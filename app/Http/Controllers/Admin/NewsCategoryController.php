@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 use App\Models\GeneralSetting;
 use App\Models\NewsCategory;
 use Auth;
@@ -49,11 +50,15 @@ class NewsCategoryController extends Controller
             ];
             if ($this->validate($request, $rules)) {
                 $checkValue = NewsCategory::where('name', '=', $postData['name'])->count();
-                if ($checkValue <= 0) {                    
+                if ($checkValue <= 0) { 
+                    // Generate a unique slug
+                    $slug = Str::slug($postData['name']);                   
                     $fields = [
                         'name'                      => $postData['name'],                       
-                        'description'               => $postData['description'],                       
+                        'description'               => $postData['description'], 
+                        'slug'                      => $slug,
                     ];
+                    // Helper::pr($fields);
                     NewsCategory::insert($fields);
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
                 } else {
@@ -87,10 +92,13 @@ class NewsCategoryController extends Controller
             ];
             if ($this->validate($request, $rules)) {
                 $checkValue = NewsCategory::where('name', '=', $postData['name'])->where('id', '!=', $id)->count();
-                if ($checkValue <= 0) {                    
+                if ($checkValue <= 0) {        
+                    // Generate a unique slug
+                    $slug = Str::slug($postData['name']);            
                     $fields = [
                         'name'                      => $postData['name'],                       
-                        'description'               => $postData['description'],                       
+                        'description'               => $postData['description'], 
+                        'slug'                      => $slug,                      
                     ];
                     NewsCategory::where($this->data['primary_key'], '=', $id)->update($fields);
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');

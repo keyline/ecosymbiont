@@ -9,20 +9,20 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Models\GeneralSetting;
-use App\Models\Notice;
+use App\Models\Article;
 use Auth;
 use Session;
 use Helper;
 use Hash;
 
-class NoticeController extends Controller
+class ArticlesController extends Controller
 {
     public function __construct()
     {
         $this->data = array(
-            'title'             => 'Journal',
-            'controller'        => 'NoticeController',
-            'controller_route'  => 'notice',
+            'title'             => 'Articles',
+            'controller'        => 'ArticlesController',
+            'controller_route'  => 'article',
             'primary_key'       => 'id',
         );
     }
@@ -31,8 +31,8 @@ class NoticeController extends Controller
     {
         $data['module']                 = $this->data;
         $title                          = $this->data['title'] . ' List';
-        $page_name                      = 'notice.list';
-        $data['rows']                   = Notice::where('status', '!=', 3)->orderBy('id', 'DESC')->get();
+        $page_name                      = 'article.list';
+        $data['rows']                   = Article::where('status', '!=', 3)->orderBy('id', 'DESC')->get();
 
         echo $this->admin_after_login_layout($title, $page_name, $data);
     }
@@ -52,29 +52,29 @@ class NoticeController extends Controller
                 'frequency'                 => 'required',
                 'keywords'                  => 'required',
                 'description'               => 'required',
-                'notice_year'               => 'required',
+                'article_year'               => 'required',
                 'uploaded_by'               => 'required',
-                'notice_date'               => 'required',
-                'notice_file'               => 'required',
+                'article_date'               => 'required',
+                'article_file'               => 'required',
                 'is_archieve'               => 'required',
             ];
             if ($this->validate($request, $rules)) {
-                $checkValue = Notice::where('name', '=', $postData['name'])->count();
+                $checkValue = Article::where('name', '=', $postData['name'])->count();
                 if ($checkValue <= 0) {
-                    /* notice file */
-                    $imageFile      = $request->file('notice_file');
+                    /* Article file */
+                    $imageFile      = $request->file('article_file');
                     if ($imageFile != '') {
                         $imageName      = $imageFile->getClientOriginalName();
-                        $uploadedFile   = $this->upload_single_file('notice_file', $imageName, 'notice', 'pdf');
+                        $uploadedFile   = $this->upload_single_file('article_file', $imageName, 'article', 'pdf');
                         if ($uploadedFile['status']) {
-                            $notice_file = $uploadedFile['newFilename'];
+                            $article_file = $uploadedFile['newFilename'];
                         } else {
                             return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
                         }
                     } else {
-                        return redirect()->back()->with(['error_message' => 'Please Upload Notice File !!!']);
+                        return redirect()->back()->with(['error_message' => 'Please Upload Article File !!!']);
                     }
-                    /* notice file */
+                    /* Article file */
                     $fields = [
                         'name'                      => $postData['name'],
                         'publisher_name'            => $postData['publisher_name'],
@@ -84,13 +84,13 @@ class NoticeController extends Controller
                         'frequency'                 => $postData['frequency'],
                         'keywords'                  => $postData['keywords'],
                         'description'               => $postData['description'],
-                        'notice_year'               => $postData['notice_year'],
+                        'article_year'               => $postData['article_year'],
                         'uploaded_by'               => $postData['uploaded_by'],
-                        'notice_date'               => date_format(date_create($postData['notice_date']), "Y-m-d"),
-                        'notice_file'               => $notice_file,
+                        'article_date'               => date_format(date_create($postData['article_date']), "Y-m-d"),
+                        'article_file'               => $article_file,
                         'is_archieve'               => $postData['is_archieve'],
                     ];
-                    Notice::insert($fields);
+                    Article::insert($fields);
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
                 } else {
                     return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
@@ -102,7 +102,7 @@ class NoticeController extends Controller
         $data['module']                 = $this->data;
         $title                          = $this->data['title'] . ' Add';
         $data['frequency']              = JournalFrequency::where('status', '=', 1)->orderBy('name', 'DESC')->get();
-        $page_name                      = 'notice.add-edit';
+        $page_name                      = 'article.add-edit';
         $data['row']                    = [];
         echo $this->admin_after_login_layout($title, $page_name, $data);
     }
@@ -113,8 +113,8 @@ class NoticeController extends Controller
         $data['module']                 = $this->data;
         $id                             = Helper::decoded($id);
         $title                          = $this->data['title'] . ' Update';
-        $page_name                      = 'notice.add-edit';
-        $data['row']                    = Notice::where($this->data['primary_key'], '=', $id)->first();
+        $page_name                      = 'article.add-edit';
+        $data['row']                    = Article::where($this->data['primary_key'], '=', $id)->first();
         $data['frequency']              = JournalFrequency::where('status', '=', 1)->orderBy('name', 'DESC')->get();
 
         if ($request->isMethod('post')) {
@@ -128,28 +128,28 @@ class NoticeController extends Controller
                 'frequency'                 => 'required',
                 'keywords'                  => 'required',
                 'description'               => 'required',
-                'notice_year'               => 'required',
+                'article_year'               => 'required',
                 'uploaded_by'               => 'required',
-                'notice_date'               => 'required',
+                'article_date'               => 'required',
                 'is_archieve'               => 'required',
             ];
             if ($this->validate($request, $rules)) {
-                $checkValue = Notice::where('name', '=', $postData['name'])->where('id', '!=', $id)->count();
+                $checkValue = Article::where('name', '=', $postData['name'])->where('id', '!=', $id)->count();
                 if ($checkValue <= 0) {
-                    /* notice file */
-                    $imageFile      = $request->file('notice_file');
+                    /* Article file */
+                    $imageFile      = $request->file('article_file');
                     if ($imageFile != '') {
                         $imageName      = $imageFile->getClientOriginalName();
-                        $uploadedFile   = $this->upload_single_file('notice_file', $imageName, 'notice', 'pdf');
+                        $uploadedFile   = $this->upload_single_file('article_file', $imageName, 'article', 'pdf');
                         if ($uploadedFile['status']) {
-                            $notice_file = $uploadedFile['newFilename'];
+                            $article_file = $uploadedFile['newFilename'];
                         } else {
                             return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
                         }
                     } else {
-                        $notice_file = $data['row']->notice_file;
+                        $article_file = $data['row']->article_file;
                     }
-                    /* notice file */
+                    /* Article file */
                     $fields = [
                         'name'                      => $postData['name'],
                         'publisher_name'            => $postData['publisher_name'],
@@ -159,13 +159,13 @@ class NoticeController extends Controller
                         'frequency'                 => $postData['frequency'],
                         'keywords'                  => $postData['keywords'],
                         'description'               => $postData['description'],
-                        'notice_year'               => $postData['notice_year'],
+                        'article_year'               => $postData['article_year'],
                         'uploaded_by'               => $postData['uploaded_by'],
-                        'notice_date'               => date_format(date_create($postData['notice_date']), "Y-m-d"),
-                        'notice_file'               => $notice_file,
+                        'article_date'               => date_format(date_create($postData['article_date']), "Y-m-d"),
+                        'article_file'               => $article_file,
                         'is_archieve'               => $postData['is_archieve'],
                     ];
-                    Notice::where($this->data['primary_key'], '=', $id)->update($fields);
+                    Article::where($this->data['primary_key'], '=', $id)->update($fields);
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');
                 } else {
                     return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
@@ -184,7 +184,7 @@ class NoticeController extends Controller
         $fields = [
             'status'             => 3
         ];
-        Notice::where($this->data['primary_key'], '=', $id)->update($fields);
+        Article::where($this->data['primary_key'], '=', $id)->update($fields);
         return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Deleted Successfully !!!');
     }
     /* delete */
@@ -192,7 +192,7 @@ class NoticeController extends Controller
     public function change_status(Request $request, $id)
     {
         $id                             = Helper::decoded($id);
-        $model                          = Notice::find($id);
+        $model                          = Article::find($id);
         if ($model->status == 1) {
             $model->status  = 0;
             $msg            = 'Deactivated';
@@ -205,18 +205,32 @@ class NoticeController extends Controller
     }
     /* change status */
     /* change archieve status */
-    public function change_archieve_status(Request $request, $id)
+    public function change_status_accept($id)
     {
+        // dd($id);
         $id                             = Helper::decoded($id);
-        $model                          = Notice::find($id);
-        if ($model->is_archieve == 1) {
-            $model->is_archieve  = 0;
-            $msg            = 'Moved To Current List';
-        } else {
-            $model->is_archieve  = 1;
-            $msg            = 'Moved To Archieve List';
-        }
-        $model->save();
+        $model                          = Article::find($id);
+        $fields = [
+            'is_published' => 1,
+        ];
+                   
+        $msg            = 'Accept';        
+        // $model->save();
+        Article::where($this->data['primary_key'], '=', $id)->update($fields);
+        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' Successfully !!!');
+    }
+    public function change_status_reject($id)
+    {
+        // dd($id);
+        $id                             = Helper::decoded($id);
+        $model                          = Article::find($id);
+        $fields = [
+            'is_published' => 2,
+        ];
+                   
+        $msg            = 'Reject';        
+        // $model->save();
+        Article::where($this->data['primary_key'], '=', $id)->update($fields);
         return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' Successfully !!!');
     }
     /* change archieve status */

@@ -6,11 +6,11 @@ use App\Models\Admin\JournalFrequency;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Notice extends Model
+class Article extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'notices'
+        'articles'
     ];
     #____________________________ Relationships ____________________________
 
