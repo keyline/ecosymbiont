@@ -26,7 +26,7 @@ use App\Models\FaqCategory;
 use App\Models\Enquiry;
 use App\Models\UserActivity;
 use App\Models\Source;
-use App\Models\Notice;
+use App\Models\Article;
 use App\Models\Manuscript;
 
 use Auth;
@@ -238,8 +238,8 @@ class UserController extends Controller
     /* authentication */
     /* dashboard */
         public function dashboard(){
-            $data['current_journal_count']          = Notice::where('status', '!=', 3)->where('is_archieve', '=', 0)->count();
-            $data['archieve_journal_count']         = Notice::where('status', '!=', 3)->where('is_archieve', '=', 1)->count();
+            $data['current_journal_count']          = Article::where('status', '!=', 3)->where('is_published', '=', 0)->count();
+            $data['archieve_journal_count']         = Article::where('status', '!=', 3)->where('is_published', '=', 1)->count();
 
             $data['pending_manuscript_count']         = Manuscript::where('status', '=', 0)->count();
             $data['active_manuscript_count']         = Manuscript::where('status', '=', 1)->count();
