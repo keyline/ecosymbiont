@@ -55,14 +55,16 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::post('payment-settings', 'UserController@payment_settings');
         Route::post('signature-settings', 'UserController@signature_settings');
         /* setting */
-        /* notice */
-        Route::get('notice/list', 'NoticeController@list');
-        Route::match(['get', 'post'], 'notice/add', 'NoticeController@add');
-        Route::match(['get', 'post'], 'notice/edit/{id}', 'NoticeController@edit');
-        Route::get('notice/delete/{id}', 'NoticeController@delete');
-        Route::get('notice/change-status/{id}', 'NoticeController@change_status');
-        Route::get('notice/change-archieve-status/{id}', 'NoticeController@change_archieve_status');
-        /* notice */
+        /* submitted articles */
+        Route::get('article/list', 'ArticlesController@list');
+        Route::match(['get', 'post'], 'article/add', 'ArticlesController@add');
+        Route::match(['get', 'post'], 'article/edit/{id}', 'ArticlesController@edit');
+        Route::get('article/delete/{id}', 'ArticlesController@delete');
+        Route::get('article/change-status/{id}', 'ArticlesController@change_status');
+        Route::match(['get', 'post'], 'article/change_status_accept/{id}', 'ArticlesController@change_status_accept');
+        Route::match(['get', 'post'], 'article/change_status_reject/{id}', 'ArticlesController@change_status_reject');
+        /* submitted articles */
+        
          /* category */
          Route::get('news_category/list', 'NewsCategoryController@list');
          Route::match(['get', 'post'], 'news_category/add', 'NewsCategoryController@add');
@@ -71,6 +73,22 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
          Route::get('news_category/change-status/{id}', 'NewsCategoryController@change_status');
          Route::get('news_category/change-archieve-status/{id}', 'NewsCategoryController@change_archieve_status');
          /* category */
+         /* subscribers */
+         Route::get('subscribers/list', 'SubscribersController@list');
+        //  Route::match(['get', 'post'], 'subscribers/add', 'SubscribersController@add');
+        //  Route::match(['get', 'post'], 'subscribers/edit/{id}', 'SubscribersController@edit');
+         Route::get('subscribers/delete/{id}', 'SubscribersController@delete');
+         Route::get('subscribers/change-status/{id}', 'SubscribersController@change_status');
+         Route::get('subscribers/change-archieve-status/{id}', 'SubscribersController@change_archieve_status');
+         /* subscribers */
+          /* users */
+          Route::get('users/list', 'UsersController@list');
+          //  Route::match(['get', 'post'], 'subscribers/add', 'UsersController@add');
+          //  Route::match(['get', 'post'], 'subscribers/edit/{id}', 'UsersController@edit');
+           Route::get('users/delete/{id}', 'UsersController@delete');
+           Route::get('users/change-status/{id}', 'UsersController@change_status');
+           Route::get('users/change-archieve-status/{id}', 'UsersController@change_archieve_status');
+           /* users */
         /* manuscript */
         Route::get('manuscript/list', 'ManuscriptController@list');
         Route::get('manuscript/delete/{id}', 'ManuscriptController@delete');

@@ -63,17 +63,17 @@ if (!empty($parameters)) {
                 <!-- End news categories -->
                 <!-- news contents -->
                     <div class="nav-item">
-                        <a class="nav-link <?= $pageSegment == 'notice' ? 'active' : '' ?>"
-                            href="<?= url('admin/notice/list') ?>" data-placement="left">
+                        <a class="nav-link <?= $pageSegment == 'article' ? 'active' : '' ?>"
+                            href="<?= url('admin/article/list') ?>" data-placement="left">
                             <i class="fa fa-bell nav-icon"></i>
-                            <span class="nav-link-title">News Contents</span>
+                            <span class="nav-link-title">Submitted Articles</span>
                         </a>
                     </div>
                 <!-- End news contents -->
                 <!-- users -->
                     <div class="nav-item">
                         <a class="nav-link <?= $pageSegment == 'notice' ? 'active' : '' ?>"
-                            href="<?= url('admin/notice/list') ?>" data-placement="left">
+                            href="<?= url('admin/users/list') ?>" data-placement="left">
                             <i class="fa fa-bell nav-icon"></i>
                             <span class="nav-link-title">Users</span>
                         </a>
@@ -86,7 +86,7 @@ if (!empty($parameters)) {
                           <span class="nav-link-title">Newsletters</span>
                         </a>
                         <div id="navbarVerticalMenuMasters" class="nav-collapse collapse <?=(($pageSegment == 'parent-category' || $pageSegment == 'sub-category')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">
-                          <a class="nav-link <?=(($pageSegment == 'sub-category')?'active':'')?>" href="<?=url('admin/sub-category/list')?>">Subscribers</a>
+                          <a class="nav-link <?=(($pageSegment == 'sub-category')?'active':'')?>" href="<?=url('admin/subscribers/list')?>">Subscribers</a>
                           <a class="nav-link <?=(($pageSegment == 'state')?'active':'')?>" href="<?=url('admin/state/list')?>">Newsletters</a>
                         </div>
                     </div>

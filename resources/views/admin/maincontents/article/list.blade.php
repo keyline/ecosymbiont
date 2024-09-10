@@ -38,12 +38,14 @@ $controllerRoute = $module['controller_route'];
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Name<br>Publish Info</th>
+                  <th scope="col">User Name</th>
+                  <th scope="col">Article Name</th>
                   <th scope="col">Summary</th>
-                  <th scope="col">Journal Date</th>
+                  <th scope="col">Article Date</th>
                   <!-- <th scope="col">Uploaded By</th> -->
-                  <th scope="col">Journal File</th>
-                  <th scope="col">Archieve</th>
+                  <th scope="col">Article File</th>                  
+                  <th scope="col">Published Status</th>                  
+                  <th scope="col">Published Action</th>                  
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -52,26 +54,52 @@ $controllerRoute = $module['controller_route'];
                   <tr>
                     <th scope="row"><?=$sl++?></th>
                     <td>
-                      <?=$row->name?><br>
-                      Publisher : <b><?=$row->publisher_name?></b><br>
-                      ISSN No. : <b><?=$row->issn_no?></b><br>
-                      Volume : <b><?=$row->volume?></b><br>
-                      Issue : <b><?=$row->issue?></b>
-                    </td>
+                      <?=$row->author_name?></td>
+                    <td>
+                      <?=$row->name?></td>
                     <td><?=wordwrap($row->description,35,"<br>\n")?></td>
                     <td><?=date_format(date_create($row->notice_date), "M d, Y")?></td>
                     <!-- <td><?=$row->uploaded_by?></td> -->
                     <td>
                       <?php if($row->notice_file != ''){?>
-                        <a href="<?=env('UPLOADS_URL').'notice/'.$row->notice_file?>" target="_blank" class="badge bg-primary"><i class="fa fa-info-circle"></i> View Notice</a>
+                        <a href="<?=env('UPLOADS_URL').'article/'.$row->notice_file?>" target="_blank" class="badge bg-primary"><i class="fa fa-info-circle"></i> View Notice</a>
                       <?php }?>
                     </td>
                     <td>
-                      <?php if($row->is_archieve){?>
+                      <?php if($row->is_published == 0){
+                        echo "Pending";
+                      }
+                        elseif($row->is_published == 1){
+                          echo "Accept";
+                        }
+                      else {
+                        echo "Reject";
+                      }
+                      ?>
+                      <!-- <?php if($row->is_archieve){?>
                         <a href="<?=url('admin/' . $controllerRoute . '/change-archieve-status/'.Helper::encoded($row->id))?>" class="btn btn-warning btn-sm" title="Move To Current <?=$module['title']?>">Move To Current</a>
                       <?php } else {?>
                         <a href="<?=url('admin/' . $controllerRoute . '/change-archieve-status/'.Helper::encoded($row->id))?>" class="btn btn-success btn-sm" title="Move To Archieve <?=$module['title']?>">Move To Archieve</a>
-                      <?php }?>
+                      <?php }?> -->
+                    </td>
+                    <td>
+                      <?php
+                      if ($row->is_published == '0')
+                      { ?>
+                          <!-- <form action="<?=url('admin/' . $controllerRoute . '/change_status_accept/'.Helper::encoded($row->id))?>" method="POST" style="display:inline;">                             
+                              <button type="submit" class="btn btn-success">Accept</button>
+                          </form> -->
+                          <a href="<?=url('admin/' . $controllerRoute . '/change_status_accept/'.Helper::encoded($row->id))?>" class="btn btn-success btn-sm" title="Accept <?=$module['title']?>">Accept</a>
+                          <a href="<?=url('admin/' . $controllerRoute . '/change_status_reject/'.Helper::encoded($row->id))?>" class="btn btn-danger btn-sm" title="Reject <?=$module['title']?>">Reject</a>
+                          <!-- <form action="<?=url('admin/' . $controllerRoute . '/change_status_reject/'.Helper::encoded($row->id))?>" method="POST" style="display:inline;">                             
+                              <button type="submit" class="btn btn-danger">Reject</button>
+                          </form> -->
+                     <?php } elseif($row->is_published == '1'){?>
+                      <a href="<?=url('admin/' . $controllerRoute . '/change_status_reject/'.Helper::encoded($row->id))?>" class="btn btn-danger btn-sm" title="Reject <?=$module['title']?>">Reject</a>
+                     <?php } else{ ?>
+                      <a href="<?=url('admin/' . $controllerRoute . '/change_status_accept/'.Helper::encoded($row->id))?>" class="btn btn-success btn-sm" title="Accept <?=$module['title']?>">Accept</a>
+                     <?php } ?>
+                      
                     </td>
                     <td>
                       <a href="<?=url('admin/' . $controllerRoute . '/edit/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit"></i></a>
