@@ -1,0 +1,227 @@
+@media (min-width: 1600px) {
+    .container { max-width: 1400px; }
+}
+    @media (min-width: 1900px) {
+    .container { max-width: 1540px; }
+}
+@media(max-width: 1400px){
+    .nav-section .nav-link{
+        font-size: 14px;
+    }
+    .about-section{
+        padding-top: 180px;
+    }
+    .fixed-box-inner{
+        right: 99px;
+    }
+}
+@media(min-width: 1200px){
+	.mobilelogo{display: none}
+}
+@media(max-width: 1199px){
+    .info-left-box,
+    .info-mid-box,
+    .info-right-box{
+        width: 100%;
+    }
+    .news-update,
+    .info-mid-box{
+        width: 50%;
+        float: left;
+    }
+    .tender {
+        height: 100%;
+    }
+	.info-section .tender {
+        height: auto;
+    }
+    .fixed-box-inner{
+        position: static;
+        max-width: 100%;
+        display: inline-flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        /* align-items: center; */
+        margin: 75px 0;
+    }
+    .fixed-box-item:last-child{
+        margin-bottom: 15px;
+    }
+    .fixed-box-item{
+        width: 45%;
+        margin: 15px;
+    }
+    .about-section{
+        padding-top: 0px;
+    }
+.mobile_navicon_search {
+    display: flex;
+    align-items: center;
+}
+.mobile_navicon_search form.search-box.searchbar {
+    margin-left: 18px;
+}
+}
+@media(max-width: 991px){
+    .navbar-brand img{
+        width: 100%;
+        max-width: 200px;
+    }
+    .nav-section .nav-link{
+        padding-top: 0.6rem;
+        padding-bottom: 0.6rem;
+    }
+    .fixed-box-inner{
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .about-section{
+        padding-bottom: 75px;
+    }
+    .news-head h2,
+    .about-left h2,
+    .about-right h2,
+    .info-mid-box h2,
+    .campus-text h2,
+    .get-in-touch-form h3,
+    .footer-link-box h2,
+    .footer-info-box h2,
+    .footer-address-box h2{
+        font-size: 25px;
+    }
+    .news-head a{
+        font-size: 17px;
+    }
+    .about-right{
+        margin-top: 50px
+    }
+    .footer-info-box,
+    .footer-address-box{
+        margin-top: 30px
+    }
+}
+@media(min-width: 768px){
+	
+}
+@media(max-width: 767px){
+    .nav-section{
+        padding: 10px 0;
+    }
+    .navbar-brand img{
+        width: 100%;
+        max-width: 150px;
+    }
+    .mid-header{
+        padding: 15px 0;
+    }
+    .banner-section {
+        padding-top: 0px;
+    }  
+    .banner-section .carousel-indicators{
+        bottom: -45px;
+    }
+    .fixed-box-inner {
+        margin: 45px 0 0;
+    }
+    .banner-section .carousel-indicators button{
+        width: 10px !important;
+        height: 10px !important;
+    }
+    .info-tab .accordion-button{
+        font-size: 17px;
+    }
+    .about-section,
+    .campus-section,
+    .get-in-touch,
+    .department-info{
+        padding: 50px 0;
+    }      
+
+    .top-header a{
+        font-size: 14px;
+    }
+    .mid-header-inner-list ul{
+        margin-top: 10px;
+    }
+    .mid-header-inner-list li {
+        margin-left: 15px;
+    }
+    .mid-header-inner-list li a{
+        font-size: 14px;
+    }
+    .fixed-box-item{
+        width: 100%;
+    }
+    .news-update{
+        width: 100%;
+        float: none;
+    }
+    .news-update,
+    .info-mid-box{
+        width: 100%;
+    }
+    .info-mid-box{
+        padding: 40px 25px
+    }
+    .gallery-box{
+        margin-top: 30px;
+    }
+    .campus-video iframe{
+        height: 250px;
+    }
+    .get-in-touch-form {
+        position: static;
+        max-width: 100%;
+        transform: translateY(-6px);
+    }
+    .footer-link-box {
+        margin-top: 30px
+    }
+.inner-leftbox .news-update, .inner-leftbox .tender {
+		width: 100%;
+	}
+    
+}
+@media(max-width: 575px){
+    .navbar-brand img{
+        width: 100%;
+        max-width: 120px;
+    }
+    .mid-header{
+        padding: 5px 0;
+    }
+    .mid-header-inner-list ul{
+        margin-top: 0px
+    }
+    .fixed-box-inner-icon img{
+        max-width: 55px;
+        margin-bottom: 15px;
+    }
+    .news-update {
+        padding: 50px 15px 20px 50px;
+    }
+    .news-head h2::before,
+    .info-right-head h2::before,
+    .tender-head h2::before{
+        left: -35px
+    }
+    .info-mid-box{
+        padding: 30px 15px
+    }
+}
+@media(max-width: 480px){
+    .left-top-header li{
+        margin-right: 10px;
+    }
+    .left-top-header i{
+        font-size: 10px;
+        margin-right: 2px;
+    }
+.news-head h2, .about-left h2, .about-right h2, .info-mid-box h2, .campus-text h2, .get-in-touch-form h3, .footer-link-box h2, .footer-info-box h2, .footer-address-box h2 {
+    font-size: 18px;
+}
+.news-head a {
+    font-size: 14px;
+}
+    
+}
