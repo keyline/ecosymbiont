@@ -44,51 +44,71 @@ if (!empty($parameters)) {
         <div class="navbar-vertical-content">
             <div id="navbarVerticalMenu" class="nav nav-pills nav-vertical card-navbar-nav">
                 <!-- dashboard -->
-                <div class="nav-item">
-                    <a class="nav-link <?= $pageSegment == 'dashboard' ? 'active' : '' ?>"
-                        href="<?= url('admin/dashboard') ?>" data-placement="left">
-                        <i class="fa fa-home nav-icon"></i>
-                        <span class="nav-link-title">Dashboard</span>
-                    </a>
-                </div>
+                    <div class="nav-item">
+                        <a class="nav-link <?= $pageSegment == 'dashboard' ? 'active' : '' ?>"
+                            href="<?= url('admin/dashboard') ?>" data-placement="left">
+                            <i class="fa fa-home nav-icon"></i>
+                            <span class="nav-link-title">Dashboard</span>
+                        </a>
+                    </div>
                 <!-- End dashboard -->
-                <!-- Notices -->
-                <div class="nav-item">
-                    <a class="nav-link <?= $pageSegment == 'notice' ? 'active' : '' ?>"
-                        href="<?= url('admin/notice/list') ?>" data-placement="left">
-                        <i class="fa fa-bell nav-icon"></i>
-                        <span class="nav-link-title">Journals</span>
-                    </a>
-                </div>
-                <!-- End Notices -->
-                 <!-- news_category -->
-                <div class="nav-item">
-                    <a class="nav-link <?= $pageSegment == 'news_category' ? 'active' : '' ?>"
-                        href="<?= url('admin/news_category/list') ?>" data-placement="left">
-                        <i class="fa fa-bell nav-icon"></i>
-                        <span class="nav-link-title">News Categories</span>
-                    </a>
-                </div>
-                <!-- End news_category -->
-                <!-- Notices -->
-                <div class="nav-item">
-                    <a class="nav-link <?= $pageSegment == 'manuscript' ? 'active' : '' ?>"
-                        href="<?= url('admin/manuscript/list') ?>" data-placement="left">
-                        <i class="fa fa-file-text nav-icon"></i>
-                        <span class="nav-link-title">Manuscripts</span>
-                    </a>
-                </div>
-                <!-- End Notices -->
-
-                <!-- Scroll Notice  -->
-                <div class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('scroll-notice.*') ? 'active' : '' }}"
-                        href="{{ route('scroll-notice.create') }}" data-placement="left">
-                        <i class="fa fa-file-text nav-icon"></i>
-                        <span class="nav-link-title">Scroll Notice</span>
-                    </a>
-                </div>
-                <!-- End Scroll Notice  -->
+                <!-- news categories -->
+                    <div class="nav-item">
+                        <a class="nav-link <?= $pageSegment == 'news_category' ? 'active' : '' ?>"
+                            href="<?= url('admin/news_category/list') ?>" data-placement="left">
+                            <i class="fa fa-bell nav-icon"></i>
+                            <span class="nav-link-title">News Categories</span>
+                        </a>
+                    </div>
+                <!-- End news categories -->
+                <!-- news contents -->
+                    <div class="nav-item">
+                        <a class="nav-link <?= $pageSegment == 'notice' ? 'active' : '' ?>"
+                            href="<?= url('admin/notice/list') ?>" data-placement="left">
+                            <i class="fa fa-bell nav-icon"></i>
+                            <span class="nav-link-title">News Contents</span>
+                        </a>
+                    </div>
+                <!-- End news contents -->
+                <!-- users -->
+                    <div class="nav-item">
+                        <a class="nav-link <?= $pageSegment == 'notice' ? 'active' : '' ?>"
+                            href="<?= url('admin/notice/list') ?>" data-placement="left">
+                            <i class="fa fa-bell nav-icon"></i>
+                            <span class="nav-link-title">Users</span>
+                        </a>
+                    </div>
+                <!-- End users -->
+                <!-- newsletters -->
+                    <div class="nav-item">
+                        <a class="nav-link dropdown-toggle active <?=(($pageSegment == 'parent-category' || $pageSegment == 'sub-category')?'':'collapsed')?>" href="#navbarVerticalMenuMasters" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuMasters" aria-expanded="<?=(($pageSegment == 'parent-category' || $pageSegment == 'sub-category')?'true':'false')?>" aria-controls="navbarVerticalMenuMasters">
+                          <i class="fa fa-database nav-icon"></i>
+                          <span class="nav-link-title">Newsletters</span>
+                        </a>
+                        <div id="navbarVerticalMenuMasters" class="nav-collapse collapse <?=(($pageSegment == 'parent-category' || $pageSegment == 'sub-category')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">
+                          <a class="nav-link <?=(($pageSegment == 'sub-category')?'active':'')?>" href="<?=url('admin/sub-category/list')?>">Subscribers</a>
+                          <a class="nav-link <?=(($pageSegment == 'state')?'active':'')?>" href="<?=url('admin/state/list')?>">Newsletters</a>
+                        </div>
+                    </div>
+                <!-- End newsletters -->
+                <!-- email logs -->
+                    <div class="nav-item">
+                        <a class="nav-link <?= $pageSegment == 'notice' ? 'active' : '' ?>"
+                            href="<?= url('admin/notice/list') ?>" data-placement="left">
+                            <i class="fa fa-bell nav-icon"></i>
+                            <span class="nav-link-title">Email Logs</span>
+                        </a>
+                    </div>
+                <!-- End email logs -->
+                <!-- login logs -->
+                    <div class="nav-item">
+                        <a class="nav-link <?= $pageSegment == 'notice' ? 'active' : '' ?>"
+                            href="<?= url('admin/notice/list') ?>" data-placement="left">
+                            <i class="fa fa-bell nav-icon"></i>
+                            <span class="nav-link-title">Login Logs</span>
+                        </a>
+                    </div>
+                <!-- End login logs -->
             </div>
         </div>
         <!-- End Content -->

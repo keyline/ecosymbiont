@@ -60,30 +60,30 @@ $user_type = session('type');
         <div class="card-body pt-3">
           <!-- Bordered Tabs -->
           <ul class="nav nav-tabs nav-tabs-bordered">
-            <!-- <li class="nav-item">
-              <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab1">Profile</button>
-            </li> -->
-            <?php //if($user_type == 'ma'){?>
             <li class="nav-item">
-              <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab2">General</button>
+              <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab1">Profile</button>
             </li>
-            <?php //}?>
+            <?php if($user_type == 'ma'){?>
+            <li class="nav-item">
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab2">General</button>
+            </li>
+            <?php }?>
             <li class="nav-item">
               <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab3">Change Password</button>
             </li>
             <?php if($user_type == 'ma'){?>
-            <!-- <li class="nav-item">
+            <li class="nav-item">
               <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab4">Email</button>
-            </li> -->
+            </li>
             <!-- <li class="nav-item">
               <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab5">SMS</button>
             </li> -->
-            <!-- <li class="nav-item">
+            <li class="nav-item">
               <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab6">Footer</button>
-            </li> -->
-            <!-- <li class="nav-item">
+            </li>
+            <li class="nav-item">
               <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab7">SEO</button>
-            </li> -->
+            </li>
             <!-- <li class="nav-item">
               <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab8">Payment</button>
             </li> -->
@@ -96,7 +96,7 @@ $user_type = session('type');
             <?php }?>
           </ul>
           <div class="tab-content pt-2">
-            <div class="tab-pane fade profile-overview" id="tab1">
+            <div class="tab-pane fade show active profile-overview" id="tab1">
               <!-- profile settings Form -->
               <form method="POST" action="{{ url('admin/profile-settings') }}" enctype="multipart/form-data">
                 @csrf
@@ -136,7 +136,7 @@ $user_type = session('type');
               </form><!-- End profile settings Form -->
               <!-- <span>Quantico Area Realestate Properties</span> -->
             </div>
-            <div class="tab-pane fade show active profile-edit pt-3" id="tab2">
+            <div class="tab-pane fade profile-edit pt-3" id="tab2">
               <!-- general settings Form -->
               <form method="POST" action="{{ url('admin/general-settings') }}" enctype="multipart/form-data">
                 @csrf
@@ -327,7 +327,7 @@ $user_type = session('type');
                 </div>
               </form><!-- End general settings Form -->
             </div>
-            <div class="tab-pane fade show active pt-3" id="tab3">
+            <div class="tab-pane fade pt-3" id="tab3">
               <!-- chnage password Form -->
               <form method="POST" action="{{ url('admin/change-password') }}" enctype="multipart/form-data">
                 @csrf

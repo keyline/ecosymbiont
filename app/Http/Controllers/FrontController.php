@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -24,6 +23,7 @@ class FrontController extends Controller
 {
     public function home()
     {
+        echo "Webite is under construction";die;
         $data['rows']                   = Notice::with('journalFrequency')->where('status', '=', 1)->where('is_archieve', '=', 0)->orderBy('id', 'DESC')->get();
         $title                          = 'Recent Journals';
         $page_name                      = 'home';
