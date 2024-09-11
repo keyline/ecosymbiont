@@ -13,6 +13,10 @@ use App\Models\User;
 use App\Models\Country;
 use App\Models\Role;
 use App\Models\SectionErt;
+use App\Models\Title;
+use App\Models\Pronoun;
+use App\Models\EcosystemAffiliation;
+use App\Models\ExpertiseArea;
 use Auth;
 use Session;
 use Helper;
@@ -50,25 +54,64 @@ class UsersController extends Controller
         $data['module']           = $this->data;
         if ($request->isMethod('post')) {
             $postData = $request->all();
-            $rules = [
-                'name'                      => 'required',
-                'role'                      => 'required',
-                'email'                     => 'required',
-                'phone'                     => 'required',
-                'country'                   => 'required', 
-                'password'                  => 'required',              
+            // dd($postData);
+            $rules = [                                 
+                'first_name'                => 'required',            
+                'last_name'                 => 'required',                                    
+                'email'                     => 'required',           
+                'phone'                     => 'required',           
+                'country'                 => 'required',           
+                'role'                    => 'required',           
+                'password'                  => 'required', 
+                'invited'                   => 'required',
+                'invited_by'                => 'required', 
+                'invited_by_email'          => 'required',  
+                'explanation'               => 'required',  
+                'explanation_submission'    => 'required',     
+                'section_ertId'             => 'required',
+                'titleId'                   => 'required',
+                'pronounId'                 => 'required',
+                'participated'              => 'required',
+                'participated_info'         => 'required',
+                'organization_name'         => 'required',
+                'organization_website'      => 'required',
+                'ecosystem_affiliationId'   => 'required',               
+                'expertise_areaId'          => 'required',
+                's_biography'               => 'required',
+                'p_biography'               => 'required',             
             ];
             if ($this->validate($request, $rules)) {
-                $checkValue = User::where('name', '=', $postData['name'])->count();
+                $checkValue = User::where('first_name', '=', $postData['first_name'])->count();
                 if ($checkValue <= 0) {                    
-                    $fields = [
-                        'name'            => $postData['name'],
-                        'role'            => $postData['role'],
-                        'email'           => $postData['email'],
-                        'phone'           => $postData['phone'],
-                        'country'         => $postData['country'],  
-                        'password'        => Hash::make($postData['password']),                
+                    $fields = [                        
+                        'first_name'                => $postData['first_name'],            
+                        'last_name'                 => $postData['last_name'],        
+                        'middle_name'               => $postData['middle_name'],            
+                        'email'                     => $postData['email'],           
+                        'phone'                     => $postData['phone'],           
+                        'country'                 => $postData['countryId'],           
+                        'role'                    => $postData['roleId'],           
+                        'password'                  => Hash::make($postData['password']), 
+                        'invited'                   => $postData['invited'],
+                        'invited_by'                => $postData['invited_by'], 
+                        'invited_by_email'          => $postData['invited_by_email'],  
+                        'explanation'               => $postData['explanation'],  
+                        'explanation_submission'    => $postData['explanation_submission'],     
+                        'section_ertId'             => $postData['section_ertId'],
+                        'titleId'                   => $postData['titleId'],
+                        'pronounId'                 => $postData['pronounId'],
+                        'participated'              => $postData['participated'],
+                        'participated_info'         => $postData['participated_info'],
+                        'organization_name'         => $postData['organization_name'],
+                        'organization_website'      => $postData['organization_website'],
+                        'ecosystem_affiliationId'   => $postData['ecosystem_affiliationId'],
+                        'indigenous_affiliation'    => $postData['indigenous_affiliation'],
+                        'expertise_areaId'          => $postData['expertise_areaId'],
+                        's_biography'               => $postData['s_biography'],
+                        'p_biography'               => $postData['p_biography'],             
                     ];
+                    // dd($fields);
+                    // Helper::pr($fields);
                     User::insert($fields);
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
                 } else {
@@ -83,6 +126,10 @@ class UsersController extends Controller
         $data['country']                = Country::orderBy('name', 'ASC')->get();
         $data['role']                   = Role::where('status', '=', 1)->orderBy('name', 'ASC')->get();
         $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
         // Helper::pr($data['country']);
         $page_name                      = 'users.add-edit';
         $data['row']                    = [];

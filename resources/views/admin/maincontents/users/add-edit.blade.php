@@ -45,29 +45,57 @@ $controllerRoute = $module['controller_route'];
         <?php
         $setting = GeneralSetting::where('id', '=', 1)->first();
         if ($row) {
-            $name = $row->name;            
+            $first_name = $row->first_name;            
+            $last_name = $row->last_name;            
+            $middle_name = $row->middle_name;            
             $email = $row->email;          
             $phone = $row->phone;          
             $countryId = $row->country;          
             $roleId = $row->role;          
-            $password = $row->password;          
+            $password = $row->password;  
+            $invited = $row->invited;        
             $invited_by = $row->invited_by; 
             $invited_by_email = $row->invited_by_email;  
             $explanation = $row->explanation;  
             $explanation_submission = $row->explanation_submission;  
-            $section_ertId = $row->section_ertId;   
+            $section_ertId = $row->section_ertId; 
+            $titleId = $row->titleId;  
+            $pronounId = $row->pronounId;
+            $participated = $row->participated;
+            $participated_info = $row->participated_info;
+            $organization_name = $row->organization_name;
+            $organization_website = $row->organization_website;
+            $ecosystem_affiliationId = $row->ecosystem_affiliationId;
+            $indigenous_affiliation = $row->indigenous_affiliation;
+            $expertise_areaId = $row->expertise_areaId;
+            $s_biography = $row->s_biography;
+            $p_biography = $row->p_biography;
         } else {
-            $name = '';            
+            $first_name = '';            
+            $last_name =  '';          
+            $middle_name = '';            
             $email = '';           
             $phone = '';           
             $countryId = '';           
             $roleId = '';           
             $password = ''; 
+            $invited = '';
             $invited_by = ''; 
             $invited_by_email = '';  
             $explanation = '';  
             $explanation_submission = '';     
             $section_ertId = '';
+            $titleId = '';
+            $pronounId = '';
+            $participated = '';
+            $participated_info = '';
+            $organization_name = '';
+            $organization_website = '';
+            $ecosystem_affiliationId = [];
+            $indigenous_affiliation = '';
+            $expertise_areaId = [];
+            $s_biography = '';
+            $p_biography = '';
         }
         ?>
         <div class="col-xl-12">
@@ -90,12 +118,55 @@ $controllerRoute = $module['controller_route'];
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="name" class="col-md-2 col-lg-2 col-form-label">Name</label>
+                            <label for="title" class="col-md-2 col-lg-2 col-form-label">Title
+                            </label>
                             <div class="col-md-10 col-lg-10">
-                                <input type="text" name="name" class="form-control" id="name"
-                                    value="<?= $name ?>" required>
+                                <select name="title" class="form-control" id="title" required>
+                                    <option value="" selected disabled>Select</option>
+                                    @if ($user_title)
+                                        @foreach ($user_title as $data)
+                                            <option value="{{ $data->id }}" @selected($data->id == $titleId)>
+                                                {{ $data->name }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div> 
+                        <div class="row mb-3">
+                            <label for="first_name" class="col-md-2 col-lg-2 col-form-label">First Name</label>
+                            <div class="col-md-10 col-lg-10">
+                                <input type="text" name="first_name" class="form-control" id="first_name"
+                                    value="<?= $first_name ?>" required>
+                            </div>
+                        </div> 
+                        <div class="row mb-3">
+                            <label for="last_name" class="col-md-2 col-lg-2 col-form-label">Surname (last name)</label>
+                            <div class="col-md-10 col-lg-10">
+                                <input type="text" name="last_name" class="form-control" id="last_name"
+                                    value="<?= $last_name ?>" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="middle_name" class="col-md-2 col-lg-2 col-form-label">Middle name(s)/ initial(s)</label>
+                            <div class="col-md-10 col-lg-10">
+                                <input type="text" name="middle_name" class="form-control" id="middle_name"
+                                    value="<?= $middle_name ?>">
                             </div>
                         </div>   
+                        <div class="row mb-3">
+                            <label for="pronoun" class="col-md-2 col-lg-2 col-form-label">Pronoun</label>
+                            <div class="col-md-10 col-lg-10">
+                                <select name="pronoun" class="form-control" id="pronoun" required>
+                                    <option value="" selected disabled>Select</option>
+                                    @if ($pronoun)
+                                        @foreach ($pronoun as $data)
+                                            <option value="{{ $data->id }}" @selected($data->id == $pronounId)>
+                                                {{ $data->name }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
                         <div class="row mb-3">
                             <label for="email" class="col-md-2 col-lg-2 col-form-label">Email</label>
                             <div class="col-md-10 col-lg-10">
@@ -185,7 +256,7 @@ $controllerRoute = $module['controller_route'];
                             </div>
                         </div> 
                         <div class="row mb-3">
-                            <label for="country" class="col-md-2 col-lg-2 col-form-label">For which section of ERT would you like your Submission to be considered?
+                            <label for="section_ert" class="col-md-2 col-lg-2 col-form-label">For which section of ERT would you like your Submission to be considered?
                             </label>
                             <div class="col-md-10 col-lg-10">
                                 <select name="section_ert" class="form-control" id="section_ert" required>
@@ -198,13 +269,67 @@ $controllerRoute = $module['controller_route'];
                                     @endif
                                 </select>
                             </div>
+                        </div>                         
+                        <div class="row mb-3">
+                            <label for="organization_name" class="col-md-2 col-lg-4 col-form-label">Organization name (if no affiliation, type N/A)
+                            </label>
+                            <div class="col-md-10 col-lg-8">
+                                <input type="text" name="organization_name" class="form-control" id="organization_name"
+                                    value="<?= $organization_name ?>" required>
+                            </div>
                         </div> 
                         <div class="row mb-3">
-                            <label for="explanation_submission" class="col-md-2 col-lg-4 col-form-label">Explain why and how your Submission relates to restoring, preserving, and/or promoting human-ecological interconnectivity (symbiosis) (max. 150 words)</label>
+                            <label for="organization_website" class="col-md-2 col-lg-4 col-form-label">Organization website (if no affiliation, type N/A)
+                            </label>
                             <div class="col-md-10 col-lg-8">
-                                <textarea id="explanation_submission" name="explanation_submission" rows="4" cols="50" maxlength="10" placeholder="Your explanation here..." required><?= $explanation_submission ?></textarea>
+                                <input type="text" name="organization_website" class="form-control" id="organization_website"
+                                    value="<?= $organization_website ?>" required>
                             </div>
-                        </div>      
+                        </div>
+                        <div class="row mb-3">
+                            <label for="ecosystem_affiliation" class="col-md-2 col-lg-2 col-form-label"> Ecosystem affiliation (ethnicity) (select all that apply)
+                            </label>
+                            <div class="col-md-10 col-lg-10">                                                                                                
+                                @if ($ecosystem_affiliation)
+                                    @foreach ($ecosystem_affiliation as $data)
+                                    <input type="checkbox" name="ecosystem_affiliation[]" value="{{ $data->id }}" @selected($data->id == $ecosystem_affiliationId)>{{ $data->name }}<br>
+                                    @endforeach
+                                @endif                                
+                            </div>
+                        </div>   
+                        <div class="row mb-3">
+                            <label for="Indigenous_affiliation" class="col-md-2 col-lg-2 col-form-label">Indigenous affiliation (if you would like to further define your ethnicity, e.g., region of South Asia or Indigenous tribe/nation)
+                            </label>
+                            <div class="col-md-10 col-lg-10">
+                                <input type="text" name="indigenous_affiliation" class="form-control" id="indigenous_affiliation"
+                                value="<?= $indigenous_affiliation ?>" required>
+                            </div>
+                        </div> 
+                        <div class="row mb-3">
+                            <label for="expertise_area" class="col-md-2 col-lg-2 col-form-label"> Your expertise area (select all that apply)
+                            </label>
+                            <div class="col-md-10 col-lg-10">
+                                @if ($expertise_area)
+                                    @foreach ($expertise_area as $data)
+                                    <input type="checkbox" name="expertise_area[]" value="{{ $data->id }}" @selected($data->id == $expertise_areaId)>{{ $data->name }}<br>                                          
+                                    @endforeach
+                                @endif
+                            </div>
+                        </div> 
+                        <div class="row mb-3">
+                            <label for="s_biography" class="col-md-2 col-lg-2 col-form-label">1-sentence biography (max. 40 words)
+                            </label>
+                            <div class="col-md-10 col-lg-10">
+                                <textarea id="s_biography" name="s_biography" rows="4" cols="50" maxlength="40" placeholder="Your explanation here..." required><?= $s_biography ?></textarea>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="p_biography" class="col-md-2 col-lg-2 col-form-label">1-paragraph biography (150-250 words)
+                            </label>
+                            <div class="col-md-10 col-lg-10">
+                                <textarea id="p_biography" name="p_biography" rows="4" cols="50" maxlength="250" placeholder="Your explanation here..." required><?= $p_biography ?></textarea>
+                            </div>
+                        </div>    
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary"><?= $row ? 'Save' : 'Add' ?></button>
                         </div>
