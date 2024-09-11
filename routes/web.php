@@ -81,10 +81,66 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
          Route::get('subscribers/change-status/{id}', 'SubscribersController@change_status');
          Route::get('subscribers/change-archieve-status/{id}', 'SubscribersController@change_archieve_status');
          /* subscribers */
+         /* expertise_area */
+         Route::get('expertise_area/list', 'ExpertiseAreaController@list');
+         Route::match(['get', 'post'], 'expertise_area/add', 'ExpertiseAreaController@add');
+         Route::match(['get', 'post'], 'expertise_area/edit/{id}', 'ExpertiseAreaController@edit');
+         Route::get('expertise_area/delete/{id}', 'ExpertiseAreaController@delete');
+         Route::get('expertise_area/change-status/{id}', 'ExpertiseAreaController@change_status');
+         Route::get('expertise_area/change-archieve-status/{id}', 'ExpertiseAreaController@change_archieve_status');
+         /* expertise_area */
+         /* ecosystem_affiliation */
+         Route::get('ecosystem_affiliation/list', 'EcosystemAffiliationController@list');
+         Route::match(['get', 'post'], 'ecosystem_affiliation/add', 'EcosystemAffiliationController@add');
+         Route::match(['get', 'post'], 'ecosystem_affiliation/edit/{id}', 'EcosystemAffiliationController@edit');
+         Route::get('ecosystem_affiliation/delete/{id}', 'EcosystemAffiliationController@delete');
+         Route::get('ecosystem_affiliation/change-status/{id}', 'EcosystemAffiliationController@change_status');
+         Route::get('ecosystem_affiliation/change-archieve-status/{id}', 'EcosystemAffiliationController@change_archieve_status');
+         /* ecosystem_affiliation */
+         /* pronoun */
+         Route::get('pronoun/list', 'PronounController@list');
+         Route::match(['get', 'post'], 'pronoun/add', 'PronounController@add');
+         Route::match(['get', 'post'], 'pronoun/edit/{id}', 'PronounController@edit');
+         Route::get('pronoun/delete/{id}', 'PronounController@delete');
+         Route::get('pronoun/change-status/{id}', 'PronounController@change_status');
+         Route::get('pronoun/change-archieve-status/{id}', 'PronounController@change_archieve_status');
+         /* pronoun */
+         /* Section Ert */
+         Route::get('section_ert/list', 'SectionErtController@list');
+         Route::match(['get', 'post'], 'section_ert/add', 'SectionErtController@add');
+         Route::match(['get', 'post'], 'section_ert/edit/{id}', 'SectionErtController@edit');
+         Route::get('section_ert/delete/{id}', 'SectionErtController@delete');
+         Route::get('section_ert/change-status/{id}', 'SectionErtController@change_status');
+         Route::get('section_ert/change-archieve-status/{id}', 'SectionErtController@change_archieve_status');
+         /* Section Ert */
+         /* Submission Type */
+         Route::get('submission_type/list', 'SubmissionTypeController@list');
+         Route::match(['get', 'post'], 'submission_type/add', 'SubmissionTypeController@add');
+         Route::match(['get', 'post'], 'submission_type/edit/{id}', 'SubmissionTypeController@edit');
+         Route::get('submission_type/delete/{id}', 'SubmissionTypeController@delete');
+         Route::get('submission_type/change-status/{id}', 'SubmissionTypeController@change_status');
+         Route::get('submission_type/change-archieve-status/{id}', 'SubmissionTypeController@change_archieve_status');
+         /* Submission Type */
+          /* title */
+          Route::get('title/list', 'TitleController@list');
+          Route::match(['get', 'post'], 'title/add', 'TitleController@add');
+          Route::match(['get', 'post'], 'title/edit/{id}', 'TitleController@edit');
+          Route::get('title/delete/{id}', 'TitleController@delete');
+          Route::get('title/change-status/{id}', 'TitleController@change_status');
+          Route::get('title/change-archieve-status/{id}', 'TitleController@change_archieve_status');
+          /* title */
+          /* role */
+          Route::get('role/list', 'RoleController@list');
+          Route::match(['get', 'post'], 'role/add', 'RoleController@add');
+          Route::match(['get', 'post'], 'role/edit/{id}', 'RoleController@edit');
+          Route::get('role/delete/{id}', 'RoleController@delete');
+          Route::get('role/change-status/{id}', 'RoleController@change_status');
+          Route::get('role/change-archieve-status/{id}', 'RoleController@change_archieve_status');
+          /* role */
           /* users */
           Route::get('users/list', 'UsersController@list');
-          //  Route::match(['get', 'post'], 'subscribers/add', 'UsersController@add');
-          //  Route::match(['get', 'post'], 'subscribers/edit/{id}', 'UsersController@edit');
+           Route::match(['get', 'post'], 'users/add', 'UsersController@add');
+           Route::match(['get', 'post'], 'users/edit/{id}', 'UsersController@edit');
            Route::get('users/delete/{id}', 'UsersController@delete');
            Route::get('users/change-status/{id}', 'UsersController@change_status');
            Route::get('users/change-archieve-status/{id}', 'UsersController@change_archieve_status');
