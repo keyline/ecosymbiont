@@ -70,4 +70,18 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = bcrypt($value);
     }
+
+    public function role_id()
+    {
+        return $this->belongsTo(Role::class, 'role', 'id');
+        // 'role' is the foreign key in the users table
+        // 'id' is the primary key in the roles table
+    }
+
+    public function country_id()
+    {
+        return $this->belongsTo(Country::class, 'country', 'id');
+        // 'role' is the foreign key in the users table
+        // 'id' is the primary key in the roles table
+    }
 }

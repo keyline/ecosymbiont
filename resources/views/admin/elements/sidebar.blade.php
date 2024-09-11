@@ -72,7 +72,7 @@ if (!empty($parameters)) {
                 <!-- End news contents -->
                 <!-- users -->
                     <div class="nav-item">
-                        <a class="nav-link <?= $pageSegment == 'notice' ? 'active' : '' ?>"
+                        <a class="nav-link <?= $pageSegment == 'users' ? 'active' : '' ?>"
                             href="<?= url('admin/users/list') ?>" data-placement="left">
                             <i class="fa fa-bell nav-icon"></i>
                             <span class="nav-link-title">Users</span>
@@ -91,6 +91,23 @@ if (!empty($parameters)) {
                         </div>
                     </div>
                 <!-- End newsletters -->
+                 <!-- masters -->
+                 <div class="nav-item">
+                        <a class="nav-link dropdown-toggle active <?=(($pageSegment == 'parent-category' || $pageSegment == 'sub-category')?'':'collapsed')?>" href="#navbarVerticalMenuMasters2" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuMasters2" aria-expanded="<?=(($pageSegment == 'parent-category' || $pageSegment == 'sub-category')?'true':'false')?>" aria-controls="navbarVerticalMenuMasters2">
+                          <i class="fa fa-database nav-icon"></i>
+                          <span class="nav-link-title">Masters</span>
+                        </a>
+                        <div id="navbarVerticalMenuMasters2" class="nav-collapse collapse <?=(($pageSegment == 'parent-category' || $pageSegment == 'sub-category')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">
+                          <a class="nav-link <?=(($pageSegment == 'expertise_area')?'active':'')?>" href="<?=url('admin/expertise_area/list')?>">Expertise Area</a>
+                          <a class="nav-link <?=(($pageSegment == 'ecosystem_affiliation')?'active':'')?>" href="<?=url('admin/ecosystem_affiliation/list')?>">Ecosystem Affiliation</a>
+                          <a class="nav-link <?=(($pageSegment == 'pronoun')?'active':'')?>" href="<?=url('admin/pronoun/list')?>">Pronoun</a>
+                          <a class="nav-link <?=(($pageSegment == 'title')?'active':'')?>" href="<?=url('admin/title/list')?>">Title</a>
+                          <a class="nav-link <?=(($pageSegment == 'role')?'active':'')?>" href="<?=url('admin/role/list')?>">Role</a>
+                          <a class="nav-link <?=(($pageSegment == 'section_ert')?'active':'')?>" href="<?=url('admin/section_ert/list')?>">Section Ert</a>
+                          <a class="nav-link <?=(($pageSegment == 'submission_type')?'active':'')?>" href="<?=url('admin/submission_type/list')?>">Submission Type</a>
+                        </div>
+                    </div>
+                <!-- End masters -->
                 <!-- email logs -->
                     <div class="nav-item">
                         <a class="nav-link <?= $pageSegment == 'notice' ? 'active' : '' ?>"

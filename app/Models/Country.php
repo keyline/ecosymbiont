@@ -25,4 +25,10 @@ class Country extends Model{
     // protected $casts = [
         
     // ];
+    public function users()
+    {
+        return $this->hasMany(User::class, 'country', 'id');
+        // 'role' is the foreign key in the users table
+        // 'id' is the primary key in the roles table
+    }
 }
