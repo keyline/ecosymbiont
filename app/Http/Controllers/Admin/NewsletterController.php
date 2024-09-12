@@ -89,7 +89,7 @@ class NewsletterController extends Controller
             $page_name                      = 'newsletter.add-edit';
             $data['row']                    = Newsletter::where($this->data['primary_key'], '=', $id)->first();
             $data['allUsers']               = User::select('id', 'first_name', 'last_name')->where('status', '=', 1)->get();
-            $data['subscribers']            = Subscriber::select('id', 'email')->where('status', '=', 1)->get();
+            $data['subscribers']            = Subscriber::select('id', 'subscribers_email')->where('status', '=', 1)->get();
 
             if($request->isMethod('post')){
                 $postData = $request->all();
