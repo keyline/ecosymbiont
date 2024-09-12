@@ -77,7 +77,7 @@ $controllerRoute = $module['controller_route'];
                       </div>
                     </td>
                     <td>{{ $value->title }}</td>
-                    <td><?=wordwrap($row->description,35,"<br>\n")?></td>
+                    <td><?=wordwrap($value->description,35,"<br>\n")?></td>
                     <!-- <td>{{ $value->description }}</td> -->
                     <td>
                       <?php if($value->attachment != ''){?>
