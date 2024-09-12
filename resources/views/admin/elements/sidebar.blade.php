@@ -52,52 +52,59 @@ if (!empty($parameters)) {
                         </a>
                     </div>
                 <!-- End dashboard -->
-                <!-- news categories -->
+                <!-- news -->
                     <div class="nav-item">
-                        <a class="nav-link <?= $pageSegment == 'news_category' ? 'active' : '' ?>"
-                            href="<?= url('admin/news_category/list') ?>" data-placement="left">
-                            <i class="fa fa-bell nav-icon"></i>
-                            <span class="nav-link-title">News Categories</span>
+                        <a class="nav-link dropdown-toggle active <?=(($pageSegment == 'news_category' || $pageSegment == 'content')?'':'collapsed')?>" href="#navbarVerticalMenuNews" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuNews" aria-expanded="<?=(($pageSegment == 'news_category' || $pageSegment == 'content')?'true':'false')?>" aria-controls="navbarVerticalMenuNews">
+                          <i class="fa fa-bell nav-icon"></i>
+                          <span class="nav-link-title">News</span>
                         </a>
-                    </div>
-                <!-- End news categories -->
-                <!-- news contents -->
+                        <div id="navbarVerticalMenuNews" class="nav-collapse collapse <?=(($pageSegment == 'news_category' || $pageSegment == 'content')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">
+                          <a class="nav-link <?=(($pageSegment == 'news_category')?'active':'')?>" href="<?=url('admin/news_category/list')?>">Categories</a>                          
+                          <a class="nav-link <?=(($pageSegment == 'content')?'active':'')?>" href="<?=url('admin/content/list')?>">Contents</a>
+                        </div>
+                    </div>                    
+                <!-- End news -->
+                <!-- Submitted Articles -->
                     <div class="nav-item">
                         <a class="nav-link <?= $pageSegment == 'article' ? 'active' : '' ?>"
                             href="<?= url('admin/article/list') ?>" data-placement="left">
-                            <i class="fa fa-bell nav-icon"></i>
+                            <i class="fa fa-file-text nav-icon"></i>
                             <span class="nav-link-title">Submitted Articles</span>
                         </a>
                     </div>
-                <!-- End news contents -->
-                <!-- users -->
+                <!-- End Submitted Articles -->                
+                 <!-- users -->
                     <div class="nav-item">
-                        <a class="nav-link <?= $pageSegment == 'users' ? 'active' : '' ?>"
-                            href="<?= url('admin/users/list') ?>" data-placement="left">
-                            <i class="fa fa-bell nav-icon"></i>
-                            <span class="nav-link-title">Users</span>
+                        <a class="nav-link dropdown-toggle active <?=(($pageSegment == 'content_creaters' || $pageSegment == 'editors'  || $pageSegment == 'readers')?'':'collapsed')?>" href="#navbarVerticalMenuUsers" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuUsers" aria-expanded="<?=(($pageSegment == 'content_creaters' || $pageSegment == 'editors'  || $pageSegment == 'readers')?'true':'false')?>" aria-controls="navbarVerticalMenuUsers">
+                          <i class="fa fa-users nav-icon"></i>
+                          <span class="nav-link-title">Users</span>
                         </a>
-                    </div>
-                <!-- End users -->
-                <!-- newsletters -->
-                    <div class="nav-item">
-                        <a class="nav-link dropdown-toggle active <?=(($pageSegment == 'parent-category' || $pageSegment == 'sub-category')?'':'collapsed')?>" href="#navbarVerticalMenuMasters" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuMasters" aria-expanded="<?=(($pageSegment == 'parent-category' || $pageSegment == 'sub-category')?'true':'false')?>" aria-controls="navbarVerticalMenuMasters">
-                          <i class="fa fa-database nav-icon"></i>
-                          <span class="nav-link-title">Newsletters</span>
-                        </a>
-                        <div id="navbarVerticalMenuMasters" class="nav-collapse collapse <?=(($pageSegment == 'parent-category' || $pageSegment == 'sub-category')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">
-                          <a class="nav-link <?=(($pageSegment == 'sub-category')?'active':'')?>" href="<?=url('admin/subscribers/list')?>">Subscribers</a>
-                          <a class="nav-link <?=(($pageSegment == 'state')?'active':'')?>" href="<?=url('admin/state/list')?>">Newsletters</a>
+                        <div id="navbarVerticalMenuUsers" class="nav-collapse collapse <?=(($pageSegment == 'content_creaters' || $pageSegment == 'editors'  || $pageSegment == 'readers')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">
+                          <a class="nav-link <?=(($pageSegment == 'content_creaters')?'active':'')?>" href="<?=url('admin/content_creaters/list')?>">Content Creater</a>
+                          <a class="nav-link <?=(($pageSegment == 'readers')?'active':'')?>" href="<?=url('admin/readers/list')?>">Readers</a>
+                          <a class="nav-link <?=(($pageSegment == 'editors')?'active':'')?>" href="<?=url('admin/editors/list')?>">Editors</a>
                         </div>
                     </div>
-                <!-- End newsletters -->
+                <!-- End users -->
+                <!-- Newsletter -->
+                    <div class="nav-item">
+                        <a class="nav-link dropdown-toggle active <?=(($pageSegment == 'subscriber' || $pageSegment == 'newsletter')?'':'collapsed')?>" href="#navbarVerticalNewsletter" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalNewsletter" aria-expanded="<?=(($pageSegment == 'subscriber' || $pageSegment == 'newsletter')?'true':'false')?>" aria-controls="navbarVerticalNewsletter">
+                        <i class="fa fa-envelope nav-icon"></i>
+                        <span class="nav-link-title">Newsletter</span>
+                        </a>
+                        <div id="navbarVerticalNewsletter" class="nav-collapse collapse <?=(($pageSegment == 'subscriber' || $pageSegment == 'newsletter')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">
+                        <a class="nav-link <?=(($pageSegment == 'subscriber')?'active':'')?>" href="<?=url('admin/subscriber/list')?>">Subscribers</a>
+                        <a class="nav-link <?=(($pageSegment == 'newsletter')?'active':'')?>" href="<?=url('admin/newsletter/list')?>">Newsletter</a>
+                        </div>
+                    </div>
+                    <!-- End Newsletter -->
                  <!-- masters -->
                  <div class="nav-item">
-                        <a class="nav-link dropdown-toggle active <?=(($pageSegment == 'parent-category' || $pageSegment == 'sub-category')?'':'collapsed')?>" href="#navbarVerticalMenuMasters2" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuMasters2" aria-expanded="<?=(($pageSegment == 'parent-category' || $pageSegment == 'sub-category')?'true':'false')?>" aria-controls="navbarVerticalMenuMasters2">
+                        <a class="nav-link dropdown-toggle active <?=(($pageSegment == 'expertise_area' || $pageSegment == 'ecosystem_affiliation' || $pageSegment == 'pronoun' || $pageSegment == 'title' || $pageSegment == 'role' || $pageSegment == 'section_ert' || $pageSegment == 'submission_type')?'':'collapsed')?>" href="#navbarVerticalMenuMasters2" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuMasters2" aria-expanded="<?=(($pageSegment == 'expertise_area' || $pageSegment == 'ecosystem_affiliation' || $pageSegment == 'pronoun' || $pageSegment == 'title' || $pageSegment == 'role' || $pageSegment == 'section_ert' || $pageSegment == 'submission_type')?'true':'false')?>" aria-controls="navbarVerticalMenuMasters2">
                           <i class="fa fa-database nav-icon"></i>
                           <span class="nav-link-title">Masters</span>
                         </a>
-                        <div id="navbarVerticalMenuMasters2" class="nav-collapse collapse <?=(($pageSegment == 'parent-category' || $pageSegment == 'sub-category')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">
+                        <div id="navbarVerticalMenuMasters2" class="nav-collapse collapse <?=(($pageSegment == 'expertise_area' || $pageSegment == 'ecosystem_affiliation' || $pageSegment == 'pronoun' || $pageSegment == 'title' || $pageSegment == 'role' || $pageSegment == 'section_ert' || $pageSegment == 'submission_type')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">
                           <a class="nav-link <?=(($pageSegment == 'expertise_area')?'active':'')?>" href="<?=url('admin/expertise_area/list')?>">Expertise Area</a>
                           <a class="nav-link <?=(($pageSegment == 'ecosystem_affiliation')?'active':'')?>" href="<?=url('admin/ecosystem_affiliation/list')?>">Ecosystem Affiliation</a>
                           <a class="nav-link <?=(($pageSegment == 'pronoun')?'active':'')?>" href="<?=url('admin/pronoun/list')?>">Pronoun</a>
@@ -112,7 +119,7 @@ if (!empty($parameters)) {
                     <div class="nav-item">
                         <a class="nav-link <?= $pageSegment == 'notice' ? 'active' : '' ?>"
                             href="<?= url('admin/notice/list') ?>" data-placement="left">
-                            <i class="fa fa-bell nav-icon"></i>
+                            <i class="fa fa-list-alt nav-icon"></i>
                             <span class="nav-link-title">Email Logs</span>
                         </a>
                     </div>
@@ -121,11 +128,35 @@ if (!empty($parameters)) {
                     <div class="nav-item">
                         <a class="nav-link <?= $pageSegment == 'notice' ? 'active' : '' ?>"
                             href="<?= url('admin/notice/list') ?>" data-placement="left">
-                            <i class="fa fa-bell nav-icon"></i>
+                            <i class="fa fa-sign-in nav-icon"></i>
                             <span class="nav-link-title">Login Logs</span>
                         </a>
                     </div>
                 <!-- End login logs -->
+                <!-- contact enquires -->
+                    <div class="nav-item">
+                        <a class="nav-link <?=(($pageSegment == 'enquiry')?'active':'')?>" href="<?=url('admin/enquiry/list')?>" data-placement="left">
+                        <i class="fa fa-bell nav-icon"></i>
+                        <span class="nav-link-title">Contact Enquires</span>
+                        </a>
+                    </div>
+                <!-- End contact enquires -->
+                 <!-- page -->
+                    <div class="nav-item">
+                        <a class="nav-link <?=(($pageSegment == 'page')?'active':'')?>" href="<?=url('admin/page/list')?>" data-placement="left">
+                        <i class="fa fa-file nav-icon"></i>
+                        <span class="nav-link-title">Pages</span>
+                        </a>
+                    </div>
+                <!-- End page -->
+                <!-- settings -->
+                <div class="nav-item">
+                        <a class="nav-link <?=(($pageSegment == 'settings')?'active':'')?>" href="<?=url('admin/settings')?>" data-placement="left">
+                        <i class="fa fa-cogs nav-icon"></i>
+                        <span class="nav-link-title">Account Settings</span>
+                        </a>
+                    </div>
+                <!-- End settings -->
             </div>
         </div>
         <!-- End Content -->

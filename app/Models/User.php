@@ -84,4 +84,5 @@ class User extends Authenticatable
         // 'role' is the foreign key in the users table
         // 'id' is the primary key in the roles table
     }
+    
 }
