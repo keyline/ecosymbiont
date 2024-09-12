@@ -15,14 +15,14 @@ use Session;
 use Helper;
 use Hash;
 
-class SubscribersController extends Controller
+class SubscriberController extends Controller
 {
     public function __construct()
     {
         $this->data = array(
             'title'             => 'Subscribers',
-            'controller'        => 'SubscribersController',
-            'controller_route'  => 'subscribers',
+            'controller'        => 'SubscriberController',
+            'controller_route'  => 'subscriber',
             'primary_key'       => 'id',
         );
     }

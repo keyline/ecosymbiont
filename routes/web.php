@@ -73,14 +73,26 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
          Route::get('news_category/change-status/{id}', 'NewsCategoryController@change_status');
          Route::get('news_category/change-archieve-status/{id}', 'NewsCategoryController@change_archieve_status');
          /* category */
-         /* subscribers */
-         Route::get('subscribers/list', 'SubscribersController@list');
-        //  Route::match(['get', 'post'], 'subscribers/add', 'SubscribersController@add');
-        //  Route::match(['get', 'post'], 'subscribers/edit/{id}', 'SubscribersController@edit');
-         Route::get('subscribers/delete/{id}', 'SubscribersController@delete');
-         Route::get('subscribers/change-status/{id}', 'SubscribersController@change_status');
-         Route::get('subscribers/change-archieve-status/{id}', 'SubscribersController@change_archieve_status');
-         /* subscribers */
+         /* newsletter */
+                /* subscriber */
+                Route::get('subscriber/list', 'SubscriberController@list');
+                Route::match(['get', 'post'], 'subscriber/add', 'SubscriberController@add');
+                Route::match(['get', 'post'], 'subscriber/edit/{id}', 'SubscriberController@edit');
+                Route::get('subscriber/delete/{id}', 'SubscriberController@delete');
+                Route::get('subscriber/change-status/{id}', 'SubscriberController@change_status');
+                Route::get('subscriber/send/{id}', 'SubscriberController@send');
+                Route::post('subscriber/get-user', 'SubscriberController@getUser');
+            /* subscriber */
+            /* newsletter */
+                Route::get('newsletter/list', 'NewsletterController@list');
+                Route::match(['get', 'post'], 'newsletter/add', 'NewsletterController@add');
+                Route::match(['get', 'post'], 'newsletter/edit/{id}', 'NewsletterController@edit');
+                Route::get('newsletter/delete/{id}', 'NewsletterController@delete');
+                Route::get('newsletter/change-status/{id}', 'NewsletterController@change_status');
+                Route::get('newsletter/send/{id}', 'NewsletterController@send');
+                Route::post('newsletter/get-user', 'NewsletterController@getUser');
+            /* newsletter */
+        /* newsletter */
          /* expertise_area */
          Route::get('expertise_area/list', 'ExpertiseAreaController@list');
          Route::match(['get', 'post'], 'expertise_area/add', 'ExpertiseAreaController@add');
@@ -137,24 +149,42 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
           Route::get('role/change-status/{id}', 'RoleController@change_status');
           Route::get('role/change-archieve-status/{id}', 'RoleController@change_archieve_status');
           /* role */
-          /* users */
-          Route::get('users/list', 'UsersController@list');
-           Route::match(['get', 'post'], 'users/add', 'UsersController@add');
-           Route::match(['get', 'post'], 'users/edit/{id}', 'UsersController@edit');
-           Route::get('users/delete/{id}', 'UsersController@delete');
-           Route::get('users/change-status/{id}', 'UsersController@change_status');
-           Route::get('users/change-archieve-status/{id}', 'UsersController@change_archieve_status');
-           /* users */
-        /* manuscript */
-        Route::get('manuscript/list', 'ManuscriptController@list');
-        Route::get('manuscript/delete/{id}', 'ManuscriptController@delete');
-        Route::get('manuscript/change-status/{id}/{id2}', 'ManuscriptController@change_status');
-        /* manuscript */
-
-        /* Scroll Notice */
-        Route::resource('scroll-notice', ScrollNoticeController::class);
-        Route::post('scroll-notice/store', 'ScrollNoticeController@store');
-        /* Scroll Notice */
+          /* content_creaters */
+          Route::get('content_creaters/list', 'ContentCreatersController@list');
+           Route::match(['get', 'post'], 'content_creaters/add', 'ContentCreatersController@add');
+           Route::match(['get', 'post'], 'content_creaters/edit/{id}', 'ContentCreatersController@edit');
+           Route::get('content_creaters/delete/{id}', 'ContentCreatersController@delete');
+           Route::get('content_creaters/change-status/{id}', 'ContentCreatersController@change_status');
+           Route::get('content_creaters/change-archieve-status/{id}', 'ContentCreatersController@change_archieve_status');
+           /* content_creaters */
+           /* readers */
+          Route::get('readers/list', 'ReadersController@list');
+          Route::match(['get', 'post'], 'readers/add', 'ReadersController@add');
+          Route::match(['get', 'post'], 'readers/edit/{id}', 'ReadersController@edit');
+          Route::get('readers/delete/{id}', 'ReadersController@delete');
+          Route::get('readers/change-status/{id}', 'ReadersController@change_status');
+          Route::get('readers/change-archieve-status/{id}', 'ReadersController@change_archieve_status');
+          /* readers */
+           /* editors */
+           Route::get('editors/list', 'EditorsController@list');
+           Route::match(['get', 'post'], 'editors/add', 'EditorsController@add');
+           Route::match(['get', 'post'], 'editors/edit/{id}', 'EditorsController@edit');
+           Route::get('editors/delete/{id}', 'EditorsController@delete');
+           Route::get('editors/change-status/{id}', 'EditorsController@change_status');
+           Route::get('editors/change-archieve-status/{id}', 'EditorsController@change_archieve_status');
+           /* editors */
+           // page
+           Route::get('page/list', 'PageController@list');
+           Route::match(['get', 'post'], 'page/add', 'PageController@add');
+           Route::match(['get', 'post'], 'page/edit/{id}', 'PageController@edit');
+           Route::get('page/delete/{id}', 'PageController@delete');
+           Route::get('page/change-status/{id}', 'PageController@change_status');
+            // page
+            //enquiry
+            Route::get('enquiry/list', 'EnquiryController@list');
+            Route::get('enquiry/view-details/{id}', 'EnquiryController@details');
+            Route::get('enquiry/delete/{id}', 'EnquiryController@delete');
+            //enquiry
     });
 });
 /* Admin Panel */
