@@ -77,7 +77,7 @@ class NewsletterController extends Controller
             $data['row']                    = [];
             $data['allUsers']               = User::select('email')->where('status', '=', 1)->get();
             $data['subscribers']            = Subscriber::select('subscribers_email')->where('status', '=', 1)->get();
-            dd($data['subscribers']);
+            // dd($data['subscribers']);
             echo $this->admin_after_login_layout($title,$page_name,$data);
         }
     /* add */
