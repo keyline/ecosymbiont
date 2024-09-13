@@ -33,7 +33,7 @@ class NewsCategoryController extends Controller
         $data['module']                 = $this->data;
         $title                          = $this->data['title'] . ' List';
         $page_name                      = 'news_category.list';
-        $data['rows']                   = NewsCategory::where('status', '!=', 3)->orderBy('id', 'DESC')->get();
+        $data['rows']                   = NewsCategory::where('status', '!=', 3)->where('parent_category', '=', 0)->orderBy('id', 'DESC')->get();
 
         echo $this->admin_after_login_layout($title, $page_name, $data);
     }

@@ -393,6 +393,8 @@ $user_type = session('type');
                   <div class="col-md-8 col-lg-9">
                     <input type="text" name="smtp_port" class="form-control" id="smtp_port" value="<?=$setting->smtp_port?>">
                   </div>
+                  <h3>Test Email</h3>
+                <a href="{{ url('admin/test-email') }}" class="btn btn-success"><i class="fa fa-envelope"></i> Click To Send Test Email</a>
                 </div>
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary">Submit</button>
