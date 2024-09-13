@@ -54,7 +54,7 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::post('seo-settings', 'UserController@seo_settings');
         Route::post('payment-settings', 'UserController@payment_settings');
         Route::post('signature-settings', 'UserController@signature_settings');
-        Route::match(['get','post'], "test-email", "User::testEmail");
+        Route::match(['get','post'], "test-email", "UserController@testEmail");
         /* setting */
         /* submitted articles */
         Route::get('article/list', 'ArticlesController@list');

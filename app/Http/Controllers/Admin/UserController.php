@@ -683,12 +683,12 @@ class UserController extends Controller
     /* login logs */
     /* test email */
         public function testEmail(){
-            $generalSetting             = $this->common_model->find_data('general_settings', 'row');
+            $generalSetting             = GeneralSetting::where('id', '=', 1)->first();
             $subject                    = 'Test email subject on '.date('Y-m-d H:i:s');
             $message                    = 'Test email message body on '.date('Y-m-d H:i:s');
             $this->sendMail($generalSetting->site_mail, $subject, $message);
-            $this->session->setFlashdata('success_message', 'Test Email Sent Successfully !!!');
-            return redirect()->to('/admin/settings');
+            return redirect()->back()->with('success_message', 'Test Email Sent Successfully !!!');            
+            
         }
 /* test email */
 }
