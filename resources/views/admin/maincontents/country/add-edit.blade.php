@@ -45,11 +45,9 @@ $controllerRoute = $module['controller_route'];
         <?php
         $setting = GeneralSetting::where('id', '=', 1)->first();
         if ($row) {
-            $name = $row->sub_category;            
-            $description = $row->description;          
+            $name = $row->name;                                 
         } else {
-            $name = '';            
-            $description = '';           
+            $name = '';                               
         }
         ?>
         <div class="col-xl-12">
@@ -58,18 +56,12 @@ $controllerRoute = $module['controller_route'];
                     <form method="POST" action="" enctype="multipart/form-data">
                         @csrf
                         <div class="row mb-3">
-                            <label for="name" class="col-md-2 col-lg-2 col-form-label">Category Name</label>
+                            <label for="name" class="col-md-2 col-lg-2 col-form-label">Name</label>
                             <div class="col-md-10 col-lg-10">
                                 <input type="text" name="name" class="form-control" id="name"
                                     value="<?= $name ?>" required>
                             </div>
-                        </div>                        
-                        <!-- <div class="row mb-3">
-                            <label for="description" class="col-md-2 col-lg-2 col-form-label">Description</label>
-                            <div class="col-md-10 col-lg-10">
-                                <textarea name="description" class="form-control" id="description" rows="3"><?= $description ?></textarea>
-                            </div>
-                        </div>                         -->
+                        </div>                                                                  
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary"><?= $row ? 'Save' : 'Add' ?></button>
                         </div>

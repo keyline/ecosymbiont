@@ -54,12 +54,13 @@ if (!empty($parameters)) {
                 <!-- End dashboard -->
                 <!-- news -->
                     <div class="nav-item">
-                        <a class="nav-link dropdown-toggle active <?=(($pageSegment == 'news_category' || $pageSegment == 'content')?'':'collapsed')?>" href="#navbarVerticalMenuNews" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuNews" aria-expanded="<?=(($pageSegment == 'news_category' || $pageSegment == 'content')?'true':'false')?>" aria-controls="navbarVerticalMenuNews">
+                        <a class="nav-link dropdown-toggle active <?=(($pageSegment == 'news_category' || $pageSegment == 'content' || $pageSegment == 'news_subcategory')?'':'collapsed')?>" href="#navbarVerticalMenuNews" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuNews" aria-expanded="<?=(($pageSegment == 'news_category' || $pageSegment == 'content' || $pageSegment == 'news_subcategory')?'true':'false')?>" aria-controls="navbarVerticalMenuNews">
                           <i class="fa fa-bell nav-icon"></i>
                           <span class="nav-link-title">News</span>
                         </a>
-                        <div id="navbarVerticalMenuNews" class="nav-collapse collapse <?=(($pageSegment == 'news_category' || $pageSegment == 'content')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">
-                          <a class="nav-link <?=(($pageSegment == 'news_category')?'active':'')?>" href="<?=url('admin/news_category/list')?>">Categories</a>                          
+                        <div id="navbarVerticalMenuNews" class="nav-collapse collapse <?=(($pageSegment == 'news_category' || $pageSegment == 'content' || $pageSegment == 'news_subcategory')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">
+                          <a class="nav-link <?=(($pageSegment == 'news_category')?'active':'')?>" href="<?=url('admin/news_category/list')?>">Parent Categories</a>
+                          <a class="nav-link <?=(($pageSegment == 'news_subcategory')?'active':'')?>" href="<?=url('admin/news_subcategory/list')?>">Sub Categories</a>
                           <a class="nav-link <?=(($pageSegment == 'content')?'active':'')?>" href="<?=url('admin/content/list')?>">Contents</a>
                         </div>
                     </div>                    
@@ -100,11 +101,11 @@ if (!empty($parameters)) {
                     <!-- End Newsletter -->
                  <!-- masters -->
                  <div class="nav-item">
-                        <a class="nav-link dropdown-toggle active <?=(($pageSegment == 'expertise_area' || $pageSegment == 'ecosystem_affiliation' || $pageSegment == 'pronoun' || $pageSegment == 'title' || $pageSegment == 'role' || $pageSegment == 'section_ert' || $pageSegment == 'submission_type')?'':'collapsed')?>" href="#navbarVerticalMenuMasters2" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuMasters2" aria-expanded="<?=(($pageSegment == 'expertise_area' || $pageSegment == 'ecosystem_affiliation' || $pageSegment == 'pronoun' || $pageSegment == 'title' || $pageSegment == 'role' || $pageSegment == 'section_ert' || $pageSegment == 'submission_type')?'true':'false')?>" aria-controls="navbarVerticalMenuMasters2">
+                        <a class="nav-link dropdown-toggle active <?=(($pageSegment == 'expertise_area' || $pageSegment == 'ecosystem_affiliation' || $pageSegment == 'pronoun' || $pageSegment == 'title' || $pageSegment == 'role' || $pageSegment == 'section_ert' || $pageSegment == 'submission_type' || $pageSegment == 'country')?'':'collapsed')?>" href="#navbarVerticalMenuMasters2" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuMasters2" aria-expanded="<?=(($pageSegment == 'expertise_area' || $pageSegment == 'ecosystem_affiliation' || $pageSegment == 'pronoun' || $pageSegment == 'title' || $pageSegment == 'role' || $pageSegment == 'section_ert' || $pageSegment == 'submission_type' || $pageSegment == 'country')?'true':'false')?>" aria-controls="navbarVerticalMenuMasters2">
                           <i class="fa fa-database nav-icon"></i>
                           <span class="nav-link-title">Masters</span>
                         </a>
-                        <div id="navbarVerticalMenuMasters2" class="nav-collapse collapse <?=(($pageSegment == 'expertise_area' || $pageSegment == 'ecosystem_affiliation' || $pageSegment == 'pronoun' || $pageSegment == 'title' || $pageSegment == 'role' || $pageSegment == 'section_ert' || $pageSegment == 'submission_type')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">
+                        <div id="navbarVerticalMenuMasters2" class="nav-collapse collapse <?=(($pageSegment == 'expertise_area' || $pageSegment == 'ecosystem_affiliation' || $pageSegment == 'pronoun' || $pageSegment == 'title' || $pageSegment == 'role' || $pageSegment == 'section_ert' || $pageSegment == 'submission_type' || $pageSegment == 'country')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">
                           <a class="nav-link <?=(($pageSegment == 'expertise_area')?'active':'')?>" href="<?=url('admin/expertise_area/list')?>">Expertise Area</a>
                           <a class="nav-link <?=(($pageSegment == 'ecosystem_affiliation')?'active':'')?>" href="<?=url('admin/ecosystem_affiliation/list')?>">Ecosystem Affiliation</a>
                           <a class="nav-link <?=(($pageSegment == 'pronoun')?'active':'')?>" href="<?=url('admin/pronoun/list')?>">Pronoun</a>
@@ -112,6 +113,7 @@ if (!empty($parameters)) {
                           <a class="nav-link <?=(($pageSegment == 'role')?'active':'')?>" href="<?=url('admin/role/list')?>">Role</a>
                           <a class="nav-link <?=(($pageSegment == 'section_ert')?'active':'')?>" href="<?=url('admin/section_ert/list')?>">Section Ert</a>
                           <a class="nav-link <?=(($pageSegment == 'submission_type')?'active':'')?>" href="<?=url('admin/submission_type/list')?>">Submission Type</a>
+                          <a class="nav-link <?=(($pageSegment == 'country')?'active':'')?>" href="<?=url('admin/country/list')?>">Country</a>
                         </div>
                     </div>
                 <!-- End masters -->

@@ -65,14 +65,22 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::match(['get', 'post'], 'article/change_status_reject/{id}', 'ArticlesController@change_status_reject');
         /* submitted articles */
         
-         /* category */
+         /* parent category */
          Route::get('news_category/list', 'NewsCategoryController@list');
          Route::match(['get', 'post'], 'news_category/add', 'NewsCategoryController@add');
          Route::match(['get', 'post'], 'news_category/edit/{id}', 'NewsCategoryController@edit');
          Route::get('news_category/delete/{id}', 'NewsCategoryController@delete');
          Route::get('news_category/change-status/{id}', 'NewsCategoryController@change_status');
          Route::get('news_category/change-archieve-status/{id}', 'NewsCategoryController@change_archieve_status');
-         /* category */
+         /* end parent category */
+         /*sub category */
+         Route::get('news_subcategory/list', 'NewsSubCategoryController@list');
+         Route::match(['get', 'post'], 'news_subcategory/add', 'NewsSubCategoryController@add');
+         Route::match(['get', 'post'], 'news_subcategory/edit/{id}', 'NewsSubCategoryController@edit');
+         Route::get('news_subcategory/delete/{id}', 'NewsSubCategoryController@delete');
+         Route::get('news_subcategory/change-status/{id}', 'NewsSubCategoryController@change_status');
+         Route::get('news_subcategory/change-archieve-status/{id}', 'NewsSubCategoryController@change_archieve_status');
+         /* end sub category */
          /* newsletter */
                 /* subscriber */
                 Route::get('subscriber/list', 'SubscriberController@list');
@@ -141,6 +149,14 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
           Route::get('title/change-status/{id}', 'TitleController@change_status');
           Route::get('title/change-archieve-status/{id}', 'TitleController@change_archieve_status');
           /* title */
+          /* country */
+          Route::get('country/list', 'CountryController@list');
+          Route::match(['get', 'post'], 'country/add', 'CountryController@add');
+          Route::match(['get', 'post'], 'country/edit/{id}', 'CountryController@edit');
+          Route::get('country/delete/{id}', 'CountryController@delete');
+          Route::get('country/change-status/{id}', 'CountryController@change_status');
+          Route::get('country/change-archieve-status/{id}', 'CountryController@change_archieve_status');
+          /* country */
           /* role */
           Route::get('role/list', 'RoleController@list');
           Route::match(['get', 'post'], 'role/add', 'RoleController@add');
