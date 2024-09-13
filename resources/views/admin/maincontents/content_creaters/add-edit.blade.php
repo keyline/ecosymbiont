@@ -56,23 +56,23 @@ $controllerRoute = $module['controller_route'];
             $countryId = $row->country;          
             $roleId = $row->role;          
             $password = $row->password;  
-            $invited = $row->invited;        
-            $invited_by = $row->invited_by; 
-            $invited_by_email = $row->invited_by_email;  
-            $explanation = $row->explanation;  
-            $explanation_submission = $row->explanation_submission;  
-            $section_ertId = $row->section_ertId; 
+            // $invited = $row->invited;        
+            // $invited_by = $row->invited_by; 
+            // $invited_by_email = $row->invited_by_email;  
+            // $explanation = $row->explanation;  
+            // $explanation_submission = $row->explanation_submission;  
+            // $section_ertId = $row->section_ertId; 
             $titleId = $row->titleId;  
             $pronounId = $row->pronounId;
-            $participated = $row->participated;
-            $participated_info = $row->participated_info;
-            $organization_name = $row->organization_name;
-            $organization_website = $row->organization_website;
-            $ecosystem_affiliationId = $selected_ecosystem_affiliation;
-            $indigenous_affiliation = $row->indigenous_affiliation;
-            $expertise_areaId = $selected_expertise_area;
-            $bio_short = $row->bio_short;
-            $bio_long = $row->bio_long;
+            // $participated = $row->participated;
+            // $participated_info = $row->participated_info;
+            // $organization_name = $row->organization_name;
+            // $organization_website = $row->organization_website;
+            // $ecosystem_affiliationId = $selected_ecosystem_affiliation;
+            // $indigenous_affiliation = $row->indigenous_affiliation;
+            // $expertise_areaId = $selected_expertise_area;
+            // $bio_short = $row->bio_short;
+            // $bio_long = $row->bio_long;
         } else {
             $first_name = '';            
             $last_name =  '';          
@@ -82,23 +82,23 @@ $controllerRoute = $module['controller_route'];
             $countryId = '';           
             $roleId = '';           
             $password = ''; 
-            $invited = '';
-            $invited_by = ''; 
-            $invited_by_email = '';  
-            $explanation = '';  
-            $explanation_submission = '';     
-            $section_ertId = '';
+            // $invited = '';
+            // $invited_by = ''; 
+            // $invited_by_email = '';  
+            // $explanation = '';  
+            // $explanation_submission = '';     
+            // $section_ertId = '';
             $titleId = '';
             $pronounId = '';
-            $participated = '';
-            $participated_info = '';
-            $organization_name = '';
-            $organization_website = '';
-            $ecosystem_affiliationId = [];
-            $indigenous_affiliation = '';
-            $expertise_areaId = [];
-            $bio_short = '';
-            $bio_long = '';
+            // $participated = '';
+            // $participated_info = '';
+            // $organization_name = '';
+            // $organization_website = '';
+            // $ecosystem_affiliationId = [];
+            // $indigenous_affiliation = '';
+            // $expertise_areaId = [];
+            // $bio_short = '';
+            // $bio_long = '';
         }
         ?>
         <div class="col-xl-12">
@@ -106,12 +106,12 @@ $controllerRoute = $module['controller_route'];
                 <div class="card-body pt-3">
                     <form method="POST" action="" enctype="multipart/form-data" oninput="validateForm()">
                         @csrf
-                        <div class="row mb-3">
+                        <!-- <div class="row mb-3">
                             <label for="invited" class="col-md-2 col-lg-4 col-form-label">Were you invited to make a Submission to ERT?</label>
                             <div class="col-md-10 col-lg-8">
-                                <input type="radio" id="yes" name="invited" value="Yes" @checked(old('invited', $invited) == 'Yes')>
+                                <input type="radio" id="yes" name="invited" value="Yes" )>
                                 <label for="yes">Yes</label>
-                                <input type="radio" id="no" name="invited" value="No" @checked(old('invited', $invited) == 'No')>
+                                <input type="radio" id="no" name="invited" value="No" )>
                                 <label for="no">No</label>
                             </div>
                         </div>  
@@ -119,7 +119,7 @@ $controllerRoute = $module['controller_route'];
                             <label for="invited_by" class="col-md-2 col-lg-4 col-form-label">Full name of person who invited you to make a Submission to ERT </label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="text" name="invited_by" class="form-control" id="invited_by"
-                                    value="<?= $invited_by ?>" required>
+                                    value="?= $invited_by ?>" required>
                             </div>
                         </div> 
                         <div class="row mb-3">
@@ -127,38 +127,38 @@ $controllerRoute = $module['controller_route'];
                             </label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="email" name="invited_by_email" class="form-control" id="invited_by_email"
-                                    value="<?= $invited_by_email ?>" required>
+                                    value="?= $invited_by_email ?>" required>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="participated" class="col-md-2 col-lg-4 col-form-label">Have you participated as a strategist at an in-person ER Synergy Meeting?</label>
                             <div class="col-md-10 col-lg-8">
-                                <input type="radio" id="yes" name="participated" value="Yes" @checked(old('participated', $participated) == 'Yes')>
+                                <input type="radio" id="yes" name="participated" value="Yes" )>
                                 <label for="yes">Yes</label>
-                                <input type="radio" id="no" name="participated" value="No" @checked(old('participated', $participated) == 'No')>
+                                <input type="radio" id="no" name="participated" value="No" )>
                                 <label for="no">No</label>
                             </div>
                         </div> 
                         <div class="row mb-3">
                             <label for="participated_info" class="col-md-2 col-lg-4 col-form-label">Provide date and location of most recent in-person ER Synergy Meeting you participated in.</label>
                             <div class="col-md-10 col-lg-8">
-                                <input type="radio" id="yes" name="participated_info" value="Yes" @checked(old('participated_info', $participated_info) == 'Yes')>
+                                <input type="radio" id="yes" name="participated_info" value="Yes" )>
                                 <label for="yes">Yes</label>
-                                <input type="radio" id="no" name="participated_info" value="No" @checked(old('participated_info', $participated_info) == 'No')>
+                                <input type="radio" id="no" name="participated_info" value="No" )>
                                 <label for="no">No</label>
                             </div>
                         </div> 
                         <div class="row mb-3">
                             <label for="explanation" class="col-md-2 col-lg-4 col-form-label">Explain why you are a grassroots changemaker, knowledge-holder, and/or innovator (max. 100 words)</label>
                             <div class="col-md-10 col-lg-8">
-                                <textarea class="form-control" id="explanation" name="explanation" rows="4" cols="50" placeholder="Your explanation here..." required><?= $explanation ?></textarea>
+                                <textarea class="form-control" id="explanation" name="explanation" rows="4" cols="50" placeholder="Your explanation here..." required>?= $explanation ?></textarea>
                                 <div id="explanationError" class="error"></div>
                             </div>
                         </div>  
                         <div class="row mb-3">
                             <label for="explanation_submission" class="col-md-2 col-lg-4 col-form-label">Explain why and how your Submission relates to restoring, preserving, and/or promoting human-ecological interconnectivity (symbiosis) (max. 150 words)</label>
                             <div class="col-md-10 col-lg-8">
-                                <textarea class="form-control" id="explanation_submission" name="explanation_submission" rows="4" cols="50" placeholder="Your explanation here..." required><?= $explanation_submission ?></textarea>
+                                <textarea class="form-control" id="explanation_submission" name="explanation_submission" rows="4" cols="50" placeholder="Your explanation here..." required>?= $explanation_submission ?></textarea>
                                 <div id="explanation_submissionError" class="error"></div>
                             </div>
                         </div> 
@@ -170,13 +170,13 @@ $controllerRoute = $module['controller_route'];
                                     <option value="" selected disabled>Select</option>
                                     @if ($section_ert)
                                         @foreach ($section_ert as $data)
-                                            <option value="{{ $data->id }}" @selected($data->id == $section_ertId)>
+                                            <option value="{{ $data->id }}")>
                                                 {{ $data->name }}</option>
                                         @endforeach
                                     @endif
                                 </select>
                             </div>
-                        </div>  
+                        </div>   
                         <div class="row mb-3">
                             <label for="role" class="col-md-2 col-lg-4 col-form-label">User Type</label>
                             <div class="col-md-10 col-lg-8">
@@ -184,13 +184,13 @@ $controllerRoute = $module['controller_route'];
                                     <option value="" selected disabled>Select</option>
                                     @if ($role)
                                         @foreach ($role as $data)
-                                            <option value="{{ $data->id }}" @selected($data->id == $roleId)>
+                                            <option value="{{ $data->id }}" )>
                                                 {{ $data->name }}</option>
                                         @endforeach
                                     @endif
                                 </select>
                             </div>
-                        </div>
+                        </div>-->
                         <div class="row mb-3">
                             <label for="email" class="col-md-2 col-lg-4 col-form-label">Your email address</label>
                             <div class="col-md-10 col-lg-8">
@@ -198,7 +198,7 @@ $controllerRoute = $module['controller_route'];
                                     value="<?= $email ?>" required>
                             </div>
                         </div> 
-                        <div class="row mb-3">
+                        <!-- <div class="row mb-3">
                             <label for="title" class="col-md-2 col-lg-4 col-form-label">Title
                             </label>
                             <div class="col-md-10 col-lg-8">
@@ -206,13 +206,13 @@ $controllerRoute = $module['controller_route'];
                                     <option value="" selected disabled>Select</option>
                                     @if ($user_title)
                                         @foreach ($user_title as $data)
-                                            <option value="{{ $data->id }}" @selected($data->id == $titleId)>
+                                            <option value="{{ $data->id }}" >
                                                 {{ $data->name }}</option>
                                         @endforeach
                                     @endif
                                 </select>
                             </div>
-                        </div> 
+                        </div>  -->
                         <div class="row mb-3">
                             <label for="first_name" class="col-md-2 col-lg-4 col-form-label">First Name</label>
                             <div class="col-md-10 col-lg-8">
@@ -234,28 +234,28 @@ $controllerRoute = $module['controller_route'];
                                     value="<?= $last_name ?>" required>
                             </div>
                         </div>  
-                        <div class="row mb-3">
+                        <!-- <div class="row mb-3">
                             <label for="pronoun" class="col-md-2 col-lg-4 col-form-label">Pronoun</label>
                             <div class="col-md-10 col-lg-8">
                                 <select name="pronoun" class="form-control" id="pronoun" required>
                                     <option value="" selected disabled>Select</option>
                                     @if ($pronoun)
                                         @foreach ($pronoun as $data)
-                                            <option value="{{ $data->id }}" @selected($data->id == $pronounId)>
+                                            <option value="{{ $data->id }}" >
                                                 {{ $data->name }}</option>
                                         @endforeach
                                     @endif
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
                          
-                        <div class="row mb-3">
+                        <!-- <div class="row mb-3">
                             <label for="phone" class="col-md-2 col-lg-4 col-form-label">Phone</label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="phone" name="phone" maxlength="10" class="form-control" id="phone"
-                                    value="<?= $phone ?>" required>
+                                    value="?= $phone ?>" required>
                             </div>
-                        </div>   
+                        </div>    -->
                         <div class="row mb-3">
                             <label for="password" class="col-md-2 col-lg-4 col-form-label">Password</label>
                             <div class="col-md-10 col-lg-8">
@@ -276,12 +276,12 @@ $controllerRoute = $module['controller_route'];
                                 </select>
                             </div>
                         </div>                                                                       
-                        <div class="row mb-3">
+                        <!-- <div class="row mb-3">
                             <label for="organization_name" class="col-md-2 col-lg-4 col-form-label">Organization name (if no affiliation, type N/A)
                             </label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="text" name="organization_name" class="form-control" id="organization_name"
-                                    value="<?= $organization_name ?>" required>
+                                    value="?= $organization_name ?>" required>
                             </div>
                         </div> 
                         <div class="row mb-3">
@@ -289,7 +289,7 @@ $controllerRoute = $module['controller_route'];
                             </label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="text" name="organization_website" class="form-control" id="organization_website"
-                                    value="<?= $organization_website ?>" required>
+                                    value="?= $organization_website ?>" required>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -298,7 +298,7 @@ $controllerRoute = $module['controller_route'];
                             <div class="col-md-10 col-lg-8">                                                                                                
                                 @if ($ecosystem_affiliation)
                                     @foreach ($ecosystem_affiliation as $data)
-                                    <input type="checkbox" name="ecosystem_affiliation[]" value="{{ $data->id }}" @if(in_array($data->id, old('ecosystem_affiliation', $ecosystem_affiliationId))) checked @endif>{{ $data->name }}<br>
+                                    <input type="checkbox" name="ecosystem_affiliation[]" value="{{ $data->id }}" >{{ $data->name }}<br>
                                     @endforeach
                                 @endif                                
                             </div>
@@ -308,7 +308,7 @@ $controllerRoute = $module['controller_route'];
                             </label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="text" name="indigenous_affiliation" class="form-control" id="indigenous_affiliation"
-                                value="<?= $indigenous_affiliation ?>" required>
+                                value="?= $indigenous_affiliation ?>" required>
                             </div>
                         </div> 
                         <div class="row mb-3">
@@ -317,7 +317,7 @@ $controllerRoute = $module['controller_route'];
                             <div class="col-md-10 col-lg-8">
                                 @if ($expertise_area)
                                     @foreach ($expertise_area as $data)
-                                    <input type="checkbox" name="expertise_area[]" value="{{ $data->id }}" @if(in_array($data->id, old('expertise_area', $expertise_areaId))) checked @endif>{{ $data->name }}<br>                                          
+                                    <input type="checkbox" name="expertise_area[]" value="{{ $data->id }}" >{{ $data->name }}<br>                                          
                                     @endforeach
                                 @endif
                             </div>
@@ -326,7 +326,7 @@ $controllerRoute = $module['controller_route'];
                             <label for="bio_short" class="col-md-2 col-lg-4 col-form-label">1-sentence biography (max. 40 words)
                             </label>
                             <div class="col-md-10 col-lg-8">
-                                <textarea class="form-control" id="bio_short" name="bio_short" rows="4" cols="50" placeholder="Your explanation here..." required><?= $bio_short ?></textarea>
+                                <textarea class="form-control" id="bio_short" name="bio_short" rows="4" cols="50" placeholder="Your explanation here..." required>?= $bio_short ?></textarea>
                                 <div id="bio_shortError" class="error"></div>
                             </div>
                         </div>
@@ -334,13 +334,13 @@ $controllerRoute = $module['controller_route'];
                             <label for="bio_long" class="col-md-2 col-lg-4 col-form-label">1-paragraph biography (150-250 words)
                             </label>
                             <div class="col-md-10 col-lg-8">
-                                <textarea class="form-control" id="bio_long" name="bio_long" rows="4" cols="50" placeholder="Your explanation here..." required><?= $bio_long ?></textarea>
+                                <textarea class="form-control" id="bio_long" name="bio_long" rows="4" cols="50" placeholder="Your explanation here..." required>?= $bio_long ?></textarea>
                                 <div id="bio_longError" class="error"></div>
                             </div>
-                        </div>    
+                        </div>   --> 
                         <div class="text-center">
-                            <button type="submit" id="submitButton" class="btn btn-primary" disabled><?= $row ? 'Save' : 'Add' ?></button>
-                        </div>
+                            <button type="submit" id="submitButton" class="btn btn-primary"><?= $row ? 'Save' : 'Add' ?></button>
+                        </div> 
                     </form>
                 </div>
             </div>
