@@ -38,7 +38,8 @@ $controllerRoute = $module['controller_route'];
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Category</th>                                    
+                  <th scope="col">Country</th>
+                  <th scope="col">Created At</th>                  
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -47,8 +48,9 @@ $controllerRoute = $module['controller_route'];
                   <tr>
                     <th scope="row"><?=$sl++?></th>
                     <td>
-                      <?=$row->sub_category?>
-                    </td>                                     
+                      <?=$row->name?>
+                    </td>
+                    <td><?=$row->created_at?></td>                    
                     <td>
                       <a href="<?=url('admin/' . $controllerRoute . '/edit/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit"></i></a>
                       <a href="<?=url('admin/' . $controllerRoute . '/delete/'.Helper::encoded($row->id))?>" class="btn btn-outline-danger btn-sm" title="Delete <?=$module['title']?>" onclick="return confirm('Do You Want To Delete This <?=$module['title']?>');"><i class="fa fa-trash"></i></a>

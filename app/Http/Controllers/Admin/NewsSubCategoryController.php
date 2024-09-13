@@ -16,25 +16,24 @@ use Session;
 use Helper;
 use Hash;
 
-class NewsCategoryController extends Controller
+class NewsSubCategoryController extends Controller
 {
     public function __construct()
     {
         $this->data = array(
-            'title'             => 'Parent Category',
-            'controller'        => 'NewsCategoryController',
-            'controller_route'  => 'news_category',
+            'title'             => 'Sub Category',
+            'controller'        => 'NewsSubCategoryController',
+            'controller_route'  => 'news_subcategory',
             'primary_key'       => 'id',
         );
     }
     /* list */
     public function list()
-    {
+    {       
         $data['module']                 = $this->data;
         $title                          = $this->data['title'] . ' List';
-        $page_name                      = 'news_category.list';
-        $data['rows']                   = NewsCategory::where('status', '!=', 3)->orderBy('id', 'DESC')->get();
-
+        $page_name                      = 'news_subcategory.list';
+        $data['rows']                   = NewsCategory::where('status', '!=', 3)->where('parent_category', '!=', 0)->orderBy('id', 'DESC')->get();        
         echo $this->admin_after_login_layout($title, $page_name, $data);
     }
     /* list */
@@ -45,16 +44,17 @@ class NewsCategoryController extends Controller
         if ($request->isMethod('post')) {
             $postData = $request->all();
             $rules = [
-                'name'                      => 'required',                               
+                'parent_category'                   => 'required',                               
+                'sub_category'                      => 'required',                               
             ];
             if ($this->validate($request, $rules)) {
-                $checkValue = NewsCategory::where('sub_category', '=', $postData['name'])->count();
+                $checkValue = NewsCategory::where('sub_category', '=', $postData['sub_category'])->count();
                 if ($checkValue <= 0) { 
                     // Generate a unique slug
-                    $slug = Str::slug($postData['name']);                   
+                    $slug = Str::slug($postData['sub_category']);                   
                     $fields = [
-                        'sub_category'              => $postData['name'],                       
-                        'parent_category'           => 0, 
+                        'sub_category'              => $postData['sub_category'],                       
+                        'parent_category'           => $postData['parent_category'], 
                         'slug'                      => $slug,
                     ];
                     // Helper::pr($fields);
@@ -69,8 +69,9 @@ class NewsCategoryController extends Controller
         }
         $data['module']                 = $this->data;
         $title                          = $this->data['title'] . ' Add';       
-        $page_name                      = 'news_category.add-edit';
+        $page_name                      = 'news_subcategory.add-edit';
         $data['row']                    = [];
+        $data['parent_category']        = NewsCategory::where('status', '!=', 3)->where('parent_category', '=', 0)->orderBy('id', 'DESC')->get();
         echo $this->admin_after_login_layout($title, $page_name, $data);
     }
     /* add */
@@ -80,28 +81,31 @@ class NewsCategoryController extends Controller
         $data['module']                 = $this->data;
         $id                             = Helper::decoded($id);
         $title                          = $this->data['title'] . ' Update';
-        $page_name                      = 'news_category.add-edit';
-        $data['row']                    = NewsCategory::where($this->data['primary_key'], '=', $id)->first();        
+        $page_name                      = 'news_subcategory.add-edit';
+        $data['row']                    = NewsCategory::where($this->data['primary_key'], '=', $id)->first();   
+        $data['parent_category']        = NewsCategory::where('status', '!=', 3)->where('parent_category', '=', 0)->orderBy('id', 'DESC')->get();     
 
         if ($request->isMethod('post')) {
             $postData = $request->all();
             $rules = [
-                'name'                      => 'required',                                             
+                'parent_category'                   => 'required',                               
+                'sub_category'                      => 'required',                               
             ];
             if ($this->validate($request, $rules)) {
-                $checkValue = NewsCategory::where('sub_category', '=', $postData['name'])->where('id', '!=', $id)->count();
-                if ($checkValue <= 0) {        
+                // $checkValue = NewsCategory::where('sub_category', '=', $postData['sub_category'])->count();
+                // if ($checkValue <= 0) { 
                     // Generate a unique slug
-                    $slug = Str::slug($postData['name']);            
+                    $slug = Str::slug($postData['sub_category']);                   
                     $fields = [
-                        'sub_category'              => $postData['name'],                                               
-                        'slug'                      => $slug,                      
+                        'sub_category'              => $postData['sub_category'],                       
+                        'parent_category'           => $postData['parent_category'], 
+                        'slug'                      => $slug,
                     ];
                     NewsCategory::where($this->data['primary_key'], '=', $id)->update($fields);
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');
-                } else {
-                    return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
-                }
+                // } else {
+                //     return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
+                // }
             } else {
                 return redirect()->back()->with('error_message', 'All Fields Required !!!');
             }

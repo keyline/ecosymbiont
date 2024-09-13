@@ -45,11 +45,11 @@ $controllerRoute = $module['controller_route'];
         <?php
         $setting = GeneralSetting::where('id', '=', 1)->first();
         if ($row) {
-            $name = $row->sub_category;            
-            $description = $row->description;          
+            $sub_category = $row->sub_category;            
+            $parent_categoryId = $row->parent_category;          
         } else {
-            $name = '';            
-            $description = '';           
+            $sub_category = '';            
+            $parent_categoryId = '';           
         }
         ?>
         <div class="col-xl-12">
@@ -58,16 +58,30 @@ $controllerRoute = $module['controller_route'];
                     <form method="POST" action="" enctype="multipart/form-data">
                         @csrf
                         <div class="row mb-3">
-                            <label for="name" class="col-md-2 col-lg-2 col-form-label">Category Name</label>
+                            <label for="parent_category" class="col-md-2 col-lg-2 col-form-label">Choose Parent Category</label>
                             <div class="col-md-10 col-lg-10">
-                                <input type="text" name="name" class="form-control" id="name"
-                                    value="<?= $name ?>" required>
+                                <select name="parent_category" class="form-control" id="parent_category" required>
+                                    <option value="" selected disabled>Select</option>
+                                    @if ($parent_category)
+                                        @foreach ($parent_category as $data)
+                                            <option value="{{ $data->id }}" @selected($data->id == $parent_categoryId)>
+                                                {{ $data->sub_category }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
                             </div>
-                        </div>                        
+                        </div>   
+                        <div class="row mb-3">
+                            <label for="sub_category" class="col-md-2 col-lg-2 col-form-label">Sub Category Name</label>
+                            <div class="col-md-10 col-lg-10">
+                                <input type="text" name="sub_category" class="form-control" id="sub_category"
+                                    value="<?= $sub_category ?>" required>
+                            </div>
+                        </div>                                             
                         <!-- <div class="row mb-3">
                             <label for="description" class="col-md-2 col-lg-2 col-form-label">Description</label>
                             <div class="col-md-10 col-lg-10">
-                                <textarea name="description" class="form-control" id="description" rows="3"><?= $description ?></textarea>
+                                <textarea name="description" class="form-control" id="description" rows="3">?= $description ?></textarea>
                             </div>
                         </div>                         -->
                         <div class="text-center">
