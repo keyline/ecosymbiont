@@ -82,6 +82,15 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
          Route::get('news_subcategory/change-status/{id}', 'NewsSubCategoryController@change_status');
          Route::get('news_subcategory/change-archieve-status/{id}', 'NewsSubCategoryController@change_archieve_status');
          /* end sub category */
+         /*news content */
+         Route::get('news_content/list', 'NewsContentController@list');
+         Route::match(['get', 'post'], 'news_content/add', 'NewsContentController@add');
+         Route::match(['get', 'post'], 'news_content/edit/{id}', 'NewsContentController@edit');
+         Route::get('news_content/delete/{id}', 'NewsContentController@delete');
+         Route::get('news_content/change-status/{id}', 'NewsContentController@change_status');
+         Route::get('news_content/change-archieve-status/{id}', 'NewsContentController@change_archieve_status');
+         Route::get('news_content/get-subcategories/{parent_id}', 'NewsContentController@getSubcategories'); // AJAX route
+         /* end news content */
          /* newsletter */
                 /* subscriber */
                 Route::get('subscriber/list', 'SubscriberController@list');
