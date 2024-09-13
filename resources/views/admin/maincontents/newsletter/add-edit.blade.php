@@ -75,7 +75,7 @@ $controllerRoute = $module['controller_route'];
                       <option value="<?=$allUser->email?>" <?=((in_array($allUser->email, $users))?'selected':'')?> class="all user-type2"><?=$allUser->email?></option>
                     <?php } }?>
                     <?php if($subscribers){ foreach($subscribers as $subscriber){?>
-                      <option value="<?=$subscriber->email?>" <?=((in_array($subscriber->email, $users))?'selected':'')?> class="all user-type1"><?=$subscriber->email?></option>
+                      <option value="<?=$subscriber->subscribers_email?>" <?=((in_array($subscriber->subscribers_email, $users))?'selected':'')?> class="all user-type1"><?=$subscriber->subscribers_email?></option>
                     <?php } }?>
                   </select>
               </div>

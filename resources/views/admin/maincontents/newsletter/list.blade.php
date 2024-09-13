@@ -77,7 +77,8 @@ $controllerRoute = $module['controller_route'];
                       </div>
                     </td>
                     <td>{{ $value->title }}</td>
-                    <td>{{ $value->description }}</td>
+                    <td><?=wordwrap($value->description,35,"<br>\n")?></td>
+                    <!-- <td>{{ $value->description }}</td> -->
                     <td>
                       <?php if($value->attachment != ''){?>
                         <img src="<?=env('UPLOADS_URL').'newsletter/'.$value->attachment?>" class="img-thumbnail" alt="<?=$value->title?>" style="width: 150px; height: 150px; margin-top: 10px;">
