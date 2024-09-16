@@ -20,7 +20,7 @@ class SectionErtController extends Controller
     public function __construct()
     {
         $this->data = array(
-            'title'             => 'Section Ert',
+            'title'             => 'Section ERT',
             'controller'        => 'SectionErtController',
             'controller_route'  => 'section_ert',
             'primary_key'       => 'id',

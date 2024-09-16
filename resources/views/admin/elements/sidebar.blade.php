@@ -111,7 +111,7 @@ if (!empty($parameters)) {
                           <a class="nav-link <?=(($pageSegment == 'pronoun')?'active':'')?>" href="<?=url('admin/pronoun/list')?>">Pronoun</a>
                           <a class="nav-link <?=(($pageSegment == 'title')?'active':'')?>" href="<?=url('admin/title/list')?>">Title</a>
                           <a class="nav-link <?=(($pageSegment == 'role')?'active':'')?>" href="<?=url('admin/role/list')?>">Role</a>
-                          <a class="nav-link <?=(($pageSegment == 'section_ert')?'active':'')?>" href="<?=url('admin/section_ert/list')?>">Section Ert</a>
+                          <a class="nav-link <?=(($pageSegment == 'section_ert')?'active':'')?>" href="<?=url('admin/section_ert/list')?>">Section ERT</a>
                           <a class="nav-link <?=(($pageSegment == 'submission_type')?'active':'')?>" href="<?=url('admin/submission_type/list')?>">Submission Type</a>
                           <a class="nav-link <?=(($pageSegment == 'country')?'active':'')?>" href="<?=url('admin/country/list')?>">Country</a>
                         </div>
@@ -119,8 +119,8 @@ if (!empty($parameters)) {
                 <!-- End masters -->
                 <!-- email logs -->
                     <div class="nav-item">
-                        <a class="nav-link <?= $pageSegment == 'notice' ? 'active' : '' ?>"
-                            href="<?= url('admin/notice/list') ?>" data-placement="left">
+                        <a class="nav-link <?= $pageSegment == 'email-logs' ? 'active' : '' ?>"
+                            href="<?= url('admin/email-logs') ?>" data-placement="left">
                             <i class="fa fa-list-alt nav-icon"></i>
                             <span class="nav-link-title">Email Logs</span>
                         </a>
@@ -128,8 +128,8 @@ if (!empty($parameters)) {
                 <!-- End email logs -->
                 <!-- login logs -->
                     <div class="nav-item">
-                        <a class="nav-link <?= $pageSegment == 'notice' ? 'active' : '' ?>"
-                            href="<?= url('admin/notice/list') ?>" data-placement="left">
+                        <a class="nav-link <?= $pageSegment == 'login-logs' ? 'active' : '' ?>"
+                            href="<?= url('admin/login-logs') ?>" data-placement="left">
                             <i class="fa fa-sign-in nav-icon"></i>
                             <span class="nav-link-title">Login Logs</span>
                         </a>

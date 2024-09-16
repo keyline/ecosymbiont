@@ -1,54 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="no-js">
 <head>
-    <?=$before_head?>
+    <?=$head?>
 </head>
-<body id="font-size">
-    <header>
-        <?=$before_header?>
-    </header>
-    <div class="main">
+<body>
+    <!-- Container -->
+    <div id="container">
+        <!-- Header ================================================== -->
+        <header class="clearfix">
+            <?=$header?>
+        </header>
+        <!-- End Header -->
         <?=$maincontent?>
-    </div>    
-        
-    <!-- footer section -->
-    <?=$before_footer?>
+        <!-- footer 
+            ================================================== -->
+        <footer>
+            <?=$footer?>
+        </footer>
+        <!-- End footer -->
+    </div>
+    <!-- End Container -->
     
-    <!-- js link -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-   <script src="<?=env('FRONT_ASSETS_URL')?>js/menumaker.js"></script>
-    <script src="<?=env('FRONT_ASSETS_URL')?>js/fontsize.min.js"></script>
-    <script>
-        function iconChange() {
-        var element = document.getElementById("mobile-icon");
-        element.classList.toggle("fa-times");
-        }
-    </script>
-    <script>
-        $('#font-size').FontSize({
-            increaseTimes: 5,
-            reduceTimes: 5,
-            step: 3,
-            increaseBtn:'.zoomin',
-            reduceBtn:'.zoomout'
-        });
-      $(document).ready(function() {
-         $(".fa-search").click(function() {
-            $(".togglesearch").toggle();
-            $("input[type='search']").focus();
-          });
-      });
-      $("#cssmenu").menumaker({
-        title: "", // The text of the button which toggles the menu
-        breakpoint: 1199, // The breakpoint for switching to the mobile view
-        format: "multitoggle" // It takes three values: dropdown for a simple toggle menu, select for select list menu, multitoggle for a menu where each submenu can be toggled separately
-    });
-      
-      
-      $(".topsearch-icon").click(function () {
-            $(".topsearch-icon").toggleClass("fa-bars fa-times");
-        });
-    </script>
+    <script type="text/javascript" src="<?=env('FRONT_ASSETS_URL')?>js/jquery.min.js"></script>
+    <script type="text/javascript" src="<?=env('FRONT_ASSETS_URL')?>js/jquery.migrate.js"></script>
+    <script type="text/javascript" src="<?=env('FRONT_ASSETS_URL')?>js/jquery.bxslider.min.js"></script>
+    <script type="text/javascript" src="<?=env('FRONT_ASSETS_URL')?>js/jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript" src="<?=env('FRONT_ASSETS_URL')?>js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?=env('FRONT_ASSETS_URL')?>js/jquery.ticker.js"></script>
+    <script type="text/javascript" src="<?=env('FRONT_ASSETS_URL')?>js/jquery.imagesloaded.min.js"></script>
+    <script type="text/javascript" src="<?=env('FRONT_ASSETS_URL')?>js/jquery.isotope.min.js"></script>
+    <script type="text/javascript" src="<?=env('FRONT_ASSETS_URL')?>js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="<?=env('FRONT_ASSETS_URL')?>js/theia-sticky-sidebar.js"></script>
+    <script type="text/javascript" src="<?=env('FRONT_ASSETS_URL')?>js/sticky.js"></script>
+    <script type="text/javascript" src="<?=env('FRONT_ASSETS_URL')?>js/retina-1.1.0.min.js"></script>
+    <script type="text/javascript" src="<?=env('FRONT_ASSETS_URL')?>js/script.js"></script>
 </body>
 </html>
