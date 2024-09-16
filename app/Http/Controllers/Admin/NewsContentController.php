@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use App\Models\GeneralSetting;
 use App\Rules\MaxWords;
 use App\Models\NewsContent;
+use App\Models\NewsContentImage;
 use App\Models\NewsCategory;
 use App\Models\Pronoun;
 use App\Models\EcosystemAffiliation;
@@ -74,30 +75,17 @@ class NewsContentController extends Controller
                 $imageFile      = $request->file('cover_image');
                 if($imageFile != ''){
                     $imageName      = $imageFile->getClientOriginalName();
-                    $uploadedFile   = $this->upload_single_file('cover_image', $imageName, '', 'image');
+                    $uploadedFile   = $this->upload_single_file('cover_image', $imageName, 'newcontent', 'image');
                     if($uploadedFile['status']){
                         $cover_image = $uploadedFile['newFilename'];
                     } else {
                         return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
                     }
                 } else {
-                    $cover_image = $row->image;
+                    $cover_image = $data['row']->cover_image;
                 }
                 /* banner image */
-                /* others image */
-                $imageFile      = $request->file('others_image');
-                if($imageFile != ''){
-                    $imageName      = $imageFile->getClientOriginalName();
-                    $uploadedFile   = $this->upload_single_file('others_image', $imageName, '', 'image');
-                    if($uploadedFile['status']){
-                        $others_image = $uploadedFile['newFilename'];
-                    } else {
-                        return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
-                    }
-                } else {
-                    $others_image = $row->image;
-                }
-                /* others image */
+                    
                 
                 // $checkValue = NewsContent::where('sub_category', '=', $postData['sub_category'])->count();
                 // if ($checkValue <= 0) { 
@@ -115,7 +103,7 @@ class NewsContentController extends Controller
                         'country'                   => $postData['country'],   
                         'organization_name'         => $postData['organization_name'],   
                         'cover_image'               => $cover_image,     
-                        'others_image'              => $others_image,     
+                        // 'others_image'              => $others_image,     
                         'long_desc'                 => $postData['long_desc'],     
                         'keywords'                  => $postData['keywords'],     
                         'is_feature'                => $postData['is_feature'],  
@@ -123,9 +111,42 @@ class NewsContentController extends Controller
                         'short_desc'                => $postData['short_desc'],    
                         'sub_title'                  => $postData['sub_title'], 
                     ];
-                    // dd($fields);
+                    //  dd($fields);
                     //  Helper::pr($fields);
-                    NewsContent::insert($fields);
+                    // NewsContent::insert($fields);
+                    /* others image */
+                $imageFile      = $request->file('others_image');
+                // dd($imageFile);
+                if($imageFile != ''){
+                    // $imageName      = $imageFile->getClientOriginalName();
+                    $uploadedFile   = $this->commonFileArrayUpload('newcontent', $imageFile, 'image');
+                    if(!empty($uploadedFile)){
+                        $others_image = $uploadedFile;
+                    }
+                    // if($uploadedFile['status']){
+                    //     $others_image = $uploadedFile['newFilename'];
+                    // }
+                     else {
+                        return redirect()->back()->with(['error_message' => 'Please upload an image']);
+                    }
+                } else {
+                    $cover_image = $data['row']->cover_image;
+                }
+                // Helper::pr($others_image);
+                /* others image */           
+                    // Insert the data and get the last inserted ID
+                    $lastInsertedId = NewsContent::insertGetId($fields);
+                    // dd($lastInsertedId);
+                    if(count($others_image)>0){
+                        for($k=0;$k<count($others_image);$k++){
+                            $fields   = [
+                                                'image_file'                => $others_image[$k],
+                                                'news_id'                   => $lastInsertedId,
+                            ];
+                            // dd($fields);
+                            NewsContentImage::insert($fields);                        
+                        }
+                    }     
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
                 // } else {
                 //     return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
@@ -168,7 +189,8 @@ class NewsContentController extends Controller
         $id                             = Helper::decoded($id);
         $title                          = $this->data['title'] . ' Update';
         $page_name                      = 'news_content.add-edit';
-        $data['row']                    = NewsContent::where($this->data['primary_key'], '=', $id)->first();   
+        $data['row']                    = NewsContent::where($this->data['primary_key'], '=', $id)->first();        
+        $data['news_images']            = NewsContentImage::where('status', '!=', 3)->where('news_id', '=', $id)->get();
         $data['parent_category']        = NewsCategory::where('status', '!=', 3)->where('parent_category', '=', 0)->orderBy('id', 'DESC')->get();
         $data['sub_category']           = NewsCategory::where('status', '!=', 3)->where('parent_category', '!=', 0)->orderBy('id', 'DESC')->get();
         $data['pronoun']                = Pronoun::where('status', '!=', 3)->orderBy('id', 'ASC')->get();
@@ -177,7 +199,7 @@ class NewsContentController extends Controller
         $data['selected_ecosystem_affiliation'] = json_decode($data['row']->author_affiliation);        
 
         if ($request->isMethod('post')) {
-            $postData = $request->all();
+            $postData = $request->all();          
             $rules = [
                 'parent_category'           => 'required',                               
                 'sub_categories'              => 'required',   
@@ -188,20 +210,35 @@ class NewsContentController extends Controller
                 'author_email'              => 'required',   
                 'country'                   => 'required',   
                 'organization_name'         => 'required',   
-                'cover_image'               => 'required',     
-                'others_image'              => 'required',     
+                // 'cover_image'               => 'required',     
+                // 'others_image'              => 'required',     
                 'long_desc'                 => 'required',     
                 'keywords'                  => 'required',     
                 'is_feature'                => 'required',  
                 'is_popular'                => 'required',  
                 'short_desc'                => ['required', 'string', new MaxWords(100)],    
                 'sub_title'                  => ['required', 'string', new MaxWords(40)], 
-            ];
+            ];           
             if ($this->validate($request, $rules)) {
                 // $checkValue = NewsContent::where('sub_category', '=', $postData['sub_category'])->count();
                 // if ($checkValue <= 0) { 
                     // Generate a unique slug
-                    $slug = Str::slug($postData['sub_category']);                   
+                    $slug = Str::slug($postData['new_title']);   
+                    /* banner image */
+                    $imageFile      = $request->file('cover_image');
+                        if($imageFile != ''){
+                            $imageName      = $imageFile->getClientOriginalName();
+                            $uploadedFile   = $this->upload_single_file('cover_image', $imageName, 'newcontent', 'image');
+                            if($uploadedFile['status']){
+                                $cover_image = $uploadedFile['newFilename'];
+                            } else {
+                                return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                            }
+                        } else {
+                            $cover_image = $data['row']->cover_image;
+                        }
+                    /* banner image */                      
+                                                
                     $fields = [
                         'sub_category'              => $postData['sub_categories'],                       
                         'parent_category'           => $postData['parent_category'], 
@@ -214,19 +251,38 @@ class NewsContentController extends Controller
                         'country'                   => $postData['country'],   
                         'organization_name'         => $postData['organization_name'],   
                         'cover_image'               => $cover_image,     
-                        'others_image'              => $others_image,     
+                        // 'others_image'              => $others_image,     
                         'long_desc'                 => $postData['long_desc'],     
                         'keywords'                  => $postData['keywords'],     
                         'is_feature'                => $postData['is_feature'],  
                         'is_popular'                => $postData['is_popular'],  
                         'short_desc'                => $postData['short_desc'],    
                         'sub_title'                  => $postData['sub_title'], 
-                    ];
+                    ];                    
                     NewsContent::where($this->data['primary_key'], '=', $id)->update($fields);
-                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');
-                // } else {
-                //     return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
-                // }
+                    /* others image */
+                    $imageFile      = $request->file('others_image');                    
+                    $others_image = [];
+                    if($imageFile != ''){                    
+                    $uploadedFile   = $this->commonFileArrayUpload('newcontent', $imageFile, 'image');
+                    if(!empty($uploadedFile)){
+                        $others_image = $uploadedFile;
+                    }                  
+                     else {
+                        return redirect()->back()->with(['error_message' => 'Please upload an image']);
+                    }
+                    }                                         
+                    /* others image */                               
+                    if(count($others_image)>0){
+                        for($k=0;$k<count($others_image);$k++){
+                            $fields   = [
+                                                'image_file'                => $others_image[$k],
+                                                'news_id'                   => $id ,
+                            ];                            
+                            NewsContentImage::insert($fields);                        
+                        }
+                    }     
+                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');                
             } else {
                 return redirect()->back()->with('error_message', 'All Fields Required !!!');
             }
@@ -277,4 +333,63 @@ class NewsContentController extends Controller
         return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' Successfully !!!');
     }
     /* change archieve status */
+     /* edit image */
+     public function edit_image(Request $request, $id)
+     {
+         $data['module']                 = $this->data;
+         $id                             = Helper::decoded($id);
+         $title                          = $this->data['title'] . ' Update';
+         $page_name                      = 'news_content_image.add-edit';        
+         $data['row']            = NewsContentImage::where('status', '!=', 3)->where('id', '=', $id)->first();
+         $data['content']                    = NewsContent::where('id', '=', $data['row']->news_id)->first();          
+ 
+         if ($request->isMethod('post')) {
+             $postData = $request->all();          
+             $rules = [                   
+                  'others_image'              => 'required',                   
+             ];           
+             if ($this->validate($request, $rules)) {                 
+                     /* others image */
+                     $imageFile      = $request->file('others_image');                    
+                     $others_image = [];
+                     if($imageFile != ''){                    
+                     $uploadedFile   = $this->commonFileArrayUpload('newcontent', $imageFile, 'image');
+                     if(!empty($uploadedFile)){
+                         $others_image = $uploadedFile;
+                     }                  
+                      else {
+                         return redirect()->back()->with(['error_message' => 'Please upload an image']);
+                     }
+                     }                                         
+                     /* others image */                               
+                     if(count($others_image)>0){
+                         for($k=0;$k<count($others_image);$k++){
+                             $fields   = [
+                                                 'image_file'                => $others_image[$k],
+                                                 'news_id'                   => $data['content']->id ,
+                             ];   
+                            //  Helper::pr($fields);
+                             NewsContentImage::where('id', '=', $id)->update($fields);
+                         }
+                     }                                                                                                                        
+                     
+                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');                
+             } else {
+                 return redirect()->back()->with('error_message', 'All Fields Required !!!');
+             }
+         }
+         echo $this->admin_after_login_layout($title, $page_name, $data);
+     }
+     /* edit image */
+     /* delete image */
+    public function delete_image(Request $request, $id)
+    {
+        $id                             = Helper::decoded($id);
+        $fields = [
+            'status'             => 3
+        ];
+        NewsContentImage::where('id', '=', $id)->update($fields);
+        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Deleted Successfully !!!');
+    }
+    /* delete image */
 }

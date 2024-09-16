@@ -90,6 +90,8 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
          Route::get('news_content/change-status/{id}', 'NewsContentController@change_status');
          Route::get('news_content/change-archieve-status/{id}', 'NewsContentController@change_archieve_status');
          Route::get('news_content/get-subcategories/{parent_id}', 'NewsContentController@getSubcategories'); // AJAX route
+         Route::match(['get', 'post'], 'news_content/edit_image/{id}', 'NewsContentController@edit_image');
+         Route::get('news_content/delete_image/{id}', 'NewsContentController@delete_image');
          /* end news content */
          /* newsletter */
                 /* subscriber */

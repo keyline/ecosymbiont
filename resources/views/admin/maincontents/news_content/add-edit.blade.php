@@ -105,7 +105,13 @@ $controllerRoute = $module['controller_route'];
                             <label for="sub_categories" class="col-md-2 col-lg-2 col-form-label">Choose Sub Category</label>
                             <div class="col-md-10 col-lg-10">                                
                                 <select name="sub_categories" class="form-control" id="sub_categories" required>
-                                    <option value="" selected disabled>Select</option>                                    
+                                    <option value="" selected disabled>Select</option> 
+                                    @if ($sub_category)
+                                        @foreach ($sub_category as $data)
+                                            <option value="{{ $data->id }}" @selected($data->id == $sub_categoryId)>
+                                                {{ $data->sub_category }}</option>
+                                        @endforeach
+                                    @endif                                   
                                 </select>
                             </div>
                         </div>    
@@ -190,7 +196,7 @@ $controllerRoute = $module['controller_route'];
                                 <input type="file" name="cover_image" class="form-control" id="cover_image">
                                 <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>
                                 <?php if($cover_image != ''){?>
-                                <img src="<?=env('UPLOADS_URL').$cover_image?>" alt="<?=$author_name?>" style="width: 150px; height: 150px; margin-top: 10px;">
+                                <img src="<?=env('UPLOADS_URL').'newcontent/'.$cover_image?>" alt="<?=$author_name?>" style="width: 150px; height: 150px; margin-top: 10px;">
                                 <?php } else {?>
                                 <img src="<?=env('NO_IMAGE')?>" alt="<?=$author_name?>" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
                                 <?php }?>
@@ -199,11 +205,15 @@ $controllerRoute = $module['controller_route'];
                         <div class="row mb-3">
                             <label for="others_image" class="col-md-4 col-lg-3 col-form-label">Others Image</label>
                             <div class="col-md-8 col-lg-9">
-                                <input type="file" name="others_image" class="form-control" id="others_image">
+                                <input type="file" name="others_image[]" class="form-control" id="others_image" multiple>
                                 <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>
-                                <?php if($others_image != ''){?>
-                                <img src="<?=env('UPLOADS_URL').$others_image?>" alt="<?=$author_name?>" style="width: 150px; height: 150px; margin-top: 10px;">
-                                <?php } else {?>
+                                <?php if($news_images != ''){
+                                    foreach($news_images as $image) {                                        
+                                    ?>
+                                <img src="<?=env('UPLOADS_URL').'newcontent/'.$image->image_file?>" alt="<?=$author_name?>" style="width: 150px; height: 150px; margin-top: 10px;">
+                                <a href="<?=url('admin/' . $controllerRoute . '/edit_image/'.Helper::encoded($image->id))?>" class="btn btn-outline-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit"></i></a>
+                                <a href="<?=url('admin/' . $controllerRoute . '/delete_image/'.Helper::encoded($image->id))?>" class="btn btn-outline-danger btn-sm" title="Delete <?=$module['title']?>" onclick="return confirm('Do You Want To Delete This <?=$module['title']?>');"><i class="fa fa-trash"></i></a>
+                                <?php } } else {?>
                                 <img src="<?=env('NO_IMAGE')?>" alt="<?=$author_name?>" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
                                 <?php }?>
                             </div>
