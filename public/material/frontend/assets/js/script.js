@@ -92,14 +92,14 @@ $(document).ready(function($) {
 	/* = Dropdown
 	/*-------------------------------------------------*/
 	
-	$('.navbar-nav > li').on('hover',
-		function () {
-			$(this).find('.megadropdown').css({'display':'block', 'visibility':'inherit', 'opacity': '1'});
-		}, 
-		function () {
-			$(this).find('.megadropdown').css({'display':'none', 'visibility':'hidden', 'opacity': '0'});
-		}
-	);
+	// $('.navbar-nav > li').on('hover',
+	// 	function () {
+	// 		$(this).find('.megadropdown').css({'display':'block', 'visibility':'inherit', 'opacity': '1'});
+	// 	}, 
+	// 	function () {
+	// 		$(this).find('.megadropdown').css({'display':'none', 'visibility':'hidden', 'opacity': '0'});
+	// 	}
+	// );
 
 	/*-------------------------------------------------*/
 	/* = ticker news

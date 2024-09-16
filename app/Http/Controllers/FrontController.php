@@ -18,7 +18,7 @@ use Session;
 use Helper;
 use Hash;
 use stripe;
-
+date_default_timezone_set("Asia/Calcutta");
 class FrontController extends Controller
 {
     public function home()

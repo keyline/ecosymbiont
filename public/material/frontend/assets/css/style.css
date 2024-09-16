@@ -461,7 +461,7 @@ header.active .nav-list-container {
 .navbar-nav .megadropdown .inner-megadropdown .filter-block {
   float: left;
   width: 220px;
-  text-align: right;
+  text-align: left;
   height: 100%;
 }
 .navbar-nav .megadropdown .inner-megadropdown .filter-block ul.filter-posts {
@@ -6432,4 +6432,26 @@ footer .footer-last-line nav.footer-nav ul li:first-child:before {
 }
 .sidebar {
   padding-top: 30px!important;
+}
+
+.navbar-nav > li.drop-arrow:hover .megadropdown{
+  display: block ;
+  visibility: visible ;
+  opacity:1;
+}
+.navbar-nav .megadropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 223px;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+}
+.navbar-nav > li {
+/*  position: inherit;*/
+  position: relative;
 }
