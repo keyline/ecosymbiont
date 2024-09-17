@@ -165,22 +165,18 @@ class NewsContentController extends Controller
         $data['sub_category']           = NewsCategory::where('status', '!=', 3)->where('parent_category', '!=', 0)->orderBy('id', 'DESC')->get();
         $data['pronoun']                = Pronoun::where('status', '!=', 3)->orderBy('id', 'ASC')->get();
         $data['author_affiliation']     = EcosystemAffiliation::where('status', '!=', 3)->orderBy('name', 'ASC')->get();
-        $data['country']     = Country::where('status', '!=', 3)->orderBy('name', 'ASC')->get();
+        $data['country']                = Country::where('status', '!=', 3)->orderBy('name', 'ASC')->get();
+         $data['news_images']           = [];
         echo $this->admin_after_login_layout($title, $page_name, $data);
     }
     /* add */
     // Method to return subcategories based on parent category
     public function getSubcategories($parent_id)
     {
-        // \DB::enableQueryLog();
-
         $subcategories = NewsCategory::where('parent_category', $parent_id)->get();
-       // Retrieve the last query executed
-    $queries = \DB::getQueryLog();
-    $lastQuery = end($queries);
-
-    // dd($lastQuery); // Display the last executed query
-        return response()->json($subcategories); // Return as JSON response for AJAX
+        $queries = \DB::getQueryLog();
+        $lastQuery = end($queries);
+        return response()->json($subcategories);
     }
     /* edit */
     public function edit(Request $request, $id)

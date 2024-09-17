@@ -156,7 +156,7 @@ $controllerRoute = $module['controller_route'];
                             <div class="col-md-10 col-lg-10">                                                                                                
                                 @if ($author_affiliation)
                                     @foreach ($author_affiliation as $data)
-                                    <input type="checkbox" name="author_affiliation[]" value="{{ $data->id }}" @if(in_array($data->id, old('author_affiliation', $author_affiliationId))) checked @endif>{{ $data->name }}<br>
+                                    <input type="checkbox" name="author_affiliation[]" value="{{ $data->id }}" @if(in_array($data->id, old('author_affiliation', $author_affiliationId))) checked @endif> {{ $data->name }}<br>
                                     @endforeach
                                 @endif                                
                             </div>
@@ -191,8 +191,8 @@ $controllerRoute = $module['controller_route'];
                             </div>
                         </div>   
                         <div class="row mb-3">
-                            <label for="cover_image" class="col-md-4 col-lg-3 col-form-label">Cover Image</label>
-                            <div class="col-md-8 col-lg-9">
+                            <label for="cover_image" class="col-md-2 col-lg-2 col-form-label">Cover Image</label>
+                            <div class="col-md-10 col-lg-10">
                                 <input type="file" name="cover_image" class="form-control" id="cover_image">
                                 <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>
                                 <?php if($cover_image != ''){?>
@@ -203,25 +203,32 @@ $controllerRoute = $module['controller_route'];
                             </div>
                         </div>   
                         <div class="row mb-3">
-                            <label for="others_image" class="col-md-4 col-lg-3 col-form-label">Others Image</label>
-                            <div class="col-md-8 col-lg-9">
+                            <label for="others_image" class="col-md-2 col-lg-2 col-form-label">Others Image</label>
+                            <div class="col-md-10 col-lg-10">
                                 <input type="file" name="others_image[]" class="form-control" id="others_image" multiple>
                                 <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>
-                                <?php if($news_images != ''){
-                                    foreach($news_images as $image) {                                        
-                                    ?>
-                                <img src="<?=env('UPLOADS_URL').'newcontent/'.$image->image_file?>" alt="<?=$author_name?>" style="width: 150px; height: 150px; margin-top: 10px;">
-                                <a href="<?=url('admin/' . $controllerRoute . '/edit_image/'.Helper::encoded($image->id))?>" class="btn btn-outline-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit"></i></a>
-                                <a href="<?=url('admin/' . $controllerRoute . '/delete_image/'.Helper::encoded($image->id))?>" class="btn btn-outline-danger btn-sm" title="Delete <?=$module['title']?>" onclick="return confirm('Do You Want To Delete This <?=$module['title']?>');"><i class="fa fa-trash"></i></a>
-                                <?php } } else {?>
-                                <img src="<?=env('NO_IMAGE')?>" alt="<?=$author_name?>" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
-                                <?php }?>
+
+                                <div class="row">
+                                    <?php if($news_images != ''){ foreach($news_images as $image) { ?>
+                                        <div class="col-md-3">
+                                            <img src="<?=env('UPLOADS_URL').'newcontent/'.$image->image_file?>" alt="<?=$author_name?>" style="width: 150px; height: 150px; margin-top: 10px;"><br>
+                                            <p class="mt-2">
+                                                <a href="<?=url('admin/' . $controllerRoute . '/edit_image/'.Helper::encoded($image->id))?>" class="btn btn-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit"></i> Edit</a>
+                                                <a href="<?=url('admin/' . $controllerRoute . '/delete_image/'.Helper::encoded($image->id))?>" class="btn btn-danger btn-sm" title="Delete <?=$module['title']?>" onclick="return confirm('Do You Want To Delete This <?=$module['title']?>');"><i class="fa fa-trash"></i> Delete</a>
+                                            </p>
+                                        </div>
+                                    <?php } } else {?>
+                                        <div class="col-md-12">
+                                            <img src="<?=env('NO_IMAGE')?>" alt="<?=$author_name?>" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
+                                        </div>
+                                    <?php }?>
+                                </div>
                             </div>
                         </div>                        
                         <div class="row mb-3">
-                            <label for="long_desc" class="col-md-2 col-lg-2 col-form-label">Description</label>
+                            <label for="ckeditor1" class="col-md-2 col-lg-2 col-form-label">Description</label>
                             <div class="col-md-10 col-lg-10">
-                                <textarea name="long_desc" class="form-control" id="long_desc" rows="3"><?= $long_desc ?></textarea>
+                                <textarea name="long_desc" class="form-control" id="ckeditor1" rows="5"><?= $long_desc ?></textarea>
                             </div>
                         </div>                        
                         <div class="row mb-3">
@@ -232,29 +239,29 @@ $controllerRoute = $module['controller_route'];
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="short_desc" class="col-md-2 col-lg-2 col-form-label">Short Description
+                            <label for="ckeditor2" class="col-md-2 col-lg-2 col-form-label">Short Description
                             </label>
                             <div class="col-md-10 col-lg-10">
-                                <textarea class="form-control" id="short_desc" name="short_desc" rows="4" cols="50" placeholder="Your explanation here..." required><?= $short_desc ?></textarea>
+                                <textarea class="form-control" id="ckeditor2" name="short_desc" rows="5" required><?= $short_desc ?></textarea>
                                 <div id="short_descError" class="error"></div>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label for="is_feature" class="col-md-2 col-lg-2 col-form-label">Is Features</label>
                             <div class="col-md-10 col-lg-10">
-                                <input type="radio" id="yes" name="is_feature" value="Yes" @checked(old('is_feature', $is_feature) == 'Yes')>
-                                <label for="yes">Yes</label>
-                                <input type="radio" id="no" name="is_feature" value="No" @checked(old('is_feature', $is_feature) == 'No')>
-                                <label for="no">No</label>
+                                <input type="radio" id="is_feature_yes" name="is_feature" value="1" @checked(old('is_feature', $is_feature) == 1)>
+                                <label for="is_feature_yes">Yes</label>
+                                <input type="radio" id="is_feature_no" name="is_feature" value="0" @checked(old('is_feature', $is_feature) == 0)>
+                                <label for="is_feature_no">No</label>
                             </div>
                         </div>  
                         <div class="row mb-3">
                             <label for="is_popular" class="col-md-2 col-lg-2 col-form-label">Is Popular</label>
                             <div class="col-md-10 col-lg-10">
-                                <input type="radio" id="yes" name="is_popular" value="Yes" @checked(old('is_popular', $is_popular) == 'Yes')>
-                                <label for="yes">Yes</label>
-                                <input type="radio" id="no" name="is_popular" value="No" @checked(old('is_popular', $is_popular) == 'No')>
-                                <label for="no">No</label>
+                                <input type="radio" id="is_popular_yes" name="is_popular" value="1" @checked(old('is_popular', $is_popular) == 1)>
+                                <label for="is_popular_yes">Yes</label>
+                                <input type="radio" id="is_popular_no" name="is_popular" value="0" @checked(old('is_popular', $is_popular) == 0)>
+                                <label for="is_popular_no">No</label>
                             </div>
                         </div> 
                         <div class="text-center">
@@ -266,7 +273,6 @@ $controllerRoute = $module['controller_route'];
         </div>
     </div>
 </section>
-<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {

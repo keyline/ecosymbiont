@@ -55,9 +55,9 @@ $controllerRoute = $module['controller_route'];
               </div>
             </div>
             <div class="row mb-3">
-              <label for="page_content" class="col-md-2 col-lg-2 col-form-label">Page Content</label>
+              <label for="ckeditor1" class="col-md-2 col-lg-2 col-form-label">Page Content</label>
               <div class="col-md-10 col-lg-10">
-                <textarea type="text" name="page_content" class="form-control ckeditor" id="page_content" rows="5" required><?=$page_content?></textarea>
+                <textarea type="text" name="page_content" class="form-control" id="ckeditor1" rows="5" required><?=$page_content?></textarea>
               </div>
             </div>
             <div class="row mb-3">
@@ -124,5 +124,4 @@ $controllerRoute = $module['controller_route'];
     </div>
   </div>
 </section>
-<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
