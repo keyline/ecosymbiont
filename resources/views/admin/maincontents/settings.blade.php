@@ -768,7 +768,6 @@ $user_type = session('type');
   </div>
 </div>
 <!-- End Row -->
-<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script type="text/javascript">
