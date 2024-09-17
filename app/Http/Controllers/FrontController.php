@@ -11,6 +11,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Notice;
+use App\Models\Page;
 use App\Models\Manuscript;
 
 use Auth;
@@ -28,11 +29,11 @@ class FrontController extends Controller
         $page_name                      = 'home';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
-    public function archieve()
+    public function pageContent($slug)
     {
-        $data['rows']                   = Notice::with('journalFrequency')->where('status', '=', 1)->where('is_archieve', '=', 1)->orderBy('id', 'DESC')->get();
-        $title                          = 'Archieve Journals';
-        $page_name                      = 'archieve';
+        $data['row']                    = Page::select('page_name', 'page_name')->where('status', '=', 1)->where('page_slug', '=', $slug)->first();
+        $title                          = (($data['row'])?$data['row']->page_name:'');
+        $page_name                      = 'page-content';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
     public function submitManuscript(Request $request)
@@ -157,6 +158,20 @@ class FrontController extends Controller
         }
         $title                          = 'Submit Manuscript';
         $page_name                      = 'submit-manuscript';
+        echo $this->front_before_login_layout($title, $page_name, $data);
+    }
+    public function signIn()
+    {
+        $data                           = [];
+        $title                          = 'Sign In';
+        $page_name                      = 'signin';
+        echo $this->front_before_login_layout($title, $page_name, $data);
+    }
+    public function signUp()
+    {
+        $data                           = [];
+        $title                          = 'Sign Up';
+        $page_name                      = 'signup';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
 }

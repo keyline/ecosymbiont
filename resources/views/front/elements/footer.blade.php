@@ -87,9 +87,8 @@
                 <nav class="footer-nav">
                     <ul>
                         <li><a href="<?=url('/')?>">Home</a></li>
-                        <!--<li><a href="index.html">Purchase Theme</a></li>-->
                         <li><a href="<?=url('page/about-us')?>">About</a></li>
-                        <li><a href="<?=url('contact-us')?>">Contact</a></li>
+                        <!-- <li><a href="<?=url('contact-us')?>">Contact</a></li> -->
                     </ul>
                 </nav>
             </div>

@@ -49,8 +49,9 @@ $details = json_decode($details);
                             </li>
                             <li><span class="time-now"><?=date('l d F Y')?> / <?=date('H:i')?></span></li>
                             <!-- <li><a href="#">Log In</a></li> -->
-                            <li><a href="<?=url('contact-us')?>">Contact</a></li>
+                            <!-- <li><a href="<?=url('contact-us')?>">Contact</a></li> -->
                             <li><a href="<?=url('signin')?>">Sign In</a></li>
+                            <li><a href="<?=url('signup')?>">Sign Up</a></li>
                         </ul>
                     </div>  
                     <div class="col-md-3">
@@ -78,7 +79,7 @@ $details = json_decode($details);
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html"><img src="<?=env('FRONT_ASSETS_URL')?>images/logo.png" alt=""></a>
+                    <a class="navbar-brand" href="<?=url('/')?>"><img src="<?=env('UPLOADS_URL').$generalSetting->site_logo?>" alt="<?=$generalSetting->site_name?>"></a>
                 </div>
                 
             </div>

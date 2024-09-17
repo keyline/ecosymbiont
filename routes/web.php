@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Route;
     Route::match(['get', 'post'], '/', 'App\Http\Controllers\FrontController@home');
     Route::match(['get', 'post'], '/contact-us', 'App\Http\Controllers\FrontController@contactUs');
     Route::match(['get', 'post'], '/page/{id}', 'App\Http\Controllers\FrontController@pageContent');
+    Route::match(['get', 'post'], '/signin', 'App\Http\Controllers\FrontController@signIn');
+    Route::match(['get', 'post'], '/signup', 'App\Http\Controllers\FrontController@signUp');
 // before login
 /* Front Panel */
 /* Admin Panel */
