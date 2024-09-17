@@ -8,7 +8,7 @@ $APP_URL = $_SERVER['APP_URL'];
 // Use ipinfo.io API to get location details
 $details = file_get_contents("http://ipinfo.io/{$ip}/json");
 $details = json_decode($details);
-// Helper::pr($_SERVER);
+Helper::pr($details);
 // Display the city and country
 // echo "City: " . $details->city . "<br>";
 // echo "Country: " . $details->country . "<br>";
