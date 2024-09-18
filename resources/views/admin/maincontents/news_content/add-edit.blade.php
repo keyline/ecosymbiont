@@ -85,7 +85,7 @@ $controllerRoute = $module['controller_route'];
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body pt-3">
-                    <form method="POST" action="" enctype="multipart/form-data">
+                    <form method="POST" action="" enctype="multipart/form-data" oninput="validateForm()">
                         @csrf
                         <div class="row mb-3">
                             <label for="parent_category" class="col-md-2 col-lg-2 col-form-label">Choose Parent Category</label>
