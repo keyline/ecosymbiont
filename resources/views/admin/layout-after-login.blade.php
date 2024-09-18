@@ -3073,5 +3073,78 @@ $pageFunction = ((count($pageName)>2)?$pageName[2]:'');
       })()
     </script>
   <!-- End Style Switcher JS -->
+  <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.1.0/ckeditor5.css" />
+  <script type="importmap">
+    {
+        "imports": {
+            "ckeditor5": "https://cdn.ckeditor.com/ckeditor5/43.1.0/ckeditor5.js",
+            "ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/43.1.0/"
+        }
+    }
+  </script>
+  <script type="module">
+    import {
+        ClassicEditor,
+        Essentials,
+        Bold,
+        Italic,
+        Strikethrough,
+        Subscript,
+        Superscript,
+        CodeBlock,
+        Font,
+        Link,
+        List,
+        Paragraph,
+        Image,
+        ImageCaption,
+        ImageResize,
+        ImageStyle,
+        ImageToolbar,
+        LinkImage,
+        PictureEditing,
+        ImageUpload,
+        CloudServices,
+        CKBox,
+        CKBoxImageEdit
+    } from 'ckeditor5';
+
+    for (let i = 0; i <= 15; i++) {
+      ClassicEditor
+        .create( document.querySelector( '#ckeditor' + i ), {
+          plugins: [ Essentials, Bold, Italic, Strikethrough, Subscript, Superscript, CodeBlock, Font, Link, List, Paragraph, Image, ImageToolbar, ImageCaption, ImageStyle, ImageResize, LinkImage, PictureEditing, ImageUpload, CloudServices, CKBox, CKBoxImageEdit ],
+          toolbar: {
+            items: [
+              'undo', 'redo',
+              '|',
+              'heading',
+              '|',
+              'fontfamily', 'fontsize', 'fontColor', 'fontBackgroundColor', 'formatPainter',
+              '|',
+              'bold', 'italic', 'strikethrough', 'subscript', 'superscript', 'code',
+              '|',
+              'link', 'uploadImage', 'blockQuote', 'codeBlock',
+              '|',
+              'bulletedList', 'numberedList', 'todoList', 'outdent', 'indent',
+              '|',
+              'ckbox', 'ckboxImageEdit', 'toggleImageCaption', 'imageTextAlternative', 'ckboxImageEdit',
+              '|',
+              'imageStyle:block',
+              'imageStyle:side',
+              '|',
+              'toggleImageCaption',
+              'imageTextAlternative',
+              '|',
+              'linkImage', 'insertImage'
+            ]
+          },
+          menuBar: {
+            isVisible: true
+          }
+        })
+        .then( /* ... */ )
+        .catch( /* ... */ );
+    }
+  </script>
 </body>
 </html>

@@ -292,9 +292,9 @@ $user_type = session('type');
                     <input type="file" name="site_logo" class="form-control" id="site_logo">
                     <small class="text-info">* Only jpg, jpeg, png, ico files are allowed</small><br>
                     <?php if($setting->site_logo != ''){?>
-                      <img src="<?=env('UPLOADS_URL').$setting->site_logo?>" alt="<?=$setting->site_name?>" style="width: 150px; height: 150px; margin-top: 10px;">
+                      <img src="<?=env('UPLOADS_URL').$setting->site_logo?>" alt="<?=$setting->site_name?>" style="width: 230px; height: 150px; margin-top: 10px;">
                     <?php } else {?>
-                      <img src="<?=env('NO_IMAGE')?>" alt="<?=$setting->site_name?>" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
+                      <img src="<?=env('NO_IMAGE')?>" alt="<?=$setting->site_name?>" class="img-thumbnail" style="width: 230px; height: 150px; margin-top: 10px;">
                     <?php }?>
                   </div>
                 </div>
@@ -304,9 +304,9 @@ $user_type = session('type');
                     <input type="file" name="site_footer_logo" class="form-control" id="site_footer_logo">
                     <small class="text-info">* Only jpg, jpeg, png, ico files are allowed</small><br>
                     <?php if($setting->site_footer_logo != ''){?>
-                      <img src="<?=env('UPLOADS_URL').$setting->site_footer_logo?>" alt="<?=$setting->site_name?>" style="width: 150px; height: 150px; margin-top: 10px;">
+                      <img src="<?=env('UPLOADS_URL').$setting->site_footer_logo?>" alt="<?=$setting->site_name?>" style="width: 230px; height: 150px; margin-top: 10px;">
                     <?php } else {?>
-                      <img src="<?=env('NO_IMAGE')?>" alt="<?=$setting->site_name?>" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
+                      <img src="<?=env('NO_IMAGE')?>" alt="<?=$setting->site_name?>" class="img-thumbnail" style="width: 230px; height: 150px; margin-top: 10px;">
                     <?php }?>
                   </div>
                 </div>
@@ -316,9 +316,9 @@ $user_type = session('type');
                     <input type="file" name="site_favicon" class="form-control" id="site_favicon">
                     <small class="text-info">* Only jpg, jpeg, png, ico files are allowed</small><br>
                     <?php if($setting->site_favicon != ''){?>
-                      <img src="<?=env('UPLOADS_URL').$setting->site_favicon?>" alt="<?=$setting->site_name?>" style="width: 150px; height: 150px; margin-top: 10px;">
+                      <img src="<?=env('UPLOADS_URL').$setting->site_favicon?>" alt="<?=$setting->site_name?>" style="width: 230px; height: 150px; margin-top: 10px;">
                     <?php } else {?>
-                      <img src="<?=env('NO_IMAGE')?>" alt="<?=$setting->site_name?>" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
+                      <img src="<?=env('NO_IMAGE')?>" alt="<?=$setting->site_name?>" class="img-thumbnail" style="width: 230px; height: 150px; margin-top: 10px;">
                     <?php }?>
                   </div>
                 </div>
@@ -768,7 +768,6 @@ $user_type = session('type');
   </div>
 </div>
 <!-- End Row -->
-<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script type="text/javascript">

@@ -38,20 +38,11 @@ $controllerRoute = $module['controller_route'];
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Parent Category</th>                                   
-                  <th scope="col">Sub category</th>                                   
-                  <th scope="col">Title</th>                                   
-                  <th scope="col">Sub Title</th>                                   
-                  <th scope="col">Author Name</th>                                   
-                  <th scope="col">Author Pronoun</th>                                   
-                  <th scope="col">Author Affiliation</th>                                   
-                  <th scope="col">Author Email</th>                                   
-                  <th scope="col">Country</th>                                   
-                  <th scope="col">Organization Name</th>                                   
-                  <th scope="col">Long Description</th>                                   
-                  <th scope="col">Cover Image</th>                                   
-                  <th scope="col">Is Feature</th>                                   
-                  <th scope="col">Is Popular</th>                                                                                        
+                  <th scope="col">Parent Category<br>Sub category</th>
+                  <th scope="col">Title<br>Sub Title</th>
+                  <th scope="col">Author Name<br>Pronoun<br>Affiliation<br>Email<br>Country<br>Organization</th>
+                  <th scope="col">Is Feature</th>
+                  <th scope="col">Is Popular</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -66,51 +57,41 @@ $controllerRoute = $module['controller_route'];
                         foreach($categories as $category){
                       ?>
                       <?=$category->sub_category?>
-                      <?php } ?>
-                    </td>                    
-                    <td>
-                    <?php
+                      <?php } ?><br>
+                      <?php
                         $sub_id = $row->sub_category;
                         $subcategories = DB::table('news_category')->where('id', '=', $sub_id)->get();
                         foreach($subcategories as $subcategory){
                       ?>
                       <?=$subcategory->sub_category?>
-                    <?php } ?>
-                  </td>   
-                  <td><?=wordwrap($row->new_title, 20, "<br>\n");?></td>                 
-                  <td><?=wordwrap($row->sub_title, 20, "<br>\n");?></td>                                
-                  <td><?=$row->author_name?></td>                 
-                  <td>
-                  <?php
+                      <?php } ?>
+                    </td>
+                    <td>
+                      <?=wordwrap($row->new_title, 20, "<br>\n");?><br><hr><br>
+                      <?=wordwrap($row->sub_title, 20, "<br>\n");?>
+                    </td>
+                    <td>
+                      <?=$row->author_name?><br>
+                      <?php
                         $pronoun_id = $row->author_pronoun;
                         $pronoun = DB::table('pronouns')->where('id', '=', $pronoun_id)->get();
                         foreach($pronoun as $pronouns){
                       ?>
-                    <?=$pronouns->name?>
-                    <?php } ?>
-                  </td>                 
-                  <td><?=$row->author_affiliation?></td>                 
-                  <td><?=$row->author_email?></td>                 
-                  <td>
-                  <?php
+                        <?=$pronouns->name?>
+                      <?php } ?><br>
+                      <?=$row->author_affiliation?><br>
+                      <?=$row->author_email?><br>
+                      <?php
                         $country_id = $row->country;
                         $country = DB::table('countries')->where('id', '=', $country_id)->get();
                         foreach($country as $countries){
                       ?>
-                    <?=$countries->name?>
-                    <?php } ?>
-                  </td>                 
-                  <td><?=$row->organization_name?></td>                 
-                  <td><?=wordwrap($row->long_desc, 20, "<br>\n");?></td>    
-                  <td>
-                    <?php if($row->cover_image != ''){?>
-                      <img src="<?=env('UPLOADS_URL').'newcontent/'.$row->cover_image?>" class="img-thumbnail" alt="<?=$row->title?>" style="width: 150px; height: 150px; margin-top: 10px;">
-                    <?php } else {?>
-                      <img src="<?=env('NO_IMAGE')?>" alt="<?=$row->title?>" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
-                    <?php }?>
-                  </td>             
-                  <td><?=$row->is_feature?></td>                 
-                  <td><?=$row->is_popular?></td>                                                
+                        <?=$countries->name?>
+                      <?php } ?><br>
+                      <?=$row->organization_name?>
+                    </td> 
+                    <td><span class="<?=(($row->is_feature)?'badge bg-success':'badge bg-danger')?>"><?=(($row->is_feature)?'<i class="fa fa-check"></i> YES':'<i class="fa fa-times"></i> NO')?></span></td>                 
+                    <td><span class="<?=(($row->is_popular)?'badge bg-success':'badge bg-danger')?>"><?=(($row->is_popular)?'<i class="fa fa-check"></i> YES':'<i class="fa fa-times"></i> NO')?></span></td>
                     <td>
                       <a href="<?=url('admin/' . $controllerRoute . '/edit/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit"></i></a>
                       <a href="<?=url('admin/' . $controllerRoute . '/delete/'.Helper::encoded($row->id))?>" class="btn btn-outline-danger btn-sm" title="Delete <?=$module['title']?>" onclick="return confirm('Do You Want To Delete This <?=$module['title']?>');"><i class="fa fa-trash"></i></a>
@@ -123,7 +104,7 @@ $controllerRoute = $module['controller_route'];
                   </tr>
                 <?php } } else {?>
                   <tr>
-                    <td colspan="9" style="text-align: center;color: red;">No Records Found !!!</td>
+                    <td colspan="7" style="text-align: center;color: red;">No Records Found !!!</td>
                   </tr>
                 <?php }?>
               </tbody>

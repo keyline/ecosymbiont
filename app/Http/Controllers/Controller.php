@@ -15,8 +15,8 @@ use App\Models\Admin;
 use App\Models\Admin\ScrollNotice;
 use App\Models\User;
 use App\Models\UserAccess;
-use App\Models\Category;
-use App\Models\Manufacturer;
+use App\Models\NewsCategory;
+
 use Session;
 use Helper;
 
@@ -246,10 +246,11 @@ class Controller extends BaseController
         $data['scrollNotice']               = ScrollNotice::find('1');
         $data['title']                      = $title.' :: '.$data['generalSetting']->site_name;
         $data['page_header']                = $title;
+        $data['parentCats']                 = NewsCategory::select('id', 'sub_category', 'slug')->where('status', '=', 1)->where('parent_category', '=', 0)->get();
 
-        $data['before_head']                = view('front.elements.beforehead', $data);
-        $data['before_header']              = view('front.elements.beforeheader', $data);
-        $data['before_footer']              = view('front.elements.beforefooter', $data);
+        $data['head']                       = view('front.elements.head', $data);
+        $data['header']                     = view('front.elements.header', $data);
+        $data['footer']                     = view('front.elements.footer', $data);
         $data['maincontent']                = view('front.pages.'.$page_name, $data);
         return view('front.layout-before-login', $data);
     }
@@ -262,11 +263,12 @@ class Controller extends BaseController
         $data['page_header']        = $title;
         $user_id                    = session('user_id');
         $data['user']               = User::find($user_id);
+        $data['parentCats']         = NewsCategory::select('id', 'sub_category', 'slug')->where('status', '=', 1)->where('parent_category', '=', 0)->get();
 
-        $data['after_head']         = view('front.elements.afterhead', $data);
-        $data['after_header']       = view('front.elements.afterheader', $data);
-        $data['after_sidebar']      = view('front.elements.sidebar', $data);
-        $data['after_footer']       = view('front.elements.afterfooter', $data);
+        $data['head']               = view('front.elements.head', $data);
+        $data['header']             = view('front.elements.header', $data);
+        $data['sidebar']            = view('front.elements.sidebar', $data);
+        $data['footer']             = view('front.elements.footer', $data);
         $data['maincontent']        = view('front.pages.user.'.$page_name, $data);
         return view('front.layout-after-login', $data);
     }

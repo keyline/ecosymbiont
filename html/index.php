@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" class="no-js">
 <head>
-	<title>HotMagazines</title>
+	<title>ecosymbionts</title>
 
 	<meta charset="utf-8">
 
@@ -65,7 +65,7 @@
 									<li><span class="time-now">Thursday 8 January 2015 / 21:20</span></li>
 									<li><a href="#">Log In</a></li>
 									<li><a href="contact.html">Contact</a></li>
-									<li><a href="#">Purchase Theme</a></li>
+									<li><a href="#">Sign In</a></li>
 								</ul>
 							</div>	
 							<div class="col-md-3">
@@ -525,57 +525,57 @@
 			<div class="container">
 				<div class="row">
 
-					<div class="col-md-2 col-sm-0 sidebar-sticky">
+					<!--<div class="col-md-2 col-sm-0 sidebar-sticky">-->
 
 						<!-- sidebar -->
-						<div class="sidebar small-sidebar theiaStickySidebar">
+					<!--	<div class="sidebar small-sidebar theiaStickySidebar">-->
 
-							<div class="widget review-widget">
-								<div class="title-section">
-									<h1><span>Review</span></h1>
-								</div>
+					<!--		<div class="widget review-widget">-->
+					<!--			<div class="title-section">-->
+					<!--				<h1><span>Review</span></h1>-->
+					<!--			</div>-->
 
-								<ul class="review-posts-list">
-									<li>
-										<img src="upload/news-posts/rev1.jpg" alt="">
-										<h2><a href="single-post.html">Donec nec justo eget felis facilisis fermentum.</a></h2>
-										<span class="date">27 may 2013</span>
-									</li>
-									<li>
-										<h2><a href="single-post.html">Donec nec justo eget felis facilisis fermentum.</a></h2>
-										<span class="date">27 may 2013</span>
-									</li>
-									<li>
-										<img src="upload/news-posts/rev2.jpg" alt="">
-										<h2><a href="single-post.html">Donec nec justo eget felis facilisis fermentum.</a></h2>
-										<span class="date">27 may 2013</span>
-									</li>
-									<li>
-										<h2><a href="single-post.html">Donec nec justo eget felis facilisis fermentum.</a></h2>
-										<span class="date">27 may 2013</span>
-									</li>
-									<li>
-										<img src="upload/news-posts/rev3.jpg" alt="">
-										<h2><a href="single-post.html">Donec nec justo eget felis facilisis fermentum.</a></h2>
-										<span class="date">27 may 2013</span>
-									</li>
-									<li>
-										<img src="upload/news-posts/rev4.jpg" alt="">
-										<h2><a href="single-post.html">Donec nec justo eget felis facilisis fermentum.</a></h2>
-										<span class="date">27 may 2013</span>
-									</li>
-									<li>
-										<h2><a href="single-post.html">Donec nec justo eget felis facilisis fermentum.</a></h2>
-										<span class="date">27 may 2013</span>
-									</li>
-								</ul>
-							</div>
+					<!--			<ul class="review-posts-list">-->
+					<!--				<li>-->
+					<!--					<img src="upload/news-posts/rev1.jpg" alt="">-->
+					<!--					<h2><a href="single-post.html">Donec nec justo eget felis facilisis fermentum.</a></h2>-->
+					<!--					<span class="date">27 may 2013</span>-->
+					<!--				</li>-->
+					<!--				<li>-->
+					<!--					<h2><a href="single-post.html">Donec nec justo eget felis facilisis fermentum.</a></h2>-->
+					<!--					<span class="date">27 may 2013</span>-->
+					<!--				</li>-->
+					<!--				<li>-->
+					<!--					<img src="upload/news-posts/rev2.jpg" alt="">-->
+					<!--					<h2><a href="single-post.html">Donec nec justo eget felis facilisis fermentum.</a></h2>-->
+					<!--					<span class="date">27 may 2013</span>-->
+					<!--				</li>-->
+					<!--				<li>-->
+					<!--					<h2><a href="single-post.html">Donec nec justo eget felis facilisis fermentum.</a></h2>-->
+					<!--					<span class="date">27 may 2013</span>-->
+					<!--				</li>-->
+					<!--				<li>-->
+					<!--					<img src="upload/news-posts/rev3.jpg" alt="">-->
+					<!--					<h2><a href="single-post.html">Donec nec justo eget felis facilisis fermentum.</a></h2>-->
+					<!--					<span class="date">27 may 2013</span>-->
+					<!--				</li>-->
+					<!--				<li>-->
+					<!--					<img src="upload/news-posts/rev4.jpg" alt="">-->
+					<!--					<h2><a href="single-post.html">Donec nec justo eget felis facilisis fermentum.</a></h2>-->
+					<!--					<span class="date">27 may 2013</span>-->
+					<!--				</li>-->
+					<!--				<li>-->
+					<!--					<h2><a href="single-post.html">Donec nec justo eget felis facilisis fermentum.</a></h2>-->
+					<!--					<span class="date">27 may 2013</span>-->
+					<!--				</li>-->
+					<!--			</ul>-->
+					<!--		</div>-->
 
-						</div>
+					<!--	</div>-->
 
-					</div>
+					<!--</div>-->
 
-					<div class="col-md-7 col-sm-8 content-blocker">
+					<div class="col-md-9 col-sm-8 content-blocker">
 
 						<!-- block content -->
 						<div class="block-content">
@@ -717,20 +717,20 @@
 							<!-- End grid box -->
 
 							<!-- google addsense -->
-							<div class="advertisement">
-								<div class="desktop-advert">
-									<span>Advertisement</span>
-									<img src="upload/addsense/600x80.jpg" alt="">
-								</div>
-								<div class="tablet-advert">
-									<span>Advertisement</span>
-									<img src="upload/addsense/468x60-white.jpg" alt="">
-								</div>
-								<div class="mobile-advert">
-									<span>Advertisement</span>
-									<img src="upload/addsense/300x250.jpg" alt="">
-								</div>
-							</div>
+							<!--<div class="advertisement">-->
+							<!--	<div class="desktop-advert">-->
+							<!--		<span>Advertisement</span>-->
+							<!--		<img src="upload/addsense/600x80.jpg" alt="">-->
+							<!--	</div>-->
+							<!--	<div class="tablet-advert">-->
+							<!--		<span>Advertisement</span>-->
+							<!--		<img src="upload/addsense/468x60-white.jpg" alt="">-->
+							<!--	</div>-->
+							<!--	<div class="mobile-advert">-->
+							<!--		<span>Advertisement</span>-->
+							<!--		<img src="upload/addsense/300x250.jpg" alt="">-->
+							<!--	</div>-->
+							<!--</div>-->
 							<!-- End google addsense -->
 
 							<!-- carousel box -->
@@ -901,33 +901,33 @@
 						<!-- sidebar -->
 						<div class="sidebar large-sidebar theiaStickySidebar">
 
-							<div class="widget social-widget">
-								<div class="title-section">
-									<h1><span>Stay Connected</span></h1>
-								</div>
-								<ul class="social-share">
-									<li>
-										<a href="#" class="rss"><i class="fa fa-rss"></i></a>
-										<span class="number">9,455</span>
-										<span>Subscribers</span>
-									</li>
-									<li>
-										<a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-										<span class="number">56,743</span>
-										<span>Fans</span>
-									</li>
-									<li>
-										<a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-										<span class="number">43,501</span>
-										<span>Followers</span>
-									</li>
-									<li>
-										<a href="#" class="google"><i class="fa fa-google-plus"></i></a>
-										<span class="number">35,003</span>
-										<span>Followers</span>
-									</li>
-								</ul>
-							</div>
+							<!--<div class="widget social-widget">-->
+							<!--	<div class="title-section">-->
+							<!--		<h1><span>Stay Connected</span></h1>-->
+							<!--	</div>-->
+							<!--	<ul class="social-share">-->
+							<!--		<li>-->
+							<!--			<a href="#" class="rss"><i class="fa fa-rss"></i></a>-->
+							<!--			<span class="number">9,455</span>-->
+							<!--			<span>Subscribers</span>-->
+							<!--		</li>-->
+							<!--		<li>-->
+							<!--			<a href="#" class="facebook"><i class="fa fa-facebook"></i></a>-->
+							<!--			<span class="number">56,743</span>-->
+							<!--			<span>Fans</span>-->
+							<!--		</li>-->
+							<!--		<li>-->
+							<!--			<a href="#" class="twitter"><i class="fa fa-twitter"></i></a>-->
+							<!--			<span class="number">43,501</span>-->
+							<!--			<span>Followers</span>-->
+							<!--		</li>-->
+							<!--		<li>-->
+							<!--			<a href="#" class="google"><i class="fa fa-google-plus"></i></a>-->
+							<!--			<span class="number">35,003</span>-->
+							<!--			<span>Followers</span>-->
+							<!--		</li>-->
+							<!--	</ul>-->
+							<!--</div>-->
 
 							<div class="widget features-slide-widget">
 								<div class="title-section">
@@ -1008,20 +1008,20 @@
 								</ul>
 							</div>
 
-							<div class="advertisement">
-								<div class="desktop-advert">
-									<span>Advertisement</span>
-									<img src="upload/addsense/250x250.jpg" alt="">
-								</div>
-								<div class="tablet-advert">
-									<span>Advertisement</span>
-									<img src="upload/addsense/200x200.jpg" alt="">
-								</div>
-								<div class="mobile-advert">
-									<span>Advertisement</span>
-									<img src="upload/addsense/300x250.jpg" alt="">
-								</div>
-							</div>
+							<!--<div class="advertisement">-->
+							<!--	<div class="desktop-advert">-->
+							<!--		<span>Advertisement</span>-->
+							<!--		<img src="upload/addsense/250x250.jpg" alt="">-->
+							<!--	</div>-->
+							<!--	<div class="tablet-advert">-->
+							<!--		<span>Advertisement</span>-->
+							<!--		<img src="upload/addsense/200x200.jpg" alt="">-->
+							<!--	</div>-->
+							<!--	<div class="mobile-advert">-->
+							<!--		<span>Advertisement</span>-->
+							<!--		<img src="upload/addsense/300x250.jpg" alt="">-->
+							<!--	</div>-->
+							<!--</div>-->
 
 							<div class="widget tab-posts-widget">
 
@@ -1156,67 +1156,67 @@
 		<!-- End block-wrapper-section -->
 
 		<!-- list line posts section -->
-		<div class="list-line-posts">
-			<div class="container">
+		<!--<div class="list-line-posts">-->
+		<!--	<div class="container">-->
 
-				<div class="owl-wrapper">
-					<div class="owl-carousel" data-num="4">
+		<!--		<div class="owl-wrapper">-->
+		<!--			<div class="owl-carousel" data-num="4">-->
 
-						<div class="item list-post">
-							<div class="post-content">
-								<a href="politics-category.html">Opinion</a>
-								<h2><a href="single-post.html">Donec odio. Quisque volutpat mattis eros. </a></h2>
-								<ul class="post-tags">
-									<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-								</ul>
-							</div>
-						</div>
+		<!--				<div class="item list-post">-->
+		<!--					<div class="post-content">-->
+		<!--						<a href="politics-category.html">Opinion</a>-->
+		<!--						<h2><a href="single-post.html">Donec odio. Quisque volutpat mattis eros. </a></h2>-->
+		<!--						<ul class="post-tags">-->
+		<!--							<li><i class="fa fa-clock-o"></i>27 may 2013</li>-->
+		<!--						</ul>-->
+		<!--					</div>-->
+		<!--				</div>-->
 
-						<div class="item list-post">
-							<div class="post-content">
-								<a href="politics-category.html">World</a>
-								<h2><a href="single-post.html">Nullam malesuada erat ut turpis. </a></h2>
-								<ul class="post-tags">
-									<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-								</ul>
-							</div>
-						</div>
+		<!--				<div class="item list-post">-->
+		<!--					<div class="post-content">-->
+		<!--						<a href="politics-category.html">World</a>-->
+		<!--						<h2><a href="single-post.html">Nullam malesuada erat ut turpis. </a></h2>-->
+		<!--						<ul class="post-tags">-->
+		<!--							<li><i class="fa fa-clock-o"></i>27 may 2013</li>-->
+		<!--						</ul>-->
+		<!--					</div>-->
+		<!--				</div>-->
 
-						<div class="item list-post">
-							<div class="post-content">
-								<a href="politics-category.html">Video</a>
-								<h2><a href="single-post.html">Aliquam porttitor mauris sit amet orci. </a></h2>
-								<ul class="post-tags">
-									<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-								</ul>
-							</div>
-						</div>
+		<!--				<div class="item list-post">-->
+		<!--					<div class="post-content">-->
+		<!--						<a href="politics-category.html">Video</a>-->
+		<!--						<h2><a href="single-post.html">Aliquam porttitor mauris sit amet orci. </a></h2>-->
+		<!--						<ul class="post-tags">-->
+		<!--							<li><i class="fa fa-clock-o"></i>27 may 2013</li>-->
+		<!--						</ul>-->
+		<!--					</div>-->
+		<!--				</div>-->
 
-						<div class="item list-post">
-							<div class="post-content">
-								<a href="politics-category.html">Elections</a>
-								<h2><a href="single-post.html">Morbi in sem quis dui placerat ornare. </a></h2>
-								<ul class="post-tags">
-									<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-								</ul>
-							</div>
-						</div>
+		<!--				<div class="item list-post">-->
+		<!--					<div class="post-content">-->
+		<!--						<a href="politics-category.html">Elections</a>-->
+		<!--						<h2><a href="single-post.html">Morbi in sem quis dui placerat ornare. </a></h2>-->
+		<!--						<ul class="post-tags">-->
+		<!--							<li><i class="fa fa-clock-o"></i>27 may 2013</li>-->
+		<!--						</ul>-->
+		<!--					</div>-->
+		<!--				</div>-->
 
-						<div class="item list-post">
-							<div class="post-content">
-								<a href="politics-category.html">Nations</a>
-								<h2><a href="single-post.html">Morbi in sem quis dui placerat ornare. </a></h2>
-								<ul class="post-tags">
-									<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-								</ul>
-							</div>
-						</div>
+		<!--				<div class="item list-post">-->
+		<!--					<div class="post-content">-->
+		<!--						<a href="politics-category.html">Nations</a>-->
+		<!--						<h2><a href="single-post.html">Morbi in sem quis dui placerat ornare. </a></h2>-->
+		<!--						<ul class="post-tags">-->
+		<!--							<li><i class="fa fa-clock-o"></i>27 may 2013</li>-->
+		<!--						</ul>-->
+		<!--					</div>-->
+		<!--				</div>-->
 
-					</div>
-				</div>
+		<!--			</div>-->
+		<!--		</div>-->
 
-			</div>
-		</div>
+		<!--	</div>-->
+		<!--</div>-->
 		<!-- End list line posts section -->
 
 		<!-- feature-video-section 
@@ -1319,49 +1319,49 @@
 			<div class="container">
 				<div class="row">
 
-					<div class="col-md-2 col-sm-0 sidebar-sticky">
+					<!--<div class="col-md-2 col-sm-0 sidebar-sticky">-->
 
 						<!-- sidebar -->
-						<div class="sidebar small-sidebar theiaStickySidebar">
+					<!--	<div class="sidebar small-sidebar theiaStickySidebar">-->
 
-							<div class="widget voises-widget">
-								<div class="title-section">
-									<h1><span>Voises</span></h1>
-								</div>
-								<ul class="voises-posts">
+					<!--		<div class="widget voises-widget">-->
+					<!--			<div class="title-section">-->
+					<!--				<h1><span>Voises</span></h1>-->
+					<!--			</div>-->
+					<!--			<ul class="voises-posts">-->
 
-									<li>
-										<img src="upload/users/av1.jpg" alt="">
-										<p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. </p>
-										<span>By Howard Kurtz</span>
-									</li>
+					<!--				<li>-->
+					<!--					<img src="upload/users/av1.jpg" alt="">-->
+					<!--					<p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. </p>-->
+					<!--					<span>By Howard Kurtz</span>-->
+					<!--				</li>-->
 
-									<li>
-										<img src="upload/users/av2.jpg" alt="">
-										<p>Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</p>
-										<span>By Dana Blanton</span>
-									</li>
+					<!--				<li>-->
+					<!--					<img src="upload/users/av2.jpg" alt="">-->
+					<!--					<p>Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</p>-->
+					<!--					<span>By Dana Blanton</span>-->
+					<!--				</li>-->
 
-									<li>
-										<img src="upload/users/av3.jpg" alt="">
-										<p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, </p>
-										<span>By John Doe</span>
-									</li>
+					<!--				<li>-->
+					<!--					<img src="upload/users/av3.jpg" alt="">-->
+					<!--					<p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, </p>-->
+					<!--					<span>By John Doe</span>-->
+					<!--				</li>-->
 
-									<li>
-										<img src="upload/users/av4.jpg" alt="">
-										<p>Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</p>
-										<span>By Howard</span>
-									</li>
+					<!--				<li>-->
+					<!--					<img src="upload/users/av4.jpg" alt="">-->
+					<!--					<p>Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</p>-->
+					<!--					<span>By Howard</span>-->
+					<!--				</li>-->
 
-								</ul>
-							</div>
+					<!--			</ul>-->
+					<!--		</div>-->
 
-						</div>
+					<!--	</div>-->
 
-					</div>
+					<!--</div>-->
 
-					<div class="col-md-7 col-sm-8 content-blocker">
+					<div class="col-md-9 col-sm-8 content-blocker">
 
 						<!-- block content -->
 						<div class="block-content">
@@ -1468,17 +1468,17 @@
 							<!-- End article box -->
 
 							<!-- Pagination box -->
-							<div class="pagination-box">
-								<ul class="pagination-list">
-									<li><a class="active" href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><span>...</span></li>
-									<li><a href="#">9</a></li>
-									<li><a href="#">Next</a></li>
-								</ul>
-								<p>Page 1 of 9</p>
-							</div>
+							<!--<div class="pagination-box">-->
+							<!--	<ul class="pagination-list">-->
+							<!--		<li><a class="active" href="#">1</a></li>-->
+							<!--		<li><a href="#">2</a></li>-->
+							<!--		<li><a href="#">3</a></li>-->
+							<!--		<li><span>...</span></li>-->
+							<!--		<li><a href="#">9</a></li>-->
+							<!--		<li><a href="#">Next</a></li>-->
+							<!--	</ul>-->
+							<!--	<p>Page 1 of 9</p>-->
+							<!--</div>-->
 							<!-- End Pagination box -->
 
 						</div>
@@ -1491,48 +1491,48 @@
 						<!-- sidebar -->
 						<div class="sidebar large-sidebar theiaStickySidebar">
 
-							<div class="widget features-slide-widget">
-								<div class="title-section">
-									<h1><span>Most Discussed</span></h1>
-								</div>
-								<ul class="list-posts">
+							<!--<div class="widget features-slide-widget">-->
+							<!--	<div class="title-section">-->
+							<!--		<h1><span>Most Discussed</span></h1>-->
+							<!--	</div>-->
+							<!--	<ul class="list-posts">-->
 
-									<li>
-										<div class="post-content">
-											<h2><a href="single-post.html">Sed arcu. Cras consequat.</a></h2>
-											<ul class="post-tags">
-												<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-											</ul>
-										</div>
-									</li>
+							<!--		<li>-->
+							<!--			<div class="post-content">-->
+							<!--				<h2><a href="single-post.html">Sed arcu. Cras consequat.</a></h2>-->
+							<!--				<ul class="post-tags">-->
+							<!--					<li><i class="fa fa-clock-o"></i>27 may 2013</li>-->
+							<!--				</ul>-->
+							<!--			</div>-->
+							<!--		</li>-->
 
-									<li>
-										<div class="post-content">
-											<h2><a href="single-post.html">Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. </a></h2>
-											<ul class="post-tags">
-												<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-											</ul>
-										</div>
-									</li>
-									<li>
-										<div class="post-content">
-											<h2><a href="single-post.html">Morbi interdum mollis sapien. </a></h2>
-											<ul class="post-tags">
-												<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-											</ul>
-										</div>
-									</li>
+							<!--		<li>-->
+							<!--			<div class="post-content">-->
+							<!--				<h2><a href="single-post.html">Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. </a></h2>-->
+							<!--				<ul class="post-tags">-->
+							<!--					<li><i class="fa fa-clock-o"></i>27 may 2013</li>-->
+							<!--				</ul>-->
+							<!--			</div>-->
+							<!--		</li>-->
+							<!--		<li>-->
+							<!--			<div class="post-content">-->
+							<!--				<h2><a href="single-post.html">Morbi interdum mollis sapien. </a></h2>-->
+							<!--				<ul class="post-tags">-->
+							<!--					<li><i class="fa fa-clock-o"></i>27 may 2013</li>-->
+							<!--				</ul>-->
+							<!--			</div>-->
+							<!--		</li>-->
 
-									<li>
-										<div class="post-content">
-											<h2><a href="single-post.html">Etiam pellentesque mauris ut lectus. Sed arcu. Cras consequat.</a></h2>
-											<ul class="post-tags">
-												<li><i class="fa fa-clock-o"></i>27 may 2013</li>
-											</ul>
-										</div>
-									</li>
-								</ul>
-							</div>
+							<!--		<li>-->
+							<!--			<div class="post-content">-->
+							<!--				<h2><a href="single-post.html">Etiam pellentesque mauris ut lectus. Sed arcu. Cras consequat.</a></h2>-->
+							<!--				<ul class="post-tags">-->
+							<!--					<li><i class="fa fa-clock-o"></i>27 may 2013</li>-->
+							<!--				</ul>-->
+							<!--			</div>-->
+							<!--		</li>-->
+							<!--	</ul>-->
+							<!--</div>-->
 
 							<div class="widget subscribe-widget">
 								<form class="subscribe-form">
@@ -1545,20 +1545,20 @@
 								</form>
 							</div>
 
-							<div class="advertisement">
-								<div class="desktop-advert">
-									<span>Advertisement</span>
-									<img src="upload/addsense/250x250.jpg" alt="">
-								</div>
-								<div class="tablet-advert">
-									<span>Advertisement</span>
-									<img src="upload/addsense/200x200.jpg" alt="">
-								</div>
-								<div class="mobile-advert">
-									<span>Advertisement</span>
-									<img src="upload/addsense/300x250.jpg" alt="">
-								</div>
-							</div>
+							<!--<div class="advertisement">-->
+							<!--	<div class="desktop-advert">-->
+							<!--		<span>Advertisement</span>-->
+							<!--		<img src="upload/addsense/250x250.jpg" alt="">-->
+							<!--	</div>-->
+							<!--	<div class="tablet-advert">-->
+							<!--		<span>Advertisement</span>-->
+							<!--		<img src="upload/addsense/200x200.jpg" alt="">-->
+							<!--	</div>-->
+							<!--	<div class="mobile-advert">-->
+							<!--		<span>Advertisement</span>-->
+							<!--		<img src="upload/addsense/300x250.jpg" alt="">-->
+							<!--	</div>-->
+							<!--</div>-->
 
 						</div>
 						<!-- End sidebar -->
@@ -1582,7 +1582,7 @@
 								<h1>About</h1>
 								<p>Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis. </p>
 								<p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. </p>
-								<a href="index.html"><img src="images/footer-logo.png" alt=""></a>
+								<a href="index.html"><img src="images/logo.png" alt=""></a>
 							</div>
 						</div>
 						<div class="col-md-3">
@@ -1662,13 +1662,13 @@
 				<div class="footer-last-line">
 					<div class="row">
 						<div class="col-md-6">
-							<p>&copy; COPYRIGHT 2015 hotmagazine.com</p>
+							<p>&copy; COPYRIGHT 2024 ecosymbionts</p>
 						</div>
 						<div class="col-md-6">
 							<nav class="footer-nav">
 								<ul>
 									<li><a href="index.html">Home</a></li>
-									<li><a href="index.html">Purchase Theme</a></li>
+									<!--<li><a href="index.html">Purchase Theme</a></li>-->
 									<li><a href="about.html">About</a></li>
 									<li><a href="contact.html">Contact</a></li>
 								</ul>

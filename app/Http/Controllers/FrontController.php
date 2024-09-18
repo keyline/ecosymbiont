@@ -18,14 +18,13 @@ use Session;
 use Helper;
 use Hash;
 use stripe;
-
+date_default_timezone_set("Asia/Calcutta");
 class FrontController extends Controller
 {
     public function home()
     {
-        echo "Webite is under construction";die;
-        $data['rows']                   = Notice::with('journalFrequency')->where('status', '=', 1)->where('is_archieve', '=', 0)->orderBy('id', 'DESC')->get();
-        $title                          = 'Recent Journals';
+        $data = [];
+        $title                          = 'Home';
         $page_name                      = 'home';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
@@ -34,34 +33,6 @@ class FrontController extends Controller
         $data['rows']                   = Notice::with('journalFrequency')->where('status', '=', 1)->where('is_archieve', '=', 1)->orderBy('id', 'DESC')->get();
         $title                          = 'Archieve Journals';
         $page_name                      = 'archieve';
-        echo $this->front_before_login_layout($title, $page_name, $data);
-    }
-    public function about()
-    {
-        $data = [];
-        $title                          = 'About Us';
-        $page_name                      = 'about';
-        echo $this->front_before_login_layout($title, $page_name, $data);
-    }
-    public function authorGuideline()
-    {
-        $data = [];
-        $title                          = 'Author Guideline';
-        $page_name                      = 'author-guideline';
-        echo $this->front_before_login_layout($title, $page_name, $data);
-    }
-    public function editorialBoard()
-    {
-        $data = [];
-        $title                          = 'Editorial Board for Journal of Educare';
-        $page_name                      = 'editorial-board';
-        echo $this->front_before_login_layout($title, $page_name, $data);
-    }
-    public function advisoryBoard()
-    {
-        $data = [];
-        $title                          = 'Advisory Board for Journal of Educare';
-        $page_name                      = 'advisory-board';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
     public function submitManuscript(Request $request)
