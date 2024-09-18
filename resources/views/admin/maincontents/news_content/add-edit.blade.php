@@ -56,6 +56,7 @@ $controllerRoute = $module['controller_route'];
             $countryId = $row->country;
             $organization_name = $row->organization_name;
             $cover_image = $row->cover_image;
+            $cover_image_caption = $row->cover_image_caption;
             $others_image = $row->others_image;
             $long_desc = $row->long_desc;
             $keywords = $row->keywords;
@@ -74,6 +75,7 @@ $controllerRoute = $module['controller_route'];
             $countryId = '';
             $organization_name = '';
             $cover_image = '';
+            $cover_image_caption = '';
             $others_image = '';
             $long_desc = '';
             $keywords = '';
@@ -201,7 +203,14 @@ $controllerRoute = $module['controller_route'];
                                 <img src="<?=env('NO_IMAGE')?>" alt="<?=$author_name?>" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
                                 <?php }?>
                             </div>
-                        </div>   
+                        </div>
+                        <div class="row mb-3">
+                            <label for="cover_image_caption" class="col-md-2 col-lg-2 col-form-label">Cover Image Caption</label>
+                            <div class="col-md-10 col-lg-10">
+                                <input type="text" name="cover_image_caption" class="form-control" id="cover_image_caption" value="<?= $cover_image_caption ?>">
+                            </div>
+                        </div>
+
                         <div class="row mb-3">
                             <label for="others_image" class="col-md-2 col-lg-2 col-form-label">Others Image</label>
                             <div class="col-md-10 col-lg-10">
