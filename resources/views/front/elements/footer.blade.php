@@ -1,14 +1,19 @@
+<?php
+use App\Models\NewsCategory;
+use App\Models\NewsContent;
+use App\Helpers\Helper;
+?>
 <div class="container">
     <div class="footer-widgets-part">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <div class="widget text-widget">
                     <h1>About</h1>
                     <p><?=$generalSetting->footer_description?></p>
                     <a href="index.html"><img src="images/logo.png" alt=""></a>
                 </div>
             </div>
-            <div class="col-md-3">
+            <!-- <div class="col-md-3">
                 <div class="widget tags-widget">
                     <h1>Popular Tags</h1>
                     <ul class="tag-list">
@@ -24,45 +29,35 @@
                         <li><a href="#">Music</a></li>
                     </ul>
                 </div>
-            </div>
-            <div class="col-md-3">
+            </div> -->
+            <div class="col-md-6">
                 <div class="widget posts-widget">
                     <h1>Random Post</h1>
                     <ul class="list-posts">
-                        <li>
-                            <img src="<?=env('FRONT_ASSETS_URL')?>upload/news-posts/listw4.jpg" alt="">
-                            <div class="post-content">
-                                <a href="politics-category.html">World</a>
-                                <h2><a href="single-post.html">Pellentesque odio nisi, euismod in ultricies in, diam. </a></h2>
-                                <ul class="post-tags">
-                                    <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="<?=env('FRONT_ASSETS_URL')?>upload/news-posts/listw1.jpg" alt="">
-                            <div class="post-content">
-                                <a href="politics-category.html">Election</a>
-                                <h2><a href="single-post.html">Sed arcu. Cras consequat.</a></h2>
-                                <ul class="post-tags">
-                                    <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="<?=env('FRONT_ASSETS_URL')?>upload/news-posts/listw3.jpg" alt="">
-                            <div class="post-content">
-                                <a href="politics-category.html">Opinion</a>
-                                <h2><a href="single-post.html">Phasellus ultrices nulla quis nibh. Quisque a lectus.</a></h2>
-                                <ul class="post-tags">
-                                    <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                                </ul>
-                            </div>
-                        </li>
+                        <?php
+                        $randomContents = NewsContent::join('news_category', 'news_contents.sub_category', '=', 'news_category.id')
+                                                ->select('news_contents.id', 'news_contents.new_title', 'news_contents.sub_title', 'news_contents.slug', 'news_contents.author_name', 'news_contents.cover_image', 'news_contents.created_at', 'news_category.sub_category as sub_category_name', 'news_category.slug as sub_category_slug')
+                                                ->where('news_contents.status', '=', 1)
+                                                ->inRandomOrder()
+                                                ->limit(3)
+                                                ->get();
+                        if($randomContents){ foreach($randomContents as $randomContent){
+                        ?>
+                            <li>
+                                <img src="<?=env('UPLOADS_URL').'newcontent/'.$randomContent->cover_image?>" alt="<?=$randomContent->new_title?>">
+                                <div class="post-content">
+                                    <a href="<?=url('subcategory/' . $randomContent->sub_category_slug)?>"><?=$randomContent->sub_category_name?></a>
+                                    <h2><a href="<?=url('content/' . $randomContent->slug)?>"><?=$randomContent->new_title?></a></h2>
+                                    <ul class="post-tags">
+                                        <li><i class="fa fa-clock-o"></i><?=date_format(date_create($randomContent->created_at), "d M Y")?></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        <?php } }?>
                     </ul>
                 </div>
             </div>
-            <div class="col-md-3">
+            <!-- <div class="col-md-3">
                 <div class="widget flickr-widget">
                     <h1>Flickr Photos</h1>
                     <ul class="flickr-list">
@@ -75,7 +70,7 @@
                     </ul>
                     <a href="#">View more photos...</a>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <div class="footer-last-line">
@@ -87,9 +82,8 @@
                 <nav class="footer-nav">
                     <ul>
                         <li><a href="<?=url('/')?>">Home</a></li>
-                        <!--<li><a href="index.html">Purchase Theme</a></li>-->
                         <li><a href="<?=url('page/about-us')?>">About</a></li>
-                        <li><a href="<?=url('contact-us')?>">Contact</a></li>
+                        <!-- <li><a href="<?=url('contact-us')?>">Contact</a></li> -->
                     </ul>
                 </nav>
             </div>
