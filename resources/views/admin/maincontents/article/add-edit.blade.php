@@ -628,12 +628,12 @@ $controllerRoute = $module['controller_route'];
 
     function validateFileSize(input, errorElementId) {
         var file = input.files[0];
-        if (file && file.size > 10485760) { // 10 MB in bytes
-            document.getElementById(errorElementId).innerText = "File size exceeds 10 MB. Please upload a smaller file.";
-            input.value = ''; // Clear the input value to prevent form submission
-        } else {
-            document.getElementById(errorElementId).innerText = ''; // Clear error if valid
-        }
+        var maxSize = 5 * 1024 * 1024; // 5MB in bytes
+
+    if (file.size > maxSize) {
+        alert('File size exceeds 5MB. Please upload a smaller file.');
+        input.value = ''; // Clear the input if validation fails
+    }
     }
 
     function validateVideoFile(input, errorElementId) {
