@@ -92,8 +92,7 @@ $controllerRoute = $module['controller_route'];
             $for_publication_name = '';           
             $countryId = '';           
             $roleId = '';           
-            $creative_Work = ''; 
-            $invited = '';
+            $creative_Work = '';             
             $copyright = ''; 
             $invited = '';
             $invited_by = '';
@@ -227,7 +226,7 @@ $controllerRoute = $module['controller_route'];
                                 <label for="invited_by" class="col-md-2 col-lg-4 col-form-label">9A) Full name of person who invited you to submit a Creative-Work to ERT</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" name="invited_by" class="form-control" id="invited_by"
-                                        value="<?= $invited_by ?>" required>
+                                        value="<?= $invited_by ?>">
                                 </div>
                             </div> 
                             <div class="row mb-3">
@@ -235,7 +234,7 @@ $controllerRoute = $module['controller_route'];
                                 </label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="email" name="invited_by_email" class="form-control" id="invited_by_email"
-                                        value="<?= $invited_by_email ?>" required>
+                                        value="<?= $invited_by_email ?>">
                                 </div>
                             </div>
                         </div>
@@ -314,15 +313,16 @@ $controllerRoute = $module['controller_route'];
                                 <label for="submission_types" class="col-md-2 col-lg-4 col-form-label">16) Select the type of your Creative-Work
                                 </label>
                                 <div class="col-md-10 col-lg-8">                                
-                                    @if ($submission_types)
-                                    <!-- dd($submission_types); -->
-                                        @foreach ($submission_types as $data)
-                                            <!-- <option value="{{ $data->id }}" @selected($data->id == $titleId)> -->
-                                            <input type="radio"  name="submission_types" value="{{ $data->id }}"  >
-                                            <label for="yes">{{ $data->name }}</label>
-                                                <!-- {{ $data->name }}</option> -->
-                                        @endforeach
-                                    @endif                                
+                                @if ($submission_type)
+                                    @for ($i = 0; $i < count($submission_type); $i++)
+                                        @php
+                                            $data = $submission_type[$i];
+                                        @endphp
+                                        <!-- Use Blade's templating syntax instead of echo inside @php block -->                                        
+                                        <input type="radio" name="submission_types" value="<?php echo $data->id ?>">
+                                        <label for="submission_types"><?php echo $data->name?></label>
+                                    @endfor
+                                @endif                            
                                 </div>
                             </div>                           
                             <div class="row mb-3">
@@ -330,6 +330,7 @@ $controllerRoute = $module['controller_route'];
                                 <div class="col-md-10 col-lg-8">
                                     <input type="file" name="narrative_file" class="form-control" id="narrative_file">
                                     <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>
+                                    <span id="narrative_file_error" class="text-danger"></span>
                                     <?php if($narrative_file != ''){?>
                                     <a href="<?= env('UPLOADS_URL') . 'narrative/' . $narrative_file ?>" target="_blank"
                                         class="badge bg-primary">View Journal</a>
@@ -345,7 +346,8 @@ $controllerRoute = $module['controller_route'];
                                 <label for="first_image_file" class="col-md-2 col-lg-4 col-form-label">16A2) TYPE A: First image/photograph accompanying word narrative</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="file" name="first_image_file" class="form-control" id="first_image_file">
-                                    <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>                                    
+                                    <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>
+                                    <span id="first_image_file_error" class="text-danger"></span>
                                     <?php if($first_image_file != ''){?>
                                     <img src="<?=env('UPLOADS_URL').'narrative/'.$first_image_file?>" alt="first_image_file" style="width: 150px; height: 150px; margin-top: 10px;">
                                     <?php } else {?>
@@ -357,7 +359,8 @@ $controllerRoute = $module['controller_route'];
                                 <label for="second_image_file" class="col-md-2 col-lg-4 col-form-label">16A3) TYPE A: Second image/photograph accompanying word narrative</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="file" name="second_image_file" class="form-control" id="second_image_file">
-                                    <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>                                    
+                                    <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>
+                                    <span id="second_image_file_error" class="text-danger"></span>                                    
                                     <?php if($second_image_file != ''){?>
                                     <img src="<?=env('UPLOADS_URL').'narrative/'.$second_image_file?>" alt="second_image_file" style="width: 150px; height: 150px; margin-top: 10px;">
                                     <?php } else {?>
@@ -369,7 +372,8 @@ $controllerRoute = $module['controller_route'];
                                 <label for="art_image_file" class="col-md-2 col-lg-4 col-form-label">16B1) TYPE B: Art image + descriptive narrative | art image</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="file" name="art_image_file" class="form-control" id="art_image_file">
-                                    <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>                                    
+                                    <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>    
+                                    <span id="art_image_file_error" class="text-danger"></span>                                
                                     <?php if($art_image_file != ''){?>
                                     <img src="<?=env('UPLOADS_URL').'art_image/'.$art_image_file?>" alt="art_image_file" style="width: 150px; height: 150px; margin-top: 10px;">
                                     <?php } else {?>
@@ -389,9 +393,14 @@ $controllerRoute = $module['controller_route'];
                                 <label for="art_video_file" class="col-md-2 col-lg-4 col-form-label">16C1) TYPE C: Video + descriptive narrative | audiovisual media (3-10 min.)</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="file" name="art_video_file" class="form-control" id="art_video_file">
-                                    <small class="text-info">* Only MP4, AVI, MOV, MKV, WEBM files are allowed</small><br>                                    
+                                    <small class="text-info">* Only MP4, AVI, MOV, MKV, WEBM files are allowed</small><br>  
+                                    <span id="art_video_file_error" class="text-danger"></span>                                  
                                     <?php if($art_video_file != ''){?>
-                                    <img src="<?=env('UPLOADS_URL').'art_video/'.$art_video_file?>" alt="art_video_file" style="width: 150px; height: 150px; margin-top: 10px;">
+                                        <video width="150" height="150" controls>
+                                            <source src="<?=env('UPLOADS_URL').'art_video/'.$art_video_file?>" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    <!-- <img src="<?=env('UPLOADS_URL').'art_video/'.$art_video_file?>" alt="art_video_file" style="width: 150px; height: 150px; margin-top: 10px;"> -->
                                     <?php } else {?>
                                     <img src="<?=env('NO_IMAGE')?>" alt="art_video_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
                                     <?php }?>
@@ -591,5 +600,66 @@ $controllerRoute = $module['controller_route'];
         allValid &= checkWordLimit(document.getElementById('bio_long'), 250, 'bio_longError');        
 
         document.getElementById('submitButton').disabled = !allValid;
+    }
+</script>
+<!-- Add real-time size validation script -->
+<script>
+    document.getElementById('narrative_file').addEventListener('change', function() {
+        validateFileSize(this, 'narrative_file_error');
+    });
+    
+    document.getElementById('first_image_file').addEventListener('change', function() {
+        validateFileSize(this, 'first_image_file_error');
+    });
+
+    document.getElementById('second_image_file').addEventListener('change', function() {
+        validateFileSize(this, 'second_image_file_error');
+    });
+
+    document.getElementById('art_image_file').addEventListener('change', function() {
+        validateFileSize(this, 'art_image_file_error');
+    });    
+    
+    document.getElementById('art_video_file').addEventListener('change', function() {
+        validateVideoFile(this, 'art_video_file_error');
+    });
+
+    // Add similar event listeners for other file inputs
+
+    function validateFileSize(input, errorElementId) {
+        var file = input.files[0];
+        if (file && file.size > 10485760) { // 10 MB in bytes
+            document.getElementById(errorElementId).innerText = "File size exceeds 10 MB. Please upload a smaller file.";
+            input.value = ''; // Clear the input value to prevent form submission
+        } else {
+            document.getElementById(errorElementId).innerText = ''; // Clear error if valid
+        }
+    }
+
+    function validateVideoFile(input, errorElementId) {
+        var file = input.files[0];
+        var allowedExtensions = ['mp4', 'avi', 'mov', 'mkv', 'webm'];
+        var fileSizeLimit = 10485760; // 10MB in bytes
+
+        if (file) {
+            var fileExtension = file.name.split('.').pop().toLowerCase();
+
+            // Validate file type
+            if (!allowedExtensions.includes(fileExtension)) {
+                document.getElementById(errorElementId).innerText = "Invalid file type. Only MP4, AVI, MOV, MKV, WEBM are allowed.";
+                input.value = ''; // Clear the input
+                return;
+            }
+
+            // Validate file size
+            if (file.size > fileSizeLimit) {
+                document.getElementById(errorElementId).innerText = "File size exceeds 10 MB. Please upload a smaller file.";
+                input.value = ''; // Clear the input
+                return;
+            }
+
+            // Clear any previous error
+            document.getElementById(errorElementId).innerText = '';
+        }
     }
 </script>

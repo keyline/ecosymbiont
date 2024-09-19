@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Models\GeneralSetting;
+use App\Rules\MaxWords;
 use App\Models\Article;
 use App\Models\SectionErt;
 use App\Models\Title;
@@ -78,31 +79,127 @@ class ArticlesController extends Controller
                     // 'bio_short'                 => ['required', 'string', new MaxWords(40)],
                     // 'bio_long'                  => ['required', 'string', new MaxWords(250)], 
                 ];
+            } else{
+                // echo "this section"; die;
+                    $rules = [
+                'first_name'                => 'required',            
+                'last_name'                 => 'required',                                    
+                'email'                     => 'required',                                      
+                'country'                   => 'required',                                     
+                'for_publication_name'      => 'required', 
+                'orginal_work'              => 'required', 
+                'copyright'                 => 'required', 
+                'submission_types'          => 'required', 
+                // 'narrative_file'            => 'required', 
+                // 'first_image_file'          => 'required', 
+                // 'second_image_file'         => 'required', 
+                // 'art_image_file'            => 'required', 
+                // 'art_video_file'            => 'required', 
+                'state'                     => 'required', 
+                'city'                      => 'required', 
+                'acknowledge'               => 'required',                                                      
+                'section_ert'               => 'required',
+                'title'                     => 'required',
+                'pronoun'                   => 'required',                
+                'organization_name'         => 'required',
+                'organization_website'      => 'required',
+                'ecosystem_affiliation'     => 'required',               
+                'expertise_area'            => 'required',                
+                'explanation'               => ['required', 'string', new MaxWords(100)],
+                'explanation_submission'    => ['required', 'string', new MaxWords(150)],
+                'art_video_desc'            => ['required', 'string', new MaxWords(250)],
+                'creative_Work'             => ['required', 'string', new MaxWords(10)],
+                'subtitle'                  => ['required', 'string', new MaxWords(40)],
+                'art_image_desc'            => ['required', 'string', new MaxWords(250)],
+                'bio_short'                 => ['required', 'string', new MaxWords(40)],
+                'bio_long'                  => ['required', 'string', new MaxWords(250)], 
+            ];
+            
+            /* narrative file */
+                $imageFile      = $request->file('narrative_file');
+                if ($imageFile != '') {
+                    $imageName      = $imageFile->getClientOriginalName();
+                    $uploadedFile   = $this->upload_single_file('narrative_file', $imageName, 'narrative', 'image');
+                    if ($uploadedFile['status']) {
+                        $narrative_file = $uploadedFile['newFilename'];
+                    } else {
+                        return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                    }
+                } else {
+                    return redirect()->back()->with(['error_message' => 'Please Upload narrative File !!!']);
+                }
+            /* narrative file */
+            /* first_image file */
+            $imageFile      = $request->file('first_image_file');
+            if ($imageFile != '') {
+                $imageName      = $imageFile->getClientOriginalName();
+                $uploadedFile   = $this->upload_single_file('first_image_file', $imageName, 'narrative', 'image');
+                if ($uploadedFile['status']) {
+                    $first_image_file = $uploadedFile['newFilename'];
+                } else {
+                    return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                }
+            } else {
+                return redirect()->back()->with(['error_message' => 'Please Upload first_image File !!!']);
             }
-            // $rules = [
-                // 'first_name'                => 'required',            
-                // 'last_name'                 => 'required',                                    
-                // 'email'                     => 'required',                                      
-                // 'country'                   => 'required',                                     
-                // 'password'                  => 'required', 
-                // 'invited'                   => 'required',
-                // 'invited_by'                => 'required', 
-                // 'invited_by_email'          => 'required',                     
-                // 'section_ert'               => 'required',
-                // 'title'                     => 'required',
-                // 'pronoun'                   => 'required',
-                // 'participated'              => 'required',
-                // 'participated_info'         => 'required',
-                // 'organization_name'         => 'required',
-                // 'organization_website'      => 'required',
-                // 'ecosystem_affiliation'     => 'required',               
-                // 'expertise_area'            => 'required',                
-                // 'explanation'               => ['required', 'string', new MaxWords(100)],
-                // 'explanation_submission'    => ['required', 'string', new MaxWords(150)],
-                // 'bio_short'                 => ['required', 'string', new MaxWords(40)],
-                // 'bio_long'                  => ['required', 'string', new MaxWords(250)], 
-            // ];
+            /* first_image file */
+            /* second_image file */
+            $imageFile      = $request->file('second_image_file');
+            if ($imageFile != '') {
+                $imageName      = $imageFile->getClientOriginalName();
+                $uploadedFile   = $this->upload_single_file('second_image_file', $imageName, 'narrative', 'image');
+                if ($uploadedFile['status']) {
+                    $second_image_file = $uploadedFile['newFilename'];
+                } else {
+                    return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                }
+            } else {
+                return redirect()->back()->with(['error_message' => 'Please Upload second_image File !!!']);
+            }
+            /* second_image file */
+            /* art_image file */
+            $imageFile      = $request->file('art_image_file');
+            if ($imageFile != '') {
+                $imageName      = $imageFile->getClientOriginalName();
+                $uploadedFile   = $this->upload_single_file('art_image_file', $imageName, 'art_image', 'image');
+                if ($uploadedFile['status']) {
+                    $art_image_file = $uploadedFile['newFilename'];
+                } else {
+                    return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                }
+            } else {
+                return redirect()->back()->with(['error_message' => 'Please Upload art_image File !!!']);
+            }
+            /* art_image file */
+            /* art_video file */
+            $imageFile      = $request->file('art_video_file');
+            if ($imageFile != '') {
+                $imageName      = $imageFile->getClientOriginalName();
+                $uploadedFile   = $this->upload_single_file('art_video_file', $imageName, 'art_video', 'image');
+                if ($uploadedFile['status']) {
+                    $art_video_file = $uploadedFile['newFilename'];
+                } else {
+                    return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                }
+            } else {
+                return redirect()->back()->with(['error_message' => 'Please Upload art_video File !!!']);
+            }
+            /* art_video file */
+            // dd($postData);
+            }
+            //  dump($postData); die;
+            // $validator = Validator::make($request->all(), $rules);
+            
+
+                // $validator->fails();
+                // dd($validator->fails());
+                // $errors = $validator->errors(); 
+                // dd($errors);                
+            // $validation = $this->validate($request, $rules);
+            // dd($validation);
             if ($this->validate($request, $rules)) {
+                // echo "rules verifired"; die;
+                // dd($postData);
                 // $checkValue = Article::where('first_name', '=', $postData['first_name'])->count();
                 // if ($checkValue <= 0) {
                     /* Article file */
@@ -120,21 +217,48 @@ class ArticlesController extends Controller
                     // }
                     /* Article file */
                     $fields = [
+                        'email'                     => $postData['email'],   
                         'first_name'                => $postData['first_name'],            
                         'last_name'                 => $postData['last_name'],        
-                        'middle_name'               => $postData['middle_name'],            
-                        'email'                     => $postData['email'],           
+                        'middle_name'               => $postData['middle_name'],                                            
                         'for_publication_name'      => $postData['for_publication_name'],           
                         'orginal_work'              => $postData['orginal_work'],           
                         'user'                      => 0,           
                         'copyright'                 => $postData['copyright'],
                         'titleId'                     => $postData['title'],
                         'pronounId'                   => $postData['pronoun'], 
-                        // 'invited'                   => $postData['invited'],
-                        // 'invited_by'                => $postData['invited_by'], 
-                        // 'invited_by_email'          => $postData['invited_by_email'],
+                        'invited'                   => $postData['invited'],
+                        'invited_by'                => $postData['invited_by'], 
+                        'invited_by_email'          => $postData['invited_by_email'],
+                        'explanation'               => $postData['explanation'],  
+                        'explanation_submission'    => $postData['explanation_submission'],     
+                        'section_ertId'             => json_encode($postData['section_ert']),
+                        'creative_Work'             => $postData['creative_Work'],
+                        'subtitle'             => $postData['subtitle'],
+                        'submission_types'             => $postData['submission_types'],
+                        'titleId'                   => $postData['title'],
+                        'pronounId'                 => $postData['pronoun'],
+                        'participated'              => $postData['participated'],
+                        'participated_info'         => $postData['participated_info'],
+                        'narrative_file'         => $narrative_file,
+                        'first_image_file'         => $first_image_file,
+                        'second_image_file'         => $second_image_file,
+                        'art_image_file'         => $art_image_file,
+                        'art_image_desc'         => $postData['art_image_desc'],
+                        'art_video_file'         => $art_video_file,
+                        'art_video_desc'         => $postData['art_video_desc'],
+                        'country'         => $postData['country'],
+                        'state'         => $postData['state'],
+                        'city'         => $postData['city'],
+                        'organization_name'         => $postData['organization_name'],
+                        'organization_website'      => $postData['organization_website'],
+                        'ecosystem_affiliationId'   => json_encode($postData['ecosystem_affiliation']),
+                        'indigenous_affiliation'    => $postData['indigenous_affiliation'],
+                        'expertise_areaId'          => json_encode($postData['expertise_area']),
+                        'bio_short'               => $postData['bio_short'],
+                        'bio_long'               => $postData['bio_long'],  
                     ];
-                    // Helper::pr($fields);
+                    //  Helper::pr($fields);
                     Article::insert($fields);
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
                 // } else {
@@ -148,8 +272,10 @@ class ArticlesController extends Controller
         $title                          = $this->data['title'] . ' Add';
         $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
         $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-        $data['submission_types']       = SubmissionType::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['submission_type']       = SubmissionType::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // dd($data['submission_types']);
         $data['country']                = Country::orderBy('name', 'ASC')->get();
+        // dd($data['country']);
         $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
         $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
         $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
