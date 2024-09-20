@@ -1,4 +1,5 @@
 <?php
+use App\Models\EcosystemAffiliation;
 use App\Helpers\Helper;
 $controllerRoute = $module['controller_route'];
 ?>
@@ -79,7 +80,18 @@ $controllerRoute = $module['controller_route'];
                       ?>
                         <?=$pronouns->name?>
                       <?php } ?><br>
-                      <?=$row->author_affiliation?><br>
+                      <?php
+                      $author_affiliation = json_decode($row->author_affiliation);
+                      $affiliations = [];
+                      if(!empty($author_affiliation)){
+                        for($k=0;$k<count($author_affiliation);$k++){
+                          $getAffiliation = EcosystemAffiliation::select('name')->where('id', '=', $author_affiliation[$k])->first();
+                          $affiliations[] = (($getAffiliation)?$getAffiliation->name:'');
+                        }
+                      }
+                      echo implode(', ', $affiliations);
+                      ?>
+                      <br>
                       <?=$row->author_email?><br>
                       <?php
                         $country_id = $row->country;
