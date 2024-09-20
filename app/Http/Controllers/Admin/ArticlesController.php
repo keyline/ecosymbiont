@@ -378,7 +378,7 @@ class ArticlesController extends Controller
         $id                             = Helper::decoded($id);
         $model                          = Article::find($id);
         $fields = [
-            'is_published' => 1,
+            'is_published' => 2,
         ];
                    
         $msg            = 'Accept';        
@@ -392,7 +392,7 @@ class ArticlesController extends Controller
         $id                             = Helper::decoded($id);
         $model                          = Article::find($id);
         $fields = [
-            'is_published' => 2,
+            'is_published' => 3,
         ];
                    
         $msg            = 'Reject';        
@@ -401,4 +401,16 @@ class ArticlesController extends Controller
         return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' Successfully !!!');
     }
     /* change archieve status */
+
+    public function viewDetails($id)
+    {
+        // dd($id);
+        $id                             = Helper::decoded($id);       
+        $data['module']                 = $this->data;
+        $title                          = $this->data['title'] . ' View Details';
+        $page_name                      = 'article.view_details';
+        $data['rows']                   = Article::where('status', '!=', 3)->orderBy('id', 'DESC')->get();
+        
+        echo $this->admin_after_login_layout($title, $page_name, $data);
+    }
 }

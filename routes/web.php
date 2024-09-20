@@ -61,6 +61,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('article/list', 'ArticlesController@list');
         Route::match(['get', 'post'], 'article/add', 'ArticlesController@add');
         Route::match(['get', 'post'], 'article/edit/{id}', 'ArticlesController@edit');
+        Route::match(['get', 'post'], 'article/view_details/{id}', 'ArticlesController@viewDetails');
         Route::get('article/delete/{id}', 'ArticlesController@delete');
         Route::get('article/change-status/{id}', 'ArticlesController@change_status');
         Route::match(['get', 'post'], 'article/change_status_accept/{id}', 'ArticlesController@change_status_accept');
