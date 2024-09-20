@@ -43,7 +43,7 @@
                                               </div>
                                             </div>
                                             <div class="text-center">
-                                              <button type="submit" class="btn btn-primary">Submit</button>
+                                              <button type="submit" class="btn btn-primary">Sign In</button>
                                             </div>
                                             <div class="text-center" style="margin-bottom: 15px;">
                                               Not Registered Yet ? <a href="<?=url('signup')?>">Sign Up</a>

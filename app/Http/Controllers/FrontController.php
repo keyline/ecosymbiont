@@ -349,10 +349,6 @@ class FrontController extends Controller
             $data['user']                   = User::find($user_id);
             $data['articles']               = Article::where('user_id', '=', $user_id)->get();
 
-            if ($request->isMethod('post')) {
-                // article submit code goes here
-            }
-
             $title                          = 'My Articles';
             $page_name                      = 'my-articles';
             echo $this->front_after_login_layout($title, $page_name, $data);

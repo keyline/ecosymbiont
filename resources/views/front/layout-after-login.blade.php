@@ -48,5 +48,10 @@
     <script type="text/javascript" src="<?=env('FRONT_ASSETS_URL')?>js/sticky.js"></script>
     <script type="text/javascript" src="<?=env('FRONT_ASSETS_URL')?>js/retina-1.1.0.min.js"></script>
     <script type="text/javascript" src="<?=env('FRONT_ASSETS_URL')?>js/script.js"></script>
+    <script type="text/javascript">
+        $(function(){
+          $('.autohide').delay(5000).fadeOut('slow');
+        })
+    </script>
 </body>
 </html>
