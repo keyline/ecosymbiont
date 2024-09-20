@@ -14,6 +14,7 @@ use App\Models\NewsCategory;
 use App\Models\NewsContent;
 use App\Models\Notice;
 use App\Models\Page;
+use App\Models\User;
 use App\Models\Manuscript;
 use App\Models\Subscriber;
 use App\Models\Country;
@@ -118,18 +119,91 @@ class FrontController extends Controller
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
 
-    public function signIn()
+    public function signIn(Request $request)
     {
+        if($request->isMethod('post')){
+            $postData = $request->all();
+            // dd($postData);
+            $rules = [
+                        'email'     => 'required|email|max:255',
+                        'password'  => 'required|max:30',
+                    ];
+            if($this->validate($request, $rules)){
+                
+                if(Auth::guard('web')->attempt(['email' => $postData['email'], 'password' => $postData['password'], 'status' => 1])){
+                    // Helper::pr(Auth::guard('web')->user());
+                    $sessionData = Auth::guard('web')->user();
+                    $request->session()->put('user_id', $sessionData->id);
+                    $request->session()->put('first_name', $sessionData->first_name);
+                    $request->session()->put('middle_name', $sessionData->middle_name);
+                    $request->session()->put('last_name', $sessionData->last_name);
+                    $request->session()->put('role', $sessionData->role);
+                    $request->session()->put('email', $sessionData->email);
+                    // $request->session()->put('is_admin_login', 1);
+                                        
+                    return redirect('profile');
+                } else {                    
+                    return redirect()->back()->with('error_message', 'Invalid Email Or Password !!!');
+                }
+            } else {
+                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+            }
+        }
         $data                           = [];
         $title                          = 'Sign In';
         $page_name                      = 'signin';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
-    public function signUp()
+
+    public function profile()
+    {        
+        $data                           = [];
+        $title                          = 'Profile';
+        $page_name                      = 'profile';
+        echo $this->front_before_login_layout($title, $page_name, $data);
+    }
+
+    public function signUp(Request $request)
     {
         $data['countries']              = Country::select('id', 'name')->where('status', '=', 1)->get();
         $title                          = 'Sign Up';
         $page_name                      = 'signup';
+        if ($request->isMethod('post')) {
+            $postData = $request->all();
+            //  dd($postData);
+            $rules = [                                 
+                'first_name'                => 'required',            
+                'last_name'                 => 'required',                                    
+                'email'                     => 'required',           
+                'phone'                     => 'required',           
+                'country'                   => 'required',                                     
+                'password'                  => 'required',                         
+            ];
+            if ($this->validate($request, $rules)) {
+                //   dd($postData);
+                $checkValue = User::where('email', '=', $postData['email'])->count();
+                if ($checkValue <= 0) {                    
+                    $fields = [                        
+                        'first_name'                => $postData['first_name'],            
+                        'last_name'                 => $postData['last_name'],        
+                        'middle_name'               => $postData['middle_name'],            
+                        'email'                     => $postData['email'],           
+                        'phone'                     => $postData['phone'],           
+                        'country'                   => $postData['country'],           
+                        'role'                      => 1,           
+                        'password'                  => Hash::make($postData['password']),                         
+                    ];
+                    //  dd($fields);
+                    //   Helper::pr($fields);
+                    User::insert($fields);
+                    return redirect()->back()->with('success_message', 'Sign Up Successfully !!!');
+                } else {
+                    return redirect()->back()->with('error_message', 'User Already Inserted !!!');
+                }
+            } else {
+                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+            }
+        }
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
 }

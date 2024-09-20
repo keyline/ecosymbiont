@@ -24,28 +24,17 @@
                             <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <div class="card-header">
-                                            <h3 class="text-center">SignIn to Your Account</h3>
-                                            <p class="text-center">Enter your email & password to login</p>
-                                        </div>
-                                        <form method="POST" action="">
-                                        @csrf
-                                            <div class="row mb-3">
-                                              <label for="email" class="col-md-4 col-lg-3 col-form-label">Email Id</label>
-                                              <div class="col-md-8 col-lg-9">
-                                                <input type="text" name="email" class="form-control" id="email" value="">
-                                              </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                              <label for="password" class="col-md-4 col-lg-3 col-form-label">Password</label>
-                                              <div class="col-md-8 col-lg-9">
-                                                <input type="password" name="password" class="form-control" id="password">
-                                              </div>
-                                            </div>
-                                            <div class="text-center">
-                                              <button type="submit" class="btn btn-primary">Submit</button>
-                                            </div>
-                                          </form>
+                                        <div class="card-header">                                        
+                                            <h3 class="text-center">
+                                            Welcome 
+                                            {{ session()->get('first_name') }} 
+                                            @if (session()->has('middle_name'))
+                                                {{ session()->get('middle_name') }}
+                                            @endif
+                                            {{ session()->get('last_name') }}
+                                            </h3>
+                                            
+                                        </div>                                        
                                     </div>
                                 </div>
                             </div>
