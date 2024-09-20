@@ -78,7 +78,7 @@
                                               <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>
                                             <div class="text-center" style="margin-bottom: 15px;">
-                                              Alredy Registered ? <a href="<?=url('signin')?>">Sign In</a>
+                                              Already Registered ? <a href="<?=url('signin')?>">Sign In</a>
                                             </div>
                                           </form>
                                     </div>

@@ -36,7 +36,7 @@
                                         <td><?=$sl++?></td>
                                         <td><?=$article->article_no?></td>
                                         <td>
-                                            <h5><?=$article->article_no?></h5>
+                                            <h5><?=$article->creative_Work?></h5>
                                             <h6><?=$article->subtitle?></h6>
                                         </td>
                                         <td>
