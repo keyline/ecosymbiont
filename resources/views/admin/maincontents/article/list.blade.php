@@ -37,13 +37,10 @@ $controllerRoute = $module['controller_route'];
             <table id="simpletable" class="table table-striped table-bordered nowrap">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">User Name</th>
-                  <th scope="col">Article Name</th>
-                  <th scope="col">Summary</th>
-                  <th scope="col">Article Date</th>
-                  <!-- <th scope="col">Uploaded By</th> -->
-                  <th scope="col">Article File</th>                  
+                  <th scope="col">#</th>                  
+                  <th scope="col">Author Info</th>                  
+                  <th scope="col">Article Info</th>                  
+                  <th scope="col">Submitted Time</th>                  
                   <th scope="col">Published Status</th>                  
                   <th scope="col">Published Action</th>                  
                   <th scope="col">Action</th>
@@ -54,23 +51,19 @@ $controllerRoute = $module['controller_route'];
                   <tr>
                     <th scope="row"><?=$sl++?></th>
                     <td>
-                      <?=$row->author_name?></td>
+                      <?=$row->first_name?> <?=$row->last_name?><br> <?=$row->email?></td>
                     <td>
-                      <?=$row->name?></td>
-                    <td><?=wordwrap($row->description,35,"<br>\n")?></td>
-                    <td><?=date_format(date_create($row->notice_date), "M d, Y")?></td>
-                    <!-- <td><?=$row->uploaded_by?></td> -->
-                    <td>
-                      <?php if($row->notice_file != ''){?>
-                        <a href="<?=env('UPLOADS_URL').'article/'.$row->notice_file?>" target="_blank" class="badge bg-primary"><i class="fa fa-info-circle"></i> View Notice</a>
-                      <?php }?>
-                    </td>
+                      <?=$row->subtitle?></td>                    
+                    <td><?=date_format(date_create($row->created_at), "M d, Y")?></td>                                       
                     <td>
                       <?php if($row->is_published == 0){
-                        echo "Pending";
+                        echo "Article Submitted";
                       }
                         elseif($row->is_published == 1){
-                          echo "Accept";
+                          echo "Scan Copy Uploaded";
+                        }
+                        elseif($row->is_published == 2){
+                          echo "Approve";
                         }
                       else {
                         echo "Reject";
@@ -84,7 +77,7 @@ $controllerRoute = $module['controller_route'];
                     </td>
                     <td>
                       <?php
-                      if ($row->is_published == '0')
+                      if ($row->is_published == '0' || $row->is_published == '1')
                       { ?>
                           <!-- <form action="<?=url('admin/' . $controllerRoute . '/change_status_accept/'.Helper::encoded($row->id))?>" method="POST" style="display:inline;">                             
                               <button type="submit" class="btn btn-success">Accept</button>
@@ -94,7 +87,7 @@ $controllerRoute = $module['controller_route'];
                           <!-- <form action="<?=url('admin/' . $controllerRoute . '/change_status_reject/'.Helper::encoded($row->id))?>" method="POST" style="display:inline;">                             
                               <button type="submit" class="btn btn-danger">Reject</button>
                           </form> -->
-                     <?php } elseif($row->is_published == '1'){?>
+                     <?php } elseif($row->is_published == '2'){?>
                       <a href="<?=url('admin/' . $controllerRoute . '/change_status_reject/'.Helper::encoded($row->id))?>" class="btn btn-danger btn-sm" title="Reject <?=$module['title']?>">Reject</a>
                      <?php } else{ ?>
                       <a href="<?=url('admin/' . $controllerRoute . '/change_status_accept/'.Helper::encoded($row->id))?>" class="btn btn-success btn-sm" title="Accept <?=$module['title']?>">Accept</a>
@@ -102,13 +95,14 @@ $controllerRoute = $module['controller_route'];
                       
                     </td>
                     <td>
-                      <a href="<?=url('admin/' . $controllerRoute . '/edit/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit"></i></a>
+                      <!-- <a href="<?=url('admin/' . $controllerRoute . '/edit/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit"></i></a> -->
+                      <a href="<?=url('admin/' . $controllerRoute . '/view_details/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="ViewDetails <?=$module['title']?>">View Details</a>
                       <a href="<?=url('admin/' . $controllerRoute . '/delete/'.Helper::encoded($row->id))?>" class="btn btn-outline-danger btn-sm" title="Delete <?=$module['title']?>" onclick="return confirm('Do You Want To Delete This <?=$module['title']?>');"><i class="fa fa-trash"></i></a>
-                      <?php if($row->status){?>
+                      <!-- <?php if($row->status){?>
                         <a href="<?=url('admin/' . $controllerRoute . '/change-status/'.Helper::encoded($row->id))?>" class="btn btn-outline-success btn-sm" title="Activate <?=$module['title']?>"><i class="fa fa-check"></i></a>
                       <?php } else {?>
                         <a href="<?=url('admin/' . $controllerRoute . '/change-status/'.Helper::encoded($row->id))?>" class="btn btn-outline-warning btn-sm" title="Deactivate <?=$module['title']?>"><i class="fa fa-times"></i></a>
-                      <?php }?>
+                      <?php }?> -->
                     </td>
                   </tr>
                 <?php } } else {?>

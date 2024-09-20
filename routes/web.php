@@ -51,29 +51,30 @@ use Illuminate\Support\Facades\Route;
             Route::match(['get', 'post'], '/email-logs/details/{email}', 'UserController@emailLogsDetails');
             Route::get('login-logs', 'UserController@loginLogs');
 
-            /* setting */
-                Route::get('settings', 'UserController@settings');
-                Route::post('profile-settings', 'UserController@profile_settings');
-                Route::post('general-settings', 'UserController@general_settings');
-                Route::post('change-password', 'UserController@change_password');
-                Route::post('email-settings', 'UserController@email_settings');
-                Route::post('email-template', 'UserController@email_template');
-                Route::post('sms-settings', 'UserController@sms_settings');
-                Route::post('footer-settings', 'UserController@footer_settings');
-                Route::post('seo-settings', 'UserController@seo_settings');
-                Route::post('payment-settings', 'UserController@payment_settings');
-                Route::post('signature-settings', 'UserController@signature_settings');
-                Route::match(['get','post'], "test-email", "UserController@testEmail");
-            /* setting */
-            /* submitted articles */
-                Route::get('article/list', 'ArticlesController@list');
-                Route::match(['get', 'post'], 'article/add', 'ArticlesController@add');
-                Route::match(['get', 'post'], 'article/edit/{id}', 'ArticlesController@edit');
-                Route::get('article/delete/{id}', 'ArticlesController@delete');
-                Route::get('article/change-status/{id}', 'ArticlesController@change_status');
-                Route::match(['get', 'post'], 'article/change_status_accept/{id}', 'ArticlesController@change_status_accept');
-                Route::match(['get', 'post'], 'article/change_status_reject/{id}', 'ArticlesController@change_status_reject');
-            /* submitted articles */
+        /* setting */
+        Route::get('settings', 'UserController@settings');
+        Route::post('profile-settings', 'UserController@profile_settings');
+        Route::post('general-settings', 'UserController@general_settings');
+        Route::post('change-password', 'UserController@change_password');
+        Route::post('email-settings', 'UserController@email_settings');
+        Route::post('email-template', 'UserController@email_template');
+        Route::post('sms-settings', 'UserController@sms_settings');
+        Route::post('footer-settings', 'UserController@footer_settings');
+        Route::post('seo-settings', 'UserController@seo_settings');
+        Route::post('payment-settings', 'UserController@payment_settings');
+        Route::post('signature-settings', 'UserController@signature_settings');
+        Route::match(['get','post'], "test-email", "UserController@testEmail");
+        /* setting */
+        /* submitted articles */
+        Route::get('article/list', 'ArticlesController@list');
+        Route::match(['get', 'post'], 'article/add', 'ArticlesController@add');
+        Route::match(['get', 'post'], 'article/edit/{id}', 'ArticlesController@edit');
+        Route::match(['get', 'post'], 'article/view_details/{id}', 'ArticlesController@viewDetails');
+        Route::get('article/delete/{id}', 'ArticlesController@delete');
+        Route::get('article/change-status/{id}', 'ArticlesController@change_status');
+        Route::match(['get', 'post'], 'article/change_status_accept/{id}', 'ArticlesController@change_status_accept');
+        Route::match(['get', 'post'], 'article/change_status_reject/{id}', 'ArticlesController@change_status_reject');
+        /* submitted articles */
         
             /* parent category */
              Route::get('news_category/list', 'NewsCategoryController@list');
