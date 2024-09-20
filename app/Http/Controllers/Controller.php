@@ -246,6 +246,8 @@ class Controller extends BaseController
         $data['scrollNotice']               = ScrollNotice::find('1');
         $data['title']                      = $title.' :: '.$data['generalSetting']->site_name;
         $data['page_header']                = $title;
+        $user_id                            = session('user_id');
+        $data['user']                       = User::find($user_id);
         $data['parentCats']                 = NewsCategory::select('id', 'sub_category', 'slug')->where('status', '=', 1)->where('parent_category', '=', 0)->get();
 
         $data['head']                       = view('front.elements.head', $data);
@@ -258,7 +260,7 @@ class Controller extends BaseController
     public function front_after_login_layout($title, $page_name, $data)
     {
         $data['generalSetting']     = GeneralSetting::find('1');
-        $data['content']            = HomePage::where('status', '=', 1)->orderBy('id', 'ASC')->first();
+        $data['scrollNotice']       = ScrollNotice::find('1');
         $data['title']              = $title.' :: '.$data['generalSetting']->site_name;
         $data['page_header']        = $title;
         $user_id                    = session('user_id');

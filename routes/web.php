@@ -26,7 +26,15 @@ use Illuminate\Support\Facades\Route;
     Route::match(['get', 'post'], '/content/{id}', 'App\Http\Controllers\FrontController@newsContent');
     Route::match(['get', 'post'], '/signin', 'App\Http\Controllers\FrontController@signIn');
     Route::match(['get', 'post'], '/signup', 'App\Http\Controllers\FrontController@signUp');
-    Route::get('profile', 'App\Http\Controllers\FrontController@profile');
+
+    Route::group(['prefix' => 'user', 'middleware' => ['user']], function () {
+        Route::get('signout', 'App\Http\Controllers\FrontController@signout');
+        Route::get('dashboard', 'App\Http\Controllers\FrontController@dashboard');
+        Route::match(['get', 'post'], '/my-profile', 'App\Http\Controllers\FrontController@myProfile');
+        Route::match(['get', 'post'], '/change-password', 'App\Http\Controllers\FrontController@changePassword');
+        Route::get('my-articles', 'App\Http\Controllers\FrontController@myArticle');
+        Route::get('submit-new-article', 'App\Http\Controllers\FrontController@submitNewArticle');
+    });
 // before login
 /* Front Panel */
 /* Admin Panel */
@@ -43,58 +51,58 @@ use Illuminate\Support\Facades\Route;
             Route::match(['get', 'post'], '/email-logs/details/{email}', 'UserController@emailLogsDetails');
             Route::get('login-logs', 'UserController@loginLogs');
 
-        /* setting */
-        Route::get('settings', 'UserController@settings');
-        Route::post('profile-settings', 'UserController@profile_settings');
-        Route::post('general-settings', 'UserController@general_settings');
-        Route::post('change-password', 'UserController@change_password');
-        Route::post('email-settings', 'UserController@email_settings');
-        Route::post('email-template', 'UserController@email_template');
-        Route::post('sms-settings', 'UserController@sms_settings');
-        Route::post('footer-settings', 'UserController@footer_settings');
-        Route::post('seo-settings', 'UserController@seo_settings');
-        Route::post('payment-settings', 'UserController@payment_settings');
-        Route::post('signature-settings', 'UserController@signature_settings');
-        Route::match(['get','post'], "test-email", "UserController@testEmail");
-        /* setting */
-        /* submitted articles */
-        Route::get('article/list', 'ArticlesController@list');
-        Route::match(['get', 'post'], 'article/add', 'ArticlesController@add');
-        Route::match(['get', 'post'], 'article/edit/{id}', 'ArticlesController@edit');
-        Route::get('article/delete/{id}', 'ArticlesController@delete');
-        Route::get('article/change-status/{id}', 'ArticlesController@change_status');
-        Route::match(['get', 'post'], 'article/change_status_accept/{id}', 'ArticlesController@change_status_accept');
-        Route::match(['get', 'post'], 'article/change_status_reject/{id}', 'ArticlesController@change_status_reject');
-        /* submitted articles */
+            /* setting */
+                Route::get('settings', 'UserController@settings');
+                Route::post('profile-settings', 'UserController@profile_settings');
+                Route::post('general-settings', 'UserController@general_settings');
+                Route::post('change-password', 'UserController@change_password');
+                Route::post('email-settings', 'UserController@email_settings');
+                Route::post('email-template', 'UserController@email_template');
+                Route::post('sms-settings', 'UserController@sms_settings');
+                Route::post('footer-settings', 'UserController@footer_settings');
+                Route::post('seo-settings', 'UserController@seo_settings');
+                Route::post('payment-settings', 'UserController@payment_settings');
+                Route::post('signature-settings', 'UserController@signature_settings');
+                Route::match(['get','post'], "test-email", "UserController@testEmail");
+            /* setting */
+            /* submitted articles */
+                Route::get('article/list', 'ArticlesController@list');
+                Route::match(['get', 'post'], 'article/add', 'ArticlesController@add');
+                Route::match(['get', 'post'], 'article/edit/{id}', 'ArticlesController@edit');
+                Route::get('article/delete/{id}', 'ArticlesController@delete');
+                Route::get('article/change-status/{id}', 'ArticlesController@change_status');
+                Route::match(['get', 'post'], 'article/change_status_accept/{id}', 'ArticlesController@change_status_accept');
+                Route::match(['get', 'post'], 'article/change_status_reject/{id}', 'ArticlesController@change_status_reject');
+            /* submitted articles */
         
-         /* parent category */
-         Route::get('news_category/list', 'NewsCategoryController@list');
-         Route::match(['get', 'post'], 'news_category/add', 'NewsCategoryController@add');
-         Route::match(['get', 'post'], 'news_category/edit/{id}', 'NewsCategoryController@edit');
-         Route::get('news_category/delete/{id}', 'NewsCategoryController@delete');
-         Route::get('news_category/change-status/{id}', 'NewsCategoryController@change_status');
-         Route::get('news_category/change-archieve-status/{id}', 'NewsCategoryController@change_archieve_status');
-         /* end parent category */
-         /*sub category */
-         Route::get('news_subcategory/list', 'NewsSubCategoryController@list');
-         Route::match(['get', 'post'], 'news_subcategory/add', 'NewsSubCategoryController@add');
-         Route::match(['get', 'post'], 'news_subcategory/edit/{id}', 'NewsSubCategoryController@edit');
-         Route::get('news_subcategory/delete/{id}', 'NewsSubCategoryController@delete');
-         Route::get('news_subcategory/change-status/{id}', 'NewsSubCategoryController@change_status');
-         Route::get('news_subcategory/change-archieve-status/{id}', 'NewsSubCategoryController@change_archieve_status');
-         /* end sub category */
-         /*news content */
-         Route::get('news_content/list', 'NewsContentController@list');
-         Route::match(['get', 'post'], 'news_content/add', 'NewsContentController@add');
-         Route::match(['get', 'post'], 'news_content/edit/{id}', 'NewsContentController@edit');
-         Route::get('news_content/delete/{id}', 'NewsContentController@delete');
-         Route::get('news_content/change-status/{id}', 'NewsContentController@change_status');
-         Route::get('news_content/change-archieve-status/{id}', 'NewsContentController@change_archieve_status');
-         Route::get('news_content/get-subcategories/{parent_id}', 'NewsContentController@getSubcategories'); // AJAX route
-         Route::match(['get', 'post'], 'news_content/edit_image/{id}', 'NewsContentController@edit_image');
-         Route::get('news_content/delete_image/{id}', 'NewsContentController@delete_image');
-         /* end news content */
-         /* newsletter */
+            /* parent category */
+             Route::get('news_category/list', 'NewsCategoryController@list');
+             Route::match(['get', 'post'], 'news_category/add', 'NewsCategoryController@add');
+             Route::match(['get', 'post'], 'news_category/edit/{id}', 'NewsCategoryController@edit');
+             Route::get('news_category/delete/{id}', 'NewsCategoryController@delete');
+             Route::get('news_category/change-status/{id}', 'NewsCategoryController@change_status');
+             Route::get('news_category/change-archieve-status/{id}', 'NewsCategoryController@change_archieve_status');
+            /* end parent category */
+            /*sub category */
+                 Route::get('news_subcategory/list', 'NewsSubCategoryController@list');
+                 Route::match(['get', 'post'], 'news_subcategory/add', 'NewsSubCategoryController@add');
+                 Route::match(['get', 'post'], 'news_subcategory/edit/{id}', 'NewsSubCategoryController@edit');
+                 Route::get('news_subcategory/delete/{id}', 'NewsSubCategoryController@delete');
+                 Route::get('news_subcategory/change-status/{id}', 'NewsSubCategoryController@change_status');
+                 Route::get('news_subcategory/change-archieve-status/{id}', 'NewsSubCategoryController@change_archieve_status');
+            /* end sub category */
+            /*news content */
+             Route::get('news_content/list', 'NewsContentController@list');
+             Route::match(['get', 'post'], 'news_content/add', 'NewsContentController@add');
+             Route::match(['get', 'post'], 'news_content/edit/{id}', 'NewsContentController@edit');
+             Route::get('news_content/delete/{id}', 'NewsContentController@delete');
+             Route::get('news_content/change-status/{id}', 'NewsContentController@change_status');
+             Route::get('news_content/change-archieve-status/{id}', 'NewsContentController@change_archieve_status');
+             Route::get('news_content/get-subcategories/{parent_id}', 'NewsContentController@getSubcategories'); // AJAX route
+             Route::match(['get', 'post'], 'news_content/edit_image/{id}', 'NewsContentController@edit_image');
+             Route::get('news_content/delete_image/{id}', 'NewsContentController@delete_image');
+            /* end news content */
+            /* newsletter */
                 /* subscriber */
                 Route::get('subscriber/list', 'SubscriberController@list');
                 Route::match(['get', 'post'], 'subscriber/add', 'SubscriberController@add');
@@ -113,8 +121,8 @@ use Illuminate\Support\Facades\Route;
                     Route::get('newsletter/send/{id}', 'NewsletterController@send');
                     Route::post('newsletter/get-user', 'NewsletterController@getUser');
                 /* newsletter */
-            /* newsletter */
-             /* expertise_area */
+            /* newsletter */
+            /* expertise_area */
              Route::get('expertise_area/list', 'ExpertiseAreaController@list');
              Route::match(['get', 'post'], 'expertise_area/add', 'ExpertiseAreaController@add');
              Route::match(['get', 'post'], 'expertise_area/edit/{id}', 'ExpertiseAreaController@edit');

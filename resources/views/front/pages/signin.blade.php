@@ -30,13 +30,13 @@
                                         </div>
                                         <form method="POST" action="">
                                         @csrf
-                                            <div class="row mb-3">
+                                            <div class="row" style="margin-bottom: 15px;">
                                               <label for="email" class="col-md-4 col-lg-3 col-form-label">Email Id</label>
                                               <div class="col-md-8 col-lg-9">
                                                 <input type="text" name="email" class="form-control" id="email" value="">
                                               </div>
                                             </div>
-                                            <div class="row mb-3">
+                                            <div class="row" style="margin-bottom: 15px;">
                                               <label for="password" class="col-md-4 col-lg-3 col-form-label">Password</label>
                                               <div class="col-md-8 col-lg-9">
                                                 <input type="password" name="password" class="form-control" id="password">
@@ -44,6 +44,9 @@
                                             </div>
                                             <div class="text-center">
                                               <button type="submit" class="btn btn-primary">Submit</button>
+                                            </div>
+                                            <div class="text-center" style="margin-bottom: 15px;">
+                                              Not Registered Yet ? <a href="<?=url('signup')?>">Sign Up</a>
                                             </div>
                                           </form>
                                     </div>
