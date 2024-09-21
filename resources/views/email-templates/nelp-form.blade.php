@@ -77,7 +77,7 @@ $generalSetting            = GeneralSetting::find('1');
                 <td></td>
             </tr>
             <!-- THE CREATIVE-WORK -->
-            <table style=" border: 1px solid #000;">
+            <table border="1px">
                 <tr>
                     <th><p style="width: 100%;background-color: #e7e6e6; padding: 5px 15px;">THE CREATIVE-WORK</p></th>
                 </tr>
