@@ -20,7 +20,7 @@ $generalSetting            = GeneralSetting::find('1');
             padding: 0;
         }
         p{
-            font-size: 14px;
+            font-size: 12px;
         }
         ol { counter-reset: item }
         ol li{ display: block; line-height: 1.5; position: relative; padding-left: 38px;}
@@ -37,18 +37,18 @@ $generalSetting            = GeneralSetting::find('1');
     <table style="max-width: 100%; background: #fff; margin:0 auto; padding: 30px;">
         <tbody>
             <tr>
-                <td>
-                    <p style="font-size: 14px;"><strong>RETURN FORM <span><u>ERT-N0924-02:</u></span></strong></p>
-                    <p style="font-size: 13px; line-height: 2;">A <span><u>digitized form of a</u></span> <strong>hand-signed</strong> copy of this NELP must be uploaded to  (<span style="background: yellow;">xxxx</span>).</p>
+                <td style="width: 80%;">
+                    <p style="font-size: 11px;"><strong>RETURN FORM <span><u>ERT-N0924-02:</u></span></strong></p>
+                    <p style="font-size: 12px; line-height: 2;">A <span><u>digitized form of a</u></span> <strong>hand-signed</strong> copy of this NELP must be uploaded to  (<span style="background: yellow;">xxxx</span>).</p>
                     <h3>NON-EXCLUSIVE LICENSE TO PUBLISH (“NELP”)</h3>
                 </td>
-                <td>
-                    <img src="logo.png" alt="" srcset="" style="width: 50%; float: right;">
+                <td style="width: 20%;">
+                    <img src="logo.png" alt="" srcset="">
                 </td>
             </tr>
             <tr>
                 <td style="width: 100%">
-                    <p style="line-height: 1.5; width: 100%">This NELP records the terms under which the Creative-Work specified below will be published online only on <strong>Ecosymbionts Regenerate Together</strong> (the “<strong>Platform</strong>”). The Platform is published by Ecosymbionts Regenerate (the “Publisher”). The Platform is owned by the Śramani Institute (the “<strong>Proprietor</strong>”).</p>
+                    <p style="line-height: 1.5; width: 100%; margin-top: 10px;">This NELP records the terms under which the Creative-Work specified below will be published online only on <strong>Ecosymbionts Regenerate Together</strong> (the “<strong>Platform</strong>”). The Platform is published by Ecosymbionts Regenerate (the “Publisher”). The Platform is owned by the Śramani Institute (the “<strong>Proprietor</strong>”).</p>
                     <p style="font-size: 13px; width: 100%">Submission Reference Number (“<strong>SRN</strong>”): <span style="background: yellow;">xxx</span></p>
                 </td>
             </tr>
