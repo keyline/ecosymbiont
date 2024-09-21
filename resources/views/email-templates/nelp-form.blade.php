@@ -54,30 +54,15 @@ $generalSetting            = GeneralSetting::find('1');
             </tr>
             <!-- THE CREATIVE-WORK -->
 
-            <table  border="1px" style="table-layout:fixed;">
-                <tbody>
-                    <tr>
-                        <td>
-                            <p style="width: 100%; border: 1px solid #000; background-color: #e7e6e6; padding: 5px 15px;">THE CREATIVE-WORK
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p
-                                style="width: 20%; float: left; border: 1px solid #000; border-top: none; background: #e7e6e6; height: 67px;  padding: 5px 15px;">
-                                <strong style="font-size: 14px;">Creative-Work Title:</p>
-                        </td>
-                        <td>
-                            <p
-                                style="width: 80%; float: right; border: 1px solid #000; border-top: none; border-left: none; padding: 5px 15px;">
-                            <p style="color: #ff0000">[14 (note: this indicates the question number on the submission form; the answer
-                                should be pasted here)]</p> <span style="display: block; margin-top: 20px; text-align: right;">(the
-                                <strong>“Contribution”</strong>)</span></p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <tr>
+                <td style="width: 100%; border: 1px solid #000; background-color: #e7e6e6; padding: 5px 15px;">
+                    <p>THE CREATIVE-WORK</p>
+                </td>
+            </tr>
+            <tr>
+                <td><p style="width: 20%; float: left; border: 1px solid #000; border-top: none; background: #e7e6e6; height: 67px;  padding: 5px 15px;"><strong style="font-size: 14px;">Creative-Work Title:</p></td>
+                <td><p style="width: 80%; float: right; border: 1px solid #000; border-top: none; border-left: none; padding: 5px 15px;"><p style="color: #ff0000">[14 (note: this indicates the question number on the submission form; the answer should be pasted here)]</p> <span style="display: block; margin-top: 20px; text-align: right;">(the <strong>“Contribution”</strong>)</span></p></td>
+            </tr>
 
         </tbody>
     </table>
