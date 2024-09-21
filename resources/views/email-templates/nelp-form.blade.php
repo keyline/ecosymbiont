@@ -43,7 +43,7 @@ $generalSetting            = GeneralSetting::find('1');
                     <h3>NON-EXCLUSIVE LICENSE TO PUBLISH (“NELP”)</h3>
                 </td>
                 <td>
-                    <img src="logo.png" alt="" srcset="" style="width: 50%; text-align:end;">
+                    <img src="logo.png" alt="" srcset="" style="width: 50%; float: right;">
                 </td>
             </tr>
             <tr>
@@ -54,13 +54,13 @@ $generalSetting            = GeneralSetting::find('1');
             </tr>
             <!-- THE CREATIVE-WORK -->
 
-            <tr>
+            <!-- <tr>
                 <td>
                     <strong style="font-size: 15px;">THE CREATIVE-WORK</strong>
                 </td>
                 <td><strong style="font-size: 14px;">Creative-Work Title:</strong></td>
                 <td>[14 (note: this indicates the question number on the submission form; the answer should be pasted here)]</p> <span style="display: block; margin-top: 20px; text-align: right;">(the <strong>“Contribution”</strong>)</span></td>
-            </tr>
+            </tr> -->
 
         </tbody>
     </table>
