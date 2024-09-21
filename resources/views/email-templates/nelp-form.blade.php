@@ -85,7 +85,7 @@ $generalSetting            = GeneralSetting::find('1');
             </tr>
             <tr>
                 <td align="left"><p style="width: 25%; border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px;">Creative-Work Title:</p></td>
-                <td align="right">
+                <td align="left">
                     <div style="width: 85%; border: 1px solid #000; border-top: none; border-left: none; padding: 5px 15px; display: block; background-color: grey">
                     <p>[14 (note: this indicates the question number on the submission form; the answer should be pasted here)]<span>(the <strong>“Contribution”</strong>)</span></p>
                     </div>
