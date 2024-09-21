@@ -81,12 +81,11 @@ $generalSetting            = GeneralSetting::find('1');
                 <td style="width: 100%; border: 1px solid #000; background-color: #e7e6e6; padding: 5px 15px;" colspan="2">
                     <p>THE CREATIVE-WORK</p>
                 </td>
-                <td></td>
             </tr>
             <tr>
                 <td><p style="width: 30%; border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px; float: left; height: 50px">Creative-Work Title:</p></td>
                 <td>
-                    <div style="width: 150%; border: 1px solid #000; border-top: none; border-left: none; padding: 5px 15px; display: block; background-color: grey; float: left; height: 50px">
+                    <div style="width: 70%; border: 1px solid #000; border-top: none; border-left: none; padding: 5px 15px; display: block; background-color: grey; float: left; height: 50px">
                     <p>[14 (note: this indicates the question number on the submission form; the answer should be pasted here)]<span style="display: block; margin-top: 20px; text-align: right;">(the <strong>“Contribution”</strong>)</span></p>
                     </div>
                 </td>
