@@ -253,7 +253,7 @@ header.active .nav-list-container {
   text-transform: capitalize;
   letter-spacing: 2.5px;
   border: none;
-  height: auto;
+  height: auto !important;
 }
 .navbar-brand span {
   color: #d09c1c !important;
