@@ -56,10 +56,12 @@ $generalSetting            = GeneralSetting::find('1');
 
             <tr>
                 <td>
-                    <strong style="font-size: 15px;">THE CREATIVE-WORK</strong>
+                    <p style="font-size: 15px; font-weight: bold;">THE CREATIVE-WORK</p>
                 </td>
-                <td><strong style="font-size: 14px;">Creative-Work Title:</strong></td>
-                <td>[14 (note: this indicates the question number on the submission form; the answer should be pasted here)]</p> <span style="display: block; margin-top: 20px; text-align: right;">(the <strong>“Contribution”</strong>)</span></td>
+            </tr>
+            <tr>
+                <td><p style="font-size: 14px;">Creative-Work Title:</p></td>
+                <td><p>[14 (note: this indicates the question number on the submission form; the answer should be pasted here)]</p> <span style="display: block; margin-top: 20px; text-align: right;">(the <strong>“Contribution”</strong>)</span></p></td>
             </tr>
 
         </tbody>
