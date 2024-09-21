@@ -39,7 +39,7 @@ $generalSetting            = GeneralSetting::find('1');
             <tr>
                 <td>
                     <div class="box" style="float: left; margin-top: 25px">
-                        <p style="font-size: 14px;"><strong>RETURN FORM <span style="color: #ff0000"><u>ERT-N0924-02:</u></span></strong></p>
+                        <p style="font-size: 14px;"><strong>RETURN FORM2 <span style="color: #ff0000"><u>ERT-N0924-02:</u></span></strong></p>
                         <p style="font-size: 13px; line-height: 2;">A <span style="color: #ff0000"><u>digitized form of a</u></span> <strong>hand-signed</strong> copy of this NELP must be uploaded to  (<span style="background: yellow; color: #ff0000">xxxx</span>).</p>
                         <h3>NON-EXCLUSIVE LICENSE TO PUBLISH (“NELP”)</h3>
                     </div>
