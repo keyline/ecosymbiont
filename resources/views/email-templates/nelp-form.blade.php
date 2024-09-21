@@ -27,7 +27,6 @@ $generalSetting            = GeneralSetting::find('1');
         tr,
         td p {
         font-size: 13px;
-        line-height: 18px;
         padding: 0;
         margin: 0;
         }
@@ -67,7 +66,7 @@ $generalSetting            = GeneralSetting::find('1');
                 </td>
             </tr>
             <tr>
-                <td style="width: 100%; display: block;">
+                <td>
                     <p style="line-height: 1.5; width: 100%; margin-top: 10px;">This NELP records the terms under which the Creative-Work specified below will be published online only on <strong>Ecosymbionts Regenerate Together</strong> (the “<strong>Platform</strong>”). The Platform is published by Ecosymbionts Regenerate (the “Publisher”). The Platform is owned by the Śramani Institute (the “<strong>Proprietor</strong>”).</p>
                     <p style="width: 100%">Submission Reference Number (“<strong>SRN</strong>”): <span style="background: yellow;">xxx</span></p>
                 </td>
