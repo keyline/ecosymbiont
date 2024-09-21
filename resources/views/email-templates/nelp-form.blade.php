@@ -78,7 +78,7 @@ $generalSetting            = GeneralSetting::find('1');
          <tbody>
             <tr>
                <td >
-                  <img style="max-width: 100%;width: 65%;" src="data:image/svg+xml;base64,<?php echo base64_encode(file_get_contents(base_path('public/uploads/' . $generalSetting->site_logo))); ?>" alt="<?=$generalSetting->site_name?>">
+                  <img style="max-width: 100%;width: 65%;" src="" alt="logo">
                </td>
                <td >
                   <p style="font-weight: 700;padding-top:20px;font-size: 45px;padding-bottom: 20px;color:#2e3092;line-height: 56px;text-align:end;">
@@ -94,17 +94,17 @@ $generalSetting            = GeneralSetting::find('1');
                </td>
                <td style="text-align: end;">
                   <p style="font-size: 18px;color:#181717;padding-bottom: 10px;">
-                     Invoice No : #<?=$invoice_no?>
+                     Invoice No : #5555
                   </p>
                   <p style="font-size: 18px;color:#181717;">
-                     Date : <?=date_format(date_create($payment_date_time), "M d, Y h:i A")?>
+                     Date :06-50-2021
                   </p>
                </td>
             </tr>
             <tr>
                <td style="">
                   <p style="font-weight: 700;padding-top: 10px;font-size: 20px;padding-bottom: 20px;color: #2e3092;line-height: 26px;">
-                     <?=(($getUser)?$getUser->first_name . '' . $getUser->last_name:'')?>
+                     syrajit
                   </p>
                </td>
                <td style="text-align: end;">
@@ -161,12 +161,12 @@ $generalSetting            = GeneralSetting::find('1');
             <tr>
                <td style="">
                   <p style="font-size: 18px;color:#181717;padding-left:15px;padding-bottom: 30px;padding-top: 30px;">
-                     <?=$particulars?>
+                     perticulars
                   </p>
                </td>
                <td style="text-align: end;">
                   <p style="font-size: 18px;color:#181717;padding-bottom: 30px;padding-top: 30px;padding-right:15px;">
-                     $<?=number_format($net_amount,2)?>
+                    555555
                   </p>
                </td>
             </tr>
@@ -218,7 +218,7 @@ $generalSetting            = GeneralSetting::find('1');
                </td>
                <td style="text-align: end;">
                   <p style="font-size: 18px;color:#181717;padding-right:15px;padding-bottom: 30px;padding-top: 30px;padding-right:15px;">
-                     Sub-total : &nbsp;&nbsp;&nbsp;$<?=number_format($net_amount,2)?>
+                     Sub-total : &nbsp;&nbsp;&nbsp;555555
                   </p>
                </td>
             </tr>
@@ -230,23 +230,23 @@ $generalSetting            = GeneralSetting::find('1');
                </td>
                <td style="text-align: end;">
                   <p style="font-size: 18px;color:#181717;padding-right:15px;padding-bottom: 30px;padding-top: 30px;padding-right:15px;">
-                     Discount : &nbsp;&nbsp;&nbsp;$<?=number_format($discount_amount,2)?>
+                     Discount : &nbsp;&nbsp;&nbsp;105805485
                   </p>
                </td>
             </tr>
             <tr>
                <td style="">
                   <p style="font-size: 18px;color:#181717;padding-bottom: 10px;">
-                     <?=$generalSetting->site_name?>
+                     keyline
                   </p>
                   <p style="font-size: 18px;color:#181717;padding-bottom: 10px;">
-                     Phone Number: <?=$generalSetting->site_phone?>
+                     Phone Number: 6545465456465465
                   </p>
                   <p style="font-size: 18px;color:#181717;padding-bottom: 10px;">
-                     Email: <?=$generalSetting->system_email?>
+                     Email: dsfsfsdfsd@
                   </p>
                   <p style="font-size: 18px;color:#181717;padding-bottom: 10px;">
-                     <?=$generalSetting->site_url?>
+                     fsdfbsdjhbfsdjh
                   </p>
                </td>
                <td align="right" >
@@ -257,7 +257,7 @@ $generalSetting            = GeneralSetting::find('1');
                               <p style="font-size: 18px;color:#fff;font-weight: 600;">Total : </p>
                            </td>
                            <td style="width:50%;padding: 10px 25px 10px 25px;">
-                              <p style="font-size: 18px;color:#fff;font-weight: 600;">$<?=number_format($payment_amount,2)?></p>
+                              <p style="font-size: 18px;color:#fff;font-weight: 600;">504545</p>
                            </td>
                         </tr>
                      </tbody>
