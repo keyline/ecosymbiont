@@ -38,18 +38,16 @@ $generalSetting            = GeneralSetting::find('1');
         <tbody>
             <tr>
                 <td>
-                    <div class="box" style="float: left; margin-top: 25px">
-                        <p style="font-size: 14px;"><strong>RETURN FORM <span><u>ERT-N0924-02:</u></span></strong></p>
-                        <p style="font-size: 13px; line-height: 2;">A <span><u>digitized form of a</u></span> <strong>hand-signed</strong> copy of this NELP must be uploaded to  (<span style="background: yellow; color: #ff0000">xxxx</span>).</p>
-                        <h3>NON-EXCLUSIVE LICENSE TO PUBLISH (“NELP”)</h3>
-                    </div>
+                    <p style="font-size: 14px;"><strong>RETURN FORM <span><u>ERT-N0924-02:</u></span></strong></p>
+                    <p style="font-size: 13px; line-height: 2;">A <span><u>digitized form of a</u></span> <strong>hand-signed</strong> copy of this NELP must be uploaded to  (<span style="background: yellow; color: #ff0000">xxxx</span>).</p>
+                    <h3>NON-EXCLUSIVE LICENSE TO PUBLISH (“NELP”)</h3>
                 </td>
                 <td>
-                    <img src="logo.png" alt="" srcset="" style="width: 100px; float: right;">
+                    <img src="logo.png" alt="" srcset="" style="width: 100px; text-align:end;">
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
+                <td>
                     <p style="line-height: 1.5; width: 100%">This NELP records the terms under which the Creative-Work specified below will be published online only on <strong>Ecosymbionts Regenerate Together</strong> (the “<strong>Platform</strong>”). The Platform is published by Ecosymbionts Regenerate (the “Publisher”). The Platform is owned by the Śramani Institute (the “<strong>Proprietor</strong>”).</p>
                     <p style="font-size: 13px; width: 100%">Submission Reference Number (“<strong>SRN</strong>”): <span style="background: yellow; color: #ff0000">xxx</span></p>
                 </td>
@@ -57,7 +55,7 @@ $generalSetting            = GeneralSetting::find('1');
             <!-- THE CREATIVE-WORK -->
 
             <tr>
-                <td colspan="2">
+                <td>
                     <strong style="font-size: 15px;">THE CREATIVE-WORK</strong>
                 </td>
                 <td><strong style="font-size: 14px;">Creative-Work Title:</strong></td>
