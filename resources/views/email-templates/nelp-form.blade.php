@@ -56,7 +56,7 @@ $generalSetting            = GeneralSetting::find('1');
         }
       </style>
 </head>
-<body style="background: #e7e6e6; font-family: sans-serif;">
+<body>
     <table style="width: 100%; background: #fff; padding: 10px;">
         <tbody>
             <tr>
@@ -89,7 +89,6 @@ $generalSetting            = GeneralSetting::find('1');
                     <p>[14 (note: this indicates the question number on the submission form; the answer should be pasted here)]<span style="display: block; margin-top: 20px; text-align: right;">(the <strong>“Contribution”</strong>)</span></p>
                     </div>
                 </td>
-                <td></td>
             </tr>
 
         </tbody>
