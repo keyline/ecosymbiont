@@ -10,153 +10,605 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\NewsCategory;
+use App\Models\NewsContent;
 use App\Models\Notice;
+use App\Models\Page;
+use App\Models\User;
 use App\Models\Manuscript;
+use App\Models\Subscriber;
+use App\Models\Country;
+use App\Models\UserActivity;
+use App\Models\Article;
+use App\Rules\MaxWords;
+use App\Models\SectionErt;
+use App\Models\Title;
+use App\Models\Pronoun;
+use App\Models\EcosystemAffiliation;
+use App\Models\ExpertiseArea;
+use App\Models\SubmissionType;
+use App\Models\GeneralSetting;
 
 use Auth;
 use Session;
 use Helper;
 use Hash;
 use stripe;
+use PDF;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 date_default_timezone_set("Asia/Calcutta");
+
 class FrontController extends Controller
 {
-    public function home()
+    public function home(Request $request)
     {
         $data = [];
         $title                          = 'Home';
         $page_name                      = 'home';
-        echo $this->front_before_login_layout($title, $page_name, $data);
-    }
-    public function archieve()
-    {
-        $data['rows']                   = Notice::with('journalFrequency')->where('status', '=', 1)->where('is_archieve', '=', 1)->orderBy('id', 'DESC')->get();
-        $title                          = 'Archieve Journals';
-        $page_name                      = 'archieve';
-        echo $this->front_before_login_layout($title, $page_name, $data);
-    }
-    public function submitManuscript(Request $request)
-    {
-        $data                           = [];
         if ($request->isMethod('post')) {
-            $postData = $request->all();
-
-            $userType = $postData['userType'] ?? null;
-
-            $rules = [];
-
-            // Set validation rules based on userType
-            if ($userType == 1) {
-                // Only validate the first user
-                $rules = [
-                    'author_name.0'        => 'required|string',
-                    'author_designation.0' => 'required|string',
-                    'author_affiliation.0' => 'required|string',
-                    'author_email.0'       => 'required|email',
-                    'author_phone.0'       => 'required|string',
-                    'manuscript_file'      => 'required|file',
-                    'plagiarism_certificate' => 'required|file',
-                    'payment_receipt'      => 'required|file',
-                ];
-            } elseif ($userType == 2) {
-                // Validate the first two users
-                $rules = [
-                    'author_name.0'        => 'required|string',
-                    'author_designation.0' => 'required|string',
-                    'author_affiliation.0' => 'required|string',
-                    'author_email.0'       => 'required|email',
-                    'author_phone.0'       => 'required|string',
-                    'author_name.1'        => 'required|string',
-                    'author_designation.1' => 'required|string',
-                    'author_affiliation.1' => 'required|string',
-                    'author_email.1'       => 'required|email',
-                    'author_phone.1'       => 'required|string',
-                    'manuscript_file'      => 'required|file',
-                    'plagiarism_certificate' => 'required|file',
-                    'payment_receipt'      => 'required|file',
-                ];
-            }
-
-            // Conditional validation for the third author if the name is not blank
-            if (!empty($postData['author_name'][2])) {
-                $rules = array_merge($rules, [
-                    'author_name.2'        => 'required|string',
-                    'author_designation.2' => 'required|string',
-                    'author_affiliation.2' => 'required|string',
-                    'author_email.2'       => 'required|email',
-                    'author_phone.2'       => 'required|string',
-                ]);
-            }
+            $postData   = $request->all();
+            $rules      = [
+                'subscribe_email'        => 'required|email'
+            ];
 
             if ($this->validate($request, $rules)) {
-                $manuscript_file = '';
-                $plagiarism_certificate = '';
-                $payment_receipt = '';
-
-                // Manuscript file upload
-                if ($request->hasFile('manuscript_file')) {
-                    $imageFile = $request->file('manuscript_file');
-                    $imageName = $imageFile->getClientOriginalName();
-                    $uploadedFile = $this->upload_single_file('manuscript_file', $imageName, 'manuscript', 'word');
-                    if ($uploadedFile['status']) {
-                        $manuscript_file = $uploadedFile['newFilename'];
-                    } else {
-                        return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
-                    }
-                } else {
-                    return redirect()->back()->with(['error_message' => 'Please Upload Manuscript file !!!']);
-                }
-
-                // Plagiarism certificate file upload
-                if ($request->hasFile('plagiarism_certificate')) {
-                    $imageFile = $request->file('plagiarism_certificate');
-                    $imageName = $imageFile->getClientOriginalName();
-                    $uploadedFile = $this->upload_single_file('plagiarism_certificate', $imageName, 'manuscript', 'custom');
-                    if ($uploadedFile['status']) {
-                        $plagiarism_certificate = $uploadedFile['newFilename'];
-                    } else {
-                        return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
-                    }
-                }
-
-                // Payment receipt file upload
-                if ($request->hasFile('payment_receipt')) {
-                    $imageFile = $request->file('payment_receipt');
-                    $imageName = $imageFile->getClientOriginalName();
-                    $uploadedFile = $this->upload_single_file('payment_receipt', $imageName, 'manuscript', 'custom');
-                    if ($uploadedFile['status']) {
-                        $payment_receipt = $uploadedFile['newFilename'];
-                    } else {
-                        return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
-                    }
-                }
-
-                // Loop through each set of author data
-                $authorCount = count($postData['author_name']);
-                for ($i = 0; $i < $authorCount; $i++) {
-
+                $subscribe_email = $postData['subscribe_email'];
+                $checkSubscribeEmail = Subscriber::where('subscribers_email', '=', $subscribe_email)->count();
+                if($checkSubscribeEmail <= 0){
                     $fields = [
-                        'author_name'            => $postData['author_name'][$i],
-                        'author_designation'     => $postData['author_designation'][$i],
-                        'author_affiliation'     => $postData['author_affiliation'][$i],
-                        'author_email'           => $postData['author_email'][$i],
-                        'author_phone'           => $postData['author_phone'][$i],
-                        'manuscript_file'        => $manuscript_file,
-                        'plagiarism_certificate' => $plagiarism_certificate,
-                        'payment_receipt'        => $payment_receipt,
+                        'subscribers_email'            => $subscribe_email
                     ];
-
-                    // Insert each author's data into the database
-                    Manuscript::insert($fields);
+                    Subscriber::insert($fields);
+                    return redirect()->back()->with('success_message', 'Email Subscribed Successfully !!!');
+                } else {
+                    return redirect()->back()->with('error_message', 'Email Already Subscribed !!!');
                 }
-
-                return redirect("submit-manuscript")->with('success_message', 'Manuscript Submitted Successfully !!!');
             } else {
                 return redirect()->back()->with('error_message', 'All Fields Required !!!');
             }
         }
-        $title                          = 'Submit Manuscript';
-        $page_name                      = 'submit-manuscript';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
+    public function pageContent($slug)
+    {
+        $data['row']                    = Page::select('page_name', 'page_name')->where('status', '=', 1)->where('page_slug', '=', $slug)->first();
+        $title                          = (($data['row'])?$data['row']->page_name:'');
+        $page_name                      = 'page-content';
+        echo $this->front_before_login_layout($title, $page_name, $data);
+    }
+    public function category($slug)
+    {
+        $data['row']                    = NewsCategory::select('id', 'sub_category')->where('status', '=', 1)->where('slug', '=', $slug)->first();
+        $parent_category_id                = (($data['row'])?$data['row']->id:'');
+
+        $data['contents']               = NewsContent::join('news_category', 'news_contents.sub_category', '=', 'news_category.id')
+                                           ->select('news_contents.id', 'news_contents.new_title', 'news_contents.sub_title', 'news_contents.slug', 'news_contents.author_name', 'news_contents.cover_image', 'news_contents.created_at', 'news_category.sub_category as sub_category_name', 'news_category.slug as sub_category_slug')
+                                           ->where('news_contents.status', '=', 1)
+                                           ->where('news_contents.parent_category', '=', $parent_category_id)
+                                           ->orderBy('news_contents.id', 'DESC')
+                                           ->get();
+
+        $title                          = (($data['row'])?$data['row']->sub_category:'');
+        $page_name                      = 'category';
+        echo $this->front_before_login_layout($title, $page_name, $data);
+    }
+    public function subcategory($slug)
+    {
+        $data['row']                    = NewsCategory::select('id', 'sub_category')->where('status', '=', 1)->where('slug', '=', $slug)->first();
+        $sub_category_id                = (($data['row'])?$data['row']->id:'');
+
+        $data['contents']               = NewsContent::join('news_category', 'news_contents.sub_category', '=', 'news_category.id')
+                                           ->select('news_contents.id', 'news_contents.new_title', 'news_contents.sub_title', 'news_contents.slug', 'news_contents.author_name', 'news_contents.cover_image', 'news_contents.created_at', 'news_category.sub_category as sub_category_name', 'news_category.slug as sub_category_slug')
+                                           ->where('news_contents.status', '=', 1)
+                                           ->where('news_contents.sub_category', '=', $sub_category_id)
+                                           ->orderBy('news_contents.id', 'DESC')
+                                           ->get();
+
+        $title                          = (($data['row'])?$data['row']->sub_category:'');
+        $page_name                      = 'subcategory';
+        echo $this->front_before_login_layout($title, $page_name, $data);
+    }
+    public function newsContent($slug)
+    {
+        $data['rowContent']         = NewsContent::join('news_category', 'news_contents.sub_category', '=', 'news_category.id')
+                                           ->select('news_contents.id as news_id', 'news_contents.*', 'news_category.sub_category as sub_category_name', 'news_category.slug as sub_category_slug')
+                                           ->where('news_contents.status', '=', 1)
+                                           ->where('news_contents.slug', '=', $slug)
+                                           ->first();
+        $author_name                = (($data['rowContent'])?$data['rowContent']->author_name:'');
+        $parent_category_id         = (($data['rowContent'])?$data['rowContent']->parent_category:'');
+        $data['authorPostCount']    = NewsContent::where('news_contents.status', '=', 1)
+                                           ->where('news_contents.author_name', 'LIKE', '%'.$author_name.'%')
+                                           ->count();
+        $data['alsoLikeContents']   = NewsContent::join('news_category', 'news_contents.sub_category', '=', 'news_category.id')
+                                           ->select('news_contents.id as news_id', 'news_contents.*', 'news_category.sub_category as sub_category_name', 'news_category.slug as sub_category_slug')
+                                           ->where('news_contents.status', '=', 1)
+                                           ->where('news_contents.parent_category', '=', $parent_category_id)
+                                           ->where('news_contents.id', '!=', (($data['rowContent'])?$data['rowContent']->news_id:''))
+                                           ->get();
+
+        $title                      = (($data['rowContent'])?$data['rowContent']->new_title:'');
+        $page_name                  = 'news-content';
+        echo $this->front_before_login_layout($title, $page_name, $data);
+    }
+    /* authentication */
+        public function signIn(Request $request)
+        {
+            if($request->isMethod('post')){
+                $postData = $request->all();
+                $rules = [
+                            'email'     => 'required|email|max:255',
+                            'password'  => 'required|max:30',
+                        ];
+                if($this->validate($request, $rules)){
+                    if(Auth::guard('web')->attempt(['email' => $postData['email'], 'password' => $postData['password'], 'status' => 1])){
+                        $sessionData = Auth::guard('web')->user();
+                        $request->session()->put('user_id', $sessionData->id);
+                        $request->session()->put('first_name', $sessionData->first_name);
+                        $request->session()->put('middle_name', $sessionData->middle_name);
+                        $request->session()->put('last_name', $sessionData->last_name);
+                        $request->session()->put('name', $sessionData->first_name . ' ' . $sessionData->last_name);
+                        $request->session()->put('role', $sessionData->role);
+                        $request->session()->put('email', $sessionData->email);
+                        $request->session()->put('is_user_login', 1);
+
+                        /* user activity */
+                            $activityData = [
+                                'user_email'        => $sessionData->email,
+                                'user_name'         => $sessionData->name,
+                                'user_type'         => 'USER',
+                                'ip_address'        => $request->ip(),
+                                'activity_type'     => 1,
+                                'activity_details'  => 'Sign In Success !!!',
+                                'platform_type'     => 'WEB',
+                            ];
+                            UserActivity::insert($activityData);
+                        /* user activity */
+
+                        return redirect('user/dashboard');
+                    } else {
+                        /* user activity */
+                            $activityData = [
+                                'user_email'        => $postData['email'],
+                                'user_name'         => 'User',
+                                'user_type'         => 'USER',
+                                'ip_address'        => $request->ip(),
+                                'activity_type'     => 0,
+                                'activity_details'  => 'Invalid Email Or Password !!!',
+                                'platform_type'     => 'WEB',
+                            ];
+                            UserActivity::insert($activityData);
+                        /* user activity */
+                        return redirect()->back()->with('error_message', 'Invalid Email Or Password !!!');
+                    }
+                } else {
+                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                }
+            }
+            $data                           = [];
+            $title                          = 'Sign In';
+            $page_name                      = 'signin';
+            echo $this->front_before_login_layout($title, $page_name, $data);
+        }
+        public function signUp(Request $request)
+        {
+            $data['countries']              = Country::select('id', 'name')->where('status', '=', 1)->get();
+            $title                          = 'Sign Up';
+            $page_name                      = 'signup';
+            if ($request->isMethod('post')) {
+                $postData = $request->all();
+                $rules = [                                 
+                    'first_name'                => 'required',            
+                    'last_name'                 => 'required',                                    
+                    'email'                     => 'required',           
+                    'phone'                     => 'required',           
+                    'country'                   => 'required',                                     
+                    'password'                  => 'required',                         
+                ];
+                if ($this->validate($request, $rules)) {
+                    $checkValue = User::where('email', '=', $postData['email'])->count();
+                    if ($checkValue <= 0) {                    
+                        $fields = [                        
+                            'first_name'                => $postData['first_name'],            
+                            'last_name'                 => $postData['last_name'],        
+                            'middle_name'               => $postData['middle_name'],            
+                            'email'                     => $postData['email'],           
+                            'phone'                     => $postData['phone'],           
+                            'country'                   => $postData['country'],           
+                            'role'                      => 1,           
+                            'password'                  => Hash::make($postData['password']),                         
+                        ];
+                        User::insert($fields);
+                        return redirect(url('signin'))->with('success_message', 'Sign Up Successfully !!!');
+                    } else {
+                        return redirect()->back()->with('error_message', 'User Already Registered !!!');
+                    }
+                } else {
+                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                }
+            }
+            echo $this->front_before_login_layout($title, $page_name, $data);
+        }
+    /* authentication */
+    /* after login */
+        public function signout(Request $request){
+            $user_email                             = $request->session()->get('email');
+            $user_name                              = $request->session()->get('name');
+            /* user activity */
+                $activityData = [
+                    'user_email'        => $user_email,
+                    'user_name'         => $user_name,
+                    'user_type'         => 'USER',
+                    'ip_address'        => $request->ip(),
+                    'activity_type'     => 2,
+                    'activity_details'  => 'You Are Successfully Sign Out !!!',
+                    'platform_type'     => 'WEB',
+                ];
+                UserActivity::insert($activityData);
+            /* user activity */
+            $request->session()->forget(['user_id', 'name', 'email', 'first_name', 'middle_name', 'last_name', 'role', 'is_user_login']);
+            // Helper::pr(session()->all());die;
+            Auth::guard('web')->logout();
+            return redirect(url('signin'))->with('success_message', 'You Are Successfully Sign Out !!!');
+        }
+        public function dashboard()
+        {
+            $user_id                        = session('user_id');
+            $data['user']                   = User::find($user_id);
+            $data['approved_articles']      = Article::where('is_published', '=', 1)->where('user_id', '=', $user_id)->count();
+            $data['pending_articles']       = Article::where('is_published', '=', 0)->where('user_id', '=', $user_id)->count();
+
+            $title                          = 'Dashboard';
+            $page_name                      = 'dashboard';
+            echo $this->front_after_login_layout($title, $page_name, $data);
+        }
+        public function myProfile(Request $request)
+        {
+            $user_id                        = session('user_id');
+            $data['user']                   = User::find($user_id);
+            $data['countries']              = Country::select('id', 'name')->where('status', '=', 1)->get();
+
+            if ($request->isMethod('post')) {
+                $postData = $request->all();
+                $rules = [                                 
+                    'first_name'                => 'required',            
+                    'last_name'                 => 'required',                                    
+                    'email'                     => 'required',           
+                    'phone'                     => 'required',           
+                    'country'                   => 'required',                        
+                ];
+                if ($this->validate($request, $rules)) {
+                    /* profile image */
+                        $imageFile      = $request->file('profile_image');
+                        if($imageFile != ''){
+                            $imageName      = $imageFile->getClientOriginalName();
+                            $uploadedFile   = $this->upload_single_file('profile_image', $imageName, 'user', 'image');
+                            if($uploadedFile['status']){
+                                $profile_image = $uploadedFile['newFilename'];
+                            } else {
+                                return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                            }
+                        } else {
+                            $profile_image = $data['user']->profile_image;
+                        }
+                    /* profile image */
+                    $fields = [                        
+                        'first_name'                => $postData['first_name'],
+                        'last_name'                 => $postData['last_name'],
+                        'middle_name'               => $postData['middle_name'],
+                        'phone'                     => $postData['phone'],           
+                        'country'                   => $postData['country'],
+                        'profile_image'             => $profile_image,
+                    ];
+                    // Helper::pr($fields);
+                    User::where('id', '=', $user_id)->update($fields);
+                    return redirect()->back()->with('success_message', 'Profile Updated Successfully !!!');
+                } else {
+                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                }
+            }
+
+            $title                          = 'My Profile';
+            $page_name                      = 'my-profile';
+            echo $this->front_after_login_layout($title, $page_name, $data);
+        }
+        public function changePassword(Request $request)
+        {
+            $user_id                        = session('user_id');
+            $data['user']                   = User::find($user_id);
+
+            if ($request->isMethod('post')) {
+                $postData   = $request->all();
+                $rules      = [
+                    'old_password'            => 'required',
+                    'new_password'            => 'required',
+                    'confirm_password'        => 'required',
+                ];
+                if($this->validate($request, $rules)){
+                    $old_password       = $postData['old_password'];
+                    $new_password       = $postData['new_password'];
+                    $confirm_password   = $postData['confirm_password'];
+                    if(Hash::check($old_password, $data['user']->password)){
+                        if($new_password == $confirm_password){
+                            if($new_password != $old_password){
+                                $fields = [
+                                    'password'            => Hash::make($new_password)
+                                ];
+                                User::where('id', '=', $user_id)->update($fields);
+                                return redirect()->back()->with('success_message', 'Password Changed Successfully !!!');
+                            } else {
+                                return redirect()->back()->with('error_message', 'New & Old Password Can\'t Be Same !!!');
+                            }
+                        } else {
+                            return redirect()->back()->with('error_message', 'New & Confirm Password Does Not Matched !!!');
+                        }
+                    } else {
+                        return redirect()->back()->with('error_message', 'Current Password Is Incorrect !!!');
+                    }
+                } else {
+                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                }
+            }
+
+            $title                          = 'Chnage Password';
+            $page_name                      = 'change-password';
+            echo $this->front_after_login_layout($title, $page_name, $data);
+        }
+        public function myArticle(Request $request)
+        {
+            $user_id                        = session('user_id');
+            $data['user']                   = User::find($user_id);
+            $data['articles']               = Article::where('user_id', '=', $user_id)->get();
+
+            $title                          = 'My Articles';
+            $page_name                      = 'my-articles';
+            echo $this->front_after_login_layout($title, $page_name, $data);
+        }
+        public function submitNewArticle(Request $request)
+        {
+            $user_id                        = session('user_id');
+            $data['user']                   = User::find($user_id);
+            $data['articles']               = Article::where('user_id', '=', $user_id)->get();
+
+            if ($request->isMethod('post')) {
+                $postData = $request->all();
+                if ($postData['invited'] == 'No' && $postData['participated'] == 'No') {
+                    $rules = [
+                        'first_name'                => 'required',            
+                        'last_name'                 => 'required',                                    
+                        'email'                     => 'required',                                      
+                        'for_publication_name'      => 'required',                                      
+                        'orginal_work'              => 'required',                                     
+                        'copyright'                 => 'required',                     
+                        'title'                     => 'required',
+                        'pronoun'                   => 'required',                   
+                    ];
+                    $participatedInfo = isset($postData['participated_info']) ? $postData['participated_info'] : '';
+                    $invited_byInfo = isset($postData['invited_by']) ? $postData['invited_by'] : '';
+                    $invited_emailInfo = isset($postData['invited_by_email']) ? $postData['invited_by_email'] : '';
+                    $section_ertInfo = isset($postData['section_ert']) ? json_encode($postData['section_ert']) : '';
+                    $expertise_areaInfo = isset($postData['expertise_area']) ? json_encode($postData['expertise_area']) : '';
+                    $ecosystem_affiliationInfo = isset($postData['ecosystem_affiliation']) ? json_encode($postData['ecosystem_affiliation']) : '';
+                    $submission_typesInfo = isset($postData['submission_types']) ? $postData['submission_types'] : '';
+                    $narrative_fileInfo = isset($narrative_file) ? $narrative_file : '';    
+                    $first_image_fileInfo = isset($first_image_file) ? $first_image_file : '';    
+                    $second_image_fileInfo = isset($second_image_file) ? $second_image_file : '';    
+                    $art_image_fileInfo = isset($art_image_file) ? $art_image_file : '';    
+                    $art_video_fileInfo = isset($art_video_file) ? $art_video_file : ''; 
+                } else{
+                    $rules = [
+                        'first_name'                => 'required',            
+                        'last_name'                 => 'required',                                    
+                        'email'                     => 'required',                                      
+                        'country'                   => 'required',                                     
+                        'for_publication_name'      => 'required', 
+                        'orginal_work'              => 'required', 
+                        'copyright'                 => 'required', 
+                        'submission_types'          => 'required',                
+                        'state'                     => 'required', 
+                        'city'                      => 'required', 
+                        'acknowledge'               => 'required',                                                      
+                        'section_ert'               => 'required',
+                        'title'                     => 'required',
+                        'pronoun'                   => 'required',                
+                        'organization_name'         => 'required',
+                        'organization_website'      => 'required',
+                        'ecosystem_affiliation'     => 'required',               
+                        'expertise_area'            => 'required',                
+                        'explanation'               => ['required', 'string', new MaxWords(100)],
+                        'explanation_submission'    => ['required', 'string', new MaxWords(150)],
+                        'art_video_desc'            => ['required', 'string', new MaxWords(250)],
+                        'creative_Work'             => ['required', 'string', new MaxWords(10)],
+                        'subtitle'                  => ['required', 'string', new MaxWords(40)],
+                        'art_image_desc'            => ['required', 'string', new MaxWords(250)],
+                        'bio_short'                 => ['required', 'string', new MaxWords(40)],
+                        'bio_long'                  => ['required', 'string', new MaxWords(250)],
+                    ];                                    
+                    /* narrative file */
+                        $imageFile      = $request->file('narrative_file');
+                        if ($imageFile != '') {
+                            $imageName      = $imageFile->getClientOriginalName();
+                            $uploadedFile   = $this->upload_single_file('narrative_file', $imageName, 'narrative', 'image');
+                            if ($uploadedFile['status']) {
+                                $narrative_file = $uploadedFile['newFilename'];
+                            } else {
+                                return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                            }
+                        } else {
+                            return redirect()->back()->with(['error_message' => 'Please Upload narrative File !!!']);
+                        }
+                    /* narrative file */
+                    /* first_image file */
+                        $imageFile      = $request->file('first_image_file');
+                        if ($imageFile != '') {
+                            $imageName      = $imageFile->getClientOriginalName();
+                            $uploadedFile   = $this->upload_single_file('first_image_file', $imageName, 'narrative', 'image');
+                            if ($uploadedFile['status']) {
+                                $first_image_file = $uploadedFile['newFilename'];
+                            } else {
+                                return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                            }
+                        } else {
+                            return redirect()->back()->with(['error_message' => 'Please Upload first_image File !!!']);
+                        }
+                    /* first_image file */
+                    /* second_image file */
+                        $imageFile      = $request->file('second_image_file');
+                        if ($imageFile != '') {
+                            $imageName      = $imageFile->getClientOriginalName();
+                            $uploadedFile   = $this->upload_single_file('second_image_file', $imageName, 'narrative', 'image');
+                            if ($uploadedFile['status']) {
+                                $second_image_file = $uploadedFile['newFilename'];
+                            } else {
+                                return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                            }
+                        } else {
+                            return redirect()->back()->with(['error_message' => 'Please Upload second_image File !!!']);
+                        }
+                    /* second_image file */
+                    /* art_image file */
+                        $imageFile      = $request->file('art_image_file');
+                        if ($imageFile != '') {
+                            $imageName      = $imageFile->getClientOriginalName();
+                            $uploadedFile   = $this->upload_single_file('art_image_file', $imageName, 'art_image', 'image');
+                            if ($uploadedFile['status']) {
+                                $art_image_file = $uploadedFile['newFilename'];
+                            } else {
+                                return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                            }
+                        } else {
+                            return redirect()->back()->with(['error_message' => 'Please Upload art_image File !!!']);
+                        }
+                    /* art_image file */
+                    /* art_video file */
+                        $imageFile      = $request->file('art_video_file');
+                        if ($imageFile != '') {
+                            $imageName      = $imageFile->getClientOriginalName();
+                            $uploadedFile   = $this->upload_single_file('art_video_file', $imageName, 'art_video', 'video');
+                            if ($uploadedFile['status']) {
+                                $art_video_file = $uploadedFile['newFilename'];
+                            } else {
+                                return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                            }
+                        } else {
+                            return redirect()->back()->with(['error_message' => 'Please Upload art_video File !!!']);
+                        }
+                    /* art_video file */        
+                    $participatedInfo = isset($postData['participated_info']) ? $postData['participated_info'] : '';
+                    $invited_byInfo = isset($postData['invited_by']) ? $postData['invited_by'] : '';
+                    $invited_emailInfo = isset($postData['invited_by_email']) ? $postData['invited_by_email'] : '';
+                    $section_ertInfo = isset($postData['section_ert']) ? json_encode($postData['section_ert']) : '';
+                    $expertise_areaInfo = isset($postData['expertise_area']) ? json_encode($postData['expertise_area']) : '';
+                    $ecosystem_affiliationInfo = isset($postData['ecosystem_affiliation']) ? json_encode($postData['ecosystem_affiliation']) : '';
+                    $submission_typesInfo = isset($postData['submission_types']) ? $postData['submission_types'] : '';
+                    $narrative_fileInfo = isset($narrative_file) ? $narrative_file : '';    
+                    $first_image_fileInfo = isset($first_image_file) ? $first_image_file : '';    
+                    $second_image_fileInfo = isset($second_image_file) ? $second_image_file : '';    
+                    $art_image_fileInfo = isset($art_image_file) ? $art_image_file : '';    
+                    $art_video_fileInfo = isset($art_video_file) ? $art_video_file : '';    
+                }            
+                if ($this->validate($request, $rules)) {
+                    /* article no generate */
+                        $getLastArticle = Article::orderBy('id', 'DESC')->first();
+                        if($getLastArticle){
+                            $sl_no              = $getLastArticle->sl_no;
+                            $next_sl_no         = $sl_no + 1;
+                            $next_sl_no_string  = str_pad($next_sl_no, 6, 0, STR_PAD_LEFT);
+                            $article_no         = 'ECOSYM-ARTICLE-'.$next_sl_no_string;
+                        } else {
+                            $next_sl_no         = 1;
+                            $next_sl_no_string  = str_pad($next_sl_no, 6, 0, STR_PAD_LEFT);
+                            $article_no         = 'ECOSYM-ARTICLE-'.$next_sl_no_string;
+                        }
+                    /* article no generate */
+                    $fields = [
+                        'sl_no'                     => $next_sl_no,
+                        'article_no'                => $article_no,
+                        'email'                     => $postData['email'],   
+                        'first_name'                => $postData['first_name'],            
+                        'last_name'                 => $postData['last_name'],        
+                        'middle_name'               => $postData['middle_name'],                                            
+                        'for_publication_name'      => $postData['for_publication_name'],           
+                        'orginal_work'              => $postData['orginal_work'],           
+                        'user_id'                   => $user_id,           
+                        'copyright'                 => $postData['copyright'],
+                        'titleId'                   => $postData['title'],
+                        'pronounId'                 => $postData['pronoun'], 
+                        'invited'                   => $postData['invited'],
+                        'invited_by'                => $invited_byInfo, 
+                        'invited_by_email'          => $invited_emailInfo,
+                        'explanation'               => $postData['explanation'],  
+                        'explanation_submission'    => $postData['explanation_submission'],     
+                        'section_ertId'             => $section_ertInfo,
+                        'creative_Work'             => $postData['creative_Work'],
+                        'subtitle'                  => $postData['subtitle'],
+                        'submission_types'          => $submission_typesInfo,
+                        'titleId'                   => $postData['title'],
+                        'pronounId'                 => $postData['pronoun'],
+                        'participated'              => $postData['participated'],
+                        'participated_info'         => $participatedInfo,
+                        'narrative_file'            => $narrative_fileInfo,
+                        'first_image_file'          => $first_image_fileInfo,
+                        'second_image_file'         => $second_image_fileInfo,
+                        'art_image_file'            => $art_image_fileInfo,
+                        'art_image_desc'            => $postData['art_image_desc'],
+                        'art_video_file'            => $art_video_fileInfo,
+                        'art_video_desc'            => $postData['art_video_desc'],
+                        'country'                   => $postData['country'],
+                        'state'                     => $postData['state'],
+                        'city'                      => $postData['city'],
+                        'organization_name'         => $postData['organization_name'],
+                        'organization_website'      => $postData['organization_website'],
+                        'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
+                        'indigenous_affiliation'    => $postData['indigenous_affiliation'],
+                        'expertise_areaId'          => $expertise_areaInfo,
+                        'bio_short'                 => $postData['bio_short'],
+                        'bio_long'                  => $postData['bio_long'],  
+                    ];
+                    // Helper::pr($fields);                    
+
+                    /* generate inspection pdf & save it to directory */
+                        $generalSetting                 = GeneralSetting::find('1');
+                        $subject                        = $generalSetting->site_name . '-NELP-Form-' . $article_no;
+                        $message                        = view('email-templates.nelp-form',$fields);                        
+                        // echo $message;die;
+                        $options    = new Options();
+                        $options->set('defaultFont', 'Courier');
+                        $dompdf     = new Dompdf($options);
+                        $html       = $message;
+                        $dompdf->loadHtml($html);
+                        $dompdf->setPaper('A4', 'portrait');
+                        $dompdf->render();
+                        $output = $dompdf->output();
+                        // Output the generated PDF to browser
+                        $dompdf->stream("document.pdf", array("Attachment" => false));die;
+                        $filename   = $article_no.'-'.time().'.pdf';
+                        $pdfFilePath = 'public/uploads/article/' . $filename;
+                        // Save the PDF to a file
+                        file_put_contents($pdfFilePath, $output);
+                        // echo "PDF file has been generated and saved at: " . $pdfFilePath;die;
+                        $fields['nelp_form_pdf'] = $filename;
+                    /* generate inspection pdf & save it to directory */
+                    Article::insert($fields);
+                    die;
+                    return redirect()->back()->with('success_message', 'Article submitted Successfully !!!');
+                } else {
+                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                }
+            }
+
+            $title                          = 'Submit New Articles';
+            $page_name                      = 'submit-new-article';
+            $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['submission_type']        = SubmissionType::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['country']                = Country::orderBy('name', 'ASC')->get();
+            $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();                        
+            $data['row']                    = [];
+            echo $this->front_after_login_layout($title, $page_name, $data);
+        }
+    /* after login */
 }

@@ -45,7 +45,8 @@ class NewsSubCategoryController extends Controller
             $postData = $request->all();
             $rules = [
                 'parent_category'                   => 'required',                               
-                'sub_category'                      => 'required',                               
+                'sub_category'                      => 'required',
+                'short_description'                 => 'required',
             ];
             if ($this->validate($request, $rules)) {
                 $checkValue = NewsCategory::where('sub_category', '=', $postData['sub_category'])->count();
@@ -54,7 +55,8 @@ class NewsSubCategoryController extends Controller
                     $slug = Str::slug($postData['sub_category']);                   
                     $fields = [
                         'sub_category'              => $postData['sub_category'],                       
-                        'parent_category'           => $postData['parent_category'], 
+                        'parent_category'           => $postData['parent_category'],
+                        'short_description'         => $postData['short_description'],
                         'slug'                      => $slug,
                     ];
                     // Helper::pr($fields);
@@ -89,7 +91,8 @@ class NewsSubCategoryController extends Controller
             $postData = $request->all();
             $rules = [
                 'parent_category'                   => 'required',                               
-                'sub_category'                      => 'required',                               
+                'sub_category'                      => 'required',
+                'short_description'                 => 'required',
             ];
             if ($this->validate($request, $rules)) {
                 // $checkValue = NewsCategory::where('sub_category', '=', $postData['sub_category'])->count();
@@ -98,7 +101,8 @@ class NewsSubCategoryController extends Controller
                     $slug = Str::slug($postData['sub_category']);                   
                     $fields = [
                         'sub_category'              => $postData['sub_category'],                       
-                        'parent_category'           => $postData['parent_category'], 
+                        'parent_category'           => $postData['parent_category'],
+                        'short_description'         => $postData['short_description'],
                         'slug'                      => $slug,
                     ];
                     NewsCategory::where($this->data['primary_key'], '=', $id)->update($fields);

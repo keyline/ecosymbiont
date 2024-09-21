@@ -1,5 +1,6 @@
 <?php
 use App\Models\NewsCategory;
+use App\Models\NewsContent;
 use App\Helpers\Helper;
 // Get the IP address of the user
 $ip = $_SERVER['REMOTE_ADDR']; // This gets the user's IP address
@@ -23,7 +24,7 @@ $details = json_decode($details);
                         <ul class="top-line-list">
                             <li>
                                 <?php if($APP_URL != 'http://localhost/ecosymbiont/'){?>
-                                    <span class="city-weather"><?=$details->city?>, <?=$details->region?>, <?=$details->country?></span>
+                                    <!-- <span class="city-weather">?=$details->city?>, ?=$details->region?>, ?=$details->country?></span> -->
                                 <?php }?>
                                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="24px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
                                     <path fill="#777777" d="M208,64c8.833,0,16-7.167,16-16V16c0-8.833-7.167-16-16-16s-16,7.167-16,16v32
@@ -49,8 +50,14 @@ $details = json_decode($details);
                             </li>
                             <li><span class="time-now"><?=date('l d F Y')?> / <?=date('H:i')?></span></li>
                             <!-- <li><a href="#">Log In</a></li> -->
-                            <li><a href="<?=url('contact-us')?>">Contact</a></li>
-                            <li><a href="<?=url('signin')?>">Sign In</a></li>
+                            <!-- <li><a href="<?=url('contact-us')?>">Contact</a></li> -->
+                            <?php if(session('is_user_login')){?>
+                                <li><img src="<?=(($user)?(($user->profile_image != '')?env('UPLOADS_URL').'user/'.$user->profile_image:env('NO_USER_IMAGE')):env('NO_USER_IMAGE'))?>" alt="<?=(($user)?$user->first_name . ' ' . $user->last_name:'')?>" class="img-responsive img-circle" style="width: 35px;height: 35px;"><a href="<?=url('user/dashboard')?>">Welcome <?=(($user)?$user->first_name . ' ' . $user->last_name:'')?></a></li>
+                                <li><a href="<?=url('user/signout')?>">Sign Out</a></li>
+                            <?php } else {?>
+                                <li><a href="<?=url('signin')?>">Sign In</a></li>
+                                <li><a href="<?=url('signup')?>">Sign Up</a></li>
+                            <?php }?>
                         </ul>
                     </div>  
                     <div class="col-md-3">
@@ -78,7 +85,7 @@ $details = json_decode($details);
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html"><img src="<?=env('FRONT_ASSETS_URL')?>images/logo.png" alt=""></a>
+                    <a class="navbar-brand" href="<?=url('/')?>"><img src="<?=env('UPLOADS_URL').$generalSetting->site_logo?>" alt="<?=$generalSetting->site_name?>"></a>
                 </div>
                 
             </div>
@@ -89,46 +96,26 @@ $details = json_decode($details);
             <div class="container">
                 <div class="owl-wrapper">
                     <div class="owl-carousel" data-num="3">
-                        <div class="item list-post">
-                            <img src="<?=env('FRONT_ASSETS_URL')?>upload/news-posts/listw5.jpg" alt="">
-                            <div class="post-content">
-                                <a href="politics-category.html">Politics</a>
-                                <h2><a href="single-post.html">Donec odio. Quisque volutpat mattis eros. Nullam malesuada </a></h2>
-                                <ul class="post-tags">
-                                    <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                                </ul>
+                        <?php
+                        $hotNewsContents = NewsContent::join('news_category', 'news_contents.sub_category', '=', 'news_category.id')
+                                           ->select('news_contents.id', 'news_contents.new_title', 'news_contents.sub_title', 'news_contents.slug', 'news_contents.author_name', 'news_contents.cover_image', 'news_contents.created_at', 'news_category.sub_category as sub_category_name', 'news_category.slug as sub_category_slug')
+                                           ->where('news_contents.status', '=', 1)
+                                           ->where('news_contents.is_hot', '=', 1)
+                                           ->orderBy('news_contents.id', 'DESC')
+                                           ->get();
+                        if($hotNewsContents){ foreach($hotNewsContents as $rowContent){
+                        ?>
+                            <div class="item list-post">
+                                <img src="<?=env('UPLOADS_URL').'newcontent/'.$rowContent->cover_image?>" alt="<?=$rowContent->new_title?>">
+                                <div class="post-content">
+                                    <a href="<?=url('subcategory/' . $rowContent->sub_category_slug)?>"><?=$rowContent->sub_category_name?></a>
+                                    <h2><a href="<?=url('content/' . $rowContent->slug)?>"><?=$rowContent->new_title?></a></h2>
+                                    <ul class="post-tags">
+                                        <li><i class="fa fa-clock-o"></i><?=date_format(date_create($rowContent->created_at), "d M Y")?></li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                        <div class="item list-post">
-                            <img src="<?=env('FRONT_ASSETS_URL')?>upload/news-posts/listw4.jpg" alt="">
-                            <div class="post-content">
-                                <a href="politics-category.html">World</a>
-                                <h2><a href="single-post.html">Nullam malesuada erat ut turpis. Suspendisse urna nibh</a></h2>
-                                <ul class="post-tags">
-                                    <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="item list-post">
-                            <img src="<?=env('FRONT_ASSETS_URL')?>upload/news-posts/listw3.jpg" alt="">
-                            <div class="post-content">
-                                <a href="politics-category.html">Business</a>
-                                <h2><a href="single-post.html">Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. </a></h2>
-                                <ul class="post-tags">
-                                    <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="item list-post">
-                            <img src="<?=env('FRONT_ASSETS_URL')?>upload/news-posts/listw2.jpg" alt="">
-                            <div class="post-content">
-                                <a href="politics-category.html">Election</a>
-                                <h2><a href="single-post.html">Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. </a></h2>
-                                <ul class="post-tags">
-                                    <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                                </ul>
-                            </div>
-                        </div>
+                        <?php } }?>
                     </div>
                 </div>
             </div>
@@ -143,7 +130,7 @@ $details = json_decode($details);
                         <li><a class="active" href="<?=url('/')?>">Home</a></li>
                         <li><a href="<?=url('page/about-us')?>">ABOUT</a></li>
                         <?php if($parentCats){ foreach($parentCats as $parentCat){?>
-                            <li class="drop-arrow"><a href="<?=url('category/' . Helper::encoded($parentCat->slug))?>"><?=$parentCat->sub_category?></a>
+                            <li class="drop-arrow"><a href="<?=url('category/' . $parentCat->slug)?>"><?=$parentCat->sub_category?></a>
                                 <div class="megadropdown">
                                     <div>
                                         <div class="inner-megadropdown world-dropdown">
@@ -153,7 +140,7 @@ $details = json_decode($details);
                                                     $childCats = NewsCategory::select('id', 'sub_category', 'slug')->where('status', '=', 1)->where('parent_category', '=', $parentCat->id)->get();
                                                     if($childCats){ $sl=1; foreach($childCats as $childCat){
                                                     ?>
-                                                        <li><a <?=(($sl == 1)?'class="active"':'')?> href="<?=url('subcategory/' . Helper::encoded($parentCat->slug))?>"><?=$childCat->sub_category?></a></li>
+                                                        <li><a <?=(($sl == 1)?'class="active"':'')?> href="<?=url('subcategory/' . $childCat->slug)?>"><?=$childCat->sub_category?></a></li>
                                                     <?php $sl++; } }?>
                                                 </ul>
                                             </div>
@@ -164,10 +151,10 @@ $details = json_decode($details);
                         <?php } }?>
                         <li><a href="<?=url('submissions')?>">SUBMISSIONS</a></li>
                     </ul>
-                    <form class="navbar-form navbar-right" role="search">
+                    <!-- <form class="navbar-form navbar-right" role="search">
                         <input type="text" id="search" name="search" placeholder="Search here">
                         <button type="submit" id="search-submit"><i class="fa fa-search"></i></button>
-                    </form>
+                    </form> -->
                 </div>
                 <!-- /.navbar-collapse -->
             </div>

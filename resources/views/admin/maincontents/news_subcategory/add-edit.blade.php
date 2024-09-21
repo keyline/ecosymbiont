@@ -45,11 +45,13 @@ $controllerRoute = $module['controller_route'];
         <?php
         $setting = GeneralSetting::where('id', '=', 1)->first();
         if ($row) {
-            $sub_category = $row->sub_category;            
-            $parent_categoryId = $row->parent_category;          
+            $sub_category = $row->sub_category;
+            $parent_categoryId = $row->parent_category;
+            $short_description = $row->short_description;
         } else {
-            $sub_category = '';            
-            $parent_categoryId = '';           
+            $sub_category = '';
+            $parent_categoryId = '';
+            $short_description = '';
         }
         ?>
         <div class="col-xl-12">
@@ -78,12 +80,12 @@ $controllerRoute = $module['controller_route'];
                                     value="<?= $sub_category ?>" required>
                             </div>
                         </div>                                             
-                        <!-- <div class="row mb-3">
-                            <label for="description" class="col-md-2 col-lg-2 col-form-label">Description</label>
+                        <div class="row mb-3">
+                            <label for="short_description" class="col-md-2 col-lg-2 col-form-label">Short Description</label>
                             <div class="col-md-10 col-lg-10">
-                                <textarea name="description" class="form-control" id="description" rows="3">?= $description ?></textarea>
+                                <textarea name="short_description" class="form-control" id="short_description" rows="5" required><?=$short_description ?></textarea>
                             </div>
-                        </div>                         -->
+                        </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary"><?= $row ? 'Save' : 'Add' ?></button>
                         </div>
