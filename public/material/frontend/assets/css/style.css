@@ -252,12 +252,14 @@ header.active .nav-list-container {
   text-transform: capitalize;
   letter-spacing: 2.5px;
   border: none;
+  height: auto !important;
 }
 .navbar-brand span {
   color: #d09c1c !important;
 }
 .navbar-brand img {
   max-width: 100%;
+  width: 300px;
 }
 .logo-advertisement {
   background: #fafafa;
