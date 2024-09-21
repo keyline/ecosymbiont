@@ -47,7 +47,7 @@ $generalSetting            = GeneralSetting::find('1');
                 </td>
             </tr>
             <tr>
-                <td style="width: 100%" colspan="2">
+                <td style="width: 100%; display: block;" colspan="2">
                     <p style="line-height: 1.5; width: 100%; margin-top: 10px;">This NELP records the terms under which the Creative-Work specified below will be published online only on <strong>Ecosymbionts Regenerate Together</strong> (the “<strong>Platform</strong>”). The Platform is published by Ecosymbionts Regenerate (the “Publisher”). The Platform is owned by the Śramani Institute (the “<strong>Proprietor</strong>”).</p>
                     <p style="width: 100%">Submission Reference Number (“<strong>SRN</strong>”): <span style="background: yellow;">xxx</span></p>
                 </td>
@@ -56,12 +56,12 @@ $generalSetting            = GeneralSetting::find('1');
 
             <tr>
                 <td>
-                    <p style="font-size: 15px; font-weight: bold;">THE CREATIVE-WORK</p>
+                    <p  style="width: 100%; display: block; margin-top: 20px; border: 1px solid #000; background: #e7e6e6; padding: 5px 15px;">THE CREATIVE-WORK</p>
                 </td>
             </tr>
             <tr>
-                <td><p style="font-size: 14px;">Creative-Work Title:</p></td>
-                <td><p>[14 (note: this indicates the question number on the submission form; the answer should be pasted here)]</p> <span style="display: block; margin-top: 20px; text-align: right;">(the <strong>“Contribution”</strong>)</span></p></td>
+                <td><p style="width: 20%; float: left; border: 1px solid #000; border-top: none; background: #e7e6e6; height: 67px;  padding: 5px 15px;"><strong style="font-size: 14px;">Creative-Work Title:</p></td>
+                <td><p style="width: 80%; float: right; border: 1px solid #000; border-top: none; border-left: none; padding: 5px 15px;"><p style="color: #ff0000">[14 (note: this indicates the question number on the submission form; the answer should be pasted here)]</p> <span style="display: block; margin-top: 20px; text-align: right;">(the <strong>“Contribution”</strong>)</span></p></td>
             </tr>
 
         </tbody>
