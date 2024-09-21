@@ -203,7 +203,7 @@
                             </div>  
                             <div id="invitedDetails" style="display: none;">
                                 <div class="row mb-3">
-                                    <label for="invited_by" class="col-md-2 col-lg-4 col-form-label"8A) Full name of person who invited you to submit a Creative-Work to ERT</label>
+                                    <label for="invited_by" class="col-md-2 col-lg-4 col-form-label">8A) Full name of person who invited you to submit a Creative-Work to ERT</label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="invited_by" class="form-control" id="invited_by"
                                             value="<?= $invited_by ?>">
