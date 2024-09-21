@@ -65,7 +65,7 @@ $generalSetting            = GeneralSetting::find('1');
                     <p style="font-size: 12px; line-height: 2; width: 80%;">A <span><u>digitized form of a</u></span> <strong>hand-signed</strong> copy of this NELP must be uploaded to  (<span style="background: yellow;">xxxx</span>).</p>
                     <h5>NON-EXCLUSIVE LICENSE TO PUBLISH (“NELP”)</h5>
                 </td>
-                <td align="right">
+                <td>
                     <img src="logo.png" alt="" srcset="" style="max-width: 100%;width: 30%;">
                 </td>
             </tr>
@@ -83,8 +83,8 @@ $generalSetting            = GeneralSetting::find('1');
                 </td>
             </tr>
             <tr>
-                <td style="display: block; float: left"><p style="width: 30%; border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px; ">Creative-Work Title:</p></td>
-                <td style="display: block; float: left">
+                <td><p style="width: 30%; border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px; ">Creative-Work Title:</p></td>
+                <td>
                     <div style="width: 70%; border: 1px solid #000; border-top: none; border-left: none; padding: 5px 15px; display: block; background-color: grey; ">
                     <p>[14 (note: this indicates the question number on the submission form; the answer should be pasted here)]<span style="display: block; margin-top: 20px; text-align: right;">(the <strong>“Contribution”</strong>)</span></p>
                     </div>
