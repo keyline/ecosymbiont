@@ -66,7 +66,7 @@ $generalSetting            = GeneralSetting::find('1');
                     <h5>NON-EXCLUSIVE LICENSE TO PUBLISH (“NELP”)</h5>
                 </td>
                 <td align="right">
-                    <img src="logo.png" alt="" srcset="" style="max-width: 100%;width: 55%;">
+                    <img src="logo.png" alt="" srcset="" style="max-width: 100%;width: 30%;">
                 </td>
             </tr>
             <tr>
@@ -78,7 +78,7 @@ $generalSetting            = GeneralSetting::find('1');
             </tr>
             <!-- THE CREATIVE-WORK -->
             <tr>
-                <td style="width: 100%; border: 1px solid #000; background-color: #e7e6e6; padding: 5px 15px;" colspan="4">
+                <td style="width: 100%; border: 1px solid #000; background-color: #e7e6e6; padding: 5px 15px;">
                     <p>THE CREATIVE-WORK</p>
                 </td>
             </tr>
