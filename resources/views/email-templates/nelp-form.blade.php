@@ -34,16 +34,16 @@ $generalSetting            = GeneralSetting::find('1');
     </style>
 </head>
 <body style="background: #e7e6e6; font-family: sans-serif;">
-    <table style="max-width: 100%; background: #fff; margin:0 auto; padding: 30px;">
+    <table style="width: 100%; background: #fff; margin:0 auto; padding: 30px;">
         <tbody>
             <tr>
-                <td>
+                <td colspan="2">
                     <p style="font-size: 11px; width: 80%;"><strong>RETURN FORM <span><u>ERT-N0924-02:</u></span></strong></p>
                     <p style="font-size: 12px; line-height: 2; width: 80%;">A <span><u>digitized form of a</u></span> <strong>hand-signed</strong> copy of this NELP must be uploaded to  (<span style="background: yellow;">xxxx</span>).</p>
                     <h5>NON-EXCLUSIVE LICENSE TO PUBLISH (“NELP”)</h5>
                 </td>
                 <td>
-                    <img src="logo.png" alt="" srcset="" style="width: 100px;">
+                    <img src="logo.png" alt="" srcset="" style="width: 100px; float: right">
                 </td>
             </tr>
             <tr>
