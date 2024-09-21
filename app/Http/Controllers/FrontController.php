@@ -27,13 +27,18 @@ use App\Models\Pronoun;
 use App\Models\EcosystemAffiliation;
 use App\Models\ExpertiseArea;
 use App\Models\SubmissionType;
+use App\Models\GeneralSetting;
 
 use Auth;
 use Session;
 use Helper;
 use Hash;
 use stripe;
+use PDF;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 date_default_timezone_set("Asia/Calcutta");
+
 class FrontController extends Controller
 {
     public function home(Request $request)
@@ -368,9 +373,7 @@ class FrontController extends Controller
 
             if ($request->isMethod('post')) {
                 $postData = $request->all();
-                //  dd($postData);
                 if ($postData['invited'] == 'No' && $postData['participated'] == 'No') {
-                    // echo "this section"; die;
                     $rules = [
                         'first_name'                => 'required',            
                         'last_name'                 => 'required',                                    
@@ -394,34 +397,33 @@ class FrontController extends Controller
                     $art_image_fileInfo = isset($art_image_file) ? $art_image_file : '';    
                     $art_video_fileInfo = isset($art_video_file) ? $art_video_file : ''; 
                 } else{
-                    
-                        $rules = [
-                    'first_name'                => 'required',            
-                    'last_name'                 => 'required',                                    
-                    'email'                     => 'required',                                      
-                    'country'                   => 'required',                                     
-                    'for_publication_name'      => 'required', 
-                    'orginal_work'              => 'required', 
-                    'copyright'                 => 'required', 
-                    'submission_types'          => 'required',                
-                    'state'                     => 'required', 
-                    'city'                      => 'required', 
-                    'acknowledge'               => 'required',                                                      
-                    'section_ert'               => 'required',
-                    'title'                     => 'required',
-                    'pronoun'                   => 'required',                
-                    'organization_name'         => 'required',
-                    'organization_website'      => 'required',
-                    'ecosystem_affiliation'     => 'required',               
-                    'expertise_area'            => 'required',                
-                    'explanation'               => ['required', 'string', new MaxWords(100)],
-                    'explanation_submission'    => ['required', 'string', new MaxWords(150)],
-                    'art_video_desc'            => ['required', 'string', new MaxWords(250)],
-                    'creative_Work'             => ['required', 'string', new MaxWords(10)],
-                    'subtitle'                  => ['required', 'string', new MaxWords(40)],
-                    'art_image_desc'            => ['required', 'string', new MaxWords(250)],
-                    'bio_short'                 => ['required', 'string', new MaxWords(40)],
-                    'bio_long'                  => ['required', 'string', new MaxWords(250)], 
+                    $rules = [
+                        'first_name'                => 'required',            
+                        'last_name'                 => 'required',                                    
+                        'email'                     => 'required',                                      
+                        'country'                   => 'required',                                     
+                        'for_publication_name'      => 'required', 
+                        'orginal_work'              => 'required', 
+                        'copyright'                 => 'required', 
+                        'submission_types'          => 'required',                
+                        'state'                     => 'required', 
+                        'city'                      => 'required', 
+                        'acknowledge'               => 'required',                                                      
+                        'section_ert'               => 'required',
+                        'title'                     => 'required',
+                        'pronoun'                   => 'required',                
+                        'organization_name'         => 'required',
+                        'organization_website'      => 'required',
+                        'ecosystem_affiliation'     => 'required',               
+                        'expertise_area'            => 'required',                
+                        'explanation'               => ['required', 'string', new MaxWords(100)],
+                        'explanation_submission'    => ['required', 'string', new MaxWords(150)],
+                        'art_video_desc'            => ['required', 'string', new MaxWords(250)],
+                        'creative_Work'             => ['required', 'string', new MaxWords(10)],
+                        'subtitle'                  => ['required', 'string', new MaxWords(40)],
+                        'art_image_desc'            => ['required', 'string', new MaxWords(250)],
+                        'bio_short'                 => ['required', 'string', new MaxWords(40)],
+                        'bio_long'                  => ['required', 'string', new MaxWords(250)],
                     ];                                    
                     /* narrative file */
                         $imageFile      = $request->file('narrative_file');
@@ -506,56 +508,91 @@ class FrontController extends Controller
                     $art_image_fileInfo = isset($art_image_file) ? $art_image_file : '';    
                     $art_video_fileInfo = isset($art_video_file) ? $art_video_file : '';    
                 }            
-                if ($this->validate($request, $rules)) {                
-                        $fields = [
-                            'email'                     => $postData['email'],   
-                            'first_name'                => $postData['first_name'],            
-                            'last_name'                 => $postData['last_name'],        
-                            'middle_name'               => $postData['middle_name'],                                            
-                            'for_publication_name'      => $postData['for_publication_name'],           
-                            'orginal_work'              => $postData['orginal_work'],           
-                            'user_id'                      => $user_id,           
-                            'copyright'                 => $postData['copyright'],
-                            'titleId'                     => $postData['title'],
-                            'pronounId'                   => $postData['pronoun'], 
-                            'invited'                   => $postData['invited'],
-                            'invited_by'                => $invited_byInfo, 
-                            'invited_by_email'          => $invited_emailInfo,
-                            'explanation'               => $postData['explanation'],  
-                            'explanation_submission'    => $postData['explanation_submission'],     
-                            'section_ertId'             => $section_ertInfo,
-                            'creative_Work'             => $postData['creative_Work'],
-                            'subtitle'             => $postData['subtitle'],
-                            'submission_types'             => $submission_typesInfo,
-                            'titleId'                   => $postData['title'],
-                            'pronounId'                 => $postData['pronoun'],
-                            'participated'              => $postData['participated'],
-                            'participated_info'         => $participatedInfo,
-                            'narrative_file'         => $narrative_fileInfo,
-                            'first_image_file'         => $first_image_fileInfo,
-                            'second_image_file'         => $second_image_fileInfo,
-                            'art_image_file'         => $art_image_fileInfo,
-                            'art_image_desc'         => $postData['art_image_desc'],
-                            'art_video_file'         => $art_video_fileInfo,
-                            'art_video_desc'         => $postData['art_video_desc'],
-                            'country'         => $postData['country'],
-                            'state'         => $postData['state'],
-                            'city'         => $postData['city'],
-                            'organization_name'         => $postData['organization_name'],
-                            'organization_website'      => $postData['organization_website'],
-                            'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
-                            'indigenous_affiliation'    => $postData['indigenous_affiliation'],
-                            'expertise_areaId'          => $expertise_areaInfo,
-                            'bio_short'               => $postData['bio_short'],
-                            'bio_long'               => $postData['bio_long'],  
-                        ];
-                        //   Helper::pr($fields);
-                        Article::insert($fields);
-                        // return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
-                        return redirect()->back()->with('success_message', 'Article submitted Successfully !!!');
-                    // } else {
-                    //     return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
-                    // }
+                if ($this->validate($request, $rules)) {
+                    /* article no generate */
+                        $getLastArticle = Article::orderBy('id', 'DESC')->first();
+                        if($getLastArticle){
+                            $sl_no              = $getLastArticle->sl_no;
+                            $next_sl_no         = $sl_no + 1;
+                            $next_sl_no_string  = str_pad($next_sl_no, 6, 0, STR_PAD_LEFT);
+                            $article_no         = 'ECOSYM-ARTICLE-'.$next_sl_no_string;
+                        } else {
+                            $next_sl_no         = 1;
+                            $next_sl_no_string  = str_pad($next_sl_no, 6, 0, STR_PAD_LEFT);
+                            $article_no         = 'ECOSYM-ARTICLE-'.$next_sl_no_string;
+                        }
+                    /* article no generate */
+                    $fields = [
+                        'sl_no'                     => $next_sl_no,
+                        'article_no'                => $article_no,
+                        'email'                     => $postData['email'],   
+                        'first_name'                => $postData['first_name'],            
+                        'last_name'                 => $postData['last_name'],        
+                        'middle_name'               => $postData['middle_name'],                                            
+                        'for_publication_name'      => $postData['for_publication_name'],           
+                        'orginal_work'              => $postData['orginal_work'],           
+                        'user_id'                   => $user_id,           
+                        'copyright'                 => $postData['copyright'],
+                        'titleId'                   => $postData['title'],
+                        'pronounId'                 => $postData['pronoun'], 
+                        'invited'                   => $postData['invited'],
+                        'invited_by'                => $invited_byInfo, 
+                        'invited_by_email'          => $invited_emailInfo,
+                        'explanation'               => $postData['explanation'],  
+                        'explanation_submission'    => $postData['explanation_submission'],     
+                        'section_ertId'             => $section_ertInfo,
+                        'creative_Work'             => $postData['creative_Work'],
+                        'subtitle'                  => $postData['subtitle'],
+                        'submission_types'          => $submission_typesInfo,
+                        'titleId'                   => $postData['title'],
+                        'pronounId'                 => $postData['pronoun'],
+                        'participated'              => $postData['participated'],
+                        'participated_info'         => $participatedInfo,
+                        'narrative_file'            => $narrative_fileInfo,
+                        'first_image_file'          => $first_image_fileInfo,
+                        'second_image_file'         => $second_image_fileInfo,
+                        'art_image_file'            => $art_image_fileInfo,
+                        'art_image_desc'            => $postData['art_image_desc'],
+                        'art_video_file'            => $art_video_fileInfo,
+                        'art_video_desc'            => $postData['art_video_desc'],
+                        'country'                   => $postData['country'],
+                        'state'                     => $postData['state'],
+                        'city'                      => $postData['city'],
+                        'organization_name'         => $postData['organization_name'],
+                        'organization_website'      => $postData['organization_website'],
+                        'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
+                        'indigenous_affiliation'    => $postData['indigenous_affiliation'],
+                        'expertise_areaId'          => $expertise_areaInfo,
+                        'bio_short'                 => $postData['bio_short'],
+                        'bio_long'                  => $postData['bio_long'],  
+                    ];
+                    // Helper::pr($fields);                    
+
+                    /* generate inspection pdf & save it to directory */
+                        $generalSetting                 = GeneralSetting::find('1');
+                        $subject                        = $generalSetting->site_name . '-NELP-Form-' . $article_no;
+                        $message                        = view('email-templates.nelp-form',$fields);                        
+                        // echo $message;die;
+                        $options    = new Options();
+                        $options->set('defaultFont', 'Courier');
+                        $dompdf     = new Dompdf($options);
+                        $html       = $message;
+                        $dompdf->loadHtml($html);
+                        $dompdf->setPaper('A4', 'portrait');
+                        $dompdf->render();
+                        $output = $dompdf->output();
+                        // Output the generated PDF to browser
+                        $dompdf->stream("document.pdf", array("Attachment" => false));die;
+                        $filename   = $article_no.'-'.time().'.pdf';
+                        $pdfFilePath = 'public/uploads/article/' . $filename;
+                        // Save the PDF to a file
+                        file_put_contents($pdfFilePath, $output);
+                        // echo "PDF file has been generated and saved at: " . $pdfFilePath;die;
+                        $fields['nelp_form_pdf'] = $filename;
+                    /* generate inspection pdf & save it to directory */
+                    Article::insert($fields);
+                    die;
+                    return redirect()->back()->with('success_message', 'Article submitted Successfully !!!');
                 } else {
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');
                 }
@@ -565,10 +602,8 @@ class FrontController extends Controller
             $page_name                      = 'submit-new-article';
             $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-            $data['submission_type']       = SubmissionType::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-            // dd($data['submission_types']);
+            $data['submission_type']        = SubmissionType::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['country']                = Country::orderBy('name', 'ASC')->get();
-            // dd($data['country']);
             $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();                        
