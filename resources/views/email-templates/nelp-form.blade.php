@@ -1,13 +1,8 @@
 <?php
-   use App\Models\GeneralSetting;
-   use App\Models\User;
-   use App\Models\Property;
-   use App\Models\Unit;
-   use App\Models\PropertyInspection;
-   use App\Models\RoomType;
-   $generalSetting               = GeneralSetting::find('1');
-   $getUser                      = User::select('first_name', 'last_name')->where('id', '=', $user_id)->first();
-   ?>
+use App\Models\GeneralSetting;
+use App\Models\Article;
+$generalSetting            = GeneralSetting::find('1');
+?>
 <!DOCTYPE html>
 <html lang="en">
    <head>
