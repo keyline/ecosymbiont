@@ -40,10 +40,10 @@ $generalSetting            = GeneralSetting::find('1');
                 <td>
                     <p style="font-size: 11px; width: 80%;"><strong>RETURN FORM <span><u>ERT-N0924-02:</u></span></strong></p>
                     <p style="font-size: 12px; line-height: 2; width: 80%;">A <span><u>digitized form of a</u></span> <strong>hand-signed</strong> copy of this NELP must be uploaded to  (<span style="background: yellow;">xxxx</span>).</p>
-                    <h3>NON-EXCLUSIVE LICENSE TO PUBLISH (“NELP”)</h3>
+                    <h5>NON-EXCLUSIVE LICENSE TO PUBLISH (“NELP”)</h5>
                 </td>
                 <td>
-                    <img src="logo.png" alt="" srcset="" style="width: 20%;">
+                    <img src="logo.png" alt="" srcset="" style="width: 200px;">
                 </td>
             </tr>
             <tr>
@@ -54,13 +54,13 @@ $generalSetting            = GeneralSetting::find('1');
             </tr>
             <!-- THE CREATIVE-WORK -->
 
-            <!-- <tr>
+            <tr>
                 <td>
                     <strong style="font-size: 15px;">THE CREATIVE-WORK</strong>
                 </td>
                 <td><strong style="font-size: 14px;">Creative-Work Title:</strong></td>
                 <td>[14 (note: this indicates the question number on the submission form; the answer should be pasted here)]</p> <span style="display: block; margin-top: 20px; text-align: right;">(the <strong>“Contribution”</strong>)</span></td>
-            </tr> -->
+            </tr>
 
         </tbody>
     </table>
