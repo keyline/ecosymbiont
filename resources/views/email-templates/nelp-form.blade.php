@@ -49,14 +49,21 @@ $generalSetting            = GeneralSetting::find('1');
                 </td>
             </tr>
             <tr>
-                <td>
-                    <p style="line-height: 1.5; float: left; width: 100%">This NELP records the terms under which the Creative-Work specified below will be published online only on <strong>Ecosymbionts Regenerate Together</strong> (the “<strong>Platform</strong>”). The Platform is published by Ecosymbionts Regenerate (the “Publisher”). The Platform is owned by the Śramani Institute (the “<strong>Proprietor</strong>”).</p>
-                    <p style="font-size: 13px; float: left; width: 100%">Submission Reference Number (“<strong>SRN</strong>”): <span style="background: yellow; color: #ff0000">xxx</span></p>
+                <td colspan="2">
+                    <p style="line-height: 1.5; width: 100%">This NELP records the terms under which the Creative-Work specified below will be published online only on <strong>Ecosymbionts Regenerate Together</strong> (the “<strong>Platform</strong>”). The Platform is published by Ecosymbionts Regenerate (the “Publisher”). The Platform is owned by the Śramani Institute (the “<strong>Proprietor</strong>”).</p>
+                    <p style="font-size: 13px; width: 100%">Submission Reference Number (“<strong>SRN</strong>”): <span style="background: yellow; color: #ff0000">xxx</span></p>
                 </td>
             </tr>
             <!-- THE CREATIVE-WORK -->
 
-            
+            <tr>
+                <td colspan="2">
+                    <strong style="font-size: 15px;">THE CREATIVE-WORK</strong>
+                </td>
+                <td><strong style="font-size: 14px;">Creative-Work Title:</strong></td>
+                <td>[14 (note: this indicates the question number on the submission form; the answer should be pasted here)]</p> <span style="display: block; margin-top: 20px; text-align: right;">(the <strong>“Contribution”</strong>)</span></td>
+            </tr>
+
         </tbody>
     </table>
 </body>
