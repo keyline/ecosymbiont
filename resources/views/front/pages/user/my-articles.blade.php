@@ -23,11 +23,11 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <td>#</td>
-                                    <td>Article No.</td>
-                                    <td>Title</td>
-                                    <td>Published Status</td>
-                                    <td>action</td>
+                                    <th>#</th>
+                                    <th>SRN</th>
+                                    <th>Title<br>Subtitle</th>
+                                    <th>Status</th>
+                                    <!-- <td>action</td> -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -40,17 +40,35 @@
                                             <h6><?=$article->subtitle?></h6>
                                         </td>
                                         <td>
-                                            <?php if($article->is_published){?>
-                                                <span class="label label-success">Approved</span>
-                                            <?php } else {?>
-                                                <span class="label label-warning">Waiting For Approve</span>
-                                            <?php }?>
+                                            <h4>
+                                            <?php
+                                            if($article->is_published == 0){
+                                                echo "Article Submitted";
+                                            } elseif($article->is_published == 1){
+                                                echo "Scan Copy Uploaded";
+                                            } elseif($article->is_published == 2){
+                                                echo "Approve";
+                                            } elseif($article->is_published == 3){
+                                                echo "Reject";
+                                            }
+                                            echo '</h4><hr>';
+                                            if($article->is_published == 0){
+                                            ?>
+                                            <form method="POST" action="" enctype="multipart/form-data" oninput="validateForm()">
+                                                @csrf
+                                                <input type="hidden" name="article_id" value="<?=$article->id?>">
+                                                <small>Upload Scan Copy Of NELP Form With Date & Signature</small>
+                                                <input type="file" name="nelp_form_scan_copy" class="form-control" id="nelp_form_scan_copy" required>
+                                                <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>
+                                                <button type="submit" class="btn btn-primary btn-sm">Upload</button>
+                                            </form>
+                                            <?php } ?>
                                         </td>
-                                        <td>
+                                        <!-- <td>
                                             <?php if(!$article->is_published){?>
                                                 <a href="" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
                                             <?php }?>
-                                        </td>
+                                        </td> -->
                                     </tr>
                                 <?php } }?>
                             </tbody>

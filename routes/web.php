@@ -33,6 +33,7 @@ use Illuminate\Support\Facades\Route;
         Route::match(['get', 'post'], '/my-profile', 'App\Http\Controllers\FrontController@myProfile');
         Route::match(['get', 'post'], '/change-password', 'App\Http\Controllers\FrontController@changePassword');
         Route::get('my-articles', 'App\Http\Controllers\FrontController@myArticle');
+        Route::post('my-articles', 'App\Http\Controllers\FrontController@myArticle');
         Route::match(['get', 'post'], '/submit-new-article', 'App\Http\Controllers\FrontController@submitNewArticle');
     });
 // before login

@@ -127,7 +127,7 @@ $details = json_decode($details);
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-left">
-                        <li><a class="active" href="<?=url('/')?>">Home</a></li>
+                        <!-- <li><a class="active" href="<?=url('/')?>">Home</a></li> -->
                         <li><a href="<?=url('page/about-us')?>">ABOUT</a></li>
                         <?php if($parentCats){ foreach($parentCats as $parentCat){?>
                             <li class="drop-arrow"><a href="<?=url('category/' . $parentCat->slug)?>"><?=$parentCat->sub_category?></a>
