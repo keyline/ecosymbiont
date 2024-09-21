@@ -14,6 +14,10 @@ $generalSetting            = GeneralSetting::find('1');
         margin: 0 auto;
         font-family: Montserrat, sans-serif;
         }
+        h1,h2,h3,h4,h5,h6,p,span{
+            margin: 0;
+            padding: 0;
+        }
         table,
         tr,
         td {
@@ -66,7 +70,7 @@ $generalSetting            = GeneralSetting::find('1');
                 </td>
             </tr>
             <tr>
-                <td width="100%">
+                <td width="100%" colspan="2">
                     <p style="line-height: 1.5; width: 100%; margin-top: 10px;">This NELP records the terms under which the Creative-Work specified below will be published online only on <strong>Ecosymbionts Regenerate Together</strong> (the “<strong>Platform</strong>”). The Platform is published by Ecosymbionts Regenerate (the “Publisher”). The Platform is owned by the Śramani Institute (the “<strong>Proprietor</strong>”).</p>
                     <p style="width: 100%">Submission Reference Number (“<strong>SRN</strong>”): <span style="background: yellow;">xxx</span></p>
                 </td>
