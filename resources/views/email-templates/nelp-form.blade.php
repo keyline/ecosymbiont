@@ -54,7 +54,7 @@ $generalSetting            = GeneralSetting::find('1');
             </tr>
             <!-- THE CREATIVE-WORK -->
 
-            <table style="width: 100%; border: 1px solid #000;">
+            <table  border="1px" style="table-layout:fixed;">
                 <tbody>
                     <tr>
                         <td>
