@@ -57,11 +57,12 @@ $controllerRoute = $module['controller_route'];
             $orginal_work = $row->orginal_work;        
             $copyright = $row->copyright; 
             $invited = $row->invited;
+            $invited_by = $row->invited_by;  
             $invited_by_email = $row->invited_by_email;  
             $explanation = $row->explanation;  
             $explanation_submission = $row->explanation_submission;  
-            $section_ertId = $row->section_ertId; 
-            $titleId = $row->user_title;  
+            $section_ertId = $selected_section_ertId; 
+            $titleId = $row->titleId;  
             $pronounId = $row->pronounId;
             $subtitle = $row->subtitle;
             $submission_types = $row->submission_types;
@@ -172,7 +173,7 @@ $controllerRoute = $module['controller_route'];
                                 @if ($user_title)
                                     @foreach ($user_title as $data)
                                         <!-- <option value="{{ $data->id }}" @selected($data->id == $titleId)> -->
-                                        <input type="radio" id="yes" name="title" value="{{ $data->id }}"  >
+                                        <input type="radio" id="yes" name="title" value="{{ $data->id }}"  @checked($data->id == $titleId) >
                                         <label for="yes">{{ $data->name }}</label>
                                             <!-- {{ $data->name }}</option> -->
                                     @endforeach
@@ -185,7 +186,7 @@ $controllerRoute = $module['controller_route'];
                                 @if ($pronoun)
                                     @foreach ($pronoun as $data)
                                         <!-- <option value="{{ $data->id }}" @selected($data->id == $pronounId)> -->
-                                        <input type="radio" id="yes" name="pronoun" value="{{ $data->id }}"  >
+                                        <input type="radio" id="yes" name="pronoun" value="{{ $data->id }}" @checked($data->id == $pronounId) >
                                         <label for="yes">{{ $data->name }}</label>
                                             <!-- {{ $data->name }}</option> -->
                                     @endforeach
@@ -196,9 +197,9 @@ $controllerRoute = $module['controller_route'];
                             <label for="orginal_work" class="col-md-2 col-lg-4 col-form-label">7) Are all components of this Creative-Work your original work?
                             </label>
                             <div class="col-md-10 col-lg-8">
-                                <input type="radio" id="yes" name="orginal_work" value="Yes" >
+                                <input type="radio" id="yes" name="orginal_work" value="Yes" @checked(old('orginal_work', $orginal_work) == 'Yes')>
                                 <label for="yes">Yes</label>
-                                <input type="radio" id="no" name="orginal_work" value="No" >
+                                <input type="radio" id="no" name="orginal_work" value="No" @checked(old('orginal_work', $orginal_work) == 'No')>
                                 <label for="no">No</label>
                             </div>
                         </div>
@@ -206,9 +207,9 @@ $controllerRoute = $module['controller_route'];
                             <label for="copyright" class="col-md-2 col-lg-4 col-form-label">8) Do you own the copyright and licensing rights to all components of your Creative-Work?
                             </label>
                             <div class="col-md-10 col-lg-8">
-                                <input type="radio" id="yes" name="copyright" value="Yes" >
+                                <input type="radio" id="yes" name="copyright" value="Yes" @checked(old('copyright', $copyright) == 'Yes')>
                                 <label for="yes">Yes</label>
-                                <input type="radio" id="no" name="copyright" value="No" >
+                                <input type="radio" id="no" name="copyright" value="No" @checked(old('copyright', $copyright) == 'No')>
                                 <label for="no">No</label>
                             </div>
                         </div>  
@@ -242,9 +243,9 @@ $controllerRoute = $module['controller_route'];
                             <label for="participated" class="col-md-2 col-lg-4 col-form-label">10) Have you participated as a strategist at an in-person ER Synergy Meeting?
                             </label>
                             <div class="col-md-10 col-lg-8">
-                                <input type="radio" id="participated_yes" name="participated" value="Yes" >
+                                <input type="radio" id="participated_yes" name="participated" value="Yes" @checked(old('participated', $participated) == 'Yes')>
                                 <label for="yes">Yes</label>
-                                <input type="radio" id="participated_no" name="participated" value="No" >
+                                <input type="radio" id="participated_no" name="participated" value="No" @checked(old('participated', $participated) == 'No')>
                                 <label for="no">No</label>
                             </div>
                         </div> 
@@ -282,16 +283,7 @@ $controllerRoute = $module['controller_route'];
                                         @foreach ($section_ert as $data)
                                         <input type="checkbox" name="section_ert[]" value="{{ $data->id }}" @if(in_array($data->id, old('section_ert', $section_ertId))) checked @endif>{{ $data->name }}<br>
                                         @endforeach
-                                    @endif 
-                                    <!-- <select name="section_ert" class="form-control" id="section_ert" required>
-                                        <option value="" selected disabled>Select</option>
-                                        @if ($section_ert)
-                                            @foreach ($section_ert as $data)
-                                                <option value="{{ $data->id }}" @selected($data->id == $section_ertId)>
-                                                    {{ $data->name }}</option>
-                                            @endforeach
-                                        @endif
-                                    </select> -->
+                                    @endif                                     
                                 </div>
                             </div>     
                             <div class="row mb-3">
@@ -319,7 +311,7 @@ $controllerRoute = $module['controller_route'];
                                             $data = $submission_type[$i];
                                         @endphp
                                         <!-- Use Blade's templating syntax instead of echo inside @php block -->                                        
-                                        <input type="radio" name="submission_types" value="<?php echo $data->id ?>">
+                                        <input type="radio" name="submission_types" value="<?php echo $data->id ?>" @checked($data->id == $submission_types)>
                                         <label for="submission_types"><?php echo $data->name?></label>
                                     @endfor
                                 @endif                            
@@ -521,7 +513,7 @@ $controllerRoute = $module['controller_route'];
                             </div>     
                         </div>                   
                         <div class="text-center">
-                            <button type="submit" id="submitButton" class="btn btn-primary" disabled><?= $row ? 'Save' : 'Add' ?></button>
+                            <button type="submit" id="submitButton" class="btn btn-primary"><?= $row ? 'Save' : 'Add' ?></button>
                         </div>
                     </form>
                 </div>

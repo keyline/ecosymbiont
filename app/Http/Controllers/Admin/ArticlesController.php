@@ -253,8 +253,7 @@ class ArticlesController extends Controller
         // dd($data['country']);
         $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
         $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-        $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-        $data['frequency']              = JournalFrequency::where('status', '=', 1)->orderBy('name', 'DESC')->get();
+        $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();        
         $page_name                      = 'article.add-edit';
         $data['row']                    = [];
         echo $this->admin_after_login_layout($title, $page_name, $data);
@@ -268,7 +267,18 @@ class ArticlesController extends Controller
         $title                          = $this->data['title'] . ' Update';
         $page_name                      = 'article.add-edit';
         $data['row']                    = Article::where($this->data['primary_key'], '=', $id)->first();
-        $data['frequency']              = JournalFrequency::where('status', '=', 1)->orderBy('name', 'DESC')->get();
+        $data['selected_ecosystem_affiliation'] = json_decode($data['row']->ecosystem_affiliationId);
+        $data['selected_expertise_area'] = json_decode($data['row']->expertise_areaId);
+        $data['selected_section_ertId'] = json_decode($data['row']->section_ertId);
+        $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['submission_type']       = SubmissionType::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // dd($data['submission_types']);
+        $data['country']                = Country::orderBy('name', 'ASC')->get();
+        // dd($data['country']);
+        $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
 
         if ($request->isMethod('post')) {
             $postData = $request->all();
@@ -395,7 +405,19 @@ class ArticlesController extends Controller
         $data['module']                 = $this->data;
         $title                          = $this->data['title'] . ' View Details';
         $page_name                      = 'article.view_details';
-        $data['rows']                   = Article::where('status', '!=', 3)->orderBy('id', 'DESC')->get();
+        $data['row']                   = Article::where('status', '!=', 3)->where('id', '=', $id)->orderBy('id', 'DESC')->first();
+        $data['selected_ecosystem_affiliation'] = json_decode($data['row']->ecosystem_affiliationId);
+        $data['selected_expertise_area'] = json_decode($data['row']->expertise_areaId);
+        $data['selected_section_ertId'] = json_decode($data['row']->section_ertId);
+        $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['submission_type']       = SubmissionType::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // dd($data['submission_types']);
+        $data['country']                = Country::orderBy('name', 'ASC')->get();
+        // dd($data['country']);
+        $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
         
         echo $this->admin_after_login_layout($title, $page_name, $data);
     }
