@@ -54,7 +54,7 @@ $generalSetting            = GeneralSetting::find('1');
       </style>
 </head>
 <body style="background: #e7e6e6; font-family: sans-serif;">
-    <table style="width: 100%; background: #fff; margin:0 auto; padding: 30px;">
+    <table style="width: 100%; background: #fff; padding: 10px;">
         <tbody>
             <tr>
                 <td>
@@ -67,7 +67,7 @@ $generalSetting            = GeneralSetting::find('1');
                 </td>
             </tr>
             <tr>
-                <td style="width: 100%; display: block;" colspan="4">
+                <td style="width: 100%; display: block;">
                     <p style="line-height: 1.5; width: 100%; margin-top: 10px;">This NELP records the terms under which the Creative-Work specified below will be published online only on <strong>Ecosymbionts Regenerate Together</strong> (the “<strong>Platform</strong>”). The Platform is published by Ecosymbionts Regenerate (the “Publisher”). The Platform is owned by the Śramani Institute (the “<strong>Proprietor</strong>”).</p>
                     <p style="width: 100%">Submission Reference Number (“<strong>SRN</strong>”): <span style="background: yellow;">xxx</span></p>
                 </td>
