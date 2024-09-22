@@ -236,10 +236,10 @@ $generalSetting            = GeneralSetting::find('1');
             </tr>
               <!-- SUPPLEMENTARY MATERIALS-->
              <tr>
-                <td width="100%" colspan="1" style="border: 1px solid #000; background-color: #e7e6e6; text-align:left; padding: 5px 15px;">
+                <td width="100%" colspan="1" style="border: 1px solid #000; border-right: none; background-color: #e7e6e6; text-align:left; padding: 5px 15px;">
                     <p style="width: 100%; text-align:left; font-weight: bold">SUPPLEMENTARY MATERIALS</p>
                 </td>
-                <td colspan="6" style="border: 1px solid #000; background-color: #e7e6e6; text-align:left; padding: 5px 15px;">
+                <td colspan="6" style="background-color: #e7e6e6; text-align:left; padding: 5px 15px;">
                     <p style="color: #4472c4;"><i>Identify any additional materials to be published in association with the Contribution</i></p>
                 </td>
             </tr>
