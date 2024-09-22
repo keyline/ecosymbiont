@@ -79,7 +79,7 @@ $generalSetting            = GeneralSetting::find('1');
         <br>Submission Reference Number (“<strong>SRN</strong>”): <span style="background: yellow;">xxx</span></p>
         </li>
     </ul>
-    <table  style="table-layout: fixed; width: 100%;">
+    <table style="width: 100%; background: #fff;">
         <tbody>
             <!-- <tr>
                 <td  width="100%">
@@ -125,10 +125,26 @@ $generalSetting            = GeneralSetting::find('1');
                 </td>
             </tr>
             <tr>
-                <td width="40%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Full Legal Name:</td>
-                <td width="60%" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
+                <td width="30%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Full Legal Name:</td>
+                <td width="70%" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
                 [2] [3] [4] <span style="display: block; margin-top: 20px; text-align: right;">(the “<strong>Lead Author</strong>”)</span>
                 </td>
+            </tr>
+            <tr>
+                <td width="30%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Preferred name for publication:</td>
+                <td width="70%" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
+                [4A]
+                </td>
+            </tr>
+            <tr>
+                <td width="30%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Email address:</td>
+                <td width="70%" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
+                [0]
+                </td>
+            </tr>
+            <tr>
+                <td width="30%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Ancestral continental ecoweb affiliation:</strong></td>
+                <td width="70%" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">[22]</td>
             </tr>
         </tbody>
     </table>
