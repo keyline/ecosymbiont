@@ -62,7 +62,7 @@ $generalSetting            = GeneralSetting::find('1');
             <tr>
                 <td>
                     <p style="font-size: 11px;"><strong>RETURN FORM <span><u>ERT-N0924-02:</u></span></strong></p>
-                    <img src="logo.png" alt="" srcset="" style="max-width: 100%;width: 30%;">
+                    <img src="logo.png" alt="" srcset="" style="max-width: 100%;width: 30%; float: right">
                 </td>
             </tr>
             <tr>
@@ -84,6 +84,8 @@ $generalSetting            = GeneralSetting::find('1');
                 <td>
                     <p style="width: 100%; border: 1px solid #000; background-color: #e7e6e6; padding: 5px 15px;">THE CREATIVE-WORK</p>
                 </td>
+            </tr>
+            <tr>
                 <td><p style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px; ">Creative-Work Title:</p></td>
                 <td>
                     <div style="border: 1px solid #000; border-top: none; border-left: none; padding: 5px 15px; background-color: grey;">
