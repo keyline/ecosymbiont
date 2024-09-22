@@ -117,7 +117,7 @@ $generalSetting            = GeneralSetting::find('1');
                     [14 (note: this indicates the question number on the submission form; the answer should be pasted here)]<span style="display: block; margin-top: 20px; text-align: right;">(the <strong>“Contribution”</strong>)</span>
                     </p>
                 </td>
-                <td>&nbsp;&nbsp;&nbsp;</td>
+                <td>1</td>
             </tr>
         </tbody>
     </table>
