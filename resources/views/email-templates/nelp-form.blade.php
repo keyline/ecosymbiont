@@ -198,7 +198,7 @@ $generalSetting            = GeneralSetting::find('1');
                 <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Form-2 [22]</td>
                 <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Form-2 [23]</td>
                 <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Form-2 [20]</td>
-                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Form-2 [17]</td>
+                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Form-2 [18]</td>
             </tr>
         </tbody>
     </table>
