@@ -225,8 +225,8 @@ $generalSetting            = GeneralSetting::find('1');
                 </td>
                 <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; padding: 5px 15px;">
                     <div>
-                     <input type="checkbox"  name="" id="" style="height:5px; width:5px;margin: 0;">
-                        <label style="margin-top: -5px;padding-left: 3px;font-weight: normal;">One or more Authors are employed by the Śramani Institute or are related to a Śramani Institute employee. Please provide names and describe the relationship(s):
+                     <input type="checkbox"  name="" id="" style="height:5px; width:5px;margin: 5px;">
+                        <label style="margin-top: 0px;padding-left: 3px;font-weight: normal;">One or more Authors are employed by the Śramani Institute or are related to a Śramani Institute employee. Please provide names and describe the relationship(s):
                         </label>
                     </div>
                 </td>
@@ -242,7 +242,7 @@ $generalSetting            = GeneralSetting::find('1');
             </tr>
             <tr>
                 <td width="30%" colspan="1" rowspan="3" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">If the Author intends to submit or upload any additional materials for online publication in association with the Contribution, please indicate by checking the applicable boxes in this section.</td>
-                <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
+                <td width="70%" colspan="6" valign="top" style="padding: 5px 15px;">
                 <div>
                      <input type="checkbox"  name="" id="" style="height:5px; width:5px;margin: 0;">
                         <label style="margin-top: -5px;padding-left: 3px;font-weight: normal;">NO, Supplementary Materials will not be submitted or uploaded by the Author for publication/uploading in connection with the Contribution.
