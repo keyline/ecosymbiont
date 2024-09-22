@@ -370,6 +370,30 @@ class FrontController extends Controller
             $user_id                        = session('user_id');
             $data['user']                   = User::find($user_id);
             $data['articles']               = Article::where('user_id', '=', $user_id)->get();
+             /* generate inspection pdf & save it to directory */
+             $article_no = '';
+             $fields = [];
+             $generalSetting                 = GeneralSetting::find('1');
+             $subject                        = $generalSetting->site_name . '-NELP-Form-' . $article_no;
+             $message                        = view('email-templates.nelp-form',$fields);                        
+             // echo $message;die;
+             $options    = new Options();
+             $options->set('defaultFont', 'Courier');
+             $dompdf     = new Dompdf($options);
+             $html       = $message;
+             $dompdf->loadHtml($html);
+             $dompdf->setPaper('A4', 'portrait');
+             $dompdf->render();
+             $output = $dompdf->output();
+             // Output the generated PDF to browser
+             $dompdf->stream("document.pdf", array("Attachment" => false));die;
+             $filename   = $article_no.'-'.time().'.pdf';
+             $pdfFilePath = 'public/uploads/article/' . $filename;
+             // Save the PDF to a file
+             file_put_contents($pdfFilePath, $output);
+             // echo "PDF file has been generated and saved at: " . $pdfFilePath;die;
+             $fields['nelp_form_pdf'] = $filename;
+         /* generate inspection pdf & save it to directory */
 
             if ($request->isMethod('post')) {
                 $postData = $request->all();
@@ -576,30 +600,7 @@ class FrontController extends Controller
                 //     return redirect()->back()->with('error_message', 'All Fields Required !!!');
                 // }
 
-                /* generate inspection pdf & save it to directory */
-                $article_no = '';
-                $fields = [];
-                $generalSetting                 = GeneralSetting::find('1');
-                $subject                        = $generalSetting->site_name . '-NELP-Form-' . $article_no;
-                $message                        = view('email-templates.nelp-form',$fields);                        
-                // echo $message;die;
-                $options    = new Options();
-                $options->set('defaultFont', 'Courier');
-                $dompdf     = new Dompdf($options);
-                $html       = $message;
-                $dompdf->loadHtml($html);
-                $dompdf->setPaper('A4', 'portrait');
-                $dompdf->render();
-                $output = $dompdf->output();
-                // Output the generated PDF to browser
-                $dompdf->stream("document.pdf", array("Attachment" => false));die;
-                $filename   = $article_no.'-'.time().'.pdf';
-                $pdfFilePath = 'public/uploads/article/' . $filename;
-                // Save the PDF to a file
-                file_put_contents($pdfFilePath, $output);
-                // echo "PDF file has been generated and saved at: " . $pdfFilePath;die;
-                $fields['nelp_form_pdf'] = $filename;
-            /* generate inspection pdf & save it to directory */
+               
             }
 
             $title                          = 'Submit New Articles';
