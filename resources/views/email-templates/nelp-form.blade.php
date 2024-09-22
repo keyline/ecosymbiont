@@ -27,7 +27,7 @@ $generalSetting            = GeneralSetting::find('1');
         border-collapse: collapse;
         padding: 0;
         font-size: 9px;
-        line-height: 1;
+        line-height: 1.3;
         margin: 0;
         }
         table,
@@ -177,8 +177,8 @@ $generalSetting            = GeneralSetting::find('1');
             </tr>
                 <!-- OTHER AUTHORS’ DETAILS -->
             <tr>
-                <td width="100%" colspan="7">
-                    <p style="width: 100%; text-align:left; font-weight: bold; margin-top: 10px;border: 1px solid #000; background-color: #e7e6e6; text-align:left; padding: 5px 15px;">OTHER AUTHORS’ DETAILS</p>
+                <td colspan="7" style="width: 100%; text-align:left; font-weight: bold; margin-top: 10px;border: 1px solid #000; background-color: #e7e6e6; text-align:left; padding: 5px 15px;">
+                    <p>OTHER AUTHORS’ DETAILS</p>
                 </td>
             </tr>
             <tr>
