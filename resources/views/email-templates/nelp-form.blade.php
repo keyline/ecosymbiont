@@ -178,20 +178,20 @@ $generalSetting            = GeneralSetting::find('1');
             <table style="width: 100%;">
                 <!-- OTHER AUTHORS’ DETAILS -->
             <tr>
-                <td width="100%" colspan="2" style="border: 1px solid #000; background-color: #e7e6e6; text-align:left; padding: 5px 15px;">
+                <td width="100%" style="border: 1px solid #000; background-color: #e7e6e6; text-align:left; padding: 5px 15px;">
                     <p style="width: 100%; text-align:left; font-weight: bold">OTHER AUTHORS’ DETAILS</p>
                 </td>
             </tr>
             <tr>
-                <td valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold"><p style="color: #4472c4; font-size: 14px; line-height: 1.5;"><i>If the Contribution is created by two or more authors and the copyright in the Contribution is jointly owned by them – please enter the details of all other individuals who contributed to the creation of the Contribution in this box.</i></p></td>
+                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold"><p style="color: #4472c4; font-size: 14px; line-height: 1.5;"><i>If the Contribution is created by two or more authors and the copyright in the Contribution is jointly owned by them – please enter the details of all other individuals who contributed to the creation of the Contribution in this box.</i></p></td>
                 <td valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
                 Full Legal Name/ Preferred name for publication
                 </td>
-                <td>Email address</td>
-                <td>Ancestral continental ecoweb affiliation</td>
-                <td>Ancestral regional ecoweb affiliation</td>
-                <td>Organizational/ ecoweb-rooted community/ movement affiliation Organizational affiliation</td>
-                <td>Country of residence</td>
+                <td width="20%">Email address</td>
+                <td width="20%">Ancestral continental ecoweb affiliation</td>
+                <td width="20%">Ancestral regional ecoweb affiliation</td>
+                <td width="20%">Organizational/ ecoweb-rooted community/ movement affiliation Organizational affiliation</td>
+                <td width="20%">Country of residence</td>
             </tr>
             </table>
         </tbody>
