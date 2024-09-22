@@ -219,11 +219,11 @@ $generalSetting            = GeneralSetting::find('1');
             </tr>
             <!-- ŚRAMANI INSTITUTE EMPLOYEE -->
             <tr>
-                <td width="30%" colspan="1" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">
+                <td width="30%" colspan="1" valign="top" style="border: 1px solid #000; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">
                     SRAMANI INSTITUTE EMPLOYEE
                     <p style="color: #4472c4;"><i>You must check this box and enter details, if applicable</i></p>
                 </td>
-                <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
+                <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; padding: 5px 15px;">
                     <p>One or more Authors are employed by the Śramani Institute or are related to a Śramani Institute employee. Please provide names and describe the relationship(s):</p>
                 </td>
             </tr>
