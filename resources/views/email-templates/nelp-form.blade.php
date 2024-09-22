@@ -18,6 +18,9 @@ $generalSetting            = GeneralSetting::find('1');
             margin: 0;
             padding: 0;
         }
+        ul{
+            list-style: none;
+        }
         table,
         tr,
         td {
@@ -58,8 +61,8 @@ $generalSetting            = GeneralSetting::find('1');
 </head>
 <body>
     <ul>
-        <li style="float: left; height: 50px"><p style="font-size: 11px;"><strong>RETURN FORM <span><u>ERT-N0924-02:</u></span></strong></p></li>
-        <li style="float: right; height: 50px"><img src="logo.png" alt="" srcset="" style="max-width: 100%;width: 30%;"></li>
+        <li style="float: left;"><p style="font-size: 11px;"><strong>RETURN FORM <span><u>ERT-N0924-02:</u></span></strong></p></li>
+        <li style="float: right;"><img src="logo.png" alt="" srcset="" style="max-width: 100%;width: 30%;"></li>
     </ul>
     <table style="width: 100%; background: #fff; padding: 10px;">
         <tbody>
