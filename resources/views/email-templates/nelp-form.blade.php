@@ -61,26 +61,25 @@ $generalSetting            = GeneralSetting::find('1');
         <tbody>
             <tr>
                 <td>
-                    <p style="font-size: 11px; width: 80%;"><strong>RETURN FORM <span><u>ERT-N0924-02:</u></span></strong></p>
+                    <p style="font-size: 11px;"><strong>RETURN FORM <span><u>ERT-N0924-02:</u></span></strong></p>
                 </td>
-                <td>
+                <td align="right" rowspan="3">
                     <img src="logo.png" alt="" srcset="" style="max-width: 100%;width: 30%;">
                 </td>
             </tr>
             <tr>
                 <td>
-                    <p style="font-size: 12px; line-height: 2; width: 80%;">A <span><u>digitized form of a</u></span> <strong>hand-signed</strong> copy of this NELP must be uploaded to  (<span style="background: yellow;">xxxx</span>).</p>
+                    <p style="font-size: 12px; line-height: 2;">A <span><u>digitized form of a</u></span> <strong>hand-signed</strong> copy of this NELP must be uploaded to  (<span style="background: yellow;">xxxx</span>).</p>
                 </td>
             </tr>
             <tr>
                 <td><h5>NON-EXCLUSIVE LICENSE TO PUBLISH (“NELP”)</h5></td>
             </tr>
             <tr>
-                <td width="100%" colspan="2">
+                <td width="100%">
                     <p style="line-height: 1.5; width: 100%; margin-top: 10px;">This NELP records the terms under which the Creative-Work specified below will be published online only on <strong>Ecosymbionts Regenerate Together</strong> (the “<strong>Platform</strong>”). The Platform is published by Ecosymbionts Regenerate (the “Publisher”). The Platform is owned by the Śramani Institute (the “<strong>Proprietor</strong>”).</p>
                     <p style="width: 100%">Submission Reference Number (“<strong>SRN</strong>”): <span style="background: yellow;">xxx</span></p>
                 </td>
-                <td></td>
             </tr>
             <!-- THE CREATIVE-WORK -->
             <tr>
