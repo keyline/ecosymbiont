@@ -125,8 +125,8 @@ $generalSetting            = GeneralSetting::find('1');
                 </td>
             </tr>
             <tr>
-                <td width="30%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Full Legal Name:</td>
-                <td width="70%" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
+                <td width="40%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Full Legal Name:</td>
+                <td width="60%" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
                 [2] [3] [4] <span style="display: block; margin-top: 20px; text-align: right;">(the “<strong>Lead Author</strong>”)</span>
                 </td>
             </tr>
