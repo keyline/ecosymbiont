@@ -27,7 +27,7 @@ $generalSetting            = GeneralSetting::find('1');
         border-collapse: collapse;
         padding: 0;
         font-size: 9px;
-        line-height: 18px;
+        line-height: 1;
         margin: 0;
         }
         table,
