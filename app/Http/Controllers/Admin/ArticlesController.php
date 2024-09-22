@@ -595,7 +595,7 @@ class ArticlesController extends Controller
             Article::where($this->data['primary_key'], '=', $id)->update(['nelp_form_pdf' => $filename, 'is_published' => 2]);
         /* generate nelp pdf */
         /* email functionality */
-            $message                    = ' : NELP Form - ' . $article_no;                    
+            $message                    = 'NELP Form - ' . $article_no;                    
             $generalSetting             = GeneralSetting::find('1');
             $subject                    = $generalSetting->site_name . ' : NELP Form - ' . $article_no;
             $attchment                  = 'public/uploads/article/' . $filename;
