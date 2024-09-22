@@ -175,7 +175,6 @@ $generalSetting            = GeneralSetting::find('1');
                 <td width="30%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Signature:</td>
                 <td width="70%" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Date:</td>
             </tr>
-            <table style="width: 100%;">
                 <!-- OTHER AUTHORS’ DETAILS -->
             <tr>
                 <td width="100%" colspan="7" style="border: 1px solid #000; background-color: #e7e6e6; text-align:left; padding: 5px 15px;">
@@ -193,7 +192,6 @@ $generalSetting            = GeneralSetting::find('1');
                 <td width="20%">Organizational/ ecoweb-rooted community/ movement affiliation Organizational affiliation</td>
                 <td width="20%">Country of residence</td>
             </tr>
-            </table>
         </tbody>
     </table>
 
