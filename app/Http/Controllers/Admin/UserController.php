@@ -27,6 +27,8 @@ use App\Models\Enquiry;
 use App\Models\UserActivity;
 use App\Models\Source;
 use App\Models\Article;
+use App\Models\User;
+use App\Models\NewsContent;
 use App\Models\Manuscript;
 
 use Auth;
@@ -238,12 +240,15 @@ class UserController extends Controller
     /* authentication */
     /* dashboard */
         public function dashboard(){
-            $data['current_journal_count']          = Article::where('status', '!=', 3)->where('is_published', '=', 0)->count();
-            $data['archieve_journal_count']         = Article::where('status', '!=', 3)->where('is_published', '=', 1)->count();
+            $data['readers']                        = User::where('status', '!=', 3)->where('role', '=', 1)->count();
+            $data['content_creators']               = User::where('status', '!=', 3)->where('role', '=', 2)->count();
 
-            $data['pending_manuscript_count']         = Manuscript::where('status', '=', 0)->count();
-            $data['active_manuscript_count']         = Manuscript::where('status', '=', 1)->count();
-            $data['reject_manuscript_count']         = Manuscript::where('status', '=', 2)->count();
+            $data['submitted']                      = Article::where('status', '!=', 3)->where('is_published', '=', 0)->count();
+            $data['final_edited']                   = Article::where('status', '!=', 3)->where('is_published', '=', 1)->count();
+            $data['nelp_generated']                 = Article::where('status', '!=', 3)->where('is_published', '=', 2)->count();
+            $data['scan_copy_uploaded']             = Article::where('status', '!=', 3)->where('is_published', '=', 3)->count();
+            $data['approved']                       = Article::where('status', '!=', 3)->where('is_published', '=', 4)->count();
+            $data['news_content']                   = NewsContent::where('status', '!=', 3)->count();
 
             $title                                  = 'Dashboard';
             $page_name                              = 'dashboard';
