@@ -78,9 +78,7 @@ $controllerRoute = $module['controller_route'];
                         <a href="<?=url('admin/' . $controllerRoute . '/change_status_reject/'.Helper::encoded($row->id))?>" class="btn btn-danger btn-sm" title="Reject <?=$module['title']?>">Reject</a>
                      <?php } elseif($row->is_published == 4){?>
                         <a href="<?=url('admin/' . $controllerRoute . '/change_status_reject/'.Helper::encoded($row->id))?>" class="btn btn-danger btn-sm" title="Reject <?=$module['title']?>">Reject</a>
-                     <?php } else{ ?>
-                        <a href="<?=url('admin/' . $controllerRoute . '/change_status_accept/'.Helper::encoded($row->id))?>" class="btn btn-success btn-sm" title="Accept <?=$module['title']?>">Accept</a>
-                     <?php } ?>
+                     <?php }?>
                       
                     </td>
                     <td>
