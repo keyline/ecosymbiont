@@ -62,7 +62,7 @@ $generalSetting            = GeneralSetting::find('1');
             <tr>
                 <td>
                     <p style="font-size: 11px;"><strong>RETURN FORM <span><u>ERT-N0924-02:</u></span></strong></p>
-                    <img src="logo.png" alt="" srcset="" style="max-width: 100%;width: 30%; float: right">
+                    <img src="logo.png" alt="" srcset="" style="max-width: 100%;width: 30%;">
                 </td>
             </tr>
             <tr>
@@ -74,7 +74,7 @@ $generalSetting            = GeneralSetting::find('1');
                 <td><h5>NON-EXCLUSIVE LICENSE TO PUBLISH (“NELP”)</h5></td>
             </tr>
             <tr>
-                <td>
+                <td width="100%">
                     <p style="line-height: 1.5; width: 100%; margin-top: 10px;">This NELP records the terms under which the Creative-Work specified below will be published online only on <strong>Ecosymbionts Regenerate Together</strong> (the “<strong>Platform</strong>”). The Platform is published by Ecosymbionts Regenerate (the “Publisher”). The Platform is owned by the Śramani Institute (the “<strong>Proprietor</strong>”).</p>
                     <p style="width: 100%">Submission Reference Number (“<strong>SRN</strong>”): <span style="background: yellow;">xxx</span></p>
                 </td>
@@ -84,8 +84,6 @@ $generalSetting            = GeneralSetting::find('1');
                 <td>
                     <p style="width: 100%; border: 1px solid #000; background-color: #e7e6e6; padding: 5px 15px;">THE CREATIVE-WORK</p>
                 </td>
-            </tr>
-            <tr>
                 <td><p style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px; ">Creative-Work Title:</p></td>
                 <td>
                     <div style="border: 1px solid #000; border-top: none; border-left: none; padding: 5px 15px; background-color: grey;">
