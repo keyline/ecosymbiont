@@ -118,6 +118,18 @@ $generalSetting            = GeneralSetting::find('1');
             <tr>
                 <td width="100%" colspan="2"><p style="color: #4472c4;margin-top: 10px;"><i>This NELP can be used where a Contribution has one or more authors. The first author listed (“<strong> <i>Lead Author</i> </strong>”) must be a human individual and must complete the box below and sign this NELP on behalf of herself/himself/themself (and all other authors, if any).</i></p></td>
             </tr>
+            <!-- LEAD AUTHOR’S DETAILS AND SIGNATURE -->
+            <tr>
+                <td width="100%" colspan="2" style="border: 1px solid #000; background-color: #e7e6e6; text-align:left; padding: 5px 15px;">
+                    <p style="width: 100%; text-align:left; font-weight: bold">LEAD AUTHOR’S DETAILS AND SIGNATURE</p>
+                </td>
+            </tr>
+            <tr>
+                <td width="30%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">LEAD AUTHOR’S DETAILS AND SIGNATURE</td>
+                <td width="70%" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
+                [2] [3] [4] <span style="display: block; margin-top: 20px; text-align: right;">(the “<strong>Lead Author</strong>”)</span>
+                </td>
+            </tr>
         </tbody>
     </table>
 </body>
