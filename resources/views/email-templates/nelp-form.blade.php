@@ -59,7 +59,7 @@ $generalSetting            = GeneralSetting::find('1');
 <body>
     <table style="width: 100%; background: #fff; padding: 10px;">
         <tbody>
-            <tr>
+            <!-- <tr>
                 <td>
                     <p style="font-size: 11px;"><strong>RETURN FORM <span><u>ERT-N0924-02:</u></span></strong></p>
                 </td>
@@ -80,7 +80,7 @@ $generalSetting            = GeneralSetting::find('1');
                     <p style="line-height: 1.5; width: 100%; margin-top: 10px;">This NELP records the terms under which the Creative-Work specified below will be published online only on <strong>Ecosymbionts Regenerate Together</strong> (the “<strong>Platform</strong>”). The Platform is published by Ecosymbionts Regenerate (the “Publisher”). The Platform is owned by the Śramani Institute (the “<strong>Proprietor</strong>”).</p>
                     <p style="width: 100%">Submission Reference Number (“<strong>SRN</strong>”): <span style="background: yellow;">xxx</span></p>
                 </td>
-            </tr>
+            </tr> -->
             <!-- THE CREATIVE-WORK -->
             <!-- <tr>
                 <td colspan="2">
@@ -93,10 +93,8 @@ $generalSetting            = GeneralSetting::find('1');
                     </div>
                 </td>
             </tr> -->
-            <table width="100%">
-                <tbody>
                     <tr>
-                        <td colspan="3" style="border: 1px solid #000; border-top: none; border-left: none; padding: 5px 15px; background-color: grey;">THE CREATIVE-WORK</td>
+                        <td style="border: 1px solid #000; border-top: none; border-left: none; padding: 5px 15px; background-color: grey;">THE CREATIVE-WORK</td>
                     </tr>
                     <tr>
                         <td>
@@ -104,9 +102,6 @@ $generalSetting            = GeneralSetting::find('1');
                         </td>
                         <td><p style="border: 1px solid #000; border-top: none; border-left: none; padding: 5px 15px; background-color: grey;">[14 (note: this indicates the question number on the submission form; the answer should be pasted here)]<span style="margin-top: 20px; text-align: right;">(the <strong>“Contribution”</strong>)</span></p></td>
                     </tr>
-                </tbody>
-            </table>
-
         </tbody>
     </table>
 </body>
