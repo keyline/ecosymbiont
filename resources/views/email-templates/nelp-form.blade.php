@@ -105,16 +105,14 @@ $generalSetting            = GeneralSetting::find('1');
             </tr> -->
             <!-- THE CREATIVE-WORK -->
             <tr>
-                <td width="100%" colspan="7">
-                    <p style="width: 100%; text-align:left; font-weight: bold;border: 1px solid #000; background-color: #e7e6e6; text-align:left; padding: 5px 15px;">THE CREATIVE-WORK</p>
+                <td width="100%" colspan="7" style="border: 1px solid #000; background-color: #e7e6e6; text-align:left; padding: 5px 15px;">
+                    <p style="width: 100%; text-align:left; font-weight: bold">THE CREATIVE-WORK</p>
                 </td>
             </tr>
             <tr>
-                <td width="30%" colspan="1" valign="top">
-                    <p style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Creative-Work Title:</p>
-                </td>
-                <td width="70%" colspan="6" valign="top">
-                    <p  style="border: 1px solid #000; border-top: none; padding: 5px 15px;">[14 (note: this indicates the question number on the submission form; the answer should be pasted here)]<span style="display: block; margin-top: 20px; text-align: right;">(the <strong>“Contribution”</strong>)</span></p>
+                <td width="30%" colspan="1" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Creative-Work Title:</td>
+                <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
+                    [14 (note: this indicates the question number on the submission form; the answer should be pasted here)]<span style="display: block; margin-top: 20px; text-align: right;">(the <strong>“Contribution”</strong>)</span>
                 </td>
             </tr>
             <tr>
@@ -178,7 +176,6 @@ $generalSetting            = GeneralSetting::find('1');
                 <td width="70%" colspan="5" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Date:</td>
             </tr>
             <!-- OTHER AUTHORS’ DETAILS -->
-            &nbsp;&nbsp;&nbsp;
             <tr>
                 <td colspan="7" style="width: 100%; text-align:left; font-weight: bold; margin-top: 10px;border: 1px solid #000; background-color: #e7e6e6; text-align:left; padding: 5px 15px;">
                     <p>OTHER AUTHORS’ DETAILS</p>
@@ -214,7 +211,6 @@ $generalSetting            = GeneralSetting::find('1');
             <tr>
                 <td width="20%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px;"><p style="text-align: center;">(the Lead Author and each individual listed here and at the end of this NELP is, individually and collectively, the “<strong>Author</strong>”)</p></td>
             </tr>
-            &nbsp;&nbsp;&nbsp;
             <!-- ŚRAMANI INSTITUTE EMPLOYEE -->
             <tr>
                 <td width="30%" colspan="1" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">
