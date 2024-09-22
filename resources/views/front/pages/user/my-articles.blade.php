@@ -45,8 +45,8 @@
                                             <?php }?>
                                         </td>
                                         <td>
-                                            <?php if($article->nelp_form_pdf){?>
-                                                <a href="<?=env('UPLOADS_URL').'article/'.$article->nelp_form_pdf?>" target="_blank" class="label label-primary">View File</a>
+                                            <?php if($article->nelp_form_scan_copy){?>
+                                                <a href="<?=env('UPLOADS_URL').'article/'.$article->nelp_form_scan_copy?>" target="_blank" class="label label-primary">View File</a>
                                             <?php } else {?>
                                                 <?php if($article->is_published == 2){?>
                                                     <form method="POST" action="" enctype="multipart/form-data" oninput="validateForm()">
