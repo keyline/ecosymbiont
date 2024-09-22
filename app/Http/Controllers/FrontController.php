@@ -381,7 +381,7 @@ class FrontController extends Controller
                 $imageFile      = $request->file('nelp_form_scan_copy');
                 if ($imageFile != '') {
                     $imageName      = $imageFile->getClientOriginalName();
-                    $uploadedFile   = $this->upload_single_file('nelp_form_scan_copy', $imageName, 'article', 'custom');
+                    $uploadedFile   = $this->upload_single_file('nelp_form_scan_copy', $imageName, 'article', 'pdf');
                     if ($uploadedFile['status']) {
                         $nelp_form_scan_copy = $uploadedFile['newFilename'];
                         Article::where('id', '=', $article_id)->update(['nelp_form_scan_copy' => $nelp_form_scan_copy, 'is_published' => 1]);

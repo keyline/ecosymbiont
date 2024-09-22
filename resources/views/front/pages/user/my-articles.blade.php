@@ -54,7 +54,7 @@
                                                         <input type="hidden" name="article_id" value="<?=$article->id?>">
                                                         <small>Upload Scan Copy Of NELP Form With Date & Signature</small>
                                                         <input type="file" name="nelp_form_scan_copy" class="form-control" id="nelp_form_scan_copy" required>
-                                                        <small class="text-info">* Only Image & PDF files are allowed</small><br>
+                                                        <small class="text-info">* Only PDF files are allowed</small><br>
                                                         <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-upload"></i> Upload</button>
                                                     </form>
                                                 <?php } ?>
