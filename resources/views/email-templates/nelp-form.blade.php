@@ -175,6 +175,24 @@ $generalSetting            = GeneralSetting::find('1');
                 <td width="30%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Signature:</td>
                 <td width="70%" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Date:</td>
             </tr>
+
+            <!-- OTHER AUTHORS’ DETAILS -->
+            <tr>
+                <td width="100%" colspan="2" style="border: 1px solid #000; background-color: #e7e6e6; text-align:left; padding: 5px 15px;">
+                    <p style="width: 100%; text-align:left; font-weight: bold">OTHER AUTHORS’ DETAILS</p>
+                </td>
+            </tr>
+            <tr>
+                <td width="30%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold"><p style="color: #4472c4; font-size: 14px; line-height: 1.5;"><i>If the Contribution is created by two or more authors and the copyright in the Contribution is jointly owned by them – please enter the details of all other individuals who contributed to the creation of the Contribution in this box.</i></p></td>
+                <td width="70%" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
+                Full Legal Name/ Preferred name for publication
+                </td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+            </tr>
         </tbody>
     </table>
 </body>
