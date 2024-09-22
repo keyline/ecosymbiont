@@ -176,9 +176,7 @@ $generalSetting            = GeneralSetting::find('1');
                 <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; padding: 5px 15px; font-weight: bold">Date:</td>
             </tr>
             <!-- OTHER AUTHORS’ DETAILS -->
-            <tr>
-                <td>&nbsp;&nbsp;&nbsp;</td>
-            </tr>
+            
             <tr>
                 <td colspan="7" style="width: 100%; text-align:left; font-weight: bold; margin-top: 10px;border: 1px solid #000; background-color: #e7e6e6; text-align:left; padding: 5px 15px;">
                     <p>OTHER AUTHORS’ DETAILS</p>
