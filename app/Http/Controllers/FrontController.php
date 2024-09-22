@@ -381,7 +381,7 @@ class FrontController extends Controller
                 $imageFile      = $request->file('nelp_form_scan_copy');
                 if ($imageFile != '') {
                     $imageName      = $imageFile->getClientOriginalName();
-                    $uploadedFile   = $this->upload_single_file('nelp_form_scan_copy', $imageName, 'article', 'image');
+                    $uploadedFile   = $this->upload_single_file('nelp_form_scan_copy', $imageName, 'article', 'custom');
                     if ($uploadedFile['status']) {
                         $nelp_form_scan_copy = $uploadedFile['newFilename'];
                         Article::where('id', '=', $article_id)->update(['nelp_form_scan_copy' => $nelp_form_scan_copy, 'is_published' => 1]);
@@ -403,7 +403,7 @@ class FrontController extends Controller
             $user_id                        = session('user_id');
             $data['user']                   = User::find($user_id);
             $data['articles']               = Article::where('user_id', '=', $user_id)->get();
-            
+
             if ($request->isMethod('post')) {
                 $postData = $request->all();
                 if ($postData['invited'] == 'No' && $postData['participated'] == 'No') {

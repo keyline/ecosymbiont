@@ -49,13 +49,13 @@
                                                 <a href="<?=env('UPLOADS_URL').'article/'.$article->nelp_form_scan_copy?>" target="_blank" class="label label-primary">View File</a>
                                             <?php } else {?>
                                                 <?php if($article->is_published == 2){?>
-                                                    <form method="POST" action="" enctype="multipart/form-data" oninput="validateForm()">
+                                                    <form method="POST" action="" enctype="multipart/form-data" style="border: 1px solid #00000057;padding: 10px;border-radius: 10px;margin-bottom: 10px;margin-top: 10px;">
                                                         @csrf
                                                         <input type="hidden" name="article_id" value="<?=$article->id?>">
                                                         <small>Upload Scan Copy Of NELP Form With Date & Signature</small>
                                                         <input type="file" name="nelp_form_scan_copy" class="form-control" id="nelp_form_scan_copy" required>
-                                                        <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>
-                                                        <button type="submit" class="btn btn-primary btn-sm">Upload</button>
+                                                        <small class="text-info">* Only Image & PDF files are allowed</small><br>
+                                                        <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-upload"></i> Upload</button>
                                                     </form>
                                                 <?php } ?>
                                             <?php }?>
