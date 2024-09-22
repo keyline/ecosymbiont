@@ -86,8 +86,6 @@ $generalSetting            = GeneralSetting::find('1');
                 <td colspan="2">
                     <p style="width: 100%; border: 1px solid #000; background-color: #e7e6e6; padding: 5px 15px;">THE CREATIVE-WORK</p>
                 </td>
-            </tr>
-            <tr>
                 <td><p style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px; ">Creative-Work Title:</p></td>
                 <td>
                     <div style="border: 1px solid #000; border-top: none; border-left: none; padding: 5px 15px; background-color: grey;">
