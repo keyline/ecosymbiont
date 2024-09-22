@@ -225,8 +225,8 @@ $generalSetting            = GeneralSetting::find('1');
                 </td>
                 <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; padding: 5px 15px;">
                     <div  style="padding-bottom: 10px;">
-                     <input type="checkbox"  name="" id="" style="height:21px; width:28px; vertical-align: middle;margin: 0;margin-top: 0px;">
-                        <label style="margin: 0;padding-left: 3px;font-weight: normal;vertical-align: middle;font-size: 18px;color: #2e3192;">One or more Authors are employed by the Śramani Institute or are related to a Śramani Institute employee. Please provide names and describe the relationship(s):
+                     <input type="checkbox"  name="" id="" style="height:21px; width:28px;margin: 0;margin-top: 0px;">
+                        <label style="margin: 0;padding-left: 3px;font-weight: normal;">One or more Authors are employed by the Śramani Institute or are related to a Śramani Institute employee. Please provide names and describe the relationship(s):
                         </label>
                     </div>
                 </td>
