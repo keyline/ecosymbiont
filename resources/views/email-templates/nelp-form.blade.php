@@ -39,6 +39,7 @@ $generalSetting            = GeneralSetting::find('1');
         }
         .header{
             padding: 0;
+            height: 65px;
         }
         @page {
         @bottom-left-corner {
@@ -71,7 +72,7 @@ $generalSetting            = GeneralSetting::find('1');
         </li>
         <li style="float: right;"><img src="logo.png" alt="" srcset="" style="max-width: 100%;width: 30%;"></li>
     </ul>
-    <ul>
+    <ul style="padding: 0;">
         <li>
             <p style="line-height: 1.5; width: 100%; margin-top: 10px;">This NELP records the terms under which the Creative-Work specified below will be published online only on <strong>Ecosymbionts Regenerate Together</strong> (the “<strong>Platform</strong>”). The Platform is published by Ecosymbionts Regenerate (the “Publisher”). The Platform is owned by the Śramani Institute (the “<strong>Proprietor</strong>”).
         <br>Submission Reference Number (“<strong>SRN</strong>”): <span style="background: yellow;">xxx</span></p>
