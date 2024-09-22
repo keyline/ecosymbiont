@@ -267,8 +267,8 @@ $generalSetting            = GeneralSetting::find('1');
                 </td>
             </tr>
             <tr>
-                <td style="text-align: center;">
-                    <p>PLEASE NOTE: Amended/alternative versions of this NELP will not be accepted and may delay or prevent publication</p>
+                <td colspan="7" style="text-align: center;">
+                    <p style="matgin-top: 5px">PLEASE NOTE: Amended/alternative versions of this NELP will not be accepted and may delay or prevent publication</p>
                 </td>
             </tr>
         </tbody>
