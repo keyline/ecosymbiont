@@ -173,11 +173,11 @@ $generalSetting            = GeneralSetting::find('1');
             </tr>
             <tr>
                 <td width="30%" colspan="2" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Signature:</td>
-                <td width="70%" colspan="5" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Date:</td>
+                <td width="70%" colspan="5" valign="top" style="border: 1px solid #000; padding: 5px 15px; font-weight: bold">Date:</td>
             </tr>
             <!-- OTHER AUTHORS’ DETAILS -->
             <tr>
-                <td>&nbsp;&nbsp;&nbsp;
+                <td colspan="7">&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;
