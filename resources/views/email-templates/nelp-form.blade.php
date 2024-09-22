@@ -64,7 +64,7 @@ $generalSetting            = GeneralSetting::find('1');
 </head>
 <body>
     <ul class="header">
-        <li style="float: left;">
+        <li style="float: left; width: 70%;">
             <p style="font-size: 11px;"><strong>RETURN FORM <span><u>ERT-N0924-02:</u></span></strong></p>
             <p style="font-size: 12px; line-height: 2;">A <span><u>digitized form of a</u></span> <strong>hand-signed</strong> copy of this NELP must be uploaded to  (<span style="background: yellow;">xxxx</span>).</p>
             <h5>NON-EXCLUSIVE LICENSE TO PUBLISH (“NELP”)</h5>
