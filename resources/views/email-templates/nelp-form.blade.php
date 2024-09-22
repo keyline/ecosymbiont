@@ -125,42 +125,42 @@ $generalSetting            = GeneralSetting::find('1');
                 </td>
             </tr>
             <tr>
-                <td width="30%" colspan="2" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Full Legal Name:</td>
-                <td width="70%" colspan="5" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
+                <td width="30%" colspan="1" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Full Legal Name:</td>
+                <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
                 [2] [3] [4] <span style="display: block; margin-top: 5px; text-align: right;">(the “<strong>Lead Author</strong>”)</span>
                 </td>
             </tr>
             <tr>
-                <td width="30%" colspan="2" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Preferred name for publication:</td>
-                <td width="70%" colspan="5" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
+                <td width="30%" colspan="1" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Preferred name for publication:</td>
+                <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
                 [4A]
                 </td>
             </tr>
             <tr>
-                <td width="30%" colspan="2" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Email address:</td>
-                <td width="70%" colspan="5" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
+                <td width="30%" colspan="1" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Email address:</td>
+                <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
                 [0]
                 </td>
             </tr>
             <tr>
-                <td width="30%" colspan="2" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Ancestral continental ecoweb affiliation:</strong></td>
-                <td width="70%" colspan="5" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">[22]</td>
+                <td width="30%" colspan="1" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Ancestral continental ecoweb affiliation:</strong></td>
+                <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">[22]</td>
             </tr>
             <tr>
-                <td width="30%" colspan="2" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Ancestral regional ecoweb affiliation:</td>
-                <td width="70%" colspan="5" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">[23]</td>
+                <td width="30%" colspan="1" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Ancestral regional ecoweb affiliation:</td>
+                <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">[23]</td>
             </tr>
             <tr>
-                <td width="30%" colspan="2" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Organizational affiliation:</td>
-                <td width="70%" colspan="5" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">[20]</td>
+                <td width="30%" colspan="1" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Organizational affiliation:</td>
+                <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">[20]</td>
             </tr>
             <tr>
-                <td width="30%" colspan="2" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Country of residence:</td>
-                <td width="70%" colspan="5" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">[17]</td>
+                <td width="30%" colspan="1" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Country of residence:</td>
+                <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">[17]</td>
             </tr>
             <tr>
-                <td width="30%" colspan="2" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Authority to sign:</td>
-                <td width="70%" colspan="5" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
+                <td width="30%" colspan="1" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Authority to sign:</td>
+                <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
                     <p>By signing this NELP, I confirm and agree that: 
                         <ul style="list-style-type: lower-roman; padding-left: 15px; font-size: 14px; line-height: 1.5;">
                             <li>All information that I have entered into this NELP is correct at the time of signature.</li>
@@ -172,8 +172,8 @@ $generalSetting            = GeneralSetting::find('1');
                 </td>
             </tr>
             <tr>
-                <td width="30%" colspan="2" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Signature:</td>
-                <td width="70%" colspan="5" valign="top" style="border: 1px solid #000; padding: 5px 15px; font-weight: bold">Date:</td>
+                <td width="30%" colspan="1" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Signature:</td>
+                <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; padding: 5px 15px; font-weight: bold">Date:</td>
             </tr>
             <!-- OTHER AUTHORS’ DETAILS -->
             <tr>
