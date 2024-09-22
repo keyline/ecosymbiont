@@ -273,6 +273,9 @@ $generalSetting            = GeneralSetting::find('1');
             </tr>
         </tbody>
     </table>
-
+    <ul>
+        <li style="font-weight: bold;">1. 	STANDARD TERMS AND CONDITIONS</li>
+        <li>1.1 	The Author hereby agrees to be bound by all terms and conditions in this NELP. </li>
+    </ul>    
 </body>
 </html>
