@@ -37,7 +37,8 @@ $controllerRoute = $module['controller_route'];
             <table id="simpletable" class="table table-striped table-bordered nowrap">
               <thead>
                 <tr>
-                  <th scope="col">#</th>                  
+                  <th scope="col">#</th>
+                  <th scope="col">SRN</th>
                   <th scope="col">Author Info</th>                  
                   <th scope="col">Creative-Work Info</th>                  
                   <th scope="col">Submitted At</th>                  
@@ -50,6 +51,7 @@ $controllerRoute = $module['controller_route'];
                 <?php if(count($rows)>0){ $sl=1; foreach($rows as $row){?>
                   <tr>
                     <th scope="row"><?=$sl++?></th>
+                    <td><?=$row->article_no?></td>
                     <td>
                       <?=$row->first_name?> <?=$row->last_name?><br> <?=$row->email?></td>
                     <td>
