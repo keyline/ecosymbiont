@@ -274,8 +274,10 @@ $generalSetting            = GeneralSetting::find('1');
         </tbody>
     </table>
     <ul style="padding: 0;">
-        <li style="font-weight: bold;"><span style="margin-right: 10px">1.</span> STANDARD TERMS AND CONDITIONS</li>
-        <li><span style="margin-right: 10px">1.1</span>The Author hereby agrees to be bound by all terms and conditions in this NELP. </li>
+        <li style="font-weight: bold; margin: 10px 0"><span style="margin-right: 10px">1.</span> STANDARD TERMS AND CONDITIONS</li>
+        <li style="margin: 10px 0"><span style="margin-right: 10px">1.1</span>The Author hereby agrees to be bound by all terms and conditions in this NELP. </li>
+        <li style="font-weight: bold; margin: 10px 0"><span style="margin-right: 10px">2.</span> LICENSE </li>
+        <li style="margin: 10px 0"><span style="margin-right: 10px">2.1.</span>The term “Contribution” means the Creative-Work created by the Author as identified on page one of this NELP and includes, without exception, all the following versions of the Creative-Work: </li>
     </ul>    
 </body>
 </html>
