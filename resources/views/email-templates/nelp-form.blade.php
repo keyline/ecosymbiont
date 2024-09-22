@@ -26,7 +26,7 @@ $generalSetting            = GeneralSetting::find('1');
         td {
         border-collapse: collapse;
         padding: 0;
-        font-size: 11px;
+        font-size: 9px;
         line-height: 18px;
         margin: 0;
         }
@@ -34,7 +34,7 @@ $generalSetting            = GeneralSetting::find('1');
         tr,
         td p,
         ul li {
-        font-size: 10px;
+        font-size: 8px;
         padding: 0;
         margin: 0;
         }
