@@ -186,11 +186,11 @@ $generalSetting            = GeneralSetting::find('1');
                 <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">
                 Full Legal Name/ Preferred name for publication
                 </td>
-                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Email address</td>
-                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Ancestral continental ecoweb affiliation</td>
-                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Ancestral regional ecoweb affiliation</td>
-                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Organizational/ ecoweb-rooted community/ movement affiliation Organizational affiliation</td>
-                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Country of residence</td>
+                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold; font-size: 9px">Email address</td>
+                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bol; font-size: 9pxd">Ancestral continental ecoweb affiliation</td>
+                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bol; font-size: 9pxd">Ancestral regional ecoweb affiliation</td>
+                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bol; font-size: 9pxd">Organizational/ ecoweb-rooted community/ movement affiliation Organizational affiliation</td>
+                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px; font-weight: bol; font-size: 9pxd">Country of residence</td>
             </tr>
             <tr>
                 <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px;">Form-2 [2] [3] [4]</td>
