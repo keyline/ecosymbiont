@@ -108,6 +108,7 @@ $generalSetting            = GeneralSetting::find('1');
                 <td width="100%">
                     <p style="width: 100%; border: 1px solid #000; background-color: #e7e6e6; padding: 5px 15px;">THE CREATIVE-WORK</p>
                 </td>
+                <td>&nbsp;&nbsp;&nbsp;</td>
             </tr>
             <tr>
             <td width="30%" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px;">Creative-Work Title:</td>
