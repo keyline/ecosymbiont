@@ -105,7 +105,7 @@ $generalSetting            = GeneralSetting::find('1');
             </tr> -->
             <!-- THE CREATIVE-WORK -->
             <tr>
-                <td width="100%" colspan="2" style="border: 1px solid #000; background-color: #e7e6e6; text-align:left; padding: 5px 15px;">
+                <td width="100%" colspan="7" style="border: 1px solid #000; background-color: #e7e6e6; text-align:left; padding: 5px 15px;">
                     <p style="width: 100%; text-align:left; font-weight: bold">THE CREATIVE-WORK</p>
                 </td>
             </tr>
