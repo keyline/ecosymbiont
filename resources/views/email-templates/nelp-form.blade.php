@@ -239,13 +239,13 @@ $generalSetting            = GeneralSetting::find('1');
                 <td width="100%" colspan="1" style="border: 1px solid #000; border-right: none; background-color: #e7e6e6; text-align:left; padding: 5px 15px;">
                     <p style="width: 100%; text-align:left; font-weight: bold">SUPPLEMENTARY MATERIALS</p>
                 </td>
-                <td colspan="6" style="background-color: #e7e6e6; text-align:left; padding: 5px 15px;">
+                <td colspan="6" style="background-color: #e7e6e6; border: 1px solid #000; border-left: none; text-align:left; padding: 5px 15px;">
                     <p style="color: #4472c4;"><i>Identify any additional materials to be published in association with the Contribution</i></p>
                 </td>
             </tr>
             <tr>
-                <td width="30%" colspan="1" rowspan="3" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">If the Author intends to submit or upload any additional materials for online publication in association with the Contribution, please indicate by checking the applicable boxes in this section.</td>
-                <td width="70%" colspan="6" valign="top" style="padding: 5px 15px;">
+                <td width="30%" colspan="1" rowspan="3" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">If the Author intends to submit or upload any additional materials for online publication in association with the Contribution, please indicate by checking the applicable boxes in this section.</td>
+                <td width="70%" colspan="6" valign="top" style="padding: 5px 15px; border: 1px solid #000; border-top: none;">
                 <div>
                      <input type="checkbox"  name="" id="" style="height:15px; width:15px; margin: 0;margin-top: 0px">
                         <label style="margin: 0;padding-left: 3px;font-weight: normal;">NO, Supplementary Materials will not be submitted or uploaded by the Author for publication/uploading in connection with the Contribution.
