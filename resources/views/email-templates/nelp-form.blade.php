@@ -58,8 +58,8 @@ $generalSetting            = GeneralSetting::find('1');
 </head>
 <body>
     <ul>
-        <li><p style="font-size: 11px;"><strong>RETURN FORM <span><u>ERT-N0924-02:</u></span></strong></p></li>
-        <li><img src="logo.png" alt="" srcset="" style="max-width: 100%;width: 30%;"></li>
+        <li style="float: left; height: 50px"><p style="font-size: 11px;"><strong>RETURN FORM <span><u>ERT-N0924-02:</u></span></strong></p></li>
+        <li style="float: right; height: 50px"><img src="logo.png" alt="" srcset="" style="max-width: 100%;width: 30%;"></li>
     </ul>
     <table style="width: 100%; background: #fff; padding: 10px;">
         <tbody>
