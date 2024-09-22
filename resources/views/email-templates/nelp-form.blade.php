@@ -62,12 +62,18 @@ $generalSetting            = GeneralSetting::find('1');
             <tr>
                 <td>
                     <p style="font-size: 11px; width: 80%;"><strong>RETURN FORM <span><u>ERT-N0924-02:</u></span></strong></p>
-                    <p style="font-size: 12px; line-height: 2; width: 80%;">A <span><u>digitized form of a</u></span> <strong>hand-signed</strong> copy of this NELP must be uploaded to  (<span style="background: yellow;">xxxx</span>).</p>
-                    <h5>NON-EXCLUSIVE LICENSE TO PUBLISH (“NELP”)</h5>
                 </td>
                 <td>
                     <img src="logo.png" alt="" srcset="" style="max-width: 100%;width: 30%;">
                 </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="font-size: 12px; line-height: 2; width: 80%;">A <span><u>digitized form of a</u></span> <strong>hand-signed</strong> copy of this NELP must be uploaded to  (<span style="background: yellow;">xxxx</span>).</p>
+                </td>
+            </tr>
+            <tr>
+                <td><h5>NON-EXCLUSIVE LICENSE TO PUBLISH (“NELP”)</h5></td>
             </tr>
             <tr>
                 <td width="100%" colspan="2">
