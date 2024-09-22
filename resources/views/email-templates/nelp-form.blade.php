@@ -96,7 +96,7 @@ $generalSetting            = GeneralSetting::find('1');
             <table width="100%">
                 <tbody>
                     <tr>
-                        <th  style="width: 100%; border: 1px solid #000; border-top: none; border-left: none; padding: 5px 15px; background-color: grey;">THE CREATIVE-WORK</th>
+                        <td  style="width: 100%; border: 1px solid #000; border-top: none; border-left: none; padding: 5px 15px; background-color: grey;">THE CREATIVE-WORK</td>
                     </tr>
                     <tr>
                         <td>
