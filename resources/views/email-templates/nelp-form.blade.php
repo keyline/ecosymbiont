@@ -111,9 +111,12 @@ $generalSetting            = GeneralSetting::find('1');
             </tr>
             <tr>
                 <td width="30%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Creative-Work Title:</td>
-                <td width="70%" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px; font-weight: bold">
+                <td width="70%" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
                     [14 (note: this indicates the question number on the submission form; the answer should be pasted here)]<span style="display: block; margin-top: 20px; text-align: right;">(the <strong>“Contribution”</strong>)</span>
                 </td>
+            </tr>
+            <tr>
+                <td style="margin-top: 20px; display: block;"><p style="color: #4472c4"><i>This NELP can be used where a Contribution has one or more authors. The first author listed (“<strong> <i>Lead Author</i> </strong>”) must be a human individual and must complete the box below and sign this NELP on behalf of herself/himself/themself (and all other authors, if any).</i></p></td>
             </tr>
         </tbody>
     </table>
