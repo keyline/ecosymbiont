@@ -173,7 +173,8 @@ $generalSetting            = GeneralSetting::find('1');
             </tr>
             <tr>
                 <td width="30%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Signature:</td>
-                <td width="30%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Date:</td>
+                <td>&nbsp;&nbsp;&nbsp;</td>
+                <td width="30%" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Date:</td>
             </tr>
         </tbody>
     </table>
