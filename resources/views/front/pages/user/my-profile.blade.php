@@ -16,14 +16,14 @@
                     </div>
                 @endif
             </div>
-            <div class="col-md-4">
+            <!-- <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
                         <img src="<?=(($user)?(($user->profile_image != '')?env('UPLOADS_URL').'user/'.$user->profile_image:env('NO_USER_IMAGE')):env('NO_USER_IMAGE'))?>" alt="<?=(($user)?$user->first_name . ' ' . $user->last_name:'')?>" class="img-circle" style="width: 250px;height: 250px;">
                     </div>
                 </div>
-            </div>
-            <div class="col-md-8">
+            </div> -->
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
                         <form method="POST" action="" enctype="multipart/form-data">
@@ -41,7 +41,7 @@
                               </div>
                             </div>
                             <div class="row" style="margin-bottom: 15px;">
-                              <label for="last_name" class="col-md-4 col-lg-3 col-form-label">Sur Name</label>
+                              <label for="last_name" class="col-md-4 col-lg-3 col-form-label">Surname</label>
                               <div class="col-md-8 col-lg-9">
                                 <input type="text" name="last_name" class="form-control" id="last_name" placeholder="Enter Sur Name" value="<?=(($user)?$user->last_name:'')?>" required autocomplete="off">
                               </div>
@@ -52,12 +52,12 @@
                                 <input type="email" name="email" class="form-control" id="email" placeholder="Enter Email" value="<?=(($user)?$user->email:'')?>" required autocomplete="off" readonly>
                               </div>
                             </div>
-                            <div class="row" style="margin-bottom: 15px;">
+                            <!-- <div class="row" style="margin-bottom: 15px;">
                               <label for="phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
                               <div class="col-md-8 col-lg-9">
                                 <input type="text" name="phone" class="form-control" id="phone" placeholder="Enter Phone" value="<?=(($user)?$user->phone:'')?>" required autocomplete="off">
                               </div>
-                            </div>
+                            </div> -->
                             <div class="row" style="margin-bottom: 15px;">
                               <label for="country" class="col-md-4 col-lg-3 col-form-label">Country</label>
                               <div class="col-md-8 col-lg-9">
@@ -69,13 +69,13 @@
                                 </select>
                               </div>
                             </div>
-                            <div class="row" style="margin-bottom: 15px;">
+                            <!-- <div class="row" style="margin-bottom: 15px;">
                                 <label for="profile_image" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                                 <div class="col-md-8 col-lg-9">
                                     <input type="file" class="form-control" id="profile_image" name="profile_image">
                                     <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="text-center">
                               <button type="submit" class="btn btn-primary">Submit</button>
                             </div>

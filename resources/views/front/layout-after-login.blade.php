@@ -15,11 +15,11 @@
             <section class="block-wrapper">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-3 col-sm-4 sidebar-sticky">
+                        <div class="col-md-2 col-sm-4 sidebar-sticky">
                             <!--sidebar -->
                             <?=$sidebar?>
                         </div>
-                        <div class="col-md-9 col-sm-8 content-blocker">
+                        <div class="col-md-10 col-sm-8 content-blocker">
                             <?=$maincontent?>
                         </div>
                     </div>

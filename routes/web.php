@@ -17,25 +17,28 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 /* Front Panel */
-// before login
-    Route::match(['get', 'post'], '/', 'App\Http\Controllers\FrontController@home');
-    Route::match(['get', 'post'], '/contact-us', 'App\Http\Controllers\FrontController@contactUs');
-    Route::match(['get', 'post'], '/page/{id}', 'App\Http\Controllers\FrontController@pageContent');
-    Route::match(['get', 'post'], '/category/{id}', 'App\Http\Controllers\FrontController@category');
-    Route::match(['get', 'post'], '/subcategory/{id}', 'App\Http\Controllers\FrontController@subcategory');
-    Route::match(['get', 'post'], '/content/{id}', 'App\Http\Controllers\FrontController@newsContent');
-    Route::match(['get', 'post'], '/signin', 'App\Http\Controllers\FrontController@signIn');
-    Route::match(['get', 'post'], '/signup', 'App\Http\Controllers\FrontController@signUp');
-
-    Route::group(['prefix' => 'user', 'middleware' => ['user']], function () {
-        Route::get('signout', 'App\Http\Controllers\FrontController@signout');
-        Route::get('dashboard', 'App\Http\Controllers\FrontController@dashboard');
-        Route::match(['get', 'post'], '/my-profile', 'App\Http\Controllers\FrontController@myProfile');
-        Route::match(['get', 'post'], '/change-password', 'App\Http\Controllers\FrontController@changePassword');
-        Route::get('my-articles', 'App\Http\Controllers\FrontController@myArticle');
-        Route::match(['get', 'post'], '/submit-new-article', 'App\Http\Controllers\FrontController@submitNewArticle');
-    });
-// before login
+    // before login
+        Route::match(['get', 'post'], '/', 'App\Http\Controllers\FrontController@home');
+        Route::match(['get', 'post'], '/contact-us', 'App\Http\Controllers\FrontController@contactUs');
+        Route::match(['get', 'post'], '/page/{id}', 'App\Http\Controllers\FrontController@pageContent');
+        Route::match(['get', 'post'], '/category/{id}', 'App\Http\Controllers\FrontController@category');
+        Route::match(['get', 'post'], '/subcategory/{id}', 'App\Http\Controllers\FrontController@subcategory');
+        Route::match(['get', 'post'], '/content/{id}', 'App\Http\Controllers\FrontController@newsContent');
+        Route::match(['get', 'post'], '/signin/{id}', 'App\Http\Controllers\FrontController@signIn');
+        Route::match(['get', 'post'], '/signup', 'App\Http\Controllers\FrontController@signUp');
+        Route::match(['get', 'post'], '/submissions', 'App\Http\Controllers\FrontController@submissions');
+    // before login
+    // after login
+        Route::group(['prefix' => 'user', 'middleware' => ['user']], function () {
+            Route::get('signout', 'App\Http\Controllers\FrontController@signout');
+            Route::get('dashboard', 'App\Http\Controllers\FrontController@dashboard');
+            Route::match(['get', 'post'], '/my-profile', 'App\Http\Controllers\FrontController@myProfile');
+            Route::match(['get', 'post'], '/change-password', 'App\Http\Controllers\FrontController@changePassword');
+            Route::get('my-articles', 'App\Http\Controllers\FrontController@myArticle');
+            Route::post('my-articles', 'App\Http\Controllers\FrontController@myArticle');
+            Route::match(['get', 'post'], '/submit-new-article', 'App\Http\Controllers\FrontController@submitNewArticle');
+        });
+    // after login
 /* Front Panel */
 /* Admin Panel */
     Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function () {

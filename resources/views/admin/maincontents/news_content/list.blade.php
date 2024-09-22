@@ -39,7 +39,7 @@ $controllerRoute = $module['controller_route'];
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Parent Category<br>Sub category</th>
+                  <th scope="col">SRN<br>DOI<br>Parent Category<br>Sub category</th>
                   <th scope="col">Title<br>Sub Title</th>
                   <th scope="col">Author Name<br>Pronoun<br>Affiliation<br>Email<br>Country<br>Organization</th>
                   <th scope="col">Is Feature</th>
@@ -52,6 +52,8 @@ $controllerRoute = $module['controller_route'];
                   <tr>
                     <th scope="row"><?=$sl++?></th>
                     <td>
+                      <?=$row->creative_work_SRN?><br>
+                      <?=$row->creative_work_DOI?><br>
                       <?php
                         $parent_id = $row->parent_category;
                         $categories = DB::table('news_category')->where('id', '=', $parent_id)->get();
