@@ -231,6 +231,9 @@ $generalSetting            = GeneralSetting::find('1');
                     </div>
                 </td>
             </tr>
+            <tr>
+                <td colspan="7">&nbsp;&nbsp;&nbsp;</td>
+            </tr>
               <!-- SUPPLEMENTARY MATERIALS-->
              <tr>
                 <td width="100%" colspan="1" style="border: 1px solid #000; background-color: #e7e6e6; text-align:left; padding: 5px 15px;">
