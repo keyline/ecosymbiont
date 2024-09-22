@@ -178,7 +178,7 @@ $generalSetting            = GeneralSetting::find('1');
                 <!-- OTHER AUTHORS’ DETAILS -->
             <tr>
                 <td width="100%" colspan="7" style="border: 1px solid #000; background-color: #e7e6e6; text-align:left; padding: 5px 15px;">
-                    <p style="width: 100%; text-align:left; font-weight: bold">OTHER AUTHORS’ DETAILS</p>
+                    <p style="width: 100%; text-align:left; font-weight: bold; margin-top: 10px">OTHER AUTHORS’ DETAILS</p>
                 </td>
             </tr>
             <tr>
