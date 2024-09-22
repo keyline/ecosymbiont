@@ -46,6 +46,7 @@ $controllerRoute = $module['controller_route'];
         <?php
         $setting = GeneralSetting::where('id', '=', 1)->first();
         if ($row) {
+            $user_id = $row->user_id;
             $first_name = $row->first_name;            
             $last_name = $row->last_name;            
             $middle_name = $row->middle_name;            
@@ -57,11 +58,12 @@ $controllerRoute = $module['controller_route'];
             $orginal_work = $row->orginal_work;        
             $copyright = $row->copyright; 
             $invited = $row->invited;
+            $invited_by = $row->invited_by;  
             $invited_by_email = $row->invited_by_email;  
             $explanation = $row->explanation;  
             $explanation_submission = $row->explanation_submission;  
-            $section_ertId = $row->section_ertId; 
-            $titleId = $row->user_title;  
+            $section_ertId = (($selected_section_ertId != '')?json_decode($selected_section_ertId):[]); 
+            $titleId = $row->titleId;  
             $pronounId = $row->pronounId;
             $subtitle = $row->subtitle;
             $submission_types = $row->submission_types;
@@ -78,9 +80,9 @@ $controllerRoute = $module['controller_route'];
             $participated_info = $row->participated_info;
             $organization_name = $row->organization_name;
             $organization_website = $row->organization_website;
-            $ecosystem_affiliationId = $selected_ecosystem_affiliation;
+            $ecosystem_affiliationId = (($selected_ecosystem_affiliation != '')?json_decode($selected_ecosystem_affiliation):[]);
             $indigenous_affiliation = $row->indigenous_affiliation;
-            $expertise_areaId = $selected_expertise_area;
+            $expertise_areaId = (($selected_expertise_area != '')?json_decode($selected_expertise_area):[]);
             $bio_short = $row->bio_short;
             $bio_long = $row->bio_long;            
             $acknowledge = $row->acknowledge;
@@ -130,6 +132,8 @@ $controllerRoute = $module['controller_route'];
                 <div class="card-body pt-3">
                     <form method="POST" action="" enctype="multipart/form-data" oninput="validateForm()">
                         @csrf
+                        <input type="hidden" name="user_id" class="form-control"
+                                    value="<?= $user_id ?>" required>
                         <div class="row mb-3">
                             <label for="email" class="col-md-2 col-lg-4 col-form-label">0) Email address</label>
                             <div class="col-md-10 col-lg-8">
@@ -172,7 +176,7 @@ $controllerRoute = $module['controller_route'];
                                 @if ($user_title)
                                     @foreach ($user_title as $data)
                                         <!-- <option value="{{ $data->id }}" @selected($data->id == $titleId)> -->
-                                        <input type="radio" id="yes" name="title" value="{{ $data->id }}"  >
+                                        <input type="radio" id="yes" name="title" value="{{ $data->id }}"  @checked($data->id == $titleId) >
                                         <label for="yes">{{ $data->name }}</label>
                                             <!-- {{ $data->name }}</option> -->
                                     @endforeach
@@ -185,7 +189,7 @@ $controllerRoute = $module['controller_route'];
                                 @if ($pronoun)
                                     @foreach ($pronoun as $data)
                                         <!-- <option value="{{ $data->id }}" @selected($data->id == $pronounId)> -->
-                                        <input type="radio" id="yes" name="pronoun" value="{{ $data->id }}"  >
+                                        <input type="radio" id="yes" name="pronoun" value="{{ $data->id }}" @checked($data->id == $pronounId) >
                                         <label for="yes">{{ $data->name }}</label>
                                             <!-- {{ $data->name }}</option> -->
                                     @endforeach
@@ -196,9 +200,9 @@ $controllerRoute = $module['controller_route'];
                             <label for="orginal_work" class="col-md-2 col-lg-4 col-form-label">7) Are all components of this Creative-Work your original work?
                             </label>
                             <div class="col-md-10 col-lg-8">
-                                <input type="radio" id="yes" name="orginal_work" value="Yes" >
+                                <input type="radio" id="yes" name="orginal_work" value="Yes" @checked(old('orginal_work', $orginal_work) == 'Yes')>
                                 <label for="yes">Yes</label>
-                                <input type="radio" id="no" name="orginal_work" value="No" >
+                                <input type="radio" id="no" name="orginal_work" value="No" @checked(old('orginal_work', $orginal_work) == 'No')>
                                 <label for="no">No</label>
                             </div>
                         </div>
@@ -206,9 +210,9 @@ $controllerRoute = $module['controller_route'];
                             <label for="copyright" class="col-md-2 col-lg-4 col-form-label">8) Do you own the copyright and licensing rights to all components of your Creative-Work?
                             </label>
                             <div class="col-md-10 col-lg-8">
-                                <input type="radio" id="yes" name="copyright" value="Yes" >
+                                <input type="radio" id="yes" name="copyright" value="Yes" @checked(old('copyright', $copyright) == 'Yes')>
                                 <label for="yes">Yes</label>
-                                <input type="radio" id="no" name="copyright" value="No" >
+                                <input type="radio" id="no" name="copyright" value="No" @checked(old('copyright', $copyright) == 'No')>
                                 <label for="no">No</label>
                             </div>
                         </div>  
@@ -242,9 +246,9 @@ $controllerRoute = $module['controller_route'];
                             <label for="participated" class="col-md-2 col-lg-4 col-form-label">10) Have you participated as a strategist at an in-person ER Synergy Meeting?
                             </label>
                             <div class="col-md-10 col-lg-8">
-                                <input type="radio" id="participated_yes" name="participated" value="Yes" >
+                                <input type="radio" id="participated_yes" name="participated" value="Yes" @checked(old('participated', $participated) == 'Yes')>
                                 <label for="yes">Yes</label>
-                                <input type="radio" id="participated_no" name="participated" value="No" >
+                                <input type="radio" id="participated_no" name="participated" value="No" @checked(old('participated', $participated) == 'No')>
                                 <label for="no">No</label>
                             </div>
                         </div> 
@@ -278,20 +282,11 @@ $controllerRoute = $module['controller_route'];
                                 <label for="section_ert" class="col-md-2 col-lg-4 col-form-label">13) For which section and sub-section of ERT would you like your Creative-Work to be considered?
                                 </label>
                                 <div class="col-md-10 col-lg-8">
-                                    @if ($section_ert)
+                                    @if (!empty($section_ert))
                                         @foreach ($section_ert as $data)
-                                        <input type="checkbox" name="section_ert[]" value="{{ $data->id }}" @if(in_array($data->id, old('section_ert', $section_ertId))) checked @endif>{{ $data->name }}<br>
+                                        <input type="checkbox" name="section_ert[]" value="{{ $data->id }}" @if(in_array($data->id, $section_ertId)) checked @endif>{{ $data->name }}<br>
                                         @endforeach
-                                    @endif 
-                                    <!-- <select name="section_ert" class="form-control" id="section_ert" required>
-                                        <option value="" selected disabled>Select</option>
-                                        @if ($section_ert)
-                                            @foreach ($section_ert as $data)
-                                                <option value="{{ $data->id }}" @selected($data->id == $section_ertId)>
-                                                    {{ $data->name }}</option>
-                                            @endforeach
-                                        @endif
-                                    </select> -->
+                                    @endif                                     
                                 </div>
                             </div>     
                             <div class="row mb-3">
@@ -319,7 +314,7 @@ $controllerRoute = $module['controller_route'];
                                             $data = $submission_type[$i];
                                         @endphp
                                         <!-- Use Blade's templating syntax instead of echo inside @php block -->                                        
-                                        <input type="radio" name="submission_types" value="<?php echo $data->id ?>">
+                                        <input type="radio" name="submission_types" value="<?php echo $data->id ?>" @checked($data->id == $submission_types)>
                                         <label for="submission_types"><?php echo $data->name?></label>
                                     @endfor
                                 @endif                            
@@ -329,17 +324,17 @@ $controllerRoute = $module['controller_route'];
                                 <label for="narrative_file" class="col-md-2 col-lg-4 col-form-label">16A1) TYPE A: word narrative (no embedded images) (500-1000 words for prose, 100-250 words for poetry)</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="file" name="narrative_file" class="form-control" id="narrative_file">
-                                    <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>
+                                    <small class="text-info">* Only DOC files are allowed</small><br>
                                     <span id="narrative_file_error" class="text-danger"></span>
                                     <?php if($narrative_file != ''){?>
                                     <a href="<?= env('UPLOADS_URL') . 'narrative/' . $narrative_file ?>" target="_blank"
-                                        class="badge bg-primary">View Journal</a>
+                                        class="badge bg-primary">View PDF</a>
                                     <?php }?>
-                                    <?php if($narrative_file != ''){?>
+                                    <!-- <?php if($narrative_file != ''){?>
                                     <img src="<?=env('UPLOADS_URL').'narrative/'.$narrative_file?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
                                     <?php } else {?>
                                     <img src="<?=env('NO_IMAGE')?>" alt="narrative_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
-                                    <?php }?>
+                                    <?php }?> -->
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -396,7 +391,7 @@ $controllerRoute = $module['controller_route'];
                                     <small class="text-info">* Only MP4, AVI, MOV, MKV, WEBM files are allowed</small><br>  
                                     <span id="art_video_file_error" class="text-danger"></span>                                  
                                     <?php if($art_video_file != ''){?>
-                                        <video width="150" height="150" controls>
+                                        <video width="350" height="250" controls>
                                             <source src="<?=env('UPLOADS_URL').'art_video/'.$art_video_file?>" type="video/mp4">
                                             Your browser does not support the video tag.
                                         </video>
@@ -521,7 +516,7 @@ $controllerRoute = $module['controller_route'];
                             </div>     
                         </div>                   
                         <div class="text-center">
-                            <button type="submit" id="submitButton" class="btn btn-primary" disabled><?= $row ? 'Save' : 'Add' ?></button>
+                            <button type="submit" id="submitButton" class="btn btn-primary"><?= $row ? 'Save' : 'Add' ?></button>
                         </div>
                     </form>
                 </div>
