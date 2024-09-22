@@ -76,10 +76,10 @@ $controllerRoute = $module['controller_route'];
                     </td>
                     <td>
                       <?php if ($row->is_published == 3) { ?>
-                        <a href="<?=url('admin/' . $controllerRoute . '/change_status_accept/'.Helper::encoded($row->id))?>" class="btn btn-success btn-sm" title="Accept <?=$module['title']?>">Accept</a>
-                        <a href="<?=url('admin/' . $controllerRoute . '/change_status_reject/'.Helper::encoded($row->id))?>" class="btn btn-danger btn-sm" title="Reject <?=$module['title']?>">Reject</a>
+                        <a href="<?=url('admin/' . $controllerRoute . '/change_status_accept/'.Helper::encoded($row->id))?>" class="btn btn-success btn-sm" title="Accept <?=$module['title']?>"><i class="fa fa-check"></i> Accept</a>
+                        <a href="<?=url('admin/' . $controllerRoute . '/change_status_reject/'.Helper::encoded($row->id))?>" class="btn btn-danger btn-sm" title="Reject <?=$module['title']?>"><i class="fa fa-times"></i> Reject</a>
                      <?php } elseif($row->is_published == 4){?>
-                        <a href="<?=url('admin/' . $controllerRoute . '/change_status_reject/'.Helper::encoded($row->id))?>" class="btn btn-danger btn-sm" title="Reject <?=$module['title']?>">Reject</a>
+                        <a href="<?=url('admin/' . $controllerRoute . '/change_status_reject/'.Helper::encoded($row->id))?>" class="btn btn-danger btn-sm" title="Reject <?=$module['title']?>"><i class="fa fa-times"></i> Reject</a>
                      <?php }?>
                       
                     </td>
