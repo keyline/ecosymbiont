@@ -182,7 +182,7 @@ $generalSetting            = GeneralSetting::find('1');
                 </td>
             </tr>
             <tr>
-                <td width="20%" rowspan="4" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold"><p style="color: #4472c4; font-size: 14px; line-height: 1.5;"><i>If the Contribution is created by two or more authors and the copyright in the Contribution is jointly owned by them – please enter the details of all other individuals who contributed to the creation of the Contribution in this box.</i></p></td>
+                <td width="20%" rowspan="4" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold"><p style="color: #4472c4;"><i>If the Contribution is created by two or more authors and the copyright in the Contribution is jointly owned by them – please enter the details of all other individuals who contributed to the creation of the Contribution in this box.</i></p></td>
                 <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">
                 Full Legal Name/ Preferred name for publication
                 </td>
@@ -209,7 +209,7 @@ $generalSetting            = GeneralSetting::find('1');
                 <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px;">Form-3 [17]</td>
             </tr>
             <tr>
-                <td width="20%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px;"><p style="text-align: center;">(the Lead Author and each individual listed here and at the end of this NELP is, individually and collectively, the “<strong>Author</strong>”)</p></td>
+                <td width="20%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px;"><p style="text-align: center;">(the Lead Author and each individual listed here and at the end of this NELP is, individually and collectively, the “<strong>Author</strong>”)</p></td>
             </tr>
         </tbody>
     </table>
