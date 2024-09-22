@@ -135,14 +135,15 @@ class FrontController extends Controller
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
     /* authentication */
-        public function signIn(Request $request)
+        public function signIn(Request $request, $page_link = '')
         {
             if($request->isMethod('post')){
-                $postData = $request->all();
-                $rules = [
-                            'email'     => 'required|email|max:255',
-                            'password'  => 'required|max:30',
-                        ];
+                $postData   = $request->all();
+                $page_link  = Helper::decoded($postData['page_link']);
+                $rules      =   [
+                                    'email'     => 'required|email|max:255',
+                                    'password'  => 'required|max:30',
+                                ];
                 if($this->validate($request, $rules)){
                     if(Auth::guard('web')->attempt(['email' => $postData['email'], 'password' => $postData['password'], 'status' => 1])){
                         $sessionData = Auth::guard('web')->user();
@@ -168,9 +169,17 @@ class FrontController extends Controller
                             UserActivity::insert($activityData);
                         /* user activity */
                         if($sessionData->role == 1){
-                            return redirect('user/my-profile');
+                            if($page_link == ''){
+                                return redirect('user/my-profile');
+                            } else {
+                                return redirect($page_link);
+                            }
                         } else {
-                            return redirect('user/dashboard');
+                            if($page_link == ''){
+                                return redirect('user/dashboard');
+                            } else {
+                                return redirect($page_link);
+                            }
                         }
                     } else {
                         /* user activity */
@@ -191,7 +200,7 @@ class FrontController extends Controller
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');
                 }
             }
-            $data                           = [];
+            $data['page_link']              = (($page_link != '')?$page_link:'');
             $title                          = 'Sign In';
             $page_name                      = 'signin';
             echo $this->front_before_login_layout($title, $page_name, $data);

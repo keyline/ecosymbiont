@@ -29,7 +29,8 @@
                                             <p class="text-center">Enter your email & password to login</p>
                                         </div>
                                         <form method="POST" action="">
-                                        @csrf
+                                            @csrf
+                                            <input type="hidden" name="page_link" value="<?=$page_link?>">
                                             <div class="row" style="margin-bottom: 15px;">
                                               <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                                               <div class="col-md-8 col-lg-9">

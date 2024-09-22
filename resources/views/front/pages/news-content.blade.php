@@ -72,7 +72,23 @@ use App\Helpers\Helper;
                                         <p><?=$rowContent->long_desc?></p>
                                     <?php } else {?>
                                         <p><?=substr($rowContent->long_desc,0,100)?> ...</p>
-                                        <p class="text-center"><a href="<?=url('signin')?>" class="text-primary">Read More</a></p>
+                                        <?php
+                                        // Check if HTTPS is enabled
+                                        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+
+                                        // Get the host name
+                                        $host = $_SERVER['HTTP_HOST'];
+
+                                        // Get the URI (Uniform Resource Identifier)
+                                        $uri = $_SERVER['REQUEST_URI'];
+
+                                        // Combine to get the full URL
+                                        $current_url = $protocol . $host . $uri;
+
+                                        // Output the current URL
+                                        // echo $current_url;
+                                        ?>
+                                        <p class="text-center"><a href="<?=url('signin/' . Helper::encoded($current_url))?>" class="text-primary">Read More</a></p>
                                     <?php }?>
                                     
                                 </div>
