@@ -60,7 +60,7 @@ $generalSetting            = GeneralSetting::find('1');
     <table style="width: 100%; background: #fff; padding: 10px;">
         <tbody>
             <tr>
-                <td>
+                <td  width="100%" colspan="2">
                     <p style="font-size: 11px;"><strong>RETURN FORM <span><u>ERT-N0924-02:</u></span></strong></p>
                 </td>
                 <td align="right" rowspan="3">
@@ -68,12 +68,12 @@ $generalSetting            = GeneralSetting::find('1');
                 </td>
             </tr>
             <tr>
-                <td>
+                <td  width="100%" colspan="2">
                     <p style="font-size: 12px; line-height: 2;">A <span><u>digitized form of a</u></span> <strong>hand-signed</strong> copy of this NELP must be uploaded to  (<span style="background: yellow;">xxxx</span>).</p>
                 </td>
             </tr>
             <tr>
-                <td><h5>NON-EXCLUSIVE LICENSE TO PUBLISH (“NELP”)</h5></td>
+                <td  width="100%" colspan="2"><h5>NON-EXCLUSIVE LICENSE TO PUBLISH (“NELP”)</h5></td>
             </tr>
             <tr>
                 <td width="100%" colspan="2">
