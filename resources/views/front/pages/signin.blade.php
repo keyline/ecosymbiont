@@ -31,7 +31,7 @@
                                         <form method="POST" action="">
                                         @csrf
                                             <div class="row" style="margin-bottom: 15px;">
-                                              <label for="email" class="col-md-4 col-lg-3 col-form-label">Email Id</label>
+                                              <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                                               <div class="col-md-8 col-lg-9">
                                                 <input type="text" name="email" class="form-control" id="email" value="">
                                               </div>

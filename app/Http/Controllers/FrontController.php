@@ -72,8 +72,9 @@ class FrontController extends Controller
     }
     public function pageContent($slug)
     {
-        $data['row']                    = Page::select('page_name', 'page_name')->where('status', '=', 1)->where('page_slug', '=', $slug)->first();
+        $data['row']                    = Page::select('page_name', 'page_content')->where('status', '=', 1)->where('page_slug', '=', $slug)->first();
         $title                          = (($data['row'])?$data['row']->page_name:'');
+        $data['button_show']            = (($slug == 'submissions')?1:0);
         $page_name                      = 'page-content';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
@@ -116,6 +117,7 @@ class FrontController extends Controller
                                            ->where('news_contents.status', '=', 1)
                                            ->where('news_contents.slug', '=', $slug)
                                            ->first();
+        // Helper::pr($data['rowContent']);
         $author_name                = (($data['rowContent'])?$data['rowContent']->author_name:'');
         $parent_category_id         = (($data['rowContent'])?$data['rowContent']->parent_category:'');
         $data['authorPostCount']    = NewsContent::where('news_contents.status', '=', 1)
@@ -165,8 +167,11 @@ class FrontController extends Controller
                             ];
                             UserActivity::insert($activityData);
                         /* user activity */
-
-                        return redirect('user/dashboard');
+                        if($sessionData->role == 1){
+                            return redirect('user/my-profile');
+                        } else {
+                            return redirect('user/dashboard');
+                        }
                     } else {
                         /* user activity */
                             $activityData = [
@@ -215,8 +220,8 @@ class FrontController extends Controller
                             'middle_name'               => $postData['middle_name'],            
                             'email'                     => $postData['email'],           
                             'phone'                     => $postData['phone'],           
-                            'country'                   => $postData['country'],           
-                            'role'                      => 1,           
+                            'country'                   => $postData['country'],
+                            'role'                      => $postData['role'],
                             'password'                  => Hash::make($postData['password']),                         
                         ];
                         User::insert($fields);
@@ -359,7 +364,7 @@ class FrontController extends Controller
         {
             $user_id                        = session('user_id');
             $data['user']                   = User::find($user_id);
-            $data['articles']               = Article::where('user_id', '=', $user_id)->get();
+            $data['articles']               = Article::where('user_id', '=', $user_id)->orderBy('id', 'DESC')->get();
 
             if ($request->isMethod('post')) {
                 $postData = $request->all();
@@ -380,7 +385,7 @@ class FrontController extends Controller
                 }
             }
 
-            $title                          = 'My Articles';
+            $title                          = 'My Creative-Works';
             $page_name                      = 'my-articles';
             echo $this->front_after_login_layout($title, $page_name, $data);
         }
@@ -448,7 +453,7 @@ class FrontController extends Controller
                         $imageFile      = $request->file('narrative_file');
                         if ($imageFile != '') {
                             $imageName      = $imageFile->getClientOriginalName();
-                            $uploadedFile   = $this->upload_single_file('narrative_file', $imageName, 'narrative', 'image');
+                            $uploadedFile   = $this->upload_single_file('narrative_file', $imageName, 'narrative', 'word');
                             if ($uploadedFile['status']) {
                                 $narrative_file = $uploadedFile['newFilename'];
                             } else {
@@ -529,16 +534,19 @@ class FrontController extends Controller
                 }            
                 if ($this->validate($request, $rules)) {
                     /* article no generate */
-                        $getLastArticle = Article::orderBy('id', 'DESC')->first();
+                        $currentMonth   = date('m');
+                        $currentYear    = date('Y');
+                        $currentMonthYear = $currentYear.'-'.$currentMonth;
+                        $getLastArticle = Article::where('created_at', 'LIKE', '%'.$currentMonthYear.'%')->orderBy('id', 'DESC')->first();
                         if($getLastArticle){
                             $sl_no              = $getLastArticle->sl_no;
                             $next_sl_no         = $sl_no + 1;
-                            $next_sl_no_string  = str_pad($next_sl_no, 6, 0, STR_PAD_LEFT);
-                            $article_no         = 'ECOSYM-ARTICLE-'.$next_sl_no_string;
+                            $next_sl_no_string  = str_pad($next_sl_no, 3, 0, STR_PAD_LEFT);
+                            $article_no         = 'SRN-'.$currentMonth.$currentYear.'-'.$next_sl_no_string;
                         } else {
                             $next_sl_no         = 1;
-                            $next_sl_no_string  = str_pad($next_sl_no, 6, 0, STR_PAD_LEFT);
-                            $article_no         = 'ECOSYM-ARTICLE-'.$next_sl_no_string;
+                            $next_sl_no_string  = str_pad($next_sl_no, 3, 0, STR_PAD_LEFT);
+                            $article_no         = 'SRN-'.$currentMonth.$currentYear.'-'.$next_sl_no_string;
                         }
                     /* article no generate */
                     $fields = [
@@ -585,7 +593,7 @@ class FrontController extends Controller
                         'bio_short'                 => $postData['bio_short'],
                         'bio_long'                  => $postData['bio_long'],  
                     ];
-                    // Helper::pr($fields);
+                    // Helper::pr($fields);die;
 
                     /* generate inspection pdf & save it to directory */
                         // $generalSetting                 = GeneralSetting::find('1');
@@ -610,14 +618,13 @@ class FrontController extends Controller
                         // $fields['nelp_form_pdf'] = $filename;
                     /* generate inspection pdf & save it to directory */
                     Article::insert($fields);
-                    
-                    return redirect(url('user/my-articles'))->with('success_message', 'Article Submitted Successfully !!!');
+                    return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
                 } else {
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');
                 }
             }
 
-            $title                          = 'Submit New Articles';
+            $title                          = 'Submit New Creative-Work';
             $page_name                      = 'submit-new-article';
             $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();

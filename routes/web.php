@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Route;
     Route::match(['get', 'post'], '/content/{id}', 'App\Http\Controllers\FrontController@newsContent');
     Route::match(['get', 'post'], '/signin', 'App\Http\Controllers\FrontController@signIn');
     Route::match(['get', 'post'], '/signup', 'App\Http\Controllers\FrontController@signUp');
+    Route::match(['get', 'post'], '/submissions', 'App\Http\Controllers\FrontController@submissions');
 
     Route::group(['prefix' => 'user', 'middleware' => ['user']], function () {
         Route::get('signout', 'App\Http\Controllers\FrontController@signout');

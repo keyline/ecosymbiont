@@ -4,6 +4,9 @@ use App\Models\NewsContent;
 use App\Models\NewsContentImage;
 use App\Models\Country;
 use App\Models\EcosystemAffiliation;
+use App\Models\Article;
+use App\Models\Title;
+use App\Models\Pronoun;
 use App\Helpers\Helper;
 ?>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -19,13 +22,13 @@ use App\Helpers\Helper;
                             <div class="single-post-box">
                                 <div class="title-post">
                                     <h1><?=$rowContent->new_title?></h1>
-                                    <h5><?=$rowContent->sub_title?></h5>
                                     <ul class="post-tags">
                                         <li><i class="fa fa-clock-o"></i><?=date_format(date_create($rowContent->created_at), "d M Y")?></li>
-                                        <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$rowContent->author_name?></a></li>
+                                        <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$rowContent->author_name?> | <?=$rowContent->creative_work_DOI?></a></li>
                                         <!-- <li><a href="#"><i class="fa fa-comments-o"></i><span>0</span></a></li>
                                         <li><i class="fa fa-eye"></i>872</li> -->
                                     </ul>
+                                    <h5><?=$rowContent->sub_title?></h5>
                                 </div>
                                 <div class="share-post-box">
                                     <ul class="share-box">
@@ -38,7 +41,7 @@ use App\Helpers\Helper;
                                 </div>
                                 <div class="post-gallery">
                                     <img src="<?=env('UPLOADS_URL').'newcontent/'.$rowContent->cover_image?>" alt="<?=$rowContent->new_title?>">
-                                    <span class="image-caption"><?=$rowContent->cover_image_caption?></span>
+                                    <span class="image-caption" style="color:skyblue;"><?=$rowContent->cover_image_caption?></span>
                                 </div>
                                 <div class="post-content">
                                     <p><?=$rowContent->short_desc?></p>
@@ -65,7 +68,13 @@ use App\Helpers\Helper;
                                     </div>
                                 </div>
                                 <div class="post-content">
-                                    <p><?=$rowContent->long_desc?></p>
+                                    <?php if(session('is_user_login')){?>
+                                        <p><?=$rowContent->long_desc?></p>
+                                    <?php } else {?>
+                                        <p><?=substr($rowContent->long_desc,0,100)?> ...</p>
+                                        <p class="text-center"><a href="<?=url('signin')?>" class="text-primary">Read More</a></p>
+                                    <?php }?>
+                                    
                                 </div>
                                 <div class="post-tags-box">
                                     <ul class="tags-box">
@@ -92,41 +101,49 @@ use App\Helpers\Helper;
                                         <li class="active" style="width: 100%;">
                                             <a href="#about-autor" data-toggle="tab">About The Autor</a>
                                         </li>
-                                        <!-- <li>
-                                            <a href="#more-autor" data-toggle="tab">More From Autor</a>
-                                        </li> -->
                                     </ul>
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="about-autor">
                                             <div class="autor-box">
-                                                <img src="<?=env('NO_USER_IMAGE')?>" alt="<?=$rowContent->author_name?>">
+                                                <?php
+                                                $getArticle = Article::where('article_no', '=', $rowContent->creative_work_SRN)->first();
+                                                $titleId = (($getArticle)?$getArticle->titleId:'');
+                                                $getTitle = Title::select('name')->where('id', '=', $titleId)->first();
+                                                $pronounId = (($getArticle)?$getArticle->pronounId:'');
+                                                $getPronoun = Pronoun::select('name')->where('id', '=', $pronounId)->first();
+                                                ?>
                                                 <div class="autor-content">
                                                     <div class="autor-title">
-                                                        <h1><span><?=$rowContent->author_name?></span><a href="javascript:void(0);"><?=$authorPostCount?> Posts</a></h1>
-                                                        <!-- <ul class="autor-social">
-                                                            <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                                                            <li><a href="#" class="google"><i class="fa fa-google-plus"></i></a></li>
-                                                            <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                                                            <li><a href="#" class="youtube"><i class="fa fa-youtube"></i></a></li>
-                                                            <li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
-                                                            <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
-                                                            <li><a href="#" class="dribble"><i class="fa fa-dribbble"></i></a></li>
-                                                        </ul> -->
+                                                        <h1>
+                                                            <span><?=$rowContent->author_name?>  (<?=(($getTitle)?$getTitle->name:'')?>/<?=(($getPronoun)?$getPronoun->name:'')?>) <?=(($getArticle)?$getArticle->bio_short:'')?>.</span>
+                                                            <!-- <a href="javascript:void(0);"><?=$authorPostCount?> Posts</a> -->
+                                                        </h1>
                                                     </div>
-                                                    <p><?=$rowContent->organization_name?></p>
-                                                    <?php
-                                                    $getCountry = Country::select('name')->where('id', '=', $rowContent->country)->first();
-                                                    ?>
-                                                    <p><?=(($getCountry)?$getCountry->name:'')?></p>
-                                                    <?php
-                                                    $author_affiliation = json_decode($rowContent->author_affiliation);
-                                                    $affiliations       = [];
-                                                    if(!empty($author_affiliation)){ for($k=0;$k<count($author_affiliation);$k++){
-                                                        $getAffiliation = EcosystemAffiliation::select('name')->where('id', '=', $author_affiliation[$k])->first();
-                                                        $affiliations[]       = $getAffiliation->name;
-                                                    } }?>
-                                                    <p><?=implode(", ", $affiliations)?></p>
-
+                                                    <div class="autor-title">
+                                                        <h1>
+                                                            <?php
+                                                            $author_affiliation = json_decode($rowContent->author_affiliation);
+                                                            $affiliations       = [];
+                                                            if(!empty($author_affiliation)){ for($k=0;$k<count($author_affiliation);$k++){
+                                                                $getAffiliation = EcosystemAffiliation::select('name')->where('id', '=', $author_affiliation[$k])->first();
+                                                                $affiliations[]       = $getAffiliation->name;
+                                                            } }?>
+                                                            <span><?=implode(", ", $affiliations)?> | <?=(($getArticle)?$getArticle->indigenous_affiliation:'')?></span>
+                                                        </h1>
+                                                    </div>
+                                                    <div class="autor-title">
+                                                        <h1>
+                                                            <?php
+                                                            $getCountry = Country::select('name')->where('id', '=', $rowContent->country)->first();
+                                                            ?>
+                                                            <span><?=(($getCountry)?$getCountry->name:'')?></span>
+                                                        </h1>
+                                                    </div>
+                                                    <div class="autor-title">
+                                                        <h1>
+                                                            <span><?=$rowContent->organization_name?></span>
+                                                        </h1>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

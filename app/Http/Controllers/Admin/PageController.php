@@ -39,7 +39,7 @@ class PageController extends Controller
                 $postData = $request->all();
                 $rules = [
                     'page_name'             => 'required',
-                    'page_content'          => 'required'
+                    // 'page_content'          => 'required'
                 ];
                 if($this->validate($request, $rules)){
                     /* page image */
@@ -78,6 +78,7 @@ class PageController extends Controller
                         'page_banner_image'     => $page_banner_image,
                         'page_video'            => $postData['page_video'],
                     ];
+                    // Helper::pr($fields);
                     Page::insert($fields);
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'].' Inserted Successfully !!!');
                 } else {
@@ -102,7 +103,7 @@ class PageController extends Controller
                 $postData = $request->all();
                 $rules = [
                     'page_name'             => 'required',
-                    'page_content'          => 'required'
+                    // 'page_content'          => 'required'
                 ];
                 if($this->validate($request, $rules)){
                     /* page image */

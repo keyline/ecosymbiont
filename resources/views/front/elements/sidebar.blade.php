@@ -12,15 +12,17 @@ $pageSegment = $pageName[1];
 <div class="sidebar theiaStickySidebar">
     <div class="widget review-widget">
         <div class="title-section">
-            <h1><span>Welcome <?=(($user)?$user->first_name . ' ' . $user->last_name:'')?></span></h1>
+            <h1><span>Welcome <?=(($user)?$user->first_name:'')?></span></h1>
         </div>
         <ul class="review-posts-list quick-link">
-            <li <?=(($pageSegment == 'dashboard')?'class="active"':'')?>>
-                <a href="<?=url('user/dashboard')?>">Dashboard</a>
-            </li>
-            <li <?=(($pageSegment == 'my-articles')?'class="active"':'')?>>
-                <a href="<?=url('user/my-articles')?>">My Articles</a>
-            </li>
+            <?php if(session('role') == 2){?>
+                <li <?=(($pageSegment == 'dashboard')?'class="active"':'')?>>
+                    <a href="<?=url('user/dashboard')?>">Dashboard</a>
+                </li>
+                <li <?=(($pageSegment == 'my-articles')?'class="active"':'')?>>
+                    <a href="<?=url('user/my-articles')?>">My Creative-Works</a>
+                </li>
+            <?php }?>
             <li <?=(($pageSegment == 'my-profile')?'class="active"':'')?>>
                 <a href="<?=url('user/my-profile')?>">My Profile</a>
             </li>

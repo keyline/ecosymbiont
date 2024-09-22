@@ -52,7 +52,9 @@ $details = json_decode($details);
                             <!-- <li><a href="#">Log In</a></li> -->
                             <!-- <li><a href="<?=url('contact-us')?>">Contact</a></li> -->
                             <?php if(session('is_user_login')){?>
-                                <li><img src="<?=(($user)?(($user->profile_image != '')?env('UPLOADS_URL').'user/'.$user->profile_image:env('NO_USER_IMAGE')):env('NO_USER_IMAGE'))?>" alt="<?=(($user)?$user->first_name . ' ' . $user->last_name:'')?>" class="img-responsive img-circle" style="width: 35px;height: 35px;"><a href="<?=url('user/dashboard')?>">Welcome <?=(($user)?$user->first_name . ' ' . $user->last_name:'')?></a></li>
+                                <li>
+                                    <!-- <img src="<?=(($user)?(($user->profile_image != '')?env('UPLOADS_URL').'user/'.$user->profile_image:env('NO_USER_IMAGE')):env('NO_USER_IMAGE'))?>" alt="<?=(($user)?$user->first_name . ' ' . $user->last_name:'')?>" class="img-responsive img-circle" style="width: 35px;height: 35px;"> -->
+                                    <a href="<?=url('user/dashboard')?>">Welcome <?=(($user)?$user->first_name . ' ' . $user->last_name:'')?></a></li>
                                 <li><a href="<?=url('user/signout')?>">Sign Out</a></li>
                             <?php } else {?>
                                 <li><a href="<?=url('signin')?>">Sign In</a></li>
@@ -149,7 +151,7 @@ $details = json_decode($details);
                                 </div>
                             </li>
                         <?php } }?>
-                        <li><a href="<?=url('submissions')?>">SUBMISSIONS</a></li>
+                        <li><a href="<?=url('page/submissions')?>">SUBMISSIONS</a></li>
                     </ul>
                     <!-- <form class="navbar-form navbar-right" role="search">
                         <input type="text" id="search" name="search" placeholder="Search here">

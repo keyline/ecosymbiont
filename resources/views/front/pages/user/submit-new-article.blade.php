@@ -260,7 +260,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         @if ($section_ert)
                                             @foreach ($section_ert as $data)
-                                            <input type="checkbox" name="section_ert[]" value="{{ $data->id }}" @if(in_array($data->id, old('section_ert', $section_ertId))) checked @endif>{{ $data->name }}<br>
+                                            <input type="checkbox" name="section_ert[]" value="{{ $data->id }}" @if(in_array($data->id, old('section_ert', $section_ertId))) checked @endif> {{ $data->name }}<br>
                                             @endforeach
                                         @endif                                         
                                     </div>
@@ -290,8 +290,8 @@
                                                 $data = $submission_type[$i];
                                             @endphp
                                             <!-- Use Blade's templating syntax instead of echo inside @php block -->                                        
-                                            <input type="radio" name="submission_types" value="<?php echo $data->id ?>">
-                                            <label for="submission_types"><?php echo $data->name?></label>
+                                            <input type="radio" name="submission_types" value="<?php echo $data->id ?>" id="submission_types<?php echo $data->id ?>">
+                                            <label for="submission_types<?php echo $data->id ?>"><?php echo $data->name?></label>
                                         @endfor
                                     @endif                            
                                     </div>
@@ -299,57 +299,33 @@
                                 <div class="row mb-3">
                                     <label for="narrative_file" class="col-md-2 col-lg-4 col-form-label">15A1) TYPE A: word narrative (no embedded images) (500-1000 words for prose, 100-250 words for poetry)</label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="file" name="narrative_file" class="form-control" id="narrative_file">
-                                        <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>
+                                        <input type="file" name="narrative_file" class="form-control" id="narrative_file" required>
+                                        <small class="text-info">* Only DOC & DOCX files are allowed</small><br>
                                         <span id="narrative_file_error" class="text-danger"></span>
-                                        <?php if($narrative_file != ''){?>
-                                        <a href="<?= env('UPLOADS_URL') . 'narrative/' . $narrative_file ?>" target="_blank"
-                                            class="badge bg-primary">View Journal</a>
-                                        <?php }?>
-                                        <?php if($narrative_file != ''){?>
-                                        <img src="<?=env('UPLOADS_URL').'narrative/'.$narrative_file?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
-                                        <?php } else {?>
-                                        <img src="<?=env('NO_IMAGE')?>" alt="narrative_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
-                                        <?php }?>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="first_image_file" class="col-md-2 col-lg-4 col-form-label">15A2) TYPE A: First image/photograph accompanying word narrative</label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="file" name="first_image_file" class="form-control" id="first_image_file">
-                                        <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>
+                                        <small class="text-info">* Only JPG, JPEG, SVG, PNG files are allowed</small><br>
                                         <span id="first_image_file_error" class="text-danger"></span>
-                                        <?php if($first_image_file != ''){?>
-                                        <img src="<?=env('UPLOADS_URL').'narrative/'.$first_image_file?>" alt="first_image_file" style="width: 150px; height: 150px; margin-top: 10px;">
-                                        <?php } else {?>
-                                        <img src="<?=env('NO_IMAGE')?>" alt="first_image_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
-                                        <?php }?>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="second_image_file" class="col-md-2 col-lg-4 col-form-label">15A3) TYPE A: Second image/photograph accompanying word narrative</label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="file" name="second_image_file" class="form-control" id="second_image_file">
-                                        <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>
-                                        <span id="second_image_file_error" class="text-danger"></span>                                    
-                                        <?php if($second_image_file != ''){?>
-                                        <img src="<?=env('UPLOADS_URL').'narrative/'.$second_image_file?>" alt="second_image_file" style="width: 150px; height: 150px; margin-top: 10px;">
-                                        <?php } else {?>
-                                        <img src="<?=env('NO_IMAGE')?>" alt="second_image_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
-                                        <?php }?>
+                                        <small class="text-info">* Only JPG, JPEG, SVG, PNG files are allowed</small><br>
+                                        <span id="second_image_file_error" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="art_image_file" class="col-md-2 col-lg-4 col-form-label">15B1) TYPE B: Art image + descriptive narrative | art image</label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="file" name="art_image_file" class="form-control" id="art_image_file">
-                                        <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>    
-                                        <span id="art_image_file_error" class="text-danger"></span>                                
-                                        <?php if($art_image_file != ''){?>
-                                        <img src="<?=env('UPLOADS_URL').'art_image/'.$art_image_file?>" alt="art_image_file" style="width: 150px; height: 150px; margin-top: 10px;">
-                                        <?php } else {?>
-                                        <img src="<?=env('NO_IMAGE')?>" alt="art_image_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
-                                        <?php }?>
+                                        <small class="text-info">* Only JPG, JPEG, SVG, PNG files are allowed</small><br>    
+                                        <span id="art_image_file_error" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -365,16 +341,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         <input type="file" name="art_video_file" class="form-control" id="art_video_file">
                                         <small class="text-info">* Only MP4, AVI, MOV, MKV, WEBM files are allowed</small><br>  
-                                        <span id="art_video_file_error" class="text-danger"></span>                                  
-                                        <?php if($art_video_file != ''){?>
-                                            <video width="150" height="150" controls>
-                                                <source src="<?=env('UPLOADS_URL').'art_video/'.$art_video_file?>" type="video/mp4">
-                                                Your browser does not support the video tag.
-                                            </video>
-                                        <!-- <img src="<?=env('UPLOADS_URL').'art_video/'.$art_video_file?>" alt="art_video_file" style="width: 150px; height: 150px; margin-top: 10px;"> -->
-                                        <?php } else {?>
-                                        <img src="<?=env('NO_IMAGE')?>" alt="art_video_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
-                                        <?php }?>
+                                        <span id="art_video_file_error" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -435,7 +402,7 @@
                                     <div class="col-md-10 col-lg-8">                                                                                                
                                         @if ($ecosystem_affiliation)
                                             @foreach ($ecosystem_affiliation as $data)
-                                            <input type="checkbox" name="ecosystem_affiliation[]" value="{{ $data->id }}" @if(in_array($data->id, old('ecosystem_affiliation', $ecosystem_affiliationId))) checked @endif>{{ $data->name }}<br>
+                                            <input type="checkbox" name="ecosystem_affiliation[]" value="{{ $data->id }}" @if(in_array($data->id, old('ecosystem_affiliation', $ecosystem_affiliationId))) checked @endif> {{ $data->name }}<br>
                                             @endforeach
                                         @endif                                
                                     </div>
@@ -454,7 +421,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         @if ($expertise_area)
                                             @foreach ($expertise_area as $data)
-                                            <input type="checkbox" name="expertise_area[]" value="{{ $data->id }}" @if(in_array($data->id, old('expertise_area', $expertise_areaId))) checked @endif>{{ $data->name }}<br>
+                                            <input type="checkbox" name="expertise_area[]" value="{{ $data->id }}" @if(in_array($data->id, old('expertise_area', $expertise_areaId))) checked @endif> {{ $data->name }}<br>
                                             @endforeach
                                         @endif
                                     </div>
@@ -487,7 +454,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         <p>The substance of your Creative-Work will not be further reviewed by the editor(s) until you upload a completed and signed digital copy of the NELP, according to the process described in your Eligibility E-mail.</p>                                
                                         <input type="checkbox" id="acknowledge" name="acknowledge" value="1" required>
-                                        <label for="acknowledge">I understand</label>
+                                        <label for="acknowledge">I Understand</label>
                                     </div>
                                 </div>     
                             </div>                   

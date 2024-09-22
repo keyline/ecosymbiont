@@ -25,9 +25,11 @@
                                 <tr>
                                     <th>#</th>
                                     <th>SRN</th>
-                                    <th>Title<br>Subtitle</th>
+                                    <th>Title</th>
+                                    <th>Submitted At</th>
+                                    <th>NELP</th>
+                                    <th>NELP Scan Copy</th>
                                     <th>Status</th>
-                                    <!-- <td>action</td> -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -35,40 +37,46 @@
                                     <tr>
                                         <td><?=$sl++?></td>
                                         <td><?=$article->article_no?></td>
+                                        <td><?=$article->creative_Work?></td>
+                                        <td><?=date_format(date_create($article->created_at), "d-m-Y")?></td>
                                         <td>
-                                            <h5><?=$article->creative_Work?></h5>
-                                            <h6><?=$article->subtitle?></h6>
+                                            <?php if($article->nelp_form_pdf){?>
+                                                <a href="<?=env('UPLOADS_URL').'article/'.$article->nelp_form_pdf?>" target="_blank" class="label label-primary">View File</a>
+                                            <?php }?>
                                         </td>
                                         <td>
-                                            <h4>
+                                            <?php if($article->nelp_form_pdf){?>
+                                                <a href="<?=env('UPLOADS_URL').'article/'.$article->nelp_form_pdf?>" target="_blank" class="label label-primary">View File</a>
+                                            <?php } else {?>
+                                                <?php if($article->is_published == 2){?>
+                                                    <form method="POST" action="" enctype="multipart/form-data" oninput="validateForm()">
+                                                        @csrf
+                                                        <input type="hidden" name="article_id" value="<?=$article->id?>">
+                                                        <small>Upload Scan Copy Of NELP Form With Date & Signature</small>
+                                                        <input type="file" name="nelp_form_scan_copy" class="form-control" id="nelp_form_scan_copy" required>
+                                                        <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>
+                                                        <button type="submit" class="btn btn-primary btn-sm">Upload</button>
+                                                    </form>
+                                                <?php } ?>
+                                            <?php }?>
+                                        </td>
+                                        <td>
                                             <?php
                                             if($article->is_published == 0){
-                                                echo "Article Submitted";
+                                                echo "<h6>Submitted</h6>";
                                             } elseif($article->is_published == 1){
-                                                echo "Scan Copy Uploaded";
+                                                echo "<h6>Final Edited & Checked</h6>";
                                             } elseif($article->is_published == 2){
-                                                echo "Approve";
+                                                echo "<h6>NELP Form Generated & Shared</h6>";
                                             } elseif($article->is_published == 3){
-                                                echo "Reject";
+                                                echo "<h6>Scan Copy Uploaded</h6>";
+                                            } elseif($article->is_published == 4){
+                                                echo "<h6>Approved</h6>";
+                                            } elseif($article->is_published == 5){
+                                                echo "<h6>Rejected</h6>";
                                             }
-                                            echo '</h4><hr>';
-                                            if($article->is_published == 0){
                                             ?>
-                                            <form method="POST" action="" enctype="multipart/form-data" oninput="validateForm()">
-                                                @csrf
-                                                <input type="hidden" name="article_id" value="<?=$article->id?>">
-                                                <small>Upload Scan Copy Of NELP Form With Date & Signature</small>
-                                                <input type="file" name="nelp_form_scan_copy" class="form-control" id="nelp_form_scan_copy" required>
-                                                <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>
-                                                <button type="submit" class="btn btn-primary btn-sm">Upload</button>
-                                            </form>
-                                            <?php } ?>
                                         </td>
-                                        <!-- <td>
-                                            <?php if(!$article->is_published){?>
-                                                <a href="" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
-                                            <?php }?>
-                                        </td> -->
                                     </tr>
                                 <?php } }?>
                             </tbody>

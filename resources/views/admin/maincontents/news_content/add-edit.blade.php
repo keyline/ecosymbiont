@@ -47,8 +47,10 @@ $controllerRoute = $module['controller_route'];
         if ($row) {
             $sub_categoryId = $row->sub_category;            
             $parent_categoryId = $row->parent_category;  
-            $new_title = $row->new_title;   
-            $sub_title = $row->sub_title;  
+            $new_title = $row->new_title;
+            $sub_title = $row->sub_title;
+            $creative_work_SRN = $row->creative_work_SRN;
+            $creative_work_DOI = $row->creative_work_DOI;
             $author_name = $row->author_name; 
             $pronounId = $row->author_pronoun;  
             $author_affiliationId = $selected_ecosystem_affiliation;
@@ -68,6 +70,8 @@ $controllerRoute = $module['controller_route'];
             $parent_categoryId = ''; 
             $new_title = '';          
             $sub_title = '';
+            $creative_work_SRN = '';
+            $creative_work_DOI = '';
             $author_name = '';
             $pronounId = '';
             $author_affiliationId = [];
@@ -130,7 +134,21 @@ $controllerRoute = $module['controller_route'];
                             <textarea class="form-control" id="sub_title" name="sub_title" rows="4" cols="50" placeholder="Your explanation here..." required><?= $sub_title ?></textarea>
                             <div id="sub_titleError" class="error"></div>
                             </div>
-                        </div>  
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="creative_work_SRN" class="col-md-2 col-lg-2 col-form-label">Creative-Work SRN</label>
+                            <div class="col-md-10 col-lg-10">
+                                <input type="text" name="creative_work_SRN" class="form-control" id="creative_work_SRN" value="<?= $creative_work_SRN ?>" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="creative_work_DOI" class="col-md-2 col-lg-2 col-form-label">Creative-Work DOI</label>
+                            <div class="col-md-10 col-lg-10">
+                                <input type="text" name="creative_work_DOI" class="form-control" id="creative_work_DOI" value="<?= $creative_work_DOI ?>" required>
+                            </div>
+                        </div>
+
                         <div class="row mb-3">
                             <label for="author_name" class="col-md-2 col-lg-2 col-form-label">Author Name</label>
                             <div class="col-md-10 col-lg-10">
