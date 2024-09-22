@@ -76,9 +76,9 @@ $generalSetting            = GeneralSetting::find('1');
                 <td  width="100%"><h5>NON-EXCLUSIVE LICENSE TO PUBLISH (“NELP”)</h5></td>
             </tr>
             <tr>
-                <td width="100%" colspan="2" style="line-height: 1.5; width: 100%; margin-top: 10px;">
-                    This NELP records the terms under which the Creative-Work specified below will be published online only on <strong>Ecosymbionts Regenerate Together</strong> (the “<strong>Platform</strong>”). The Platform is published by Ecosymbionts Regenerate (the “Publisher”). The Platform is owned by the Śramani Institute (the “<strong>Proprietor</strong>”).
-                    <br>Submission Reference Number (“<strong>SRN</strong>”): <span style="background: yellow;">xxx</span>
+                <td width="100%" colspan="2">
+                    <p style="line-height: 1.5; width: 100%; margin-top: 10px;">This NELP records the terms under which the Creative-Work specified below will be published online only on <strong>Ecosymbionts Regenerate Together</strong> (the “<strong>Platform</strong>”). The Platform is published by Ecosymbionts Regenerate (the “Publisher”). The Platform is owned by the Śramani Institute (the “<strong>Proprietor</strong>”).
+                    <br>Submission Reference Number (“<strong>SRN</strong>”): <span style="background: yellow;">xxx</span></p>
                 </td>
             </tr>
             <!-- THE CREATIVE-WORK -->
