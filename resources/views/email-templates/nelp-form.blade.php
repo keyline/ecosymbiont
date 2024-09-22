@@ -176,7 +176,7 @@ $generalSetting            = GeneralSetting::find('1');
                 <td width="70%" colspan="5" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Date:</td>
             </tr>
             <!-- OTHER AUTHORS’ DETAILS -->
-            <br style="border-top: 1px solid #000" />
+            <br/>
             <tr>
                 <td colspan="7" style="width: 100%; text-align:left; font-weight: bold; margin-top: 10px;border: 1px solid #000; background-color: #e7e6e6; text-align:left; padding: 5px 15px;">
                     <p>OTHER AUTHORS’ DETAILS</p>
@@ -212,11 +212,10 @@ $generalSetting            = GeneralSetting::find('1');
             <tr>
                 <td width="20%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px;"><p style="text-align: center;">(the Lead Author and each individual listed here and at the end of this NELP is, individually and collectively, the “<strong>Author</strong>”)</p></td>
             </tr>
-            <br style="border-top: 1px solid #000">
             <!-- ŚRAMANI INSTITUTE EMPLOYEE -->
-            <tr>
+            <tr styale="margin-top: 30px">
                 <td width="30%" colspan="1" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">
-                    ŚRAMANI INSTITUTE EMPLOYEE
+                    SRAMANI INSTITUTE EMPLOYEE
                     <p style="color: #4472c4;"><i>You must check this box and enter details, if applicable</i></p>
                 </td>
                 <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
