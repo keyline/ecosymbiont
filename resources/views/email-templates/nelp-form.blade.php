@@ -278,8 +278,10 @@ $generalSetting            = GeneralSetting::find('1');
         <li style="margin: 10px 0"><span style="margin-right: 10px">1.1</span>The Author hereby agrees to be bound by all terms and conditions in this NELP. </li>
         <li style="font-weight: bold; margin: 10px 0"><span style="margin-right: 10px">2.</span> LICENSE </li>
         <li style="margin: 10px 0"><span style="margin-right: 10px">2.1.</span>The term “Contribution” means the Creative-Work created by the Author as identified on page one of this NELP and includes, without exception, all the following versions of the Creative-Work: </li>
-        <ul style="padding-left: 10px">
+        <ul style="padding-left: 20px">
             <li style="margin: 10px 0"><b><span style="margin-right: 10px">2.1.1.</span>Submitted Creative-Work Under Review (“SCWUR”):</b> any version of the Contribution that is under formal review for inclusion on the Platform. </li>
+            <li style="margin: 10px 0"><b><span style="margin-right: 10px">2.1.2.</span>Accepted Creative-Work (“ACW”):</b>the version of the Contribution that has been accepted for publication. This version may include revisions resulting from editor review but may be subject to further editorial input by the Publisher.</li>
+            <li style="margin: 10px 0"><b><span style="margin-right: 10px">2.1.3.</span>Content of Record (“CoR”):</b> the version of the Contribution that is formally published on the Platform and is citable via a permanent identifying Digital Object Identifier (“DOI”). This does not include any ‘early release Creative-Work’ that has not yet been fixed by processes that are still to be applied, such as copy-editing, proof corrections, layout, and typesetting. The CoR includes any corrected or enhanced CoR. </li>
         </ul>
     </ul>    
 </body>
