@@ -176,11 +176,7 @@ $generalSetting            = GeneralSetting::find('1');
                 <td width="70%" colspan="5" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Date:</td>
             </tr>
             <!-- OTHER AUTHORS’ DETAILS -->
-            <tr>
-                <td>
-                    <p style="margin: 10px 0;"></p>
-                </td>
-            </tr>
+            &nbsp;&nbsp;&nbsp;
             <tr>
                 <td colspan="7" style="width: 100%; text-align:left; font-weight: bold; margin-top: 10px;border: 1px solid #000; background-color: #e7e6e6; text-align:left; padding: 5px 15px;">
                     <p>OTHER AUTHORS’ DETAILS</p>
@@ -216,11 +212,7 @@ $generalSetting            = GeneralSetting::find('1');
             <tr>
                 <td width="20%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px;"><p style="text-align: center;">(the Lead Author and each individual listed here and at the end of this NELP is, individually and collectively, the “<strong>Author</strong>”)</p></td>
             </tr>
-            <tr>
-                <td>
-                    <p style="margin: 10px 0;"></p>
-                </td>
-            </tr>
+            &nbsp;&nbsp;&nbsp;
             <!-- ŚRAMANI INSTITUTE EMPLOYEE -->
             <tr>
                 <td width="30%" colspan="1" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">
