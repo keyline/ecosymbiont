@@ -1,7 +1,5 @@
 <?php
 use App\Models\GeneralSetting;
-use App\Models\EcosystemAffiliation;
-use App\Models\Country;
 use App\Models\Article;
 $generalSetting            = GeneralSetting::find('1');
 ?>
@@ -70,17 +68,15 @@ $generalSetting            = GeneralSetting::find('1');
     <ul class="header">
         <li style="float: left; width: 70%;">
             <p style="font-size: 11px;"><strong>RETURN FORM <span><u>ERT-N0924-02:</u></span></strong></p>
-            <p style="font-size: 12px; line-height: 2;">A <span><u>digitized form of a</u></span> <strong>hand-signed</strong> copy of this NELP must be uploaded to  (<span style="background: yellow;"><?=url('/')?></span>).</p>
+            <p style="font-size: 12px; line-height: 2;">A <span><u>digitized form of a</u></span> <strong>hand-signed</strong> copy of this NELP must be uploaded to  (<span style="background: yellow;">xxxx</span>).</p>
             <h5>NON-EXCLUSIVE LICENSE TO PUBLISH (“NELP”)</h5>
         </li>
-        <li style="float: right;">
-            <!-- <img src="data:image/svg+xml;base64,<?php echo base64_encode(file_get_contents(base_path('public/material/frontend/assets/images/logo-pdf.png'))); ?>" alt="<?=$generalSetting->site_name?>" srcset="" style="max-width: 100%;width: 30%;"> -->
-        </li>
+        <li style="float: right;"><img src="logo.png" alt="" srcset="" style="max-width: 100%;width: 30%;"></li>
     </ul>
     <ul style="padding: 0;">
         <li>
             <p style="line-height: 1.5; width: 100%;">This NELP records the terms under which the Creative-Work specified below will be published online only on <strong>Ecosymbionts Regenerate Together</strong> (the “<strong>Platform</strong>”). The Platform is published by Ecosymbionts Regenerate (the “Publisher”). The Platform is owned by the Śramani Institute (the “<strong>Proprietor</strong>”).
-        <br>Submission Reference Number (“<strong>SRN</strong>”): <span style="background: yellow;"><?=$article_no?>/<?=str_replace("SRN","DOI",$article_no)?></span></p>
+        <br>Submission Reference Number (“<strong>SRN</strong>”): <span style="background: yellow;">xxx</span></p>
         </li>
     </ul>
     <table style="width: 100%; background: #fff; padding: 0px;">
@@ -116,7 +112,7 @@ $generalSetting            = GeneralSetting::find('1');
             <tr>
                 <td width="30%" colspan="1" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Creative-Work Title:</td>
                 <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
-                    <?=$creative_Work?><span style="display: block; margin-top: 5px; text-align: right;">(the <strong>“Contribution”</strong>)</span>
+                    [14 (note: this indicates the question number on the submission form; the answer should be pasted here)]<span style="display: block; margin-top: 5px; text-align: right;">(the <strong>“Contribution”</strong>)</span>
                 </td>
             </tr>
             <tr>
@@ -131,51 +127,36 @@ $generalSetting            = GeneralSetting::find('1');
             <tr>
                 <td width="30%" colspan="1" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Full Legal Name:</td>
                 <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
-                <?=$first_name?> <?=$middle_name?> <?=$last_name?> <span style="display: block; margin-top: 5px; text-align: right;">(the “<strong>Lead Author</strong>”)</span>
+                [2] [3] [4] <span style="display: block; margin-top: 5px; text-align: right;">(the “<strong>Lead Author</strong>”)</span>
                 </td>
             </tr>
             <tr>
                 <td width="30%" colspan="1" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Preferred name for publication:</td>
                 <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
-                <?=$for_publication_name?>
+                [4A]
                 </td>
             </tr>
             <tr>
                 <td width="30%" colspan="1" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Email address:</td>
                 <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
-                <?=$email?>
+                [0]
                 </td>
             </tr>
             <tr>
                 <td width="30%" colspan="1" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Ancestral continental ecoweb affiliation:</strong></td>
-                <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
-                    <?php
-                    $ecosystem_affiliationId    = json_decode($ecosystem_affiliationId);
-                    $affiliations               = [];
-                    if(!empty($ecosystem_affiliationId)){ for($k=0;$k<count($ecosystem_affiliationId);$k++){
-                        $getAffiliation         = EcosystemAffiliation::select('name')->where('id', '=', $ecosystem_affiliationId[$k])->first();
-                        $affiliations[]         = $getAffiliation->name;
-                    } }
-                    echo implode(", ", $affiliations);
-                    ?>
-                </td>
+                <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">[22]</td>
             </tr>
             <tr>
                 <td width="30%" colspan="1" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Ancestral regional ecoweb affiliation:</td>
-                <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;"><?=$indigenous_affiliation?></td>
+                <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">[23]</td>
             </tr>
             <tr>
                 <td width="30%" colspan="1" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Organizational affiliation:</td>
-                <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;"><?=$organization_name?></td>
+                <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">[20]</td>
             </tr>
             <tr>
                 <td width="30%" colspan="1" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Country of residence:</td>
-                <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
-                    <?php
-                    $getCountry = Country::select('name')->where('id', '=', $country)->first();
-                    echo (($getCountry)?$getCountry->name:'');
-                    ?>
-                </td>
+                <td width="70%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">[17]</td>
             </tr>
             <tr>
                 <td width="30%" colspan="1" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Authority to sign:</td>
@@ -215,20 +196,20 @@ $generalSetting            = GeneralSetting::find('1');
                 <td width="15%" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold; font-size: 9px;">Country of residence</td>
             </tr>
             <tr>
-                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px;"></td>
-                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px;"></td>
-                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px;"></td>
-                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px;"></td>
-                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px;"></td>
-                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px;"></td>
+                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px;">Form-2 [2] [3] [4]</td>
+                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px;">Form-2 [0]</td>
+                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px;">Form-2 [22]</td>
+                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px;">Form-2 [23]</td>
+                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px;">Form-2 [20]</td>
+                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px;">Form-2 [17]</td>
             </tr>
             <tr>
-                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px;"></td>
-                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px;"></td>
-                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px;"></td>
-                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px;"></td>
-                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px;"></td>
-                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px;"></td>
+                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px;">Form-3 [2] [3] [4]</td>
+                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px;">Form-3 [0]</td>
+                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px;">Form-3 [22]</td>
+                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px;">Form-3 [23]</td>
+                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px;">Form-3 [20]</td>
+                <td width="20%" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px;">Form-3 [17]</td>
             </tr>
             <tr>
                 <td width="20%" colspan="6" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px;"><p style="text-align: center;">(the Lead Author and each individual listed here and at the end of this NELP is, individually and collectively, the “<strong>Author</strong>”)</p></td>

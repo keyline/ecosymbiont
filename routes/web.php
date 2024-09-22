@@ -24,7 +24,8 @@ use Illuminate\Support\Facades\Route;
         Route::match(['get', 'post'], '/category/{id}', 'App\Http\Controllers\FrontController@category');
         Route::match(['get', 'post'], '/subcategory/{id}', 'App\Http\Controllers\FrontController@subcategory');
         Route::match(['get', 'post'], '/content/{id}', 'App\Http\Controllers\FrontController@newsContent');
-        Route::match(['get', 'post'], '/signin/{id}', 'App\Http\Controllers\FrontController@signIn');
+        Route::match(['get', 'post'], '/signin', 'App\Http\Controllers\FrontController@signIn');
+        Route::match(['get', 'post'], '/sign-in/{id}', 'App\Http\Controllers\FrontController@signIn');
         Route::match(['get', 'post'], '/signup', 'App\Http\Controllers\FrontController@signUp');
         Route::match(['get', 'post'], '/submissions', 'App\Http\Controllers\FrontController@submissions');
     // before login
@@ -77,6 +78,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('article/change-status/{id}', 'ArticlesController@change_status');
         Route::match(['get', 'post'], 'article/change_status_accept/{id}', 'ArticlesController@change_status_accept');
         Route::match(['get', 'post'], 'article/change_status_reject/{id}', 'ArticlesController@change_status_reject');
+        Route::get('article/generate-nelp-form/{id}', 'ArticlesController@generate_nelp_form');
         /* submitted articles */
         
             /* parent category */

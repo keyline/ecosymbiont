@@ -46,6 +46,7 @@ $controllerRoute = $module['controller_route'];
         <?php
         $setting = GeneralSetting::where('id', '=', 1)->first();
         if ($row) {
+            // Helper::pr($row);
             $user_id = $row->user_id;
             $first_name = $row->first_name;            
             $last_name = $row->last_name;            
@@ -62,7 +63,7 @@ $controllerRoute = $module['controller_route'];
             $invited_by_email = $row->invited_by_email;  
             $explanation = $row->explanation;  
             $explanation_submission = $row->explanation_submission;  
-            $section_ertId = (($selected_section_ertId != '')?json_decode($selected_section_ertId):[]); 
+            $section_ertId = (($row->section_ertId != '')?json_decode($row->section_ertId):[]); 
             $titleId = $row->titleId;  
             $pronounId = $row->pronounId;
             $subtitle = $row->subtitle;
@@ -80,12 +81,13 @@ $controllerRoute = $module['controller_route'];
             $participated_info = $row->participated_info;
             $organization_name = $row->organization_name;
             $organization_website = $row->organization_website;
-            $ecosystem_affiliationId = (($selected_ecosystem_affiliation != '')?json_decode($selected_ecosystem_affiliation):[]);
+            $ecosystem_affiliationId = (($row->ecosystem_affiliationId != '')?json_decode($row->ecosystem_affiliationId):[]);
             $indigenous_affiliation = $row->indigenous_affiliation;
-            $expertise_areaId = (($selected_expertise_area != '')?json_decode($selected_expertise_area):[]);
+            $expertise_areaId = (($row->expertise_areaId != '')?json_decode($row->expertise_areaId):[]);
             $bio_short = $row->bio_short;
             $bio_long = $row->bio_long;            
             $acknowledge = $row->acknowledge;
+            $is_final_edit = $row->is_final_edit;
         } else {
             $first_name = '';            
             $last_name =  '';          
@@ -125,6 +127,7 @@ $controllerRoute = $module['controller_route'];
             $bio_short = '';
             $bio_long = '';            
             $acknowledge = '';
+            $is_final_edit = 0;
         }
         ?>
         <div class="col-xl-12">
@@ -513,8 +516,16 @@ $controllerRoute = $module['controller_route'];
                                     <input type="checkbox" id="acknowledge" name="acknowledge" value="1" required>
                                     <label for="acknowledge">I understand</label>
                                 </div>
-                            </div>     
-                        </div>                   
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-10 col-lg-8 text-center">
+                                    <label for="acknowledge">Final Edit</label>
+                                    <input type="radio" id="is_final_edit1" name="is_final_edit" value="1" <?=(($is_final_edit == 1)?'checked':'')?>> <label for="is_final_edit1">YES</label>
+                                    <input type="radio" id="is_final_edit0" name="is_final_edit" value="0" <?=(($is_final_edit == 0)?'checked':'')?>> <label for="is_final_edit0">NO</label>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="text-center">
                             <button type="submit" id="submitButton" class="btn btn-primary"><?= $row ? 'Save' : 'Add' ?></button>
                         </div>

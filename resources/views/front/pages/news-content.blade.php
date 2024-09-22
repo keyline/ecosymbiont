@@ -88,7 +88,7 @@ use App\Helpers\Helper;
                                         // Output the current URL
                                         // echo $current_url;
                                         ?>
-                                        <p class="text-center"><a href="<?=url('signin/' . Helper::encoded($current_url))?>" class="text-primary">Read More</a></p>
+                                        <p class="text-center"><a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="text-primary">Read More</a></p>
                                     <?php }?>
                                     
                                 </div>

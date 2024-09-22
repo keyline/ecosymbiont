@@ -84,12 +84,17 @@ $controllerRoute = $module['controller_route'];
               <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab2">NELP PDF</button>
             </li>            
             <li class="nav-item">
-              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab3">NELP Scan Copy</button>
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab3">NELP Scan Copy</button>
             </li>                               
           </ul> 
           <div class="tab-content pt-2">     
             <div class="tab-pane fade show active" id="tab1">
-            <p style="float:right;"><a href="<?=url('admin/' . $controllerRoute . '/edit/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit"> Edit</i></a></p>
+              <p style="float:right;">
+                <?php if($row->is_final_edit){?>
+                  <a href="<?=url('admin/' . $controllerRoute . '/generate-nelp-form/'.Helper::encoded($row->id))?>" class="btn btn-outline-info btn-sm" title="Generate NELP Form & Shared"><i class="fa fa-pdf"> Generate NELP Form & Shared</i></a>
+                <?php }?>
+                <a href="<?=url('admin/' . $controllerRoute . '/edit/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit"> Edit</i></a>
+              </p>
               <table class="table table-striped table-bordered nowrap">
                 <thead>
                   <tr>                                     

@@ -19,10 +19,15 @@ use App\Models\EcosystemAffiliation;
 use App\Models\ExpertiseArea;
 use App\Models\SubmissionType;
 use App\Models\Country;
+use App\Models\EmailLog;
+
 use Auth;
 use Session;
 use Helper;
 use Hash;
+use PDF;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class ArticlesController extends Controller
 {
@@ -468,10 +473,12 @@ class ArticlesController extends Controller
                     ];
                     //   Helper::pr($fields);
                     Article::where($this->data['primary_key'], '=', $id)->update($fields);
-                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');
-                // } else {
-                //     return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
-                // }
+                    
+                    if($postData['is_final_edit']){
+                        Article::where($this->data['primary_key'], '=', $id)->update(['is_published' => 1, 'is_final_edit' => 1]);
+                    }
+
+                    return redirect("admin/" . $this->data['controller_route'] . "/view_details/" . Helper::encoded($id))->with('success_message', $this->data['title'] . ' Updated Successfully !!!');
             } else {
                 return redirect()->back()->with('error_message', 'All Fields Required !!!');
             }
@@ -540,24 +547,70 @@ class ArticlesController extends Controller
     public function viewDetails($id)
     {
         // dd($id);
-        $id                             = Helper::decoded($id);       
-        $data['module']                 = $this->data;
-        $title                          = $this->data['title'] . ' View Details';
-        $page_name                      = 'article.view_details';
-        $data['row']                   = Article::where('status', '!=', 3)->where('id', '=', $id)->orderBy('id', 'DESC')->first();
-        $data['selected_ecosystem_affiliation'] = json_decode($data['row']->ecosystem_affiliationId);
-        $data['selected_expertise_area'] = json_decode($data['row']->expertise_areaId);
-        $data['selected_section_ertId'] = json_decode($data['row']->section_ertId);
-        $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-        $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-        $data['submission_type']       = SubmissionType::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-        // dd($data['submission_types']);
-        $data['country']                = Country::orderBy('name', 'ASC')->get();
-        // dd($data['country']);
-        $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-        $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-        $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $id                                         = Helper::decoded($id);       
+        $data['module']                             = $this->data;
         
+        $page_name                                  = 'article.view_details';
+        $data['row']                                = Article::where('status', '!=', 3)->where('id', '=', $id)->orderBy('id', 'DESC')->first();
+        $data['selected_ecosystem_affiliation']     = json_decode($data['row']->ecosystem_affiliationId);
+        $data['selected_expertise_area']            = json_decode($data['row']->expertise_areaId);
+        $data['selected_section_ertId']             = json_decode($data['row']->section_ertId);
+        $data['section_ert']                        = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['user_title']                         = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['submission_type']                    = SubmissionType::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['country']                            = Country::orderBy('name', 'ASC')->get();
+        $data['pronoun']                            = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['ecosystem_affiliation']              = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['expertise_area']                     = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        
+        $title                                      = $this->data['title'] . ' View Details : ' . (($data['row'])?$data['row']->creative_Work. ' (' . $data['row']->article_no . ')':'');
         echo $this->admin_after_login_layout($title, $page_name, $data);
+    }
+    public function generate_nelp_form($id)
+    {
+        $id                                 = Helper::decoded($id);       
+        $data['module']                     = $this->data;
+        $getArticle                         = Article::where('status', '!=', 3)->where('id', '=', $id)->orderBy('id', 'DESC')->first();
+        // Helper::pr($data['row']);
+        $article_no                         = (($getArticle)?$getArticle->article_no:''); 
+        /* generate nelp pdf */
+            $generalSetting                 = GeneralSetting::find('1');
+            $subject                        = $generalSetting->site_name . '-NELP-Form-' . $article_no;
+            $message                        = view('email-templates.nelp-form',$getArticle);
+            $options                        = new Options();
+            $options->set('defaultFont', 'Courier');
+            $dompdf                         = new Dompdf($options);
+            $html                           = $message;
+            $dompdf->loadHtml($html);
+            $dompdf->setPaper('letter', 'portrait');
+            $dompdf->render();
+            $output                         = $dompdf->output();
+            // Output the generated PDF to browser
+            // $dompdf->stream("document.pdf", array("Attachment" => false));die;
+            $filename                       = $article_no.'-'.time().'.pdf';
+            $pdfFilePath                    = 'public/uploads/article/' . $filename;
+            // Save the PDF to a file
+            file_put_contents($pdfFilePath, $output);
+            // echo "PDF file has been generated and saved at: " . $pdfFilePath;die;
+            Article::where($this->data['primary_key'], '=', $id)->update(['nelp_form_pdf' => $filename, 'is_published' => 2]);
+        /* generate nelp pdf */
+        /* email functionality */
+            $message                    = ' : NELP Form - ' . $article_no;                    
+            $generalSetting             = GeneralSetting::find('1');
+            $subject                    = $generalSetting->site_name . ' : NELP Form - ' . $article_no;
+            $attchment                  = 'public/uploads/article/' . $filename;
+            $this->sendMail($generalSetting->system_email, $subject, $message, $attchment);
+            $this->sendMail((($getArticle)?$getArticle->email:''), $subject, $message, $attchment);
+        /* email functionality */
+        /* email log save */
+            $postData2 = [
+                'name'                  => (($getArticle)?$getArticle->first_name . '' . $getArticle->last_name:''),
+                'email'                 => (($getArticle)?$getArticle->email:''),
+                'subject'               => $subject,
+                'message'               => $message
+            ];
+            EmailLog::insertGetId($postData2);
+        /* email log save */
+        return redirect("admin/" . $this->data['controller_route'] . "/view_details/" . Helper::encoded($id))->with('success_message', $this->data['title'] . ' NELP Form Generated & Shared To User Successfully !!!');
     }
 }
