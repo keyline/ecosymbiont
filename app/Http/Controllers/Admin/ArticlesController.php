@@ -29,7 +29,7 @@ class ArticlesController extends Controller
     public function __construct()
     {
         $this->data = array(
-            'title'             => 'Articles',
+            'title'             => 'Creative-Works',
             'controller'        => 'ArticlesController',
             'controller_route'  => 'article',
             'primary_key'       => 'id',
@@ -282,57 +282,196 @@ class ArticlesController extends Controller
 
         if ($request->isMethod('post')) {
             $postData = $request->all();
-            $rules = [
-                'name'                      => 'required',
-                'publisher_name'            => 'required',
-                'issn_no'                   => 'required',
-                'volume'                    => 'required',
-                'issue'                     => 'required',
-                'frequency'                 => 'required',
-                'keywords'                  => 'required',
-                'description'               => 'required',
-                'article_year'               => 'required',
-                'uploaded_by'               => 'required',
-                'article_date'               => 'required',
-                'is_archieve'               => 'required',
-            ];
-            if ($this->validate($request, $rules)) {
-                $checkValue = Article::where('name', '=', $postData['name'])->where('id', '!=', $id)->count();
-                if ($checkValue <= 0) {
-                    /* Article file */
-                    $imageFile      = $request->file('article_file');
+            if ($postData['invited'] == 'No' && $postData['participated'] == 'No') {
+                // echo "this section"; die;
+                $rules = [
+                    'first_name'                => 'required',            
+                    'last_name'                 => 'required',                                    
+                    'email'                     => 'required',                                      
+                    'for_publication_name'      => 'required',                                      
+                    'orginal_work'              => 'required',                                     
+                    'copyright'                 => 'required',                     
+                    'title'                     => 'required',
+                    'pronoun'                   => 'required',                   
+                ];
+                $participatedInfo = isset($postData['participated_info']) ? $postData['participated_info'] : '';
+                $invited_byInfo = isset($postData['invited_by']) ? $postData['invited_by'] : '';
+                $invited_emailInfo = isset($postData['invited_by_email']) ? $postData['invited_by_email'] : '';
+                $section_ertInfo = isset($postData['section_ert']) ? json_encode($postData['section_ert']) : '';
+                $expertise_areaInfo = isset($postData['expertise_area']) ? json_encode($postData['expertise_area']) : '';
+                $ecosystem_affiliationInfo = isset($postData['ecosystem_affiliation']) ? json_encode($postData['ecosystem_affiliation']) : '';
+                $submission_typesInfo = isset($postData['submission_types']) ? $postData['submission_types'] : '';
+                $narrative_fileInfo = isset($narrative_file) ? $narrative_file : '';    
+                $first_image_fileInfo = isset($first_image_file) ? $first_image_file : '';    
+                $second_image_fileInfo = isset($second_image_file) ? $second_image_file : '';    
+                $art_image_fileInfo = isset($art_image_file) ? $art_image_file : '';    
+                $art_video_fileInfo = isset($art_video_file) ? $art_video_file : ''; 
+            } else{
+                
+                    $rules = [
+                'first_name'                => 'required',            
+                'last_name'                 => 'required',                                    
+                'email'                     => 'required',                                      
+                'country'                   => 'required',                                     
+                'for_publication_name'      => 'required', 
+                'orginal_work'              => 'required', 
+                'copyright'                 => 'required', 
+                'submission_types'          => 'required',                
+                'state'                     => 'required', 
+                'city'                      => 'required', 
+                'acknowledge'               => 'required',                                                      
+                'section_ert'               => 'required',
+                'title'                     => 'required',
+                'pronoun'                   => 'required',                
+                'organization_name'         => 'required',
+                'organization_website'      => 'required',
+                'ecosystem_affiliation'     => 'required',               
+                'expertise_area'            => 'required',                
+                'explanation'               => ['required', 'string', new MaxWords(100)],
+                'explanation_submission'    => ['required', 'string', new MaxWords(150)],
+                'art_video_desc'            => ['required', 'string', new MaxWords(250)],
+                'creative_Work'             => ['required', 'string', new MaxWords(10)],
+                'subtitle'                  => ['required', 'string', new MaxWords(40)],
+                'art_image_desc'            => ['required', 'string', new MaxWords(250)],
+                'bio_short'                 => ['required', 'string', new MaxWords(40)],
+                'bio_long'                  => ['required', 'string', new MaxWords(250)], 
+                ];                                    
+                /* narrative file */
+                    $imageFile      = $request->file('narrative_file');
                     if ($imageFile != '') {
                         $imageName      = $imageFile->getClientOriginalName();
-                        $uploadedFile   = $this->upload_single_file('article_file', $imageName, 'article', 'pdf');
+                        $uploadedFile   = $this->upload_single_file('narrative_file', $imageName, 'narrative', 'word');
                         if ($uploadedFile['status']) {
-                            $article_file = $uploadedFile['newFilename'];
+                            $narrative_file = $uploadedFile['newFilename'];
+                        } else {
+                            return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                        }
+                    } else {                        
+                            $narrative_file = $data['row']->narrative_file;                                                
+                    }
+                /* narrative file */
+                /* first_image file */
+                    $imageFile      = $request->file('first_image_file');
+                    if ($imageFile != '') {
+                        $imageName      = $imageFile->getClientOriginalName();
+                        $uploadedFile   = $this->upload_single_file('first_image_file', $imageName, 'narrative', 'image');
+                        if ($uploadedFile['status']) {
+                            $first_image_file = $uploadedFile['newFilename'];
                         } else {
                             return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
                         }
                     } else {
-                        $article_file = $data['row']->article_file;
+                        $first_image_file = $data['row']->first_image_file;
+                        // return redirect()->back()->with(['error_message' => 'Please Upload first_image File !!!']);
                     }
-                    /* Article file */
+                /* first_image file */
+                /* second_image file */
+                    $imageFile      = $request->file('second_image_file');
+                    if ($imageFile != '') {
+                        $imageName      = $imageFile->getClientOriginalName();
+                        $uploadedFile   = $this->upload_single_file('second_image_file', $imageName, 'narrative', 'image');
+                        if ($uploadedFile['status']) {
+                            $second_image_file = $uploadedFile['newFilename'];
+                        } else {
+                            return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                        }
+                    } else {
+                        $second_image_file = $data['row']->second_image_file;
+                        // return redirect()->back()->with(['error_message' => 'Please Upload second_image File !!!']);
+                    }
+                /* second_image file */
+                /* art_image file */
+                    $imageFile      = $request->file('art_image_file');
+                    if ($imageFile != '') {
+                        $imageName      = $imageFile->getClientOriginalName();
+                        $uploadedFile   = $this->upload_single_file('art_image_file', $imageName, 'art_image', 'image');
+                        if ($uploadedFile['status']) {
+                            $art_image_file = $uploadedFile['newFilename'];
+                        } else {
+                            return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                        }
+                    } else {
+                        $art_image_file = $data['row']->art_image_file;
+                        // return redirect()->back()->with(['error_message' => 'Please Upload art_image File !!!']);
+                    }
+                /* art_image file */
+                /* art_video file */
+                    $imageFile      = $request->file('art_video_file');
+                    if ($imageFile != '') {
+                        $imageName      = $imageFile->getClientOriginalName();
+                        $uploadedFile   = $this->upload_single_file('art_video_file', $imageName, 'art_video', 'video');
+                        if ($uploadedFile['status']) {
+                            $art_video_file = $uploadedFile['newFilename'];
+                        } else {
+                            return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                        }
+                    } else {
+                        $art_video_file = $data['row']->art_video_file;
+                        // return redirect()->back()->with(['error_message' => 'Please Upload art_video File !!!']);
+                    }
+                /* art_video file */        
+                $participatedInfo = isset($postData['participated_info']) ? $postData['participated_info'] : '';
+                $invited_byInfo = isset($postData['invited_by']) ? $postData['invited_by'] : '';
+                $invited_emailInfo = isset($postData['invited_by_email']) ? $postData['invited_by_email'] : '';
+                $section_ertInfo = isset($postData['section_ert']) ? json_encode($postData['section_ert']) : '';
+                $expertise_areaInfo = isset($postData['expertise_area']) ? json_encode($postData['expertise_area']) : '';
+                $ecosystem_affiliationInfo = isset($postData['ecosystem_affiliation']) ? json_encode($postData['ecosystem_affiliation']) : '';
+                $submission_typesInfo = isset($postData['submission_types']) ? $postData['submission_types'] : '';
+                $narrative_fileInfo = isset($narrative_file) ? $narrative_file : '';    
+                $first_image_fileInfo = isset($first_image_file) ? $first_image_file : '';    
+                $second_image_fileInfo = isset($second_image_file) ? $second_image_file : '';    
+                $art_image_fileInfo = isset($art_image_file) ? $art_image_file : '';    
+                $art_video_fileInfo = isset($art_video_file) ? $art_video_file : '';    
+            }            
+            if ($this->validate($request, $rules)) {                
                     $fields = [
-                        'name'                      => $postData['name'],
-                        'publisher_name'            => $postData['publisher_name'],
-                        'issn_no'                   => $postData['issn_no'],
-                        'volume'                    => $postData['volume'],
-                        'issue'                     => $postData['issue'],
-                        'frequency'                 => $postData['frequency'],
-                        'keywords'                  => $postData['keywords'],
-                        'description'               => $postData['description'],
-                        'article_year'               => $postData['article_year'],
-                        'uploaded_by'               => $postData['uploaded_by'],
-                        'article_date'               => date_format(date_create($postData['article_date']), "Y-m-d"),
-                        'article_file'               => $article_file,
-                        'is_archieve'               => $postData['is_archieve'],
+                        'email'                     => $postData['email'],   
+                        'first_name'                => $postData['first_name'],            
+                        'last_name'                 => $postData['last_name'],        
+                        'middle_name'               => $postData['middle_name'],                                            
+                        'for_publication_name'      => $postData['for_publication_name'],           
+                        'orginal_work'              => $postData['orginal_work'],           
+                        'user_id'                      => $postData['user_id'],           
+                        'copyright'                 => $postData['copyright'],
+                        'titleId'                     => $postData['title'],
+                        'pronounId'                   => $postData['pronoun'], 
+                        'invited'                   => $postData['invited'],
+                        'invited_by'                => $invited_byInfo, 
+                        'invited_by_email'          => $invited_emailInfo,
+                        'explanation'               => $postData['explanation'],  
+                        'explanation_submission'    => $postData['explanation_submission'],     
+                        'section_ertId'             => $section_ertInfo,
+                        'creative_Work'             => $postData['creative_Work'],
+                        'subtitle'             => $postData['subtitle'],
+                        'submission_types'             => $submission_typesInfo,
+                        'titleId'                   => $postData['title'],
+                        'pronounId'                 => $postData['pronoun'],
+                        'participated'              => $postData['participated'],
+                        'participated_info'         => $participatedInfo,
+                        'narrative_file'         => $narrative_fileInfo,
+                        'first_image_file'         => $first_image_fileInfo,
+                        'second_image_file'         => $second_image_fileInfo,
+                        'art_image_file'         => $art_image_fileInfo,
+                        'art_image_desc'         => $postData['art_image_desc'],
+                        'art_video_file'         => $art_video_fileInfo,
+                        'art_video_desc'         => $postData['art_video_desc'],
+                        'country'         => $postData['country'],
+                        'state'         => $postData['state'],
+                        'city'         => $postData['city'],
+                        'organization_name'         => $postData['organization_name'],
+                        'organization_website'      => $postData['organization_website'],
+                        'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
+                        'indigenous_affiliation'    => $postData['indigenous_affiliation'],
+                        'expertise_areaId'          => $expertise_areaInfo,
+                        'bio_short'               => $postData['bio_short'],
+                        'bio_long'               => $postData['bio_long'],  
                     ];
+                    //   Helper::pr($fields);
                     Article::where($this->data['primary_key'], '=', $id)->update($fields);
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');
-                } else {
-                    return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
-                }
+                // } else {
+                //     return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
+                // }
             } else {
                 return redirect()->back()->with('error_message', 'All Fields Required !!!');
             }

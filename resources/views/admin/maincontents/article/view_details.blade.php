@@ -89,7 +89,7 @@ $controllerRoute = $module['controller_route'];
           </ul> 
           <div class="tab-content pt-2">     
             <div class="tab-pane fade show active" id="tab1">
-            <a href="<?=url('admin/' . $controllerRoute . '/edit/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit">Edit</i></a>
+            <p style="float:right;"><a href="<?=url('admin/' . $controllerRoute . '/edit/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit"> Edit</i></a></p>
               <table class="table table-striped table-bordered nowrap">
                 <thead>
                   <tr>                                     
@@ -218,10 +218,9 @@ $controllerRoute = $module['controller_route'];
                       <td>16A1) TYPE A: word narrative (no embedded images) (500-1000 words for prose, 100-250 words for poetry)</td>
                       <td>
                       <?php if($narrative_file != ''){?>
-                        <img src="<?=env('UPLOADS_URL').'narrative/'.$narrative_file?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
-                        <?php } else {?>
-                        <img src="<?=env('NO_IMAGE')?>" alt="narrative_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
-                        <?php }?>
+                        <a href="<?= env('UPLOADS_URL') . 'narrative/' . $narrative_file ?>" target="_blank"
+                            class="badge bg-primary">View File</a>
+                        <?php }?>                      
                       </td>
                     </tr>
                     <tr>
@@ -262,7 +261,7 @@ $controllerRoute = $module['controller_route'];
                       <td>16C1) TYPE C: Video + descriptive narrative | audiovisual media (3-10 min.)</td>
                       <td>
                       <?php if($art_video_file != ''){?>
-                          <video width="150" height="150" controls>
+                          <video width="350" height="250" controls>
                               <source src="<?=env('UPLOADS_URL').'art_video/'.$art_video_file?>" type="video/mp4">
                               Your browser does not support the video tag.
                           </video>                      

@@ -46,6 +46,7 @@ $controllerRoute = $module['controller_route'];
         <?php
         $setting = GeneralSetting::where('id', '=', 1)->first();
         if ($row) {
+            $user_id = $row->user_id;
             $first_name = $row->first_name;            
             $last_name = $row->last_name;            
             $middle_name = $row->middle_name;            
@@ -61,7 +62,7 @@ $controllerRoute = $module['controller_route'];
             $invited_by_email = $row->invited_by_email;  
             $explanation = $row->explanation;  
             $explanation_submission = $row->explanation_submission;  
-            $section_ertId = $selected_section_ertId; 
+            $section_ertId = (($selected_section_ertId != '')?json_decode($selected_section_ertId):[]); 
             $titleId = $row->titleId;  
             $pronounId = $row->pronounId;
             $subtitle = $row->subtitle;
@@ -79,9 +80,9 @@ $controllerRoute = $module['controller_route'];
             $participated_info = $row->participated_info;
             $organization_name = $row->organization_name;
             $organization_website = $row->organization_website;
-            $ecosystem_affiliationId = $selected_ecosystem_affiliation;
+            $ecosystem_affiliationId = (($selected_ecosystem_affiliation != '')?json_decode($selected_ecosystem_affiliation):[]);
             $indigenous_affiliation = $row->indigenous_affiliation;
-            $expertise_areaId = $selected_expertise_area;
+            $expertise_areaId = (($selected_expertise_area != '')?json_decode($selected_expertise_area):[]);
             $bio_short = $row->bio_short;
             $bio_long = $row->bio_long;            
             $acknowledge = $row->acknowledge;
@@ -131,6 +132,8 @@ $controllerRoute = $module['controller_route'];
                 <div class="card-body pt-3">
                     <form method="POST" action="" enctype="multipart/form-data" oninput="validateForm()">
                         @csrf
+                        <input type="hidden" name="user_id" class="form-control"
+                                    value="<?= $user_id ?>" required>
                         <div class="row mb-3">
                             <label for="email" class="col-md-2 col-lg-4 col-form-label">0) Email address</label>
                             <div class="col-md-10 col-lg-8">
@@ -279,9 +282,9 @@ $controllerRoute = $module['controller_route'];
                                 <label for="section_ert" class="col-md-2 col-lg-4 col-form-label">13) For which section and sub-section of ERT would you like your Creative-Work to be considered?
                                 </label>
                                 <div class="col-md-10 col-lg-8">
-                                    @if ($section_ert)
+                                    @if (!empty($section_ert))
                                         @foreach ($section_ert as $data)
-                                        <input type="checkbox" name="section_ert[]" value="{{ $data->id }}" @if(in_array($data->id, old('section_ert', $section_ertId))) checked @endif>{{ $data->name }}<br>
+                                        <input type="checkbox" name="section_ert[]" value="{{ $data->id }}" @if(in_array($data->id, $section_ertId)) checked @endif>{{ $data->name }}<br>
                                         @endforeach
                                     @endif                                     
                                 </div>
@@ -321,17 +324,17 @@ $controllerRoute = $module['controller_route'];
                                 <label for="narrative_file" class="col-md-2 col-lg-4 col-form-label">16A1) TYPE A: word narrative (no embedded images) (500-1000 words for prose, 100-250 words for poetry)</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="file" name="narrative_file" class="form-control" id="narrative_file">
-                                    <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>
+                                    <small class="text-info">* Only DOC files are allowed</small><br>
                                     <span id="narrative_file_error" class="text-danger"></span>
                                     <?php if($narrative_file != ''){?>
                                     <a href="<?= env('UPLOADS_URL') . 'narrative/' . $narrative_file ?>" target="_blank"
-                                        class="badge bg-primary">View Journal</a>
+                                        class="badge bg-primary">View PDF</a>
                                     <?php }?>
-                                    <?php if($narrative_file != ''){?>
+                                    <!-- <?php if($narrative_file != ''){?>
                                     <img src="<?=env('UPLOADS_URL').'narrative/'.$narrative_file?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
                                     <?php } else {?>
                                     <img src="<?=env('NO_IMAGE')?>" alt="narrative_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
-                                    <?php }?>
+                                    <?php }?> -->
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -388,7 +391,7 @@ $controllerRoute = $module['controller_route'];
                                     <small class="text-info">* Only MP4, AVI, MOV, MKV, WEBM files are allowed</small><br>  
                                     <span id="art_video_file_error" class="text-danger"></span>                                  
                                     <?php if($art_video_file != ''){?>
-                                        <video width="150" height="150" controls>
+                                        <video width="350" height="250" controls>
                                             <source src="<?=env('UPLOADS_URL').'art_video/'.$art_video_file?>" type="video/mp4">
                                             Your browser does not support the video tag.
                                         </video>

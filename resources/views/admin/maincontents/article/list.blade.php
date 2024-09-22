@@ -30,17 +30,17 @@ $controllerRoute = $module['controller_route'];
     <div class="col-lg-12">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">
+          <!-- <h5 class="card-title">
             <a href="<?=url('admin/' . $controllerRoute . '/add/')?>" class="btn btn-outline-success btn-sm">Add <?=$module['title']?></a>
-          </h5>
+          </h5> -->
           <div class="dt-responsive table-responsive">
             <table id="simpletable" class="table table-striped table-bordered nowrap">
               <thead>
                 <tr>
                   <th scope="col">#</th>                  
                   <th scope="col">Author Info</th>                  
-                  <th scope="col">Article Info</th>                  
-                  <th scope="col">Submitted Time</th>                  
+                  <th scope="col">Creative-Work Info</th>                  
+                  <th scope="col">Submitted At</th>                  
                   <th scope="col">Published Status</th>                  
                   <th scope="col">Published Action</th>                  
                   <th scope="col">Action</th>
@@ -53,20 +53,22 @@ $controllerRoute = $module['controller_route'];
                     <td>
                       <?=$row->first_name?> <?=$row->last_name?><br> <?=$row->email?></td>
                     <td>
-                      <?=$row->subtitle?></td>                    
+                      <?=wordwrap($row->creative_Work,30,"<br>\n")?></td>                    
                     <td><?=date_format(date_create($row->created_at), "M d, Y")?></td>                                       
                     <td>
-                      <?php if($row->is_published == 0){
-                        echo "Article Submitted";
-                      }
-                        elseif($row->is_published == 1){
-                          echo "Scan Copy Uploaded";
-                        }
-                        elseif($row->is_published == 2){
-                          echo "Approve";
-                        }
-                      else {
-                        echo "Reject";
+                    <?php
+                      if($row->is_published == 0){
+                          echo "<h6>Submitted</h6>";
+                      } elseif($row->is_published == 1){
+                          echo "<h6>Final Edited & Checked</h6>";
+                      } elseif($row->is_published == 2){
+                          echo "<h6>NELP Form Generated & Shared</h6>";
+                      } elseif($row->is_published == 3){
+                          echo "<h6>Scan Copy Uploaded</h6>";
+                      } elseif($row->is_published == 4){
+                          echo "<h6>Approved</h6>";
+                      } elseif($row->is_published == 5){
+                          echo "<h6>Rejected</h6>";
                       }
                       ?>
                       <!-- <?php if($row->is_archieve){?>
