@@ -146,6 +146,31 @@ $generalSetting            = GeneralSetting::find('1');
                 <td width="30%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Ancestral continental ecoweb affiliation:</strong></td>
                 <td width="70%" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">[22]</td>
             </tr>
+            <tr>
+                <td width="30%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Ancestral regional ecoweb affiliation:</td>
+                <td width="70%" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">[23]</td>
+            </tr>
+            <tr>
+                <td width="30%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Organizational affiliation:</td>
+                <td width="70%" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">[20]</td>
+            </tr>
+            <tr>
+                <td width="30%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Country of residence:</td>
+                <td width="70%" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">[17]</td>
+            </tr>
+            <tr>
+                <td width="30%" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Authority to sign:</td>
+                <td width="70%" valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
+                    <p>By signing this NELP, I confirm and agree that: 
+                        <ul style="list-style-type: lower-roman; padding-left: 15px; font-size: 14px; line-height: 1.5;">
+                            <li>All information that I have entered into this NELP is correct at the time of signature.</li>
+                            <li><strong>EITHER</strong>, I am the sole author and owner of the copyright in the Contribution and I agree to the terms and conditions in this NELP. </li>
+                            <li><strong>OR</strong>, the copyright in the Contribution is jointly owned by me and the Author(s) listed below and I agree to (and am authorized by each Author to agree to) the terms of this NELP on behalf of all Authors;</li>
+                            <li>AND, no other person nor entity has any copyright interest in the Contribution</li>
+                        </ul>    
+                    <p>
+                </td>
+            </tr>
         </tbody>
     </table>
 </body>
