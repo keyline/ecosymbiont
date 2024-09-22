@@ -79,7 +79,7 @@ $generalSetting            = GeneralSetting::find('1');
         <br>Submission Reference Number (“<strong>SRN</strong>”): <span style="background: yellow;">xxx</span></p>
         </li>
     </ul>
-    <table style="width: 100%; background: #fff;">
+    <table style="width: 100%; background: #fff; padding: 0 15px;">
         <tbody>
             <!-- <tr>
                 <td  width="100%">
@@ -119,7 +119,7 @@ $generalSetting            = GeneralSetting::find('1');
                 <td width="100%" colspan="7"><p style="color: #4472c4;margin-top: 10px;"><i>This NELP can be used where a Contribution has one or more authors. The first author listed (“<strong> <i>Lead Author</i> </strong>”) must be a human individual and must complete the box below and sign this NELP on behalf of herself/himself/themself (and all other authors, if any).</i></p></td>
             </tr>
             <!-- LEAD AUTHOR’S DETAILS AND SIGNATURE -->
-            <tr>
+            <!-- <tr>
                 <td width="100%" colspan="7" style="border: 1px solid #000; background-color: #e7e6e6; text-align:left; padding: 5px 15px;">
                     <p style="width: 100%; text-align:left; font-weight: bold">LEAD AUTHOR’S DETAILS AND SIGNATURE</p>
                 </td>
@@ -174,7 +174,7 @@ $generalSetting            = GeneralSetting::find('1');
             <tr>
                 <td width="30%" colspan="2" valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Signature:</td>
                 <td width="70%" colspan="5" valign="top" style="border: 1px solid #000; border-top: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">Date:</td>
-            </tr>
+            </tr> -->
                 <!-- OTHER AUTHORS’ DETAILS -->
             <tr>
                 <td width="100%" colspan="7" style="border: 1px solid #000; background-color: #e7e6e6; text-align:left; padding: 5px 15px;">
