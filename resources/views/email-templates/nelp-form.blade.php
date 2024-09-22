@@ -184,14 +184,14 @@ $generalSetting            = GeneralSetting::find('1');
             </tr>
             <tr>
                 <th valign="top" style="border: 1px solid #000; border-top: none; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold"><p style="color: #4472c4; font-size: 14px; line-height: 1.5;"><i>If the Contribution is created by two or more authors and the copyright in the Contribution is jointly owned by them – please enter the details of all other individuals who contributed to the creation of the Contribution in this box.</i></p></t7>
-                <td valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
+                <th valign="top" style="border: 1px solid #000; border-top: none; padding: 5px 15px;">
                 Full Legal Name/ Preferred name for publication
-                </td>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>5</th>
-                <th>6</th>
+                </th>
+                <th>Email address</th>
+                <th>Ancestral continental ecoweb affiliation</th>
+                <th>Ancestral regional ecoweb affiliation</th>
+                <th>Organizational/ ecoweb-rooted community/ movement affiliation Organizational affiliation</th>
+                <th>Country of residence</th>
             </tr>
             </table>
         </tbody>
