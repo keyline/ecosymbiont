@@ -176,7 +176,7 @@ $generalSetting            = GeneralSetting::find('1');
                 <td width="70%" colspan="5" valign="top" style="border: 1px solid #000; padding: 5px 15px; font-weight: bold">Date:</td>
             </tr>
             <!-- OTHER AUTHORS’ DETAILS -->
-            <tr>
+            <!-- <tr>
                 <td colspan="7">&nbsp;&nbsp;&nbsp;</td>
             </tr>
             <tr>
@@ -216,7 +216,7 @@ $generalSetting            = GeneralSetting::find('1');
             </tr>
             <tr>
                 <td colspan="7">&nbsp;&nbsp;&nbsp;</td>
-            </tr>
+            </tr> -->
             <!-- ŚRAMANI INSTITUTE EMPLOYEE -->
             <tr>
                 <td width="30%" colspan="1" valign="top" style="border: 1px solid #000; border-right: none; background: #e7e6e6; padding: 5px 15px; font-weight: bold">
