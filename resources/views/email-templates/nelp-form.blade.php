@@ -79,7 +79,7 @@ $generalSetting            = GeneralSetting::find('1');
         <br>Submission Reference Number (“<strong>SRN</strong>”): <span style="background: yellow;">xxx</span></p>
         </li>
     </ul>
-    <table  style="table-layout: fixed">
+    <table  style="table-layout: fixed; width: 100%;">
         <tbody>
             <!-- <tr>
                 <td  width="100%">
