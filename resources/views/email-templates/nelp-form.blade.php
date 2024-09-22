@@ -40,7 +40,7 @@ $generalSetting            = GeneralSetting::find('1');
         }
         .header{
             padding: 0;
-            height: 65px;
+            height: 50px;
         }
         @page {
         @bottom-left-corner {
