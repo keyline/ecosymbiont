@@ -80,9 +80,9 @@
                                                     <?php } }?>
                                                 </select>
                                               </div>
-                                            </div>
-                                            <!-- Google reCAPTCHA widget -->
-                                            <div class="g-recaptcha" data-sitekey="6LclkEwqAAAAAHf6rGCvLyu-B1N-eYOU8NYLL5k4"></div>
+                                            </div> 
+                                            <!-- Add hidden input for reCAPTCHA token -->
+                                            <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">                                           
                                             <div class="text-center" style="margin-bottom: 15px;">
                                               <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>
@@ -109,9 +109,7 @@
       (A) be invited to submit a Creative-Work to ERT; and/or <br>
       (B) have participated as a strategist at an in-person ER Synergy Meeting. </p>
       <button id="closePopup">Close</button>
-    </div>
-    <!-- Include Google's reCAPTCHA JS library -->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    </div>    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
       $(document).ready(function() {
@@ -131,3 +129,12 @@
       });
     </script>
 <!-- End block-wrapper-section -->
+<script src="https://www.google.com/recaptcha/api.js?render=6LclkEwqAAAAAHf6rGCvLyu-B1N-eYOU8NYLL5k4"></script>
+<script>
+grecaptcha.ready(function() {
+    grecaptcha.execute('6LclkEwqAAAAAHf6rGCvLyu-B1N-eYOU8NYLL5k4', {action: 'submit'}).then(function(token) {
+        // Add the token to your form submission
+        document.getElementById('g-recaptcha-response').value = token;
+    });
+});
+</script>
