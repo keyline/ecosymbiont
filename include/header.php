@@ -1,4 +1,9 @@
-<?php echo $current_url = basename($_SERVER['REQUEST_URI'], ".php"); ?>
+<?php 
+function isActive($page) {
+    $current_page = basename($_SERVER['REQUEST_URI'], ".php");  // Get current page name without extension
+    return $current_page == $page ? 'active' : '';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,11 +35,11 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">                        
-                        <li><a class="<?= $current_url == url('/') ? 'active' : '' ?>" href="<?= url('/') ?>">About</a></li>
-                        <li><a href="<?= url() ?>./together">Ecosymbionts Regenerate Together</a></li>
-                        <li><a class="<?= $current_url == url('synergy-meetings') ? 'active' : '' ?>" href="<?= url('synergy-meetings') ?>">Synergy Meeting</a></li>                        
-                        <li><a class="<?= $current_url == url('in-the-media') ? 'active' : '' ?>" href="<?= url('in-the-media') ?>">In the Media</a></li>
-                        <li><a class="<?= $current_url == url('contact') ? 'active' : '' ?>" href="<?= url('contact') ?>">Contact</a></li>
+                        <li><a class="<?= isActive('home') ?>" href="index.php">About</a></li>
+                        <li><a href="<?=$_SERVER['REQUEST_URI']?>./together">Ecosymbionts Regenerate Together</a></li>
+                        <li><a class="<?= isActive('synergy-meetings') ?>" href="synergy-meetings.php">Synergy Meeting</a></li>                        
+                        <li><a class="<?= isActive('in-the-media') ?>" href="in-the-media.php">In the Media</a></li>
+                        <li><a class="<?= isActive('contact') ?>" href="contact.php">Contact</a></li>
                         <!-- <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
