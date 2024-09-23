@@ -155,6 +155,13 @@ $controllerRoute = $module['controller_route'];
                                 <input type="text" name="author_name" class="form-control" id="author_name"
                                     value="<?= $author_name ?>" required>
                             </div>
+                        </div>     
+                        <div class="row mb-3">
+                            <label for="author_short_bio" class="col-md-2 col-lg-2 col-form-label">Author Short Bio</label>
+                            <div class="col-md-10 col-lg-10">
+                                <input type="text" name="author_short_bio" class="form-control" id="author_short_bio"
+                                    value="<?= $author_short_bio ?>" required>
+                            </div>
                         </div>      
                         <div class="row mb-3">
                             <label for="pronoun" class="col-md-2 col-lg-2 col-form-label">Pronoun</label>
@@ -181,6 +188,14 @@ $controllerRoute = $module['controller_route'];
                                 @endif                                
                             </div>
                         </div>
+                        <div class="row mb-3">
+                                <label for="Indigenous_affiliation" class="col-md-2 col-lg-4 col-form-label">23) Ancestral regional ecoweb affiliation (please further define your ethnicity, e.g., region of South Asia and/or Indigenous tribe/nation)
+                                </label>
+                                <div class="col-md-10 col-lg-8">
+                                    <input type="text" name="indigenous_affiliation" class="form-control" id="indigenous_affiliation"
+                                    value="<?= $indigenous_affiliation ?>" required>
+                                </div>
+                            </div> 
                         <div class="row mb-3">
                             <label for="author_email" class="col-md-2 col-lg-2 col-form-label">Author email</label>
                             <div class="col-md-10 col-lg-10">
