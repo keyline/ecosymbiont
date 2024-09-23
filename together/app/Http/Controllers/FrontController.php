@@ -71,6 +71,13 @@ class FrontController extends Controller
         }
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
+    public function submissions()
+    {
+        $data = [];
+        $title                          = 'Submissions';
+        $page_name                      = 'submissions';
+        echo $this->front_before_login_layout($title, $page_name, $data);
+    }
     public function pageContent($slug)
     {
         $data['row']                    = Page::select('page_name', 'page_content')->where('status', '=', 1)->where('page_slug', '=', $slug)->first();

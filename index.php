@@ -10,48 +10,44 @@ include "include/header.php";
                 <div class="row">
                     <div class="col-md-12">
                         <div class="info-box">
-                            <h2>OUR MISSION</h2>
-                            <p>Our mission is to regain the understanding that human communities are part of natural
-                                ecological webs (<span>ecowebs</span>) and to <span>regenerate</span> systems that
-                                restore, preserve, and foster our mutually beneficial interconnectivity and
-                                interdependence (<span>symbiosis</span>) within and to these ecowebs.</p>
+                            <h2>OUR MISSION</h2>  
+                            <p>Our mission is to regain the understanding that human communities are part of natural ecological webs (<span><a href="#defination">ecowebs</a></span>) and to <span><a href="#defination">regenerate</a></span>  systems that restore, preserve, and foster the symbiosis  between humans and ecowebs. Symbiosis encompasses the connectivity and dependence that exist within an ecoweb and that results in mutual benefit of all within that ecoweb, including humans</p>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="info-box">
                             <h2>OUR FOCUS</h2>
                             <p>We focus on regenerating systems that advance food sovereignty, sustainable healthcare,
-                                and ecoweb integration rooted in human communities. These systems are of two types:</p>
+                                and ecoweb integration rooted in human communities locally. These systems are of two types:</p>
                             <ul>
                                 <li><strong><i>human activity systems:</i></strong> ecoweb-specific systems of
                                     knowledge, technologies, and practices developed by ecoweb-rooted human communities
                                     – such as Indigenous and tribal communities – that are based and rely on the
-                                    specific and preserved biodiversity of each ecoweb; and</li>
-                                <li><strong><i>legal-economic-governance systems:</i></strong> operating locally,
-                                    regionally, and globally and that optimize the wellbeing of human communities and
-                                    the ecowebs of which they are a symbiotic part.</li>
+                                    specific and preserved <a href="#defination">biodiversity</a> of each ecoweb; and</li>
+                                <li><strong><i>legal-economic-governance systems:</i></strong> trade, and government systems that optimize the wellbeing of human communities and the ecowebs of which they are a symbiotic part and that operate locally, regionally, and globally.</li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="info-box">
                             <h2>OUR APPROACH</h2>
-                            <p>Our approach to fulfilling our mission is two-fold:</p>
+                            <p>We fulfill our mission three interconnected ways:</p>
                             <ul>
-                                <li><strong><i>Disrupt and reshape:</i></strong> We work to disrupt and reshape the
+                                <li><strong><i>Disrupt systems:</i></strong> We work to disrupt and reshape the
                                     globally institutionalized legal-economic-governance system that has been destroying
                                     human-ecoweb symbiosis by fiercely promoting corporate
-                                    <span><u>extractivism</u></span> (exploitation of human and non-human ecoweb
+                                    <span><u><a href="#defination">extractivism</a></u></span> (exploitation of human and non-human ecoweb
                                     resources without replenishment). This work is done through legal action, policy
                                     reform, and other methods.
                                 </li>
                                 <li><strong><i>Facilitate synergies:</i> </strong>We bring together and facilitate
-                                    <span><u>synergies</u></span> between <span><u>grassroots</u></span> changemakers,
+                                    <span><u><a href="#defination">synergies</a></u></span> between <span><u><a href="#defination">grassroots</a></u></span> changemakers,
                                     innovators, and knowledge-holders working to regenerate systems that restore,
                                     preserve, and foster human-ecoweb symbiosis. We do this through in-person
-                                    <strong>Synergy Meetings</strong> and through our online knowledge-sharing and
-                                    community-building platform, <strong>Ecosymbionts Regenerate Together.</strong>
+                                    <strong><a href="<?=$base_url?>synergy-meetings.php">Synergy Meetings</a></strong> and through our online knowledge-sharing and
+                                    community-building platform, <strong><a href="<?=$base_url?>together" target="_blank">Ecosymbionts Regenerate Together</a>.</strong>
                                 </li>
+                                <li><strong><i>Regenerate systems:</i> </strong> We collaboratively conceptualize and promote alternative systems that optimize ecoweb wellbeing (including of humans), instead of exploiting, diminishing, and destroying ecowebs. We do this by synthesizing our own work with the knowledge, ideas, and wisdom of grassroots changemakers, innovators, and knowledge-holders from across the world shared on <a href="<?=$base_url?>together" target="_blank">Ecosymbionts Regenerate Together</a> . </li>
                             </ul>
                         </div>
                     </div>
@@ -71,7 +67,7 @@ include "include/header.php";
                                 extractivism. This suffering takes the form of food insecurity, oppression, violence,
                                 impoverishment, climate crisis, inequitable access to resources, water scarcity, forced
                                 displacement, loss of identity and culture, disenfranchisement, and environmental
-                                degradation. Unless there is a fundamental change in the systems enabling this
+                                degradation. Unless there is a fundamental change in the systems enabling and perpetuating this
                                 extractivism, both we humans and the biodiverse ecowebs we rely on for our survival will
                                 be irreversibly injured, and possibly annihilated.</p>
                         </div>
@@ -80,77 +76,45 @@ include "include/header.php";
                         <div class="info-box">
                             <h4>The extractivist system is becoming increasingly entrenched</h4>
                             <p>A new system of amassing wealth for small groups of shareholders
-                                (<span><u>corporations</u></span>) was developed in Europe at least four centuries ago,
+                                (<span><u><a href="#defination">corporations</a></u></span>) was <a href="#defination">developed in Europe at least four centuries ago</a>,
                                 taking the form of government-sanctioned exploitation of humans and ecowebs through the
                                 use of ‘legal’ tools, like charters and the doctrine of discovery. In this system,
-                                European monarchs granted to small companies of European men – for a share of the
-                                profits – exclusive rights to:</p>
+                                European monarchs granted to small companies of European men – – for a share of the
+                                profits – – exclusive rights to:</p>
                             <ul>
                                 <li>trade across entire continental regions,</li>
-                                <li>exploit – in an unbridled manner – vast tracts of land and water already under the
+                                <li>exploit – – in an unbridled manner – – vast tracts of land and water already under the
                                     stewardship of Indigenous peoples, and</li>
                                 <li>own, control, and dispossess human beings.</li>
                             </ul>
-                            <p class="mt-20">This government-backed corporate extractivism that – within a short period
-                                of time – subjugated nearly all of the world’s Indigenous peoples and the biodiverse
+                            <p class="mt-20">This government-backed corporate extractivism that – – within a short period
+                                of time – – subjugated nearly all of the world’s Indigenous peoples and the biodiverse
                                 ecowebs they thrived in for millennia still persists today. Not only does it persist,
                                 but it is fiercely protected and promoted through a system of laws, economic
-                                prescriptions, and governance structures that is imposed on almost all of the world’s
+                                prescriptions, and governing structures (legal-economic-governance system) that is imposed on almost all of the world’s
                                 peoples through autocratic global institutions.</p>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="info-box">
-                            <h4>The extractivist system is becoming increasingly entrenched</h4>
-                            <p>A new system of amassing wealth for small groups of shareholders
-                                (<span><u>corporations</u></span>) was developed in Europe at least four centuries ago,
-                                taking the form of government-sanctioned exploitation of humans and ecowebs through the
-                                use of ‘legal’ tools, like charters and the doctrine of discovery. In this system,
-                                European monarchs granted to small companies of European men – for a share of the
-                                profits – exclusive rights to:</p>
-                            <ul>
-                                <li>trade across entire continental regions,</li>
-                                <li>exploit – in an unbridled manner – vast tracts of land and water already under the
-                                    stewardship of Indigenous peoples, and</li>
-                                <li>own, control, and dispossess human beings.</li>
-                            </ul>
-                            <p class="mt-20">This government-backed corporate extractivism that – within a short period
-                                of time – subjugated nearly all of the world’s Indigenous peoples and the biodiverse
-                                ecowebs they thrived in for millennia still persists today. Not only does it persist,
-                                but it is fiercely protected and promoted through a system of laws, economic
-                                prescriptions, and governance structures that is imposed on almost all of the world’s
-                                peoples through autocratic global institutions.</p>
-                        </div>
-                    </div>
+                    
                     <div class="col-md-12">
                         <div class="info-box">
                             <h4>Human communities must regenerate and re-integrate into ecowebs</h4>
                             <p>Systemic extractivism has caused human communities to be disconnected from the biodiverse
                                 ancestral ecowebs they preserved for thousands of years through sophisticated
-                                regenerative knowledge, technologies, and practices. This disconnection – resulting from
-                                forced human displacement and ecoweb destruction – has in turn devastated the
+                                regenerative knowledge, technologies, and practices. This disconnection – – resulting from
+                                forced human displacement and ecoweb destruction – – has in turn devastated the
                                 self-sufficiency, self-reliance, identity, and culture of communities and compelled them
                                 to become increasingly dependent on corporate commodities and influence, thus
                                 perpetuating and deepening the cycle of extractivism and suffering. The only way to end
-                                this cycle is to restore human-ecoweb symbiosis through the regeneration – by
-                                Indigenous, tribal, and migrant/settler communities alike – of systems that nurture and
+                                this cycle is to restore human-ecoweb symbiosis through the regeneration – – by
+                                Indigenous, tribal, and migrant/settler communities alike – – of systems that nurture and
                                 sustain, rather than extract and eradicate. </p>
-                            <ul>
-                                <li>trade across entire continental regions,</li>
-                                <li>exploit – in an unbridled manner – vast tracts of land and water already under the
-                                    stewardship of Indigenous peoples, and</li>
-                                <li>own, control, and dispossess human beings.</li>
-                            </ul>
-                            <p class="mt-20">This government-backed corporate extractivism that – within a short period
-                                of time – subjugated nearly all of the world’s Indigenous peoples and the biodiverse
-                                ecowebs they thrived in for millennia still persists today. Not only does it persist,
-                                but it is fiercely protected and promoted through a system of laws, economic
-                                prescriptions, and governance structures that is imposed on almost all of the world’s
-                                peoples through autocratic global institutions.</p>
+                            
+                            
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" id="defination">
                     <div class="col-md-4">
                         <div class="defination-img">
                             <img src="images/defination.webp" alt="" class="img-responsive">
@@ -225,7 +189,7 @@ include "include/header.php";
                                 </div>
                                 <div id="collapsefive" class="panel-collapse collapse">
                                   <div class="panel-body">
-                                    The process of exploiting human resources – such as labor and knowledge – and non-human ecoweb resources – such as minerals, water, plants, and animals – in a manner that does not replenish but instead atrophies and destroys
+                                    The process of exploiting human resources – – such as labor and knowledge – – and non-human ecoweb resources – – such as minerals, water, plants, and animals – – in a manner that does not replenish but instead atrophies and destroys
                                   </div>
                                 </div>
                               </div>
