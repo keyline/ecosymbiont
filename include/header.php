@@ -55,5 +55,3 @@ function isActive($page) {
             </div>
         </nav>
     </header>
-</body>
-</html>
