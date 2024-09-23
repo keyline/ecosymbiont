@@ -48,8 +48,7 @@ class NewsContentController extends Controller
     {
         $data['module']           = $this->data;
         if ($request->isMethod('post')) {
-            $postData = $request->all();
-            dd($postData);
+            $postData = $request->all();            
             // Validation rules
             $rules = [
                 'parent_category'           => 'required',                               
@@ -69,7 +68,7 @@ class NewsContentController extends Controller
             
             // Validate request data
             if ($this->validate($request, $rules)) {
-        
+                dd($postData);
                 // Handle cover image upload
                 $imageFile = $request->file('cover_image');
                 $cover_image = $data['row']->cover_image ?? ''; // Fallback to existing image if not uploaded
