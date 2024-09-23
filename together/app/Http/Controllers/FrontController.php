@@ -285,7 +285,7 @@ class FrontController extends Controller
 
                     } else {
                         // reCAPTCHA validation failed
-                        echo "reCAPTCHA v3 validation failed. Please try again."; die;
+                        return redirect()->back()->with('error_message', 'reCAPTCHA v3 validation failed. Please try again.');                        
                     }                              
             }
             echo $this->front_before_login_layout($title, $page_name, $data);
