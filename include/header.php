@@ -1,5 +1,6 @@
 <?php 
 // echo  $current_page = $_SERVER['REQUEST_URI']; die;
+$base_url = "https://ecosymbiont.keylines.net.in/";
 function isActive($page) {
    $current_page = basename($_SERVER['REQUEST_URI'], ".php"); // Get current page name without extension
     return $current_page == $page ? 'active' : '';
@@ -38,7 +39,7 @@ function isActive($page) {
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">                        
                         <li><a class="<?= isActive('index') ?>" href="#">About</a></li>
-                        <li><a href="<?=$_SERVER['REQUEST_URI']?>./together">ERT</a></li>
+                        <li><a href="<?=$base_ur?>/together">ERT</a></li>
                         <li><a class="<?= isActive('synergy-meetings') ?>" href="synergy-meetings.php">Synergy Meetings</a></li>                        
                         <li><a class="<?= isActive('in-the-media') ?>" href="in-the-media.php">In the Media</a></li>
                         <li><a class="<?= isActive('contact') ?>" href="contact.php">Contact</a></li>
