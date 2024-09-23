@@ -135,7 +135,7 @@ $controllerRoute = $module['controller_route'];
                         <div class="row mb-3">
                             <label for="sub_title" class="col-md-2 col-lg-2 col-form-label">Subtitle</label>
                             <div class="col-md-10 col-lg-10">
-                            <textarea class="form-control" id="sub_title" name="sub_title" rows="4" cols="50" placeholder="Your explanation here..." required><?= $sub_title ?></textarea>
+                            <textarea class="form-control" id="sub_title" name="sub_title" rows="4" cols="50" placeholder="Your explanation here..."><?= $sub_title ?></textarea>
                             <div id="sub_titleError" class="error"></div>
                             </div>
                         </div>
@@ -164,7 +164,7 @@ $controllerRoute = $module['controller_route'];
                             <label for="author_short_bio" class="col-md-2 col-lg-2 col-form-label">Author Short Bio</label>
                             <div class="col-md-10 col-lg-10">
                                 <input type="text" name="author_short_bio" class="form-control" id="author_short_bio"
-                                    value="<?= $author_short_bio ?>" required>
+                                    value="<?= $author_short_bio ?>">
                             </div>
                         </div>      
                         <div class="row mb-3">
@@ -193,11 +193,11 @@ $controllerRoute = $module['controller_route'];
                             </div>
                         </div>
                         <div class="row mb-3">
-                                <label for="Indigenous_affiliation" class="col-md-2 col-lg-4 col-form-label">23) Ancestral regional ecoweb affiliation (please further define your ethnicity, e.g., region of South Asia and/or Indigenous tribe/nation)
+                                <label for="Indigenous_affiliation" class="col-md-2 col-lg-4 col-form-label"> Ancestral regional ecoweb affiliation (please further define your ethnicity, e.g., region of South Asia and/or Indigenous tribe/nation)
                                 </label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" name="indigenous_affiliation" class="form-control" id="indigenous_affiliation"
-                                    value="<?= $indigenous_affiliation ?>" required>
+                                    value="<?= $indigenous_affiliation ?>">
                                 </div>
                             </div> 
                         <div class="row mb-3">
@@ -226,7 +226,7 @@ $controllerRoute = $module['controller_route'];
                             </label>
                             <div class="col-md-10 col-lg-10">
                                 <input type="text" name="organization_name" class="form-control" id="organization_name"
-                                    value="<?= $organization_name ?>" required>
+                                    value="<?= $organization_name ?>">
                             </div>
                         </div>   
                         <div class="row mb-3">
@@ -288,7 +288,7 @@ $controllerRoute = $module['controller_route'];
                             <label for="ckeditor2" class="col-md-2 col-lg-2 col-form-label">Short Description
                             </label>
                             <div class="col-md-10 col-lg-10">
-                                <textarea class="form-control" id="ckeditor2" name="short_desc" rows="5" required><?= $short_desc ?></textarea>
+                                <textarea class="form-control" id="ckeditor2" name="short_desc" rows="5"><?= $short_desc ?></textarea>
                                 <div id="short_descError" class="error"></div>
                             </div>
                         </div>
