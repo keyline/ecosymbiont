@@ -634,10 +634,10 @@ $controllerRoute = $module['controller_route'];
 
     function validateFileSize(input, errorElementId) {
         var file = input.files[0];
-        var maxSize = 5 * 1024 * 1024; // 5MB in bytes
+        var maxSize = 1 * 1024 * 1024; // 1MB in bytes
 
     if (file.size > maxSize) {
-        alert('File size exceeds 5MB. Please upload a smaller file.');
+        alert('File size exceeds 1MB. Please upload a smaller file.');
         input.value = ''; // Clear the input if validation fails
     }
     }

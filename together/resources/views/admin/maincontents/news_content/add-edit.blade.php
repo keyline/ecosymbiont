@@ -10,6 +10,7 @@ $controllerRoute = $module['controller_route'];
         background-color: #d81636;
         border: 1px solid #d81636;
     }
+    .error { color: red; }
 </style>
 <div class="pagetitle">
     <h1><?= $page_header ?></h1>
@@ -243,6 +244,7 @@ $controllerRoute = $module['controller_route'];
                             <div class="col-md-10 col-lg-10">
                                 <input type="file" name="cover_image" class="form-control" id="cover_image">
                                 <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>
+                                <span id="cover_image_error" class="text-danger"></span>  
                                 <?php if($cover_image != ''){?>
                                 <img src="<?=env('UPLOADS_URL').'newcontent/'.$cover_image?>" alt="<?=$author_name?>" style="width: 150px; height: 150px; margin-top: 10px;">
                                 <?php } else {?>
@@ -389,4 +391,18 @@ $controllerRoute = $module['controller_route'];
             }
         });
     });
+</script>
+<script>
+    document.getElementById('cover_image').addEventListener('change', function() {
+        validateFileSize(this, 'cover_image_error');
+    });
+    function validateFileSize(input, errorElementId) {
+        var file = input.files[0];
+        var maxSize = 1 * 1024 * 1024; // 1MB in bytes
+
+    if (file.size > maxSize) {
+        alert('File size exceeds 1MB. Please upload a smaller file.');
+        input.value = ''; // Clear the input if validation fails
+    }
+    }
 </script>
