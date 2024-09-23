@@ -138,9 +138,7 @@ class NewsContentController extends Controller
                      else {
                         return redirect()->back()->with(['error_message' => 'Please upload an image']);
                     }
-                } else {
-                    $cover_image = $data['row']->cover_image;
-                }
+                } 
                 // Helper::pr($others_image);
                 /* others image */           
                     // Insert the data and get the last inserted ID
