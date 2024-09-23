@@ -1,3 +1,4 @@
+<?php echo $current_url = url()->current(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,10 +29,12 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Synergy Meeting<span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">Press Release</a></li>
-                        <li><a href="#">Online Platform</a></li>
+                    <ul class="nav navbar-nav">                        
+                        <li><a class="<?= $current_url == url('/') ? 'active' : '' ?>" href="<?= url('/') ?>">About</a></li>
+                        <li><a href="<?= url() ?>./together">Ecosymbionts Regenerate Together</a></li>
+                        <li><a class="<?= $current_url == url('synergy-meetings') ? 'active' : '' ?>" href="<?= url('synergy-meetings') ?>">Synergy Meeting</a></li>                        
+                        <li><a class="<?= $current_url == url('in-the-media') ? 'active' : '' ?>" href="<?= url('in-the-media') ?>">In the Media</a></li>
+                        <li><a class="<?= $current_url == url('contact') ? 'active' : '' ?>" href="<?= url('contact') ?>">Contact</a></li>
                         <!-- <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
