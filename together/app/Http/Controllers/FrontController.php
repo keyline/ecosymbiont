@@ -121,7 +121,9 @@ class FrontController extends Controller
         // echo $postUrl; die;
         // <?=env('APP_URL').'content/'.$rowContent->cover_image
         $facebookShareUrl = "https://www.facebook.com/sharer/sharer.php?u=" . urlencode($postUrl);     
+        $twitterShareUrl = "https://twitter.com/intent/tweet?url=" . urlencode($postUrl);     
         $data['facebookShareUrl']   = $facebookShareUrl;                               
+        $data['twitterShareUrl']   = $twitterShareUrl;                               
         // Helper::pr($data['rowContent']);
         $author_name                = (($data['rowContent'])?$data['rowContent']->author_name:'');
         $parent_category_id         = (($data['rowContent'])?$data['rowContent']->parent_category:'');
