@@ -1,4 +1,4 @@
-<?php echo $current_url = url()->current(); ?>
+<?php echo $current_url = basename($_SERVER['REQUEST_URI'], ".php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
