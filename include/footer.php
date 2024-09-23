@@ -3,9 +3,9 @@
         <div class="row">
             <div class="col-md-12">
                 <ul>
-                    <li><a href="#"><img src="images/logo.webp" alt="" class="img-responsive"></a></li>
-                    <li><a href="#" class="footer_btn">Press Release</a></li>
-                    <li><a href="#" class="footer_btn_2">Online Platform</a></li>
+                    <li><a href="index.php"><img src="images/logo.webp" alt="" class="img-responsive"></a></li>
+                    <li><a href="in-the-media" class="footer_btn">Press Release</a></li>
+                    <li><a href="<?=$base_url?>/together" class="footer_btn_2">Online Platform</a></li>
                 </ul>
             </div>
         </div>

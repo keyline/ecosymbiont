@@ -30,7 +30,7 @@ function isActive($page) {
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="index.php">
                         <img src="images/logo.webp" alt="" class="img-responsive">
                     </a>
                 </div>
