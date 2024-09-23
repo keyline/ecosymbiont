@@ -401,7 +401,8 @@ $controllerRoute = $module['controller_route'];
         var maxSize = 1 * 1024 * 1024; // 1MB in bytes
 
     if (file.size > maxSize) {
-        alert('File size exceeds 1MB. Please upload a smaller file.');
+        document.getElementById(errorElementId).innerText = "File size exceeds 1MB. Please upload a smaller file.";
+        // alert('File size exceeds 1MB. Please upload a smaller file.');
         input.value = ''; // Clear the input if validation fails
     }
     }
