@@ -16,7 +16,7 @@ use App\Helpers\Helper;
                                    ->where('news_contents.parent_category', '=', 1)
                                    ->orderBy('news_contents.id', 'DESC')
                                    ->first();
-                // Helper::pr($parentCategoryContent1);
+                 Helper::pr($parentCategoryContent1);
                 if($parentCategoryContent1){
                 ?>
                     <div class="news-post image-post default-size">
