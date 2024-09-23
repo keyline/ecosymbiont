@@ -1,0 +1,245 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'inter', sans-serif;
+}
+h1,h2,h3,h4,h5,h6,p,ul,span,a{
+    margin: 0;
+    padding: 0;
+}
+@font-face {
+    font-family: 'inter', sans-serif;
+    src: url(../fonts/Inter-VariableFont_opsz\,wght.ttf);
+}
+/* navbar css */
+header{
+    margin-bottom: 77px;
+}
+header .navbar{
+    min-height: auto !important;
+    background: #fff;
+    margin-bottom: 0;
+    padding: 10px 15px;
+}
+header .navbar-brand{
+    padding: 0;
+    height: auto;
+}
+header .navbar-brand>img{
+    width: 100%;
+    max-width: 50%;
+}
+header .nav>li{
+    margin: 0 25px;
+}
+.middle-nav{
+    display: flex;
+    align-items: center;
+}
+.container>.navbar-header{
+    margin-left: 0;
+    margin-right: 0;
+}
+.navbar-default .navbar-nav>li>a{
+    font-family: 'inter', sans-serif;
+    color: #90201f;
+    font-size: 16px;
+    transition: all .3s ease-in-out;
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>li>a:hover{
+    background: transparent;
+    color: #d09c1c;
+}
+.navbar-fixed-top{
+    border-bottom: 3px solid #d09c1c;
+}
+/* banner info css */
+.banner-info,
+.urgent-section{
+    padding: 50px 0;
+}
+.info-box{
+    margin-bottom: 30px;
+}
+.info-box h2,
+.info-box h4{
+    color: #90201f;
+    font-size: 30px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+.info-box h4{
+    font-size: 20px;
+}
+.info-box p,
+.info-box ul li{
+    color: #000;
+    font-size: 16px;
+    line-height: 1.4;
+}
+.info-box span{
+    color: #d09c1c;
+}
+.info-box ul{
+    padding-left: 15px;
+}
+.info-box ul li{
+    margin-top: 20px
+}
+/* reatoring css */
+.reatoring{
+    padding: 100px 0;
+    background: url(../images/restoring.webp) no-repeat center center;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+}
+.reatoring h1{
+    color: #fff;
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+}
+.mt-20{
+    margin-top: 20px
+}
+
+/* accordian css */
+.panel-title {
+    width: 100%
+}
+.accordion-toggle{
+    color: #90201f !important;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+}
+.accordion-toggle.collapsed{
+    color: #000 !important;
+}
+.accordion-toggle:hover,
+.accordion-toggle:focus{
+    text-decoration: none;
+}
+.panel-default>.panel-heading{
+    border: 1px solid #90201f !important;
+}
+.panel-default>.panel-heading+.panel-collapse>.panel-body{
+    border: none !important;
+}
+.panel-default{
+    border: none !important
+}
+.panel-body{
+    background: #f8f8f8 !important;
+}
+footer{
+    padding: 25px 0;
+    background: #ededed;
+    border-top: 3px solid #90201f;
+    display: flex;
+    align-items: center;
+}
+footer ul{
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    align-items: center;
+}
+.footer_btn{
+    color: #90201f;
+    font-size: 16px;
+    padding: 20px 30px;
+    border-radius: 100px;
+    transition: all .3s ease-in-out;
+}
+.footer_btn_2{
+    color: #d09c1c;
+    text-decoration: none;
+    background: #90201f;
+    font-size: 16px;
+    padding: 20px 30px;
+    border-radius: 100px;
+}
+.footer_btn:hover,
+.footer_btn_2:hover{
+    color: #d09c1c;
+    text-decoration: none;
+    background: #90201f;
+}
+
+/* responsive start */
+
+@media(max-width: 992px){
+    header {
+        margin-bottom: 66px;
+    }
+    .navbar-header{
+        width: 240px;
+    }
+    header .nav>li {
+        margin: 0 8px;
+    }
+}
+@media(max-width: 767px){
+    .navbar-header{
+        width: 100%;
+    }
+    .navbar-toggle{
+        margin: 19px 0 0;
+    }
+    .middle-nav{
+        display: block;
+    }
+    .banner-info, .urgent-section {
+        padding: 30px 0;
+    }
+    .info-box h2,
+    .info-box h4{
+        color: #90201f;
+        font-size: 20px;
+    }
+    .info-box h4{
+        font-size: 18px;
+    }
+    .info-box p, .info-box ul li {
+        font-size: 15px;
+        line-height: 1.4;
+    }
+    .reatoring h1 {
+        font-size: 25px;
+        font-weight: 600;
+        line-height: 1.5;
+        padding: 0 15px;
+    }
+    .reatoring h1 br{
+        display: none;
+    }
+    .defination-img{
+        margin-bottom: 30px;
+    }
+    footer ul li:first-child{
+        width: 30%;
+    }
+    .footer_btn {
+        font-size: 13px;
+        padding: 10px 20px;
+    }
+}
+@media(max-width: 500px){
+    .navbar-brand{
+        width: 220px;
+    }
+    .navbar-toggle {
+        margin: 5px 0 0;
+    }
+    .footer_btn {
+        font-size: 12px;
+        padding: 10px 10px;
+    }
+}
