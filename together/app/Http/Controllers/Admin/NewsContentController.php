@@ -63,7 +63,7 @@ class NewsContentController extends Controller
                 'cover_image'               => 'required',     
                 'is_feature'                => 'required',  
                 'is_popular'                => 'required',  
-                'sub_title'                 => ['required', 'string', new MaxWords(40)], 
+                'sub_title'                 => 'required', 
             ];
             
             // Validate request data
