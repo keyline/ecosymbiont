@@ -16,7 +16,7 @@ use App\Helpers\Helper;
                                    ->where('news_contents.parent_category', '=', 1)
                                    ->orderBy('news_contents.id', 'DESC')
                                    ->first();
-                 Helper::pr($parentCategoryContent1);
+                //  Helper::pr($parentCategoryContent1);
                 if($parentCategoryContent1){
                 ?>
                     <div class="news-post image-post default-size">
@@ -401,15 +401,15 @@ use App\Helpers\Helper;
                                         </div>
                                         <div class="col-sm-7">
                                             <div class="post-content">
-                                                <a href="<?=url('category/' . $parentCategoryContent1->category_slug)?>"><?=$parentCategoryContent1->category_name?></a>
-                                                <h2><a href="<?=url('content/' . $parentCategoryContent1->slug)?>"><?=$parentCategoryContent1->new_title?></a></h2>
+                                                <a href="<?=url('category/' . $recentContent->category_slug)?>"><?=$recentContent->category_name?></a>
+                                                <h2><a href="<?=url('content/' . $recentContent->slug)?>"><?=$recentContent->new_title?></a></h2>
                                                 <ul class="post-tags">
-                                                    <li><i class="fa fa-clock-o"></i><?=date_format(date_create($parentCategoryContent1->created_at), "d M Y")?></li>
-                                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent1->author_name?></a></li>
+                                                    <li><i class="fa fa-clock-o"></i><?=date_format(date_create($recentContent->created_at), "d M Y")?></li>
+                                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$recentContent->author_name?></a></li>
                                                     <!-- <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
                                                     <li><i class="fa fa-eye"></i>872</li> -->
                                                 </ul>
-                                                <p><?=$parentCategoryContent1->sub_title?></p>
+                                                <p><?=$recentContent->sub_title?></p>
                                             </div>
                                         </div>
                                     </div>
