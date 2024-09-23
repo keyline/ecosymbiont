@@ -1,6 +1,6 @@
 <?php 
 function isActive($page) {
-    $current_page = basename($_SERVER['REQUEST_URI'], ".php");  // Get current page name without extension
+  echo  $current_page = basename($_SERVER['REQUEST_URI'], ".php");  die; // Get current page name without extension
     return $current_page == $page ? 'active' : '';
 }
 ?>
