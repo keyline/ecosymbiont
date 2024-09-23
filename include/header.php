@@ -38,7 +38,7 @@ function isActive($page) {
                     <ul class="nav navbar-nav">                        
                         <li><a class="<?= isActive('index') ?>" href="#">About</a></li>
                         <li><a href="<?=$_SERVER['REQUEST_URI']?>./together">Ecosymbionts Regenerate Together</a></li>
-                        <li><a class="<?= isActive('synergy-meetings') ?>" href="synergy-meetings.php">Synergy Meeting</a></li>                        
+                        <li><a class="<?= isActive('synergy-meetings') ?>" href="synergy-meetings.php">Synergy Meetings</a></li>                        
                         <li><a class="<?= isActive('in-the-media') ?>" href="in-the-media.php">In the Media</a></li>
                         <li><a class="<?= isActive('contact') ?>" href="contact.php">Contact</a></li>
                         <!-- <li class="dropdown">
