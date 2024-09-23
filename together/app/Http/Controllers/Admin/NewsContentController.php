@@ -49,6 +49,8 @@ class NewsContentController extends Controller
         $data['module']           = $this->data;
         if ($request->isMethod('post')) {
             $postData = $request->all();
+            
+            // Validation rules
             $rules = [
                 'parent_category'           => 'required',                               
                 'sub_categories'            => 'required',   
@@ -56,107 +58,91 @@ class NewsContentController extends Controller
                 'creative_work_SRN'         => 'required',
                 'creative_work_DOI'         => 'required',
                 'author_name'               => 'required',
-                // 'author_short_bio'          => 'required',
                 'pronoun'                   => 'required',   
-                // 'author_affiliation'        => 'required',   
-                // 'indigenous_affiliation'    => 'required',   
                 'author_email'              => 'required',   
                 'country'                   => 'required',   
-                // 'organization_name'         => 'required',   
                 'cover_image'               => 'required',     
-                // 'others_image'              => 'required',     
-                // 'long_desc'                 => 'required',     
-                // 'keywords'                  => 'required',     
                 'is_feature'                => 'required',  
                 'is_popular'                => 'required',  
-                // 'short_desc'                => ['required', 'string', new MaxWords(100)],    
-                'sub_title'                  => ['required', 'string', new MaxWords(40)], 
+                'sub_title'                 => ['required', 'string', new MaxWords(40)], 
             ];
             
+            // Validate request data
             if ($this->validate($request, $rules)) {
-                // dd($postData);
-                /* banner image */
-                $imageFile      = $request->file('cover_image');
-                if($imageFile != ''){
-                    $imageName      = $imageFile->getClientOriginalName();
-                    $uploadedFile   = $this->upload_single_file('cover_image', $imageName, 'newcontent', 'image');
-                    if($uploadedFile['status']){
+        
+                // Handle cover image upload
+                $imageFile = $request->file('cover_image');
+                $cover_image = $data['row']->cover_image ?? ''; // Fallback to existing image if not uploaded
+                if($imageFile != '') {
+                    $imageName = $imageFile->getClientOriginalName();
+                    $uploadedFile = $this->upload_single_file('cover_image', $imageName, 'newcontent', 'image');
+                    if ($uploadedFile['status']) {
                         $cover_image = $uploadedFile['newFilename'];
                     } else {
                         return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
                     }
-                } else {
-                    $cover_image = $data['row']->cover_image;
                 }
-                /* banner image */
-                    
+        
+                // Generate a unique slug
+                $slug = Str::slug($postData['new_title']);
+        
+                // Prepare fields for NewsContent insertion
+                $fields = [
+                    'sub_category'              => $postData['sub_categories'],                       
+                    'parent_category'           => $postData['parent_category'], 
+                    'slug'                      => $slug,
+                    'new_title'                 => $postData['new_title'],
+                    'creative_work_SRN'         => $postData['creative_work_SRN'],
+                    'creative_work_DOI'         => $postData['creative_work_DOI'],
+                    'author_name'               => $postData['author_name'],   
+                    'author_short_bio'          => $postData['author_short_bio'] ?? '',   
+                    'author_pronoun'            => $postData['pronoun'],   
+                    'author_affiliation'        => json_encode($postData['author_affiliation'] ?? []),   
+                    'indigenous_affiliation'    => $postData['indigenous_affiliation'] ?? '',   
+                    'author_email'              => $postData['author_email'],   
+                    'country'                   => $postData['country'],   
+                    'organization_name'         => $postData['organization_name'] ?? '',   
+                    'cover_image'               => $cover_image,
+                    'cover_image_caption'       => $postData['cover_image_caption'] ?? '',
+                    'long_desc'                 => $postData['long_desc'] ?? '',     
+                    'keywords'                  => $postData['keywords'] ?? '',     
+                    'is_feature'                => $postData['is_feature'],  
+                    'is_popular'                => $postData['is_popular'],  
+                    'short_desc'                => $postData['short_desc'] ?? '',    
+                    'sub_title'                 => $postData['sub_title'], 
+                ];
+        
+                // Insert NewsContent and get the last inserted ID
+                $lastInsertedId = NewsContent::insertGetId($fields);
+        
+                // Handle others_image upload (optional)
+                $imageFile = $request->file('others_image');
+                $others_image = [];
+        
+                if($imageFile != '') {                    
+                    $uploadedFile = $this->commonFileArrayUpload('newcontent', $imageFile, 'image');
+                    if(!empty($uploadedFile)) {
+                        $others_image = $uploadedFile;
+                    } else {
+                        return redirect()->back()->with(['error_message' => 'Please upload an image']);
+                    }
+                }
+        
+                // Insert into NewsContentImage if others_image is not empty
+                if(count($others_image) > 0) {
+                    foreach($others_image as $image) {
+                        $imageFields = [
+                            'image_file' => $image,
+                            'news_id' => $lastInsertedId,
+                        ];
+                        NewsContentImage::insert($imageFields);
+                    }
+                }
+        
+                // Redirect after successful insertion
+                return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
                 
-                // $checkValue = NewsContent::where('sub_category', '=', $postData['sub_category'])->count();
-                // if ($checkValue <= 0) { 
-                    // Generate a unique slug
-                    $slug = Str::slug($postData['new_title']);                   
-                    $fields = [
-                        'sub_category'              => $postData['sub_categories'],                       
-                        'parent_category'           => $postData['parent_category'], 
-                        'slug'                      => $slug,
-                        'new_title'                 => $postData['new_title'],
-                        'creative_work_SRN'         => $postData['creative_work_SRN'],
-                        'creative_work_DOI'         => $postData['creative_work_DOI'],
-                        'author_name'               => $postData['author_name'],   
-                        'author_short_bio'          => $postData['author_short_bio'],   
-                        'author_pronoun'            => $postData['pronoun'],   
-                        'author_affiliation'        => json_encode($postData['author_affiliation']),   
-                        'indigenous_affiliation'    => $postData['indigenous_affiliation'],   
-                        'author_email'              => $postData['author_email'],   
-                        'country'                   => $postData['country'],   
-                        'organization_name'         => $postData['organization_name'],   
-                        'cover_image'               => $cover_image,
-                        'cover_image_caption'       => $postData['cover_image_caption'],
-                        // 'others_image'              => $others_image,     
-                        'long_desc'                 => $postData['long_desc'],     
-                        'keywords'                  => $postData['keywords'],     
-                        'is_feature'                => $postData['is_feature'],  
-                        'is_popular'                => $postData['is_popular'],  
-                        'short_desc'                => $postData['short_desc'],    
-                        'sub_title'                  => $postData['sub_title'], 
-                    ];
-                    //  dd($fields);
-                      Helper::pr($fields);
-                     NewsContent::insert($fields);
-                    /* others image */
-                    $imageFile      = $request->file('others_image');   
-                    $others_image = []; // Initialize as an empty array             
-                    if($imageFile != ''){                    
-                        $uploadedFile   = $this->commonFileArrayUpload('newcontent', $imageFile, 'image');
-                        if(!empty($uploadedFile)){
-                            $others_image = $uploadedFile;
-                        }                    
-                        else {
-                            return redirect()->back()->with(['error_message' => 'Please upload an image']);
-                        }
-                    } 
-                // Helper::pr($others_image);
-                /* others image */           
-                    // Insert the data and get the last inserted ID
-                    $lastInsertedId = NewsContent::insertGetId($fields);
-                    // dd($lastInsertedId);
-                    if(count($others_image)>0){
-                        for($k=0;$k<count($others_image);$k++){
-                            $fields   = [
-                                                'image_file'                => $others_image[$k],
-                                                'news_id'                   => $lastInsertedId,
-                            ];
-                            // dd($fields);
-                            NewsContentImage::insert($fields);                        
-                        }
-                    }     
-                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
-                // } else {
-                //     return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
-                // }
             } else {
-                // echo "valiadtion wrong";
-                // dd($postData);
                 return redirect()->back()->with('error_message', 'All Fields Required !!!');
             }
         }
