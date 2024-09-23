@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
     // before login
         Route::match(['get', 'post'], '/', 'App\Http\Controllers\FrontController@home');
         Route::match(['get', 'post'], '/contact-us', 'App\Http\Controllers\FrontController@contactUs');
+        //Route::match(['get', 'post'], '/submissions', 'App\Http\Controllers\FrontController@submissions');
         Route::match(['get', 'post'], '/page/{id}', 'App\Http\Controllers\FrontController@pageContent');
         Route::match(['get', 'post'], '/category/{id}', 'App\Http\Controllers\FrontController@category');
         Route::match(['get', 'post'], '/subcategory/{id}', 'App\Http\Controllers\FrontController@subcategory');
