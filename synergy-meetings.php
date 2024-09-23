@@ -4,7 +4,7 @@ include "include/header.php";
 <body>
 <main>
         <section class="body-container">
-            <h2 class="main-heading">Thank you for your patience. The website will launch on 25 September, 2024.</h2>
+            <!-- <h2 class="main-heading">Thank you for your patience. The website will launch on 25 September, 2024.</h2> -->
             <div class="row">
                 <div class="col-6">
                     <div class="left-img-box">
