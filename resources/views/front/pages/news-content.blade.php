@@ -33,7 +33,7 @@ use App\Helpers\Helper;
                                 <div class="share-post-box">
                                     <ul class="share-box">
                                         <li><i class="fa fa-share-alt"></i><span>Share Post</span></li>
-                                        <li><a class="facebook" href="javascript:void(0);"><i class="fa fa-facebook"></i><span>Share on Facebook</span></a></li>
+                                        <li><a class="facebook" href="{{ $facebookShareUrl }}"><i class="fa fa-facebook"></i><span>Share on Facebook</span></a></li>
                                         <li><a class="twitter" href="javascript:void(0);"><i class="fa fa-twitter"></i><span>Share on Twitter</span></a></li>
                                         <!-- <li><a class="google" href="#"><i class="fa fa-google-plus"></i><span></span></a></li> -->
                                         <li><a class="linkedin" href="javascript:void(0);"><i class="fa fa-linkedin"></i><span>&nbsp;&nbsp;&nbsp;Share on Linkedin</span></a></li>
