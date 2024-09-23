@@ -105,8 +105,7 @@ use App\Helpers\Helper;
                                 </div>
                                 <div class="share-post-box">
                                     <ul class="share-box">
-                                        <li><i class="fa fa-share-alt"></i><span>Share Post</span></li>
-                                        <li><i class="fa fa-share-alt"></i><span>Share Post</span></li>
+                                        <li><i class="fa fa-share-alt"></i><span>Share Post</span></li>                                        
                                         <li><a class="facebook" href="{{ $facebookShareUrl }}" target="_blank"><i class="fa fa-facebook"></i><span>Share on Facebook</span></a></li>
                                         <li><a class="twitter" href="{{ $twitterShareUrl }}" target="_blank"><i class="fa fa-twitter"></i><span>Share on Twitter</span></a></li>
                                         <!-- <li><a class="google" href="#"><i class="fa fa-google-plus"></i><span></span></a></li> -->
