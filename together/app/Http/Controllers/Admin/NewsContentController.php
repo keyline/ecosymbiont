@@ -121,7 +121,7 @@ class NewsContentController extends Controller
                         'sub_title'                  => $postData['sub_title'], 
                     ];
                     //  dd($fields);
-                    //   Helper::pr($fields);
+                      Helper::pr($fields);
                      NewsContent::insert($fields);
                     /* others image */
                     $imageFile      = $request->file('others_image');   
