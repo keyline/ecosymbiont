@@ -124,7 +124,7 @@ class NewsContentController extends Controller
                     if(!empty($uploadedFile)) {
                         $others_image = $uploadedFile;
                     } else {
-                        return redirect()->back()->with(['error_message' => 'Please upload an image']);
+                        $others_image = [];
                     }
                 }
         
@@ -259,7 +259,7 @@ class NewsContentController extends Controller
                         $others_image = $uploadedFile;
                     }                  
                      else {
-                        return redirect()->back()->with(['error_message' => 'Please upload an image']);
+                        $others_image = [];
                     }
                     }                                         
                     /* others image */                               
