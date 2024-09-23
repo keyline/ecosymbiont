@@ -35,7 +35,7 @@ function isActive($page) {
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">                        
-                        <li><a class="<?= isActive('home') ?>" href="index.php">About</a></li>
+                        <li><a class="<?= isActive('index') ?>" href="#">About</a></li>
                         <li><a href="<?=$_SERVER['REQUEST_URI']?>./together">Ecosymbionts Regenerate Together</a></li>
                         <li><a class="<?= isActive('synergy-meetings') ?>" href="synergy-meetings.php">Synergy Meeting</a></li>                        
                         <li><a class="<?= isActive('in-the-media') ?>" href="in-the-media.php">In the Media</a></li>
