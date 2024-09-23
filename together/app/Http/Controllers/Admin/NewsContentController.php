@@ -124,31 +124,32 @@ class NewsContentController extends Controller
                     //   Helper::pr($fields);
                      NewsContent::insert($fields);
                     /* others image */
-                $imageFile      = $request->file('others_image');                
-                if($imageFile != ''){                    
-                    $uploadedFile   = $this->commonFileArrayUpload('newcontent', $imageFile, 'image');
-                    if(!empty($uploadedFile)){
-                        $others_image = $uploadedFile;
-                    }                    
-                     else {
-                        return redirect()->back()->with(['error_message' => 'Please upload an image']);
-                    }
-                } 
+                    $imageFile      = $request->file('others_image');   
+                    $others_image = []; // Initialize as an empty array             
+                    if($imageFile != ''){                    
+                        $uploadedFile   = $this->commonFileArrayUpload('newcontent', $imageFile, 'image');
+                        if(!empty($uploadedFile)){
+                            $others_image = $uploadedFile;
+                        }                    
+                        else {
+                            return redirect()->back()->with(['error_message' => 'Please upload an image']);
+                        }
+                    } 
                 // Helper::pr($others_image);
                 /* others image */           
                     // Insert the data and get the last inserted ID
-                    // $lastInsertedId = NewsContent::insertGetId($fields);
+                    $lastInsertedId = NewsContent::insertGetId($fields);
                     // dd($lastInsertedId);
-                    // if(count($others_image)>0){
-                    //     for($k=0;$k<count($others_image);$k++){
-                    //         $fields   = [
-                    //                             'image_file'                => $others_image[$k],
-                    //                             'news_id'                   => $lastInsertedId,
-                    //         ];
-                    //         // dd($fields);
-                    //         NewsContentImage::insert($fields);                        
-                    //     }
-                    // }     
+                    if(count($others_image)>0){
+                        for($k=0;$k<count($others_image);$k++){
+                            $fields   = [
+                                                'image_file'                => $others_image[$k],
+                                                'news_id'                   => $lastInsertedId,
+                            ];
+                            // dd($fields);
+                            NewsContentImage::insert($fields);                        
+                        }
+                    }     
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
                 // } else {
                 //     return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
