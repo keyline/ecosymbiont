@@ -81,6 +81,8 @@
                                                 </select>
                                               </div>
                                             </div>
+                                            <!-- Google reCAPTCHA widget -->
+                                            <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY"></div>
                                             <div class="text-center" style="margin-bottom: 15px;">
                                               <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>
@@ -108,6 +110,8 @@
       (B) have participated as a strategist at an in-person ER Synergy Meeting. </p>
       <button id="closePopup">Close</button>
     </div>
+    <!-- Include Google's reCAPTCHA JS library -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
       $(document).ready(function() {
