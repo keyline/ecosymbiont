@@ -49,7 +49,7 @@ class NewsContentController extends Controller
         $data['module']           = $this->data;
         if ($request->isMethod('post')) {
             $postData = $request->all();
-            
+            dd($postData);
             // Validation rules
             $rules = [
                 'parent_category'           => 'required',                               
