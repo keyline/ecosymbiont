@@ -117,6 +117,11 @@ class FrontController extends Controller
                                            ->where('news_contents.status', '=', 1)
                                            ->where('news_contents.slug', '=', $slug)
                                            ->first();
+        $postUrl = env('APP_URL') . '/content/' . $slug;
+        // echo $postUrl; die;
+        // <?=env('APP_URL').'content/'.$rowContent->cover_image
+        $facebookShareUrl = "https://www.facebook.com/sharer/sharer.php?u=" . urlencode($postUrl);     
+        $data['facebookShareUrl']   = $facebookShareUrl;                               
         // Helper::pr($data['rowContent']);
         $author_name                = (($data['rowContent'])?$data['rowContent']->author_name:'');
         $parent_category_id         = (($data['rowContent'])?$data['rowContent']->parent_category:'');
