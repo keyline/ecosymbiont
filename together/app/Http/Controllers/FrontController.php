@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper as HelpersHelper;
 use App\Http\Controllers\Controller;
 use App\Services\OpenAiAuth;
 use Illuminate\Http\Request;
@@ -221,6 +222,43 @@ class FrontController extends Controller
             $page_name                      = 'signup';
             if ($request->isMethod('post')) {
                 $postData = $request->all();
+                Helper::pr($postData);
+                 // Get reCAPTCHA token from form POST data
+                    $recaptchaResponse = $postData('g-recaptcha-response');
+
+                    // Your Google reCAPTCHA secret key
+                    $secretKey = '6LclkEwqAAAAABtaRIg1Rxp8LK4dFcFyN2Si0Ygj';
+
+                    // Google reCAPTCHA verification URL
+                    $verifyURL = 'https://www.google.com/recaptcha/api/siteverify';
+
+                    // Prepare the POST request
+                    $data = array(
+                        'secret' => $secretKey,
+                        'response' => $recaptchaResponse,                       
+                    );
+
+                    // Initiate cURL
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, $verifyURL);
+                    curl_setopt($ch, CURLOPT_POST, true);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    $response = curl_exec($ch);
+                    curl_close($ch);
+
+                    // Decode JSON response
+                    $responseData = json_decode($response);
+
+                    // Check if reCAPTCHA validation was successful
+                    if ($responseData->success && $responseData->score >= 0.5) {
+                        // reCAPTCHA validation passed, proceed with form processing
+                        echo "reCAPTCHA v3 validation passed. You can process the form."; die;
+                    } else {
+                        // reCAPTCHA validation failed
+                        echo "reCAPTCHA v3 validation failed. Please try again."; die;
+                    }
+                
                 $rules = [                                 
                     'first_name'                => 'required',            
                     'last_name'                 => 'required',                                    
