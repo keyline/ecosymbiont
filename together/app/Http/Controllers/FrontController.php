@@ -257,8 +257,7 @@ class FrontController extends Controller
                         $rules = [                                 
                             'first_name'                => 'required',            
                             'last_name'                 => 'required',                                    
-                            'email'                     => 'required',           
-                            'phone'                     => 'required',           
+                            'email'                     => 'required',                                                  
                             'country'                   => 'required',                                     
                             'password'                  => 'required',                         
                         ];
@@ -269,8 +268,7 @@ class FrontController extends Controller
                                     'first_name'                => $postData['first_name'],            
                                     'last_name'                 => $postData['last_name'],        
                                     'middle_name'               => $postData['middle_name'],            
-                                    'email'                     => $postData['email'],           
-                                    'phone'                     => $postData['phone'],           
+                                    'email'                     => $postData['email'],                                                          
                                     'country'                   => $postData['country'],
                                     'role'                      => $postData['role'],
                                     'password'                  => Hash::make($postData['password']),                         
