@@ -14,6 +14,7 @@ function isActive($page) {
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style_meeting.css">
 </head>
 <body>
 <header>

@@ -8,7 +8,7 @@ include "include/header.php";
             <div class="row">
                 <div class="col-6">
                     <div class="left-img-box">
-                        <img src="left-img.webp" alt="" class="img-fluid">
+                        <img src="images/left-img.webp" alt="" class="img-fluid">
                     </div>
                 </div>
                 <div class="col-6">
