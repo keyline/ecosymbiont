@@ -273,7 +273,7 @@ class FrontController extends Controller
                                     'role'                      => $postData['role'],
                                     'password'                  => Hash::make($postData['password']),                         
                                 ];
-                                Helper::pr($fields);
+                                // Helper::pr($fields);
                                 User::insert($fields);
                                 return redirect(url('signin'))->with('success_message', 'Sign Up Successfully !!!');
                             } else {
