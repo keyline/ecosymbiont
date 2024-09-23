@@ -54,11 +54,11 @@ if (!empty($parameters)) {
                 <!-- End dashboard -->
                 <!-- news -->
                     <div class="nav-item">
-                        <a class="nav-link dropdown-toggle active <?=(($pageSegment == 'news_category' || $pageSegment == 'content' || $pageSegment == 'news_subcategory')?'':'collapsed')?>" href="#navbarVerticalMenuNews" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuNews" aria-expanded="<?=(($pageSegment == 'news_category' || $pageSegment == 'content' || $pageSegment == 'news_subcategory')?'true':'false')?>" aria-controls="navbarVerticalMenuNews">
+                        <a class="nav-link dropdown-toggle active <?=(($pageSegment == 'news_category' || $pageSegment == 'news_content' || $pageSegment == 'news_subcategory')?'':'collapsed')?>" href="#navbarVerticalMenuNews" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuNews" aria-expanded="<?=(($pageSegment == 'news_category' || $pageSegment == 'news_content' || $pageSegment == 'news_subcategory')?'true':'false')?>" aria-controls="navbarVerticalMenuNews">
                           <i class="fa fa-bell nav-icon"></i>
                           <span class="nav-link-title">News</span>
                         </a>
-                        <div id="navbarVerticalMenuNews" class="nav-collapse collapse <?=(($pageSegment == 'news_category' || $pageSegment == 'content' || $pageSegment == 'news_subcategory')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">
+                        <div id="navbarVerticalMenuNews" class="nav-collapse collapse <?=(($pageSegment == 'news_category' || $pageSegment == 'news_content' || $pageSegment == 'news_subcategory')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">
                           <a class="nav-link <?=(($pageSegment == 'news_category')?'active':'')?>" href="<?=url('admin/news_category/list')?>">Parent Categories</a>
                           <a class="nav-link <?=(($pageSegment == 'news_subcategory')?'active':'')?>" href="<?=url('admin/news_subcategory/list')?>">Sub Categories</a>
                           <a class="nav-link <?=(($pageSegment == 'news_content')?'active':'')?>" href="<?=url('admin/news_content/list')?>">Contents</a>
@@ -70,7 +70,7 @@ if (!empty($parameters)) {
                         <a class="nav-link <?= $pageSegment == 'article' ? 'active' : '' ?>"
                             href="<?= url('admin/article/list') ?>" data-placement="left">
                             <i class="fa fa-file-text nav-icon"></i>
-                            <span class="nav-link-title">Submitted Articles</span>
+                            <span class="nav-link-title">Submit Creative-Work</span>
                         </a>
                     </div>
                 <!-- End Submitted Articles -->                
@@ -83,7 +83,7 @@ if (!empty($parameters)) {
                         <div id="navbarVerticalMenuUsers" class="nav-collapse collapse <?=(($pageSegment == 'content_creaters' || $pageSegment == 'editors'  || $pageSegment == 'readers')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">
                           <a class="nav-link <?=(($pageSegment == 'content_creaters')?'active':'')?>" href="<?=url('admin/content_creaters/list')?>">Content Creater</a>
                           <a class="nav-link <?=(($pageSegment == 'readers')?'active':'')?>" href="<?=url('admin/readers/list')?>">Readers</a>
-                          <a class="nav-link <?=(($pageSegment == 'editors')?'active':'')?>" href="<?=url('admin/editors/list')?>">Editors</a>
+                          <!-- <a class="nav-link <?=(($pageSegment == 'editors')?'active':'')?>" href="<?=url('admin/editors/list')?>">Editors</a> -->
                         </div>
                     </div>
                 <!-- End users -->

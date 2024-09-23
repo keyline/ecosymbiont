@@ -28,6 +28,13 @@
                                         <form method="POST" action="">
                                             @csrf
                                             <div class="row" style="margin-bottom: 15px;">
+                                              <label for="first_name" class="col-md-4 col-lg-3 col-form-label">Who Am I</label>
+                                              <div class="col-md-8 col-lg-9">
+                                                <input type="radio" name="role" id="role1" value="1" required> <label for="role1">Reader</label>
+                                                <input type="radio" name="role" id="role2" value="2" required> <label for="role2">Content Creator</label>
+                                              </div>
+                                            </div>
+                                            <div class="row" style="margin-bottom: 15px;">
                                               <label for="first_name" class="col-md-4 col-lg-3 col-form-label">First Name</label>
                                               <div class="col-md-8 col-lg-9">
                                                 <input type="text" name="first_name" class="form-control" id="first_name" placeholder="Enter First Name" required autocomplete="off">
@@ -40,7 +47,7 @@
                                               </div>
                                             </div>
                                             <div class="row" style="margin-bottom: 15px;">
-                                              <label for="last_name" class="col-md-4 col-lg-3 col-form-label">Sur Name</label>
+                                              <label for="last_name" class="col-md-4 col-lg-3 col-form-label">Surname</label>
                                               <div class="col-md-8 col-lg-9">
                                                 <input type="text" name="last_name" class="form-control" id="last_name" placeholder="Enter Sur Name" required autocomplete="off">
                                               </div>
@@ -51,12 +58,12 @@
                                                 <input type="email" name="email" class="form-control" id="email" placeholder="Enter Email" required autocomplete="off">
                                               </div>
                                             </div>
-                                            <div class="row" style="margin-bottom: 15px;">
+                                            <!-- <div class="row" style="margin-bottom: 15px;">
                                               <label for="phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
                                               <div class="col-md-8 col-lg-9">
                                                 <input type="text" name="phone" class="form-control" id="phone" placeholder="Enter Phone" required autocomplete="off">
                                               </div>
-                                            </div>
+                                            </div> -->
                                             <div class="row" style="margin-bottom: 15px;">
                                               <label for="password" class="col-md-4 col-lg-3 col-form-label">Password</label>
                                               <div class="col-md-8 col-lg-9">
@@ -92,4 +99,31 @@
             </div>
         </div>
     </section>
+
+    <!-- Popup Div (Initially hidden) -->
+    <div id="popup" style="position: fixed;top: 40%;left: 43%;width: 400px;padding: 20px;background-color: #d09c1c;border: 1px solid rgb(0, 0, 0);">
+      <h3>Submissions Eligibility Criteria</h3>
+      <p>At this time, you must:<br>
+      (A) be invited to submit a Creative-Work to ERT; and/or <br>
+      (B) have participated as a strategist at an in-person ER Synergy Meeting. </p>
+      <button id="closePopup">Close</button>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        // Trigger popup on radio button change
+        $('input[name="role"]').change(function() {
+            if ($(this).is(':checked')) {
+              if($(this).val() == 2){
+                $('#popup').fadeIn();
+              }
+            }
+        });
+
+        // Close the popup
+        $('#closePopup').click(function() {
+            $('#popup').fadeOut();
+        });
+      });
+    </script>
 <!-- End block-wrapper-section -->

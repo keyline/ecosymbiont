@@ -27,13 +27,18 @@ use App\Models\Pronoun;
 use App\Models\EcosystemAffiliation;
 use App\Models\ExpertiseArea;
 use App\Models\SubmissionType;
+use App\Models\GeneralSetting;
 
 use Auth;
 use Session;
 use Helper;
 use Hash;
 use stripe;
+use PDF;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 date_default_timezone_set("Asia/Calcutta");
+
 class FrontController extends Controller
 {
     public function home(Request $request)
@@ -67,8 +72,9 @@ class FrontController extends Controller
     }
     public function pageContent($slug)
     {
-        $data['row']                    = Page::select('page_name', 'page_name')->where('status', '=', 1)->where('page_slug', '=', $slug)->first();
+        $data['row']                    = Page::select('page_name', 'page_content')->where('status', '=', 1)->where('page_slug', '=', $slug)->first();
         $title                          = (($data['row'])?$data['row']->page_name:'');
+        $data['button_show']            = (($slug == 'submissions')?1:0);
         $page_name                      = 'page-content';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
@@ -111,6 +117,7 @@ class FrontController extends Controller
                                            ->where('news_contents.status', '=', 1)
                                            ->where('news_contents.slug', '=', $slug)
                                            ->first();
+        // Helper::pr($data['rowContent']);
         $author_name                = (($data['rowContent'])?$data['rowContent']->author_name:'');
         $parent_category_id         = (($data['rowContent'])?$data['rowContent']->parent_category:'');
         $data['authorPostCount']    = NewsContent::where('news_contents.status', '=', 1)
@@ -128,14 +135,15 @@ class FrontController extends Controller
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
     /* authentication */
-        public function signIn(Request $request)
+        public function signIn(Request $request, $page_link = '')
         {
             if($request->isMethod('post')){
-                $postData = $request->all();
-                $rules = [
-                            'email'     => 'required|email|max:255',
-                            'password'  => 'required|max:30',
-                        ];
+                $postData   = $request->all();
+                $page_link  = Helper::decoded($postData['page_link']);
+                $rules      =   [
+                                    'email'     => 'required|email|max:255',
+                                    'password'  => 'required|max:30',
+                                ];
                 if($this->validate($request, $rules)){
                     if(Auth::guard('web')->attempt(['email' => $postData['email'], 'password' => $postData['password'], 'status' => 1])){
                         $sessionData = Auth::guard('web')->user();
@@ -160,8 +168,19 @@ class FrontController extends Controller
                             ];
                             UserActivity::insert($activityData);
                         /* user activity */
-
-                        return redirect('user/dashboard');
+                        if($sessionData->role == 1){
+                            if($page_link == ''){
+                                return redirect('user/my-profile');
+                            } else {
+                                return redirect($page_link);
+                            }
+                        } else {
+                            if($page_link == ''){
+                                return redirect('user/dashboard');
+                            } else {
+                                return redirect($page_link);
+                            }
+                        }
                     } else {
                         /* user activity */
                             $activityData = [
@@ -181,7 +200,7 @@ class FrontController extends Controller
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');
                 }
             }
-            $data                           = [];
+            $data['page_link']              = (($page_link != '')?$page_link:'');
             $title                          = 'Sign In';
             $page_name                      = 'signin';
             echo $this->front_before_login_layout($title, $page_name, $data);
@@ -210,8 +229,8 @@ class FrontController extends Controller
                             'middle_name'               => $postData['middle_name'],            
                             'email'                     => $postData['email'],           
                             'phone'                     => $postData['phone'],           
-                            'country'                   => $postData['country'],           
-                            'role'                      => 1,           
+                            'country'                   => $postData['country'],
+                            'role'                      => $postData['role'],
                             'password'                  => Hash::make($postData['password']),                         
                         ];
                         User::insert($fields);
@@ -354,9 +373,28 @@ class FrontController extends Controller
         {
             $user_id                        = session('user_id');
             $data['user']                   = User::find($user_id);
-            $data['articles']               = Article::where('user_id', '=', $user_id)->get();
+            $data['articles']               = Article::where('user_id', '=', $user_id)->orderBy('id', 'DESC')->get();
 
-            $title                          = 'My Articles';
+            if ($request->isMethod('post')) {
+                $postData = $request->all();
+                $article_id = $postData['article_id'];
+                $imageFile      = $request->file('nelp_form_scan_copy');
+                if ($imageFile != '') {
+                    $imageName      = $imageFile->getClientOriginalName();
+                    $uploadedFile   = $this->upload_single_file('nelp_form_scan_copy', $imageName, 'article', 'pdf');
+                    if ($uploadedFile['status']) {
+                        $nelp_form_scan_copy = $uploadedFile['newFilename'];
+                        Article::where('id', '=', $article_id)->update(['nelp_form_scan_copy' => $nelp_form_scan_copy, 'is_published' => 3]);
+                        return redirect()->back()->with(['success_message' => 'Scan Copy Of NELP Form Uploaded Successfully !!!']);
+                    } else {
+                        return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                    }
+                } else {
+                    return redirect()->back()->with(['error_message' => 'Please Upload Scan Copy Of NELP Form !!!']);
+                }
+            }
+
+            $title                          = 'My Creative-Works';
             $page_name                      = 'my-articles';
             echo $this->front_after_login_layout($title, $page_name, $data);
         }
@@ -368,9 +406,7 @@ class FrontController extends Controller
 
             if ($request->isMethod('post')) {
                 $postData = $request->all();
-                //  dd($postData);
                 if ($postData['invited'] == 'No' && $postData['participated'] == 'No') {
-                    // echo "this section"; die;
                     $rules = [
                         'first_name'                => 'required',            
                         'last_name'                 => 'required',                                    
@@ -394,40 +430,39 @@ class FrontController extends Controller
                     $art_image_fileInfo = isset($art_image_file) ? $art_image_file : '';    
                     $art_video_fileInfo = isset($art_video_file) ? $art_video_file : ''; 
                 } else{
-                    
-                        $rules = [
-                    'first_name'                => 'required',            
-                    'last_name'                 => 'required',                                    
-                    'email'                     => 'required',                                      
-                    'country'                   => 'required',                                     
-                    'for_publication_name'      => 'required', 
-                    'orginal_work'              => 'required', 
-                    'copyright'                 => 'required', 
-                    'submission_types'          => 'required',                
-                    'state'                     => 'required', 
-                    'city'                      => 'required', 
-                    'acknowledge'               => 'required',                                                      
-                    'section_ert'               => 'required',
-                    'title'                     => 'required',
-                    'pronoun'                   => 'required',                
-                    'organization_name'         => 'required',
-                    'organization_website'      => 'required',
-                    'ecosystem_affiliation'     => 'required',               
-                    'expertise_area'            => 'required',                
-                    'explanation'               => ['required', 'string', new MaxWords(100)],
-                    'explanation_submission'    => ['required', 'string', new MaxWords(150)],
-                    'art_video_desc'            => ['required', 'string', new MaxWords(250)],
-                    'creative_Work'             => ['required', 'string', new MaxWords(10)],
-                    'subtitle'                  => ['required', 'string', new MaxWords(40)],
-                    'art_image_desc'            => ['required', 'string', new MaxWords(250)],
-                    'bio_short'                 => ['required', 'string', new MaxWords(40)],
-                    'bio_long'                  => ['required', 'string', new MaxWords(250)], 
+                    $rules = [
+                        'first_name'                => 'required',            
+                        'last_name'                 => 'required',                                    
+                        'email'                     => 'required',                                      
+                        'country'                   => 'required',                                     
+                        'for_publication_name'      => 'required', 
+                        'orginal_work'              => 'required', 
+                        'copyright'                 => 'required', 
+                        'submission_types'          => 'required',                
+                        'state'                     => 'required', 
+                        'city'                      => 'required', 
+                        'acknowledge'               => 'required',                                                      
+                        'section_ert'               => 'required',
+                        'title'                     => 'required',
+                        'pronoun'                   => 'required',                
+                        'organization_name'         => 'required',
+                        'organization_website'      => 'required',
+                        'ecosystem_affiliation'     => 'required',               
+                        'expertise_area'            => 'required',                
+                        'explanation'               => ['required', 'string', new MaxWords(100)],
+                        'explanation_submission'    => ['required', 'string', new MaxWords(150)],
+                        'art_video_desc'            => ['required', 'string', new MaxWords(250)],
+                        'creative_Work'             => ['required', 'string', new MaxWords(10)],
+                        'subtitle'                  => ['required', 'string', new MaxWords(40)],
+                        'art_image_desc'            => ['required', 'string', new MaxWords(250)],
+                        'bio_short'                 => ['required', 'string', new MaxWords(40)],
+                        'bio_long'                  => ['required', 'string', new MaxWords(250)],
                     ];                                    
                     /* narrative file */
                         $imageFile      = $request->file('narrative_file');
                         if ($imageFile != '') {
                             $imageName      = $imageFile->getClientOriginalName();
-                            $uploadedFile   = $this->upload_single_file('narrative_file', $imageName, 'narrative', 'image');
+                            $uploadedFile   = $this->upload_single_file('narrative_file', $imageName, 'narrative', 'word');
                             if ($uploadedFile['status']) {
                                 $narrative_file = $uploadedFile['newFilename'];
                             } else {
@@ -506,69 +541,81 @@ class FrontController extends Controller
                     $art_image_fileInfo = isset($art_image_file) ? $art_image_file : '';    
                     $art_video_fileInfo = isset($art_video_file) ? $art_video_file : '';    
                 }            
-                if ($this->validate($request, $rules)) {                
-                        $fields = [
-                            'email'                     => $postData['email'],   
-                            'first_name'                => $postData['first_name'],            
-                            'last_name'                 => $postData['last_name'],        
-                            'middle_name'               => $postData['middle_name'],                                            
-                            'for_publication_name'      => $postData['for_publication_name'],           
-                            'orginal_work'              => $postData['orginal_work'],           
-                            'user_id'                      => $user_id,           
-                            'copyright'                 => $postData['copyright'],
-                            'titleId'                     => $postData['title'],
-                            'pronounId'                   => $postData['pronoun'], 
-                            'invited'                   => $postData['invited'],
-                            'invited_by'                => $invited_byInfo, 
-                            'invited_by_email'          => $invited_emailInfo,
-                            'explanation'               => $postData['explanation'],  
-                            'explanation_submission'    => $postData['explanation_submission'],     
-                            'section_ertId'             => $section_ertInfo,
-                            'creative_Work'             => $postData['creative_Work'],
-                            'subtitle'             => $postData['subtitle'],
-                            'submission_types'             => $submission_typesInfo,
-                            'titleId'                   => $postData['title'],
-                            'pronounId'                 => $postData['pronoun'],
-                            'participated'              => $postData['participated'],
-                            'participated_info'         => $participatedInfo,
-                            'narrative_file'         => $narrative_fileInfo,
-                            'first_image_file'         => $first_image_fileInfo,
-                            'second_image_file'         => $second_image_fileInfo,
-                            'art_image_file'         => $art_image_fileInfo,
-                            'art_image_desc'         => $postData['art_image_desc'],
-                            'art_video_file'         => $art_video_fileInfo,
-                            'art_video_desc'         => $postData['art_video_desc'],
-                            'country'         => $postData['country'],
-                            'state'         => $postData['state'],
-                            'city'         => $postData['city'],
-                            'organization_name'         => $postData['organization_name'],
-                            'organization_website'      => $postData['organization_website'],
-                            'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
-                            'indigenous_affiliation'    => $postData['indigenous_affiliation'],
-                            'expertise_areaId'          => $expertise_areaInfo,
-                            'bio_short'               => $postData['bio_short'],
-                            'bio_long'               => $postData['bio_long'],  
-                        ];
-                        //   Helper::pr($fields);
-                        Article::insert($fields);
-                        // return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
-                        return redirect()->back()->with('success_message', 'Article submitted Successfully !!!');
-                    // } else {
-                    //     return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
-                    // }
+                if ($this->validate($request, $rules)) {
+                    /* article no generate */
+                        $currentMonth   = date('m');
+                        $currentYear    = date('Y');
+                        $currentMonthYear = $currentYear.'-'.$currentMonth;
+                        $getLastArticle = Article::where('created_at', 'LIKE', '%'.$currentMonthYear.'%')->orderBy('id', 'DESC')->first();
+                        if($getLastArticle){
+                            $sl_no              = $getLastArticle->sl_no;
+                            $next_sl_no         = $sl_no + 1;
+                            $next_sl_no_string  = str_pad($next_sl_no, 3, 0, STR_PAD_LEFT);
+                            $article_no         = 'SRN-'.$currentMonth.$currentYear.'-'.$next_sl_no_string;
+                        } else {
+                            $next_sl_no         = 1;
+                            $next_sl_no_string  = str_pad($next_sl_no, 3, 0, STR_PAD_LEFT);
+                            $article_no         = 'SRN-'.$currentMonth.$currentYear.'-'.$next_sl_no_string;
+                        }
+                    /* article no generate */
+                    $fields = [
+                        'sl_no'                     => $next_sl_no,
+                        'article_no'                => $article_no,
+                        'email'                     => $postData['email'],   
+                        'first_name'                => $postData['first_name'],            
+                        'last_name'                 => $postData['last_name'],        
+                        'middle_name'               => $postData['middle_name'],                                            
+                        'for_publication_name'      => $postData['for_publication_name'],           
+                        'orginal_work'              => $postData['orginal_work'],           
+                        'user_id'                   => $user_id,           
+                        'copyright'                 => $postData['copyright'],
+                        'titleId'                   => $postData['title'],
+                        'pronounId'                 => $postData['pronoun'], 
+                        'invited'                   => $postData['invited'],
+                        'invited_by'                => $invited_byInfo, 
+                        'invited_by_email'          => $invited_emailInfo,
+                        'explanation'               => $postData['explanation'],  
+                        'explanation_submission'    => $postData['explanation_submission'],     
+                        'section_ertId'             => $section_ertInfo,
+                        'creative_Work'             => $postData['creative_Work'],
+                        'subtitle'                  => $postData['subtitle'],
+                        'submission_types'          => $submission_typesInfo,
+                        'titleId'                   => $postData['title'],
+                        'pronounId'                 => $postData['pronoun'],
+                        'participated'              => $postData['participated'],
+                        'participated_info'         => $participatedInfo,
+                        'narrative_file'            => $narrative_fileInfo,
+                        'first_image_file'          => $first_image_fileInfo,
+                        'second_image_file'         => $second_image_fileInfo,
+                        'art_image_file'            => $art_image_fileInfo,
+                        'art_image_desc'            => $postData['art_image_desc'],
+                        'art_video_file'            => $art_video_fileInfo,
+                        'art_video_desc'            => $postData['art_video_desc'],
+                        'country'                   => $postData['country'],
+                        'state'                     => $postData['state'],
+                        'city'                      => $postData['city'],
+                        'organization_name'         => $postData['organization_name'],
+                        'organization_website'      => $postData['organization_website'],
+                        'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
+                        'indigenous_affiliation'    => $postData['indigenous_affiliation'],
+                        'expertise_areaId'          => $expertise_areaInfo,
+                        'bio_short'                 => $postData['bio_short'],
+                        'bio_long'                  => $postData['bio_long'],  
+                    ];
+                    // Helper::pr($fields);die;
+                    Article::insert($fields);
+                    return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
                 } else {
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');
                 }
             }
 
-            $title                          = 'Submit New Articles';
+            $title                          = 'Submit New Creative-Work';
             $page_name                      = 'submit-new-article';
             $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-            $data['submission_type']       = SubmissionType::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-            // dd($data['submission_types']);
+            $data['submission_type']        = SubmissionType::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['country']                = Country::orderBy('name', 'ASC')->get();
-            // dd($data['country']);
             $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();                        

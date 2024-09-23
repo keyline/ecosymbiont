@@ -23,10 +23,10 @@
         <!-- Card -->
         <a class="card card-hover-shadow h-100" href="<?=url('admin/notice/list')?>">
           <div class="card-body">
-            <h6 class="card-subtitle">Total Current Journals</h6>
+            <h6 class="card-subtitle">Readers</h6>
             <div class="row align-items-center gx-2 mb-1">
               <div class="col-12">
-                <h2 class="card-title text-inherit"><?=$current_journal_count?></h2>
+                <h2 class="card-title text-inherit"><?=$readers?></h2>
               </div>
             </div>
             <!-- End Row -->
@@ -42,10 +42,10 @@
         <!-- Card -->
         <a class="card card-hover-shadow h-100" href="<?=url('admin/notice/list')?>">
           <div class="card-body">
-            <h6 class="card-subtitle">Total Archieve Journals</h6>
+            <h6 class="card-subtitle">Content Creators</h6>
             <div class="row align-items-center gx-2 mb-1">
               <div class="col-6">
-                <h2 class="card-title text-inherit"><?=$archieve_journal_count?></h2>
+                <h2 class="card-title text-inherit"><?=$content_creators?></h2>
               </div>
             </div>
             <!-- End Row -->
@@ -62,10 +62,10 @@
         <!-- Card -->
         <a class="card card-hover-shadow h-100" href="<?=url('admin/manuscript/list')?>">
           <div class="card-body">
-            <h6 class="card-subtitle">Total Pending Manuscripts</h6>
+            <h6 class="card-subtitle">Creative-Work Submitted</h6>
             <div class="row align-items-center gx-2 mb-1">
               <div class="col-6">
-                <h2 class="card-title text-inherit"><?=$pending_manuscript_count?></h2>
+                <h2 class="card-title text-inherit"><?=$submitted?></h2>
               </div>
             </div>
             <!-- End Row -->
@@ -81,10 +81,10 @@
         <!-- Card -->
         <a class="card card-hover-shadow h-100" href="<?=url('admin/manuscript/list')?>">
           <div class="card-body">
-            <h6 class="card-subtitle">Total Active Manuscripts</h6>
+            <h6 class="card-subtitle">Final Edited & Checked</h6>
             <div class="row align-items-center gx-2 mb-1">
               <div class="col-6">
-                <h2 class="card-title text-inherit"><?=$active_manuscript_count?></h2>
+                <h2 class="card-title text-inherit"><?=$final_edited?></h2>
               </div>
             </div>
             <!-- End Row -->
@@ -100,10 +100,67 @@
         <!-- Card -->
         <a class="card card-hover-shadow h-100" href="<?=url('admin/manuscript/list')?>">
           <div class="card-body">
-            <h6 class="card-subtitle">Total Reject Manuscripts</h6>
+            <h6 class="card-subtitle">NELP Form Generated & Shared</h6>
             <div class="row align-items-center gx-2 mb-1">
               <div class="col-6">
-                <h2 class="card-title text-inherit"><?=$reject_manuscript_count?></h2>
+                <h2 class="card-title text-inherit"><?=$nelp_generated?></h2>
+              </div>
+            </div>
+            <!-- End Row -->
+            <!-- <span class="badge bg-soft-success text-success">
+              <i class="bi-graph-up"></i> 1.7%
+            </span>
+            <span class="text-body fs-6 ms-1">from 29.1%</span> -->
+          </div>
+        </a>
+        <!-- End Card -->
+      </div>
+      <div class="col-sm-12 col-lg-4 mb-3 mb-lg-5">
+        <!-- Card -->
+        <a class="card card-hover-shadow h-100" href="<?=url('admin/manuscript/list')?>">
+          <div class="card-body">
+            <h6 class="card-subtitle">Scan Copy Uploaded</h6>
+            <div class="row align-items-center gx-2 mb-1">
+              <div class="col-6">
+                <h2 class="card-title text-inherit"><?=$scan_copy_uploaded?></h2>
+              </div>
+            </div>
+            <!-- End Row -->
+            <!-- <span class="badge bg-soft-success text-success">
+              <i class="bi-graph-up"></i> 1.7%
+            </span>
+            <span class="text-body fs-6 ms-1">from 29.1%</span> -->
+          </div>
+        </a>
+        <!-- End Card -->
+      </div>
+      <div class="col-sm-12 col-lg-4 mb-3 mb-lg-5">
+        <!-- Card -->
+        <a class="card card-hover-shadow h-100" href="<?=url('admin/manuscript/list')?>">
+          <div class="card-body">
+            <h6 class="card-subtitle">Approved</h6>
+            <div class="row align-items-center gx-2 mb-1">
+              <div class="col-6">
+                <h2 class="card-title text-inherit"><?=$approved?></h2>
+              </div>
+            </div>
+            <!-- End Row -->
+            <!-- <span class="badge bg-soft-success text-success">
+              <i class="bi-graph-up"></i> 1.7%
+            </span>
+            <span class="text-body fs-6 ms-1">from 29.1%</span> -->
+          </div>
+        </a>
+        <!-- End Card -->
+      </div>
+      <div class="col-sm-12 col-lg-4 mb-3 mb-lg-5">
+        <!-- Card -->
+        <a class="card card-hover-shadow h-100" href="<?=url('admin/manuscript/list')?>">
+          <div class="card-body">
+            <h6 class="card-subtitle">News Contents</h6>
+            <div class="row align-items-center gx-2 mb-1">
+              <div class="col-6">
+                <h2 class="card-title text-inherit"><?=$news_content?></h2>
               </div>
             </div>
             <!-- End Row -->

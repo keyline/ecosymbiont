@@ -8,7 +8,7 @@
                 	<div class="card">
 	                    <div class="card-body text-center">
 	                    	<h3><?=$approved_articles?></h3>
-	                        <p>Approved Articles</p>
+	                        <p>Approved Creative-Works</p>
 	                    </div>
                 	</div>
             	</a>
@@ -18,7 +18,7 @@
 	                <div class="card">
 	                    <div class="card-body text-center">
 	                    	<h3><?=$pending_articles?></h3>
-	                        <p>Waiting For Approve Articles</p>
+	                        <p>Waiting For Approved Creative-Works</p>
 	                    </div>
 	                </div>
             	</a>
