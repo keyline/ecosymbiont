@@ -224,7 +224,7 @@ class FrontController extends Controller
                 $postData = $request->all();
                 // Helper::pr($postData);
                  // Get reCAPTCHA token from form POST data
-                    $recaptchaResponse = $postData('g-recaptcha-response');
+                    $recaptchaResponse = $postData['g-recaptcha-response'];
 
                     // Your Google reCAPTCHA secret key
                     $secretKey = '6LclkEwqAAAAABtaRIg1Rxp8LK4dFcFyN2Si0Ygj';
