@@ -1,7 +1,6 @@
 <?php
 include "include/header.php";
 ?>
-<body>  
     <main>
         <section class="banner">
             <img src="images/banner.webp" alt="" class="img-responsive">
@@ -293,7 +292,7 @@ include "include/header.php";
             </div>
         </section>
     </main>    
-</body>
+
 <?php
 include "include/footer.php";
 ?>

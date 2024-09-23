@@ -1,7 +1,7 @@
 <?php 
 include "include/header.php";
 ?>
-<body>
+
 <main>
         <section class="body-container">
             <!-- <h2 class="main-heading">Thank you for your patience. The website will launch on 25 September, 2024.</h2> -->
@@ -241,7 +241,6 @@ include "include/header.php";
             </div>
         </section>
     </main>
-</body>
 <?php 
 include "include/footer.php"
 ?>
