@@ -253,41 +253,42 @@ class FrontController extends Controller
                     // Check if reCAPTCHA validation was successful
                     if ($responseData->success && $responseData->score >= 0.5) {
                         // reCAPTCHA validation passed, proceed with form processing
-                        echo "reCAPTCHA v3 validation passed. You can process the form."; die;
+                        // echo "reCAPTCHA v3 validation passed. You can process the form."; die;
+                        $rules = [                                 
+                            'first_name'                => 'required',            
+                            'last_name'                 => 'required',                                    
+                            'email'                     => 'required',           
+                            'phone'                     => 'required',           
+                            'country'                   => 'required',                                     
+                            'password'                  => 'required',                         
+                        ];
+                        if ($this->validate($request, $rules)) {
+                            $checkValue = User::where('email', '=', $postData['email'])->count();
+                            if ($checkValue <= 0) {                    
+                                $fields = [                        
+                                    'first_name'                => $postData['first_name'],            
+                                    'last_name'                 => $postData['last_name'],        
+                                    'middle_name'               => $postData['middle_name'],            
+                                    'email'                     => $postData['email'],           
+                                    'phone'                     => $postData['phone'],           
+                                    'country'                   => $postData['country'],
+                                    'role'                      => $postData['role'],
+                                    'password'                  => Hash::make($postData['password']),                         
+                                ];
+                                Helper::pr($fields);
+                                User::insert($fields);
+                                return redirect(url('signin'))->with('success_message', 'Sign Up Successfully !!!');
+                            } else {
+                                return redirect()->back()->with('error_message', 'User Already Registered !!!');
+                            }
+                        } else {
+                            return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                        }
+
                     } else {
                         // reCAPTCHA validation failed
                         echo "reCAPTCHA v3 validation failed. Please try again."; die;
-                    }
-                
-                $rules = [                                 
-                    'first_name'                => 'required',            
-                    'last_name'                 => 'required',                                    
-                    'email'                     => 'required',           
-                    'phone'                     => 'required',           
-                    'country'                   => 'required',                                     
-                    'password'                  => 'required',                         
-                ];
-                if ($this->validate($request, $rules)) {
-                    $checkValue = User::where('email', '=', $postData['email'])->count();
-                    if ($checkValue <= 0) {                    
-                        $fields = [                        
-                            'first_name'                => $postData['first_name'],            
-                            'last_name'                 => $postData['last_name'],        
-                            'middle_name'               => $postData['middle_name'],            
-                            'email'                     => $postData['email'],           
-                            'phone'                     => $postData['phone'],           
-                            'country'                   => $postData['country'],
-                            'role'                      => $postData['role'],
-                            'password'                  => Hash::make($postData['password']),                         
-                        ];
-                        User::insert($fields);
-                        return redirect(url('signin'))->with('success_message', 'Sign Up Successfully !!!');
-                    } else {
-                        return redirect()->back()->with('error_message', 'User Already Registered !!!');
-                    }
-                } else {
-                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
-                }
+                    }                              
             }
             echo $this->front_before_login_layout($title, $page_name, $data);
         }
