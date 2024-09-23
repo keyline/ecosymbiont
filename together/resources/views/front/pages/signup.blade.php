@@ -82,7 +82,7 @@
                                               </div>
                                             </div>
                                             <!-- Google reCAPTCHA widget -->
-                                            <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY"></div>
+                                            <div class="g-recaptcha" data-sitekey="6LclkEwqAAAAAHf6rGCvLyu-B1N-eYOU8NYLL5k4"></div>
                                             <div class="text-center" style="margin-bottom: 15px;">
                                               <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>
