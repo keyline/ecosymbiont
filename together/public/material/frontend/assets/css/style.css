@@ -5920,6 +5920,10 @@ a.blue_btn {
   display: flex;
   align-items: center;
 }
+.navbar-nav .megadropdown .inner-megadropdown .filter-block ul li a {
+  text-transform: capitalize !important;
+  font-size: 14px !important;
+}
 /*-------------------------------------------------*/
 /* =  Responsive Part
 /*-------------------------------------------------*/
