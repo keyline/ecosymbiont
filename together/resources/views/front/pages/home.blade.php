@@ -37,14 +37,27 @@ use App\Helpers\Helper;
                 <div class="image-slider snd-size">
                     <span class="top-stories">TOP STORIES</span>
                     <ul class="bxslider">
-                        <?php                        
-                        $parentCategoryContents3 = NewsContent::join('news_category', 'news_contents.parent_category', '=', 'news_category.id')
-                                               ->select('news_contents.id', 'news_contents.new_title', 'news_contents.sub_title', 'news_contents.slug', 'news_contents.author_name', 'news_contents.cover_image', 'news_contents.created_at', 'news_category.sub_category as category_name', 'news_category.slug as category_slug')
-                                               ->where('news_contents.status', '=', 1)
-                                            //    ->where('news_contents.is_popular', '=', 1)
-                                               ->where('news_contents.parent_category', '=', 3)                                               
-                                               ->inRandomOrder()
-                                               ->get();                                                                
+                        <?php         
+                        DB::enableQueryLog(); // Enable query log               
+                        $parentCategoryContents3 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
+                                                                ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
+                                                                ->select('news_contents.id', 
+                                                                        'news_contents.new_title', 
+                                                                        'news_contents.sub_title', 
+                                                                        'news_contents.slug', 
+                                                                        'news_contents.author_name', 
+                                                                        'news_contents.cover_image', 
+                                                                        'news_contents.created_at', 
+                                                                        'parent_category.sub_category as parent_category_name', 
+                                                                        'parent_category.slug as parent_category_slug', 
+                                                                        'sub_category.sub_category as sub_category_name', 
+                                                                        'sub_category.slug as sub_category_slug')
+                                                                ->where('news_contents.status', '=', 1)
+                                                                // ->where('news_contents.is_popular', '=', 1) // Uncomment if needed
+                                                                ->where('news_contents.parent_category', '=', 3)
+                                                                ->inRandomOrder()
+                                                                ->get();       
+                                                                dd(DB::getQueryLog());                                                        
                         if($parentCategoryContents3){ foreach($parentCategoryContents3 as $parentCategoryContent3){
                         ?>
                             <li>
