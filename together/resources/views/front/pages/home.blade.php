@@ -51,7 +51,7 @@ use App\Helpers\Helper;
                         if($parentCategoryContents3){ foreach($parentCategoryContents3 as $parentCategoryContent3){
                         ?>
                             <li>
-                                <div class="news-post image-post">
+                                <!-- <div class="news-post image-post">
                                     <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent3->cover_image?>" alt="<?=$parentCategoryContent3->new_title?>">
                                     <div class="hover-box">
                                         <div class="inner-hover">
@@ -59,13 +59,11 @@ use App\Helpers\Helper;
                                             <h2><a href="<?=url('content/' . $parentCategoryContent3->slug)?>"><?=$parentCategoryContent3->new_title?></a></h2>
                                             <ul class="post-tags">
                                                 <li><i class="fa fa-clock-o"></i><?=date_format(date_create($parentCategoryContent3->created_at), "d M Y")?></li>
-                                                <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent3->author_name?></a></li>
-                                                <!-- <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
-                                                <li><i class="fa fa-eye"></i>872</li> -->
+                                                <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent3->author_name?></a></li>                                               
                                             </ul>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </li>
                         <?php } }?>
                     </ul>
