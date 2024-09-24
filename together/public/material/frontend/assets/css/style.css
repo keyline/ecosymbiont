@@ -5960,6 +5960,32 @@ ul.list-posts.home_feature_section li img {
 header nav.navbar.navbar-default {
   margin-bottom: 0 !important;
 }
+div#popup {
+  z-index: 999999;
+  background: #fff !important;
+  border-radius: 10px;
+}
+button#closePopup {
+  display: table;
+  margin: 0 auto;
+  background: #337ab7;
+  border: none;
+  color: #fff;
+  padding: 6px 20px;
+  border-radius: 4px;
+}
+div#popup h3 {
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  margin-top: 0;
+  color: #902321;
+}
+div#popup p {
+  line-height: 30px;
+}
 /*-------------------------------------------------*/
 /* =  Responsive Part
 /*-------------------------------------------------*/
