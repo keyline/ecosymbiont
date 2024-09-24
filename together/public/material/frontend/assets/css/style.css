@@ -5866,11 +5866,18 @@ footer .footer-last-line nav.footer-nav ul li:first-child:before {
 }
 .titleto-inner li {
   font-size: 16px;
-  line-height: 1.25;
+  line-height: 28px;
   padding-bottom: 10px;
 }
 .titleto-inner p {
   font-size: 15px;
+  font-weight: 600;
+}
+a.blue_btn {
+  color: #fff !important;
+}
+.titleto-inner h4 {
+  color: #90201f !important;
   font-weight: 600;
 }
 /*-------------------------------------------------*/

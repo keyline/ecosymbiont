@@ -28,7 +28,7 @@ include "include/header.php";
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12" id="our-approach">
                         <div class="info-box">
                             <h2>OUR APPROACH</h2>
                             <p>We fulfill our mission three interconnected ways:</p>

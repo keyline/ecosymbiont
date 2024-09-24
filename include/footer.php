@@ -14,6 +14,7 @@
 <!-- js link -->
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/multiselect-dropdown.js"></script>
 <script>
     $('.panel-title > a').click(function() {
     $(this).parents('.panel-default').find('i').toggleClass('fa-plus fa-minus');
