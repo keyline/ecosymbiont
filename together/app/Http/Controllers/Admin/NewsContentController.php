@@ -63,7 +63,7 @@ class NewsContentController extends Controller
                 'cover_image'               => 'required',     
                 'is_feature'                => 'required',  
                 'is_popular'                => 'required',  
-                'sub_title'                 => 'required', 
+                'sub_title'                 => ['required', 'string', new MaxWords(42)], 
             ];
             
             // Validate request data
@@ -202,8 +202,8 @@ class NewsContentController extends Controller
                 'keywords'                  => 'required',     
                 'is_feature'                => 'required',  
                 'is_popular'                => 'required',  
-                'short_desc'                => ['required', 'string', new MaxWords(100)],    
-                'sub_title'                  => ['required', 'string', new MaxWords(40)], 
+                'short_desc'                => ['required', 'string', new MaxWords(102)],    
+                'sub_title'                  => ['required', 'string', new MaxWords(42)], 
             ];           
             if ($this->validate($request, $rules)) {
                 // $checkValue = NewsContent::where('sub_category', '=', $postData['sub_category'])->count();

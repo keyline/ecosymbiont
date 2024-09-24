@@ -357,8 +357,8 @@ $controllerRoute = $module['controller_route'];
         let allValid = true;
         // allValid &= checkWordLimit(document.getElementById('explanation'), 100, 'explanationError');
         // allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');
-        allValid &= checkWordLimit(document.getElementById('sub_title'), 40, 'sub_titleError');
-        allValid &= checkWordLimit(document.getElementById('short_desc'), 100, 'bio_longError');
+        allValid &= checkWordLimit(document.getElementById('sub_title'), 42, 'sub_titleError');
+        allValid &= checkWordLimit(document.getElementById('short_desc'), 102, 'bio_longError');
 
         document.getElementById('submitButton').disabled = !allValid;
     }
