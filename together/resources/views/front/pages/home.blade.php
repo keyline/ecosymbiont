@@ -66,7 +66,7 @@ use App\Helpers\Helper;
                                     <div class="hover-box">
                                         <div class="inner-hover">
                                             <a class="category-post" href="<?=url('category/' . $parentCategoryContent3->parent_category_slug)?>"><?=$parentCategoryContent3->parent_category_name?></a>
-                                            <a class="category-post" href="<?=url('category/' . $parentCategoryContent3->sub_category_slug)?>"><?=$parentCategoryContent3->sub_category_name?></a>
+                                            <a class="sub-category-post" href="<?=url('category/' . $parentCategoryContent3->sub_category_slug)?>"><?=$parentCategoryContent3->sub_category_name?></a>
                                             <h2><a href="<?=url('content/' . $parentCategoryContent3->slug)?>"><?=$parentCategoryContent3->new_title?></a></h2>
                                             <ul class="post-tags">
                                                 <li><i class="fa fa-clock-o"></i><?=date_format(date_create($parentCategoryContent3->created_at), "d M Y")?></li>
