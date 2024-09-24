@@ -19,7 +19,7 @@ use App\Helpers\Helper;
                 //  Helper::pr($parentCategoryContent1);
                 if($parentCategoryContent1){
                 ?>
-                    <div class="news-post image-post default-size">
+                    <!-- <div class="news-post image-post default-size">
                         <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent1->cover_image?>" alt="<?=$parentCategoryContent1->new_title?>">
                         <div class="hover-box">
                             <div class="inner-hover">
@@ -31,7 +31,7 @@ use App\Helpers\Helper;
                                 <p><?=$parentCategoryContent1->sub_title?></p>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 <?php }?>
                 <div class="image-slider snd-size">
                     <span class="top-stories">TOP STORIES</span>
@@ -122,7 +122,7 @@ use App\Helpers\Helper;
                     </div> -->
                 <?php }?>
                 <?php if($parentCategoryContent9){?>
-                    <div class="news-post image-post">
+                    <!-- <div class="news-post image-post">
                         <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent9->cover_image?>" alt="<?=$parentCategoryContent9->new_title?>">
                         <div class="hover-box">
                             <div class="inner-hover">
@@ -134,7 +134,7 @@ use App\Helpers\Helper;
                                 <p><?=$parentCategoryContent9->sub_title?></p>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 <?php }?>
             </div>
         </div>
