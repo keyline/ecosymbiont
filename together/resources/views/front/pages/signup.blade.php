@@ -113,7 +113,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
       $(document).ready(function() {
-        $('#popup').fadeOut();
+        $('#popup').hide();
         // Trigger popup on radio button change
         $('input[name="role"]').change(function() {
             if ($(this).is(':checked')) {
