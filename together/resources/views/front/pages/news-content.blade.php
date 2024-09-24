@@ -142,6 +142,7 @@ use App\Helpers\Helper;
                                                 <div class="autor-content">
                                                     <div class="autor-title">
                                                         <span>
+                                                            <img src="<?=env('UPLOADS_URL').'icon/author.png'?>" alt="author">
                                                             <!-- <span><?=$rowContent->author_name?>  (<?=(($getTitle)?$getTitle->name:'')?>/<?=(($getPronoun)?$getPronoun->name:'')?>) <?=$rowContent->author_short_bio?>.</span> -->
                                                             <span><?=$rowContent->author_short_bio?>.</span>
                                                             <!-- <a href="javascript:void(0);"><?=$authorPostCount?> Posts</a> -->
@@ -149,6 +150,7 @@ use App\Helpers\Helper;
                                                     </div>
                                                     <div class="autor-title">
                                                         <span>
+                                                            <img src="<?=env('UPLOADS_URL').'icon/ancestral.png'?>" alt="author_affiliation">
                                                             <?php
                                                             $author_affiliation = json_decode($rowContent->author_affiliation);
                                                             $affiliations       = [];
@@ -161,6 +163,7 @@ use App\Helpers\Helper;
                                                     </div>
                                                     <div class="autor-title">
                                                         <span>
+                                                            <img src="<?=env('UPLOADS_URL').'icon/residence.png'?>" alt="residence">
                                                             <?php
                                                             $getCountry = Country::select('name')->where('id', '=', $rowContent->country)->first();
                                                             ?>
@@ -169,6 +172,7 @@ use App\Helpers\Helper;
                                                     </div>
                                                     <div class="autor-title">
                                                         <span>
+                                                            <img src="<?=env('UPLOADS_URL').'icon/organizational.png'?>" alt="organizational">
                                                             <span><?=$rowContent->organization_name?></span>
                                                         </span>
                                                     </div>
