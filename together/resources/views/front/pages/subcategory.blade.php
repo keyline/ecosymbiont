@@ -55,7 +55,7 @@ use App\Helpers\Helper;
                     <div class="sidebar large-sidebar theiaStickySidebar">
                         <div class="widget features-slide-widget">
                             <div class="title-section">
-                                <h1><span>Featured Posts</span></h1>
+                                <h1><span>Highlighted</span></h1>
                             </div>
                             <ul class="list-posts">
                                 <?php
@@ -64,7 +64,7 @@ use App\Helpers\Helper;
                                                    ->where('news_contents.status', '=', 1)
                                                    ->where('news_contents.is_popular', '=', 1)
                                                    ->inRandomOrder()
-                                                   ->limit(6)
+                                                   ->limit(3)
                                                    ->get();
                                 if($popularContents){ foreach($popularContents as $popularContent){
                                 ?>
@@ -98,7 +98,7 @@ use App\Helpers\Helper;
                                                            ->where('news_contents.status', '=', 1)
                                                            ->where('news_contents.is_popular', '=', 1)
                                                            ->inRandomOrder()
-                                                           ->limit(6)
+                                                           ->limit(3)
                                                            ->get();
                                         if($popularContents){ foreach($popularContents as $popularContent){
                                         ?>
@@ -121,7 +121,7 @@ use App\Helpers\Helper;
                                                            ->select('news_contents.id', 'news_contents.new_title', 'news_contents.sub_title', 'news_contents.slug', 'news_contents.author_name', 'news_contents.cover_image', 'news_contents.created_at', 'news_category.sub_category as category_name', 'news_category.slug as category_slug')
                                                            ->where('news_contents.status', '=', 1)
                                                            ->orderBy('news_contents.id', 'DESC')
-                                                           ->limit(6)
+                                                           ->limit(3)
                                                            ->get();
                                         if($recentContents){ foreach($recentContents as $recentContent){
                                         ?>
