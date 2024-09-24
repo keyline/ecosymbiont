@@ -287,7 +287,8 @@ use App\Helpers\Helper;
                 <h1><span>Politics Original Videos</span></h1>
             </div>
             <div class="features-video-box owl-wrapper">
-                <div class="owl-carousel" data-num="4">
+                <h2>Coming Soon</h2>
+                <!-- <div class="owl-carousel" data-num="4">
                 
                     <div class="item news-post video-post">
                         <img alt="" src="<?=env('FRONT_ASSETS_URL')?>upload/news-posts/video1.jpg">
@@ -365,7 +366,7 @@ use App\Helpers\Helper;
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
