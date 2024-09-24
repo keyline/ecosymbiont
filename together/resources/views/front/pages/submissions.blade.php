@@ -33,10 +33,10 @@
                                                     <li>At this time, you must:
                                                         <ul>
                                                             <li>be invited to submit a Creative-Work to Ecosymbionts Regenerate Together ("ERT"); and/or</li>
-                                                            <li>have participated as a strategist at an in-person Ecosymbionts Regenerate ("ER") <a href="https://ecosymbiont.keylines.net.in/synergy-meetings.php" style="color: #d09c1c;">Synergy Meeting</a> .</li>
+                                                            <li>have participated as a strategist at an in-person Ecosymbionts Regenerate ("ER") <a href="<?=env('REGENERATE_URL')?>synergy-meetings.php" style="color: #d09c1c;">Synergy Meeting</a> .</li>
                                                         </ul>
                                                     </li>
-                                                    <li>Your Creative-Work must relate to <a href="https://ecosymbiont.keylines.net.in/" style="color: #d09c1c;" traget="_blank">regenerating systems that restore, preserve, and foster the symbiosis humans natural ecological webs (ecowebs) or to elucidating how existing extractivist systems harm human-ecoweb symbiosis</a> </li>
+                                                    <li>Your Creative-Work must relate to <a href="<?=env('REGENERATE_URL')?>" style="color: #d09c1c;" traget="_blank">regenerating systems that restore, preserve, and foster the symbiosis humans natural ecological webs (ecowebs) or to elucidating how existing extractivist systems harm human-ecoweb symbiosis</a> </li>
                                                 </ul>
                                             </div>
 
@@ -124,15 +124,15 @@
                                                         </ul>
                                                     </li>
                                                     <li>
-                                                        <strong><a href="https://ecosymbiont.keylines.net.in/#our-approach" style="color: #d09c1c;" traget="_blank">SYSTEMS</a></strong>
+                                                        <strong><a href="<?=env('REGENERATE_URL')?>#our-approach" style="color: #d09c1c;" traget="_blank">SYSTEMS</a></strong>
                                                         <ul>
                                                             <li>
                                                                 <strong><i>Ecoweb-Rooted Framing</i></strong><br>
-                                                                Creative-Work that conceptualizes <a href="https://ecosymbiont.keylines.net.in/#our-approach" style="color: #d09c1c;" traget="_blank">legal-economic-governance systems</a>  in a manner that reframes them to optimize ecoweb-rooted symbiotic wellbeing, i.e., of human communities and one or more ecowebs we rely on.
+                                                                Creative-Work that conceptualizes <a href="<?=env('REGENERATE_URL')?>#our-approach" style="color: #d09c1c;" traget="_blank">legal-economic-governance systems</a>  in a manner that reframes them to optimize ecoweb-rooted symbiotic wellbeing, i.e., of human communities and one or more ecowebs we rely on.
                                                             </li>
                                                             <li>
                                                                 <strong><i>Extractivism Alternatives</i></strong><br>
-                                                                Creative-Work that describes <a href="https://ecosymbiont.keylines.net.in/#our-approach" style="color: #d09c1c;" traget="_blank">human activity systems</a> that present an alternative to extractivist systems, e.g., the cycle of sustainable generation, repeated use, and biodegradable disposal of objects, as opposed to the cycle of resource extraction, disposable commodity production, disposable use, and landfill waste generation.
+                                                                Creative-Work that describes <a href="<?=env('REGENERATE_URL')?>#our-approach" style="color: #d09c1c;" traget="_blank">human activity systems</a> that present an alternative to extractivist systems, e.g., the cycle of sustainable generation, repeated use, and biodegradable disposal of objects, as opposed to the cycle of resource extraction, disposable commodity production, disposable use, and landfill waste generation.
                                                             </li>
                                                             <li>
                                                                 <strong><i>Systems Reform</i></strong><br>
@@ -168,7 +168,7 @@
 
                                             <div class="titleto-inner">
                                                 <h2>REVIEW PROCESS</h2>
-                                                <p>Your Creative-Work will be reviewed based on several criteria, including clarity, veracity, and relevance to the <a href="https://ecosymbiont.keylines.net.in/" style="color: #d09c1c;" traget="_blank">mission and approach of Ecosymbionts Regenerate</a>. If your Creative-Work is accepted for publication as Content on ERT, a few rounds of editor-guided revision may be required before publication. </p>
+                                                <p>Your Creative-Work will be reviewed based on several criteria, including clarity, veracity, and relevance to the <a href="<?=env('REGENERATE_URL')?>" style="color: #d09c1c;" traget="_blank">mission and approach of Ecosymbionts Regenerate</a>. If your Creative-Work is accepted for publication as Content on ERT, a few rounds of editor-guided revision may be required before publication. </p>
                                             </div>
 
                                             <div class="titleto-inner">
