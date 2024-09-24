@@ -7,8 +7,8 @@ $ip = $_SERVER['REMOTE_ADDR']; // This gets the user's IP address
 $APP_URL = $_SERVER['APP_URL'];
 
 // Use ipinfo.io API to get location details
-$details = file_get_contents("http://ipinfo.io/{$ip}/json");
-$details = json_decode($details);
+//$details = file_get_contents("http://ipinfo.io/{$ip}/json");
+//$details = json_decode($details);
 // Helper::pr($details);
 // Display the city and country
 // echo "City: " . $details->city . "<br>";
