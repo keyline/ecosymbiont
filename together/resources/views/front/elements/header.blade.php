@@ -64,11 +64,11 @@ $details = json_decode($details);
                     </div>  
                     <div class="col-md-3">
                         <ul class="social-icons">
-                            <li><a class="facebook" href="<?=$generalSetting->facebook_profile?>"><i class="fa fa-facebook"></i></a></li>
+                            <!-- <li><a class="facebook" href="<?=$generalSetting->facebook_profile?>"><i class="fa fa-facebook"></i></a></li> -->
                             <li><a class="twitter" href="<?=$generalSetting->twitter_profile?>"><i class="fa fa-twitter"></i></a></li>
                             <!-- <li><a class="rss" href="#"><i class="fa fa-rss"></i></a></li> -->
-                            <li><a class="google" href="<?=$generalSetting->youtube_profile?>"><i class="fa fa-youtube"></i></a></li>
-                            <li><a class="linkedin" href="<?=$generalSetting->linkedin_profile?>"><i class="fa fa-linkedin"></i></a></li>
+                            <!-- <li><a class="google" href="<?=$generalSetting->youtube_profile?>"><i class="fa fa-youtube"></i></a></li> -->
+                            <!-- <li><a class="linkedin" href="<?=$generalSetting->linkedin_profile?>"><i class="fa fa-linkedin"></i></a></li> -->
                             <li><a class="pinterest" href="<?=$generalSetting->instagram_profile?>"><i class="fa fa-instagram"></i></a></li>
                         </ul>
                     </div>  
@@ -131,7 +131,7 @@ $details = json_decode($details);
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-left">
                         <!-- <li><a class="active" href="<?=url('/')?>">Home</a></li> -->
-                        <li><a href="<?=url('page/about-us')?>">ABOUT</a></li>
+                        <li><a href="<?=url('about-us')?>">ABOUT</a></li>
                         <?php if($parentCats){ foreach($parentCats as $parentCat){?>
                             <li class="drop-arrow"><a href="<?=url('category/' . $parentCat->slug)?>"><?=$parentCat->sub_category?></a>
                                 <div class="megadropdown">
@@ -152,7 +152,8 @@ $details = json_decode($details);
                                 </div>
                             </li>
                         <?php } }?>
-                        <li><a href="<?=url('page/submissions')?>">SUBMISSIONS</a></li>
+                        <li><a href="<?=url('submissions')?>">SUBMISSIONS</a></li>
+                        <li><a href="<?=url('contact-us')?>">Contact</a></li>
                     </ul>
                     <!-- <form class="navbar-form navbar-right" role="search">
                         <input type="text" id="search" name="search" placeholder="Search here">

@@ -19,7 +19,7 @@ use App\Helpers\Helper;
                 //  Helper::pr($parentCategoryContent1);
                 if($parentCategoryContent1){
                 ?>
-                    <div class="news-post image-post default-size">
+                    <div class="news-post homesmall_box image-post default-size">
                         <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent1->cover_image?>" alt="<?=$parentCategoryContent1->new_title?>">
                         <div class="hover-box">
                             <div class="inner-hover">
@@ -103,7 +103,7 @@ use App\Helpers\Helper;
                                    ->first();
                 if($parentCategoryContent2){
                 ?>
-                    <div class="news-post image-post">
+                    <div class="news-post homesmall_box image-post">
                         <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent2->cover_image?>" alt="<?=$parentCategoryContent2->new_title?>">
                         <div class="hover-box">
                             <div class="inner-hover">
@@ -119,7 +119,7 @@ use App\Helpers\Helper;
                     </div>
                 <?php }?>
                 <?php if($parentCategoryContent8){?>
-                    <div class="news-post image-post">
+                    <div class="news-post homesmall_box image-post">
                         <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent8->cover_image?>" alt="<?=$parentCategoryContent8->new_title?>">
                         <div class="hover-box">
                             <div class="inner-hover">
@@ -135,7 +135,7 @@ use App\Helpers\Helper;
                     </div>
                 <?php }?>
                 <?php if($parentCategoryContent9){?>
-                    <div class="news-post image-post">
+                    <div class="news-post homesmall_box image-post">
                         <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent9->cover_image?>" alt="<?=$parentCategoryContent9->new_title?>">
                         <div class="hover-box">
                             <div class="inner-hover">

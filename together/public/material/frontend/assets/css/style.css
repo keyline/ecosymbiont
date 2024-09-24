@@ -656,9 +656,12 @@ header .list-line-posts div.list-post {
   -webkit-box-shadow: 0 0 10px #dedede;
   -moz-box-shadow: 0 0 10px #dedede;
   -o-box-shadow: 0 0 10px #dedede;
+  display: flex;
+  align-items: stretch;
 }
 header .list-line-posts div.list-post img {
   width: 109px;
+  object-fit: cover;
 }
 header .list-line-posts div.list-post .post-content {
   padding: 15px 20px;
@@ -1328,6 +1331,11 @@ ul.category-filter-posts li a.active:after {
 }
 .heading-news2 .heading-news-box .image-slider.snd-size .image-post {
   width: 100%;
+}
+.heading-news2 .heading-news-box .image-slider.snd-size .image-post img {
+  height: 450px;
+  object-fit: cover;
+  overflow: hidden;
 }
 .heading-news2 .heading-news-box .image-slider.snd-size .image-post .hover-box {
   background: transparent;
