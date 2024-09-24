@@ -425,7 +425,11 @@ use App\Helpers\Helper;
                                                 <h2><a href="<?=url('content/' . $recentContent->slug)?>"><?=$recentContent->new_title?></a></h2>
                                                 <ul class="post-tags">
                                                     <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$recentContent->author_name?></a></li>
+                                                    <?php
+                                                    if($recentContent->indigenous_affiliation != ''){                                                    
+                                                     ?>
                                                     <li><i class="fa fa-map-marker"></i><a href="javascript:void(0);"><?=$recentContent->indigenous_affiliation?></a></li>
+                                                <?php } ?>
                                                     <!-- <li><i class="fa fa-clock-o"></i><?=date_format(date_create($recentContent->created_at), "d M Y")?></li> -->
                                                     
                                                     <!-- <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
@@ -466,7 +470,7 @@ use App\Helpers\Helper;
                     <div class="sidebar large-sidebar theiaStickySidebar">
                         <div class="widget subscribe-widget">
                             <form class="subscribe-form" method="POST" action="">
-                                <h1>Subscribe to RSS Feeds</h1>
+                                <h1>Subscribe for latest content</h1>
                                 @csrf
                                 <input type="text" name="subscribe_email" id="subscribe_email" placeholder="Email" required />
                                 <button id="submit-subscribe" type="submit"><i class="fa fa-arrow-circle-right"></i></button>
