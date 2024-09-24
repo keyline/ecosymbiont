@@ -1,3 +1,23 @@
+@font-face {
+    font-family: 'proximanova_light';
+    src:url('font/proximanova_light.otf');
+}
+@font-face {
+    font-family: 'proximanova_bold.otf';
+    src:url('font/proximanova_bold.otf');
+}
+@font-face {
+    font-family: 'proximanova_regular';
+    src:url('font/proximanova_regular.ttf');
+}
+@font-face {
+    font-family: 'proximanova_extrabold';
+    src:url('font/proximanova_extrabold.otf');
+}
+@font-face {
+    font-family: 'proximanova_black';
+    src:url('font/proximanova_black.ttf');
+}
 *{
     margin: 0;
     padding: 0;
@@ -6,7 +26,7 @@
 body{
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'proximanova_regular', sans-serif;
 }
 h1,h2,h3,h4,h5,h6,p,span,ul,li,a{
     margin: 0;
@@ -30,7 +50,7 @@ ul{
 }
 .header-container h1{
     text-transform: uppercase;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'proximanova_bold', sans-serif;
 }
 .body-container{
     padding: 20px 5vw;
@@ -39,7 +59,7 @@ ul{
     text-align: center;
     margin-bottom: 30px;
     color: #cf9c1b;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'proximanova_bold',  sans-serif;
     font-size: 30px;
 }
 .row{
@@ -65,9 +85,9 @@ ul{
 }
 p,
 ul li{
-    font-size: 15px !important;
+    font-size: 16px !important;
     line-height: 1.5;
-    font-weight: 500;
+    font-weight: 600;
 }
 .inner-list{
     background: #fff;
