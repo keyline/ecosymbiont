@@ -92,7 +92,7 @@ use App\Helpers\Helper;
                                    ->first();
                 if($parentCategoryContent2){
                 ?>
-                    <div class="news-post image-post">
+                    <!-- <div class="news-post image-post">
                         <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent2->cover_image?>" alt="<?=$parentCategoryContent2->new_title?>">
                         <div class="hover-box">
                             <div class="inner-hover">
@@ -104,10 +104,10 @@ use App\Helpers\Helper;
                                 <p><?=$parentCategoryContent2->sub_title?></p>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 <?php }?>
                 <?php if($parentCategoryContent8){?>
-                    <div class="news-post image-post">
+                    <!-- <div class="news-post image-post">
                         <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent8->cover_image?>" alt="<?=$parentCategoryContent8->new_title?>">
                         <div class="hover-box">
                             <div class="inner-hover">
@@ -119,7 +119,7 @@ use App\Helpers\Helper;
                                 <p><?=$parentCategoryContent8->sub_title?></p>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 <?php }?>
                 <?php if($parentCategoryContent9){?>
                     <div class="news-post image-post">
