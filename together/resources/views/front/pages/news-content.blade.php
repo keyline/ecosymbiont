@@ -125,13 +125,13 @@ use App\Helpers\Helper;
                                                 $getArticle = Article::where('article_no', '=', $rowContent->creative_work_SRN)->first();
                                                 $titleId = (($getArticle)?$getArticle->titleId:'');
                                                 $getTitle = Title::select('name')->where('id', '=', $titleId)->first();
-                                                $pronounId = (($getArticle)?$getArticle->pronounId:'');
+                                                $pronounId = $rowContent->author_pronoun;
                                                 $getPronoun = Pronoun::select('name')->where('id', '=', $pronounId)->first();
                                                 ?>
                                                 <div class="autor-content">
                                                     <div class="autor-title">
                                                         <h1>
-                                                            <span><?=$rowContent->author_name?>  (<?=(($getTitle)?$getTitle->name:'')?>/<?=(($getPronoun)?$getPronoun->name:'')?>) <?=(($getArticle)?$getArticle->bio_short:'')?>.</span>
+                                                            <span><?=$rowContent->author_name?>  (<?=(($getTitle)?$getTitle->name:'')?>/<?=(($getPronoun)?$getPronoun->name:'')?>) <?=$rowContent->author_short_bio?>.</span>
                                                             <!-- <a href="javascript:void(0);"><?=$authorPostCount?> Posts</a> -->
                                                         </h1>
                                                     </div>
@@ -144,7 +144,7 @@ use App\Helpers\Helper;
                                                                 $getAffiliation = EcosystemAffiliation::select('name')->where('id', '=', $author_affiliation[$k])->first();
                                                                 $affiliations[]       = $getAffiliation->name;
                                                             } }?>
-                                                            <span><?=implode(", ", $affiliations)?> | <?=(($getArticle)?$getArticle->indigenous_affiliation:'')?></span>
+                                                            <span><?=implode(", ", $affiliations)?> | <?=$rowContent->indigenous_affiliation?></span>
                                                         </h1>
                                                     </div>
                                                     <div class="autor-title">
