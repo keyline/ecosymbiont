@@ -245,7 +245,7 @@ use App\Helpers\Helper;
                     <div class="sidebar large-sidebar theiaStickySidebar">
                         <div class="widget features-slide-widget">
                             <div class="title-section">
-                                <h1><span>Featured Posts</span></h1>
+                                <h1><span>Highlighted</span></h1>
                             </div>
                             <ul class="list-posts">
                                 <?php

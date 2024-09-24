@@ -73,7 +73,7 @@ class FrontController extends Controller
     }
     public function submissions()
     {
-        $data = [];
+        $data['button_show']            = 1;
         $title                          = 'Submissions';
         $page_name                      = 'submissions';
         echo $this->front_before_login_layout($title, $page_name, $data);
