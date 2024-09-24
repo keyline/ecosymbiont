@@ -153,6 +153,7 @@ $details = json_decode($details);
                             </li>
                         <?php } }?>
                         <li><a href="<?=url('page/submissions')?>">SUBMISSIONS</a></li>
+                        <li><a href="<?=url('contacts')?>">CONTACTS</a></li>
                     </ul>
                     <!-- <form class="navbar-form navbar-right" role="search">
                         <input type="text" id="search" name="search" placeholder="Search here">
