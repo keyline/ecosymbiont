@@ -19,7 +19,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <a href="<?=url('user/submit-new-article')?>" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i> Submit New Article</a>
+                        <a href="<?=url('user/submit-new-article')?>" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i> Submit New Creative-Work</a>
                         <table class="table table-striped">
                             <thead>
                                 <tr>

@@ -674,7 +674,7 @@ class FrontController extends Controller
             $page_name                      = 'submit-new-article';
             $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-            $data['submission_type']        = SubmissionType::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['submission_type']        = SubmissionType::where('status', '=', 1)->orderBy('id', 'ASC')->get();
             $data['country']                = Country::orderBy('name', 'ASC')->get();
             $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
