@@ -21,7 +21,7 @@
     <div class="row">
       <div class="col-sm-12 col-lg-6 mb-3 mb-lg-5">
         <!-- Card -->
-        <a class="card card-hover-shadow h-100" href="<?=url('admin/notice/list')?>">
+        <a class="card card-hover-shadow h-100" href="<?=url('admin/readers/list')?>">
           <div class="card-body">
             <h6 class="card-subtitle">Readers</h6>
             <div class="row align-items-center gx-2 mb-1">
@@ -40,7 +40,7 @@
       </div>
       <div class="col-sm-12 col-lg-6 mb-3 mb-lg-5">
         <!-- Card -->
-        <a class="card card-hover-shadow h-100" href="<?=url('admin/notice/list')?>">
+        <a class="card card-hover-shadow h-100" href="<?=url('admin/content_creaters/list')?>">
           <div class="card-body">
             <h6 class="card-subtitle">Content Creators</h6>
             <div class="row align-items-center gx-2 mb-1">
@@ -60,7 +60,7 @@
 
       <div class="col-sm-12 col-lg-4 mb-3 mb-lg-5">
         <!-- Card -->
-        <a class="card card-hover-shadow h-100" href="<?=url('admin/manuscript/list')?>">
+        <a class="card card-hover-shadow h-100" href="<?= url('admin/article/list') ?>">
           <div class="card-body">
             <h6 class="card-subtitle">Creative-Work Submitted</h6>
             <div class="row align-items-center gx-2 mb-1">
@@ -79,7 +79,7 @@
       </div>
       <div class="col-sm-12 col-lg-4 mb-3 mb-lg-5">
         <!-- Card -->
-        <a class="card card-hover-shadow h-100" href="<?=url('admin/manuscript/list')?>">
+        <a class="card card-hover-shadow h-100" href="<?= url('admin/article/list') ?>">
           <div class="card-body">
             <h6 class="card-subtitle">Final Edited & Checked</h6>
             <div class="row align-items-center gx-2 mb-1">
@@ -98,7 +98,7 @@
       </div>
       <div class="col-sm-12 col-lg-4 mb-3 mb-lg-5">
         <!-- Card -->
-        <a class="card card-hover-shadow h-100" href="<?=url('admin/manuscript/list')?>">
+        <a class="card card-hover-shadow h-100" href="<?= url('admin/article/list') ?>">
           <div class="card-body">
             <h6 class="card-subtitle">NELP Form Generated & Shared</h6>
             <div class="row align-items-center gx-2 mb-1">
@@ -117,7 +117,7 @@
       </div>
       <div class="col-sm-12 col-lg-4 mb-3 mb-lg-5">
         <!-- Card -->
-        <a class="card card-hover-shadow h-100" href="<?=url('admin/manuscript/list')?>">
+        <a class="card card-hover-shadow h-100" href="<?= url('admin/article/list') ?>">
           <div class="card-body">
             <h6 class="card-subtitle">Scan Copy Uploaded</h6>
             <div class="row align-items-center gx-2 mb-1">
@@ -136,7 +136,7 @@
       </div>
       <div class="col-sm-12 col-lg-4 mb-3 mb-lg-5">
         <!-- Card -->
-        <a class="card card-hover-shadow h-100" href="<?=url('admin/manuscript/list')?>">
+        <a class="card card-hover-shadow h-100" href="<?= url('admin/article/list') ?>">
           <div class="card-body">
             <h6 class="card-subtitle">Approved</h6>
             <div class="row align-items-center gx-2 mb-1">
@@ -155,7 +155,7 @@
       </div>
       <div class="col-sm-12 col-lg-4 mb-3 mb-lg-5">
         <!-- Card -->
-        <a class="card card-hover-shadow h-100" href="<?=url('admin/manuscript/list')?>">
+        <a class="card card-hover-shadow h-100" href="<?=url('admin/news_content/list')?>">
           <div class="card-body">
             <h6 class="card-subtitle">News Contents</h6>
             <div class="row align-items-center gx-2 mb-1">
