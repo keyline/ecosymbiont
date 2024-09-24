@@ -45,6 +45,8 @@ use App\Helpers\Helper;
                                                // ->orderBy('news_contents.id', 'DESC')
                                                ->inRandomOrder()
                                                ->get();
+                        // Print query with placeholders
+                        dd($parentCategoryContents3->toSql());                                               
                         if($parentCategoryContents3){ foreach($parentCategoryContents3 as $parentCategoryContent3){
                         ?>
                             <li>
@@ -287,7 +289,7 @@ use App\Helpers\Helper;
                 <h1><span>Politics Original Videos</span></h1>
             </div>
             <div class="features-video-box owl-wrapper">
-                <h2>Coming Soon</h2>
+                <h2 style="color: white; text-align: center;">Coming Soon</h2>
                 <!-- <div class="owl-carousel" data-num="4">
                 
                     <div class="item news-post video-post">
