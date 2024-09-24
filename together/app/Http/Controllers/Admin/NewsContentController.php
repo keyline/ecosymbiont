@@ -198,11 +198,9 @@ class NewsContentController extends Controller
                 'organization_name'         => 'required',   
                 // 'cover_image'               => 'required',     
                 // 'others_image'              => 'required',     
-                'long_desc'                 => 'required',     
-                'keywords'                  => 'required',     
+                'long_desc'                 => 'required',                          
                 'is_feature'                => 'required',  
-                'is_popular'                => 'required',  
-                'short_desc'                => ['required', 'string', new MaxWords(102)],    
+                'is_popular'                => 'required',                     
                 'sub_title'                  => ['required', 'string', new MaxWords(42)], 
             ];           
             if ($this->validate($request, $rules)) {
