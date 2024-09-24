@@ -26,7 +26,8 @@ use App\Helpers\Helper;
                                 <a class="category-post" href="<?=url('category/' . $parentCategoryContent1->category_slug)?>"><?=$parentCategoryContent1->category_name?></a>
                                 <h2><a href="<?=url('content/' . $parentCategoryContent1->slug)?>"><?=$parentCategoryContent1->new_title?></a></h2>
                                 <ul class="post-tags">
-                                    <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent1->created_at), "d M Y")?></span></li>
+                                    <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent1->created_at), "d M Y")?></span></li> -->
+                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent1->author_name?></a></li>
                                 </ul>
                                 <p><?=$parentCategoryContent1->sub_title?></p>
                             </div>
@@ -95,7 +96,8 @@ use App\Helpers\Helper;
                                 <a class="category-post" href="<?=url('category/' . $parentCategoryContent2->category_slug)?>"><?=$parentCategoryContent2->category_name?></a>
                                 <h2><a href="<?=url('content/' . $parentCategoryContent2->slug)?>"><?=$parentCategoryContent2->new_title?></a></h2>
                                 <ul class="post-tags">
-                                    <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent2->created_at), "d M Y")?></span></li>
+                                    <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent2->created_at), "d M Y")?></span></li> -->
+                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent2->author_name?></a></li>
                                 </ul>
                                 <p><?=$parentCategoryContent2->sub_title?></p>
                             </div>
@@ -110,7 +112,8 @@ use App\Helpers\Helper;
                                 <a class="category-post" href="<?=url('category/' . $parentCategoryContent8->category_slug)?>"><?=$parentCategoryContent8->category_name?></a>
                                 <h2><a href="<?=url('content/' . $parentCategoryContent8->slug)?>"><?=$parentCategoryContent8->new_title?></a></h2>
                                 <ul class="post-tags">
-                                    <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent8->created_at), "d M Y")?></span></li>
+                                    <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent8->created_at), "d M Y")?></span></li> -->
+                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent8->author_name?></a></li>
                                 </ul>
                                 <p><?=$parentCategoryContent8->sub_title?></p>
                             </div>
@@ -125,7 +128,8 @@ use App\Helpers\Helper;
                                 <a class="category-post" href="<?=url('category/' . $parentCategoryContent9->category_slug)?>"><?=$parentCategoryContent9->category_name?></a>
                                 <h2><a href="<?=url('content/' . $parentCategoryContent9->slug)?>"><?=$parentCategoryContent9->new_title?></a></h2>
                                 <ul class="post-tags">
-                                    <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent9->created_at), "d M Y")?></span></li>
+                                    <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent9->created_at), "d M Y")?></span></li> -->
+                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent9->author_name?></a></li>
                                 </ul>
                                 <p><?=$parentCategoryContent9->sub_title?></p>
                             </div>
