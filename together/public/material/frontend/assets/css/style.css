@@ -71,6 +71,9 @@
   font-family: 'proximanova_black';
   src:url('font/proximanova_black.ttf');
 }
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{
+  font-family: 'proximanova_regular';
+}
 .isotope-item {
   z-index: 2;
 }
@@ -6233,6 +6236,9 @@ ul.list-posts.home_feature_section li img {
 @media (min-width: 768px) {
 .heading-news2 .news-post.homesmall_box img {
   height: 220px;
+}
+header nav.navbar.navbar-default {
+  margin-bottom: 0 !important;
 }
 }
 @media (max-width: 767px) {

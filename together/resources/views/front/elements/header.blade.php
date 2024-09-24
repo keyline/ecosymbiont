@@ -22,10 +22,10 @@ $APP_URL = $_SERVER['APP_URL'];
                 <div class="row">
                     <div class="col-md-9">
                         <ul class="top-line-list">
-                            <li>
-                                <?php if($APP_URL != 'http://localhost/ecosymbiont/'){?>
-                                    <!-- <span class="city-weather">?=$details->city?>, ?=$details->region?>, ?=$details->country?></span> -->
-                                <?php }?>
+                            <!-- <li>
+                                <?php //if($APP_URL != 'http://localhost/ecosymbiont/'){?>
+                                    <span class="city-weather">?=$details->city?>, ?=$details->region?>, ?=$details->country?></span>
+                                <?php //}?>
                                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="24px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
                                     <path fill="#777777" d="M208,64c8.833,0,16-7.167,16-16V16c0-8.833-7.167-16-16-16s-16,7.167-16,16v32
                                         C192,56.833,199.167,64,208,64z M332.438,106.167l22.625-22.625c6.249-6.25,6.249-16.375,0-22.625
@@ -47,7 +47,7 @@ $APP_URL = $_SERVER['APP_URL'];
                                     />
                                 </svg>
                                 <span class="cel-temperature">+7</span>
-                            </li>
+                            </li> -->
                             <li><span class="time-now"><?=date('l d F Y')?> / <?=date('H:i')?></span></li>
                             <!-- <li><a href="#">Log In</a></li> -->
                             <!-- <li><a href="<?=url('contact-us')?>">Contact</a></li> -->
