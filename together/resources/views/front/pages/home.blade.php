@@ -146,7 +146,7 @@ use App\Helpers\Helper;
                         <!-- grid box -->
                         <div class="grid-box">
                             <div class="title-section">
-                                <h1><span>Today's Featured</span></h1>
+                                <h1><span>Featured</span></h1>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -186,7 +186,7 @@ use App\Helpers\Helper;
                     <div class="sidebar large-sidebar theiaStickySidebar">
                         <div class="widget features-slide-widget">
                             <div class="title-section">
-                                <h1><span>Featured Posts</span></h1>
+                                <h1><span>Highlighted</span></h1>
                             </div>
                             
                             <ul class="list-posts">
