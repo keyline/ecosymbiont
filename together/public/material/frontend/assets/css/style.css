@@ -5943,7 +5943,7 @@ a.sub-category-post {
 }
 .single-post-box .about-more-autor .autor-box .autor-content .autor-title img {
   max-width: 60px;
-  margin-right: 10px;
+  margin: 0 20px 0 0;
 }
 .single-post-box .about-more-autor .autor-box .autor-content .autor-title >span {
   display: flex;
