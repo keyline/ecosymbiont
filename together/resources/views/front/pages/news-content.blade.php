@@ -77,7 +77,7 @@ use App\Helpers\Helper;
                                             $words = explode(' ', $rowContent->long_desc);
                                         
                                         // Get the first 40 words
-                                        $short_desc = implode(' ', array_slice($words, 0, 40));
+                                        $short_desc = implode(' ', array_slice($words, 0, 50));
                                         
                                         // Display the shortened description
                                         echo $short_desc;
