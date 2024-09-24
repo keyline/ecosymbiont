@@ -511,10 +511,10 @@ class FrontController extends Controller
                         'expertise_area'            => 'required',                
                         'explanation'               => ['required', 'string', new MaxWords(100)],
                         'explanation_submission'    => ['required', 'string', new MaxWords(150)],
-                        'art_video_desc'            => ['required', 'string', new MaxWords(250)],
+                        // 'art_video_desc'            => ['required', 'string', new MaxWords(250)],
                         'creative_Work'             => ['required', 'string', new MaxWords(10)],
                         'subtitle'                  => ['required', 'string', new MaxWords(40)],
-                        'art_image_desc'            => ['required', 'string', new MaxWords(250)],
+                        // 'art_image_desc'            => ['required', 'string', new MaxWords(250)],
                         'bio_short'                 => ['required', 'string', new MaxWords(40)],
                         'bio_long'                  => ['required', 'string', new MaxWords(250)],
                     ];                                    

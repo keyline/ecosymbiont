@@ -299,7 +299,7 @@
                                 <div class="row mb-3">
                                     <label for="narrative_file" class="col-md-2 col-lg-4 col-form-label">15A1) TYPE A: word narrative (no embedded images) (500-1000 words for prose, 100-250 words for poetry)</label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="file" name="narrative_file" class="form-control" id="narrative_file" required>
+                                        <input type="file" name="narrative_file" class="form-control" id="narrative_file">
                                         <small class="text-info">* Only DOC & DOCX files are allowed</small><br>
                                         <span id="narrative_file_error" class="text-danger"></span>
                                     </div>
@@ -332,7 +332,7 @@
                                     <label for="art_image_desc" class="col-md-2 col-lg-4 col-form-label">15B2) TYPE B: Art image + descriptive narrative | descriptive narrative (100-250 words)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <textarea class="form-control" id="art_image_desc" name="art_image_desc" rows="4" cols="50" placeholder="Your art_image_desc here..." required><?= $art_image_desc ?></textarea>
+                                        <textarea class="form-control" id="art_image_desc" name="art_image_desc" rows="4" cols="50" placeholder="Your art_image_desc here..."><?= $art_image_desc ?></textarea>
                                         <div id="art_image_descError" class="error"></div>
                                     </div>
                                 </div>
@@ -348,7 +348,7 @@
                                     <label for="art_video_desc" class="col-md-2 col-lg-4 col-form-label">15C2) TYPE C: Video + narrative | descriptive narrative (100-250 words)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <textarea class="form-control" id="art_video_desc" name="art_video_desc" rows="4" cols="50" placeholder="Your art_video_desc here..." required><?= $art_video_desc ?></textarea>
+                                        <textarea class="form-control" id="art_video_desc" name="art_video_desc" rows="4" cols="50" placeholder="Your art_video_desc here..."><?= $art_video_desc ?></textarea>
                                         <div id="art_video_descError" class="error"></div>
                                     </div>
                                 </div>
