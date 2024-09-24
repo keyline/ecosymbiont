@@ -12,14 +12,14 @@ use App\Helpers\Helper;
                 $parentCategoryContent1 = NewsContent::join('news_category', 'news_contents.parent_category', '=', 'news_category.id')
                                    ->select('news_contents.id', 'news_contents.new_title', 'news_contents.sub_title', 'news_contents.slug', 'news_contents.author_name', 'news_contents.cover_image', 'news_contents.created_at', 'news_category.sub_category as category_name', 'news_category.slug as category_slug')
                                    ->where('news_contents.status', '=', 1)
-                                   ->where('news_contents.is_popular', '=', 1)
+                                //    ->where('news_contents.is_popular', '=', 1)
                                    ->where('news_contents.parent_category', '=', 1)
                                    ->orderBy('news_contents.id', 'DESC')
                                    ->first();
                 //  Helper::pr($parentCategoryContent1);
                 if($parentCategoryContent1){
                 ?>
-                    <!-- <div class="news-post image-post default-size">
+                    <div class="news-post image-post default-size">
                         <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent1->cover_image?>" alt="<?=$parentCategoryContent1->new_title?>">
                         <div class="hover-box">
                             <div class="inner-hover">
@@ -31,27 +31,23 @@ use App\Helpers\Helper;
                                 <p><?=$parentCategoryContent1->sub_title?></p>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                 <?php }?>
                 <div class="image-slider snd-size">
                     <span class="top-stories">TOP STORIES</span>
                     <ul class="bxslider">
-                        <?php
-                        // DB::enableQueryLog(); // Enable query log
+                        <?php                        
                         $parentCategoryContents3 = NewsContent::join('news_category', 'news_contents.parent_category', '=', 'news_category.id')
                                                ->select('news_contents.id', 'news_contents.new_title', 'news_contents.sub_title', 'news_contents.slug', 'news_contents.author_name', 'news_contents.cover_image', 'news_contents.created_at', 'news_category.sub_category as category_name', 'news_category.slug as category_slug')
                                                ->where('news_contents.status', '=', 1)
-                                               ->where('news_contents.is_popular', '=', 1)
-                                               ->where('news_contents.parent_category', '=', 3)
-                                               // ->orderBy('news_contents.id', 'DESC')
+                                            //    ->where('news_contents.is_popular', '=', 1)
+                                               ->where('news_contents.parent_category', '=', 3)                                               
                                                ->inRandomOrder()
-                                               ->get();
-                        // Print the executed queries
-                        // dd(DB::getQueryLog());                                             
+                                               ->get();                                                                
                         if($parentCategoryContents3){ foreach($parentCategoryContents3 as $parentCategoryContent3){
                         ?>
                             <li>
-                                <!-- <div class="news-post image-post">
+                                <div class="news-post image-post">
                                     <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent3->cover_image?>" alt="<?=$parentCategoryContent3->new_title?>">
                                     <div class="hover-box">
                                         <div class="inner-hover">
@@ -59,11 +55,11 @@ use App\Helpers\Helper;
                                             <h2><a href="<?=url('content/' . $parentCategoryContent3->slug)?>"><?=$parentCategoryContent3->new_title?></a></h2>
                                             <ul class="post-tags">
                                                 <li><i class="fa fa-clock-o"></i><?=date_format(date_create($parentCategoryContent3->created_at), "d M Y")?></li>
-                                                <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent3->author_name?></a></li>                                               
+                                                <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent3->author_name?></a></li>                                                
                                             </ul>
                                         </div>
                                     </div>
-                                </div> -->
+                                </div>
                             </li>
                         <?php } }?>
                     </ul>
@@ -72,27 +68,27 @@ use App\Helpers\Helper;
                 $parentCategoryContent2 = NewsContent::join('news_category', 'news_contents.parent_category', '=', 'news_category.id')
                                    ->select('news_contents.id', 'news_contents.new_title', 'news_contents.sub_title', 'news_contents.slug', 'news_contents.author_name', 'news_contents.cover_image', 'news_contents.created_at', 'news_category.sub_category as category_name', 'news_category.slug as category_slug')
                                    ->where('news_contents.status', '=', 1)
-                                   ->where('news_contents.is_popular', '=', 1)
+                                //    ->where('news_contents.is_popular', '=', 1)
                                    ->where('news_contents.parent_category', '=', 2)
                                    ->orderBy('news_contents.id', 'DESC')
                                    ->first();
                 $parentCategoryContent8 = NewsContent::join('news_category', 'news_contents.parent_category', '=', 'news_category.id')
                                    ->select('news_contents.id', 'news_contents.new_title', 'news_contents.sub_title', 'news_contents.slug', 'news_contents.author_name', 'news_contents.cover_image', 'news_contents.created_at', 'news_category.sub_category as category_name', 'news_category.slug as category_slug')
                                    ->where('news_contents.status', '=', 1)
-                                   ->where('news_contents.is_popular', '=', 1)
+                                //    ->where('news_contents.is_popular', '=', 1)
                                    ->where('news_contents.parent_category', '=', 8)
                                    ->orderBy('news_contents.id', 'DESC')
                                    ->first();
                 $parentCategoryContent9 = NewsContent::join('news_category', 'news_contents.parent_category', '=', 'news_category.id')
                                    ->select('news_contents.id', 'news_contents.new_title', 'news_contents.sub_title', 'news_contents.slug', 'news_contents.author_name', 'news_contents.cover_image', 'news_contents.created_at', 'news_category.sub_category as category_name', 'news_category.slug as category_slug')
                                    ->where('news_contents.status', '=', 1)
-                                   ->where('news_contents.is_popular', '=', 1)
+                                //    ->where('news_contents.is_popular', '=', 1)
                                    ->where('news_contents.parent_category', '=', 9)
                                    ->orderBy('news_contents.id', 'DESC')
                                    ->first();
                 if($parentCategoryContent2){
                 ?>
-                    <!-- <div class="news-post image-post">
+                    <div class="news-post image-post">
                         <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent2->cover_image?>" alt="<?=$parentCategoryContent2->new_title?>">
                         <div class="hover-box">
                             <div class="inner-hover">
@@ -104,10 +100,10 @@ use App\Helpers\Helper;
                                 <p><?=$parentCategoryContent2->sub_title?></p>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                 <?php }?>
                 <?php if($parentCategoryContent8){?>
-                    <!-- <div class="news-post image-post">
+                    <div class="news-post image-post">
                         <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent8->cover_image?>" alt="<?=$parentCategoryContent8->new_title?>">
                         <div class="hover-box">
                             <div class="inner-hover">
@@ -119,10 +115,10 @@ use App\Helpers\Helper;
                                 <p><?=$parentCategoryContent8->sub_title?></p>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                 <?php }?>
                 <?php if($parentCategoryContent9){?>
-                    <!-- <div class="news-post image-post">
+                    <div class="news-post image-post">
                         <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent9->cover_image?>" alt="<?=$parentCategoryContent9->new_title?>">
                         <div class="hover-box">
                             <div class="inner-hover">
@@ -134,7 +130,7 @@ use App\Helpers\Helper;
                                 <p><?=$parentCategoryContent9->sub_title?></p>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                 <?php }?>
             </div>
         </div>
