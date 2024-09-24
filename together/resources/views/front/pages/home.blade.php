@@ -167,11 +167,13 @@ use App\Helpers\Helper;
                                                 <h2><a href="<?=url('content/' . $featuredContent->slug)?>"><?=$featuredContent->new_title?></a></h2>
                                                 <ul class="post-tags">
                                                     <li><i class="fa fa-clock-o"></i><?=date_format(date_create($featuredContent->created_at), "d M Y")?></li>
+                                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$featuredContent->author_name?></a></li>
                                                 </ul>
                                             </div>
                                         </li>
                                         <?php } }?>
                                     </ul>
+                                    <p><?=$featuredContent->sub_title?></p>
                                 </div>
                             </div>
                             <!-- <div class="center-button">
@@ -405,7 +407,7 @@ use App\Helpers\Helper;
                                                 <h2><a href="<?=url('content/' . $recentContent->slug)?>"><?=$recentContent->new_title?></a></h2>
                                                 <ul class="post-tags">
                                                     <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$recentContent->author_name?></a></li>
-                                                    <li><i class="fa fa-user"></i><a href="javascript:void(0);"><?=$recentContent->indigenous_affiliation?></a></li>
+                                                    <li><i class="fa fa-map-marker"></i><a href="javascript:void(0);"><?=$recentContent->indigenous_affiliation?></a></li>
                                                     <!-- <li><i class="fa fa-clock-o"></i><?=date_format(date_create($recentContent->created_at), "d M Y")?></li> -->
                                                     
                                                     <!-- <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
