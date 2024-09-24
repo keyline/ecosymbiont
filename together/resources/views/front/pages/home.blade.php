@@ -384,7 +384,7 @@ use App\Helpers\Helper;
                             <?php
                             // DB::enableQueryLog(); // Enable query log
                             $recentContents = NewsContent::join('news_category', 'news_contents.parent_category', '=', 'news_category.id')
-                                               ->select('news_contents.id', 'news_contents.new_title', 'news_contents.sub_title', 'news_contents.slug', 'news_contents.author_name', 'news_contents.cover_image', 'news_contents.created_at', 'news_category.sub_category as category_name', 'news_category.slug as category_slug')
+                                               ->select('news_contents.id', 'news_contents.new_title', 'news_contents.sub_title', 'news_contents.slug', 'news_contents.author_name', `news_contents`.`indigenous_affiliation`, 'news_contents.cover_image', 'news_contents.created_at', 'news_category.sub_category as category_name', 'news_category.slug as category_slug')
                                                ->where('news_contents.status', '=', 1)
                                                ->orderBy('news_contents.id', 'DESC')
                                                ->limit(6)
@@ -405,7 +405,7 @@ use App\Helpers\Helper;
                                                 <h2><a href="<?=url('content/' . $recentContent->slug)?>"><?=$recentContent->new_title?></a></h2>
                                                 <ul class="post-tags">
                                                     <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$recentContent->author_name?></a></li>
-                                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$recentContent->indigenous_affiliation?></a></li>
+                                                    <li><i class="fa fa-user"></i><a href="javascript:void(0);"><?=$recentContent->indigenous_affiliation?></a></li>
                                                     <!-- <li><i class="fa fa-clock-o"></i><?=date_format(date_create($recentContent->created_at), "d M Y")?></li> -->
                                                     
                                                     <!-- <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
