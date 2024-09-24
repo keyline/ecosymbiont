@@ -4291,6 +4291,7 @@ div.list-post .post-content h2 a:hover {
   overflow: hidden;
   margin-bottom: 10px;
   font-family: 'proximanova_regular';
+  width: 100%;
 }
 .single-post-box .about-more-autor .autor-box .autor-content .autor-title h1 {
   float: left;
@@ -5949,6 +5950,13 @@ a.sub-category-post {
   display: flex;
   align-items: center;
 }
+ul.list-posts.home_feature_section li img {
+  height: auto;
+  object-fit: cover;
+}
+.heading-news2 .news-post.homesmall_box img {
+  height: 175px;
+}
 /*-------------------------------------------------*/
 /* =  Responsive Part
 /*-------------------------------------------------*/
@@ -6227,6 +6235,9 @@ a.sub-category-post {
 @media (max-width: 767px) {
   .top-line {
     display: none;
+  }
+  .logo-advertisement .navbar-header button.navbar-toggle {
+    top: 45px;
   }
   .navbar-default .advertisement {
     display: none;
