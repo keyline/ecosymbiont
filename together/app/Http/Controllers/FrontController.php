@@ -29,6 +29,7 @@ use App\Models\EcosystemAffiliation;
 use App\Models\ExpertiseArea;
 use App\Models\SubmissionType;
 use App\Models\GeneralSetting;
+use App\Models\Enquiry;
 
 use Auth;
 use Session;
@@ -76,6 +77,94 @@ class FrontController extends Controller
         $data['button_show']            = 1;
         $title                          = 'Submissions';
         $page_name                      = 'submissions';
+        echo $this->front_before_login_layout($title, $page_name, $data);
+    }
+    public function contacts(Request $request)
+    {
+        $data = [];
+        $title                          = 'Contacts';
+        $page_name                      = 'contacts';
+        if ($request->isMethod('post')) {
+            $postData = $request->all();
+            // Helper::pr($postData);
+             // Get reCAPTCHA token from form POST data
+                $recaptchaResponse = $postData['g-recaptcha-response'];
+
+                // Your Google reCAPTCHA secret key
+                $secretKey = '6LclkEwqAAAAABtaRIg1Rxp8LK4dFcFyN2Si0Ygj';
+
+                // Google reCAPTCHA verification URL
+                $verifyURL = 'https://www.google.com/recaptcha/api/siteverify';
+
+                // Prepare the POST request
+                $data = array(
+                    'secret' => $secretKey,
+                    'response' => $recaptchaResponse,                       
+                );
+
+                // Initiate cURL
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $verifyURL);
+                curl_setopt($ch, CURLOPT_POST, true);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $response = curl_exec($ch);
+                curl_close($ch);
+
+                // Decode JSON response
+                $responseData = json_decode($response);
+
+                // Check if reCAPTCHA validation was successful
+                if ($responseData->success && $responseData->score >= 0.5) {
+                    // reCAPTCHA validation passed, proceed with form processing
+                    // echo "reCAPTCHA v3 validation passed. You can process the form."; die;
+                    $rules = [                                 
+                        'first_name'                => 'required',            
+                        'subject'                 => 'required',                                    
+                        'email'                     => 'required',                                                  
+                        'country'                   => 'required',                                     
+                        'message'                  => 'required',                         
+                    ];
+                    if ($this->validate($request, $rules)) {
+                        $checkValue = Enquiry::where('email', '=', $postData['email'])->count();
+                        if ($checkValue <= 0) {                    
+                            $fields = [                        
+                                'first_name'                => $postData['first_name'],            
+                                'subject'                 => json_encode($postData['subject']),         
+                                'email'                     => $postData['email'],                                                          
+                                'country'                   => $postData['country'],                               
+                                'message'                  =>$postData['message'],                         
+                            ];
+                            // Helper::pr($fields);
+                            Enquiry::insert($fields);
+                            $generalSetting             = GeneralSetting::where('id', '=', 1)->first();
+                            $subject                    = 'New Lead From Ecosymbiont Website';
+                            $message                    = "<table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
+                                                                <tr><td style='padding: 8px 15px'>Dear Administrator,</td></tr>
+                                                                <tr><td style='padding: 8px 15px'>A new lead has contacted you through the Ecosymbiont Website. Please find the details below.</td></tr>
+                                                                <tr><td style='padding: 8px 15px'><strong>Name: </strong>" . htmlspecialchars($postData['first_name']) . "</td></tr>
+                                                                <tr><td style='padding: 8px 15px'><strong>Email: </strong>" . htmlspecialchars($postData['email']) . "</td></tr>    
+                                                                <tr><td style='padding: 8px 15px'><strong>Country: </strong>" . htmlspecialchars($postData['country']) . "</td></tr>                                         
+                                                                <tr><td style='padding: 8px 15px'><strong>Message: </strong>" . htmlspecialchars($postData['message']) . "</td></tr>
+                                                                <tr><td style='padding: 8px 15px'><strong>Subject: </strong>" . htmlspecialchars(implode(', ', $postData['subject'])) . "</td></tr>
+                                                                <tr><td style='padding: 8px 15px'>Thank You,</td></tr>
+                                                                <tr><td style='padding: 8px 15px'>Auto-generated from the Ecosymbiont Website.</td></tr>
+                                                            </table>";
+                            $this->sendMail($generalSetting->site_mail, $subject, $message);
+                            
+                            return redirect(url('contacts'))->with('success_message', 'Enquiry submitted Successfully !!!');
+                        } else {
+                            return redirect()->back()->with('error_message', 'Enquiry Already Inserted !!!');
+                        }
+                    } else {
+                        return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                    }
+
+                } else {
+                    // reCAPTCHA validation failed
+                    return redirect()->back()->with('error_message', 'reCAPTCHA v3 validation failed. Please try again.');                        
+                }                              
+        }
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
     public function aboutUs()
