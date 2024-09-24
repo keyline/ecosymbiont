@@ -139,7 +139,7 @@ use App\Helpers\Helper;
                                                 $pronounId = $rowContent->author_pronoun;
                                                 $getPronoun = Pronoun::select('name')->where('id', '=', $pronounId)->first();
                                                 ?>
-                                                <div class="autor-content">
+                                                <div class="autor-content postdetails-icon">
                                                     <div class="autor-title">
                                                         <span>
                                                             <img src="<?=env('UPLOADS_URL').'icon/author.png'?>" alt="author">
