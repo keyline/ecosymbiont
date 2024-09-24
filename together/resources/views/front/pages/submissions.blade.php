@@ -36,7 +36,7 @@
                                                             <li>have participated as a strategist at an in-person Ecosymbionts Regenerate ("ER") <a href="https://ecosymbiont.keylines.net.in/synergy-meetings.php" style="color: #d09c1c;">Synergy Meeting</a> .</li>
                                                         </ul>
                                                     </li>
-                                                    <li>Your Creative-Work must relate to regenerating systems that restore, preserve, and foster the symbiosis humans natural ecological webs (ecowebs) or to elucidating how existing extractivist systems harm human-ecoweb symbiosis </li>
+                                                    <li>Your Creative-Work must relate to <a href="https://ecosymbiont.keylines.net.in/" style="color: #d09c1c;" traget="_blank">regenerating systems that restore, preserve, and foster the symbiosis humans natural ecological webs (ecowebs) or to elucidating how existing extractivist systems harm human-ecoweb symbiosis</a> </li>
                                                 </ul>
                                             </div>
 
@@ -68,7 +68,7 @@
                                                     <li>To be categorized as non-fiction any knowledge or ideas contained in your Creative-Work must be your own and may include your first-person account of narration by a knowledge-holder and/or ancestor who is explicitly named and credited.</li>
                                                     <li>A non-fiction Creative-Work that contains descriptions of knowledge and/or activities —– especially harmful activities —– by legal entities (e.g., corporations) and/or human persons other than yourself must be substantiated by external sources (e.g., citations) and/or be witnessed first-hand by you.</li>
                                                     <li>As you generate your Creative-Work, please keep in mind that readers and grassroots individuals and collectives from across the world will be viewing your Creative-Work if it is published by ERT as content. Thus, please write and present in a manner that explains terms and concepts specific to your region or culture, such that a person completely unfamiliar with the topic and regional/cultural context of your Creative-Work can understand.</li>
-                                                    <li>Please write in a simple and clear manner that is not academic, keeping in mind that readers and grassroots individuals and collectives viewing your Creative-Work are from a variety of occupational and cultural backgrounds and are most probably not native English speakers. When citing another’s publication, please simply state the finding and use footnotes to provide information about the full citation. For example, do not write: “Garcia and Hussain (2018) describe various detrimental neurological effects of environmental pollution in frontline communities.” Instead, write: “Environmental pollution has been reported to have various detrimental neurological effects in frontline communities.1” Then in your footnote for (1) provide the entire citation of Garcia and Hussain (2018).</li>
+                                                    <li>Please write in a simple and clear manner that is not academic, keeping in mind that readers and grassroots individuals and collectives viewing your Creative-Work are from a variety of occupational and cultural backgrounds and are most probably not native English speakers. When citing another’s publication, please simply state the finding and use footnotes to provide information about the full citation. For example, do <strong style="color: #d09c1c;">not</strong> write: “Garcia and Hussain (2018) describe various detrimental neurological effects of environmental pollution in frontline communities.” Instead, write: “Environmental pollution has been reported to have various detrimental neurological effects in frontline communities.<sup>1</sup>” Then in your footnote for (1) provide the entire citation of Garcia and Hussain (2018).</li>
                                                     <li>If you are including citations in your Creative-Work, please format them as follows: M. Garcia, L. Hussain, Environmental Pollution Causes Neurological Effects in Impacted Communities, Journal of Impacts: Vol. 5 (Issue 12), pp. 46-48 (2018). </li>
                                                     <li>ERT encourages the submission of Creative-Works in vernacular languages. For narratives —– both word narratives and descriptive narratives —– please ensure that if the language is not English, you also submit an accurate English translation of the entire narrative. 
                                                         For video in which the languages spoken are not English, please ensure that there are accurate English subtitles within the submitted video.  
@@ -124,15 +124,15 @@
                                                         </ul>
                                                     </li>
                                                     <li>
-                                                        <strong>SYSTEMS</strong>
+                                                        <strong><a href="https://ecosymbiont.keylines.net.in/#our-approach" style="color: #d09c1c;" traget="_blank">SYSTEMS</a></strong>
                                                         <ul>
                                                             <li>
                                                                 <strong><i>Ecoweb-Rooted Framing</i></strong><br>
-                                                                Creative-Work that conceptualizes legal-economic-governance systems  in a manner that reframes them to optimize ecoweb-rooted symbiotic wellbeing, i.e., of human communities and one or more ecowebs we rely on.
+                                                                Creative-Work that conceptualizes <a href="https://ecosymbiont.keylines.net.in/#our-approach" style="color: #d09c1c;" traget="_blank">legal-economic-governance systems</a>  in a manner that reframes them to optimize ecoweb-rooted symbiotic wellbeing, i.e., of human communities and one or more ecowebs we rely on.
                                                             </li>
                                                             <li>
                                                                 <strong><i>Extractivism Alternatives</i></strong><br>
-                                                                Creative-Work that describes human activity systems  that present an alternative to extractivist systems, e.g., the cycle of sustainable generation, repeated use, and biodegradable disposal of objects, as opposed to the cycle of resource extraction, disposable commodity production, disposable use, and landfill waste generation.
+                                                                Creative-Work that describes <a href="https://ecosymbiont.keylines.net.in/#our-approach" style="color: #d09c1c;" traget="_blank">human activity systems</a> that present an alternative to extractivist systems, e.g., the cycle of sustainable generation, repeated use, and biodegradable disposal of objects, as opposed to the cycle of resource extraction, disposable commodity production, disposable use, and landfill waste generation.
                                                             </li>
                                                             <li>
                                                                 <strong><i>Systems Reform</i></strong><br>
@@ -168,14 +168,14 @@
 
                                             <div class="titleto-inner">
                                                 <h2>REVIEW PROCESS</h2>
-                                                <p>Your Creative-Work will be reviewed based on several criteria, including clarity, veracity, and relevance to the mission and approach of Ecosymbionts Regenerate  (see below). If your Creative-Work is accepted for publication as Content on ERT, a few rounds of editor-guided revision may be required before publication. </p>
+                                                <p>Your Creative-Work will be reviewed based on several criteria, including clarity, veracity, and relevance to the <a href="https://ecosymbiont.keylines.net.in/" style="color: #d09c1c;" traget="_blank">mission and approach of Ecosymbionts Regenerate</a>. If your Creative-Work is accepted for publication as Content on ERT, a few rounds of editor-guided revision may be required before publication. </p>
                                             </div>
 
                                             <div class="titleto-inner">
                                                 <h2>COPYRIGHT & LICENSE</h2>
                                                 <p>As per the terms detailed in the NELP, you grant ERT, ER, and the Śramani Institute (the nonprofit host organization of ER and ERT) a non-exclusive license to publish and use your Content. You will retain the copyright to your work and the right to also publish elsewhere. </p>
                                             </div>
-                                            <a href="btn btn-primary">SUBMIT CREATIVE-WORK</a>
+                                            <a class="btn btn-primary blue_btn" href="#">SUBMIT CREATIVE-WORK</a>
                                         </div>
                                     </div>
                                 </div>
