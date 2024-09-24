@@ -5957,7 +5957,9 @@ ul.list-posts.home_feature_section li img {
   height: auto;
   object-fit: cover;
 }
-
+header nav.navbar.navbar-default {
+  margin-bottom: 0 !important;
+}
 /*-------------------------------------------------*/
 /* =  Responsive Part
 /*-------------------------------------------------*/
@@ -6237,9 +6239,7 @@ ul.list-posts.home_feature_section li img {
 .heading-news2 .news-post.homesmall_box img {
   height: 220px;
 }
-header nav.navbar.navbar-default {
-  margin-bottom: 0 !important;
-}
+
 }
 @media (max-width: 767px) {
   .top-line {
