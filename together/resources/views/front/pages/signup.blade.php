@@ -28,7 +28,7 @@
                                         <form method="POST" action="">
                                             @csrf
                                             <div class="row" style="margin-bottom: 15px;">
-                                              <label for="first_name" class="col-md-4 col-lg-3 col-form-label">Who Am I*</label>
+                                              <label for="first_name" class="col-md-4 col-lg-3 col-form-label">User Type</label>
                                               <div class="col-md-8 col-lg-9">
                                                 <input type="radio" name="role" id="role1" value="1" required> <label for="role1">Reader</label>
                                                 <input type="radio" name="role" id="role2" value="2" required> <label for="role2">Content Creator</label>

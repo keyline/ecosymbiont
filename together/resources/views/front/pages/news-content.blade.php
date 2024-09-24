@@ -44,7 +44,7 @@ use App\Helpers\Helper;
                                     <span class="image-caption" style="color:skyblue;"><?=$rowContent->cover_image_caption?></span>
                                 </div>
                                 <div class="post-content">
-                                    <p><?=$rowContent->short_desc?></p>
+                                    <!-- <p><?=$rowContent->short_desc?></p> -->
                                 </div>
                                 <div class="article-inpost">
                                     <div class="row">
@@ -115,7 +115,7 @@ use App\Helpers\Helper;
                                 <div class="about-more-autor">
                                     <ul class="nav nav-tabs">
                                         <li class="active" style="width: 100%;">
-                                            <a href="#about-autor" data-toggle="tab">About The Autor</a>
+                                            <a href="#about-autor" data-toggle="tab">About The Author</a>
                                         </li>
                                     </ul>
                                     <div class="tab-content">
