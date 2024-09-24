@@ -141,14 +141,14 @@ use App\Helpers\Helper;
                                                 ?>
                                                 <div class="autor-content">
                                                     <div class="autor-title">
-                                                        <h1>
+                                                        <span>
                                                             <!-- <span><?=$rowContent->author_name?>  (<?=(($getTitle)?$getTitle->name:'')?>/<?=(($getPronoun)?$getPronoun->name:'')?>) <?=$rowContent->author_short_bio?>.</span> -->
                                                             <span><?=$rowContent->author_short_bio?>.</span>
                                                             <!-- <a href="javascript:void(0);"><?=$authorPostCount?> Posts</a> -->
-                                                        </h1>
+                                                        </span>
                                                     </div>
                                                     <div class="autor-title">
-                                                        <h1>
+                                                        <span>
                                                             <?php
                                                             $author_affiliation = json_decode($rowContent->author_affiliation);
                                                             $affiliations       = [];
@@ -157,20 +157,20 @@ use App\Helpers\Helper;
                                                                 $affiliations[]       = $getAffiliation->name;
                                                             } }?>
                                                             <span><?=implode(", ", $affiliations)?> | <?=$rowContent->indigenous_affiliation?></span>
-                                                        </h1>
+                                                        </span>
                                                     </div>
                                                     <div class="autor-title">
-                                                        <h1>
+                                                        <span>
                                                             <?php
                                                             $getCountry = Country::select('name')->where('id', '=', $rowContent->country)->first();
                                                             ?>
                                                             <span><?=(($getCountry)?$getCountry->name:'')?></span>
-                                                        </h1>
+                                                        </span>
                                                     </div>
                                                     <div class="autor-title">
-                                                        <h1>
+                                                        <span>
                                                             <span><?=$rowContent->organization_name?></span>
-                                                        </h1>
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
