@@ -71,7 +71,18 @@ use App\Helpers\Helper;
                                     <?php if(session('is_user_login')){?>
                                         <p><?=$rowContent->long_desc?></p>
                                     <?php } else {?>
-                                        <p><?=substr($rowContent->long_desc,0,100)?> ...</p>
+                                        <!-- <p>?=substr($rowContent->long_desc,0,100)?> ...</p> -->
+                                        <p>
+                                            <?php // Split the long description into an array of words
+                                            $words = explode(' ', $rowContent->long_desc);
+                                        
+                                        // Get the first 40 words
+                                        $short_desc = implode(' ', array_slice($words, 0, 40));
+                                        
+                                        // Display the shortened description
+                                        echo $short_desc;
+                                        ?>
+                                    </p>
                                         <?php
                                         // Check if HTTPS is enabled
                                         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
