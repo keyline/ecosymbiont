@@ -38,7 +38,7 @@ use App\Helpers\Helper;
                     <span class="top-stories">TOP STORIES</span>
                     <ul class="bxslider">
                         <?php         
-                        DB::enableQueryLog(); // Enable query log               
+                        // DB::enableQueryLog(); // Enable query log               
                         $parentCategoryContents3 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
                                                                 ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
                                                                 ->select('news_contents.id', 
@@ -57,7 +57,7 @@ use App\Helpers\Helper;
                                                                 ->where('news_contents.parent_category', '=', 3)
                                                                 ->inRandomOrder()
                                                                 ->get();       
-                                                                dd(DB::getQueryLog());                                                        
+                                                                // dd(DB::getQueryLog());                                                        
                         if($parentCategoryContents3){ foreach($parentCategoryContents3 as $parentCategoryContent3){
                         ?>
                             <li>
@@ -65,7 +65,8 @@ use App\Helpers\Helper;
                                     <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent3->cover_image?>" alt="<?=$parentCategoryContent3->new_title?>">
                                     <div class="hover-box">
                                         <div class="inner-hover">
-                                            <a class="category-post" href="<?=url('category/' . $parentCategoryContent3->category_slug)?>"><?=$parentCategoryContent3->category_name?></a>
+                                            <a class="category-post" href="<?=url('category/' . $parentCategoryContent3->parent_category_slug)?>"><?=$parentCategoryContent3->parent_category_name?></a>
+                                            <a class="category-post" href="<?=url('category/' . $parentCategoryContent3->sub_category_slug)?>"><?=$parentCategoryContent3->sub_category_name?></a>
                                             <h2><a href="<?=url('content/' . $parentCategoryContent3->slug)?>"><?=$parentCategoryContent3->new_title?></a></h2>
                                             <ul class="post-tags">
                                                 <li><i class="fa fa-clock-o"></i><?=date_format(date_create($parentCategoryContent3->created_at), "d M Y")?></li>
