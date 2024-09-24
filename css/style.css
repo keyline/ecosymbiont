@@ -1,3 +1,23 @@
+@font-face {
+    font-family: 'proximanova_light';
+    src:url('font/proximanova_light.otf');
+}
+@font-face {
+    font-family: 'proximanova_bold.otf';
+    src:url('font/proximanova_bold.otf');
+}
+@font-face {
+    font-family: 'proximanova_regular';
+    src:url('font/proximanova_regular.ttf');
+}
+@font-face {
+    font-family: 'proximanova_extrabold';
+    src:url('font/proximanova_extrabold.otf');
+}
+@font-face {
+    font-family: 'proximanova_black';
+    src:url('font/proximanova_black.ttf');
+}
 *{
     margin: 0;
     padding: 0;
@@ -6,7 +26,7 @@
 body{
     margin: 0;
     padding: 0;
-    font-family: 'inter', sans-serif;
+    font-family: 'proximanova_regular', sans-serif;
 }
 h1,h2,h3,h4,h5,h6,p,ul,span,a{
     margin: 0;
@@ -32,10 +52,14 @@ header .navbar-brand{
 }
 header .navbar-brand>img{
     width: 100%;
-    max-width: 50%;
+    max-width: 64%;
+}
+header .header_top.darkHeader .navbar-brand>img{
+    max-width: 45%;
 }
 header .nav>li{
-    margin: 0 25px;
+    margin: 0 5px;
+    text-transform: uppercase;
 }
 .middle-nav{
     display: flex;
@@ -66,8 +90,7 @@ header .nav>li{
 .info-box{
     margin-bottom: 30px;
 }
-.info-box h2,
-.info-box h4{
+.info-box h2{
     color: #90201f;
     font-size: 30px;
     margin-bottom: 15px;
@@ -75,7 +98,11 @@ header .nav>li{
 }
 .info-box h4{
     font-size: 20px;
+    color: #23627f;
+    margin-bottom: 15px;
+    font-weight: bold;
 }
+
 .info-box p,
 .info-box ul li{
     color: #000;
@@ -94,7 +121,7 @@ header .nav>li{
 /* reatoring css */
 .reatoring{
     padding: 100px 0;
-    background: url(../images/restoring.webp) no-repeat center center;
+    background: url(../images/middleimage.jpg) no-repeat center center;
     background-size: 100% 100%;
     background-attachment: fixed;
 }
@@ -118,6 +145,7 @@ header .nav>li{
     display: flex;
     justify-content: space-between;
     text-decoration: none;
+    font-weight: 600;
 }
 .accordion-toggle.collapsed{
     color: #000 !important;
@@ -150,6 +178,15 @@ footer ul{
     justify-content: space-between;
     list-style: none;
     align-items: center;
+    padding-left: 0px;
+}
+.foot_logo img {
+    max-width: 70%;
+}
+.fot_smalltext {
+    margin-top: 15px;
+    border-top: 1px solid #bbb6b6;
+    padding-top: 10px;
 }
 .footer_btn{
     color: #90201f;
@@ -203,6 +240,22 @@ footer ul{
 textarea.form-control {
     height: 100px;
 }
+.navbar.darkHeader {
+    position: fixed;
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.1);
+    padding: 0 0;
+    backdrop-filter: blur(10px);
+    animation: slideDown 0.35s ease-out;
+    background: #fff;
+}
+@keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
 /* responsive start */
 
 @media(max-width: 992px){

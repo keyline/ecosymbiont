@@ -95,11 +95,7 @@ include "include/header.php";
                                 offer fiscal sponsorship and resources to grassroots environmental initiatives working
                                 in many areas, including conservation, Indigenous communities, sustainable agriculture
                                 and food systems, community resilience, and environmental justice.</li>
-                            <li><strong>Ecosymbionts Regenerate (<a href="https://ecosymbiont.org/">ecosymbiont.org</a>).</strong> Ecosymbionts Regenerate works
-                                to regenerate systems that restore, preserve, and foster the mutually beneficial
-                                interconnectivity and interdependence (symbiosis) of human communities within and to
-                                ecological webs (ecowebs). They focus on advancing food sovereignty, sustainable
-                                healthcare, and ecoweb integration rooted in human communities.</li>
+                            <li><strong>Ecosymbionts Regenerate (<a href="https://ecosymbiont.org/">ecosymbiont.org</a>).</strong> The mission of Ecosymbionts Regenerate is to regain the understanding that human communities are part of natural ecological webs (ecowebs) and to regenerate systems that restore, preserve, and foster the symbiosis between humans and ecowebs. Symbiosis encompasses the connectivity and dependence that exist within an ecoweb and that results in mutual benefit of all within that ecoweb, including humans.</li>
                             <li><strong>Gill Tract Community Farm (<a href="https://www.gilltractfarm.org/">gilltractfarm.org</a>).</strong> The Gill Tract Community
                                 Farm in Albany, California is a community-managed food system centered around local,
                                 organic, agroecological farming practices. They form innovative partnerships with the

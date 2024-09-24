@@ -19,7 +19,7 @@ function isActive($page) {
 </head>
 <body>
 <header>
-        <nav class="navbar navbar-default navbar-fixed-top">
+        <nav class="navbar header_top navbar-default navbar-fixed-top">
             <div class="container middle-nav">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -39,7 +39,7 @@ function isActive($page) {
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">                        
                         <li><a class="<?= isActive('index') ?>" href="index.php">About</a></li>
-                        <li><a href="<?=$base_url?>/together">ERT</a></li>
+                        <li><a href="<?=$base_url?>/together">Online Platform</a></li>
                         <li><a class="<?= isActive('synergy-meetings') ?>" href="synergy-meetings.php">Synergy Meetings</a></li>                        
                         <li><a class="<?= isActive('in-the-media') ?>" href="in-the-media.php">In the Media</a></li>
                         <li><a class="<?= isActive('contact') ?>" href="contact.php">Contact</a></li>
