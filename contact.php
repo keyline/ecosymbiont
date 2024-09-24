@@ -4,7 +4,7 @@ include "include/header.php";
 <style>
   select {width: 20em;}
 </style>
-    <section class="banner-info">
+    <section class="banner-info blanktop_pages">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">

@@ -227,7 +227,11 @@ textarea.form-control {
         display: block;
     }
     .banner-info, .urgent-section {
-        padding: 30px 0;
+        padding: 30px 0 20px;
+    }
+    .blanktop_pages{
+        padding: 80px 0 20px;
+        height: 100vh;
     }
     .info-box h2,
     .info-box h4{
@@ -268,8 +272,22 @@ textarea.form-control {
     .navbar-toggle {
         margin: 5px 0 0;
     }
+    footer ul li{
+        width: 100% !important;
+    }
     .footer_btn {
-        font-size: 12px;
+        font-size: 18px;
         padding: 10px 10px;
+    }
+    footer ul li {
+        width: 100%;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+    }
+    footer ul {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
     }
 }

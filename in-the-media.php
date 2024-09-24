@@ -1,7 +1,7 @@
 <?php 
 include "include/header.php";
 ?>
-    <section class="banner-info">
+    <section class="banner-info blanktop_pages">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
