@@ -37,6 +37,7 @@ use App\Helpers\Helper;
                     <span class="top-stories">TOP STORIES</span>
                     <ul class="bxslider">
                         <?php
+                        DB::enableQueryLog(); // Enable query log
                         $parentCategoryContents3 = NewsContent::join('news_category', 'news_contents.parent_category', '=', 'news_category.id')
                                                ->select('news_contents.id', 'news_contents.new_title', 'news_contents.sub_title', 'news_contents.slug', 'news_contents.author_name', 'news_contents.cover_image', 'news_contents.created_at', 'news_category.sub_category as category_name', 'news_category.slug as category_slug')
                                                ->where('news_contents.status', '=', 1)
@@ -45,8 +46,8 @@ use App\Helpers\Helper;
                                                // ->orderBy('news_contents.id', 'DESC')
                                                ->inRandomOrder()
                                                ->get();
-                        // Print query with placeholders
-                        dd($parentCategoryContents3->toSql());                                               
+                        // Print the executed queries
+                        dd(DB::getQueryLog());                                             
                         if($parentCategoryContents3){ foreach($parentCategoryContents3 as $parentCategoryContent3){
                         ?>
                             <li>
