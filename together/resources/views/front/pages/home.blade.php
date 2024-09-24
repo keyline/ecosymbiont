@@ -161,7 +161,7 @@ use App\Helpers\Helper;
                                                                ->get();
                                         if($featuredContents){ foreach($featuredContents as $featuredContent){
                                         ?>
-                                        <li>
+                                        <li style="display: flex;">
                                             <img src="<?=env('UPLOADS_URL').'newcontent/'.$featuredContent->cover_image?>" alt="<?=$featuredContent->new_title?>">
                                             <div class="post-content">
                                                 <h2><a href="<?=url('content/' . $featuredContent->slug)?>"><?=$featuredContent->new_title?></a></h2>
