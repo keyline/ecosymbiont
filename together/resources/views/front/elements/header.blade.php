@@ -113,7 +113,8 @@ $details = json_decode($details);
                                     <a href="<?=url('subcategory/' . $rowContent->sub_category_slug)?>"><?=$rowContent->sub_category_name?></a>
                                     <h2><a href="<?=url('content/' . $rowContent->slug)?>"><?=$rowContent->new_title?></a></h2>
                                     <ul class="post-tags">
-                                        <li><i class="fa fa-clock-o"></i><?=date_format(date_create($rowContent->created_at), "d M Y")?></li>
+                                        <!-- <li><i class="fa fa-clock-o"></i><?=date_format(date_create($rowContent->created_at), "d M Y")?></li> -->
+                                        <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$rowContent->author_name?></a></li>
                                     </ul>
                                 </div>
                             </div>
