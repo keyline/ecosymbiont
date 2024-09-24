@@ -131,7 +131,8 @@ use App\Helpers\Helper;
                                                 <div class="autor-content">
                                                     <div class="autor-title">
                                                         <h1>
-                                                            <span><?=$rowContent->author_name?>  (<?=(($getTitle)?$getTitle->name:'')?>/<?=(($getPronoun)?$getPronoun->name:'')?>) <?=$rowContent->author_short_bio?>.</span>
+                                                            <!-- <span><?=$rowContent->author_name?>  (<?=(($getTitle)?$getTitle->name:'')?>/<?=(($getPronoun)?$getPronoun->name:'')?>) <?=$rowContent->author_short_bio?>.</span> -->
+                                                            <span><?=$rowContent->author_short_bio?>.</span>
                                                             <!-- <a href="javascript:void(0);"><?=$authorPostCount?> Posts</a> -->
                                                         </h1>
                                                     </div>
