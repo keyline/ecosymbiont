@@ -4,14 +4,22 @@ include "include/header.php";
 
 <main>
         <section class="body-container">
+            <div class="container">
             <!-- <h2 class="main-heading">Thank you for your patience. The website will launch on 25 September, 2024.</h2> -->
             <div class="row">
+                <div class="col-md-12">
+                    <div class="titleto-box">
+                        <h2>Synergy Meetings</h2>
+                    </div>
+                </div>
                 <div class="col-6">
+                    
                     <div class="left-img-box">
                         <img src="images/left-img.webp" alt="" class="img-fluid">
                     </div>
                 </div>
                 <div class="col-6">
+                    
                     <div class="right-text-box">
                         <h3 class="mb-10 text-green">Come join us in Downtown Oakland, CA, USA, on September 25th, 2024,
                             at 6 PM. RSVP using the QR code provided (seats are limited) or <a
@@ -234,6 +242,7 @@ include "include/header.php";
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </section>
     </main>

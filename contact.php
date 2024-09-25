@@ -9,9 +9,12 @@ session_start();
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="info-box">
-                        <h2><i>Contact Us</i></h2>
+                    <div class="titleto-box">
+                        <h2>Contact Us</h2>
                     </div>
+                </div>
+                <div class="col-md-12">
+                    
 
                     <div class="info-box"> 
                         <p>If you are interested in funding or learning more about the work of Ecosymbionts Regenerate (ER) and/or Ecosymbionts Regenerate Together (ERT) or if you would like to submit Creative-Work, please contact us.</p>
@@ -74,12 +77,13 @@ session_start();
                                     <input type="email" class="form-control" id="email" name="email" required>
                                 </div>
                             </div>
-                            <div class="form-row">
-                                <div class="form-group col-6">
+                                <div class="form-group ">
                                     <label class="form-check-label" for="country">Country of residence*</label>
                                     <input type="text" class="form-control" id="country" name="country" required>
                                 </div>
-                                <div class="form-group col-6">
+                                
+
+                            <div class="form-group ">
                                     <label for="subject">Subject*</label>
                                     <select class="form-control" name="subject[]" id="subject" multiple onchange="console.log(Array.from(this.selectedOptions).map(x=>x.value??x.text))" multiselect-hide-x="true" required>
                                         <option value="1">I am interested in funding the work of ER and/or ERT</option>
@@ -87,7 +91,6 @@ session_start();
                                         <option value="3">I am interested in submitting Creative-Work to ERT</option>
                                     </select>
                                 </div>
-                            </div>
                             <div class="form-group">
                                 <label for="message">Message (up to 250 words)*</label>
                                 <textarea class="form-control" id="message" name="message" rows="3" maxlength="250" required></textarea>
