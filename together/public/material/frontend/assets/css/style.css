@@ -5971,6 +5971,8 @@ footer .footer-last-line nav.footer-nav ul li:first-child:before {
   font-size: 16px;
   line-height: 28px;
   padding-bottom: 10px;
+  font-weight: 600;
+  font-family: 'proximanova_regular';
 }
 .titleto-inner p {
   font-size: 15px;
@@ -5982,6 +5984,7 @@ a.blue_btn {
 .titleto-inner h4 {
   color: #90201f !important;
   font-weight: 600;
+  font-family: 'proximanova_regular';
 }
 .features-slide-widget li {
   display: flex;
@@ -6337,8 +6340,15 @@ div#popup p {
 }
 @media (max-width: 767px) {
   .top-line {
-    display: none;
+    /* display: none; */
+    text-align: center;
   }
+  .top-line ul.top-line-list li:first-child {
+    display: none;
+}
+.top-line ul.top-line-list li:before {
+  border-right: 1px dotted #777777;
+}
   .logo-advertisement .navbar-header button.navbar-toggle {
     top: 45px;
   }
@@ -6711,3 +6721,4 @@ div.block-content {
 .mb-3{
   margin-bottom: 15px;
 }
+.black{color: #000;}

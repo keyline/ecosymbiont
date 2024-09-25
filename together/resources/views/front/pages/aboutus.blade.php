@@ -20,10 +20,10 @@
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="post-content">
-                                            <p style="font-size:15px;font-weight: 600;">Ecosymbionts Regenerate Together (ERT) is an online knowledge-sharing and community-building platform for <a href="<?=env('REGENERATE_URL')?>#defination" style="color: #d09c1c;" traget="_blank">grassroots</a>  changemakers, innovators, and knowledge-holders from across the world.</p>
+                                            <p style="font-size:15px;font-weight: 600; color:#000;">Ecosymbionts Regenerate Together (ERT) is an online knowledge-sharing and community-building platform for <a href="<?=env('REGENERATE_URL')?>#defination" style="color: #d09c1c;" traget="_blank">grassroots</a>  changemakers, innovators, and knowledge-holders from across the world.</p>
                                             
                                             <div class="titleto-inner">
-                                                <p>The purpose of ERT is two-fold:</p>
+                                                <p class="black">The purpose of ERT is two-fold:</p>
                                                 <ul>
                                                     <li><strong><i>Facilitate synergies:</i></strong> Bring together and facilitate <a href="<?=env('REGENERATE_URL')?>#defination" style="color: #d09c1c;" traget="_blank">synergies</a> between grassroots changemakers, innovators, and knowledge-holders from across the world working to <a href="<?=env('REGENERATE_URL')?>#defination" style="color: #d09c1c;" traget="_blank">regenerate</a> systems that restore, preserve, and foster human-<a href="<?=env('REGENERATE_URL')?>#defination" style="color: #d09c1c;" traget="_blank">ecoweb symbiosis</a> .
                                                     </li>
@@ -36,17 +36,17 @@
 
                                             <div class="titleto-inner">
                                                 <h2>HOW TO CITE ERT CONTENT</h2>
-                                                <p>If you are citing ERT content, please use the following format: Author name(s), Title, Ecosymbionts Regenerate Together: DOI (publication date).</p>
-                                                <p><i>For example: </i></p>
-                                                <p>F. <i>Jahan, From Bhopal to the Bay: Fighting Corporations Creating Industrial Wastelands</i>, <strong>Ecosymbionts Regenerate Together:</strong> DOI-ERT092024-004 (25 September, 2024).</p>
+                                                <p class="black">If you are citing ERT content, please use the following format: Author name(s), Title, Ecosymbionts Regenerate Together: DOI (publication date).</p>
+                                                <p class="black"><i>For example: </i></p>
+                                                <p class="black">F. <i>Jahan, From Bhopal to the Bay: Fighting Corporations Creating Industrial Wastelands</i>, <strong>Ecosymbionts Regenerate Together:</strong> DOI-ERT092024-004 (25 September, 2024).</p>
                                             </div>
                                             <div class="titleto-inner">
                                                 <h2>TYPES OF CREATIVE-WORKS</h2>
-                                                <p>Both fiction and non-fiction Creative-Works are published as content on ERT, in the form of (a) word narratives, (b) visual art, and (c) videos. ERT encourages content in vernacular languages, with English translations provided, and where applicable, English subtitles.</p>
+                                                <p class="black">Both fiction and non-fiction Creative-Works are published as content on ERT, in the form of (a) word narratives, (b) visual art, and (c) videos. ERT encourages content in vernacular languages, with English translations provided, and where applicable, English subtitles.</p>
                                             </div>
                                             <div class="titleto-inner">
                                                 <h2>SECTIONS AND SUB-SECTIONS OF ERT</h2>
-                                                <p>ERT has five main sections that are further divided into sub-sections. </p>
+                                                <p class="black">ERT has five main sections that are further divided into sub-sections. </p>
                                             </div>
                                             <div class="titleto-inner">
                                                 <h4>Action</h4>
