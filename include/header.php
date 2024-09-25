@@ -12,6 +12,7 @@ function isActive($page) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ECOSYMBIONTS</title>
+    <link href="<?=$base_url?>images/fav.png" rel="icon">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -30,7 +31,7 @@ function isActive($page) {
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.php">
+                    <a class="navbar-brand" href="<?=$base_url?>">
                         <img src="images/logo.webp" alt="" class="img-responsive">
                     </a>
                 </div>
