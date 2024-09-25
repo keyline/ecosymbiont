@@ -87,9 +87,9 @@ include "include/header.php";
                             <div class="form-group ">
                                     <label for="subject">Subject*</label>
                                     <select class="form-control" name="subject[]" id="subject" multiple onchange="console.log(Array.from(this.selectedOptions).map(x=>x.value??x.text))" multiselect-hide-x="true" required>
-                                        <option value="1">I am interested in funding the work of ER and/or ERT</option>
-                                        <option value="2">I am interested in learning more about the work of ER and/or ERT</option>
-                                        <option value="3">I am interested in submitting Creative-Work to ERT</option>
+                                        <option value="I am interested in funding the work of ER and/or ERT">I am interested in funding the work of ER and/or ERT</option>
+                                        <option value="I am interested in learning more about the work of ER and/or ERT">I am interested in learning more about the work of ER and/or ERT</option>
+                                        <option value="I am interested in submitting Creative-Work to ERT">I am interested in submitting Creative-Work to ERT</option>
                                     </select>
                                 </div>
                             <div class="form-group">

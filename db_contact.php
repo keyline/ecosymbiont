@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $country = $_POST['country'];
     $subject = $_POST['subject'];
     $message = $_POST['message'];
-    $subject_string = json_encode($subject); // Or use json_encode($subject)
+    $subject_string = implode(", ", $subject);; // Or use json_encode($subject)
 
     // Verify the reCAPTCHA response
     $recaptchaResponse = $_POST['recaptcha_response'];
@@ -60,22 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sql = "INSERT INTO enquiries (name, email, country, subject, message) VALUES ('$full_name', '$email', '$country', '$subject_string', '$message')";
 
         // Execute the query
-        if (mysqli_query($conn, $sql)) {
-        // echo "New record created successfully!";
-        // Get the last inserted ID
-            $lastInsertId = $conn->insert_id;
-
-            // Fetch the last inserted row using the ID
-            $sql = "SELECT * FROM enquiries WHERE id = $lastInsertId";
-            $result = $conn->query($sql);
-            // Fetch as associative array
-            $lastRow = $result->fetch_assoc();
-            
-            // $subject_fetch = $lastRow->subject;
-            $subject_array = json_decode($lastRow['subject'], true);
-            $subject_string = implode(", ", $subject_array);
-             print_r($subject_string);die;
-
+        if (mysqli_query($conn, $sql)) {        
             // Initialize PHPMailer for admin notification
             $adminMail = new PHPMailer(true);
             try {
