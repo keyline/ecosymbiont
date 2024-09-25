@@ -54,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
 
     if ($result->success && $result->score >= 0.5) {
+        // echo "verified"; die;
         // Handle the form submission (e.g., save to database, send email, etc.)
         // Prepare the SQL query
         $sql = "INSERT INTO enquiries (name, email, country, subject, message) VALUES ('$full_name', '$email', '$country', '$subject_string', '$message')";
@@ -65,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $adminMail = new PHPMailer(true);
             try {
                 // Server settings
-                $adminMail->SMTPDebug = 3;
+                // $adminMail->SMTPDebug = 3;
                 $adminMail->isSMTP();
                 $adminMail->Host = 'ecosymbiont.keylines.net.in';
                 $adminMail->SMTPAuth = true;
