@@ -6343,11 +6343,13 @@ div#popup p {
     /* display: none; */
     text-align: center;
   }
-  .top-line ul.top-line-list li:first-child {
-    display: none;
+  .top-line ul.top-line-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 .top-line ul.top-line-list li:before {
-  border-right: 1px dotted #777777;
+  display: none;
 }
   .logo-advertisement .navbar-header button.navbar-toggle {
     top: 45px;
