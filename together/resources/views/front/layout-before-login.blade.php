@@ -39,6 +39,11 @@
         $(function(){
           $('.autohide').delay(5000).fadeOut('slow');
         })
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip({
+                html: true
+            });
+        });
     </script>
 </body>
 </html>

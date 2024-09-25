@@ -140,7 +140,7 @@ use App\Helpers\Helper;
                                                         <div class="autor-content postdetails-icon">
                                                             <div class="autor-title">
                                                                 <span>
-                                                                    <img src="<?=env('UPLOADS_URL').'icon/author.png'?>" alt="author">                                                            
+                                                                    <img src="<?=env('UPLOADS_URL').'icon/author.png'?>" alt="author" title="Author Bio" data-toogle="tooltip">                                                            
                                                                     <span><?=$author_short_bio = trim($paragraphs[$i])?>.</span>
                                                                     
                                                                     <!-- <a href="javascript:void(0);"><?=$authorPostCount?> Posts</a> -->
@@ -148,7 +148,7 @@ use App\Helpers\Helper;
                                                             </div>
                                                             <div class="autor-title">
                                                                 <span>
-                                                                    <img src="<?=env('UPLOADS_URL').'icon/ancestral.png'?>" alt="author_affiliation">
+                                                                    <img src="<?=env('UPLOADS_URL').'icon/ancestral.png'?>" alt="author_affiliation" title="Ancestral Ecoweb" data-toogle="tooltip">
                                                                     <?php
                                                                     $author_affiliation = json_decode($rowContent->author_affiliation);
                                                                     $affiliations       = [];
@@ -161,7 +161,7 @@ use App\Helpers\Helper;
                                                             </div>
                                                             <div class="autor-title">
                                                                 <span>
-                                                                    <img src="<?=env('UPLOADS_URL').'icon/residence.png'?>" alt="residence">
+                                                                    <img src="<?=env('UPLOADS_URL').'icon/residence.png'?>" alt="residence" title="Residence" data-toogle="tooltip">
                                                                     <?php
                                                                     $getCountry = Country::select('name')->where('id', '=', $rowContent->country)->first();
                                                                     ?>
@@ -170,7 +170,7 @@ use App\Helpers\Helper;
                                                             </div>
                                                             <div class="autor-title">
                                                                 <span>
-                                                                    <img src="<?=env('UPLOADS_URL').'icon/organizational.png'?>" alt="organizational">                                                                    
+                                                                    <img src="<?=env('UPLOADS_URL').'icon/organizational.png'?>" alt="organizational" title="Organizational Affiliation" data-toogle="tooltip">                                                                    
                                                                     <span><?= $organization_name = (isset($organization[$i]) > 0) ? trim($organization[$i]) : trim($organization[0]); ?></span>
                                                                 </span>
                                                             </div>
