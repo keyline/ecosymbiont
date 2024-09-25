@@ -123,104 +123,98 @@ use App\Helpers\Helper;
                                         <li><a class="linkedin" href="{{ $linkdinShareUrl }}" target="_blank"><i class="fa fa-linkedin"></i><span>&nbsp;&nbsp;&nbsp;Share on Linkedin</span></a></li>
                                     </ul>
                                 </div>
-                                <div class="about-more-autor">
-                                    <ul class="nav nav-tabs">
-                                        <li class="active" style="width: 100%;">
-                                            <a href="#about-autor" data-toggle="tab">About The Author</a>
-                                        </li>
-                                    </ul>
-                                    <div class="tab-content">
-                                        <div class="tab-pane active" id="about-autor">
-                                            <div class="autor-box">
-                                                <?php
-                                                $getArticle = Article::where('article_no', '=', $rowContent->creative_work_SRN)->first();
-                                                $titleId = (($getArticle)?$getArticle->titleId:'');
-                                                $getTitle = Title::select('name')->where('id', '=', $titleId)->first();
-                                                $pronounId = $rowContent->author_pronoun;
-                                                $getPronoun = Pronoun::select('name')->where('id', '=', $pronounId)->first();
-                                                ?>
-                                                <div class="autor-content postdetails-icon">
-                                                    <div class="autor-title">
-                                                        <span>
-                                                            <img src="<?=env('UPLOADS_URL').'icon/author.png'?>" alt="author">
-                                                            <!-- <span><?=$rowContent->author_name?>  (<?=(($getTitle)?$getTitle->name:'')?>/<?=(($getPronoun)?$getPronoun->name:'')?>) <?=$rowContent->author_short_bio?>.</span> -->
-                                                           <?php  // Split the string into two parts using the '#' as a delimiter
-                                                                $paragraphs = explode('#', $rowContent->author_short_bio);
-
-                                                                // Store each part in separate variables
-                                                                $author_short_bio1 = trim($paragraphs[0]);
-                                                                $author_short_bio2 = trim($paragraphs[1]);
-                                                            ?>
-                                                            <span><?=$rowContent->author_short_bio?>.</span>
-                                                            <!-- <span><?=$author_short_bio1?>.</span>
-                                                            <span><?=$author_short_bio2?>.</span> -->
-                                                            <!-- <a href="javascript:void(0);"><?=$authorPostCount?> Posts</a> -->
-                                                        </span>
-                                                    </div>
-                                                    <div class="autor-title">
-                                                        <span>
-                                                            <img src="<?=env('UPLOADS_URL').'icon/ancestral.png'?>" alt="author_affiliation">
-                                                            <?php
-                                                            $author_affiliation = json_decode($rowContent->author_affiliation);
-                                                            $affiliations       = [];
-                                                            if(!empty($author_affiliation)){ for($k=0;$k<count($author_affiliation);$k++){
-                                                                $getAffiliation = EcosystemAffiliation::select('name')->where('id', '=', $author_affiliation[$k])->first();
-                                                                $affiliations[]       = $getAffiliation->name;
-                                                            } }?>
-                                                            <span><?=implode(", ", $affiliations)?> | <?=$rowContent->indigenous_affiliation?></span>
-                                                        </span>
-                                                    </div>
-                                                    <div class="autor-title">
-                                                        <span>
-                                                            <img src="<?=env('UPLOADS_URL').'icon/residence.png'?>" alt="residence">
-                                                            <?php
-                                                            $getCountry = Country::select('name')->where('id', '=', $rowContent->country)->first();
-                                                            ?>
-                                                            <span><?=(($getCountry)?$getCountry->name:'')?></span>
-                                                        </span>
-                                                    </div>
-                                                    <div class="autor-title">
-                                                        <span>
-                                                            <img src="<?=env('UPLOADS_URL').'icon/organizational.png'?>" alt="organizational">
-                                                            <span><?=$rowContent->organization_name?></span>
-                                                        </span>
+                                <?php  // Split the string into two parts using the '#' as a delimiter
+                                    $paragraphs = explode('#', $rowContent->author_short_bio);  
+                                    $indigenous = explode('#',$rowContent->indigenous_affiliation);
+                                    $organization = explode('#',$rowContent->organization_name);                                    
+                                    for($i=0; $i<count($paragraphs); $i++)
+                                    {?>
+                                        <div class="about-more-autor">
+                                            <ul class="nav nav-tabs">
+                                                <li class="active" style="width: 100%;">
+                                                    <a href="#about-autor" data-toggle="tab"><?php echo ($i == 0)?'About The Lead Author':'About The Co-Author'; ?></a>
+                                                </li>
+                                            </ul>                                    
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="about-autor">
+                                                    <div class="autor-box">                                                
+                                                        <div class="autor-content postdetails-icon">
+                                                            <div class="autor-title">
+                                                                <span>
+                                                                    <img src="<?=env('UPLOADS_URL').'icon/author.png'?>" alt="author">                                                            
+                                                                    <span><?=$author_short_bio = trim($paragraphs[$i])?>.</span>
+                                                                    
+                                                                    <!-- <a href="javascript:void(0);"><?=$authorPostCount?> Posts</a> -->
+                                                                </span>
+                                                            </div>
+                                                            <div class="autor-title">
+                                                                <span>
+                                                                    <img src="<?=env('UPLOADS_URL').'icon/ancestral.png'?>" alt="author_affiliation">
+                                                                    <?php
+                                                                    $author_affiliation = json_decode($rowContent->author_affiliation);
+                                                                    $affiliations       = [];
+                                                                    if(!empty($author_affiliation)){ for($k=0;$k<count($author_affiliation);$k++){
+                                                                        $getAffiliation = EcosystemAffiliation::select('name')->where('id', '=', $author_affiliation[$k])->first();
+                                                                        $affiliations[]       = $getAffiliation->name;
+                                                                    } }?>
+                                                                    <span><?=implode(", ", $affiliations)?> | <?= $indigenous_affiliation = (isset($indigenous[$i]) > 0) ? trim($indigenous[$i]) : trim($indigenous[0]); ?></span>
+                                                                </span>
+                                                            </div>
+                                                            <div class="autor-title">
+                                                                <span>
+                                                                    <img src="<?=env('UPLOADS_URL').'icon/residence.png'?>" alt="residence">
+                                                                    <?php
+                                                                    $getCountry = Country::select('name')->where('id', '=', $rowContent->country)->first();
+                                                                    ?>
+                                                                    <span><?=(($getCountry)?$getCountry->name:'')?></span>
+                                                                </span>
+                                                            </div>
+                                                            <div class="autor-title">
+                                                                <span>
+                                                                    <img src="<?=env('UPLOADS_URL').'icon/organizational.png'?>" alt="organizational">                                                                    
+                                                                    <span><?= $organization_name = (isset($organization[$i]) > 0) ? trim($organization[$i]) : trim($organization[0]); ?></span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
+                                                <!-- <div class="tab-pane" id="more-autor">
+                                                    <div class="more-autor-posts">
+                                                        <div class="news-post image-post3">
+                                                            <img src="upload/news-posts/im4.jpg" alt="">
+                                                            <div class="hover-box">
+                                                                <h2><a href="single-post.html">Donec odio. Quisque volutpat mattis eros.</a></h2>
+                                                                <ul class="post-tags">
+                                                                    <li><i class="fa fa-clock-o"></i>27 may 2013</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="news-post image-post3">
+                                                            <img src="upload/news-posts/im5.jpg" alt="">
+                                                            <div class="hover-box">
+                                                                <h2><a href="single-post.html">Nullam malesuada erat ut turpis. </a></h2>
+                                                                <ul class="post-tags">
+                                                                    <li><i class="fa fa-clock-o"></i>27 may 2013</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="news-post image-post3">
+                                                            <img src="upload/news-posts/im6.jpg" alt="">
+                                                            <div class="hover-box">
+                                                                <h2><a href="single-post.html">Suspendisse urna nibh.</a></h2>
+                                                                <ul class="post-tags">
+                                                                    <li><i class="fa fa-clock-o"></i>27 may 2013</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
                                             </div>
                                         </div>
-                                        <!-- <div class="tab-pane" id="more-autor">
-                                            <div class="more-autor-posts">
-                                                <div class="news-post image-post3">
-                                                    <img src="upload/news-posts/im4.jpg" alt="">
-                                                    <div class="hover-box">
-                                                        <h2><a href="single-post.html">Donec odio. Quisque volutpat mattis eros.</a></h2>
-                                                        <ul class="post-tags">
-                                                            <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="news-post image-post3">
-                                                    <img src="upload/news-posts/im5.jpg" alt="">
-                                                    <div class="hover-box">
-                                                        <h2><a href="single-post.html">Nullam malesuada erat ut turpis. </a></h2>
-                                                        <ul class="post-tags">
-                                                            <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="news-post image-post3">
-                                                    <img src="upload/news-posts/im6.jpg" alt="">
-                                                    <div class="hover-box">
-                                                        <h2><a href="single-post.html">Suspendisse urna nibh.</a></h2>
-                                                        <ul class="post-tags">
-                                                            <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> -->
-                                    </div>
-                                </div>
+                                    <?php }
+                                      ?>                                  
+
+                                
                                 <!-- carousel box -->
                                 <div class="carousel-box owl-wrapper">
                                     <div class="title-section">
