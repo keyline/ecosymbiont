@@ -3,35 +3,39 @@ use App\Models\NewsCategory;
 use App\Models\NewsContent;
 use App\Helpers\Helper;
 ?>
-<div class="container">
-    <div class="footer_top_menu">
-        <div class="row">
-            <div class="col-md-12">
-                <nav class="footer-nav">
-                    <ul>
-                        <li><a href="<?=url('/')?>">Home</a></li>
-                        <li><a href="<?=url('about-us')?>">About</a></li>
-                        <li><a href="<?=url('contact-us')?>">Contact</a></li>
-                        <li class="foot-social-icons"><a class="twitter" href="<?=$generalSetting->twitter_profile?>"><i class="fa fa-twitter"></i></a></li>
-                        <li class="foot-social-icons"><a class="pinterest" href="<?=$generalSetting->instagram_profile?>"><i class="fa fa-instagram"></i></a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </div>
 
-    <div class="footer_copy_pow">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="foot_copyinfo"><?=$generalSetting->footer_description?></div>
-                <div class="kelfot">
-                    <a href="https://keylines.net/" target="_blank">Powered by keylines.net</a>
+    <div class="footer_top_menu">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav class="footer-nav">
+                        <ul>
+                            <li><a href="<?=url('/')?>">Home</a></li>
+                            <li><a href="<?=url('about-us')?>">About</a></li>
+                            <li><a href="<?=url('contact-us')?>">Contact</a></li>
+                            <li class="foot-social-icons"><a class="twitter" href="<?=$generalSetting->twitter_profile?>"><i class="fa fa-twitter"></i></a></li>
+                            <li class="foot-social-icons"><a class="pinterest" href="<?=$generalSetting->instagram_profile?>"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="footer_copy_pow">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="foot_copyinfo"><?=$generalSetting->footer_description?></div>
+                    <div class="kelfot">
+                        <a href="https://keylines.net/" target="_blank">Powered by keylines.net</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+<div class="container">
     <div class="footer-widgets-part">
         <div class="row">
             <div class="col-md-6">
