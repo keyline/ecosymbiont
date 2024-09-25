@@ -225,8 +225,8 @@ class FrontController extends Controller
                                            ->where('news_contents.status', '=', 1)
                                            ->where('news_contents.slug', '=', $slug)
                                            ->first();
-        $postUrl = env('APP_URL') . '/content/' . $slug;
-        // echo $postUrl; die;
+        $postUrl = env('APP_URL') . 'content/' . $slug;
+         echo $postUrl; die;
         // <?=env('APP_URL').'content/'.$rowContent->cover_image
         $facebookShareUrl = "https://www.facebook.com/sharer/sharer.php?u=" . urlencode($postUrl);     
         $twitterShareUrl = "https://twitter.com/intent/tweet?url=" . urlencode($postUrl);     
