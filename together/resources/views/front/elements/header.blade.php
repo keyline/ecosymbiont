@@ -154,7 +154,7 @@ $APP_URL = $_SERVER['APP_URL'];
                             </li>
                         <?php } }?>
                         <li><a href="<?=url('submissions')?>">SUBMISSIONS</a></li>
-                        <li><a href="<?=url('contacts')?>">CONTACTS</a></li>
+                        <li><a href="<?=env('REGENERATE_URL')?>/contact.php">CONTACT</a></li>
                     </ul>
                     <!-- <form class="navbar-form navbar-right" role="search">
                         <input type="text" id="search" name="search" placeholder="Search here">

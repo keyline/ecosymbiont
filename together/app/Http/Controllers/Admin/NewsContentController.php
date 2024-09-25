@@ -201,7 +201,7 @@ class NewsContentController extends Controller
                 'long_desc'                 => 'required',                          
                 'is_feature'                => 'required',  
                 'is_popular'                => 'required',                     
-                'sub_title'                  => ['required', 'string', new MaxWords(42)], 
+                'sub_title'                  => ['required', 'string', new MaxWords(50)], 
             ];           
             if ($this->validate($request, $rules)) {
                 // $checkValue = NewsContent::where('sub_category', '=', $postData['sub_category'])->count();

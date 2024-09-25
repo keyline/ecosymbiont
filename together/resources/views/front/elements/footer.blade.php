@@ -32,7 +32,7 @@ use App\Helpers\Helper;
             </div> -->
             <div class="col-md-6">
                 <div class="widget posts-widget">
-                    <h1>Random Post</h1>
+                    <h1>Random Content</h1>
                     <ul class="list-posts">
                         <?php
                         $randomContents = NewsContent::join('news_category', 'news_contents.sub_category', '=', 'news_category.id')

@@ -144,7 +144,16 @@ use App\Helpers\Helper;
                                                         <span>
                                                             <img src="<?=env('UPLOADS_URL').'icon/author.png'?>" alt="author">
                                                             <!-- <span><?=$rowContent->author_name?>  (<?=(($getTitle)?$getTitle->name:'')?>/<?=(($getPronoun)?$getPronoun->name:'')?>) <?=$rowContent->author_short_bio?>.</span> -->
+                                                           <?php  // Split the string into two parts using the '#' as a delimiter
+                                                                $paragraphs = explode('#', $rowContent->author_short_bio);
+
+                                                                // Store each part in separate variables
+                                                                $author_short_bio1 = trim($paragraphs[0]);
+                                                                $author_short_bio2 = trim($paragraphs[1]);
+                                                            ?>
                                                             <span><?=$rowContent->author_short_bio?>.</span>
+                                                            <span><?=$rowContent->author_short_bio1?>.</span>
+                                                            <span><?=$rowContent->author_short_bio2?>.</span>
                                                             <!-- <a href="javascript:void(0);"><?=$authorPostCount?> Posts</a> -->
                                                         </span>
                                                     </div>
