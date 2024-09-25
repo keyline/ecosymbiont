@@ -2273,11 +2273,12 @@ section.big-slider .big-bxslider li .image-post2 .hover-box .inner-hover h2 {
   max-width: 70px;
 }
 .sidebar .subscribe-widget form {
-  background: url('../upload/banners/back2.jpg') center center;
+  /* background: url('../upload/banners/back2.jpg') center center;
   background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
-  -o-background-size: cover;
+  -o-background-size: cover; */
+  background:#206081;
   padding: 25px 20px;
   margin: 0;
 }
