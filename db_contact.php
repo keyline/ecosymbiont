@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $lastRow = $result->fetch_assoc();
             
             // $subject_fetch = $lastRow->subject;
-            $subject_array = json_decode($lastRow->subject, true);
+            $subject_array = json_decode($lastRow['subject'], true);
             print_r($subject_array);die;
 
             // Initialize PHPMailer for admin notification
