@@ -19,7 +19,7 @@ function isActive($page) {
 </head>
 <body>
 <header>
-        <nav class="navbar header_top navbar-default navbar-fixed-top">
+        <nav class="navbar header_top navbar-default ">
             <div class="container middle-nav">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">

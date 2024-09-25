@@ -38,7 +38,7 @@ h1,h2,h3,h4,h5,h6,p,ul,span,a{
 }
 /* navbar css */
 header{
-    margin-bottom: 77px;
+    /* margin-bottom: 77px; */
 }
 header .navbar{
     min-height: auto !important;
@@ -70,7 +70,6 @@ header .nav>li{
     margin-right: 0;
 }
 .navbar-default .navbar-nav>li>a{
-    font-family: 'inter', sans-serif;
     color: #90201f;
     font-size: 16px;
     transition: all .3s ease-in-out;
@@ -92,9 +91,10 @@ header .nav>li{
 }
 .info-box h2{
     color: #90201f;
-    font-size: 30px;
+    font-size: 20px;
     margin-bottom: 15px;
     font-weight: bold;
+    text-transform: uppercase;
 }
 .info-box h4{
     font-size: 20px;
@@ -201,7 +201,7 @@ footer ul{
     background: #90201f;
     font-size: 16px;
     padding: 20px 30px;
-    border-radius: 100px;
+    border-radius: 4x;
 }
 .footer_btn:hover,
 .footer_btn_2:hover{
@@ -232,7 +232,6 @@ footer ul{
 .info-contact_form .multiselect-dropdown {
     width: 100% !important;
     padding: 8px 10px;
-    text-transform: capitalize;
 }
 .form-control {
     height: 40px;
@@ -247,6 +246,8 @@ textarea.form-control {
     backdrop-filter: blur(10px);
     animation: slideDown 0.35s ease-out;
     background: #fff;
+    width: 100%;
+    z-index: 9;
 }
 @keyframes slideDown {
     from {
@@ -256,11 +257,32 @@ textarea.form-control {
       transform: translateY(0);
     }
   }
-/* responsive start */
+.titleto-box h2{
+    color: #90201f;
+    font-weight: bold;
+    font-size: 30px;
+    text-transform: uppercase;
+    margin: 0 0 30px;
+}
 
+
+
+
+
+
+
+  
+/* responsive start */
+@media (min-width: 768px) and (max-width: 1199px){
+    .navbar-default .navbar-nav>li>a {
+        font-size: 12px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}
 @media(max-width: 992px){
     header {
-        margin-bottom: 66px;
+        /* margin-bottom: 66px; */
     }
     .navbar-header{
         width: 240px;
