@@ -6351,6 +6351,11 @@ div#popup p {
 .top-line ul.top-line-list li:before {
   
 }
+.heading-news2 .heading-news-box > .news-post img {
+  object-fit: cover;
+  height: 100%;
+}
+.heading-news2 .heading-news-box .image-slider.snd-size .image-post{height: 300px;}
   .logo-advertisement .navbar-header button.navbar-toggle {
     top: 45px;
   }
