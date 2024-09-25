@@ -103,7 +103,7 @@
     </section>
 
     <!-- Popup Div (Initially hidden) -->
-    <div id="popup" style="position: fixed;top: 40%;left: 43%;width: 400px;padding: 20px;background-color: #d09c1c;border: 1px solid rgb(0, 0, 0);">
+    <div id="popup">
       <h3>Submissions Eligibility Criteria</h3>
       <p>At this time, you must:<br>
       (A) be invited to submit a Creative-Work to ERT; and/or <br>

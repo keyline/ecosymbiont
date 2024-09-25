@@ -6057,6 +6057,18 @@ div#popup h3 {
 div#popup p {
   line-height: 30px;
 }
+#popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  padding: 20px;
+  background-color: rgb(208, 156, 28);
+  border: 1px solid rgb(0, 0, 0);
+  display: block;
+  max-width: 400px;
+  transform: translate(-50%, -50%);
+}
 /*-------------------------------------------------*/
 /* =  Responsive Part
 /*-------------------------------------------------*/
@@ -6675,6 +6687,9 @@ div.block-content {
   .heading-news4 .news-post.image-post4 .post-content h2 {
     font-size: 16px;
     line-height: 24px;
+  }
+  #popup {
+    max-width: 320px;
   }
 }
 .content-blocker,
