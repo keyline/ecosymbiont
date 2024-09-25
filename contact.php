@@ -1,6 +1,7 @@
 <?php 
-include "include/header.php";
 session_start();
+include "include/header.php";
+
 ?>
 <style>
   select {width: 20em;}
