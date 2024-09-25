@@ -11,7 +11,7 @@ include "include/header.php";
                     <div class="col-md-12">
                         <div class="info-box">
                             <h2>OUR MISSION</h2>  
-                            <p>Our mission is to regain the understanding that human communities are part of natural ecological webs <span><a href="#defination"> ecowebs </a></span> and to <span><a href="#defination">regenerate</a></span>  systems that restore, preserve, and foster the symbiosis  between humans and ecowebs. Symbiosis encompasses the connectivity and dependence that exist within an ecoweb and that results in mutual benefit of all within that ecoweb, including humans</p>
+                            <p>Our mission is to regain the understanding that human communities are part of natural ecological webs <span><a href="#defination"> ecowebs </a></span> and to <span><a href="#defination">regenerate</a></span>  systems that restore, preserve, and foster the symbiosis between humans and ecowebs. Symbiosis encompasses the connectivity and dependence that exist within an ecoweb and that results in mutual benefit of all within that ecoweb, including humans</p>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -22,7 +22,7 @@ include "include/header.php";
                             <ul>
                                 <li><strong><i>human activity systems:</i></strong> ecoweb&#x2013;specific systems of
                                     knowledge, technologies, and practices developed by ecoweb&#x2013;rooted human communities
-                                    &#x2013; such as Indigenous and tribal communities &#x2013; that are based and rely on the
+                                    &#x2014; such as Indigenous and tribal communities &#x2014; that are based and rely on the
                                     specific and preserved <a href="#defination">biodiversity</a> of each ecoweb; and</li>
                                 <li><strong><i>legal&#x2013;economic&#x2013;governance systems:</i></strong> trade, and government systems that optimize the wellbeing of human communities and the ecowebs of which they are a symbiotic part and that operate locally, regionally, and globally.</li>
                             </ul>
