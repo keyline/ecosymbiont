@@ -6349,7 +6349,7 @@ div#popup p {
     justify-content: center;
 }
 .top-line ul.top-line-list li:before {
-  display: none;
+  
 }
   .logo-advertisement .navbar-header button.navbar-toggle {
     top: 45px;
@@ -6451,6 +6451,7 @@ div#popup p {
   }
   .heading-news2 .heading-news-box > .news-post {
     width: 100%;
+    height: 300px;
   }
   .heading-news2 .heading-news-box .image-slider.snd-size {
     width: 100%;
