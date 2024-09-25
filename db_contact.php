@@ -3,9 +3,9 @@
 session_start();
 // Database connection parameters
 $servername = "localhost"; // Your database server
-$username = "root"; // Your database username
-$password = ""; // Your database password
-$dbname = "keyline_ecosymbiont"; // Your database name
+$username = "keyline1_ecosymbiont"; // Your database username
+$password = "GHbux{3ZTZP$"; // Your database password
+$dbname = "keyline1_ecosymbiont"; // Your database name
 
 // Create a connection
 $conn = new mysqli($servername, $username, $password, $dbname);
