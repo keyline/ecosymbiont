@@ -334,7 +334,7 @@ class FrontController extends Controller
                     $recaptchaResponse = $postData['g-recaptcha-response'];
 
                     // Your Google reCAPTCHA secret key
-                    $secretKey = '6LclkEwqAAAAABtaRIg1Rxp8LK4dFcFyN2Si0Ygj';
+                    $secretKey = '6LcIw04qAAAAAJCWh02op84FgNvxexQsh9LLCuqW';
 
                     // Google reCAPTCHA verification URL
                     $verifyURL = 'https://www.google.com/recaptcha/api/siteverify';

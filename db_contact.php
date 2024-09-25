@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Verify the reCAPTCHA response
     $recaptchaResponse = $_POST['recaptcha_response'];
-    $secretKey = '6LclkEwqAAAAABtaRIg1Rxp8LK4dFcFyN2Si0Ygj'; // Your secret key
+    $secretKey = '6LcIw04qAAAAAJCWh02op84FgNvxexQsh9LLCuqW'; // Your secret key
 
     $url = 'https://www.google.com/recaptcha/api/siteverify';
     $data = array(
@@ -67,17 +67,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Server settings
                 // $adminMail->SMTPDebug = 3;
                 $adminMail->isSMTP();
-                $adminMail->Host = 'ecosymbiont.keylines.net.in';
+                $adminMail->Host = 'ecosymbiont.org';
                 $adminMail->SMTPAuth = true;
-                $adminMail->Username = 'no-reply@ecosymbiont.keylines.net.in';
-                $adminMail->Password = 'MpuxHY6Km9&Y';
+                $adminMail->Username = 'no-reply@ecosymbiont.org';
+                $adminMail->Password = 'NXVfrKH_rSML';
                 $adminMail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
                 $adminMail->Port = 465;
         
                 // Recipients
-                $adminMail->setFrom('no-reply@ecosymbiont.keylines.net.in', 'Ecosymbiont');                
+                $adminMail->setFrom('no-reply@ecosymbiont.org', 'Ecosymbiont');                
                 $adminMail->addAddress('deblina@keylines.net', 'Ecosymbiont');
-                $adminMail->addReplyTo('no-reply@ecosymbiont.keylines.net.in', 'Ecosymbiont');
+                $adminMail->addReplyTo('no-reply@ecosymbiont.org', 'Ecosymbiont');
         
                 // Content
                 $adminMail->isHTML(true);

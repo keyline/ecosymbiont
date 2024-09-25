@@ -104,7 +104,7 @@ include "include/header.php";
             </div>
         </div>
     </section>
-    <script src="https://www.google.com/recaptcha/api.js?render=6LclkEwqAAAAAHf6rGCvLyu-B1N-eYOU8NYLL5k4"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LcIw04qAAAAAGBE5JP7v7i3gYEa4OPNSWqBlvbH"></script>
     <script>
         // Validate the form before submission
         function validateForm() {
@@ -121,7 +121,7 @@ include "include/header.php";
 
             // Trigger reCAPTCHA validation
             grecaptcha.ready(function () {
-                grecaptcha.execute('6LclkEwqAAAAAHf6rGCvLyu-B1N-eYOU8NYLL5k4', { action: 'submit' }).then(function (token) {
+                grecaptcha.execute('6LcIw04qAAAAAGBE5JP7v7i3gYEa4OPNSWqBlvbH', { action: 'submit' }).then(function (token) {
                     // Set the token into the hidden input field
                     document.getElementById('recaptchaResponse').value = token;
                     document.getElementById('myForm').submit();

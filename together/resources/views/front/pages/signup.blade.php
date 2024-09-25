@@ -130,10 +130,10 @@
       });
     </script>
 <!-- End block-wrapper-section -->
-<script src="https://www.google.com/recaptcha/api.js?render=6LclkEwqAAAAAHf6rGCvLyu-B1N-eYOU8NYLL5k4"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6LcIw04qAAAAAGBE5JP7v7i3gYEa4OPNSWqBlvbH"></script>
 <script>
 grecaptcha.ready(function() {
-    grecaptcha.execute('6LclkEwqAAAAAHf6rGCvLyu-B1N-eYOU8NYLL5k4', {action: 'submit'}).then(function(token) {
+    grecaptcha.execute('6LcIw04qAAAAAGBE5JP7v7i3gYEa4OPNSWqBlvbH', {action: 'submit'}).then(function(token) {
         // Add the token to your form submission
         document.getElementById('g-recaptcha-response').value = token;
     });
