@@ -152,8 +152,8 @@ use App\Helpers\Helper;
                                                                 $author_short_bio2 = trim($paragraphs[1]);
                                                             ?>
                                                             <span><?=$rowContent->author_short_bio?>.</span>
-                                                            <span><?=$author_short_bio1?>.</span>
-                                                            <span><?=$author_short_bio2?>.</span>
+                                                            <!-- <span><?=$author_short_bio1?>.</span>
+                                                            <span><?=$author_short_bio2?>.</span> -->
                                                             <!-- <a href="javascript:void(0);"><?=$authorPostCount?> Posts</a> -->
                                                         </span>
                                                     </div>
