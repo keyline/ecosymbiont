@@ -46,7 +46,7 @@ use App\Helpers\Helper;
                                 <div class="post-content">
                                     <!-- <p><?=$rowContent->short_desc?></p> -->
                                 </div>
-                                <div class="article-inpost">
+                                <!-- <div class="article-inpost">
                                     <div class="row">
                                         <?php
                                         $news_id = $rowContent->news_id;
@@ -60,13 +60,12 @@ use App\Helpers\Helper;
                                                         <div class="hover-image">
                                                             <a class="zoom" href="<?=env('UPLOADS_URL').'newcontent/'.$contentOtherImage->image_file?>"><i class="fa fa-arrows-alt"></i></a>
                                                         </div>
-                                                    </div>
-                                                    <!-- <span class="image-caption">Cras eget sem nec dui volutpat ultrices.</span> -->
+                                                    </div>                                                   
                                                 </div>
                                             </div>
                                         <?php } }?>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="post-content">
                                     <?php if(session('is_user_login')){?>
                                         <p><?=$rowContent->long_desc?></p>
