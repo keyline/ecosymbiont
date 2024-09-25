@@ -502,7 +502,7 @@ $controllerRoute = $module['controller_route'];
                                     <div id="bio_longError" class="error"></div>
                                 </div>
                             </div>
-                            <div class="row mb-3">
+                            <!-- <div class="row mb-3">
                                 <label for="bio_long" class="col-md-2 col-lg-4 col-form-label">27) Instructions for initial submission of Creative-Work for eligibility screening:
                                 </label>
                                 <div class="col-md-10 col-lg-8">
@@ -516,7 +516,7 @@ $controllerRoute = $module['controller_route'];
                                     <input type="checkbox" id="acknowledge" name="acknowledge" value="1" required>
                                     <label for="acknowledge">I understand</label>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row mb-3">
                                 <div class="col-md-10 col-lg-8 text-center">
                                     <label for="acknowledge">Final Edit</label>
