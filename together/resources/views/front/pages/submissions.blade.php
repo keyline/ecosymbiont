@@ -20,7 +20,7 @@
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="post-content">
-                                            <p style="font-size:15px;font-weight: 600;">Before making a submission of your Creative-Work to our <a href="<?=url('/about-us')?>" style="color: #d09c1c;">online knowledge-sharing and community-building platform</a> , please read these submission guidelines in their entirety.</p>
+                                            <p class="black" style="font-size:15px;font-weight: 600;">Before making a submission of your Creative-Work to our <a href="<?=url('/about-us')?>" style="color: #d09c1c;">online knowledge-sharing and community-building platform</a> , please read these submission guidelines in their entirety.</p>
 
                                             <div class="titleto-inner">
                                                 <h2>ELIGIBILITY CRITERIA</h2>
@@ -42,7 +42,7 @@
 
                                             <div class="titleto-inner">
                                                 <h2>AUTHORSHIP</h2>
-                                                <p>ERT encourages human individuals, as well as ecoweb-rooted communities (see below for definition) or movements to be authors of Creative-Works submitted to ERT. Given the current legal framework associated with copyright and licensing, at least one human individual must be a co-author if an ecoweb-rooted community or movement is an author. Please also see the instructions below:</p>
+                                                <p class="black">ERT encourages human individuals, as well as ecoweb-rooted communities (see below for definition) or movements to be authors of Creative-Works submitted to ERT. Given the current legal framework associated with copyright and licensing, at least one human individual must be a co-author if an ecoweb-rooted community or movement is an author. Please also see the instructions below:</p>
                                                 
                                                 <ul>
                                                     <li>A Creative-Work may have up to three co-authors, wherein the first author listed must be a human individual ("Lead Author").</li>
@@ -78,7 +78,7 @@
 
                                             <div class="titleto-inner">
                                                 <h2>EXPLANATION OF SECTIONS AND SUB-SECTIONS OF ERT</h2>
-                                                <p>ERT has five main sections that are further divided into sub-sections. To help you understand what type of content is appropriate for each section/sub-section, please see below.</p>
+                                                <p class="black">ERT has five main sections that are further divided into sub-sections. To help you understand what type of content is appropriate for each section/sub-section, please see below.</p>
                                                 <ul>
                                                     <li>
                                                         <strong>ACTION</strong>
@@ -162,18 +162,18 @@
 
                                             <div class="titleto-inner">
                                                 <h2>INSTRUCTIONS FOR SUBMISSION</h2>
-                                                <p>Upon submitting a completed form to ERT, if you meet the eligibility criteria, you will receive an Eligibility E-mail with a Submission Reference Number (“SRN”) and accompanying Non-Exclusive License to Publish (“NELP”). Please date and sign the NELP and follow the upload instructions provided in your Eligibility E-mail. Once the editor(s) receive(s) your dated and signed NELP, we will begin substantively reviewing your Creative-Work.</p>
-                                                <p>Please note that if there are multiple co-authors of a Creative-Work, certain details of each co-author must be listed in the same NELP and the Lead Author must sign and date the NELP on behalf of all co-authors. If one of the co-authors is an ecoweb-rooted community or movement, the details of a human individual representative of the ecoweb-rooted community or movement must be provided in the NELP.</p>
+                                                <p class="black">Upon submitting a completed form to ERT, if you meet the eligibility criteria, you will receive an Eligibility E-mail with a Submission Reference Number (“SRN”) and accompanying Non-Exclusive License to Publish (“NELP”). Please date and sign the NELP and follow the upload instructions provided in your Eligibility E-mail. Once the editor(s) receive(s) your dated and signed NELP, we will begin substantively reviewing your Creative-Work.</p>
+                                                <p class="black">Please note that if there are multiple co-authors of a Creative-Work, certain details of each co-author must be listed in the same NELP and the Lead Author must sign and date the NELP on behalf of all co-authors. If one of the co-authors is an ecoweb-rooted community or movement, the details of a human individual representative of the ecoweb-rooted community or movement must be provided in the NELP.</p>
                                             </div>
 
                                             <div class="titleto-inner">
                                                 <h2>REVIEW PROCESS</h2>
-                                                <p>Your Creative-Work will be reviewed based on several criteria, including clarity, veracity, and relevance to the <a href="<?=env('REGENERATE_URL')?>" style="color: #d09c1c;" traget="_blank">mission and approach of Ecosymbionts Regenerate</a>. If your Creative-Work is accepted for publication as Content on ERT, a few rounds of editor-guided revision may be required before publication. </p>
+                                                <p class="black">Your Creative-Work will be reviewed based on several criteria, including clarity, veracity, and relevance to the <a href="<?=env('REGENERATE_URL')?>" style="color: #d09c1c;" traget="_blank">mission and approach of Ecosymbionts Regenerate</a>. If your Creative-Work is accepted for publication as Content on ERT, a few rounds of editor-guided revision may be required before publication. </p>
                                             </div>
 
                                             <div class="titleto-inner">
                                                 <h2>COPYRIGHT & LICENSE</h2>
-                                                <p>As per the terms detailed in the NELP, you grant ERT, ER, and the Śramani Institute (the nonprofit host organization of ER and ERT) a non-exclusive license to publish and use your Content. You will retain the copyright to your work and the right to also publish elsewhere. </p>
+                                                <p class="black">As per the terms detailed in the NELP, you grant ERT, ER, and the Śramani Institute (the nonprofit host organization of ER and ERT) a non-exclusive license to publish and use your Content. You will retain the copyright to your work and the right to also publish elsewhere. </p>
                                             </div>
                                             <!-- <a class="btn btn-primary blue_btn" href="#">SUBMIT CREATIVE-WORK</a> -->
                                             <?php if($button_show){?>

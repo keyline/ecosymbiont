@@ -13,7 +13,7 @@ include "include/header.php";
                     <div class="info-box">
                         <h2>PUBLICATIONS</h2>
                         <h4><i>Earth Island Journal</i></h4>
-                        <p style="padding-top:15px">Opinion by Kakoli Mitra</p>
+                        <p>Opinion by Kakoli Mitra</p>
                         <p style="padding-top:15px"><a href="https://www.earthisland.org/journal/index.php/articles/entry/lessons-from-indias-bhopal-union-carbide-disaster" target="_blank">Lessons from India’s Bhopal Union Carbide Disaster</a> </p>
                         <p style="padding-top:15px">Published on 12 September, 2024</p>
                     </div>
