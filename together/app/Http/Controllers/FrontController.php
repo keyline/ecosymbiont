@@ -200,15 +200,19 @@ class FrontController extends Controller
     }
     public function subcategory($slug)
     {
-        $data['row']                    = NewsCategory::select('id', 'sub_category')->where('status', '=', 1)->where('slug', '=', $slug)->first();
+        $data['row']                    = NewsCategory::select('id', 'sub_category', 'short_description')->where('status', '=', 1)->where('slug', '=', $slug)->first();
+        //  dd($data['row']);
         $sub_category_id                = (($data['row'])?$data['row']->id:'');
+        // $sub_category_description                = (($data['row'])?$data['row']->short_description:'');
 
         $data['contents']               = NewsContent::join('news_category', 'news_contents.sub_category', '=', 'news_category.id')
-                                           ->select('news_contents.id', 'news_contents.new_title', 'news_contents.sub_title', 'news_contents.slug', 'news_contents.author_name', 'news_contents.cover_image', 'news_contents.created_at', 'news_category.sub_category as sub_category_name', 'news_category.slug as sub_category_slug')
+                                           ->select('news_contents.id', 'news_contents.new_title', 'news_contents.sub_title', 'news_contents.slug', 'news_contents.author_name', 'news_contents.cover_image', 'news_contents.created_at', 'news_category.sub_category as sub_category_name', 'news_category.short_description', 'news_category.slug as sub_category_slug')
                                            ->where('news_contents.status', '=', 1)
                                            ->where('news_contents.sub_category', '=', $sub_category_id)
                                            ->orderBy('news_contents.id', 'DESC')
                                            ->get();
+                                        //    dd($data['contents']);
+                                        // Helper::pr($data['contents']);
 
         $title                          = (($data['row'])?$data['row']->sub_category:'');
         $page_name                      = 'subcategory';
