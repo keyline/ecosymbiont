@@ -28,24 +28,24 @@ use App\Helpers\Helper;
                 <div class="col-md-12">
                     <div class="foot_copyinfo"><?=$generalSetting->footer_description?></div>
                     <div class="kelfot">
-                        <a href="https://keylines.net/" target="_blank">Powered by Keylines</a>
+                        <a href="https://keylines.net/" target="_blank">Powered by Keyline</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-<div class="container">
+<!-- <div class="container">
     <div class="footer-widgets-part">
         <div class="row">
-            <!-- <div class="col-md-6">
+            <div class="col-md-6">
                 <div class="widget text-widget">
                     <h1>About</h1>
                     <p></p>
                     <a href="index.html"><img src="images/logo.png" alt=""></a>
                 </div>
-            </div> -->
-            <!-- <div class="col-md-3">
+            </div>
+            <div class="col-md-3">
                 <div class="widget tags-widget">
                     <h1>Popular Tags</h1>
                     <ul class="tag-list">
@@ -61,8 +61,8 @@ use App\Helpers\Helper;
                         <li><a href="#">Music</a></li>
                     </ul>
                 </div>
-            </div> -->
-            <!-- <div class="col-md-6">
+            </div>
+            <div class="col-md-6">
                 <div class="widget posts-widget">
                     <h1>Random Content</h1>
                     <ul class="list-posts">
@@ -88,8 +88,8 @@ use App\Helpers\Helper;
                         <?php } }?>
                     </ul>
                 </div>
-            </div> -->
-            <!-- <div class="col-md-3">
+            </div>
+            <div class="col-md-3">
                 <div class="widget flickr-widget">
                     <h1>Flickr Photos</h1>
                     <ul class="flickr-list">
@@ -102,10 +102,10 @@ use App\Helpers\Helper;
                     </ul>
                     <a href="#">View more photos...</a>
                 </div>
-            </div> -->
+            </div>
         </div>
     </div>
-    <!-- <div class="footer-last-line">
+    <div class="footer-last-line">
         <div class="row">
             <div class="col-md-6">
                 <p><?=$generalSetting->footer_text?></p>
@@ -115,5 +115,5 @@ use App\Helpers\Helper;
                 
             </div>
         </div>
-    </div> -->
-</div>
+    </div>
+</div> -->
