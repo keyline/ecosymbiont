@@ -18,33 +18,41 @@ use App\Helpers\Helper;
                             </div>
                         </div>
                         <!-- End article box -->
-                        <!-- article box -->
-                        <div class="article-box">
-                            <?php if($contents){ foreach($contents as $rowContent){?>
+                        <!-- article box -->                        
+                            <?php if ($contents->isEmpty()) { ?>
                                 <div class="news-post article-post">
                                     <div class="row">
-                                        <div class="col-sm-5">
-                                            <div class="post-gallery">
-                                                <img src="<?=env('UPLOADS_URL').'newcontent/'.$rowContent->cover_image?>" alt="<?=$rowContent->new_title?>">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-7">
-                                            <div class="post-content">
-                                                <a href="<?=url('subcategory/' . $rowContent->sub_category_slug)?>"><?=$rowContent->sub_category_name?></a>
-                                                <h2><a href="<?=url('content/' . $rowContent->slug)?>"><?=$rowContent->new_title?></a></h2>
-                                                <ul class="post-tags">
-                                                    <li><i class="fa fa-clock-o"></i><?=date_format(date_create($rowContent->created_at), "d M Y")?></li>
-                                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$rowContent->author_name?></a></li>
-                                                    <!-- <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
-                                                    <li><i class="fa fa-eye"></i>872</li> -->
-                                                </ul>
-                                                <p><?=$rowContent->sub_title?></p>
+                                        <div class="col-sm-12">
+                                            <div class="post-content" style="padding-top: 0px;margin-top: -30px;">
+                                                <p><?=$row->short_description?></p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            <?php } }?>
-                        </div>
+                            <?php } else { 
+                                foreach ($contents as $rowContent) { ?>
+                                    <div class="news-post article-post">
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <div class="post-gallery">
+                                                    <img src="<?= env('UPLOADS_URL') . 'newcontent/' . $rowContent->cover_image ?>" alt="<?= $rowContent->new_title ?>">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-7">
+                                                <div class="post-content">
+                                                    <a href="<?= url('subcategory/' . $rowContent->sub_category_slug) ?>"><?= $rowContent->sub_category_name ?></a>
+                                                    <h2><a href="<?= url('content/' . $rowContent->slug) ?>"><?= $rowContent->new_title ?></a></h2>
+                                                    <ul class="post-tags">
+                                                        <li><i class="fa fa-clock-o"></i><?= date_format(date_create($rowContent->created_at), "d M Y") ?></li>
+                                                        <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?= $rowContent->author_name ?></a></li>
+                                                    </ul>
+                                                    <p><?= $rowContent->sub_title ?></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php }  
+                            } ?>                       
                         <!-- End article box -->
                     </div>
                     <!-- End block content -->
