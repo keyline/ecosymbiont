@@ -81,13 +81,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
                 // Content
                 $adminMail->isHTML(true);
-                $adminMail->Subject = 'New Lead From Ecosymbiont Website - ' . htmlspecialchars($first_name);
+                $adminMail->Subject = 'New Lead From Ecosymbiont Website - ' . htmlspecialchars($full_name);
         
                 $adminMail->Body = "
                 <table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
                     <tr><td style='padding: 8px 15px'>Dear Administrator,</td></tr>
                     <tr><td style='padding: 8px 15px'>A new lead has contacted you through the Ecosymbiont Website. Please find the details below.</td></tr>
-                    <tr><td style='padding: 8px 15px'><strong>Name: </strong>" . htmlspecialchars($first_name) . "</td></tr>
+                    <tr><td style='padding: 8px 15px'><strong>Name: </strong>" . htmlspecialchars($full_name) . "</td></tr>
                     <tr><td style='padding: 8px 15px'><strong>Email: </strong>" . htmlspecialchars($email) . "</td></tr>    
                     <tr><td style='padding: 8px 15px'><strong>Country: </strong>" . htmlspecialchars($country) . "</td></tr>                                         
                     <tr><td style='padding: 8px 15px'><strong>Message: </strong>" . htmlspecialchars($message) . "</td></tr>
