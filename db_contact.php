@@ -62,6 +62,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Execute the query
         if (mysqli_query($conn, $sql)) {
         // echo "New record created successfully!";
+        // Get the last inserted ID
+           echo  $lastInsertId = $conn->insert_id; die;
+
+            // Fetch the last inserted row using the ID
+            $sql = "SELECT * FROM your_table WHERE id = $lastInsertId";
+            $result = $conn->query($sql);
             // Initialize PHPMailer for admin notification
             $adminMail = new PHPMailer(true);
             try {
