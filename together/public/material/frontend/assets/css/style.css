@@ -5999,8 +5999,10 @@ a.sub-category-post {
     color: #fff;
     padding: 2px 10px;
     font-size: 13px;
-    text-transform: uppercase;
     display: inline-block;
+}
+a.category-post:hover, a.sub-category-post:hover {
+  color: #fff;
 }
 .autor-box .postdetails-icon.autor-content {
   margin-left: 0 !important;
