@@ -10,7 +10,7 @@ session_start();
             <div class="row">
                 <div class="col-md-12">
                     <div class="titleto-box">
-                        <h2>Contact Us</h2>
+                        <h2>Contact</h2>
                     </div>
                 </div>
                 <div class="col-md-12">
