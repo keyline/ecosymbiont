@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $adminMail->Body = "
                 <table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
                     <tr><td style='padding: 8px 15px'>Dear Administrator,</td></tr>
-                    <tr><td style='padding: 8px 15px'>A new lead has contacted you through the Ecosymbiont Website. Please find the details below.</td></tr>
+                    <tr><td style='padding: 8px 15px'>A new enquiry is submitted through the Ecosymbiont Website. Please take a look at the details below.</td></tr>
                     <tr><td style='padding: 8px 15px'><strong>Name: </strong>" . htmlspecialchars($full_name) . "</td></tr>
                     <tr><td style='padding: 8px 15px'><strong>Email: </strong>" . htmlspecialchars($email) . "</td></tr>    
                     <tr><td style='padding: 8px 15px'><strong>Country: </strong>" . htmlspecialchars($country) . "</td></tr>                                         
