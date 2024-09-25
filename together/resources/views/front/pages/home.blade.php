@@ -214,7 +214,7 @@ use App\Helpers\Helper;
                                 $featuredContents = NewsContent::join('news_category', 'news_contents.parent_category', '=', 'news_category.id')
                                                    ->select('news_contents.id', 'news_contents.new_title', 'news_contents.sub_title', 'news_contents.slug', 'news_contents.author_name', 'news_contents.cover_image', 'news_contents.created_at', 'news_category.sub_category as category_name', 'news_category.slug as category_slug')
                                                    ->where('news_contents.status', '=', 1)
-                                                   ->where('news_contents.is_feature', '=', 1)
+                                                   ->where('news_contents.is_hot', '=', 1)
                                                    ->inRandomOrder()
                                                    ->limit(3)
                                                    ->get();
