@@ -187,6 +187,7 @@ footer ul{
     margin-top: 15px;
     border-top: 1px solid #bbb6b6;
     padding-top: 10px;
+    text-align: center;
 }
 .footer_btn{
     color: #90201f;
@@ -202,6 +203,10 @@ footer ul{
     font-size: 16px;
     padding: 20px 30px;
     border-radius: 4x;
+}
+.kelfot {
+    text-align: center;
+    padding: 15px 0 0;
 }
 .footer_btn:hover,
 .footer_btn_2:hover{
