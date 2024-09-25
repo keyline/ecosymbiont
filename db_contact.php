@@ -70,8 +70,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $result = $conn->query($sql);
             // Fetch as associative array
             $lastRow = $result->fetch_assoc();
-            print_r($lastRow);die;
-            $subject_array = json_decode($subject_string, true);
+            
+            // $subject_fetch = $lastRow->subject;
+            $subject_array = json_decode($lastRow->subject, true);
+            print_r($subject_array);die;
 
             // Initialize PHPMailer for admin notification
             $adminMail = new PHPMailer(true);
