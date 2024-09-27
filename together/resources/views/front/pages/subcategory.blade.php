@@ -40,7 +40,7 @@ use App\Helpers\Helper;
                                             </div>
                                             <div class="col-sm-7">
                                                 <div class="post-content">
-                                                    <a href="<?= url('subcategory/' . $rowContent->sub_category_slug) ?>"><?= $rowContent->sub_category_name ?></a>
+                                                    <a href="<?= url('category/' . $rowContent->parent_category_name. '/' . $rowContent->sub_category_slug) ?>"><?= $rowContent->sub_category_name ?></a>
                                                     <h2><a href="<?= url('content/' . $rowContent->slug) ?>"><?= $rowContent->new_title ?></a></h2>
                                                     <ul class="post-tags">
                                                         <li><i class="fa fa-clock-o"></i><?= date_format(date_create($rowContent->created_at), "d M Y") ?></li>
