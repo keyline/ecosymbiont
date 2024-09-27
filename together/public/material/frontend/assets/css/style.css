@@ -754,7 +754,7 @@ p {
   font-family: 'proximanova_regular', sans-serif;
   font-weight: 700;
   margin: 0 0 30px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   margin-bottom: -1px;
 }
 .title-section h1 span {
@@ -6148,6 +6148,23 @@ div#popup p {
   }
 }
 @media (max-width: 991px) {
+  /* .navbar-nav > li.drop-arrow > a {
+    padding-right: 30px;
+  } */
+  .navbar-nav > li.drop-arrow > a:before {
+    content: '\f107' !important;
+    position: absolute;
+    font-family: 'FontAwesome';
+    font-size: 13px;
+    color: #fff;
+    top: 16px;
+    right: 13px;
+    transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+  }
+ 
   .top-line ul.social-icons {
     display: none;
   }
