@@ -6,12 +6,12 @@ include "include/header.php";
 <style>
   select {width: 20em;}
 </style>
-    <section class="banner-info blanktop_pages">
+    <section class="banner-info ">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="titleto-box">
-                        <h2>Contact</h2>
+                        <h2>CONTACT US</h2>
                     </div>
                 </div>
                 <div class="col-md-12">

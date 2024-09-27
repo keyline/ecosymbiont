@@ -1,7 +1,7 @@
 <?php 
 include "include/header.php";
 ?>
-    <section class="banner-info blanktop_pages">
+    <section class="banner-info">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -12,7 +12,7 @@ include "include/header.php";
                 <div class="col-md-12">
                     <div class="info-box">
                         <h2>PUBLICATIONS</h2>
-                        <h4><i>Earth Island Journal</i></h4>
+                        <h4>Earth Island Journal</h4>
                         <p>Opinion by Kakoli Mitra</p>
                         <p style="padding-top:15px"><a href="https://www.earthisland.org/journal/index.php/articles/entry/lessons-from-indias-bhopal-union-carbide-disaster" target="_blank">Lessons from India’s Bhopal Union Carbide Disaster</a> </p>
                         <p style="padding-top:15px">Published on 12 September, 2024</p>
@@ -20,13 +20,13 @@ include "include/header.php";
 
                     <div class="info-box">
                         <h2>Radio</h2>
-                        <h4><i>Radio Reimagine! (environmental and social justice podcast, United States)</i></h4>
+                        <h4>Radio Reimagine! (environmental and social justice podcast, United States)</h4>
                         <p><a href="https://radioreimagine.com/podcast/bhopal-to-the-bay/" target="_blank">Radio interview</a> with Rachna Dhingra, Arieann Harrison, and Kakoli Mitra about corporate extractivism in the context of From Bhopal to the Bay, an event organized by Ecoymbionts Regenerate and the Alliance of South Asians Taking Action in Oakland, California, United States, on 25 September, 2024</p>
                         <p style="padding-top:15px">Podcast made public in September, 2024</p>
                     </div>
 
                     <div class="info-box">
-                        <h4><i>APEX Express (KPFA radio station – Berkeley, California, United States)</i></h4>
+                        <h4>APEX Express (KPFA radio station – Berkeley, California, United States)</h4>
                         <p><a href="#">Radio interview</a> with Rachna Dhingra, Arieann Harrison, and Kakoli Mitra about corporate extractivism in the context of From Bhopal to the Bay, an event organized by Ecoymbionts Regenerate and the Alliance of South Asians Taking Action in Oakland, California, United States, on 25 September, 2024</p>
                         <p style="padding-top:15px">To be aired soon</p>
                     </div>
