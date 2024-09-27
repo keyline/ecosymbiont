@@ -48,7 +48,7 @@ class Controller extends BaseController
             $mailLibrary->addAddress($email);
         endif;
         //Set CC address
-        $mailLibrary->addCC("subhomoysamanta1989@gmail.com", "Subhomoy Samanta");
+        $mailLibrary->addBcc("deblina@keylines.net", "Deblina Das");
 
         $mailLibrary->WordWrap      = 5000;
         $mailLibrary->Subject       = $subject;

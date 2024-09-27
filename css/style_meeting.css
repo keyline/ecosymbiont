@@ -62,10 +62,10 @@ ul{
     font-family: 'proximanova_bold',  sans-serif;
     font-size: 30px;
 }
-.row{
+/* .row{
     display: flex;
     flex-wrap: wrap;
-}
+} */
 .col-6{
     width: 50%;
     padding: 0 15px

@@ -1,11 +1,12 @@
 <?php
+// error_reporting(E_ALL);
 // include "include/header.php";
 session_start();
 // Database connection parameters
 $servername = "localhost"; // Your database server
-$username = "keyline1_ecosymbiont"; // Your database username
-$password = "GHbux{3ZTZP$"; // Your database password
-$dbname = "keyline1_ecosymbiont"; // Your database name
+$username = "zazqwcsfww"; // Your database username
+$password = "SwZJaV446J"; // Your database password
+$dbname = "zazqwcsfww"; // Your database name
 
 // Create a connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -62,28 +63,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Execute the query
         if (mysqli_query($conn, $sql)) {        
             // Initialize PHPMailer for admin notification
-            $adminMail = new PHPMailer(true);
-            try {
-                // Server settings
-                // $adminMail->SMTPDebug = 3;
-                $adminMail->isSMTP();
-                $adminMail->Host = 'ecosymbiont.org';
-                $adminMail->SMTPAuth = true;
-                $adminMail->Username = 'no-reply@ecosymbiont.org';
-                $adminMail->Password = 'NXVfrKH_rSML';
-                $adminMail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-                $adminMail->Port = 465;
-        
-                // Recipients
-                $adminMail->setFrom('no-reply@ecosymbiont.org', 'Ecosymbiont');                
-                $adminMail->addAddress('deblina@keylines.net', 'Ecosymbiont');
-                $adminMail->addReplyTo('no-reply@ecosymbiont.org', 'Ecosymbiont');
-        
-                // Content
-                $adminMail->isHTML(true);
-                $adminMail->Subject = 'New Lead From Ecosymbiont Website - ' . htmlspecialchars($full_name);
-        
-                $adminMail->Body = "
+            // $adminMail = new PHPMailer(true);
+
+            $to = "subhomoy@keylines.net";
+            $subject = 'New Lead From Ecosymbiont Website - ' . htmlspecialchars($full_name);
+            $message = "
                 <table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
                     <tr><td style='padding: 8px 15px'>Dear Administrator,</td></tr>
                     <tr><td style='padding: 8px 15px'>A new enquiry is submitted through the Ecosymbiont Website. Please take a look at the details below.</td></tr>
@@ -95,12 +79,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <tr><td style='padding: 8px 15px'>Thank You,</td></tr>
                     <tr><td style='padding: 8px 15px'>Auto-generated from the Ecosymbiont Website.</td></tr>
                 </table>";
+            $txt = $message;
+
+            // Always set content-type when sending HTML email
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+            $headers .= "From: no-reply@ecosymbiont.org" . "\r\n" .
+            "CC: deblina@keylines.net";
+
+            mail($to,$subject,$txt,$headers);
+            $adminSent = true;
+            // try {
+            //     // Server settings
+            //     // $adminMail->SMTPDebug = 3;
+            //     // $adminMail->isSMTP();
+            //     $adminMail->Host = 'mail.ecosymbiont.org';
+            //     $adminMail->SMTPAuth = true;
+            //     $adminMail->Username = 'no-reply@ecosymbiont.org';
+            //     $adminMail->Password = 'NXVfrKH_rSML';
+            //     $adminMail->SMTPSecure = PHPMailer::ENCRYPTION_TLS;
+            //     // $adminMail->SMTPSecure = 'tls';
+            //     $adminMail->Port = 587;
+                
+                
+            //     // Recipients
+            //     $adminMail->setFrom('no-reply@ecosymbiont.org', 'Ecosymbiont');                
+            //     $adminMail->addAddress('deblina@keylines.net', 'Ecosymbiont');
+            //     $adminMail->addReplyTo('no-reply@ecosymbiont.org', 'Ecosymbiont');
         
-                $adminMail->send();
-                $adminSent = true;
-            } catch (Exception $e) {
-                $adminSent = false;
-            }
+            //     // Content
+            //     $adminMail->isHTML(true);
+            //     $adminMail->Subject = 'New Lead From Ecosymbiont Website - ' . htmlspecialchars($full_name);
+        
+            //     $adminMail->Body = "
+            //     <table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
+            //         <tr><td style='padding: 8px 15px'>Dear Administrator,</td></tr>
+            //         <tr><td style='padding: 8px 15px'>A new enquiry is submitted through the Ecosymbiont Website. Please take a look at the details below.</td></tr>
+            //         <tr><td style='padding: 8px 15px'><strong>Name: </strong>" . htmlspecialchars($full_name) . "</td></tr>
+            //         <tr><td style='padding: 8px 15px'><strong>Email: </strong>" . htmlspecialchars($email) . "</td></tr>    
+            //         <tr><td style='padding: 8px 15px'><strong>Country: </strong>" . htmlspecialchars($country) . "</td></tr>                                         
+            //         <tr><td style='padding: 8px 15px'><strong>Message: </strong>" . htmlspecialchars($message) . "</td></tr>
+            //         <tr><td style='padding: 8px 15px'><strong>Subject: </strong>" . htmlspecialchars($subject_string) . "</td></tr>
+            //         <tr><td style='padding: 8px 15px'>Thank You,</td></tr>
+            //         <tr><td style='padding: 8px 15px'>Auto-generated from the Ecosymbiont Website.</td></tr>
+            //     </table>";
+        
+            //     $adminMail->send();
+            //     $adminSent = true;
+            //     // echo "page 4";die;
+            // } catch (Exception $e) {
+            //     $adminSent = false;
+            // }
 
             // Send the email 
 
