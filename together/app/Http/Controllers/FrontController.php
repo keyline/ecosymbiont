@@ -199,7 +199,8 @@ class FrontController extends Controller
                                                         'news_contents.created_at', 
                                                         'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
                                                         'parent_category.sub_category as parent_category_name', // From parent_category name
-                                                        'sub_category.slug as sub_category_slug' // Corrected alias to sub_category
+                                                        'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
+                                                        'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
                                                     )
                                                     ->where('news_contents.status', 1)
                                                     ->where('news_contents.parent_category', $parent_category_id) // Ensure $parent_category_id is defined
@@ -229,7 +230,8 @@ class FrontController extends Controller
                                                     'news_contents.created_at', 
                                                     'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
                                                     'parent_category.sub_category as parent_category_name', // From parent_category name
-                                                    'sub_category.slug as sub_category_slug' // Corrected alias to sub_category
+                                                    'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
+                                                    'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
                                                 )
                                                 ->where('news_contents.status', 1)
                                                 ->where('news_contents.sub_category', $sub_category_id) // Ensure $parent_category_id is defined
@@ -243,13 +245,21 @@ class FrontController extends Controller
         $page_name                      = 'subcategory';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
-    public function newsContent($slug)
+    public function newsContent($categoryname, $subcategoryname, $slug)
     {
-        $data['rowContent']         = NewsContent::join('news_category', 'news_contents.sub_category', '=', 'news_category.id')
-                                           ->select('news_contents.id as news_id', 'news_contents.*', 'news_category.sub_category as sub_category_name', 'news_category.slug as sub_category_slug')
-                                           ->where('news_contents.status', '=', 1)
-                                           ->where('news_contents.slug', '=', $slug)
-                                           ->first();
+        $data['rowContent'] = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
+                                        ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
+                                        ->select(
+                                            'news_contents.id as news_id',  // Select the ID as news_id
+                                            'news_contents.*',  // Select all fields from the news_contents table
+                                            'parent_category.sub_category as parent_category_name',  // Alias for subcategory name from parent_category
+                                            'sub_category.sub_category as sub_category_name',  // Alias for subcategory name from sub_category
+                                            'sub_category.slug as sub_category_slug'  // Alias for subcategory slug from sub_category
+                                        )
+                                        ->where('news_contents.status', 1)  // Fetch only active news content
+                                        ->where('news_contents.slug', $slug)  // Fetch the news content matching the given slug
+                                        ->first();  // Fetch a single record;
+                                           
         $postUrl = env('APP_URL') . 'content/' . $slug;
         //  echo $postUrl; die;
         // <?=env('APP_URL').'content/'.$rowContent->cover_image
@@ -265,11 +275,18 @@ class FrontController extends Controller
         $data['authorPostCount']    = NewsContent::where('news_contents.status', '=', 1)
                                            ->where('news_contents.author_name', 'LIKE', '%'.$author_name.'%')
                                            ->count();
-        $data['alsoLikeContents']   = NewsContent::join('news_category', 'news_contents.sub_category', '=', 'news_category.id')
-                                           ->select('news_contents.id as news_id', 'news_contents.*', 'news_category.sub_category as sub_category_name', 'news_category.slug as sub_category_slug')
-                                           ->where('news_contents.status', '=', 1)
-                                           ->where('news_contents.parent_category', '=', $parent_category_id)
-                                           ->where('news_contents.id', '!=', (($data['rowContent'])?$data['rowContent']->news_id:''))
+        $data['alsoLikeContents'] = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
+                                           ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
+                                           ->select(
+                                               'news_contents.id as news_id',  // Alias the news ID
+                                               'news_contents.*',  // Select all fields from news_contents
+                                               'sub_category.sub_category as sub_category_name',  // Select subcategory name with alias
+                                               'sub_category.slug as sub_category_slug',  // Select subcategory slug with alias
+                                               'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                           )
+                                           ->where('news_contents.status', 1)  // Fetch only active content
+                                           ->where('news_contents.parent_category', $parent_category_id)  // Filter by parent category
+                                           ->where('news_contents.id', '!=', ($data['rowContent']) ? $data['rowContent']->news_id : null)  // Exclude the current content by its ID
                                            ->get();
 
         $title                      = (($data['rowContent'])?$data['rowContent']->new_title:'');
