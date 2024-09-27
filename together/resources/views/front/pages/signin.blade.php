@@ -25,7 +25,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="card-header">
-                                            <h3 class="text-center">SignIn to Your Account</h3>
+                                            <h3 class="text-center">Signin To Your Account</h3>
                                             <p class="text-center">Enter your email & password to login</p>
                                         </div>
                                         <form method="POST" action="">

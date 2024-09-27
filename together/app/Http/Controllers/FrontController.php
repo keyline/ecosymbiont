@@ -407,7 +407,7 @@ class FrontController extends Controller
                                 ];
                                 // Helper::pr($fields);
                                 User::insert($fields);
-                                return redirect(url('signin'))->with('success_message', 'Sign Up Successfully !!!');
+                                return redirect(url('signin'))->with('success_message', 'Sign up successful!');
                             } else {
                                 return redirect()->back()->with('error_message', 'User Already Registered !!!');
                             }
