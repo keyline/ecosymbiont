@@ -11,7 +11,7 @@ include "include/header.php";
                     <div class="col-md-12">
                         <div class="info-box">
                             <h2>OUR MISSION</h2>  
-                            <p id="our-focus">Our mission is to regain the understanding that human communities are part of natural ecological webs <span><a href="#definitions"> ecological webs (ecowebs) </a></span> and to <span><a href="#definitions">regenerate</a></span>  systems that restore, preserve, and foster the symbiosis between humans and ecowebs. Symbiosis encompasses the connectivity and dependence that exist within an ecoweb and that results in mutual benefit of all within that ecoweb, including humans.</p>
+                            <p id="our-focus">Our mission is to regain the understanding that human communities are part of natural <span><a href="#definitions"> ecological webs (ecowebs) </a></span> and to <span><a href="#definitions">regenerate</a></span>  systems that restore, preserve, and foster the symbiosis between humans and ecowebs. Symbiosis encompasses the connectivity and dependence that exist within an ecoweb and that results in mutual benefit of all within that ecoweb, including humans.</p>
                         </div>
                     </div>
                     <div class="col-md-12">
