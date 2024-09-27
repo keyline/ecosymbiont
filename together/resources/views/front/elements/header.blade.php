@@ -114,7 +114,8 @@ $APP_URL = $_SERVER['APP_URL'];
                                                             'news_contents.created_at', 
                                                             'sub_category.sub_category as sub_category_name', // From sub_category name
                                                             'parent_category.sub_category as parent_category_name', // From parent_category name
-                                                            'sub_category.slug as sub_category_slug' // From sub_category alias
+                                                            'sub_category.slug as sub_category_slug', // From sub_category alias
+                                                            'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
                                                         )
                                                         ->where('news_contents.status', 1)
                                                         ->where('news_contents.is_hot', 1)
@@ -126,9 +127,9 @@ $APP_URL = $_SERVER['APP_URL'];
                             <div class="item list-post">
                                 <img src="<?=env('UPLOADS_URL').'newcontent/'.$rowContent->cover_image?>" alt="<?=$rowContent->new_title?>">
                                 <div class="post-content">
-                                    <a href="<?=url('category/' . $rowContent->parent_category_name. '/' . $rowContent->sub_category_slug)?>"><?=$rowContent->sub_category_name?></a>
+                                    <a href="<?=url('category/' . $rowContent->parent_category_slug. '/' . $rowContent->sub_category_slug)?>"><?=$rowContent->sub_category_name?></a>
                                     <!-- <a href="?=url('subcategory/' . $rowContent->sub_category_slug)?>">?=$rowContent->sub_category_name?></a> -->
-                                    <h2><a href="<?=url('content/' . $rowContent->slug)?>"><?=$rowContent->new_title?></a></h2>
+                                    <h2><a href="<?=url('content/' . $rowContent->parent_category_slug. '/' . $rowContent->sub_category_slug . '/' . $rowContent->slug)?>"><?=$rowContent->new_title?></a></h2>
                                     <ul class="post-tags">
                                         <!-- <li><i class="fa fa-clock-o"></i><?=date_format(date_create($rowContent->created_at), "d M Y")?></li> -->
                                         <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$rowContent->author_name?></a></li>

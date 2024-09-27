@@ -18,6 +18,12 @@ use App\Helpers\Helper;
                     <?php if($rowContent){?>
                         <!-- block content -->
                         <div class="block-content">
+                            <!-- article box -->
+                            <div class="article-box">
+                                <div class="title-section">
+                                    <h1><span><?=$rowContent->parent_category_name .' | '. $rowContent->sub_category_name?></span></h1>
+                                </div>
+                            </div>
                             <!-- single-post box -->
                             <div class="single-post-box">
                                 <div class="title-post">
@@ -141,7 +147,7 @@ use App\Helpers\Helper;
                                                             <div class="autor-title">
                                                                 <span>
                                                                     <img src="<?=env('UPLOADS_URL').'icon/author.png'?>" alt="author" title="Author Bio" data-toogle="tooltip">                                                            
-                                                                    <span><?=$author_short_bio = trim($paragraphs[$i])?>.</span>
+                                                                    <span><?=$author_short_bio = trim($paragraphs[$i])?></span>
                                                                     
                                                                     <!-- <a href="javascript:void(0);"><?=$authorPostCount?> Posts</a> -->
                                                                 </span>
@@ -224,8 +230,8 @@ use App\Helpers\Helper;
                                             <div class="item news-post image-post3">
                                                 <img src="<?=env('UPLOADS_URL').'newcontent/'.$alsoLikeContent->cover_image?>" alt="<?=$alsoLikeContent->new_title?>">
                                                 <div class="hover-box">
-                                                    <a href="<?=url('subcategory/' . $alsoLikeContent->sub_category_slug)?>"><?=$alsoLikeContent->sub_category_name?></a>
-                                                    <h2><a href="<?=url('content/' . $alsoLikeContent->slug)?>"><?=$alsoLikeContent->new_title?></a></h2>
+                                                    <a href="<?=url('category/' . $alsoLikeContent->parent_category_slug. '/' . $alsoLikeContent->sub_category_slug)?>"><?=$alsoLikeContent->sub_category_name?></a>
+                                                    <h2><a href="<?=url('content/' . $alsoLikeContent->parent_category_slug. '/' . $alsoLikeContent->sub_category_slug . '/' . $alsoLikeContent->slug)?>"><?=$alsoLikeContent->new_title?></a></h2>
                                                     <ul class="post-tags">
                                                         <li><i class="fa fa-clock-o"></i><?=date_format(date_create($alsoLikeContent->created_at), "d M Y")?></li>
                                                         <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$alsoLikeContent->author_name?></a></li>
@@ -249,23 +255,36 @@ use App\Helpers\Helper;
                             <div class="title-section">
                                 <h1><span>Highlighted</span></h1>
                             </div>
+                            
                             <ul class="list-posts">
                                 <?php
-                                $popularContents = NewsContent::join('news_category', 'news_contents.parent_category', '=', 'news_category.id')
-                                                   ->select('news_contents.id', 'news_contents.new_title', 'news_contents.sub_title', 'news_contents.slug', 'news_contents.author_name', 'news_contents.cover_image', 'news_contents.created_at', 'news_category.sub_category as category_name', 'news_category.slug as category_slug')
-                                                   ->where('news_contents.status', '=', 1)
-                                                   ->where('news_contents.is_popular', '=', 1)
-                                                   ->inRandomOrder()
-                                                   ->limit(6)
-                                                   ->get();
-                                if($popularContents){ foreach($popularContents as $popularContent){
+                                $featuredContents = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
+                                                                ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
+                                                                ->select(
+                                                                    'news_contents.id', 
+                                                                    'news_contents.new_title', 
+                                                                    'news_contents.sub_title', 
+                                                                    'news_contents.slug', 
+                                                                    'news_contents.author_name', 
+                                                                    'news_contents.cover_image', 
+                                                                    'news_contents.created_at',
+                                                                    'sub_category.sub_category as category_name',  // Correct alias for subcategory name
+                                                                    'sub_category.slug as category_slug',  // Correct alias for subcategory slug                                                                            
+                                                                    'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                                                )
+                                                                ->where('news_contents.status', 1)  // Fetch only active content
+                                                                ->where('news_contents.is_hot', 1)  // Fetch only featured content
+                                                                ->inRandomOrder()  // Randomize the result order
+                                                                ->limit(3)  // Limit to 3 records
+                                                                ->get();
+                                if($featuredContents){ foreach($featuredContents as $featuredContent){
                                 ?>
                                     <li>
-                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$popularContent->cover_image?>" alt="<?=$popularContent->new_title?>">
+                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$featuredContent->cover_image?>" alt="<?=$featuredContent->new_title?>">
                                         <div class="post-content">
-                                            <h2><a href="<?=url('content/' . $popularContent->slug)?>"><?=$popularContent->new_title?></a></h2>
+                                            <h2><a href="<?=url('content/' . $featuredContent->parent_category_slug. '/' . $featuredContent->category_slug . '/' . $featuredContent->slug)?>"><?=$featuredContent->new_title?></a></h2>
                                             <ul class="post-tags">
-                                                <li><i class="fa fa-clock-o"></i><?=date_format(date_create($popularContent->created_at), "d M Y")?></li>
+                                                <li><i class="fa fa-clock-o"></i><?=date_format(date_create($featuredContent->created_at), "d M Y")?></li>
                                             </ul>
                                         </div>
                                     </li>
@@ -284,20 +303,32 @@ use App\Helpers\Helper;
                             <div class="tab-content">
                                 <div class="tab-pane active" id="option1">
                                     <ul class="list-posts">
-                                       <?php
-                                        $popularContents = NewsContent::join('news_category', 'news_contents.parent_category', '=', 'news_category.id')
-                                                           ->select('news_contents.id', 'news_contents.new_title', 'news_contents.sub_title', 'news_contents.slug', 'news_contents.author_name', 'news_contents.cover_image', 'news_contents.created_at', 'news_category.sub_category as category_name', 'news_category.slug as category_slug')
-                                                           ->where('news_contents.status', '=', 1)
-                                                           ->where('news_contents.is_popular', '=', 1)
-                                                           ->inRandomOrder()
-                                                           ->limit(6)
-                                                           ->get();
+                                        <?php
+                                        $popularContents = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
+                                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
+                                                            ->select(
+                                                                'news_contents.id', 
+                                                                'news_contents.new_title', 
+                                                                'news_contents.sub_title', 
+                                                                'news_contents.slug', 
+                                                                'news_contents.author_name', 
+                                                                'news_contents.cover_image', 
+                                                                'news_contents.created_at',
+                                                                'sub_category.sub_category as category_name',  // Correct alias for subcategory name
+                                                                'sub_category.slug as category_slug',  // Correct alias for subcategory slug
+                                                                'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                                            )
+                                                            ->where('news_contents.status', 1)  // Fetch only active content
+                                                            ->where('news_contents.is_popular', 1)  // Fetch only featured content
+                                                            ->inRandomOrder()  // Randomize the result order
+                                                            ->limit(3)  // Limit to 3 records
+                                                            ->get();
                                         if($popularContents){ foreach($popularContents as $popularContent){
                                         ?>
                                             <li>
                                                 <img src="<?=env('UPLOADS_URL').'newcontent/'.$popularContent->cover_image?>" alt="<?=$popularContent->new_title?>">
                                                 <div class="post-content">
-                                                    <h2><a href="<?=url('content/' . $popularContent->slug)?>"><?=$popularContent->new_title?></a></h2>
+                                                    <h2><a href="<?=url('content/'. $popularContent->parent_category_slug. '/' . $popularContent->category_slug . '/' .  $popularContent->slug)?>"><?=$popularContent->new_title?></a></h2>
                                                     <ul class="post-tags">
                                                         <li><i class="fa fa-clock-o"></i><?=date_format(date_create($popularContent->created_at), "d M Y")?></li>
                                                     </ul>
@@ -309,18 +340,30 @@ use App\Helpers\Helper;
                                 <div class="tab-pane" id="option2">
                                     <ul class="list-posts">
                                         <?php
-                                        $recentContents = NewsContent::join('news_category', 'news_contents.parent_category', '=', 'news_category.id')
-                                                           ->select('news_contents.id', 'news_contents.new_title', 'news_contents.sub_title', 'news_contents.slug', 'news_contents.author_name', 'news_contents.cover_image', 'news_contents.created_at', 'news_category.sub_category as category_name', 'news_category.slug as category_slug')
-                                                           ->where('news_contents.status', '=', 1)
-                                                           ->orderBy('news_contents.id', 'DESC')
-                                                           ->limit(6)
-                                                           ->get();
+                                        $recentContents = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
+                                                                        ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
+                                                                        ->select(
+                                                                            'news_contents.id', 
+                                                                            'news_contents.new_title', 
+                                                                            'news_contents.sub_title', 
+                                                                            'news_contents.slug', 
+                                                                            'news_contents.author_name', 
+                                                                            'news_contents.cover_image', 
+                                                                            'news_contents.created_at',
+                                                                            'sub_category.sub_category as category_name',  // Correct alias for subcategory name
+                                                                            'sub_category.slug as category_slug',  // Correct alias for subcategory slug
+                                                                            'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                                                        )
+                                                                        ->where('news_contents.status', 1)  // Fetch only active content                                                                        
+                                                                        ->inRandomOrder()  // Randomize the result order
+                                                                        ->limit(3)  // Limit to 3 records
+                                                                        ->get();
                                         if($recentContents){ foreach($recentContents as $recentContent){
                                         ?>
                                             <li>
                                                 <img src="<?=env('UPLOADS_URL').'newcontent/'.$recentContent->cover_image?>" alt="<?=$recentContent->new_title?>">
                                                 <div class="post-content">
-                                                    <h2><a href="<?=url('content/' . $recentContent->slug)?>"><?=$recentContent->new_title?></a></h2>
+                                                    <h2><a href="<?=url('content/' . $recentContent->parent_category_slug. '/' . $recentContent->category_slug . '/' .  $recentContent->slug)?>"><?=$recentContent->new_title?></a></h2>
                                                     <ul class="post-tags">
                                                         <li><i class="fa fa-clock-o"></i><?=date_format(date_create($recentContent->created_at), "d M Y")?></li>
                                                     </ul>

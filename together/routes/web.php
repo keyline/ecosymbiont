@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
         Route::match(['get', 'post'], '/page/{id}', 'App\Http\Controllers\FrontController@pageContent');
         Route::match(['get', 'post'], '/category/{id}', 'App\Http\Controllers\FrontController@category');
         Route::match(['get', 'post'], '/category/{categoryname}/{id}', 'App\Http\Controllers\FrontController@subcategory');
-        Route::match(['get', 'post'], '/content/{id}', 'App\Http\Controllers\FrontController@newsContent');
+        Route::match(['get', 'post'], '/content/{categoryname}/{subcategoryname}/{id}', 'App\Http\Controllers\FrontController@newsContent');
         Route::match(['get', 'post'], '/signin', 'App\Http\Controllers\FrontController@signIn');
         Route::match(['get', 'post'], '/sign-in/{id}', 'App\Http\Controllers\FrontController@signIn');
         Route::match(['get', 'post'], '/signup', 'App\Http\Controllers\FrontController@signUp');
