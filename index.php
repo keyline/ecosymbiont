@@ -11,7 +11,7 @@ include "include/header.php";
                     <div class="col-md-12">
                         <div class="info-box">
                             <h2>OUR MISSION</h2>  
-                            <p>Our mission is to regain the understanding that human communities are part of natural ecological webs <span><a href="#defination"> ecowebs </a></span> and to <span><a href="#defination">regenerate</a></span>  systems that restore, preserve, and foster the symbiosis between humans and ecowebs. Symbiosis encompasses the connectivity and dependence that exist within an ecoweb and that results in mutual benefit of all within that ecoweb, including humans</p>
+                            <p>Our mission is to regain the understanding that human communities are part of natural ecological webs <span><a href="#definitions"> ecowebs </a></span> and to <span><a href="#definitions">regenerate</a></span>  systems that restore, preserve, and foster the symbiosis between humans and ecowebs. Symbiosis encompasses the connectivity and dependence that exist within an ecoweb and that results in mutual benefit of all within that ecoweb, including humans.</p>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -20,34 +20,34 @@ include "include/header.php";
                             <p>We focus on regenerating systems that advance food sovereignty, sustainable healthcare,
                                 and ecoweb integration rooted in human communities locally. These systems are of two types:</p>
                             <ul>
-                                <li><strong><i>human activity systems:</i></strong> ecoweb&#x2013;specific systems of
-                                    knowledge, technologies, and practices developed by ecoweb&#x2013;rooted human communities
+                                <li><i><strong class="fontbold">human activity systems:</strong></i> ecoweb-specific systems of
+                                    knowledge, technologies, and practices developed by ecoweb-rooted human communities
                                     &#x2014; such as Indigenous and tribal communities &#x2014; that are based and rely on the
-                                    specific and preserved <a href="#defination">biodiversity</a> of each ecoweb; and</li>
-                                <li><strong><i>legal&#x2013;economic&#x2013;governance systems:</i></strong> trade, and government systems that optimize the wellbeing of human communities and the ecowebs of which they are a symbiotic part and that operate locally, regionally, and globally.</li>
+                                    specific and preserved <a href="#definitions">biodiversity</a> of each ecoweb; and</li>
+                                <li><strong><i>legal-economic-governance systems:</i></strong> legal, trade, and government systems that optimize the wellbeing of human communities and the ecowebs of which they are a symbiotic part and that operate locally, regionally, and globally.</li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-12" id="our-approach">
                         <div class="info-box">
                             <h2>OUR APPROACH</h2>
-                            <p>We fulfill our mission three interconnected ways:</p>
+                            <p>We fulfill our mission in three interconnected ways:</p>
                             <ul>
                                 <li><strong><i>Disrupt systems:</i></strong> We work to disrupt and reshape the
-                                    globally institutionalized legal&#x2013;economic&#x2013;governance system that has been destroying
-                                    human&#x2013;ecoweb symbiosis by fiercely promoting corporate
-                                    <span><u><a href="#defination">extractivism</a></u></span> (exploitation of human and non-human ecoweb
+                                    globally institutionalized legal-economic-governance system that has been destroying
+                                    human-ecoweb symbiosis by fiercely promoting corporate
+                                    <span><u><a href="#definitions">extractivism</a></u></span> (exploitation of human and non-human ecoweb
                                     resources without replenishment). This work is done through legal action, policy
                                     reform, and other methods.
                                 </li>
                                 <li><strong><i>Facilitate synergies:</i> </strong>We bring together and facilitate
-                                    <span><u><a href="#defination">synergies</a></u></span> between <span><u><a href="#defination">grassroots</a></u></span> changemakers,
-                                    innovators, and knowledge&#x2013;holders working to regenerate systems that restore,
-                                    preserve, and foster human&#x2013;ecoweb symbiosis. We do this through in&#x2013;person
+                                    <span><u><a href="#definitions">synergies</a></u></span> between <span><u><a href="#definitions">grassroots</a></u></span> changemakers,
+                                    innovators, and knowledge-holders working to regenerate systems that restore,
+                                    preserve, and foster human-ecoweb symbiosis. We do this through in-person
                                     <strong><a href="<?=$base_url?>synergy-meetings.php">Synergy Meetings</a></strong> and through our online knowledge-sharing and
-                                    community&#x2013;building platform, <strong><a href="<?=$base_url?>together" target="_blank">Ecosymbionts Regenerate Together</a>.</strong>
+                                    community-building platform, <strong><a href="<?=$base_url?>together" target="_blank">Ecosymbionts Regenerate Together</a>.</strong>
                                 </li>
-                                <li><strong><i>Regenerate systems:</i> </strong> We collaboratively conceptualize and promote alternative systems that optimize ecoweb wellbeing (including of humans), instead of exploiting, diminishing, and destroying ecowebs. We do this by synthesizing our own work with the knowledge, ideas, and wisdom of grassroots changemakers, innovators, and knowledge&#x2013;holders from across the world shared on <a href="<?=$base_url?>together" target="_blank">Ecosymbionts Regenerate Together</a> . </li>
+                                <li><strong><i>Regenerate systems:</i> </strong> We collaboratively conceptualize and promote alternative systems that optimize ecoweb wellbeing (including of humans), instead of exploiting, diminishing, and destroying ecowebs. We do this by synthesizing our own work with the knowledge, ideas, and wisdom of grassroots changemakers, innovators, and knowledge-holders from across the world shared on <a href="<?=$base_url?>together" target="_blank">Ecosymbionts Regenerate Together</a>. </li>
                             </ul>
                         </div>
                     </div>
@@ -55,7 +55,7 @@ include "include/header.php";
             </div>
         </section>
         <section class="reatoring">
-            <h1>WHY IS REGENERATING HUMAN&#x2013;ECOWEB <br>SYMBIOSIS CRUCIAL?</h1>
+            <h1>WHY IS REGENERATING HUMAN-ECOWEB <br>SYMBIOSIS CRUCIAL?</h1>
         </section>
         <section class="urgent-section">
             <div class="container">
@@ -74,8 +74,8 @@ include "include/header.php";
                         <div class="info-box">
                             <h4>The extractivist system is becoming increasingly entrenched</h4>
                             <p>A new system of amassing wealth for small groups of shareholders
-                                (<span><u><a href="#defination">corporations</a></u></span>) was <a href="#defination">developed in Europe at least four centuries ago</a>,
-                                taking the form of government&#x2013;sanctioned exploitation of humans and ecowebs through the
+                                (<span><u><a href="#definitions">corporations</a></u></span>) was <a href="#definitions">developed in Europe at least four centuries ago</a>,
+                                taking the form of government-sanctioned exploitation of humans and ecowebs through the
                                 use of ‘legal’ tools, like charters and the doctrine of discovery. In this system,
                                 European monarchs granted to small companies of European men &#x2014; for a share of the
                                 profits &#x2014; exclusive rights to:</p>
@@ -112,7 +112,12 @@ include "include/header.php";
                         </div>
                     </div>
                 </div>
-                <div class="row" id="defination">
+                <div class="row" id="definitions">
+                  <div class="col-md-12">
+                      <div class="info-box">
+                        <h2>DEFINITIONS</h2>
+                      </div>
+                    </div>
                     <div class="col-md-4">
                         <div class="defination-img">
                             <img src="images/Definition.jpg" alt="" class="img-responsive">
@@ -131,7 +136,7 @@ include "include/header.php";
                                   </div>
                                   <div id="collapseOne" class="panel-collapse collapse in">
                                     <div class="panel-body">
-                                        The large variety of living beings existing today because each evolved upon successfully adapting to a particular niche of our planet containing other living beings and abiotic components (e.g., water, minerals, air, rocks)
+                                        The large variety of living beings existing today because each evolved upon successfully adapting to a particular niche of our planet containing other living beings and non-living (abiotic) components (<i>e.g.</i>, water, minerals, air, rocks)
                                     </div>
                                   </div>
                                 </div>
@@ -145,7 +150,7 @@ include "include/header.php";
                                   </div>
                                   <div id="collapseTwo" class="panel-collapse collapse">
                                     <div class="panel-body">
-                                        A legal entity that is separate and distinct from its human owners, affording it protections and privileges not afforded to humans; generally, a for&#x2013;profit corporation’s primary objective is to amass wealth (generate profits) for its owners
+                                        A legal entity that is separate and distinct from its human owners, affording it protections and privileges not afforded to humans; generally, a for-profit corporation’s primary objective is to amass wealth (generate profits) for its owners
                                     </div>
                                   </div>
                                 </div>
@@ -173,7 +178,8 @@ include "include/header.php";
                                     </div>
                                     <div id="collapsefour" class="panel-collapse collapse">
                                       <div class="panel-body">
-                                        A human being who strives to live symbiotically with other humans, non-human living beings, and abiotic components (e.g., water, minerals, air, rocks) of ecowebs 
+                                        A human being who strives to live symbiotically with other humans, non-human living beings, and non-living (abiotic) components (<i>e.g.</i>,
+                                        water, minerals, air, rocks) of ecowebs 
                                       </div>
                                     </div>
                                   </div>

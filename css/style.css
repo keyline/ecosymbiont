@@ -3,7 +3,7 @@
     src:url('font/proximanova_light.otf');
 }
 @font-face {
-    font-family: 'proximanova_bold.otf';
+    font-family: 'proximanova_bold';
     src:url('font/proximanova_bold.otf');
 }
 @font-face {
@@ -31,6 +31,9 @@ body{
 h1,h2,h3,h4,h5,h6,p,ul,span,a{
     margin: 0;
     padding: 0;
+}
+.fontbold{
+    font-family: 'proximanova_bold';
 }
 @font-face {
     font-family: 'inter', sans-serif;
@@ -73,6 +76,7 @@ header .nav>li{
     color: #90201f;
     font-size: 16px;
     transition: all .3s ease-in-out;
+    font-weight: 600;
 }
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>li>a:hover{
     background: transparent;
