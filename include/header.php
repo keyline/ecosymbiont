@@ -1,7 +1,7 @@
 <?php 
 // echo  $current_page = $_SERVER['REQUEST_URI']; die;
-// $base_url = "https://ecosymbiont.org/";
-$base_url = "http://localhost/ecosymbiontgit/";
+$base_url = "https://ecosymbiont.org/";
+// $base_url = "http://localhost/ecosymbiontgit/";
 function isActive($page) {
    $current_page = basename($_SERVER['REQUEST_URI'], ".php"); // Get current page name without extension
     return $current_page == $page ? 'active' : '';

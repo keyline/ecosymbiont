@@ -100,18 +100,34 @@ $APP_URL = $_SERVER['APP_URL'];
                 <div class="owl-wrapper">
                     <div class="owl-carousel" data-num="3">
                         <?php
-                        $hotNewsContents = NewsContent::join('news_category', 'news_contents.sub_category', '=', 'news_category.id')
-                                           ->select('news_contents.id', 'news_contents.new_title', 'news_contents.sub_title', 'news_contents.slug', 'news_contents.author_name', 'news_contents.cover_image', 'news_contents.created_at', 'news_category.sub_category as sub_category_name', 'news_category.slug as sub_category_slug')
-                                           ->where('news_contents.status', '=', 1)
-                                           ->where('news_contents.is_hot', '=', 1)
-                                           ->orderBy('news_contents.id', 'DESC')
-                                           ->get();
+                        // DB::enableQueryLog(); // Enable query log
+
+                        $hotNewsContents = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
+                                                        ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
+                                                        ->select(
+                                                            'news_contents.id', 
+                                                            'news_contents.new_title', 
+                                                            'news_contents.sub_title', 
+                                                            'news_contents.slug', 
+                                                            'news_contents.author_name', 
+                                                            'news_contents.cover_image', 
+                                                            'news_contents.created_at', 
+                                                            'sub_category.sub_category as sub_category_name', // From sub_category name
+                                                            'parent_category.sub_category as parent_category_name', // From parent_category name
+                                                            'sub_category.slug as sub_category_slug' // From sub_category alias
+                                                        )
+                                                        ->where('news_contents.status', 1)
+                                                        ->where('news_contents.is_hot', 1)
+                                                        ->orderBy('news_contents.id', 'DESC')
+                                                        ->get();
+                                           // dd(DB::getQueryLog());
                         if($hotNewsContents){ foreach($hotNewsContents as $rowContent){
                         ?>
                             <div class="item list-post">
                                 <img src="<?=env('UPLOADS_URL').'newcontent/'.$rowContent->cover_image?>" alt="<?=$rowContent->new_title?>">
                                 <div class="post-content">
-                                    <a href="<?=url('subcategory/' . $rowContent->sub_category_slug)?>"><?=$rowContent->sub_category_name?></a>
+                                    <a href="<?=url('category/' . $rowContent->parent_category_name. '/' . $rowContent->sub_category_slug)?>"><?=$rowContent->sub_category_name?></a>
+                                    <!-- <a href="?=url('subcategory/' . $rowContent->sub_category_slug)?>">?=$rowContent->sub_category_name?></a> -->
                                     <h2><a href="<?=url('content/' . $rowContent->slug)?>"><?=$rowContent->new_title?></a></h2>
                                     <ul class="post-tags">
                                         <!-- <li><i class="fa fa-clock-o"></i><?=date_format(date_create($rowContent->created_at), "d M Y")?></li> -->
@@ -141,10 +157,11 @@ $APP_URL = $_SERVER['APP_URL'];
                                             <div class="filter-block">
                                                 <ul class="filter-posts">
                                                     <?php
-                                                    $childCats = NewsCategory::select('id', 'sub_category', 'slug')->where('status', '=', 1)->where('parent_category', '=', $parentCat->id)->get();
+                                                    
+                                                    $childCats = NewsCategory::select('id', 'sub_category', 'slug')->where('status', '=', 1)->where('parent_category', '=', $parentCat->id)->orderBy('sub_category', 'asc')->get();                                                                                                        
                                                     if($childCats){ $sl=1; foreach($childCats as $childCat){
                                                     ?>
-                                                        <li><a <?=(($sl == 1)?'class="active"':'')?> href="<?=url('subcategory/' . $childCat->slug)?>"><?=$childCat->sub_category?></a></li>
+                                                        <li><a <?=(($sl == 1)?'class="active"':'')?> href="<?=url('category/' . $parentCat->sub_category .'/'. $childCat->slug)?>"><?=$childCat->sub_category?></a></li>
                                                     <?php $sl++; } }?>
                                                 </ul>
                                             </div>

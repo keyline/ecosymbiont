@@ -248,7 +248,7 @@ class Controller extends BaseController
         $data['page_header']                = $title;
         $user_id                            = session('user_id');
         $data['user']                       = User::find($user_id);
-        $data['parentCats']                 = NewsCategory::select('id', 'sub_category', 'slug')->where('status', '=', 1)->where('parent_category', '=', 0)->get();
+        $data['parentCats']                 = NewsCategory::select('id', 'sub_category', 'slug')->where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'asc')->get();
 
         $data['head']                       = view('front.elements.head', $data);
         $data['header']                     = view('front.elements.header', $data);
@@ -265,7 +265,7 @@ class Controller extends BaseController
         $data['page_header']        = $title;
         $user_id                    = session('user_id');
         $data['user']               = User::find($user_id);
-        $data['parentCats']         = NewsCategory::select('id', 'sub_category', 'slug')->where('status', '=', 1)->where('parent_category', '=', 0)->get();
+        $data['parentCats']         = NewsCategory::select('id', 'sub_category', 'slug')->where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'asc')->get();
 
         $data['head']               = view('front.elements.head', $data);
         $data['header']             = view('front.elements.header', $data);
