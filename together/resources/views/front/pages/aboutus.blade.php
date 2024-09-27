@@ -20,12 +20,12 @@
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="post-content">
-                                            <p style="font-size:15px;font-weight: 600; color:#000;">Ecosymbionts Regenerate Together (ERT) is an online knowledge-sharing and community-building platform for <a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" traget="_blank">grassroots</a>  changemakers, innovators, and knowledge-holders from across the world.</p>
+                                            <p style="color:#000;">Ecosymbionts Regenerate Together (ERT) is an online knowledge-sharing and community-building platform for <a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">grassroots</a>  changemakers, innovators, and knowledge-holders from across the world.</p>
                                             
                                             <div class="titleto-inner">
                                                 <p class="black">The purpose of ERT is two-fold:</p>
                                                 <ul>
-                                                    <li><strong><i>Facilitate synergies:</i></strong> Bring together and facilitate <a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" traget="_blank">synergies</a> between grassroots changemakers, innovators, and knowledge-holders from across the world working to <a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" traget="_blank">regenerate</a> systems that restore, preserve, and foster human-<a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" traget="_blank">ecoweb symbiosis</a> .
+                                                    <li><strong><i>Facilitate synergies:</i></strong> Bring together and facilitate <a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">synergies</a> between grassroots changemakers, innovators, and knowledge-holders from across the world working to <a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">regenerate</a> systems that restore, preserve, and foster human-<a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">ecoweb symbiosis</a>.
                                                     </li>
                                                     <li><strong><i>Regenerate systems: </i></strong> Collaboratively conceptualize and promote alternative systems that optimize ecoweb wellbeing (instead of exploiting, diminishing, and destroying ecowebs) by synthesizing the knowledge, ideas, and wisdom of grassroots changemakers, innovators, and knowledge-holders from across the world. 
                                                     </li>     
@@ -36,7 +36,7 @@
 
                                             <div class="titleto-inner">
                                                 <h2>HOW TO CITE ERT CONTENT</h2>
-                                                <p class="black">If you are citing ERT content, please use the following format: Author name(s), Title, Ecosymbionts Regenerate Together: DOI (publication date).</p>
+                                                <p class="black">If you are citing ERT content, please use the following format: Author name(s), <i>Title</i>, <strong>Ecosymbionts Regenerate Together:</strong> DOI (publication date).</p>
                                                 <p class="black"><i>For example: </i></p>
                                                 <p class="black">F. <i>Jahan, From Bhopal to the Bay: Fighting Corporations Creating Industrial Wastelands</i>, <strong>Ecosymbionts Regenerate Together:</strong> DOI-ERT092024-004 (25 September, 2024).</p>
                                             </div>
@@ -45,8 +45,8 @@
                                                 <p class="black">Both fiction and non-fiction Creative-Works are published as content on ERT, in the form of (a) word narratives, (b) visual art, and (c) videos. ERT encourages content in vernacular languages, with English translations provided, and where applicable, English subtitles.</p>
                                             </div>
                                             <div class="titleto-inner">
-                                                <h2>SECTIONS AND SUB-SECTIONS OF ERT</h2>
-                                                <p class="black">ERT has five main sections that are further divided into sub-sections. </p>
+                                                <h2>CATEGORIES AND SUB-CATEGORIES OF ERT</h2>
+                                                <p class="black">ERT has five main categories that are further divided into sub-sections. </p>
                                             </div>
                                             <div class="titleto-inner">
                                                 <h4>Action</h4>
@@ -73,8 +73,8 @@
                                             <div class="titleto-inner">
                                                 <h4>Systems</h4>
                                                 <ul>
-                                                    <li><strong>Ecoweb-Rooted Framing:</strong> Creative-Work that conceptualizes <a href="<?=env('REGENERATE_URL')?>#our-approach" style="color: #d09c1c;" traget="_blank">legal-economic-governance systems</a> in a manner that reframes them to optimize ecoweb-rooted symbiotic wellbeing, i.e., of human communities and one or more ecowebs we rely on</li>
-                                                    <li><strong><a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" traget="_blank">Extractivism</a>  Alternatives:</strong> Creative-Work that describes <a href="<?=env('REGENERATE_URL')?>#our-approach" style="color: #d09c1c;" traget="_blank">human activity systems</a> that present an alternative to extractivist systems, e.g., the cycle of sustainable generation, repeated use, and biodegradable disposal of objects, as opposed to the cycle of resource extraction, disposable commodity production, disposable use, and landfill waste generation</li>
+                                                    <li><strong>Ecoweb-Rooted Framing:</strong> Creative-Work that conceptualizes <a href="<?=env('REGENERATE_URL')?>#our-approach" style="color: #d09c1c;" target="_blank">legal-economic-governance systems</a> in a manner that reframes them to optimize ecoweb-rooted symbiotic wellbeing, i.e., of human communities and one or more ecowebs we rely on</li>
+                                                    <li><strong><a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">Extractivism</a>  Alternatives:</strong> Creative-Work that describes <a href="<?=env('REGENERATE_URL')?>#our-approach" style="color: #d09c1c;" target="_blank">human activity systems</a> that present an alternative to extractivist systems, e.g., the cycle of sustainable generation, repeated use, and biodegradable disposal of objects, as opposed to the cycle of resource extraction, disposable commodity production, disposable use, and landfill waste generation</li>
                                                     <li><strong>Systems Reform:</strong> Creative-Work that describes concrete ideas on how to reshape legal-economic-governance and/or human acitivty systems in a manner that minimizes or eliminates extractivism.</li>
                                                 </ul>
                                             </div>

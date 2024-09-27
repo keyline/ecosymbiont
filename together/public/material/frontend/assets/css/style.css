@@ -737,11 +737,11 @@ body.boxed #container {
   opacity: 1;
 }
 p {
-  font-size: 14px;
+  font-size: 18px;
   color: #666666;
   font-family: 'proximanova_regular', sans-serif;
   font-weight: 400;
-  line-height: 20px;
+  line-height: 1.25;
   margin: 0 0 10px;
 }
 .title-section {
@@ -4296,6 +4296,7 @@ div.list-post .post-content h2 a:hover {
   margin-bottom: 10px;
   font-family: 'proximanova_regular';
   width: 100%;
+  font-size: 18px;
 }
 .single-post-box .about-more-autor .autor-box .autor-content .autor-title h1 {
   float: left;
@@ -5968,15 +5969,14 @@ footer .footer-last-line nav.footer-nav ul li:first-child:before {
   font-size: 20px !important;
 }
 .titleto-inner li {
-  font-size: 16px;
+  font-size: 18px;
   line-height: 28px;
   padding-bottom: 10px;
-  font-weight: 600;
   font-family: 'proximanova_regular';
 }
 .titleto-inner p {
-  font-size: 15px;
-  font-weight: 600;
+  /* font-size: 15px;
+  font-weight: 600; */
 }
 a.blue_btn {
   color: #fff !important;

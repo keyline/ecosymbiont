@@ -20,7 +20,7 @@
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="post-content">
-                                            <p class="black" style="font-size:15px;font-weight: 600;">Before making a submission of your Creative-Work to our <a href="<?=url('/about-us')?>" style="color: #d09c1c;">online knowledge-sharing and community-building platform</a> , please read these submission guidelines in their entirety.</p>
+                                            <p class="black">Before making a submission of your Creative-Work to our <a href="<?=url('/about-us')?>" style="color: #d09c1c;">online knowledge-sharing and community-building platform</a>, please read these submission guidelines in their entirety.</p>
 
                                             <div class="titleto-inner">
                                                 <h2>ELIGIBILITY CRITERIA</h2>
@@ -33,10 +33,10 @@
                                                     <li>At this time, you must:
                                                         <ul>
                                                             <li>be invited to submit a Creative-Work to Ecosymbionts Regenerate Together ("ERT"); and/or</li>
-                                                            <li>have participated as a strategist at an in-person Ecosymbionts Regenerate ("ER") <a href="<?=env('REGENERATE_URL')?>synergy-meetings.php" style="color: #d09c1c;">Synergy Meeting</a> .</li>
+                                                            <li>have participated as a strategist at an in-person Ecosymbionts Regenerate ("ER") <a href="<?=env('REGENERATE_URL')?>synergy-meetings.php" style="color: #d09c1c;">Synergy Meeting</a>.</li>
                                                         </ul>
                                                     </li>
-                                                    <li>Your Creative-Work must relate to <a href="<?=env('REGENERATE_URL')?>" style="color: #d09c1c;" traget="_blank">regenerating systems that restore, preserve, and foster the symbiosis humans natural ecological webs (ecowebs) or to elucidating how existing extractivist systems harm human-ecoweb symbiosis</a> </li>
+                                                    <li>Your Creative-Work must relate to <a href="<?=env('REGENERATE_URL')?>" style="color: #d09c1c;" traget="_blank">regenerating systems that restore, preserve, and foster the symbiosis humans natural ecological webs (ecowebs) or to elucidating how existing extractivist systems harm human-ecoweb symbiosis</a>. </li>
                                                 </ul>
                                             </div>
 
@@ -63,22 +63,22 @@
                                                         </ul>
                                                     </li>
                                                     <li>For Creative-Work type (A), your word narrative submission must be accompanied by at least one (1) image or photograph and may be accompanied by up to six (6) images or photographs.</li>
-                                                    <li>For Creative-Work type (B), you may submit up to six (6) art images of the same or related piece(s) of art. You must provide the following details about your piece(s) of art: (a) title, (b) medium (e.g., oil on canvas), (c) dimensions, and (d) year created.</li>
+                                                    <li>For Creative-Work type (B), you may submit up to six (6) art images of the same or related piece(s) of art. You must provide the following details about your piece(s) of art: (a) title, (b) medium (<i>e.g.</i>, oil on canvas), (c) dimensions, and (d) year created.</li>
                                                     <li>For all Creative-Work types, each image or photograph submitted must be accompanied by a brief figure caption.</li>
                                                     <li>To be categorized as non-fiction any knowledge or ideas contained in your Creative-Work must be your own and may include your first-person account of narration by a knowledge-holder and/or ancestor who is explicitly named and credited.</li>
-                                                    <li>A non-fiction Creative-Work that contains descriptions of knowledge and/or activities —– especially harmful activities —– by legal entities (e.g., corporations) and/or human persons other than yourself must be substantiated by external sources (e.g., citations) and/or be witnessed first-hand by you.</li>
+                                                    <li>A non-fiction Creative-Work that contains descriptions of knowledge and/or activities &#x2014; especially harmful activities &#x2014; by legal entities (<i>e.g.</i>, corporations) and/or human persons other than yourself must be substantiated by external sources (<i>e.g.</i>, citations) and/or be witnessed first-hand by you.</li>
                                                     <li>As you generate your Creative-Work, please keep in mind that readers and grassroots individuals and collectives from across the world will be viewing your Creative-Work if it is published by ERT as content. Thus, please write and present in a manner that explains terms and concepts specific to your region or culture, such that a person completely unfamiliar with the topic and regional/cultural context of your Creative-Work can understand.</li>
                                                     <li>Please write in a simple and clear manner that is not academic, keeping in mind that readers and grassroots individuals and collectives viewing your Creative-Work are from a variety of occupational and cultural backgrounds and are most probably not native English speakers. When citing another’s publication, please simply state the finding and use footnotes to provide information about the full citation. For example, do <strong style="color: #d09c1c;">not</strong> write: “Garcia and Hussain (2018) describe various detrimental neurological effects of environmental pollution in frontline communities.” Instead, write: “Environmental pollution has been reported to have various detrimental neurological effects in frontline communities.<sup>1</sup>” Then in your footnote for (1) provide the entire citation of Garcia and Hussain (2018).</li>
-                                                    <li>If you are including citations in your Creative-Work, please format them as follows: M. Garcia, L. Hussain, Environmental Pollution Causes Neurological Effects in Impacted Communities, Journal of Impacts: Vol. 5 (Issue 12), pp. 46-48 (2018). </li>
-                                                    <li>ERT encourages the submission of Creative-Works in vernacular languages. For narratives —– both word narratives and descriptive narratives —– please ensure that if the language is not English, you also submit an accurate English translation of the entire narrative. 
+                                                    <li>If you are including citations in your Creative-Work, please format them as follows: M. Garcia, L. Hussain, <i>Environmental Pollution Causes Neurological Effects in Impacted Communities</i>, <strong>Journal of Impacts:</strong> Vol. 5 (Issue 12), pp. 46-48 (2018). </li>
+                                                    <li>ERT encourages the submission of Creative-Works in vernacular languages. For narratives &#x2014; both word narratives and descriptive narratives &#x2014; please ensure that if the language is not English, you also submit an accurate English translation of the entire narrative. 
                                                         For video in which the languages spoken are not English, please ensure that there are accurate English subtitles within the submitted video.  
                                                     </li>
                                                 </ul>
                                             </div>
 
                                             <div class="titleto-inner">
-                                                <h2>EXPLANATION OF SECTIONS AND SUB-SECTIONS OF ERT</h2>
-                                                <p class="black">ERT has five main sections that are further divided into sub-sections. To help you understand what type of content is appropriate for each section/sub-section, please see below.</p>
+                                                <h2>EXPLANATION OF CATEGORIES AND SUBCATEGORIES OF ERT</h2>
+                                                <p class="black">ERT has five main categories that are further divided into sub-categories. To help you understand what type of content is appropriate for each category/sub-category, please see below.</p>
                                                 <ul>
                                                     <li>
                                                         <strong>ACTION</strong>
@@ -124,15 +124,15 @@
                                                         </ul>
                                                     </li>
                                                     <li>
-                                                        <strong><a href="<?=env('REGENERATE_URL')?>#our-approach" style="color: #d09c1c;" traget="_blank">SYSTEMS</a></strong>
+                                                        <strong>SYSTEMS</strong>
                                                         <ul>
                                                             <li>
                                                                 <strong><i>Ecoweb-Rooted Framing</i></strong><br>
-                                                                Creative-Work that conceptualizes <a href="<?=env('REGENERATE_URL')?>#our-approach" style="color: #d09c1c;" traget="_blank">legal-economic-governance systems</a>  in a manner that reframes them to optimize ecoweb-rooted symbiotic wellbeing, i.e., of human communities and one or more ecowebs we rely on.
+                                                                Creative-Work that conceptualizes <a href="<?=env('REGENERATE_URL')?>#our-focus" style="color: #d09c1c;" traget="_blank">legal-economic-governance systems</a>  in a manner that reframes them to optimize ecoweb-rooted symbiotic wellbeing, <i>i.e.</i>, of human communities and one or more ecowebs we rely on.
                                                             </li>
                                                             <li>
                                                                 <strong><i>Extractivism Alternatives</i></strong><br>
-                                                                Creative-Work that describes <a href="<?=env('REGENERATE_URL')?>#our-approach" style="color: #d09c1c;" traget="_blank">human activity systems</a> that present an alternative to extractivist systems, e.g., the cycle of sustainable generation, repeated use, and biodegradable disposal of objects, as opposed to the cycle of resource extraction, disposable commodity production, disposable use, and landfill waste generation.
+                                                                Creative-Work that describes <a href="<?=env('REGENERATE_URL')?>#our-focus" style="color: #d09c1c;" traget="_blank">human activity systems</a> that present an alternative to extractivist systems, <i>e.g.</i>, the cycle of sustainable generation, repeated use, and biodegradable disposal of objects, as opposed to the cycle of resource extraction, disposable commodity production, disposable use, and landfill waste generation.
                                                             </li>
                                                             <li>
                                                                 <strong><i>Systems Reform</i></strong><br>
@@ -180,7 +180,7 @@
                                                 <?php if(session('is_user_login')){?>
                                                     <p class="text-center"><a href="<?=url('user/submit-new-article')?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Submit New Article</a></p>
                                                 <?php } else {?>
-                                                    <p class="text-center"><a href="<?=url('signin')?>" class="btn btn-primary">Submit New Article</a></p>
+                                                    <p class="text-center"><a href="<?=url('signin')?>" class="btn btn-primary">Submit New Creative-Work</a></p>
                                                 <?php }?>
                                             <?php }?>
                                         </div>
