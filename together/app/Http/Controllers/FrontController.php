@@ -427,15 +427,16 @@ class FrontController extends Controller
                                 //  Helper::pr($fields);
                                 User::insert($fields);
                                 $generalSetting             = GeneralSetting::where('id', '=', 1)->first();
-                                $subject                    = 'New Lead From Ecosymbiont Website';
+                                $subject                    = 'Subject: Your Login Credentials for Portal Access';
                                 $message                    = "<table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
-                                                                    <tr><td style='padding: 8px 15px'>Dear Administrator,</td></tr>
-                                                                    <tr><td style='padding: 8px 15px'>A new lead has contacted you through the Ecosymbiont Website. Please find the details below.</td></tr>
-                                                                    <tr><td style='padding: 8px 15px'><strong>Name: </strong>" . htmlspecialchars($postData['first_name']) . "</td></tr>
+                                                                    <tr><td style='padding: 8px 15px'>Dear" . htmlspecialchars($postData['first_name']) . ",</td></tr>
+                                                                    <tr><td style='padding: 8px 15px'>Thank you for registering with us. Below are your credentials to access the portal:</td></tr>
+                                                                    <tr><td style='padding: 8px 15px'>Thank you for signing up!</td></tr>
+                                                                    <tr><td style='padding: 8px 15px'><strong>Sign-in Link: </strong><a href='" . htmlspecialchars(env('APP_URL') . "/signin") . "'>" . htmlspecialchars(env('APP_URL') . "/signin") . "</a></td></tr>
                                                                     <tr><td style='padding: 8px 15px'><strong>Email: </strong>" . htmlspecialchars($postData['email']) . "</td></tr>    
-                                                                    <tr><td style='padding: 8px 15px'><strong>Country: </strong>" . htmlspecialchars($postData['country']) . "</td></tr>                                         
-                                                                    <tr><td style='padding: 8px 15px'><strong>Message: </strong>" . htmlspecialchars($postData['message']) . "</td></tr>
-                                                                    <tr><td style='padding: 8px 15px'><strong>Subject: </strong>" . htmlspecialchars(implode(', ', $postData['subject'])) . "</td></tr>
+                                                                    <tr><td style='padding: 8px 15px'><strong>Password: </strong>" . htmlspecialchars($randomPassword) . "</td></tr>                                         
+                                                                    
+                                                                    
                                                                     <tr><td style='padding: 8px 15px'>Thank You,</td></tr>
                                                                     <tr><td style='padding: 8px 15px'>Auto-generated from the Ecosymbiont Website.</td></tr>
                                                                 </table>";
