@@ -52,8 +52,8 @@ use App\Helpers\Helper;
 
 
                         <!--- box 2-->
-                        <?php
-                            $parentCategoryContent2 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
+                        <?php 
+                        $parentCategoryContent8 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
                                                         ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
                                                         ->select(
                                                             'news_contents.id', 
@@ -70,27 +70,30 @@ use App\Helpers\Helper;
                                                         )
                                                         ->where('news_contents.status', 1) // Fetch only active content
                                                         // ->where('news_contents.is_popular', 1) // Uncomment if you want to filter by popular content
-                                                        ->where('news_contents.parent_category', 2) // Parent category filter
+                                                        ->where('news_contents.parent_category', 8) // Parent category filter
                                                         ->orderBy('news_contents.id', 'DESC') // Order by most recent
                                                         ->first(); // Fetch single record
-                        
-                        if($parentCategoryContent2){
-                            ?>
-                            <div class="news-post homesmall_box image-post">
-                                <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent2->cover_image?>" alt="<?=$parentCategoryContent2->new_title?>">
-                                <div class="hover-box">
-                                    <div class="inner-hover">
-                                        <a class="category-post" href="<?=url('category/' . $parentCategoryContent2->parent_category_slug)?>"><?=$parentCategoryContent2->parent_category_name?></a>
-                                        <h2><a href="<?=url('content/'. $parentCategoryContent2->parent_category_slug. '/' . $parentCategoryContent2->category_slug . '/' . $parentCategoryContent2->slug)?>"><?=$parentCategoryContent2->new_title?></a></h2>
-                                        <ul class="post-tags">
-                                            <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent2->created_at), "d M Y")?></span></li> -->
-                                            <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent2->author_name?></a></li>
-                                        </ul>
-                                        <p><?=$parentCategoryContent2->sub_title?></p>
+                            
+                            if($parentCategoryContent8){?>
+                                <div class="news-post homesmall_box image-post">
+                                    <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent8->cover_image?>" alt="<?=$parentCategoryContent8->new_title?>">
+                                    <div class="hover-box">
+                                        <div class="inner-hover">
+                                            <a class="category-post" href="<?=url('category/' . $parentCategoryContent8->parent_category_slug)?>"><?=$parentCategoryContent8->parent_category_name?></a>
+                                            <h2><a href="<?=url('content/' . $parentCategoryContent8->parent_category_slug. '/' . $parentCategoryContent8->category_slug . '/' . $parentCategoryContent8->slug)?>"><?=$parentCategoryContent8->new_title?></a></h2>
+                                            <ul class="post-tags">
+                                                <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent8->created_at), "d M Y")?></span></li> -->
+                                                <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent8->author_name?></a></li>
+                                            </ul>
+                                            <p><?=$parentCategoryContent8->sub_title?></p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        <?php }?>
+                            <?php }?>
+
+
+
+                       
                         <!--- box 2-->
                     </div>
                 </div>
@@ -143,8 +146,8 @@ use App\Helpers\Helper;
                 </div>
                 <div class="col-md-3">
                     <!--- box 4-->
-                    <?php 
-                        $parentCategoryContent8 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
+                    <?php
+                            $parentCategoryContent2 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
                                                         ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
                                                         ->select(
                                                             'news_contents.id', 
@@ -161,26 +164,27 @@ use App\Helpers\Helper;
                                                         )
                                                         ->where('news_contents.status', 1) // Fetch only active content
                                                         // ->where('news_contents.is_popular', 1) // Uncomment if you want to filter by popular content
-                                                        ->where('news_contents.parent_category', 8) // Parent category filter
+                                                        ->where('news_contents.parent_category', 2) // Parent category filter
                                                         ->orderBy('news_contents.id', 'DESC') // Order by most recent
                                                         ->first(); // Fetch single record
-                            
-                            if($parentCategoryContent8){?>
-                                <div class="news-post homesmall_box image-post">
-                                    <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent8->cover_image?>" alt="<?=$parentCategoryContent8->new_title?>">
-                                    <div class="hover-box">
-                                        <div class="inner-hover">
-                                            <a class="category-post" href="<?=url('category/' . $parentCategoryContent8->parent_category_slug)?>"><?=$parentCategoryContent8->parent_category_name?></a>
-                                            <h2><a href="<?=url('content/' . $parentCategoryContent8->parent_category_slug. '/' . $parentCategoryContent8->category_slug . '/' . $parentCategoryContent8->slug)?>"><?=$parentCategoryContent8->new_title?></a></h2>
-                                            <ul class="post-tags">
-                                                <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent8->created_at), "d M Y")?></span></li> -->
-                                                <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent8->author_name?></a></li>
-                                            </ul>
-                                            <p><?=$parentCategoryContent8->sub_title?></p>
-                                        </div>
+                        
+                        if($parentCategoryContent2){
+                            ?>
+                            <div class="news-post homesmall_box image-post">
+                                <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent2->cover_image?>" alt="<?=$parentCategoryContent2->new_title?>">
+                                <div class="hover-box">
+                                    <div class="inner-hover">
+                                        <a class="category-post" href="<?=url('category/' . $parentCategoryContent2->parent_category_slug)?>"><?=$parentCategoryContent2->parent_category_name?></a>
+                                        <h2><a href="<?=url('content/'. $parentCategoryContent2->parent_category_slug. '/' . $parentCategoryContent2->category_slug . '/' . $parentCategoryContent2->slug)?>"><?=$parentCategoryContent2->new_title?></a></h2>
+                                        <ul class="post-tags">
+                                            <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent2->created_at), "d M Y")?></span></li> -->
+                                            <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent2->author_name?></a></li>
+                                        </ul>
+                                        <p><?=$parentCategoryContent2->sub_title?></p>
                                     </div>
                                 </div>
-                            <?php }?>
+                            </div>
+                        <?php }?>
                     <!--- box 4-->
 
                     <!--- box 5-->
