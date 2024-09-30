@@ -150,7 +150,7 @@ $(document).ready(function($) {
 						autoPlay: 10000,
 						navigation : true,
 						items : dataNum,
-						itemsDesktop : [1199,dataNum2],
+						//itemsDesktop : [1199,dataNum2],
 						itemsDesktopSmall : [979,dataNum3]
 					});
 

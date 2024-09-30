@@ -6,202 +6,232 @@ use App\Helpers\Helper;
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- heading-news-section2 ================================================== -->
     <section class="heading-news2">
-        <div class="container">
-            <div class="iso-call heading-news-box">
-                <?php
-                $parentCategoryContent1 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
-                                                        ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
-                                                        ->select(
-                                                            'news_contents.id', 
-                                                            'news_contents.new_title', 
-                                                            'news_contents.sub_title', 
-                                                            'news_contents.slug', 
-                                                            'news_contents.author_name', 
-                                                            'news_contents.cover_image', 
-                                                            'news_contents.created_at',
-                                                            'parent_category.sub_category as parent_category_name', // Corrected alias to sub_category
-                                                            'sub_category.sub_category as category_name', // Corrected alias to sub_category
-                                                            'sub_category.slug as category_slug', // Corrected alias to sub_category
-                                                            'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
-                                                        )
-                                                        ->where('news_contents.status', 1) // Fetch only active content
-                                                        // ->where('news_contents.is_popular', 1) // Uncomment if you want to filter by popular content
-                                                        ->where('news_contents.parent_category', 1) // Parent category filter
-                                                        ->orderBy('news_contents.id', 'DESC') // Order by most recent
-                                                        ->first(); // Fetch single record
-                                                        //  Helper::pr($parentCategoryContent1);
-                if($parentCategoryContent1){
-                ?>
-                    <div class="news-post homesmall_box image-post default-size">
-                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent1->cover_image?>" alt="<?=$parentCategoryContent1->new_title?>">
-                        <div class="hover-box">
-                            <div class="inner-hover">
-                                <a class="category-post" href="<?=url('category/' . $parentCategoryContent1->parent_category_slug)?>"><?=$parentCategoryContent1->parent_category_name?></a>
-                                <h2><a href="<?=url('content/' . $parentCategoryContent1->parent_category_slug. '/' . $parentCategoryContent1->category_slug . '/' . $parentCategoryContent1->slug)?>"><?=$parentCategoryContent1->new_title?></a></h2>
-                                <ul class="post-tags">
-                                    <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent1->created_at), "d M Y")?></span></li> -->
-                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent1->author_name?></a></li>
-                                </ul>
-                                <p><?=$parentCategoryContent1->sub_title?></p>
-                            </div>
+        <div class="heading-news-box">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 pl-1 pr-1">
+                        <div class="home_blog_left">
+                            <?php
+                                $parentCategoryContent1 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
+                                                                        ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
+                                                                        ->select(
+                                                                            'news_contents.id', 
+                                                                            'news_contents.new_title', 
+                                                                            'news_contents.sub_title', 
+                                                                            'news_contents.slug', 
+                                                                            'news_contents.author_name', 
+                                                                            'news_contents.cover_image', 
+                                                                            'news_contents.created_at',
+                                                                            'parent_category.sub_category as parent_category_name', // Corrected alias to sub_category
+                                                                            'sub_category.sub_category as category_name', // Corrected alias to sub_category
+                                                                            'sub_category.slug as category_slug', // Corrected alias to sub_category
+                                                                            'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                                                        )
+                                                                        ->where('news_contents.status', 1) // Fetch only active content
+                                                                        // ->where('news_contents.is_popular', 1) // Uncomment if you want to filter by popular content
+                                                                        ->where('news_contents.parent_category', 1) // Parent category filter
+                                                                        ->orderBy('news_contents.id', 'DESC') // Order by most recent
+                                                                        ->first(); // Fetch single record
+                                                                        //  Helper::pr($parentCategoryContent1);
+                                if($parentCategoryContent1){
+                                ?>
+                                    <div class="news-post homesmall_box image-post default-size">
+                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent1->cover_image?>" alt="<?=$parentCategoryContent1->new_title?>">
+                                        <div class="hover-box">
+                                            <div class="inner-hover">
+                                                <a class="category-post" href="<?=url('category/' . $parentCategoryContent1->parent_category_slug)?>"><?=$parentCategoryContent1->parent_category_name?></a>
+                                                <h2><a href="<?=url('content/' . $parentCategoryContent1->parent_category_slug. '/' . $parentCategoryContent1->category_slug . '/' . $parentCategoryContent1->slug)?>"><?=$parentCategoryContent1->new_title?></a></h2>
+                                                <ul class="post-tags">
+                                                    <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent1->created_at), "d M Y")?></span></li> -->
+                                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent1->author_name?></a></li>
+                                                </ul>
+                                                <p><?=$parentCategoryContent1->sub_title?></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                            <?php }?>
+
+
+                            <!--- box 2-->
+                            <?php 
+                            $parentCategoryContent8 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
+                                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
+                                                            ->select(
+                                                                'news_contents.id', 
+                                                                'news_contents.new_title', 
+                                                                'news_contents.sub_title', 
+                                                                'news_contents.slug', 
+                                                                'news_contents.author_name', 
+                                                                'news_contents.cover_image', 
+                                                                'news_contents.created_at',
+                                                                'parent_category.sub_category as parent_category_name', // Corrected alias to sub_category
+                                                                'sub_category.sub_category as category_name', // Corrected alias to sub_category
+                                                                'sub_category.slug as category_slug', // Corrected alias to sub_category
+                                                                'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                                            )
+                                                            ->where('news_contents.status', 1) // Fetch only active content
+                                                            // ->where('news_contents.is_popular', 1) // Uncomment if you want to filter by popular content
+                                                            ->where('news_contents.parent_category', 8) // Parent category filter
+                                                            ->orderBy('news_contents.id', 'DESC') // Order by most recent
+                                                            ->first(); // Fetch single record
+                                
+                                if($parentCategoryContent8){?>
+                                    <div class="news-post homesmall_box image-post">
+                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent8->cover_image?>" alt="<?=$parentCategoryContent8->new_title?>">
+                                        <div class="hover-box">
+                                            <div class="inner-hover">
+                                                <a class="category-post" href="<?=url('category/' . $parentCategoryContent8->parent_category_slug)?>"><?=$parentCategoryContent8->parent_category_name?></a>
+                                                <h2><a href="<?=url('content/' . $parentCategoryContent8->parent_category_slug. '/' . $parentCategoryContent8->category_slug . '/' . $parentCategoryContent8->slug)?>"><?=$parentCategoryContent8->new_title?></a></h2>
+                                                <ul class="post-tags">
+                                                    <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent8->created_at), "d M Y")?></span></li> -->
+                                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent8->author_name?></a></li>
+                                                </ul>
+                                                <p><?=$parentCategoryContent8->sub_title?></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php }?>
+
+
+
+                        
+                            <!--- box 2-->
                         </div>
                     </div>
-                <?php }?>
-                <div class="image-slider snd-size">
-                    <span class="top-stories">TOP STORIES</span>
-                    <ul class="bxslider">
-                        <?php         
-                        // DB::enableQueryLog(); // Enable query log               
-                        $parentCategoryContents3 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
-                                                                ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
-                                                                ->select('news_contents.id', 
-                                                                        'news_contents.new_title', 
-                                                                        'news_contents.sub_title', 
-                                                                        'news_contents.slug', 
-                                                                        'news_contents.author_name', 
-                                                                        'news_contents.cover_image', 
-                                                                        'news_contents.created_at', 
-                                                                        'parent_category.sub_category as parent_category_name', 
-                                                                        'parent_category.slug as parent_category_slug', 
-                                                                        'sub_category.sub_category as sub_category_name', 
-                                                                        'sub_category.slug as sub_category_slug')
-                                                                ->where('news_contents.status', '=', 1)
-                                                                // ->where('news_contents.is_popular', '=', 1) // Uncomment if needed
-                                                                ->where('news_contents.parent_category', '=', 3)
-                                                                ->inRandomOrder()
-                                                                ->get();       
-                                                                // dd(DB::getQueryLog());                                                        
-                        if($parentCategoryContents3){ foreach($parentCategoryContents3 as $parentCategoryContent3){
-                        ?>
-                            <li>
-                                <div class="news-post image-post">
-                                    <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent3->cover_image?>" alt="<?=$parentCategoryContent3->new_title?>">
+                    <div class="col-md-6 pl-1 pr-1">
+                        <div class="image-slider snd-size">
+                            <span class="top-stories">TOP STORIES</span>
+                            <ul class="bxslider">
+                                <?php         
+                                // DB::enableQueryLog(); // Enable query log               
+                                $parentCategoryContents3 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
+                                                                        ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
+                                                                        ->select('news_contents.id', 
+                                                                                'news_contents.new_title', 
+                                                                                'news_contents.sub_title', 
+                                                                                'news_contents.slug', 
+                                                                                'news_contents.author_name', 
+                                                                                'news_contents.cover_image', 
+                                                                                'news_contents.created_at', 
+                                                                                'parent_category.sub_category as parent_category_name', 
+                                                                                'parent_category.slug as parent_category_slug', 
+                                                                                'sub_category.sub_category as sub_category_name', 
+                                                                                'sub_category.slug as sub_category_slug')
+                                                                        ->where('news_contents.status', '=', 1)
+                                                                        // ->where('news_contents.is_popular', '=', 1) // Uncomment if needed
+                                                                        ->where('news_contents.parent_category', '=', 3)
+                                                                        ->inRandomOrder()
+                                                                        ->get();       
+                                                                        // dd(DB::getQueryLog());                                                        
+                                if($parentCategoryContents3){ foreach($parentCategoryContents3 as $parentCategoryContent3){
+                                ?>
+                                    <li>
+                                        <div class="news-post image-post">
+                                            <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent3->cover_image?>" alt="<?=$parentCategoryContent3->new_title?>">
+                                            <div class="hover-box">
+                                                <div class="inner-hover">
+                                                    <a class="category-post" href="<?=url('category/' . $parentCategoryContent3->parent_category_slug)?>"><?=$parentCategoryContent3->parent_category_name?></a>
+                                                    <a class="sub-category-post" href="<?=url('category/' . $parentCategoryContent3->parent_category_slug. '/' . $parentCategoryContent3->sub_category_slug)?>"><?=$parentCategoryContent3->sub_category_name?></a>
+                                                    <h2><a href="<?=url('content/' . $parentCategoryContent3->parent_category_slug. '/' . $parentCategoryContent3->sub_category_slug. '/' . $parentCategoryContent3->slug)?>"><?=$parentCategoryContent3->new_title?></a></h2>
+                                                    <ul class="post-tags">
+                                                        <li><i class="fa fa-clock-o"></i><?=date_format(date_create($parentCategoryContent3->created_at), "d M Y")?></li>
+                                                        <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent3->author_name?></a></li>                                                
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                <?php } }?>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 pl-1 pr-1">
+                        <!--- box 4-->
+                        <?php
+                                $parentCategoryContent2 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
+                                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
+                                                            ->select(
+                                                                'news_contents.id', 
+                                                                'news_contents.new_title', 
+                                                                'news_contents.sub_title', 
+                                                                'news_contents.slug', 
+                                                                'news_contents.author_name', 
+                                                                'news_contents.cover_image', 
+                                                                'news_contents.created_at',
+                                                                'parent_category.sub_category as parent_category_name', // Corrected alias to sub_category
+                                                                'sub_category.sub_category as category_name', // Corrected alias to sub_category
+                                                                'sub_category.slug as category_slug', // Corrected alias to sub_category
+                                                                'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                                            )
+                                                            ->where('news_contents.status', 1) // Fetch only active content
+                                                            // ->where('news_contents.is_popular', 1) // Uncomment if you want to filter by popular content
+                                                            ->where('news_contents.parent_category', 2) // Parent category filter
+                                                            ->orderBy('news_contents.id', 'DESC') // Order by most recent
+                                                            ->first(); // Fetch single record
+                            
+                            if($parentCategoryContent2){
+                                ?>
+                                <div class="news-post homesmall_box image-post">
+                                    <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent2->cover_image?>" alt="<?=$parentCategoryContent2->new_title?>">
                                     <div class="hover-box">
                                         <div class="inner-hover">
-                                            <a class="category-post" href="<?=url('category/' . $parentCategoryContent3->parent_category_slug)?>"><?=$parentCategoryContent3->parent_category_name?></a>
-                                            <a class="sub-category-post" href="<?=url('category/' . $parentCategoryContent3->parent_category_slug. '/' . $parentCategoryContent3->sub_category_slug)?>"><?=$parentCategoryContent3->sub_category_name?></a>
-                                            <h2><a href="<?=url('content/' . $parentCategoryContent3->parent_category_slug. '/' . $parentCategoryContent3->sub_category_slug. '/' . $parentCategoryContent3->slug)?>"><?=$parentCategoryContent3->new_title?></a></h2>
+                                            <a class="category-post" href="<?=url('category/' . $parentCategoryContent2->parent_category_slug)?>"><?=$parentCategoryContent2->parent_category_name?></a>
+                                            <h2><a href="<?=url('content/'. $parentCategoryContent2->parent_category_slug. '/' . $parentCategoryContent2->category_slug . '/' . $parentCategoryContent2->slug)?>"><?=$parentCategoryContent2->new_title?></a></h2>
                                             <ul class="post-tags">
-                                                <li><i class="fa fa-clock-o"></i><?=date_format(date_create($parentCategoryContent3->created_at), "d M Y")?></li>
-                                                <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent3->author_name?></a></li>                                                
+                                                <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent2->created_at), "d M Y")?></span></li> -->
+                                                <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent2->author_name?></a></li>
                                             </ul>
+                                            <p><?=$parentCategoryContent2->sub_title?></p>
                                         </div>
                                     </div>
                                 </div>
-                            </li>
-                        <?php } }?>
-                    </ul>
+                            <?php }?>
+                        <!--- box 4-->
+
+                        <!--- box 5-->
+                        <?php 
+                            $parentCategoryContent9 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
+                                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
+                                                            ->select(
+                                                                'news_contents.id', 
+                                                                'news_contents.new_title', 
+                                                                'news_contents.sub_title', 
+                                                                'news_contents.slug', 
+                                                                'news_contents.author_name', 
+                                                                'news_contents.cover_image', 
+                                                                'news_contents.created_at',
+                                                                'parent_category.sub_category as parent_category_name', // Corrected alias to sub_category
+                                                                'sub_category.sub_category as category_name', // Corrected alias to sub_category
+                                                                'sub_category.slug as category_slug', // Corrected alias to sub_category
+                                                                'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                                            )
+                                                            ->where('news_contents.status', 1) // Fetch only active content
+                                                            // ->where('news_contents.is_popular', 1) // Uncomment if you want to filter by popular content
+                                                            ->where('news_contents.parent_category', 9) // Parent category filter
+                                                            ->orderBy('news_contents.id', 'DESC') // Order by most recent
+                                                            ->first(); // Fetch single record
+                        ?>
+                        <?php if($parentCategoryContent9){?>
+                            <div class="news-post homesmall_box image-post">
+                                <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent9->cover_image?>" alt="<?=$parentCategoryContent9->new_title?>">
+                                <div class="hover-box">
+                                    <div class="inner-hover">
+                                        <a class="category-post" href="<?=url('category/' . $parentCategoryContent9->parent_category_slug)?>"><?=$parentCategoryContent9->parent_category_name?></a>
+                                        <h2><a href="<?=url('content/' . $parentCategoryContent9->parent_category_slug. '/' . $parentCategoryContent9->category_slug . '/' . $parentCategoryContent9->slug)?>"><?=$parentCategoryContent9->new_title?></a></h2>
+                                        <ul class="post-tags">
+                                            <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent9->created_at), "d M Y")?></span></li> -->
+                                            <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent9->author_name?></a></li>
+                                        </ul>
+                                        <p><?=$parentCategoryContent9->sub_title?></p>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php }?>
+                        <!--- box 5-->
+                    </div>
                 </div>
-                <?php
-                $parentCategoryContent2 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
-                                                        ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
-                                                        ->select(
-                                                            'news_contents.id', 
-                                                            'news_contents.new_title', 
-                                                            'news_contents.sub_title', 
-                                                            'news_contents.slug', 
-                                                            'news_contents.author_name', 
-                                                            'news_contents.cover_image', 
-                                                            'news_contents.created_at',
-                                                            'parent_category.sub_category as parent_category_name', // Corrected alias to sub_category
-                                                            'sub_category.sub_category as category_name', // Corrected alias to sub_category
-                                                            'sub_category.slug as category_slug', // Corrected alias to sub_category
-                                                            'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
-                                                        )
-                                                        ->where('news_contents.status', 1) // Fetch only active content
-                                                        // ->where('news_contents.is_popular', 1) // Uncomment if you want to filter by popular content
-                                                        ->where('news_contents.parent_category', 2) // Parent category filter
-                                                        ->orderBy('news_contents.id', 'DESC') // Order by most recent
-                                                        ->first(); // Fetch single record
-                $parentCategoryContent8 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
-                                                        ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
-                                                        ->select(
-                                                            'news_contents.id', 
-                                                            'news_contents.new_title', 
-                                                            'news_contents.sub_title', 
-                                                            'news_contents.slug', 
-                                                            'news_contents.author_name', 
-                                                            'news_contents.cover_image', 
-                                                            'news_contents.created_at',
-                                                            'parent_category.sub_category as parent_category_name', // Corrected alias to sub_category
-                                                            'sub_category.sub_category as category_name', // Corrected alias to sub_category
-                                                            'sub_category.slug as category_slug', // Corrected alias to sub_category
-                                                            'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
-                                                        )
-                                                        ->where('news_contents.status', 1) // Fetch only active content
-                                                        // ->where('news_contents.is_popular', 1) // Uncomment if you want to filter by popular content
-                                                        ->where('news_contents.parent_category', 8) // Parent category filter
-                                                        ->orderBy('news_contents.id', 'DESC') // Order by most recent
-                                                        ->first(); // Fetch single record
-                $parentCategoryContent9 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
-                                                        ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
-                                                        ->select(
-                                                            'news_contents.id', 
-                                                            'news_contents.new_title', 
-                                                            'news_contents.sub_title', 
-                                                            'news_contents.slug', 
-                                                            'news_contents.author_name', 
-                                                            'news_contents.cover_image', 
-                                                            'news_contents.created_at',
-                                                            'parent_category.sub_category as parent_category_name', // Corrected alias to sub_category
-                                                            'sub_category.sub_category as category_name', // Corrected alias to sub_category
-                                                            'sub_category.slug as category_slug', // Corrected alias to sub_category
-                                                            'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
-                                                        )
-                                                        ->where('news_contents.status', 1) // Fetch only active content
-                                                        // ->where('news_contents.is_popular', 1) // Uncomment if you want to filter by popular content
-                                                        ->where('news_contents.parent_category', 9) // Parent category filter
-                                                        ->orderBy('news_contents.id', 'DESC') // Order by most recent
-                                                        ->first(); // Fetch single record
-                if($parentCategoryContent2){
-                ?>
-                    <div class="news-post homesmall_box image-post">
-                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent2->cover_image?>" alt="<?=$parentCategoryContent2->new_title?>">
-                        <div class="hover-box">
-                            <div class="inner-hover">
-                                <a class="category-post" href="<?=url('category/' . $parentCategoryContent2->parent_category_slug)?>"><?=$parentCategoryContent2->parent_category_name?></a>
-                                <h2><a href="<?=url('content/'. $parentCategoryContent2->parent_category_slug. '/' . $parentCategoryContent2->category_slug . '/' . $parentCategoryContent2->slug)?>"><?=$parentCategoryContent2->new_title?></a></h2>
-                                <ul class="post-tags">
-                                    <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent2->created_at), "d M Y")?></span></li> -->
-                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent2->author_name?></a></li>
-                                </ul>
-                                <p><?=$parentCategoryContent2->sub_title?></p>
-                            </div>
-                        </div>
-                    </div>
-                <?php }?>
-                <?php if($parentCategoryContent8){?>
-                    <div class="news-post homesmall_box image-post">
-                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent8->cover_image?>" alt="<?=$parentCategoryContent8->new_title?>">
-                        <div class="hover-box">
-                            <div class="inner-hover">
-                                <a class="category-post" href="<?=url('category/' . $parentCategoryContent8->parent_category_slug)?>"><?=$parentCategoryContent8->parent_category_name?></a>
-                                <h2><a href="<?=url('content/' . $parentCategoryContent8->parent_category_slug. '/' . $parentCategoryContent8->category_slug . '/' . $parentCategoryContent8->slug)?>"><?=$parentCategoryContent8->new_title?></a></h2>
-                                <ul class="post-tags">
-                                    <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent8->created_at), "d M Y")?></span></li> -->
-                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent8->author_name?></a></li>
-                                </ul>
-                                <p><?=$parentCategoryContent8->sub_title?></p>
-                            </div>
-                        </div>
-                    </div>
-                <?php }?>
-                <?php if($parentCategoryContent9){?>
-                    <div class="news-post homesmall_box image-post">
-                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent9->cover_image?>" alt="<?=$parentCategoryContent9->new_title?>">
-                        <div class="hover-box">
-                            <div class="inner-hover">
-                                <a class="category-post" href="<?=url('category/' . $parentCategoryContent9->parent_category_slug)?>"><?=$parentCategoryContent9->parent_category_name?></a>
-                                <h2><a href="<?=url('content/' . $parentCategoryContent9->parent_category_slug. '/' . $parentCategoryContent9->category_slug . '/' . $parentCategoryContent9->slug)?>"><?=$parentCategoryContent9->new_title?></a></h2>
-                                <ul class="post-tags">
-                                    <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent9->created_at), "d M Y")?></span></li> -->
-                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent9->author_name?></a></li>
-                                </ul>
-                                <p><?=$parentCategoryContent9->sub_title?></p>
-                            </div>
-                        </div>
-                    </div>
-                <?php }?>
+                <!-- <div class="iso-call heading-news-box">
+                </div> -->
             </div>
         </div>
     </section>

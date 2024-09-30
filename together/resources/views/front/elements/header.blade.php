@@ -82,6 +82,27 @@ $APP_URL = $_SERVER['APP_URL'];
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <a class="navbar-brand" href="<?=url('/')?>"><img src="<?=env('UPLOADS_URL').$generalSetting->site_logo?>" alt="<?=$generalSetting->site_name?>"></a>
+                    <div id="cssmenu">
+                        <ul>
+                            <li><a href="<?=url('about-us')?>">ABOUT</a></li>
+                            <?php if($parentCats){ foreach($parentCats as $parentCat){?>
+                                <li><a href="<?=url('category/' . $parentCat->slug)?>"><?=$parentCat->sub_category?></a>
+                                    
+                                    <ul class="filter-posts">
+                                        <?php
+                                        
+                                        $childCats = NewsCategory::select('id', 'sub_category', 'slug')->where('status', '=', 1)->where('parent_category', '=', $parentCat->id)->orderBy('sub_category', 'asc')->get();                                                                                                        
+                                        if($childCats){ $sl=1; foreach($childCats as $childCat){
+                                        ?>
+                                            <li><a <?=(($sl == 1)?'class="active"':'')?> href="<?=url('category/' . $parentCat->sub_category .'/'. $childCat->slug)?>"><?=$childCat->sub_category?></a></li>
+                                        <?php $sl++; } }?>
+                                    </ul>
+                                </li>
+                            <?php } }?>
+                            <li><a href="<?=url('submissions')?>">SUBMISSIONS</a></li>
+                            <li><a href="<?=env('REGENERATE_URL')?>contact.php">CONTACT</a></li>
+                        </ul>
+                    </div>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>

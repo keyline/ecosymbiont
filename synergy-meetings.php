@@ -23,9 +23,9 @@ include "include/header.php";
                 <div class="col-md-6">
                     
                     <div class="right-text-box">
-                        <p class="mb-10">A Synergy Meeting took place in association with From Bhopal to the Bay in September, 2024, in Oakland, California, United States.</p>
+                        <p class="mb-10">A Synergy Meeting took place in association with From <span class="italic">Bhopal to the Bay</span> in September, 2024, in Oakland, California, United States.</p>
                         <div class="info-box" style="margin-bottom: 0;">
-                            <h4 style="margin-bottom: 10px;"><i>Event Context</i></h4>
+                            <h4 style="margin-bottom: 10px; color:#90201f;">Event Context</h4>
                         </div>
                         <p class="mb-20">40 years ago, Bhopal, India, experienced the world’s worst-ever
                             corporation-caused disaster, resulting in the deaths and disabling of hundreds of thousands
@@ -42,12 +42,12 @@ include "include/header.php";
                             Indigenous rights, land sovereignty, social-environmental justice, climate change, human
                             rights, food sovereignty, and corporate accountability.</p>
                             <div class="info-box" style="margin-bottom: 0;">
-                                <h4 style="margin-bottom: 10px;"><i>Participating/ sponsoring
-                                organizations</i></h4>
+                                <h4 style="margin-bottom: 10px; color:#90201f;">Participating/ sponsoring
+                                organizations</h4>
                             </div>
                         <!-- <h3 class="mb-20"><i>Participating/Sponsoring Organizations:</i></h3> -->
                         <ul class="mb-10 long-ul">
-                            <li><strong>350SF (<a href="https://350bayarea.org/" target="_blank">350bayarea.org / 350-san-francisco</a>).</strong> 350SF is a local chapter of
+                            <li><strong>350SF (<a href="https://350bayarea.org/" target="_blank">350bayarea.org</a> / 350-san-francisco).</strong> 350SF is a local chapter of
                                 the broader 350 Bay Area network, focusing on grassroots climate initiatives in San
                                 Francisco. They work to accelerate the transition from fossil fuels to clean energy
                                 through community outreach, policy advocacy, and supporting local climate actions.</li>

@@ -11,7 +11,7 @@ include "include/header.php";
                     <div class="col-md-12">
                         <div class="info-box">
                             <h2>OUR MISSION</h2>  
-                            <p id="our-focus">Our mission is to regain the understanding that human communities are part of natural <span><a href="#definitions"> ecological webs (ecowebs) </a></span> and to <span><a href="#definitions">regenerate</a></span>  systems that restore, preserve, and foster the symbiosis between humans and ecowebs. Symbiosis encompasses the connectivity and dependence that exist within an ecoweb and that results in mutual benefit of all within that ecoweb, including humans.</p>
+                            <p id="our-focus">Our mission is to regain the understanding that human communities are part of natural  ecological webs (<span><a href="#definitions">ecowebs</a></span>) and to <span><a href="#definitions">regenerate</a></span>  systems that restore, preserve, and foster the symbiosis between humans and ecowebs. Symbiosis encompasses the connectivity and dependence that exist within an ecoweb and that results in mutual benefit of all within that ecoweb, including humans.</p>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -45,7 +45,7 @@ include "include/header.php";
                                     innovators, and knowledge-holders working to regenerate systems that restore,
                                     preserve, and foster human-ecoweb symbiosis. We do this through in-person
                                     <strong><a href="<?=$base_url?>synergy-meetings.php">Synergy Meetings</a></strong> and through our online knowledge-sharing and
-                                    community-building platform, <strong><a href="<?=$base_url?>together" target="_blank">Ecosymbionts Regenerate Together</a>.</strong>
+                                    community-building platform, <strong><a href="<?=$base_url?>together" target="_blank">Ecosymbionts Regenerate Together</a></strong>.
                                 </li>
                                 <li><strong><i>Regenerate systems:</i> </strong> We collaboratively conceptualize and promote alternative systems that optimize ecoweb wellbeing (including of humans), instead of exploiting, diminishing, and destroying ecowebs. We do this by synthesizing our own work with the knowledge, ideas, and wisdom of grassroots changemakers, innovators, and knowledge-holders from across the world shared on <a href="<?=$base_url?>together" target="_blank">Ecosymbionts Regenerate Together</a>. </li>
                             </ul>
@@ -114,7 +114,7 @@ include "include/header.php";
                 </div>
                 <div class="row" id="definitions">
                   <div class="col-md-12">
-                      <div class="info-box">
+                      <div class="info-box hideonmobile">
                         <h2>DEFINITIONS</h2>
                       </div>
                     </div>
@@ -124,6 +124,9 @@ include "include/header.php";
                         </div>
                     </div>
                     <div class="col-md-8">
+                        <div id="definitions" class="info-box hideondesktop mobile_toppadding">
+                          <h2>DEFINITIONS</h2>
+                        </div>
                         <div class="defination-info">
                             <div class="panel-group" id="accordion">
                                 <div class="panel panel-default">
@@ -164,7 +167,7 @@ include "include/header.php";
                                   </div>
                                   <div id="collapseThree" class="panel-collapse collapse">
                                     <div class="panel-body">
-                                        An interconnected network of diverse living beings and abiotic components (water, minerals, air, rocks) that have evolved together over time in a particular niche of our planet and are thus mutually beneficial to and dependent on each other (symbiotic)
+                                        An interconnected network of diverse living beings and non-living (abiotic) components (<span class="italic">e.g.</span>, water, minerals, air, rocks) that have evolved together over time in a particular niche of our planet and are thus mutually beneficial to and dependent on each other (symbiotic)
                                     </div>
                                   </div>
                                 </div>
@@ -178,7 +181,7 @@ include "include/header.php";
                                     </div>
                                     <div id="collapsefour" class="panel-collapse collapse">
                                       <div class="panel-body">
-                                        A human being who strives to live symbiotically with other humans, non-human living beings, and non-living (abiotic) components (<i>e.g.</i>,
+                                        A human being who strives to live symbiotically with other humans, non-human living beings, and non-living (abiotic) components (<span class="italic">e.g.</span>,
                                         water, minerals, air, rocks) of ecowebs 
                                       </div>
                                     </div>

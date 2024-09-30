@@ -28,6 +28,9 @@ body{
     padding: 0;
     font-family: 'proximanova_regular', sans-serif;
 }
+.italic {
+    font-style: italic;
+}
 h1,h2,h3,h4,h5,h6,p,ul,span,a{
     margin: 0;
     padding: 0;
@@ -126,7 +129,7 @@ header .nav>li{
 .reatoring{
     padding: 100px 0;
     background: url(../images/middleimage.jpg) no-repeat center center;
-    background-size: 100% 100%;
+    background-size: cover;
     background-attachment: fixed;
 }
 .reatoring h1{
@@ -297,7 +300,12 @@ textarea.form-control {
     }
     
 }
+@media(min-width: 991px){
+.hideondesktop{display: none;}
+}
 @media(max-width: 992px){
+    .hideonmobile{display: none;}
+    .mobile_toppadding{padding-top: 25px;}
     header {
         /* margin-bottom: 66px; */
     }
@@ -305,7 +313,10 @@ textarea.form-control {
         width: 240px;
     }
     header .nav>li {
-        margin: 0 8px;
+        margin: 0 0;
+    }
+    .left-img-box {
+        margin-bottom: 30px;
     }
 }
 @media(max-width: 767px){
