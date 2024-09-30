@@ -64,12 +64,12 @@
                                                 <input type="text" name="phone" class="form-control" id="phone" placeholder="Enter Phone" required autocomplete="off">
                                               </div>
                                             </div> -->
-                                            <div class="row" style="margin-bottom: 15px;">
+                                            <!-- <div class="row" style="margin-bottom: 15px;">
                                               <label for="password" class="col-md-4 col-lg-3 col-form-label">Password*</label>
                                               <div class="col-md-8 col-lg-9">
                                                 <input type="password" name="password" class="form-control" id="password" placeholder="Enter Password" minlength="8" maxlength="15" required autocomplete="off">
                                               </div>
-                                            </div>
+                                            </div> -->
                                             <div class="row" style="margin-bottom: 15px;">
                                               <label for="country" class="col-md-4 col-lg-3 col-form-label">Country*</label>
                                               <div class="col-md-8 col-lg-9">

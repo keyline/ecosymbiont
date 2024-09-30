@@ -407,12 +407,14 @@ class FrontController extends Controller
                             'first_name'                => 'required',            
                             'last_name'                 => 'required',                                    
                             'email'                     => 'required',                                                  
-                            'country'                   => 'required',                                     
-                            'password'                  => 'required',                         
+                            'country'                   => 'required',                                                                                         
                         ];
                         if ($this->validate($request, $rules)) {
                             $checkValue = User::where('email', '=', $postData['email'])->count();
-                            if ($checkValue <= 0) {                    
+                            if ($checkValue <= 0) {        
+                                // Generate a random alphanumeric password
+                                $randomPassword = bin2hex(random_bytes(8));   
+
                                 $fields = [                        
                                     'first_name'                => $postData['first_name'],            
                                     'last_name'                 => $postData['last_name'],        
@@ -420,9 +422,9 @@ class FrontController extends Controller
                                     'email'                     => $postData['email'],                                                          
                                     'country'                   => $postData['country'],
                                     'role'                      => $postData['role'],
-                                    'password'                  => Hash::make($postData['password']),                         
+                                    'password'                  => Hash::make($randomPassword),                         
                                 ];
-                                // Helper::pr($fields);
+                                 Helper::pr($fields);
                                 User::insert($fields);
                                 return redirect(url('signin'))->with('success_message', 'Sign up successful!');
                             } else {
