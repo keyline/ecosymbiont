@@ -440,7 +440,7 @@ class FrontController extends Controller
                                                                     <tr><td style='padding: 8px 15px'>Auto-generated from the Ecosymbiont Website.</td></tr>
                                                                 </table>";
                                 $this->sendMail($postData['email'], $subject, $message);
-                                return redirect(url('signin'))->with('success_message', 'Sign up successful!');
+                                return redirect(url('signin'))->with('success_message', 'Your sign-up was successful! Please check your email for your login credentials.');
                             } else {
                                 return redirect()->back()->with('error_message', 'User Already Registered !!!');
                             }
