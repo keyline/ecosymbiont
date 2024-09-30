@@ -6366,7 +6366,7 @@ div#popup p {
 .heading-news2 .news-post.homesmall_box img {
   height: 220px;
 }
-#cssmenu.small-screen{display:none;}
+#cssmenu{display:none;}
 }
 @media (max-width: 767px) {
   .top-line {
@@ -6598,7 +6598,7 @@ div#popup p {
 #cssmenu.small-screen #menu-button {
   position: absolute;
   right: 0;
-  top: -53px;
+  top: -90px;
 }
 }
 @media (max-width: 650px) {
