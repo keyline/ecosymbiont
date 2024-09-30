@@ -7,6 +7,11 @@ use App\Helpers\Helper;
 <!-- heading-news-section2 ================================================== -->
     <section class="heading-news2">
         <div class="container">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6"></div>
+                <div class="col-md-3"></div>
+            </div>
             <div class="iso-call heading-news-box">
                 <?php
                 $parentCategoryContent1 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
