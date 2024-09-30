@@ -135,22 +135,23 @@ $(document).ready(function($) {
 						dataNum2,
 						dataNum3;
 
-					if ( dataNum == 1 ) {
-						dataNum2 = 1;
-						dataNum3 = 1;
-					} else if ( dataNum == 2 ) {
-						dataNum2 = 2;
-						dataNum3 = dataNum - 1;
-					} else {
-						dataNum2 = dataNum - 1;
-						dataNum3 = dataNum - 2;
-					}
+						if ( dataNum == 1 ) {
+							dataNum2 = 1;
+							dataNum3 = 1;
+						} else if ( dataNum == 2 ) {
+							dataNum2 = 2;
+							dataNum3 = dataNum - 1;
+						} else {
+							dataNum2 = dataNum - 1;
+							dataNum3 = dataNum - 2;
+						}
+	
 
 					carousel.owlCarousel({
 						autoPlay: 10000,
 						navigation : true,
 						items : dataNum,
-						//itemsDesktop : [1199,dataNum2],
+						itemsDesktop : [1199,dataNum2],
 						itemsDesktopSmall : [979,dataNum3]
 					});
 
