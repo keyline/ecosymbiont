@@ -187,7 +187,7 @@ use App\Helpers\Helper;
                                                             <div class="autor-title">
                                                                 <span>
                                                                     <img src="<?=env('UPLOADS_URL').'icon/organizational.png'?>" alt="organizational" title="Organizational Affiliation" data-toogle="tooltip">                                                                    
-                                                                    <span><?= $organization_name = (isset($organization[$i]) > 0) ? trim($organization[$i]) : trim($organization[0]); ?></span>
+                                                                    <span><?= $organization_name = (isset($organization[$i]) > 0) ? trim($organization[$i]) : ''; ?></span>
                                                                 </span>
                                                             </div>
                                                         </div>
