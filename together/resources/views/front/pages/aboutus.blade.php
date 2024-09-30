@@ -38,7 +38,7 @@
                                                 <h2>HOW TO CITE ERT CONTENT</h2>
                                                 <p class="black">If you are citing ERT content, please use the following format: Author name(s), <i>Title</i>, <strong>Ecosymbionts Regenerate Together:</strong> DOI (publication date).</p>
                                                 <p class="black"><i>For example: </i></p>
-                                                <p class="black">F. <i>Jahan, From Bhopal to the Bay: Fighting Corporations Creating Industrial Wastelands</i>, <strong>Ecosymbionts Regenerate Together:</strong> DOI-ERT092024-004 (25 September, 2024).</p>
+                                                <p class="black">F. Jahan, <i>From Bhopal to the Bay: Fighting Corporations Creating Industrial Wastelands</i>, <strong>Ecosymbionts Regenerate Together:</strong> DOI-ERT092024-004 (25 September, 2024).</p>
                                             </div>
                                             <div class="titleto-inner">
                                                 <h2>TYPES OF CREATIVE-WORKS</h2>
@@ -51,39 +51,39 @@
                                             <div class="titleto-inner">
                                                 <h4>Action</h4>
                                                 <ul>
-                                                    <li><strong>Activism:</strong> Substantive Creative-Work about specific upcoming or past activism</li>
-                                                    <li><strong>Events:</strong> Substantive Creative-Work about specific upcoming or past events</li>
+                                                    <li><strong><span class="italic">Activism:</span></strong> Substantive Creative-Work about specific upcoming or past activism</li>
+                                                    <li><strong><span class="italic">Events:</span></strong> Substantive Creative-Work about specific upcoming or past events</li>
                                                 </ul>
                                             </div>
                                             <div class="titleto-inner">
                                                 <h4>Indigenous</h4>
                                                 <ul>
-                                                    <li><strong>Indigenous Knowledge-Technologies-Practices:</strong> Indigenous persons writing about their own community's Knowledge-Technologies-Practices or on behalf of a living Indigenous person</li>
-                                                    <li><strong>Indigenous Retelling & Telling:</strong> A retelling or telling of past and/or current events from the perspective of an Indigenous individual and/or community</li>
+                                                    <li><strong><span class="italic">Indigenous Knowledge-Technologies-Practices:</span></strong> Indigenous persons writing about their own community's Knowledge-Technologies-Practices or on behalf of a living Indigenous person</li>
+                                                    <li><strong><span class="italic">Indigenous Retelling & Telling:</span></strong> A retelling or telling of past and/or current events from the perspective of an Indigenous individual and/or community</li>
                                                 </ul>
                                             </div>
                                             <div class="titleto-inner">
                                                 <h4>Regenerative</h4>
                                                 <ul>
-                                                    <li><strong>Ecoweb Regeneration:</strong> About restoring, revitalizing, generating, and/or nurturing one or more ecowebs in a way that optimizes symbiotic health and wellbeing</li>
-                                                    <li><strong>Human-Ecoweb Integration:</strong> About integrating one or more human communities into one or more natural or regenerated ecowebs</li>
-                                                    <li><strong>Regenerative Technologies:</strong> About technologies that use materials and processes that are not extractive but instead preserve ecowebs and human communities in ways that optimize symbiotic health and wellbeing</li>
+                                                    <li><strong><span class="italic">Ecoweb Regeneration:</span></strong> About restoring, revitalizing, generating, and/or nurturing one or more ecowebs in a way that optimizes symbiotic health and wellbeing</li>
+                                                    <li><strong><span class="italic">Human-Ecoweb Integration:</span></strong> About integrating one or more human communities into one or more natural or regenerated ecowebs</li>
+                                                    <li><strong><span class="italic">Regenerative Technologies:</span></strong> About technologies that use materials and processes that are not extractive but instead preserve ecowebs and human communities in ways that optimize symbiotic health and wellbeing</li>
                                                 </ul>
                                             </div>
                                             <div class="titleto-inner">
                                                 <h4>Systems</h4>
                                                 <ul>
-                                                    <li><strong>Ecoweb-Rooted Framing:</strong> Creative-Work that conceptualizes <a href="<?=env('REGENERATE_URL')?>#our-focus" style="color: #d09c1c;" target="_blank">legal-economic-governance systems</a> in a manner that reframes them to optimize ecoweb-rooted symbiotic wellbeing, i.e., of human communities and one or more ecowebs we rely on</li>
+                                                    <li><strong><span class="italic">Ecoweb-Rooted Framing:</span></strong> Creative-Work that conceptualizes <a href="<?=env('REGENERATE_URL')?>#our-focus" style="color: #d09c1c;" target="_blank">legal-economic-governance systems</a> in a manner that reframes them to optimize ecoweb-rooted symbiotic wellbeing, i.e., of human communities and one or more ecowebs we rely on</li>
                                                     <li><strong><a href="<?=env('REGENERATE_URL')?>#our-focus" style="color: #d09c1c;" target="_blank">Extractivism</a>  Alternatives:</strong> Creative-Work that describes <a href="<?=env('REGENERATE_URL')?>#our-focus" style="color: #d09c1c;" target="_blank">human activity systems</a> that present an alternative to extractivist systems, e.g., the cycle of sustainable generation, repeated use, and biodegradable disposal of objects, as opposed to the cycle of resource extraction, disposable commodity production, disposable use, and landfill waste generation</li>
-                                                    <li><strong>Systems Reform:</strong> Creative-Work that describes concrete ideas on how to reshape legal-economic-governance and/or human acitivty systems in a manner that minimizes or eliminates extractivism.</li>
+                                                    <li><strong><span class="italic">Systems Reform:</span></strong> Creative-Work that describes concrete ideas on how to reshape legal-economic-governance and/or human acitivty systems in a manner that minimizes or eliminates extractivism.</li>
                                                 </ul>
                                             </div>
                                             <div class="titleto-inner">
                                                 <h4>Wellbeing</h4>
                                                 <ul>
-                                                    <li><strong>Art-Music-Performance:</strong> Visual art, literary art, and/or audiovisual media of music and/or performance</li>
-                                                    <li><strong>Food Sovereignty:</strong> About systems that generate food in a manner that optimizes the wellbeing of human communities and the ecowebs we rely on</li>
-                                                    <li><strong>Sustainable Healthcare:</strong> About systems that optimize the mental and physical wellbeing of humans, especially those that incorporate connections to and sustainable utilization of biodiverse ecowebs and ecoweb resources</li>
+                                                    <li><strong><span class="italic">Art-Music-Performance:</span></strong> Visual art, literary art, and/or audiovisual media of music and/or performance</li>
+                                                    <li><strong><span class="italic">Food Sovereignty:</span></strong> About systems that generate food in a manner that optimizes the wellbeing of human communities and the ecowebs we rely on</li>
+                                                    <li><strong><span class="italic">Sustainable Healthcare:</span></strong> About systems that optimize the mental and physical wellbeing of humans, especially those that incorporate connections to and sustainable utilization of biodiverse ecowebs and ecoweb resources</li>
                                                 </ul>
                                             </div>
 

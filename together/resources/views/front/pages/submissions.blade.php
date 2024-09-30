@@ -47,7 +47,7 @@
                                                 <ul>
                                                     <li>A Creative-Work may have up to three co-authors, wherein the first author listed must be a human individual ("Lead Author").</li>
                                                     <li>ERT encourages an ecoweb-rooted community or movement to be a co-author of a Creative-Work, but only if a human individual is also a co-author.</li>
-                                                    <li>For the purposes of submissions of Creative- Work to ERT, an ecoweb-rooted community is defined as a self-associating group of human individuals that trace their origins to a particular ecoweb. Examples of ecoweb-rooted communities are: the Idu Mishmi of Arunachal Pradesh (India) and the Lisjan Ohlone of California (United States).</li>
+                                                    <li>For the purposes of submissions of Creative-Work to ERT, an ecoweb-rooted community is defined as a self-associating group of human individuals that trace their origins to a particular ecoweb. Examples of ecoweb-rooted communities are: the Idu Mishmi of Arunachal Pradesh (India) and the Lisjan Ohlone of California (United States).</li>
                                                     <li>Each co-author must submit a separate submission form, with a human individual representative of an ecoweb-rooted community co-author or movement co-author submitting on behalf of the ecoweb-rooted community or movement.</li>
                                                 </ul>
                                             </div>
@@ -77,7 +77,7 @@
                                             </div>
 
                                             <div class="titleto-inner">
-                                                <h2>EXPLANATION OF CATEGORIES AND SUBCATEGORIES OF ERT</h2>
+                                                <h2>EXPLANATION OF CATEGORIES AND SUB-CATEGORIES OF ERT</h2>
                                                 <p class="black">ERT has five main categories that are further divided into sub-categories. To help you understand what type of content is appropriate for each category/sub-category, please see below.</p>
                                                 <ul>
                                                     <li>
@@ -178,7 +178,7 @@
                                             <!-- <a class="btn btn-primary blue_btn" href="#">SUBMIT CREATIVE-WORK</a> -->
                                             <?php if($button_show){?>
                                                 <?php if(session('is_user_login')){?>
-                                                    <p class="text-center"><a href="<?=url('user/submit-new-article')?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Submit New Article</a></p>
+                                                    <p class="text-center"><a href="<?=url('user/submit-new-article')?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Submit New Creative-Work</a></p>
                                                 <?php } else {?>
                                                     <p class="text-center"><a href="<?=url('signin')?>" class="btn btn-primary">Submit New Creative-Work</a></p>
                                                 <?php }?>
