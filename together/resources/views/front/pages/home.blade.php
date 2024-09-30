@@ -6,7 +6,7 @@ use App\Helpers\Helper;
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- heading-news-section2 ================================================== -->
     <section class="heading-news2">
-        <div class="iso-call heading-news-box">
+        <div class="heading-news-box">
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
