@@ -9,7 +9,7 @@ use App\Helpers\Helper;
         <div class="heading-news-box">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-3 pl-1 pr-1">
                         <div class="home_blog_left">
                             <?php
                                 $parentCategoryContent1 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
@@ -98,7 +98,7 @@ use App\Helpers\Helper;
                             <!--- box 2-->
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 pl-1 pr-1">
                         <div class="image-slider snd-size">
                             <span class="top-stories">TOP STORIES</span>
                             <ul class="bxslider">
@@ -145,7 +145,7 @@ use App\Helpers\Helper;
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 pl-1 pr-1">
                         <!--- box 4-->
                         <?php
                                 $parentCategoryContent2 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
