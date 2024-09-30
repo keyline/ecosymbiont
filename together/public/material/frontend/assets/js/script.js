@@ -139,7 +139,7 @@ $(document).ready(function($) {
 						dataNum2 = 1;
 						dataNum3 = 1;
 					} else if ( dataNum == 2 ) {
-						dataNum2 = 3;
+						dataNum2 = 2;
 						dataNum3 = dataNum - 1;
 					} else {
 						dataNum2 = dataNum - 1;
@@ -150,7 +150,7 @@ $(document).ready(function($) {
 						autoPlay: 10000,
 						navigation : true,
 						items : dataNum,
-						itemsDesktop : [1199,dataNum2],
+						//itemsDesktop : [1199,dataNum2],
 						itemsDesktopSmall : [979,dataNum3]
 					});
 
