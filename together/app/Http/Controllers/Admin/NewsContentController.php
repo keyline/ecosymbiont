@@ -63,7 +63,7 @@ class NewsContentController extends Controller
                 'cover_image'               => 'required',     
                 'is_feature'                => 'required',  
                 'is_popular'                => 'required',  
-                'sub_title'                 => ['required', 'string', new MaxWords(50)], 
+                'sub_title'                 => 'required', 
             ];
             
             // Validate request data
@@ -110,6 +110,7 @@ class NewsContentController extends Controller
                     'short_desc'                => $postData['short_desc'] ?? '',    
                     'sub_title'                 => $postData['sub_title'], 
                 ];
+                
         
                 // Insert NewsContent and get the last inserted ID
                 $lastInsertedId = NewsContent::insertGetId($fields);
@@ -201,7 +202,7 @@ class NewsContentController extends Controller
                 'long_desc'                 => 'required',                          
                 'is_feature'                => 'required',  
                 'is_popular'                => 'required',                     
-                'sub_title'                  => ['required', 'string', new MaxWords(50)], 
+                'sub_title'                  => 'required', 
             ];           
             if ($this->validate($request, $rules)) {
                 // $checkValue = NewsContent::where('sub_category', '=', $postData['sub_category'])->count();
@@ -231,7 +232,8 @@ class NewsContentController extends Controller
                         'creative_work_SRN'         => $postData['creative_work_SRN'],
                         'creative_work_DOI'         => $postData['creative_work_DOI'],
                         'author_name'               => $postData['author_name'],   
-                        'author_pronoun'            => $postData['pronoun'],   
+                        'author_pronoun'            => $postData['pronoun'],
+                        'indigenous_affiliation'    => $postData['indigenous_affiliation'],
                         'author_affiliation'       => json_encode($postData['author_affiliation']),   
                         'author_email'              => $postData['author_email'],   
                         'country'                   => $postData['country'],   
@@ -245,7 +247,8 @@ class NewsContentController extends Controller
                         'is_popular'                => $postData['is_popular'],  
                         'short_desc'                => $postData['short_desc'],    
                         'sub_title'                  => $postData['sub_title'], 
-                    ];                    
+                    ];  
+                    // dd($fields);                  
                     NewsContent::where($this->data['primary_key'], '=', $id)->update($fields);
                     /* others image */
                     $imageFile      = $request->file('others_image');                    

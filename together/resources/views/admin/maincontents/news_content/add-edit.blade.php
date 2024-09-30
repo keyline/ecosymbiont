@@ -145,7 +145,7 @@ $controllerRoute = $module['controller_route'];
                         <div class="row mb-3">
                             <label for="sub_title" class="col-md-2 col-lg-2 col-form-label">Subtitle</label>
                             <div class="col-md-10 col-lg-10">
-                            <textarea class="form-control" id="sub_title" name="sub_title" rows="4" cols="50" placeholder="Your explanation here..."><?= $sub_title ?></textarea>
+                            <textarea class="form-control ckeditor" id="sub_title" name="sub_title" rows="4" cols="50" placeholder="Your explanation here..."><?= $sub_title ?></textarea>
                             <div id="sub_titleError" class="error"></div>
                             </div>
                         </div>
@@ -345,6 +345,7 @@ $controllerRoute = $module['controller_route'];
 <script>
     function checkWordLimit(field, limit, errorField) {
         var words = field.value.trim().split(/\s+/).filter(word => word.length > 0).length;
+        // alert(words);die;
         if (words > limit) {
             document.getElementById(errorField).innerText = "Exceeded word limit of " + limit + " words.";
             return false;
@@ -359,7 +360,7 @@ $controllerRoute = $module['controller_route'];
         // allValid &= checkWordLimit(document.getElementById('explanation'), 100, 'explanationError');
         // allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');
         allValid &= checkWordLimit(document.getElementById('sub_title'), 50, 'sub_titleError');
-        allValid &= checkWordLimit(document.getElementById('short_desc'), 102, 'bio_longError');
+        allValid &= checkWordLimit(document.getElementById('short_desc'), 102, 'short_descError');
 
         document.getElementById('submitButton').disabled = !allValid;
     }

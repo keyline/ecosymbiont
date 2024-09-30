@@ -131,13 +131,23 @@ use App\Helpers\Helper;
                                 <?php  // Split the string into two parts using the '#' as a delimiter
                                     $paragraphs = explode('#', $rowContent->author_short_bio);  
                                     $indigenous = explode('#',$rowContent->indigenous_affiliation);
-                                    $organization = explode('#',$rowContent->organization_name);                                    
+                                    $organization = explode('#',$rowContent->organization_name);                                      
                                     for($i=0; $i<count($paragraphs); $i++)
                                     {?>
                                         <div class="about-more-autor">
                                             <ul class="nav nav-tabs">
                                                 <li class="active" style="width: 100%;">
-                                                    <a href="#about-autor" data-toggle="tab"><?php echo ($i == 0)?'About The Lead Author':'About The Co-Author'; ?></a>
+                                                    <a href="#about-autor" data-toggle="tab">
+                                                    <?php 
+                                                        if ($i == 0) {
+                                                            echo 'About The Lead Author';
+                                                        } elseif ($i == 1) {
+                                                            echo 'About The Second Author';
+                                                        } elseif ($i == 2) {
+                                                            echo 'About The Third Author';
+                                                        }
+                                                    ?>
+                                                    </a>
                                                 </li>
                                             </ul>                                    
                                             <div class="tab-content">

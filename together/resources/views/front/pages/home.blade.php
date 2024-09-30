@@ -19,6 +19,7 @@ use App\Helpers\Helper;
                                                             'news_contents.author_name', 
                                                             'news_contents.cover_image', 
                                                             'news_contents.created_at',
+                                                            'parent_category.sub_category as parent_category_name', // Corrected alias to sub_category
                                                             'sub_category.sub_category as category_name', // Corrected alias to sub_category
                                                             'sub_category.slug as category_slug', // Corrected alias to sub_category
                                                             'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
@@ -35,7 +36,7 @@ use App\Helpers\Helper;
                         <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent1->cover_image?>" alt="<?=$parentCategoryContent1->new_title?>">
                         <div class="hover-box">
                             <div class="inner-hover">
-                                <a class="category-post" href="<?=url('category/' . $parentCategoryContent1->category_slug)?>"><?=$parentCategoryContent1->category_name?></a>
+                                <a class="category-post" href="<?=url('category/' . $parentCategoryContent1->parent_category_slug)?>"><?=$parentCategoryContent1->parent_category_name?></a>
                                 <h2><a href="<?=url('content/' . $parentCategoryContent1->parent_category_slug. '/' . $parentCategoryContent1->category_slug . '/' . $parentCategoryContent1->slug)?>"><?=$parentCategoryContent1->new_title?></a></h2>
                                 <ul class="post-tags">
                                     <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent1->created_at), "d M Y")?></span></li> -->
@@ -102,6 +103,7 @@ use App\Helpers\Helper;
                                                             'news_contents.author_name', 
                                                             'news_contents.cover_image', 
                                                             'news_contents.created_at',
+                                                            'parent_category.sub_category as parent_category_name', // Corrected alias to sub_category
                                                             'sub_category.sub_category as category_name', // Corrected alias to sub_category
                                                             'sub_category.slug as category_slug', // Corrected alias to sub_category
                                                             'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
@@ -121,6 +123,7 @@ use App\Helpers\Helper;
                                                             'news_contents.author_name', 
                                                             'news_contents.cover_image', 
                                                             'news_contents.created_at',
+                                                            'parent_category.sub_category as parent_category_name', // Corrected alias to sub_category
                                                             'sub_category.sub_category as category_name', // Corrected alias to sub_category
                                                             'sub_category.slug as category_slug', // Corrected alias to sub_category
                                                             'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
@@ -140,6 +143,7 @@ use App\Helpers\Helper;
                                                             'news_contents.author_name', 
                                                             'news_contents.cover_image', 
                                                             'news_contents.created_at',
+                                                            'parent_category.sub_category as parent_category_name', // Corrected alias to sub_category
                                                             'sub_category.sub_category as category_name', // Corrected alias to sub_category
                                                             'sub_category.slug as category_slug', // Corrected alias to sub_category
                                                             'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
@@ -155,7 +159,7 @@ use App\Helpers\Helper;
                         <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent2->cover_image?>" alt="<?=$parentCategoryContent2->new_title?>">
                         <div class="hover-box">
                             <div class="inner-hover">
-                                <a class="category-post" href="<?=url('category/' . $parentCategoryContent2->category_slug)?>"><?=$parentCategoryContent2->category_name?></a>
+                                <a class="category-post" href="<?=url('category/' . $parentCategoryContent2->parent_category_slug)?>"><?=$parentCategoryContent2->parent_category_name?></a>
                                 <h2><a href="<?=url('content/'. $parentCategoryContent2->parent_category_slug. '/' . $parentCategoryContent2->category_slug . '/' . $parentCategoryContent2->slug)?>"><?=$parentCategoryContent2->new_title?></a></h2>
                                 <ul class="post-tags">
                                     <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent2->created_at), "d M Y")?></span></li> -->
@@ -171,7 +175,7 @@ use App\Helpers\Helper;
                         <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent8->cover_image?>" alt="<?=$parentCategoryContent8->new_title?>">
                         <div class="hover-box">
                             <div class="inner-hover">
-                                <a class="category-post" href="<?=url('category/' . $parentCategoryContent8->category_slug)?>"><?=$parentCategoryContent8->category_name?></a>
+                                <a class="category-post" href="<?=url('category/' . $parentCategoryContent8->parent_category_slug)?>"><?=$parentCategoryContent8->parent_category_name?></a>
                                 <h2><a href="<?=url('content/' . $parentCategoryContent8->parent_category_slug. '/' . $parentCategoryContent8->category_slug . '/' . $parentCategoryContent8->slug)?>"><?=$parentCategoryContent8->new_title?></a></h2>
                                 <ul class="post-tags">
                                     <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent8->created_at), "d M Y")?></span></li> -->
@@ -187,7 +191,7 @@ use App\Helpers\Helper;
                         <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent9->cover_image?>" alt="<?=$parentCategoryContent9->new_title?>">
                         <div class="hover-box">
                             <div class="inner-hover">
-                                <a class="category-post" href="<?=url('category/' . $parentCategoryContent9->category_slug)?>"><?=$parentCategoryContent9->category_name?></a>
+                                <a class="category-post" href="<?=url('category/' . $parentCategoryContent9->parent_category_slug)?>"><?=$parentCategoryContent9->parent_category_name?></a>
                                 <h2><a href="<?=url('content/' . $parentCategoryContent9->parent_category_slug. '/' . $parentCategoryContent9->category_slug . '/' . $parentCategoryContent9->slug)?>"><?=$parentCategoryContent9->new_title?></a></h2>
                                 <ul class="post-tags">
                                     <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent9->created_at), "d M Y")?></span></li> -->
@@ -509,6 +513,7 @@ use App\Helpers\Helper;
                                                                 'news_contents.author_name', 
                                                                 'news_contents.cover_image', 
                                                                 'news_contents.created_at',
+                                                                'parent_category.sub_category as parent_category_name', // Corrected alias to sub_category
                                                                 'sub_category.sub_category as category_name',  // Correct alias for subcategory name
                                                                 'sub_category.slug as category_slug',  // Correct alias for subcategory slug
                                                                 'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
@@ -530,7 +535,7 @@ use App\Helpers\Helper;
                                         </div>
                                         <div class="col-sm-7">
                                             <div class="post-content">
-                                                <a href="<?=url('category/' . $recentContent->category_slug)?>"><?=$recentContent->category_name?></a>
+                                                <a href="<?=url('category/' . $recentContent->parent_category_slug)?>"><?=$recentContent->parent_category_name?></a>
                                                 <h2><a href="<?=url('content/' . $recentContent->parent_category_slug. '/' . $recentContent->category_slug . '/' . $recentContent->slug)?>"><?=$recentContent->new_title?></a></h2>
                                                 <ul class="post-tags">
                                                     <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$recentContent->author_name?></a></li>
