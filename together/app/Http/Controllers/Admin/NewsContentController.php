@@ -196,7 +196,7 @@ class NewsContentController extends Controller
                 'author_affiliation'        => 'required',   
                 'author_email'              => 'required',   
                 'country'                   => 'required',   
-                'organization_name'         => 'required',   
+                // 'organization_name'         => 'required',   
                 // 'cover_image'               => 'required',     
                 // 'others_image'              => 'required',     
                 'long_desc'                 => 'required',                          

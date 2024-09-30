@@ -424,8 +424,22 @@ class FrontController extends Controller
                                     'role'                      => $postData['role'],
                                     'password'                  => Hash::make($randomPassword),                         
                                 ];
-                                 Helper::pr($fields);
+                                //  Helper::pr($fields);
                                 User::insert($fields);
+                                $generalSetting             = GeneralSetting::where('id', '=', 1)->first();
+                                $subject                    = 'New Lead From Ecosymbiont Website';
+                                $message                    = "<table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
+                                                                    <tr><td style='padding: 8px 15px'>Dear Administrator,</td></tr>
+                                                                    <tr><td style='padding: 8px 15px'>A new lead has contacted you through the Ecosymbiont Website. Please find the details below.</td></tr>
+                                                                    <tr><td style='padding: 8px 15px'><strong>Name: </strong>" . htmlspecialchars($postData['first_name']) . "</td></tr>
+                                                                    <tr><td style='padding: 8px 15px'><strong>Email: </strong>" . htmlspecialchars($postData['email']) . "</td></tr>    
+                                                                    <tr><td style='padding: 8px 15px'><strong>Country: </strong>" . htmlspecialchars($postData['country']) . "</td></tr>                                         
+                                                                    <tr><td style='padding: 8px 15px'><strong>Message: </strong>" . htmlspecialchars($postData['message']) . "</td></tr>
+                                                                    <tr><td style='padding: 8px 15px'><strong>Subject: </strong>" . htmlspecialchars(implode(', ', $postData['subject'])) . "</td></tr>
+                                                                    <tr><td style='padding: 8px 15px'>Thank You,</td></tr>
+                                                                    <tr><td style='padding: 8px 15px'>Auto-generated from the Ecosymbiont Website.</td></tr>
+                                                                </table>";
+                                $this->sendMail($generalSetting->site_mail, $subject, $message);
                                 return redirect(url('signin'))->with('success_message', 'Sign up successful!');
                             } else {
                                 return redirect()->back()->with('error_message', 'User Already Registered !!!');
