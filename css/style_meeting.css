@@ -108,7 +108,7 @@ ul li{
     margin: 10px 0;
 }
 .long-ul li strong{
-    font-size: 15px
+    /* font-size: 15px */
 }
 
 @media(max-width: 991px){

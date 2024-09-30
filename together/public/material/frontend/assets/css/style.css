@@ -6091,6 +6091,7 @@ div#popup p {
   #container {
     overflow: hidden;
   }
+  .navbar-nav > li.drop-arrow > a:before{background:none;}
   .navbar-brand {
     max-width: 230px;
     padding-top: 58px;
@@ -6190,7 +6191,7 @@ div#popup p {
     padding: 45px 15px 35px 0;
   }
   .navbar-nav .megadropdown .inner-megadropdown .filter-block {
-    display: none;
+    /* display: none; */
   }
   .navbar-nav .megadropdown .inner-megadropdown .posts-filtered-block {
     width: 720px;
@@ -6365,7 +6366,7 @@ div#popup p {
 .heading-news2 .news-post.homesmall_box img {
   height: 220px;
 }
-
+#cssmenu.small-screen{display:none;}
 }
 @media (max-width: 767px) {
   .top-line {
@@ -6380,6 +6381,7 @@ div#popup p {
 .top-line ul.top-line-list li:before {
   
 }
+
 .heading-news2 .heading-news-box > .news-post img {
   object-fit: cover;
   height: 100%;
@@ -6387,6 +6389,7 @@ div#popup p {
 .heading-news2 .heading-news-box .image-slider.snd-size .image-post{height: 300px;}
   .logo-advertisement .navbar-header button.navbar-toggle {
     top: 45px;
+    display: none;
   }
   .navbar-default .advertisement {
     display: none;
@@ -6457,9 +6460,22 @@ div#popup p {
     display: none !important;
   }
   .navbar-default .navbar-collapse {
-    max-height: 220px;
+    /* max-height: 220px; */
     overflow-y: scroll;
     overflow-x: hidden;
+  }
+  .navbar-nav > li.drop-arrow:after {
+    content: '\f107' !important;
+    position: absolute;
+    font-family: 'FontAwesome';
+    font-size: 13px;
+    color: #fff;
+    top: 16px;
+    right: 13px;
+    transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
   }
   section.heading-news .heading-news-box > .image-post {
     display: none;
@@ -6575,6 +6591,14 @@ div#popup p {
 .single-post-box .share-post-box ul.share-box li{margin-bottom: 10px;}
 .single-post-box .share-post-box ul.share-box li, .single-post-box .share-post-box ul.share-box li a {
   width: 100%;
+}
+.navbar-header {
+  position: relative;
+}
+#cssmenu.small-screen #menu-button {
+  position: absolute;
+  right: 0;
+  top: -53px;
 }
 }
 @media (max-width: 650px) {
