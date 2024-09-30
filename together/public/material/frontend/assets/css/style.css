@@ -1331,7 +1331,7 @@ ul.category-filter-posts li a.active:after {
   margin-right: -5px;
 }
 .heading-news2 .heading-news-box .image-slider.snd-size {
-  width: 60%;
+  /* width: 60%; */
 }
 .heading-news2 .heading-news-box .image-slider.snd-size .image-post {
   width: 100%;
@@ -1362,7 +1362,7 @@ ul.category-filter-posts li a.active:after {
 }
 .heading-news2 .heading-news-box .news-post {
   padding: 5px;
-  width: 20%;
+  /* width: 20%; */
 }
 .heading-news2 .heading-news-box .news-post .hover-box {
   top: 5px;
