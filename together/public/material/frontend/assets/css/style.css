@@ -6387,6 +6387,7 @@ div#popup p {
 @media (min-width: 768px) {
 .heading-news2 .news-post.homesmall_box img {
   height: 220px;
+  object-fit: cover;
 }
 #cssmenu{display:none;}
 }
