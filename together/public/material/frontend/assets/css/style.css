@@ -3865,10 +3865,22 @@ div.list-post .post-content h2 a:hover {
 .single-post-box .post-gallery span.image-caption {
   display: inline-block;
   color: #aaa;
-  font-size: 12px;
+  font-size: 18px;
   font-family: 'proximanova_regular', sans-serif;
   font-style: italic;
   margin: 0;
+  text-align: left !important;
+  width: 100%;
+}
+.others_image_colour {
+  display: inline-block;
+  color: #aaa;
+  font-size: 18px;
+  font-family: 'proximanova_regular', sans-serif;
+  font-style: italic;
+  margin: 0;
+  text-align: left !important;
+  width: 100%;
 }
 .single-post-box .post-gallery iframe {
   width: 100%;

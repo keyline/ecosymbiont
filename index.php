@@ -124,7 +124,7 @@ include "include/header.php";
                         </div>
                     </div>
                     <div class="col-md-8">
-                        <div class="info-box hideondesktop mobile_toppadding">
+                        <div id="definitions" class="info-box hideondesktop mobile_toppadding">
                           <h2>DEFINITIONS</h2>
                         </div>
                         <div class="defination-info">
