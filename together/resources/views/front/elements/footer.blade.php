@@ -10,11 +10,11 @@ use App\Helpers\Helper;
                 <div class="col-md-12">
                     <nav class="footer-nav">
                         <ul>
-                            <li><a href="<?=url('/')?>">Home</a></li>
-                            <li><a href="<?=url('about-us')?>">About</a></li>
-                            <li><a href="<?=env('REGENERATE_URL')?>contact.php">Contact</a></li>
-                            <li class="foot-social-icons"><a class="twitter" href="<?=$generalSetting->twitter_profile?>"><i class="fa fa-twitter"></i></a></li>
-                            <li class="foot-social-icons"><a class="pinterest" href="<?=$generalSetting->instagram_profile?>"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="<?=url('/') ?>" target="_blank">Home</a></li>
+                            <li><a href="<?=url('about-us')?>" target="_blank">About</a></li>
+                            <li><a href="<?=env('REGENERATE_URL')?>contact.php" target="_blank">Contact</a></li>
+                            <li class="foot-social-icons"><a class="twitter" href="<?=$generalSetting->twitter_profile?>" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                            <li class="foot-social-icons"><a class="pinterest" href="<?=$generalSetting->instagram_profile?>" target="_blank"><i class="fa fa-instagram"></i></a></li>
                         </ul>
                     </nav>
                 </div>

@@ -65,7 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Initialize PHPMailer for admin notification
             // $adminMail = new PHPMailer(true);
 
-            $to = "subhomoy@keylines.net";
+            // $to = "Ecosymbionts.regenerate@gmail.com";
+            $to = "deblinasonaidas1997@gmail.com";
             $subject = 'New Lead From Ecosymbiont Website - ' . htmlspecialchars($full_name);
             $message = "
                 <table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
@@ -86,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
             $headers .= "From: no-reply@ecosymbiont.org" . "\r\n" .
-            "CC: deblina@keylines.net";
+            "BCC: deblina@keylines.net";
 
             mail($to,$subject,$txt,$headers);
             $adminSent = true;
