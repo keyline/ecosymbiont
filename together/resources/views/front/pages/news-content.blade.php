@@ -50,7 +50,7 @@ use App\Helpers\Helper;
                                     <span class="image-caption" style="color:skyblue;"><?=$rowContent->cover_image_caption?></span>
                                 </div>
                                 <div class="post-content">
-                                    <!-- <p><?=$rowContent->short_desc?></p> -->
+                                    <?=$rowContent->short_desc?>
                                 </div>
                                 <!-- <div class="article-inpost">
                                     <div class="row">
@@ -74,10 +74,10 @@ use App\Helpers\Helper;
                                 </div> -->
                                 <div class="post-content">
                                     <?php if(session('is_user_login')){?>
-                                        <p><?=$rowContent->long_desc?></p>
+                                        <div><?=$rowContent->long_desc?></div>
                                     <?php } else {?>
                                         <!-- <p>?=substr($rowContent->long_desc,0,100)?> ...</p> -->
-                                        <p>
+                                        <div>
                                             <?php // Split the long description into an array of words
                                             $words = explode(' ', $rowContent->long_desc);
                                         
@@ -87,7 +87,7 @@ use App\Helpers\Helper;
                                         // Display the shortened description
                                         echo $short_desc;
                                         ?>
-                                    </p>
+                                    </div>
                                         <?php
                                         // Check if HTTPS is enabled
                                         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";

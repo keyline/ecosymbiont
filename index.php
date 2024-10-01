@@ -11,7 +11,7 @@ include "include/header.php";
                     <div class="col-md-12">
                         <div class="info-box">
                             <h2>OUR MISSION</h2>  
-                            <p id="our-focus">Our mission is to regain the understanding that human communities are part of natural  ecological webs (<span><a href="#definitions">ecowebs</a></span>) and to <span><a href="#definitions">regenerate</a></span>  systems that restore, preserve, and foster the symbiosis between humans and ecowebs. Symbiosis encompasses the connectivity and dependence that exist within an ecoweb and that results in mutual benefit of all within that ecoweb, including humans.</p>
+                            <p id="our-focus">Our mission is to regain the understanding that human communities are part of natural  ecological webs (<span><a target="_blank" href="#definitions">ecowebs</a></span>) and to <span><a target="_blank" href="#definitions">regenerate</a></span>  systems that restore, preserve, and foster the symbiosis between humans and ecowebs. Symbiosis encompasses the connectivity and dependence that exist within an ecoweb and that results in mutual benefit of all within that ecoweb, including humans.</p>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -23,7 +23,7 @@ include "include/header.php";
                                 <li><i><strong class="fontbold">human activity systems:</strong></i> ecoweb-specific systems of
                                     knowledge, technologies, and practices developed by ecoweb-rooted human communities
                                     &#x2014; such as Indigenous and tribal communities &#x2014; that are based and rely on the
-                                    specific and preserved <a href="#definitions">biodiversity</a> of each ecoweb; and</li>
+                                    specific and preserved <a target="_blank" href="#definitions">biodiversity</a> of each ecoweb; and</li>
                                 <li><strong><i>legal-economic-governance systems:</i></strong> legal, trade, and government systems that optimize the wellbeing of human communities and the ecowebs of which they are a symbiotic part and that operate locally, regionally, and globally.</li>
                             </ul>
                         </div>
@@ -36,15 +36,15 @@ include "include/header.php";
                                 <li><strong><i>Disrupt systems:</i></strong> We work to disrupt and reshape the
                                     globally institutionalized legal-economic-governance system that has been destroying
                                     human-ecoweb symbiosis by fiercely promoting corporate
-                                    <span><u><a href="#definitions">extractivism</a></u></span> (exploitation of human and non-human ecoweb
+                                    <span><a href="#definitions" target="_blank">extractivism</a></span> (exploitation of human and non-human ecoweb
                                     resources without replenishment). This work is done through legal action, policy
                                     reform, and other methods.
                                 </li>
                                 <li><strong><i>Facilitate synergies:</i> </strong>We bring together and facilitate
-                                    <span><u><a href="#definitions">synergies</a></u></span> between <span><u><a href="#definitions">grassroots</a></u></span> changemakers,
+                                    <span><a target="_blank" href="#definitions">synergies</a></span> between <span><a target="_blank" href="#definitions">grassroots</a></span> changemakers,
                                     innovators, and knowledge-holders working to regenerate systems that restore,
                                     preserve, and foster human-ecoweb symbiosis. We do this through in-person
-                                    <strong><a href="<?=$base_url?>synergy-meetings.php">Synergy Meetings</a></strong> and through our online knowledge-sharing and
+                                    <strong><a href="<?=$base_url?>synergy-meetings.php" target="_blank">Synergy Meetings</a></strong> and through our online knowledge-sharing and
                                     community-building platform, <strong><a href="<?=$base_url?>together" target="_blank">Ecosymbionts Regenerate Together</a></strong>.
                                 </li>
                                 <li><strong><i>Regenerate systems:</i> </strong> We collaboratively conceptualize and promote alternative systems that optimize ecoweb wellbeing (including of humans), instead of exploiting, diminishing, and destroying ecowebs. We do this by synthesizing our own work with the knowledge, ideas, and wisdom of grassroots changemakers, innovators, and knowledge-holders from across the world shared on <a href="<?=$base_url?>together" target="_blank">Ecosymbionts Regenerate Together</a>. </li>
@@ -74,7 +74,7 @@ include "include/header.php";
                         <div class="info-box">
                             <h4>The extractivist system is becoming increasingly entrenched</h4>
                             <p>A new system of amassing wealth for small groups of shareholders
-                                (<span><u><a href="#definitions">corporations</a></u></span>) was <a href="#definitions">developed in Europe at least four centuries ago</a>,
+                                (<span><a target="_blank" href="#definitions">corporations</a></span>) was <a href="https://ecosymbiont.org/together/content/systems/systems-reform/424-years-and-counting-the-global-system-of-corporate-extractivism-1-of-3" target="_blank">developed in Europe at least four centuries ago</a>,
                                 taking the form of government-sanctioned exploitation of humans and ecowebs through the
                                 use of ‘legal’ tools, like charters and the doctrine of discovery. In this system,
                                 European monarchs granted to small companies of European men &#x2014; for a share of the

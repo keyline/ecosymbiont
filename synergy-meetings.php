@@ -23,7 +23,7 @@ include "include/header.php";
                 <div class="col-md-6">
                     
                     <div class="right-text-box">
-                        <p class="mb-10">A Synergy Meeting took place in association with From <span class="italic">Bhopal to the Bay</span> in September, 2024, in Oakland, California, United States.</p>
+                        <p class="mb-10">A Synergy Meeting took place in association with <span class="italic">From Bhopal to the Bay</span> in September, 2024, in Oakland, California, United States.</p>
                         <div class="info-box" style="margin-bottom: 0;">
                             <h4 style="margin-bottom: 10px; color:#90201f;">Event Context</h4>
                         </div>
@@ -47,7 +47,7 @@ include "include/header.php";
                             </div>
                         <!-- <h3 class="mb-20"><i>Participating/Sponsoring Organizations:</i></h3> -->
                         <ul class="mb-10 long-ul">
-                            <li><strong>350SF (<a href="https://350bayarea.org/" target="_blank">350bayarea.org</a> / 350-san-francisco).</strong> 350SF is a local chapter of
+                            <li><strong>350SF (<a href="https://350bayarea.org/350-san-francisco" target="_blank">350bayarea.org</a>).</strong> 350SF is a local chapter of
                                 the broader 350 Bay Area network, focusing on grassroots climate initiatives in San
                                 Francisco. They work to accelerate the transition from fossil fuels to clean energy
                                 through community outreach, policy advocacy, and supporting local climate actions.</li>
