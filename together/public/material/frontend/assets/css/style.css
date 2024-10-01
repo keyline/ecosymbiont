@@ -3955,10 +3955,10 @@ div.list-post .post-content h2 a:hover {
 .single-post-box > .post-content blockquote:after {
   content: '\201D';
   position: absolute;
-  bottom: 0;
+  bottom: -35px;
   font-size: 72px;
   font-family: georgia;
-  right: 0;
+  font-weight: 700;
 }
 .single-post-box > .post-content > h2 {
   color: #333333;
