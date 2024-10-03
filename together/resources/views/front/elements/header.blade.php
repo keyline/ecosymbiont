@@ -3,8 +3,8 @@ use App\Models\NewsCategory;
 use App\Models\NewsContent;
 use App\Helpers\Helper;
 // Get the IP address of the user
-$ip = $_SERVER['REMOTE_ADDR']; // This gets the user's IP address
-$APP_URL = $_SERVER['APP_URL'];
+// $ip = $_SERVER['REMOTE_ADDR']; // This gets the user's IP address
+// $APP_URL = $_SERVER['APP_URL'];
 
 // Use ipinfo.io API to get location details
 //$details = file_get_contents("http://ipinfo.io/{$ip}/json");
