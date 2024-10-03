@@ -74,6 +74,13 @@
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{
   font-family: 'proximanova_regular';
 }
+a:focus, a:hover{
+  text-decoration: none;
+}
+ul.none_bulet {
+  list-style: none;
+  padding-left: 15px;
+}
 .isotope-item {
   z-index: 2;
 }

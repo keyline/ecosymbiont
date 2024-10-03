@@ -56,10 +56,10 @@
                                                 <h2>GUIDELINES</h2>
                                                 <ul>
                                                     <li>Your Creative-Work can be one of 3 types:
-                                                        <ul>
-                                                            <li>non-fiction or fiction word narrative (500-1000 words for prose, 100-250 words for poetry);</li>
-                                                            <li>art image(s) + descriptive narrative (100-250 words); or</li>
-                                                            <li>video (3-10 minutes) + descriptive narrative (100-250 words).</li>
+                                                        <ul class="none_bulet">
+                                                            <li>*(A) non-fiction or fiction word narrative (500-1000 words for prose, 100-250 words for poetry);</li>
+                                                            <li>*(B) art image(s) + descriptive narrative (100-250 words); or</li>
+                                                            <li>*(C) video (3-10 minutes) + descriptive narrative (100-250 words).</li>
                                                         </ul>
                                                     </li>
                                                     <li>For Creative-Work type (A), your word narrative submission must be accompanied by at least one (1) image or photograph and may be accompanied by up to five (5) images or photographs.</li>
