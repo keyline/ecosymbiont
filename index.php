@@ -112,7 +112,7 @@ include "include/header.php";
                         </div>
                     </div>
                 </div>
-                <div class="row" id="definitions">
+                <div class="row" >
                   <div class="col-md-12">
                       <div class="info-box hideonmobile">
                         <h2>DEFINITIONS</h2>
@@ -124,10 +124,10 @@ include "include/header.php";
                         </div>
                     </div>
                     <div class="col-md-8">
-                        <div id="definitions" class="info-box hideondesktop mobile_toppadding">
+                        <div class="info-box hideondesktop mobile_toppadding">
                           <h2>DEFINITIONS</h2>
                         </div>
-                        <div class="defination-info">
+                        <div class="defination-info" id="definitions">
                             <div class="panel-group" id="accordion">
                                 <div class="panel panel-default">
                                   <div class="panel-heading">
