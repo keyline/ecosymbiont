@@ -84,8 +84,8 @@ class NewsContentController extends Controller
 
                 //fetch video code form url
                 $url = $postData['video_url'];
-                $parts = explode("v=", $url);
-                $videoId = $parts[1]; // This will give you the part after 'v='                
+                preg_match("/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([a-zA-Z0-9_-]{11})/", $url, $matches1);
+                    $videoId = $matches1[1]; // This will give you the part after 'v='                
                 // Generate a unique slug
                 $slug = Str::slug($postData['new_title']);
         
