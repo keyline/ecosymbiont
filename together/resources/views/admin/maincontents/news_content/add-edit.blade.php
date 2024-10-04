@@ -68,6 +68,9 @@ $controllerRoute = $module['controller_route'];
             $short_desc = $row->short_desc;
             $is_feature = $row->is_feature;
             $is_popular = $row->is_popular;            
+            $media = $row->media;     
+            $video_url = $row->video_url;  
+            $videoId = $row->videoId;     
         } else {
             $sub_categoryId = '';            
             $parent_categoryId = ''; 
@@ -91,6 +94,9 @@ $controllerRoute = $module['controller_route'];
             $short_desc = '';
             $is_feature = '';
             $is_popular = '';            
+            $media = '';    
+            $video_url = '';        
+            $videoId = '';
         }
         ?>
         <div class="col-xl-12">
@@ -238,50 +244,80 @@ $controllerRoute = $module['controller_route'];
                                 <input type="text" name="organization_name" class="form-control" id="organization_name"
                                     value="<?= $organization_name ?>">
                             </div>
-                        </div>   
+                        </div> 
                         <div class="row mb-3">
-                            <label for="cover_image" class="col-md-2 col-lg-2 col-form-label">Cover Image</label>
+                            <label for="media" class="col-md-2 col-lg-2 col-form-label">Media Type</label>
                             <div class="col-md-10 col-lg-10">
-                                <input type="file" name="cover_image" class="form-control" id="cover_image">
-                                <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>
-                                <span id="cover_image_error" class="text-danger"></span>  
-                                <?php if($cover_image != ''){?>
-                                <img src="<?=env('UPLOADS_URL').'newcontent/'.$cover_image?>" alt="<?=$author_name?>" style="width: 150px; height: 150px; margin-top: 10px;">
-                                <?php } else {?>
-                                <img src="<?=env('NO_IMAGE')?>" alt="<?=$author_name?>" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
-                                <?php }?>
+                                <input type="radio" id="media_image" name="media" value="image" @checked(old('media', $media) == 'image')>
+                                <label for="media_image">Image</label>
+                                <input type="radio" id="media_video" name="media" value="video" @checked(old('media', $media) == 'video')>
+                                <label for="media_video">Video</label>
                             </div>
                         </div>
-                        <div class="row mb-3">
-                            <label for="cover_image_caption" class="col-md-2 col-lg-2 col-form-label">Cover Image Caption</label>
-                            <div class="col-md-10 col-lg-10">
-                                <input type="text" name="cover_image_caption" class="form-control" id="cover_image_caption" value="<?= $cover_image_caption ?>">
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="others_image" class="col-md-2 col-lg-2 col-form-label">Others Image</label>
-                            <div class="col-md-10 col-lg-10">
-                                <input type="file" name="others_image[]" class="form-control" id="others_image" multiple>
-                                <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>
-
-                                <div class="row">
-                                    <?php if($news_images != ''){ foreach($news_images as $image) { ?>
-                                        <div class="col-md-3">
-                                            <img src="<?=env('UPLOADS_URL').'newcontent/'.$image->image_file?>" alt="<?=$author_name?>" style="width: 150px; height: 150px; margin-top: 10px;"><br>
-                                            <p class="mt-2">
-                                                <a href="<?=url('admin/' . $controllerRoute . '/edit_image/'.Helper::encoded($image->id))?>" class="btn btn-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit"></i> Edit</a>
-                                                <a href="<?=url('admin/' . $controllerRoute . '/delete_image/'.Helper::encoded($image->id))?>" class="btn btn-danger btn-sm" title="Delete <?=$module['title']?>" onclick="return confirm('Do You Want To Delete This <?=$module['title']?>');"><i class="fa fa-trash"></i> Delete</a>
-                                            </p>
-                                        </div>
-                                    <?php } } else {?>
-                                        <div class="col-md-12">
-                                            <img src="<?=env('NO_IMAGE')?>" alt="<?=$author_name?>" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
-                                        </div>
+                        <div id="imageDetails" style="display: none;">  
+                            <div class="row mb-3">
+                                <label for="cover_image" class="col-md-2 col-lg-2 col-form-label">Cover Image</label>
+                                <div class="col-md-10 col-lg-10">
+                                    <input type="file" name="cover_image" class="form-control" id="cover_image">
+                                    <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>
+                                    <span id="cover_image_error" class="text-danger"></span>  
+                                    <?php if($cover_image != ''){?>
+                                    <img src="<?=env('UPLOADS_URL').'newcontent/'.$cover_image?>" alt="<?=$author_name?>" style="width: 150px; height: 150px; margin-top: 10px;">
+                                    <?php } else {?>
+                                    <img src="<?=env('NO_IMAGE')?>" alt="<?=$author_name?>" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
                                     <?php }?>
                                 </div>
                             </div>
-                        </div>                        
+                            <div class="row mb-3">
+                                <label for="cover_image_caption" class="col-md-2 col-lg-2 col-form-label">Cover Image Caption</label>
+                                <div class="col-md-10 col-lg-10">
+                                    <input type="text" name="cover_image_caption" class="form-control" id="cover_image_caption" value="<?= $cover_image_caption ?>">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="others_image" class="col-md-2 col-lg-2 col-form-label">Others Image</label>
+                                <div class="col-md-10 col-lg-10">
+                                    <input type="file" name="others_image[]" class="form-control" id="others_image" multiple>
+                                    <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>
+
+                                    <div class="row">
+                                        <?php if($news_images != ''){ foreach($news_images as $image) { ?>
+                                            <div class="col-md-3">
+                                                <img src="<?=env('UPLOADS_URL').'newcontent/'.$image->image_file?>" alt="<?=$author_name?>" style="width: 150px; height: 150px; margin-top: 10px;"><br>
+                                                <p class="mt-2">
+                                                    <a href="<?=url('admin/' . $controllerRoute . '/edit_image/'.Helper::encoded($image->id))?>" class="btn btn-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit"></i> Edit</a>
+                                                    <a href="<?=url('admin/' . $controllerRoute . '/delete_image/'.Helper::encoded($image->id))?>" class="btn btn-danger btn-sm" title="Delete <?=$module['title']?>" onclick="return confirm('Do You Want To Delete This <?=$module['title']?>');"><i class="fa fa-trash"></i> Delete</a>
+                                                </p>
+                                            </div>
+                                        <?php } } else {?>
+                                            <div class="col-md-12">
+                                                <img src="<?=env('NO_IMAGE')?>" alt="<?=$author_name?>" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
+                                            </div>
+                                        <?php }?>
+                                    </div>
+                                </div>
+                            </div>      
+                        </div>
+                        <div id="videoDetails" style="display: none;">
+                            <div class="row mb-3">
+                                <label for="video_url" class="col-md-2 col-lg-2 col-form-label">Video Url
+                                </label>
+                                <div class="col-md-10 col-lg-10">
+                                    <input type="text" name="video_url" class="form-control" id="video_url"
+                                        value="<?= $video_url ?>">
+                                    <?php if($video_url != ''){?>
+                                        <iframe width="350" height="250" src="https://www.youtube.com/embed/<?= $videoId ?>" 
+                                                title="YouTube video player" frameborder="0" 
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                                allowfullscreen>
+                                        </iframe>                                   
+                                    <?php } else {?>
+                                    <img src="<?=env('NO_IMAGE')?>" alt="video_url" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
+                                    <?php }?>
+                                </div>
+                            </div> 
+                        </div>
                         <div class="row mb-3">
                             <label for="ckeditor1" class="col-md-2 col-lg-2 col-form-label">Description</label>
                             <div class="col-md-10 col-lg-10">
@@ -340,6 +376,36 @@ $controllerRoute = $module['controller_route'];
             searchResultLimit: 30,
             renderChoiceLimit: 30
         });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        // Function to show/hide the invited and participated fields
+        function toggleFields() {
+            const imageYes = $('#media_image').is(':checked');
+             const videoYes = $('#media_video').is(':checked');            
+            // Toggle individual sections
+            $('#imageDetails').toggle(imageYes);
+             $('#videoDetails').toggle(videoYes);            
+            if (imageYes) {
+                $('#imageDetails').show();
+                $('#videoDetails').hide();                            
+            }
+            else if(videoYes){
+                $('#imageDetails').hide();
+                $('#videoDetails').show();
+            }
+            else{
+                $('#imageDetails').hide();
+                $('#videoDetails').hide();                
+            }
+        }
+        // Trigger on change
+        $('input[name="media"]').on('change', function() {
+            toggleFields();
+        });
+        // Check initial state on page load
+        toggleFields();
     });
 </script>
 <script>

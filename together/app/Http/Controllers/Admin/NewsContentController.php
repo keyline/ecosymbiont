@@ -60,7 +60,7 @@ class NewsContentController extends Controller
                 'pronoun'                   => 'required',   
                 'author_email'              => 'required',   
                 'country'                   => 'required',   
-                'cover_image'               => 'required',     
+                'media'                     => 'required',     
                 'is_feature'                => 'required',  
                 'is_popular'                => 'required',  
                 'sub_title'                 => 'required', 
@@ -68,20 +68,24 @@ class NewsContentController extends Controller
             
             // Validate request data
             if ($this->validate($request, $rules)) {
-                // dd($postData);
-                // Handle cover image upload
-                $imageFile = $request->file('cover_image');
-                $cover_image = $data['row']->cover_image ?? ''; // Fallback to existing image if not uploaded
-                if($imageFile != '') {
-                    $imageName = $imageFile->getClientOriginalName();
-                    $uploadedFile = $this->upload_single_file('cover_image', $imageName, 'newcontent', 'image');
-                    if ($uploadedFile['status']) {
-                        $cover_image = $uploadedFile['newFilename'];
-                    } else {
-                        return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                if ($postData['media'] == 'image') {               
+                    $imageFile = $request->file('cover_image');
+                    $cover_image = $data['row']->cover_image ?? ''; // Fallback to existing image if not uploaded
+                    if($imageFile != '') {
+                        $imageName = $imageFile->getClientOriginalName();
+                        $uploadedFile = $this->upload_single_file('cover_image', $imageName, 'newcontent', 'image');
+                        if ($uploadedFile['status']) {
+                            $cover_image = $uploadedFile['newFilename'];
+                        } else {
+                            return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                        }
                     }
                 }
-        
+
+                //fetch video code form url
+                $url = $postData['video_url'];
+                $parts = explode("v=", $url);
+                $videoId = $parts[1]; // This will give you the part after 'v='                
                 // Generate a unique slug
                 $slug = Str::slug($postData['new_title']);
         
@@ -101,8 +105,11 @@ class NewsContentController extends Controller
                     'author_email'              => $postData['author_email'],   
                     'country'                   => $postData['country'],   
                     'organization_name'         => $postData['organization_name'] ?? '',   
-                    'cover_image'               => $cover_image,
+                    'media'                     => $postData['media'],   
+                    'cover_image'               => $cover_image ?? '',
                     'cover_image_caption'       => $postData['cover_image_caption'] ?? '',
+                    'video_url'                 => $postData['video_url'],
+                    'videoId'                   => $videoId,
                     'long_desc'                 => $postData['long_desc'] ?? '',     
                     'keywords'                  => $postData['keywords'] ?? '',     
                     'is_feature'                => $postData['is_feature'],  
@@ -184,70 +191,77 @@ class NewsContentController extends Controller
         $data['selected_ecosystem_affiliation'] = json_decode($data['row']->author_affiliation);        
 
         if ($request->isMethod('post')) {
-            $postData = $request->all();          
+            $postData = $request->all();                         
             $rules = [
                 'parent_category'           => 'required',                               
                 'sub_categories'            => 'required',   
                 'new_title'                 => 'required',
                 'creative_work_SRN'         => 'required',
                 'creative_work_DOI'         => 'required',
-                'author_name'               => 'required',   
+                'author_name'               => 'required',
                 'pronoun'                   => 'required',   
-                'author_affiliation'        => 'required',   
                 'author_email'              => 'required',   
                 'country'                   => 'required',   
-                // 'organization_name'         => 'required',   
-                // 'cover_image'               => 'required',     
-                // 'others_image'              => 'required',     
-                'long_desc'                 => 'required',                          
+                'media'                     => 'required',     
                 'is_feature'                => 'required',  
-                'is_popular'                => 'required',                     
-                'sub_title'                  => 'required', 
-            ];           
+                'is_popular'                => 'required',  
+                'sub_title'                 => 'required', 
+            ];     
             if ($this->validate($request, $rules)) {
-                // $checkValue = NewsContent::where('sub_category', '=', $postData['sub_category'])->count();
-                // if ($checkValue <= 0) { 
+                
                     // Generate a unique slug
-                    $slug = Str::slug($postData['new_title']);   
-                    /* banner image */
-                    $imageFile      = $request->file('cover_image');
-                        if($imageFile != ''){
-                            $imageName      = $imageFile->getClientOriginalName();
-                            $uploadedFile   = $this->upload_single_file('cover_image', $imageName, 'newcontent', 'image');
-                            if($uploadedFile['status']){
-                                $cover_image = $uploadedFile['newFilename'];
+                    $slug = Str::slug($postData['new_title']); 
+
+                    //fetch video code form url
+                    $url = $postData['video_url'];
+                    // $parts = explode("v=", $url);
+                    // Regular expression to match both types of YouTube URLs
+                    preg_match("/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([a-zA-Z0-9_-]{11})/", $url, $matches1);
+                    $videoId = $matches1[1]; // This will give you the part after 'v='
+
+                    if ($postData['media'] == 'image') {   
+                        /* banner image */
+                        $imageFile      = $request->file('cover_image');
+                            if($imageFile != ''){
+                                $imageName      = $imageFile->getClientOriginalName();
+                                $uploadedFile   = $this->upload_single_file('cover_image', $imageName, 'newcontent', 'image');
+                                if($uploadedFile['status']){
+                                    $cover_image = $uploadedFile['newFilename'];
+                                } else {
+                                    return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                                }
                             } else {
-                                return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                                $cover_image = $data['row']->cover_image;
                             }
-                        } else {
-                            $cover_image = $data['row']->cover_image;
-                        }
-                    /* banner image */                      
-                                                
+                        /* banner image */                      
+                    }                       
                     $fields = [
-                        'sub_category'              => $postData['sub_categories'],                       
-                        'parent_category'           => $postData['parent_category'], 
-                        'slug'                      => $slug,
-                        'new_title'                 => $postData['new_title'],
-                        'creative_work_SRN'         => $postData['creative_work_SRN'],
-                        'creative_work_DOI'         => $postData['creative_work_DOI'],
-                        'author_name'               => $postData['author_name'],   
-                        'author_pronoun'            => $postData['pronoun'],
-                        'indigenous_affiliation'    => $postData['indigenous_affiliation'],
-                        'author_affiliation'       => json_encode($postData['author_affiliation']),   
-                        'author_email'              => $postData['author_email'],   
-                        'country'                   => $postData['country'],   
-                        'organization_name'         => $postData['organization_name'],   
-                        'cover_image'               => $cover_image,
-                        'cover_image_caption'       => $postData['cover_image_caption'],
-                        // 'others_image'              => $others_image,
-                        'long_desc'                 => $postData['long_desc'],     
-                        'keywords'                  => $postData['keywords'],     
-                        'is_feature'                => $postData['is_feature'],  
-                        'is_popular'                => $postData['is_popular'],  
-                        'short_desc'                => $postData['short_desc'],    
-                        'sub_title'                  => $postData['sub_title'], 
-                    ];  
+                    'sub_category'              => $postData['sub_categories'],                       
+                    'parent_category'           => $postData['parent_category'], 
+                    'slug'                      => $slug,
+                    'new_title'                 => $postData['new_title'],
+                    'creative_work_SRN'         => $postData['creative_work_SRN'],
+                    'creative_work_DOI'         => $postData['creative_work_DOI'],
+                    'author_name'               => $postData['author_name'],   
+                    'author_short_bio'          => $postData['author_short_bio'] ?? '',   
+                    'author_pronoun'            => $postData['pronoun'],   
+                    'author_affiliation'        => json_encode($postData['author_affiliation'] ?? []),   
+                    'indigenous_affiliation'    => $postData['indigenous_affiliation'] ?? '',   
+                    'author_email'              => $postData['author_email'],   
+                    'country'                   => $postData['country'],   
+                    'organization_name'         => $postData['organization_name'] ?? '',   
+                    'media'                     => $postData['media'],   
+                    'cover_image'               => $cover_image ?? '',
+                    'cover_image_caption'       => $postData['cover_image_caption'] ?? '',
+                    'video_url'                 => $postData['video_url'],
+                    'videoId'                   => $videoId,
+                    'long_desc'                 => $postData['long_desc'] ?? '',     
+                    'keywords'                  => $postData['keywords'] ?? '',     
+                    'is_feature'                => $postData['is_feature'],  
+                    'is_popular'                => $postData['is_popular'],  
+                    'short_desc'                => $postData['short_desc'] ?? '',    
+                    'sub_title'                 => $postData['sub_title'], 
+                ];
                     // dd($fields);                  
                     NewsContent::where($this->data['primary_key'], '=', $id)->update($fields);
                     /* others image */
