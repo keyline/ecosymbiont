@@ -150,17 +150,17 @@ use App\Helpers\Helper;
                             <div class="item list-post">
                                 
                                 <?php if($rowContent->media == 'image'){?>
-                                    <!-- <div class="post-gallery"> -->
+                                    <div class="post-gallery">
                                         <img src="<?=env('UPLOADS_URL').'newcontent/'.$rowContent->cover_image?>" alt="<?=$rowContent->new_title?>">
-                                    <!-- </div> -->
+                                    </div>
                                 <?php } else {?>
-                                    <div class="video-post">
+                                    <div class="post-gallery video-post">
                                         <img alt="" src="https://img.youtube.com/vi/<?=$rowContent->videoId?>/hqdefault.jpg">
                                         <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                     </div>
                                 <?php } ?>
 
-
+                                            
                                 <div class="post-content">
                                     <a href="<?=url('category/' . $rowContent->parent_category_slug. '/' . $rowContent->sub_category_slug)?>"><?=$rowContent->sub_category_name?></a>
                                     <!-- <a href="?=url('subcategory/' . $rowContent->sub_category_slug)?>">?=$rowContent->sub_category_name?></a> -->
