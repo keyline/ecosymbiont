@@ -436,83 +436,47 @@ use App\Helpers\Helper;
             <div class="features-video-box owl-wrapper">
                 <!-- <h2 style="color: white; text-align: center;">Coming Soon</h2> -->
                 <div class="owl-carousel" data-num="4">
-                
-                    <div class="item news-post video-post">
-                        <img alt="" src="<?=env('FRONT_ASSETS_URL')?>upload/news-posts/video1.jpg">
-                        <a href="https://www.youtube.com/watch?v=LL59es7iy8Q" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                        <div class="hover-box">
-                            <h2><a href="single-post.html">Lorem ipsum dolor sit consectetuer adipiscing elit. Donec odio. </a></h2>
-                            <ul class="post-tags">
-                                <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                            </ul>
+                    <?php
+                    $videoContents = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                                    ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
+                                                    ->select(
+                                                        'news_contents.id', 
+                                                        'news_contents.new_title', 
+                                                        'news_contents.sub_title', 
+                                                        'news_contents.slug', 
+                                                        'news_contents.author_name', 
+                                                        'news_contents.cover_image', 
+                                                        'news_contents.created_at',
+                                                        'news_contents.videoId',
+                                                        'parent_category.sub_category as parent_category_name',
+                                                        'sub_category.sub_category as category_name',
+                                                        'sub_category.slug as category_slug',
+                                                        'parent_category.slug as parent_category_slug'
+                                                    )
+                                                    ->where('news_contents.status', 1)
+                                                    ->where('news_contents.media', 'video')
+                                                    ->inRandomOrder()
+                                                    ->limit(8)
+                                                    ->get();
+                    if($videoContents){ foreach($videoContents as $videoContent){
+                    ?>
+                        <div class="item news-post video-post">
+                            <img alt="" src="<?=env('FRONT_ASSETS_URL')?>upload/news-posts/video1.jpg">
+                            <a href="https://www.youtube.com/watch?v=<?=$videoContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                            <div class="hover-box">
+                                <a href="<?=url('category/' . $videoContent->parent_category_slug)?>"><?=$videoContent->parent_category_name?></a>
+                                <h2><a href="<?=url('content/' . $videoContent->parent_category_slug. '/' . $videoContent->category_slug . '/' . $videoContent->slug)?>"><?=$videoContent->new_title?></a></h2>
+                                <ul class="post-tags">
+                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$videoContent->author_name?></a></li>
+                                    <?php if($videoContent->indigenous_affiliation != ''){ ?>
+                                        <li><i class="fa fa-map-marker"></i><a href="javascript:void(0);"><?=$videoContent->indigenous_affiliation?></a></li>
+                                    <?php } ?>
+                                    <li><i class="fa fa-clock-o"></i><?=date_format(date_create($videoContent->created_at), "d M Y")?></li>
+                                </ul>
+                                <p><?=$videoContent->sub_title?></p>
+                            </div>
                         </div>
-                    </div>
-                
-                    <div class="item news-post video-post">
-                        <img alt="" src="<?=env('FRONT_ASSETS_URL')?>upload/news-posts/video2.jpg">
-                        <a href="https://www.youtube.com/watch?v=LL59es7iy8Q" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                        <div class="hover-box">
-                            <h2><a href="single-post.html">Quisque volutpat mattis eros. </a></h2>
-                            <ul class="post-tags">
-                                <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                            </ul>
-                        </div>
-                    </div>
-                
-                    <div class="item news-post video-post">
-                        <img alt="" src="<?=env('FRONT_ASSETS_URL')?>upload/news-posts/video3.jpg">
-                        <a href="https://www.youtube.com/watch?v=LL59es7iy8Q" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                        <div class="hover-box">
-                            <h2><a href="single-post.html">Nullam malesuada erat ut turpis. </a></h2>
-                            <ul class="post-tags">
-                                <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                            </ul>
-                        </div>
-                    </div>
-                
-                    <div class="item news-post video-post">
-                        <img alt="" src="<?=env('FRONT_ASSETS_URL')?>upload/news-posts/video4.jpg">
-                        <a href="https://www.youtube.com/watch?v=LL59es7iy8Q" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                        <div class="hover-box">
-                            <h2><a href="single-post.html">Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.</a></h2>
-                            <ul class="post-tags">
-                                <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                            </ul>
-                        </div>
-                    </div>
-                
-                    <div class="item news-post video-post">
-                        <img alt="" src="<?=env('FRONT_ASSETS_URL')?>upload/news-posts/video1.jpg">
-                        <a href="https://www.youtube.com/watch?v=LL59es7iy8Q" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                        <div class="hover-box">
-                            <h2><a href="single-post.html">Lorem ipsum dolor sit consectetuer adipiscing elit. Donec odio. </a></h2>
-                            <ul class="post-tags">
-                                <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                            </ul>
-                        </div>
-                    </div>
-                
-                    <div class="item news-post video-post">
-                        <img alt="" src="<?=env('FRONT_ASSETS_URL')?>upload/news-posts/video2.jpg">
-                        <a href="https://www.youtube.com/watch?v=LL59es7iy8Q" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                        <div class="hover-box">
-                            <h2><a href="single-post.html">Quisque volutpat mattis eros. </a></h2>
-                            <ul class="post-tags">
-                                <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                            </ul>
-                        </div>
-                    </div>
-                
-                    <div class="item news-post video-post">
-                        <img alt="" src="<?=env('FRONT_ASSETS_URL')?>upload/news-posts/video3.jpg">
-                        <a href="https://www.youtube.com/watch?v=LL59es7iy8Q" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                        <div class="hover-box">
-                            <h2><a href="single-post.html">Nullam malesuada erat ut turpis. </a></h2>
-                            <ul class="post-tags">
-                                <li><i class="fa fa-clock-o"></i>27 may 2013</li>
-                            </ul>
-                        </div>
-                    </div>
+                    <?php } }?>
                 </div>
             </div>
         </div>
@@ -572,8 +536,8 @@ use App\Helpers\Helper;
                                                     <?php
                                                     if($recentContent->indigenous_affiliation != ''){                                                    
                                                      ?>
-                                                    <li><i class="fa fa-map-marker"></i><a href="javascript:void(0);"><?=$recentContent->indigenous_affiliation?></a></li>
-                                                <?php } ?>
+                                                        <li><i class="fa fa-map-marker"></i><a href="javascript:void(0);"><?=$recentContent->indigenous_affiliation?></a></li>
+                                                    <?php } ?>
                                                     <!-- <li><i class="fa fa-clock-o"></i><?=date_format(date_create($recentContent->created_at), "d M Y")?></li> -->
                                                     
                                                     <!-- <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
