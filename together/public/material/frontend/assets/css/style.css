@@ -3261,6 +3261,7 @@ ul.list-posts > li .post-content h2 a:hover {
 .video-post {
   position: relative;
 }
+.video-post 
 .image-post3 .hover-box,
 .video-post .hover-box {
   position: absolute;
@@ -3336,6 +3337,15 @@ ul.list-posts > li .post-content h2 a:hover {
 button.mfp-close,
 button.mfp-arrow {
   outline: none;
+}
+.post-gallery.video-post{
+  position: relative;
+} 
+.video-link{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 /* article post style */
 .article-post {
