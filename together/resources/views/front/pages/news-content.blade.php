@@ -51,7 +51,7 @@ use App\Helpers\Helper;
                                         <span class="image-caption" style="color:skyblue;"><?=$rowContent->cover_image_caption?></span>
                                     </div>
                                 <?php } else {?>
-                                    <div class="post-gallery">
+                                    <div class="post-gallery video-post">
                                         <img alt="" src="https://img.youtube.com/vi/<?=$rowContent->videoId?>/hqdefault.jpg">
                                         <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                     </div>
