@@ -461,7 +461,7 @@ use App\Helpers\Helper;
                     if($videoContents){ foreach($videoContents as $videoContent){
                     ?>
                         <div class="item news-post video-post">
-                            <img alt="" src="<?=env('FRONT_ASSETS_URL')?>upload/news-posts/video1.jpg">
+                            <img alt="" src="https://img.youtube.com/vi/<?=$videoContent->videoId?>/hqdefault.jpg">
                             <a href="https://www.youtube.com/watch?v=<?=$videoContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                             <div class="hover-box">
                                 <a href="<?=url('category/' . $videoContent->parent_category_slug)?>"><?=$videoContent->parent_category_name?></a>
