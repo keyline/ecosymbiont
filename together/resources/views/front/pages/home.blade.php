@@ -344,8 +344,10 @@ use App\Helpers\Helper;
                                                 <!-- </div> -->
                                             <?php } else {?>
                                                 <div class="video-post">
-                                                    <img alt="" src="https://img.youtube.com/vi/<?=$featuredContent->videoId?>/hqdefault.jpg">
-                                                    <a href="https://www.youtube.com/watch?v=<?=$featuredContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                    <div class="video-holder">
+                                                        <img alt="" src="https://img.youtube.com/vi/<?=$featuredContent->videoId?>/hqdefault.jpg">
+                                                        <a href="https://www.youtube.com/watch?v=<?=$featuredContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                    </div>
                                                 </div>
                                             <?php } ?>
                                             <div class="post-content">

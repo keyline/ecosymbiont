@@ -3338,14 +3338,24 @@ button.mfp-close,
 button.mfp-arrow {
   outline: none;
 }
-.post-gallery.video-post{
+.video-post{
   position: relative;
 } 
-.post-gallery.video-post .video-link{
+.video-post a.video-link{
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.video-holder{
+  display: flex;
+  width: auto;
+  height: auto;
+  position: relative;
+  margin-right: 20px;
+}
+ul.list-posts > li .video-holder > img{
+  margin-right: 0;
 }
 /* article post style */
 .article-post {
