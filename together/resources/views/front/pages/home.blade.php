@@ -435,7 +435,7 @@ use App\Helpers\Helper;
             </div>
             <div class="features-video-box owl-wrapper">
                 <!-- <h2 style="color: white; text-align: center;">Coming Soon</h2> -->
-                <div class="owl-carousel" data-num="4">
+                <div class="owl-carousel" data-num="2">
                     <?php
                     $videoContents = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
                                                     ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
@@ -473,7 +473,7 @@ use App\Helpers\Helper;
                                     <?php } ?>
                                     <li><i class="fa fa-clock-o"></i><?=date_format(date_create($videoContent->created_at), "d M Y")?></li>
                                 </ul>
-                                <p><?=$videoContent->sub_title?></p>
+                                <!-- <p><?=$videoContent->sub_title?></p> -->
                             </div>
                         </div>
                     <?php } }?>
