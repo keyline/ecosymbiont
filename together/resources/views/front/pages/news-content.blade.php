@@ -45,10 +45,17 @@ use App\Helpers\Helper;
                                         <li><a class="linkedin" href="{{ $linkdinShareUrl }}" target="_blank"><i class="fa fa-linkedin"></i><span>&nbsp;&nbsp;&nbsp;Share on Linkedin</span></a></li>
                                     </ul>
                                 </div>
-                                <div class="post-gallery">
-                                    <img src="<?=env('UPLOADS_URL').'newcontent/'.$rowContent->cover_image?>" alt="<?=$rowContent->new_title?>">
-                                    <span class="image-caption" style="color:skyblue;"><?=$rowContent->cover_image_caption?></span>
-                                </div>
+                                <?php if($rowContent->media == 'image'){?>
+                                    <div class="post-gallery">
+                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$rowContent->cover_image?>" alt="<?=$rowContent->new_title?>">
+                                        <span class="image-caption" style="color:skyblue;"><?=$rowContent->cover_image_caption?></span>
+                                    </div>
+                                <?php } else {?>
+                                    <div class="post-gallery">
+                                        <img alt="" src="https://img.youtube.com/vi/<?=$rowContent->videoId?>/hqdefault.jpg">
+                                        <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                    </div>
+                                <?php } ?>
                                 <div class="post-content">
                                     <?=$rowContent->short_desc?>
                                 </div>
