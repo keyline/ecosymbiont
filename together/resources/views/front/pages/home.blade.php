@@ -435,7 +435,7 @@ use App\Helpers\Helper;
             </div>
             <div class="features-video-box owl-wrapper">
                 <!-- <h2 style="color: white; text-align: center;">Coming Soon</h2> -->
-                <!-- <div class="owl-carousel" data-num="4">
+                <div class="owl-carousel" data-num="4">
                 
                     <div class="item news-post video-post">
                         <img alt="" src="<?=env('FRONT_ASSETS_URL')?>upload/news-posts/video1.jpg">
@@ -513,7 +513,7 @@ use App\Helpers\Helper;
                             </ul>
                         </div>
                     </div>
-                </div> -->
+                </div>
             </div>
         </div>
     </section>
