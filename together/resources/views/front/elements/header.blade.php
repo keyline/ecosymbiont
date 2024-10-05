@@ -132,7 +132,9 @@ use App\Helpers\Helper;
                                                             'news_contents.slug', 
                                                             'news_contents.author_name', 
                                                             'news_contents.cover_image', 
-                                                            'news_contents.created_at', 
+                                                            'news_contents.created_at',
+                                                            'news_contents.media',
+                                                            'news_contents.videoId',
                                                             'sub_category.sub_category as sub_category_name', // From sub_category name
                                                             'parent_category.sub_category as parent_category_name', // From parent_category name
                                                             'sub_category.slug as sub_category_slug', // From sub_category alias
@@ -146,7 +148,19 @@ use App\Helpers\Helper;
                         if($hotNewsContents){ foreach($hotNewsContents as $rowContent){
                         ?>
                             <div class="item list-post">
-                                <img src="<?=env('UPLOADS_URL').'newcontent/'.$rowContent->cover_image?>" alt="<?=$rowContent->new_title?>">
+                                
+                                <?php if($rowContent->media == 'image'){?>
+                                    <!-- <div class="post-gallery"> -->
+                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$rowContent->cover_image?>" alt="<?=$rowContent->new_title?>">
+                                    <!-- </div> -->
+                                <?php } else {?>
+                                    <div class="video-post">
+                                        <img alt="" src="https://img.youtube.com/vi/<?=$rowContent->videoId?>/hqdefault.jpg">
+                                        <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                    </div>
+                                <?php } ?>
+
+
                                 <div class="post-content">
                                     <a href="<?=url('category/' . $rowContent->parent_category_slug. '/' . $rowContent->sub_category_slug)?>"><?=$rowContent->sub_category_name?></a>
                                     <!-- <a href="?=url('subcategory/' . $rowContent->sub_category_slug)?>">?=$rowContent->sub_category_name?></a> -->
