@@ -141,7 +141,8 @@ $(document).ready(function($) {
 						} else if ( dataNum == 2 ) {
 							dataNum2 = 2;
 							dataNum3 = dataNum - 1;
-						} else {
+						}
+						 else {
 							dataNum2 = dataNum - 1;
 							dataNum3 = dataNum - 2;
 						}

@@ -3311,7 +3311,10 @@ ul.list-posts > li .post-content h2 a:hover {
 }
 .image-post3:hover .hover-box,
 .video-post:hover .hover-box {
-  background: #206081;
+  background: #d09c1c;
+}
+.hover-box a{
+  color: #fff !important;
 }
 .video-post {
   margin-bottom: 10px;
@@ -3356,6 +3359,10 @@ button.mfp-arrow {
 }
 ul.list-posts > li .video-holder > img{
   margin-right: 0;
+}
+.features-video-box{
+  width: 66%;
+  margin: 0 auto;
 }
 /* article post style */
 .article-post {
