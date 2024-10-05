@@ -22,6 +22,8 @@ use App\Helpers\Helper;
                                                                             'news_contents.author_name', 
                                                                             'news_contents.cover_image', 
                                                                             'news_contents.created_at',
+                                                                            'news_contents.media',
+                                                                            'news_contents.videoId',
                                                                             'parent_category.sub_category as parent_category_name', // Corrected alias to sub_category
                                                                             'sub_category.sub_category as category_name', // Corrected alias to sub_category
                                                                             'sub_category.slug as category_slug', // Corrected alias to sub_category
@@ -36,7 +38,17 @@ use App\Helpers\Helper;
                                 if($parentCategoryContent1){
                                 ?>
                                     <div class="news-post homesmall_box image-post default-size">
-                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent1->cover_image?>" alt="<?=$parentCategoryContent1->new_title?>">
+                                        <!-- <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent1->cover_image?>" alt="<?=$parentCategoryContent1->new_title?>"> -->
+                                        <?php if($parentCategoryContent1->media == 'image'){?>
+                                            <!-- <div class="post-gallery"> -->
+                                                <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent1->cover_image?>" alt="<?=$parentCategoryContent1->new_title?>">
+                                            <!-- </div> -->
+                                        <?php } else {?>
+                                            <div class="video-post">
+                                                <img alt="" src="https://img.youtube.com/vi/<?=$parentCategoryContent1->videoId?>/hqdefault.jpg">
+                                                <a href="https://www.youtube.com/watch?v=<?=$parentCategoryContent1->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                            </div>
+                                        <?php } ?>
                                         <div class="hover-box">
                                             <div class="inner-hover">
                                                 <a class="category-post" href="<?=url('category/' . $parentCategoryContent1->parent_category_slug)?>"><?=$parentCategoryContent1->parent_category_name?></a>
@@ -64,6 +76,8 @@ use App\Helpers\Helper;
                                                                 'news_contents.author_name', 
                                                                 'news_contents.cover_image', 
                                                                 'news_contents.created_at',
+                                                                'news_contents.media',
+                                                                'news_contents.videoId',
                                                                 'parent_category.sub_category as parent_category_name', // Corrected alias to sub_category
                                                                 'sub_category.sub_category as category_name', // Corrected alias to sub_category
                                                                 'sub_category.slug as category_slug', // Corrected alias to sub_category
@@ -77,7 +91,17 @@ use App\Helpers\Helper;
                                 
                                 if($parentCategoryContent8){?>
                                     <div class="news-post homesmall_box image-post">
-                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent8->cover_image?>" alt="<?=$parentCategoryContent8->new_title?>">
+                                        <!-- <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent8->cover_image?>" alt="<?=$parentCategoryContent8->new_title?>"> -->
+                                        <?php if($parentCategoryContent8->media == 'image'){?>
+                                            <!-- <div class="post-gallery"> -->
+                                                <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent8->cover_image?>" alt="<?=$parentCategoryContent8->new_title?>">
+                                            <!-- </div> -->
+                                        <?php } else {?>
+                                            <div class="video-post">
+                                                <img alt="" src="https://img.youtube.com/vi/<?=$parentCategoryContent8->videoId?>/hqdefault.jpg">
+                                                <a href="https://www.youtube.com/watch?v=<?=$parentCategoryContent8->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                            </div>
+                                        <?php } ?>
                                         <div class="hover-box">
                                             <div class="inner-hover">
                                                 <a class="category-post" href="<?=url('category/' . $parentCategoryContent8->parent_category_slug)?>"><?=$parentCategoryContent8->parent_category_name?></a>
@@ -112,7 +136,9 @@ use App\Helpers\Helper;
                                                                                 'news_contents.slug', 
                                                                                 'news_contents.author_name', 
                                                                                 'news_contents.cover_image', 
-                                                                                'news_contents.created_at', 
+                                                                                'news_contents.created_at',
+                                                                                'news_contents.media',
+                                                                                'news_contents.videoId',
                                                                                 'parent_category.sub_category as parent_category_name', 
                                                                                 'parent_category.slug as parent_category_slug', 
                                                                                 'sub_category.sub_category as sub_category_name', 
@@ -127,7 +153,17 @@ use App\Helpers\Helper;
                                 ?>
                                     <li>
                                         <div class="news-post image-post">
-                                            <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent3->cover_image?>" alt="<?=$parentCategoryContent3->new_title?>">
+                                            <!-- <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent3->cover_image?>" alt="<?=$parentCategoryContent3->new_title?>"> -->
+                                            <?php if($parentCategoryContent3->media == 'image'){?>
+                                                <!-- <div class="post-gallery"> -->
+                                                    <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent3->cover_image?>" alt="<?=$parentCategoryContent3->new_title?>">
+                                                <!-- </div> -->
+                                            <?php } else {?>
+                                                <div class="video-post">
+                                                    <img alt="" src="https://img.youtube.com/vi/<?=$parentCategoryContent3->videoId?>/hqdefault.jpg">
+                                                    <a href="https://www.youtube.com/watch?v=<?=$parentCategoryContent3->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                </div>
+                                            <?php } ?>
                                             <div class="hover-box">
                                                 <div class="inner-hover">
                                                     <a class="category-post" href="<?=url('category/' . $parentCategoryContent3->parent_category_slug)?>"><?=$parentCategoryContent3->parent_category_name?></a>
@@ -158,6 +194,8 @@ use App\Helpers\Helper;
                                                                 'news_contents.author_name', 
                                                                 'news_contents.cover_image', 
                                                                 'news_contents.created_at',
+                                                                'news_contents.media',
+                                                                'news_contents.videoId',
                                                                 'parent_category.sub_category as parent_category_name', // Corrected alias to sub_category
                                                                 'sub_category.sub_category as category_name', // Corrected alias to sub_category
                                                                 'sub_category.slug as category_slug', // Corrected alias to sub_category
@@ -172,7 +210,17 @@ use App\Helpers\Helper;
                             if($parentCategoryContent2){
                                 ?>
                                 <div class="news-post homesmall_box image-post">
-                                    <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent2->cover_image?>" alt="<?=$parentCategoryContent2->new_title?>">
+                                    <!-- <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent2->cover_image?>" alt="<?=$parentCategoryContent2->new_title?>"> -->
+                                    <?php if($parentCategoryContent2->media == 'image'){?>
+                                        <!-- <div class="post-gallery"> -->
+                                            <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent2->cover_image?>" alt="<?=$parentCategoryContent2->new_title?>">
+                                        <!-- </div> -->
+                                    <?php } else {?>
+                                        <div class="video-post">
+                                            <img alt="" src="https://img.youtube.com/vi/<?=$parentCategoryContent2->videoId?>/hqdefault.jpg">
+                                            <a href="https://www.youtube.com/watch?v=<?=$parentCategoryContent2->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                        </div>
+                                    <?php } ?>
                                     <div class="hover-box">
                                         <div class="inner-hover">
                                             <a class="category-post" href="<?=url('category/' . $parentCategoryContent2->parent_category_slug)?>"><?=$parentCategoryContent2->parent_category_name?></a>
@@ -200,6 +248,8 @@ use App\Helpers\Helper;
                                                                 'news_contents.author_name', 
                                                                 'news_contents.cover_image', 
                                                                 'news_contents.created_at',
+                                                                'news_contents.media',
+                                                                'news_contents.videoId',
                                                                 'parent_category.sub_category as parent_category_name', // Corrected alias to sub_category
                                                                 'sub_category.sub_category as category_name', // Corrected alias to sub_category
                                                                 'sub_category.slug as category_slug', // Corrected alias to sub_category
@@ -213,7 +263,17 @@ use App\Helpers\Helper;
                         ?>
                         <?php if($parentCategoryContent9){?>
                             <div class="news-post homesmall_box image-post">
-                                <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent9->cover_image?>" alt="<?=$parentCategoryContent9->new_title?>">
+                                <!-- <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent9->cover_image?>" alt="<?=$parentCategoryContent9->new_title?>"> -->
+                                <?php if($parentCategoryContent9->media == 'image'){?>
+                                    <!-- <div class="post-gallery"> -->
+                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent9->cover_image?>" alt="<?=$parentCategoryContent9->new_title?>">
+                                    <!-- </div> -->
+                                <?php } else {?>
+                                    <div class="video-post">
+                                        <img alt="" src="https://img.youtube.com/vi/<?=$parentCategoryContent9->videoId?>/hqdefault.jpg">
+                                        <a href="https://www.youtube.com/watch?v=<?=$parentCategoryContent9->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                    </div>
+                                <?php } ?>
                                 <div class="hover-box">
                                     <div class="inner-hover">
                                         <a class="category-post" href="<?=url('category/' . $parentCategoryContent9->parent_category_slug)?>"><?=$parentCategoryContent9->parent_category_name?></a>
@@ -278,12 +338,12 @@ use App\Helpers\Helper;
                                         <li style="display: flex;">
                                             <!-- <img src="<?=env('UPLOADS_URL').'newcontent/'.$featuredContent->cover_image?>" alt="<?=$featuredContent->new_title?>"> -->
                                             <?php if($featuredContent->media == 'image'){?>
-                                                <div class="post-gallery">
+                                                <!-- <div class="post-gallery"> -->
                                                     <img src="<?=env('UPLOADS_URL').'newcontent/'.$featuredContent->cover_image?>" alt="<?=$featuredContent->new_title?>">
-                                                    <span class="image-caption" style="color:skyblue;"><?=$featuredContent->cover_image_caption?></span>
-                                                </div>
+                                                    <!-- <span class="image-caption" style="color:skyblue;"><?=$featuredContent->cover_image_caption?></span> -->
+                                                <!-- </div> -->
                                             <?php } else {?>
-                                                <div class="post-gallery video-post">
+                                                <div class="video-post">
                                                     <img alt="" src="https://img.youtube.com/vi/<?=$featuredContent->videoId?>/hqdefault.jpg">
                                                     <a href="https://www.youtube.com/watch?v=<?=$featuredContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                                 </div>
