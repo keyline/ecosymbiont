@@ -262,6 +262,8 @@ use App\Helpers\Helper;
                                                                             'news_contents.author_name', 
                                                                             'news_contents.cover_image', 
                                                                             'news_contents.created_at',
+                                                                            'news_contents.media',
+                                                                            'news_contents.videoId',
                                                                             'sub_category.sub_category as category_name',  // Correct alias for subcategory name
                                                                             'sub_category.slug as category_slug',  // Correct alias for subcategory slug                                                                            
                                                                             'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
@@ -274,7 +276,18 @@ use App\Helpers\Helper;
                                         if($featuredContents){ foreach($featuredContents as $featuredContent){
                                         ?>
                                         <li style="display: flex;">
-                                            <img src="<?=env('UPLOADS_URL').'newcontent/'.$featuredContent->cover_image?>" alt="<?=$featuredContent->new_title?>">
+                                            <!-- <img src="<?=env('UPLOADS_URL').'newcontent/'.$featuredContent->cover_image?>" alt="<?=$featuredContent->new_title?>"> -->
+                                            <?php if($featuredContent->media == 'image'){?>
+                                                <div class="post-gallery">
+                                                    <img src="<?=env('UPLOADS_URL').'newcontent/'.$featuredContent->cover_image?>" alt="<?=$featuredContent->new_title?>">
+                                                    <span class="image-caption" style="color:skyblue;"><?=$featuredContent->cover_image_caption?></span>
+                                                </div>
+                                            <?php } else {?>
+                                                <div class="post-gallery video-post">
+                                                    <img alt="" src="https://img.youtube.com/vi/<?=$featuredContent->videoId?>/hqdefault.jpg">
+                                                    <a href="https://www.youtube.com/watch?v=<?=$featuredContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                </div>
+                                            <?php } ?>
                                             <div class="post-content">
                                                 <h2><a href="<?=url('content/' . $featuredContent->parent_category_slug. '/' . $featuredContent->category_slug . '/' . $featuredContent->slug)?>"><?=$featuredContent->new_title?></a></h2>
                                                 <ul class="post-tags">
@@ -540,6 +553,8 @@ use App\Helpers\Helper;
                                                                 'news_contents.author_name', 
                                                                 'news_contents.cover_image', 
                                                                 'news_contents.created_at',
+                                                                'news_contents.media',
+                                                                'news_contents.videoId',
                                                                 'parent_category.sub_category as parent_category_name', // Corrected alias to sub_category
                                                                 'sub_category.sub_category as category_name',  // Correct alias for subcategory name
                                                                 'sub_category.slug as category_slug',  // Correct alias for subcategory slug
@@ -556,9 +571,20 @@ use App\Helpers\Helper;
                                 <div class="news-post article-post">
                                     <div class="row">
                                         <div class="col-sm-5">
-                                            <div class="post-gallery">
+                                            <!-- <div class="post-gallery">
                                                 <img src="<?=env('UPLOADS_URL').'newcontent/'.$recentContent->cover_image?>" alt="<?=$recentContent->new_title?>">
-                                            </div>
+                                            </div> -->
+                                            <?php if($recentContent->media == 'image'){?>
+                                                <div class="post-gallery">
+                                                    <img src="<?=env('UPLOADS_URL').'newcontent/'.$recentContent->cover_image?>" alt="<?=$recentContent->new_title?>">
+                                                    <span class="image-caption" style="color:skyblue;"><?=$recentContent->cover_image_caption?></span>
+                                                </div>
+                                            <?php } else {?>
+                                                <div class="post-gallery video-post">
+                                                    <img alt="" src="https://img.youtube.com/vi/<?=$recentContent->videoId?>/hqdefault.jpg">
+                                                    <a href="https://www.youtube.com/watch?v=<?=$recentContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                </div>
+                                            <?php } ?>
                                         </div>
                                         <div class="col-sm-7">
                                             <div class="post-content">
