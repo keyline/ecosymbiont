@@ -89,6 +89,8 @@ use App\Helpers\Helper;
                                                                     'news_contents.author_name', 
                                                                     'news_contents.cover_image', 
                                                                     'news_contents.created_at',
+                                                                    'news_contents.media',
+                                                                    'news_contents.videoId',
                                                                     'sub_category.sub_category as category_name',  // Correct alias for subcategory name
                                                                     'sub_category.slug as category_slug',  // Correct alias for subcategory slug                                                                            
                                                                     'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
@@ -101,7 +103,16 @@ use App\Helpers\Helper;
                                 if($featuredContents){ foreach($featuredContents as $featuredContent){
                                 ?>
                                     <li>
-                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$featuredContent->cover_image?>" alt="<?=$featuredContent->new_title?>">
+                                        <?php if($featuredContent->media == 'image'){?>
+                                            <!-- <div class="post-gallery"> -->
+                                                <img src="<?=env('UPLOADS_URL').'newcontent/'.$featuredContent->cover_image?>" alt="<?=$featuredContent->new_title?>">
+                                            <!-- </div> -->
+                                        <?php } else {?>
+                                            <div class="video-post">
+                                                <img alt="" src="https://img.youtube.com/vi/<?=$featuredContent->videoId?>/hqdefault.jpg">
+                                                <a href="https://www.youtube.com/watch?v=<?=$featuredContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                            </div>
+                                        <?php } ?>
                                         <div class="post-content">
                                             <h2><a href="<?=url('content/' . $featuredContent->parent_category_slug. '/' . $featuredContent->category_slug . '/' . $featuredContent->slug)?>"><?=$featuredContent->new_title?></a></h2>
                                             <ul class="post-tags">
@@ -135,6 +146,8 @@ use App\Helpers\Helper;
                                                                 'news_contents.author_name', 
                                                                 'news_contents.cover_image', 
                                                                 'news_contents.created_at',
+                                                                'news_contents.media',
+                                                                'news_contents.videoId',
                                                                 'sub_category.sub_category as category_name',  // Correct alias for subcategory name
                                                                 'sub_category.slug as category_slug',  // Correct alias for subcategory slug
                                                                 'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
@@ -147,7 +160,16 @@ use App\Helpers\Helper;
                                         if($popularContents){ foreach($popularContents as $popularContent){
                                         ?>
                                             <li>
-                                                <img src="<?=env('UPLOADS_URL').'newcontent/'.$popularContent->cover_image?>" alt="<?=$popularContent->new_title?>">
+                                                <?php if($popularContent->media == 'image'){?>
+                                                    <!-- <div class="post-gallery"> -->
+                                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$popularContent->cover_image?>" alt="<?=$popularContent->new_title?>">
+                                                    <!-- </div> -->
+                                                <?php } else {?>
+                                                    <div class="video-post">
+                                                        <img alt="" src="https://img.youtube.com/vi/<?=$popularContent->videoId?>/hqdefault.jpg">
+                                                        <a href="https://www.youtube.com/watch?v=<?=$popularContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                    </div>
+                                                <?php } ?>
                                                 <div class="post-content">
                                                     <h2><a href="<?=url('content/'. $popularContent->parent_category_slug. '/' . $popularContent->category_slug . '/' .  $popularContent->slug)?>"><?=$popularContent->new_title?></a></h2>
                                                     <ul class="post-tags">
@@ -171,6 +193,8 @@ use App\Helpers\Helper;
                                                                             'news_contents.author_name', 
                                                                             'news_contents.cover_image', 
                                                                             'news_contents.created_at',
+                                                                            'news_contents.media',
+                                                                            'news_contents.videoId',
                                                                             'sub_category.sub_category as category_name',  // Correct alias for subcategory name
                                                                             'sub_category.slug as category_slug',  // Correct alias for subcategory slug
                                                                             'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
@@ -182,7 +206,16 @@ use App\Helpers\Helper;
                                         if($recentContents){ foreach($recentContents as $recentContent){
                                         ?>
                                             <li>
-                                                <img src="<?=env('UPLOADS_URL').'newcontent/'.$recentContent->cover_image?>" alt="<?=$recentContent->new_title?>">
+                                                <?php if($recentContent->media == 'image'){?>
+                                                    <!-- <div class="post-gallery"> -->
+                                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$recentContent->cover_image?>" alt="<?=$recentContent->new_title?>">
+                                                    <!-- </div> -->
+                                                <?php } else {?>
+                                                    <div class="video-post">
+                                                        <img alt="" src="https://img.youtube.com/vi/<?=$recentContent->videoId?>/hqdefault.jpg">
+                                                        <a href="https://www.youtube.com/watch?v=<?=$recentContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                    </div>
+                                                <?php } ?>
                                                 <div class="post-content">
                                                     <h2><a href="<?=url('content/' . $recentContent->parent_category_slug. '/' . $recentContent->category_slug . '/' .  $recentContent->slug)?>"><?=$recentContent->new_title?></a></h2>
                                                     <ul class="post-tags">
