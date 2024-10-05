@@ -3341,7 +3341,7 @@ button.mfp-arrow {
 .post-gallery.video-post{
   position: relative;
 } 
-.video-link{
+.post-gallery.video-post .video-link{
   position: absolute;
   top: 50%;
   left: 50%;
