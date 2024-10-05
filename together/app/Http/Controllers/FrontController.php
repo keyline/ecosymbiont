@@ -196,7 +196,9 @@ class FrontController extends Controller
                                                         'news_contents.slug', 
                                                         'news_contents.author_name', 
                                                         'news_contents.cover_image', 
-                                                        'news_contents.created_at', 
+                                                        'news_contents.created_at',
+                                                        'news_contents.media',
+                                                        'news_contents.videoId',
                                                         'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
                                                         'parent_category.sub_category as parent_category_name', // From parent_category name
                                                         'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
@@ -227,7 +229,9 @@ class FrontController extends Controller
                                                     'news_contents.slug', 
                                                     'news_contents.author_name', 
                                                     'news_contents.cover_image', 
-                                                    'news_contents.created_at', 
+                                                    'news_contents.created_at',
+                                                    'news_contents.media',
+                                                    'news_contents.videoId',
                                                     'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
                                                     'parent_category.sub_category as parent_category_name', // From parent_category name
                                                     'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
