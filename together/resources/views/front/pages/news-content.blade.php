@@ -246,14 +246,14 @@ use App\Helpers\Helper;
                                         <?php if($alsoLikeContents){ foreach($alsoLikeContents as $alsoLikeContent){?>
                                             <div class="item news-post image-post3">
                                                 <!-- <img src="<?=env('UPLOADS_URL').'newcontent/'.$alsoLikeContent->cover_image?>" alt="<?=$alsoLikeContent->new_title?>"> -->
-                                                <?php if($featuredContent->media == 'image'){?>
+                                                <?php if($alsoLikeContent->media == 'image'){?>
                                                     <!-- <div class="post-gallery"> -->
-                                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$featuredContent->cover_image?>" alt="<?=$featuredContent->new_title?>">
+                                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$alsoLikeContent->cover_image?>" alt="<?=$alsoLikeContent->new_title?>">
                                                     <!-- </div> -->
                                                 <?php } else {?>
                                                     <div class="video-post">
-                                                        <img alt="" src="https://img.youtube.com/vi/<?=$featuredContent->videoId?>/hqdefault.jpg">
-                                                        <a href="https://www.youtube.com/watch?v=<?=$featuredContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                        <img alt="" src="https://img.youtube.com/vi/<?=$alsoLikeContent->videoId?>/hqdefault.jpg">
+                                                        <a href="https://www.youtube.com/watch?v=<?=$alsoLikeContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                                     </div>
                                                 <?php } ?>
                                                 <div class="hover-box">
