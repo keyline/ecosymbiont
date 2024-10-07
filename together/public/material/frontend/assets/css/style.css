@@ -6859,3 +6859,22 @@ div.block-content {
   margin-bottom: 15px;
 }
 .black{color: #000;}
+.welcome_mucis_section {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+.welcome_mucis_section h3 {
+  padding-right: 10px;
+  font-size: 30px;
+  color: #90201f;
+}
+@media(max-width: 600px){
+  .welcome_mucis_section {
+      align-items: center;
+      flex-wrap: wrap;
+      text-align: center;
+      justify-content: center;
+  }
+  }

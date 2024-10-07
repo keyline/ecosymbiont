@@ -9,6 +9,14 @@ include "include/header.php";
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
+                      <div class="welcome_mucis_section">
+                        <h3>WELCOME</h3>
+                        <audio preload="auto" controls>
+                              <source src="ecosymbiontsaudio6oct2024.mp3">
+                        </audio>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
                         <div class="info-box">
                             <h2>OUR MISSION</h2>  
                             <p id="our-focus">Our mission is to regain the understanding that human communities are part of natural  ecological webs (<span><a target="_blank" href="#definitions">ecowebs</a></span>) and to <span><a target="_blank" href="#definitions">regenerate</a></span>  systems that restore, preserve, and foster the symbiosis between humans and ecowebs. Symbiosis encompasses the connectivity and dependence that exist within an ecoweb and that results in mutual benefit of all within that ecoweb, including humans.</p>
@@ -17,8 +25,7 @@ include "include/header.php";
                     <div class="col-md-12">
                         <div class="info-box">
                             <h2>OUR FOCUS</h2>
-                            <p>We focus on regenerating systems that advance food sovereignty, sustainable healthcare,
-                                and ecoweb integration rooted in human communities locally. These systems are of two types:</p>
+                            <p>We focus on regenerating systems that advance food sovereignty, healthy living, and biodiversity preservation, all rooted locally in ecoweb-integrated human communities. These systems are of two types:</p>
                             <ul>
                                 <li><i><strong class="fontbold">human activity systems:</strong></i> ecoweb-specific systems of
                                     knowledge, technologies, and practices developed by ecoweb-rooted human communities
@@ -27,6 +34,14 @@ include "include/header.php";
                                 <li><strong><i>legal-economic-governance systems:</i></strong> legal, trade, and government systems that optimize the wellbeing of human communities and the ecowebs of which they are a symbiotic part and that operate locally, regionally, and globally.</li>
                             </ul>
                         </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="theory_inner">
+                          <h4>THEORY OF CHANGE</h4>
+                          <div>
+                          Exploiting &#x2014; without replenishing &#x2014; human and ecological resources (<a target="_blank" href="#definitions">extractivism</a>) by profit-making <a target="_blank" href="#definitions">corporations</a> is a modern (400+ years) form of imperialism that is enabled and promoted by a global system of laws, trade edicts, and governance structures imposed on nearly all peoples across the world. This system disconnects humans from ecowebs and causes widespread ecocide (e.g., climate crisis, biodiversity loss) and inequity (e.g., food insecurity, genocide) and must be disrupted and replaced in its entirety if ecowebs (humans included) are to survive. The collaborative conceptualizing and implementing of alternative systems that optimize ecoweb wellbeing are essential to effectively replace the globally institutionalized extractivist system.
+                          </div>
+                      </div>
                     </div>
                     <div class="col-md-12" id="our-approach">
                         <div class="info-box">

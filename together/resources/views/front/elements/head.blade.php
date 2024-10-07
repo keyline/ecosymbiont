@@ -15,5 +15,6 @@
 <link rel="stylesheet" type="text/css" href="<?=env('FRONT_ASSETS_URL')?>css/owl.theme.css" media="screen">
 <link rel="stylesheet" type="text/css" href="<?=env('FRONT_ASSETS_URL')?>css/ticker-style.css"/>
 <link rel="stylesheet" type="text/css" href="<?=env('FRONT_ASSETS_URL')?>css/menumaker.css"/>
+<link rel="stylesheet" type="text/css" href="<?=env('FRONT_ASSETS_URL')?>css/audioplayer.css">
 <link rel="stylesheet" type="text/css" href="<?=env('FRONT_ASSETS_URL')?>css/style.css" media="screen">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">

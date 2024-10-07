@@ -19,6 +19,12 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/multiselect-dropdown.js"></script>
+<script src="js/audioplayer.js"></script>
+<script>
+    $(function() {
+    $('audio').audioPlayer();
+    });
+</script>
 <script>
     $('.panel-title > a').click(function() {
     $(this).parents('.panel-default').find('i').toggleClass('fa-plus fa-minus');
