@@ -279,8 +279,31 @@ textarea.form-control {
     text-transform: uppercase;
     margin: 0 0 30px;
 }
-
-
+.welcome_mucis_section {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+.welcome_mucis_section h3 {
+    padding-right: 10px;
+    font-size: 30px;
+    color: #90201f;
+}
+.theory_inner {
+    margin: 30px auto 50px;
+    max-width: 800px;
+    background: #f7fff8;
+    padding: 25px;
+    box-shadow: 0px 1px 9px 4px #ddd;
+    border-radius: 10px;
+    font-size: 18px;
+  }
+  .theory_inner h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 13px;
+  }
 
 
 
@@ -370,6 +393,14 @@ textarea.form-control {
         font-size: 13px;
         padding: 10px 20px;
     }
+}
+@media(max-width: 600px){
+.welcome_mucis_section {
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+}
 }
 @media(max-width: 500px){
     .navbar-brand{

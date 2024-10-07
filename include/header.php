@@ -16,6 +16,7 @@ function isActive($page) {
     <link href="<?=$base_url?>images/fav.png" rel="icon">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/audioplayer.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/style_meeting.css">
 </head>
