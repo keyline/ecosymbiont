@@ -6876,6 +6876,14 @@ div.block-content {
 .video_post_text .hover-box ul.post-tags li, .video_post_text .hover-box ul.post-tags li {
   color: #fff;
 }
+.item.news-post.video-post.video_post_text {
+  height: 200px;
+  overflow: hidden;
+}
+.item.news-post.video-post.video_post_text img {
+  object-fit: cover;
+  height: 100%;
+}
 @media(max-width: 600px){
   .welcome_mucis_section {
       align-items: center;
