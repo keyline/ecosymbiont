@@ -179,7 +179,7 @@ use App\Helpers\Helper;
                                                                         $getAffiliation = EcosystemAffiliation::select('name')->where('id', '=', $author_affiliation[$k])->first();
                                                                         $affiliations[]       = $getAffiliation->name;
                                                                     } }?>
-                                                                    <span><?=implode(", ", $affiliations)?> <?= $indigenous_affiliation = (isset($indigenous[$i]) && !empty($indigenous[$i]) > 0) ? '| ' . trim($indigenous[$i]) : trim($indigenous[0]); ?></span>
+                                                                    <span><?=implode(", ", $affiliations)?> <?= $indigenous_affiliation = (isset($indigenous[$i]) && !empty($indigenous[$i]) > 0) ? '| ' . trim($indigenous[$i]) : '| ' . trim($indigenous[0]); ?></span>
                                                                 </span>
                                                             </div>
                                                             <div class="autor-title">
