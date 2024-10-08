@@ -244,7 +244,7 @@ use App\Helpers\Helper;
                                     </div>
                                     <div class="owl-carousel" data-num="3">
                                         <?php if($alsoLikeContents){ foreach($alsoLikeContents as $alsoLikeContent){?>
-                                            <div class="item news-post image-post3 video_post_text">
+                                            <div class="item news-post video-post video_post_text">
                                                 <!-- <img src="<?=env('UPLOADS_URL').'newcontent/'.$alsoLikeContent->cover_image?>" alt="<?=$alsoLikeContent->new_title?>"> -->
                                                 <?php if($alsoLikeContent->media == 'image'){?>
                                                     <!-- <div class="post-gallery"> -->

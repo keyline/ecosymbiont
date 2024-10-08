@@ -6871,10 +6871,10 @@ div.block-content {
   color: #90201f;
 }
 .video_post_text .hover-box a {
-  color: #444 !important;
+  /* color: #444 !important; */
 }
 .video_post_text .hover-box ul.post-tags li, .video_post_text .hover-box ul.post-tags li {
-  color: #999;
+  color: #fff;
 }
 @media(max-width: 600px){
   .welcome_mucis_section {
