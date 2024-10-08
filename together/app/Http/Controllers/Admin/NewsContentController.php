@@ -68,24 +68,31 @@ class NewsContentController extends Controller
             
             // Validate request data
             if ($this->validate($request, $rules)) {
-                if ($postData['media'] == 'image') {               
-                    $imageFile = $request->file('cover_image');
-                    $cover_image = $data['row']->cover_image ?? ''; // Fallback to existing image if not uploaded
-                    if($imageFile != '') {
-                        $imageName = $imageFile->getClientOriginalName();
-                        $uploadedFile = $this->upload_single_file('cover_image', $imageName, 'newcontent', 'image');
-                        if ($uploadedFile['status']) {
-                            $cover_image = $uploadedFile['newFilename'];
+                if ($postData['media'] == 'image') {   
+                    /* banner image */
+                    $imageFile      = $request->file('cover_image');
+                        if($imageFile != ''){
+                            $imageName      = $imageFile->getClientOriginalName();
+                            $uploadedFile   = $this->upload_single_file('cover_image', $imageName, 'newcontent', 'image');
+                            if($uploadedFile['status']){
+                                $cover_image = $uploadedFile['newFilename'];
+                            } else {
+                                return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                            }
                         } else {
-                            return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                            $cover_image = $data['row']->cover_image;
                         }
-                    }
-                }
+                    /* banner image */                      
+                } 
+                else{
+                    //fetch video code form url
+                    $url = $postData['video_url'];
+                    // $parts = explode("v=", $url);
+                    // Regular expression to match both types of YouTube URLs
+                    preg_match("/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([a-zA-Z0-9_-]{11})/", $url, $matches1);
+                    $videoId = $matches1[1]; // This will give you the part after 'v='
 
-                //fetch video code form url
-                $url = $postData['video_url'];
-                preg_match("/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([a-zA-Z0-9_-]{11})/", $url, $matches1);
-                    $videoId = $matches1[1]; // This will give you the part after 'v='                
+                }                 
                 // Generate a unique slug
                 $slug = Str::slug($postData['new_title']);
         
@@ -210,15 +217,7 @@ class NewsContentController extends Controller
             if ($this->validate($request, $rules)) {
                 
                     // Generate a unique slug
-                    $slug = Str::slug($postData['new_title']); 
-
-                    //fetch video code form url
-                    $url = $postData['video_url'];
-                    // $parts = explode("v=", $url);
-                    // Regular expression to match both types of YouTube URLs
-                    preg_match("/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([a-zA-Z0-9_-]{11})/", $url, $matches1);
-                    $videoId = $matches1[1]; // This will give you the part after 'v='
-
+                    $slug = Str::slug($postData['new_title']);                     
                     if ($postData['media'] == 'image') {   
                         /* banner image */
                         $imageFile      = $request->file('cover_image');
@@ -234,7 +233,16 @@ class NewsContentController extends Controller
                                 $cover_image = $data['row']->cover_image;
                             }
                         /* banner image */                      
-                    }                       
+                    } 
+                    else{
+                        //fetch video code form url
+                        $url = $postData['video_url'];
+                        // $parts = explode("v=", $url);
+                        // Regular expression to match both types of YouTube URLs
+                        preg_match("/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([a-zA-Z0-9_-]{11})/", $url, $matches1);
+                        $videoId = $matches1[1]; // This will give you the part after 'v='
+
+                    }                     
                     $fields = [
                     'sub_category'              => $postData['sub_categories'],                       
                     'parent_category'           => $postData['parent_category'], 
