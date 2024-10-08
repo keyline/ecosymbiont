@@ -10,7 +10,6 @@ include "include/header.php";
                 <div class="row">
                     <div class="col-md-12">
                       <div class="welcome_mucis_section">
-                        <h3>WELCOME</h3>
                         <audio preload="auto" controls>
                               <source src="ecosymbiontsaudio6oct2024.mp3">
                         </audio>
@@ -39,7 +38,7 @@ include "include/header.php";
                       <div class="theory_inner">
                           <h4>THEORY OF CHANGE</h4>
                           <div>
-                          Exploiting &#x2014; without replenishing &#x2014; human and ecological resources (<a target="_blank" href="#definitions">extractivism</a>) by profit-making <a target="_blank" href="#definitions">corporations</a> is a modern (400+ years) form of imperialism that is enabled and promoted by a global system of laws, trade edicts, and governance structures imposed on nearly all peoples across the world. This system disconnects humans from ecowebs and causes widespread ecocide (e.g., climate crisis, biodiversity loss) and inequity (e.g., food insecurity, genocide) and must be disrupted and replaced in its entirety if ecowebs (humans included) are to survive. The collaborative conceptualizing and implementing of alternative systems that optimize ecoweb wellbeing are essential to effectively replace the globally institutionalized extractivist system.
+                          Exploiting &#x2014; without replenishing &#x2014; human and ecological resources (<a target="_blank" href="#definitions">extractivism</a>) by profit-making <a target="_blank" href="#definitions">corporations</a> is a modern (400+ years) form of imperialism that is enabled and promoted by a global system of laws, trade edicts, and governance structures imposed on nearly all peoples across the world. This system disconnects humans from ecowebs and causes widespread ecocide (<i>e.g.</i>, climate crisis, biodiversity loss) and inequity (<i>e.g.</i>, food insecurity, genocide) and must be disrupted and replaced in its entirety if ecowebs (humans included) are to survive. The collaborative conceptualizing and implementing of alternative systems that optimize ecoweb wellbeing are essential to effectively replace the globally institutionalized extractivist system.
                           </div>
                       </div>
                     </div>

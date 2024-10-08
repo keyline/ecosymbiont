@@ -14,7 +14,6 @@
                     <div class="article-box">
                             <div class="col-md-12">
                             <div class="welcome_mucis_section">
-                                <h3>WELCOME</h3>
                                 <audio preload="auto" controls>
                                     <source src="<?=env('FRONT_ASSETS_URL')?>ecosymbiontsaudio6oct2024.mp3">
                                 </audio>
