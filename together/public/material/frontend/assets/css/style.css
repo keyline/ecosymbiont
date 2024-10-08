@@ -6895,4 +6895,5 @@ div.block-content {
   }
   .display_contents{
     display: contents !important;
+    text-decoration: underline !important;
   }
