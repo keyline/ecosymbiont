@@ -6894,6 +6894,6 @@ div.block-content {
   }
   }
   .display_contents{
-    display: contents !important;
+    display: inline !important;
     text-decoration: underline !important;
   }
