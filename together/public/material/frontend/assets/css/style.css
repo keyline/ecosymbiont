@@ -6870,6 +6870,12 @@ div.block-content {
   font-size: 30px;
   color: #90201f;
 }
+.video_post_text .hover-box a {
+  color: #444 !important;
+}
+.video_post_text .hover-box ul.post-tags li, .video_post_text .hover-box ul.post-tags li {
+  color: #999;
+}
 @media(max-width: 600px){
   .welcome_mucis_section {
       align-items: center;
