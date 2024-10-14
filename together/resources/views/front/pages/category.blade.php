@@ -3,6 +3,12 @@ use App\Models\NewsCategory;
 use App\Models\NewsContent;
 use App\Helpers\Helper;
 ?>
+<?php
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+$host = $_SERVER['HTTP_HOST'];
+$uri = $_SERVER['REQUEST_URI'];
+$current_url = $protocol . $host . $uri;
+?>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- block-wrapper-section ================================================== -->
     <section class="block-wrapper">
@@ -35,7 +41,11 @@ use App\Helpers\Helper;
                                             <?php } else {?>
                                                 <div class="post-gallery video-post">
                                                     <img alt="" src="https://img.youtube.com/vi/<?=$rowContent->videoId?>/hqdefault.jpg">
-                                                    <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                    <?php if(session('is_user_login')){?>
+                                                        <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                    <?php } else {?>
+                                                        <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                    <?php }?>
                                                 </div>
                                             <?php } ?>
                                         </div>
@@ -60,7 +70,6 @@ use App\Helpers\Helper;
                     </div>
                     <!-- End block content -->
                 </div>
-
                 <div class="col-md-3 col-sm-4 sidebar-sticky">
                     <!-- sidebar -->
                     <div class="sidebar large-sidebar theiaStickySidebar">
