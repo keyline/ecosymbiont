@@ -8,6 +8,11 @@ use App\Models\Article;
 use App\Models\Title;
 use App\Models\Pronoun;
 use App\Helpers\Helper;
+
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+$host = $_SERVER['HTTP_HOST'];
+$uri = $_SERVER['REQUEST_URI'];
+$current_url = $protocol . $host . $uri;
 ?>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- block-wrapper-section ================================================== -->
@@ -53,7 +58,11 @@ use App\Helpers\Helper;
                                 <?php } else {?>
                                     <div class="post-gallery video-post">
                                         <img alt="" src="https://img.youtube.com/vi/<?=$rowContent->videoId?>/hqdefault.jpg">
-                                        <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                        <?php if(session('is_user_login')){?>
+                                            <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                        <?php } else {?>
+                                            <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
+                                        <?php }?>
                                     </div>
                                 <?php } ?>
                                 <div class="post-content">
@@ -257,7 +266,11 @@ use App\Helpers\Helper;
                                                 <?php } else {?>
                                                     <div class="video-post">
                                                         <img alt="" src="https://img.youtube.com/vi/<?=$alsoLikeContent->videoId?>/hqdefault.jpg">
-                                                        <a href="https://www.youtube.com/watch?v=<?=$alsoLikeContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                        <?php if(session('is_user_login')){?>
+                                                            <a href="https://www.youtube.com/watch?v=<?=$alsoLikeContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                        <?php } else {?>
+                                                            <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
+                                                        <?php }?>
                                                     </div>
                                                 <?php } ?>
                                                 <div class="hover-box">
@@ -320,7 +333,11 @@ use App\Helpers\Helper;
                                         <?php } else {?>
                                             <div class="video-post">
                                                 <img alt="" src="https://img.youtube.com/vi/<?=$featuredContent->videoId?>/hqdefault.jpg">
-                                                <a href="https://www.youtube.com/watch?v=<?=$featuredContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                <?php if(session('is_user_login')){?>
+                                                    <a href="https://www.youtube.com/watch?v=<?=$featuredContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                <?php } else {?>
+                                                    <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
+                                                <?php }?>
                                             </div>
                                         <?php } ?>
                                         <div class="post-content">
@@ -377,7 +394,11 @@ use App\Helpers\Helper;
                                                 <?php } else {?>
                                                     <div class="video-post">
                                                         <img alt="" src="https://img.youtube.com/vi/<?=$popularContent->videoId?>/hqdefault.jpg">
-                                                        <a href="https://www.youtube.com/watch?v=<?=$popularContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                        <?php if(session('is_user_login')){?>
+                                                            <a href="https://www.youtube.com/watch?v=<?=$popularContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                        <?php } else {?>
+                                                            <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
+                                                        <?php }?>
                                                     </div>
                                                 <?php } ?>
                                                 <div class="post-content">
@@ -423,7 +444,11 @@ use App\Helpers\Helper;
                                                 <?php } else {?>
                                                     <div class="video-post">
                                                         <img alt="" src="https://img.youtube.com/vi/<?=$recentContent->videoId?>/hqdefault.jpg">
-                                                        <a href="https://www.youtube.com/watch?v=<?=$recentContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                        <?php if(session('is_user_login')){?>
+                                                            <a href="https://www.youtube.com/watch?v=<?=$recentContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                        <?php } else {?>
+                                                            <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
+                                                        <?php }?>
                                                     </div>
                                                 <?php } ?>
                                                 <div class="post-content">
