@@ -44,7 +44,7 @@ $current_url = $protocol . $host . $uri;
                                                     <?php if(session('is_user_login')){?>
                                                         <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                                     <?php } else {?>
-                                                        <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>"><i class="fa fa-play-circle-o"></i></a>
+                                                        <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);"><i class="fa fa-play-circle-o"></i></a>
                                                     <?php }?>
                                                 </div>
                                             <?php } ?>
