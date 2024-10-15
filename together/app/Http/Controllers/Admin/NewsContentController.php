@@ -345,22 +345,90 @@ class NewsContentController extends Controller
         return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' Successfully !!!');
     }
     /* change archieve status */
+    /* image list */
+    public function list_image()
+    {       
+        $data['module']                 = $this->data;
+        $title                          = 'News Content Image List';
+        $page_name                      = 'news_content_image.list';
+        $data['rows']                   = NewsContentImage::where('status', '!=', 3)->orderBy('id', 'DESC')->get();        
+        echo $this->admin_after_login_layout($title, $page_name, $data);
+    }
+    /* image list */
+    /* add */
+    public function add_image(Request $request)
+    {
+        $data['module']           = $this->data;
+        if ($request->isMethod('post')) {
+            $postData = $request->all(); 
+            //  Helper::pr($postData);
+            // Validation rules
+            $rules = [
+                'others_image'           => 'required',                                                
+                'image_title'                 => 'required'               
+            ];
+            
+            // Validate request data
+            if ($this->validate($request, $rules)) {                
+                
+                $image_title = $postData['image_title'];
+                // Handle others_image upload (optional)
+                $imageFile = $request->file('others_image');
+                $others_image = [];
+        
+                if($imageFile != '') {                    
+                    $uploadedFile = $this->commonFileArrayUpload('newcontent', $imageFile, 'image');
+                    if(!empty($uploadedFile)) {
+                        $others_image = $uploadedFile;
+                    } else {
+                        $others_image = [];
+                    }
+                }
+        
+                // Insert into NewsContentImage if others_image is not empty
+                if(count($others_image) > 0) {
+                    foreach($others_image as $image) {
+                        $imageFields = [
+                            'image_file' => $image,
+                            'image_title' => $image_title,
+                        ];
+                        //  Helper::pr($imageFields);
+                        NewsContentImage::insert($imageFields);
+                    }
+                }
+        
+                // Redirect after successful insertion
+                return redirect("admin/news_content_image/list")->with('success_message', 'Images inserted Successfully !!!');
+                
+            } else {
+                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+            }
+        }
+        $data['module']                 = $this->data;
+        $title                          = $this->data['title'] . ' Add';       
+        $page_name                      = 'news_content_image.add-edit';
+        $data['row']                    = [];        
+         $data['news_images']           = [];
+        echo $this->admin_after_login_layout($title, $page_name, $data);
+    }
+    /* add */
      /* edit image */
      public function edit_image(Request $request, $id)
      {
          $data['module']                 = $this->data;
          $id                             = Helper::decoded($id);
-         $title                          = $this->data['title'] . ' Update';
+         $title                          = 'News Content Image Update';
          $page_name                      = 'news_content_image.add-edit';        
-         $data['row']            = NewsContentImage::where('status', '!=', 3)->where('id', '=', $id)->first();
-         $data['content']                    = NewsContent::where('id', '=', $data['row']->news_id)->first();          
+         $data['row']                    = NewsContentImage::where('status', '!=', 3)->where('id', '=', $id)->first();
+         $data['content']                = NewsContent::where('id', '=', $data['row']->news_id)->first();          
  
          if ($request->isMethod('post')) {
              $postData = $request->all();          
              $rules = [                   
                   'others_image'              => 'required',                   
              ];           
-             if ($this->validate($request, $rules)) {                 
+             if ($this->validate($request, $rules)) { 
+                    $image_title = $postData['image_title'];                
                      /* others image */
                      $imageFile      = $request->file('others_image');                    
                      $others_image = [];
@@ -377,15 +445,15 @@ class NewsContentController extends Controller
                      if(count($others_image)>0){
                          for($k=0;$k<count($others_image);$k++){
                              $fields   = [
-                                                 'image_file'                => $others_image[$k],
-                                                 'news_id'                   => $data['content']->id ,
+                                                 'image_file'  => $others_image[$k],
+                                                 'image_title' => $image_title,
                              ];   
                             //  Helper::pr($fields);
                              NewsContentImage::where('id', '=', $id)->update($fields);
                          }
                      }                                                                                                                        
                      
-                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');                
+                     return redirect("admin/news_content_image/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');                
              } else {
                  return redirect()->back()->with('error_message', 'All Fields Required !!!');
              }
@@ -401,7 +469,23 @@ class NewsContentController extends Controller
             'status'             => 3
         ];
         NewsContentImage::where('id', '=', $id)->update($fields);
-        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Deleted Successfully !!!');
+        return redirect("admin/news_content_image/list")->with('success_message', 'Image Deleted Successfully !!!');
     }
     /* delete image */
+    /* change image status */
+    public function change_status_image(Request $request, $id)
+    {
+        $id                             = Helper::decoded($id);
+        $model                          = NewsContentImage::find($id);
+        if ($model->status == 1) {
+            $model->status  = 0;
+            $msg            = 'Deactivated';
+        } else {
+            $model->status  = 1;
+            $msg            = 'Activated';
+        }
+        $model->save();
+        return redirect("admin/news_content_image/list")->with('success_message', 'Image ' . $msg . ' Successfully !!!');
+    }
+    /* change image status */
 }

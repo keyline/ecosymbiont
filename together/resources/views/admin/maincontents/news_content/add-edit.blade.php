@@ -275,7 +275,7 @@ $controllerRoute = $module['controller_route'];
                                 </div>
                             </div>
 
-                            <div class="row mb-3">
+                            <!-- <div class="row mb-3">
                                 <label for="others_image" class="col-md-2 col-lg-2 col-form-label">Others Image</label>
                                 <div class="col-md-10 col-lg-10">
                                     <input type="file" name="others_image[]" class="form-control" id="others_image" multiple>
@@ -297,7 +297,7 @@ $controllerRoute = $module['controller_route'];
                                         <?php }?>
                                     </div>
                                 </div>
-                            </div>      
+                            </div>       -->
                         </div>
                         <div id="videoDetails" style="display: none;">
                             <div class="row mb-3">

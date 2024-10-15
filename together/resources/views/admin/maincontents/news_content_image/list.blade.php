@@ -31,94 +31,39 @@ $controllerRoute = $module['controller_route'];
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">
-            <a href="<?=url('admin/' . $controllerRoute . '/add/')?>" class="btn btn-outline-success btn-sm">Add <?=$module['title']?></a>
+            <a href="<?=url('admin/news_content_image/add_image/')?>" class="btn btn-outline-success btn-sm">Add News Content Image</a>
           </h5>
           <div class="dt-responsive table-responsive">
             <table id="simpletable" class="table table-striped table-bordered nowrap">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Parent Category</th>                                   
-                  <th scope="col">Sub category</th>                                   
-                  <th scope="col">Title</th>                                   
-                  <th scope="col">Sub Title</th>                                   
-                  <th scope="col">Author Name</th>                                   
-                  <th scope="col">Author Pronoun</th>                                   
-                  <th scope="col">Author Affiliation</th>                                   
-                  <th scope="col">Author Email</th>                                   
-                  <th scope="col">Country</th>                                   
-                  <th scope="col">Organization Name</th>                                   
-                  <th scope="col">Long Description</th>                                   
-                  <th scope="col">Cover Image</th>                                   
-                  <th scope="col">Is Feature</th>                                   
-                  <th scope="col">Is Popular</th>                                                                                        
+                  <th scope="col">#</th>                                   
+                  <th scope="col">Image</th>                                                                                                                                           
+                  <th scope="col">Image URL</th>                                                                                                                                           
                   <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
                 <?php if(count($rows)>0){ $sl=1; foreach($rows as $row){?>
                   <tr>
-                    <th scope="row"><?=$sl++?></th>
+                    <th scope="row"><?=$sl++?></th>                      
                     <td>
-                      <?php
-                        $parent_id = $row->parent_category;
-                        $categories = DB::table('news_category')->where('id', '=', $parent_id)->get();
-                        foreach($categories as $category){
-                      ?>
-                      <?=$category->sub_category?>
-                      <?php } ?>
-                    </td>                    
-                    <td>
-                    <?php
-                        $sub_id = $row->sub_category;
-                        $subcategories = DB::table('news_category')->where('id', '=', $sub_id)->get();
-                        foreach($subcategories as $subcategory){
-                      ?>
-                      <?=$subcategory->sub_category?>
-                    <?php } ?>
-                  </td>   
-                  <td><?=wordwrap($row->new_title, 20, "<br>\n");?></td>                 
-                  <td><?=wordwrap($row->sub_title, 20, "<br>\n");?></td>                                
-                  <td><?=$row->author_name?></td>                 
-                  <td>
-                  <?php
-                        $pronoun_id = $row->author_pronoun;
-                        $pronoun = DB::table('pronouns')->where('id', '=', $pronoun_id)->get();
-                        foreach($pronoun as $pronouns){
-                      ?>
-                    <?=$pronouns->name?>
-                    <?php } ?>
-                  </td>                 
-                  <td><?=$row->author_affiliation?></td>                 
-                  <td><?=$row->author_email?></td>                 
-                  <td>
-                  <?php
-                        $country_id = $row->country;
-                        $country = DB::table('countries')->where('id', '=', $country_id)->get();
-                        foreach($country as $countries){
-                      ?>
-                    <?=$countries->name?>
-                    <?php } ?>
-                  </td>                 
-                  <td><?=$row->organization_name?></td>                 
-                  <td><?=wordwrap($row->long_desc, 20, "<br>\n");?></td>    
-                  <td>
-                    <?php if($row->cover_image != ''){?>
-                      <img src="<?=env('UPLOADS_URL').'newcontent/'.$row->cover_image?>" class="img-thumbnail" alt="<?=$row->title?>" style="width: 150px; height: 150px; margin-top: 10px;">
-                    <?php } else {?>
-                      <img src="<?=env('NO_IMAGE')?>" alt="<?=$row->title?>" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
-                    <?php }?>
-                  </td>             
-                  <td><?=$row->is_feature?></td>                 
-                  <td><?=$row->is_popular?></td>                                                
-                    <td>
-                      <a href="<?=url('admin/' . $controllerRoute . '/edit/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit"></i></a>
-                      <a href="<?=url('admin/' . $controllerRoute . '/delete/'.Helper::encoded($row->id))?>" class="btn btn-outline-danger btn-sm" title="Delete <?=$module['title']?>" onclick="return confirm('Do You Want To Delete This <?=$module['title']?>');"><i class="fa fa-trash"></i></a>
-                      <?php if($row->status){?>
-                        <a href="<?=url('admin/' . $controllerRoute . '/change-status/'.Helper::encoded($row->id))?>" class="btn btn-outline-success btn-sm" title="Activate <?=$module['title']?>"><i class="fa fa-check"></i></a>
+                      <?php if($row->image_file != ''){?>
+                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$row->image_file?>" class="img-thumbnail" id="imageToCopy<?=$row->id?>" alt="<?=$row->image_title?>" style="width: 150px; height: 150px; margin-top: 10px;">
                       <?php } else {?>
-                        <a href="<?=url('admin/' . $controllerRoute . '/change-status/'.Helper::encoded($row->id))?>" class="btn btn-outline-warning btn-sm" title="Deactivate <?=$module['title']?>"><i class="fa fa-times"></i></a>
+                        <img src="<?=env('NO_IMAGE')?>" alt="" class="img-thumbnail"  style="width: 150px; height: 150px; margin-top: 10px;">
                       <?php }?>
+                    </td>                                                                              
+                    <td>
+                      <input type="text" class="form-control" id="imageUrlTextBox" value="<?=env('UPLOADS_URL').'newcontent/'.$row->image_file?>" readonly style="width: 300px;"><br>
+                      <button class="btn btn-primary" onclick="copyImageLink(<?=$row->id?>)">Copy Image Link</button>
+                      <!-- Message that appears after copying -->
+                      <p id="copyMessage<?=$row->id?>" style="color:green; display:none;">Image link copied!</p>
+                    </td>
+                    <td>
+                      <a href="<?=url('admin/news_content_image/edit_image/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit News Content Image"><i class="fa fa-edit"></i></a>
+                      <a href="<?=url('admin/news_content_image/delete_image/'.Helper::encoded($row->id))?>" class="btn btn-outline-danger btn-sm" title="Delete News Content Image" onclick="return confirm('Do You Want To Delete This News Content Image');"><i class="fa fa-trash"></i></a>                      
+                      <a href="<?=env('UPLOADS_URL').'newcontent/'.$row->image_file?>" download="<?=$row->image_title?>" class="btn btn-outline-success btn-sm"><i class="fa fa-download"></i></a>
                     </td>
                   </tr>
                 <?php } } else {?>
@@ -134,3 +79,21 @@ $controllerRoute = $module['controller_route'];
     </div>
   </div>
 </section>
+<script>
+    function copyImageLink(id) {
+        // Get the image URL from the `src` attribute
+        const imageUrl = document.getElementById('imageToCopy' + id).src;
+        
+        // Use the Clipboard API to copy the URL
+        navigator.clipboard.writeText(imageUrl).then(function() {
+            // Show success message
+            const message = document.getElementById('copyMessage' + id);
+            message.style.display = 'block';
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 2000); // Hide message after 2 seconds
+        }).catch(function(error) {
+            console.error('Error copying image URL: ', error);
+        });
+    }
+</script>
