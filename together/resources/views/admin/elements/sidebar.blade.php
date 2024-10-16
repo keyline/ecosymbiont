@@ -54,14 +54,15 @@ if (!empty($parameters)) {
                 <!-- End dashboard -->
                 <!-- news -->
                     <div class="nav-item">
-                        <a class="nav-link dropdown-toggle active <?=(($pageSegment == 'news_category' || $pageSegment == 'news_content' || $pageSegment == 'news_subcategory')?'':'collapsed')?>" href="#navbarVerticalMenuNews" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuNews" aria-expanded="<?=(($pageSegment == 'news_category' || $pageSegment == 'news_content' || $pageSegment == 'news_subcategory')?'true':'false')?>" aria-controls="navbarVerticalMenuNews">
+                        <a class="nav-link dropdown-toggle active <?=(($pageSegment == 'news_category' || $pageSegment == 'news_content' || $pageSegment == 'news_subcategory' || $pageSegment == 'news_content_image')?'':'collapsed')?>" href="#navbarVerticalMenuNews" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuNews" aria-expanded="<?=(($pageSegment == 'news_category' || $pageSegment == 'news_content' || $pageSegment == 'news_subcategory' || $pageSegment == 'news_content_image')?'true':'false')?>" aria-controls="navbarVerticalMenuNews">
                           <i class="fa fa-bell nav-icon"></i>
                           <span class="nav-link-title">News</span>
                         </a>
-                        <div id="navbarVerticalMenuNews" class="nav-collapse collapse <?=(($pageSegment == 'news_category' || $pageSegment == 'news_content' || $pageSegment == 'news_subcategory')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">
+                        <div id="navbarVerticalMenuNews" class="nav-collapse collapse <?=(($pageSegment == 'news_category' || $pageSegment == 'news_content' || $pageSegment == 'news_subcategory' || $pageSegment == 'news_content_image')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">
                           <a class="nav-link <?=(($pageSegment == 'news_category')?'active':'')?>" href="<?=url('admin/news_category/list')?>">Parent Categories</a>
                           <a class="nav-link <?=(($pageSegment == 'news_subcategory')?'active':'')?>" href="<?=url('admin/news_subcategory/list')?>">Sub Categories</a>
                           <a class="nav-link <?=(($pageSegment == 'news_content')?'active':'')?>" href="<?=url('admin/news_content/list')?>">Contents</a>
+                          <a class="nav-link <?=(($pageSegment == 'news_content_image')?'active':'')?>" href="<?=url('admin/news_content_image/list')?>">Media</a>
                         </div>
                     </div>                    
                 <!-- End news -->

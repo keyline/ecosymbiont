@@ -10,6 +10,16 @@ $controllerRoute = $module['controller_route'];
         background-color: #d81636;
         border: 1px solid #d81636;
     }
+    .image-preview {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .image-preview img {
+            margin: 10px;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+        }
 </style>
 <div class="pagetitle">
     <h1><?= $page_header ?></h1>
@@ -17,7 +27,7 @@ $controllerRoute = $module['controller_route'];
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="<?= url('admin/dashboard') ?>">Home</a></li>
             <li class="breadcrumb-item active"><a
-                    href="<?= url('admin/' . $controllerRoute . '/list/') ?>"><?= $module['title'] ?> List</a></li>
+                    href="<?= url('admin/news_content_image/list/') ?>"><?= $module['title'] ?> Media List</a></li>
             <li class="breadcrumb-item active"><?= $page_header ?></li>
         </ol>
     </nav>
@@ -44,42 +54,12 @@ $controllerRoute = $module['controller_route'];
         </div>
         <?php
         $setting = GeneralSetting::where('id', '=', 1)->first();
-        if ($row) {
-            // $sub_categoryId = $row->sub_category;            
-            // $parent_categoryId = $row->parent_category;  
-            // $new_title = $row->new_title;   
-            // $sub_title = $row->sub_title;  
-            // $author_name = $row->author_name; 
-            // $pronounId = $row->author_pronoun;  
-            // $author_affiliationId = $selected_ecosystem_affiliation;
-            // $author_email = $row->author_email;
-            // $countryId = $row->country;
-            // $organization_name = $row->organization_name;
-            // $cover_image = $row->cover_image;
-            $others_image = $row->image_file;
-            // $long_desc = $row->long_desc;
-            // $keywords = $row->keywords;
-            // $short_desc = $row->short_desc;
-            // $is_feature = $row->is_feature;
-            // $is_popular = $row->is_popular;            
-        } else {
-            // $sub_categoryId = '';            
-            // $parent_categoryId = ''; 
-            // $new_title = '';          
-            // $sub_title = '';
-            // $author_name = '';
-            // $pronounId = '';
-            // $author_affiliationId = [];
-            // $author_email = '';
-            // $countryId = '';
-            // $organization_name = '';
-            // $cover_image = '';
-            $others_image = '';
-            // $long_desc = '';
-            // $keywords = '';
-            // $short_desc = '';
-            // $is_feature = '';
-            // $is_popular = '';            
+        if ($row) {              
+            $image_title = $row->image_title;               
+            $others_image = $row->image_file;                       
+        } else {            
+            $image_title = '';                    
+            $others_image = '';                 
         }
         ?>
         <div class="col-xl-12">
@@ -96,10 +76,18 @@ $controllerRoute = $module['controller_route'];
                                     ?>
                                 <img src="<?=env('UPLOADS_URL').'newcontent/'.$others_image?>"  style="width: 150px; height: 150px; margin-top: 10px;">                                
                                 <?php }  else {?>
-                                <img src="<?=env('NO_IMAGE')?>"  class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
+                                    <div class="image-preview" id="imagePreview"></div>
+                                <!-- <img src="<?=env('NO_IMAGE')?>"  class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;"> -->
                                 <?php }?>                                
                             </div>
-                        </div>                                                
+                        </div>   
+                        <div class="row mb-3">
+                            <label for="image_title" class="col-md-4 col-lg-3 col-form-label">Image Title</label>
+                            <div class="col-md-8 col-lg-9">
+                                <input type="text" name="image_title" class="form-control" id="image_title"
+                                    value="<?= $image_title ?>" required>
+                            </div>
+                        </div>                                              
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary"><?= $row ? 'Save' : 'Add' ?></button>
                         </div> 
@@ -122,53 +110,26 @@ $controllerRoute = $module['controller_route'];
     });
 </script>
 <script>
-    function checkWordLimit(field, limit, errorField) {
-        var words = field.value.trim().split(/\s+/).filter(word => word.length > 0).length;
-        if (words > limit) {
-            document.getElementById(errorField).innerText = "Exceeded word limit of " + limit + " words.";
-            return false;
-        } else {
-            document.getElementById(errorField).innerText = "";
-            return true;
-        }
-    }
-
-    function validateForm() {
-        let allValid = true;
-        // allValid &= checkWordLimit(document.getElementById('explanation'), 100, 'explanationError');
-        // allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');
-        allValid &= checkWordLimit(document.getElementById('sub_title'), 40, 'sub_titleError');
-        allValid &= checkWordLimit(document.getElementById('short_desc'), 100, 'bio_longError');
-
-        document.getElementById('submitButton').disabled = !allValid;
-    }
-</script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        // When parent category changes
-        $('#parent_category').on('change', function() {
-            var parent_id = $(this).val();
-            // alert(parent_id);
-
-            // Clear the subcategory dropdown
-            $('#sub_categories').html('<option value="">Select Sub Category</option>');
-
-            // If a parent category is selected
-            if (parent_id) {
-                var url = "{{ url('admin/news_content/get-subcategories') }}/" + parent_id;
-                // Make an AJAX call to fetch subcategories
-                $.ajax({
-                    url: url,
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function(data) {
-                        // Populate the subcategory dropdown
-                        $.each(data, function(key, value) {
-                            $('#sub_categories').append('<option value="' + value.id + '">' + value.sub_category + '</option>');
-                        });
-                    }
-                });
+    document.getElementById('others_image').addEventListener('change', function(event) {
+        const imagePreview = document.getElementById('imagePreview');
+        imagePreview.innerHTML = ''; // Clear previous previews
+        const files = event.target.files;
+        
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            
+            if (file && file.type.match('image.*')) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    imagePreview.appendChild(img);
+                };
+                
+                reader.readAsDataURL(file);
             }
-        });
+        }
     });
 </script>
+

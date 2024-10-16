@@ -60,13 +60,15 @@
                                                 <ul>
                                                     <li><strong><span class="italic">Activism:</span></strong> Substantive Creative-Work about specific upcoming or past activism</li>
                                                     <li><strong><span class="italic">Events:</span></strong> Substantive Creative-Work about specific upcoming or past events</li>
+                                                    <li><strong><span class="italic">Women:</span></strong> About issues that concern women and members of minority genders</li>
                                                 </ul>
                                             </div>
                                             <div class="titleto-inner">
                                                 <h4>Indigenous</h4>
                                                 <ul>
-                                                    <li><strong><span class="italic">Indigenous Knowledge-Technologies-Practices:</span></strong> Indigenous persons writing about their own community's Knowledge-Technologies-Practices or on behalf of a living Indigenous person</li>
+                                                    <li><strong><span class="italic">Indigenous Knowledge-Technologies-Practices:</span></strong> Indigenous persons narrating their own community's KnowledgeTechnologies-Practices (KTP) or a person narrating on behalf of an Indigenous individual and/or community (in a manner that does not reveal details of KTP so that any misappropriation by others is prevented)</li>
                                                     <li><strong><span class="italic">Indigenous Retelling & Telling:</span></strong> A retelling or telling of past and/or current events from the perspective of an Indigenous individual and/or community</li>
+                                                    <li><strong><span class="italic">Indigenous Survivance:</span></strong> A sharing of Indigenous individuals, especially women, being vanished by various actors and/or of the persevering of Indigenous communities, especially in the face of vanishings</li>
                                                 </ul>
                                             </div>
                                             <div class="titleto-inner">
@@ -90,7 +92,7 @@
                                                 <ul>
                                                     <li><strong><span class="italic">Art-Music-Performance:</span></strong> Visual art, literary art, and/or audiovisual media of music and/or performance</li>
                                                     <li><strong><span class="italic">Food Sovereignty:</span></strong> About systems that generate food in a manner that optimizes the wellbeing of human communities and the ecowebs we rely on</li>
-                                                    <li><strong><span class="italic">Sustainable Healthcare:</span></strong> About systems that optimize the mental and physical wellbeing of humans, especially those that incorporate connections to and sustainable utilization of biodiverse ecowebs and ecoweb resources</li>
+                                                    <li><strong><span class="italic">Sustainable Health:</span></strong> About systems that optimize the mental and physical wellbeing of humans, especially those that incorporate connections to and sustainable utilization of biodiverse ecowebs and ecoweb resources</li>
                                                 </ul>
                                             </div>
 

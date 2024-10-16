@@ -107,8 +107,11 @@ use Illuminate\Support\Facades\Route;
              Route::get('news_content/change-status/{id}', 'NewsContentController@change_status');
              Route::get('news_content/change-archieve-status/{id}', 'NewsContentController@change_archieve_status');
              Route::get('news_content/get-subcategories/{parent_id}', 'NewsContentController@getSubcategories'); // AJAX route
-             Route::match(['get', 'post'], 'news_content/edit_image/{id}', 'NewsContentController@edit_image');
-             Route::get('news_content/delete_image/{id}', 'NewsContentController@delete_image');
+             Route::get('news_content_image/list', 'NewsContentController@list_image');
+             Route::match(['get', 'post'], 'news_content_image/add_image', 'NewsContentController@add_image');
+             Route::match(['get', 'post'], 'news_content_image/edit_image/{id}', 'NewsContentController@edit_image');
+             Route::get('news_content_image/delete_image/{id}', 'NewsContentController@delete_image');
+             Route::get('news_content_image/change-status-image/{id}', 'NewsContentController@change_status_image');
             /* end news content */
             /* newsletter */
                 /* subscriber */

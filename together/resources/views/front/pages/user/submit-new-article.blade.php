@@ -459,7 +459,7 @@
                                 </div>     
                             </div>                   
                             <div class="text-center">
-                                <button type="submit" id="submitButton" class="btn btn-primary" disabled><?= $row ? 'Save' : 'Add' ?></button>
+                                <button type="submit" id="submitButton" class="btn btn-primary" disabled><?= $row ? 'Save' : 'Submit' ?></button>
                             </div>
                         </form>
                     </div>

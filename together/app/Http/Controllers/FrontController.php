@@ -30,6 +30,7 @@ use App\Models\ExpertiseArea;
 use App\Models\SubmissionType;
 use App\Models\GeneralSetting;
 use App\Models\Enquiry;
+use App\Models\EmailLog;
 
 use Auth;
 use Session;
@@ -632,18 +633,18 @@ class FrontController extends Controller
                         'title'                     => 'required',
                         'pronoun'                   => 'required',                   
                     ];
-                    $participatedInfo = isset($postData['participated_info']) ? $postData['participated_info'] : '';
-                    $invited_byInfo = isset($postData['invited_by']) ? $postData['invited_by'] : '';
-                    $invited_emailInfo = isset($postData['invited_by_email']) ? $postData['invited_by_email'] : '';
-                    $section_ertInfo = isset($postData['section_ert']) ? json_encode($postData['section_ert']) : '';
-                    $expertise_areaInfo = isset($postData['expertise_area']) ? json_encode($postData['expertise_area']) : '';
-                    $ecosystem_affiliationInfo = isset($postData['ecosystem_affiliation']) ? json_encode($postData['ecosystem_affiliation']) : '';
-                    $submission_typesInfo = isset($postData['submission_types']) ? $postData['submission_types'] : '';
-                    $narrative_fileInfo = isset($narrative_file) ? $narrative_file : '';    
-                    $first_image_fileInfo = isset($first_image_file) ? $first_image_file : '';    
-                    $second_image_fileInfo = isset($second_image_file) ? $second_image_file : '';    
-                    $art_image_fileInfo = isset($art_image_file) ? $art_image_file : '';    
-                    $art_video_fileInfo = isset($art_video_file) ? $art_video_file : ''; 
+                    $participatedInfo           = isset($postData['participated_info']) ? $postData['participated_info'] : '';
+                    $invited_byInfo             = isset($postData['invited_by']) ? $postData['invited_by'] : '';
+                    $invited_emailInfo          = isset($postData['invited_by_email']) ? $postData['invited_by_email'] : '';
+                    $section_ertInfo            = isset($postData['section_ert']) ? json_encode($postData['section_ert']) : '';
+                    $expertise_areaInfo         = isset($postData['expertise_area']) ? json_encode($postData['expertise_area']) : '';
+                    $ecosystem_affiliationInfo  = isset($postData['ecosystem_affiliation']) ? json_encode($postData['ecosystem_affiliation']) : '';
+                    $submission_typesInfo       = isset($postData['submission_types']) ? $postData['submission_types'] : '';
+                    $narrative_fileInfo         = isset($narrative_file) ? $narrative_file : '';    
+                    $first_image_fileInfo       = isset($first_image_file) ? $first_image_file : '';    
+                    $second_image_fileInfo      = isset($second_image_file) ? $second_image_file : '';    
+                    $art_image_fileInfo         = isset($art_image_file) ? $art_image_file : '';    
+                    $art_video_fileInfo         = isset($art_video_file) ? $art_video_file : ''; 
                 } else{
                     $rules = [
                         'first_name'                => 'required',            
@@ -817,6 +818,34 @@ class FrontController extends Controller
                         'bio_short'                 => $postData['bio_short'],
                         'bio_long'                  => $postData['bio_long'],  
                     ];
+                    /* submission email */
+                        $generalSetting             = GeneralSetting::find('1');
+                        if($postData['middle_name'] != ''){
+                            $fullName                   = $postData['first_name'] . ' '. $postData['middle_name'] . ' ' . $postData['last_name'];
+                        } else {
+                            $fullName                   = $postData['first_name'] . ' ' . $postData['last_name'];
+                        }
+                        $mailData                   = [
+                            'fullName'                  => $fullName,
+                            'email'                     => $postData['email'],
+                            'article_no'                => $article_no,
+                            'for_publication_name'      => $postData['for_publication_name'],
+                        ];
+                        $subject                    = $generalSetting->site_name.' :: Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
+                        $message                    = view('email-templates.creative-work-submission',$mailData);
+                        // echo $message;die;
+                        $this->sendMail($postData['email'], $subject, $message);
+                        $this->sendMail($generalSetting->system_email, $subject, $message);
+                    /* submission email */
+                    /* email log save */
+                        $postData2 = [
+                            'name'                  => $fullName,
+                            'email'                 => $postData['email'],
+                            'subject'               => $subject,
+                            'message'               => $message
+                        ];
+                        EmailLog::insertGetId($postData2);
+                    /* email log save */
                     // Helper::pr($fields);die;
                     Article::insert($fields);
                     return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');

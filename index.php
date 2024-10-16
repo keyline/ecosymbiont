@@ -137,11 +137,11 @@ include "include/header.php";
                             <img src="images/Definition.jpg" alt="" class="img-responsive">
                         </div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-8" id="definitions">
                         <div class="info-box hideondesktop mobile_toppadding">
                           <h2>DEFINITIONS</h2>
                         </div>
-                        <div class="defination-info" id="definitions">
+                        <div class="defination-info" >
                             <div class="panel-group" id="accordion">
                                 <div class="panel panel-default">
                                   <div class="panel-heading">
