@@ -349,7 +349,7 @@ class NewsContentController extends Controller
     public function list_image()
     {       
         $data['module']                 = $this->data;
-        $title                          = 'News Content Image List';
+        $title                          = 'News Content Media List';
         $page_name                      = 'news_content_image.list';
         $data['rows']                   = NewsContentImage::where('status', '!=', 3)->orderBy('id', 'DESC')->get();        
         echo $this->admin_after_login_layout($title, $page_name, $data);
@@ -405,7 +405,7 @@ class NewsContentController extends Controller
             }
         }
         $data['module']                 = $this->data;
-        $title                          = $this->data['title'] . ' Add';       
+        $title                          = 'News Content Media Add';       
         $page_name                      = 'news_content_image.add-edit';
         $data['row']                    = [];        
          $data['news_images']           = [];
@@ -417,7 +417,7 @@ class NewsContentController extends Controller
      {
          $data['module']                 = $this->data;
          $id                             = Helper::decoded($id);
-         $title                          = 'News Content Image Update';
+         $title                          = 'News Content Media Update';
          $page_name                      = 'news_content_image.add-edit';        
          $data['row']                    = NewsContentImage::where('status', '!=', 3)->where('id', '=', $id)->first();
          $data['content']                = NewsContent::where('id', '=', $data['row']->news_id)->first();          

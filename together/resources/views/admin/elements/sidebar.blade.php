@@ -62,7 +62,7 @@ if (!empty($parameters)) {
                           <a class="nav-link <?=(($pageSegment == 'news_category')?'active':'')?>" href="<?=url('admin/news_category/list')?>">Parent Categories</a>
                           <a class="nav-link <?=(($pageSegment == 'news_subcategory')?'active':'')?>" href="<?=url('admin/news_subcategory/list')?>">Sub Categories</a>
                           <a class="nav-link <?=(($pageSegment == 'news_content')?'active':'')?>" href="<?=url('admin/news_content/list')?>">Contents</a>
-                          <a class="nav-link <?=(($pageSegment == 'news_content_image')?'active':'')?>" href="<?=url('admin/news_content_image/list')?>">Images</a>
+                          <a class="nav-link <?=(($pageSegment == 'news_content_image')?'active':'')?>" href="<?=url('admin/news_content_image/list')?>">Media</a>
                         </div>
                     </div>                    
                 <!-- End news -->
