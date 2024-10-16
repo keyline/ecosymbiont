@@ -27,7 +27,7 @@ $controllerRoute = $module['controller_route'];
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="<?= url('admin/dashboard') ?>">Home</a></li>
             <li class="breadcrumb-item active"><a
-                    href="<?= url('admin/' . $controllerRoute . '/list/') ?>"><?= $module['title'] ?> List</a></li>
+                    href="<?= url('admin/news_content_image/list/') ?>"><?= $module['title'] ?> List</a></li>
             <li class="breadcrumb-item active"><?= $page_header ?></li>
         </ol>
     </nav>
