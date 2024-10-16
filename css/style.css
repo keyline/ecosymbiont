@@ -304,7 +304,19 @@ textarea.form-control {
     font-weight: 600;
     margin-bottom: 13px;
   }
-
+  .innernav_samedesign {
+    border: none;
+    background: #ddd;
+    border-radius: 0;
+    padding: 16px 12px;
+}
+.innernav_samedesign span.icon-bar {
+    background: #000 !important;
+    height: 4px;
+}
+.darkHeader .innernav_samedesign{
+    padding: 10px 12px;
+}
 
 
 

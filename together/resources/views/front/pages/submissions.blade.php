@@ -91,6 +91,10 @@
                                                                 <strong><i>Events</i></strong><br>
                                                                 Substantive Creative-Work about specific upcoming or past events, not a mere announcement.
                                                             </li>
+                                                            <li>
+                                                                <strong><i>Women</i></strong><br>
+                                                                About issues that concern women and members of minority genders.
+                                                            </li>
                                                         </ul>
                                                     </li>
                                                     <li>
@@ -98,11 +102,15 @@
                                                         <ul>
                                                             <li>
                                                                 <strong><i>Indigenous Knowledge-Technologies-Practices</i></strong><br>
-                                                                You must either by an Indigenous person writing about your own community’s Knowledge-Technologies-Practices, or if you are writing on behalf of a living Indigenous person, that living Indigenous person must be a co-author of your Creative-Work.
+                                                                You must either be an Indigenous person narrating your own community's Knowledge-Technologies-Practices (KTP), or if you are a person narrating on behalf of an Indigenous individual and/or community the latter must be a co-author of your Creative-Work (narrate in a manner that does not reveal details of KTP so that any misappropriation by others is prevented).
                                                             </li>
                                                             <li>
                                                                 <strong><i>Indigenous Retelling & Telling</i></strong><br>
                                                                 A retelling or telling of past and/or current events from the perspective of an Indigenous individual and/or community.
+                                                            </li>
+                                                            <li>
+                                                                <strong><i>Indigenous Survivance</i></strong><br>
+                                                                A sharing of Indigenous individuals,especially women, being vanished by various actors and/or of the persevering of Indigenous communities, especially in the face of vanishings.
                                                             </li>
                                                         </ul>
                                                     </li>
@@ -152,7 +160,7 @@
                                                                 About systems that generate food in a manner that optimizes the wellbeing of human communities and the ecowebs we rely on.
                                                             </li>
                                                             <li>
-                                                                <strong><i>Sustainable Healthcare</i></strong><br>
+                                                                <strong><i>Sustainable Health</i></strong><br>
                                                                 About systems that optimize the mental and physical wellbeing of humans, especially those that incorporate connections to and sustainable utilization of biodiverse ecowebs and ecoweb resources.
                                                             </li>
                                                         </ul>
