@@ -152,6 +152,14 @@ if (!empty($parameters)) {
                         </a>
                     </div>
                 <!-- End page -->
+                <!-- SEO Settings -->
+                <div class="nav-item">
+                        <a class="nav-link <?=(($pageSegment == 'seo')?'active':'')?>" href="<?=url('admin/seo/list')?>" data-placement="left">
+                        <i class="fa fa-hashtag nav-icon"></i>                        
+                        <span class="nav-link-title">SEO Settings</span>
+                        </a>
+                    </div>
+                <!-- End SEO Settings -->
                 <!-- settings -->
                 <div class="nav-item">
                         <a class="nav-link <?=(($pageSegment == 'settings')?'active':'')?>" href="<?=url('admin/settings')?>" data-placement="left">

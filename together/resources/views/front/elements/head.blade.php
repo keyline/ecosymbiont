@@ -18,3 +18,21 @@
 <link rel="stylesheet" type="text/css" href="<?=env('FRONT_ASSETS_URL')?>css/audioplayer.css">
 <link rel="stylesheet" type="text/css" href="<?=env('FRONT_ASSETS_URL')?>css/style.css" media="screen">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<?php
+dd($_REQUEST['slug']);
+$uriString =  $_SERVER["REQUEST_URI"]; //it will print full url
+echo $uriString; 
+$uriArr = explode('/', $uriString);
+ dd ($uriArr); die;
+  foreach ($metadetails as $key => $meta) {
+    if ($uriArr[1] == $meta->url) {?>
+      <title><?=$meta->title;?></title>
+      <meta name="description" content="<?=$meta->description;?>">
+      <meta name="keywords" content="<?=$meta->keyword;?>">
+   <?php } 
+      // <title>Global Leader in Testing, Inspection, and Certification – Mitra SK</title>
+      // <meta name="description" content="Over 85 years of leading global Testing, Inspection & Certification services, with a network spanning 28 countries, showcasing excellence across diverse industries. Your trusted TIC partner.">
+      // <meta name="keywords" content="home">
+    }
+    ?>
