@@ -20,14 +20,25 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
 <?php
-dd($_REQUEST['slug']);
-$uriString =  $_SERVER["REQUEST_URI"]; //it will print full url
-echo $uriString; 
-$uriArr = explode('/', $uriString);
- dd ($uriArr); die;
+ 
+// Get the protocol (HTTP or HTTPS)
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+
+// Get the host (domain name)
+$host = $_SERVER['HTTP_HOST']; // e.g., localhost or example.com
+
+// Get the request URI (path after the domain)
+$requestUri = $_SERVER['REQUEST_URI']; // e.g., /ecosymbiontgit/together/category/action
+
+// Combine all parts to get the full URL
+$fullUrl = $protocol . $host . $requestUri;
+
+// echo $fullUrl; 
+
   foreach ($metadetails as $key => $meta) {
-    if ($uriArr[1] == $meta->url) {?>
-      <title><?=$meta->title;?></title>
+    if ($fullUrl == $meta->url) {?>
+      <!-- <title><?=$meta->title;?></title> -->
+      <meta name="title" content="<?=$meta->title?>">
       <meta name="description" content="<?=$meta->description;?>">
       <meta name="keywords" content="<?=$meta->keyword;?>">
    <?php } 
