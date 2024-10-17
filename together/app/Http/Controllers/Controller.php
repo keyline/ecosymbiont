@@ -12,6 +12,7 @@ use PHPMailer\PHPMailer\Exception;
 use App\Models\GeneralSetting;
 use App\Models\HomePage;
 use App\Models\Admin;
+use App\Models\SeoSetting;
 use App\Models\Admin\ScrollNotice;
 use App\Models\User;
 use App\Models\UserAccess;
@@ -249,7 +250,7 @@ class Controller extends BaseController
         $user_id                            = session('user_id');
         $data['user']                       = User::find($user_id);
         $data['parentCats']                 = NewsCategory::select('id', 'sub_category', 'slug')->where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'asc')->get();
-
+        $data['metadetails']                = SeoSetting::where('status', '!=', 3)->orderBy('id', 'DESC')->get();
         $data['head']                       = view('front.elements.head', $data);
         $data['header']                     = view('front.elements.header', $data);
         $data['footer']                     = view('front.elements.footer', $data);
@@ -266,7 +267,7 @@ class Controller extends BaseController
         $user_id                    = session('user_id');
         $data['user']               = User::find($user_id);
         $data['parentCats']         = NewsCategory::select('id', 'sub_category', 'slug')->where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'asc')->get();
-
+        $data['metadetails']        = SeoSetting::where('status', '!=', 3)->orderBy('id', 'DESC')->get();
         $data['head']               = view('front.elements.head', $data);
         $data['header']             = view('front.elements.header', $data);
         $data['sidebar']            = view('front.elements.sidebar', $data);
