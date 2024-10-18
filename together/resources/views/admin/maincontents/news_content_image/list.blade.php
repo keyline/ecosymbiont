@@ -55,7 +55,7 @@ $controllerRoute = $module['controller_route'];
                       <?php }?>
                     </td>                                                                              
                     <td>
-                      <input type="text" class="form-control" id="imageUrlTextBox" value="<?=env('UPLOADS_URL').'newcontent/'.$row->image_file?>" readonly style="width: 300px;"><br>
+                      <input type="hidden" class="form-control" id="imageUrlTextBox" value="<?=env('UPLOADS_URL').'newcontent/'.$row->image_file?>" readonly style="width: 300px;"><br>
                       <button class="btn btn-primary" onclick="copyImageLink(<?=$row->id?>)">Copy Image Link</button>
                       <!-- Message that appears after copying -->
                       <p id="copyMessage<?=$row->id?>" style="color:green; display:none;">Image link copied!</p>
