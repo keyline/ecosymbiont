@@ -48,6 +48,7 @@ $controllerRoute = $module['controller_route'];
         if ($row) {
             // Helper::pr($row);
             $user_id = $row->user_id;
+            $author_classification = $row->author_classification;
             $first_name = $row->first_name;            
             $last_name = $row->last_name;            
             $middle_name = $row->middle_name;            
@@ -89,6 +90,8 @@ $controllerRoute = $module['controller_route'];
             $acknowledge = $row->acknowledge;
             $is_final_edit = $row->is_final_edit;
         } else {
+            $user_id = '';
+            $author_classification = '';
             $first_name = '';            
             $last_name =  '';          
             $middle_name = '';            
@@ -96,7 +99,8 @@ $controllerRoute = $module['controller_route'];
             $for_publication_name = '';           
             $countryId = '';           
             $roleId = '';           
-            $creative_Work = '';             
+            $creative_Work = '';  
+            $orginal_work = '';           
             $copyright = ''; 
             $invited = '';
             $invited_by = '';
@@ -142,6 +146,18 @@ $controllerRoute = $module['controller_route'];
                             <div class="col-md-10 col-lg-8">
                                 <input type="email" name="email" class="form-control" id="email"
                                     value="<?= $email ?>" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="author_classification" class="col-md-2 col-lg-4 col-form-label">1) Author Classification
+                            </label>
+                            <div class="col-md-10 col-lg-8">
+                                <input type="radio" id="Human individual" name="author_classification" value="Human individual" @checked(old('author_classification', $author_classification) == 'Human individual')>
+                                <label for="Human individual">Human individual</label>
+                                <input type="radio" id="Ecoweb-rooted community" name="author_classification" value="Ecoweb-rooted community" @checked(old('author_classification', $author_classification) == 'Ecoweb-rooted community')>
+                                <label for="Ecoweb-rooted community">Ecoweb-rooted community</label>
+                                <input type="radio" id="Movement" name="author_classification" value="Movement" @checked(old('author_classification', $author_classification) == 'Movement')>
+                                <label for="Movement">Movement</label>
                             </div>
                         </div> 
                         <div class="row mb-3">
