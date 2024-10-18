@@ -26,6 +26,17 @@ include "include/header.php";
                     </div>
 
                     <div class="info-box">
+                        <h4>Work Week Radio (KPOO radio station — San Francisco, California, United States)</h4>
+                        <p><a href="https://radioreimagine.com/podcast/bhopal-to-the-bay/" target="_blank">Radio interview</a> with Kakoli Mitra, entitled: Bhopal, capitalism, and the lessons for the world</p>
+                        <p style="padding-top:15px">Aired on 17 October, 2024</p>
+                        <div class="welcome_mucis_section">
+                            <audio preload="auto" controls>
+                                <source src="Kakoli-SteveZeltzer-KPOO-17102024.mp3">
+                            </audio>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
                         <h4>APEX Express (KPFA radio station – Berkeley, California, United States)</h4>
                         <p><a href="#">Radio interview</a> with Rachna Dhingra, Arieann Harrison, and Kakoli Mitra about corporate extractivism in the context of From Bhopal to the Bay, an event organized by Ecoymbionts Regenerate and the Alliance of South Asians Taking Action in Oakland, California, United States, on 25 September, 2024</p>
                         <p style="padding-top:15px">To be aired soon</p>

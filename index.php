@@ -59,9 +59,9 @@ include "include/header.php";
                                     innovators, and knowledge-holders working to regenerate systems that restore,
                                     preserve, and foster human-ecoweb symbiosis. We do this through in-person
                                     <strong><a href="<?=$base_url?>synergy-meetings.php" target="_blank">Synergy Meetings</a></strong> and through our online knowledge-sharing and
-                                    community-building platform, <strong><a href="<?=$base_url?>together" target="_blank">Ecosymbionts Regenerate Together</a></strong>.
+                                    community-building platform, <strong><a href="<?=$base_url?>together" target="_blank">Ecosymbionts all Regenerate Together (EaRTh)</a></strong>.
                                 </li>
-                                <li><strong><i>Regenerate systems:</i> </strong> We collaboratively conceptualize and promote alternative systems that optimize ecoweb wellbeing (including of humans), instead of exploiting, diminishing, and destroying ecowebs. We do this by synthesizing our own work with the knowledge, ideas, and wisdom of grassroots changemakers, innovators, and knowledge-holders from across the world shared on <a href="<?=$base_url?>together" target="_blank">Ecosymbionts Regenerate Together</a>. </li>
+                                <li><strong><i>Regenerate systems:</i> </strong> We collaboratively conceptualize and promote alternative systems that optimize ecoweb wellbeing (including of humans), instead of exploiting, diminishing, and destroying ecowebs. We do this by synthesizing our own work with the knowledge, ideas, and wisdom of grassroots changemakers, innovators, and knowledge-holders from across the world shared on <a href="<?=$base_url?>together" target="_blank">Ecosymbionts all Regenerate Together (EaRTh)</a>. </li>
                             </ul>
                         </div>
                     </div>
@@ -137,7 +137,7 @@ include "include/header.php";
                             <img src="images/Definition.jpg" alt="" class="img-responsive">
                         </div>
                     </div>
-                    <div class="col-md-8" id="definitions">
+                    <div class="col-md-8" id="definitions"/>
                         <div class="info-box hideondesktop mobile_toppadding">
                           <h2>DEFINITIONS</h2>
                         </div>
