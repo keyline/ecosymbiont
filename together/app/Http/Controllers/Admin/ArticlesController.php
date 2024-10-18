@@ -13,6 +13,7 @@ use App\Models\GeneralSetting;
 use App\Rules\MaxWords;
 use App\Models\Article;
 use App\Models\SectionErt;
+use App\Models\NewsCategory;
 use App\Models\Title;
 use App\Models\Pronoun;
 use App\Models\EcosystemAffiliation;
@@ -251,8 +252,9 @@ class ArticlesController extends Controller
         $data['module']                 = $this->data;
         $title                          = $this->data['title'] . ' Add';
         $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['news_category']          = NewsCategory::where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'ASC')->get();        
         $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-        $data['submission_type']       = SubmissionType::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['submission_type']       = SubmissionType::where('status', '=', 1)->get();
         // dd($data['submission_types']);
         $data['country']                = Country::orderBy('name', 'ASC')->get();
         // dd($data['country']);
