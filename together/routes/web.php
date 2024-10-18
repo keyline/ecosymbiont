@@ -228,6 +228,13 @@ use Illuminate\Support\Facades\Route;
                Route::get('page/delete/{id}', 'PageController@delete');
                Route::get('page/change-status/{id}', 'PageController@change_status');
                 // page
+                // seo
+               Route::get('seo/list', 'SeoController@list');
+               Route::match(['get', 'post'], 'seo/add', 'SeoController@add');
+               Route::match(['get', 'post'], 'seo/edit/{id}', 'SeoController@edit');
+               Route::get('seo/delete/{id}', 'SeoController@delete');
+               Route::get('seo/change-status/{id}', 'SeoController@change_status');
+                // seo
                 //enquiry
                 Route::get('enquiry/list', 'EnquiryController@list');
                 Route::get('enquiry/view-details/{id}', 'EnquiryController@details');

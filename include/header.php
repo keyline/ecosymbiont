@@ -1,7 +1,113 @@
 <?php 
-// echo  $current_page = $_SERVER['REQUEST_URI']; die;
-$base_url = "https://ecosymbiont.org/";
-// $base_url = "http://localhost/ecosymbiontgit/";
+
+// Get the current host
+$host = $_SERVER['HTTP_HOST'];
+
+// Set base URL according to the environment
+if ($host == 'localhost') {
+    // Local environment
+    define('BASE_URL', 'http://localhost/ecosymbiontgit/');
+} elseif ($host == 'ecosymbiont.org') {
+    // Live environment
+    define('BASE_URL', 'https://ecosymbiont.org/');
+} elseif ($host == 'ecosymbiont.keylines.in') {
+    // Development environment
+    define('BASE_URL', 'https://ecosymbiont.keylines.in/');
+} else {
+    // Default to live as a fallback
+    define('BASE_URL', 'https://ecosymbiont.org/');
+}
+
+ $url = "http://" . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];      
+
+$urlParts = explode('/', str_ireplace(array('http://', 'https://'), '', $url)); 
+
+//    echo $urlParts[0];
+if($urlParts[2] == 'index.php'|| $urlParts[2] == ''){
+    $title = 'HOME';
+    $metatitle = $title;
+    $ogtitle = $title;
+    $metadescription = 'home description';
+    $metakeyword = 'home keyword';
+    $ogdescription = $metadescription;
+    $ogimage = BASE_URL."images/logo.webp";
+?>
+    <title><?= $title ?></title>
+    <meta name="title" content="<?=$title?>">
+    <meta name="description" content="<?=$metadescription?>">
+    <meta name="keywords" content="<?=$metakeyword?>">
+
+    <meta property="og:title" content="<?=$ogtitle;?>">
+    <meta property="og:site_name" content=ECOSYMBIONTS>
+    <meta property="og:url" content=<?= BASE_URL; ?>>
+    <meta property="og:description" content= "<?=$ogdescription;?>">
+    <meta property="og:type" content=website>
+    <meta property="og:image" content="<?=$ogimage?>">  
+
+<?php }else if($urlParts[2] == 'synergy-meetings.php'){
+    $title = 'synergy-meetings';
+    $metatitle = $title;
+    $ogtitle = $title;
+    $metadescription = 'synergy-meetings description';
+    $metakeyword = '';
+    $ogdescription = $metadescription;
+    $ogimage = BASE_URL."images/logo.webp";
+?>
+    <title><?= $title ?></title>
+    <meta name="title" content="<?=$title?>">
+    <meta name="description" content="<?=$metadescription?>">
+    <meta name="keywords" content="<?=$metakeyword?>">
+
+    <meta property="og:title" content="<?=$ogtitle;?>">
+    <meta property="og:site_name" content=ECOSYMBIONTS>
+    <meta property="og:url" content=<?= BASE_URL; ?>>
+    <meta property="og:description" content= "<?=$ogdescription;?>">
+    <meta property="og:type" content=website>
+    <meta property="og:image" content="<?=$ogimage?>">            
+
+<?php }else if($urlParts[2] == 'in-the-media.php'){
+    $title = 'in-the-media';
+    $metatitle = $title;
+    $ogtitle = $title;
+    $metadescription = 'in-the-media description';
+    $metakeyword = '';
+    $ogdescription = $metadescription;
+    $ogimage = BASE_URL."images/logo.webp";
+?>
+    <title><?= $title ?></title>
+    <meta name="title" content="<?=$title?>">
+    <meta name="description" content="<?=$metadescription?>">
+    <meta name="keywords" content="<?=$metakeyword?>">
+
+    <meta property="og:title" content="<?=$ogtitle;?>">
+    <meta property="og:site_name" content=ECOSYMBIONTS>
+    <meta property="og:url" content=<?= BASE_URL; ?>>
+    <meta property="og:description" content= "<?=$ogdescription;?>">
+    <meta property="og:type" content=website>
+    <meta property="og:image" content="<?=$ogimage?>">     
+
+<?php }else if($urlParts[2] == 'contact.php'){
+    $title = 'contact';
+    $metatitle = $title;
+    $ogtitle = $title;
+    $metadescription = "contact description";
+    $metakeyword = '';
+    $ogdescription = $metadescription;
+    $ogimage = BASE_URL."images/logo.webp";
+?>
+    <title><?= $title ?></title>
+    <meta name="title" content="<?=$title?>">
+    <meta name="description" content="<?=$metadescription?>">
+    <meta name="keywords" content="<?=$metakeyword?>">
+
+    <meta property="og:title" content="<?=$ogtitle;?>">
+    <meta property="og:site_name" content=ecoex>
+    <meta property="og:url" content=<?= BASE_URL; ?>>
+    <meta property="og:description" content= "<?=$ogdescription;?>">
+    <meta property="og:type" content=website>
+    <meta property="og:image" content="<?=$ogimage?>"> 
+    <?php  } 
+
 function isActive($page) {
    $current_page = basename($_SERVER['REQUEST_URI'], ".php"); // Get current page name without extension
     return $current_page == $page ? 'active' : '';
@@ -12,8 +118,8 @@ function isActive($page) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ECOSYMBIONTS</title>
-    <link href="<?=$base_url?>images/fav.png" rel="icon">
+    <!-- <title>ECOSYMBIONTS</title> -->
+    <link href="<?= BASE_URL; ?>images/fav.png" rel="icon">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" href="css/audioplayer.css">
@@ -33,7 +139,7 @@ function isActive($page) {
                         <!-- <span class="icon-bar"></span> -->
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<?=$base_url?>">
+                    <a class="navbar-brand" href="<?= BASE_URL; ?>">
                         <img src="images/logo.webp" alt="" class="img-responsive">
                     </a>
                 </div>
@@ -41,11 +147,11 @@ function isActive($page) {
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">                        
-                        <li><a class="<?= isActive('index') ?>" href="<?=$base_url?>">About</a></li>
-                        <li><a href="<?=$base_url?>together">Online Platform</a></li>
-                        <li><a class="<?= isActive('synergy-meetings') ?>" href="synergy-meetings.php">Synergy Meetings</a></li>                        
-                        <li><a class="<?= isActive('in-the-media') ?>" href="in-the-media.php">In the Media</a></li>
-                        <li><a class="<?= isActive('contact') ?>" href="contact.php">Contact</a></li>
+                        <li><a class="<?= isActive('index') ?>" href="<?= BASE_URL; ?>">About</a></li>
+                        <li><a href="<?= BASE_URL; ?>together">Online Platform</a></li>
+                        <li><a class="<?= isActive('synergy-meetings') ?>" href="<?= BASE_URL; ?>synergy-meetings.php">Synergy Meetings</a></li>                        
+                        <li><a class="<?= isActive('in-the-media') ?>" href="<?= BASE_URL; ?>in-the-media.php">In the Media</a></li>
+                        <li><a class="<?= isActive('contact') ?>" href="<?= BASE_URL; ?>contact.php">Contact</a></li>
                         <!-- <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
