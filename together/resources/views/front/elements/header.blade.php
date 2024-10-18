@@ -209,10 +209,10 @@ use App\Helpers\Helper;
                         <li><a href="<?=url('submissions')?>">SUBMISSIONS</a></li>
                         <li><a href="<?=env('REGENERATE_URL')?>contact.php">CONTACT</a></li>
                     </ul>
-                    <!-- <form class="navbar-form navbar-right" role="search">
+                    <form class="navbar-form navbar-right" role="search">
                         <input type="text" id="search" name="search" placeholder="Search here">
                         <button type="submit" id="search-submit"><i class="fa fa-search"></i></button>
-                    </form> -->
+                    </form>
                 </div>
                 <!-- /.navbar-collapse -->
             </div>

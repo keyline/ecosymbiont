@@ -11,6 +11,16 @@ $controllerRoute = $module['controller_route'];
         border: 1px solid #d81636;
     }
     .error { color: red; }
+    .badge {
+        display: inline-flex;
+        align-items: center;
+        margin: 2px;
+        background-color: #132144;
+    }
+    .badge .remove {
+        cursor: pointer;
+        margin-left: 5px;
+    }
 </style>
 <div class="pagetitle">
     <h1><?= $page_header ?></h1>
@@ -327,8 +337,21 @@ $controllerRoute = $module['controller_route'];
                         <div class="row mb-3">
                             <label for="keywords" class="col-md-2 col-lg-2 col-form-label">Keywords</label>
                             <div class="col-md-10 col-lg-10">
-                                <textarea name="keywords" class="form-control" id="keywords" rows="3"><?= $keywords ?></textarea>
+                                <input type="text" id="input-tags" class="form-control" placeholder="Enter Keywords">
+                                <textarea class="form-control" name="keywords" id="keywords" style="display:none;"><?=$keywords?></textarea>
                                 <small class="text-primary">Enter keywords with comma separated</small>
+                                <div id="badge-container">
+                                    <?php
+                                    if($keywords != ''){
+                                        $deal_keywords = explode(",", $keywords);
+                                        if(!empty($deal_keywords)){
+                                        for($k=0;$k<count($deal_keywords);$k++){
+                                    ?>
+                                        <span class="badge"><?=$deal_keywords[$k]?> <span class="remove" data-tag="<?=$deal_keywords[$k]?>">&times;</span></span>
+                                    <?php } }
+                                    }
+                                    ?>
+                                </div>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -474,4 +497,41 @@ $controllerRoute = $module['controller_route'];
         input.value = ''; // Clear the input if validation fails
     }
     }
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    var tagsArray = [];
+    var beforeData = $('#keywords').val();
+    if(beforeData.length > 0){
+      tagsArray = beforeData.split(',');
+    }
+    $('#input-tags').on('input', function() {
+        var input = $(this).val();
+        if (input.includes(',')) {
+            var tags = input.split(',');
+            tags.forEach(function(tag) {
+                tag = tag.trim();
+                if (tag.length > 0 && !tagsArray.includes(tag)) {
+                    tagsArray.push(tag);
+                    $('#badge-container').append(
+                        '<span class="badge">' + tag + ' <span class="remove" data-tag="' + tag + '">&times;</span></span>'
+                    );
+                }
+            });
+            $('#keywords').val(tagsArray);
+            // console.log(tagsArray);
+            $(this).val('');
+        }
+    });
+    // console.log(tagsArray);
+    $(document).on('click', '.remove', function() {
+        var tag = $(this).data('tag');
+        tagsArray = tagsArray.filter(function(item) {
+            return item !== tag;
+        });
+        $(this).parent().remove();
+        $('#keywords').val(tagsArray);
+        // console.log(tagsArray);
+    });
+  });
 </script>
