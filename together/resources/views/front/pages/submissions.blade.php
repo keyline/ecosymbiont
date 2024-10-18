@@ -32,7 +32,7 @@
                                                     <li>Your Creative-Work must not have been published on any other medium that has the exclusive right to publish your work.</li>
                                                     <li>At this time, you must:
                                                         <ul>
-                                                            <li>be invited to submit a Creative-Work to Ecosymbionts Regenerate Together ("ERT"); and/or</li>
+                                                            <li>be invited to submit a Creative-Work to Ecosymbionts all Regenerate Together ("EaRTh"); and/or</li>
                                                             <li>have participated as a strategist at an in-person Ecosymbionts Regenerate ("ER") <a target="_blank" href="<?=env('REGENERATE_URL')?>synergy-meetings.php" style="color: #d09c1c;">Synergy Meeting</a>.</li>
                                                         </ul>
                                                     </li>
@@ -42,12 +42,12 @@
 
                                             <div class="titleto-inner">
                                                 <h2>AUTHORSHIP</h2>
-                                                <p class="black">ERT encourages human individuals, as well as ecoweb-rooted communities (see below for definition) or movements to be authors of Creative-Works submitted to ERT. Given the current legal framework associated with copyright and licensing, at least one human individual must be a co-author if an ecoweb-rooted community or movement is an author. Please also see the instructions below:</p>
+                                                <p class="black">EaRTh encourages human individuals, as well as ecoweb-rooted communities (see below for definition) or movements to be authors of Creative-Works submitted to EaRTh. Given the current legal framework associated with copyright and licensing, at least one human individual must be a co-author if an ecoweb-rooted community or movement is an author. Please also see the instructions below:</p>
                                                 
                                                 <ul>
                                                     <li>A Creative-Work may have up to three co-authors, wherein the first author listed must be a human individual ("Lead Author").</li>
-                                                    <li>ERT encourages an ecoweb-rooted community or movement to be a co-author of a Creative-Work, but only if a human individual is also a co-author.</li>
-                                                    <li>For the purposes of submissions of Creative-Work to ERT, an ecoweb-rooted community is defined as a self-associating group of human individuals that trace their origins to a particular ecoweb. Examples of ecoweb-rooted communities are: the Idu Mishmi of Arunachal Pradesh (India) and the Lisjan Ohlone of California (United States).</li>
+                                                    <li>EaRTh encourages an ecoweb-rooted community or movement to be a co-author of a Creative-Work, but only if a human individual is also a co-author.</li>
+                                                    <li>For the purposes of submissions of Creative-Work to EaRTh, an ecoweb-rooted community is defined as a self-associating group of human individuals that trace their origins to a particular ecoweb. Examples of ecoweb-rooted communities are: the Idu Mishmi of Arunachal Pradesh (India) and the Lisjan Ohlone of California (United States).</li>
                                                     <li>Each co-author must submit a separate submission form, with a human individual representative of an ecoweb-rooted community co-author or movement co-author submitting on behalf of the ecoweb-rooted community or movement.</li>
                                                 </ul>
                                             </div>
@@ -67,18 +67,18 @@
                                                     <li>For all Creative-Work types, each image or photograph submitted must be accompanied by a brief figure caption (up to 50 words).</li>
                                                     <li>To be categorized as non-fiction any knowledge or ideas contained in your Creative-Work must be your own and may include your first-person account of narration by a knowledge-holder and/or ancestor who is explicitly named and credited.</li>
                                                     <li>A non-fiction Creative-Work that contains descriptions of knowledge and/or activities &#x2014; especially harmful activities &#x2014; by legal entities (<i>e.g.</i>, corporations) and/or human persons other than yourself must be substantiated by external sources (<i>e.g.</i>, citations) and/or be witnessed first-hand by you.</li>
-                                                    <li>As you generate your Creative-Work, please keep in mind that readers and grassroots individuals and collectives from across the world will be viewing your Creative-Work if it is published by ERT as content. Thus, please write and present in a manner that explains terms and concepts specific to your region or culture, such that a person completely unfamiliar with the topic and regional/cultural context of your Creative-Work can understand.</li>
+                                                    <li>As you generate your Creative-Work, please keep in mind that readers and grassroots individuals and collectives from across the world will be viewing your Creative-Work if it is published by EaRTh as content. Thus, please write and present in a manner that explains terms and concepts specific to your region or culture, such that a person completely unfamiliar with the topic and regional/cultural context of your Creative-Work can understand.</li>
                                                     <li>Please write in a simple and clear manner that is not academic, keeping in mind that readers and grassroots individuals and collectives viewing your Creative-Work are from a variety of occupational and cultural backgrounds and are most probably not native English speakers. When citing another’s publication, please simply state the finding and use footnotes to provide information about the full citation.<br><br> For example, do <strong style="color: #d09c1c;">not</strong> write: “Garcia and Hussain (2018) describe various detrimental neurological effects of environmental pollution in frontline communities.” <br><br>Instead, write: “Environmental pollution has been reported to have various detrimental neurological effects in frontline communities.<sup>[1]</sup>" Then in your footnote for [1] provide the entire citation of Garcia and Hussain (2018).</li>
                                                     <li>If you are including citations in your Creative-Work, please format them as follows: M. Garcia, L. Hussain, <i>Environmental Pollution Causes Neurological Effects in Impacted Communities</i>, <strong>Journal of Impacts:</strong> Vol. 5 (Issue 12), pp. 46-48 (2018). </li>
-                                                    <li>ERT encourages the submission of Creative-Works in vernacular languages. For narratives &#x2014; both word narratives and descriptive narratives &#x2014; please ensure that if the language is not English, you also submit an accurate English translation of the entire narrative. 
+                                                    <li>EaRTh encourages the submission of Creative-Works in vernacular languages. For narratives &#x2014; both word narratives and descriptive narratives &#x2014; please ensure that if the language is not English, you also submit an accurate English translation of the entire narrative. 
                                                         For video in which the languages spoken are not English, please ensure that there are accurate English subtitles within the submitted video.  
                                                     </li>
                                                 </ul>
                                             </div>
 
                                             <div class="titleto-inner">
-                                                <h2>EXPLANATION OF CATEGORIES AND SUB-CATEGORIES OF ERT</h2>
-                                                <p class="black">ERT has five main categories that are further divided into sub-categories. To help you understand what type of content is appropriate for each category/sub-category, please see below.</p>
+                                                <h2>EXPLANATION OF CATEGORIES AND SUB-CATEGORIES OF EaRTh</h2>
+                                                <p class="black">EaRTh has five main categories that are further divided into sub-categories. To help you understand what type of content is appropriate for each category/sub-category, please see below.</p>
                                                 <ul>
                                                     <li>
                                                         <strong>ACTION</strong>
@@ -170,18 +170,18 @@
 
                                             <div class="titleto-inner">
                                                 <h2>INSTRUCTIONS FOR SUBMISSION</h2>
-                                                <p class="black">Upon submitting a completed form to ERT, if you meet the eligibility criteria, you will receive an Eligibility E-mail with a Submission Reference Number (“SRN”) and accompanying Non-Exclusive License to Publish (“NELP”). Please date and sign the NELP and follow the upload instructions provided in your Eligibility E-mail. Once the editor(s) receive(s) your dated and signed NELP, we will begin substantively reviewing your Creative-Work.</p>
+                                                <p class="black">Upon submitting a completed form to EaRTh, if you meet the eligibility criteria, you will receive an Eligibility E-mail with a Submission Reference Number (“SRN”) and accompanying Non-Exclusive License to Publish (“NELP”). Please date and sign the NELP and follow the upload instructions provided in your Eligibility E-mail. Once the editor(s) receive(s) your dated and signed NELP, we will begin substantively reviewing your Creative-Work.</p>
                                                 <p class="black">Please note that if there are multiple co-authors of a Creative-Work, certain details of each co-author must be listed in the same NELP and the Lead Author must sign and date the NELP on behalf of all co-authors. If one of the co-authors is an ecoweb-rooted community or movement, the details of a human individual representative of the ecoweb-rooted community or movement must be provided in the NELP.</p>
                                             </div>
 
                                             <div class="titleto-inner">
                                                 <h2>REVIEW PROCESS</h2>
-                                                <p class="black">Your Creative-Work will be reviewed based on several criteria, including clarity, veracity, and relevance to the <a href="<?=env('REGENERATE_URL')?>" style="color: #d09c1c;" target="_blank">mission and approach of Ecosymbionts Regenerate</a>. If your Creative-Work is accepted for publication as Content on ERT, a few rounds of editor-guided revision may be required before publication. </p>
+                                                <p class="black">Your Creative-Work will be reviewed based on several criteria, including clarity, veracity, and relevance to the <a href="<?=env('REGENERATE_URL')?>" style="color: #d09c1c;" target="_blank">mission and approach of Ecosymbionts Regenerate</a>. If your Creative-Work is accepted for publication as Content on EaRTh, a few rounds of editor-guided revision may be required before publication. </p>
                                             </div>
 
                                             <div class="titleto-inner">
                                                 <h2>COPYRIGHT & LICENSE</h2>
-                                                <p class="black">As per the terms detailed in the NELP, you grant ERT, ER, and the Śramani Institute (the nonprofit host organization of ER and ERT) a non-exclusive license to publish and use your Content. You will retain the copyright to your work and the right to also publish elsewhere. </p>
+                                                <p class="black">As per the terms detailed in the NELP, you grant EaRTh, ER, and the Śramani Institute (the nonprofit host organization of ER and EaRTh) a non-exclusive license to publish and use your Content. You will retain the copyright to your work and the right to also publish elsewhere. </p>
                                             </div>
                                             <!-- <a class="btn btn-primary blue_btn" href="#">SUBMIT CREATIVE-WORK</a> -->
                                             <?php if($button_show){?>
