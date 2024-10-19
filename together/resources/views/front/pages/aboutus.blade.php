@@ -27,10 +27,10 @@
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="post-content">
-                                            <p style="color:#000;">Ecosymbionts Regenerate Together (ERT) is an online knowledge-sharing and community-building platform for <a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">grassroots</a>  changemakers, innovators, and knowledge-holders from across the world.</p>
+                                            <p style="color:#000;">Ecosymbionts all Regenerate Together (EaRTh) is an online knowledge-sharing and community-building platform for <a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">grassroots</a>  changemakers, innovators, and knowledge-holders from across the world.</p>
                                             
                                             <div class="titleto-inner">
-                                                <p class="black">The purpose of ERT is two-fold:</p>
+                                                <p class="black">The purpose of EaRTh is two-fold:</p>
                                                 <ul>
                                                     <li><strong><i>Facilitate synergies:</i></strong> Bring together and facilitate <a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">synergies</a> between grassroots changemakers, innovators, and knowledge-holders from across the world working to <a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">regenerate</a> systems that restore, preserve, and foster human-<a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">ecoweb</a> <a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">symbiosis</a>.
                                                     </li>
@@ -42,18 +42,18 @@
                                             
 
                                             <div class="titleto-inner">
-                                                <h2>HOW TO CITE ERT CONTENT</h2>
-                                                <p class="black">If you are citing ERT content, please use the following format: Author name(s), <i>Title</i>, <strong>Ecosymbionts Regenerate Together:</strong> DOI (publication date).</p>
+                                                <h2>HOW TO CITE EaRTh CONTENT</h2>
+                                                <p class="black">If you are citing EaRTh content, please use the following format: Author name(s), <i>Title</i>, <strong>Ecosymbionts all Regenerate Together (EaRTh):</strong> DOI (publication date).</p>
                                                 <p class="black"><i>For example: </i></p>
-                                                <p class="black">F. Jahan, <i>From Bhopal to the Bay: Fighting Corporations Creating Industrial Wastelands</i>, <strong>Ecosymbionts Regenerate Together:</strong> DOI-ERT092024-004 (25 September, 2024).</p>
+                                                <p class="black">F. Jahan, <i>From Bhopal to the Bay: Fighting Corporations Creating Industrial Wastelands</i>, <strong>Ecosymbionts all Regenerate Together (EaRTh):</strong> DOI-ERT092024-004 (25 September, 2024).</p>
                                             </div>
                                             <div class="titleto-inner">
                                                 <h2>TYPES OF CREATIVE-WORKS</h2>
-                                                <p class="black">Both fiction and non-fiction Creative-Works are published as content on ERT, in the form of (a) word narratives, (b) visual art, and (c) videos. ERT encourages content in vernacular languages, with English translations provided, and where applicable, English subtitles.</p>
+                                                <p class="black">Both fiction and non-fiction Creative-Works are published as content on EaRTh, in the form of (a) word narratives, (b) visual art, and (c) videos. EaRTh encourages content in vernacular languages, with English translations provided, and where applicable, English subtitles.</p>
                                             </div>
                                             <div class="titleto-inner">
-                                                <h2>CATEGORIES AND SUB-CATEGORIES OF ERT</h2>
-                                                <p class="black">ERT has five main categories that are further divided into sub-sections. </p>
+                                                <h2>CATEGORIES AND SUB-CATEGORIES OF EaRTh</h2>
+                                                <p class="black">EaRTh has five main categories that are further divided into sub-sections. </p>
                                             </div>
                                             <div class="titleto-inner">
                                                 <h4>Action</h4>

@@ -3,6 +3,18 @@ use App\Models\EcosystemAffiliation;
 use App\Helpers\Helper;
 $controllerRoute = $module['controller_route'];
 ?>
+<style type="text/css">
+  .badge {
+      display: inline-flex;
+      align-items: center;
+      margin: 2px;
+      background-color: #132144;
+  }
+  .badge .remove {
+      cursor: pointer;
+      margin-left: 5px;
+  }
+</style>
 <div class="pagetitle">
   <h1><?=$page_header?></h1>
   <nav>
@@ -39,9 +51,10 @@ $controllerRoute = $module['controller_route'];
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">SRN<br>DOI<br>Parent Category<br>Sub category</th>
+                  <th scope="col">SRN<br>DOI<br>Parent Category<br>Sub Category</th>
                   <th scope="col">Title<br>Sub Title</th>
                   <th scope="col">Author Name<br>Pronoun<br>Affiliation<br>Email<br>Country<br>Organization</th>
+                  <th scope="col">Keywords</th>
                   <th scope="col">Is Feature</th>
                   <th scope="col">Is Popular</th>
                   <th scope="col">Action</th>
@@ -103,7 +116,19 @@ $controllerRoute = $module['controller_route'];
                         <?=$countries->name?>
                       <?php } ?><br>
                       <?=$row->organization_name?>
-                    </td> 
+                    </td>
+                    <td>
+                      <?php
+                      if($row->keywords != ''){
+                          $deal_keywords = explode(",", $row->keywords);
+                          if(!empty($deal_keywords)){
+                          for($k=0;$k<count($deal_keywords);$k++){
+                      ?>
+                          <span class="badge"><?=$deal_keywords[$k]?> <span class="remove" data-tag="<?=$deal_keywords[$k]?>">&times;</span></span>
+                      <?php } }
+                      }
+                      ?>
+                    </td>
                     <td><span class="<?=(($row->is_feature)?'badge bg-success':'badge bg-danger')?>"><?=(($row->is_feature)?'<i class="fa fa-check"></i> YES':'<i class="fa fa-times"></i> NO')?></span></td>                 
                     <td><span class="<?=(($row->is_popular)?'badge bg-success':'badge bg-danger')?>"><?=(($row->is_popular)?'<i class="fa fa-check"></i> YES':'<i class="fa fa-times"></i> NO')?></span></td>
                     <td>
