@@ -71,11 +71,13 @@ class FrontController extends Controller
                 return redirect()->back()->with('error_message', 'All Fields Required !!!');
             }
         }
+        $data['search_keyword']         = '';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
     public function submissions()
     {
         $data['button_show']            = 1;
+        $data['search_keyword']         = '';
         $title                          = 'Submissions';
         $page_name                      = 'submissions';
         echo $this->front_before_login_layout($title, $page_name, $data);
@@ -166,6 +168,7 @@ class FrontController extends Controller
                     return redirect()->back()->with('error_message', 'reCAPTCHA v3 validation failed. Please try again.');                        
                 }                              
         }
+        $data['search_keyword']         = '';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
     public function aboutUs()
@@ -173,6 +176,7 @@ class FrontController extends Controller
         $data = [];
         $title                          = 'About Us';
         $page_name                      = 'aboutus';
+        $data['search_keyword']         = '';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
     public function pageContent($slug)
@@ -181,6 +185,7 @@ class FrontController extends Controller
         $title                          = (($data['row'])?$data['row']->page_name:'');
         $data['button_show']            = (($slug == 'submissions')?1:0);
         $page_name                      = 'page-content';
+        $data['search_keyword']         = '';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
     public function category($slug)
@@ -209,6 +214,7 @@ class FrontController extends Controller
                                                     ->where('news_contents.parent_category', $parent_category_id) // Ensure $parent_category_id is defined
                                                     ->orderBy('news_contents.id', 'DESC')
                                                     ->get();
+        $data['search_keyword']         = '';
 
         $title                          = (($data['row'])?$data['row']->sub_category:'');
         $page_name                      = 'category';
@@ -246,6 +252,7 @@ class FrontController extends Controller
                                         // Helper::pr($data['contents']);
 
         // $title                          = ($categoryname .'|'. ($data['row'])?$data['row']->sub_category:'');
+        $data['search_keyword']         = '';
         $title                          = $categoryname .' | '. $data['row']->sub_category;
         $page_name                      = 'subcategory';
         echo $this->front_before_login_layout($title, $page_name, $data);
@@ -293,10 +300,83 @@ class FrontController extends Controller
                                            ->where('news_contents.parent_category', $parent_category_id)  // Filter by parent category
                                            ->where('news_contents.id', '!=', ($data['rowContent']) ? $data['rowContent']->news_id : null)  // Exclude the current content by its ID
                                            ->get();
+        $data['search_keyword']         = '';
 
         $title                      = (($data['rowContent'])?$data['rowContent']->new_title:'');
         $page_name                  = 'news-content';
         echo $this->front_before_login_layout($title, $page_name, $data);
+    }
+    public function search_result(Request $request)
+    {
+        if($request->isMethod('get')){
+            $postData           = $request->all();
+            $search_keyword     = $postData['article_search'];
+            $data['contents']   = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
+                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
+                                            ->select(
+                                                        'news_contents.id', 
+                                                        'news_contents.new_title', 
+                                                        'news_contents.sub_title', 
+                                                        'news_contents.slug', 
+                                                        'news_contents.author_name', 
+                                                        'news_contents.cover_image', 
+                                                        'news_contents.created_at',
+                                                        'news_contents.media',
+                                                        'news_contents.videoId',
+                                                        'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
+                                                        'parent_category.sub_category as parent_category_name', // From parent_category name
+                                                        'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
+                                                        'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                                    )
+                                            ->where(function($query) {
+                                                $query->where('news_contents.status', 1);
+                                             })
+                                             ->where(function($query) use ($search_keyword) {
+                                                $query->where('news_contents.new_title', 'LIKE', '%'.$search_keyword.'%')
+                                                      ->orWhere('news_contents.sub_title', 'LIKE', '%'.$search_keyword.'%')
+                                                      ->orWhere('news_contents.long_desc', 'LIKE', '%'.$search_keyword.'%')
+                                                      ->orWhere('news_contents.keywords', 'LIKE', '%'.$search_keyword.'%');
+                                             })
+                                             ->get();
+            // Helper::pr($searchResults);
+            
+            $data['search_keyword']         = $search_keyword;
+            $title                          = 'Search Result For : "' . $search_keyword . '"';
+            $page_name                      = 'search-result';
+            echo $this->front_before_login_layout($title, $page_name, $data);
+        }
+    }
+    public function fetch_search_suggestions(Request $request){
+        $apiStatus          = TRUE;
+        $apiMessage         = '';
+        $apiResponse        = [];
+        $apiExtraField      = '';
+        $apiExtraData       = '';
+        $requestData        = $request->all();
+        
+        $search_keyword     = $requestData['search_keyword'];
+        $searchResults      = NewsContent::select('id', 'new_title', 'slug', 'parent_category', 'sub_category')->where(function($query) {
+                                                $query->where('status', 1);
+                                             })
+                                             ->where(function($query) use ($search_keyword) {
+                                                $query->where('new_title', 'LIKE', '%'.$search_keyword.'%')
+                                                      ->orWhere('sub_title', 'LIKE', '%'.$search_keyword.'%')
+                                                      ->orWhere('long_desc', 'LIKE', '%'.$search_keyword.'%')
+                                                      ->orWhere('keywords', 'LIKE', '%'.$search_keyword.'%');
+                                             })
+                                             ->get();
+        
+        if($searchResults){
+            foreach ($searchResults as $searchResult) {
+                $getParentCategory  = NewsCategory::select('slug')->where('id', '=', $searchResult->parent_category)->first();
+                $getChildCategory   = NewsCategory::select('slug')->where('id', '=', $searchResult->sub_category)->first();
+                $contentUrl         = url('content/' . (($getParentCategory)?$getParentCategory->slug:''). '/' . (($getChildCategory)?$getChildCategory->slug:'') . '/' . $searchResult->slug);
+                echo '<li><a href="' . $contentUrl . '">' . htmlspecialchars($searchResult->new_title) . '</a></li>';
+            }
+        } else {
+            echo '<li>No results found</li>';
+        }
+        // $this->response_to_json($apiStatus, $apiMessage, $apiResponse, $apiExtraField, $apiExtraData);
     }
     /* authentication */
         public function signIn(Request $request, $page_link = '')
@@ -365,6 +445,7 @@ class FrontController extends Controller
                 }
             }
             $data['page_link']              = (($page_link != '')?$page_link:'');
+            $data['search_keyword']         = '';
             $title                          = 'Sign In';
             $page_name                      = 'signin';
             echo $this->front_before_login_layout($title, $page_name, $data);
@@ -374,6 +455,7 @@ class FrontController extends Controller
             $data['countries']              = Country::select('id', 'name')->where('status', '=', 1)->get();
             $title                          = 'Sign Up';
             $page_name                      = 'signup';
+            $data['search_keyword']         = '';
             if ($request->isMethod('post')) {
                 $postData = $request->all();
                 // Helper::pr($postData);
@@ -489,6 +571,7 @@ class FrontController extends Controller
             $data['approved_articles']      = Article::where('is_published', '=', 1)->where('user_id', '=', $user_id)->count();
             $data['pending_articles']       = Article::where('is_published', '=', 0)->where('user_id', '=', $user_id)->count();
 
+            $data['search_keyword']         = '';
             $title                          = 'Dashboard';
             $page_name                      = 'dashboard';
             echo $this->front_after_login_layout($title, $page_name, $data);
@@ -498,6 +581,7 @@ class FrontController extends Controller
             $user_id                        = session('user_id');
             $data['user']                   = User::find($user_id);
             $data['countries']              = Country::select('id', 'name')->where('status', '=', 1)->get();
+            $data['search_keyword']         = '';
 
             if ($request->isMethod('post')) {
                 $postData = $request->all();
@@ -547,6 +631,7 @@ class FrontController extends Controller
         {
             $user_id                        = session('user_id');
             $data['user']                   = User::find($user_id);
+            $data['search_keyword']         = '';
 
             if ($request->isMethod('post')) {
                 $postData   = $request->all();
@@ -590,6 +675,7 @@ class FrontController extends Controller
             $user_id                        = session('user_id');
             $data['user']                   = User::find($user_id);
             $data['articles']               = Article::where('user_id', '=', $user_id)->orderBy('id', 'DESC')->get();
+            $data['search_keyword']         = '';
 
             if ($request->isMethod('post')) {
                 $postData = $request->all();
@@ -619,6 +705,7 @@ class FrontController extends Controller
             $user_id                        = session('user_id');
             $data['user']                   = User::find($user_id);
             $data['articles']               = Article::where('user_id', '=', $user_id)->get();
+            $data['search_keyword']         = '';
 
             if ($request->isMethod('post')) {
                 $postData = $request->all();
