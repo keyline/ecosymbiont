@@ -42,8 +42,8 @@
                                             
 
                                             <div class="titleto-inner">
-                                                <h2>HOW TO CITE ERT CONTENT</h2>
-                                                <p class="black">If you are citing ERT content, please use the following format: Author name(s), <i>Title</i>, <strong>Ecosymbionts all Regenerate Together (EaRTh):</strong> DOI (publication date).</p>
+                                                <h2>HOW TO CITE EaRTh CONTENT</h2>
+                                                <p class="black">If you are citing EaRTh content, please use the following format: Author name(s), <i>Title</i>, <strong>Ecosymbionts all Regenerate Together (EaRTh):</strong> DOI (publication date).</p>
                                                 <p class="black"><i>For example: </i></p>
                                                 <p class="black">F. Jahan, <i>From Bhopal to the Bay: Fighting Corporations Creating Industrial Wastelands</i>, <strong>Ecosymbionts all Regenerate Together (EaRTh):</strong> DOI-ERT092024-004 (25 September, 2024).</p>
                                             </div>
