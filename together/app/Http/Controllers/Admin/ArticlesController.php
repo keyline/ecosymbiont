@@ -58,12 +58,11 @@ class ArticlesController extends Controller
         $data['module']           = $this->data;
         if ($request->isMethod('post')) {
             $postData = $request->all();
-            // dd($postData);
+             dd($postData);
             if ($postData['invited'] == 'No' && $postData['participated'] == 'No') {
                 // echo "this section"; die;
                 $rules = [
-                    'first_name'                => 'required',            
-                    'last_name'                 => 'required',                                    
+                    'first_name'                => 'required',                                                                
                     'email'                     => 'required',                                      
                     'for_publication_name'      => 'required',                                      
                     'orginal_work'              => 'required',                                     
@@ -86,8 +85,8 @@ class ArticlesController extends Controller
             } else{
                 
                     $rules = [
-                'first_name'                => 'required',            
-                'last_name'                 => 'required',                                    
+                'author_classification'     => 'required',
+                'first_name'                => 'required',                                                               
                 'email'                     => 'required',                                      
                 'country'                   => 'required',                                     
                 'for_publication_name'      => 'required', 
@@ -105,19 +104,18 @@ class ArticlesController extends Controller
                 'ecosystem_affiliation'     => 'required',               
                 'expertise_area'            => 'required',                
                 'explanation'               => ['required', 'string', new MaxWords(100)],
-                'explanation_submission'    => ['required', 'string', new MaxWords(150)],
-                'art_video_desc'            => ['required', 'string', new MaxWords(250)],
+                'explanation_submission'    => ['required', 'string', new MaxWords(150)],                
                 'creative_Work'             => ['required', 'string', new MaxWords(10)],
-                'subtitle'                  => ['required', 'string', new MaxWords(40)],
-                'art_image_desc'            => ['required', 'string', new MaxWords(250)],
+                'subtitle'                  => ['required', 'string', new MaxWords(40)],                
                 'bio_short'                 => ['required', 'string', new MaxWords(40)],
                 'bio_long'                  => ['required', 'string', new MaxWords(250)], 
-                ];                                    
-                /* narrative file */
+                ];   
+
+                /* narrative doc file */
                     $imageFile      = $request->file('narrative_file');
                     if ($imageFile != '') {
                         $imageName      = $imageFile->getClientOriginalName();
-                        $uploadedFile   = $this->upload_single_file('narrative_file', $imageName, 'narrative', 'image');
+                        $uploadedFile   = $this->upload_single_file('narrative_file', $imageName, 'narrative', 'word');
                         if ($uploadedFile['status']) {
                             $narrative_file = $uploadedFile['newFilename'];
                         } else {
@@ -126,7 +124,35 @@ class ArticlesController extends Controller
                     } else {
                         return redirect()->back()->with(['error_message' => 'Please Upload narrative File !!!']);
                     }
-                /* narrative file */
+                /* narrative doc file */
+                /* narrative image file */
+                    
+                    $data = [];
+                    for ($i = 1; $i <= $request->narrative_images; $i++) {
+                        if ($request->hasFile('image_file_' . $i)) {
+                            $imageFile      = $request->file('image_file_' . $i);
+                            if ($imageFile != '') {
+                                $imageName      = $imageFile->getClientOriginalName();
+                                $uploadedFile   = $this->upload_single_file('image_file_' . $i, $imageName, 'narrative', 'image');
+                                if ($uploadedFile['status']) {
+                                    $narrative_images = $uploadedFile['newFilename'];
+                                    $data[] = [
+                                        'image_path' => $narrative_images,
+                                        'description' => $request->input('narrative_image_desc_' . $i),
+                                    ];
+                                } else {
+                                    return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                                }
+                            } else {
+                                return redirect()->back()->with(['error_message' => 'Please Upload narrative File !!!']);
+                            }
+
+                            // $imagePath = $request->file('image_file_' . $i)->store('narrative_images', 'public');
+                            
+                        }
+                    }
+
+                /* narrative image file */
                 /* first_image file */
                     $imageFile      = $request->file('first_image_file');
                     if ($imageFile != '') {

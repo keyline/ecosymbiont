@@ -51,13 +51,13 @@ $controllerRoute = $module['controller_route'];
             $author_classification = $row->author_classification;
             $co_authors = $row->co_authors;
             $co_authors_position = $row->co_authors_position;
-            $first_name = $row->first_name;            
-            $last_name = $row->last_name;            
-            $middle_name = $row->middle_name;            
+            $co_author_name = $row->co_author_name;
+            $co_author_short_bio = $row->co_author_short_bio;
+            $first_name = $row->first_name;                               
             $email = $row->email;          
             $for_publication_name = $row->for_publication_name;          
             $countryId = $row->country;          
-            $roleId = $row->role;          
+            // $roleId = $row->role;          
             $creative_Work = $row->creative_Work;  
             $orginal_work = $row->orginal_work;        
             $copyright = $row->copyright; 
@@ -66,7 +66,7 @@ $controllerRoute = $module['controller_route'];
             $invited_by_email = $row->invited_by_email;  
             $explanation = $row->explanation;  
             $explanation_submission = $row->explanation_submission;  
-            $section_ertId = (($row->section_ertId != '')?json_decode($row->section_ertId):[]); 
+            // $section_ertId = (($row->section_ertId != '')?json_decode($row->section_ertId):[]); 
             $titleId = $row->titleId;  
             $news_categoryId = $row->news_categoryId;
             $pronounId = $row->pronounId;
@@ -94,20 +94,20 @@ $controllerRoute = $module['controller_route'];
             $expertise_areaId = (($row->expertise_areaId != '')?json_decode($row->expertise_areaId):[]);
             $bio_short = $row->bio_short;
             $bio_long = $row->bio_long;            
-            $acknowledge = $row->acknowledge;
+            // $acknowledge = $row->acknowledge;
             $is_final_edit = $row->is_final_edit;
         } else {
             $user_id = '';
             $author_classification = '';
             $co_authors = '';
             $co_authors_position = '';
-            $first_name = '';            
-            $last_name =  '';          
-            $middle_name = '';            
+            $co_author_name = '';
+            $co_author_short_bio = '';
+            $first_name = '';                                 
             $email = '';           
             $for_publication_name = '';           
             $countryId = '';           
-            $roleId = '';           
+            // $roleId = '';           
             $creative_Work = '';  
             $orginal_work = '';           
             $copyright = ''; 
@@ -116,7 +116,7 @@ $controllerRoute = $module['controller_route'];
             $invited_by_email = '';  
             $explanation = '';  
             $explanation_submission = '';     
-            $section_ertId = [];
+            // $section_ertId = [];
             $titleId = '';
             $news_categoryId = '';
             $pronounId = '';
@@ -144,10 +144,22 @@ $controllerRoute = $module['controller_route'];
             $expertise_areaId = [];
             $bio_short = '';
             $bio_long = '';            
-            $acknowledge = '';
+            // $acknowledge = '';
             $is_final_edit = 0;
         }
         ?>
+        <div class="col-xl-12">
+            <div class="card">
+                <div class="card-body pt-3">
+                @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+</div>
+@endif
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body pt-3">
@@ -186,7 +198,7 @@ $controllerRoute = $module['controller_route'];
                                 <label for="2">2</label>
                             </div>
                         </div>
-                        <div id="co_authors_position" style="display: none;">
+                        <div id="co_authors_position" style="display: none;border: 1px solid #000; padding: 10px; border-radius: 7px;">
                             <div class="row mb-3">
                                 <label for="co_authors_position" class="col-md-2 col-lg-4 col-form-label">3A) (- if answer to (3) is 1 or 2) Indicate in which position your name should appear in the list of authors (the Lead Author, i.e., the first author listed, must be a human individual)
                                 </label>
@@ -199,6 +211,81 @@ $controllerRoute = $module['controller_route'];
                                     <label for="Third position">Third position</label>
                                 </div>
                             </div>
+                            <div id="artimageFieldsContainer">
+                                @for ($i = 1; $i <= 3; $i++)
+                                <div class="card mb-3" id="author_card_{{$i}}" style="padding: 11px;border: 1px solid black; display:none;">
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <label for="co_author_name_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3B{{$i}}) Co-Author Name</label>
+                                                <div class="col-md-10 col-lg-8">
+                                                    <input type="text" name="co_author_name_{{$i}}" class="form-control" id="co_author_name_{{$i}}"
+                                                        value="<?= $co_author_name ?>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <label for="co_author_short_bio_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3C{{$i}}) Co-Author Short Bio</label>
+                                                <div class="col-md-10 col-lg-8">
+                                                    <input type="text" name="co_author_short_bio_{{$i}}" class="form-control" id="co_author_short_bio_{{$i}}"
+                                                        value="<?= $co_author_short_bio ?>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <label for="co_author_country_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3D{{$i}}) Co-Author country/nation</label>
+                                                <div class="col-md-10 col-lg-8">
+                                                    <select name="co_author_country_{{$i}}" class="form-control" id="co_author_country_{{$i}}" >
+                                                        <option value="" selected disabled>Select</option>
+                                                        @if ($country)
+                                                            @foreach ($country as $data)
+                                                                <option value="{{ $data->id }}" @selected($data->id == $countryId)>
+                                                                    {{ $data->name }}</option>
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
+                                                </div>
+                                            </div>                                        
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <label for="co_authororganization_name_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3E{{$i}}) Co-Author grassroots organization/ ecoweb-rooted community/ movement
+                                                </label>
+                                                <div class="col-md-10 col-lg-8">
+                                                    <input type="text" name="co_authororganization_name_{{$i}}" class="form-control" id="co_authororganization_name_{{$i}}"
+                                                        value="<?= $organization_name ?>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <label for="ecosystem_affiliation_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3F{{$i}}) What continent are Co-Author ancestors originally from? (select all that apply)
+                                                </label>
+                                                <div class="col-md-10 col-lg-8">                                                                                                
+                                                    @if ($ecosystem_affiliation)
+                                                        @foreach ($ecosystem_affiliation as $data)
+                                                        <input type="checkbox" name="ecosystem_affiliation_{{$i}}[]" value="{{ $data->id }}" @if(in_array($data->id, old('ecosystem_affiliation', $ecosystem_affiliationId))) checked @endif>  {{ $data->name }}<br>
+                                                        @endforeach
+                                                    @endif                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <label for="Indigenous_affiliation_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3G{{$i}}) What specific region are Co-author ancestors originally from OR what is the name of your Indigenous community? (example of specific region = Bengal; example of Indigenous community name = Lisjan Ohlone)
+                                                </label>
+                                                <div class="col-md-10 col-lg-8">
+                                                    <input type="text" name="indigenous_affiliation_{{$i}}" class="form-control" id="indigenous_affiliation_{{$i}}"
+                                                    value="<?= $indigenous_affiliation ?>" >
+                                                </div>
+                                            </div>
+                                        </div>  
+                                    </div> 
+                                </div> 
+                                @endfor
+                            </div>                                                                           
                         </div> 
                         <div class="row mb-3">
                             <label for="first_name" class="col-md-2 col-lg-4 col-form-label">4) Full Legal Name (exactly as it appears on your government-issued identification documents, e.g., passport and/or driver's license)</label>
@@ -374,7 +461,7 @@ $controllerRoute = $module['controller_route'];
                                 @endif                            
                                 </div>
                             </div> 
-                            <div id="submission_types_a" style="display: none;">                          
+                            <div id="submission_types_a" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px;">                          
                                 <div class="row mb-3">
                                     <label for="narrative_file" class="col-md-2 col-lg-4 col-form-label">17A1) TYPE A: word narrative (no embedded images) (500-1000 words for prose, 100-250 words for poetry)</label>
                                     <div class="col-md-10 col-lg-8">
@@ -411,45 +498,61 @@ $controllerRoute = $module['controller_route'];
                                 <!-- Image upload and description divs (hidden initially) -->
                                 <div id="imageFieldsContainer">
                                     <!-- These divs will be dynamically shown based on the selected number -->
-                                    <div class="row mb-3 image-upload-div" id="image_upload_1" style="display: none;">
-                                        <label for="first_image_file" class="col-md-2 col-lg-4 col-form-label">17A3a) TYPE A: image 1 accompanying word narrative</label>
-                                        <div class="col-md-10 col-lg-8">
-                                            <input type="file" name="image_file_1" class="form-control" id="image_file_1">
-                                            <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small>
-                                            <span id="image_file_1_error" class="text-danger"></span>
-                                            <img id="image_preview_1" src="<?= env('NO_IMAGE') ?>" alt="first_image_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3 description-div" id="description_1" style="display: none;">
-                                        <label for="narrative_image_desc_1" class="col-md-2 col-lg-4 col-form-label">17A3b) TYPE A: short caption for image 1 (max. 50 words)</label>
-                                        <div class="col-md-10 col-lg-8">
-                                            <textarea class="form-control" id="narrative_image_desc_1" name="narrative_image_desc_1" rows="4" cols="50" placeholder="Your narrative_image_desc here..." required></textarea>
-                                            <div id="narrative_image_desc_1Error" class="error"></div>
+                                    <div class="card" id="card_1" style="padding: 11px;border: 1px solid black;display: none;">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="row image-upload-div" id="image_upload_1">
+                                                    <label for="first_image_file" class="col-md-2 col-lg-4 col-form-label">17A3a1) TYPE A: image 1 accompanying word narrative</label>
+                                                    <div class="col-md-10 col-lg-8">
+                                                        <input type="file" name="image_file_1" class="form-control" id="image_file_1">
+                                                        <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small>
+                                                        <span id="image_file_1_error" class="text-danger"></span>
+                                                        <img id="image_preview_1" src="<?= env('NO_IMAGE') ?>" alt="first_image_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
+                                                    </div>
+                                                </div>                                    
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row description-div" id="description_1" >
+                                                    <label for="narrative_image_desc_1" class="col-md-2 col-lg-4 col-form-label">17A3b1) TYPE A: short caption for image 1 (max. 50 words)</label>
+                                                    <div class="col-md-10 col-lg-8">
+                                                        <textarea class="form-control" id="narrative_image_desc_1" name="narrative_image_desc_1" rows="4" cols="50" placeholder="Your narrative_image_desc here..." ></textarea>
+                                                        <div id="narrative_image_desc_1Error" class="error"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     
                                     <!-- Repeat for multiple images -->
                                     @for ($i = 2; $i <= 5; $i++)
-                                    <div class="row mb-3 image-upload-div" id="image_upload_{{ $i }}" style="display: none;">
-                                        <label for="image_file_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17A3a) TYPE A: image {{ $i }} accompanying word narrative</label>
-                                        <div class="col-md-10 col-lg-8">
-                                            <input type="file" name="image_file_{{ $i }}" class="form-control" id="image_file_{{ $i }}">
-                                            <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small>
-                                            <span id="image_file_{{ $i }}_error" class="text-danger"></span>
-                                            <img id="image_preview_{{ $i }}" src="<?= env('NO_IMAGE') ?>" alt="image_file_{{ $i }}" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3 description-div" id="description_{{ $i }}" style="display: none;">
-                                        <label for="narrative_image_desc_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17A3b) TYPE A: short caption for image {{ $i }} (max. 50 words)</label>
-                                        <div class="col-md-10 col-lg-8">
-                                            <textarea class="form-control" id="narrative_image_desc_{{ $i }}" name="narrative_image_desc_{{ $i }}" rows="4" cols="50" placeholder="Your narrative_image_desc here..." required></textarea>
-                                            <div id="narrative_image_desc_{{ $i }}Error" class="error"></div>
+                                    <div class="card mt-3" id="card_{{$i}}" style="padding: 11px;border: 1px solid black; display: none;">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="row image-upload-div" id="image_upload_{{ $i }}" >
+                                                    <label for="image_file_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17A3a{{$i}}) TYPE A: image {{ $i }} accompanying word narrative</label>
+                                                    <div class="col-md-10 col-lg-8">
+                                                        <input type="file" name="image_file_{{ $i }}" class="form-control" id="image_file_{{ $i }}">
+                                                        <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small>
+                                                        <span id="image_file_{{ $i }}_error" class="text-danger"></span>
+                                                        <img id="image_preview_{{ $i }}" src="<?= env('NO_IMAGE') ?>" alt="image_file_{{ $i }}" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">                                            
+                                                <div class="row description-div" id="description_{{ $i }}" >
+                                                    <label for="narrative_image_desc_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17A3b{{$i}}) TYPE A: short caption for image {{ $i }} (max. 50 words)</label>
+                                                    <div class="col-md-10 col-lg-8">
+                                                        <textarea class="form-control" id="narrative_image_desc_{{ $i }}" name="narrative_image_desc_{{ $i }}" rows="4" cols="50" placeholder="Your narrative_image_desc here..." ></textarea>
+                                                        <div id="narrative_image_desc_{{ $i }}Error" class="error"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     @endfor
                                 </div>                                
                             </div>
-                            <div id="submission_types_b" style="display: none;">
+                            <div id="submission_types_b" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px;">
                                 <div class="row mb-3">
                                     <label for="art_images" class="col-md-2 col-lg-4 col-form-label">17B1) TYPE B: How many images related to the same art are you uploading?</label>
                                     <div class="col-md-10 col-lg-8">
@@ -469,34 +572,42 @@ $controllerRoute = $module['controller_route'];
                                 <!-- Image upload and description divs (hidden initially) -->
                                 <div id="artimageFieldsContainer">
                                     @for ($i = 1; $i <= 5; $i++)
-                                    <div class="row mb-3 image-upload-div" id="art_image_upload_{{ $i }}" style="display: none;">
-                                        <label for="art_image_file_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17B2a) TYPE B: image {{ $i }} of art</label>
-                                        <div class="col-md-10 col-lg-8">
-                                            <input type="file" name="art_image_file_{{ $i }}" class="form-control" id="art_image_file_{{ $i }}">
-                                            <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small>
-                                            <span id="art_image_file_{{ $i }}_error" class="text-danger"></span>
-                                            <img id="art_image_preview_{{ $i }}" src="<?= env('NO_IMAGE') ?>" alt="art_image_file_{{ $i }}" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
+                                    <div class="card mt-3" id="art_card_{{$i}}" style="padding: 11px;border: 1px solid black;display: none;">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="row image-upload-div" id="art_image_upload_{{ $i }}" >
+                                                    <label for="art_image_file_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17B2a{{$i}}) TYPE B: image {{ $i }} of art</label>
+                                                    <div class="col-md-10 col-lg-8">
+                                                        <input type="file" name="art_image_file_{{ $i }}" class="form-control" id="art_image_file_{{ $i }}">
+                                                        <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small>
+                                                        <span id="art_image_file_{{ $i }}_error" class="text-danger"></span>
+                                                        <img id="art_image_preview_{{ $i }}" src="<?= env('NO_IMAGE') ?>" alt="art_image_file_{{ $i }}" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row description-div" id="art_description_{{ $i }}" >
+                                                    <label for="art_image_desc_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17B2b{{$i}}) TYPE B: short caption for image {{ $i }} (max. 50 words)</label>
+                                                    <div class="col-md-10 col-lg-8">
+                                                        <textarea class="form-control" id="art_image_desc_{{ $i }}" name="art_image_desc_{{ $i }}" rows="4" cols="50" placeholder="Your art_image_desc here..." ></textarea>
+                                                        <div id="art_image_desc_{{ $i }}Error" class="error"></div>
+                                                    </div>
+                                                </div>
+                                            </div>                                                                                        
                                         </div>
-                                    </div>
-                                    <div class="row mb-3 description-div" id="art_description_{{ $i }}" style="display: none;">
-                                        <label for="art_image_desc_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17B2b) TYPE B: short caption for image {{ $i }} (max. 50 words)</label>
-                                        <div class="col-md-10 col-lg-8">
-                                            <textarea class="form-control" id="art_image_desc_{{ $i }}" name="art_image_desc_{{ $i }}" rows="4" cols="50" placeholder="Your art_image_desc here..." required></textarea>
-                                            <div id="art_image_desc_{{ $i }}Error" class="error"></div>
-                                        </div>
-                                    </div>
+                                    </div>                                    
                                     @endfor
                                 </div>  
                                 <div class="row mb-3">
                                     <label for="art_desc" class="col-md-2 col-lg-4 col-form-label">17B3) TYPE B: descriptive narrative for art (100-250 words)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <textarea class="form-control" id="art_desc" name="art_desc" rows="4" cols="50" placeholder="Your art_desc here..." required><?= $art_desc ?></textarea>
+                                        <textarea class="form-control" id="art_desc" name="art_desc" rows="4" cols="50" placeholder="Your art_desc here..." ><?= $art_desc ?></textarea>
                                         <div id="art_descError" class="error"></div>
                                     </div>
                                 </div>                           
                             </div>
-                            <div id="submission_types_c" style="display: none;">
+                            <div id="submission_types_c" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px;">
                                 <div class="row mb-3">
                                     <label for="art_video_file" class="col-md-2 col-lg-4 col-form-label">17C1) TYPE C: Video (3-10 minutes)</label>
                                     <div class="col-md-10 col-lg-8">
@@ -518,7 +629,7 @@ $controllerRoute = $module['controller_route'];
                                     <label for="art_video_desc" class="col-md-2 col-lg-4 col-form-label">17C2) TYPE C: descriptive narrative for video (100-250 words)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <textarea class="form-control" id="art_video_desc" name="art_video_desc" rows="4" cols="50" placeholder="Your art_video_desc here..." required><?= $art_video_desc ?></textarea>
+                                        <textarea class="form-control" id="art_video_desc" name="art_video_desc" rows="4" cols="50" placeholder="Your art_video_desc here..." ><?= $art_video_desc ?></textarea>
                                         <div id="art_video_descError" class="error"></div>
                                     </div>
                                 </div>
@@ -675,12 +786,12 @@ $controllerRoute = $module['controller_route'];
 
             if (invitedNo && participatedNo) {
                 $('#formDetails').hide();
-                $('#submitButton').prop('disabled', false);
+                // $('#submitButton').prop('disabled', false);
                 $('#invited_by_email, #invited_by, #explanation, #explanation_submission, #creative_Work, #art_image_desc, #art_video_desc, #country, #state, #city, #organization_name, #organization_website, #indigenous_affiliation, #bio_short, #bio_long, #acknowledge').removeAttr('required');
             }
             else{
                 $('#formDetails').show();
-                $('#submitButton').prop('disabled', true);
+                // $('#submitButton').prop('disabled', true);
             }
         }
 
@@ -767,14 +878,16 @@ $controllerRoute = $module['controller_route'];
     function showImageUploadFields(count) {
         // Hide all image upload and description fields initially
         for (let i = 1; i <= 5; i++) {
-            document.getElementById('image_upload_' + i).style.display = 'none';
-            document.getElementById('description_' + i).style.display = 'none';
+            // document.getElementById('image_upload_' + i).style.display = 'none';
+            // document.getElementById('description_' + i).style.display = 'none';
+            document.getElementById('card_' + i).style.display = 'none';
         }
 
         // Show only the number of fields selected
         for (let i = 1; i <= count; i++) {
-            document.getElementById('image_upload_' + i).style.display = 'block';
-            document.getElementById('description_' + i).style.display = 'block';
+            // document.getElementById('image_upload_' + i).style.display = 'block';
+            // document.getElementById('description_' + i).style.display = 'block';
+            document.getElementById('card_' + i).style.display = 'block';
         }
     }
 
@@ -800,14 +913,16 @@ $controllerRoute = $module['controller_route'];
     function showArtImageFields(count) {
         // Hide all image upload and description fields initially
         for (let i = 1; i <= 5; i++) {
-            document.getElementById('art_image_upload_' + i).style.display = 'none';
-            document.getElementById('art_description_' + i).style.display = 'none';
+            // document.getElementById('art_image_upload_' + i).style.display = 'none';
+            // document.getElementById('art_description_' + i).style.display = 'none';
+            document.getElementById('art_card_' + i).style.display = 'none';
         }
 
         // Show only the number of fields corresponding to the selected value
         for (let i = 1; i <= count; i++) {
-            document.getElementById('art_image_upload_' + i).style.display = 'block';
-            document.getElementById('art_description_' + i).style.display = 'block';
+            // document.getElementById('art_image_upload_' + i).style.display = 'block';
+            // document.getElementById('art_description_' + i).style.display = 'block';
+            document.getElementById('art_card_' + i).style.display = 'block';
         }
     }
 
@@ -818,6 +933,46 @@ $controllerRoute = $module['controller_route'];
     }
 });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const coAuthorsRadios = document.querySelectorAll('input[name="co_authors"]');
+
+        // Listen for changes to the co_authors radio buttons
+        coAuthorsRadios.forEach(radio => {
+            radio.addEventListener('change', function () {
+                const selectedValue = this.value;
+                toggleCoAuthorsFields(selectedValue);
+            });
+        });
+
+        function toggleCoAuthorsFields(count) {
+            // Hide all co-author fields initially
+            for (let i = 1; i <= 3; i++) {
+                document.getElementById('author_card_' + i).style.display = 'none';
+            }
+
+            // Show only the necessary fields based on the selected number of co-authors
+            for (let i = 1; i <= count; i++) {
+                document.getElementById('author_card_' + i).style.display = 'block';
+            }
+
+            // Show/Hide the co-author position section based on the selection
+            // const coAuthorsPosition = document.getElementById('co_authors_position');
+            // if (count > 0) {
+            //     coAuthorsPosition.style.display = 'block';
+            // } else {
+            //     coAuthorsPosition.style.display = 'none';
+            // }
+        }
+
+        // Initialize the form with the correct fields displayed if a value is already selected
+        const initialSelectedValue = document.querySelector('input[name="co_authors"]:checked');
+        if (initialSelectedValue) {
+            toggleCoAuthorsFields(initialSelectedValue.value);
+        }
+    });
+</script>
+
 <script>
     function checkWordLimit(field, limit, errorField) {
         var words = field.value.trim().split(/\s+/).filter(word => word.length > 0).length;
