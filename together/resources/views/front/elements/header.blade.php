@@ -209,14 +209,35 @@ use App\Helpers\Helper;
                         <li><a href="<?=url('submissions')?>">SUBMISSIONS</a></li>
                         <li><a href="<?=env('REGENERATE_URL')?>contact.php">CONTACT</a></li>
                     </ul>
-                    <form class="navbar-form navbar-right" role="search">
-                        <input type="text" id="search" name="search" placeholder="Search here">
-                        <button type="submit" id="search-submit"><i class="fa fa-search"></i></button>
+                    <form class="navbar-form navbar-right" method="GET" action="<?=url('search-result')?>" role="search">
+                        <!-- @csrf -->
+                        <input type="text" name="article_search" id="article-search" placeholder="Search here" value="<?=$search_keyword?>" onkeyup="getSuggestions(this.value);" style="text-transform: lowercase;" required>
+                        <button type="submit"><i class="fa fa-search"></i></button>
                     </form>
                 </div>
+                <ul id="suggestions"></ul>
                 <!-- /.navbar-collapse -->
             </div>
         </div>
         <!-- End navbar list container -->
     </nav>
     <!-- End Bootstrap navbar -->
+
+<script>
+    function getSuggestions() {
+        let search_keyword = $('#article-search').val();
+        if (search_keyword.length >= 3) {
+            var url = '<?=url('/')?>';
+            $.ajax({
+                url: url + '/fetch-search-suggestions',
+                type: 'POST',
+                data: { search_keyword: search_keyword, "_token": "{{ csrf_token() }}" },
+                success: function (data) {
+                    $('#suggestions').html(data);
+                }
+            });
+        } else {
+            $('#suggestions').html('');
+        }
+    }
+</script>

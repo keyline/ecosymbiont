@@ -30,6 +30,8 @@ use Illuminate\Support\Facades\Route;
         Route::match(['get', 'post'], '/signup', 'App\Http\Controllers\FrontController@signUp');
         Route::match(['get', 'post'], '/submissions', 'App\Http\Controllers\FrontController@submissions');
         Route::match(['get', 'post'], '/contacts', 'App\Http\Controllers\FrontController@contacts');
+        Route::match(['get', 'post'], '/fetch-search-suggestions', 'App\Http\Controllers\FrontController@fetch_search_suggestions');
+        Route::match(['get', 'post'], '/search-result', 'App\Http\Controllers\FrontController@search_result');
     // before login
     // after login
         Route::group(['prefix' => 'user', 'middleware' => ['user']], function () {
