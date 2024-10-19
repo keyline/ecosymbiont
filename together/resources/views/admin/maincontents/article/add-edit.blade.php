@@ -212,7 +212,7 @@ $controllerRoute = $module['controller_route'];
                                 </div>
                             </div>
                             <div id="artimageFieldsContainer">
-                                @for ($i = 1; $i <= 3; $i++)
+                                @for ($i = 1; $i <= 2; $i++)
                                 <div class="card mb-3" id="author_card_{{$i}}" style="padding: 11px;border: 1px solid black; display:none;">
                                     <div class="row mb-3">
                                         <div class="col-md-6">
@@ -281,7 +281,21 @@ $controllerRoute = $module['controller_route'];
                                                     value="<?= $indigenous_affiliation ?>" >
                                                 </div>
                                             </div>
-                                        </div>  
+                                        </div> 
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <label for="author_classification_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3H{{$i}}) Co-Author Classification
+                                                </label>
+                                                <div class="col-md-10 col-lg-8">
+                                                    <input type="radio" id="Human individual" name="author_classification_{{$i}}" value="Human individual" @checked(old('author_classification', $author_classification) == 'Human individual')>
+                                                    <label for="Human individual">Human individual</label>
+                                                    <input type="radio" id="Ecoweb-rooted community" name="author_classification_{{$i}}" value="Ecoweb-rooted community" @checked(old('author_classification', $author_classification) == 'Ecoweb-rooted community')>
+                                                    <label for="Ecoweb-rooted community">Ecoweb-rooted community</label>
+                                                    <input type="radio" id="Movement" name="author_classification_{{$i}}" value="Movement" @checked(old('author_classification', $author_classification) == 'Movement')>
+                                                    <label for="Movement">Movement</label>
+                                                </div>
+                                            </div> 
+                                        </div> 
                                     </div> 
                                 </div> 
                                 @endfor
@@ -420,7 +434,7 @@ $controllerRoute = $module['controller_route'];
                                     ?>                                         
                                         @foreach ($sub_category as $sub)
                                             <!-- <option value="{{ $parent->id }}" @selected($parent->id == $titleId)> -->
-                                            <input type="radio" id="yes" name="title" value="{{ $parent->id }}"  @checked($parent->id == $news_categoryId) >
+                                            <input type="radio" id="yes" name="section_ert" value="{{ $parent->id }}"  @checked($parent->id == $news_categoryId) >
                                             <label for="yes">{{$parent->sub_category}}: {{ $sub->sub_category }}</label> <br>
                                                 <!-- {{ $data->name }}</option> -->
                                         @endforeach
@@ -947,7 +961,7 @@ $controllerRoute = $module['controller_route'];
 
         function toggleCoAuthorsFields(count) {
             // Hide all co-author fields initially
-            for (let i = 1; i <= 3; i++) {
+            for (let i = 1; i <= 2; i++) {
                 document.getElementById('author_card_' + i).style.display = 'none';
             }
 
