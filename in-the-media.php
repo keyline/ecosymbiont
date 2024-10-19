@@ -27,7 +27,7 @@ include "include/header.php";
 
                     <div class="info-box">
                         <h4>Work Week Radio (KPOO radio station — San Francisco, California, United States)</h4>
-                        <p><a href="https://radioreimagine.com/podcast/bhopal-to-the-bay/" target="_blank">Radio interview</a> with Kakoli Mitra, entitled: Bhopal, capitalism, and the lessons for the world</p>
+                        <p>Radio interview with Kakoli Mitra, entitled: Bhopal, capitalism, and the lessons for the world</p>
                         <p style="padding-top:15px">Aired on 17 October, 2024</p>
                         <div class="welcome_mucis_section">
                             <audio preload="auto" controls>
