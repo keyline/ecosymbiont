@@ -94,7 +94,7 @@ use App\Helpers\Helper;
                                         $childCats = NewsCategory::select('id', 'sub_category', 'slug')->where('status', '=', 1)->where('parent_category', '=', $parentCat->id)->orderBy('sub_category', 'asc')->get();                                                                                                        
                                         if($childCats){ $sl=1; foreach($childCats as $childCat){
                                         ?>
-                                            <li><a <?=(($sl == 1)?'class="active"':'')?> href="<?=url('category/' . $parentCat->sub_category .'/'. $childCat->slug)?>"><?=$childCat->sub_category?></a></li>
+                                            <li><a <?=(($sl == 1)?'class="active"':'')?> href="<?=url('category/' . $parentCat->slug .'/'. $childCat->slug)?>"><?=$childCat->sub_category?></a></li>
                                         <?php $sl++; } }?>
                                     </ul>
                                 </li>
