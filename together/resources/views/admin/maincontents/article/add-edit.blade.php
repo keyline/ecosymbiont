@@ -51,8 +51,13 @@ $controllerRoute = $module['controller_route'];
             $author_classification = $row->author_classification;
             $co_authors = $row->co_authors;
             $co_authors_position = $row->co_authors_position;
-            $co_author_name = $row->co_author_name;
-            $co_author_short_bio = $row->co_author_short_bio;
+            $co_author_name = json_decode($row->co_author_names);
+            $co_author_short_bio = json_decode($row->co_author_bios);            
+            $co_author_countries =json_decode($row->co_author_countries);
+            $co_author_organizations = json_decode($row->co_author_organizations);
+            $co_ecosystem_affiliations = json_decode($row->co_ecosystem_affiliations);
+            $co_indigenous_affiliations = json_decode($row->co_indigenous_affiliations);
+            $co_author_classification = json_decode($row->co_author_classification);
             $first_name = $row->first_name;                               
             $email = $row->email;          
             $for_publication_name = $row->for_publication_name;          
@@ -68,13 +73,18 @@ $controllerRoute = $module['controller_route'];
             $explanation_submission = $row->explanation_submission;  
             // $section_ertId = (($row->section_ertId != '')?json_decode($row->section_ertId):[]); 
             $titleId = $row->titleId;  
-            $news_categoryId = $row->news_categoryId;
+            $news_categoryId = $row->section_ertId;
             $pronounId = $row->pronounId;
             $subtitle = $row->subtitle;
             $submission_types = $row->submission_types;
             $narrative_file = $row->narrative_file;
             $narrative_images = $row->narrative_images;
+            $image_files = json_decode($row->image_files);
+            $narrative_image_desc = json_decode($row->narrative_image_desc);
             $art_images = $row->art_images;
+            $art_image_file = json_decode($row->art_image_file);
+            $art_image_desc = json_decode($row->art_image_desc);    
+            $art_desc = $row->art_desc;            
             $first_image_file = $row->first_image_file;
             $second_image_file = $row->second_image_file;
             $art_image_file = $row->art_image_file;
@@ -220,7 +230,7 @@ $controllerRoute = $module['controller_route'];
                                                 <label for="co_author_name_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3B{{$i}}) Co-Author Name</label>
                                                 <div class="col-md-10 col-lg-8">
                                                     <input type="text" name="co_author_name_{{$i}}" class="form-control" id="co_author_name_{{$i}}"
-                                                        value="<?= $co_author_name ?>">
+                                                        value="<?= $co_author_name[$i-1] ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -229,7 +239,7 @@ $controllerRoute = $module['controller_route'];
                                                 <label for="co_author_short_bio_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3C{{$i}}) Co-Author Short Bio</label>
                                                 <div class="col-md-10 col-lg-8">
                                                     <input type="text" name="co_author_short_bio_{{$i}}" class="form-control" id="co_author_short_bio_{{$i}}"
-                                                        value="<?= $co_author_short_bio ?>">
+                                                        value="<?= $co_author_short_bio[$i-1] ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -241,7 +251,7 @@ $controllerRoute = $module['controller_route'];
                                                         <option value="" selected disabled>Select</option>
                                                         @if ($country)
                                                             @foreach ($country as $data)
-                                                                <option value="{{ $data->id }}" @selected($data->id == $countryId)>
+                                                                <option value="{{ $data->id }}" @selected($data->id == $co_author_countries[$i-1])>
                                                                     {{ $data->name }}</option>
                                                             @endforeach
                                                         @endif
@@ -255,18 +265,18 @@ $controllerRoute = $module['controller_route'];
                                                 </label>
                                                 <div class="col-md-10 col-lg-8">
                                                     <input type="text" name="co_authororganization_name_{{$i}}" class="form-control" id="co_authororganization_name_{{$i}}"
-                                                        value="<?= $organization_name ?>">
+                                                        value="<?= $co_author_organizations[$i-1] ?>">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="row">
-                                                <label for="ecosystem_affiliation_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3F{{$i}}) What continent are Co-Author ancestors originally from? (select all that apply)
+                                                <label for="co_ecosystem_affiliation_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3F{{$i}}) What continent are Co-Author ancestors originally from? (select all that apply)
                                                 </label>
                                                 <div class="col-md-10 col-lg-8">                                                                                                
                                                     @if ($ecosystem_affiliation)
                                                         @foreach ($ecosystem_affiliation as $data)
-                                                        <input type="checkbox" name="ecosystem_affiliation_{{$i}}[]" value="{{ $data->id }}" @if(in_array($data->id, old('ecosystem_affiliation', $ecosystem_affiliationId))) checked @endif>  {{ $data->name }}<br>
+                                                        <input type="checkbox" name="co_ecosystem_affiliation_{{$i}}[]" value="{{ $data->id }}" @if(in_array($data->id, old('ecosystem_affiliation', $co_ecosystem_affiliations[$i-1]))) checked @endif>  {{ $data->name }}<br>
                                                         @endforeach
                                                     @endif                                
                                                 </div>
@@ -274,24 +284,24 @@ $controllerRoute = $module['controller_route'];
                                         </div>
                                         <div class="col-md-6">
                                             <div class="row">
-                                                <label for="Indigenous_affiliation_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3G{{$i}}) What specific region are Co-author ancestors originally from OR what is the name of your Indigenous community? (example of specific region = Bengal; example of Indigenous community name = Lisjan Ohlone)
+                                                <label for="co_Indigenous_affiliation_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3G{{$i}}) What specific region are Co-author ancestors originally from OR what is the name of your Indigenous community? (example of specific region = Bengal; example of Indigenous community name = Lisjan Ohlone)
                                                 </label>
                                                 <div class="col-md-10 col-lg-8">
-                                                    <input type="text" name="indigenous_affiliation_{{$i}}" class="form-control" id="indigenous_affiliation_{{$i}}"
-                                                    value="<?= $indigenous_affiliation ?>" >
+                                                    <input type="text" name="co_indigenous_affiliation_{{$i}}" class="form-control" id="indigenous_affiliation_{{$i}}"
+                                                    value="<?= $co_indigenous_affiliations[$i-1] ?>" >
                                                 </div>
                                             </div>
                                         </div> 
                                         <div class="col-md-6">
                                             <div class="row">
-                                                <label for="author_classification_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3H{{$i}}) Co-Author Classification
+                                                <label for="co_author_classification_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3H{{$i}}) Co-Author Classification
                                                 </label>
                                                 <div class="col-md-10 col-lg-8">
-                                                    <input type="radio" id="Human individual" name="author_classification_{{$i}}" value="Human individual" @checked(old('author_classification', $author_classification) == 'Human individual')>
+                                                    <input type="radio" id="Human individual" name="co_author_classification_{{$i}}" value="Human individual" @checked(old('author_classification', $co_author_classification[$i-1]) == 'Human individual')>
                                                     <label for="Human individual">Human individual</label>
-                                                    <input type="radio" id="Ecoweb-rooted community" name="author_classification_{{$i}}" value="Ecoweb-rooted community" @checked(old('author_classification', $author_classification) == 'Ecoweb-rooted community')>
+                                                    <input type="radio" id="Ecoweb-rooted community" name="co_author_classification_{{$i}}" value="Ecoweb-rooted community" @checked(old('author_classification', $co_author_classification[$i-1]) == 'Ecoweb-rooted community')>
                                                     <label for="Ecoweb-rooted community">Ecoweb-rooted community</label>
-                                                    <input type="radio" id="Movement" name="author_classification_{{$i}}" value="Movement" @checked(old('author_classification', $author_classification) == 'Movement')>
+                                                    <input type="radio" id="Movement" name="co_author_classification_{{$i}}" value="Movement" @checked(old('author_classification', $co_author_classification[$i-1]) == 'Movement')>
                                                     <label for="Movement">Movement</label>
                                                 </div>
                                             </div> 
@@ -434,7 +444,7 @@ $controllerRoute = $module['controller_route'];
                                     ?>                                         
                                         @foreach ($sub_category as $sub)
                                             <!-- <option value="{{ $parent->id }}" @selected($parent->id == $titleId)> -->
-                                            <input type="radio" id="yes" name="section_ert" value="{{ $parent->id }}"  @checked($parent->id == $news_categoryId) >
+                                            <input type="radio" id="yes" name="section_ert" value="{{ $sub->id }}"  @checked($sub->id == $news_categoryId) >
                                             <label for="yes">{{$parent->sub_category}}: {{ $sub->sub_category }}</label> <br>
                                                 <!-- {{ $data->name }}</option> -->
                                         @endforeach
@@ -520,8 +530,10 @@ $controllerRoute = $module['controller_route'];
                                                     <div class="col-md-10 col-lg-8">
                                                         <input type="file" name="image_file_1" class="form-control" id="image_file_1">
                                                         <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small>
-                                                        <span id="image_file_1_error" class="text-danger"></span>
-                                                        <img id="image_preview_1" src="<?= env('NO_IMAGE') ?>" alt="first_image_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
+                                                        <span id="image_file_1_error" class="text-danger"></span>                                                        
+                                                         <?php if($image_files[0] != ''){?>
+                                                        <img src="<?=env('UPLOADS_URL').'narrative/'.$image_files[0]?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
+                                                        <?php }?>
                                                     </div>
                                                 </div>                                    
                                             </div>
@@ -529,7 +541,7 @@ $controllerRoute = $module['controller_route'];
                                                 <div class="row description-div" id="description_1" >
                                                     <label for="narrative_image_desc_1" class="col-md-2 col-lg-4 col-form-label">17A3b1) TYPE A: short caption for image 1 (max. 50 words)</label>
                                                     <div class="col-md-10 col-lg-8">
-                                                        <textarea class="form-control" id="narrative_image_desc_1" name="narrative_image_desc_1" rows="4" cols="50" placeholder="Your narrative_image_desc here..." ></textarea>
+                                                        <textarea class="form-control" id="narrative_image_desc_1" name="narrative_image_desc_1" rows="4" cols="50" placeholder="Your narrative_image_desc here..." ><?= $narrative_image_desc[0]?></textarea>
                                                         <div id="narrative_image_desc_1Error" class="error"></div>
                                                     </div>
                                                 </div>
@@ -547,8 +559,10 @@ $controllerRoute = $module['controller_route'];
                                                     <div class="col-md-10 col-lg-8">
                                                         <input type="file" name="image_file_{{ $i }}" class="form-control" id="image_file_{{ $i }}">
                                                         <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small>
-                                                        <span id="image_file_{{ $i }}_error" class="text-danger"></span>
-                                                        <img id="image_preview_{{ $i }}" src="<?= env('NO_IMAGE') ?>" alt="image_file_{{ $i }}" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
+                                                        <span id="image_file_{{ $i }}_error" class="text-danger"></span>                                                        
+                                                        <?php if($image_files[$i-1] != ''){?>
+                                                        <img src="<?=env('UPLOADS_URL').'narrative/'.$image_files[$i-1]?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
+                                                        <?php }?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -556,7 +570,7 @@ $controllerRoute = $module['controller_route'];
                                                 <div class="row description-div" id="description_{{ $i }}" >
                                                     <label for="narrative_image_desc_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17A3b{{$i}}) TYPE A: short caption for image {{ $i }} (max. 50 words)</label>
                                                     <div class="col-md-10 col-lg-8">
-                                                        <textarea class="form-control" id="narrative_image_desc_{{ $i }}" name="narrative_image_desc_{{ $i }}" rows="4" cols="50" placeholder="Your narrative_image_desc here..." ></textarea>
+                                                        <textarea class="form-control" id="narrative_image_desc_{{ $i }}" name="narrative_image_desc_{{ $i }}" rows="4" cols="50" placeholder="Your narrative_image_desc here..." ><?=$narrative_image_desc[$i-1]?></textarea>
                                                         <div id="narrative_image_desc_{{ $i }}Error" class="error"></div>
                                                     </div>
                                                 </div>
@@ -595,7 +609,9 @@ $controllerRoute = $module['controller_route'];
                                                         <input type="file" name="art_image_file_{{ $i }}" class="form-control" id="art_image_file_{{ $i }}">
                                                         <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small>
                                                         <span id="art_image_file_{{ $i }}_error" class="text-danger"></span>
-                                                        <img id="art_image_preview_{{ $i }}" src="<?= env('NO_IMAGE') ?>" alt="art_image_file_{{ $i }}" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
+                                                        <?php if($art_image_file[$i-1] != ''){?>
+                                                        <img src="<?=env('UPLOADS_URL').'narrative/'.$art_image_file[$i-1]?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
+                                                        <?php }?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -603,7 +619,7 @@ $controllerRoute = $module['controller_route'];
                                                 <div class="row description-div" id="art_description_{{ $i }}" >
                                                     <label for="art_image_desc_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17B2b{{$i}}) TYPE B: short caption for image {{ $i }} (max. 50 words)</label>
                                                     <div class="col-md-10 col-lg-8">
-                                                        <textarea class="form-control" id="art_image_desc_{{ $i }}" name="art_image_desc_{{ $i }}" rows="4" cols="50" placeholder="Your art_image_desc here..." ></textarea>
+                                                        <textarea class="form-control" id="art_image_desc_{{ $i }}" name="art_image_desc_{{ $i }}" rows="4" cols="50" placeholder="Your art_image_desc here..." ><?=$art_image_desc[$i-1]?></textarea>
                                                         <div id="art_image_desc_{{ $i }}Error" class="error"></div>
                                                     </div>
                                                 </div>
