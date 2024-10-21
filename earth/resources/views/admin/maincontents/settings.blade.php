@@ -290,7 +290,7 @@ $user_type = session('type');
                   <label for="site_logo" class="col-md-4 col-lg-3 col-form-label">Logo</label>
                   <div class="col-md-8 col-lg-9">
                     <input type="file" name="site_logo" class="form-control" id="site_logo">
-                    <small class="text-info">* Only jpg, jpeg, png, ico files are allowed</small><br>
+                    <small class="text-info">* Only jpg, jpeg, png, ico, svg, webp files are allowed</small><br>
                     <?php if($setting->site_logo != ''){?>
                       <img src="<?=env('UPLOADS_URL').$setting->site_logo?>" alt="<?=$setting->site_name?>" style="width: 230px; height: 150px; margin-top: 10px;">
                     <?php } else {?>
@@ -302,7 +302,7 @@ $user_type = session('type');
                   <label for="site_footer_logo" class="col-md-4 col-lg-3 col-form-label">Footer Logo</label>
                   <div class="col-md-8 col-lg-9">
                     <input type="file" name="site_footer_logo" class="form-control" id="site_footer_logo">
-                    <small class="text-info">* Only jpg, jpeg, png, ico files are allowed</small><br>
+                    <small class="text-info">* Only jpg, jpeg, png, ico, svg, webp files are allowed</small><br>
                     <?php if($setting->site_footer_logo != ''){?>
                       <img src="<?=env('UPLOADS_URL').$setting->site_footer_logo?>" alt="<?=$setting->site_name?>" style="width: 230px; height: 150px; margin-top: 10px;">
                     <?php } else {?>
@@ -314,7 +314,7 @@ $user_type = session('type');
                   <label for="site_favicon" class="col-md-4 col-lg-3 col-form-label">Favicon</label>
                   <div class="col-md-8 col-lg-9">
                     <input type="file" name="site_favicon" class="form-control" id="site_favicon">
-                    <small class="text-info">* Only jpg, jpeg, png, ico files are allowed</small><br>
+                    <small class="text-info">* Only jpg, jpeg, png, ico, svg, webp files are allowed</small><br>
                     <?php if($setting->site_favicon != ''){?>
                       <img src="<?=env('UPLOADS_URL').$setting->site_favicon?>" alt="<?=$setting->site_name?>" style="width: 230px; height: 150px; margin-top: 10px;">
                     <?php } else {?>
