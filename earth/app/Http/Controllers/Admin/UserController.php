@@ -370,7 +370,7 @@ class UserController extends Controller
                     // 'facebook_tracking_code'            => $postData['facebook_tracking_code'],
                     // 'theme_color'                       => $postData['theme_color'],
                     // 'font_color'                        => $postData['font_color'],
-                    'publisher_name'                    => $postData['publisher_name'],
+                    // 'publisher_name'                    => $postData['publisher_name'],
                     'twitter_profile'                   => $postData['twitter_profile'],
                     'facebook_profile'                  => $postData['facebook_profile'],
                     'instagram_profile'                 => $postData['instagram_profile'],
