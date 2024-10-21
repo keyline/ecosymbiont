@@ -213,7 +213,7 @@ use App\Helpers\Helper;
                         <li><a href="<?=env('REGENERATE_URL')?>contact.php">CONTACT</a></li>
                     </ul>
                     <!-- desktop -->
-                    <form style="display:none;" class="navbar-form navbar-right" method="GET" action="<?=url('search-result')?>" role="search">
+                    <form class="navbar-form navbar-right" method="GET" action="<?=url('search-result')?>" role="search">
                         <!-- @csrf -->
                         <input type="text" name="article_search" id="article-search" placeholder="Search here" value="<?=$search_keyword?>" onkeyup="getSuggestions(this.value);" style="text-transform: lowercase;" required>
                         <button type="submit"><i class="fa fa-search"></i></button>
