@@ -59,9 +59,9 @@ include "include/header.php";
                                     innovators, and knowledge-holders working to regenerate systems that restore,
                                     preserve, and foster human-ecoweb symbiosis. We do this through in-person
                                     <strong><a href="<?=$base_url?>synergy-meetings.php" target="_blank">Synergy Meetings</a></strong> and through our online knowledge-sharing and
-                                    community-building platform, <strong><a href="<?=$base_url?>together" target="_blank">Ecosymbionts all Regenerate Together (EaRTh)</a></strong>.
+                                    community-building platform, <strong><a href="<?=$base_url?>earth" target="_blank">Ecosymbionts all Regenerate Together (EaRTh)</a></strong>.
                                 </li>
-                                <li><strong><i>Regenerate systems:</i> </strong> We collaboratively conceptualize and promote alternative systems that optimize ecoweb wellbeing (including of humans), instead of exploiting, diminishing, and destroying ecowebs. We do this by synthesizing our own work with the knowledge, ideas, and wisdom of grassroots changemakers, innovators, and knowledge-holders from across the world shared on <a href="<?=$base_url?>together" target="_blank">Ecosymbionts all Regenerate Together (EaRTh)</a>. </li>
+                                <li><strong><i>Regenerate systems:</i> </strong> We collaboratively conceptualize and promote alternative systems that optimize ecoweb wellbeing (including of humans), instead of exploiting, diminishing, and destroying ecowebs. We do this by synthesizing our own work with the knowledge, ideas, and wisdom of grassroots changemakers, innovators, and knowledge-holders from across the world shared on <a href="<?=$base_url?>earth" target="_blank">Ecosymbionts all Regenerate Together (EaRTh)</a>. </li>
                             </ul>
                         </div>
                     </div>
@@ -88,7 +88,7 @@ include "include/header.php";
                         <div class="info-box">
                             <h4>The extractivist system is becoming increasingly entrenched</h4>
                             <p>A new system of amassing wealth for small groups of shareholders
-                                (<span><a target="_blank" href="#definitions">corporations</a></span>) was <a href="https://ecosymbiont.org/together/content/systems/systems-reform/424-years-and-counting-the-global-system-of-corporate-extractivism-1-of-3" target="_blank">developed in Europe at least four centuries ago</a>,
+                                (<span><a target="_blank" href="#definitions">corporations</a></span>) was <a href="<?=$base_url?>earth/content/systems/systems-reform/424-years-and-counting-the-global-system-of-corporate-extractivism-1-of-3" target="_blank">developed in Europe at least four centuries ago</a>,
                                 taking the form of government-sanctioned exploitation of humans and ecowebs through the
                                 use of ‘legal’ tools, like charters and the doctrine of discovery. In this system,
                                 European monarchs granted to small companies of European men &#x2014; for a share of the
