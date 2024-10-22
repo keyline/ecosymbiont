@@ -6241,6 +6241,9 @@ div#popup p {
   #container {
     overflow: hidden;
   }
+  .search_suggestion{
+    height: auto;
+  }
   .navbar-nav > li.drop-arrow > a:before{background:none;}
   .navbar-brand {
     max-width: 230px;
