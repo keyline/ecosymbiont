@@ -634,6 +634,7 @@ header.active .nav-list-container {
   box-shadow: 0px 7px 10px -8px #000;
   overflow-x: hidden;
   overflow-y: auto;
+  height: 300px;
 }
 #suggestions{
   padding: 0;
@@ -789,6 +790,7 @@ body.boxed {
 }
 body{
   font-family: 'proximanova_regular', sans-serif;
+  overflow-x: hidden;
 }
 body.boxed #container {
   max-width: 1260px;
