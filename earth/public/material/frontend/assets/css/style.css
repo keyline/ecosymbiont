@@ -642,7 +642,7 @@ header.active .nav-list-container {
 }
 
 #suggestions li{
-  padding: 5px 10px;
+  padding: 10px 10px;
   line-height: 1.2;
   transition: all .3s ease-in-out;
 }
@@ -664,6 +664,7 @@ header.active .nav-list-container {
 #suggestions li a{
   color: #000;
   text-decoration: none;
+  font-size: 12px;
 }
 .navbar-nav .megadropdown .inner-megadropdown .owl-wrapper h1 {
   color: #222222;
