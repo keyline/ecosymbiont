@@ -371,7 +371,7 @@ class FrontController extends Controller
                 $getParentCategory  = NewsCategory::select('slug')->where('id', '=', $searchResult->parent_category)->first();
                 $getChildCategory   = NewsCategory::select('slug')->where('id', '=', $searchResult->sub_category)->first();
                 $contentUrl         = url('content/' . (($getParentCategory)?$getParentCategory->slug:''). '/' . (($getChildCategory)?$getChildCategory->slug:'') . '/' . $searchResult->slug);
-                echo '<li><a href="' . $contentUrl . '">' . htmlspecialchars($searchResult->new_title) . '</a></li><hr>';
+                echo '<li><a href="' . $contentUrl . '">' . htmlspecialchars($searchResult->new_title) . '</a></li>';
             }
         } else {
             echo '<li>No results found</li>';

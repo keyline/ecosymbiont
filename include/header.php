@@ -148,7 +148,7 @@ function isActive($page) {
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">                        
                         <li><a class="<?= isActive('index') ?>" href="<?= BASE_URL; ?>">About</a></li>
-                        <li><a href="<?= BASE_URL; ?>earth">Online Platform</a></li>
+                        <li><a href="<?= BASE_URL; ?>earth">EaRTh</a></li>
                         <li><a class="<?= isActive('synergy-meetings') ?>" href="<?= BASE_URL; ?>synergy-meetings.php">Synergy Meetings</a></li>                        
                         <li><a class="<?= isActive('in-the-media') ?>" href="<?= BASE_URL; ?>in-the-media.php">In the Media</a></li>
                         <li><a class="<?= isActive('contact') ?>" href="<?= BASE_URL; ?>contact.php">Contact</a></li>
