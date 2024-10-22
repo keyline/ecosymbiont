@@ -636,6 +636,26 @@ header.active .nav-list-container {
   overflow-y: auto;
   height: 300px;
 }
+.search_suggestion::-webkit-scrollbar {
+  width: 20px;
+}
+
+/* Track */
+.search_suggestion::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+.search_suggestion::-webkit-scrollbar-thumb {
+  background: #d09c1c; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.search_suggestion::-webkit-scrollbar-thumb:hover {
+  background: #b30000;
+}
 #suggestions{
   padding: 0;
   list-style: none;
