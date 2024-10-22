@@ -637,7 +637,7 @@ header.active .nav-list-container {
   height: 300px;
 }
 .search_suggestion::-webkit-scrollbar {
-  width: 20px;
+  width: 7px;
 }
 
 /* Track */
@@ -654,7 +654,7 @@ header.active .nav-list-container {
 
 /* Handle on hover */
 .search_suggestion::-webkit-scrollbar-thumb:hover {
-  background: #b30000;
+  background: #d09c1c21;
 }
 #suggestions{
   padding: 0;
