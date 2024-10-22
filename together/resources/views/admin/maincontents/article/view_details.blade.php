@@ -331,7 +331,7 @@ $controllerRoute = $module['controller_route'];
                       <td>17B2a{{$i}}) TYPE B: image {{ $i }} of art</td>
                       <td>
                       <?php if($art_image_file[$i-1] != ''){?>
-                        <img src="<?=env('UPLOADS_URL').'narrative/'.$art_image_file[$i-1]?>" alt="first_image_file" style="width: 150px; height: 150px; margin-top: 10px;">
+                        <img src="<?=env('UPLOADS_URL').'art_image/'.$art_image_file[$i-1]?>" alt="first_image_file" style="width: 150px; height: 150px; margin-top: 10px;">
                         <?php } else {?>
                         <img src="<?=env('NO_IMAGE')?>" alt="first_image_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
                         <?php }?>
