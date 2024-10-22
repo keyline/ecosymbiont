@@ -83,6 +83,7 @@ use App\Helpers\Helper;
                 <div class="navbar-header">
                     <a class="navbar-brand" href="<?=url('/')?>"><img src="<?=env('UPLOADS_URL').$generalSetting->site_logo?>" alt="<?=$generalSetting->site_name?>"></a>
                     <div id="cssmenu">
+                        <!-- mobile -->
                         <ul>
                             <li><a href="<?=url('about-us')?>">ABOUT</a></li>
                             <?php if($parentCats){ foreach($parentCats as $parentCat){?>
@@ -94,7 +95,7 @@ use App\Helpers\Helper;
                                         $childCats = NewsCategory::select('id', 'sub_category', 'slug')->where('status', '=', 1)->where('parent_category', '=', $parentCat->id)->orderBy('sub_category', 'asc')->get();                                                                                                        
                                         if($childCats){ $sl=1; foreach($childCats as $childCat){
                                         ?>
-                                            <li><a <?=(($sl == 1)?'class="active"':'')?> href="<?=url('category/' . $parentCat->sub_category .'/'. $childCat->slug)?>"><?=$childCat->sub_category?></a></li>
+                                            <li><a <?=(($sl == 1)?'class="active"':'')?> href="<?=url('category/' . $parentCat->slug .'/'. $childCat->slug)?>"><?=$childCat->sub_category?></a></li>
                                         <?php $sl++; } }?>
                                     </ul>
                                 </li>
@@ -102,14 +103,22 @@ use App\Helpers\Helper;
                             <li><a href="<?=url('submissions')?>">SUBMISSIONS</a></li>
                             <li><a href="<?=env('REGENERATE_URL')?>contact.php">CONTACT</a></li>
                         </ul>
+                        <!-- mobile -->
                     </div>
+                    <!-- <div class="search_holder">
+                        <form class="navbar-form navbar-right d-md-none" method="GET" action="<?=url('search-result')?>" role="search">
+                            @csrf
+                            <input type="text" name="article_search" id="article-search" placeholder="Search here" value="?=$search_keyword?>" onkeyup="getSuggestions(this.value);" style="text-transform: lowercase;" required>
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                        <ul id="suggestions"></ul>
+                    </div> -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    
                 </div>
                 
             </div>
@@ -181,41 +190,50 @@ use App\Helpers\Helper;
         <div class="nav-list-container">
             <div class="container">
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-left">
-                        <!-- <li><a class="active" href="<?=url('/')?>">Home</a></li> -->
-                        <li><a href="<?=url('about-us')?>">ABOUT</a></li>
-                        <?php if($parentCats){ foreach($parentCats as $parentCat){?>
-                            <li class="drop-arrow"><a href="<?=url('category/' . $parentCat->slug)?>"><?=$parentCat->sub_category?></a>
-                                <div class="megadropdown">
-                                    <div>
-                                        <div class="inner-megadropdown world-dropdown">
-                                            <div class="filter-block">
-                                                <ul class="filter-posts">
-                                                    <?php
-                                                    
-                                                    $childCats = NewsCategory::select('id', 'sub_category', 'slug')->where('status', '=', 1)->where('parent_category', '=', $parentCat->id)->orderBy('sub_category', 'asc')->get();                                                                                                        
-                                                    if($childCats){ $sl=1; foreach($childCats as $childCat){
-                                                    ?>
-                                                        <li><a <?=(($sl == 1)?'class="active"':'')?> href="<?=url('category/' . $parentCat->sub_category .'/'. $childCat->slug)?>"><?=$childCat->sub_category?></a></li>
-                                                    <?php $sl++; } }?>
-                                                </ul>
+                <div class="d-flex">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <!-- desktop -->
+                        <ul class="nav navbar-nav navbar-left">
+                            <!-- <li><a class="active" href="<?=url('/')?>">Home</a></li> -->
+                            <li><a href="<?=url('about-us')?>">ABOUT</a></li>
+                            <?php if($parentCats){ foreach($parentCats as $parentCat){?>
+                                <li class="drop-arrow"><a href="<?=url('category/' . $parentCat->slug)?>"><?=$parentCat->sub_category?></a>
+                                    <div class="megadropdown">
+                                        <div>
+                                            <div class="inner-megadropdown world-dropdown">
+                                                <div class="filter-block">
+                                                    <ul class="filter-posts">
+                                                        <?php
+                                                        
+                                                        $childCats = NewsCategory::select('id', 'sub_category', 'slug')->where('status', '=', 1)->where('parent_category', '=', $parentCat->id)->orderBy('sub_category', 'asc')->get();                                                                                                        
+                                                        if($childCats){ $sl=1; foreach($childCats as $childCat){
+                                                        ?>
+                                                            <li><a <?=(($sl == 1)?'class="active"':'')?> href="<?=url('category/' . $parentCat->slug .'/'. $childCat->slug)?>"><?=$childCat->sub_category?></a></li>
+                                                        <?php $sl++; } }?>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                        <?php } }?>
-                        <li><a href="<?=url('submissions')?>">SUBMISSIONS</a></li>
-                        <li><a href="<?=env('REGENERATE_URL')?>contact.php">CONTACT</a></li>
-                    </ul>
-                    <form style="display:none;" class="navbar-form navbar-right" method="GET" action="<?=url('search-result')?>" role="search">
-                        <!-- @csrf -->
-                        <input type="text" name="article_search" id="article-search" placeholder="Search here" value="<?=$search_keyword?>" onkeyup="getSuggestions(this.value);" style="text-transform: lowercase;" required>
-                        <button type="submit"><i class="fa fa-search"></i></button>
-                    </form>
+                                </li>
+                            <?php } }?>
+                            <li><a href="<?=url('submissions')?>">SUBMISSIONS</a></li>
+                            <li><a href="<?=env('REGENERATE_URL')?>contact.php">CONTACT</a></li>
+                        </ul>
+                        <!-- desktop -->
+                    </div>
+                    <div class="seach_holder">
+                        <form class="navbar-form" method="GET" action="<?=url('search-result')?>" role="search">
+                            <!-- @csrf -->
+                            <input type="text" name="article_search" id="article-search" placeholder="Search here" value="<?=$search_keyword?>" onkeyup="getSuggestions(this.value);" style="text-transform: lowercase;" required>
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                        <div class="search_suggestion">
+                            <ul id="suggestions"></ul>
+                        </div>
+                    </div>
                 </div>
-                <ul style="display:none;" id="suggestions"></ul>
+                
                 <!-- /.navbar-collapse -->
             </div>
         </div>
