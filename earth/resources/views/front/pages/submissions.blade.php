@@ -183,7 +183,7 @@
                                                 <h2>COPYRIGHT & LICENSE</h2>
                                                 <p class="black">As per the terms detailed in the NELP, you grant EaRTh, ER, and the Śramani Institute (the nonprofit host organization of ER and EaRTh) a non-exclusive license to publish and use your Content. You will retain the copyright to your work and the right to also publish elsewhere. </p>
                                             </div>
-                                            <p class="text-center"><a href="<?=url()?>contact.php" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Submit New Creative-Work</a></p>
+                                            <p class="text-center"><a href="<?=url('/')?>contact.php" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Submit New Creative-Work</a></p>
                                             <!-- <?php if($button_show){?>
                                                 <?php if(session('is_user_login')){?>
                                                     <p class="text-center"><a href="<?=url('user/submit-new-article')?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Submit New Creative-Work</a></p>
