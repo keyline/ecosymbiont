@@ -41,6 +41,7 @@ use Illuminate\Support\Facades\Route;
             Route::match(['get', 'post'], '/change-password', 'App\Http\Controllers\FrontController@changePassword');
             Route::match(['get', 'post'], '/profiles', 'App\Http\Controllers\FrontController@profiles');
             Route::match(['get', 'post'], '/add-profile', 'App\Http\Controllers\FrontController@addProfile');
+            Route::match(['get', 'post'], '/update-profile/{id}', 'App\Http\Controllers\FrontController@updateProfile');
             Route::get('my-articles', 'App\Http\Controllers\FrontController@myArticle');
             Route::post('my-articles', 'App\Http\Controllers\FrontController@myArticle');
             Route::match(['get', 'post'], '/submit-new-article', 'App\Http\Controllers\FrontController@submitNewArticle');

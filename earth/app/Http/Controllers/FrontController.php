@@ -989,7 +989,6 @@ class FrontController extends Controller
                     $fields = [                        
                         'name'                => $postData['name']
                     ];
-                    Helper::pr($fields);
                     UserProfile::insert($fields);
                     return redirect()->back()->with('success_message', 'Profile Created Successfully !!!');
                 } else {
@@ -998,6 +997,34 @@ class FrontController extends Controller
             }
             
             $title                          = 'Add Profile';
+            $page_name                      = 'add-edit-profile';
+            echo $this->front_after_login_layout($title, $page_name, $data);
+        }
+        public function updateProfile(Request $request, $id)
+        {
+            $id                             = Helper::decoded($id);
+            $user_id                        = session('user_id');
+            $data['user']                   = User::find($user_id);
+            $data['row']                    = UserProfile::where('user_id', '=', $user_id)->where('id', '=', $id)->first();
+            $data['search_keyword']         = '';
+            
+            if ($request->isMethod('post')) {
+                $postData = $request->all();
+                $rules = [                                 
+                    'name'                => 'required'
+                ];
+                if ($this->validate($request, $rules)) {
+                    $fields = [                        
+                        'name'                => $postData['name']
+                    ];
+                    UserProfile::where('id', '=', $id)->update($fields);
+                    return redirect()->back()->with('success_message', 'Profile Updated Successfully !!!');
+                } else {
+                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                }
+            }
+            
+            $title                          = 'Update Profile';
             $page_name                      = 'add-edit-profile';
             echo $this->front_after_login_layout($title, $page_name, $data);
         }
