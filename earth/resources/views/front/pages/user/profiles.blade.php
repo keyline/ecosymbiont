@@ -1,3 +1,6 @@
+<?php
+use App\Helpers\Helper;
+?>
 <!-- block content -->
     <div class="block-content">
         <!-- single-post box -->
@@ -27,7 +30,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
-                                    <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -36,13 +39,7 @@
                                         <td><?=$sl++?></td>
                                         <td><?=$profile->name?></td>
                                         <td>
-                                            <?php
-                                            if($profile->status == 1){
-                                                echo "<h6>Activated</h6>";
-                                            } else {
-                                                echo "<h6>Deactivated</h6>";
-                                            }
-                                            ?>
+                                            <a href="<?=url('user/update-profile/' . Helper::encoded($profile->id))?>" class="label label-primary">Edit</a>
                                         </td>
                                     </tr>
                                 <?php } }?>
