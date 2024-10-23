@@ -31,6 +31,7 @@ use App\Models\SubmissionType;
 use App\Models\GeneralSetting;
 use App\Models\Enquiry;
 use App\Models\EmailLog;
+use App\Models\UserProfile;
 
 use Auth;
 use Session;
@@ -676,6 +677,10 @@ class FrontController extends Controller
             $data['user']                   = User::find($user_id);
             $data['articles']               = Article::where('user_id', '=', $user_id)->orderBy('id', 'DESC')->get();
             $data['search_keyword']         = '';
+            $checkProfile                   = UserProfile::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
+            if($checkProfile <= 0){
+                return redirect(url('user/add-profile'))->with(['error_message' => 'Create Profile First !!!']);
+            }
 
             if ($request->isMethod('post')) {
                 $postData = $request->all();
@@ -951,6 +956,49 @@ class FrontController extends Controller
             $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();                        
             $data['row']                    = [];
+            echo $this->front_after_login_layout($title, $page_name, $data);
+        }
+        public function profiles(Request $request)
+        {
+            $user_id                        = session('user_id');
+            $data['user']                   = User::find($user_id);
+            $data['profiles']               = UserProfile::where('user_id', '=', $user_id)->where('status', '=', 1)->orderBy('id', 'DESC')->get();
+            $data['search_keyword']         = '';
+            
+            $title                          = 'Profiles';
+            $page_name                      = 'profiles';
+            echo $this->front_after_login_layout($title, $page_name, $data);
+        }
+        public function addProfile(Request $request)
+        {
+            $user_id                        = session('user_id');
+            $data['user']                   = User::find($user_id);
+            $data['row']                    = [];
+            $data['search_keyword']         = '';
+            $checkProfile                   = UserProfile::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
+            if($checkProfile > 0){
+                return redirect(url('user/profiles'))->with(['error_message' => 'Profile Already Created !!!']);
+            }
+
+            if ($request->isMethod('post')) {
+                $postData = $request->all();
+                $rules = [                                 
+                    'name'                => 'required'
+                ];
+                if ($this->validate($request, $rules)) {
+                    $fields = [                        
+                        'name'                => $postData['name']
+                    ];
+                    Helper::pr($fields);
+                    UserProfile::insert($fields);
+                    return redirect()->back()->with('success_message', 'Profile Created Successfully !!!');
+                } else {
+                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                }
+            }
+            
+            $title                          = 'Add Profile';
+            $page_name                      = 'add-edit-profile';
             echo $this->front_after_login_layout($title, $page_name, $data);
         }
     /* after login */

@@ -19,6 +19,9 @@ $pageSegment = $pageName[1];
                 <li <?=(($pageSegment == 'dashboard')?'class="active"':'')?>>
                     <a href="<?=url('user/dashboard')?>">Dashboard</a>
                 </li>
+                <li <?=(($pageSegment == 'profiles')?'class="active"':'')?>>
+                    <a href="<?=url('user/profiles')?>">Profiles</a>
+                </li>
                 <li <?=(($pageSegment == 'my-articles')?'class="active"':'')?>>
                     <a href="<?=url('user/my-articles')?>">My Creative-Works</a>
                 </li>
