@@ -991,7 +991,7 @@ class FrontController extends Controller
                         'name'                => $postData['name'],
                     ];
                     UserProfile::insert($fields);
-                    return redirect()->back()->with('success_message', 'Profile Created Successfully !!!');
+                    return redirect(url('user/profiles'))->with('success_message', 'Profile Created Successfully !!!');
                 } else {
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');
                 }
@@ -1020,7 +1020,7 @@ class FrontController extends Controller
                         'name'                => $postData['name'],
                     ];
                     UserProfile::where('id', '=', $id)->update($fields);
-                    return redirect()->back()->with('success_message', 'Profile Updated Successfully !!!');
+                    return redirect(url('user/profiles'))->with('success_message', 'Profile Updated Successfully !!!');
                 } else {
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');
                 }
