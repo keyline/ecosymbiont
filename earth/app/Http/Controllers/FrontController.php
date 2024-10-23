@@ -987,7 +987,8 @@ class FrontController extends Controller
                 ];
                 if ($this->validate($request, $rules)) {
                     $fields = [                        
-                        'name'                => $postData['name']
+                        'user_id'             => $user_id,
+                        'name'                => $postData['name'],
                     ];
                     UserProfile::insert($fields);
                     return redirect()->back()->with('success_message', 'Profile Created Successfully !!!');
@@ -1015,7 +1016,8 @@ class FrontController extends Controller
                 ];
                 if ($this->validate($request, $rules)) {
                     $fields = [                        
-                        'name'                => $postData['name']
+                        'user_id'             => $user_id,
+                        'name'                => $postData['name'],
                     ];
                     UserProfile::where('id', '=', $id)->update($fields);
                     return redirect()->back()->with('success_message', 'Profile Updated Successfully !!!');
