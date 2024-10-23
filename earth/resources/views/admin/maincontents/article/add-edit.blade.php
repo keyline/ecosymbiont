@@ -673,11 +673,8 @@ $controllerRoute = $module['controller_route'];
                                             <video width="350" height="250" controls>
                                                 <source src="<?=env('UPLOADS_URL').'art_video/'.$art_video_file?>" type="video/mp4">
                                                 Your browser does not support the video tag.
-                                            </video>
-                                        <!-- <img src="<?=env('UPLOADS_URL').'art_video/'.$art_video_file?>" alt="art_video_file" style="width: 150px; height: 150px; margin-top: 10px;"> -->
-                                        <?php } else {?>
-                                        <img src="<?=env('NO_IMAGE')?>" alt="art_video_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
-                                        <?php }?>
+                                            </video>                                        
+                                        <?php } ?>                                                                                
                                     </div>
                                 </div>
                                 <div class="row mb-3">

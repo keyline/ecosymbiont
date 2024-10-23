@@ -354,9 +354,7 @@ $controllerRoute = $module['controller_route'];
                               <source src="<?=env('UPLOADS_URL').'art_video/'.$art_video_file?>" type="video/mp4">
                               Your browser does not support the video tag.
                           </video>                      
-                      <?php } else {?>
-                      <img src="<?=env('NO_IMAGE')?>" alt="art_video_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
-                      <?php }?>
+                      <?php }?>                      
                       </td>
                     </tr>
                     <tr>
