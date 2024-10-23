@@ -54,16 +54,14 @@ $controllerRoute = $module['controller_route'];
             $co_author_name = json_decode($row->co_author_names);
             $co_author_short_bio = json_decode($row->co_author_bios);            
             $co_author_countries =json_decode($row->co_author_countries);
-            $co_author_organizations = json_decode($row->co_author_organizations);
-            // dd($co_author_organizations[0]);
+            $co_author_organizations = json_decode($row->co_author_organizations);            
             $co_ecosystem_affiliations = json_decode($row->co_ecosystem_affiliations);
             $co_indigenous_affiliations = json_decode($row->co_indigenous_affiliations);
             $co_author_classification = json_decode($row->co_author_classification);
             $first_name = $row->first_name;                               
             $email = $row->email;          
             $for_publication_name = $row->for_publication_name;          
-            $countryId = $row->country;          
-            // $roleId = $row->role;          
+            $countryId = $row->country;                              
             $creative_Work = $row->creative_Work;  
             $orginal_work = $row->orginal_work;        
             $copyright = $row->copyright; 
@@ -71,8 +69,7 @@ $controllerRoute = $module['controller_route'];
             $invited_by = $row->invited_by;  
             $invited_by_email = $row->invited_by_email;  
             $explanation = $row->explanation;  
-            $explanation_submission = $row->explanation_submission;  
-            // $section_ertId = (($row->section_ertId != '')?json_decode($row->section_ertId):[]); 
+            $explanation_submission = $row->explanation_submission;              
             $titleId = $row->titleId;  
             $news_categoryId = $row->section_ertId;
             $pronounId = $row->pronounId;
@@ -87,8 +84,7 @@ $controllerRoute = $module['controller_route'];
             $art_image_desc = json_decode($row->art_image_desc);    
             $art_desc = $row->art_desc;            
             $first_image_file = $row->first_image_file;
-            $second_image_file = $row->second_image_file;
-            // $art_image_file = $row->art_image_file;                        
+            $second_image_file = $row->second_image_file;                                
             $art_video_file = $row->art_video_file;
             $art_video_desc = $row->art_video_desc;
             $art_desc = $row->art_desc;
@@ -115,8 +111,7 @@ $controllerRoute = $module['controller_route'];
             $first_name = '';                                 
             $email = '';           
             $for_publication_name = '';           
-            $countryId = '';           
-            // $roleId = '';           
+            $countryId = '';                                 
             $creative_Work = '';  
             $orginal_work = '';           
             $copyright = ''; 
@@ -124,8 +119,7 @@ $controllerRoute = $module['controller_route'];
             $invited_by = '';
             $invited_by_email = '';  
             $explanation = '';  
-            $explanation_submission = '';     
-            // $section_ertId = [];
+            $explanation_submission = '';                 
             $titleId = '';
             $news_categoryId = '';
             $pronounId = '';
@@ -152,8 +146,7 @@ $controllerRoute = $module['controller_route'];
             $indigenous_affiliation = '';
             $expertise_areaId = [];
             $bio_short = '';
-            $bio_long = '';            
-            // $acknowledge = '';
+            $bio_long = '';                        
             $is_final_edit = 0;
         }
         ?>
@@ -860,11 +853,7 @@ $controllerRoute = $module['controller_route'];
     // Function to toggle the co-authors position section
     function toggleCoAuthorsPosition() {
         var coAuthors = document.querySelector('input[name="co_authors"]:checked').value;
-        var positionDiv = document.getElementById('co_authors_position');
-        // var submissionTypes = document.querySelector('input[name="submission_types"]:checked').value;
-        // var submissionTypesADiv = document.getElementById('submission_types_a');
-        // var submissionTypesBDiv = document.getElementById('submission_types_b');
-        // var submissionTypesCDiv = document.getElementById('submission_types_c');
+        var positionDiv = document.getElementById('co_authors_position');    
         
         if (coAuthors == '1' || coAuthors == '2') {
             positionDiv.style.display = 'block';
@@ -929,16 +918,12 @@ $controllerRoute = $module['controller_route'];
     
     function showImageUploadFields(count) {
         // Hide all image upload and description fields initially
-        for (let i = 1; i <= 5; i++) {
-            // document.getElementById('image_upload_' + i).style.display = 'none';
-            // document.getElementById('description_' + i).style.display = 'none';
+        for (let i = 1; i <= 5; i++) {            
             document.getElementById('card_' + i).style.display = 'none';
         }
 
         // Show only the number of fields selected
-        for (let i = 1; i <= count; i++) {
-            // document.getElementById('image_upload_' + i).style.display = 'block';
-            // document.getElementById('description_' + i).style.display = 'block';
+        for (let i = 1; i <= count; i++) {            
             document.getElementById('card_' + i).style.display = 'block';
         }
     }
@@ -964,16 +949,12 @@ $controllerRoute = $module['controller_route'];
 
     function showArtImageFields(count) {
         // Hide all image upload and description fields initially
-        for (let i = 1; i <= 5; i++) {
-            // document.getElementById('art_image_upload_' + i).style.display = 'none';
-            // document.getElementById('art_description_' + i).style.display = 'none';
+        for (let i = 1; i <= 5; i++) {           
             document.getElementById('art_card_' + i).style.display = 'none';
         }
 
         // Show only the number of fields corresponding to the selected value
-        for (let i = 1; i <= count; i++) {
-            // document.getElementById('art_image_upload_' + i).style.display = 'block';
-            // document.getElementById('art_description_' + i).style.display = 'block';
+        for (let i = 1; i <= count; i++) {            
             document.getElementById('art_card_' + i).style.display = 'block';
         }
     }
@@ -1006,15 +987,7 @@ $controllerRoute = $module['controller_route'];
             // Show only the necessary fields based on the selected number of co-authors
             for (let i = 1; i <= count; i++) {
                 document.getElementById('author_card_' + i).style.display = 'block';
-            }
-
-            // Show/Hide the co-author position section based on the selection
-            // const coAuthorsPosition = document.getElementById('co_authors_position');
-            // if (count > 0) {
-            //     coAuthorsPosition.style.display = 'block';
-            // } else {
-            //     coAuthorsPosition.style.display = 'none';
-            // }
+            }        
         }
 
         // Initialize the form with the correct fields displayed if a value is already selected

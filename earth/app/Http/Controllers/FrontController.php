@@ -709,10 +709,27 @@ class FrontController extends Controller
 
             if ($request->isMethod('post')) {
                 $postData = $request->all();
-                if ($postData['invited'] == 'No' && $postData['participated'] == 'No') {
+                //  dd($postData);
+                /* article no generate */
+                    $currentMonth   = date('m');
+                    $currentYear    = date('Y');
+                    $currentMonthYear = $currentYear.'-'.$currentMonth;
+                    $getLastArticle = Article::where('created_at', 'LIKE', '%'.$currentMonthYear.'%')->orderBy('id', 'DESC')->first();
+                    if($getLastArticle){
+                        $sl_no              = $getLastArticle->sl_no;
+                        $next_sl_no         = $sl_no + 1;
+                        $next_sl_no_string  = str_pad($next_sl_no, 3, 0, STR_PAD_LEFT);
+                        $article_no         = 'SRN-'.$currentMonth.$currentYear.'-'.$next_sl_no_string;
+                    } else {
+                        $next_sl_no         = 1;
+                        $next_sl_no_string  = str_pad($next_sl_no, 3, 0, STR_PAD_LEFT);
+                        $article_no         = 'SRN-'.$currentMonth.$currentYear.'-'.$next_sl_no_string;
+                    }
+                /* article no generate */
+
+                if ($postData['invited'] == 'No' && $postData['participated'] == 'No') {                    
                     $rules = [
-                        'first_name'                => 'required',            
-                        'last_name'                 => 'required',                                    
+                        'first_name'                => 'required',                                                                
                         'email'                     => 'required',                                      
                         'for_publication_name'      => 'required',                                      
                         'orginal_work'              => 'required',                                     
@@ -720,236 +737,880 @@ class FrontController extends Controller
                         'title'                     => 'required',
                         'pronoun'                   => 'required',                   
                     ];
-                    $participatedInfo           = isset($postData['participated_info']) ? $postData['participated_info'] : '';
-                    $invited_byInfo             = isset($postData['invited_by']) ? $postData['invited_by'] : '';
-                    $invited_emailInfo          = isset($postData['invited_by_email']) ? $postData['invited_by_email'] : '';
-                    $section_ertInfo            = isset($postData['section_ert']) ? json_encode($postData['section_ert']) : '';
-                    $expertise_areaInfo         = isset($postData['expertise_area']) ? json_encode($postData['expertise_area']) : '';
-                    $ecosystem_affiliationInfo  = isset($postData['ecosystem_affiliation']) ? json_encode($postData['ecosystem_affiliation']) : '';
-                    $submission_typesInfo       = isset($postData['submission_types']) ? $postData['submission_types'] : '';
-                    $narrative_fileInfo         = isset($narrative_file) ? $narrative_file : '';    
-                    $first_image_fileInfo       = isset($first_image_file) ? $first_image_file : '';    
-                    $second_image_fileInfo      = isset($second_image_file) ? $second_image_file : '';    
-                    $art_image_fileInfo         = isset($art_image_file) ? $art_image_file : '';    
-                    $art_video_fileInfo         = isset($art_video_file) ? $art_video_file : ''; 
+                    $participatedInfo = isset($postData['participated_info']) ? $postData['participated_info'] : '';
+                    $invited_byInfo = isset($postData['invited_by']) ? $postData['invited_by'] : '';
+                    $invited_emailInfo = isset($postData['invited_by_email']) ? $postData['invited_by_email'] : '';                    
+    
+                    /* co-author details */
+                    // Define the number of co-authors you want to handle (e.g., 3 in this case)
+                    $coAuthorsCount = $postData['co_authors'];
+                    // Initialize empty arrays to hold the co-author data
+                    $coAuthorNames = [];
+                    $coAuthorBios = [];
+                    $coAuthorCountries = [];
+                    $coAuthorOrganizations = [];
+                    $coecosystemAffiliations = [];
+                    $coindigenousAffiliations = [];
+                    $coauthorClassification = [];
+    
+                    // Loop through the number of co-authors and collect the data into arrays
+                    for ($i = 1; $i <= $coAuthorsCount; $i++) {
+                        // Check if co-author name exists, to avoid null entries
+                        if ($request->input("co_author_name_{$i}") !== null) {
+                            $coAuthorNames[] = $request->input("co_author_name_{$i}");
+                            $coAuthorBios[] = $request->input("co_author_short_bio_{$i}");
+                            $coAuthorCountries[] = $request->input("co_author_country_{$i}");
+                            $coAuthorOrganizations[] = $request->input("co_authororganization_name_{$i}");
+                            $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
+                            $coindigenousAffiliations[] = $request->input("co_indigenous_affiliation_{$i}");
+                            $coauthorClassification[] = $request->input("co_author_classification_{$i}");
+                        }
+                    }                
+                    
+                    /* co-author details */
+    
+                    if($postData['co_authors'] == '0'){
+                        
+                        //save to database//
+                        if ($this->validate($request, $rules)) {                                            
+                            $fields = [
+                                'sl_no'                     => $next_sl_no,
+                                'article_no'                => $article_no,
+                                'user_id'                   => $user_id,             
+                                'email'                     => $postData['email'],
+                                'author_classification'     => $postData['author_classification'],
+                                'co_authors'                => $postData['co_authors'],                            
+                                'first_name'                => $postData['first_name'],                                                                             
+                                'for_publication_name'      => $postData['for_publication_name'], 
+                                'titleId'                   => $postData['title'],             
+                                'pronounId'                 => $postData['pronoun'],
+                                'orginal_work'              => $postData['orginal_work'],           
+                                'copyright'                 => $postData['copyright'],
+                                'invited'                   => $postData['invited'],
+                                'invited_by'                => $invited_byInfo, 
+                                'invited_by_email'          => $invited_emailInfo,
+                                'participated'              => $postData['participated'],
+                                'participated_info'         => $participatedInfo                       
+                            ];
+                            //  Helper::pr($fields);
+
+                            /* submission email */
+                            $generalSetting             = GeneralSetting::find('1');                            
+                            $fullName                   = $postData['first_name'];
+                            $mailData                   = [
+                                'fullName'                  => $fullName,
+                                'email'                     => $postData['email'],
+                                'article_no'                => $article_no,
+                                'for_publication_name'      => $postData['for_publication_name'],
+                            ];
+                            $subject                    = $generalSetting->site_name.' :: Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
+                            $message                    = view('email-templates.creative-work-submission',$mailData);
+                            // echo $message;die;
+                            // $this->sendMail($postData['email'], $subject, $message);
+                            // $this->sendMail($generalSetting->system_email, $subject, $message);
+                            /* submission email */
+                            /* email log save */
+                                $postData2 = [
+                                    'name'                  => $fullName,
+                                    'email'                 => $postData['email'],
+                                    'subject'               => $subject,
+                                    'message'               => $message
+                                ];
+                                EmailLog::insertGetId($postData2);
+                            /* email log save */
+
+                            Article::insert($fields);
+                            return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
+                            } else {
+                                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                            }
+                    } else{                    
+                        //save to database//
+                        if ($this->validate($request, $rules)) {                
+                            $fields = [
+                                'sl_no'                     => $next_sl_no,
+                                'article_no'                => $article_no,
+                                'user_id'                   => $user_id,                
+                                'email'                     => $postData['email'],
+                                'author_classification'     => $postData['author_classification'],
+                                'co_authors'                => $postData['co_authors'],
+                                'co_authors_position'       => $postData['co_authors_position'],
+                                'co_author_names'           => json_encode($coAuthorNames),  // Storing as JSON string
+                                'co_author_bios'            => json_encode($coAuthorBios),
+                                'co_author_countries'       => json_encode($coAuthorCountries),
+                                'co_author_organizations'   => json_encode($coAuthorOrganizations),
+                                'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
+                                'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
+                                'co_author_classification'  => json_encode($coauthorClassification),
+                                'first_name'                => $postData['first_name'],                                                                             
+                                'for_publication_name'      => $postData['for_publication_name'], 
+                                'titleId'                   => $postData['title'],             
+                                'pronounId'                 => $postData['pronoun'],
+                                'orginal_work'              => $postData['orginal_work'],           
+                                'copyright'                 => $postData['copyright'],
+                                'invited'                   => $postData['invited'],
+                                'invited_by'                => $invited_byInfo, 
+                                'invited_by_email'          => $invited_emailInfo,
+                                'participated'              => $postData['participated'],
+                                'participated_info'         => $participatedInfo                       
+                            ];
+                            //  Helper::pr($fields);
+                            /* submission email */
+                            $generalSetting             = GeneralSetting::find('1');                            
+                            $fullName                   = $postData['first_name'];
+                            $mailData                   = [
+                                'fullName'                  => $fullName,
+                                'email'                     => $postData['email'],
+                                'article_no'                => $article_no,
+                                'for_publication_name'      => $postData['for_publication_name'],
+                            ];
+                            $subject                    = $generalSetting->site_name.' :: Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
+                            $message                    = view('email-templates.creative-work-submission',$mailData);
+                            // echo $message;die;
+                            // $this->sendMail($postData['email'], $subject, $message);
+                            // $this->sendMail($generalSetting->system_email, $subject, $message);
+                            /* submission email */
+                            /* email log save */
+                                $postData2 = [
+                                    'name'                  => $fullName,
+                                    'email'                 => $postData['email'],
+                                    'subject'               => $subject,
+                                    'message'               => $message
+                                ];
+                                EmailLog::insertGetId($postData2);
+                            /* email log save */
+
+                            Article::insert($fields);
+                            return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
+                        } else {
+                                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                        }
+                    }
                 } else{
                     $rules = [
-                        'first_name'                => 'required',            
-                        'last_name'                 => 'required',                                    
-                        'email'                     => 'required',                                      
-                        'country'                   => 'required',                                     
-                        'for_publication_name'      => 'required', 
-                        'orginal_work'              => 'required', 
-                        'copyright'                 => 'required', 
-                        'submission_types'          => 'required',                
-                        'state'                     => 'required', 
-                        'city'                      => 'required', 
-                        'acknowledge'               => 'required',                                                      
-                        'section_ert'               => 'required',
-                        'title'                     => 'required',
-                        'pronoun'                   => 'required',                
-                        'organization_name'         => 'required',
-                        'organization_website'      => 'required',
-                        'ecosystem_affiliation'     => 'required',               
-                        'expertise_area'            => 'required',                
-                        'explanation'               => ['required', 'string', new MaxWords(100)],
-                        'explanation_submission'    => ['required', 'string', new MaxWords(150)],
-                        // 'art_video_desc'            => ['required', 'string', new MaxWords(250)],
-                        'creative_Work'             => ['required', 'string', new MaxWords(10)],
-                        'subtitle'                  => ['required', 'string', new MaxWords(40)],
-                        // 'art_image_desc'            => ['required', 'string', new MaxWords(250)],
-                        'bio_short'                 => ['required', 'string', new MaxWords(40)],
-                        'bio_long'                  => ['required', 'string', new MaxWords(250)],
+                    'author_classification'     => 'required',
+                    'first_name'                => 'required',                                                               
+                    'email'                     => 'required',                                      
+                    'country'                   => 'required',                                     
+                    'for_publication_name'      => 'required', 
+                    'orginal_work'              => 'required', 
+                    'copyright'                 => 'required', 
+                    'submission_types'          => 'required',                
+                    'state'                     => 'required', 
+                    'city'                      => 'required', 
+                    'acknowledge'               => 'required',                                                      
+                    'section_ert'               => 'required',
+                    'title'                     => 'required',
+                    'pronoun'                   => 'required',                
+                    'organization_name'         => 'required',
+                    'organization_website'      => 'required',
+                    'ecosystem_affiliation'     => 'required',               
+                    'expertise_area'            => 'required',                
+                    'explanation'               => ['required', 'string', new MaxWords(100)],
+                    'explanation_submission'    => ['required', 'string', new MaxWords(150)],                
+                    'creative_Work'             => ['required', 'string', new MaxWords(10)],
+                    'subtitle'                  => ['required', 'string', new MaxWords(40)],                
+                    'bio_short'                 => ['required', 'string', new MaxWords(40)],
+                    'bio_long'                  => ['required', 'string', new MaxWords(250)], 
                     ];                                    
-                    /* narrative file */
-                        $imageFile      = $request->file('narrative_file');
-                        if ($imageFile != '') {
-                            $imageName      = $imageFile->getClientOriginalName();
-                            $uploadedFile   = $this->upload_single_file('narrative_file', $imageName, 'narrative', 'word');
-                            if ($uploadedFile['status']) {
-                                $narrative_file = $uploadedFile['newFilename'];
-                            } else {
-                                return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
-                            }
-                        } else {
-                            return redirect()->back()->with(['error_message' => 'Please Upload narrative File !!!']);
-                        }
-                    /* narrative file */
-                    /* first_image file */
-                        $imageFile      = $request->file('first_image_file');
-                        if ($imageFile != '') {
-                            $imageName      = $imageFile->getClientOriginalName();
-                            $uploadedFile   = $this->upload_single_file('first_image_file', $imageName, 'narrative', 'image');
-                            if ($uploadedFile['status']) {
-                                $first_image_file = $uploadedFile['newFilename'];
-                            } else {
-                                return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
-                            }
-                        } else {
-                            return redirect()->back()->with(['error_message' => 'Please Upload first_image File !!!']);
-                        }
-                    /* first_image file */
-                    /* second_image file */
-                        $imageFile      = $request->file('second_image_file');
-                        if ($imageFile != '') {
-                            $imageName      = $imageFile->getClientOriginalName();
-                            $uploadedFile   = $this->upload_single_file('second_image_file', $imageName, 'narrative', 'image');
-                            if ($uploadedFile['status']) {
-                                $second_image_file = $uploadedFile['newFilename'];
-                            } else {
-                                return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
-                            }
-                        } else {
-                            return redirect()->back()->with(['error_message' => 'Please Upload second_image File !!!']);
-                        }
-                    /* second_image file */
-                    /* art_image file */
-                        $imageFile      = $request->file('art_image_file');
-                        if ($imageFile != '') {
-                            $imageName      = $imageFile->getClientOriginalName();
-                            $uploadedFile   = $this->upload_single_file('art_image_file', $imageName, 'art_image', 'image');
-                            if ($uploadedFile['status']) {
-                                $art_image_file = $uploadedFile['newFilename'];
-                            } else {
-                                return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
-                            }
-                        } else {
-                            return redirect()->back()->with(['error_message' => 'Please Upload art_image File !!!']);
-                        }
-                    /* art_image file */
-                    /* art_video file */
-                        $imageFile      = $request->file('art_video_file');
-                        if ($imageFile != '') {
-                            $imageName      = $imageFile->getClientOriginalName();
-                            $uploadedFile   = $this->upload_single_file('art_video_file', $imageName, 'art_video', 'video');
-                            if ($uploadedFile['status']) {
-                                $art_video_file = $uploadedFile['newFilename'];
-                            } else {
-                                return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
-                            }
-                        } else {
-                            return redirect()->back()->with(['error_message' => 'Please Upload art_video File !!!']);
-                        }
-                    /* art_video file */        
+                    
                     $participatedInfo = isset($postData['participated_info']) ? $postData['participated_info'] : '';
                     $invited_byInfo = isset($postData['invited_by']) ? $postData['invited_by'] : '';
                     $invited_emailInfo = isset($postData['invited_by_email']) ? $postData['invited_by_email'] : '';
-                    $section_ertInfo = isset($postData['section_ert']) ? json_encode($postData['section_ert']) : '';
+                    $section_ertInfo = isset($postData['section_ert']) ? ($postData['section_ert']) : '';
                     $expertise_areaInfo = isset($postData['expertise_area']) ? json_encode($postData['expertise_area']) : '';
                     $ecosystem_affiliationInfo = isset($postData['ecosystem_affiliation']) ? json_encode($postData['ecosystem_affiliation']) : '';
                     $submission_typesInfo = isset($postData['submission_types']) ? $postData['submission_types'] : '';
-                    $narrative_fileInfo = isset($narrative_file) ? $narrative_file : '';    
-                    $first_image_fileInfo = isset($first_image_file) ? $first_image_file : '';    
-                    $second_image_fileInfo = isset($second_image_file) ? $second_image_file : '';    
-                    $art_image_fileInfo = isset($art_image_file) ? $art_image_file : '';    
-                    $art_video_fileInfo = isset($art_video_file) ? $art_video_file : '';    
-                }            
-                if ($this->validate($request, $rules)) {
-                    /* article no generate */
-                        $currentMonth   = date('m');
-                        $currentYear    = date('Y');
-                        $currentMonthYear = $currentYear.'-'.$currentMonth;
-                        $getLastArticle = Article::where('created_at', 'LIKE', '%'.$currentMonthYear.'%')->orderBy('id', 'DESC')->first();
-                        if($getLastArticle){
-                            $sl_no              = $getLastArticle->sl_no;
-                            $next_sl_no         = $sl_no + 1;
-                            $next_sl_no_string  = str_pad($next_sl_no, 3, 0, STR_PAD_LEFT);
-                            $article_no         = 'SRN-'.$currentMonth.$currentYear.'-'.$next_sl_no_string;
-                        } else {
-                            $next_sl_no         = 1;
-                            $next_sl_no_string  = str_pad($next_sl_no, 3, 0, STR_PAD_LEFT);
-                            $article_no         = 'SRN-'.$currentMonth.$currentYear.'-'.$next_sl_no_string;
-                        }
-                    /* article no generate */
-                    $fields = [
-                        'sl_no'                     => $next_sl_no,
-                        'article_no'                => $article_no,
-                        'email'                     => $postData['email'],   
-                        'first_name'                => $postData['first_name'],            
-                        'last_name'                 => $postData['last_name'],        
-                        'middle_name'               => $postData['middle_name'],                                            
-                        'for_publication_name'      => $postData['for_publication_name'],           
-                        'orginal_work'              => $postData['orginal_work'],           
-                        'user_id'                   => $user_id,           
-                        'copyright'                 => $postData['copyright'],
-                        'titleId'                   => $postData['title'],
-                        'pronounId'                 => $postData['pronoun'], 
-                        'invited'                   => $postData['invited'],
-                        'invited_by'                => $invited_byInfo, 
-                        'invited_by_email'          => $invited_emailInfo,
-                        'explanation'               => $postData['explanation'],  
-                        'explanation_submission'    => $postData['explanation_submission'],     
-                        'section_ertId'             => $section_ertInfo,
-                        'creative_Work'             => $postData['creative_Work'],
-                        'subtitle'                  => $postData['subtitle'],
-                        'submission_types'          => $submission_typesInfo,
-                        'titleId'                   => $postData['title'],
-                        'pronounId'                 => $postData['pronoun'],
-                        'participated'              => $postData['participated'],
-                        'participated_info'         => $participatedInfo,
-                        'narrative_file'            => $narrative_fileInfo,
-                        'first_image_file'          => $first_image_fileInfo,
-                        'second_image_file'         => $second_image_fileInfo,
-                        'art_image_file'            => $art_image_fileInfo,
-                        'art_image_desc'            => $postData['art_image_desc'],
-                        'art_video_file'            => $art_video_fileInfo,
-                        'art_video_desc'            => $postData['art_video_desc'],
-                        'country'                   => $postData['country'],
-                        'state'                     => $postData['state'],
-                        'city'                      => $postData['city'],
-                        'organization_name'         => $postData['organization_name'],
-                        'organization_website'      => $postData['organization_website'],
-                        'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
-                        'indigenous_affiliation'    => $postData['indigenous_affiliation'],
-                        'expertise_areaId'          => $expertise_areaInfo,
-                        'bio_short'                 => $postData['bio_short'],
-                        'bio_long'                  => $postData['bio_long'],  
-                    ];
-                    /* submission email */
-                        $generalSetting             = GeneralSetting::find('1');
-                        if($postData['middle_name'] != ''){
-                            $fullName                   = $postData['first_name'] . ' '. $postData['middle_name'] . ' ' . $postData['last_name'];
-                        } else {
-                            $fullName                   = $postData['first_name'] . ' ' . $postData['last_name'];
-                        }
-                        $mailData                   = [
-                            'fullName'                  => $fullName,
-                            'email'                     => $postData['email'],
-                            'article_no'                => $article_no,
-                            'for_publication_name'      => $postData['for_publication_name'],
-                        ];
-                        $subject                    = $generalSetting->site_name.' :: Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
-                        $message                    = view('email-templates.creative-work-submission',$mailData);
-                        // echo $message;die;
-                        $this->sendMail($postData['email'], $subject, $message);
-                        $this->sendMail($generalSetting->system_email, $subject, $message);
-                    /* submission email */
-                    /* email log save */
-                        $postData2 = [
-                            'name'                  => $fullName,
-                            'email'                 => $postData['email'],
-                            'subject'               => $subject,
-                            'message'               => $message
-                        ];
-                        EmailLog::insertGetId($postData2);
-                    /* email log save */
-                    // Helper::pr($fields);die;
-                    Article::insert($fields);
-                    return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
-                } else {
-                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
-                }
+                    $art_video_fileInfo = isset($art_video_file) ? $art_video_file : '';  
+
+                    if($postData['co_authors'] == '0'){
+                        if($postData['submission_types'] == '1'){ 
+                           
+                           /* narrative images details */
+                           // Define the number of co-authors you want to handle (e.g., 3 in this case)
+                           $narrativeImagesCount = $postData['narrative_images'];
+                           // Initialize empty arrays to hold the co-author data
+                           $narrativeImageDesc = [];
+                           $narrativeimageFile = [];                
+   
+                           // Loop through the number of co-authors and collect the data into arrays
+                           for ($i = 1; $i <= $narrativeImagesCount; $i++) {
+                               // Check if co-author name exists, to avoid null entries
+                               if ($request->input("narrative_image_desc_{$i}") !== null) {
+                                   $narrativeImageDesc[] = $request->input("narrative_image_desc_{$i}");
+   
+                               // Add image file to the array (it can be null if no file is uploaded)                        
+                                   $imageFile      = $request->file("image_file_{$i}");                            
+                                   if ($imageFile != '') {                                
+                                           $imageName      = $imageFile->getClientOriginalName();                                 
+                                       $uploadedFile   = $this->upload_single_file("image_file_{$i}", $imageName, 'narrative', 'image');                                
+                                       if ($uploadedFile['status']) {
+                                           $narrativeimageFile[] = $uploadedFile['newFilename'];                                
+                                       } else {
+                                           $narrativeimageFile[] = null;                                    
+                                       }
+                                   }                                                                                        
+                               } 
+                           }                                          
+                           /* narrative images details */                              
+   
+                           /* narrative doc file */
+                               $imageFile      = $request->file('narrative_file');
+                               if ($imageFile != '') {
+                                   $imageName      = $imageFile->getClientOriginalName();
+                                   $uploadedFile   = $this->upload_single_file('narrative_file', $imageName, 'narrative', 'word');
+                                   if ($uploadedFile['status']) {
+                                       $narrative_file = $uploadedFile['newFilename'];
+                                   } else {
+                                       return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                                   }
+                               } 
+                               else {
+                                   return redirect()->back()->with(['error_message' => 'Please Upload narrative File !!!']);
+                               }
+                           /* narrative doc file */
+                           //save to database//
+                           if ($this->validate($request, $rules)) {                
+                               $fields = [
+                                   'sl_no'                     => $next_sl_no,
+                                   'article_no'                => $article_no,
+                                   'user_id'                   => $user_id,     
+                                   'email'                     => $postData['email'],
+                                   'author_classification'     => $postData['author_classification'],
+                                   'co_authors'                => $postData['co_authors'],                           
+                                   'first_name'                => $postData['first_name'],                                                                             
+                                   'for_publication_name'      => $postData['for_publication_name'],           
+                                   'pronounId'                 => $postData['pronoun'],
+                                   'orginal_work'              => $postData['orginal_work'],           
+                                   'copyright'                 => $postData['copyright'],
+                                   'invited'                   => $postData['invited'],
+                                   'invited_by'                => $invited_byInfo, 
+                                   'invited_by_email'          => $invited_emailInfo,
+                                   'participated'              => $postData['participated'],
+                                   'participated_info'         => $participatedInfo,
+                                   'explanation'               => $postData['explanation'],  
+                                   'explanation_submission'    => $postData['explanation_submission'],     
+                                   'titleId'                   => $postData['title'],                        
+                                   'creative_Work'             => $postData['creative_Work'],
+                                   'subtitle'                  => $postData['subtitle'],
+                                   'submission_types'          => $submission_typesInfo,
+                                   'section_ertId'             => $section_ertInfo,
+                                   'narrative_file'            => $narrative_file,
+                                   'narrative_images'          => $postData['narrative_images'],
+                                   'narrative_image_desc'      => json_encode($narrativeImageDesc),  // Storing as JSON string
+                                   'image_files'               => json_encode($narrativeimageFile),                                                                                                          
+                                   'country'                   => $postData['country'],
+                                   'state'                     => $postData['state'],
+                                   'city'                      => $postData['city'],
+                                   'organization_name'         => $postData['organization_name'],
+                                   'organization_website'      => $postData['organization_website'],
+                                   'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
+                                   'indigenous_affiliation'    => $postData['indigenous_affiliation'],
+                                   'expertise_areaId'          => $expertise_areaInfo,
+                                   'bio_short'               => $postData['bio_short'],
+                                   'bio_long'               => $postData['bio_long'],  
+                               ];
+                                // Helper::pr($fields);
+
+                               /* submission email */
+                                $generalSetting             = GeneralSetting::find('1');                            
+                                $fullName                   = $postData['first_name'];
+                                $mailData                   = [
+                                    'fullName'                  => $fullName,
+                                    'email'                     => $postData['email'],
+                                    'article_no'                => $article_no,
+                                    'for_publication_name'      => $postData['for_publication_name'],
+                                ];
+                                $subject                    = $generalSetting->site_name.' :: Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
+                                $message                    = view('email-templates.creative-work-submission',$mailData);
+                                // echo $message;die;
+                                // $this->sendMail($postData['email'], $subject, $message);
+                                // $this->sendMail($generalSetting->system_email, $subject, $message);
+                                /* submission email */
+                                /* email log save */
+                                    $postData2 = [
+                                        'name'                  => $fullName,
+                                        'email'                 => $postData['email'],
+                                        'subject'               => $subject,
+                                        'message'               => $message
+                                    ];
+                                    EmailLog::insertGetId($postData2);
+                                /* email log save */
+
+                                Article::insert($fields);
+                                return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
+                                } else {
+                                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                                }                               
+                       } else if($postData['submission_types'] == '2'){
+                           /* art images details */
+                           // Define the number of co-authors you want to handle (e.g., 3 in this case)
+                           $artImagesCount = $postData['art_images'];
+                           // Initialize empty arrays to hold the co-author data
+                           $artImageDesc = [];
+                           $artimageFile = [];                
+   
+                           // Loop through the number of co-authors and collect the data into arrays
+                           for ($i = 1; $i <= $artImagesCount; $i++) {
+                               // Check if co-author name exists, to avoid null entries
+                               if ($request->input("art_image_desc_{$i}") !== null) {
+                                   $artImageDesc[] = $request->input("art_image_desc_{$i}");
+   
+                               // Add image file to the array (it can be null if no file is uploaded)                        
+                                   $imageFile      = $request->file("art_image_file_{$i}");                            
+                                   if ($imageFile != '') {                                
+                                           $imageName      = $imageFile->getClientOriginalName();                                 
+                                       $uploadedFile   = $this->upload_single_file("art_image_file_{$i}", $imageName, 'art_image', 'image');                                
+                                       if ($uploadedFile['status']) {
+                                           $artimageFile[] = $uploadedFile['newFilename'];                                
+                                       } else {
+                                           $artimageFile[] = null;                                    
+                                       }
+                                   }                                                                                        
+                               } 
+                           }                                          
+                           /* art images details */
+   
+                           if ($this->validate($request, $rules)) {                
+                               $fields = [
+                                   'sl_no'                     => $next_sl_no,
+                                   'article_no'                => $article_no,
+                                   'user_id'                   => $user_id,              
+                                   'email'                     => $postData['email'],
+                                   'author_classification'     => $postData['author_classification'],
+                                   'co_authors'                => $postData['co_authors'],                           
+                                   'first_name'                => $postData['first_name'],                                                                             
+                                   'for_publication_name'      => $postData['for_publication_name'],           
+                                   'pronounId'                 => $postData['pronoun'],
+                                   'orginal_work'              => $postData['orginal_work'],           
+                                   'copyright'                 => $postData['copyright'],
+                                   'invited'                   => $postData['invited'],
+                                   'invited_by'                => $invited_byInfo, 
+                                   'invited_by_email'          => $invited_emailInfo,
+                                   'participated'              => $postData['participated'],
+                                   'participated_info'         => $participatedInfo,
+                                   'explanation'               => $postData['explanation'],  
+                                   'explanation_submission'    => $postData['explanation_submission'],     
+                                   'titleId'                   => $postData['title'],                        
+                                   'creative_Work'             => $postData['creative_Work'],
+                                   'subtitle'                  => $postData['subtitle'],
+                                   'submission_types'          => $submission_typesInfo,
+                                   'section_ertId'             => $section_ertInfo,                                  
+                                   'art_images'                => $postData['art_images'],
+                                   'art_image_desc'            => json_encode($artImageDesc),  // Storing as JSON string
+                                   'art_image_file'            => json_encode($artimageFile),
+                                   'art_desc'                  => $postData['art_desc'],                                                                                                      
+                                   'country'                   => $postData['country'],
+                                   'state'                     => $postData['state'],
+                                   'city'                      => $postData['city'],
+                                   'organization_name'         => $postData['organization_name'],
+                                   'organization_website'      => $postData['organization_website'],
+                                   'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
+                                   'indigenous_affiliation'    => $postData['indigenous_affiliation'],
+                                   'expertise_areaId'          => $expertise_areaInfo,
+                                   'bio_short'               => $postData['bio_short'],
+                                   'bio_long'               => $postData['bio_long'],  
+                               ];
+                                // Helper::pr($fields);
+
+                                /* submission email */
+                                $generalSetting             = GeneralSetting::find('1');                            
+                                $fullName                   = $postData['first_name'];
+                                $mailData                   = [
+                                    'fullName'                  => $fullName,
+                                    'email'                     => $postData['email'],
+                                    'article_no'                => $article_no,
+                                    'for_publication_name'      => $postData['for_publication_name'],
+                                ];
+                                $subject                    = $generalSetting->site_name.' :: Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
+                                $message                    = view('email-templates.creative-work-submission',$mailData);
+                                // echo $message;die;
+                                // $this->sendMail($postData['email'], $subject, $message);
+                                // $this->sendMail($generalSetting->system_email, $subject, $message);
+                                /* submission email */
+                                /* email log save */
+                                    $postData2 = [
+                                        'name'                  => $fullName,
+                                        'email'                 => $postData['email'],
+                                        'subject'               => $subject,
+                                        'message'               => $message
+                                    ];
+                                    EmailLog::insertGetId($postData2);
+                                /* email log save */
+
+                                Article::insert($fields);
+                                return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
+                                } else {
+                                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                                }                               
+                       } else {
+                           /* art_video file */
+                           $imageFile      = $request->file('art_video_file');
+                           if ($imageFile != '') {
+                               $imageName      = $imageFile->getClientOriginalName();
+                               $uploadedFile   = $this->upload_single_file('art_video_file', $imageName, 'art_video', 'video');
+                               if ($uploadedFile['status']) {
+                                   $art_video_file = $uploadedFile['newFilename'];
+                               } else {
+                                   return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                               }
+                           } 
+                           else {
+                               return redirect()->back()->with(['error_message' => 'Please Upload art_video File !!!']);
+                           }
+                           /* art_video file */   
+                           if ($this->validate($request, $rules)) {                
+                               $fields = [
+                                   'sl_no'                     => $next_sl_no,
+                                   'article_no'                => $article_no,
+                                   'user_id'                   => $user_id,          
+                                   'email'                     => $postData['email'],
+                                   'author_classification'     => $postData['author_classification'],
+                                   'co_authors'                => $postData['co_authors'],                           
+                                   'first_name'                => $postData['first_name'],                                                                             
+                                   'for_publication_name'      => $postData['for_publication_name'],           
+                                   'pronounId'                 => $postData['pronoun'],
+                                   'orginal_work'              => $postData['orginal_work'],           
+                                   'copyright'                 => $postData['copyright'],
+                                   'invited'                   => $postData['invited'],
+                                   'invited_by'                => $invited_byInfo, 
+                                   'invited_by_email'          => $invited_emailInfo,
+                                   'participated'              => $postData['participated'],
+                                   'participated_info'         => $participatedInfo,
+                                   'explanation'               => $postData['explanation'],  
+                                   'explanation_submission'    => $postData['explanation_submission'],     
+                                   'titleId'                   => $postData['title'],                        
+                                   'creative_Work'             => $postData['creative_Work'],
+                                   'subtitle'                  => $postData['subtitle'],
+                                   'submission_types'          => $submission_typesInfo,
+                                   'section_ertId'             => $section_ertInfo,                                
+                                   'art_video_file'            => $art_video_fileInfo,
+                                   'art_video_desc'            => $postData['art_video_desc'],                                                                        
+                                   'country'                   => $postData['country'],
+                                   'state'                     => $postData['state'],
+                                   'city'                      => $postData['city'],
+                                   'organization_name'         => $postData['organization_name'],
+                                   'organization_website'      => $postData['organization_website'],
+                                   'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
+                                   'indigenous_affiliation'    => $postData['indigenous_affiliation'],
+                                   'expertise_areaId'          => $expertise_areaInfo,
+                                   'bio_short'               => $postData['bio_short'],
+                                   'bio_long'               => $postData['bio_long'],  
+                               ];
+                                // Helper::pr($fields);
+
+                               /* submission email */
+                                $generalSetting             = GeneralSetting::find('1');                            
+                                $fullName                   = $postData['first_name'];
+                                $mailData                   = [
+                                    'fullName'                  => $fullName,
+                                    'email'                     => $postData['email'],
+                                    'article_no'                => $article_no,
+                                    'for_publication_name'      => $postData['for_publication_name'],
+                                ];
+                                $subject                    = $generalSetting->site_name.' :: Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
+                                $message                    = view('email-templates.creative-work-submission',$mailData);
+                                // echo $message;die;
+                                // $this->sendMail($postData['email'], $subject, $message);
+                                // $this->sendMail($generalSetting->system_email, $subject, $message);
+                                /* submission email */
+                                /* email log save */
+                                    $postData2 = [
+                                        'name'                  => $fullName,
+                                        'email'                 => $postData['email'],
+                                        'subject'               => $subject,
+                                        'message'               => $message
+                                    ];
+                                    EmailLog::insertGetId($postData2);
+                                /* email log save */
+
+                                Article::insert($fields);
+                                return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
+                            } else {
+                                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                            }                               
+                       }                
+                   } else {                    
+                        /* co-author details */
+                            // Define the number of co-authors you want to handle (e.g., 3 in this case)
+                            $coAuthorsCount = $postData['co_authors'];
+                            // Initialize empty arrays to hold the co-author data
+                            $coAuthorNames = [];
+                            $coAuthorBios = [];
+                            $coAuthorCountries = [];
+                            $coAuthorOrganizations = [];
+                            $coecosystemAffiliations = [];
+                            $coindigenousAffiliations = [];
+                            $coauthorClassification = [];
+    
+                            // Loop through the number of co-authors and collect the data into arrays
+                            for ($i = 1; $i <= $coAuthorsCount; $i++) {
+                                // Check if co-author name exists, to avoid null entries
+                                if ($request->input("co_author_name_{$i}") !== null) {
+                                    $coAuthorNames[] = $request->input("co_author_name_{$i}");
+                                    $coAuthorBios[] = $request->input("co_author_short_bio_{$i}");
+                                    $coAuthorCountries[] = $request->input("co_author_country_{$i}");
+                                    $coAuthorOrganizations[] = $request->input("co_authororganization_name_{$i}");
+                                    $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
+                                    $coindigenousAffiliations[] = $request->input("co_indigenous_affiliation_{$i}");
+                                    $coauthorClassification[] = $request->input("co_author_classification_{$i}");
+                                }
+                            }                                            
+                            /* co-author details */
+    
+                            $participatedInfo = isset($postData['participated_info']) ? $postData['participated_info'] : '';
+                            $invited_byInfo = isset($postData['invited_by']) ? $postData['invited_by'] : '';
+                            $invited_emailInfo = isset($postData['invited_by_email']) ? $postData['invited_by_email'] : '';
+                            $section_ertInfo = isset($postData['section_ert']) ? ($postData['section_ert']) : '';
+                            $expertise_areaInfo = isset($postData['expertise_area']) ? json_encode($postData['expertise_area']) : '';
+                            $ecosystem_affiliationInfo = isset($postData['ecosystem_affiliation']) ? json_encode($postData['ecosystem_affiliation']) : '';
+                            $submission_typesInfo = isset($postData['submission_types']) ? $postData['submission_types'] : '';
+
+                            if($postData['submission_types'] == '1'){    
+                            
+                                /* narrative images details */
+                                // Define the number of co-authors you want to handle (e.g., 3 in this case)
+                                $narrativeImagesCount = $postData['narrative_images'];
+                                // Initialize empty arrays to hold the co-author data
+                                $narrativeImageDesc = [];
+                                $narrativeimageFile = [];                
+    
+                                // Loop through the number of co-authors and collect the data into arrays
+                                for ($i = 1; $i <= $narrativeImagesCount; $i++) {
+                                    // Check if co-author name exists, to avoid null entries
+                                    if ($request->input("narrative_image_desc_{$i}") !== null) {
+                                        $narrativeImageDesc[] = $request->input("narrative_image_desc_{$i}");
+    
+                                    // Add image file to the array (it can be null if no file is uploaded)                        
+                                        $imageFile      = $request->file("image_file_{$i}");                            
+                                        if ($imageFile != '') {                                
+                                                $imageName      = $imageFile->getClientOriginalName();                                 
+                                            $uploadedFile   = $this->upload_single_file("image_file_{$i}", $imageName, 'narrative', 'image');                                
+                                            if ($uploadedFile['status']) {
+                                                $narrativeimageFile[] = $uploadedFile['newFilename'];                                
+                                            } else {
+                                                $narrativeimageFile[] = null;                                    
+                                            }
+                                        }                                                                                        
+                                    } 
+                                }                                               
+                                /* narrative images details */
+                        
+    
+                                /* narrative doc file */
+                                    $imageFile      = $request->file('narrative_file');
+                                    if ($imageFile != '') {
+                                        $imageName      = $imageFile->getClientOriginalName();
+                                        $uploadedFile   = $this->upload_single_file('narrative_file', $imageName, 'narrative', 'word');
+                                        if ($uploadedFile['status']) {
+                                            $narrative_file = $uploadedFile['newFilename'];
+                                        } else {
+                                            return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                                        }
+                                    } 
+                                    else {
+                                        return redirect()->back()->with(['error_message' => 'Please Upload narrative File !!!']);
+                                    }
+                                /* narrative doc file */
+                                
+                                //save to database//
+                                if ($this->validate($request, $rules)) {                
+                                    $fields = [
+                                        'sl_no'                     => $next_sl_no,
+                                        'article_no'                => $article_no,
+                                        'user_id'                   => $user_id,           
+                                        'email'                     => $postData['email'],
+                                        'author_classification'     => $postData['author_classification'],
+                                        'co_authors'                => $postData['co_authors'],
+                                        'co_authors_position'       => $postData['co_authors_position'],
+                                        'co_author_names'           => json_encode($coAuthorNames),  // Storing as JSON string
+                                        'co_author_bios'            => json_encode($coAuthorBios),
+                                        'co_author_countries'       => json_encode($coAuthorCountries),
+                                        'co_author_organizations'   => json_encode($coAuthorOrganizations),
+                                        'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
+                                        'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
+                                        'co_author_classification'  => json_encode($coauthorClassification),                           
+                                        'first_name'                => $postData['first_name'],                                                                             
+                                        'for_publication_name'      => $postData['for_publication_name'],           
+                                        'pronounId'                 => $postData['pronoun'],
+                                        'orginal_work'              => $postData['orginal_work'],           
+                                        'copyright'                 => $postData['copyright'],
+                                        'invited'                   => $postData['invited'],
+                                        'invited_by'                => $invited_byInfo, 
+                                        'invited_by_email'          => $invited_emailInfo,
+                                        'participated'              => $postData['participated'],
+                                        'participated_info'         => $participatedInfo,
+                                        'explanation'               => $postData['explanation'],  
+                                        'explanation_submission'    => $postData['explanation_submission'],     
+                                        'titleId'                   => $postData['title'],                        
+                                        'creative_Work'             => $postData['creative_Work'],
+                                        'subtitle'                  => $postData['subtitle'],
+                                        'submission_types'          => $submission_typesInfo,
+                                        'section_ertId'             => $section_ertInfo,
+                                        'narrative_file'            => $narrative_file,
+                                        'narrative_images'          => $postData['narrative_images'],
+                                        'narrative_image_desc'      => json_encode($narrativeImageDesc),  // Storing as JSON string
+                                        'image_files'               => json_encode($narrativeimageFile),                                                                                                                
+                                        'country'                   => $postData['country'],
+                                        'state'                     => $postData['state'],
+                                        'city'                      => $postData['city'],
+                                        'organization_name'         => $postData['organization_name'],
+                                        'organization_website'      => $postData['organization_website'],
+                                        'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
+                                        'indigenous_affiliation'    => $postData['indigenous_affiliation'],
+                                        'expertise_areaId'          => $expertise_areaInfo,
+                                        'bio_short'               => $postData['bio_short'],
+                                        'bio_long'               => $postData['bio_long'],  
+                                    ];
+                                    //  Helper::pr($fields);
+
+                                    /* submission email */
+                                    $generalSetting             = GeneralSetting::find('1');                            
+                                    $fullName                   = $postData['first_name'];
+                                    $mailData                   = [
+                                        'fullName'                  => $fullName,
+                                        'email'                     => $postData['email'],
+                                        'article_no'                => $article_no,
+                                        'for_publication_name'      => $postData['for_publication_name'],
+                                    ];
+                                    $subject                    = $generalSetting->site_name.' :: Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
+                                    $message                    = view('email-templates.creative-work-submission',$mailData);
+                                    // echo $message;die;
+                                    // $this->sendMail($postData['email'], $subject, $message);
+                                    // $this->sendMail($generalSetting->system_email, $subject, $message);
+                                    /* submission email */
+                                    /* email log save */
+                                        $postData2 = [
+                                            'name'                  => $fullName,
+                                            'email'                 => $postData['email'],
+                                            'subject'               => $subject,
+                                            'message'               => $message
+                                        ];
+                                        EmailLog::insertGetId($postData2);
+                                    /* email log save */
+
+                                    Article::insert($fields);
+                                    return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
+                                    } else {
+                                        return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                                    }                                    
+                            } else if($postData['submission_types'] == '2'){
+    
+                                /* art images details */
+                                // Define the number of co-authors you want to handle (e.g., 3 in this case)
+                                $artImagesCount = $postData['art_images'];
+                                // Initialize empty arrays to hold the co-author data
+                                $artImageDesc = [];
+                                $artimageFile = [];                
+    
+                                // Loop through the number of co-authors and collect the data into arrays
+                                for ($i = 1; $i <= $artImagesCount; $i++) {
+                                    // Check if co-author name exists, to avoid null entries
+                                    if ($request->input("art_image_desc_{$i}") !== null) {
+                                        $artImageDesc[] = $request->input("art_image_desc_{$i}");
+    
+                                    // Add image file to the array (it can be null if no file is uploaded)                        
+                                        $imageFile      = $request->file("art_image_file_{$i}");                            
+                                        if ($imageFile != '') {                                
+                                                $imageName      = $imageFile->getClientOriginalName();                                 
+                                            $uploadedFile   = $this->upload_single_file("art_image_file_{$i}", $imageName, 'art_image', 'image');                                
+                                            if ($uploadedFile['status']) {
+                                                $artimageFile[] = $uploadedFile['newFilename'];                                
+                                            } else {
+                                                $artimageFile[] = null;                                    
+                                            }
+                                        }                                                                                        
+                                    } 
+                                }                                               
+                                /* art images details */
+    
+                                if ($this->validate($request, $rules)) {                
+                                    $fields = [
+                                        'sl_no'                     => $next_sl_no,
+                                        'article_no'                => $article_no,
+                                        'user_id'                   => $user_id,          
+                                        'email'                     => $postData['email'],
+                                        'author_classification'     => $postData['author_classification'],
+                                        'co_authors'                => $postData['co_authors'],
+                                        'co_authors_position'       => $postData['co_authors_position'],
+                                        'co_author_names'           => json_encode($coAuthorNames),  // Storing as JSON string
+                                        'co_author_bios'            => json_encode($coAuthorBios),
+                                        'co_author_countries'       => json_encode($coAuthorCountries),
+                                        'co_author_organizations'   => json_encode($coAuthorOrganizations),
+                                        'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
+                                        'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
+                                        'co_author_classification'  => json_encode($coauthorClassification),                                
+                                        'first_name'                => $postData['first_name'],                                                                             
+                                        'for_publication_name'      => $postData['for_publication_name'],           
+                                        'pronounId'                 => $postData['pronoun'],
+                                        'orginal_work'              => $postData['orginal_work'],           
+                                        'copyright'                 => $postData['copyright'],
+                                        'invited'                   => $postData['invited'],
+                                        'invited_by'                => $invited_byInfo, 
+                                        'invited_by_email'          => $invited_emailInfo,
+                                        'participated'              => $postData['participated'],
+                                        'participated_info'         => $participatedInfo,
+                                        'explanation'               => $postData['explanation'],  
+                                        'explanation_submission'    => $postData['explanation_submission'],     
+                                        'titleId'                   => $postData['title'],                        
+                                        'creative_Work'             => $postData['creative_Work'],
+                                        'subtitle'                  => $postData['subtitle'],
+                                        'submission_types'          => $submission_typesInfo,
+                                        'section_ertId'             => $section_ertInfo,                                        
+                                        'art_images'                => $postData['art_images'],
+                                        'art_image_desc'            => json_encode($artImageDesc),  // Storing as JSON string
+                                        'art_image_file'            => json_encode($artimageFile),
+                                        'art_desc'                  => $postData['art_desc'],                                                                                                           
+                                        'country'                   => $postData['country'],
+                                        'state'                     => $postData['state'],
+                                        'city'                      => $postData['city'],
+                                        'organization_name'         => $postData['organization_name'],
+                                        'organization_website'      => $postData['organization_website'],
+                                        'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
+                                        'indigenous_affiliation'    => $postData['indigenous_affiliation'],
+                                        'expertise_areaId'          => $expertise_areaInfo,
+                                        'bio_short'               => $postData['bio_short'],
+                                        'bio_long'               => $postData['bio_long'],  
+                                    ];
+                                    //  Helper::pr($fields);
+                                    /* submission email */
+                                    $generalSetting             = GeneralSetting::find('1');                            
+                                    $fullName                   = $postData['first_name'];
+                                    $mailData                   = [
+                                        'fullName'                  => $fullName,
+                                        'email'                     => $postData['email'],
+                                        'article_no'                => $article_no,
+                                        'for_publication_name'      => $postData['for_publication_name'],
+                                    ];
+                                    $subject                    = $generalSetting->site_name.' :: Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
+                                    $message                    = view('email-templates.creative-work-submission',$mailData);
+                                    // echo $message;die;
+                                    // $this->sendMail($postData['email'], $subject, $message);
+                                    // $this->sendMail($generalSetting->system_email, $subject, $message);
+                                    /* submission email */
+                                    /* email log save */
+                                        $postData2 = [
+                                            'name'                  => $fullName,
+                                            'email'                 => $postData['email'],
+                                            'subject'               => $subject,
+                                            'message'               => $message
+                                        ];
+                                        EmailLog::insertGetId($postData2);
+                                    /* email log save */
+
+                                    Article::insert($fields);
+                                    return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
+                                    } else {
+                                        return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                                    }                                    
+                            } else {
+    
+                                /* art_video file */
+                                $imageFile      = $request->file('art_video_file');
+                                if ($imageFile != '') {
+                                    $imageName      = $imageFile->getClientOriginalName();
+                                    $uploadedFile   = $this->upload_single_file('art_video_file', $imageName, 'art_video', 'video');
+                                    if ($uploadedFile['status']) {
+                                        $art_video_file = $uploadedFile['newFilename'];
+                                    } else {
+                                        return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                                    }
+                                }                             
+                                /* art_video file */   
+    
+                                if ($this->validate($request, $rules)) {                
+                                    $fields = [
+                                        'sl_no'                     => $next_sl_no,
+                                        'article_no'                => $article_no,
+                                        'user_id'                   => $user_id,            
+                                        'email'                     => $postData['email'],
+                                        'author_classification'     => $postData['author_classification'],
+                                        'co_authors'                => $postData['co_authors'],
+                                        'co_authors_position'       => $postData['co_authors_position'],
+                                        'co_author_names'           => json_encode($coAuthorNames),  // Storing as JSON string
+                                        'co_author_bios'            => json_encode($coAuthorBios),
+                                        'co_author_countries'       => json_encode($coAuthorCountries),
+                                        'co_author_organizations'   => json_encode($coAuthorOrganizations),
+                                        'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
+                                        'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
+                                        'co_author_classification'  => json_encode($coauthorClassification),     
+                                        'first_name'                => $postData['first_name'],                                                                             
+                                        'for_publication_name'      => $postData['for_publication_name'],           
+                                        'pronounId'                 => $postData['pronoun'],
+                                        'orginal_work'              => $postData['orginal_work'],           
+                                        'copyright'                 => $postData['copyright'],
+                                        'invited'                   => $postData['invited'],
+                                        'invited_by'                => $invited_byInfo, 
+                                        'invited_by_email'          => $invited_emailInfo,
+                                        'participated'              => $postData['participated'],
+                                        'participated_info'         => $participatedInfo,
+                                        'explanation'               => $postData['explanation'],  
+                                        'explanation_submission'    => $postData['explanation_submission'],     
+                                        'titleId'                   => $postData['title'],                        
+                                        'creative_Work'             => $postData['creative_Work'],
+                                        'subtitle'                  => $postData['subtitle'],
+                                        'submission_types'          => $submission_typesInfo,
+                                        'section_ertId'             => $section_ertInfo,                                
+                                        'art_video_file'            => $art_video_file,
+                                        'art_video_desc'            => $postData['art_video_desc'],                                                                        
+                                        'country'                   => $postData['country'],
+                                        'state'                     => $postData['state'],
+                                        'city'                      => $postData['city'],
+                                        'organization_name'         => $postData['organization_name'],
+                                        'organization_website'      => $postData['organization_website'],
+                                        'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
+                                        'indigenous_affiliation'    => $postData['indigenous_affiliation'],
+                                        'expertise_areaId'          => $expertise_areaInfo,
+                                        'bio_short'               => $postData['bio_short'],
+                                        'bio_long'               => $postData['bio_long'],  
+                                    ];
+                                    //  Helper::pr($fields);
+
+                                    /* submission email */
+                                    $generalSetting             = GeneralSetting::find('1');                            
+                                    $fullName                   = $postData['first_name'];
+                                    $mailData                   = [
+                                        'fullName'                  => $fullName,
+                                        'email'                     => $postData['email'],
+                                        'article_no'                => $article_no,
+                                        'for_publication_name'      => $postData['for_publication_name'],
+                                    ];
+                                    $subject                    = $generalSetting->site_name.' :: Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
+                                    $message                    = view('email-templates.creative-work-submission',$mailData);
+                                    // echo $message;die;
+                                    // $this->sendMail($postData['email'], $subject, $message);
+                                    // $this->sendMail($generalSetting->system_email, $subject, $message);
+                                    /* submission email */
+                                    /* email log save */
+                                        $postData2 = [
+                                            'name'                  => $fullName,
+                                            'email'                 => $postData['email'],
+                                            'subject'               => $subject,
+                                            'message'               => $message
+                                        ];
+                                        EmailLog::insertGetId($postData2);
+                                    /* email log save */
+
+                                    Article::insert($fields);
+                                    return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
+                                } else {
+                                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                                }                                    
+                            }
+                   }
+                }                                                                    
             }
 
             $title                          = 'Submit New Creative-Work';
             $page_name                      = 'submit-new-article';
             $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['news_category']          = NewsCategory::where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'ASC')->get();        
             $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-            $data['submission_type']        = SubmissionType::where('status', '=', 1)->orderBy('id', 'ASC')->get();
+            $data['submission_type']       = SubmissionType::where('status', '=', 1)->get(); 
             $data['country']                = Country::orderBy('name', 'ASC')->get();
             $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-            $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();                        
+            $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();                               
             $data['row']                    = [];
             echo $this->front_after_login_layout($title, $page_name, $data);
         }
