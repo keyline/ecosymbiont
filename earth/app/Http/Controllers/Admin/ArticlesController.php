@@ -76,7 +76,7 @@ class ArticlesController extends Controller
 
                 /* co-author details */
                 // Define the number of co-authors you want to handle (e.g., 3 in this case)
-                $coAuthorsCount = 2;
+                $coAuthorsCount = $postData['co_authors'];
                 // Initialize empty arrays to hold the co-author data
                 $coAuthorNames = [];
                 $coAuthorBios = [];
@@ -117,7 +117,7 @@ class ArticlesController extends Controller
                     //save to database//
                     if ($this->validate($request, $rules)) {                
                         $fields = [
-                            'user'                      => 0,           
+                            'user_id'                      => 0,           
                             'email'                     => $postData['email'],
                             'author_classification'     => $postData['author_classification'],
                             'co_authors'                => $postData['co_authors'],                            
@@ -200,108 +200,7 @@ class ArticlesController extends Controller
                     'subtitle'                  => ['required', 'string', new MaxWords(40)],                
                     'bio_short'                 => ['required', 'string', new MaxWords(40)],
                     'bio_long'                  => ['required', 'string', new MaxWords(250)], 
-                    ];                       
-
-                    /* narrative images details */
-                    // Define the number of co-authors you want to handle (e.g., 3 in this case)
-                    $narrativeImagesCount = 5;
-                    // Initialize empty arrays to hold the co-author data
-                    $narrativeImageDesc = [];
-                    $narrativeimageFile = [];                
-
-                    // Loop through the number of co-authors and collect the data into arrays
-                    for ($i = 1; $i <= $narrativeImagesCount; $i++) {
-                        // Check if co-author name exists, to avoid null entries
-                        if ($request->input("narrative_image_desc_{$i}") !== null) {
-                            $narrativeImageDesc[] = $request->input("narrative_image_desc_{$i}");
-
-                        // Add image file to the array (it can be null if no file is uploaded)                        
-                            $imageFile      = $request->file("image_file_{$i}");                            
-                            if ($imageFile != '') {                                
-                                    $imageName      = $imageFile->getClientOriginalName();                                 
-                                $uploadedFile   = $this->upload_single_file("image_file_{$i}", $imageName, 'narrative', 'image');                                
-                                if ($uploadedFile['status']) {
-                                    $narrativeimageFile[] = $uploadedFile['newFilename'];                                
-                                } else {
-                                    $narrativeimageFile[] = null;                                    
-                                }
-                            }                                                                                        
-                        } 
-                    }               
-                    // Example of saving it to a database as a serialized array (optional, depends on your schema)
-                    // $narrativeData = [
-                    //     'narrative_image_desc' => json_encode($narrativeImageDesc),  // Storing as JSON string
-                    //     'image_files' => json_encode($narrativeimageFile),                    
-                    // ];
-                    // dd($narrativeData);
-                    /* narrative images details */
-
-                    /* art images details */
-                    // Define the number of co-authors you want to handle (e.g., 3 in this case)
-                    $artImagesCount = 5;
-                    // Initialize empty arrays to hold the co-author data
-                    $artImageDesc = [];
-                    $artimageFile = [];                
-
-                    // Loop through the number of co-authors and collect the data into arrays
-                    for ($i = 1; $i <= $artImagesCount; $i++) {
-                        // Check if co-author name exists, to avoid null entries
-                        if ($request->input("art_image_desc_{$i}") !== null) {
-                            $artImageDesc[] = $request->input("art_image_desc_{$i}");
-
-                        // Add image file to the array (it can be null if no file is uploaded)                        
-                            $imageFile      = $request->file("art_image_file_{$i}");                            
-                            if ($imageFile != '') {                                
-                                    $imageName      = $imageFile->getClientOriginalName();                                 
-                                $uploadedFile   = $this->upload_single_file("art_image_file_{$i}", $imageName, 'art_image', 'image');                                
-                                if ($uploadedFile['status']) {
-                                    $artimageFile[] = $uploadedFile['newFilename'];                                
-                                } else {
-                                    $artimageFile[] = null;                                    
-                                }
-                            }                                                                                        
-                        } 
-                    }               
-                    // Example of saving it to a database as a serialized array (optional, depends on your schema)
-                    // $artData = [
-                    //     'art_image_desc' => json_encode($artImageDesc),  // Storing as JSON string
-                    //     'art_image_file' => json_encode($artimageFile),                    
-                    // ];
-                    // dd($artData);
-                    /* art images details */
-
-
-                    /* narrative doc file */
-                        $imageFile      = $request->file('narrative_file');
-                        if ($imageFile != '') {
-                            $imageName      = $imageFile->getClientOriginalName();
-                            $uploadedFile   = $this->upload_single_file('narrative_file', $imageName, 'narrative', 'word');
-                            if ($uploadedFile['status']) {
-                                $narrative_file = $uploadedFile['newFilename'];
-                            } else {
-                                return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
-                            }
-                        } 
-                        // else {
-                        //     return redirect()->back()->with(['error_message' => 'Please Upload narrative File !!!']);
-                        // }
-                    /* narrative doc file */
-                
-                    /* art_video file */
-                    $imageFile      = $request->file('art_video_file');
-                    if ($imageFile != '') {
-                        $imageName      = $imageFile->getClientOriginalName();
-                        $uploadedFile   = $this->upload_single_file('art_video_file', $imageName, 'art_video', 'video');
-                        if ($uploadedFile['status']) {
-                            $art_video_file = $uploadedFile['newFilename'];
-                        } else {
-                            return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
-                        }
-                    } 
-                    // else {
-                    //     return redirect()->back()->with(['error_message' => 'Please Upload art_video File !!!']);
-                    // }
-                    /* art_video file */        
+                    ];                                                                                    
                     $participatedInfo = isset($postData['participated_info']) ? $postData['participated_info'] : '';
                     $invited_byInfo = isset($postData['invited_by']) ? $postData['invited_by'] : '';
                     $invited_emailInfo = isset($postData['invited_by_email']) ? $postData['invited_by_email'] : '';
@@ -312,7 +211,60 @@ class ArticlesController extends Controller
                     $art_video_fileInfo = isset($art_video_file) ? $art_video_file : '';    
 
                 if($postData['co_authors'] == '0'){
-                     if($postData['submission_types'] == '1'){                                           
+                     if($postData['submission_types'] == '1'){ 
+                        
+                        /* narrative images details */
+                        // Define the number of co-authors you want to handle (e.g., 3 in this case)
+                        $narrativeImagesCount = $postData['narrative_images'];
+                        // Initialize empty arrays to hold the co-author data
+                        $narrativeImageDesc = [];
+                        $narrativeimageFile = [];                
+
+                        // Loop through the number of co-authors and collect the data into arrays
+                        for ($i = 1; $i <= $narrativeImagesCount; $i++) {
+                            // Check if co-author name exists, to avoid null entries
+                            if ($request->input("narrative_image_desc_{$i}") !== null) {
+                                $narrativeImageDesc[] = $request->input("narrative_image_desc_{$i}");
+
+                            // Add image file to the array (it can be null if no file is uploaded)                        
+                                $imageFile      = $request->file("image_file_{$i}");                            
+                                if ($imageFile != '') {                                
+                                        $imageName      = $imageFile->getClientOriginalName();                                 
+                                    $uploadedFile   = $this->upload_single_file("image_file_{$i}", $imageName, 'narrative', 'image');                                
+                                    if ($uploadedFile['status']) {
+                                        $narrativeimageFile[] = $uploadedFile['newFilename'];                                
+                                    } else {
+                                        $narrativeimageFile[] = null;                                    
+                                    }
+                                }                                                                                        
+                            } 
+                        }               
+                        // Example of saving it to a database as a serialized array (optional, depends on your schema)
+                        // $narrativeData = [
+                        //     'narrative_image_desc' => json_encode($narrativeImageDesc),  // Storing as JSON string
+                        //     'image_files' => json_encode($narrativeimageFile),                    
+                        // ];
+                        // dd($narrativeData);
+                        /* narrative images details */
+
+                        
+
+
+                        /* narrative doc file */
+                            $imageFile      = $request->file('narrative_file');
+                            if ($imageFile != '') {
+                                $imageName      = $imageFile->getClientOriginalName();
+                                $uploadedFile   = $this->upload_single_file('narrative_file', $imageName, 'narrative', 'word');
+                                if ($uploadedFile['status']) {
+                                    $narrative_file = $uploadedFile['newFilename'];
+                                } else {
+                                    return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                                }
+                            } 
+                            // else {
+                            //     return redirect()->back()->with(['error_message' => 'Please Upload narrative File !!!']);
+                            // }
+                        /* narrative doc file */
                         //save to database//
                         if ($this->validate($request, $rules)) {                
                             $fields = [
@@ -337,7 +289,7 @@ class ArticlesController extends Controller
                                 'subtitle'                  => $postData['subtitle'],
                                 'submission_types'          => $submission_typesInfo,
                                 'section_ertId'             => $section_ertInfo,
-                                'narrative_file'            => $narrative_docInfo,
+                                'narrative_file'            => $narrative_file,
                                 'narrative_images'          => $postData['narrative_images'],
                                 'narrative_image_desc'      => json_encode($narrativeImageDesc),  // Storing as JSON string
                                 'image_files'               => json_encode($narrativeimageFile),
@@ -365,6 +317,40 @@ class ArticlesController extends Controller
                             return redirect()->back()->with('error_message', 'All Fields Required !!!');
                         }
                     } else if($postData['submission_types'] == '2'){
+                        /* art images details */
+                        // Define the number of co-authors you want to handle (e.g., 3 in this case)
+                        $artImagesCount = $postData['art_images'];
+                        // Initialize empty arrays to hold the co-author data
+                        $artImageDesc = [];
+                        $artimageFile = [];                
+
+                        // Loop through the number of co-authors and collect the data into arrays
+                        for ($i = 1; $i <= $artImagesCount; $i++) {
+                            // Check if co-author name exists, to avoid null entries
+                            if ($request->input("art_image_desc_{$i}") !== null) {
+                                $artImageDesc[] = $request->input("art_image_desc_{$i}");
+
+                            // Add image file to the array (it can be null if no file is uploaded)                        
+                                $imageFile      = $request->file("art_image_file_{$i}");                            
+                                if ($imageFile != '') {                                
+                                        $imageName      = $imageFile->getClientOriginalName();                                 
+                                    $uploadedFile   = $this->upload_single_file("art_image_file_{$i}", $imageName, 'art_image', 'image');                                
+                                    if ($uploadedFile['status']) {
+                                        $artimageFile[] = $uploadedFile['newFilename'];                                
+                                    } else {
+                                        $artimageFile[] = null;                                    
+                                    }
+                                }                                                                                        
+                            } 
+                        }               
+                        // Example of saving it to a database as a serialized array (optional, depends on your schema)
+                        // $artData = [
+                        //     'art_image_desc' => json_encode($artImageDesc),  // Storing as JSON string
+                        //     'art_image_file' => json_encode($artimageFile),                    
+                        // ];
+                        // dd($artData);
+                        /* art images details */
+
                         if ($this->validate($request, $rules)) {                
                             $fields = [
                                 'user_id'                      => 0,           
@@ -417,6 +403,21 @@ class ArticlesController extends Controller
                             return redirect()->back()->with('error_message', 'All Fields Required !!!');
                         }
                     } else {
+                        /* art_video file */
+                        $imageFile      = $request->file('art_video_file');
+                        if ($imageFile != '') {
+                            $imageName      = $imageFile->getClientOriginalName();
+                            $uploadedFile   = $this->upload_single_file('art_video_file', $imageName, 'art_video', 'video');
+                            if ($uploadedFile['status']) {
+                                $art_video_file = $uploadedFile['newFilename'];
+                            } else {
+                                return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                            }
+                        } 
+                        // else {
+                        //     return redirect()->back()->with(['error_message' => 'Please Upload art_video File !!!']);
+                        // }
+                        /* art_video file */   
                         if ($this->validate($request, $rules)) {                
                             $fields = [
                                 'user_id'                      => 0,           
@@ -464,7 +465,7 @@ class ArticlesController extends Controller
                 } else {                    
                         /* co-author details */
                         // Define the number of co-authors you want to handle (e.g., 3 in this case)
-                        $coAuthorsCount = 2;
+                        $coAuthorsCount = $postData['co_authors'];
                         // Initialize empty arrays to hold the co-author data
                         $coAuthorNames = [];
                         $coAuthorBios = [];
@@ -499,107 +500,7 @@ class ArticlesController extends Controller
                         // ];
                         // dd($authorData);
                         /* co-author details */
-    
-                        /* narrative images details */
-                        // Define the number of co-authors you want to handle (e.g., 3 in this case)
-                        $narrativeImagesCount = 5;
-                        // Initialize empty arrays to hold the co-author data
-                        $narrativeImageDesc = [];
-                        $narrativeimageFile = [];                
-    
-                        // Loop through the number of co-authors and collect the data into arrays
-                        for ($i = 1; $i <= $narrativeImagesCount; $i++) {
-                            // Check if co-author name exists, to avoid null entries
-                            if ($request->input("narrative_image_desc_{$i}") !== null) {
-                                $narrativeImageDesc[] = $request->input("narrative_image_desc_{$i}");
-    
-                            // Add image file to the array (it can be null if no file is uploaded)                        
-                                $imageFile      = $request->file("image_file_{$i}");                            
-                                if ($imageFile != '') {                                
-                                        $imageName      = $imageFile->getClientOriginalName();                                 
-                                    $uploadedFile   = $this->upload_single_file("image_file_{$i}", $imageName, 'narrative', 'image');                                
-                                    if ($uploadedFile['status']) {
-                                        $narrativeimageFile[] = $uploadedFile['newFilename'];                                
-                                    } else {
-                                        $narrativeimageFile[] = null;                                    
-                                    }
-                                }                                                                                        
-                            } 
-                        }               
-                        // Example of saving it to a database as a serialized array (optional, depends on your schema)
-                        // $narrativeData = [
-                        //     'narrative_image_desc' => json_encode($narrativeImageDesc),  // Storing as JSON string
-                        //     'image_files' => json_encode($narrativeimageFile),                    
-                        // ];
-                        // dd($narrativeData);
-                        /* narrative images details */
-    
-                        /* art images details */
-                        // Define the number of co-authors you want to handle (e.g., 3 in this case)
-                        $artImagesCount = 5;
-                        // Initialize empty arrays to hold the co-author data
-                        $artImageDesc = [];
-                        $artimageFile = [];                
-    
-                        // Loop through the number of co-authors and collect the data into arrays
-                        for ($i = 1; $i <= $artImagesCount; $i++) {
-                            // Check if co-author name exists, to avoid null entries
-                            if ($request->input("art_image_desc_{$i}") !== null) {
-                                $artImageDesc[] = $request->input("art_image_desc_{$i}");
-    
-                            // Add image file to the array (it can be null if no file is uploaded)                        
-                                $imageFile      = $request->file("art_image_file_{$i}");                            
-                                if ($imageFile != '') {                                
-                                        $imageName      = $imageFile->getClientOriginalName();                                 
-                                    $uploadedFile   = $this->upload_single_file("art_image_file_{$i}", $imageName, 'art_image', 'image');                                
-                                    if ($uploadedFile['status']) {
-                                        $artimageFile[] = $uploadedFile['newFilename'];                                
-                                    } else {
-                                        $artimageFile[] = null;                                    
-                                    }
-                                }                                                                                        
-                            } 
-                        }               
-                        // Example of saving it to a database as a serialized array (optional, depends on your schema)
-                        // $artData = [
-                        //     'art_image_desc' => json_encode($artImageDesc),  // Storing as JSON string
-                        //     'art_image_file' => json_encode($artimageFile),                    
-                        // ];
-                        // dd($artData);
-                        /* art images details */
-    
-    
-                        /* narrative doc file */
-                            $imageFile      = $request->file('narrative_file');
-                            if ($imageFile != '') {
-                                $imageName      = $imageFile->getClientOriginalName();
-                                $uploadedFile   = $this->upload_single_file('narrative_file', $imageName, 'narrative', 'word');
-                                if ($uploadedFile['status']) {
-                                    $narrative_file = $uploadedFile['newFilename'];
-                                } else {
-                                    return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
-                                }
-                            } 
-                            // else {
-                            //     return redirect()->back()->with(['error_message' => 'Please Upload narrative File !!!']);
-                            // }
-                        /* narrative doc file */
-                    
-                        /* art_video file */
-                        $imageFile      = $request->file('art_video_file');
-                        if ($imageFile != '') {
-                            $imageName      = $imageFile->getClientOriginalName();
-                            $uploadedFile   = $this->upload_single_file('art_video_file', $imageName, 'art_video', 'video');
-                            if ($uploadedFile['status']) {
-                                $art_video_file = $uploadedFile['newFilename'];
-                            } else {
-                                return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
-                            }
-                        } 
-                        // else {
-                        //     return redirect()->back()->with(['error_message' => 'Please Upload art_video File !!!']);
-                        // }
-                        /* art_video file */        
+                                                                    
                         $participatedInfo = isset($postData['participated_info']) ? $postData['participated_info'] : '';
                         $invited_byInfo = isset($postData['invited_by']) ? $postData['invited_by'] : '';
                         $invited_emailInfo = isset($postData['invited_by_email']) ? $postData['invited_by_email'] : '';
@@ -607,10 +508,62 @@ class ArticlesController extends Controller
                         $expertise_areaInfo = isset($postData['expertise_area']) ? json_encode($postData['expertise_area']) : '';
                         $ecosystem_affiliationInfo = isset($postData['ecosystem_affiliation']) ? json_encode($postData['ecosystem_affiliation']) : '';
                         $submission_typesInfo = isset($postData['submission_types']) ? $postData['submission_types'] : '';
-                        $narrative_docInfo = isset($narrative_file) ? $narrative_file : '';                             
-                        $art_video_fileInfo = isset($art_video_file) ? $art_video_file : '';    
+                        // $narrative_docInfo = isset($narrative_file) ? $narrative_file : '';                             
+                        // $art_video_fileInfo = isset($art_video_file) ? $art_video_file : '';    
                         //save to database//
-                        if($postData['submission_types'] == '1'){                                           
+                        if($postData['submission_types'] == '1'){    
+                            
+                            /* narrative images details */
+                            // Define the number of co-authors you want to handle (e.g., 3 in this case)
+                            $narrativeImagesCount = $postData['narrative_images'];
+                            // Initialize empty arrays to hold the co-author data
+                            $narrativeImageDesc = [];
+                            $narrativeimageFile = [];                
+
+                            // Loop through the number of co-authors and collect the data into arrays
+                            for ($i = 1; $i <= $narrativeImagesCount; $i++) {
+                                // Check if co-author name exists, to avoid null entries
+                                if ($request->input("narrative_image_desc_{$i}") !== null) {
+                                    $narrativeImageDesc[] = $request->input("narrative_image_desc_{$i}");
+
+                                // Add image file to the array (it can be null if no file is uploaded)                        
+                                    $imageFile      = $request->file("image_file_{$i}");                            
+                                    if ($imageFile != '') {                                
+                                            $imageName      = $imageFile->getClientOriginalName();                                 
+                                        $uploadedFile   = $this->upload_single_file("image_file_{$i}", $imageName, 'narrative', 'image');                                
+                                        if ($uploadedFile['status']) {
+                                            $narrativeimageFile[] = $uploadedFile['newFilename'];                                
+                                        } else {
+                                            $narrativeimageFile[] = null;                                    
+                                        }
+                                    }                                                                                        
+                                } 
+                            }               
+                            // Example of saving it to a database as a serialized array (optional, depends on your schema)
+                            // $narrativeData = [
+                            //     'narrative_image_desc' => json_encode($narrativeImageDesc),  // Storing as JSON string
+                            //     'image_files' => json_encode($narrativeimageFile),                    
+                            // ];
+                            // dd($narrativeData);
+                            /* narrative images details */
+                    
+
+                            /* narrative doc file */
+                                $imageFile      = $request->file('narrative_file');
+                                if ($imageFile != '') {
+                                    $imageName      = $imageFile->getClientOriginalName();
+                                    $uploadedFile   = $this->upload_single_file('narrative_file', $imageName, 'narrative', 'word');
+                                    if ($uploadedFile['status']) {
+                                        $narrative_file = $uploadedFile['newFilename'];
+                                    } else {
+                                        return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                                    }
+                                } 
+                                // else {
+                                //     return redirect()->back()->with(['error_message' => 'Please Upload narrative File !!!']);
+                                // }
+                            /* narrative doc file */
+                            
                             //save to database//
                             if ($this->validate($request, $rules)) {                
                                 $fields = [
@@ -671,6 +624,41 @@ class ArticlesController extends Controller
                                 return redirect()->back()->with('error_message', 'All Fields Required !!!');
                             }
                         } else if($postData['submission_types'] == '2'){
+
+                            /* art images details */
+                            // Define the number of co-authors you want to handle (e.g., 3 in this case)
+                            $artImagesCount = $postData['art_images'];
+                            // Initialize empty arrays to hold the co-author data
+                            $artImageDesc = [];
+                            $artimageFile = [];                
+
+                            // Loop through the number of co-authors and collect the data into arrays
+                            for ($i = 1; $i <= $artImagesCount; $i++) {
+                                // Check if co-author name exists, to avoid null entries
+                                if ($request->input("art_image_desc_{$i}") !== null) {
+                                    $artImageDesc[] = $request->input("art_image_desc_{$i}");
+
+                                // Add image file to the array (it can be null if no file is uploaded)                        
+                                    $imageFile      = $request->file("art_image_file_{$i}");                            
+                                    if ($imageFile != '') {                                
+                                            $imageName      = $imageFile->getClientOriginalName();                                 
+                                        $uploadedFile   = $this->upload_single_file("art_image_file_{$i}", $imageName, 'art_image', 'image');                                
+                                        if ($uploadedFile['status']) {
+                                            $artimageFile[] = $uploadedFile['newFilename'];                                
+                                        } else {
+                                            $artimageFile[] = null;                                    
+                                        }
+                                    }                                                                                        
+                                } 
+                            }               
+                            // Example of saving it to a database as a serialized array (optional, depends on your schema)
+                            // $artData = [
+                            //     'art_image_desc' => json_encode($artImageDesc),  // Storing as JSON string
+                            //     'art_image_file' => json_encode($artimageFile),                    
+                            // ];
+                            // dd($artData);
+                            /* art images details */
+
                             if ($this->validate($request, $rules)) {                
                                 $fields = [
                                     'user_id'                      => 0,           
@@ -731,6 +719,20 @@ class ArticlesController extends Controller
                                 return redirect()->back()->with('error_message', 'All Fields Required !!!');
                             }
                         } else {
+
+                            /* art_video file */
+                            $imageFile      = $request->file('art_video_file');
+                            if ($imageFile != '') {
+                                $imageName      = $imageFile->getClientOriginalName();
+                                $uploadedFile   = $this->upload_single_file('art_video_file', $imageName, 'art_video', 'video');
+                                if ($uploadedFile['status']) {
+                                    $art_video_file = $uploadedFile['newFilename'];
+                                } else {
+                                    return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                                }
+                            }                             
+                            /* art_video file */   
+
                             if ($this->validate($request, $rules)) {                
                                 $fields = [
                                     'user_id'                      => 0,           
@@ -762,7 +764,7 @@ class ArticlesController extends Controller
                                     'subtitle'                  => $postData['subtitle'],
                                     'submission_types'          => $submission_typesInfo,
                                     'section_ertId'             => $section_ertInfo,                                
-                                    'art_video_file'            => $art_video_fileInfo,
+                                    'art_video_file'            => $art_video_file,
                                     'art_video_desc'            => $postData['art_video_desc'],                                                                        
                                     'country'                   => $postData['country'],
                                     'state'                     => $postData['state'],
@@ -817,17 +819,15 @@ class ArticlesController extends Controller
         $data['selected_section_ertId'] = json_decode($data['row']->section_ertId);
         $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
         $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-        $data['submission_type']       = SubmissionType::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-        // dd($data['submission_types']);
-        $data['country']                = Country::orderBy('name', 'ASC')->get();
-        // dd($data['country']);
+        $data['submission_type']       = SubmissionType::where('status', '=', 1)->orderBy('name', 'ASC')->get();        
+        $data['country']                = Country::orderBy('name', 'ASC')->get();        
         $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
         $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
         $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
 
         if ($request->isMethod('post')) {
             $postData = $request->all();
-            //  dd($postData);
+            //    dd($postData);
             if ($postData['invited'] == 'No' && $postData['participated'] == 'No') {
                 // echo "this section"; die;
                 $rules = [
@@ -845,7 +845,8 @@ class ArticlesController extends Controller
 
                 /* co-author details */
                 // Define the number of co-authors you want to handle (e.g., 3 in this case)
-                $coAuthorsCount = 2;
+                
+                $coAuthorsCount = $postData['co_authors']; 
                 // Initialize empty arrays to hold the co-author data
                 $coAuthorNames = [];
                 $coAuthorBios = [];
@@ -886,7 +887,7 @@ class ArticlesController extends Controller
                     //save to database//
                     if ($this->validate($request, $rules)) {                
                         $fields = [
-                            'user'                      => 0,           
+                            'user_id'                      => 0,           
                             'email'                     => $postData['email'],
                             'author_classification'     => $postData['author_classification'],
                             'co_authors'                => $postData['co_authors'],                            
@@ -903,8 +904,9 @@ class ArticlesController extends Controller
                             'participated_info'         => $participatedInfo                       
                         ];
                         // Helper::pr($fields);
-                        Article::insert($fields);
-                        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');                    
+                        // Article::insert($fields);
+                        Article::where($this->data['primary_key'], '=', $id)->update($fields);
+                        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');                    
                     } else {
                         return redirect()->back()->with('error_message', 'All Fields Required !!!');
                     }
@@ -937,8 +939,9 @@ class ArticlesController extends Controller
                             'participated_info'         => $participatedInfo                       
                         ];
                         // Helper::pr($fields);
-                        Article::insert($fields);
-                        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');                    
+                        // Article::insert($fields);
+                        Article::where($this->data['primary_key'], '=', $id)->update($fields);
+                        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');                    
                     } else {
                         return redirect()->back()->with('error_message', 'All Fields Required !!!');
                     }
@@ -969,127 +972,127 @@ class ArticlesController extends Controller
                     'subtitle'                  => ['required', 'string', new MaxWords(40)],                
                     'bio_short'                 => ['required', 'string', new MaxWords(40)],
                     'bio_long'                  => ['required', 'string', new MaxWords(250)], 
-                    ];                       
-
-                    /* narrative images details */
-                    // Define the number of co-authors you want to handle (e.g., 3 in this case)
-                    $narrativeImagesCount = 5;
-                    // Initialize empty arrays to hold the co-author data
-                    $narrativeImageDesc = [];
-                    $narrativeimageFile = [];                
-
-                    // Loop through the number of co-authors and collect the data into arrays
-                    for ($i = 1; $i <= $narrativeImagesCount; $i++) {
-                        // Check if co-author name exists, to avoid null entries
-                        if ($request->input("narrative_image_desc_{$i}") !== null) {
-                            $narrativeImageDesc[] = $request->input("narrative_image_desc_{$i}");
-
-                        // Add image file to the array (it can be null if no file is uploaded)                        
-                            $imageFile      = $request->file("image_file_{$i}");                            
-                            if ($imageFile != '') {                                
-                                    $imageName      = $imageFile->getClientOriginalName();                                 
-                                $uploadedFile   = $this->upload_single_file("image_file_{$i}", $imageName, 'narrative', 'image');                                
-                                if ($uploadedFile['status']) {
-                                    $narrativeimageFile[] = $uploadedFile['newFilename'];                                
-                                } else {
-                                    $narrativeimageFile[] = null;                                    
-                                }
-                            }                                                                                        
-                        } 
-                    }               
-                    // Example of saving it to a database as a serialized array (optional, depends on your schema)
-                    // $narrativeData = [
-                    //     'narrative_image_desc' => json_encode($narrativeImageDesc),  // Storing as JSON string
-                    //     'image_files' => json_encode($narrativeimageFile),                    
-                    // ];
-                    // dd($narrativeData);
-                    /* narrative images details */
-
-                    /* art images details */
-                    // Define the number of co-authors you want to handle (e.g., 3 in this case)
-                    $artImagesCount = 5;
-                    // Initialize empty arrays to hold the co-author data
-                    $artImageDesc = [];
-                    $artimageFile = [];                
-
-                    // Loop through the number of co-authors and collect the data into arrays
-                    for ($i = 1; $i <= $artImagesCount; $i++) {
-                        // Check if co-author name exists, to avoid null entries
-                        if ($request->input("art_image_desc_{$i}") !== null) {
-                            $artImageDesc[] = $request->input("art_image_desc_{$i}");
-
-                        // Add image file to the array (it can be null if no file is uploaded)                        
-                            $imageFile      = $request->file("art_image_file_{$i}");                            
-                            if ($imageFile != '') {                                
-                                    $imageName      = $imageFile->getClientOriginalName();                                 
-                                $uploadedFile   = $this->upload_single_file("art_image_file_{$i}", $imageName, 'art_image', 'image');                                
-                                if ($uploadedFile['status']) {
-                                    $artimageFile[] = $uploadedFile['newFilename'];                                
-                                } else {
-                                    $artimageFile[] = null;                                    
-                                }
-                            }                                                                                        
-                        } 
-                    }               
-                    // Example of saving it to a database as a serialized array (optional, depends on your schema)
-                    // $artData = [
-                    //     'art_image_desc' => json_encode($artImageDesc),  // Storing as JSON string
-                    //     'art_image_file' => json_encode($artimageFile),                    
-                    // ];
-                    // dd($artData);
-                    /* art images details */
-
-
-                    /* narrative doc file */
-                        $imageFile      = $request->file('narrative_file');
-                        if ($imageFile != '') {
-                            $imageName      = $imageFile->getClientOriginalName();
-                            $uploadedFile   = $this->upload_single_file('narrative_file', $imageName, 'narrative', 'word');
-                            if ($uploadedFile['status']) {
-                                $narrative_file = $uploadedFile['newFilename'];
-                            } else {
-                                return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
-                            }
-                        } 
-                        // else {
-                        //     return redirect()->back()->with(['error_message' => 'Please Upload narrative File !!!']);
-                        // }
-                    /* narrative doc file */
+                    ];                                           
+                    
+                  /* co-author details */
+                // Define the number of co-authors you want to handle (e.g., 3 in this case)
                 
-                    /* art_video file */
-                    $imageFile      = $request->file('art_video_file');
-                    if ($imageFile != '') {
-                        $imageName      = $imageFile->getClientOriginalName();
-                        $uploadedFile   = $this->upload_single_file('art_video_file', $imageName, 'art_video', 'video');
-                        if ($uploadedFile['status']) {
-                            $art_video_file = $uploadedFile['newFilename'];
-                        } else {
-                            return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
-                        }
-                    } 
-                    // else {
-                    //     return redirect()->back()->with(['error_message' => 'Please Upload art_video File !!!']);
-                    // }
-                    /* art_video file */        
+                $coAuthorsCount = $postData['co_authors']; 
+                // Initialize empty arrays to hold the co-author data
+                $coAuthorNames = [];
+                $coAuthorBios = [];
+                $coAuthorCountries = [];
+                $coAuthorOrganizations = [];
+                $coecosystemAffiliations = [];
+                $coindigenousAffiliations = [];
+                $coauthorClassification = [];
+
+                // Loop through the number of co-authors and collect the data into arrays
+                for ($i = 1; $i <= $coAuthorsCount; $i++) {
+                    // Check if co-author name exists, to avoid null entries
+                    if ($request->input("co_author_name_{$i}") !== null) {
+                        $coAuthorNames[] = $request->input("co_author_name_{$i}");
+                        $coAuthorBios[] = $request->input("co_author_short_bio_{$i}");
+                        $coAuthorCountries[] = $request->input("co_author_country_{$i}");
+                        $coAuthorOrganizations[] = $request->input("co_authororganization_name_{$i}");
+                        $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
+                        $coindigenousAffiliations[] = $request->input("co_indigenous_affiliation_{$i}");
+                        $coauthorClassification[] = $request->input("co_author_classification_{$i}");
+                    }
+                }                
+                // Example of saving it to a database as a serialized array (optional, depends on your schema)
+                //  $authorData = [
+                //     'co_author_names' => json_encode($coAuthorNames),  // Storing as JSON string
+                //     'co_author_bios' => json_encode($coAuthorBios),
+                //     'co_author_countries' => json_encode($coAuthorCountries),
+                //     'co_author_organizations' => json_encode($coAuthorOrganizations),
+                //     'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
+                //     'co_indigenous_affiliations' => json_encode($coindigenousAffiliations),
+                //     'co_author_classification' => json_encode($coauthorClassification),
+                // ];
+                // dd($authorData);
+                /* co-author details */
+                          
                     $participatedInfo = isset($postData['participated_info']) ? $postData['participated_info'] : '';
                     $invited_byInfo = isset($postData['invited_by']) ? $postData['invited_by'] : '';
                     $invited_emailInfo = isset($postData['invited_by_email']) ? $postData['invited_by_email'] : '';
                     $section_ertInfo = isset($postData['section_ert']) ? ($postData['section_ert']) : '';
                     $expertise_areaInfo = isset($postData['expertise_area']) ? json_encode($postData['expertise_area']) : '';
                     $ecosystem_affiliationInfo = isset($postData['ecosystem_affiliation']) ? json_encode($postData['ecosystem_affiliation']) : '';
-                    $submission_typesInfo = isset($postData['submission_types']) ? $postData['submission_types'] : '';
-                    $art_video_fileInfo = isset($art_video_file) ? $art_video_file : '';  
-                    $narrative_docInfo = isset($narrative_file) ? $narrative_file : '';                               
+                    $submission_typesInfo = isset($postData['submission_types']) ? $postData['submission_types'] : '';                    
+                    
 
                 if($postData['co_authors'] == '0'){
-                     if($postData['submission_types'] == '1'){                                           
+                     if($postData['submission_types'] == '1'){  
+                        /* narrative images details */
+                        // Define the number of co-authors you want to handle (e.g., 3 in this case)
+                        $narrativeImagesCount = $postData['narrative_images'];
+                        // Initialize empty arrays to hold the co-author data
+                        $narrativeImageDesc = [];
+                        $narrativeimageFile = [];    
+                        $exsisting_image = [];            
+                        $exsisting_image = json_decode($data['row']->image_files);
+                        // Loop through the number of co-authors and collect the data into arrays
+                        for ($i = 1; $i <= $narrativeImagesCount; $i++) {
+                            // Check if co-author name exists, to avoid null entries
+                            if ($request->input("narrative_image_desc_{$i}") !== null) {
+                                $narrativeImageDesc[] = $request->input("narrative_image_desc_{$i}");
+
+                            // Add image file to the array (it can be null if no file is uploaded)                        
+                                $imageFile      = $request->file("image_file_{$i}");
+                                if ($imageFile != '') {                                
+                                        $imageName      = $imageFile->getClientOriginalName();                                 
+                                    $uploadedFile   = $this->upload_single_file("image_file_{$i}", $imageName, 'narrative', 'image');                                
+                                    if ($uploadedFile['status']) {
+                                    $narrativeimageFile[] = $uploadedFile['newFilename'];                                     
+                                    } else {
+                                        $narrativeimageFile[] = null;                                    
+                                    }
+                                }  else {
+                                $narrativeimageFile[] = $exsisting_image[$i-1];                                                              
+                                }                                                                                         
+                            } 
+                        }                              
+                        // Example of saving it to a database as a serialized array (optional, depends on your schema)
+                        // $narrativeData = [
+                        //     'narrative_image_desc' => json_encode($narrativeImageDesc),  // Storing as JSON string
+                        //     'image_files' => json_encode($narrativeimageFile),                    
+                        // ];
+                        // dd($narrativeData);
+                        /* narrative images details */                    
+
+
+                        /* narrative doc file */
+                            $imageFile      = $request->file('narrative_file');
+                            if ($imageFile != '') {
+                                $imageName      = $imageFile->getClientOriginalName();
+                                $uploadedFile   = $this->upload_single_file('narrative_file', $imageName, 'narrative', 'word');
+                                if ($uploadedFile['status']) {
+                                    $narrative_file = $uploadedFile['newFilename'];
+                                } else {
+                                    return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                                }
+                            } 
+                            else {
+                                $narrative_file = $data['row']->narrative_file;
+                                // return redirect()->back()->with(['error_message' => 'Please Upload art_image File !!!']);
+                            }
+                        /* narrative doc file */
+                        
                         //save to database//
                         if ($this->validate($request, $rules)) {                
                             $fields = [
                                 'user_id'                      => 0,           
                                 'email'                     => $postData['email'],
                                 'author_classification'     => $postData['author_classification'],
-                                'co_authors'                => $postData['co_authors'],                           
+                                'co_authors'                => $postData['co_authors'],     
+                                'co_author_names'           => json_encode($coAuthorNames),  // Storing as JSON string
+                                'co_author_bios'            => json_encode($coAuthorBios),
+                                'co_author_countries'       => json_encode($coAuthorCountries),
+                                'co_author_organizations'   => json_encode($coAuthorOrganizations),
+                                'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
+                                'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
+                                'co_author_classification'  => json_encode($coauthorClassification),                      
                                 'first_name'                => $postData['first_name'],                                                                             
                                 'for_publication_name'      => $postData['for_publication_name'],           
                                 'pronounId'                 => $postData['pronoun'],
@@ -1107,15 +1110,15 @@ class ArticlesController extends Controller
                                 'subtitle'                  => $postData['subtitle'],
                                 'submission_types'          => $submission_typesInfo,
                                 'section_ertId'             => $section_ertInfo,
-                                'narrative_file'            => $narrative_docInfo,
+                                'narrative_file'            => $narrative_file,
                                 'narrative_images'          => $postData['narrative_images'],
                                 'narrative_image_desc'      => json_encode($narrativeImageDesc),  // Storing as JSON string
                                 'image_files'               => json_encode($narrativeimageFile),
-                                // 'art_image_desc'            => json_encode($artImageDesc),  // Storing as JSON string
-                                // 'art_image_file'            => json_encode($artimageFile),
-                                // 'art_desc'                  => $postData['art_desc'],
-                                // 'art_video_file'            => $art_video_fileInfo,
-                                // 'art_video_desc'            => $postData['art_video_desc'],                                                                        
+                                'art_image_desc'            => null,  // Storing as JSON string
+                                'art_image_file'            => null,
+                                'art_desc'                  => null,
+                                'art_video_file'            => null,
+                                'art_video_desc'            => null,                                                                                
                                 'country'                   => $postData['country'],
                                 'state'                     => $postData['state'],
                                 'city'                      => $postData['city'],
@@ -1128,19 +1131,66 @@ class ArticlesController extends Controller
                                 'bio_long'               => $postData['bio_long'],  
                             ];
                             // Helper::pr($fields);
-                            Article::insert($fields);
-                            return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
+                            // Article::insert($fields);
+                            Article::where($this->data['primary_key'], '=', $id)->update($fields);
+                            return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');
                         
                         } else {
                             return redirect()->back()->with('error_message', 'All Fields Required !!!');
                         }
                     } else if($postData['submission_types'] == '2'){
+                        /* art images details */
+                        // Define the number of co-authors you want to handle (e.g., 3 in this case)
+                        $artImagesCount = $postData['art_images'];
+                        // Initialize empty arrays to hold the co-author data
+                        $artImageDesc = [];
+                        $artimageFile = [];    
+                        $exsisting_artimage = [];            
+                        $exsisting_artimage = json_decode($data['row']->art_image_file);            
+
+                        // Loop through the number of co-authors and collect the data into arrays
+                        for ($i = 1; $i <= $artImagesCount; $i++) {
+                            // Check if co-author name exists, to avoid null entries
+                            if ($request->input("art_image_desc_{$i}") !== null) {
+                                $artImageDesc[] = $request->input("art_image_desc_{$i}");
+
+                            // Add image file to the array (it can be null if no file is uploaded)                        
+                                $imageFile      = $request->file("art_image_file_{$i}");                            
+                                if ($imageFile != '') {                                
+                                        $imageName      = $imageFile->getClientOriginalName();                                 
+                                    $uploadedFile   = $this->upload_single_file("art_image_file_{$i}", $imageName, 'art_image', 'image');                                
+                                    if ($uploadedFile['status']) {
+                                        $artimageFile[] = $uploadedFile['newFilename'];                                
+                                    } else {
+                                        $artimageFile[] = null;                                    
+                                    }
+                                } else {
+                                    $artimageFile[] = $exsisting_artimage[$i-1];
+                                    // return redirect()->back()->with(['error_message' => 'Please Upload art_image File !!!']);
+                                }                                                                                       
+                            } 
+                        }               
+                        // Example of saving it to a database as a serialized array (optional, depends on your schema)
+                        // $artData = [
+                        //     'art_image_desc' => json_encode($artImageDesc),  // Storing as JSON string
+                        //     'art_image_file' => json_encode($artimageFile),                    
+                        // ];
+                        // dd($artData);
+                        /* art images details */
+                        
                         if ($this->validate($request, $rules)) {                
                             $fields = [
                                 'user_id'                      => 0,           
                                 'email'                     => $postData['email'],
                                 'author_classification'     => $postData['author_classification'],
-                                'co_authors'                => $postData['co_authors'],                           
+                                'co_authors'                => $postData['co_authors'],
+                                'co_author_names'           => json_encode($coAuthorNames),  // Storing as JSON string
+                                'co_author_bios'            => json_encode($coAuthorBios),
+                                'co_author_countries'       => json_encode($coAuthorCountries),
+                                'co_author_organizations'   => json_encode($coAuthorOrganizations),
+                                'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
+                                'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
+                                'co_author_classification'  => json_encode($coauthorClassification),                           
                                 'first_name'                => $postData['first_name'],                                                                             
                                 'for_publication_name'      => $postData['for_publication_name'],           
                                 'pronounId'                 => $postData['pronoun'],
@@ -1158,16 +1208,16 @@ class ArticlesController extends Controller
                                 'subtitle'                  => $postData['subtitle'],
                                 'submission_types'          => $submission_typesInfo,
                                 'section_ertId'             => $section_ertInfo,
-                                // 'narrative_file'            => $narrative_docInfo,
-                                // 'narrative_images'          => $postData['narrative_images'],
-                                // 'narrative_image_desc'      => json_encode($narrativeImageDesc),  // Storing as JSON string
-                                // 'image_files'               => json_encode($narrativeimageFile),
+                                'narrative_file'            => null,
+                                'narrative_images'          => null,
+                                'narrative_image_desc'      => null,  // Storing as JSON string
+                                'image_files'               => null,
                                 'art_images'                => $postData['art_images'],
                                 'art_image_desc'            => json_encode($artImageDesc),  // Storing as JSON string
                                 'art_image_file'            => json_encode($artimageFile),
                                 'art_desc'                  => $postData['art_desc'],
-                                // 'art_video_file'            => $art_video_fileInfo,
-                                // 'art_video_desc'            => $postData['art_video_desc'],                                                                        
+                                'art_video_file'            => null,
+                                'art_video_desc'            => null,                                                                                               
                                 'country'                   => $postData['country'],
                                 'state'                     => $postData['state'],
                                 'city'                      => $postData['city'],
@@ -1180,19 +1230,48 @@ class ArticlesController extends Controller
                                 'bio_long'               => $postData['bio_long'],  
                             ];
                             // Helper::pr($fields);
-                            Article::insert($fields);
-                            return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
+                            // Article::insert($fields);
+                            Article::where($this->data['primary_key'], '=', $id)->update($fields);
+                            return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');
                         
                         } else {
                             return redirect()->back()->with('error_message', 'All Fields Required !!!');
                         }
-                    } else {
+                    } else {                        
+                        /* art_video file */
+                         $imageFile      = $request->file('art_video_file');
+                        if ($imageFile != '') {
+                             $imageName      = $imageFile->getClientOriginalName();
+                            $uploadedFile   = $this->upload_single_file('art_video_file', $imageName, 'art_video', 'video');
+                            if ($uploadedFile['status']) {
+                                 $art_video_file = $uploadedFile['newFilename'];
+                                // echo "new";
+                            } else {
+                                return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                            }
+                        } 
+                        else {
+                            $art_video_file = $data['row']->art_video_file;
+                            // echo "exsisting";
+                            // return redirect()->back()->with(['error_message' => 'Please Upload art_image File !!!']);
+                        } 
+
+                        // dd($art_video_fileInfo);
+                        /* art_video file */  
+
                         if ($this->validate($request, $rules)) {                
                             $fields = [
                                 'user_id'                      => 0,           
                                 'email'                     => $postData['email'],
                                 'author_classification'     => $postData['author_classification'],
-                                'co_authors'                => $postData['co_authors'],                           
+                                'co_authors'                => $postData['co_authors'],
+                                'co_author_names'           => json_encode($coAuthorNames),  // Storing as JSON string
+                                'co_author_bios'            => json_encode($coAuthorBios),
+                                'co_author_countries'       => json_encode($coAuthorCountries),
+                                'co_author_organizations'   => json_encode($coAuthorOrganizations),
+                                'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
+                                'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
+                                'co_author_classification'  => json_encode($coauthorClassification),                           
                                 'first_name'                => $postData['first_name'],                                                                             
                                 'for_publication_name'      => $postData['for_publication_name'],           
                                 'pronounId'                 => $postData['pronoun'],
@@ -1209,8 +1288,16 @@ class ArticlesController extends Controller
                                 'creative_Work'             => $postData['creative_Work'],
                                 'subtitle'                  => $postData['subtitle'],
                                 'submission_types'          => $submission_typesInfo,
-                                'section_ertId'             => $section_ertInfo,                                
-                                'art_video_file'            => $art_video_fileInfo,
+                                'section_ertId'             => $section_ertInfo, 
+                                'narrative_file'            => null,
+                                'narrative_images'          => null,
+                                'narrative_image_desc'      => null,  // Storing as JSON string
+                                'image_files'               => null,
+                                'art_images'                => null,
+                                'art_image_desc'            => null,  // Storing as JSON string
+                                'art_image_file'            => null,
+                                'art_desc'                  => null,                                       
+                                'art_video_file'            => $art_video_file,
                                 'art_video_desc'            => $postData['art_video_desc'],                                                                        
                                 'country'                   => $postData['country'],
                                 'state'                     => $postData['state'],
@@ -1223,177 +1310,80 @@ class ArticlesController extends Controller
                                 'bio_short'               => $postData['bio_short'],
                                 'bio_long'               => $postData['bio_long'],  
                             ];
-                            // Helper::pr($fields);
-                            Article::insert($fields);
-                            return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
+                            //  Helper::pr($fields);
+                            // Article::insert($fields);
+                            Article::where($this->data['primary_key'], '=', $id)->update($fields);
+                            return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');
                         
                         } else {
                             return redirect()->back()->with('error_message', 'All Fields Required !!!');
                         }
                     }                
-                } else {                    
-                        /* co-author details */
-                        // Define the number of co-authors you want to handle (e.g., 3 in this case)
-                        $coAuthorsCount = 2;
-                        // Initialize empty arrays to hold the co-author data
-                        $coAuthorNames = [];
-                        $coAuthorBios = [];
-                        $coAuthorCountries = [];
-                        $coAuthorOrganizations = [];
-                        $coecosystemAffiliations = [];
-                        $coindigenousAffiliations = [];
-                        $coauthorClassification = [];
-
-                        // Loop through the number of co-authors and collect the data into arrays
-                        for ($i = 1; $i <= $coAuthorsCount; $i++) {
-                            // Check if co-author name exists, to avoid null entries
-                            if ($request->input("co_author_name_{$i}") !== null) {
-                                $coAuthorNames[] = $request->input("co_author_name_{$i}");
-                                $coAuthorBios[] = $request->input("co_author_short_bio_{$i}");
-                                $coAuthorCountries[] = $request->input("co_author_country_{$i}");
-                                $coAuthorOrganizations[] = $request->input("co_authororganization_name_{$i}");
-                                $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
-                                $coindigenousAffiliations[] = $request->input("co_indigenous_affiliation_{$i}");
-                                $coauthorClassification[] = $request->input("co_author_classification_{$i}");
-                            }
-                        }                
-                        // Example of saving it to a database as a serialized array (optional, depends on your schema)
-                        // $authorData = [
-                        //     'co_author_names' => json_encode($coAuthorNames),  // Storing as JSON string
-                        //     'co_author_bios' => json_encode($coAuthorBios),
-                        //     'co_author_countries' => json_encode($coAuthorCountries),
-                        //     'co_author_organizations' => json_encode($coAuthorOrganizations),
-                        //     'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
-                        //     'co_indigenous_affiliations' => json_encode($coindigenousAffiliations),
-                        //     'co_author_classification' => json_encode($coauthorClassification),
-                        // ];
-                        // dd($authorData);
-                        /* co-author details */
-    
-                        /* narrative images details */
-                        // Define the number of co-authors you want to handle (e.g., 3 in this case)
-                        $narrativeImagesCount = 5;
-                        // Initialize empty arrays to hold the co-author data
-                        $narrativeImageDesc = [];
-                        $narrativeimageFile = [];                
-    
-                        // Loop through the number of co-authors and collect the data into arrays
-                        for ($i = 1; $i <= $narrativeImagesCount; $i++) {
-                            // Check if co-author name exists, to avoid null entries
-                            if ($request->input("narrative_image_desc_{$i}") !== null) {
-                                $narrativeImageDesc[] = $request->input("narrative_image_desc_{$i}");
-    
-                            // Add image file to the array (it can be null if no file is uploaded)                        
-                                $imageFile      = $request->file("image_file_{$i}");                            
-                                if ($imageFile != '') {                                
-                                        $imageName      = $imageFile->getClientOriginalName();                                 
-                                    $uploadedFile   = $this->upload_single_file("image_file_{$i}", $imageName, 'narrative', 'image');                                
-                                    if ($uploadedFile['status']) {
-                                        $narrativeimageFile[] = $uploadedFile['newFilename'];                                
-                                    } else {
-                                        $narrativeimageFile[] = null;                                    
-                                    }
-                                }  else {
-                                    $narrativeimageFile[] = $data['row']->image_files;
-                                    // return redirect()->back()->with(['error_message' => 'Please Upload art_image File !!!']);
-                                }                                                                                      
-                            } 
-                        }               
-                        // Example of saving it to a database as a serialized array (optional, depends on your schema)
-                        // $narrativeData = [
-                        //     'narrative_image_desc' => json_encode($narrativeImageDesc),  // Storing as JSON string
-                        //     'image_files' => json_encode($narrativeimageFile),                    
-                        // ];
-                        // dd($narrativeData);
-                        /* narrative images details */
-    
-                        /* art images details */
-                        // Define the number of co-authors you want to handle (e.g., 3 in this case)
-                        $artImagesCount = 5;
-                        // Initialize empty arrays to hold the co-author data
-                        $artImageDesc = [];
-                        $artimageFile = [];                
-    
-                        // Loop through the number of co-authors and collect the data into arrays
-                        for ($i = 1; $i <= $artImagesCount; $i++) {
-                            // Check if co-author name exists, to avoid null entries
-                            if ($request->input("art_image_desc_{$i}") !== null) {
-                                $artImageDesc[] = $request->input("art_image_desc_{$i}");
-    
-                            // Add image file to the array (it can be null if no file is uploaded)                        
-                                $imageFile      = $request->file("art_image_file_{$i}");                            
-                                if ($imageFile != '') {                                
-                                        $imageName      = $imageFile->getClientOriginalName();                                 
-                                    $uploadedFile   = $this->upload_single_file("art_image_file_{$i}", $imageName, 'art_image', 'image');                                
-                                    if ($uploadedFile['status']) {
-                                        $artimageFile[] = $uploadedFile['newFilename'];                                
-                                    } else {
-                                        $artimageFile[] = null;                                    
-                                    }
-                                } else {
-                                    $artimageFile[] = $data['row']->art_image_file;
-                                    // return redirect()->back()->with(['error_message' => 'Please Upload art_image File !!!']);
-                                }
-                                                                                                   
-                            } 
-                        }               
-                        // Example of saving it to a database as a serialized array (optional, depends on your schema)
-                        // $artData = [
-                        //     'art_image_desc' => json_encode($artImageDesc),  // Storing as JSON string
-                        //     'art_image_file' => json_encode($artimageFile),                    
-                        // ];
-                        // dd($artData);
-                        /* art images details */
-    
-    
-                        /* narrative doc file */
-                            $imageFile      = $request->file('narrative_file');
-                            if ($imageFile != '') {
-                                $imageName      = $imageFile->getClientOriginalName();
-                                $uploadedFile   = $this->upload_single_file('narrative_file', $imageName, 'narrative', 'word');
-                                if ($uploadedFile['status']) {
-                                    $narrative_file = $uploadedFile['newFilename'];
-                                } else {
-                                    return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
-                                }
-                            } else {
-                                $narrative_file = $data['row']->narrative_file;
-                                // return redirect()->back()->with(['error_message' => 'Please Upload art_image File !!!']);
-                            }
-                            // else {
-                            //     return redirect()->back()->with(['error_message' => 'Please Upload narrative File !!!']);
-                            // }
-                        /* narrative doc file */
-                    
-                        /* art_video file */
-                        $imageFile      = $request->file('art_video_file');
-                        if ($imageFile != '') {
-                            $imageName      = $imageFile->getClientOriginalName();
-                            $uploadedFile   = $this->upload_single_file('art_video_file', $imageName, 'art_video', 'video');
-                            if ($uploadedFile['status']) {
-                                $art_video_file = $uploadedFile['newFilename'];
-                            } else {
-                                return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
-                            }
-                        }else {
-                            $art_video_file = $data['row']->art_video_file;
-                            // return redirect()->back()->with(['error_message' => 'Please Upload art_image File !!!']);
-                        } 
-                        // else {
-                        //     return redirect()->back()->with(['error_message' => 'Please Upload art_video File !!!']);
-                        // }
-                        /* art_video file */        
-                        $participatedInfo = isset($postData['participated_info']) ? $postData['participated_info'] : '';
-                        $invited_byInfo = isset($postData['invited_by']) ? $postData['invited_by'] : '';
-                        $invited_emailInfo = isset($postData['invited_by_email']) ? $postData['invited_by_email'] : '';
-                        $section_ertInfo = isset($postData['section_ert']) ? ($postData['section_ert']) : '';
-                        $expertise_areaInfo = isset($postData['expertise_area']) ? json_encode($postData['expertise_area']) : '';
-                        $ecosystem_affiliationInfo = isset($postData['ecosystem_affiliation']) ? json_encode($postData['ecosystem_affiliation']) : '';
-                        $submission_typesInfo = isset($postData['submission_types']) ? $postData['submission_types'] : '';
-                        $narrative_docInfo = isset($narrative_file) ? $narrative_file : '';                             
-                        $art_video_fileInfo = isset($art_video_file) ? $art_video_file : '';    
+                } else {                                                                                                                    
+                        // $participatedInfo = isset($postData['participated_info']) ? $postData['participated_info'] : '';
+                        // $invited_byInfo = isset($postData['invited_by']) ? $postData['invited_by'] : '';
+                        // $invited_emailInfo = isset($postData['invited_by_email']) ? $postData['invited_by_email'] : '';
+                        // $section_ertInfo = isset($postData['section_ert']) ? ($postData['section_ert']) : '';
+                        // $expertise_areaInfo = isset($postData['expertise_area']) ? json_encode($postData['expertise_area']) : '';
+                        // $ecosystem_affiliationInfo = isset($postData['ecosystem_affiliation']) ? json_encode($postData['ecosystem_affiliation']) : '';
+                        // $submission_typesInfo = isset($postData['submission_types']) ? $postData['submission_types'] : '';
+                        // $narrative_docInfo = isset($narrative_file) ? $narrative_file : '';                                                       
                         //save to database//
-                        if($postData['submission_types'] == '1'){                                           
+                        if($postData['submission_types'] == '1'){         
+                            
+                            /* narrative images details */
+                            // Define the number of co-authors you want to handle (e.g., 3 in this case)
+                            $narrativeImagesCount = $postData['narrative_images'];
+                            // Initialize empty arrays to hold the co-author data
+                            $narrativeImageDesc = [];
+                            $narrativeimageFile = [];    
+                            $exsisting_image = [];            
+                            $exsisting_image = json_decode($data['row']->image_files);
+                            // Loop through the number of co-authors and collect the data into arrays
+                            for ($i = 1; $i <= $narrativeImagesCount; $i++) {
+                                // Check if co-author name exists, to avoid null entries
+                                if ($request->input("narrative_image_desc_{$i}") !== null) {
+                                    $narrativeImageDesc[] = $request->input("narrative_image_desc_{$i}");
+
+                                // Add image file to the array (it can be null if no file is uploaded)                        
+                                    $imageFile      = $request->file("image_file_{$i}");
+                                    if ($imageFile != '') {                                
+                                            $imageName      = $imageFile->getClientOriginalName();                                 
+                                        $uploadedFile   = $this->upload_single_file("image_file_{$i}", $imageName, 'narrative', 'image');                                
+                                        if ($uploadedFile['status']) {
+                                        $narrativeimageFile[] = $uploadedFile['newFilename'];                                     
+                                        } else {
+                                            $narrativeimageFile[] = null;                                    
+                                        }
+                                    }  else {
+                                    $narrativeimageFile[] = $exsisting_image[$i-1];                                                              
+                                    }                                                                                         
+                                } 
+                            }                              
+                            // Example of saving it to a database as a serialized array (optional, depends on your schema)
+                            // $narrativeData = [
+                            //     'narrative_image_desc' => json_encode($narrativeImageDesc),  // Storing as JSON string
+                            //     'image_files' => json_encode($narrativeimageFile),                    
+                            // ];
+                            // dd($narrativeData);
+                            /* narrative images details */                                            
+        
+                            /* narrative doc file */
+                                $imageFile      = $request->file('narrative_file');
+                                if ($imageFile != '') {
+                                    $imageName      = $imageFile->getClientOriginalName();
+                                    $uploadedFile   = $this->upload_single_file('narrative_file', $imageName, 'narrative', 'word');
+                                    if ($uploadedFile['status']) {
+                                        $narrative_file = $uploadedFile['newFilename'];
+                                    } else {
+                                        return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                                    }
+                                } else {
+                                    $narrative_file = $data['row']->narrative_file;
+                                    // return redirect()->back()->with(['error_message' => 'Please Upload art_image File !!!']);
+                                }                            
+                            /* narrative doc file */
+
                             //save to database//
                             if ($this->validate($request, $rules)) {                
                                 $fields = [
@@ -1426,10 +1416,11 @@ class ArticlesController extends Controller
                                     'subtitle'                  => $postData['subtitle'],
                                     'submission_types'          => $submission_typesInfo,
                                     'section_ertId'             => $section_ertInfo,
-                                    'narrative_file'            => $narrative_docInfo,
+                                    'narrative_file'            => $narrative_file,
                                     'narrative_images'          => $postData['narrative_images'],
                                     'narrative_image_desc'      => json_encode($narrativeImageDesc),  // Storing as JSON string
                                     'image_files'               => json_encode($narrativeimageFile),
+                                    'art_images'                => null,
                                     'art_image_desc'            => null,  // Storing as JSON string
                                     'art_image_file'            => null,
                                     'art_desc'                  => null,
@@ -1449,12 +1440,52 @@ class ArticlesController extends Controller
                                 //   Helper::pr($fields);
                                 // Article::insert($fields);
                                 Article::where($this->data['primary_key'], '=', $id)->update($fields);
-                                return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
+                                return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');
                             
                             } else {
                                 return redirect()->back()->with('error_message', 'All Fields Required !!!');
                             }
                         } else if($postData['submission_types'] == '2'){
+                            /* art images details */
+                            // Define the number of co-authors you want to handle (e.g., 3 in this case)
+                            $artImagesCount = $postData['art_images'];
+                            // Initialize empty arrays to hold the co-author data
+                            $artImageDesc = [];
+                            $artimageFile = [];    
+                            $exsisting_artimage = [];            
+                            $exsisting_artimage = json_decode($data['row']->art_image_file);            
+                            // dd($exsisting_artimage);
+
+                            // Loop through the number of co-authors and collect the data into arrays
+                            for ($i = 1; $i <= $artImagesCount; $i++) {
+                                // Check if co-author name exists, to avoid null entries
+                                if ($request->input("art_image_desc_{$i}") !== null) {
+                                    $artImageDesc[] = $request->input("art_image_desc_{$i}");
+
+                                // Add image file to the array (it can be null if no file is uploaded)                        
+                                    $imageFile      = $request->file("art_image_file_{$i}");                            
+                                    if ($imageFile != '') {                                
+                                            $imageName      = $imageFile->getClientOriginalName();                                 
+                                        $uploadedFile   = $this->upload_single_file("art_image_file_{$i}", $imageName, 'art_image', 'image');                                
+                                        if ($uploadedFile['status']) {
+                                            $artimageFile[] = $uploadedFile['newFilename'];                                
+                                        } else {
+                                            $artimageFile[] = null;                                    
+                                        }
+                                    } else {
+                                        $artimageFile[] = $exsisting_artimage[$i-1];
+                                        // return redirect()->back()->with(['error_message' => 'Please Upload art_image File !!!']);
+                                    }                                                                                       
+                                } 
+                            }               
+                            // Example of saving it to a database as a serialized array (optional, depends on your schema)
+                            // $artData = [
+                            //     'art_image_desc' => json_encode($artImageDesc),  // Storing as JSON string
+                            //     'art_image_file' => json_encode($artimageFile),                    
+                            // ];
+                            // dd($artData);
+                            /* art images details */
+
                             if ($this->validate($request, $rules)) {                
                                 $fields = [
                                     'user_id'                      => 0,           
@@ -1510,12 +1541,29 @@ class ArticlesController extends Controller
                                 //   Helper::pr($fields);
                                 //Article::insert($fields);
                                 Article::where($this->data['primary_key'], '=', $id)->update($fields);
-                                return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
+                                return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');
                             
                             } else {
                                 return redirect()->back()->with('error_message', 'All Fields Required !!!');
                             }
                         } else {
+
+                            /* art_video file */
+                            $imageFile      = $request->file('art_video_file');
+                            if ($imageFile != '') {
+                                $imageName      = $imageFile->getClientOriginalName();
+                                $uploadedFile   = $this->upload_single_file('art_video_file', $imageName, 'art_video', 'video');
+                                if ($uploadedFile['status']) {
+                                    $art_video_file = $uploadedFile['newFilename'];
+                                } else {
+                                    return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                                }
+                            }else {
+                                $art_video_file = $data['row']->art_video_file;
+                                // return redirect()->back()->with(['error_message' => 'Please Upload art_image File !!!']);
+                            }                       
+                            /* art_video file */        
+
                             if ($this->validate($request, $rules)) {                
                                 $fields = [
                                     'user_id'                      => 0,           
@@ -1555,7 +1603,7 @@ class ArticlesController extends Controller
                                     'art_image_desc'            => null,  // Storing as JSON string
                                     'art_image_file'            => null,
                                     'art_desc'                  => null,                              
-                                    'art_video_file'            => $art_video_fileInfo,
+                                    'art_video_file'            => $art_video_file,
                                     'art_video_desc'            => $postData['art_video_desc'],                                                                        
                                     'country'                   => $postData['country'],
                                     'state'                     => $postData['state'],
@@ -1571,7 +1619,7 @@ class ArticlesController extends Controller
                                 //    Helper::pr($fields);
                                 // Article::insert($fields);
                                 Article::where($this->data['primary_key'], '=', $id)->update($fields);
-                                return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
+                                return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');
                             
                             } else {
                                 return redirect()->back()->with('error_message', 'All Fields Required !!!');
