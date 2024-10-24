@@ -806,8 +806,8 @@ class FrontController extends Controller
                             $subject                    = $generalSetting->site_name.' :: Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                             $message                    = view('email-templates.creative-work-submission',$mailData);
                             // echo $message;die;
-                            // $this->sendMail($postData['email'], $subject, $message);
-                            // $this->sendMail($generalSetting->system_email, $subject, $message);
+                            $this->sendMail($postData['email'], $subject, $message);
+                            $this->sendMail($generalSetting->system_email, $subject, $message);
                             /* submission email */
                             /* email log save */
                                 $postData2 = [
@@ -867,8 +867,8 @@ class FrontController extends Controller
                             $subject                    = $generalSetting->site_name.' :: Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                             $message                    = view('email-templates.creative-work-submission',$mailData);
                             // echo $message;die;
-                            // $this->sendMail($postData['email'], $subject, $message);
-                            // $this->sendMail($generalSetting->system_email, $subject, $message);
+                            $this->sendMail($postData['email'], $subject, $message);
+                            $this->sendMail($generalSetting->system_email, $subject, $message);
                             /* submission email */
                             /* email log save */
                                 $postData2 = [
@@ -1024,8 +1024,8 @@ class FrontController extends Controller
                                 $subject                    = $generalSetting->site_name.' :: Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                                 $message                    = view('email-templates.creative-work-submission',$mailData);
                                 // echo $message;die;
-                                // $this->sendMail($postData['email'], $subject, $message);
-                                // $this->sendMail($generalSetting->system_email, $subject, $message);
+                                $this->sendMail($postData['email'], $subject, $message);
+                                $this->sendMail($generalSetting->system_email, $subject, $message);
                                 /* submission email */
                                 /* email log save */
                                     $postData2 = [
@@ -1125,8 +1125,8 @@ class FrontController extends Controller
                                 $subject                    = $generalSetting->site_name.' :: Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                                 $message                    = view('email-templates.creative-work-submission',$mailData);
                                 // echo $message;die;
-                                // $this->sendMail($postData['email'], $subject, $message);
-                                // $this->sendMail($generalSetting->system_email, $subject, $message);
+                                $this->sendMail($postData['email'], $subject, $message);
+                                $this->sendMail($generalSetting->system_email, $subject, $message);
                                 /* submission email */
                                 /* email log save */
                                     $postData2 = [
@@ -1211,8 +1211,8 @@ class FrontController extends Controller
                                 $subject                    = $generalSetting->site_name.' :: Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                                 $message                    = view('email-templates.creative-work-submission',$mailData);
                                 // echo $message;die;
-                                // $this->sendMail($postData['email'], $subject, $message);
-                                // $this->sendMail($generalSetting->system_email, $subject, $message);
+                                $this->sendMail($postData['email'], $subject, $message);
+                                $this->sendMail($generalSetting->system_email, $subject, $message);
                                 /* submission email */
                                 /* email log save */
                                     $postData2 = [
@@ -1376,8 +1376,8 @@ class FrontController extends Controller
                                     $subject                    = $generalSetting->site_name.' :: Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                                     $message                    = view('email-templates.creative-work-submission',$mailData);
                                     // echo $message;die;
-                                    // $this->sendMail($postData['email'], $subject, $message);
-                                    // $this->sendMail($generalSetting->system_email, $subject, $message);
+                                    $this->sendMail($postData['email'], $subject, $message);
+                                    $this->sendMail($generalSetting->system_email, $subject, $message);
                                     /* submission email */
                                     /* email log save */
                                         $postData2 = [
@@ -1485,8 +1485,8 @@ class FrontController extends Controller
                                     $subject                    = $generalSetting->site_name.' :: Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                                     $message                    = view('email-templates.creative-work-submission',$mailData);
                                     // echo $message;die;
-                                    // $this->sendMail($postData['email'], $subject, $message);
-                                    // $this->sendMail($generalSetting->system_email, $subject, $message);
+                                    $this->sendMail($postData['email'], $subject, $message);
+                                    $this->sendMail($generalSetting->system_email, $subject, $message);
                                     /* submission email */
                                     /* email log save */
                                         $postData2 = [
@@ -1578,8 +1578,8 @@ class FrontController extends Controller
                                     $subject                    = $generalSetting->site_name.' :: Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                                     $message                    = view('email-templates.creative-work-submission',$mailData);
                                     // echo $message;die;
-                                    // $this->sendMail($postData['email'], $subject, $message);
-                                    // $this->sendMail($generalSetting->system_email, $subject, $message);
+                                    $this->sendMail($postData['email'], $subject, $message);
+                                    $this->sendMail($generalSetting->system_email, $subject, $message);
                                     /* submission email */
                                     /* email log save */
                                         $postData2 = [
