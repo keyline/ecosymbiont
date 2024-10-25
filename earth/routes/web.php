@@ -108,6 +108,7 @@ use Illuminate\Support\Facades\Route;
              Route::get('news_content/list', 'NewsContentController@list');
              Route::match(['get', 'post'], 'news_content/add', 'NewsContentController@add');
              Route::match(['get', 'post'], 'news_content/edit/{id}', 'NewsContentController@edit');
+             Route::match(['get', 'post'], 'news_content/import/{id}', 'NewsContentController@import');
              Route::get('news_content/delete/{id}', 'NewsContentController@delete');
              Route::get('news_content/change-status/{id}', 'NewsContentController@change_status');
              Route::get('news_content/change-archieve-status/{id}', 'NewsContentController@change_archieve_status');

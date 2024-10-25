@@ -12,11 +12,15 @@ use Illuminate\Support\Str;
 use App\Models\GeneralSetting;
 use App\Rules\MaxWords;
 use App\Models\NewsContent;
+use App\Models\Article;
+use App\Models\Title;
+use App\Models\SubmissionType;
 use App\Models\NewsContentImage;
 use App\Models\NewsCategory;
 use App\Models\Pronoun;
 use App\Models\EcosystemAffiliation;
 use App\Models\Country;
+use App\Models\ExpertiseArea;
 use Auth;
 use Session;
 use Helper;
@@ -302,6 +306,135 @@ class NewsContentController extends Controller
         echo $this->admin_after_login_layout($title, $page_name, $data);
     }
     /* edit */
+
+    /* import */
+    public function import(Request $request, $id)
+    {
+        $data['module']                 = $this->data;
+        $id                             = Helper::decoded($id);
+        $title                          = $this->data['title'] . ' Update';
+        $page_name                      = 'news_content.add-edit';
+        // $data['row']                    = NewsContent::where($this->data['primary_key'], '=', $id)->first();        
+        $data['row']                    = Article::where($this->data['primary_key'], '=', $id)->first();     
+        $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();  
+        $data['news_category']          = NewsCategory::where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'ASC')->get();        
+        $data['submission_type']       = SubmissionType::where('status', '=', 1)->orderBy('name', 'ASC')->get();  
+        $data['news_images']            = NewsContentImage::where('status', '!=', 3)->where('news_id', '=', $id)->get();
+        $data['parent_category']        = NewsCategory::where('status', '!=', 3)->where('parent_category', '=', 0)->orderBy('id', 'DESC')->get();
+        $data['sub_category']           = NewsCategory::where('status', '!=', 3)->where('parent_category', '!=', 0)->orderBy('id', 'DESC')->get();
+        $data['pronoun']                = Pronoun::where('status', '!=', 3)->orderBy('id', 'ASC')->get();
+        $data['author_affiliation']     = EcosystemAffiliation::where('status', '!=', 3)->orderBy('name', 'ASC')->get();
+        $data['country']                = Country::where('status', '!=', 3)->orderBy('name', 'ASC')->get();
+        $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // $data['selected_ecosystem_affiliation'] = json_decode($data['row']->author_affiliation);        
+
+        if ($request->isMethod('post')) {
+            $postData = $request->all();                         
+            $rules = [
+                'parent_category'           => 'required',                               
+                'sub_categories'            => 'required',   
+                'new_title'                 => 'required',
+                'creative_work_SRN'         => 'required',
+                'creative_work_DOI'         => 'required',
+                'author_name'               => 'required',
+                'pronoun'                   => 'required',   
+                'author_email'              => 'required',   
+                'country'                   => 'required',   
+                'media'                     => 'required',     
+                'is_feature'                => 'required',  
+                'is_popular'                => 'required',  
+                'sub_title'                 => 'required', 
+            ];     
+            if ($this->validate($request, $rules)) {
+                
+                    // Generate a unique slug
+                    $slug = Str::slug($postData['new_title']);                     
+                    if ($postData['media'] == 'image') {   
+                        /* banner image */
+                        $imageFile      = $request->file('cover_image');
+                            if($imageFile != ''){
+                                $imageName      = $imageFile->getClientOriginalName();
+                                $uploadedFile   = $this->upload_single_file('cover_image', $imageName, 'newcontent', 'image');
+                                if($uploadedFile['status']){
+                                    $cover_image = $uploadedFile['newFilename'];
+                                } else {
+                                    return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                                }
+                            } else {
+                                $cover_image = $data['row']->cover_image;
+                            }
+                        /* banner image */                      
+                    } 
+                    else{
+                        //fetch video code form url
+                        $url = $postData['video_url'];
+                        // $parts = explode("v=", $url);
+                        // Regular expression to match both types of YouTube URLs
+                        preg_match("/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([a-zA-Z0-9_-]{11})/", $url, $matches1);
+                        $videoId = $matches1[1]; // This will give you the part after 'v='
+
+                    }                     
+                    $fields = [
+                    'sub_category'              => $postData['sub_categories'],                       
+                    'parent_category'           => $postData['parent_category'], 
+                    'slug'                      => $slug,
+                    'new_title'                 => $postData['new_title'],
+                    'creative_work_SRN'         => $postData['creative_work_SRN'],
+                    'creative_work_DOI'         => $postData['creative_work_DOI'],
+                    'author_name'               => $postData['author_name'],   
+                    'author_short_bio'          => $postData['author_short_bio'] ?? '',   
+                    'author_pronoun'            => $postData['pronoun'],   
+                    'author_affiliation'        => json_encode($postData['author_affiliation'] ?? []),   
+                    'indigenous_affiliation'    => $postData['indigenous_affiliation'] ?? '',   
+                    'author_email'              => $postData['author_email'],   
+                    'country'                   => $postData['country'],   
+                    'organization_name'         => $postData['organization_name'] ?? '',   
+                    'media'                     => $postData['media'],   
+                    'cover_image'               => $cover_image ?? '',
+                    'cover_image_caption'       => $postData['cover_image_caption'] ?? '',
+                    'video_url'                 => $postData['video_url'],
+                    'videoId'                   => $videoId ?? '',
+                    'long_desc'                 => $postData['long_desc'] ?? '',     
+                    'keywords'                  => $postData['keywords'] ?? '',     
+                    'is_feature'                => $postData['is_feature'],  
+                    'is_popular'                => $postData['is_popular'],  
+                    'short_desc'                => $postData['short_desc'] ?? '',    
+                    'sub_title'                 => $postData['sub_title'], 
+                ];
+                    // dd($fields);                  
+                    NewsContent::where($this->data['primary_key'], '=', $id)->update($fields);
+                    /* others image */
+                    $imageFile      = $request->file('others_image');                    
+                    $others_image = [];
+                    if($imageFile != ''){                    
+                    $uploadedFile   = $this->commonFileArrayUpload('newcontent', $imageFile, 'image');
+                    if(!empty($uploadedFile)){
+                        $others_image = $uploadedFile;
+                    }                  
+                     else {
+                        $others_image = [];
+                    }
+                    }                                         
+                    /* others image */                               
+                    if(count($others_image)>0){
+                        for($k=0;$k<count($others_image);$k++){
+                            $fields   = [
+                                                'image_file'                => $others_image[$k],
+                                                'news_id'                   => $id ,
+                            ];                            
+                            NewsContentImage::insert($fields);                        
+                        }
+                    }     
+                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');                
+            } else {
+                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+            }
+        }
+        echo $this->admin_after_login_layout($title, $page_name, $data);
+    }
+    /* import */
+
     /* delete */
     public function delete(Request $request, $id)
     {
