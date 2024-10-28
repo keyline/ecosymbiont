@@ -24,6 +24,7 @@
                 @endif
             </div>
             <?php
+            // dd($profile);
             // $setting = GeneralSetting::where('id', '=', 1)->first();
             if ($row) {
                 //   Helper::pr($row);
@@ -129,7 +130,7 @@
                 $acknowledge = '';
             }
             ?>
-            <div class="col-xl-12">
+            <!-- <div class="col-xl-12">
                 <div class="card">
                     <div class="card-body pt-3">
                         @if ($errors->any())
@@ -143,7 +144,7 @@
                         @endif
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
@@ -159,13 +160,8 @@
                             <div class="row mb-3">
                                 <label for="author_classification" class="col-md-2 col-lg-4 col-form-label">2) Author Classification
                                 </label>
-                                <div class="col-md-10 col-lg-8">
-                                    <input type="radio" id="Human individual" name="author_classification" value="Human individual" @checked(old('author_classification', $author_classification) == 'Human individual')>
-                                    <label for="Human individual">Human individual</label>
-                                    <input type="radio" id="Ecoweb-rooted community" name="author_classification" value="Ecoweb-rooted community" @checked(old('author_classification', $author_classification) == 'Ecoweb-rooted community')>
-                                    <label for="Ecoweb-rooted community">Ecoweb-rooted community</label>
-                                    <input type="radio" id="Movement" name="author_classification" value="Movement" @checked(old('author_classification', $author_classification) == 'Movement')>
-                                    <label for="Movement">Movement</label>
+                                <div class="col-md-10 col-lg-8">                                                                      
+                                    <input type="text" class="form-control" id="Ecoweb-rooted community" name="author_classification" value="<?= $profile->name; ?>" readonly>
                                 </div>
                             </div> 
                             <div class="row mb-3">

@@ -710,6 +710,7 @@ class FrontController extends Controller
             $user_id                        = session('user_id');
             $data['user']                   = User::find($user_id);
             $data['articles']               = Article::where('user_id', '=', $user_id)->get();
+            $data['profile']                = UserProfile::where('user_id', '=', $user_id)->first();
             $data['search_keyword']         = '';
 
             if ($request->isMethod('post')) {
