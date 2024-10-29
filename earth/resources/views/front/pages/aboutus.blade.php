@@ -15,7 +15,7 @@
                             <div class="col-md-12">
                             <div class="welcome_mucis_section">
                                 <audio preload="auto" controls>
-                                    <source src="<?=env('FRONT_ASSETS_URL')?>ecosymbiontsaudio6oct2024.mp3">
+                                    <source src="<?=env('FRONT_ASSETS_URL')?>Ecosymbionts-audio-28Oct2024.mp3">
                                 </audio>
                             </div>
                             </div>

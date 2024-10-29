@@ -11,26 +11,26 @@ include "include/header.php";
                     <div class="col-md-12">
                       <div class="welcome_mucis_section">
                         <audio preload="auto" controls>
-                              <source src="ecosymbiontsaudio6oct2024.mp3">
+                              <source src="Ecosymbionts-audio-28Oct2024.mp3">
                         </audio>
                       </div>
                     </div>
                     <div class="col-md-12">
                         <div class="info-box">
                             <h2>OUR MISSION</h2>  
-                            <p id="our-focus">Our mission is to regain the understanding that human communities are part of natural  ecological webs (<span><a target="_blank" href="#definitions">ecowebs</a></span>) and to <span><a target="_blank" href="#definitions">regenerate</a></span>  systems that restore, preserve, and foster the symbiosis between humans and ecowebs. Symbiosis encompasses the connectivity and dependence that exist within an ecoweb and that results in mutual benefit of all within that ecoweb, including humans.</p>
+                            <p id="our-focus">We work globally to disrupt <span><a target="_blank" href="#definitions">extractivist</a></span> systems that cause ecocide and inequity, and locally to transition to <span><a target="_blank" href="#definitions">regenerative</a></span>  systems that ensure the interconnected wellbeing of humans and ecologies.</p>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="info-box">
                             <h2>OUR FOCUS</h2>
-                            <p>We focus on regenerating systems that advance food sovereignty, healthy living, and biodiversity preservation, all rooted locally in ecoweb-integrated human communities. These systems are of two types:</p>
+                            <p>We focus on transitioning to regenerative systems that advance food sovereignty, healthy living, and biodiversity preservation, all rooted locally in <a target="_blank" href="#definitions">ecoweb</a>-integrated human communities. These systems are of two types:</p>
                             <ul>
                                 <li><i><strong class="fontbold">human activity systems:</strong></i> ecoweb-specific systems of
                                     knowledge, technologies, and practices developed by ecoweb-rooted human communities
                                     &#x2014; such as Indigenous and tribal communities &#x2014; that are based and rely on the
                                     specific and preserved <a target="_blank" href="#definitions">biodiversity</a> of each ecoweb; and</li>
-                                <li><strong><i>legal-economic-governance systems:</i></strong> legal, trade, and government systems that optimize the wellbeing of human communities and the ecowebs of which they are a symbiotic part and that operate locally, regionally, and globally.</li>
+                                <li><strong><i>legal-economic-governance systems:</i></strong> legal, trade, and government systems that optimize the wellbeing of human communities and the ecowebs of which they are a <a target="_blank" href="#definitions">symbiotic</a> part and that operate locally, regionally, and globally.</li>
                             </ul>
                         </div>
                     </div>
@@ -38,7 +38,7 @@ include "include/header.php";
                       <div class="theory_inner">
                           <h4>THEORY OF CHANGE</h4>
                           <div>
-                          Exploiting &#x2014; without replenishing &#x2014; human and ecological resources (<a target="_blank" href="#definitions">extractivism</a>) by profit-making <a target="_blank" href="#definitions">corporations</a> is a modern (400+ years) form of imperialism that is enabled and promoted by a global system of laws, trade edicts, and governance structures imposed on nearly all peoples across the world. This system disconnects humans from ecowebs and causes widespread ecocide (<i>e.g.</i>, climate crisis, biodiversity loss) and inequity (<i>e.g.</i>, food insecurity, genocide) and must be disrupted and replaced in its entirety if ecowebs (humans included) are to survive. The collaborative conceptualizing and implementing of alternative systems that optimize ecoweb wellbeing are essential to effectively replace the globally institutionalized extractivist system.
+                          Exploiting, without replenishing, human and ecological resources (extractivism) by profit-making <a target="_blank" href="#definitions">corporations</a> is a modern (400+ years) form of imperialism that is enabled by a global system of extractivist education, technologies, laws, trade edicts, and governance structures imposed on nearly all peoples. This system disconnects humans from ecowebs and causes widespread ecocide (<i>e.g.</i>, climate crisis, biodiversity loss) and inequity (<i>e.g.</i>, food insecurity, violence). Thus, it must be disrupted and replaced in its entirety if ecowebs (humans included) are to survive. The collaborative conceptualizing and implementing of locally-rooted (regenerative) systems that optimize ecoweb wellbeing are essential to transition away from the globally institutionalized extractivist system.  
                           </div>
                       </div>
                     </div>
@@ -47,21 +47,16 @@ include "include/header.php";
                             <h2>OUR APPROACH</h2>
                             <p>We fulfill our mission in three interconnected ways:</p>
                             <ul>
-                                <li><strong><i>Disrupt systems:</i></strong> We work to disrupt and reshape the
-                                    globally institutionalized legal-economic-governance system that has been destroying
-                                    human-ecoweb symbiosis by fiercely promoting corporate
-                                    <span><a href="#definitions" target="_blank">extractivism</a></span> (exploitation of human and non-human ecoweb
-                                    resources without replenishment). This work is done through legal action, policy
-                                    reform, and other methods.
+                                <li><strong><i>Disrupt extractivist systems:</i></strong>We work to disrupt and transition away from the globally institutionalized legal-economicgovernance system that destroys humanecoweb symbiosis by promoting corporate extractivism (exploitation of human and non-human ecoweb resources without replenishment). This work is done through legal action and thinktank activities.
                                 </li>
-                                <li><strong><i>Facilitate synergies:</i> </strong>We bring together and facilitate
+                                <li><strong><i>Facilitate grassroots synergies:</i> </strong>We bring together and facilitate
                                     <span><a target="_blank" href="#definitions">synergies</a></span> between <span><a target="_blank" href="#definitions">grassroots</a></span> changemakers,
                                     innovators, and knowledge-holders working to regenerate systems that restore,
                                     preserve, and foster human-ecoweb symbiosis. We do this through in-person
                                     <strong><a href="<?=$base_url?>synergy-meetings.php" target="_blank">Synergy Meetings</a></strong> and through our online knowledge-sharing and
                                     community-building platform, <strong><a href="<?=$base_url?>earth" target="_blank">Ecosymbionts all Regenerate Together (EaRTh)</a></strong>.
                                 </li>
-                                <li><strong><i>Regenerate systems:</i> </strong> We collaboratively conceptualize and promote alternative systems that optimize ecoweb wellbeing (including of humans), instead of exploiting, diminishing, and destroying ecowebs. We do this by synthesizing our own work with the knowledge, ideas, and wisdom of grassroots changemakers, innovators, and knowledge-holders from across the world shared on <a href="<?=$base_url?>earth" target="_blank">Ecosymbionts all Regenerate Together (EaRTh)</a>. </li>
+                                <li><strong><i>Transition to regenerative systems:</i> </strong> We collaboratively conceptualize, promote, and implement alternative, locally-rooted systems that optimize ecoweb wellbeing, instead of destroying it. We do this by synthesizing our thinktank work with the knowledge, ideas, and wisdom of grassroots changemakers, innovators, and knowledge-holders from across the world shared on <a href="<?=$base_url?>earth" target="_blank">Ecosymbionts all Regenerate Together (EaRTh)</a>. </li>
                             </ul>
                         </div>
                     </div>
