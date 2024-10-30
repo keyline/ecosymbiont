@@ -1692,5 +1692,18 @@ class FrontController extends Controller
             $page_name                      = 'add-edit-profile';
             echo $this->front_after_login_layout($title, $page_name, $data);
         }
+        public function articleList(Request $request, $id)
+        {
+            $id                             = Helper::decoded($id);
+            $user_id                        = session('user_id');
+            $data['profile']                = UserProfile::find($id);
+            $data['articles']               = Article::where('user_id', '=', $user_id)->where('author_classification', '=', $data['profile']->name)->get();            
+            // Helper::pr($data['row']); 
+            $data['search_keyword']         = '';                                   
+            
+            $title                          = 'Article List';
+            $page_name                      = 'profile-articles';
+            echo $this->front_after_login_layout($title, $page_name, $data);
+        }
     /* after login */
 }
