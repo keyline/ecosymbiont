@@ -47,7 +47,7 @@ include "include/header.php";
                             <h2>OUR APPROACH</h2>
                             <p>We fulfill our mission in three interconnected ways:</p>
                             <ul>
-                                <li><strong><i>Disrupt extractivist systems:</i></strong>We work to disrupt and transition away from the globally institutionalized legal-economicgovernance system that destroys humanecoweb symbiosis by promoting corporate extractivism (exploitation of human and non-human ecoweb resources without replenishment). This work is done through legal action and thinktank activities.
+                                <li><strong><i>Disrupt extractivist systems:</i></strong> We work to disrupt and transition away from the globally institutionalized legal-economic-governance system that destroys human-ecoweb symbiosis by promoting corporate extractivism (exploitation of human and non-human ecoweb resources without replenishment). This work is done through legal action and thinktank activities.
                                 </li>
                                 <li><strong><i>Facilitate grassroots synergies:</i> </strong>We bring together and facilitate
                                     <span><a target="_blank" href="#definitions">synergies</a></span> between <span><a target="_blank" href="#definitions">grassroots</a></span> changemakers,
