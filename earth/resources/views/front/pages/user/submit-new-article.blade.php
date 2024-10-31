@@ -176,7 +176,7 @@
                                     <label for="2">2</label>
                                 </div>
                             </div>
-                            <div id="co_authors_position" style="display: none;border: 1px solid #000; padding: 10px; border-radius: 7px;">
+                            <div id="co_authors_position" style="display: none;border: 1px solid #000; padding: 10px; border-radius: 7px; margin-bottom: 20px;">
                                 <div class="row mb-3">
                                     <label for="co_authors_position" class="col-md-2 col-lg-4 col-form-label">3A) (- if answer to (3) is 1 or 2) Indicate in which position your name should appear in the list of authors (the Lead Author, i.e., the first author listed, must be a human individual)
                                     </label>
@@ -265,7 +265,7 @@
                                                     </div>
                                                 </div>
                                             </div> 
-                                            <div class="col-md-6">
+                                            <div class="col-md-12" style="margin-top: 15px">
                                                 <div class="row">
                                                     <label for="co_author_classification_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3H{{$i}}) Co-Author Classification</label>
                                                     <div class="col-md-10 col-lg-8">
@@ -465,7 +465,7 @@
                                     @endif                            
                                     </div>
                                 </div> 
-                                <div id="submission_types_a" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px;">                          
+                                <div id="submission_types_a" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px; margin-bottom: 20px">                          
                                     <div class="row mb-3">
                                         <label for="narrative_file" class="col-md-2 col-lg-4 col-form-label">17A1) TYPE A: word narrative (no embedded images) (500-1000 words for prose, 100-250 words for poetry)</label>
                                         <div class="col-md-10 col-lg-8">
@@ -574,7 +574,7 @@
                                         @endfor
                                     </div>                                
                                 </div>
-                                <div id="submission_types_b" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px;">
+                                <div id="submission_types_b" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px; margin-bottom: 20px">
                                     <div class="row mb-3">
                                         <label for="art_images" class="col-md-2 col-lg-4 col-form-label">17B1) TYPE B: How many images related to the same art are you uploading?</label>
                                         <div class="col-md-10 col-lg-8">
@@ -631,7 +631,7 @@
                                         </div>
                                     </div>                           
                                 </div>
-                                <div id="submission_types_c" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px;">
+                                <div id="submission_types_c" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px; margin-bottom: 20px">
                                     <div class="row mb-3">
                                         <label for="art_video_file" class="col-md-2 col-lg-4 col-form-label">17C1) TYPE C: Video (3-10 minutes)</label>
                                         <div class="col-md-10 col-lg-8">
