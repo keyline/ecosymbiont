@@ -40,6 +40,7 @@ use App\Helpers\Helper;
                                         <td><?=$profile->name?></td>
                                         <td>
                                             <a href="<?=url('user/update-profile/' . Helper::encoded($profile->id))?>" class="label label-primary">Edit</a>
+                                            <a href="<?=url('user/article-list/' . Helper::encoded($profile->id))?>" class="label label-primary">View Article List</a>
                                         </td>
                                     </tr>
                                 <?php } }?>

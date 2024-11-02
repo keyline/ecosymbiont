@@ -12,11 +12,16 @@ use Illuminate\Support\Str;
 use App\Models\GeneralSetting;
 use App\Rules\MaxWords;
 use App\Models\NewsContent;
+use App\Models\Article;
+use App\Models\Title;
+use App\Models\SubmissionType;
 use App\Models\NewsContentImage;
 use App\Models\NewsCategory;
 use App\Models\Pronoun;
 use App\Models\EcosystemAffiliation;
 use App\Models\Country;
+use App\Models\ExpertiseArea;
+use App\Models\UserProfile;
 use Auth;
 use Session;
 use Helper;
@@ -51,23 +56,47 @@ class NewsContentController extends Controller
             $postData = $request->all();            
             // Validation rules
             $rules = [
-                'parent_category'           => 'required',                               
-                'sub_categories'            => 'required',   
-                'new_title'                 => 'required',
+                'section_ert'               => 'required',   
+                'creative_Work'             => 'required',
                 'creative_work_SRN'         => 'required',
-                'creative_work_DOI'         => 'required',
-                'author_name'               => 'required',
+                'creative_work_DOI'         => 'required',                
                 'pronoun'                   => 'required',   
-                'author_email'              => 'required',   
+                'email'                     => 'required',   
                 'country'                   => 'required',   
                 'media'                     => 'required',     
                 'is_feature'                => 'required',  
                 'is_popular'                => 'required',  
-                'sub_title'                 => 'required', 
+                'subtitle'                  => 'required', 
             ];
             
             // Validate request data
             if ($this->validate($request, $rules)) {
+                /* co-author details */
+                    // Define the number of co-authors you want to handle (e.g., 3 in this case)
+                
+                    $coAuthorsCount = $postData['co_authors']; 
+                    // Initialize empty arrays to hold the co-author data
+                    $coAuthorNames = [];
+                    $coAuthorBios = [];
+                    $coAuthorCountries = [];
+                    $coAuthorOrganizations = [];
+                    $coecosystemAffiliations = [];
+                    $coindigenousAffiliations = [];
+                    $coauthorClassification = [];
+
+                    // Loop through the number of co-authors and collect the data into arrays
+                    for ($i = 1; $i <= $coAuthorsCount; $i++) {
+                        // Check if co-author name exists, to avoid null entries
+                        if ($request->input("co_author_name_{$i}") !== null) {
+                            $coAuthorNames[] = $request->input("co_author_name_{$i}");
+                            $coAuthorBios[] = $request->input("co_author_short_bio_{$i}");
+                            $coAuthorCountries[] = $request->input("co_author_country_{$i}");
+                            $coAuthorOrganizations[] = $request->input("co_authororganization_name_{$i}");
+                            $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
+                            $coindigenousAffiliations[] = $request->input("co_indigenous_affiliation_{$i}");
+                            $coauthorClassification[] = $request->input("co_author_classification_{$i}");
+                        }
+                    }
                 if ($postData['media'] == 'image') {   
                     /* banner image */
                     $imageFile      = $request->file('cover_image');
@@ -86,32 +115,46 @@ class NewsContentController extends Controller
                 } 
                 else{
                     //fetch video code form url
-                    $url = $postData['video_url'];
-                    // $parts = explode("v=", $url);
+                    $url = $postData['video_url'];                    
                     // Regular expression to match both types of YouTube URLs
                     preg_match("/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([a-zA-Z0-9_-]{11})/", $url, $matches1);
                     $videoId = $matches1[1]; // This will give you the part after 'v='
 
                 }                 
                 // Generate a unique slug
-                $slug = Str::slug($postData['new_title']);
+                $slug = Str::slug($postData['creative_Work']);
         
                 // Prepare fields for NewsContent insertion
                 $fields = [
-                    'sub_category'              => $postData['sub_categories'],                       
-                    'parent_category'           => $postData['parent_category'], 
-                    'slug'                      => $slug,
-                    'new_title'                 => $postData['new_title'],
-                    'creative_work_SRN'         => $postData['creative_work_SRN'],
-                    'creative_work_DOI'         => $postData['creative_work_DOI'],
-                    'author_name'               => $postData['author_name'],   
-                    'author_short_bio'          => $postData['author_short_bio'] ?? '',   
+                    'author_email'              => $postData['email'], 
+                    'author_classification'     => $postData['author_classification'],
+                    'co_authors'                => $postData['co_authors'],
+                    'co_authors_position'       => $postData['co_authors_position'],
+                    'co_author_names'           => json_encode($coAuthorNames),  // Storing as JSON string
+                    'co_author_bios'            => json_encode($coAuthorBios),
+                    'co_author_countries'       => json_encode($coAuthorCountries),
+                    'co_author_organizations'   => json_encode($coAuthorOrganizations),
+                    'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
+                    'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
+                    'co_author_classification'  => json_encode($coauthorClassification),
+                    'author_name'               => $postData['first_name'], 
+                    'for_publication_name'      => $postData['for_publication_name'],
+                    'new_title'                 => $postData['creative_Work'],
+                    'sub_title'                 => $postData['subtitle'], 
                     'author_pronoun'            => $postData['pronoun'],   
-                    'author_affiliation'        => json_encode($postData['author_affiliation'] ?? []),   
-                    'indigenous_affiliation'    => $postData['indigenous_affiliation'] ?? '',   
-                    'author_email'              => $postData['author_email'],   
-                    'country'                   => $postData['country'],   
+                    'title'                     => $postData['title'],
+                    'category'                  => $postData['section_ert'],                                           
+                    'slug'                      => $slug,
+                    'country'                   => $postData['country'],  
+                    'state'                     => $postData['state'],
+                    'city'                      => $postData['city'],
                     'organization_name'         => $postData['organization_name'] ?? '',   
+                    'organization_website'      => $postData['organization_website'],
+                    'author_affiliation'        => json_encode($postData['ecosystem_affiliation'] ?? []),  
+                    'indigenous_affiliation'    => $postData['indigenous_affiliation'] ?? '',   
+                    'expertise_area'            => json_encode($postData['expertise_area']),                    
+                    'creative_work_SRN'         => $postData['creative_work_SRN'],
+                    'creative_work_DOI'         => $postData['creative_work_DOI'],                                                                                                                                                           
                     'media'                     => $postData['media'],   
                     'cover_image'               => $cover_image ?? '',
                     'cover_image_caption'       => $postData['cover_image_caption'] ?? '',
@@ -122,36 +165,9 @@ class NewsContentController extends Controller
                     'is_feature'                => $postData['is_feature'],  
                     'is_popular'                => $postData['is_popular'],  
                     'short_desc'                => $postData['short_desc'] ?? '',    
-                    'sub_title'                 => $postData['sub_title'], 
                 ];
-                
-        
-                // Insert NewsContent and get the last inserted ID
-                $lastInsertedId = NewsContent::insertGetId($fields);
-        
-                // Handle others_image upload (optional)
-                $imageFile = $request->file('others_image');
-                $others_image = [];
-        
-                if($imageFile != '') {                    
-                    $uploadedFile = $this->commonFileArrayUpload('newcontent', $imageFile, 'image');
-                    if(!empty($uploadedFile)) {
-                        $others_image = $uploadedFile;
-                    } else {
-                        $others_image = [];
-                    }
-                }
-        
-                // Insert into NewsContentImage if others_image is not empty
-                if(count($others_image) > 0) {
-                    foreach($others_image as $image) {
-                        $imageFields = [
-                            'image_file' => $image,
-                            'news_id' => $lastInsertedId,
-                        ];
-                        NewsContentImage::insert($imageFields);
-                    }
-                }
+                //   dd($fields);                                 
+                NewsContent::insert($fields);                        
         
                 // Redirect after successful insertion
                 return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
@@ -164,11 +180,17 @@ class NewsContentController extends Controller
         $title                          = $this->data['title'] . ' Add';       
         $page_name                      = 'news_content.add-edit';
         $data['row']                    = [];
+        // $user_id                        = $data['row']->user_id;
         $data['parent_category']        = NewsCategory::where('status', '!=', 3)->where('parent_category', '=', 0)->orderBy('id', 'DESC')->get();
         $data['sub_category']           = NewsCategory::where('status', '!=', 3)->where('parent_category', '!=', 0)->orderBy('id', 'DESC')->get();
         $data['pronoun']                = Pronoun::where('status', '!=', 3)->orderBy('id', 'ASC')->get();
         $data['author_affiliation']     = EcosystemAffiliation::where('status', '!=', 3)->orderBy('name', 'ASC')->get();
         $data['country']                = Country::where('status', '!=', 3)->orderBy('name', 'ASC')->get();
+        // $data['profile']                = UserProfile::where('user_id', '=', $user_id)->first();
+        $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();  
+        $data['news_category']          = NewsCategory::where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'ASC')->get();        
+        $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
          $data['news_images']           = [];
         echo $this->admin_after_login_layout($title, $page_name, $data);
     }
@@ -189,35 +211,64 @@ class NewsContentController extends Controller
         $title                          = $this->data['title'] . ' Update';
         $page_name                      = 'news_content.add-edit';
         $data['row']                    = NewsContent::where($this->data['primary_key'], '=', $id)->first();        
+        $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();  
+        $data['news_category']          = NewsCategory::where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'ASC')->get();        
+        $data['submission_type']        = SubmissionType::where('status', '=', 1)->orderBy('name', 'ASC')->get();  
         $data['news_images']            = NewsContentImage::where('status', '!=', 3)->where('news_id', '=', $id)->get();
         $data['parent_category']        = NewsCategory::where('status', '!=', 3)->where('parent_category', '=', 0)->orderBy('id', 'DESC')->get();
         $data['sub_category']           = NewsCategory::where('status', '!=', 3)->where('parent_category', '!=', 0)->orderBy('id', 'DESC')->get();
         $data['pronoun']                = Pronoun::where('status', '!=', 3)->orderBy('id', 'ASC')->get();
         $data['author_affiliation']     = EcosystemAffiliation::where('status', '!=', 3)->orderBy('name', 'ASC')->get();
         $data['country']                = Country::where('status', '!=', 3)->orderBy('name', 'ASC')->get();
-        $data['selected_ecosystem_affiliation'] = json_decode($data['row']->author_affiliation);        
+        $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // $data['profile']                = UserProfile::where('user_id', '=', $user_id)->first();       
 
         if ($request->isMethod('post')) {
             $postData = $request->all();                         
             $rules = [
-                'parent_category'           => 'required',                               
-                'sub_categories'            => 'required',   
-                'new_title'                 => 'required',
+                'section_ert'            => 'required',   
+                'creative_Work'                 => 'required',
                 'creative_work_SRN'         => 'required',
-                'creative_work_DOI'         => 'required',
-                'author_name'               => 'required',
+                'creative_work_DOI'         => 'required',                
                 'pronoun'                   => 'required',   
-                'author_email'              => 'required',   
+                'email'                     => 'required',   
                 'country'                   => 'required',   
                 'media'                     => 'required',     
                 'is_feature'                => 'required',  
                 'is_popular'                => 'required',  
-                'sub_title'                 => 'required', 
+                'subtitle'                 => 'required', 
             ];     
             if ($this->validate($request, $rules)) {
                 
                     // Generate a unique slug
-                    $slug = Str::slug($postData['new_title']);                     
+                    $slug = Str::slug($postData['creative_Work']);  
+                    /* co-author details */
+                    // Define the number of co-authors you want to handle (e.g., 3 in this case)
+                
+                    $coAuthorsCount = $postData['co_authors']; 
+                    // Initialize empty arrays to hold the co-author data
+                    $coAuthorNames = [];
+                    $coAuthorBios = [];
+                    $coAuthorCountries = [];
+                    $coAuthorOrganizations = [];
+                    $coecosystemAffiliations = [];
+                    $coindigenousAffiliations = [];
+                    $coauthorClassification = [];
+
+                    // Loop through the number of co-authors and collect the data into arrays
+                    for ($i = 1; $i <= $coAuthorsCount; $i++) {
+                        // Check if co-author name exists, to avoid null entries
+                        if ($request->input("co_author_name_{$i}") !== null) {
+                            $coAuthorNames[] = $request->input("co_author_name_{$i}");
+                            $coAuthorBios[] = $request->input("co_author_short_bio_{$i}");
+                            $coAuthorCountries[] = $request->input("co_author_country_{$i}");
+                            $coAuthorOrganizations[] = $request->input("co_authororganization_name_{$i}");
+                            $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
+                            $coindigenousAffiliations[] = $request->input("co_indigenous_affiliation_{$i}");
+                            $coauthorClassification[] = $request->input("co_author_classification_{$i}");
+                        }
+                    }                             
                     if ($postData['media'] == 'image') {   
                         /* banner image */
                         $imageFile      = $request->file('cover_image');
@@ -236,28 +287,188 @@ class NewsContentController extends Controller
                     } 
                     else{
                         //fetch video code form url
-                        $url = $postData['video_url'];
-                        // $parts = explode("v=", $url);
+                        $url = $postData['video_url'];                        
                         // Regular expression to match both types of YouTube URLs
                         preg_match("/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([a-zA-Z0-9_-]{11})/", $url, $matches1);
                         $videoId = $matches1[1]; // This will give you the part after 'v='
 
                     }                     
                     $fields = [
-                    'sub_category'              => $postData['sub_categories'],                       
-                    'parent_category'           => $postData['parent_category'], 
-                    'slug'                      => $slug,
-                    'new_title'                 => $postData['new_title'],
-                    'creative_work_SRN'         => $postData['creative_work_SRN'],
-                    'creative_work_DOI'         => $postData['creative_work_DOI'],
-                    'author_name'               => $postData['author_name'],   
-                    'author_short_bio'          => $postData['author_short_bio'] ?? '',   
+                    'author_email'              => $postData['email'], 
+                    'author_classification'     => $postData['author_classification'],
+                    'co_authors'                => $postData['co_authors'],
+                    'co_authors_position'       => $postData['co_authors_position'],
+                    'co_author_names'           => json_encode($coAuthorNames),  // Storing as JSON string
+                    'co_author_bios'            => json_encode($coAuthorBios),
+                    'co_author_countries'       => json_encode($coAuthorCountries),
+                    'co_author_organizations'   => json_encode($coAuthorOrganizations),
+                    'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
+                    'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
+                    'co_author_classification'  => json_encode($coauthorClassification),
+                    'author_name'               => $postData['first_name'], 
+                    'for_publication_name'      => $postData['for_publication_name'],
+                    'new_title'                 => $postData['creative_Work'],
+                    'sub_title'                 => $postData['subtitle'], 
                     'author_pronoun'            => $postData['pronoun'],   
-                    'author_affiliation'        => json_encode($postData['author_affiliation'] ?? []),   
-                    'indigenous_affiliation'    => $postData['indigenous_affiliation'] ?? '',   
-                    'author_email'              => $postData['author_email'],   
-                    'country'                   => $postData['country'],   
+                    'title'                     => $postData['title'],
+                    'category'                  => $postData['section_ert'],                                           
+                    'slug'                      => $slug,
+                    'country'                   => $postData['country'],  
+                    'state'                     => $postData['state'],
+                    'city'                      => $postData['city'],
                     'organization_name'         => $postData['organization_name'] ?? '',   
+                    'organization_website'      => $postData['organization_website'],
+                    'author_affiliation'        => json_encode($postData['ecosystem_affiliation'] ?? []),  
+                    'indigenous_affiliation'    => $postData['indigenous_affiliation'] ?? '',   
+                    'expertise_area'            => json_encode($postData['expertise_area']),                    
+                    'creative_work_SRN'         => $postData['creative_work_SRN'],
+                    'creative_work_DOI'         => $postData['creative_work_DOI'],                                                                                                                                                           
+                    'media'                     => $postData['media'],   
+                    'cover_image'               => $cover_image ?? '',
+                    'cover_image_caption'       => $postData['cover_image_caption'] ?? '',
+                    'video_url'                 => $postData['video_url'],
+                    'videoId'                   => $videoId ?? '',
+                    'long_desc'                 => $postData['long_desc'] ?? '',     
+                    'keywords'                  => $postData['keywords'] ?? '',     
+                    'is_feature'                => $postData['is_feature'],  
+                    'is_popular'                => $postData['is_popular'],  
+                    'short_desc'                => $postData['short_desc'] ?? '', 
+                ];
+                    //  dd($fields);                  
+                    NewsContent::where($this->data['primary_key'], '=', $id)->update($fields);                   
+                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');                
+            } else {
+                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+            }
+        }
+        echo $this->admin_after_login_layout($title, $page_name, $data);
+    }
+    /* edit */
+
+    /* import */
+    public function import(Request $request, $id)
+    {
+        $data['module']                 = $this->data;
+        $id                             = Helper::decoded($id);        
+        $title                          = $this->data['title'] . ' import';
+        $page_name                      = 'news_content.import';
+        // $data['row']                    = NewsContent::where($this->data['primary_key'], '=', $id)->first();        
+        $data['row']                    = Article::where($this->data['primary_key'], '=', $id)->first();  
+        $user_id                        = $data['row']->user_id;   
+        $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();  
+        $data['news_category']          = NewsCategory::where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'ASC')->get();        
+        $data['submission_type']       = SubmissionType::where('status', '=', 1)->orderBy('name', 'ASC')->get();  
+        $data['news_images']            = NewsContentImage::where('status', '!=', 3)->where('news_id', '=', $id)->get();
+        $data['parent_category']        = NewsCategory::where('status', '!=', 3)->where('parent_category', '=', 0)->orderBy('id', 'DESC')->get();
+        $data['sub_category']           = NewsCategory::where('status', '!=', 3)->where('parent_category', '!=', 0)->orderBy('id', 'DESC')->get();
+        $data['pronoun']                = Pronoun::where('status', '!=', 3)->orderBy('id', 'ASC')->get();
+        $data['author_affiliation']     = EcosystemAffiliation::where('status', '!=', 3)->orderBy('name', 'ASC')->get();
+        $data['country']                = Country::where('status', '!=', 3)->orderBy('name', 'ASC')->get();
+        $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['profile']                = UserProfile::where('user_id', '=', $user_id)->first();
+        // $data['selected_ecosystem_affiliation'] = json_decode($data['row']->author_affiliation);        
+
+        if ($request->isMethod('post')) {
+            $postData = $request->all();     
+            // dd($postData);
+            $rules = [                                            
+                'section_ert'            => 'required',   
+                'creative_Work'                 => 'required',
+                'creative_work_SRN'         => 'required',
+                'creative_work_DOI'         => 'required',                
+                'pronoun'                   => 'required',   
+                'email'                     => 'required',   
+                'country'                   => 'required',   
+                'media'                     => 'required',     
+                'is_feature'                => 'required',  
+                'is_popular'                => 'required',  
+                'subtitle'                 => 'required', 
+            ];     
+            if ($this->validate($request, $rules)) {
+                
+                    // Generate a unique slug
+                    $slug = Str::slug($postData['creative_Work']);  
+                    /* co-author details */
+                    // Define the number of co-authors you want to handle (e.g., 3 in this case)
+                
+                    $coAuthorsCount = $postData['co_authors']; 
+                    // Initialize empty arrays to hold the co-author data
+                    $coAuthorNames = [];
+                    $coAuthorBios = [];
+                    $coAuthorCountries = [];
+                    $coAuthorOrganizations = [];
+                    $coecosystemAffiliations = [];
+                    $coindigenousAffiliations = [];
+                    $coauthorClassification = [];
+
+                    // Loop through the number of co-authors and collect the data into arrays
+                    for ($i = 1; $i <= $coAuthorsCount; $i++) {
+                        // Check if co-author name exists, to avoid null entries
+                        if ($request->input("co_author_name_{$i}") !== null) {
+                            $coAuthorNames[] = $request->input("co_author_name_{$i}");
+                            $coAuthorBios[] = $request->input("co_author_short_bio_{$i}");
+                            $coAuthorCountries[] = $request->input("co_author_country_{$i}");
+                            $coAuthorOrganizations[] = $request->input("co_authororganization_name_{$i}");
+                            $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
+                            $coindigenousAffiliations[] = $request->input("co_indigenous_affiliation_{$i}");
+                            $coauthorClassification[] = $request->input("co_author_classification_{$i}");
+                        }
+                    }                                   
+                    if ($postData['media'] == 'image') {   
+                        /* banner image */
+                        $imageFile      = $request->file('cover_image');
+                            if($imageFile != ''){
+                                $imageName      = $imageFile->getClientOriginalName();
+                                $uploadedFile   = $this->upload_single_file('cover_image', $imageName, 'newcontent', 'image');
+                                if($uploadedFile['status']){
+                                    $cover_image = $uploadedFile['newFilename'];
+                                } else {
+                                    return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                                }
+                            } else {
+                                $cover_image = $data['row']->cover_image;
+                            }
+                        /* banner image */                      
+                    } 
+                    else{
+                        //fetch video code form url
+                        $url = $postData['video_url'];                        
+                        // Regular expression to match both types of YouTube URLs
+                        preg_match("/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([a-zA-Z0-9_-]{11})/", $url, $matches1);
+                        $videoId = $matches1[1]; // This will give you the part after 'v='
+
+                    }                     
+                    $fields = [
+                    'author_email'              => $postData['email'], 
+                    'author_classification'     => $postData['author_classification'],
+                    'co_authors'                => $postData['co_authors'],
+                    'co_authors_position'       => $postData['co_authors_position'],
+                    'co_author_names'           => json_encode($coAuthorNames),  // Storing as JSON string
+                    'co_author_bios'            => json_encode($coAuthorBios),
+                    'co_author_countries'       => json_encode($coAuthorCountries),
+                    'co_author_organizations'   => json_encode($coAuthorOrganizations),
+                    'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
+                    'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
+                    'co_author_classification'  => json_encode($coauthorClassification),
+                    'author_name'               => $postData['first_name'], 
+                    'for_publication_name'      => $postData['for_publication_name'],
+                    'new_title'                 => $postData['creative_Work'],
+                    'sub_title'                 => $postData['subtitle'], 
+                    'author_pronoun'            => $postData['pronoun'],   
+                    'title'                     => $postData['title'],
+                    'category'                  => $postData['section_ert'],                                           
+                    'slug'                      => $slug,
+                    'country'                   => $postData['country'],  
+                    'state'                     => $postData['state'],
+                    'city'                      => $postData['city'],
+                    'organization_name'         => $postData['organization_name'] ?? '',   
+                    'organization_website'      => $postData['organization_website'],
+                    'author_affiliation'        => json_encode($postData['ecosystem_affiliation'] ?? []),  
+                    'indigenous_affiliation'    => $postData['indigenous_affiliation'] ?? '',   
+                    'expertise_area'            => json_encode($postData['expertise_area']),                    
+                    'creative_work_SRN'         => $postData['creative_work_SRN'],
+                    'creative_work_DOI'         => $postData['creative_work_DOI'],                                                                                                                                                           
                     'media'                     => $postData['media'],   
                     'cover_image'               => $cover_image ?? '',
                     'cover_image_caption'       => $postData['cover_image_caption'] ?? '',
@@ -268,40 +479,19 @@ class NewsContentController extends Controller
                     'is_feature'                => $postData['is_feature'],  
                     'is_popular'                => $postData['is_popular'],  
                     'short_desc'                => $postData['short_desc'] ?? '',    
-                    'sub_title'                 => $postData['sub_title'], 
+                    
                 ];
-                    // dd($fields);                  
-                    NewsContent::where($this->data['primary_key'], '=', $id)->update($fields);
-                    /* others image */
-                    $imageFile      = $request->file('others_image');                    
-                    $others_image = [];
-                    if($imageFile != ''){                    
-                    $uploadedFile   = $this->commonFileArrayUpload('newcontent', $imageFile, 'image');
-                    if(!empty($uploadedFile)){
-                        $others_image = $uploadedFile;
-                    }                  
-                     else {
-                        $others_image = [];
-                    }
-                    }                                         
-                    /* others image */                               
-                    if(count($others_image)>0){
-                        for($k=0;$k<count($others_image);$k++){
-                            $fields   = [
-                                                'image_file'                => $others_image[$k],
-                                                'news_id'                   => $id ,
-                            ];                            
-                            NewsContentImage::insert($fields);                        
-                        }
-                    }     
-                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');                
+                    //  dd($fields);                                 
+                    NewsContent::insert($fields);                    
+                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');                
             } else {
                 return redirect()->back()->with('error_message', 'All Fields Required !!!');
             }
         }
         echo $this->admin_after_login_layout($title, $page_name, $data);
     }
-    /* edit */
+    /* import */
+
     /* delete */
     public function delete(Request $request, $id)
     {
