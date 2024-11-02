@@ -76,7 +76,7 @@ $controllerRoute = $module['controller_route'];
             $for_publication_name = $row->for_publication_name;          
             $titleId = $row->title;  
             $pronounId = $row->author_pronoun;
-            $news_categoryId = $row->category;
+            $news_categoryId = $row->sub_category;
             $creative_Work = $row->new_title;  
             $orginal_work = $row->orginal_work;        
             $copyright = $row->copyright; 
@@ -88,7 +88,7 @@ $controllerRoute = $module['controller_route'];
             $ecosystem_affiliationId = (($row->author_affiliation != '')?json_decode($row->author_affiliation):[]);
             $indigenous_affiliation = $row->indigenous_affiliation;
             $expertise_areaId = (($row->expertise_area != '')?json_decode($row->expertise_area):[]);
-            $bio_short = $row->bio_short;
+            $author_short_bio = $row->author_short_bio;
             $bio_long = $row->bio_long;            
             $new_title = $row->new_title;            
             $creative_work_SRN = $row->creative_work_SRN;
@@ -132,7 +132,7 @@ $controllerRoute = $module['controller_route'];
             $creative_work_SRN = '';
             $creative_work_DOI = '';
             // $author_name = '';
-            // $author_short_bio = '';
+            $author_short_bio = '';
             $indigenous_affiliation = '';
             $pronounId = '';
             $author_affiliationId = [];
@@ -481,7 +481,14 @@ $controllerRoute = $module['controller_route'];
                                     @endif
                                 </div>
                             </div>                             
-                           
+                            <div class="row mb-3">
+                                <label for="author_short_bio" class="col-md-2 col-lg-4 col-form-label">26) 1-sentence biography (max. 40 words)
+                                </label>
+                                <div class="col-md-10 col-lg-8">
+                                    <textarea class="form-control" id="author_short_bio" name="author_short_bio" rows="4" cols="50" placeholder="Your explanation here..." required><?= $author_short_bio ?></textarea>
+                                    <div id="bio_shortError" class="error"></div>
+                                </div>
+                            </div>
                          
                         <div class="row mb-3">
                             <label for="media" class="col-md-2 col-lg-2 col-form-label">Media Type</label>

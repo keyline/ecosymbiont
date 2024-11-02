@@ -53,7 +53,8 @@ class NewsContentController extends Controller
     {
         $data['module']           = $this->data;
         if ($request->isMethod('post')) {
-            $postData = $request->all();            
+            $postData = $request->all();     
+            $parent_category                = NewsCategory::where('id', '=', $postData['section_ert'])->first();         
             // Validation rules
             $rules = [
                 'section_ert'               => 'required',   
@@ -138,12 +139,14 @@ class NewsContentController extends Controller
                     'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
                     'co_author_classification'  => json_encode($coauthorClassification),
                     'author_name'               => $postData['first_name'], 
+                    'author_short_bio'          => $postData['author_short_bio'], 
                     'for_publication_name'      => $postData['for_publication_name'],
                     'new_title'                 => $postData['creative_Work'],
                     'sub_title'                 => $postData['subtitle'], 
                     'author_pronoun'            => $postData['pronoun'],   
                     'title'                     => $postData['title'],
-                    'category'                  => $postData['section_ert'],                                           
+                    'parent_category'           => $parent_category->parent_category,                                           
+                    'sub_category'              => $postData['section_ert'],                                           
                     'slug'                      => $slug,
                     'country'                   => $postData['country'],  
                     'state'                     => $postData['state'],
@@ -222,10 +225,11 @@ class NewsContentController extends Controller
         $data['country']                = Country::where('status', '!=', 3)->orderBy('name', 'ASC')->get();
         $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
         $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-        // $data['profile']                = UserProfile::where('user_id', '=', $user_id)->first();       
+        
 
         if ($request->isMethod('post')) {
-            $postData = $request->all();                         
+            $postData = $request->all();    
+            $parent_category                = NewsCategory::where('id', '=', $postData['section_ert'])->first();                            
             $rules = [
                 'section_ert'            => 'required',   
                 'creative_Work'                 => 'required',
@@ -306,12 +310,14 @@ class NewsContentController extends Controller
                     'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
                     'co_author_classification'  => json_encode($coauthorClassification),
                     'author_name'               => $postData['first_name'], 
+                    'author_short_bio'          => $postData['author_short_bio'],
                     'for_publication_name'      => $postData['for_publication_name'],
                     'new_title'                 => $postData['creative_Work'],
                     'sub_title'                 => $postData['subtitle'], 
                     'author_pronoun'            => $postData['pronoun'],   
                     'title'                     => $postData['title'],
-                    'category'                  => $postData['section_ert'],                                           
+                    'parent_category'           => $parent_category->parent_category,                                           
+                    'sub_category'              => $postData['section_ert'],                                           
                     'slug'                      => $slug,
                     'country'                   => $postData['country'],  
                     'state'                     => $postData['state'],
@@ -370,7 +376,8 @@ class NewsContentController extends Controller
         // $data['selected_ecosystem_affiliation'] = json_decode($data['row']->author_affiliation);        
 
         if ($request->isMethod('post')) {
-            $postData = $request->all();     
+            $postData = $request->all();
+            $parent_category                = NewsCategory::where('id', '=', $postData['section_ert'])->first();       
             // dd($postData);
             $rules = [                                            
                 'section_ert'            => 'required',   
@@ -457,7 +464,8 @@ class NewsContentController extends Controller
                     'sub_title'                 => $postData['subtitle'], 
                     'author_pronoun'            => $postData['pronoun'],   
                     'title'                     => $postData['title'],
-                    'category'                  => $postData['section_ert'],                                           
+                    'parent_category'           => $parent_category->parent_category,                                           
+                    'sub_category'              => $postData['section_ert'],                                           
                     'slug'                      => $slug,
                     'country'                   => $postData['country'],  
                     'state'                     => $postData['state'],
