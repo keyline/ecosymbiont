@@ -128,9 +128,9 @@ class NewsContentController extends Controller
                 // Prepare fields for NewsContent insertion
                 $fields = [
                     'author_email'              => $postData['email'], 
-                    'author_classification'     => $postData['author_classification'],
-                    'co_authors'                => $postData['co_authors'],
-                    'co_authors_position'       => $postData['co_authors_position'],
+                    'author_classification'     => $postData['author_classification'] ?? '',
+                    'co_authors'                => $postData['co_authors'] ?? '',
+                    'co_authors_position'       => $postData['co_authors_position'] ?? '',
                     'co_author_names'           => json_encode($coAuthorNames),  // Storing as JSON string
                     'co_author_bios'            => json_encode($coAuthorBios),
                     'co_author_countries'       => json_encode($coAuthorCountries),
@@ -155,7 +155,7 @@ class NewsContentController extends Controller
                     'organization_website'      => $postData['organization_website'],
                     'author_affiliation'        => json_encode($postData['ecosystem_affiliation'] ?? []),  
                     'indigenous_affiliation'    => $postData['indigenous_affiliation'] ?? '',   
-                    'expertise_area'            => json_encode($postData['expertise_area']),                    
+                    'expertise_area'            => json_encode($postData['expertise_area'] ?? []),                         
                     'creative_work_SRN'         => $postData['creative_work_SRN'],
                     'creative_work_DOI'         => $postData['creative_work_DOI'],                                                                                                                                                           
                     'media'                     => $postData['media'],   
@@ -447,9 +447,9 @@ class NewsContentController extends Controller
                     }                     
                     $fields = [
                     'author_email'              => $postData['email'], 
-                    'author_classification'     => $postData['author_classification'],
-                    'co_authors'                => $postData['co_authors'],
-                    'co_authors_position'       => $postData['co_authors_position'],
+                    'author_classification'     => $postData['author_classification'] ?? '',
+                    'co_authors'                => $postData['co_authors'] ?? '',
+                    'co_authors_position'       => $postData['co_authors_position'] ?? '',
                     'co_author_names'           => json_encode($coAuthorNames),  // Storing as JSON string
                     'co_author_bios'            => json_encode($coAuthorBios),
                     'co_author_countries'       => json_encode($coAuthorCountries),
@@ -473,7 +473,7 @@ class NewsContentController extends Controller
                     'organization_website'      => $postData['organization_website'],
                     'author_affiliation'        => json_encode($postData['ecosystem_affiliation'] ?? []),  
                     'indigenous_affiliation'    => $postData['indigenous_affiliation'] ?? '',   
-                    'expertise_area'            => json_encode($postData['expertise_area']),                    
+                    'expertise_area'            => json_encode($postData['expertise_area'] ?? []),                         
                     'creative_work_SRN'         => $postData['creative_work_SRN'],
                     'creative_work_DOI'         => $postData['creative_work_DOI'],                                                                                                                                                           
                     'media'                     => $postData['media'],   
