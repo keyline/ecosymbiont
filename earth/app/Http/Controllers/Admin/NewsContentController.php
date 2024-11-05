@@ -229,7 +229,7 @@ class NewsContentController extends Controller
 
         if ($request->isMethod('post')) {
             $postData = $request->all();
-            Helper::pr($postData);
+            // Helper::pr($postData);
             $parent_category                = NewsCategory::where('id', '=', $postData['section_ert'])->first();                            
             $rules = [
                 'section_ert'            => 'required',   
