@@ -89,21 +89,22 @@ $current_url = $protocol . $host . $uri;
                                     </div>
                                 </div> -->
                                 <div class="post-content">
-                                    <?php if(session('is_user_login')){?>
-                                        <div><?=$rowContent->long_desc?></div>
-                                    <?php } else {?>
+                                    <?php //if(session('is_user_login')){?>
+                                        <!-- <div><?=$rowContent->long_desc?></div> -->
+                                    <?php //} else {?>
                                         <!-- <p>?=substr($rowContent->long_desc,0,100)?> ...</p> -->
+                                        <div><?=$rowContent->long_desc?></div>
                                         <div>
                                             <?php // Split the long description into an array of words
-                                            $words = explode(' ', $rowContent->long_desc);
+                                            // $words = explode(' ', $rowContent->long_desc);
                                         
-                                        // Get the first 40 words
-                                        $short_desc = implode(' ', array_slice($words, 0, 50));
+                                            // // Get the first 40 words
+                                            // $short_desc = implode(' ', array_slice($words, 0, 50));
                                         
-                                        // Display the shortened description
-                                        echo $short_desc;
-                                        ?>
-                                    </div>
+                                            // // Display the shortened description
+                                            // echo $short_desc;
+                                            ?>
+                                        </div>
                                         <?php
                                         // Check if HTTPS is enabled
                                         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
@@ -120,8 +121,8 @@ $current_url = $protocol . $host . $uri;
                                         // Output the current URL
                                         // echo $current_url;
                                         ?>
-                                        <p class="text-center"><a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="text-primary">Read More</a></p>
-                                    <?php }?>
+                                        <!-- <p class="text-center"><a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="text-primary">Read More</a></p> -->
+                                    <?php //}?>
                                     
                                 </div>
                                 <div class="post-tags-box">
