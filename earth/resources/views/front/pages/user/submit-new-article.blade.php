@@ -24,6 +24,7 @@
                 @endif
             </div>
             <?php
+            // dd($profile);
             // $setting = GeneralSetting::where('id', '=', 1)->first();
             if ($row) {
                 //   Helper::pr($row);
@@ -129,7 +130,7 @@
                 $acknowledge = '';
             }
             ?>
-            <div class="col-xl-12">
+            <!-- <div class="col-xl-12">
                 <div class="card">
                     <div class="card-body pt-3">
                         @if ($errors->any())
@@ -143,7 +144,7 @@
                         @endif
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
@@ -159,13 +160,8 @@
                             <div class="row mb-3">
                                 <label for="author_classification" class="col-md-2 col-lg-4 col-form-label">2) Author Classification
                                 </label>
-                                <div class="col-md-10 col-lg-8">
-                                    <input type="radio" id="Human individual" name="author_classification" value="Human individual" @checked(old('author_classification', $author_classification) == 'Human individual')>
-                                    <label for="Human individual">Human individual</label>
-                                    <input type="radio" id="Ecoweb-rooted community" name="author_classification" value="Ecoweb-rooted community" @checked(old('author_classification', $author_classification) == 'Ecoweb-rooted community')>
-                                    <label for="Ecoweb-rooted community">Ecoweb-rooted community</label>
-                                    <input type="radio" id="Movement" name="author_classification" value="Movement" @checked(old('author_classification', $author_classification) == 'Movement')>
-                                    <label for="Movement">Movement</label>
+                                <div class="col-md-10 col-lg-8">                                                                      
+                                    <input type="text" class="form-control" id="Ecoweb-rooted community" name="author_classification" value="<?= $profile->name; ?>" readonly>
                                 </div>
                             </div> 
                             <div class="row mb-3">
@@ -180,7 +176,7 @@
                                     <label for="2">2</label>
                                 </div>
                             </div>
-                            <div id="co_authors_position" style="display: none;border: 1px solid #000; padding: 10px; border-radius: 7px;">
+                            <div id="co_authors_position" style="display: none;border: 1px solid #000; padding: 10px; border-radius: 7px; margin-bottom: 20px;">
                                 <div class="row mb-3">
                                     <label for="co_authors_position" class="col-md-2 col-lg-4 col-form-label">3A) (- if answer to (3) is 1 or 2) Indicate in which position your name should appear in the list of authors (the Lead Author, i.e., the first author listed, must be a human individual)
                                     </label>
@@ -269,7 +265,7 @@
                                                     </div>
                                                 </div>
                                             </div> 
-                                            <div class="col-md-6">
+                                            <div class="col-md-12" style="margin-top: 15px">
                                                 <div class="row">
                                                     <label for="co_author_classification_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3H{{$i}}) Co-Author Classification</label>
                                                     <div class="col-md-10 col-lg-8">
@@ -469,7 +465,7 @@
                                     @endif                            
                                     </div>
                                 </div> 
-                                <div id="submission_types_a" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px;">                          
+                                <div id="submission_types_a" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px; margin-bottom: 20px">                          
                                     <div class="row mb-3">
                                         <label for="narrative_file" class="col-md-2 col-lg-4 col-form-label">17A1) TYPE A: word narrative (no embedded images) (500-1000 words for prose, 100-250 words for poetry)</label>
                                         <div class="col-md-10 col-lg-8">
@@ -578,7 +574,7 @@
                                         @endfor
                                     </div>                                
                                 </div>
-                                <div id="submission_types_b" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px;">
+                                <div id="submission_types_b" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px; margin-bottom: 20px">
                                     <div class="row mb-3">
                                         <label for="art_images" class="col-md-2 col-lg-4 col-form-label">17B1) TYPE B: How many images related to the same art are you uploading?</label>
                                         <div class="col-md-10 col-lg-8">
@@ -635,7 +631,7 @@
                                         </div>
                                     </div>                           
                                 </div>
-                                <div id="submission_types_c" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px;">
+                                <div id="submission_types_c" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px; margin-bottom: 20px">
                                     <div class="row mb-3">
                                         <label for="art_video_file" class="col-md-2 col-lg-4 col-form-label">17C1) TYPE C: Video (3-10 minutes)</label>
                                         <div class="col-md-10 col-lg-8">

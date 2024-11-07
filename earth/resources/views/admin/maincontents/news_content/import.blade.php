@@ -71,27 +71,28 @@ $controllerRoute = $module['controller_route'];
             $co_ecosystem_affiliations = json_decode($row->co_ecosystem_affiliations);
             $co_indigenous_affiliations = json_decode($row->co_indigenous_affiliations);
             $co_author_classification = json_decode($row->co_author_classification);
-            $first_name = $row->author_name;                               
-            $email = $row->author_email;          
+            $first_name = $row->first_name;                               
+            $email = $row->email;          
             $for_publication_name = $row->for_publication_name;          
-            $titleId = $row->title;  
-            $pronounId = $row->author_pronoun;
-            $news_categoryId = $row->sub_category;
-            $creative_Work = $row->new_title;  
+            $titleId = $row->titleId;  
+            $pronounId = $row->pronounId;
+            $news_categoryId = $row->section_ertId;
+            $creative_Work = $row->creative_Work;  
             $orginal_work = $row->orginal_work;        
             $copyright = $row->copyright; 
-            $subtitle = $row->sub_title;           
+            $subtitle = $row->subtitle;           
             $state = $row->state;
             $city = $row->city;
             $organization_name = $row->organization_name;
             $organization_website = $row->organization_website;
-            $ecosystem_affiliationId = (($row->author_affiliation != '')?json_decode($row->author_affiliation):[]);
+            $ecosystem_affiliationId = (($row->ecosystem_affiliationId != '')?json_decode($row->ecosystem_affiliationId):[]);
             $indigenous_affiliation = $row->indigenous_affiliation;
-            $expertise_areaId = (($row->expertise_area != '')?json_decode($row->expertise_area):[]);
-            $author_short_bio = $row->author_short_bio;
+            $expertise_areaId = (($row->expertise_areaId != '')?json_decode($row->expertise_areaId):[]);
+            $bio_short = $row->bio_short;
             $bio_long = $row->bio_long;            
-            $new_title = $row->new_title;            
-            $creative_work_SRN = $row->creative_work_SRN;
+            $new_title = $row->new_title;
+            $sub_title = $row->sub_title;
+            $creative_work_SRN = $row->article_no;
             $creative_work_DOI = $row->creative_work_DOI;
             $author_name = $row->author_name; 
             $author_short_bio = $row->author_short_bio; 
@@ -132,7 +133,7 @@ $controllerRoute = $module['controller_route'];
             $creative_work_SRN = '';
             $creative_work_DOI = '';
             // $author_name = '';
-            $author_short_bio = '';
+            // $author_short_bio = '';
             $indigenous_affiliation = '';
             $pronounId = '';
             $author_affiliationId = [];
@@ -327,9 +328,23 @@ $controllerRoute = $module['controller_route'];
                             <label for="for_publication_name" class="col-md-2 col-lg-4 col-form-label">5) Preferred name for publication (if different from full legal name)</label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="text" name="for_publication_name" class="form-control" id="for_publication_name"
-                                    value="<?= $for_publication_name ?>" >
+                                    value="<?= $for_publication_name ?>" required>
                             </div>
-                        </div>                        
+                        </div>
+                        <div class="row mb-3">
+                            <label for="title" class="col-md-2 col-lg-4 col-form-label">6) Title
+                            </label>
+                            <div class="col-md-10 col-lg-8">                                
+                                @if ($user_title)
+                                    @foreach ($user_title as $data)
+                                        <!-- <option value="{{ $data->id }}" @selected($data->id == $titleId)> -->
+                                        <input type="radio" id="yes" name="title" value="{{ $data->id }}"  @checked($data->id == $titleId) >
+                                        <label for="yes">{{ $data->name }}</label>
+                                            <!-- {{ $data->name }}</option> -->
+                                    @endforeach
+                                @endif                                
+                            </div>
+                        </div>   
                         <div class="row mb-3">
                             <label for="pronoun" class="col-md-2 col-lg-4 col-form-label">7) Pronoun(s) (select all that apply)</label>
                             <div class="col-md-10 col-lg-8">                                                                
@@ -389,7 +404,7 @@ $controllerRoute = $module['controller_route'];
                                 <label for="subtitle" class="col-md-2 col-lg-4 col-form-label">16) Subtitle - brief engaging summary of your Creative-Work (max. 40 words)
                                 </label>
                                 <div class="col-md-10 col-lg-8">
-                                    <textarea name="subtitle" class="form-control ckeditor" id="subtitle" rows="3"><?= $subtitle ?></textarea>
+                                    <textarea name="subtitle" class="form-control" id="subtitle" rows="3"><?= $subtitle ?></textarea>
                                     <div id="subtitleError" class="error"></div>
                                 </div>
                             </div>                            
@@ -411,14 +426,14 @@ $controllerRoute = $module['controller_route'];
                                 <label for="state" class="col-md-2 col-lg-4 col-form-label">19) State/province of residence</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" name="state" class="form-control" id="state"
-                                        value="<?= $state ?>" >
+                                        value="<?= $state ?>" required>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="city" class="col-md-2 col-lg-4 col-form-label">20) Village/town/city of residence</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" name="city" class="form-control" id="city"
-                                        value="<?= $city ?>" >
+                                        value="<?= $city ?>" required>
                                 </div>
                             </div> 
                             <div class="row mb-3">
@@ -426,7 +441,7 @@ $controllerRoute = $module['controller_route'];
                                 </label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" name="organization_name" class="form-control" id="organization_name"
-                                        value="<?= $organization_name ?>" >
+                                        value="<?= $organization_name ?>" required>
                                 </div>
                             </div> 
                             <div class="row mb-3">
@@ -434,7 +449,7 @@ $controllerRoute = $module['controller_route'];
                                 </label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" name="organization_website" class="form-control" id="organization_website"
-                                        value="<?= $organization_website ?>" >
+                                        value="<?= $organization_website ?>" required>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -467,14 +482,7 @@ $controllerRoute = $module['controller_route'];
                                     @endif
                                 </div>
                             </div>                             
-                            <div class="row mb-3">
-                                <label for="author_short_bio" class="col-md-2 col-lg-4 col-form-label">26) 1-sentence biography (max. 40 words)
-                                </label>
-                                <div class="col-md-10 col-lg-8">
-                                    <textarea class="form-control" id="author_short_bio" name="author_short_bio" rows="4" cols="50" placeholder="Your explanation here..." required><?= $author_short_bio ?></textarea>
-                                    <div id="bio_shortError" class="error"></div>
-                                </div>
-                            </div>
+                           
                          
                         <div class="row mb-3">
                             <label for="media" class="col-md-2 col-lg-2 col-form-label">Media Type</label>
@@ -548,7 +556,7 @@ $controllerRoute = $module['controller_route'];
                         <div class="row mb-3">
                             <label for="ckeditor1" class="col-md-2 col-lg-2 col-form-label">Description</label>
                             <div class="col-md-10 col-lg-10">
-                                <textarea name="long_desc" class="form-control ckeditor" id="long_desc"  rows="5"><?= $long_desc ?></textarea>
+                                <textarea name="long_desc" class="form-control ckeditor"  rows="5"><?= $long_desc ?></textarea>
                             </div>
                         </div>                        
                         <div class="row mb-3">
@@ -606,7 +614,7 @@ $controllerRoute = $module['controller_route'];
         </div>
     </div>
 </section>
-<!-- <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script> -->
+<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -617,14 +625,6 @@ $controllerRoute = $module['controller_route'];
             renderChoiceLimit: 30
         });
     });
-</script>
-<script>
-    CKEDITOR.replace('long_desc', {
-        allowedContent: true,
-    stylesSet: [        
-        { name: 'others_image_colour', element: 'em', attributes: { 'style': 'display: inline-block; color: #87ceeb;font-size: 16px;font-family: "proximanova_regular", sans-serif;font-style: italic;margin: 0;text-align: left !important;width: 100%;' } },        
-    ]
-});
 </script>
 <script>
     $(document).ready(function() {
@@ -671,11 +671,10 @@ $controllerRoute = $module['controller_route'];
 
     function validateForm() {
         let allValid = true;
-        allValid &= checkWordLimit(document.getElementById('explanation'), 100, 'explanationError');
-        // allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');        
+        // allValid &= checkWordLimit(document.getElementById('explanation'), 100, 'explanationError');
+        // allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');
+        allValid &= checkWordLimit(document.getElementById('sub_title'), 50, 'sub_titleError');
         allValid &= checkWordLimit(document.getElementById('short_desc'), 102, 'short_descError');
-        allValid &= checkWordLimit(document.getElementById('subtitle'), 50, 'subtitleError');
-        allValid &= checkWordLimit(document.getElementById('creative_Work'), 10, 'creative_WorkError');
 
         document.getElementById('submitButton').disabled = !allValid;
     }

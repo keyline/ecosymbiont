@@ -80,7 +80,7 @@ $generalSetting            = GeneralSetting::find('1');
     <ul style="padding: 0;">
         <li>
             <p style="line-height: 1.5; width: 100%;">This NELP records the terms under which the Creative-Work specified below will be published online only on <strong>Ecosymbionts Regenerate Together</strong> (the “<strong>Platform</strong>”). The Platform is published by Ecosymbionts Regenerate (the “Publisher”). The Platform is owned by the Śramani Institute (the “<strong>Proprietor</strong>”).
-        <br>Submission Reference Number (“<strong>SRN</strong>”): <span style="background: yellow;"><?=$article_no?>/<?=str_replace("SRN","DOI",$article_no)?></span></p>
+        <br>Submission Reference Number (“<strong>SRN</strong>”): <span style="background: yellow;"><?=$article_no?>/<?=str_replace("SRN","EaRTh",$article_no)?></span></p>
         </li>
     </ul>
     <table style="width: 100%; background: #fff; padding: 0px;">
