@@ -1,0 +1,133 @@
+@font-face {
+    font-family: 'proximanova_light';
+    src:url('font/proximanova_light.otf');
+}
+@font-face {
+    font-family: 'proximanova_bold.otf';
+    src:url('font/proximanova_bold.otf');
+}
+@font-face {
+    font-family: 'proximanova_regular';
+    src:url('font/proximanova_regular.ttf');
+}
+@font-face {
+    font-family: 'proximanova_extrabold';
+    src:url('font/proximanova_extrabold.otf');
+}
+@font-face {
+    font-family: 'proximanova_black';
+    src:url('font/proximanova_black.ttf');
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'proximanova_regular', sans-serif;
+}
+h1,h2,h3,h4,h5,h6,p,span,ul,li,a{
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+    color: #d09c1c;
+}
+ul{
+    padding-left: 19px;
+}
+.header-container{
+    padding: 20px 0;
+    text-align: center;
+    background: #fff;
+    width: 100%;
+}
+.logo{
+    width: 300px;
+}
+.header-container h1{
+    text-transform: uppercase;
+    font-family: 'proximanova_bold', sans-serif;
+}
+.body-container{
+    padding: 20px 5vw;
+}
+.main-heading{
+    text-align: center;
+    margin-bottom: 30px;
+    color: #cf9c1b;
+    font-family: 'proximanova_bold',  sans-serif;
+    font-size: 30px;
+}
+/* .row{
+    display: flex;
+    flex-wrap: wrap;
+} */
+.col-6{
+    width: 50%;
+    padding: 0 15px
+}
+.left-img-box{
+    text-align: center;
+}
+.left-img-box img{
+    border-radius: 10px;
+    box-shadow: 0 0 15px -5px #000;
+}
+.mb-10{
+    margin-bottom: 10px;
+}
+.mb-20{
+    margin-bottom: 20px;
+}
+p,
+ul li{
+    font-size: 18px !important;
+    line-height: 1.5;
+}
+.inner-list{
+    background: #fff;
+    box-shadow: 0 0 10px -5px #000;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 15px
+}
+.inner-list h5{
+    font-size: 15px
+}
+.text-green{
+    color: #cf9c1b;
+}
+.img-fluid{
+    max-width: 100%;
+}
+.long-ul li{
+    margin: 10px 0;
+}
+.long-ul li strong{
+    /* font-size: 15px */
+}
+
+@media(max-width: 991px){
+    .col-6{
+        width: 100%;
+    }
+    .header-container h1,
+    .main-heading{
+        font-size: 25px;
+    }
+    .header-container{
+        padding: 10px 0;
+    }
+    .right-text-box h3{
+        font-size: 16px;
+        margin-top: 10px;
+        line-height: 1.4;
+    }
+    .logo{
+        width: 200px;
+    }
+}
