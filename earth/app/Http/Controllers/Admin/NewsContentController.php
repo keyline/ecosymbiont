@@ -144,7 +144,7 @@ class NewsContentController extends Controller
                     'new_title'                 => $postData['creative_Work'],
                     'sub_title'                 => $postData['subtitle'], 
                     'author_pronoun'            => $postData['pronoun'],   
-                    'title'                     => $postData['title'],
+                    // 'title'                     => $postData['title'],
                     'parent_category'           => $parent_category->parent_category,                                           
                     'sub_category'              => $postData['section_ert'],                                           
                     'slug'                      => $slug,
