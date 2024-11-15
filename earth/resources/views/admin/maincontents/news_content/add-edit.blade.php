@@ -546,9 +546,9 @@ $controllerRoute = $module['controller_route'];
                             </div> 
                         </div>
                         <div class="row mb-3">
-                            <label for="ckeditor1" class="col-md-2 col-lg-2 col-form-label">Description</label>
+                            <label for="ckeditor2" class="col-md-2 col-lg-2 col-form-label">Description</label>
                             <div class="col-md-10 col-lg-10">
-                                <textarea name="long_desc" class="form-control ckeditor" id="long_desc"  rows="5"><?= $long_desc ?></textarea>
+                                <textarea name="long_desc" class="form-control" id="ckeditor2"  rows="5"><?= $long_desc ?></textarea>
                             </div>
                         </div>                        
                         <div class="row mb-3">
