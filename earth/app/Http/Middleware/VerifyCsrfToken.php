@@ -13,6 +13,10 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'api/*', // routes group
-        'staffapi/*', // routes group
+       'admin/news_content/add',
+       'admin/news_content/edit/{id}',
+       'admin/news_content/import/{id}',
+       'admin/news_content_image/add_image',
+       'admin/news_content_image/edit_image/{id}',
     ];
 }
