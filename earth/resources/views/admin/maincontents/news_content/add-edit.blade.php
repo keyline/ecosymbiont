@@ -548,7 +548,7 @@ $controllerRoute = $module['controller_route'];
                         <div class="row mb-3">
                             <label for="ckeditor1" class="col-md-2 col-lg-2 col-form-label">Description</label>
                             <div class="col-md-10 col-lg-10">
-                                <textarea name="long_desc" class="form-control ckeditor" id="ckeditor3"  rows="5"><?= $long_desc ?></textarea>
+                                <textarea name="long_desc" class="form-control ckeditor" id="long_desc"  rows="5"><?= $long_desc ?></textarea>
                             </div>
                         </div>                        
                         <div class="row mb-3">
@@ -606,7 +606,7 @@ $controllerRoute = $module['controller_route'];
         </div>
     </div>
 </section>
-<!-- <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script> -->
+<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -619,7 +619,7 @@ $controllerRoute = $module['controller_route'];
     });
 </script>
 <script>
-    CKEDITOR.replace('ckeditor2', {
+    CKEDITOR.replace('long_desc', {
         allowedContent: true,
     stylesSet: [        
         { name: 'others_image_colour', element: 'em', attributes: { 'style': 'display: inline-block; color: #87ceeb;font-size: 16px;font-family: "proximanova_regular", sans-serif;font-style: italic;margin: 0;text-align: left !important;width: 100%;' } },        
