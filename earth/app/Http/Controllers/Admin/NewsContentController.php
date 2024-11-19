@@ -445,7 +445,24 @@ class NewsContentController extends Controller
                         preg_match("/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([a-zA-Z0-9_-]{11})/", $url, $matches1);
                         $videoId = $matches1[1]; // This will give you the part after 'v='
 
-                    }                     
+                    }      
+                     /* NELP Pdf */
+                    $article_id = $postData['article_id'];
+                    $imageFile      = $request->file('nelp_pdf');
+                    if ($imageFile != '') {
+                        $imageName      = $imageFile->getClientOriginalName();
+                        $uploadedFile   = $this->upload_single_file('nelp_pdf', $imageName, 'article', 'pdf');
+                        if ($uploadedFile['status']) {
+                            $nelp_pdf = $uploadedFile['newFilename'];
+                            // // Article::where('id', '=', $article_id)->update(['nelp_form_scan_copy' => $nelp_form_scan_copy, 'is_published' => 3]);
+                            // return redirect()->back()->with(['success_message' => 'Scan Copy Of NELP Form Uploaded Successfully !!!']);
+                        } else {
+                            return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                        }
+                    } else {
+                        return redirect()->back()->with(['error_message' => 'Please Upload Scan Copy Of NELP Form !!!']);
+                    }       
+                     /* NELP Pdf */        
                     $fields = [
                     'author_email'              => $postData['email'], 
                     'author_classification'     => $postData['author_classification'] ?? '',

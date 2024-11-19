@@ -111,7 +111,8 @@ $controllerRoute = $module['controller_route'];
             $is_popular = $row->is_popular;            
             $media = $row->media;     
             $video_url = $row->video_url;  
-            $videoId = $row->videoId;     
+            $videoId = $row->videoId;    
+            $nelp_pdf = $row->nelp_pdf; 
         } else {
             $author_classification ='';
             $co_authors = '';
@@ -151,6 +152,7 @@ $controllerRoute = $module['controller_route'];
             $media = '';    
             $video_url = '';        
             $videoId = '';
+            $nelp_pdf = '';
         }
         ?>
         <div class="col-xl-12">
@@ -605,6 +607,16 @@ $controllerRoute = $module['controller_route'];
                                 <label for="is_popular_no">No</label>
                             </div>
                         </div> 
+                        <div class="row mb-3">
+                            <label for="nelp_pdf" class="col-md-2 col-lg-4 col-form-label">Upload NELP</label>
+                            <div class="col-md-10 col-lg-8">
+                                <input type="file" name="nelp_pdf" class="form-control" id="nelp_pdf">                                                                
+                                <?php if($nelp_pdf != ''){?>
+                                <a href="<?= env('UPLOADS_URL') . 'nelp/' . $nelp_pdf ?>" target="_blank"
+                                    class="badge bg-primary">View PDF</a>
+                                <?php }?>                                
+                            </div>
+                        </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary"><?= $row ? 'Save' : 'Add' ?></button>
                         </div> 

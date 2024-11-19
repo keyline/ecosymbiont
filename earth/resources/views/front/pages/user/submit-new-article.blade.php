@@ -5,6 +5,8 @@
     }
     .error { color: red; }
 </style>
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+<!-- <link rel="stylesheet" type="text/css" href="http://localhost/ecosymbiontgit/earth/public/material/frontend/assets/css/bootstrap.min.css" media="screen"> -->
 <!-- block content -->
     <div class="block-content">
         <!-- single-post box -->
@@ -62,8 +64,7 @@
                 $narrative_image_desc = json_decode($row->narrative_image_desc);
                 $art_images = $row->art_images;
                 $art_image_file = json_decode($row->art_image_file);
-                $art_image_desc = json_decode($row->art_image_desc);    
-                $art_desc = $row->art_desc;            
+                $art_image_desc = json_decode($row->art_image_desc);                             
                 $first_image_file = $row->first_image_file;
                 $second_image_file = $row->second_image_file;                                
                 $art_video_file = $row->art_video_file;
@@ -336,9 +337,9 @@
                                 <label for="orginal_work" class="col-md-2 col-lg-4 col-form-label">8) Are all components of this Creative-Work your original work?
                                 </label>
                                 <div class="col-md-10 col-lg-8">
-                                    <input type="radio" id="yes" name="orginal_work" value="Yes" @checked(old('orginal_work', $orginal_work) == 'Yes')>
+                                    <input type="radio" id="yes" name="orginal_work" value="Yes" @checked(old('orginal_work', $orginal_work) == 'Yes') onclick="hideModal()">
                                     <label for="yes">Yes</label>
-                                    <input type="radio" id="no" name="orginal_work" value="No" @checked(old('orginal_work', $orginal_work) == 'No')>
+                                    <input type="radio" id="no" name="orginal_work" value="No" @checked(old('orginal_work', $orginal_work) == 'No') onclick="showModal()">
                                     <label for="no">No</label>
                                 </div>
                             </div>
@@ -346,12 +347,29 @@
                                 <label for="copyright" class="col-md-2 col-lg-4 col-form-label">9) Do you own the copyright and licensing rights to all components of your Creative-Work?
                                 </label>
                                 <div class="col-md-10 col-lg-8">
-                                    <input type="radio" id="yes" name="copyright" value="Yes" @checked(old('copyright', $copyright) == 'Yes')>
+                                    <input type="radio" id="yes" name="copyright" value="Yes" @checked(old('copyright', $copyright) == 'Yes') onclick="hideModal()">
                                     <label for="yes">Yes</label>
-                                    <input type="radio" id="no" name="copyright" value="No" @checked(old('copyright', $copyright) == 'No')>
+                                    <input type="radio" id="no" name="copyright" value="No" @checked(old('copyright', $copyright) == 'No') onclick="showModal()">
                                     <label for="no">No</label>
                                 </div>
-                            </div>  
+                            </div>                              
+                            <!-- Modal -->
+                            <!-- <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="alertModalLabel"></h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                        
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>   -->
                             <div class="row mb-3">
                                 <label for="invited" class="col-md-2 col-lg-4 col-form-label">10) Were you invited to submit a Creative-Work to ERT?</label>
                                 <div class="col-md-10 col-lg-8">
@@ -774,6 +792,8 @@
 <!-- End block content -->
 <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.3/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 <script type="text/javascript">
     $(document).ready(function() {
         var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
@@ -783,6 +803,67 @@
             renderChoiceLimit: 30
         });
     });
+</script>
+<!-- Popup Div (Initially hidden) -->
+<div id="popup">
+      <h3><i class="bi bi-exclamation-triangle-fill"></i> Warning</h3>
+      <p>You must submit an original Creative-Eork and you must own the copyright and licensing rights to your original Creative-Work.</p>
+      <button id="closePopup">Close</button>
+    </div>    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+  $(document).ready(function () {
+    // Initially hide the popup
+    $('#popup').hide();
+
+    // Disable submit button initially
+    $('#submitButton').prop('disabled', false);
+
+    // Show popup and disable submit button when "No" is selected
+    $('input[name="orginal_work"], input[name="copyright"]').change(function () {
+      if ($(this).val() === 'No') {
+        $('#popup').fadeIn();
+        $('#submitButton').prop('disabled', true); // Disable submit button
+      }
+    });
+
+    // Close popup and re-enable submit button
+    $('#closePopup').click(function () {
+      $('#popup').fadeOut();
+      $('#submitButton').prop('disabled', false); // Re-enable submit button
+    });
+  });
+</script>
+
+<script>
+    function checkWordLimit(field, limit, errorField) {
+        //  console.log(field);
+        var words = field.value.trim().split(/\s+/).filter(word => word.length > 0).length;
+        if (words > limit) {
+            document.getElementById(errorField).innerText = "Exceeded word limit of " + limit + " words.";
+            return false;
+        } else {
+            document.getElementById(errorField).innerText = "";
+            return true;
+        }
+    }
+
+    function validateForm() {
+        let allValid = true;
+        allValid &= checkWordLimit(document.getElementById('explanation'), 100, 'explanationError');
+        allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');
+        allValid &= checkWordLimit(document.getElementById('creative_Work'), 10, 'creative_WorkError');
+        allValid &= checkWordLimit(document.getElementById('subtitle'), 40, 'subtitleError');
+        allValid &= checkWordLimit(document.getElementById('narrative_image_desc_1'), 50, 'narrative_image_desc_1Error');
+        // allValid &= checkWordLimit(document.getElementById('narrative_image_desc'), 50, 'narrative_image_desc_Error');
+        // allValid &= checkWordLimit(document.getElementById('art_image_desc'), 50, 'art_image_descError');
+        allValid &= checkWordLimit(document.getElementById('art_desc'), 250, 'art_descError');
+        allValid &= checkWordLimit(document.getElementById('art_video_desc'), 250, 'art_video_descError');
+        allValid &= checkWordLimit(document.getElementById('bio_short'), 40, 'bio_shortError');
+        allValid &= checkWordLimit(document.getElementById('bio_long'), 250, 'bio_longError');        
+
+        document.getElementById('submitButton').disabled = !allValid;
+    }
 </script>
 <script>
     $(document).ready(function() {
@@ -968,35 +1049,7 @@
     });
 </script>
 
-<script>
-    function checkWordLimit(field, limit, errorField) {
-        var words = field.value.trim().split(/\s+/).filter(word => word.length > 0).length;
-        if (words > limit) {
-            document.getElementById(errorField).innerText = "Exceeded word limit of " + limit + " words.";
-            return false;
-        } else {
-            document.getElementById(errorField).innerText = "";
-            return true;
-        }
-    }
 
-    function validateForm() {
-        let allValid = true;
-        allValid &= checkWordLimit(document.getElementById('explanation'), 100, 'explanationError');
-        allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');
-        allValid &= checkWordLimit(document.getElementById('creative_Work'), 10, 'creative_WorkError');
-        allValid &= checkWordLimit(document.getElementById('subtitle'), 40, 'subtitleError');
-        allValid &= checkWordLimit(document.getElementById('narrative_image_desc_1'), 50, 'narrative_image_desc_1Error');
-        allValid &= checkWordLimit(document.getElementById('narrative_image_desc'), 50, 'narrative_image_desc_Error');
-        allValid &= checkWordLimit(document.getElementById('art_image_desc'), 50, 'art_image_descError');
-        allValid &= checkWordLimit(document.getElementById('art_desc'), 250, 'art_descError');
-        allValid &= checkWordLimit(document.getElementById('art_video_desc'), 250, 'art_video_descError');
-        allValid &= checkWordLimit(document.getElementById('bio_short'), 40, 'bio_shortError');
-        allValid &= checkWordLimit(document.getElementById('bio_long'), 250, 'bio_longError');        
-
-        document.getElementById('submitButton').disabled = !allValid;
-    }
-</script>
 <!-- Add real-time size validation script -->
 <script>
     document.getElementById('narrative_file').addEventListener('change', function() {

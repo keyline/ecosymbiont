@@ -725,11 +725,11 @@ class FrontController extends Controller
                         $sl_no              = $getLastArticle->sl_no;
                         $next_sl_no         = $sl_no + 1;
                         $next_sl_no_string  = str_pad($next_sl_no, 3, 0, STR_PAD_LEFT);
-                        $article_no         = 'SRN-'.$currentMonth.$currentYear.'-'.$next_sl_no_string;
+                        $article_no         = 'SRN-EaRTH'.$currentMonth.$currentYear.'-'.$next_sl_no_string;
                     } else {
                         $next_sl_no         = 1;
                         $next_sl_no_string  = str_pad($next_sl_no, 3, 0, STR_PAD_LEFT);
-                        $article_no         = 'SRN-'.$currentMonth.$currentYear.'-'.$next_sl_no_string;
+                        $article_no         = 'SRN-EaRTH'.$currentMonth.$currentYear.'-'.$next_sl_no_string;
                     }
                 /* article no generate */
 
