@@ -149,7 +149,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="" enctype="multipart/form-data" oninput="validateForm()">
+                        <form method="POST" id="article_form" action="" enctype="multipart/form-data" oninput="validateForm()">
                             @csrf
                             <div class="row mb-3">
                                 <label for="email" class="col-md-2 col-lg-4 col-form-label">1) Email address</label>
@@ -303,7 +303,7 @@
                                 <label for="for_publication_name" class="col-md-2 col-lg-4 col-form-label">5) Preferred name for publication (if different from full legal name)</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" name="for_publication_name" class="form-control" id="for_publication_name"
-                                        value="<?= $for_publication_name ?>" required>
+                                        value="<?= $for_publication_name ?>">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -802,6 +802,12 @@
             searchResultLimit: 30,
             renderChoiceLimit: 30
         });
+    });
+</script>
+<script>
+    document.getElementById('article_form').addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent the default form submission    
+        alert("test") ;
     });
 </script>
 <!-- Popup Div (Initially hidden) -->
