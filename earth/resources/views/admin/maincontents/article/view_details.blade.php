@@ -110,8 +110,11 @@ $controllerRoute = $module['controller_route'];
                   <?php if($row->is_published == 1){?>
                     <a href="<?=url('admin/' . $controllerRoute . '/generate-nelp-form/'.Helper::encoded($row->id))?>" class="btn btn-outline-info btn-sm" title="Generate NELP Form & Shared"><i class="fa fa-pdf"> Generate NELP Form & Shared</i></a>
                   <?php }?>
-                <?php }?>
+                <?php }
+                if ($row->is_import == 0) { 
+                ?>
                 <a href="<?=url('admin/' . $controllerRoute . '/edit/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit"> Edit</i></a>
+                <?php } ?>
               </p>
               <table class="table table-striped table-bordered nowrap">
                 <thead>
@@ -436,7 +439,7 @@ $controllerRoute = $module['controller_route'];
                 </tbody>
               </table>              
             </div>
-            <div class="tab-pane fade pt-3" id="tab2">
+            <!-- <div class="tab-pane fade pt-3" id="tab2">
                 <h4>NELP PDF</h4>
                 <?php if($row->nelp_form_pdf){?>
                   <embed src="<?=env('UPLOADS_URL').'article/'.$row->nelp_form_pdf?>" type="application/pdf" width="100%" height="600px" />
@@ -447,7 +450,7 @@ $controllerRoute = $module['controller_route'];
                 <?php if($row->nelp_form_scan_copy){?>
                   <embed src="<?=env('UPLOADS_URL').'article/'.$row->nelp_form_scan_copy?>" type="application/pdf" width="100%" height="600px" />
                 <?php }?>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

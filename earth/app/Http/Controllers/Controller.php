@@ -134,7 +134,8 @@ class Controller extends BaseController
                 }
             }
 
-            $newFilename = time().$imge;
+            // $newFilename = time().$imge;
+            $newFilename = $imge;
             if($tempFile == ''){
                 $temp = $_FILES[$fieldName]["tmp_name"];
             } else {
