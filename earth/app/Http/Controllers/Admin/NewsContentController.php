@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Helper as HelpersHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\JournalFrequency;
 use Illuminate\Http\Request;
@@ -446,12 +447,12 @@ class NewsContentController extends Controller
                         $videoId = $matches1[1]; // This will give you the part after 'v='
 
                     }      
-                     /* NELP Pdf */
-                    $article_id = $postData['article_id'];
+                     /* NELP Pdf */                    
                     $imageFile      = $request->file('nelp_pdf');
+                    $nelp_form_number = str_replace("SRN","NELP",$postData['creative_work_SRN']);
                     if ($imageFile != '') {
-                        $imageName      = $imageFile->getClientOriginalName();
-                        $uploadedFile   = $this->upload_single_file('nelp_pdf', $imageName, 'article', 'pdf');
+                        $imageName      = str_replace($imageFile->getClientOriginalName(),$nelp_form_number.'.pdf',$imageFile->getClientOriginalName());
+                        $uploadedFile   = $this->upload_single_file('nelp_pdf', $imageName, 'newcontent', 'pdf');                        
                         if ($uploadedFile['status']) {
                             $nelp_pdf = $uploadedFile['newFilename'];
                             // // Article::where('id', '=', $article_id)->update(['nelp_form_scan_copy' => $nelp_form_scan_copy, 'is_published' => 3]);
@@ -503,10 +504,13 @@ class NewsContentController extends Controller
                     'keywords'                  => $postData['keywords'] ?? '',     
                     'is_feature'                => $postData['is_feature'],  
                     'is_popular'                => $postData['is_popular'],  
-                    'short_desc'                => $postData['short_desc'] ?? '',    
-                    
+                    'short_desc'                => $postData['short_desc'] ?? '',  
+                    'nelp_form_number'          => $nelp_form_number,
+                    'nelp_form_file'            => $nelp_pdf,                    
+                    'is_import'                 => 1,                    
                 ];
-                    //  dd($fields);                                 
+                    //  dd();                                 
+                    // Helper::pr($fields);
                     NewsContent::insert($fields);                    
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');                
             } else {

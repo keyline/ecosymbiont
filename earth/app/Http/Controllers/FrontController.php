@@ -725,11 +725,11 @@ class FrontController extends Controller
                         $sl_no              = $getLastArticle->sl_no;
                         $next_sl_no         = $sl_no + 1;
                         $next_sl_no_string  = str_pad($next_sl_no, 3, 0, STR_PAD_LEFT);
-                        $article_no         = 'SRN-EaRTH'.$currentMonth.$currentYear.'-'.$next_sl_no_string;
+                        $article_no         = 'SRN-EaRTh'.$currentMonth.$currentYear.'-'.$next_sl_no_string;
                     } else {
                         $next_sl_no         = 1;
                         $next_sl_no_string  = str_pad($next_sl_no, 3, 0, STR_PAD_LEFT);
-                        $article_no         = 'SRN-EaRTH'.$currentMonth.$currentYear.'-'.$next_sl_no_string;
+                        $article_no         = 'SRN-EaRTh'.$currentMonth.$currentYear.'-'.$next_sl_no_string;
                     }
                 /* article no generate */
 
@@ -796,7 +796,7 @@ class FrontController extends Controller
                                 'invited_by'                => $invited_byInfo, 
                                 'invited_by_email'          => $invited_emailInfo,
                                 'participated'              => $postData['participated'],
-                                'participated_info'         => $participatedInfo                       
+                                'participated_info'         => $participatedInfo                      
                             ];
                             //  Helper::pr($fields);
 
