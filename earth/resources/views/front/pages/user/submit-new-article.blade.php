@@ -1086,6 +1086,7 @@
 
     function validateVideoFile(input, errorElementId) {
         var file = input.files[0];
+        console.log(file);
         var allowedExtensions = ['mp4', 'avi', 'mov', 'mkv', 'webm'];
         var fileSizeLimit = 10485760; // 10MB in bytes
 
