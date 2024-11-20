@@ -792,82 +792,42 @@
 <!-- End block content -->
 <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.3/js/bootstrap.bundle.min.js"></script>
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
-<script type="text/javascript">
-    $(document).ready(function() {
-        var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
-            removeItemButton: true,
-            maxItemCount: 30,
-            searchResultLimit: 30,
-            renderChoiceLimit: 30
-        });
-    });
-</script>
+
 <!-- Popup Div (Initially hidden) -->
-<div id="popup">
+    <div id="popup">
       <h3><i class="bi bi-exclamation-triangle-fill"></i> Warning</h3>
       <p>You must submit an original Creative-Eork and you must own the copyright and licensing rights to your original Creative-Work.</p>
       <button id="closePopup">Close</button>
     </div>    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-  $(document).ready(function () {
-    // Initially hide the popup
-    $('#popup').hide();
+        $(document).ready(function () {
+            // Initially hide the popup
+            $('#popup').hide();
 
-    // Disable submit button initially
-    $('#submitButton').prop('disabled', false);
+            // Disable submit button initially
+            $('#submitButton').prop('disabled', false);
 
-    // Show popup and disable submit button when "No" is selected
-    $('input[name="orginal_work"], input[name="copyright"]').change(function () {
-      if ($(this).val() === 'No') {
-        $('#popup').fadeIn();
-        $('#submitButton').prop('disabled', true); // Disable submit button
-      }
-    });
+            // Show popup and disable submit button when "No" is selected
+            $('input[name="orginal_work"], input[name="copyright"]').change(function () {
+            if ($(this).val() === 'No') {
+                $('#popup').fadeIn();
+                $('#submitButton').prop('disabled', true); // Disable submit button
+            }
+            });
 
-    // Close popup and re-enable submit button
-    $('#closePopup').click(function () {
-      $('#popup').fadeOut();
-      $('#submitButton').prop('disabled', false); // Re-enable submit button
-    });
-  });
-</script>
-
-<script>
-    function checkWordLimit(field, limit, errorField) {
-        //  console.log(field);
-        var words = field.value.trim().split(/\s+/).filter(word => word.length > 0).length;
-        if (words > limit) {
-            document.getElementById(errorField).innerText = "Exceeded word limit of " + limit + " words.";
-            return false;
-        } else {
-            document.getElementById(errorField).innerText = "";
-            return true;
-        }
-    }
-
-    function validateForm() {
-        let allValid = true;
-        allValid &= checkWordLimit(document.getElementById('explanation'), 100, 'explanationError');
-        allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');
-        allValid &= checkWordLimit(document.getElementById('creative_Work'), 10, 'creative_WorkError');
-        allValid &= checkWordLimit(document.getElementById('subtitle'), 40, 'subtitleError');
-        allValid &= checkWordLimit(document.getElementById('narrative_image_desc_1'), 50, 'narrative_image_desc_1Error');
-        // allValid &= checkWordLimit(document.getElementById('narrative_image_desc'), 50, 'narrative_image_desc_Error');
-        // allValid &= checkWordLimit(document.getElementById('art_image_desc'), 50, 'art_image_descError');
-        allValid &= checkWordLimit(document.getElementById('art_desc'), 250, 'art_descError');
-        allValid &= checkWordLimit(document.getElementById('art_video_desc'), 250, 'art_video_descError');
-        allValid &= checkWordLimit(document.getElementById('bio_short'), 40, 'bio_shortError');
-        allValid &= checkWordLimit(document.getElementById('bio_long'), 250, 'bio_longError');        
-
-        document.getElementById('submitButton').disabled = !allValid;
-    }
-</script>
+            // Close popup and re-enable submit button
+            $('#closePopup').click(function () {
+            $('#popup').fadeOut();
+            $('#submitButton').prop('disabled', false); // Re-enable submit button
+            });
+        });
+    </script>
+<!-- Popup end (Initially hidden) -->
+<!-- Function to show/hide the invited and participated fields -->
 <script>
     $(document).ready(function() {
-        // Function to show/hide the invited and participated fields
+        
         function toggleFields() {
             const invitedYes = $('#invited_yes').is(':checked');
             const participatedYes = $('#participated_yes').is(':checked');            
@@ -900,6 +860,8 @@
         toggleFields();
     });
 </script>
+<!-- End Function to show/hide the invited and participated fields -->
+<!-- Function to toggle the co-authors position section -->
 <script>
     // Function to toggle the co-authors position section
     function toggleCoAuthorsPosition() {
@@ -921,8 +883,9 @@
     // Run the function on page load to ensure correct state
     document.addEventListener('DOMContentLoaded', toggleCoAuthorsPosition);
 </script>
-<script>
-    // Function to toggle the co-authors position section
+<!-- Function to toggle the co-authors position section -->
+<!-- Function to toggle the submission_types position section -->
+<script>    
     function togglesubmissionTypes() {        
         var submissionTypes = document.querySelector('input[name="submission_types"]:checked').value;        
         var submissionTypesADiv = document.getElementById('submission_types_a');
@@ -956,6 +919,7 @@
     // Run the function on page load to ensure correct state
     document.addEventListener('DOMContentLoaded', togglesubmissionTypes);
 </script>
+<!-- Function to toggle the submission_types position section -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
     const imageInputs = document.querySelectorAll('input[name="narrative_images"]');
