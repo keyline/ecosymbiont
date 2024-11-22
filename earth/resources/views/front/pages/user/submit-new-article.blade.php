@@ -131,7 +131,7 @@
                 $acknowledge = '';
             }
             ?>
-            <!-- <div class="col-xl-12">
+            <div class="col-xl-12">
                 <div class="card">
                     <div class="card-body pt-3">
                         @if ($errors->any())
@@ -145,7 +145,7 @@
                         @endif
                     </div>
                 </div>
-            </div> -->
+            </div>
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
@@ -488,7 +488,7 @@
                                         <label for="narrative_file" class="col-md-2 col-lg-4 col-form-label">17A1) TYPE A: word narrative (no embedded images) (500-1000 words for prose, 100-250 words for poetry)</label>
                                         <div class="col-md-10 col-lg-8">
                                             <input type="file" name="narrative_file" class="form-control" id="narrative_file">
-                                            <small class="text-info">* Only DOC files are allowed (Max 10 MB)</small><br>
+                                            <small class="text-info">* Only DOC files are allowed (Max 1 MB)</small><br>
                                             <span id="narrative_file_error" class="text-danger"></span>
                                             <?php if($narrative_file != ''){?>
                                             <a href="<?= env('UPLOADS_URL') . 'narrative/' . $narrative_file ?>" target="_blank"
@@ -651,7 +651,7 @@
                                 </div>
                                 <div id="submission_types_c" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px; margin-bottom: 20px">
                                     <div class="row mb-3">
-                                        <label for="art_video_file" class="col-md-2 col-lg-4 col-form-label">17C1) TYPE C: Video (3-10 minutes)</label>
+                                        <label for="art_video_file" class="col-md-2 col-lg-4 col-form-label">17C1) TYPE C: Video (3-10 minutes, Max 10MB)</label>
                                         <div class="col-md-10 col-lg-8">
                                             <input type="file" name="art_video_file" class="form-control" id="art_video_file">
                                             <small class="text-info">* Only MP4, AVI, MOV, MKV, WEBM files are allowed</small><br>  
@@ -792,88 +792,41 @@
 <!-- End block content -->
 <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.3/js/bootstrap.bundle.min.js"></script>
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
-<script type="text/javascript">
-    $(document).ready(function() {
-        var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
-            removeItemButton: true,
-            maxItemCount: 30,
-            searchResultLimit: 30,
-            renderChoiceLimit: 30
-        });
-    });
-</script>
-<script>
-    document.getElementById('article_form').addEventListener('submit', function(e) {
-        e.preventDefault(); // Prevent the default form submission    
-        alert("test") ;
-    });
-</script>
 <!-- Popup Div (Initially hidden) -->
-<div id="popup">
+    <div id="popup">
       <h3><i class="bi bi-exclamation-triangle-fill"></i> Warning</h3>
       <p>You must submit an original Creative-Eork and you must own the copyright and licensing rights to your original Creative-Work.</p>
       <button id="closePopup">Close</button>
     </div>    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-  $(document).ready(function () {
-    // Initially hide the popup
-    $('#popup').hide();
+        $(document).ready(function () {
+            // Initially hide the popup
+            $('#popup').hide();
 
-    // Disable submit button initially
-    $('#submitButton').prop('disabled', false);
+            // Disable submit button initially
+            $('#submitButton').prop('disabled', false);
 
-    // Show popup and disable submit button when "No" is selected
-    $('input[name="orginal_work"], input[name="copyright"]').change(function () {
-      if ($(this).val() === 'No') {
-        $('#popup').fadeIn();
-        $('#submitButton').prop('disabled', true); // Disable submit button
-      }
-    });
+            // Show popup and disable submit button when "No" is selected
+            $('input[name="orginal_work"], input[name="copyright"]').change(function () {
+            if ($(this).val() === 'No') {
+                $('#popup').fadeIn();
+                $('#submitButton').prop('disabled', true); // Disable submit button
+            }
+            });
 
-    // Close popup and re-enable submit button
-    $('#closePopup').click(function () {
-      $('#popup').fadeOut();
-      $('#submitButton').prop('disabled', false); // Re-enable submit button
-    });
-  });
-</script>
-
-<script>
-    function checkWordLimit(field, limit, errorField) {
-        //  console.log(field);
-        var words = field.value.trim().split(/\s+/).filter(word => word.length > 0).length;
-        if (words > limit) {
-            document.getElementById(errorField).innerText = "Exceeded word limit of " + limit + " words.";
-            return false;
-        } else {
-            document.getElementById(errorField).innerText = "";
-            return true;
-        }
-    }
-
-    function validateForm() {
-        let allValid = true;
-        allValid &= checkWordLimit(document.getElementById('explanation'), 100, 'explanationError');
-        allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');
-        allValid &= checkWordLimit(document.getElementById('creative_Work'), 10, 'creative_WorkError');
-        allValid &= checkWordLimit(document.getElementById('subtitle'), 40, 'subtitleError');
-        allValid &= checkWordLimit(document.getElementById('narrative_image_desc_1'), 50, 'narrative_image_desc_1Error');
-        // allValid &= checkWordLimit(document.getElementById('narrative_image_desc'), 50, 'narrative_image_desc_Error');
-        // allValid &= checkWordLimit(document.getElementById('art_image_desc'), 50, 'art_image_descError');
-        allValid &= checkWordLimit(document.getElementById('art_desc'), 250, 'art_descError');
-        allValid &= checkWordLimit(document.getElementById('art_video_desc'), 250, 'art_video_descError');
-        allValid &= checkWordLimit(document.getElementById('bio_short'), 40, 'bio_shortError');
-        allValid &= checkWordLimit(document.getElementById('bio_long'), 250, 'bio_longError');        
-
-        document.getElementById('submitButton').disabled = !allValid;
-    }
-</script>
+            // Close popup and re-enable submit button
+            $('#closePopup').click(function () {
+            $('#popup').fadeOut();
+            $('#submitButton').prop('disabled', false); // Re-enable submit button
+            });
+        });
+    </script>
+<!-- Popup end (Initially hidden) -->
+<!-- Function to show/hide the invited and participated fields -->
 <script>
     $(document).ready(function() {
-        // Function to show/hide the invited and participated fields
+        
         function toggleFields() {
             const invitedYes = $('#invited_yes').is(':checked');
             const participatedYes = $('#participated_yes').is(':checked');            
@@ -906,6 +859,8 @@
         toggleFields();
     });
 </script>
+<!-- End Function to show/hide the invited and participated fields -->
+<!-- Function to toggle the co-authors position section -->
 <script>
     // Function to toggle the co-authors position section
     function toggleCoAuthorsPosition() {
@@ -927,8 +882,42 @@
     // Run the function on page load to ensure correct state
     document.addEventListener('DOMContentLoaded', toggleCoAuthorsPosition);
 </script>
+<!--End Function to toggle the co-authors position section -->
+<!-- Show only the number of co_authors selected -->
 <script>
-    // Function to toggle the co-authors position section
+    document.addEventListener('DOMContentLoaded', function () {
+        const coAuthorsRadios = document.querySelectorAll('input[name="co_authors"]');
+
+        // Listen for changes to the co_authors radio buttons
+        coAuthorsRadios.forEach(radio => {
+            radio.addEventListener('change', function () {
+                const selectedValue = this.value;
+                toggleCoAuthorsFields(selectedValue);
+            });
+        });
+
+        function toggleCoAuthorsFields(count) {
+            // Hide all co-author fields initially
+            for (let i = 1; i <= 2; i++) {
+                document.getElementById('author_card_' + i).style.display = 'none';
+            }
+
+            // Show only the necessary fields based on the selected number of co-authors
+            for (let i = 1; i <= count; i++) {
+                document.getElementById('author_card_' + i).style.display = 'block';
+            }        
+        }
+
+        // Initialize the form with the correct fields displayed if a value is already selected
+        const initialSelectedValue = document.querySelector('input[name="co_authors"]:checked');
+        if (initialSelectedValue) {
+            toggleCoAuthorsFields(initialSelectedValue.value);
+        }
+    });
+</script>
+<!--End Show only the number of co_authors selected -->
+<!-- Function to toggle the submission_types position section -->
+<script>    
     function togglesubmissionTypes() {        
         var submissionTypes = document.querySelector('input[name="submission_types"]:checked').value;        
         var submissionTypesADiv = document.getElementById('submission_types_a');
@@ -962,117 +951,111 @@
     // Run the function on page load to ensure correct state
     document.addEventListener('DOMContentLoaded', togglesubmissionTypes);
 </script>
+<!--End Function to toggle the submission_types position section -->
+<!-- Show only the number of narrative images selected -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-    const imageInputs = document.querySelectorAll('input[name="narrative_images"]');
-    
-    imageInputs.forEach(input => {
-        input.addEventListener('change', function () {
-            const selectedValue = this.value;
-            showImageUploadFields(selectedValue);
+        const imageInputs = document.querySelectorAll('input[name="narrative_images"]');
+        
+        imageInputs.forEach(input => {
+            input.addEventListener('change', function () {
+                const selectedValue = this.value;
+                showImageUploadFields(selectedValue);
+            });
         });
+        
+        function showImageUploadFields(count) {
+            // Hide all image upload and description fields initially
+            for (let i = 1; i <= 5; i++) {            
+                document.getElementById('card_' + i).style.display = 'none';
+            }
+
+            // Show only the number of fields selected
+            for (let i = 1; i <= count; i++) {            
+                document.getElementById('card_' + i).style.display = 'block';
+            }
+        }
+
+        // Initialize the form with the correct number of fields if needed
+        const initialSelectedValue = document.querySelector('input[name="narrative_images"]:checked');
+        if (initialSelectedValue) {
+            showImageUploadFields(initialSelectedValue.value);
+        }
     });
-    
-    function showImageUploadFields(count) {
-        // Hide all image upload and description fields initially
-        for (let i = 1; i <= 5; i++) {            
-            document.getElementById('card_' + i).style.display = 'none';
-        }
-
-        // Show only the number of fields selected
-        for (let i = 1; i <= count; i++) {            
-            document.getElementById('card_' + i).style.display = 'block';
-        }
-    }
-
-    // Initialize the form with the correct number of fields if needed
-    const initialSelectedValue = document.querySelector('input[name="narrative_images"]:checked');
-    if (initialSelectedValue) {
-        showImageUploadFields(initialSelectedValue.value);
-    }
-});
 </script>
+<!--End Show only the number of narrative images selected -->
+<!-- Show only the number of art images selected -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-    const artImageRadios = document.querySelectorAll('input[name="art_images"]');
+        const artImageRadios = document.querySelectorAll('input[name="art_images"]');
 
-    // Listen for changes to the art_images radio buttons
-    artImageRadios.forEach(radio => {
-        radio.addEventListener('change', function () {
-            const selectedValue = this.value;
-            showArtImageFields(selectedValue);
-        });
-    });
-
-    function showArtImageFields(count) {
-        // Hide all image upload and description fields initially
-        for (let i = 1; i <= 5; i++) {           
-            document.getElementById('art_card_' + i).style.display = 'none';
-        }
-
-        // Show only the number of fields corresponding to the selected value
-        for (let i = 1; i <= count; i++) {            
-            document.getElementById('art_card_' + i).style.display = 'block';
-        }
-    }
-
-    // Initialize the form with the correct number of fields if a value is already selected
-    const initialSelectedValue = document.querySelector('input[name="art_images"]:checked');
-    if (initialSelectedValue) {
-        showArtImageFields(initialSelectedValue.value);
-    }
-});
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const coAuthorsRadios = document.querySelectorAll('input[name="co_authors"]');
-
-        // Listen for changes to the co_authors radio buttons
-        coAuthorsRadios.forEach(radio => {
+        // Listen for changes to the art_images radio buttons
+        artImageRadios.forEach(radio => {
             radio.addEventListener('change', function () {
                 const selectedValue = this.value;
-                toggleCoAuthorsFields(selectedValue);
+                showArtImageFields(selectedValue);
             });
         });
 
-        function toggleCoAuthorsFields(count) {
-            // Hide all co-author fields initially
-            for (let i = 1; i <= 2; i++) {
-                document.getElementById('author_card_' + i).style.display = 'none';
+        function showArtImageFields(count) {
+            // Hide all image upload and description fields initially
+            for (let i = 1; i <= 5; i++) {           
+                document.getElementById('art_card_' + i).style.display = 'none';
             }
 
-            // Show only the necessary fields based on the selected number of co-authors
-            for (let i = 1; i <= count; i++) {
-                document.getElementById('author_card_' + i).style.display = 'block';
-            }        
+            // Show only the number of fields corresponding to the selected value
+            for (let i = 1; i <= count; i++) {            
+                document.getElementById('art_card_' + i).style.display = 'block';
+            }
         }
 
-        // Initialize the form with the correct fields displayed if a value is already selected
-        const initialSelectedValue = document.querySelector('input[name="co_authors"]:checked');
+        // Initialize the form with the correct number of fields if a value is already selected
+        const initialSelectedValue = document.querySelector('input[name="art_images"]:checked');
         if (initialSelectedValue) {
-            toggleCoAuthorsFields(initialSelectedValue.value);
+            showArtImageFields(initialSelectedValue.value);
         }
     });
 </script>
-
-
+<!-- End Show only the number of art images selected -->
 <!-- Add real-time size validation script -->
 <script>
     document.getElementById('narrative_file').addEventListener('change', function() {
         validateFileSize(this, 'narrative_file_error');
     });
     
-    document.getElementById('first_image_file').addEventListener('change', function() {
-        validateFileSize(this, 'first_image_file_error');
+    document.getElementById('image_file_1').addEventListener('change', function() {
+        validateFileSize(this, 'image_file_1_error');
     });
 
-    document.getElementById('second_image_file').addEventListener('change', function() {
-        validateFileSize(this, 'second_image_file_error');
+    @for ($i = 2; $i <= 5; $i++)
+    document.getElementById('image_file_{{ $i }}').addEventListener('change', function() {
+        validateFileSize(this, 'image_file_{{ $i }}_error');
+    });
+    @endfor
+
+    document.addEventListener('change', function (event) {
+        // Check if the event target is an input file with the required ID format
+        if (event.target && event.target.id.startsWith('image_file_')) {
+            const inputId = event.target.id;
+            const errorId = inputId + '_error'; // Construct the error span ID dynamically
+            validateFileSize(event.target, errorId);
+        }
     });
 
-    document.getElementById('art_image_file').addEventListener('change', function() {
-        validateFileSize(this, 'art_image_file_error');
-    });    
+    @for ($i = 2; $i <= 5; $i++)
+    document.getElementById('art_image_file_{{ $i }}').addEventListener('change', function() {
+        validateFileSize(this, 'art_image_file_{{ $i }}_error');
+    });
+    @endfor
+
+    document.addEventListener('change', function (event) {
+        // Check if the event target is an input file with the required ID format
+        if (event.target && event.target.id.startsWith('art_image_file_')) {
+            const inputId = event.target.id;
+            const errorId = inputId + '_error'; // Construct the error span ID dynamically
+            validateFileSize(event.target, errorId);
+        }
+    });      
     
     document.getElementById('art_video_file').addEventListener('change', function() {
         validateVideoFile(this, 'art_video_file_error');
@@ -1084,9 +1067,12 @@
         var file = input.files[0];
         var maxSize = 1 * 1024 * 1024; // 1MB in bytes
 
-    if (file.size > maxSize) {
-        alert('File size exceeds 1MB. Please upload a smaller file.');
-        input.value = ''; // Clear the input if validation fails
+        if (file.size > maxSize) {
+            // alert('File size exceeds 1MB. Please upload a smaller file.');
+            document.getElementById(errorElementId).innerText = "File size exceeds 1MB. Please upload a smaller file.";
+            input.value = ''; // Clear the input if validation fails
+        } else{
+            document.getElementById(errorElementId).innerText = "";
     }
     }
 
@@ -1112,9 +1098,63 @@
                 input.value = ''; // Clear the input
                 return;
             }
+            else{
+                document.getElementById(errorElementId).innerText = "";
+            }
 
             // Clear any previous error
             document.getElementById(errorElementId).innerText = '';
         }
     }
 </script>
+<!-- End real-time size validation script -->
+<!-- all word count validation -->
+<script>
+    function checkWordLimit(field, limit, errorField) {
+        //  console.log(field);
+        var words = field.value.trim().split(/\s+/).filter(word => word.length > 0).length;
+        if (words > limit) {
+            document.getElementById(errorField).innerText = "Exceeded word limit of " + limit + " words.";
+            return false;
+        } else {
+            document.getElementById(errorField).innerText = "";
+            return true;
+        }
+    }
+
+    function validateForm() {
+        let allValid = true;
+        allValid &= checkWordLimit(document.getElementById('explanation'), 100, 'explanationError');
+        allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');
+        allValid &= checkWordLimit(document.getElementById('creative_Work'), 10, 'creative_WorkError');
+        allValid &= checkWordLimit(document.getElementById('subtitle'), 40, 'subtitleError');
+        allValid &= checkWordLimit(document.getElementById('narrative_image_desc_1'), 50, 'narrative_image_desc_1Error');
+        // Loop through the dynamically generated textareas
+        for (let i = 2; i <= 5; i++) {
+            const textarea = document.getElementById(`narrative_image_desc_${i}`);
+            const errorDiv = document.getElementById(`narrative_image_desc_${i}Error`);
+
+            if (textarea) {
+                // Perform word limit validation for each textarea
+                allValid &= checkWordLimit(textarea, 50, `narrative_image_desc_${i}Error`);
+            }
+        }  
+        // Loop through the dynamically generated textareas
+        for (let i = 1; i <= 5; i++) {
+            const textarea = document.getElementById(`art_image_desc_${i}`);
+            const errorDiv = document.getElementById(`art_image_desc_${i}Error`);
+
+            if (textarea) {
+                // Perform word limit validation for each textarea
+                allValid &= checkWordLimit(textarea, 50, `art_image_desc_${i}Error`);
+            }
+        }                
+        allValid &= checkWordLimit(document.getElementById('art_desc'), 250, 'art_descError');
+        allValid &= checkWordLimit(document.getElementById('art_video_desc'), 250, 'art_video_descError');
+        allValid &= checkWordLimit(document.getElementById('bio_short'), 40, 'bio_shortError');
+        allValid &= checkWordLimit(document.getElementById('bio_long'), 250, 'bio_longError');        
+
+        document.getElementById('submitButton').disabled = !allValid;
+    }
+</script>
+<!-- End all word count validation -->
