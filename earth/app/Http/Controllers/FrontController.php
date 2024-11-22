@@ -796,7 +796,7 @@ class FrontController extends Controller
                                 'invited_by'                => $invited_byInfo, 
                                 'invited_by_email'          => $invited_emailInfo,
                                 'participated'              => $postData['participated'],
-                                'participated_info'         => $participatedInfo                      
+                                'participated_info'         => $participatedInfo                                                      
                             ];
                             //  Helper::pr($fields);
 

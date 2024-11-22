@@ -506,12 +506,15 @@ class NewsContentController extends Controller
                     'is_popular'                => $postData['is_popular'],  
                     'short_desc'                => $postData['short_desc'] ?? '',  
                     'nelp_form_number'          => $nelp_form_number,
-                    'nelp_form_file'            => $nelp_pdf,                    
-                    'is_import'                 => 1,                    
+                    'nelp_form_file'            => $nelp_pdf,                                                          
                 ];
                     //  dd();                                 
                     // Helper::pr($fields);
-                    NewsContent::insert($fields);                    
+                    NewsContent::insert($fields);     
+                    $fieldsArticle = [
+                        'is_import'                 => 1,  
+                    ];
+                    Article::where('id', '=', $id)->update($fieldsArticle);
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');                
             } else {
                 return redirect()->back()->with('error_message', 'All Fields Required !!!');
