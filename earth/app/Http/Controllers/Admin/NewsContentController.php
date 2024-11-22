@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Helper as HelpersHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\JournalFrequency;
 use Illuminate\Http\Request;
@@ -445,7 +446,24 @@ class NewsContentController extends Controller
                         preg_match("/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([a-zA-Z0-9_-]{11})/", $url, $matches1);
                         $videoId = $matches1[1]; // This will give you the part after 'v='
 
-                    }                     
+                    }      
+                     /* NELP Pdf */                    
+                    $imageFile      = $request->file('nelp_pdf');
+                    $nelp_form_number = str_replace("SRN","NELP",$postData['creative_work_SRN']);
+                    if ($imageFile != '') {
+                        $imageName      = str_replace($imageFile->getClientOriginalName(),$nelp_form_number.'.pdf',$imageFile->getClientOriginalName());
+                        $uploadedFile   = $this->upload_single_file('nelp_pdf', $imageName, 'newcontent', 'pdf');                        
+                        if ($uploadedFile['status']) {
+                            $nelp_pdf = $uploadedFile['newFilename'];
+                            // // Article::where('id', '=', $article_id)->update(['nelp_form_scan_copy' => $nelp_form_scan_copy, 'is_published' => 3]);
+                            // return redirect()->back()->with(['success_message' => 'Scan Copy Of NELP Form Uploaded Successfully !!!']);
+                        } else {
+                            return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                        }
+                    } else {
+                        return redirect()->back()->with(['error_message' => 'Please Upload Scan Copy Of NELP Form !!!']);
+                    }       
+                     /* NELP Pdf */        
                     $fields = [
                     'author_email'              => $postData['email'], 
                     'author_classification'     => $postData['author_classification'] ?? '',
@@ -486,10 +504,13 @@ class NewsContentController extends Controller
                     'keywords'                  => $postData['keywords'] ?? '',     
                     'is_feature'                => $postData['is_feature'],  
                     'is_popular'                => $postData['is_popular'],  
-                    'short_desc'                => $postData['short_desc'] ?? '',    
-                    
+                    'short_desc'                => $postData['short_desc'] ?? '',  
+                    'nelp_form_number'          => $nelp_form_number,
+                    'nelp_form_file'            => $nelp_pdf,                    
+                    'is_import'                 => 1,                    
                 ];
-                    //  dd($fields);                                 
+                    //  dd();                                 
+                    // Helper::pr($fields);
                     NewsContent::insert($fields);                    
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');                
             } else {

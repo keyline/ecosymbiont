@@ -6,6 +6,7 @@ $controllerRoute = $module['controller_route'];
 
 ?>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.14.5/sweetalert2.css" integrity="sha512-6qScZESleBziOBqJwOPurSy6lhLqHGjHNALOOFX0mzRVPiE5SZQvepRzeSO1OB475fcZywuMjxtkrFaO93aq9g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
 <style type="text/css">
     .choices__list--multiple .choices__item {
@@ -111,7 +112,8 @@ $controllerRoute = $module['controller_route'];
             $is_popular = $row->is_popular;            
             $media = $row->media;     
             $video_url = $row->video_url;  
-            $videoId = $row->videoId;     
+            $videoId = $row->videoId;    
+            $nelp_pdf = $row->nelp_form_file; 
         } else {
             $author_classification ='';
             $co_authors = '';
@@ -151,6 +153,7 @@ $controllerRoute = $module['controller_route'];
             $media = '';    
             $video_url = '';        
             $videoId = '';
+            $nelp_pdf = '';
         }
         ?>
         <div class="col-xl-12">
@@ -165,7 +168,7 @@ $controllerRoute = $module['controller_route'];
         </ul>
 </div>
 @endif
-                    <form method="POST" action="" enctype="multipart/form-data" oninput="validateForm()">
+                    <form method="POST" id="import_form" action="" enctype="multipart/form-data" oninput="validateForm()">
                         @csrf
                         <div class="row mb-3">
                             <label for="email" class="col-md-2 col-lg-4 col-form-label">1) Email address</label>
@@ -396,7 +399,7 @@ $controllerRoute = $module['controller_route'];
                         <div class="row mb-3">
                             <label for="creative_work_DOI" class="col-md-2 col-lg-2 col-form-label">Creative-Work DOI</label>
                             <div class="col-md-10 col-lg-10">
-                                <input type="text" name="creative_work_DOI" class="form-control" id="creative_work_DOI" value="<?= $creative_work_DOI ?>" required>
+                                <input type="text" name="creative_work_DOI" class="form-control" id="creative_work_DOI" value="<?= str_replace("SRN","DOI",$creative_work_SRN)?>" required>
                             </div>
                         </div>
                                           
@@ -578,15 +581,7 @@ $controllerRoute = $module['controller_route'];
                                     ?>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="ckeditor2" class="col-md-2 col-lg-2 col-form-label">Short Description
-                            </label>
-                            <div class="col-md-10 col-lg-10">
-                                <textarea class="form-control" id="ckeditor2" name="short_desc" rows="5"><?= $short_desc ?></textarea>
-                                <div id="short_descError" class="error"></div>
-                            </div>
-                        </div>
+                        </div>                        
                         <div class="row mb-3">
                             <label for="is_feature" class="col-md-2 col-lg-2 col-form-label">Is Features</label>
                             <div class="col-md-10 col-lg-10">
@@ -605,8 +600,18 @@ $controllerRoute = $module['controller_route'];
                                 <label for="is_popular_no">No</label>
                             </div>
                         </div> 
+                        <div class="row mb-3">
+                            <label for="nelp_pdf" class="col-md-2 col-lg-2 col-form-label">Upload NELP</label>
+                            <div class="col-md-10 col-lg-10">
+                                <input type="file" name="nelp_pdf" class="form-control" id="nelp_pdf" accept="application/pdf">                                                                
+                                <?php if($nelp_pdf != ''){?>
+                                <a href="<?= env('UPLOADS_URL') . 'newcontent/' . $nelp_pdf ?>" target="_blank"
+                                    class="badge bg-primary">View PDF</a>
+                                <?php }?>                                
+                            </div>
+                        </div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary"><?= $row ? 'Save' : 'Add' ?></button>
+                            <button type="submit" id="submitFormButton" class="btn btn-primary"><?= $row ? 'Published' : 'Add' ?></button>
                         </div> 
                     </form>
                 </div>
@@ -616,6 +621,26 @@ $controllerRoute = $module['controller_route'];
 </section>
 <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.14.5/sweetalert2.min.js" integrity="sha512-JCDnPKShC1tVU4pNu5mhCEt6KWmHf0XPojB0OILRMkr89Eq9BHeBP+54oUlsmj8R5oWqmJstG1QoY6HkkKeUAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>    
+    document.querySelector('#submitFormButton').addEventListener('click', function (e) {
+    e.preventDefault(); // Prevent default form submission
+
+    Swal.fire({
+        title: 'Are you sure?',
+        html: "Once the final submission is made, further edits to this article cannot be made here. However, you can make edits through the 'News Content' module.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#4CAF50',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Publish it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.querySelector('#import_form').submit();
+        }
+    });
+});
+</script>
 <script type="text/javascript">
     $(document).ready(function() {
         var multipleCancelButton = new Choices('#choices-multiple-remove-button', {

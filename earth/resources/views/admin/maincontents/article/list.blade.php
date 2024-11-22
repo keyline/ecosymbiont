@@ -48,58 +48,58 @@ $controllerRoute = $module['controller_route'];
                 </tr>
               </thead>
               <tbody>
-                <?php if(count($rows)>0){ $sl=1; foreach($rows as $row){?>
-                  <tr>
-                    <th scope="row"><?=$sl++?></th>
-                    <td><?=$row->article_no?></td>
-                    <td>
-                      <?=$row->first_name?> <?=$row->last_name?><br> <?=$row->email?></td>
-                    <td>
-                      <?=wordwrap($row->creative_Work,30,"<br>\n")?></td>                    
-                    <td><?=date_format(date_create($row->created_at), "M d, Y")?></td>                                       
-                    <td>
-                    <?php
-                      if($row->is_published == 0){
-                          echo "<h6>Submitted</h6>";
-                      } elseif($row->is_published == 1){
-                          echo "<h6>Final Edited & Checked</h6>";
-                      } elseif($row->is_published == 2){
-                          echo "<h6>NELP Form Generated & Shared</h6>";
-                      } elseif($row->is_published == 3){
-                          echo "<h6>Scan Copy Uploaded</h6>";
-                      } elseif($row->is_published == 4){
-                          echo "<h6>Approved</h6>";
-                      } elseif($row->is_published == 5){
-                          echo "<h6>Rejected</h6>";
-                      }
-                      ?>
-                    </td>
-                    <td>
-                      <?php if ($row->is_published == 3) { ?>
-                        <a href="<?=url('admin/' . $controllerRoute . '/change_status_accept/'.Helper::encoded($row->id))?>" class="btn btn-success btn-sm" title="Accept <?=$module['title']?>"><i class="fa fa-check"></i> Accept</a>
-                        <a href="<?=url('admin/' . $controllerRoute . '/change_status_reject/'.Helper::encoded($row->id))?>" class="btn btn-danger btn-sm" title="Reject <?=$module['title']?>"><i class="fa fa-times"></i> Reject</a>
-                     <?php } elseif($row->is_published == 4){?>
-                        <a href="<?=url('admin/' . $controllerRoute . '/change_status_reject/'.Helper::encoded($row->id))?>" class="btn btn-danger btn-sm" title="Reject <?=$module['title']?>"><i class="fa fa-times"></i> Reject</a>
-                     <?php }?>
-                      
-                    </td>
-                    <td>
-                      <!-- <a href="<?=url('admin/' . $controllerRoute . '/edit/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit"></i></a> -->
-                      <a href="<?=url('admin/' . $controllerRoute . '/view_details/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="ViewDetails <?=$module['title']?>">View Details</a>
-                      <a href="<?=url('admin/news_content/import/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="ViewDetails <?=$module['title']?>">Import to News Content</a>
-                      <a href="<?=url('admin/' . $controllerRoute . '/delete/'.Helper::encoded($row->id))?>" class="btn btn-outline-danger btn-sm" title="Delete <?=$module['title']?>" onclick="return confirm('Do You Want To Delete This <?=$module['title']?>');"><i class="fa fa-trash"></i></a>
-                      <!-- <?php if($row->status){?>
-                        <a href="<?=url('admin/' . $controllerRoute . '/change-status/'.Helper::encoded($row->id))?>" class="btn btn-outline-success btn-sm" title="Activate <?=$module['title']?>"><i class="fa fa-check"></i></a>
-                      <?php } else {?>
-                        <a href="<?=url('admin/' . $controllerRoute . '/change-status/'.Helper::encoded($row->id))?>" class="btn btn-outline-warning btn-sm" title="Deactivate <?=$module['title']?>"><i class="fa fa-times"></i></a>
-                      <?php }?> -->
-                    </td>
-                  </tr>
-                <?php } } else {?>
+                <?php if(count($rows)>0)
+                { $sl=1; foreach($rows as $row)
+                  { ?>
+                      <tr>
+                        <th scope="row"><?=$sl++?></th>
+                        <td><?=$row->article_no?></td>
+                        <td>
+                          <?=$row->first_name?> <?=$row->last_name?><br> <?=$row->email?></td>
+                        <td>
+                          <?=wordwrap($row->creative_Work,30,"<br>\n")?></td>                    
+                        <td><?=date_format(date_create($row->created_at), "M d, Y")?></td>                                       
+                        <td>
+                        <?php
+                          if($row->is_published == 0){
+                              echo "<h6>Submitted</h6>";
+                          } elseif($row->is_published == 1){
+                              echo "<h6>Final Edited & Checked</h6>";
+                          } elseif($row->is_published == 2){
+                              echo "<h6>NELP Form Generated & Shared</h6>";
+                          } elseif($row->is_published == 3){
+                              echo "<h6>Scan Copy Uploaded</h6>";
+                          } elseif($row->is_published == 4){
+                              echo "<h6>Approved</h6>";
+                          } elseif($row->is_published == 5){
+                              echo "<h6>Rejected</h6>";
+                          }
+                          ?>
+                        </td>
+                        <td>
+                          <?php if ($row->is_published == 3) { ?>
+                            <a href="<?=url('admin/' . $controllerRoute . '/change_status_accept/'.Helper::encoded($row->id))?>" class="btn btn-success btn-sm" title="Accept <?=$module['title']?>"><i class="fa fa-check"></i> Accept</a>
+                            <a href="<?=url('admin/' . $controllerRoute . '/change_status_reject/'.Helper::encoded($row->id))?>" class="btn btn-danger btn-sm" title="Reject <?=$module['title']?>"><i class="fa fa-times"></i> Reject</a>
+                        <?php } elseif($row->is_published == 4){?>
+                            <a href="<?=url('admin/' . $controllerRoute . '/change_status_reject/'.Helper::encoded($row->id))?>" class="btn btn-danger btn-sm" title="Reject <?=$module['title']?>"><i class="fa fa-times"></i> Reject</a>
+                        <?php }?>
+                          
+                        </td>
+                        <td>                      
+                          <a href="<?=url('admin/' . $controllerRoute . '/view_details/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="ViewDetails <?=$module['title']?>">View Details</a>
+                          <?php if ($row->is_import == 0) { ?>
+                          <a href="<?=url('admin/news_content/import/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="ViewDetails <?=$module['title']?>">Import to News Content</a>
+                          <?php } ?>                     
+                        </td>
+                      </tr>
+                    <?php 
+                  } 
+                } else 
+                { ?>
                   <tr>
                     <td colspan="9" style="text-align: center;color: red;">No Records Found !!!</td>
                   </tr>
-                <?php }?>
+                <?php } ?>
               </tbody>
             </table>
           </div>
