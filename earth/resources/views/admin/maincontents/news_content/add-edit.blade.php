@@ -648,7 +648,15 @@ $controllerRoute = $module['controller_route'];
         allowedContent: true,
     stylesSet: [        
         { name: 'others_image_colour', element: 'em', attributes: { 'style': 'display: inline-block; color: #87ceeb;font-size: 16px;font-family: "proximanova_regular", sans-serif;font-style: italic;margin: 0;text-align: left !important;width: 100%;' } },        
-    ]
+    ],
+    on: {
+        change: function (evt) {
+            var editorContent = evt.editor.getData();
+            // Remove <p> tags inside <blockquote>
+            editorContent = editorContent.replace(/<blockquote>\s*<p>(.*?)<\/p>\s*<\/blockquote>/g, '<blockquote>$1</blockquote>');
+            evt.editor.setData(editorContent);
+        }
+    }
 });
 </script>
 <script>
