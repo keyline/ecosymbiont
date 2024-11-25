@@ -645,15 +645,8 @@ $controllerRoute = $module['controller_route'];
     });
 </script>
 <script>
-    CKEDITOR.replace('long_desc', {
-    //     toolbar: [
-    //     { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Superscript', 'Subscript'] },
-    //     { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] },
-    //     { name: 'editing', items: ['Find', 'Replace'] },
-    //     { name: 'styles', items: ['Styles', 'Format'] }
-    // ],
-        allowedContent: true,
-        extraAllowedContent: 'p[id]',
+    CKEDITOR.replace('long_desc', {   
+        allowedContent: true,       
     stylesSet: [        
         { name: 'others_image_colour', element: 'em', attributes: { 'style': 'display: inline-block; color: #87ceeb;font-size: 16px;font-family: "proximanova_regular", sans-serif;font-style: italic;margin: 0;text-align: left !important;width: 100%;' } },        
     ]
