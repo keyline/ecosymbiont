@@ -145,20 +145,107 @@ $current_url = $protocol . $host . $uri;
                                         <li><a class="linkedin" href="{{ $linkdinShareUrl }}" target="_blank"><i class="fa fa-linkedin"></i><span>&nbsp;&nbsp;&nbsp;Share on Linkedin</span></a></li>
                                     </ul>
                                 </div>
+                                <div class="about-more-autor">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active" style="width: 100%;">
+                                            <a href="#about-autor" data-toggle="tab">
+                                            <?php echo 'About The Lead Author'; ?>
+                                            </a>
+                                        </li>
+                                    </ul>                                    
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="about-autor">
+                                            <div class="autor-box">                                                
+                                                <div class="autor-content postdetails-icon">
+                                                    <div class="autor-title">
+                                                        <span>
+                                                            <img src="<?=env('UPLOADS_URL').'icon/author.png'?>" alt="author" title="Author Bio" data-toogle="tooltip">                                                            
+                                                            <span><?=$rowContent->author_short_bio?></span>
+                                                            
+                                                            <!-- <a href="javascript:void(0);"><?=$authorPostCount?> Posts</a> -->
+                                                        </span>
+                                                    </div>
+                                                    <div class="autor-title">
+                                                        <span>
+                                                            <img src="<?=env('UPLOADS_URL').'icon/ancestral.png'?>" alt="author_affiliation" title="Ancestral Ecoweb" data-toogle="tooltip">
+                                                            <?php
+                                                            $author_affiliation = json_decode($rowContent->author_affiliation);
+                                                            $affiliations       = [];
+                                                            if(!empty($author_affiliation)){ for($k=0;$k<count($author_affiliation);$k++){
+                                                                $getAffiliation = EcosystemAffiliation::select('name')->where('id', '=', $author_affiliation[$k])->first();
+                                                                $affiliations[]       = $getAffiliation->name;
+                                                            } }?>
+                                                            
+                                                            <?php
+                                                                $indigenous_affiliation = (isset($rowContent->indigenous_affiliation) && !empty($rowContent->indigenous_affiliation)) ? trim($rowContent->indigenous_affiliation) : trim($rowContent->indigenous_affiliation);
+                                                            ?>
+                                                            <span><?= implode(", ", $affiliations) ?><?= !empty($indigenous_affiliation) ? ' | ' . $indigenous_affiliation : ''; ?></span>
+                                                        </span>
+                                                    </div>
+                                                    <div class="autor-title">
+                                                        <span>
+                                                            <img src="<?=env('UPLOADS_URL').'icon/residence.png'?>" alt="residence" title="Residence" data-toogle="tooltip">
+                                                            <?php
+                                                            $getCountry = Country::select('name')->where('id', '=', $rowContent->country)->first();
+                                                            ?>
+                                                            <span><?=(($getCountry)?$getCountry->name:'')?></span>
+                                                        </span>
+                                                    </div>
+                                                    <div class="autor-title">
+                                                        <span>
+                                                            <img src="<?=env('UPLOADS_URL').'icon/organizational.png'?>" alt="organizational" title="Organizational Affiliation" data-toogle="tooltip">                                                                    
+                                                            <span><?= $organization_name = (isset($rowContent->organization_name) > 0) ? trim($rowContent->organization_name) : ''; ?></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                                                
+                                    </div>
+                                </div>
                                 <?php  // Split the string into two parts using the '#' as a delimiter
-                                    $paragraphs = explode('#', $rowContent->author_short_bio);  
-                                    $indigenous = explode('#',$rowContent->indigenous_affiliation);
-                                    $organization = explode('#',$rowContent->organization_name);                                      
-                                    for($i=0; $i<count($paragraphs); $i++)
-                                    {?>
+                                $co_authors = $rowContent->co_authors;
+                                // $co_author_name = json_decode($row->co_author_names);
+                            //  dd($co_author_name[0]); die;
+                                $co_author_bios = json_decode($rowContent->co_author_bios);
+                                $co_author_countries =json_decode($rowContent->co_author_countries);
+                                $co_author_organizations = json_decode($rowContent->co_author_organizations);
+                                $co_ecosystem_affiliations = json_decode($rowContent->co_ecosystem_affiliations);
+                                $co_indigenous_affiliations = json_decode($rowContent->co_indigenous_affiliations);
+                                $co_author_classification = json_decode($rowContent->co_author_classification);
+                                    // $paragraphs = explode('#', $rowContent->author_short_bio);  
+                                    // $indigenous = explode('#',$rowContent->indigenous_affiliation);
+                                    // $organization = explode('#',$rowContent->organization_name);                                      
+                                    for($i = 1; $i <= $co_authors; $i++)
+                                    {
+                                        // Decode the JSON field only once
+                                        $co_ecosystem_affiliations = json_decode($rowContent->co_ecosystem_affiliations);
+
+                                        // Initialize affiliations array
+                                        $affiliations = [];
+
+                                        // Check if $co_ecosystem_affiliations is not null and has the current index
+                                        if (!empty($co_ecosystem_affiliations) && isset($co_ecosystem_affiliations[$i-1])) {
+                                            $affiliation_ids = $co_ecosystem_affiliations[$i-1]; // Get the specific co-author's affiliations
+
+                                            // Loop through the affiliation IDs and fetch names
+                                            foreach ($affiliation_ids as $affiliation_id) {
+                                            $getCoAffiliation = EcosystemAffiliation::select('name')->where('id', '=', $affiliation_id)->first();
+                                            
+                                            // Check if the affiliation was found and add it to the array
+                                            if ($getCoAffiliation) {
+                                                $affiliations[] = $getCoAffiliation->name;
+                                            }
+                                            }
+                                        }
+                                        $county_ids = $co_author_countries[$i-1];
+                                        $getCoCountry = Country::select('name')->where('id', '=', $county_ids)->first();
+                                        ?>
                                         <div class="about-more-autor">
                                             <ul class="nav nav-tabs">
                                                 <li class="active" style="width: 100%;">
                                                     <a href="#about-autor" data-toggle="tab">
                                                     <?php 
-                                                        if ($i == 0) {
-                                                            echo 'About The Lead Author';
-                                                        } elseif ($i == 1) {
+                                                        if ($i == 1) {
                                                             echo 'About The Second Author';
                                                         } elseif ($i == 2) {
                                                             echo 'About The Third Author';
@@ -174,41 +261,34 @@ $current_url = $protocol . $host . $uri;
                                                             <div class="autor-title">
                                                                 <span>
                                                                     <img src="<?=env('UPLOADS_URL').'icon/author.png'?>" alt="author" title="Author Bio" data-toogle="tooltip">                                                            
-                                                                    <span><?=$author_short_bio = trim($paragraphs[$i])?></span>
+                                                                    <!-- <span>?=$author_short_bio = trim($paragraphs[$i])?></span> -->
+                                                                    <span><?=$co_author_bios[$i - 1]?></span>
                                                                     
                                                                     <!-- <a href="javascript:void(0);"><?=$authorPostCount?> Posts</a> -->
                                                                 </span>
                                                             </div>
                                                             <div class="autor-title">
                                                                 <span>
-                                                                    <img src="<?=env('UPLOADS_URL').'icon/ancestral.png'?>" alt="author_affiliation" title="Ancestral Ecoweb" data-toogle="tooltip">
+                                                                    <img src="<?=env('UPLOADS_URL').'icon/ancestral.png'?>" alt="author_affiliation" title="Ancestral Ecoweb" data-toogle="tooltip">                                                                                                                                        
                                                                     <?php
-                                                                    $author_affiliation = json_decode($rowContent->author_affiliation);
-                                                                    $affiliations       = [];
-                                                                    if(!empty($author_affiliation)){ for($k=0;$k<count($author_affiliation);$k++){
-                                                                        $getAffiliation = EcosystemAffiliation::select('name')->where('id', '=', $author_affiliation[$k])->first();
-                                                                        $affiliations[]       = $getAffiliation->name;
-                                                                    } }?>
-                                                                    
-                                                                    <?php
-                                                                        $indigenous_affiliation = (isset($indigenous[$i]) && !empty($indigenous[$i])) ? trim($indigenous[$i]) : trim($indigenous[0]);
+                                                                        // $indigenous_affiliation = (isset($indigenous[$i]) && !empty($indigenous[$i])) ? trim($indigenous[$i]) : trim($indigenous[0]);
+                                                                        $indigenous_affiliation = $co_indigenous_affiliations[$i - 1];
                                                                     ?>
                                                                     <span><?= implode(", ", $affiliations) ?><?= !empty($indigenous_affiliation) ? ' | ' . $indigenous_affiliation : ''; ?></span>
                                                                 </span>
                                                             </div>
                                                             <div class="autor-title">
                                                                 <span>
-                                                                    <img src="<?=env('UPLOADS_URL').'icon/residence.png'?>" alt="residence" title="Residence" data-toogle="tooltip">
-                                                                    <?php
-                                                                    $getCountry = Country::select('name')->where('id', '=', $rowContent->country)->first();
-                                                                    ?>
-                                                                    <span><?=(($getCountry)?$getCountry->name:'')?></span>
+                                                                    <img src="<?=env('UPLOADS_URL').'icon/residence.png'?>" alt="residence" title="Residence" data-toogle="tooltip">                                                                    
+                                                                    <!-- <span>?=(($getCountry)?$getCountry->name:'')?></span> -->
+                                                                    <span><?=$getCoCountry->name?></span>
                                                                 </span>
                                                             </div>
                                                             <div class="autor-title">
                                                                 <span>
                                                                     <img src="<?=env('UPLOADS_URL').'icon/organizational.png'?>" alt="organizational" title="Organizational Affiliation" data-toogle="tooltip">                                                                    
-                                                                    <span><?= $organization_name = (isset($organization[$i]) > 0) ? trim($organization[$i]) : ''; ?></span>
+                                                                    <!-- <span><?= $organization_name = (isset($organization[$i]) > 0) ? trim($organization[$i]) : ''; ?></span> -->
+                                                                    <span><?= $co_author_organizations[$i - 1] ?></span>
                                                                 </span>
                                                             </div>
                                                         </div>
