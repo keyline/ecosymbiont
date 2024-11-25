@@ -611,7 +611,8 @@ $controllerRoute = $module['controller_route'];
         </div>
     </div>
 </section>
-<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+<!-- <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script> -->
+<script src="https://cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.14.5/sweetalert2.min.js" integrity="sha512-JCDnPKShC1tVU4pNu5mhCEt6KWmHf0XPojB0OILRMkr89Eq9BHeBP+54oUlsmj8R5oWqmJstG1QoY6HkkKeUAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>    
@@ -645,12 +646,12 @@ $controllerRoute = $module['controller_route'];
 </script>
 <script>
     CKEDITOR.replace('long_desc', {
-        toolbar: [
-        { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Superscript', 'Subscript'] },
-        { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] },
-        { name: 'editing', items: ['Find', 'Replace'] },
-        { name: 'styles', items: ['Styles', 'Format'] }
-    ],
+    //     toolbar: [
+    //     { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Superscript', 'Subscript'] },
+    //     { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] },
+    //     { name: 'editing', items: ['Find', 'Replace'] },
+    //     { name: 'styles', items: ['Styles', 'Format'] }
+    // ],
         allowedContent: true,
     stylesSet: [        
         { name: 'others_image_colour', element: 'em', attributes: { 'style': 'display: inline-block; color: #87ceeb;font-size: 16px;font-family: "proximanova_regular", sans-serif;font-style: italic;margin: 0;text-align: left !important;width: 100%;' } },        
