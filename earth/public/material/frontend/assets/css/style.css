@@ -4049,7 +4049,7 @@ div.list-post .post-content h2 a:hover {
 .single-post-box > .post-content blockquote p {
   color: #222222;
   font-size: 18px;
-  font-style: italic;
+  /* font-style: italic; */
   margin-bottom: 0;
   line-height: 24px;
 }
