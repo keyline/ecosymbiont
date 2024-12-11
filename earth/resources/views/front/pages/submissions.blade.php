@@ -192,7 +192,7 @@ $current_url = $protocol . $host . $uri;
                                                 <?php if(session('is_user_login')){?>
                                                     <p class="text-center"><a href="<?=url('user/submit-new-article')?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Submit New Creative-Work</a></p>
                                                 <?php } else {?>
-                                                    <p class="text-center"><a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="btn btn-primary">Submit New Creative-Work</a></p>
+                                                    <p class="text-center"><a href="<?=url('sign-in/' . Helper::encoded('https://ecosymbiont.org/earth/user/submit-new-article'))?>" class="btn btn-primary">Submit New Creative-Work</a></p>
                                                 <?php }?>
                                             <?php }?>
                                         </div>
