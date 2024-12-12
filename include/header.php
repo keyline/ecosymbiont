@@ -140,7 +140,7 @@ function isActive($page) {
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="<?= BASE_URL; ?>">
-                        <!-- <img src="images/logo.webp" alt="" class="img-responsive"> -->
+                        <img src="images/logo.webp" alt="" class="img-responsive">
                     </a>
                 </div>
 
