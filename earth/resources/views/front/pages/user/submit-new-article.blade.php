@@ -392,7 +392,7 @@
                                     <label for="invited_by_email" class="col-md-2 col-lg-4 col-form-label">10B) Email address of person who invited you to submit a Creative-Work to ERT
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="email" name="invited_by_email" class="form-control" id="invited_by_email"
+                                        <input type="text" name="invited_by_email" class="form-control" id="invited_by_email"
                                             value="<?= $invited_by_email ?>">
                                     </div>
                                 </div>
@@ -692,14 +692,14 @@
                                     <label for="state" class="col-md-2 col-lg-4 col-form-label">19) State/province of residence</label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="state" class="form-control" id="state"
-                                            value="<?= $state ?>" required>
+                                            value="<?= $state ?>">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="city" class="col-md-2 col-lg-4 col-form-label">20) Village/town/city of residence</label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="city" class="form-control" id="city"
-                                            value="<?= $city ?>" required>
+                                            value="<?= $city ?>">
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
@@ -707,7 +707,7 @@
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="organization_name" class="form-control" id="organization_name"
-                                            value="<?= $organization_name ?>" required>
+                                            value="<?= $organization_name ?>" >
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
@@ -715,7 +715,7 @@
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="organization_website" class="form-control" id="organization_website"
-                                            value="<?= $organization_website ?>" required>
+                                            value="<?= $organization_website ?>" >
                                     </div>
                                 </div>
                                 <div class="row mb-3">
