@@ -95,8 +95,7 @@ $controllerRoute = $module['controller_route'];
             $sub_title = $row->sub_title;
             $creative_work_SRN = $row->article_no;
             $creative_work_DOI = $row->creative_work_DOI;
-            $author_name = $row->author_name; 
-            $author_short_bio = $row->author_short_bio; 
+            $author_name = $row->author_name;             
             // $pronounId = $row->author_pronoun;  
             // $author_affiliationId = $selected_ecosystem_affiliation;
             $indigenous_affiliation = $row->indigenous_affiliation;            
@@ -485,7 +484,14 @@ $controllerRoute = $module['controller_route'];
                                     @endif
                                 </div>
                             </div>                             
-                           
+                            <div class="row mb-3">
+                                <label for="author_short_bio" class="col-md-2 col-lg-4 col-form-label">26) 1-sentence biography (max. 40 words)
+                                </label>
+                                <div class="col-md-10 col-lg-8">
+                                    <textarea class="form-control" id="author_short_bio" name="author_short_bio" rows="4" cols="50" placeholder="Your explanation here..." required><?= $bio_short ?></textarea>
+                                    <div id="bio_shortError" class="error"></div>
+                                </div>
+                            </div>
                          
                         <div class="row mb-3">
                             <label for="media" class="col-md-2 col-lg-2 col-form-label">Media Type</label>
@@ -611,7 +617,7 @@ $controllerRoute = $module['controller_route'];
                             </div>
                         </div>
                         <div class="text-center">
-                            <button type="submit" id="submitFormButton" class="btn btn-primary"><?= $row ? 'Published' : 'Add' ?></button>
+                            <button type="submit" id="submitFormButton" class="btn btn-primary"><?= $row ? 'Publish' : 'Add' ?></button>
                         </div> 
                     </form>
                 </div>

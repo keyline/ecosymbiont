@@ -413,9 +413,9 @@ class FrontController extends Controller
                             ];
                             UserActivity::insert($activityData);
                         /* user activity */
-                        if($sessionData->role == 1){
+                        if($sessionData->role == 1 || $sessionData->role == 2){
                             if($page_link == ''){
-                                return redirect('user/my-profile');
+                                return redirect('user/profiles');
                             } else {
                                 return redirect($page_link);
                             }
@@ -736,8 +736,7 @@ class FrontController extends Controller
                 if ($postData['invited'] == 'No' && $postData['participated'] == 'No') {                    
                     $rules = [
                         'first_name'                => 'required',                                                                
-                        'email'                     => 'required',                                      
-                        'for_publication_name'      => 'required',                                      
+                        'email'                     => 'required',                                                                                                    
                         'orginal_work'              => 'required',                                     
                         'copyright'                 => 'required',                     
                         'title'                     => 'required',
@@ -897,19 +896,18 @@ class FrontController extends Controller
                     'author_classification'     => 'required',
                     'first_name'                => 'required',                                                               
                     'email'                     => 'required',                                      
-                    'country'                   => 'required',                                     
-                    'for_publication_name'      => 'required', 
+                    'country'                   => 'required',                                                          
                     'orginal_work'              => 'required', 
                     'copyright'                 => 'required', 
                     'submission_types'          => 'required',                
-                    'state'                     => 'required', 
-                    'city'                      => 'required', 
+                    // 'state'                     => 'required', 
+                    // 'city'                      => 'required', 
                     'acknowledge'               => 'required',                                                      
                     'section_ert'               => 'required',
                     'title'                     => 'required',
                     'pronoun'                   => 'required',                
-                    'organization_name'         => 'required',
-                    'organization_website'      => 'required',
+                    // 'organization_name'         => 'required',
+                    // 'organization_website'      => 'required',
                     'ecosystem_affiliation'     => 'required',               
                     'expertise_area'            => 'required',                
                     'explanation'               => ['required', 'string', new MaxWords(100)],
