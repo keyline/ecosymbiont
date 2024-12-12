@@ -149,7 +149,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="" enctype="multipart/form-data" oninput="validateForm()">
+                        <form method="POST" id="saveForm" action="" enctype="multipart/form-data" oninput="validateForm()">
+                        <input type="hidden" name="form_action" id="formAction">
                             @csrf
                             <div class="row mb-3">
                                 <label for="email" class="col-md-2 col-lg-4 col-form-label">1) Email address</label>
@@ -169,11 +170,11 @@
                                 <label for="co_authors" class="col-md-2 col-lg-4 col-form-label">3) How many co-authors do you have?
                                 </label>
                                 <div class="col-md-10 col-lg-8">
-                                    <input type="radio" id="co_authors_0" name="co_authors" value="0" @checked(old('co_authors', $co_authors) == '0')>
+                                    <input type="radio" id="co_authors_0" name="co_authors" value="0" required @checked(old('co_authors', $co_authors) == '0')>
                                     <label for="0">0</label>
-                                    <input type="radio" id="co_authors_1" name="co_authors" value="1" @checked(old('co_authors', $co_authors) == '1')>
+                                    <input type="radio" id="co_authors_1" name="co_authors" value="1" required @checked(old('co_authors', $co_authors) == '1')>
                                     <label for="1">1</label>
-                                    <input type="radio" id="co_authors_2" name="co_authors" value="2" @checked(old('co_authors', $co_authors) == '2')>
+                                    <input type="radio" id="co_authors_2" name="co_authors" value="2" required @checked(old('co_authors', $co_authors) == '2')>
                                     <label for="2">2</label>
                                 </div>
                             </div>
@@ -303,7 +304,7 @@
                                 <label for="for_publication_name" class="col-md-2 col-lg-4 col-form-label">5) Preferred name for publication (if different from full legal name)</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" name="for_publication_name" class="form-control" id="for_publication_name"
-                                        value="<?= $for_publication_name ?>" required>
+                                        value="<?= $for_publication_name ?>">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -313,7 +314,7 @@
                                     @if ($user_title)
                                         @foreach ($user_title as $data)
                                             <!-- <option value="{{ $data->id }}" @selected($data->id == $titleId)> -->
-                                            <input type="radio" id="yes" name="title" value="{{ $data->id }}"  @checked($data->id == $titleId) >
+                                            <input type="radio" id="yes" name="title" value="{{ $data->id }}" required @checked($data->id == $titleId) >
                                             <label for="yes">{{ $data->name }}</label>
                                                 <!-- {{ $data->name }}</option> -->
                                         @endforeach
@@ -326,7 +327,7 @@
                                     @if ($pronoun)
                                         @foreach ($pronoun as $data)
                                             <!-- <option value="{{ $data->id }}" @selected($data->id == $pronounId)> -->
-                                            <input type="radio" id="yes" name="pronoun" value="{{ $data->id }}" @checked($data->id == $pronounId) >
+                                            <input type="radio" id="yes" name="pronoun" value="{{ $data->id }}" required @checked($data->id == $pronounId) >
                                             <label for="yes">{{ $data->name }}</label>
                                                 <!-- {{ $data->name }}</option> -->
                                         @endforeach
@@ -337,9 +338,9 @@
                                 <label for="orginal_work" class="col-md-2 col-lg-4 col-form-label">8) Are all components of this Creative-Work your original work?
                                 </label>
                                 <div class="col-md-10 col-lg-8">
-                                    <input type="radio" id="yes" name="orginal_work" value="Yes" @checked(old('orginal_work', $orginal_work) == 'Yes') onclick="hideModal()">
+                                    <input type="radio" id="yes" name="orginal_work" value="Yes" required @checked(old('orginal_work', $orginal_work) == 'Yes') onclick="hideModal()">
                                     <label for="yes">Yes</label>
-                                    <input type="radio" id="no" name="orginal_work" value="No" @checked(old('orginal_work', $orginal_work) == 'No') onclick="showModal()">
+                                    <input type="radio" id="no" name="orginal_work" value="No" required @checked(old('orginal_work', $orginal_work) == 'No') onclick="showModal()">
                                     <label for="no">No</label>
                                 </div>
                             </div>
@@ -347,9 +348,9 @@
                                 <label for="copyright" class="col-md-2 col-lg-4 col-form-label">9) Do you own the copyright and licensing rights to all components of your Creative-Work?
                                 </label>
                                 <div class="col-md-10 col-lg-8">
-                                    <input type="radio" id="yes" name="copyright" value="Yes" @checked(old('copyright', $copyright) == 'Yes') onclick="hideModal()">
+                                    <input type="radio" id="yes" name="copyright" value="Yes" required @checked(old('copyright', $copyright) == 'Yes') onclick="hideModal()">
                                     <label for="yes">Yes</label>
-                                    <input type="radio" id="no" name="copyright" value="No" @checked(old('copyright', $copyright) == 'No') onclick="showModal()">
+                                    <input type="radio" id="no" name="copyright" value="No" required @checked(old('copyright', $copyright) == 'No') onclick="showModal()">
                                     <label for="no">No</label>
                                 </div>
                             </div>                              
@@ -373,9 +374,9 @@
                             <div class="row mb-3">
                                 <label for="invited" class="col-md-2 col-lg-4 col-form-label">10) Were you invited to submit a Creative-Work to ERT?</label>
                                 <div class="col-md-10 col-lg-8">
-                                    <input type="radio" id="invited_yes" name="invited" value="Yes" @checked(old('invited', $invited) == 'Yes')>
+                                    <input type="radio" id="invited_yes" name="invited" value="Yes" required @checked(old('invited', $invited) == 'Yes')>
                                     <label for="yes">Yes</label>
-                                    <input type="radio" id="invited_no" name="invited" value="No" @checked(old('invited', $invited) == 'No')>
+                                    <input type="radio" id="invited_no" name="invited" value="No" required @checked(old('invited', $invited) == 'No')>
                                     <label for="no">No</label>
                                 </div>
                             </div>  
@@ -400,9 +401,9 @@
                                 <label for="participated" class="col-md-2 col-lg-4 col-form-label">11) Have you participated as a strategist at an in-person ER Synergy Meeting?
                                 </label>
                                 <div class="col-md-10 col-lg-8">
-                                    <input type="radio" id="participated_yes" name="participated" value="Yes" @checked(old('participated', $participated) == 'Yes')>
+                                    <input type="radio" id="participated_yes" name="participated" value="Yes" required @checked(old('participated', $participated) == 'Yes')>
                                     <label for="yes">Yes</label>
-                                    <input type="radio" id="participated_no" name="participated" value="No" @checked(old('participated', $participated) == 'No')>
+                                    <input type="radio" id="participated_no" name="participated" value="No" required @checked(old('participated', $participated) == 'No')>
                                     <label for="no">No</label>
                                 </div>
                             </div> 
@@ -780,8 +781,11 @@
                                 </div>                                
                             </div>                  
                             <div class="text-center">
-                                <button type="submit" id="submitButton" class="btn btn-primary"><?= $row ? 'Save' : 'Submit' ?></button>
+                                <button type="submit" id="submitButton" class="btn btn-primary"><?= $row ? 'Save' : 'Submit' ?></button>                                
                             </div>
+                            <!-- <div class="text-center">
+                                <button type="button" id="savebutton" class="btn btn-primary">Save Now</button>                                                                
+                            </div> -->
                         </form>
                     </div>
                 </div>
@@ -798,7 +802,13 @@
       <h3><i class="bi bi-exclamation-triangle-fill"></i> Warning</h3>
       <p>You must submit an original Creative-Eork and you must own the copyright and licensing rights to your original Creative-Work.</p>
       <button id="closePopup">Close</button>
-    </div>    
+    </div>  
+    <!-- <div id="save">
+      <h3><i class="bi bi-exclamation-triangle-fill"></i> Warning</h3>
+      <p>1. To finalize and submit your article, click "Submit". Please note that after submission, you will no longer be able to edit the data.  
+      2. To save your article temporarily for further edits before submission, click "Save Now".</p>
+      <button id="savenowclose">Close</button>      
+    </div>     -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -822,6 +832,45 @@
             $('#submitButton').prop('disabled', false); // Re-enable submit button
             });
         });
+
+//         $(document).ready(function () {
+//             // Initially hide the popup
+//             $('#save').hide();
+//     // Handle submit button click
+//     $('#saveButton').click(function () {
+//         $('#save').show; // Show the modal
+//     });
+
+//     // Close popup and re-enable submit button
+//     $('#savenowclose').click(function () {
+//             $('#save').fadeOut();
+
+//             $('#saveForm')
+//             .find(':input[required]')
+//             .each(function () {
+//                 $(this).data('required', true); // Save original required state
+//                 $(this).removeAttr('required'); // Remove required temporarily
+//             });
+
+//         // Set action to draft
+//         $('#formAction').val('draft');
+
+//         // Submit the form
+//         $('#saveForm').submit();
+//             // $('#submitButton').prop('disabled', false); // Re-enable submit button
+//             });
+//             //  Restore required attributes
+//         $('#saveForm')
+//             .find(':input')
+//             .each(function () {
+//                 if ($(this).data('required')) {
+//                     $(this).attr('required', true); // Restore original required state
+//                 }
+//             });
+
+    
+// });
+        
     </script>
 <!-- Popup end (Initially hidden) -->
 <!-- Function to show/hide the invited and participated fields -->

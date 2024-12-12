@@ -106,7 +106,7 @@
     <div id="popup">
       <h3>Submissions Eligibility Criteria</h3>
       <p>At this time, you must:<br>
-      (A) be invited to submit a Creative-Work to ERT; and/or <br>
+      (A) Be invited to submit a Creative-Work to EaRTh (note, when filling out the form for submitting your Creative-Work, type in N/A for Questions 10A and 10B); and/or <br>
       (B) have participated as a strategist at an in-person ER Synergy Meeting. </p>
       <button id="closePopup">Close</button>
     </div>    
