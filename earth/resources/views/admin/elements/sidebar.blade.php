@@ -71,7 +71,7 @@ if (!empty($parameters)) {
                         <a class="nav-link <?= $pageSegment == 'article' ? 'active' : '' ?>"
                             href="<?= url('admin/article/list') ?>" data-placement="left">
                             <i class="fa fa-file-text nav-icon"></i>
-                            <span class="nav-link-title">Submit Creative-Work</span>
+                            <span class="nav-link-title">Submited Creative-Work</span>
                         </a>
                     </div>
                 <!-- End Submitted Articles -->                

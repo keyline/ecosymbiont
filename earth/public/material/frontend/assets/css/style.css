@@ -4020,6 +4020,13 @@ div.list-post .post-content h2 a:hover {
   padding: 0 20px;
   margin-bottom: 18px;
 }
+.single-post-box > .post-content li{
+  font-size: 18px;
+    color: #666666;
+    font-family: 'proximanova_regular', sans-serif;
+    font-weight: 400;
+    line-height: 1.25;
+}
 .single-post-box h5 {
   font-size: 18px;
   font-family: 'proximanova_regular';
@@ -4049,7 +4056,7 @@ div.list-post .post-content h2 a:hover {
 .single-post-box > .post-content blockquote p {
   color: #222222;
   font-size: 18px;
-  font-style: italic;
+  /* font-style: italic; */
   margin-bottom: 0;
   line-height: 24px;
 }
