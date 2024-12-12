@@ -603,7 +603,7 @@ $controllerRoute = $module['controller_route'];
                             </div>
                         </div> 
                         <div class="text-center">
-                            <button type="submit" id="submitFormButton" class="btn btn-primary"><?= $row ? 'Published' : 'Add' ?></button>
+                            <button type="submit" id="submitFormButton" class="btn btn-primary"><?= $row ? 'Publish' : 'Add' ?></button>
                         </div> 
                     </form>
                 </div>
