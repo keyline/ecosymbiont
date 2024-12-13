@@ -18,7 +18,7 @@
             </div>
             <?php
             if ($row) {
-                //   Helper::pr($row);
+                //    Helper::pr($row);
                 $user_id = $row->user_id;
                 $author_classification = $row->author_classification;                
                 $first_name = $row->first_name;                               
@@ -31,8 +31,7 @@
                 $explanation = $row->explanation;  
                 $explanation_submission = $row->explanation_submission;              
                 $titleId = $row->titleId;                  
-                $pronounId = $row->pronounId;
-                
+                $pronounId = $row->pronounId;                
                 $state = $row->state;
                 $city = $row->city;
                 $participated = $row->participated;
@@ -71,6 +70,21 @@
                 $bio_long = '';                                        
             }
             ?>
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body pt-3">
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
@@ -81,28 +95,28 @@
                                 <label for="email" class="col-md-2 col-lg-4 col-form-label">Email address</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="email" name="email" class="form-control" id="email"
-                                        value="<?= $email ?>" required>
+                                        value="{{ old('email', $email) }}" required>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="author_classification" class="col-md-2 col-lg-4 col-form-label">Author Classification
                                 </label>
                                 <div class="col-md-10 col-lg-8">                                                                      
-                                    <input type="text" class="form-control" id="Ecoweb-rooted community" name="author_classification" value="<?= $classification->name; ?>" readonly>
+                                    <input type="text" class="form-control" id="Ecoweb-rooted community" name="author_classification" value="{{ old('author_classification', $classification->name) }}" readonly>
                                 </div>
                             </div>                                                          
                             <div class="row mb-3">
                                 <label for="first_name" class="col-md-2 col-lg-4 col-form-label">Full Legal Name (exactly as it appears on your government-issued identification documents, e.g., passport and/or driver's license)</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" name="first_name" class="form-control" id="first_name"
-                                        value="<?= $first_name ?>" required>
+                                        value="{{ old('first_name', $first_name) }}" required>
                                 </div>
                             </div>                                                 
                             <div class="row mb-3">
                                 <label for="for_publication_name" class="col-md-2 col-lg-4 col-form-label">Preferred name for publication (if different from full legal name)</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" name="for_publication_name" class="form-control" id="for_publication_name"
-                                        value="<?= $for_publication_name ?>">
+                                        value="{{ old('for_publication_name', $for_publication_name) }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -146,7 +160,7 @@
                                     <label for="invited_by" class="col-md-2 col-lg-4 col-form-label">Full name of person who invited you to submit a Creative-Work to ERT</label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="invited_by" class="form-control" id="invited_by"
-                                            value="<?= $invited_by ?>">
+                                            value="{{ old('invited_by', $invited_by) }}">
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
@@ -154,7 +168,7 @@
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="invited_by_email" class="form-control" id="invited_by_email"
-                                            value="<?= $invited_by_email ?>">
+                                            value="{{ old('invited_by_email', $invited_by_email) }}">
                                     </div>
                                 </div>
                             </div>
@@ -173,7 +187,7 @@
                                     <label for="participated_info" class="col-md-2 col-lg-4 col-form-label">Provide date and location of most recent in-person ER Synergy Meeting in which you participated</label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="participated_info" class="form-control" id="participated_info"
-                                        value="<?= $participated_info ?>">                                    
+                                        value="{{ old('participated_info', $participated_info) }}">                                    
                                     </div>
                                 </div> 
                             </div>
@@ -181,19 +195,19 @@
                                 <div class="row mb-3">
                                     <label for="explanation" class="col-md-2 col-lg-4 col-form-label">Explain why you are a grassroots changemaker, innovator, and/or knowledge-holder (max. 100 words)</label>
                                     <div class="col-md-10 col-lg-8">
-                                        <textarea class="form-control" id="explanation" name="explanation" rows="4" cols="50" placeholder="Your explanation here..." required><?= $explanation ?></textarea>
+                                        <textarea class="form-control" id="explanation" name="explanation" rows="4" cols="50" placeholder="Your explanation here..." required>{{ old('explanation', $explanation) }}</textarea>
                                         <div id="explanationError" class="error"></div>
                                     </div>
                                 </div>  
                                 <div class="row mb-3">
                                     <label for="explanation_submission" class="col-md-2 col-lg-4 col-form-label">Explain why and how your Creative-Work relates to regenerating systems that restore, preserve, and foster the mutually beneficial interconnectivity and interdependence (symbiosis) of human communities within and to natural ecological webs (ecowebs) (max. 150 words)</label>
                                     <div class="col-md-10 col-lg-8">
-                                        <textarea class="form-control" id="explanation_submission" name="explanation_submission" rows="4" cols="50" placeholder="Your explanation here..." required><?= $explanation_submission ?></textarea>
+                                        <textarea class="form-control" id="explanation_submission" name="explanation_submission" rows="4" cols="50" placeholder="Your explanation here..." required>{{ old('explanation_submission', $explanation_submission) }}</textarea>
                                         <div id="explanation_submissionError" class="error"></div>
                                     </div>
                                 </div>                                
                                 <div class="row mb-3">
-                                    <label for="country" class="col-md-2 col-lg-4 col-form-label">What country/nation do you live in? (Country of Residence)                                </label>
+                                    <label for="country" class="col-md-2 col-lg-4 col-form-label">What country/nation do you live in? (Country of Residence)</label>
                                     <div class="col-md-10 col-lg-8">
                                         <select name="country" class="form-control" id="country" required>
                                             <option value="" selected disabled>Select</option>
@@ -210,14 +224,14 @@
                                     <label for="state" class="col-md-2 col-lg-4 col-form-label">State/province of residence</label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="state" class="form-control" id="state"
-                                            value="<?= $state ?>">
+                                            value="{{ old('state', $state) }}">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="city" class="col-md-2 col-lg-4 col-form-label">Village/town/city of residence</label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="city" class="form-control" id="city"
-                                            value="<?= $city ?>">
+                                            value="{{ old('city', $city ) }}">
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
@@ -225,7 +239,7 @@
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="organization_name" class="form-control" id="organization_name"
-                                            value="<?= $organization_name ?>" >
+                                            value="{{ old('organization_name', $organization_name) }}" >
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
@@ -233,7 +247,7 @@
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="organization_website" class="form-control" id="organization_website"
-                                            value="<?= $organization_website ?>" >
+                                            value="{{ old('organization_website', $organization_website) }}" >
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -252,7 +266,7 @@
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="indigenous_affiliation" class="form-control" id="indigenous_affiliation"
-                                        value="<?= $indigenous_affiliation ?>" required>
+                                        value="{{ old('indigenous_affiliation', $indigenous_affiliation) }}" required>
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
@@ -270,7 +284,7 @@
                                     <label for="bio_short" class="col-md-2 col-lg-4 col-form-label">1-sentence biography (max. 40 words)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <textarea class="form-control" id="bio_short" name="bio_short" rows="4" cols="50" placeholder="Your explanation here..." required><?= $bio_short ?></textarea>
+                                        <textarea class="form-control" id="bio_short" name="bio_short" rows="4" cols="50" placeholder="Your explanation here..." required>{{ old('bio_short', $bio_short) }}</textarea>
                                         <div id="bio_shortError" class="error"></div>
                                     </div>
                                 </div>
@@ -278,7 +292,7 @@
                                     <label for="bio_long" class="col-md-2 col-lg-4 col-form-label">1-paragraph biography (150-250 words)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <textarea class="form-control" id="bio_long" name="bio_long" rows="4" cols="50" placeholder="Your explanation here..." required><?= $bio_long ?></textarea>
+                                        <textarea class="form-control" id="bio_long" name="bio_long" rows="4" cols="50" placeholder="Your explanation here..." required>{{ old('bio_long', $bio_long) }}</textarea>
                                         <div id="bio_longError" class="error"></div>
                                     </div>
                                 </div>                                                                
@@ -297,3 +311,68 @@
         <!-- End single-post box -->
     </div>
 <!-- End block content -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+ <!-- all word count validation -->
+<script>
+    function checkWordLimit(field, limit, errorField) {
+        //  console.log(field);
+        var words = field.value.trim().split(/\s+/).filter(word => word.length > 0).length;
+        if (words > limit) {
+            document.getElementById(errorField).innerText = "Exceeded word limit of " + limit + " words.";
+            return false;
+        } else {
+            document.getElementById(errorField).innerText = "";
+            return true;
+        }
+    }
+
+    function validateForm() {
+        let allValid = true;
+        allValid &= checkWordLimit(document.getElementById('explanation'), 100, 'explanationError');
+        allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');        
+        allValid &= checkWordLimit(document.getElementById('subtitle'), 40, 'subtitleError');                
+        allValid &= checkWordLimit(document.getElementById('bio_short'), 40, 'bio_shortError');
+        allValid &= checkWordLimit(document.getElementById('bio_long'), 250, 'bio_longError');        
+
+        document.getElementById('submitButton').disabled = !allValid;
+    }
+</script>
+<!-- End all word count validation -->
+ <!-- Function to show/hide the invited and participated fields -->
+<script>
+    $(document).ready(function() {
+        
+        function toggleFields() {
+            const invitedYes = $('#invited_yes').is(':checked');
+            const participatedYes = $('#participated_yes').is(':checked');            
+            
+            // Toggle individual sections
+            $('#invitedDetails').toggle(invitedYes);
+            $('#participatedDetails').toggle(participatedYes);
+
+            // Check if both are "No" and hide the rest of the form
+            const invitedNo = $('#invited_no').is(':checked');
+            const participatedNo = $('#participated_no').is(':checked');
+
+            if (invitedNo && participatedNo) {
+                $('#formDetails').hide();
+                // $('#submitButton').prop('disabled', false);
+                $('#invited_by_email, #invited_by, #explanation, #explanation_submission, #creative_Work, #art_image_desc, #art_video_desc, #country, #state, #city, #organization_name, #organization_website, #indigenous_affiliation, #bio_short, #bio_long, #acknowledge').removeAttr('required');
+            }
+            else{
+                $('#formDetails').show();
+                // $('#submitButton').prop('disabled', true);
+            }
+        }
+
+        // Trigger on change
+        $('input[name="invited"], input[name="participated"]').on('change', function() {
+            toggleFields();
+        });
+
+        // Check initial state on page load
+        toggleFields();
+    });
+</script>
+<!-- End Function to show/hide the invited and participated fields -->
