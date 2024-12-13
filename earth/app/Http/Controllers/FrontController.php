@@ -32,6 +32,7 @@ use App\Models\GeneralSetting;
 use App\Models\Enquiry;
 use App\Models\EmailLog;
 use App\Models\UserProfile;
+use App\Models\UserClassification;
 
 use Auth;
 use Session;
@@ -1618,17 +1619,80 @@ class FrontController extends Controller
             $data['row']                    = [];
             echo $this->front_after_login_layout($title, $page_name, $data);
         }
-        public function profiles(Request $request)
+        public function AuthorClassification(Request $request)
         {
             $user_id                        = session('user_id');
             $data['user']                   = User::find($user_id);
-            $data['profiles']               = UserProfile::where('user_id', '=', $user_id)->where('status', '=', 1)->orderBy('id', 'DESC')->get();
+            $data['classification']         = UserClassification::where('user_id', '=', $user_id)->where('status', '=', 1)->orderBy('id', 'DESC')->get();
             $data['search_keyword']         = '';
             
-            $title                          = 'Profiles';
-            $page_name                      = 'profiles';
+            $title                          = 'Classification';
+            $page_name                      = 'author-classification';
             echo $this->front_after_login_layout($title, $page_name, $data);
         }
+        public function addAuthorClassification(Request $request)
+        {
+            $user_id                        = session('user_id');
+            $data['user']                   = User::find($user_id);
+            $data['row']                    = [];
+            $data['search_keyword']         = '';
+            $authorclassification           = UserClassification::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
+            if($authorclassification > 0){
+                return redirect(url('user/author-classification'))->with(['error_message' => 'Profile Already Created !!!']);
+            }
+
+            if ($request->isMethod('post')) {
+                $postData = $request->all();
+                $rules = [                                 
+                    'name'                => 'required'
+                ];
+                if ($this->validate($request, $rules)) {
+                    $fields = [                        
+                        'user_id'             => $user_id,
+                        'name'                => $postData['name'],
+                    ];
+                    UserClassification::insert($fields);
+                    return redirect(url('user/author-classification'))->with('success_message', 'Profile Created Successfully !!!');
+                } else {
+                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                }
+            }
+            
+            $title                          = 'Add Classification';
+            $page_name                      = 'add-edit-classification';
+            echo $this->front_after_login_layout($title, $page_name, $data);
+        }
+
+        public function updateAuthorClassification(Request $request, $id)
+        {
+            $id                             = Helper::decoded($id);
+            $user_id                        = session('user_id');
+            $data['user']                   = User::find($user_id);
+            $data['row']                    = UserClassification::where('user_id', '=', $user_id)->where('id', '=', $id)->first();
+            $data['search_keyword']         = '';
+            
+            if ($request->isMethod('post')) {
+                $postData = $request->all();
+                $rules = [                                 
+                    'name'                => 'required'
+                ];
+                if ($this->validate($request, $rules)) {
+                    $fields = [                        
+                        'user_id'             => $user_id,
+                        'name'                => $postData['name'],
+                    ];
+                    UserClassification::where('id', '=', $id)->update($fields);
+                    return redirect(url('user/author-classification'))->with('success_message', 'Profile Updated Successfully !!!');
+                } else {
+                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                }
+            }
+            
+            $title                          = 'Update Classification';
+            $page_name                      = 'add-edit-classification';
+            echo $this->front_after_login_layout($title, $page_name, $data);
+        }
+
         public function addProfile(Request $request)
         {
             $user_id                        = session('user_id');
@@ -1690,11 +1754,22 @@ class FrontController extends Controller
             $page_name                      = 'add-edit-profile';
             echo $this->front_after_login_layout($title, $page_name, $data);
         }
+        public function profiles(Request $request)
+        {
+            $user_id                        = session('user_id');
+            $data['user']                   = User::find($user_id);
+            $data['profiles']               = UserProfile::where('user_id', '=', $user_id)->where('status', '=', 1)->orderBy('id', 'DESC')->get();
+            $data['search_keyword']         = '';
+            
+            $title                          = 'Profiles';
+            $page_name                      = 'profiles';
+            echo $this->front_after_login_layout($title, $page_name, $data);
+        }
         public function articleList(Request $request, $id)
         {
             $id                             = Helper::decoded($id);
             $user_id                        = session('user_id');
-            $data['profile']                = UserProfile::find($id);
+            $data['profile']                = UserClassification::find($id);
             $data['articles']               = Article::where('user_id', '=', $user_id)->where('author_classification', '=', $data['profile']->name)->get();            
             // Helper::pr($data['row']); 
             $data['search_keyword']         = '';                                   
