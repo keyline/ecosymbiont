@@ -246,7 +246,8 @@ class Controller extends BaseController
     {
         $data['generalSetting']             = GeneralSetting::find('1');
         $data['scrollNotice']               = ScrollNotice::find('1');
-        $data['title']                      = $title.' :: '.$data['generalSetting']->site_name;
+        // $data['title']                      = $title.' :: '.$data['generalSetting']->site_name;
+        $data['title']                      = $title;
         $data['page_header']                = $title;
         $user_id                            = session('user_id');
         $data['user']                       = User::find($user_id);
