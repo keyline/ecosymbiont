@@ -678,9 +678,9 @@ class FrontController extends Controller
             $data['user']                   = User::find($user_id);
             $data['articles']               = Article::where('user_id', '=', $user_id)->orderBy('id', 'DESC')->get();
             $data['search_keyword']         = '';
-            $checkProfile                   = UserProfile::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
+            $checkProfile                   = UserClassification::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
             if($checkProfile <= 0){
-                return redirect(url('user/add-profile'))->with(['error_message' => 'Create Profile First !!!']);
+                return redirect(url('user/add-author-classification'))->with(['error_message' => 'Create Profile First !!!']);
             }
 
             if ($request->isMethod('post')) {
@@ -711,7 +711,8 @@ class FrontController extends Controller
             $user_id                        = session('user_id');
             $data['user']                   = User::find($user_id);
             $data['articles']               = Article::where('user_id', '=', $user_id)->get();
-            $data['profile']                = UserProfile::where('user_id', '=', $user_id)->first();
+            $data['profile']                = UserClassification::where('user_id', '=', $user_id)->first();
+            // $data['profile']                = UserProfile::where('user_id', '=', $user_id)->first();
             $data['search_keyword']         = '';
 
             if ($request->isMethod('post')) {
@@ -1697,6 +1698,15 @@ class FrontController extends Controller
         {
             $user_id                        = session('user_id');
             $data['user']                   = User::find($user_id);
+            $data['classification']         = UserClassification::where('user_id', '=', $user_id)->first();
+            $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['news_category']          = NewsCategory::where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'ASC')->get();        
+            $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['submission_type']       = SubmissionType::where('status', '=', 1)->get(); 
+            $data['country']                = Country::orderBy('name', 'ASC')->get();
+            $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['row']                    = [];
             $data['search_keyword']         = '';
             $checkProfile                   = UserProfile::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
@@ -1707,8 +1717,32 @@ class FrontController extends Controller
             if ($request->isMethod('post')) {
                 $postData = $request->all();
                 $rules = [                                 
-                    'name'                => 'required'
+                    'author_classification'     => 'required',
+                    'first_name'                => 'required',                                                               
+                    'email'                     => 'required',                                      
+                    'country'                   => 'required',                                                          
+                    'orginal_work'              => 'required', 
+                    'copyright'                 => 'required', 
+                    'submission_types'          => 'required',  
+                    'section_ert'               => 'required',
+                    'title'                     => 'required',
+                    'pronoun'                   => 'required',   
+                    'ecosystem_affiliation'     => 'required',               
+                    'expertise_area'            => 'required',                
+                    'explanation'               => ['required', 'string', new MaxWords(100)],
+                    'explanation_submission'    => ['required', 'string', new MaxWords(150)],                
+                    'creative_Work'             => ['required', 'string', new MaxWords(10)],
+                    'subtitle'                  => ['required', 'string', new MaxWords(40)],                
+                    'bio_short'                 => ['required', 'string', new MaxWords(40)],
+                    'bio_long'                  => ['required', 'string', new MaxWords(250)],
                 ];
+                $participatedInfo = isset($postData['participated_info']) ? $postData['participated_info'] : '';
+                $invited_byInfo = isset($postData['invited_by']) ? $postData['invited_by'] : '';
+                $invited_emailInfo = isset($postData['invited_by_email']) ? $postData['invited_by_email'] : '';
+                $section_ertInfo = isset($postData['section_ert']) ? ($postData['section_ert']) : '';
+                $expertise_areaInfo = isset($postData['expertise_area']) ? json_encode($postData['expertise_area']) : '';
+                $ecosystem_affiliationInfo = isset($postData['ecosystem_affiliation']) ? json_encode($postData['ecosystem_affiliation']) : '';
+                $submission_typesInfo = isset($postData['submission_types']) ? $postData['submission_types'] : '';
                 if ($this->validate($request, $rules)) {
                     $fields = [                        
                         'user_id'             => $user_id,
@@ -1758,7 +1792,8 @@ class FrontController extends Controller
         {
             $user_id                        = session('user_id');
             $data['user']                   = User::find($user_id);
-            $data['profiles']               = UserProfile::where('user_id', '=', $user_id)->where('status', '=', 1)->orderBy('id', 'DESC')->get();
+            // $data['profiles']               = UserProfile::where('user_id', '=', $user_id)->where('status', '=', 1)->orderBy('id', 'DESC')->get();
+            $data['profiles']                = UserProfile::where('user_id', '=', $user_id)->where('status', '=', 1)->orderBy('id', 'DESC')->get();
             $data['search_keyword']         = '';
             
             $title                          = 'Profiles';

@@ -150,7 +150,7 @@
                 <div class="card">
                     <div class="card-body">
                         <form method="POST" id="saveForm" action="" enctype="multipart/form-data" oninput="validateForm()">
-                        <input type="hidden" name="form_action" id="formAction">
+                        <!-- <input type="hidden" name="form_action" id="formAction"> -->
                             @csrf
                             <div class="row mb-3">
                                 <label for="email" class="col-md-2 col-lg-4 col-form-label">1) Email address</label>

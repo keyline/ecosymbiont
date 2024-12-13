@@ -6,6 +6,6 @@ class UserClassification extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_profiles'       
+        'user_classifications'       
     ];
 }
