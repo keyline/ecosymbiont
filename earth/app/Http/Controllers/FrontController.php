@@ -1701,8 +1701,8 @@ class FrontController extends Controller
             $data['user']                   = User::find($user_id);
             // $data['profiles']               = UserProfile::where('user_id', '=', $user_id)->where('status', '=', 1)->orderBy('id', 'DESC')->get();
             $data['profiles']                = UserProfile::where('user_id', '=', $user_id)->where('status', '=', 1)->orderBy('id', 'DESC')->get();
-            dd(DB::getQueryLog());
-             dd($data['profiles']);
+            // dd(DB::getQueryLog());
+            //  dd($data['profiles']);
             $data['search_keyword']         = '';
             
             $title                          = 'Profiles';
