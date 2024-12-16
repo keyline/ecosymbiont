@@ -4,6 +4,12 @@
         border: 1px solid #d81636;
     }
     .error { color: red; }
+    .heading{
+        margin: 0;
+        padding: 15px;
+        border-radius: 5px;
+        border: 1px solid #d09c1c;
+    }
 </style>
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
 <!-- <link rel="stylesheet" type="text/css" href="http://localhost/ecosymbiontgit/earth/public/material/frontend/assets/css/bootstrap.min.css" media="screen"> -->
@@ -149,7 +155,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                     <h3 class="mb-1">Form: Creative-work</h3>
+                     <h3 class="heading">Form: Creative-work</h3>
                     </div>
                     <div class="card-body">
                         <form method="POST" id="saveForm" action="" enctype="multipart/form-data" oninput="validateForm()">
