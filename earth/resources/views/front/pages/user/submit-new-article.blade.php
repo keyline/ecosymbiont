@@ -89,21 +89,21 @@
                 $co_authors_position = '';
                 $co_author_name = '';
                 $co_author_short_bio = '';
-                $first_name = '';                                 
-                $email = '';           
-                $for_publication_name = '';           
-                $countryId = '';                                 
+                $first_name = $profile->first_name;                                 
+                $email = $profile->email;           
+                $for_publication_name = $profile->for_publication_name;           
+                $countryId = $profile->country;                                 
                 $creative_Work = '';  
                 $orginal_work = '';           
                 $copyright = ''; 
-                $invited = '';
-                $invited_by = '';
-                $invited_by_email = '';  
-                $explanation = '';  
-                $explanation_submission = '';                 
-                $titleId = '';
+                $invited = $profile->invited;
+                $invited_by = $profile->invited_by;
+                $invited_by_email = $profile->invited_by_email;  
+                $explanation = $profile->explanation;  
+                $explanation_submission = $profile->explanation_submission;                 
+                $titleId = $profile->titleId;
                 $news_categoryId = '';
-                $pronounId = '';
+                $pronounId = $profile->pronounId;
                 $subtitle = '';
                 $submission_types = '';
                 $narrative_file = '';
@@ -117,17 +117,17 @@
                 $art_video_file = '';
                 $art_video_desc = '';
                 $art_desc = '';
-                $state = '';
-                $city = '';
-                $participated = '';
-                $participated_info = '';
-                $organization_name = '';
-                $organization_website = '';
-                $ecosystem_affiliationId = [];
-                $indigenous_affiliation = '';
-                $expertise_areaId = [];
-                $bio_short = '';
-                $bio_long = '';                        
+                $state = $profile->state;
+                $city = $profile->city;
+                $participated = $profile->participated;
+                $participated_info = $profile->participated_info;
+                $organization_name = $profile->organization_name;
+                $organization_website = $profile->organization_website;
+                $ecosystem_affiliationId = json_decode($profile->ecosystem_affiliationId);
+                $indigenous_affiliation = $profile->indigenous_affiliation;
+                $expertise_areaId = json_decode($profile->expertise_areaId);
+                $bio_short = $profile->bio_short;
+                $bio_long = $profile->bio_long;                        
                 $acknowledge = '';
             }
             ?>
@@ -150,20 +150,20 @@
                 <div class="card">
                     <div class="card-body">
                         <form method="POST" id="saveForm" action="" enctype="multipart/form-data" oninput="validateForm()">
-                        <input type="hidden" name="form_action" id="formAction">
+                        <!-- <input type="hidden" name="form_action" id="formAction"> -->
                             @csrf
                             <div class="row mb-3">
                                 <label for="email" class="col-md-2 col-lg-4 col-form-label">1) Email address</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="email" name="email" class="form-control" id="email"
-                                        value="<?= $email ?>" required>
+                                        value="<?= $email ?>" readonly>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="author_classification" class="col-md-2 col-lg-4 col-form-label">2) Author Classification
                                 </label>
                                 <div class="col-md-10 col-lg-8">                                                                      
-                                    <input type="text" class="form-control" id="Ecoweb-rooted community" name="author_classification" value="<?= $profile->name; ?>" readonly>
+                                    <input type="text" class="form-control" id="Ecoweb-rooted community" name="author_classification" value="<?= $classification->name; ?>" readonly>
                                 </div>
                             </div> 
                             <div class="row mb-3">
@@ -297,14 +297,14 @@
                                 <label for="first_name" class="col-md-2 col-lg-4 col-form-label">4) Full Legal Name (exactly as it appears on your government-issued identification documents, e.g., passport and/or driver's license)</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" name="first_name" class="form-control" id="first_name"
-                                        value="<?= $first_name ?>" required>
+                                        value="<?= $first_name ?>" readonly>
                                 </div>
                             </div>                                                 
                             <div class="row mb-3">
                                 <label for="for_publication_name" class="col-md-2 col-lg-4 col-form-label">5) Preferred name for publication (if different from full legal name)</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" name="for_publication_name" class="form-control" id="for_publication_name"
-                                        value="<?= $for_publication_name ?>">
+                                        value="<?= $for_publication_name ?>" readonly>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -314,7 +314,7 @@
                                     @if ($user_title)
                                         @foreach ($user_title as $data)
                                             <!-- <option value="{{ $data->id }}" @selected($data->id == $titleId)> -->
-                                            <input type="radio" id="yes" name="title" value="{{ $data->id }}" required @checked($data->id == $titleId) >
+                                            <input type="radio" id="yes" name="title" value="{{ $data->id }}" disabled @checked($data->id == $titleId) >
                                             <label for="yes">{{ $data->name }}</label>
                                                 <!-- {{ $data->name }}</option> -->
                                         @endforeach
@@ -327,7 +327,7 @@
                                     @if ($pronoun)
                                         @foreach ($pronoun as $data)
                                             <!-- <option value="{{ $data->id }}" @selected($data->id == $pronounId)> -->
-                                            <input type="radio" id="yes" name="pronoun" value="{{ $data->id }}" required @checked($data->id == $pronounId) >
+                                            <input type="radio" id="yes" name="pronoun" value="{{ $data->id }}" disabled @checked($data->id == $pronounId) >
                                             <label for="yes">{{ $data->name }}</label>
                                                 <!-- {{ $data->name }}</option> -->
                                         @endforeach
@@ -374,9 +374,9 @@
                             <div class="row mb-3">
                                 <label for="invited" class="col-md-2 col-lg-4 col-form-label">10) Were you invited to submit a Creative-Work to ERT?</label>
                                 <div class="col-md-10 col-lg-8">
-                                    <input type="radio" id="invited_yes" name="invited" value="Yes" required @checked(old('invited', $invited) == 'Yes')>
+                                    <input type="radio" id="invited_yes" name="invited" value="Yes" disabled @checked(old('invited', $invited) == 'Yes')>
                                     <label for="yes">Yes</label>
-                                    <input type="radio" id="invited_no" name="invited" value="No" required @checked(old('invited', $invited) == 'No')>
+                                    <input type="radio" id="invited_no" name="invited" value="No" disabled @checked(old('invited', $invited) == 'No')>
                                     <label for="no">No</label>
                                 </div>
                             </div>  
@@ -385,7 +385,7 @@
                                     <label for="invited_by" class="col-md-2 col-lg-4 col-form-label">10A) Full name of person who invited you to submit a Creative-Work to ERT</label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="invited_by" class="form-control" id="invited_by"
-                                            value="<?= $invited_by ?>">
+                                            value="<?= $invited_by ?>" readonly>
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
@@ -393,7 +393,7 @@
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="invited_by_email" class="form-control" id="invited_by_email"
-                                            value="<?= $invited_by_email ?>">
+                                            value="<?= $invited_by_email ?>" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -401,9 +401,9 @@
                                 <label for="participated" class="col-md-2 col-lg-4 col-form-label">11) Have you participated as a strategist at an in-person ER Synergy Meeting?
                                 </label>
                                 <div class="col-md-10 col-lg-8">
-                                    <input type="radio" id="participated_yes" name="participated" value="Yes" required @checked(old('participated', $participated) == 'Yes')>
+                                    <input type="radio" id="participated_yes" name="participated" value="Yes" disabled @checked(old('participated', $participated) == 'Yes')>
                                     <label for="yes">Yes</label>
-                                    <input type="radio" id="participated_no" name="participated" value="No" required @checked(old('participated', $participated) == 'No')>
+                                    <input type="radio" id="participated_no" name="participated" value="No" disabled @checked(old('participated', $participated) == 'No')>
                                     <label for="no">No</label>
                                 </div>
                             </div> 
@@ -412,7 +412,7 @@
                                     <label for="participated_info" class="col-md-2 col-lg-4 col-form-label">11A) Provide date and location of most recent in-person ER Synergy Meeting in which you participated</label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="participated_info" class="form-control" id="participated_info"
-                                        value="<?= $participated_info ?>">                                    
+                                        value="<?= $participated_info ?>" readonly>                                    
                                     </div>
                                 </div> 
                             </div>
@@ -420,14 +420,14 @@
                                 <div class="row mb-3">
                                     <label for="explanation" class="col-md-2 col-lg-4 col-form-label">12) Explain why you are a grassroots changemaker, innovator, and/or knowledge-holder (max. 100 words)</label>
                                     <div class="col-md-10 col-lg-8">
-                                        <textarea class="form-control" id="explanation" name="explanation" rows="4" cols="50" placeholder="Your explanation here..." required><?= $explanation ?></textarea>
+                                        <textarea class="form-control" id="explanation" name="explanation" rows="4" cols="50" placeholder="Your explanation here..." readonly><?= $explanation ?></textarea>
                                         <div id="explanationError" class="error"></div>
                                     </div>
                                 </div>  
                                 <div class="row mb-3">
                                     <label for="explanation_submission" class="col-md-2 col-lg-4 col-form-label">13) Explain why and how your Creative-Work relates to regenerating systems that restore, preserve, and foster the mutually beneficial interconnectivity and interdependence (symbiosis) of human communities within and to natural ecological webs (ecowebs) (max. 150 words)</label>
                                     <div class="col-md-10 col-lg-8">
-                                        <textarea class="form-control" id="explanation_submission" name="explanation_submission" rows="4" cols="50" placeholder="Your explanation here..." required><?= $explanation_submission ?></textarea>
+                                        <textarea class="form-control" id="explanation_submission" name="explanation_submission" rows="4" cols="50" placeholder="Your explanation here..." readonly><?= $explanation_submission ?></textarea>
                                         <div id="explanation_submissionError" class="error"></div>
                                     </div>
                                 </div> 
@@ -677,7 +677,7 @@
                                 <div class="row mb-3">
                                     <label for="country" class="col-md-2 col-lg-4 col-form-label">18) What country/nation do you live in? (Country of Residence)                                </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <select name="country" class="form-control" id="country" required>
+                                        <select name="country" class="form-control" id="country" readonly>
                                             <option value="" selected disabled>Select</option>
                                             @if ($country)
                                                 @foreach ($country as $data)
@@ -692,14 +692,14 @@
                                     <label for="state" class="col-md-2 col-lg-4 col-form-label">19) State/province of residence</label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="state" class="form-control" id="state"
-                                            value="<?= $state ?>">
+                                            value="<?= $state ?>" readonly>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="city" class="col-md-2 col-lg-4 col-form-label">20) Village/town/city of residence</label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="city" class="form-control" id="city"
-                                            value="<?= $city ?>">
+                                            value="<?= $city ?>" readonly>
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
@@ -707,7 +707,7 @@
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="organization_name" class="form-control" id="organization_name"
-                                            value="<?= $organization_name ?>" >
+                                            value="<?= $organization_name ?>" readonly>
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
@@ -715,7 +715,7 @@
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="organization_website" class="form-control" id="organization_website"
-                                            value="<?= $organization_website ?>" >
+                                            value="<?= $organization_website ?>" readonly>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -724,7 +724,7 @@
                                     <div class="col-md-10 col-lg-8">                                                                                                
                                         @if ($ecosystem_affiliation)
                                             @foreach ($ecosystem_affiliation as $data)
-                                            <input type="checkbox" name="ecosystem_affiliation[]" value="{{ $data->id }}" @if(in_array($data->id, old('ecosystem_affiliation', $ecosystem_affiliationId))) checked @endif>  {{ $data->name }}<br>
+                                            <input type="checkbox" name="ecosystem_affiliation[]" value="{{ $data->id }}" disabled @if(in_array($data->id, old('ecosystem_affiliation', $ecosystem_affiliationId))) checked @endif>  {{ $data->name }}<br>
                                             @endforeach
                                         @endif                                
                                     </div>
@@ -734,7 +734,7 @@
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="indigenous_affiliation" class="form-control" id="indigenous_affiliation"
-                                        value="<?= $indigenous_affiliation ?>" required>
+                                        value="<?= $indigenous_affiliation ?>" readonly>
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
@@ -743,7 +743,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         @if ($expertise_area)
                                             @foreach ($expertise_area as $data)
-                                            <input type="checkbox" name="expertise_area[]" value="{{ $data->id }}" @if(in_array($data->id, old('expertise_area', $expertise_areaId))) checked @endif>  {{ $data->name }}<br>
+                                            <input type="checkbox" name="expertise_area[]" value="{{ $data->id }}" disabled @if(in_array($data->id, old('expertise_area', $expertise_areaId))) checked @endif>  {{ $data->name }}<br>
                                             @endforeach
                                         @endif
                                     </div>
@@ -752,7 +752,7 @@
                                     <label for="bio_short" class="col-md-2 col-lg-4 col-form-label">26) 1-sentence biography (max. 40 words)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <textarea class="form-control" id="bio_short" name="bio_short" rows="4" cols="50" placeholder="Your explanation here..." required><?= $bio_short ?></textarea>
+                                        <textarea class="form-control" id="bio_short" name="bio_short" rows="4" cols="50" placeholder="Your explanation here..." readonly><?= $bio_short ?></textarea>
                                         <div id="bio_shortError" class="error"></div>
                                     </div>
                                 </div>
@@ -760,7 +760,7 @@
                                     <label for="bio_long" class="col-md-2 col-lg-4 col-form-label">27) 1-paragraph biography (150-250 words)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <textarea class="form-control" id="bio_long" name="bio_long" rows="4" cols="50" placeholder="Your explanation here..." required><?= $bio_long ?></textarea>
+                                        <textarea class="form-control" id="bio_long" name="bio_long" rows="4" cols="50" placeholder="Your explanation here..." readonly><?= $bio_long ?></textarea>
                                         <div id="bio_longError" class="error"></div>
                                     </div>
                                 </div>
