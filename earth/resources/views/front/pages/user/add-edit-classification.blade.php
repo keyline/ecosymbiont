@@ -25,6 +25,7 @@
             ?>
             <div class="col-md-12">
                 <div class="card">
+                <h3>Form: Author Classification</h3>
                     <div class="card-body">
                         <form method="POST" action="" enctype="multipart/form-data">
                             @csrf
