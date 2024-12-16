@@ -6,10 +6,13 @@
     .error { color: red; }
     .heading{
         margin: 0;
-        padding: 15px;
+        padding: 10px;
         border-radius: 5px;
-        border: 1px solid #d09c1c;
+        border: 2px solid #d09c1c;
         text-align: center;
+        margin-bottom: 15px;
+        background: #d09c1c;
+        color: #fff;
     }
 </style>
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
