@@ -328,7 +328,7 @@
                                     @if ($user_title)
                                         @foreach ($user_title as $data)
                                             <!-- <option value="{{ $data->id }}" @selected($data->id == $titleId)> -->
-                                            <input type="radio" id="yes" name="title" value="{{ $data->id }}" disabled @checked($data->id == $titleId) >
+                                            <input type="radio" class="readonly-input" id="yes" name="title" value="{{ $data->id }}" @checked($data->id == $titleId) >
                                             <label for="yes">{{ $data->name }}</label>
                                                 <!-- {{ $data->name }}</option> -->
                                         @endforeach
@@ -341,7 +341,7 @@
                                     @if ($pronoun)
                                         @foreach ($pronoun as $data)
                                             <!-- <option value="{{ $data->id }}" @selected($data->id == $pronounId)> -->
-                                            <input type="radio" id="yes" name="pronoun" value="{{ $data->id }}" disabled @checked($data->id == $pronounId) >
+                                            <input type="radio" class="readonly-input" id="yes" name="pronoun" value="{{ $data->id }}" @checked($data->id == $pronounId) >
                                             <label for="yes">{{ $data->name }}</label>
                                                 <!-- {{ $data->name }}</option> -->
                                         @endforeach
@@ -388,9 +388,9 @@
                             <div class="row mb-3">
                                 <label for="invited" class="col-md-2 col-lg-4 col-form-label">10) Were you invited to submit a Creative-Work to ERT?</label>
                                 <div class="col-md-10 col-lg-8">
-                                    <input type="radio" id="invited_yes" name="invited" value="Yes" disabled @checked(old('invited', $invited) == 'Yes')>
+                                    <input type="radio" class="readonly-input" id="invited_yes" name="invited" value="Yes"  @checked(old('invited', $invited) == 'Yes')>
                                     <label for="yes">Yes</label>
-                                    <input type="radio" id="invited_no" name="invited" value="No" disabled @checked(old('invited', $invited) == 'No')>
+                                    <input type="radio" class="readonly-input" id="invited_no" name="invited" value="No"  @checked(old('invited', $invited) == 'No')>
                                     <label for="no">No</label>
                                 </div>
                             </div>  
@@ -415,9 +415,9 @@
                                 <label for="participated" class="col-md-2 col-lg-4 col-form-label">11) Have you participated as a strategist at an in-person ER Synergy Meeting?
                                 </label>
                                 <div class="col-md-10 col-lg-8">
-                                    <input type="radio" id="participated_yes" name="participated" value="Yes"  @checked(old('participated', $participated) == 'Yes')>
+                                    <input type="radio" id="participated_yes" class="readonly-input" name="participated" value="Yes"  @checked(old('participated', $participated) == 'Yes')>
                                     <label for="yes">Yes</label>
-                                    <input type="radio" id="participated_no" name="participated" value="No"  @checked(old('participated', $participated) == 'No')>
+                                    <input type="radio" id="participated_no" class="readonly-input" name="participated" value="No"  @checked(old('participated', $participated) == 'No')>
                                     <label for="no">No</label>
                                 </div>
                             </div> 
@@ -738,7 +738,7 @@
                                     <div class="col-md-10 col-lg-8">                                                                                                
                                         @if ($ecosystem_affiliation)
                                             @foreach ($ecosystem_affiliation as $data)
-                                            <input type="checkbox" name="ecosystem_affiliation[]" value="{{ $data->id }}" disabled @if(in_array($data->id, old('ecosystem_affiliation', $ecosystem_affiliationId))) checked @endif>  {{ $data->name }}<br>
+                                            <input type="checkbox" class="readonly-input" name="ecosystem_affiliation[]" value="{{ $data->id }}"  @if(in_array($data->id, old('ecosystem_affiliation', $ecosystem_affiliationId))) checked @endif>  {{ $data->name }}<br>
                                             @endforeach
                                         @endif                                
                                     </div>
@@ -757,7 +757,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         @if ($expertise_area)
                                             @foreach ($expertise_area as $data)
-                                            <input type="checkbox" name="expertise_area[]" value="{{ $data->id }}" disabled @if(in_array($data->id, old('expertise_area', $expertise_areaId))) checked @endif>  {{ $data->name }}<br>
+                                            <input type="checkbox" class="readonly-input" name="expertise_area[]" value="{{ $data->id }}" @if(in_array($data->id, old('expertise_area', $expertise_areaId))) checked @endif>  {{ $data->name }}<br>
                                             @endforeach
                                         @endif
                                     </div>
@@ -1224,7 +1224,7 @@
  <!-- prefill radio button value -->
  <script>
     // Prevent changes to the radio buttons
-    document.querySelectorAll('input[name="participated"]').forEach(input => {
+    document.querySelectorAll('.readonly-input').forEach(input => {
         input.addEventListener('click', function(e) {
             e.preventDefault(); // Block any change
         });
