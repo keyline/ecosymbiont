@@ -34,14 +34,10 @@ use Illuminate\Support\Facades\DB;
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Author Classification</th>
+                                        <th>Name <br> Email <br> Author Classification</th>                                                                                
                                         <th>Country <br> State <br> City</th>
-                                        <th>Organization Name</th>
-                                        <th>Organization Website</th>
-                                        <th>Ecosystem Affiliation</th>
-                                        <th>Indigenous Affiliation</th>
+                                        <th>Organization Name <br> Organization Website</th>                                        
+                                        <th>Ecosystem Affiliation <br> Indigenous Affiliation</th>                                        
                                         <th>Expertise Area</th>
                                         <th>Short Bio</th>
                                         <th>Long Bio</th>
@@ -53,15 +49,12 @@ use Illuminate\Support\Facades\DB;
                                     <?php if($profiles){ $sl=1; foreach($profiles as $profile){?>
                                         <tr>
                                             <td><?=$sl++?></td>
-                                            <td><?=$profile->first_name?></td>
-                                            <td><?=$profile->email?></td>
-                                            <td><?=$profile->author_classification?></td>
+                                            <td><?=$profile->first_name?> <br><?=$profile->email?> <br> <?=$profile->author_classification?></td>                                            
                                             <td>
                                             <?php                                        
                                             $getCountry = DB::table('countries')->where('id', '=', $profile->country)->first();    
                                             echo $getCountry->name?><br><?=$profile->state?> <br> <?=$profile->city?></td>
-                                            <td><?=$profile->organization_name?></td>
-                                            <td><?=$profile->organization_website?></td>
+                                            <td><?=$profile->organization_name?> <br> <?=$profile->organization_website?></td>                                            
                                             <td><?php
                                             $ecosystem_affiliationId = json_decode($profile->ecosystem_affiliationId);
                                             $ecosystem = [];
@@ -72,8 +65,7 @@ use Illuminate\Support\Facades\DB;
                                                 }
                                             }
                                             echo implode(', ', $ecosystem);
-                                            ?></td>
-                                            <td><?=$profile->indigenous_affiliation?></td>
+                                            ?><br> <?=$profile->indigenous_affiliation?></td>                                            
                                             <td><?php
                                             $expertise_areaId = json_decode($profile->expertise_areaId);
                                             $expertise = [];
