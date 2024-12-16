@@ -103,7 +103,7 @@
                         <h3 class="heading">Form: Author Profile</h3>
                     </div>
                     <div class="card-body">
-                    <p style="color: #d81636; font-weight:500;font-size: small;margin-bottom: 25px;">**Instructions: Please note that you will have to enter all information in one sitting, as there is no save option while you work. Unless you click the "Submit" button, your information will not be entered into the system. We apologize for any inconvenience. Thank you for your contribution.</p>
+                    <p style="color: #d81636; font-weight:500;font-size: 14px;margin-bottom: 25px;"><em>**Instructions: Please note that you will have to enter all information in one sitting, as there is no save option while you work. Unless you click the "Submit" button, your information will not be entered into the system. We apologize for any inconvenience. Thank you for your contribution.</em></p>
                     <form method="POST" id="saveForm" action="" enctype="multipart/form-data" oninput="validateForm()">
                         <!-- <input type="hidden" name="form_action" id="formAction"> -->
                             @csrf
