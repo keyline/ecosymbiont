@@ -415,9 +415,9 @@
                                 <label for="participated" class="col-md-2 col-lg-4 col-form-label">11) Have you participated as a strategist at an in-person ER Synergy Meeting?
                                 </label>
                                 <div class="col-md-10 col-lg-8">
-                                    <input type="radio" id="participated_yes" name="participated" value="Yes" disabled @checked(old('participated', $participated) == 'Yes')>
+                                    <input type="radio" id="participated_yes" name="participated" value="Yes"  @checked(old('participated', $participated) == 'Yes')>
                                     <label for="yes">Yes</label>
-                                    <input type="radio" id="participated_no" name="participated" value="No" disabled @checked(old('participated', $participated) == 'No')>
+                                    <input type="radio" id="participated_no" name="participated" value="No"  @checked(old('participated', $participated) == 'No')>
                                     <label for="no">No</label>
                                 </div>
                             </div> 
@@ -1221,3 +1221,12 @@
     }
 </script>
 <!-- End all word count validation -->
+ <!-- prefill radio button value -->
+ <script>
+    // Prevent changes to the radio buttons
+    document.querySelectorAll('input[name="participated"]').forEach(input => {
+        input.addEventListener('click', function(e) {
+            e.preventDefault(); // Block any change
+        });
+    });
+</script>
