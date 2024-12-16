@@ -799,7 +799,7 @@ class FrontController extends Controller
                                 'participated'              => $postData['participated'],
                                 'participated_info'         => $participatedInfo                                                      
                             ];
-                            //  Helper::pr($fields);
+                              Helper::pr($fields);
 
                             /* submission email */
                             $generalSetting             = GeneralSetting::find('1');                            
