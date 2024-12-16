@@ -85,8 +85,8 @@ use Illuminate\Support\Facades\DB;
                                             }
                                             echo implode(', ', $expertise);
                                             ?></td>
-                                            <td><?= wordwrap($profile->bio_short, 15, '<br>\n') ?></td>
-                                            <td><?= wordwrap($profile->bio_long, 15, '<br>\n') ?></td>
+                                            <td><?=wordwrap($profile->bio_short,25,"<br>\n") ?></td>
+                                            <td><?=wordwrap($profile->bio_long,25,"<br>\n") ?></td>
                                             <td><?=date('M d Y h:i A', strtotime($profile->created_at))?></td>                                        
                                             <td>
                                                 <a href="<?=url('user/update-profile/' . Helper::encoded($profile->id))?>" class="label label-primary">Edit</a>
