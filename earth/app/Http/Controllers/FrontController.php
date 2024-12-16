@@ -717,7 +717,7 @@ class FrontController extends Controller
 
             if ($request->isMethod('post')) {
                 $postData = $request->all();
-                  dd($postData);
+                //   dd($postData);
                 /* article no generate */
                     $currentMonth   = date('m');
                     $currentYear    = date('Y');
