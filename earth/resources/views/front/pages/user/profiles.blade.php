@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\DB;
                         <?php if(count($profiles) <= 0){?>
                             <a href="<?=url('user/add-profile')?>" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i> Add New Profile</a>
                         <?php }?>
-                        <table class="table table-striped">
+                        <table class="table table-striped table-responsive">
                             <thead>
                                 <tr>
                                     <th>#</th>
