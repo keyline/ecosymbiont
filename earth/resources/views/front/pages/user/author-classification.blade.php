@@ -23,7 +23,7 @@ use App\Helpers\Helper;
                 <div class="card">
                     <div class="card-body">
                         <?php if(count($classification) <= 0){?>
-                            <a href="<?=url('user/add-profile')?>" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i> Add New Profile</a>
+                            <a href="<?=url('user/add-profile')?>" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i> Add New Classification</a>
                         <?php }?>
                         <table class="table table-striped">
                             <thead>
