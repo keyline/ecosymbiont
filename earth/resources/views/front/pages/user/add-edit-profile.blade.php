@@ -1,3 +1,15 @@
+<style>
+    .heading{
+        margin: 0;
+        padding: 10px;
+        border-radius: 5px;
+        border: 2px solid #d09c1c;
+        text-align: center;
+        margin-bottom: 15px;
+        background: #d09c1c;
+        color: #fff;
+    }
+</style>
 <!-- block content -->
     <div class="block-content">
         <!-- single-post box -->
@@ -87,7 +99,9 @@
             </div>
             <div class="col-md-12">
                 <div class="card">
-                <h3>Form: Author Profile</h3>
+                    <div class="card-header">
+                        <h3 class="heading">Form: Author Profile</h3>
+                    </div>
                     <div class="card-body">
                     <form method="POST" id="saveForm" action="" enctype="multipart/form-data" oninput="validateForm()">
                         <!-- <input type="hidden" name="form_action" id="formAction"> -->
