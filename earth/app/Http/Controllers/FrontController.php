@@ -1695,11 +1695,13 @@ class FrontController extends Controller
         }
         public function profiles(Request $request)
         {
+            DB::enableQueryLog();
             $user_id                        = session('user_id');
             // Helper::pr($user_id);
             $data['user']                   = User::find($user_id);
             // $data['profiles']               = UserProfile::where('user_id', '=', $user_id)->where('status', '=', 1)->orderBy('id', 'DESC')->get();
             $data['profiles']                = UserProfile::where('user_id', '=', $user_id)->where('status', '=', 1)->orderBy('id', 'DESC')->get();
+            dd(DB::getQueryLog());
              dd($data['profiles']);
             $data['search_keyword']         = '';
             
