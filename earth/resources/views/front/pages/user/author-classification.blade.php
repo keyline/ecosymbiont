@@ -29,7 +29,7 @@ use App\Helpers\Helper;
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>classification Name</th>
+                                    <th>Classification Name</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -39,7 +39,7 @@ use App\Helpers\Helper;
                                         <td><?=$sl++?></td>
                                         <td><?=$classifications->name?></td>
                                         <td>
-                                            <a href="<?=url('user/update-profile/' . Helper::encoded($classifications->id))?>" class="label label-primary">Edit</a>
+                                            <a href="<?=url('user/update-author-classification/' . Helper::encoded($classifications->id))?>" class="label label-primary">Edit</a>
                                             <a href="<?=url('user/article-list/' . Helper::encoded($classifications->id))?>" class="label label-primary">View Article List</a>
                                         </td>
                                     </tr>
