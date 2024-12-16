@@ -1639,7 +1639,7 @@ class FrontController extends Controller
             $data['search_keyword']         = '';
             $authorclassification           = UserClassification::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
             if($authorclassification > 0){
-                return redirect(url('user/author-classification'))->with(['error_message' => 'Profile Already Created !!!']);
+                return redirect(url('user/author-classification'))->with(['error_message' => 'Classification Already Created !!!']);
             }
 
             if ($request->isMethod('post')) {
@@ -1653,7 +1653,7 @@ class FrontController extends Controller
                         'name'                => $postData['name'],
                     ];
                     UserClassification::insert($fields);
-                    return redirect(url('user/author-classification'))->with('success_message', 'Profile Created Successfully !!!');
+                    return redirect(url('user/author-classification'))->with('success_message', 'Classification Created Successfully !!!');
                 } else {
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');
                 }
@@ -1683,7 +1683,7 @@ class FrontController extends Controller
                         'name'                => $postData['name'],
                     ];
                     UserClassification::where('id', '=', $id)->update($fields);
-                    return redirect(url('user/author-classification'))->with('success_message', 'Profile Updated Successfully !!!');
+                    return redirect(url('user/author-classification'))->with('success_message', 'Classification Updated Successfully !!!');
                 } else {
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');
                 }
