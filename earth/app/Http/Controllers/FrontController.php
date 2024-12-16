@@ -562,7 +562,7 @@ class FrontController extends Controller
                 UserActivity::insert($activityData);
             /* user activity */
             $request->session()->forget(['user_id', 'name', 'email', 'first_name', 'middle_name', 'last_name', 'role', 'is_user_login']);
-            // Helper::pr(session()->all());die;
+            //  Helper::pr(session()->all());die;
             Auth::guard('web')->logout();
             return redirect(url('signin'))->with('success_message', 'You Are Successfully Sign Out !!!');
         }
