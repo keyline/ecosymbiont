@@ -691,7 +691,7 @@
                                 <div class="row mb-3">
                                     <label for="country" class="col-md-2 col-lg-4 col-form-label">18) What country/nation do you live in? (Country of Residence)                                </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <select name="country" class="form-control" id="country" readonly>
+                                        <select name="country" class="form-control" id="country">
                                             <option value="" selected disabled>Select</option>
                                             @if ($country)
                                                 @foreach ($country as $data)
@@ -700,6 +700,8 @@
                                                 @endforeach
                                             @endif
                                         </select>
+                                        <!-- Hidden input to submit the selected value -->
+                                    <input type="hidden" name="country" value="{{ $countryId }}">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
