@@ -1150,7 +1150,7 @@ use Illuminate\Support\Facades\DB;
         var file = input.files[0];
         console.log(file);
         var allowedExtensions = ['mp4', 'avi', 'mov', 'mkv', 'webm'];
-        var fileSizeLimit = 10485760; // 10MB in bytes
+        var fileSizeLimit = 2147483648; // 2GB in bytes
 
         if (file) {
             var fileExtension = file.name.split('.').pop().toLowerCase();
@@ -1164,7 +1164,7 @@ use Illuminate\Support\Facades\DB;
 
             // Validate file size
             if (file.size > fileSizeLimit) {
-                document.getElementById(errorElementId).innerText = "File size exceeds 10 MB. Please upload a smaller file.";
+                document.getElementById(errorElementId).innerText = "File size exceeds 2 GB. Please upload a smaller file.";
                 input.value = ''; // Clear the input
                 return;
             }
