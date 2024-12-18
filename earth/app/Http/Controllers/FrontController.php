@@ -415,6 +415,7 @@ class FrontController extends Controller
                             UserActivity::insert($activityData);
                         /* user activity */
                         $exsistUser = User::where('email', '=', $sessionData->email)->where('email', '=', $sessionData->role)->count();
+                        Helper::pr($exsistUser);
                         if($exsistUser > 0)
                         {
                             if($page_link == ''){
