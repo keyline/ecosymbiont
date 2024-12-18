@@ -644,7 +644,7 @@ class NewsContentController extends Controller
                     'nelp_form_file'            => $nelp_pdf,                                                          
                 ];
                     //  dd();                                 
-                       Helper::pr($fields);
+                    //    Helper::pr($fields);
                     NewsContent::insert($fields);  
                     $fieldsArticle = [
                         'email'                     => $postData['email'], 
