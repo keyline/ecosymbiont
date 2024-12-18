@@ -497,7 +497,7 @@ class NewsContentController extends Controller
                 'media'                     => $postData['media']?? '',   
                 'cover_image'               => $cover_image ?? '',
                 'cover_image_caption'       => $cover_image_caption ?? '',
-                'video_url'                 => $postData['video_url'],
+                'video_url'                 => $postData['video_url'] ?? '',
                 'videoId'                   => $videoId ?? '',
                 'long_desc'                 => $postData['long_desc'] ?? '',     
                 'keywords'                  => $postData['keywords'] ?? '',     
