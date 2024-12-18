@@ -23,7 +23,7 @@ $pageSegment = $pageName[1];
                     <a href="<?=url('user/author-classification')?>">Classification</a>
                 </li>
                 <li <?=(($pageSegment == 'profiles')?'class="active"':'')?>>
-                    <a href="<?=url('user/profiles')?>">Profiles</a>
+                    <a href="<?=url('user/profiles')?>">Profile</a>
                 </li>
                 <li <?=(($pageSegment == 'my-articles')?'class="active"':'')?>>
                     <a href="<?=url('user/my-articles')?>">My Creative-Works</a>

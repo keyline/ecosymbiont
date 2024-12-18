@@ -414,19 +414,25 @@ class FrontController extends Controller
                             ];
                             UserActivity::insert($activityData);
                         /* user activity */
-                        if($sessionData->role == 1 || $sessionData->role == 2){
-                            if($page_link == ''){
-                                return redirect('user/author-classification');
-                            } else {
-                                return redirect($page_link);
+                        $exsistUser = User::where('email', '=', $sessionData->email)->where('role', '=', $sessionData->role)->count();
+                        // Helper::pr($exsistUser);
+                        if($exsistUser > 0)
+                        {
+                            if($sessionData->role == 2)
+                            {
+                                if($page_link == ''){
+                                    return redirect('user/dashboard');
+                                } else {
+                                    return redirect($page_link);
+                                } 
+                            }else {
+                                if($page_link == ''){
+                                    return redirect('user/my-profile');
+                                } else {
+                                    return redirect($page_link);
+                                }
                             }
-                        } else {
-                            if($page_link == ''){
-                                return redirect('user/dashboard');
-                            } else {
-                                return redirect($page_link);
-                            }
-                        }
+                        }                        
                     } else {
                         /* user activity */
                             $activityData = [
@@ -678,9 +684,13 @@ class FrontController extends Controller
             $data['user']                   = User::find($user_id);
             $data['articles']               = Article::where('user_id', '=', $user_id)->orderBy('id', 'DESC')->get();
             $data['search_keyword']         = '';
-            $checkProfile                   = UserClassification::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
+            $checkClassification            = UserClassification::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
+            $checkProfile                   = UserProfile::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
+            if($checkClassification <= 0){
+                return redirect(url('user/add-author-classification'))->with(['error_message' => 'Create Classification First !!!']);
+            }
             if($checkProfile <= 0){
-                return redirect(url('user/add-author-classification'))->with(['error_message' => 'Create Profile First !!!']);
+                return redirect(url('user/add-profile'))->with(['error_message' => 'Create Profile First !!!']);
             }
 
             if ($request->isMethod('post')) {
@@ -1653,7 +1663,7 @@ class FrontController extends Controller
                         'name'                => $postData['name'],
                     ];
                     UserClassification::insert($fields);
-                    return redirect(url('user/author-classification'))->with('success_message', 'Classification Created Successfully !!!');
+                    return redirect(url('user/add-profile'))->with('success_message', 'Classification Created Successfully !!!');
                 } else {
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');
                 }
@@ -1782,7 +1792,7 @@ class FrontController extends Controller
                     ];
                     // Helper::pr($fields);
                     UserProfile::insert($fields);
-                    return redirect(url('user/profiles'))->with('success_message', 'Profile Created Successfully !!!');
+                    return redirect(url('user/submit-new-article'))->with('success_message', 'Profile Created Successfully !!!');
                 } else {
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');
                 }

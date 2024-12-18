@@ -38,6 +38,9 @@
             <?php
             // dd($profile);
             // $setting = GeneralSetting::where('id', '=', 1)->first();
+
+use Illuminate\Support\Facades\DB;
+
             if ($row) {
                 //   Helper::pr($row);
                 $user_id = $row->user_id;
@@ -141,10 +144,11 @@
                 $acknowledge = '';
             }
             ?>
+             @if ($errors->any())
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-body pt-3">
-                        @if ($errors->any())
+                       
                         <div class="alert alert-danger">
                             <ul>
                                 @foreach ($errors->all() as $error)
@@ -152,17 +156,18 @@
                                 @endforeach
                             </ul>
                         </div>
-                        @endif
+                        
                     </div>
                 </div>
             </div>
+            @endif
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="heading">Form: Creative-work</h3>
                     </div>
                     <div class="card-body">
-                        <p style="color: #d81636; font-weight:500;font-size: 14px;margin-bottom: 25px;"><em>**Instructions: Please note that you will have to enter all information in one sitting, as there is no save option while you work. Unless you click the "Submit" button, your information will not be entered into the system. We apologize for any inconvenience. Thank you for your contribution.</em></p>
+                        <p style="color: #d81636; font-weight:500;font-size: 14px;margin-bottom: 25px;"><em>**Instructions: <b>Please make sure you have completed your Profile (click on Profile tab on the left to go there, if you haven't) before filling out this form.</b> Please note that you will have to enter all information in one sitting, as there is no save option while you work. Unless you click the "Submit" button, your information will not be entered into the system. We apologize for any inconvenience. Thank you for your contribution.</em></p>
                         <form method="POST" id="saveForm" action="" enctype="multipart/form-data" oninput="validateForm()">
                         <!-- <input type="hidden" name="form_action" id="formAction"> -->
                             @csrf
@@ -691,7 +696,7 @@
                                 <div class="row mb-3">
                                     <label for="country" class="col-md-2 col-lg-4 col-form-label">18) What country/nation do you live in? (Country of Residence)                                </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <select name="country" class="form-control" id="country" readonly>
+                                        <select name="country" class="form-control" id="country">
                                             <option value="" selected disabled>Select</option>
                                             @if ($country)
                                                 @foreach ($country as $data)
@@ -700,6 +705,8 @@
                                                 @endforeach
                                             @endif
                                         </select>
+                                        <!-- Hidden input to submit the selected value -->
+                                    <input type="hidden" name="country" value="{{ $countryId }}">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -810,7 +817,6 @@
 <!-- End block content -->
 <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
 <!-- Popup Div (Initially hidden) -->
     <div id="popup">
       <h3><i class="bi bi-exclamation-triangle-fill"></i> Warning</h3>
@@ -1142,8 +1148,9 @@
 
     function validateVideoFile(input, errorElementId) {
         var file = input.files[0];
+        console.log(file);
         var allowedExtensions = ['mp4', 'avi', 'mov', 'mkv', 'webm'];
-        var fileSizeLimit = 10485760; // 10MB in bytes
+        var fileSizeLimit = 2147483648; // 2GB in bytes
 
         if (file) {
             var fileExtension = file.name.split('.').pop().toLowerCase();
@@ -1157,7 +1164,7 @@
 
             // Validate file size
             if (file.size > fileSizeLimit) {
-                document.getElementById(errorElementId).innerText = "File size exceeds 10 MB. Please upload a smaller file.";
+                document.getElementById(errorElementId).innerText = "File size exceeds 2 GB. Please upload a smaller file.";
                 input.value = ''; // Clear the input
                 return;
             }
