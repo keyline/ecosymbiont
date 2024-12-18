@@ -647,7 +647,7 @@ class NewsContentController extends Controller
                     NewsContent::insert($fields);     
                     $fieldsArticle = [
                         'is_import'                 => 1,  
-                        'is_final_edit'             => 1
+                        'is_published'             => 4
                     ];
                     Article::where('id', '=', $id)->update($fieldsArticle);
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');                
