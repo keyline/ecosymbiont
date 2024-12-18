@@ -415,28 +415,24 @@ class FrontController extends Controller
                             UserActivity::insert($activityData);
                         /* user activity */
                         $exsistUser = User::where('email', '=', $sessionData->email)->where('role', '=', $sessionData->role)->count();
-                        Helper::pr($exsistUser);
+                        // Helper::pr($exsistUser);
                         if($exsistUser > 0)
                         {
-                            if($page_link == ''){
-                                return redirect('user/dashboard');
-                            } else {
-                                return redirect($page_link);
-                            } 
-                        }
-                        if($sessionData->role == 2){
-                            if($page_link == ''){
-                                return redirect('user/author-classification');
-                            } else {
-                                return redirect($page_link);
+                            if($sessionData->role == 2)
+                            {
+                                if($page_link == ''){
+                                    return redirect('user/dashboard');
+                                } else {
+                                    return redirect($page_link);
+                                } 
+                            }else {
+                                if($page_link == ''){
+                                    return redirect('user/my-profile');
+                                } else {
+                                    return redirect($page_link);
+                                }
                             }
-                        } else {
-                            if($page_link == ''){
-                                return redirect('user/my-profile');
-                            } else {
-                                return redirect($page_link);
-                            }
-                        }
+                        }                        
                     } else {
                         /* user activity */
                             $activityData = [
