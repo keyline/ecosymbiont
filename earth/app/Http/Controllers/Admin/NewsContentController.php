@@ -505,7 +505,8 @@ class NewsContentController extends Controller
                 'is_popular'                => $postData['is_popular'],  
                 'bio_short'                => $postData['author_short_bio'] ?? '',  
                 'nelp_form_number'          => $nelp_form_number ?? '',
-                'nelp_form_pdf'            => $nelp_pdf ?? '',                                                          
+                'nelp_form_pdf'            => $nelp_pdf ?? '', 
+                'is_published'              => 1,                                                         
                 ];
                 //   dd();                                 
                 //   Helper::pr($fields);
