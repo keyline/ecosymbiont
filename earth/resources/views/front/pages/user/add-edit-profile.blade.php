@@ -1,3 +1,15 @@
+<style>
+    .heading{
+        margin: 0;
+        padding: 10px;
+        border-radius: 5px;
+        border: 2px solid #d09c1c;
+        text-align: center;
+        margin-bottom: 15px;
+        background: #d09c1c;
+        color: #fff;
+    }
+</style>
 <!-- block content -->
     <div class="block-content">
         <!-- single-post box -->
@@ -87,7 +99,11 @@
             </div>
             <div class="col-md-12">
                 <div class="card">
+                    <div class="card-header">
+                        <h3 class="heading">Form: Author Profile</h3>
+                    </div>
                     <div class="card-body">
+                    <p style="color: #d81636; font-weight:500;font-size: 14px;margin-bottom: 25px;"><em>**Instructions: Please note that you will have to enter all information in one sitting, as there is no save option while you work. Unless you click the "Submit" button, your information will not be entered into the system. We apologize for any inconvenience. Thank you for your contribution.</em></p>
                     <form method="POST" id="saveForm" action="" enctype="multipart/form-data" oninput="validateForm()">
                         <!-- <input type="hidden" name="form_action" id="formAction"> -->
                             @csrf

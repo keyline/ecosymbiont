@@ -562,7 +562,7 @@ class FrontController extends Controller
                 UserActivity::insert($activityData);
             /* user activity */
             $request->session()->forget(['user_id', 'name', 'email', 'first_name', 'middle_name', 'last_name', 'role', 'is_user_login']);
-            // Helper::pr(session()->all());die;
+            //  Helper::pr(session()->all());die;
             Auth::guard('web')->logout();
             return redirect(url('signin'))->with('success_message', 'You Are Successfully Sign Out !!!');
         }
@@ -717,7 +717,7 @@ class FrontController extends Controller
 
             if ($request->isMethod('post')) {
                 $postData = $request->all();
-                //  dd($postData);
+                //   dd($postData);
                 /* article no generate */
                     $currentMonth   = date('m');
                     $currentYear    = date('Y');
@@ -799,7 +799,7 @@ class FrontController extends Controller
                                 'participated'              => $postData['participated'],
                                 'participated_info'         => $participatedInfo                                                      
                             ];
-                            //  Helper::pr($fields);
+                            //   Helper::pr($fields);
 
                             /* submission email */
                             $generalSetting             = GeneralSetting::find('1');                            
@@ -810,7 +810,7 @@ class FrontController extends Controller
                                 'article_no'                => $article_no,
                                 'for_publication_name'      => $postData['for_publication_name'],
                             ];
-                            $subject                    = $generalSetting->site_name.' : Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
+                            $subject                    = $generalSetting->site_name.': Creative-Work submitted by ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                             $message                    = view('email-templates.creative-work-submission',$mailData);
                             // echo $message;die;
                             $this->sendMail($postData['email'], $subject, $message);
@@ -861,7 +861,7 @@ class FrontController extends Controller
                                 'participated'              => $postData['participated'],
                                 'participated_info'         => $participatedInfo                       
                             ];
-                            //  Helper::pr($fields);
+                            //   Helper::pr($fields);
                             /* submission email */
                             $generalSetting             = GeneralSetting::find('1');                            
                             $fullName                   = $postData['first_name'];
@@ -871,7 +871,7 @@ class FrontController extends Controller
                                 'article_no'                => $article_no,
                                 'for_publication_name'      => $postData['for_publication_name'],
                             ];
-                            $subject                    = $generalSetting->site_name.' : Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
+                            $subject                    = $generalSetting->site_name.': Creative-Work submitted by ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                             $message                    = view('email-templates.creative-work-submission',$mailData);
                             // echo $message;die;
                             $this->sendMail($postData['email'], $subject, $message);
@@ -1016,7 +1016,7 @@ class FrontController extends Controller
                                    'bio_short'               => $postData['bio_short'],
                                    'bio_long'               => $postData['bio_long'],  
                                ];
-                                // Helper::pr($fields);
+                                //  Helper::pr($fields);
 
                                /* submission email */
                                 $generalSetting             = GeneralSetting::find('1');                            
@@ -1027,7 +1027,7 @@ class FrontController extends Controller
                                     'article_no'                => $article_no,
                                     'for_publication_name'      => $postData['for_publication_name'],
                                 ];
-                                $subject                    = $generalSetting->site_name.' : Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
+                                $subject                    = $generalSetting->site_name.': Creative-Work submitted by ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                                 $message                    = view('email-templates.creative-work-submission',$mailData);
                                 // echo $message;die;
                                 $this->sendMail($postData['email'], $subject, $message);
@@ -1117,7 +1117,7 @@ class FrontController extends Controller
                                    'bio_short'               => $postData['bio_short'],
                                    'bio_long'               => $postData['bio_long'],  
                                ];
-                                // Helper::pr($fields);
+                                //  Helper::pr($fields);
 
                                 /* submission email */
                                 $generalSetting             = GeneralSetting::find('1');                            
@@ -1128,7 +1128,7 @@ class FrontController extends Controller
                                     'article_no'                => $article_no,
                                     'for_publication_name'      => $postData['for_publication_name'],
                                 ];
-                                $subject                    = $generalSetting->site_name.' : Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
+                                $subject                    = $generalSetting->site_name.': Creative-Work submitted by ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                                 $message                    = view('email-templates.creative-work-submission',$mailData);
                                 // echo $message;die;
                                 $this->sendMail($postData['email'], $subject, $message);
@@ -1203,7 +1203,7 @@ class FrontController extends Controller
                                    'bio_short'               => $postData['bio_short'],
                                    'bio_long'               => $postData['bio_long'],  
                                ];
-                                // Helper::pr($fields);
+                                //  Helper::pr($fields);
 
                                /* submission email */
                                 $generalSetting             = GeneralSetting::find('1');                            
@@ -1214,7 +1214,7 @@ class FrontController extends Controller
                                     'article_no'                => $article_no,
                                     'for_publication_name'      => $postData['for_publication_name'],
                                 ];
-                                $subject                    = $generalSetting->site_name.' : Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
+                                $subject                    = $generalSetting->site_name.': Creative-Work submitted by ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                                 $message                    = view('email-templates.creative-work-submission',$mailData);
                                 // echo $message;die;
                                 $this->sendMail($postData['email'], $subject, $message);
@@ -1368,7 +1368,7 @@ class FrontController extends Controller
                                         'bio_short'               => $postData['bio_short'],
                                         'bio_long'               => $postData['bio_long'],  
                                     ];
-                                    //  Helper::pr($fields);
+                                    //   Helper::pr($fields);
 
                                     /* submission email */
                                     $generalSetting             = GeneralSetting::find('1');                            
@@ -1379,7 +1379,7 @@ class FrontController extends Controller
                                         'article_no'                => $article_no,
                                         'for_publication_name'      => $postData['for_publication_name'],
                                     ];
-                                    $subject                    = $generalSetting->site_name.' : Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
+                                    $subject                    = $generalSetting->site_name.': Creative-Work submitted by ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                                     $message                    = view('email-templates.creative-work-submission',$mailData);
                                     // echo $message;die;
                                     $this->sendMail($postData['email'], $subject, $message);
@@ -1478,7 +1478,7 @@ class FrontController extends Controller
                                         'bio_short'               => $postData['bio_short'],
                                         'bio_long'               => $postData['bio_long'],  
                                     ];
-                                    //  Helper::pr($fields);
+                                    //   Helper::pr($fields);
                                     /* submission email */
                                     $generalSetting             = GeneralSetting::find('1');                            
                                     $fullName                   = $postData['first_name'];
@@ -1488,7 +1488,7 @@ class FrontController extends Controller
                                         'article_no'                => $article_no,
                                         'for_publication_name'      => $postData['for_publication_name'],
                                     ];
-                                    $subject                    = $generalSetting->site_name.' : Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
+                                    $subject                    = $generalSetting->site_name.': Creative-Work submitted by ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                                     $message                    = view('email-templates.creative-work-submission',$mailData);
                                     // echo $message;die;
                                     $this->sendMail($postData['email'], $subject, $message);
@@ -1570,7 +1570,7 @@ class FrontController extends Controller
                                         'bio_short'               => $postData['bio_short'],
                                         'bio_long'               => $postData['bio_long'],  
                                     ];
-                                    //  Helper::pr($fields);
+                                    //   Helper::pr($fields);
 
                                     /* submission email */
                                     $generalSetting             = GeneralSetting::find('1');                            
@@ -1581,7 +1581,7 @@ class FrontController extends Controller
                                         'article_no'                => $article_no,
                                         'for_publication_name'      => $postData['for_publication_name'],
                                     ];
-                                    $subject                    = $generalSetting->site_name.' : Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
+                                    $subject                    = $generalSetting->site_name.': Creative-Work submitted by ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                                     $message                    = view('email-templates.creative-work-submission',$mailData);
                                     // echo $message;die;
                                     $this->sendMail($postData['email'], $subject, $message);
@@ -1639,7 +1639,7 @@ class FrontController extends Controller
             $data['search_keyword']         = '';
             $authorclassification           = UserClassification::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
             if($authorclassification > 0){
-                return redirect(url('user/author-classification'))->with(['error_message' => 'Profile Already Created !!!']);
+                return redirect(url('user/author-classification'))->with(['error_message' => 'Classification Already Created !!!']);
             }
 
             if ($request->isMethod('post')) {
@@ -1653,7 +1653,7 @@ class FrontController extends Controller
                         'name'                => $postData['name'],
                     ];
                     UserClassification::insert($fields);
-                    return redirect(url('user/author-classification'))->with('success_message', 'Profile Created Successfully !!!');
+                    return redirect(url('user/author-classification'))->with('success_message', 'Classification Created Successfully !!!');
                 } else {
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');
                 }
@@ -1683,7 +1683,7 @@ class FrontController extends Controller
                         'name'                => $postData['name'],
                     ];
                     UserClassification::where('id', '=', $id)->update($fields);
-                    return redirect(url('user/author-classification'))->with('success_message', 'Profile Updated Successfully !!!');
+                    return redirect(url('user/author-classification'))->with('success_message', 'Classification Updated Successfully !!!');
                 } else {
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');
                 }
@@ -1695,11 +1695,14 @@ class FrontController extends Controller
         }
         public function profiles(Request $request)
         {
+            DB::enableQueryLog();
             $user_id                        = session('user_id');
+            // Helper::pr($user_id);
             $data['user']                   = User::find($user_id);
             // $data['profiles']               = UserProfile::where('user_id', '=', $user_id)->where('status', '=', 1)->orderBy('id', 'DESC')->get();
             $data['profiles']                = UserProfile::where('user_id', '=', $user_id)->where('status', '=', 1)->orderBy('id', 'DESC')->get();
-            // dd($data['profiles']);
+            // dd(DB::getQueryLog());
+            //  dd($data['profiles']);
             $data['search_keyword']         = '';
             
             $title                          = 'Profiles';

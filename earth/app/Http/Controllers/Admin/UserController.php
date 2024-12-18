@@ -232,7 +232,7 @@ class UserController extends Controller
                 ];
                 UserActivity::insert($activityData);
             /* user activity */
-            $request->session()->forget(['user_id', 'name', 'email']);
+            $request->session()->forget(['user_id', 'name', 'email', 'is_admin_login', 'type']);
             // Helper::pr(session()->all());die;
             Auth::guard('admin')->logout();
             return redirect()->back()->with('success_message', 'You Are Successfully Logged Out !!!');

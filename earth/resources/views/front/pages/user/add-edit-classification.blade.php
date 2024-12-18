@@ -1,3 +1,15 @@
+<style>
+    .heading{
+        margin: 0;
+        padding: 10px;
+        border-radius: 5px;
+        border: 2px solid #d09c1c;
+        text-align: center;
+        margin-bottom: 15px;
+        background: #d09c1c;
+        color: #fff;
+    }
+</style>
 <!-- block content -->
     <div class="block-content">
         <!-- single-post box -->
@@ -25,6 +37,9 @@
             ?>
             <div class="col-md-12">
                 <div class="card">
+                    <div class="card-header">
+                        <h3 class="heading">Form: Author Classification</h3>
+                    </div>
                     <div class="card-body">
                         <form method="POST" action="" enctype="multipart/form-data">
                             @csrf

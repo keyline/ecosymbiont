@@ -23,13 +23,13 @@ use App\Helpers\Helper;
                 <div class="card">
                     <div class="card-body">
                         <?php if(count($classification) <= 0){?>
-                            <a href="<?=url('user/add-profile')?>" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i> Add New Profile</a>
+                            <a href="<?=url('user/add-author-classification')?>" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i> Add New Classification</a>
                         <?php }?>
                         <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>classification Name</th>
+                                    <th>Classification Name</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -39,7 +39,7 @@ use App\Helpers\Helper;
                                         <td><?=$sl++?></td>
                                         <td><?=$classifications->name?></td>
                                         <td>
-                                            <a href="<?=url('user/update-profile/' . Helper::encoded($classifications->id))?>" class="label label-primary">Edit</a>
+                                            <a href="<?=url('user/update-author-classification/' . Helper::encoded($classifications->id))?>" class="label label-primary">Edit</a>
                                             <a href="<?=url('user/article-list/' . Helper::encoded($classifications->id))?>" class="label label-primary">View Article List</a>
                                         </td>
                                     </tr>
