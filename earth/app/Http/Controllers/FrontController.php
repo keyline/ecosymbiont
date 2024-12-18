@@ -1666,7 +1666,7 @@ class FrontController extends Controller
                         'name'                => $postData['name'],
                     ];
                     UserClassification::insert($fields);
-                    return redirect(url('user/author-classification'))->with('success_message', 'Classification Created Successfully !!!');
+                    return redirect(url('user/add-profile'))->with('success_message', 'Classification Created Successfully !!!');
                 } else {
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');
                 }
@@ -1795,7 +1795,7 @@ class FrontController extends Controller
                     ];
                     // Helper::pr($fields);
                     UserProfile::insert($fields);
-                    return redirect(url('user/profiles'))->with('success_message', 'Profile Created Successfully !!!');
+                    return redirect(url('user/submit-new-article'))->with('success_message', 'Profile Created Successfully !!!');
                 } else {
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');
                 }
