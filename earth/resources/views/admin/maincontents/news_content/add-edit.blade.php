@@ -371,7 +371,7 @@ $controllerRoute = $module['controller_route'];
                                 <label for="creative_Work" class="col-md-2 col-lg-4 col-form-label">8) Title of your Creative-Work (max. 10 words)
                                 </label>
                                 <div class="col-md-10 col-lg-8">
-                                    <textarea class="form-control" id="creative_Work" name="creative_Work" rows="4" cols="50" placeholder="Your creative_Work here..." readonly><?= $creative_Work ?></textarea>
+                                    <textarea class="form-control" id="creative_Work" name="creative_Work" rows="4" cols="50" placeholder="Your creative_Work here..."><?= $creative_Work ?></textarea>
                                     <div id="creative_WorkError" class="error"></div>
                                 </div>
                             </div>  
@@ -935,4 +935,12 @@ $controllerRoute = $module['controller_route'];
         showArtImageFields(initialSelectedValue.value);
     }
 });
+</script>
+<script>
+    // Prevent changes to the radio buttons
+    document.querySelectorAll('.readonly-input').forEach(input => {
+        input.addEventListener('click', function(e) {
+            e.preventDefault(); // Block any change
+        });
+    });
 </script>
