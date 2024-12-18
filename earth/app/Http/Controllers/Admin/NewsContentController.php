@@ -362,6 +362,7 @@ class NewsContentController extends Controller
         $page_name                      = 'news_content.import';
         // $data['row']                    = NewsContent::where($this->data['primary_key'], '=', $id)->first();        
         $data['row']                    = Article::where($this->data['primary_key'], '=', $id)->first();  
+        //  Helper::pr($data['row']);
         $user_id                        = $data['row']->user_id;   
         $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();  
         $data['news_category']          = NewsCategory::where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'ASC')->get();        
@@ -381,7 +382,7 @@ class NewsContentController extends Controller
         if ($request->isMethod('post')) {
             $postData = $request->all();
             $parent_category                = NewsCategory::where('id', '=', $postData['section_ert'])->first();       
-            //  dd($postData);
+            //   dd($postData);
             $actionMode = $postData['action_mode']; // Get action mode from the form
             if ($actionMode === 'save') {
                 // Generate a unique slug
@@ -415,6 +416,7 @@ class NewsContentController extends Controller
                 if (!isset($postData['media']) || empty($postData['media'])) {
                     // Media type is not selected; skip this method and save the form
                     $cover_image = null; // Retain existing image if available
+                    $cover_image_caption = $postData['cover_image_caption'];
                     $videoId = null; // No video processing                        
                 }elseif ($postData['media'] == 'image') {   
                     /* banner image */
@@ -429,6 +431,7 @@ class NewsContentController extends Controller
                             }
                         } else {
                             $cover_image = $data['row']->cover_image;
+                            // $cover_image_caption = '';
                         }
                     /* banner image */                      
                 } 
@@ -460,7 +463,7 @@ class NewsContentController extends Controller
                 // }       
                  /* NELP Pdf */        
                 $fields = [
-                'email'              => $postData['email'], 
+                'email'                     => $postData['email'], 
                 'author_classification'     => $postData['author_classification'] ?? '',
                 'co_authors'                => $postData['co_authors'] ?? '',
                 'co_authors_position'       => $postData['co_authors_position'] ?? '',
@@ -471,42 +474,42 @@ class NewsContentController extends Controller
                 'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
                 'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
                 'co_author_classification'  => json_encode($coauthorClassification),
-                'first_name'               => $postData['first_name'], 
+                'first_name'                => $postData['first_name'], 
                 'for_publication_name'      => $postData['for_publication_name'],
-                'creative_Work'                 => $postData['creative_Work'],
-                'subtitle'                 => $postData['subtitle'], 
-                'pronounId'            => $postData['pronoun'],   
-                'titleId'                     => $postData['title'],
+                'creative_Work'             => $postData['creative_Work'],
+                'subtitle'                  => $postData['subtitle'], 
+                'pronounId'                 => $postData['pronoun'],   
+                'titleId'                   => $postData['title'],
                 // 'parent_category'           => $parent_category->parent_category,                                           
                 'section_ertId'              => $postData['section_ert'],                                           
-                // 'slug'                      => $slug,
+                 'slug'                      => $slug,
                 'country'                   => $postData['country'],  
                 'state'                     => $postData['state'],
                 'city'                      => $postData['city'],
                 'organization_name'         => $postData['organization_name'] ?? '',   
                 'organization_website'      => $postData['organization_website'],
-                'ecosystem_affiliationId'        => json_encode($postData['ecosystem_affiliation'] ?? []),  
+                'ecosystem_affiliationId'   => json_encode($postData['ecosystem_affiliation'] ?? []),  
                 'indigenous_affiliation'    => $postData['indigenous_affiliation'] ?? '',   
-                'expertise_areaId'            => json_encode($postData['expertise_area'] ?? []),                         
-                // 'creative_work_SRN'         => $postData['creative_work_SRN'],
-                // 'creative_work_DOI'         => $postData['creative_work_DOI'],                                                                                                                                                           
-                // 'media'                     => $postData['media']?? '',   
-                // 'cover_image'               => $cover_image ?? '',
-                // 'cover_image_caption'       => $postData['cover_image_caption'] ?? '',
-                // 'video_url'                 => $postData['video_url'],
-                // 'videoId'                   => $videoId ?? '',
-                // 'long_desc'                 => $postData['long_desc'] ?? '',     
-                // 'keywords'                  => $postData['keywords'] ?? '',     
-                // 'is_feature'                => $postData['is_feature'],  
-                // 'is_popular'                => $postData['is_popular'],  
+                'expertise_areaId'          => json_encode($postData['expertise_area'] ?? []),                         
+                'article_no'                => $postData['creative_work_SRN'],
+                'creative_work_DOI'         => $postData['creative_work_DOI'],                                                                                                                                                           
+                'media'                     => $postData['media']?? '',   
+                'cover_image'               => $cover_image ?? '',
+                'cover_image_caption'       => $cover_image_caption ?? '',
+                'video_url'                 => $postData['video_url'],
+                'videoId'                   => $videoId ?? '',
+                'long_desc'                 => $postData['long_desc'] ?? '',     
+                'keywords'                  => $postData['keywords'] ?? '',     
+                'is_feature'                => $postData['is_feature'],  
+                'is_popular'                => $postData['is_popular'],  
                 'bio_short'                => $postData['author_short_bio'] ?? '',  
-                // 'nelp_form_number'          => $nelp_form_number ?? '',
-                // 'nelp_form_file'            => $nelp_pdf ?? '',                                                          
-            ];
-                //  dd();                                 
-                //  Helper::pr($fields);
+                'nelp_form_number'          => $nelp_form_number ?? '',
+                'nelp_form_pdf'            => $nelp_pdf ?? '',                                                          
+                ];
+                //   dd();                                 
+                //   Helper::pr($fields);
                  Article::where('id', '=', $id)->update($fields);
-                 return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Saved Successfully !!!');                
+                 return redirect("admin/article/list")->with('success_message', 'Article Saved Successfully !!!');                
             }
             $rules = [                                            
                 'section_ert'            => 'required',   
@@ -577,6 +580,8 @@ class NewsContentController extends Controller
                     }      
                      /* NELP Pdf */                    
                     $imageFile      = $request->file('nelp_pdf');
+                    // echo $imageFile; die;
+
                     $nelp_form_number = str_replace("SRN","NELP",$postData['creative_work_SRN']);
                     if ($imageFile != '') {
                         $imageName      = str_replace($imageFile->getClientOriginalName(),$nelp_form_number.'.pdf',$imageFile->getClientOriginalName());
@@ -589,8 +594,8 @@ class NewsContentController extends Controller
                             return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
                         }
                     } else {
-                        return redirect()->back()->with(['error_message' => 'Please Upload Scan Copy Of NELP Form !!!']);
-                    }       
+                        $nelp_pdf = $data['row']->nelp_form_pdf;
+                    }
                      /* NELP Pdf */        
                     $fields = [
                     'author_email'              => $postData['email'], 
@@ -626,7 +631,7 @@ class NewsContentController extends Controller
                     'media'                     => $postData['media'],   
                     'cover_image'               => $cover_image ?? '',
                     'cover_image_caption'       => $postData['cover_image_caption'] ?? '',
-                    'video_url'                 => $postData['video_url'],
+                    'video_url'                 => $postData['video_url'] ?? '',
                     'videoId'                   => $videoId ?? '',
                     'long_desc'                 => $postData['long_desc'] ?? '',     
                     'keywords'                  => $postData['keywords'] ?? '',     
@@ -637,7 +642,7 @@ class NewsContentController extends Controller
                     'nelp_form_file'            => $nelp_pdf,                                                          
                 ];
                     //  dd();                                 
-                    // Helper::pr($fields);
+                    //   Helper::pr($fields);
                     NewsContent::insert($fields);     
                     $fieldsArticle = [
                         'is_import'                 => 1,  
@@ -649,6 +654,7 @@ class NewsContentController extends Controller
                 return redirect()->back()->with('error_message', 'All Fields Required !!!');
             }
         }
+        //  Helper::pr($data);
         echo $this->admin_after_login_layout($title, $page_name, $data);
     }
     /* import */

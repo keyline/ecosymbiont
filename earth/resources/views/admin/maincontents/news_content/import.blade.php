@@ -59,7 +59,8 @@ $controllerRoute = $module['controller_route'];
         <?php
         $setting = GeneralSetting::where('id', '=', 1)->first();
         if ($row) {
-            // Helper::pr($row);
+            //  dd($row1);
+            //  Helper::pr($row);
 
             $user_id = $row->user_id;
             $author_classification = $row->author_classification;
@@ -112,7 +113,8 @@ $controllerRoute = $module['controller_route'];
             $media = $row->media;     
             $video_url = $row->video_url;  
             $videoId = $row->videoId;    
-            $nelp_pdf = $row->nelp_form_file; 
+            $nelp_pdf = $row->nelp_form_pdf; 
+            // echo $nelp_pdf; die;
         } else {
             $author_classification ='';
             $co_authors = '';
