@@ -414,7 +414,16 @@ class FrontController extends Controller
                             ];
                             UserActivity::insert($activityData);
                         /* user activity */
-                        if($sessionData->role == 1 || $sessionData->role == 2){
+                        $exsistUser = User::where('email', '=', $sessionData->email)->where('email', '=', $sessionData->role)->count();
+                        if($exsistUser > 0)
+                        {
+                            if($page_link == ''){
+                                return redirect('user/dashboard');
+                            } else {
+                                return redirect($page_link);
+                            } 
+                        }
+                        if($sessionData->role == 2){
                             if($page_link == ''){
                                 return redirect('user/author-classification');
                             } else {
@@ -422,7 +431,7 @@ class FrontController extends Controller
                             }
                         } else {
                             if($page_link == ''){
-                                return redirect('user/dashboard');
+                                return redirect('user/my-profile');
                             } else {
                                 return redirect($page_link);
                             }
