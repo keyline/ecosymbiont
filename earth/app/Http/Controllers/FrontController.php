@@ -678,9 +678,13 @@ class FrontController extends Controller
             $data['user']                   = User::find($user_id);
             $data['articles']               = Article::where('user_id', '=', $user_id)->orderBy('id', 'DESC')->get();
             $data['search_keyword']         = '';
-            $checkProfile                   = UserClassification::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
+            $checkClassification            = UserClassification::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
+            $checkProfile                   = UserProfile::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
+            if($checkClassification <= 0){
+                return redirect(url('user/add-author-classification'))->with(['error_message' => 'Create Classification First !!!']);
+            }
             if($checkProfile <= 0){
-                return redirect(url('user/add-author-classification'))->with(['error_message' => 'Create Profile First !!!']);
+                return redirect(url('user/add-profile'))->with(['error_message' => 'Create Profile First !!!']);
             }
 
             if ($request->isMethod('post')) {
