@@ -645,11 +645,53 @@ class NewsContentController extends Controller
                 ];
                     //  dd();                                 
                     //   Helper::pr($fields);
-                    NewsContent::insert($fields);     
+                    NewsContent::insert($fields);  
                     $fieldsArticle = [
+                        'email'                     => $postData['email'], 
+                        'author_classification'     => $postData['author_classification'] ?? '',
+                        'co_authors'                => $postData['co_authors'] ?? '',
+                        'co_authors_position'       => $postData['co_authors_position'] ?? '',
+                        'co_author_names'           => json_encode($coAuthorNames),  // Storing as JSON string
+                        'co_author_bios'            => json_encode($coAuthorBios),
+                        'co_author_countries'       => json_encode($coAuthorCountries),
+                        'co_author_organizations'   => json_encode($coAuthorOrganizations),
+                        'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
+                        'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
+                        'co_author_classification'  => json_encode($coauthorClassification),
+                        'first_name'                => $postData['first_name'], 
+                        'for_publication_name'      => $postData['for_publication_name'],
+                        'creative_Work'             => $postData['creative_Work'],
+                        'subtitle'                  => $postData['subtitle'], 
+                        'pronounId'                 => $postData['pronoun'],   
+                        'titleId'                   => $postData['title'],
+                        // 'parent_category'           => $parent_category->parent_category,                                           
+                        'section_ertId'              => $postData['section_ert'],                                           
+                         'slug'                      => $slug,
+                        'country'                   => $postData['country'],  
+                        'state'                     => $postData['state'],
+                        'city'                      => $postData['city'],
+                        'organization_name'         => $postData['organization_name'] ?? '',   
+                        'organization_website'      => $postData['organization_website'],
+                        'ecosystem_affiliationId'   => json_encode($postData['ecosystem_affiliation'] ?? []),  
+                        'indigenous_affiliation'    => $postData['indigenous_affiliation'] ?? '',   
+                        'expertise_areaId'          => json_encode($postData['expertise_area'] ?? []),                         
+                        'article_no'                => $postData['creative_work_SRN'],
+                        'creative_work_DOI'         => $postData['creative_work_DOI'],                                                                                                                                                           
+                        'media'                     => $postData['media']?? '',   
+                        'cover_image'               => $cover_image ?? '',
+                        'cover_image_caption'       => $cover_image_caption ?? '',
+                        'video_url'                 => $url ?? '',
+                        'videoId'                   => $videoId ?? '',
+                        'long_desc'                 => $postData['long_desc'] ?? '',     
+                        'keywords'                  => $postData['keywords'] ?? '',     
+                        'is_feature'                => $postData['is_feature'],  
+                        'is_popular'                => $postData['is_popular'],  
+                        'bio_short'                => $postData['author_short_bio'] ?? '',  
+                        'nelp_form_number'          => $nelp_form_number ?? '',
+                        'nelp_form_pdf'            => $nelp_pdf ?? '', 
                         'is_import'                 => 1,  
-                        'is_published'             => 4
-                    ];
+                        'is_published'             => 4                                                         
+                        ];                       
                     Article::where('id', '=', $id)->update($fieldsArticle);
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');                
             } else {
