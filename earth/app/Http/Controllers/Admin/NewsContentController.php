@@ -412,13 +412,14 @@ class NewsContentController extends Controller
                         $coindigenousAffiliations[] = $request->input("co_indigenous_affiliation_{$i}");
                         $coauthorClassification[] = $request->input("co_author_classification_{$i}");
                     }
-                }           
+                }          
+                
                 if (!isset($postData['media']) || empty($postData['media'])) {
                     // Media type is not selected; skip this method and save the form
-                    $cover_image = null; // Retain existing image if available
-                    $cover_image_caption = $postData['cover_image_caption'];
+                    $cover_image = null; // Retain existing image if available                    
                     $videoId = null; // No video processing                        
                 }elseif ($postData['media'] == 'image') {   
+                    $cover_image_caption = $postData['cover_image_caption']; 
                     /* banner image */
                     $imageFile      = $request->file('cover_image');
                         if($imageFile != ''){
