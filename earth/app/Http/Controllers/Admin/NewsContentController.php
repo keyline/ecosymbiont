@@ -639,7 +639,7 @@ class NewsContentController extends Controller
                     'keywords'                  => $postData['keywords'] ?? '',     
                     'is_feature'                => $postData['is_feature'],  
                     'is_popular'                => $postData['is_popular'],  
-                    'short_desc'                => $postData['short_desc'] ?? '',  
+                    'author_short_bio'                => $postData['author_short_bio'] ?? '',  
                     'nelp_form_number'          => $nelp_form_number,
                     'nelp_form_file'            => $nelp_pdf,                                                          
                 ];
