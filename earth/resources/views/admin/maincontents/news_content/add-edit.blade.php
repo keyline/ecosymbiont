@@ -106,7 +106,7 @@ $controllerRoute = $module['controller_route'];
             $others_image = $row->others_image;
             $long_desc = $row->long_desc;
             $keywords = $row->keywords;
-            $short_desc = $row->short_desc;
+            // $short_desc = $row->short_desc;
             $is_feature = $row->is_feature;
             $is_popular = $row->is_popular;            
             $media = $row->media;     
@@ -146,7 +146,7 @@ $controllerRoute = $module['controller_route'];
             // $others_image = '';
             $long_desc = '';
             $keywords = '';
-            $short_desc = '';
+            // $short_desc = '';
             $is_feature = '';
             $is_popular = '';            
             $media = '';    
@@ -173,7 +173,7 @@ $controllerRoute = $module['controller_route'];
                             <label for="email" class="col-md-2 col-lg-4 col-form-label">1) Email address</label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="email" name="email" class="form-control" id="email"
-                                    value="<?= $email ?>" required>
+                                    value="<?= $email ?>" readonly>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -323,23 +323,23 @@ $controllerRoute = $module['controller_route'];
                             <label for="first_name" class="col-md-2 col-lg-4 col-form-label">4) Full Legal Name (exactly as it appears on your government-issued identification documents, e.g., passport and/or driver's license)</label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="text" name="first_name" class="form-control" id="first_name"
-                                    value="<?= $first_name ?>" required>
+                                    value="<?= $first_name ?>" readonly>
                             </div>
                         </div>                                                 
                         <div class="row mb-3">
                             <label for="for_publication_name" class="col-md-2 col-lg-4 col-form-label">5) Preferred name for publication (if different from full legal name)</label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="text" name="for_publication_name" class="form-control" id="for_publication_name"
-                                    value="<?= $for_publication_name ?>" >
+                                    value="<?= $for_publication_name ?>" readonly>
                             </div>
                         </div>                        
                         <div class="row mb-3">
-                            <label for="pronoun" class="col-md-2 col-lg-4 col-form-label">7) Pronoun(s) (select all that apply)</label>
+                            <label for="pronoun" class="col-md-2 col-lg-4 col-form-label">6) Pronoun(s) (select all that apply)</label>
                             <div class="col-md-10 col-lg-8">                                                                
                                 @if ($pronoun)
                                     @foreach ($pronoun as $data)
                                         <!-- <option value="{{ $data->id }}" @selected($data->id == $pronounId)> -->
-                                        <input type="radio" id="yes" name="pronoun" value="{{ $data->id }}" @checked($data->id == $pronounId) >
+                                        <input type="radio" class="readonly-input" id="yes" name="pronoun" value="{{ $data->id }}" @checked($data->id == $pronounId) >
                                         <label for="yes">{{ $data->name }}</label>
                                             <!-- {{ $data->name }}</option> -->
                                     @endforeach
@@ -347,7 +347,7 @@ $controllerRoute = $module['controller_route'];
                             </div>
                         </div> 
                         <div class="row mb-3">
-                                <label for="section_ert" class="col-md-2 col-lg-4 col-form-label">14) For which CATEGORY and sub-category of ERT would you like your Creative-Work to be considered?
+                                <label for="section_ert" class="col-md-2 col-lg-4 col-form-label">7) For which CATEGORY and sub-category of ERT would you like your Creative-Work to be considered?
                                 </label>
                                 <div class="col-md-10 col-lg-8">
                                 @if ($news_category)
@@ -368,28 +368,28 @@ $controllerRoute = $module['controller_route'];
                                 </div>
                             </div> 
                             <div class="row mb-3">
-                                <label for="creative_Work" class="col-md-2 col-lg-4 col-form-label">15) Title of your Creative-Work (max. 10 words)
+                                <label for="creative_Work" class="col-md-2 col-lg-4 col-form-label">8) Title of your Creative-Work (max. 10 words)
                                 </label>
                                 <div class="col-md-10 col-lg-8">
-                                    <textarea class="form-control" id="creative_Work" name="creative_Work" rows="4" cols="50" placeholder="Your creative_Work here..." required><?= $creative_Work ?></textarea>
+                                    <textarea class="form-control" id="creative_Work" name="creative_Work" rows="4" cols="50" placeholder="Your creative_Work here..." readonly><?= $creative_Work ?></textarea>
                                     <div id="creative_WorkError" class="error"></div>
                                 </div>
                             </div>  
                             <div class="row mb-3">
-                            <label for="creative_work_SRN" class="col-md-2 col-lg-2 col-form-label">Creative-Work SRN</label>
+                            <label for="creative_work_SRN" class="col-md-2 col-lg-2 col-form-label">9) Creative-Work SRN</label>
                             <div class="col-md-10 col-lg-10">
-                                <input type="text" name="creative_work_SRN" class="form-control" id="creative_work_SRN" value="<?= $creative_work_SRN ?>" required>
+                                <input type="text" name="creative_work_SRN" class="form-control" id="creative_work_SRN" value="<?= $creative_work_SRN ?>" readonly>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="creative_work_DOI" class="col-md-2 col-lg-2 col-form-label">Creative-Work DOI</label>
+                            <label for="creative_work_DOI" class="col-md-2 col-lg-2 col-form-label">10) Creative-Work DOI</label>
                             <div class="col-md-10 col-lg-10">
-                                <input type="text" name="creative_work_DOI" class="form-control" id="creative_work_DOI" value="<?= $creative_work_DOI ?>" required>
+                                <input type="text" name="creative_work_DOI" class="form-control" id="creative_work_DOI" value="<?= $creative_work_DOI ?>" readonly>
                             </div>
                         </div>
                                           
                             <div class="row mb-3">
-                                <label for="subtitle" class="col-md-2 col-lg-4 col-form-label">16) Subtitle - brief engaging summary of your Creative-Work (max. 40 words)
+                                <label for="subtitle" class="col-md-2 col-lg-4 col-form-label">11) Subtitle - brief engaging summary of your Creative-Work (max. 40 words)
                                 </label>
                                 <div class="col-md-10 col-lg-8">
                                     <textarea name="subtitle" class="form-control ckeditor" id="subtitle" rows="3"><?= $subtitle ?></textarea>
@@ -397,13 +397,13 @@ $controllerRoute = $module['controller_route'];
                                 </div>
                             </div>                            
                             <div class="row mb-3">
-                                <label for="country" class="col-md-2 col-lg-4 col-form-label">18) What country/nation do you live in? (Country of Residence)                                </label>
+                                <label for="country" class="col-md-2 col-lg-4 col-form-label">12) What country/nation do you live in? (Country of Residence)                                </label>
                                 <div class="col-md-10 col-lg-8">
-                                    <select name="country" class="form-control" id="country" required>
-                                        <option value="" selected disabled>Select</option>
+                                    <select name="country" class="form-control" id="country" >
+                                        <option value="" selected >Select</option>
                                         @if ($country)
                                             @foreach ($country as $data)
-                                                <option value="{{ $data->id }}" @selected($data->id == $countryId)>
+                                                <option value="{{ $data->id }}" disabled @selected($data->id == $countryId)>
                                                     {{ $data->name }}</option>
                                             @endforeach
                                         @endif
@@ -411,76 +411,76 @@ $controllerRoute = $module['controller_route'];
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="state" class="col-md-2 col-lg-4 col-form-label">19) State/province of residence</label>
+                                <label for="state" class="col-md-2 col-lg-4 col-form-label">13) State/province of residence</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" name="state" class="form-control" id="state"
-                                        value="<?= $state ?>" >
+                                        value="<?= $state ?>" readonly>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="city" class="col-md-2 col-lg-4 col-form-label">20) Village/town/city of residence</label>
+                                <label for="city" class="col-md-2 col-lg-4 col-form-label">14) Village/town/city of residence</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" name="city" class="form-control" id="city"
-                                        value="<?= $city ?>" >
+                                        value="<?= $city ?>" readonly>
                                 </div>
                             </div> 
                             <div class="row mb-3">
-                                <label for="organization_name" class="col-md-2 col-lg-4 col-form-label">21) Name of your grassroots organization/ ecoweb-rooted community/ movement (if no grassroots affiliation, type N/A)
+                                <label for="organization_name" class="col-md-2 col-lg-4 col-form-label">15) Name of your grassroots organization/ ecoweb-rooted community/ movement (if no grassroots affiliation, type N/A)
                                 </label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" name="organization_name" class="form-control" id="organization_name"
-                                        value="<?= $organization_name ?>" >
+                                        value="<?= $organization_name ?>" readonly>
                                 </div>
                             </div> 
                             <div class="row mb-3">
-                                <label for="organization_website" class="col-md-2 col-lg-4 col-form-label">22) Website of grassroots organization/ ecoweb-rooted community/ movement (if no website, type N/A)
+                                <label for="organization_website" class="col-md-2 col-lg-4 col-form-label">16) Website of grassroots organization/ ecoweb-rooted community/ movement (if no website, type N/A)
                                 </label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" name="organization_website" class="form-control" id="organization_website"
-                                        value="<?= $organization_website ?>" >
+                                        value="<?= $organization_website ?>" readonly>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="ecosystem_affiliation" class="col-md-2 col-lg-4 col-form-label">23) What continent are your ancestors originally from? (select all that apply)
+                                <label for="ecosystem_affiliation" class="col-md-2 col-lg-4 col-form-label">17) What continent are your ancestors originally from? (select all that apply)
                                 </label>
                                 <div class="col-md-10 col-lg-8">                                                                                                
                                     @if ($ecosystem_affiliation)
                                         @foreach ($ecosystem_affiliation as $data)
-                                        <input type="checkbox" name="ecosystem_affiliation[]" value="{{ $data->id }}" @if(in_array($data->id, old('ecosystem_affiliation', $ecosystem_affiliationId))) checked @endif>  {{ $data->name }}<br>
+                                        <input type="checkbox" class="readonly-input" name="ecosystem_affiliation[]" value="{{ $data->id }}" @if(in_array($data->id, old('ecosystem_affiliation', $ecosystem_affiliationId))) checked @endif>  {{ $data->name }}<br>
                                         @endforeach
                                     @endif                                
                                 </div>
                             </div>   
                             <div class="row mb-3">
-                                <label for="Indigenous_affiliation" class="col-md-2 col-lg-4 col-form-label">24) What specific region are your ancestors originally from OR what is the name of your Indigenous community? (example of specific region = Bengal; example of Indigenous community name = Lisjan Ohlone)
+                                <label for="Indigenous_affiliation" class="col-md-2 col-lg-4 col-form-label">18) What specific region are your ancestors originally from OR what is the name of your Indigenous community? (example of specific region = Bengal; example of Indigenous community name = Lisjan Ohlone)
                                 </label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" name="indigenous_affiliation" class="form-control" id="indigenous_affiliation"
-                                    value="<?= $indigenous_affiliation ?>" required>
+                                    value="<?= $indigenous_affiliation ?>" readonly>
                                 </div>
                             </div> 
                             <div class="row mb-3">
-                                <label for="expertise_area" class="col-md-2 col-lg-4 col-form-label">25) Your expertise area (select all that apply)
+                                <label for="expertise_area" class="col-md-2 col-lg-4 col-form-label">19) Your expertise area (select all that apply)
                                 </label>
                                 <div class="col-md-10 col-lg-8">
                                     @if ($expertise_area)
                                         @foreach ($expertise_area as $data)
-                                        <input type="checkbox" name="expertise_area[]" value="{{ $data->id }}" @if(in_array($data->id, old('expertise_area', $expertise_areaId))) checked @endif>  {{ $data->name }}<br>
+                                        <input type="checkbox" class="readonly-input" name="expertise_area[]" value="{{ $data->id }}" @if(in_array($data->id, old('expertise_area', $expertise_areaId))) checked @endif>  {{ $data->name }}<br>
                                         @endforeach
                                     @endif
                                 </div>
                             </div>                             
                             <div class="row mb-3">
-                                <label for="author_short_bio" class="col-md-2 col-lg-4 col-form-label">26) 1-sentence biography (max. 40 words)
+                                <label for="author_short_bio" class="col-md-2 col-lg-4 col-form-label">20) 1-sentence biography (max. 40 words)
                                 </label>
                                 <div class="col-md-10 col-lg-8">
-                                    <textarea class="form-control" id="author_short_bio" name="author_short_bio" rows="4" cols="50" placeholder="Your explanation here..." required><?= $author_short_bio ?></textarea>
+                                    <textarea class="form-control" id="author_short_bio" name="author_short_bio" rows="4" cols="50" placeholder="Your explanation here..." readonly><?= $author_short_bio ?></textarea>
                                     <div id="bio_shortError" class="error"></div>
                                 </div>
                             </div>
                          
                         <div class="row mb-3">
-                            <label for="media" class="col-md-2 col-lg-2 col-form-label">Media Type</label>
+                            <label for="media" class="col-md-2 col-lg-2 col-form-label">21) Media Type</label>
                             <div class="col-md-10 col-lg-10">
                                 <input type="radio" id="media_image" name="media" value="image" @checked(old('media', $media) == 'image')>
                                 <label for="media_image">Image</label>
@@ -490,7 +490,7 @@ $controllerRoute = $module['controller_route'];
                         </div>
                         <div id="imageDetails" style="display: none;">  
                             <div class="row mb-3">
-                                <label for="cover_image" class="col-md-2 col-lg-2 col-form-label">Cover Image</label>
+                                <label for="cover_image" class="col-md-2 col-lg-2 col-form-label">21A1) Cover Image</label>
                                 <div class="col-md-10 col-lg-10">
                                     <input type="file" name="cover_image" class="form-control" id="cover_image">
                                     <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>
@@ -501,7 +501,7 @@ $controllerRoute = $module['controller_route'];
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="cover_image_caption" class="col-md-2 col-lg-2 col-form-label">Cover Image Caption</label>
+                                <label for="cover_image_caption" class="col-md-2 col-lg-2 col-form-label">21A2) Cover Image Caption</label>
                                 <div class="col-md-10 col-lg-10">
                                     <input type="text" name="cover_image_caption" class="form-control" id="cover_image_caption" value="<?= $cover_image_caption ?>">
                                 </div>
@@ -533,7 +533,7 @@ $controllerRoute = $module['controller_route'];
                         </div>
                         <div id="videoDetails" style="display: none;">
                             <div class="row mb-3">
-                                <label for="video_url" class="col-md-2 col-lg-2 col-form-label">Video Url
+                                <label for="video_url" class="col-md-2 col-lg-2 col-form-label">21B) Video Url
                                 </label>
                                 <div class="col-md-10 col-lg-10">
                                     <input type="text" name="video_url" class="form-control" id="video_url"
@@ -549,13 +549,13 @@ $controllerRoute = $module['controller_route'];
                             </div> 
                         </div>
                         <div class="row mb-3">
-                            <label for="ckeditor1" class="col-md-2 col-lg-2 col-form-label">Description</label>
+                            <label for="ckeditor1" class="col-md-2 col-lg-2 col-form-label">22) Description</label>
                             <div class="col-md-10 col-lg-10">
                                 <textarea name="long_desc" class="form-control ckeditor" id="long_desc"  rows="5"><?= $long_desc ?></textarea>
                             </div>
                         </div>                        
                         <div class="row mb-3">
-                            <label for="keywords" class="col-md-2 col-lg-2 col-form-label">Keywords</label>
+                            <label for="keywords" class="col-md-2 col-lg-2 col-form-label">23) Keywords</label>
                             <div class="col-md-10 col-lg-10">
                                 <input type="text" id="input-tags" class="form-control" placeholder="Enter Keywords">
                                 <textarea class="form-control" name="keywords" id="keywords" style="display:none;"><?=$keywords?></textarea>
@@ -575,7 +575,7 @@ $controllerRoute = $module['controller_route'];
                             </div>
                         </div>                        
                         <div class="row mb-3">
-                            <label for="is_feature" class="col-md-2 col-lg-2 col-form-label">Is Features</label>
+                            <label for="is_feature" class="col-md-2 col-lg-2 col-form-label">24) Is Features</label>
                             <div class="col-md-10 col-lg-10">
                                 <input type="radio" id="is_feature_yes" name="is_feature" value="1" @checked(old('is_feature', $is_feature) == 1)>
                                 <label for="is_feature_yes">Yes</label>
@@ -584,7 +584,7 @@ $controllerRoute = $module['controller_route'];
                             </div>
                         </div>  
                         <div class="row mb-3">
-                            <label for="is_popular" class="col-md-2 col-lg-2 col-form-label">Is Popular</label>
+                            <label for="is_popular" class="col-md-2 col-lg-2 col-form-label">25) Is Popular</label>
                             <div class="col-md-10 col-lg-10">
                                 <input type="radio" id="is_popular_yes" name="is_popular" value="1" @checked(old('is_popular', $is_popular) == 1)>
                                 <label for="is_popular_yes">Yes</label>
@@ -593,7 +593,7 @@ $controllerRoute = $module['controller_route'];
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="nelp_pdf" class="col-md-2 col-lg-2 col-form-label">Upload NELP</label>
+                            <label for="nelp_pdf" class="col-md-2 col-lg-2 col-form-label">26) Upload NELP</label>
                             <div class="col-md-10 col-lg-10">
                                 <input type="file" name="nelp_pdf" class="form-control" id="nelp_pdf" accept="application/pdf">                                                                
                                 <?php if($nelp_pdf != ''){?>
@@ -603,7 +603,7 @@ $controllerRoute = $module['controller_route'];
                             </div>
                         </div> 
                         <div class="text-center">
-                            <button type="submit" id="submitFormButton" class="btn btn-primary"><?= $row ? 'Publish' : 'Add' ?></button>
+                            <button type="submit" id="submitFormButton" class="btn btn-primary"><?= $row ? 'Update' : 'Add' ?></button>
                         </div> 
                     </form>
                 </div>
@@ -615,7 +615,7 @@ $controllerRoute = $module['controller_route'];
 <script src="https://cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.14.5/sweetalert2.min.js" integrity="sha512-JCDnPKShC1tVU4pNu5mhCEt6KWmHf0XPojB0OILRMkr89Eq9BHeBP+54oUlsmj8R5oWqmJstG1QoY6HkkKeUAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>    
+<!-- <script>    
     document.querySelector('#submitFormButton').addEventListener('click', function (e) {
     e.preventDefault(); // Prevent default form submission
 
@@ -633,7 +633,7 @@ $controllerRoute = $module['controller_route'];
         }
     });
 });
-</script>
+</script> -->
 <script type="text/javascript">
     $(document).ready(function() {
         var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
@@ -699,7 +699,7 @@ $controllerRoute = $module['controller_route'];
         let allValid = true;
         allValid &= checkWordLimit(document.getElementById('explanation'), 100, 'explanationError');
         // allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');        
-        allValid &= checkWordLimit(document.getElementById('short_desc'), 102, 'short_descError');
+        // allValid &= checkWordLimit(document.getElementById('short_desc'), 102, 'short_descError');
         allValid &= checkWordLimit(document.getElementById('subtitle'), 50, 'subtitleError');
         allValid &= checkWordLimit(document.getElementById('creative_Work'), 10, 'creative_WorkError');
 
