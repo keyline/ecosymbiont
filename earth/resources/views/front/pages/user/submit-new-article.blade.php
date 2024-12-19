@@ -202,11 +202,11 @@ use Illuminate\Support\Facades\DB;
                                     <label for="co_authors_position" class="col-md-2 col-lg-4 col-form-label">3A) (- if answer to (3) is 1 or 2) Indicate in which position your name should appear in the list of authors (the Lead Author, i.e., the first author listed, must be a human individual)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="radio" id="" name="co_authors_position" value="First position" @checked(old('co_authors_position', $co_authors_position) == 'First position')>
+                                        <input type="radio" id="" name="co_authors_position" value="First position" @checked(old('co_authors_position', $co_authors_position ?? '') == 'First position')>
                                         <label for="First position">First position</label>
-                                        <input type="radio" id="" name="co_authors_position" value="Second position" @checked(old('co_authors_position', $co_authors_position) == 'Second position')>
+                                        <input type="radio" id="" name="co_authors_position" value="Second position" @checked(old('co_authors_position', $co_authors_position ?? '') == 'Second position')>
                                         <label for="Second position">Second position</label>
-                                        <input type="radio" id="" name="co_authors_position" value="Third position" @checked(old('co_authors_position', $co_authors_position) == 'Third position')>
+                                        <input type="radio" id="" name="co_authors_position" value="Third position" @checked(old('co_authors_position', $co_authors_position ?? '') == 'Third position')>
                                         <label for="Third position">Third position</label>
                                     </div>
                                 </div>
@@ -219,7 +219,7 @@ use Illuminate\Support\Facades\DB;
                                                     <label for="co_author_name_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3B{{$i}}) Co-Author Name</label>
                                                     <div class="col-md-10 col-lg-8">
                                                         <input type="text" name="co_author_name_{{$i}}" class="form-control" id="co_author_name_{{$i}}"
-                                                            value="<?php if(isset($co_author_name[$i-1]) && $co_author_name[$i-1] != ''){ echo $co_author_name[$i-1]; }  ?>">
+                                                        value="{{ old("co_author_name_$i", $co_author_name[$i - 1] ?? '') }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -228,7 +228,7 @@ use Illuminate\Support\Facades\DB;
                                                     <label for="co_author_short_bio_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3C{{$i}}) Co-Author Short Bio</label>
                                                     <div class="col-md-10 col-lg-8">
                                                         <input type="text" name="co_author_short_bio_{{$i}}" class="form-control" id="co_author_short_bio_{{$i}}"
-                                                            value="<?php if(isset($co_author_short_bio[$i-1]) && $co_author_short_bio[$i-1] != '') { echo $co_author_short_bio[$i-1]; } ?>">
+                                                        value="{{ old("co_author_short_bio_$i", $co_author_short_bio[$i - 1] ?? '') }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -240,7 +240,7 @@ use Illuminate\Support\Facades\DB;
                                                             <option value="" selected disabled>Select</option>
                                                             @if ($country)
                                                                 @foreach ($country as $data)
-                                                                    <option value="{{ $data->id }}" @if(isset($co_author_countries[$i-1]) && $co_author_countries[$i-1] == $data->id) selected @endif>
+                                                                    <option value="{{ $data->id }}" @selected(old("co_author_country_$i", $co_author_countries[$i - 1] ?? '') == $data->id)>
                                                                         {{ $data->name }}
                                                                     </option>
                                                                 @endforeach
@@ -255,7 +255,7 @@ use Illuminate\Support\Facades\DB;
                                                     </label>
                                                     <div class="col-md-10 col-lg-8">
                                                         <input type="text" name="co_authororganization_name_{{$i}}" class="form-control" id="co_authororganization_name_{{$i}}"
-                                                            value="<?php if(isset($co_author_organizations[$i-1]) && $co_author_organizations[$i-1] != '') { echo $co_author_organizations[$i-1]; } ?>">
+                                                        value="{{ old("co_authororganization_name_$i", $co_authororganization_name[$i - 1] ?? '') }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -282,7 +282,7 @@ use Illuminate\Support\Facades\DB;
                                                     </label>
                                                     <div class="col-md-10 col-lg-8">
                                                         <input type="text" name="co_indigenous_affiliation_{{$i}}" class="form-control" id="indigenous_affiliation_{{$i}}"
-                                                        value="<?php if(isset($co_indigenous_affiliations[$i-1]) && $co_indigenous_affiliations[$i-1] != '') { echo $co_indigenous_affiliations[$i-1]; } ?>" >
+                                                        value="{{ old("co_indigenous_affiliation_$i", $co_indigenous_affiliation[$i - 1] ?? '') }}" >
                                                     </div>
                                                 </div>
                                             </div> 
@@ -357,9 +357,9 @@ use Illuminate\Support\Facades\DB;
                                 <label for="orginal_work" class="col-md-2 col-lg-4 col-form-label">8) Are all components of this Creative-Work your original work?
                                 </label>
                                 <div class="col-md-10 col-lg-8">
-                                    <input type="radio" id="yes" name="orginal_work" value="Yes" required @checked(old('orginal_work', $orginal_work) == 'Yes') onclick="hideModal()">
+                                    <input type="radio" id="yes" name="orginal_work" value="Yes" required @checked(old('orginal_work', $orginal_work ?? '') == 'Yes') onclick="hideModal()">
                                     <label for="yes">Yes</label>
-                                    <input type="radio" id="no" name="orginal_work" value="No" required @checked(old('orginal_work', $orginal_work) == 'No') onclick="showModal()">
+                                    <input type="radio" id="no" name="orginal_work" value="No" required @checked(old('orginal_work', $orginal_work ?? '') == 'No') onclick="showModal()">
                                     <label for="no">No</label>
                                 </div>
                             </div>
@@ -367,9 +367,9 @@ use Illuminate\Support\Facades\DB;
                                 <label for="copyright" class="col-md-2 col-lg-4 col-form-label">9) Do you own the copyright and licensing rights to all components of your Creative-Work?
                                 </label>
                                 <div class="col-md-10 col-lg-8">
-                                    <input type="radio" id="yes" name="copyright" value="Yes" required @checked(old('copyright', $copyright) == 'Yes') onclick="hideModal()">
+                                    <input type="radio" id="yes" name="copyright" value="Yes" required @checked(old('copyright', $copyright ?? '') == 'Yes') onclick="hideModal()">
                                     <label for="yes">Yes</label>
-                                    <input type="radio" id="no" name="copyright" value="No" required @checked(old('copyright', $copyright) == 'No') onclick="showModal()">
+                                    <input type="radio" id="no" name="copyright" value="No" required @checked(old('copyright', $copyright ?? '') == 'No') onclick="showModal()">
                                     <label for="no">No</label>
                                 </div>
                             </div>                              
@@ -475,7 +475,7 @@ use Illuminate\Support\Facades\DB;
                                     <label for="creative_Work" class="col-md-2 col-lg-4 col-form-label">15) Title of your Creative-Work (max. 10 words)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <textarea class="form-control" id="creative_Work" name="creative_Work" rows="4" cols="50" placeholder="Your creative_Work here..." required><?= $creative_Work ?></textarea>
+                                        <textarea class="form-control" id="creative_Work" name="creative_Work" rows="4" cols="50" placeholder="Your creative_Work here..." required>{{ old('creative_Work', $creative_Work ?? '') }}</textarea>
                                         <div id="creative_WorkError" class="error"></div>
                                     </div>
                                 </div>                                            
@@ -483,7 +483,7 @@ use Illuminate\Support\Facades\DB;
                                     <label for="subtitle" class="col-md-2 col-lg-4 col-form-label">16) Subtitle - brief engaging summary of your Creative-Work (max. 40 words)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <textarea name="subtitle" class="form-control" id="subtitle" rows="3"><?= $subtitle ?></textarea>
+                                        <textarea name="subtitle" class="form-control" id="subtitle" rows="3">{{ old('subtitle', $subtitle ?? '') }}</textarea>
                                         <div id="subtitleError" class="error"></div>
                                     </div>
                                 </div>
@@ -697,10 +697,10 @@ use Illuminate\Support\Facades\DB;
                                     <label for="country" class="col-md-2 col-lg-4 col-form-label">18) What country/nation do you live in? (Country of Residence)                                </label>
                                     <div class="col-md-10 col-lg-8">
                                         <select name="country" class="form-control" id="country">
-                                            <option value="" selected disabled>Select</option>
+                                            <option value="" selected >Select</option>
                                             @if ($country)
                                                 @foreach ($country as $data)
-                                                    <option value="{{ $data->id }}" @selected($data->id == $countryId)>
+                                                    <option value="{{ $data->id }}" disabled @selected($data->id == $countryId)>
                                                         {{ $data->name }}</option>
                                                 @endforeach
                                             @endif
