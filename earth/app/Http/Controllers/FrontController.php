@@ -839,7 +839,7 @@ class FrontController extends Controller
                             Article::insert($fields);
                             return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
                             } else {
-                                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                                return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
                             }
                     } else{                    
                         //save to database//
@@ -900,7 +900,7 @@ class FrontController extends Controller
                             Article::insert($fields);
                             return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
                         } else {
-                                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                                return redirect()->back()withInput()->with('error_message', 'All Fields Required !!!');
                         }
                     }
                 } else{
@@ -978,11 +978,11 @@ class FrontController extends Controller
                                    if ($uploadedFile['status']) {
                                        $narrative_file = $uploadedFile['newFilename'];
                                    } else {
-                                       return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                                       return redirect()->back()->withInput()->with(['error_message' => $uploadedFile['message']]);
                                    }
                                } 
                                else {
-                                   return redirect()->back()->with(['error_message' => 'Please Upload narrative File !!!']);
+                                   return redirect()->back()->withInput()->with(['error_message' => 'Please Upload narrative File !!!']);
                                }
                            /* narrative doc file */
                            //save to database//
@@ -1056,7 +1056,7 @@ class FrontController extends Controller
                                 Article::insert($fields);
                                 return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
                                 } else {
-                                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                                    return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
                                 }                               
                        } else if($postData['submission_types'] == '2'){
                            /* art images details */
@@ -1157,7 +1157,7 @@ class FrontController extends Controller
                                 Article::insert($fields);
                                 return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
                                 } else {
-                                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                                    return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
                                 }                               
                        } else {
                            /* art_video file */
@@ -1168,11 +1168,11 @@ class FrontController extends Controller
                                if ($uploadedFile['status']) {
                                    $art_video_file = $uploadedFile['newFilename'];
                                } else {
-                                   return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                                   return redirect()->back()->withInput()->with(['error_message' => $uploadedFile['message']]);
                                }
                            } 
                            else {
-                               return redirect()->back()->with(['error_message' => 'Please Upload art_video File !!!']);
+                               return redirect()->back()->withInput()->with(['error_message' => 'Please Upload art_video File !!!']);
                            }
                            /* art_video file */   
                            if ($this->validate($request, $rules)) {                
@@ -1243,7 +1243,7 @@ class FrontController extends Controller
                                 Article::insert($fields);
                                 return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
                             } else {
-                                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                                return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
                             }                               
                        }                
                    } else {                    
@@ -1321,11 +1321,11 @@ class FrontController extends Controller
                                         if ($uploadedFile['status']) {
                                             $narrative_file = $uploadedFile['newFilename'];
                                         } else {
-                                            return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                                            return redirect()->back()->withInput()->with(['error_message' => $uploadedFile['message']]);
                                         }
                                     } 
                                     else {
-                                        return redirect()->back()->with(['error_message' => 'Please Upload narrative File !!!']);
+                                        return redirect()->back()-->withInput()>with(['error_message' => 'Please Upload narrative File !!!']);
                                     }
                                 /* narrative doc file */
                                 
@@ -1408,7 +1408,7 @@ class FrontController extends Controller
                                     Article::insert($fields);
                                     return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
                                     } else {
-                                        return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                                        return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
                                     }                                    
                             } else if($postData['submission_types'] == '2'){
     
@@ -1517,7 +1517,7 @@ class FrontController extends Controller
                                     Article::insert($fields);
                                     return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
                                     } else {
-                                        return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                                        return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
                                     }                                    
                             } else {
     
@@ -1610,7 +1610,7 @@ class FrontController extends Controller
                                     Article::insert($fields);
                                     return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
                                 } else {
-                                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                                    return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
                                 }                                    
                             }
                    }
