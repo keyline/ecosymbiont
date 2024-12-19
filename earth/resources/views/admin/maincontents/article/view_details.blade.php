@@ -352,7 +352,7 @@ $controllerRoute = $module['controller_route'];
                     <tr>
                       <td>17C1) TYPE C: Video (3-10 minutes)</td>
                       <td>
-                      <?php if($art_video_file != ''){?>
+                      <?php pr($art_video_file); if($art_video_file != ''){?>
                           <video width="350" height="250" controls>
                               <source src="<?=env('UPLOADS_URL').'art_video/'.$art_video_file?>" type="video/mp4">
                               Your browser does not support the video tag.
