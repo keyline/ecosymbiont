@@ -671,7 +671,7 @@ use Illuminate\Support\Facades\DB;
                                 </div>
                                 <div id="submission_types_c" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px; margin-bottom: 20px">
                                     <div class="row mb-3">
-                                        <label for="art_video_file" class="col-md-2 col-lg-4 col-form-label">17C1) TYPE C: Video (3-10 minutes, Max 10MB)</label>
+                                        <label for="art_video_file" class="col-md-2 col-lg-4 col-form-label">17C1) TYPE C: Video (3-10 minutes, Max 1GB)</label>
                                         <div class="col-md-10 col-lg-8">
                                             <input type="file" name="art_video_file" class="form-control" id="art_video_file">
                                             <small class="text-info">* Only MP4, AVI, MOV, MKV, WEBM files are allowed</small><br>  
@@ -1150,7 +1150,7 @@ use Illuminate\Support\Facades\DB;
         var file = input.files[0];
         console.log(file);
         var allowedExtensions = ['mp4', 'avi', 'mov', 'mkv', 'webm'];
-        var fileSizeLimit = 2147483648; // 2GB in bytes
+        var fileSizeLimit = 1073741824; // 1GB in bytes
 
         if (file) {
             var fileExtension = file.name.split('.').pop().toLowerCase();
@@ -1164,7 +1164,7 @@ use Illuminate\Support\Facades\DB;
 
             // Validate file size
             if (file.size > fileSizeLimit) {
-                document.getElementById(errorElementId).innerText = "File size exceeds 2 GB. Please upload a smaller file.";
+                document.getElementById(errorElementId).innerText = "File size exceeds 1 GB. Please upload a smaller file.";
                 input.value = ''; // Clear the input
                 return;
             }

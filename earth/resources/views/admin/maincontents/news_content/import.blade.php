@@ -623,8 +623,9 @@ $controllerRoute = $module['controller_route'];
                             </div>
                         </div>
                         <div class="text-center">
-                            <button type="submit" onclick="setMode('submit')" id="submitFormButton" class="btn btn-primary"><?= $row ? 'Final Publish' : 'Add' ?></button>
                             <button type="submit" onclick="setMode('save')"  class="btn btn-primary">Save as draft</button>
+                            <button type="submit" onclick="setMode('submit')" id="submitFormButton" class="btn btn-primary"><?= $row ? 'Final publish' : 'Add' ?></button>
+                            
                         </div>
                         <!-- <div class="text-center">
                             

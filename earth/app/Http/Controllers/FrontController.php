@@ -1529,7 +1529,7 @@ class FrontController extends Controller
                                     if ($uploadedFile['status']) {
                                         $art_video_file = $uploadedFile['newFilename'];
                                     } else {
-                                        return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                                        return redirect()->back()->withInput()->with(['error_message' => $uploadedFile['message']]);
                                     }
                                 }                             
                                 /* art_video file */   
