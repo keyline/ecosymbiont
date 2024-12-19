@@ -64,7 +64,7 @@ $controllerRoute = $module['controller_route'];
                           if($row->is_published == 0){
                               echo "<h6>Submitted</h6>";
                           } elseif($row->is_published == 1){
-                              echo "<h6>Final Edited & Checked</h6>";
+                              echo "<h6>Final Editing & Checking</h6>";
                           } elseif($row->is_published == 2){
                               echo "<h6>NELP Form Generated & Shared</h6>";
                           } elseif($row->is_published == 3){
