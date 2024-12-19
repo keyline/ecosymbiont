@@ -41,7 +41,7 @@
                                         <td><?=date_format(date_create($article->created_at), "d-m-Y")?></td>
                                         <td>
                                             <?php if($article->nelp_form_pdf){?>
-                                                <a href="<?=env('UPLOADS_URL').'article/'.$article->nelp_form_pdf?>" target="_blank" class="label label-primary">View File</a>
+                                                <a href="<?=env('UPLOADS_URL').'newcontent/'.$article->nelp_form_pdf?>" target="_blank" class="label label-primary">View File</a>
                                             <?php }?>
                                         </td>
                                         <td>
