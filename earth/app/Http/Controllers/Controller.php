@@ -109,7 +109,7 @@ class Controller extends BaseController
                     $status = 1;
                 }
             } elseif($uploadType == 'video') {
-                if($imageFileType1 != "mp4" && $imageFileType1 != "AVI" && $imageFileType1 != "avi" && $imageFileType1 != "MOV" && $imageFileType1 != "mov" && $imageFileType1 != "3gp" && $imageFileType1 != "webm" && $imageFileType1 != "MP4" && $imageFileType1 != "3GP" && $imageFileType1 != "WEBM") {
+                if($imageFileType1 != "mp4" && $imageFileType1 != "AVI" && $imageFileType1 != "avi" && $imageFileType1 != "MOV" && $imageFileType1 != "mov" && $imageFileType1 != "MKV" && $imageFileType1 != "mkv" && $imageFileType1 != "3gp" && $imageFileType1 != "webm" && $imageFileType1 != "MP4" && $imageFileType1 != "3GP" && $imageFileType1 != "WEBM") {
                     $message = 'Sorry, only Video files are allowed';
                     $status = 0;
                 } else {

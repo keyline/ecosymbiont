@@ -432,7 +432,16 @@ class FrontController extends Controller
                                     return redirect($page_link);
                                 }
                             }
-                        }                        
+                        } else{
+                            if($sessionData->role == 2)
+                            {
+                                if($page_link == ''){
+                                    return redirect('user/add-author-classification');
+                                } else {
+                                    return redirect($page_link);
+                                } 
+                            }
+                        }                       
                     } else {
                         /* user activity */
                             $activityData = [
