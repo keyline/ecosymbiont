@@ -1538,7 +1538,7 @@ class FrontController extends Controller
                                     $imageName      = $imageFile->getClientOriginalName();
                                     $uploadedFile   = $this->upload_single_file('art_video_file', $imageName, 'art_video', 'video');
                                     if ($uploadedFile['status']) {
-                                        $art_video_file = $uploadedFile['newFilename'];
+                                        echo $art_video_file = $uploadedFile['newFilename']; die;
                                     } else {
                                         return redirect()->back()->withInput()->with(['error_message' => $uploadedFile['message']]);
                                     }
