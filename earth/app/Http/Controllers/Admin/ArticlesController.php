@@ -1697,6 +1697,7 @@ class ArticlesController extends Controller
         
         $page_name                                  = 'article.view_details';
         $data['row']                                = Article::where('status', '!=', 3)->where('id', '=', $id)->orderBy('id', 'DESC')->first();
+        dd($data['row']);
         $data['selected_ecosystem_affiliation']     = json_decode($data['row']->ecosystem_affiliationId);
         $data['selected_expertise_area']            = json_decode($data['row']->expertise_areaId);
         $data['selected_section_ertId']             = json_decode($data['row']->section_ertId);
