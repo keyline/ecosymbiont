@@ -900,7 +900,7 @@ class FrontController extends Controller
                             Article::insert($fields);
                             return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
                         } else {
-                                return redirect()->back()withInput()->with('error_message', 'All Fields Required !!!');
+                                return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
                         }
                     }
                 } else{
@@ -1325,7 +1325,7 @@ class FrontController extends Controller
                                         }
                                     } 
                                     else {
-                                        return redirect()->back()-->withInput()>with(['error_message' => 'Please Upload narrative File !!!']);
+                                        return redirect()->back()->withInput()>with(['error_message' => 'Please Upload narrative File !!!']);
                                     }
                                 /* narrative doc file */
                                 
