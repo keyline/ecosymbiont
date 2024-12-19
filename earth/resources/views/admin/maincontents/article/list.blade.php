@@ -88,7 +88,7 @@ $controllerRoute = $module['controller_route'];
                         <td>                      
                           <a href="<?=url('admin/' . $controllerRoute . '/view_details/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="ViewDetails <?=$module['title']?>">View Details</a>
                           <?php if ($row->is_import == 0) { ?>
-                          <a href="<?=url('admin/news_content/import/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="ViewDetails <?=$module['title']?>">Import to News Content</a>
+                          <a href="<?=url('admin/news_content/import/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="ViewDetails <?=$module['title']?>">Edit / Import to News Content</a>
                           <?php } ?>                     
                         </td>
                       </tr>
