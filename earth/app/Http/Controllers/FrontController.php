@@ -1211,7 +1211,7 @@ class FrontController extends Controller
                                    'subtitle'                  => $postData['subtitle'],
                                    'submission_types'          => $submission_typesInfo,
                                    'section_ertId'             => $section_ertInfo,                                
-                                   'art_video_file'            => $art_video_fileInfo,
+                                   'art_video_file'            => $art_video_file,
                                    'art_video_desc'            => $postData['art_video_desc'],                                                                        
                                    'country'                   => $postData['country'],
                                    'state'                     => $postData['state'],
