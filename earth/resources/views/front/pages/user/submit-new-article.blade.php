@@ -210,6 +210,7 @@ use Illuminate\Support\Facades\DB;
                                         <label for="Third position">Third position</label>
                                     </div>
                                 </div>
+                                <div id="co_authors_position_error" class="error" style="color: red;"></div>
                                 <div id="artimageFieldsContainer">
                                     @for ($i = 1; $i <= 2; $i++)
                                     <div class="card mb-3" id="author_card_{{$i}}" style="padding: 11px;border: 1px solid black; display:none;">
@@ -935,12 +936,15 @@ use Illuminate\Support\Facades\DB;
     // Function to toggle the co-authors position section
     function toggleCoAuthorsPosition() {
         var coAuthors = document.querySelector('input[name="co_authors"]:checked').value;
-        var positionDiv = document.getElementById('co_authors_position');    
+        var positionDiv = document.getElementById('co_authors_position');   
+        const positionInputs = document.querySelectorAll('input[name="co_authors_position"]'); 
         
         if (coAuthors == '1' || coAuthors == '2') {
             positionDiv.style.display = 'block';
+            positionInputs.forEach(input => input.setAttribute('required', 'required'));
         } else {
             positionDiv.style.display = 'none';
+            positionInputs.forEach(input => input.removeAttribute('required'));
         }        
     }
 
