@@ -111,10 +111,10 @@ $controllerRoute = $module['controller_route'];
                     <a href="<?=url('admin/' . $controllerRoute . '/generate-nelp-form/'.Helper::encoded($row->id))?>" class="btn btn-outline-info btn-sm" title="Generate NELP Form & Shared"><i class="fa fa-pdf"> Generate NELP Form & Shared</i></a>
                   <?php }?>
                 <?php }
-                if ($row->is_import == 0) { 
+                // if ($row->is_import == 0) { 
                 ?>
-                <a href="<?=url('admin/' . $controllerRoute . '/edit/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit"> Edit</i></a>
-                <?php } ?>
+                <!-- <a href="?=url('admin/' . $controllerRoute . '/edit/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit"> Edit</i></a> -->
+                <!-- ?php } ?> -->
               </p>
               <table class="table table-striped table-bordered nowrap">
                 <thead>
