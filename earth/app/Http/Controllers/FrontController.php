@@ -402,19 +402,7 @@ class FrontController extends Controller
                         $request->session()->put('email', $sessionData->email);
                         $request->session()->put('is_user_login', 1);
 
-                        /* user activity */
-                            $activityData = [
-                                'user_email'        => $sessionData->email,
-                                'user_name'         => $sessionData->name,
-                                'user_type'         => 'USER',
-                                'ip_address'        => $request->ip(),
-                                'activity_type'     => 1,
-                                'activity_details'  => 'Sign In Success !!!',
-                                'platform_type'     => 'WEB',
-                            ];
-                            UserActivity::insert($activityData);
-                        /* user activity */
-                        $exsistUser = User::where('email', '=', $sessionData->email)->where('role', '=', $sessionData->role)->count();
+                        $exsistUser = UserActivity::where('user_email', '=', $sessionData->email)->count();
                          Helper::pr($exsistUser);
                         if($exsistUser > 0)
                         {
@@ -441,7 +429,21 @@ class FrontController extends Controller
                                     return redirect($page_link);
                                 } 
                             }
-                        }                       
+                        }
+
+                        /* user activity */
+                            $activityData = [
+                                'user_email'        => $sessionData->email,
+                                'user_name'         => $sessionData->name,
+                                'user_type'         => 'USER',
+                                'ip_address'        => $request->ip(),
+                                'activity_type'     => 1,
+                                'activity_details'  => 'Sign In Success !!!',
+                                'platform_type'     => 'WEB',
+                            ];
+                            UserActivity::insert($activityData);
+                        /* user activity */
+                                               
                     } else {
                         /* user activity */
                             $activityData = [
