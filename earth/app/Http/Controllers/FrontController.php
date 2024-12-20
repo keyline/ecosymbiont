@@ -976,7 +976,7 @@ class FrontController extends Controller
                                             $fileExtension = pathinfo($old_imageName, PATHINFO_EXTENSION);
                                         // Append the desired suffix ('a', 'b', 'c', etc.) based on $i
                                         $suffix = chr(96 + $i); // Convert $i to a letter: 1 = 'a', 2 = 'b', 3 = 'c', etc.
-                                           echo $newFileName = $imageName . '-' . $suffix . '.' . $fileExtension;die;
+                                           $newFileName = $imageName . '-' . $suffix . '.' . $fileExtension;
                                         
                                        $uploadedFile   = $this->upload_single_file("image_file_{$i}", $newFileName, 'narrative', 'image');                                
                                        if ($uploadedFile['status']) {
