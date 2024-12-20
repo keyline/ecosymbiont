@@ -218,7 +218,8 @@ class Controller extends BaseController
                         }
                     }
 
-                    $newFilename = uniqid().".".$imageFileType1;
+                    // $newFilename = uniqid().".".$imageFileType1;
+                    $newFilename = $imge.".".$imageFileType1;
                     // $temp = $images[$p]->getTempName();
                     $temp = $images[$p]->getPathName();
                     if($path == '') {
