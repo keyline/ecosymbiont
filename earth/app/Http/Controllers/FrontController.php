@@ -970,8 +970,8 @@ class FrontController extends Controller
                                // Add image file to the array (it can be null if no file is uploaded)                        
                                    $imageFile      = $request->file("image_file_{$i}");                            
                                    if ($imageFile != '') {                                
-                                        //    $imageName      = $imageFile->getClientOriginalName();        
-                                           echo $imageName      = str_replace($imageFile->getClientOriginalName(),$article_no,$imageFile->getClientOriginalName()); die;
+                                          echo  $imageName      = $imageFile->getClientOriginalName();        die;
+                                        //    echo $imageName      = str_replace($imageFile->getClientOriginalName(),$article_no,$imageFile->getClientOriginalName()); die;
                                        $uploadedFile   = $this->upload_single_file("image_file_{$i}", $imageName, 'narrative', 'image');                                
                                        if ($uploadedFile['status']) {
                                            $narrativeimageFile[] = $uploadedFile['newFilename'];                                
