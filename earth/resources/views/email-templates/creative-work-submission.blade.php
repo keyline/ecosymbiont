@@ -32,8 +32,8 @@ $generalSetting             = GeneralSetting::find('1');
                   <td style="padding: 10px; background: #ccc; text-align: left; color: #000;font-family: sans-serif;font-size: 15px;"><?=$article_no?></td>
                 </tr>
                 <tr>
-                  <th style="background: #cccccc42; color: #000; padding: 10px; text-align: left; font-family: sans-serif; font-size: 14px;">Publication Name</th>
-                  <td style="padding: 10px; background: #cccccc42; text-align: left; color: #000;font-family: sans-serif;font-size: 15px;"><?=$for_publication_name?></td>
+                  <th style="background: #cccccc42; color: #000; padding: 10px; text-align: left; font-family: sans-serif; font-size: 14px;">Title</th>
+                  <td style="padding: 10px; background: #cccccc42; text-align: left; color: #000;font-family: sans-serif;font-size: 15px;"><?=$creative_Work?></td>
                 </tr>
               </tbody>
             </table>

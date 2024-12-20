@@ -31,7 +31,7 @@
                                               <label for="first_name" class="col-md-4 col-lg-3 col-form-label">User Type</label>
                                               <div class="col-md-8 col-lg-9">
                                                 <input type="radio" name="role" id="role1" value="1" required> <label for="role1">Reader</label>
-                                                <input type="radio" name="role" id="role2" value="2" required> <label for="role2">Content Creator</label>
+                                                <input type="radio" name="role" id="role2" value="2" required> <label for="role2">Content Creator (Contributor)</label>
                                               </div>
                                             </div>
                                             <div class="row" style="margin-bottom: 15px;">
@@ -49,7 +49,7 @@
                                             <div class="row" style="margin-bottom: 15px;">
                                               <label for="last_name" class="col-md-4 col-lg-3 col-form-label">Surname*</label>
                                               <div class="col-md-8 col-lg-9">
-                                                <input type="text" name="last_name" class="form-control" id="last_name" placeholder="Enter Sur Name" required autocomplete="off">
+                                                <input type="text" name="last_name" class="form-control" id="last_name" placeholder="Enter Surname" required autocomplete="off">
                                               </div>
                                             </div>
                                             <div class="row" style="margin-bottom: 15px;">
@@ -87,7 +87,7 @@
                                               <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>
                                             <div class="text-center" style="margin-bottom: 15px;">
-                                              Already Registered ? <a href="<?=url('signin')?>">Sign In</a>
+                                            Already registered? <a href="<?=url('signin')?>">Sign In</a>
                                             </div>
                                           </form>
                                     </div>

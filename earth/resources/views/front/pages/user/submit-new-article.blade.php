@@ -167,7 +167,7 @@ use Illuminate\Support\Facades\DB;
                         <h3 class="heading">Form: Creative-work</h3>
                     </div>
                     <div class="card-body">
-                        <p style="color: #d81636; font-weight:500;font-size: 14px;margin-bottom: 25px;"><em>**Instructions: <b>Please make sure you have completed your Profile (click on Profile tab on the left to go there, if you haven't) before filling out this form.</b> Please note that you will have to enter all information in one sitting, as there is no save option while you work. Unless you click the "Submit" button, your information will not be entered into the system. We apologize for any inconvenience. Thank you for your contribution.</em></p>
+                        <p style="color: #d81636; font-weight:500;font-size: 14px;margin-bottom: 25px;"><em>**Instructions: Please make sure you have completed your Profile (click on Profile tab on the left to go there, if you haven't) before filling out this form. All questions in BLUE must be answered. Please note that you will have to enter all information in one sitting, as there is no save option while you work. Unless you click the "Submit" button, your information will not be entered into the system. We apologize for any inconvenience. Thank you for your contribution.</em></p>
                         <form method="POST" id="saveForm" action="" enctype="multipart/form-data" oninput="validateForm()">
                         <!-- <input type="hidden" name="form_action" id="formAction"> -->
                             @csrf
@@ -789,15 +789,19 @@ use Illuminate\Support\Facades\DB;
                                     <label for="bio_long" class="col-md-2 col-lg-4 col-form-label">28) Instructions for initial submission of Creative-Work for eligibility screening:
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <p>Once you have completed this form and uploaded all required files, click on the "submit" button below.</p>
-                                        <p>If you meet the eligibility criteria, you will receive an Eligibility E-mail with a Submission Reference Number ("SRN") and accompanying Non-Exclusive License to Publish ("NELP").</p>
+                                        <p>Once you have completed this form and uploaded all required files, click on the "Submit" button below. If you meet the eligibility criteria, you will receive an Eligibility E-mail with a Submission Reference Number ("SRN").</p>                                        
                                     </div>
                                     <label for="bio_long" class="col-md-2 col-lg-4 col-form-label">29) Instructions for final submission of Creative-Work for consideration of publication:
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <p>The substance of your Creative-Work will not be further reviewed by the editor(s) until you upload a completed and signed digital copy of the NELP, according to the process described in your Eligibility E-mail.</p>                                
+                                        <p>If your Creative-Work is accepted for publication (most likely, upon editorial revision), the editor(s) will e-mail you a Non-Exclusive License to Publish ("NELP"). Your Creative-Work will not be published until you e-mail back a completed and signed digital copy of the NELP.</p>                                                                        
+                                    </div>
+                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label">30) If you are submitting a video: 
+                                    </label>
+                                    <div class="col-md-10 col-lg-8">
+                                        <p>Please note that it may take several minutes for your video to upload. Please do not click on the “Submit” button more than once and do not navigate away from this page, until you are re-directed to a page that tells you: “Creative-Work submitted successfully!”</p>      
                                         <input type="checkbox" id="acknowledge" name="acknowledge" value="1" required>
-                                        <label for="acknowledge">I understand</label>
+                                        <label for="acknowledge">I understand</label>                                  
                                     </div>
                                 </div>                                
                             </div>                  

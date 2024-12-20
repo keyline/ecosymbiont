@@ -573,7 +573,7 @@ class FrontController extends Controller
                     'user_type'         => 'USER',
                     'ip_address'        => $request->ip(),
                     'activity_type'     => 2,
-                    'activity_details'  => 'You Are Successfully Sign Out !!!',
+                    'activity_details'  => 'You are successfully signed out!',
                     'platform_type'     => 'WEB',
                 ];
                 UserActivity::insert($activityData);
@@ -581,7 +581,7 @@ class FrontController extends Controller
             $request->session()->forget(['user_id', 'name', 'email', 'first_name', 'middle_name', 'last_name', 'role', 'is_user_login']);
             //  Helper::pr(session()->all());die;
             Auth::guard('web')->logout();
-            return redirect(url('signin'))->with('success_message', 'You Are Successfully Sign Out !!!');
+            return redirect(url('signin'))->with('success_message', 'You are successfully signed out!');
         }
         public function dashboard()
         {
@@ -848,7 +848,7 @@ class FrontController extends Controller
                             /* email log save */
 
                             Article::insert($fields);
-                            return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
+                            return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work submitted successfully!');
                             } else {
                                 return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
                             }
@@ -909,7 +909,7 @@ class FrontController extends Controller
                             /* email log save */
 
                             Article::insert($fields);
-                            return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
+                            return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work submitted successfully!');
                         } else {
                                 return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
                         }
@@ -1065,7 +1065,7 @@ class FrontController extends Controller
                                 /* email log save */
 
                                 Article::insert($fields);
-                                return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
+                                return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work submitted successfully!');
                                 } else {
                                     return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
                                 }                               
@@ -1166,7 +1166,7 @@ class FrontController extends Controller
                                 /* email log save */
 
                                 Article::insert($fields);
-                                return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
+                                return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work submitted successfully!');
                                 } else {
                                     return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
                                 }                               
@@ -1252,7 +1252,7 @@ class FrontController extends Controller
                                 /* email log save */
 
                                 Article::insert($fields);
-                                return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
+                                return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work submitted successfully!');
                             } else {
                                 return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
                             }                               
@@ -1417,7 +1417,7 @@ class FrontController extends Controller
                                     /* email log save */
 
                                     Article::insert($fields);
-                                    return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
+                                    return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work submitted successfully!');
                                     } else {
                                         return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
                                     }                                    
@@ -1526,7 +1526,7 @@ class FrontController extends Controller
                                     /* email log save */
 
                                     Article::insert($fields);
-                                    return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
+                                    return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work submitted successfully!');
                                     } else {
                                         return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
                                     }                                    
@@ -1619,7 +1619,7 @@ class FrontController extends Controller
                                     /* email log save */
 
                                     Article::insert($fields);
-                                    return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
+                                    return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work submitted successfully!');
                                 } else {
                                     return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
                                 }                                    

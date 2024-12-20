@@ -26,7 +26,7 @@
                                     <div class="card-body">
                                         <div class="card-header">
                                             <h3 class="text-center">Sign into your account</h3>
-                                            <p class="text-center">Enter your email & password to login</p>
+                                            <p class="text-center">Enter your email & password for login</p>
                                         </div>
                                         <form method="POST" action="">
                                             @csrf
@@ -47,7 +47,7 @@
                                               <button type="submit" class="btn btn-primary">Sign In</button>
                                             </div>
                                             <div class="text-center" style="margin-bottom: 15px;">
-                                              Not Registered Yet ? <a href="<?=url('signup')?>">Sign Up</a>
+                                            Not registered yet? <a href="<?=url('signup')?>">Sign Up</a>
                                             </div>
                                           </form>
                                     </div>
