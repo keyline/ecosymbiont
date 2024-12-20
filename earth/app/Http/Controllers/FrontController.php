@@ -1311,8 +1311,9 @@ class FrontController extends Controller
     
                                     // Add image file to the array (it can be null if no file is uploaded)                        
                                         $imageFile      = $request->file("image_file_{$i}");                            
-                                        if ($imageFile != '') {                                
-                                                $imageName      = $imageFile->getClientOriginalName();                                 
+                                        if ($imageFile != '') {       
+                                              echo  $imageName      = str_replace($imageFile->getClientOriginalName(),$postData['creative_Work'],$imageFile->getClientOriginalName());  die;
+                                                // $imageName      = $imageFile->getClientOriginalName();                                 
                                             $uploadedFile   = $this->upload_single_file("image_file_{$i}", $imageName, 'narrative', 'image');                                
                                             if ($uploadedFile['status']) {
                                                 $narrativeimageFile[] = $uploadedFile['newFilename'];                                
@@ -1387,8 +1388,8 @@ class FrontController extends Controller
                                         'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
                                         'indigenous_affiliation'    => $postData['indigenous_affiliation'],
                                         'expertise_areaId'          => $expertise_areaInfo,
-                                        'bio_short'               => $postData['bio_short'],
-                                        'bio_long'               => $postData['bio_long'],  
+                                        'bio_short'                 => $postData['bio_short'],
+                                        'bio_long'                  => $postData['bio_long'],  
                                     ];
                                     //   Helper::pr($fields);
 
@@ -1439,7 +1440,7 @@ class FrontController extends Controller
     
                                     // Add image file to the array (it can be null if no file is uploaded)                        
                                         $imageFile      = $request->file("art_image_file_{$i}");                            
-                                        if ($imageFile != '') {                                
+                                        if ($imageFile != '') {                                                                       
                                                 $imageName      = $imageFile->getClientOriginalName();                                 
                                             $uploadedFile   = $this->upload_single_file("art_image_file_{$i}", $imageName, 'art_image', 'image');                                
                                             if ($uploadedFile['status']) {
