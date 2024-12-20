@@ -340,6 +340,7 @@ class NewsContentController extends Controller
                     'keywords'                  => $postData['keywords'] ?? '',     
                     'is_feature'                => $postData['is_feature'],  
                     'is_popular'                => $postData['is_popular'],  
+                    'is_published'              => 4,
                     'short_desc'                => $postData['short_desc'] ?? '', 
                 ];
                     //  dd($fields);                  

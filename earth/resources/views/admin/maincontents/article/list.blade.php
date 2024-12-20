@@ -70,7 +70,7 @@ $controllerRoute = $module['controller_route'];
                           } elseif($row->is_published == 3){
                               echo "<h6>Scan Copy Uploaded</h6>";
                           } elseif($row->is_published == 4){
-                              echo "<h6>Approved</h6>";
+                              echo "<h6>Approved & Published</h6>";
                           } elseif($row->is_published == 5){
                               echo "<h6>Rejected</h6>";
                           }

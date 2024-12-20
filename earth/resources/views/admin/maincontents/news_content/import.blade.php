@@ -421,7 +421,7 @@ $controllerRoute = $module['controller_route'];
                                         <option value="" selected>Select</option>
                                         @if ($country)
                                             @foreach ($country as $data)
-                                                <option value="{{ $data->id }}" disabled @selected($data->id == $countryId)>
+                                                <option value="{{ $data->id }}" @selected($data->id == $countryId)>
                                                     {{ $data->name }}</option>
                                             @endforeach
                                         @endif
