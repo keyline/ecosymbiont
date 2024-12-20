@@ -974,10 +974,9 @@ class FrontController extends Controller
                                            $imageName      = $article_no;
                                           // Get file extension
                                             $fileExtension = pathinfo($old_imageName, PATHINFO_EXTENSION);
-                                        // Append the desired suffix ('a', 'b', 'c', etc.) based on $i
-                                        $suffix = chr(96 + $i); // Convert $i to a letter: 1 = 'a', 2 = 'b', 3 = 'c', etc.
-                                           $newFileName = $imageName . '-' . $suffix . '.' . $fileExtension;
-                                        
+                                            // Append the desired suffix ('a', 'b', 'c', etc.) based on $i
+                                            $suffix = chr(96 + $i); // Convert $i to a letter: 1 = 'a', 2 = 'b', 3 = 'c', etc.
+                                           $newFileName = $imageName . '-' . $suffix . '.' . $fileExtension;                                        
                                        $uploadedFile   = $this->upload_single_file("image_file_{$i}", $newFileName, 'narrative', 'image');                                
                                        if ($uploadedFile['status']) {
                                            $narrativeimageFile[] = $uploadedFile['newFilename'];                                
@@ -1045,7 +1044,7 @@ class FrontController extends Controller
                                    'bio_short'               => $postData['bio_short'],
                                    'bio_long'               => $postData['bio_long'],  
                                ];
-                                   Helper::pr($fields);
+                                //    Helper::pr($fields);
 
                                /* submission email */
                                 $generalSetting             = GeneralSetting::find('1');                            
@@ -1093,9 +1092,16 @@ class FrontController extends Controller
    
                                // Add image file to the array (it can be null if no file is uploaded)                        
                                    $imageFile      = $request->file("art_image_file_{$i}");                            
-                                   if ($imageFile != '') {                                
-                                           $imageName      = $imageFile->getClientOriginalName();                                 
-                                       $uploadedFile   = $this->upload_single_file("art_image_file_{$i}", $imageName, 'art_image', 'image');                                
+                                   if ($imageFile != '') {       
+                                        $old_imageName      = $imageFile->getClientOriginalName();
+                                           $imageName      = $article_no;
+                                          // Get file extension
+                                            $fileExtension = pathinfo($old_imageName, PATHINFO_EXTENSION);
+                                            // Append the desired suffix ('a', 'b', 'c', etc.) based on $i
+                                            $suffix = chr(96 + $i); // Convert $i to a letter: 1 = 'a', 2 = 'b', 3 = 'c', etc.
+                                           $newFileName = $imageName . '-' . $suffix . '.' . $fileExtension;                         
+                                        //    $imageName      = $imageFile->getClientOriginalName();                                 
+                                       $uploadedFile   = $this->upload_single_file("art_image_file_{$i}", $newFileName, 'art_image', 'image');                                
                                        if ($uploadedFile['status']) {
                                            $artimageFile[] = $uploadedFile['newFilename'];                                
                                        } else {
@@ -1146,7 +1152,7 @@ class FrontController extends Controller
                                    'bio_short'               => $postData['bio_short'],
                                    'bio_long'               => $postData['bio_long'],  
                                ];
-                                //   Helper::pr($fields);
+                                   Helper::pr($fields);
 
                                 /* submission email */
                                 $generalSetting             = GeneralSetting::find('1');                            
