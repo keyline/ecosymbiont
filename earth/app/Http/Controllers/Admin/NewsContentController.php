@@ -797,7 +797,7 @@ class NewsContentController extends Controller
                             'image_file' => $image,
                             'image_title' => $image_title,
                         ];
-                        //  Helper::pr($imageFields);
+                          Helper::pr($imageFields);
                         NewsContentImage::insert($imageFields);
                     }
                 }
