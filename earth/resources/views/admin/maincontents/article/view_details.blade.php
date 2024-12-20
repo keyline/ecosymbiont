@@ -302,7 +302,7 @@ $controllerRoute = $module['controller_route'];
                       <?php if($narrative_file != ''){?>
                         <a href="<?= env('UPLOADS_URL') . 'narrative/' . $narrative_file ?>" target="_blank"
                             class="badge bg-primary">View File</a>
-                            <br><?=$narrative_file?>
+                            <br><a href="<?= env('UPLOADS_URL') . 'narrative/' . $narrative_file ?>" download="<?=$art_video_file?>" class="btn btn-outline-success btn-sm"><?=$narrative_file?> <i class="fa fa-download"></i></a>
                         <?php }?>                      
                       </td>
                     </tr>
@@ -316,7 +316,7 @@ $controllerRoute = $module['controller_route'];
                       <td>
                       <?php if($image_files[$i-1] != ''){?>
                         <img src="<?=env('UPLOADS_URL').'narrative/'.$image_files[$i-1]?>" alt="first_image_file" style="width: 150px; height: 150px; margin-top: 10px;">
-                        <br><?=$image_files[$i-1]?>
+                        <br><a href="<?=env('UPLOADS_URL').'narrative/'.$image_files[$i-1]?>" download="<?=$art_video_file?>" class="btn btn-outline-success btn-sm"><?=$image_files[$i-1]?> <i class="fa fa-download"></i></a>
                         <?php } else {?>
                         <img src="<?=env('NO_IMAGE')?>" alt="first_image_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
                         <?php }?>
@@ -337,7 +337,7 @@ $controllerRoute = $module['controller_route'];
                       <td>
                       <?php if($art_image_file[$i-1] != ''){?>
                         <img src="<?=env('UPLOADS_URL').'art_image/'.$art_image_file[$i-1]?>" alt="first_image_file" style="width: 150px; height: 150px; margin-top: 10px;">
-                        <br><?=$art_image_file[$i-1]?>
+                        <br><a href="<?=env('UPLOADS_URL').'art_image/'.$art_image_file[$i-1]?>" download="<?=$art_video_file?>" class="btn btn-outline-success btn-sm"><?=$art_image_file[$i-1]?> <i class="fa fa-download"></i></a>
                         <?php } else {?>
                         <img src="<?=env('NO_IMAGE')?>" alt="first_image_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
                         <?php }?>
