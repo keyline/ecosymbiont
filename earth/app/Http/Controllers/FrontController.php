@@ -970,7 +970,8 @@ class FrontController extends Controller
                                // Add image file to the array (it can be null if no file is uploaded)                        
                                    $imageFile      = $request->file("image_file_{$i}");                            
                                    if ($imageFile != '') {                                
-                                           $imageName      = $imageFile->getClientOriginalName();                                 
+                                        //    $imageName      = $imageFile->getClientOriginalName();        
+                                           $imageName      = str_replace($imageFile->getClientOriginalName(),$postData['creative_Work'],$imageFile->getClientOriginalName());                         
                                        $uploadedFile   = $this->upload_single_file("image_file_{$i}", $imageName, 'narrative', 'image');                                
                                        if ($uploadedFile['status']) {
                                            $narrativeimageFile[] = $uploadedFile['newFilename'];                                
@@ -1038,7 +1039,7 @@ class FrontController extends Controller
                                    'bio_short'               => $postData['bio_short'],
                                    'bio_long'               => $postData['bio_long'],  
                                ];
-                                //   Helper::pr($fields);
+                                   Helper::pr($fields);
 
                                /* submission email */
                                 $generalSetting             = GeneralSetting::find('1');                            
@@ -1312,7 +1313,7 @@ class FrontController extends Controller
                                     // Add image file to the array (it can be null if no file is uploaded)                        
                                         $imageFile      = $request->file("image_file_{$i}");                            
                                         if ($imageFile != '') {       
-                                              echo  $imageName      = str_replace($imageFile->getClientOriginalName(),$postData['creative_Work'],$imageFile->getClientOriginalName());  die;
+                                              $imageName      = str_replace($imageFile->getClientOriginalName(),$postData['creative_Work'],$imageFile->getClientOriginalName());
                                                 // $imageName      = $imageFile->getClientOriginalName();                                 
                                             $uploadedFile   = $this->upload_single_file("image_file_{$i}", $imageName, 'narrative', 'image');                                
                                             if ($uploadedFile['status']) {
