@@ -344,7 +344,11 @@ class NewsContentController extends Controller
                     'short_desc'                => $postData['short_desc'] ?? '', 
                 ];
                     //  dd($fields);                  
-                    NewsContent::where($this->data['primary_key'], '=', $id)->update($fields);                   
+                    NewsContent::where($this->data['primary_key'], '=', $id)->update($fields);   
+                    $fieldsArticle = [                         
+                        'is_published'             => 4                                                         
+                        ];
+                    Article::where('article_no', '=', $postData['creative_work_SRN'])->update($fieldsArticle);
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');                
             } else {
                 return redirect()->back()->with('error_message', 'All Fields Required !!!');
