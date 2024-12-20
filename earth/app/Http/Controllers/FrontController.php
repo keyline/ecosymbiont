@@ -971,7 +971,7 @@ class FrontController extends Controller
                                    $imageFile      = $request->file("image_file_{$i}");                            
                                    if ($imageFile != '') {                                
                                         //    $imageName      = $imageFile->getClientOriginalName();        
-                                           $imageName      = str_replace($imageFile->getClientOriginalName(),$postData['creative_Work'],$imageFile->getClientOriginalName());                         
+                                           echo $imageName      = str_replace($imageFile->getClientOriginalName(),$postData['creative_Work'],$imageFile->getClientOriginalName()); die;
                                        $uploadedFile   = $this->upload_single_file("image_file_{$i}", $imageName, 'narrative', 'image');                                
                                        if ($uploadedFile['status']) {
                                            $narrativeimageFile[] = $uploadedFile['newFilename'];                                
