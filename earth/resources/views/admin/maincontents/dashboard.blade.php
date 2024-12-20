@@ -106,14 +106,14 @@
                 <h2 class="card-title text-inherit"><?=$nelp_generated?></h2>
               </div>
             </div>
-             End Row -->
-            <!-- <span class="badge bg-soft-success text-success">
+             End Row 
+             <span class="badge bg-soft-success text-success">
               <i class="bi-graph-up"></i> 1.7%
             </span>
-            <span class="text-body fs-6 ms-1">from 29.1%</span> -->
+            <span class="text-body fs-6 ms-1">from 29.1%</span> 
           </div>
         </a>
-        <!-- End Card
+         End Card
       </div> -->
       <!-- <div class="col-sm-12 col-lg-4 mb-3 mb-lg-5">
          Card 
@@ -129,10 +129,10 @@
             <!-- <span class="badge bg-soft-success text-success">
               <i class="bi-graph-up"></i> 1.7%
             </span>
-            <span class="text-body fs-6 ms-1">from 29.1%</span> -->
+            <span class="text-body fs-6 ms-1">from 29.1%</span> 
           </div>
         </a>
-        <!-- End Card 
+         End Card 
       </div> -->
       <div class="col-sm-12 col-lg-4 mb-3 mb-lg-5">
         <!-- Card -->
