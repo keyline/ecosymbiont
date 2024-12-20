@@ -63,7 +63,7 @@ $controllerRoute = $module['controller_route'];
                     <td>
                       <a href="<?=url('admin/news_content_image/edit_image/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit News Content Image"><i class="fa fa-edit"></i></a>
                       <!-- <a href="<?=url('admin/news_content_image/delete_image/'.Helper::encoded($row->id))?>" class="btn btn-outline-danger btn-sm" title="Delete News Content Image" onclick="return confirm('Do You Want To Delete This News Content Image');"><i class="fa fa-trash"></i></a>                       -->
-                      <a href="<?=env('UPLOADS_URL').'newcontent/'.$row->image_file?>" download="<?=$row->image_title?>" class="btn btn-outline-success btn-sm"><i class="fa fa-download"></i></a>
+                      <a href="<?=env('UPLOADS_URL').'newcontent/'.$row->image_file?>" download="<?=$row->image_file?>" class="btn btn-outline-success btn-sm"><i class="fa fa-download"></i></a>
                     </td>
                   </tr>
                 <?php } } else {?>
