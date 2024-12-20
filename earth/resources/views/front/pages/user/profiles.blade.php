@@ -48,8 +48,8 @@ use Illuminate\Support\Facades\DB;
                                 <tbody>
                                     <?php if($profiles){ $sl=1; foreach($profiles as $profile){?>
                                         <tr>
-                                            <td><?=$sl++?></td>
-                                            <td><a href="<?=url('user/update-profile/' . Helper::encoded($profile->id))?>" class="label label-primary"><i class="fa fa-edit"></i></a><?=$profile->first_name?> <br><?=$profile->email?> <br> <?=$profile->author_classification?></td>                                            
+                                            <td><?=$sl++?><a href="<?=url('user/update-profile/' . Helper::encoded($profile->id))?>" class="label label-primary"><i class="fa fa-edit"></i></a></td>
+                                            <td><?=$profile->first_name?> <br><?=$profile->email?> <br> <?=$profile->author_classification?></td>                                            
                                             <td>
                                             <?php                                        
                                             $getCountry = DB::table('countries')->where('id', '=', $profile->country)->first();    
