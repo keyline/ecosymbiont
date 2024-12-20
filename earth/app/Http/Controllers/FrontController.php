@@ -588,7 +588,8 @@ class FrontController extends Controller
             $user_id                        = session('user_id');
             $data['user']                   = User::find($user_id);
             $data['approved_articles']      = Article::where('is_published', '=', 4)->where('user_id', '=', $user_id)->count();
-            $data['pending_articles']       = Article::where('is_published', '=', 0)->orWhere('is_published', '=', 1)->where('user_id', '=', $user_id)->count();
+            // $data['pending_articles']       = Article::where('is_published', '=', 0)->orWhere('is_published', '=', 1)->where('user_id', '=', $user_id)->count();
+            $data['pending_articles']       = Article::whereIn('is_published', [0, 1])->where('user_id', '=', $user_id)->count();
 
             $data['search_keyword']         = '';
             $title                          = 'Dashboard';
