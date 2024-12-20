@@ -830,7 +830,7 @@ class FrontController extends Controller
                                 'fullName'                  => $fullName,
                                 'email'                     => $postData['email'],
                                 'article_no'                => $article_no,
-                                'for_publication_name'      => $postData['for_publication_name'],
+                                'creative_Work'      => $postData['creative_Work'],
                             ];
                             $subject                    = $generalSetting->site_name.': Creative-Work submitted by ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                             $message                    = view('email-templates.creative-work-submission',$mailData);
@@ -891,7 +891,7 @@ class FrontController extends Controller
                                 'fullName'                  => $fullName,
                                 'email'                     => $postData['email'],
                                 'article_no'                => $article_no,
-                                'for_publication_name'      => $postData['for_publication_name'],
+                                'creative_Work'      => $postData['creative_Work'],
                             ];
                             $subject                    = $generalSetting->site_name.': Creative-Work submitted by ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                             $message                    = view('email-templates.creative-work-submission',$mailData);
@@ -1057,7 +1057,7 @@ class FrontController extends Controller
                                     'fullName'                  => $fullName,
                                     'email'                     => $postData['email'],
                                     'article_no'                => $article_no,
-                                    'for_publication_name'      => $postData['for_publication_name'],
+                                    'creative_Work'      => $postData['creative_Work'],
                                 ];
                                 $subject                    = $generalSetting->site_name.': Creative-Work submitted by ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                                 $message                    = view('email-templates.creative-work-submission',$mailData);
@@ -1165,7 +1165,7 @@ class FrontController extends Controller
                                     'fullName'                  => $fullName,
                                     'email'                     => $postData['email'],
                                     'article_no'                => $article_no,
-                                    'for_publication_name'      => $postData['for_publication_name'],
+                                    'creative_Work'      => $postData['creative_Work'],
                                 ];
                                 $subject                    = $generalSetting->site_name.': Creative-Work submitted by ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                                 $message                    = view('email-templates.creative-work-submission',$mailData);
@@ -1256,7 +1256,7 @@ class FrontController extends Controller
                                     'fullName'                  => $fullName,
                                     'email'                     => $postData['email'],
                                     'article_no'                => $article_no,
-                                    'for_publication_name'      => $postData['for_publication_name'],
+                                    'creative_Work'      => $postData['creative_Work'],
                                 ];
                                 $subject                    = $generalSetting->site_name.': Creative-Work submitted by ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                                 $message                    = view('email-templates.creative-work-submission',$mailData);
@@ -1432,7 +1432,7 @@ class FrontController extends Controller
                                         'fullName'                  => $fullName,
                                         'email'                     => $postData['email'],
                                         'article_no'                => $article_no,
-                                        'for_publication_name'      => $postData['for_publication_name'],
+                                        'creative_Work'      => $postData['creative_Work'],
                                     ];
                                     $subject                    = $generalSetting->site_name.': Creative-Work submitted by ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                                     $message                    = view('email-templates.creative-work-submission',$mailData);
@@ -1547,7 +1547,7 @@ class FrontController extends Controller
                                         'fullName'                  => $fullName,
                                         'email'                     => $postData['email'],
                                         'article_no'                => $article_no,
-                                        'for_publication_name'      => $postData['for_publication_name'],
+                                        'creative_Work'      => $postData['creative_Work'],
                                     ];
                                     $subject                    = $generalSetting->site_name.': Creative-Work submitted by ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                                     $message                    = view('email-templates.creative-work-submission',$mailData);
@@ -1644,7 +1644,7 @@ class FrontController extends Controller
                                         'fullName'                  => $fullName,
                                         'email'                     => $postData['email'],
                                         'article_no'                => $article_no,
-                                        'for_publication_name'      => $postData['for_publication_name'],
+                                        'creative_Work'             => $postData['creative_Work'],
                                     ];
                                     $subject                    = $generalSetting->site_name.': Creative-Work submitted by ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                                     $message                    = view('email-templates.creative-work-submission',$mailData);
