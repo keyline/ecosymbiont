@@ -82,10 +82,10 @@
                 $bio_long = '';                                        
             }
             ?>
+             @if ($errors->any())
             <div class="col-xl-12">
                 <div class="card">
-                    <div class="card-body pt-3">
-                        @if ($errors->any())
+                    <div class="card-body pt-3">                       
                         <div class="alert alert-danger">
                             <ul>
                                 @foreach ($errors->all() as $error)
@@ -93,10 +93,11 @@
                                 @endforeach
                             </ul>
                         </div>
-                        @endif
+                        
                     </div>
                 </div>
             </div>
+            @endif
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
