@@ -186,7 +186,7 @@ use Illuminate\Support\Facades\DB;
                                 </div>
                             </div> 
                             <div class="row mb-3">
-                                <label for="co_authors" class="col-md-2 col-lg-4 col-form-label">3) How many co-authors do you have?
+                                <label for="co_authors" class="col-md-2 col-lg-4 col-form-label blue-text">3) How many co-authors do you have?
                                 </label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="radio" id="co_authors_0" name="co_authors" value="0" required @checked(old('co_authors', $co_authors ?? '') == '0')>
@@ -354,7 +354,7 @@ use Illuminate\Support\Facades\DB;
                                 </div>
                             </div> 
                             <div class="row mb-3">
-                                <label for="orginal_work" class="col-md-2 col-lg-4 col-form-label">8) Are all components of this Creative-Work your original work?
+                                <label for="orginal_work" class="col-md-2 col-lg-4 col-form-label blue-text">8) Are all components of this Creative-Work your original work?
                                 </label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="radio" id="yes" name="orginal_work" value="Yes" required @checked(old('orginal_work', $orginal_work ?? '') == 'Yes') onclick="hideModal()">
@@ -364,7 +364,7 @@ use Illuminate\Support\Facades\DB;
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="copyright" class="col-md-2 col-lg-4 col-form-label">9) Do you own the copyright and licensing rights to all components of your Creative-Work?
+                                <label for="copyright" class="col-md-2 col-lg-4 col-form-label blue-text">9) Do you own the copyright and licensing rights to all components of your Creative-Work?
                                 </label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="radio" id="yes" name="copyright" value="Yes" required @checked(old('copyright', $copyright ?? '') == 'Yes') onclick="hideModal()">
@@ -451,7 +451,7 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
-                                    <label for="section_ert" class="col-md-2 col-lg-4 col-form-label">14) For which CATEGORY and sub-category of ERT would you like your Creative-Work to be considered?
+                                    <label for="section_ert" class="col-md-2 col-lg-4 col-form-label blue-text">14) For which CATEGORY and sub-category of ERT would you like your Creative-Work to be considered?
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                     @if ($news_category)
@@ -472,7 +472,7 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>     
                                 <div class="row mb-3">
-                                    <label for="creative_Work" class="col-md-2 col-lg-4 col-form-label">15) Title of your Creative-Work (max. 10 words)
+                                    <label for="creative_Work" class="col-md-2 col-lg-4 col-form-label blue-text">15) Title of your Creative-Work (max. 10 words)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="creative_Work" name="creative_Work" rows="4" cols="50" placeholder="Your creative_Work here..." required>{{ old('creative_Work', $creative_Work ?? '') }}</textarea>
@@ -480,7 +480,7 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>                                            
                                 <div class="row mb-3">
-                                    <label for="subtitle" class="col-md-2 col-lg-4 col-form-label">16) Subtitle - brief engaging summary of your Creative-Work (max. 40 words)
+                                    <label for="subtitle" class="col-md-2 col-lg-4 col-form-label blue-text">16) Subtitle - brief engaging summary of your Creative-Work (max. 40 words)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <textarea name="subtitle" class="form-control" id="subtitle" rows="3">{{ old('subtitle', $subtitle ?? '') }}</textarea>
@@ -488,7 +488,7 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="submission_types" class="col-md-2 col-lg-4 col-form-label">17) Select the type of your Creative-Work
+                                    <label for="submission_types" class="col-md-2 col-lg-4 col-form-label blue-text">17) Select the type of your Creative-Work
                                     </label>
                                     <div class="col-md-10 col-lg-8">                                
                                     @if ($submission_type)
@@ -786,17 +786,17 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label">28) Instructions for initial submission of Creative-Work for eligibility screening:
+                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">28) Instructions for initial submission of Creative-Work for eligibility screening:
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <p>Once you have completed this form and uploaded all required files, click on the "Submit" button below. If you meet the eligibility criteria, you will receive an Eligibility E-mail with a Submission Reference Number ("SRN").</p>                                        
                                     </div>
-                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label">29) Instructions for final submission of Creative-Work for consideration of publication:
+                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">29) Instructions for final submission of Creative-Work for consideration of publication:
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <p>If your Creative-Work is accepted for publication (most likely, upon editorial revision), the editor(s) will e-mail you a Non-Exclusive License to Publish ("NELP"). Your Creative-Work will not be published until you e-mail back a completed and signed digital copy of the NELP.</p>                                                                        
                                     </div>
-                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label">30) If you are submitting a video: 
+                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">30) If you are submitting a video: 
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <p>Please note that it may take several minutes for your video to upload. Please do not click on the “Submit” button more than once and do not navigate away from this page, until you are re-directed to a page that tells you: “Creative-Work submitted successfully!”</p>      
