@@ -971,10 +971,12 @@ class FrontController extends Controller
                                    $imageFile      = $request->file("image_file_{$i}");                            
                                    if ($imageFile != '') {                                
                                           $old_imageName      = $imageFile->getClientOriginalName();
-                                           $imageName      = str_replace($imageFile->getClientOriginalName(),$article_no,$imageFile->getClientOriginalName());
+                                           $imageName      = $article_no;
                                           // Get file extension
                                             $fileExtension = pathinfo($old_imageName, PATHINFO_EXTENSION);
-                                           echo $newFileName = $imageName . '.' . $fileExtension;die;
+                                        // Append the desired suffix ('a', 'b', 'c', etc.) based on $i
+                                        $suffix = chr(96 + $i); // Convert $i to a letter: 1 = 'a', 2 = 'b', 3 = 'c', etc.
+                                           echo $newFileName = $imageName . '-' . $suffix . '.' . $fileExtension;die;
                                         
                                        $uploadedFile   = $this->upload_single_file("image_file_{$i}", $newFileName, 'narrative', 'image');                                
                                        if ($uploadedFile['status']) {
