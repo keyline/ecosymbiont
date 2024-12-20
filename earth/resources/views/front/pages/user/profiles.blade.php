@@ -42,14 +42,14 @@ use Illuminate\Support\Facades\DB;
                                         <th>Short Bio</th>
                                         <th>Long Bio</th>
                                         <th>Created at</th>                                    
-                                        <th>Action</th>
+                                        <!-- <th>Action</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php if($profiles){ $sl=1; foreach($profiles as $profile){?>
                                         <tr>
                                             <td><?=$sl++?></td>
-                                            <td><?=$profile->first_name?> <br><?=$profile->email?> <br> <?=$profile->author_classification?></td>                                            
+                                            <td><a href="<?=url('user/update-profile/' . Helper::encoded($profile->id))?>" class="label label-primary"><i class="fa fa-edit"></i></a><?=$profile->first_name?> <br><?=$profile->email?> <br> <?=$profile->author_classification?></td>                                            
                                             <td>
                                             <?php                                        
                                             $getCountry = DB::table('countries')->where('id', '=', $profile->country)->first();    
@@ -80,10 +80,10 @@ use Illuminate\Support\Facades\DB;
                                             <td><?=wordwrap($profile->bio_short,75,"<br>\n") ?></td>
                                             <td><?=wordwrap($profile->bio_long,75,"<br>\n") ?></td>
                                             <td><?=date('M d Y h:i A', strtotime($profile->created_at))?></td>                                        
-                                            <td>
+                                            <!-- <td>
                                                 <a href="<?=url('user/update-profile/' . Helper::encoded($profile->id))?>" class="label label-primary">Edit</a>
-                                                <!-- <a href="<?=url('user/article-list/' . Helper::encoded($profile->id))?>" class="label label-primary">View Article List</a> -->
-                                            </td>
+                                                <a href="<?=url('user/article-list/' . Helper::encoded($profile->id))?>" class="label label-primary">View Article List</a> 
+                                            </td> -->
                                         </tr>
                                     <?php } }?>
                                 </tbody>
