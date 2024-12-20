@@ -973,7 +973,7 @@ class FrontController extends Controller
                                         //   echo  $imageName      = $imageFile->getClientOriginalName();        die;
                                            echo $imageName      = str_replace($imageFile->getClientOriginalName(),$article_no,$imageFile->getClientOriginalName());
                                           // Get file extension
-                                            $fileExtension = pathinfo($$imageName, PATHINFO_EXTENSION);
+                                            $fileExtension = pathinfo($imageName, PATHINFO_EXTENSION);
                                            echo $newFileName = $imageName . '.' . $fileExtension;die;
                                         
                                        $uploadedFile   = $this->upload_single_file("image_file_{$i}", $newFileName, 'narrative', 'image');                                
