@@ -302,7 +302,7 @@ $controllerRoute = $module['controller_route'];
                       <?php if($narrative_file != ''){?>
                         <a href="<?= env('UPLOADS_URL') . 'narrative/' . $narrative_file ?>" target="_blank"
                             class="badge bg-primary">View File</a>
-                        <?php }?>                      
+                        <?php echo $narrative_file;  }?>                      
                       </td>
                     </tr>
                     <tr>
@@ -315,7 +315,7 @@ $controllerRoute = $module['controller_route'];
                       <td>
                       <?php if($image_files[$i-1] != ''){?>
                         <img src="<?=env('UPLOADS_URL').'narrative/'.$image_files[$i-1]?>" alt="first_image_file" style="width: 150px; height: 150px; margin-top: 10px;">
-                        <?php } else {?>
+                        <?php echo $image_files[$i-1] } else {?>
                         <img src="<?=env('NO_IMAGE')?>" alt="first_image_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
                         <?php }?>
                       </td>
@@ -335,7 +335,7 @@ $controllerRoute = $module['controller_route'];
                       <td>
                       <?php if($art_image_file[$i-1] != ''){?>
                         <img src="<?=env('UPLOADS_URL').'art_image/'.$art_image_file[$i-1]?>" alt="first_image_file" style="width: 150px; height: 150px; margin-top: 10px;">
-                        <?php } else {?>
+                        <?php echo $art_image_file[$i-1]; } else {?>
                         <img src="<?=env('NO_IMAGE')?>" alt="first_image_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
                         <?php }?>
                       </td>
@@ -356,8 +356,8 @@ $controllerRoute = $module['controller_route'];
                           <video width="350" height="250" controls>
                               <source src="<?=env('UPLOADS_URL').'art_video/'.$art_video_file?>" type="video/mp4">
                               Your browser does not support the video tag.
-                          </video>                      
-                      <?php }?>                      
+                          </video>                                                
+                      <?php echo $art_video_file; }?>                      
                       </td>
                     </tr>
                     <tr>
