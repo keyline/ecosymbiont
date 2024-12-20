@@ -991,8 +991,12 @@ class FrontController extends Controller
                            /* narrative doc file */
                                $imageFile      = $request->file('narrative_file');
                                if ($imageFile != '') {
-                                   $imageName      = $imageFile->getClientOriginalName();
-                                   $uploadedFile   = $this->upload_single_file('narrative_file', $imageName, 'narrative', 'word');
+                                $old_imageName      = $imageFile->getClientOriginalName();
+                                $imageName      = $article_no;
+                               // Get file extension
+                                 $fileExtension = pathinfo($old_imageName, PATHINFO_EXTENSION);                                 
+                                $newFileName = $imageName . '.' . $fileExtension;
+                                   $uploadedFile   = $this->upload_single_file('narrative_file', $newFileName, 'narrative', 'word');
                                    if ($uploadedFile['status']) {
                                        $narrative_file = $uploadedFile['newFilename'];
                                    } else {
@@ -1243,7 +1247,7 @@ class FrontController extends Controller
                                    'bio_short'               => $postData['bio_short'],
                                    'bio_long'               => $postData['bio_long'],  
                                ];
-                                   Helper::pr($fields);
+                                //    Helper::pr($fields);
 
                                /* submission email */
                                 $generalSetting             = GeneralSetting::find('1');                            
@@ -1330,9 +1334,14 @@ class FrontController extends Controller
                                     // Add image file to the array (it can be null if no file is uploaded)                        
                                         $imageFile      = $request->file("image_file_{$i}");                            
                                         if ($imageFile != '') {       
-                                              $imageName      = str_replace($imageFile->getClientOriginalName(),$postData['creative_Work'],$imageFile->getClientOriginalName());
-                                                // $imageName      = $imageFile->getClientOriginalName();                                 
-                                            $uploadedFile   = $this->upload_single_file("image_file_{$i}", $imageName, 'narrative', 'image');                                
+                                            $old_imageName      = $imageFile->getClientOriginalName();
+                                            $imageName      = $article_no;
+                                           // Get file extension
+                                             $fileExtension = pathinfo($old_imageName, PATHINFO_EXTENSION);
+                                             // Append the desired suffix ('a', 'b', 'c', etc.) based on $i
+                                             $suffix = chr(96 + $i); // Convert $i to a letter: 1 = 'a', 2 = 'b', 3 = 'c', etc.
+                                            $newFileName = $imageName . '-' . $suffix . '.' . $fileExtension;
+                                            $uploadedFile   = $this->upload_single_file("image_file_{$i}", $newFileName, 'narrative', 'image');                                
                                             if ($uploadedFile['status']) {
                                                 $narrativeimageFile[] = $uploadedFile['newFilename'];                                
                                             } else {
@@ -1347,8 +1356,13 @@ class FrontController extends Controller
                                 /* narrative doc file */
                                     $imageFile      = $request->file('narrative_file');
                                     if ($imageFile != '') {
-                                        $imageName      = $imageFile->getClientOriginalName();
-                                        $uploadedFile   = $this->upload_single_file('narrative_file', $imageName, 'narrative', 'word');
+                                        // $imageName      = $imageFile->getClientOriginalName();
+                                        $old_imageName      = $imageFile->getClientOriginalName();
+                                           $imageName      = $article_no;
+                                          // Get file extension
+                                            $fileExtension = pathinfo($old_imageName, PATHINFO_EXTENSION);                                            
+                                           $newFileName = $imageName . '.' . $fileExtension;
+                                        $uploadedFile   = $this->upload_single_file('narrative_file', $newFileName, 'narrative', 'word');
                                         if ($uploadedFile['status']) {
                                             $narrative_file = $uploadedFile['newFilename'];
                                         } else {
@@ -1409,7 +1423,7 @@ class FrontController extends Controller
                                         'bio_short'                 => $postData['bio_short'],
                                         'bio_long'                  => $postData['bio_long'],  
                                     ];
-                                    //   Helper::pr($fields);
+                                       Helper::pr($fields);
 
                                     /* submission email */
                                     $generalSetting             = GeneralSetting::find('1');                            
