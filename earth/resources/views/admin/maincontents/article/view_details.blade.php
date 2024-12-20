@@ -315,7 +315,7 @@ $controllerRoute = $module['controller_route'];
                       <td>
                       <?php if($image_files[$i-1] != ''){?>
                         <img src="<?=env('UPLOADS_URL').'narrative/'.$image_files[$i-1]?>" alt="first_image_file" style="width: 150px; height: 150px; margin-top: 10px;">
-                        <?php echo $image_files[$i-1] } else {?>
+                        <?php echo $image_files[$i-1]; } else {?>
                         <img src="<?=env('NO_IMAGE')?>" alt="first_image_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
                         <?php }?>
                       </td>
