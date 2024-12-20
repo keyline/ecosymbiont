@@ -61,7 +61,7 @@ if (!empty($parameters)) {
                         <div id="navbarVerticalMenuNews" class="nav-collapse collapse <?=(($pageSegment == 'news_category' || $pageSegment == 'news_content' || $pageSegment == 'news_subcategory' || $pageSegment == 'news_content_image')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">
                           <a class="nav-link <?=(($pageSegment == 'news_category')?'active':'')?>" href="<?=url('admin/news_category/list')?>">Parent Categories</a>
                           <a class="nav-link <?=(($pageSegment == 'news_subcategory')?'active':'')?>" href="<?=url('admin/news_subcategory/list')?>">Sub-Categories</a>
-                          <a class="nav-link <?=(($pageSegment == 'news_content')?'active':'')?>" href="<?=url('admin/news_content/list')?>">Contents</a>
+                          <a class="nav-link <?=(($pageSegment == 'news_content')?'active':'')?>" href="<?=url('admin/news_content/list')?>">Content</a>
                           <a class="nav-link <?=(($pageSegment == 'news_content_image')?'active':'')?>" href="<?=url('admin/news_content_image/list')?>">Media</a>
                         </div>
                     </div>                    

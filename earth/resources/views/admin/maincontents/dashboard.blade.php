@@ -157,7 +157,7 @@
         <!-- Card -->
         <a class="card card-hover-shadow h-100" href="<?=url('admin/news_content/list')?>">
           <div class="card-body">
-            <h6 class="card-subtitle">News Contents</h6>
+            <h6 class="card-subtitle">News Content</h6>
             <div class="row align-items-center gx-2 mb-1">
               <div class="col-6">
                 <h2 class="card-title text-inherit"><?=$news_content?></h2>
