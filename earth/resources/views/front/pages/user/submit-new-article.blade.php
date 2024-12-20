@@ -167,7 +167,7 @@ use Illuminate\Support\Facades\DB;
                         <h3 class="heading">Form: Creative-work</h3>
                     </div>
                     <div class="card-body">
-                        <p style="color: #d81636; font-weight:500;font-size: 14px;margin-bottom: 25px;"><em>**Instructions: Please make sure you have completed your Profile (click on Profile tab on the left to go there, if you haven't) before filling out this form. All questions in BLUE must be answered. Please note that you will have to enter all information in one sitting, as there is no save option while you work. Unless you click the "Submit" button, your information will not be entered into the system. We apologize for any inconvenience. Thank you for your contribution.</em></p>
+                        <p style="color: #d81636; font-weight:500;font-size: 14px;margin-bottom: 25px;"><em>**Instructions: <b>Please make sure you have completed your Profile (click on Profile tab on the left to go there, if you haven't) before filling out this form.</b> All questions in BLUE must be answered. Please note that you will have to enter all information in one sitting, as there is no save option while you work. Unless you click the "Submit" button, your information will not be entered into the system. We apologize for any inconvenience. Thank you for your contribution.</em></p>
                         <form method="POST" id="saveForm" action="" enctype="multipart/form-data" oninput="validateForm()">
                         <!-- <input type="hidden" name="form_action" id="formAction"> -->
                             @csrf
