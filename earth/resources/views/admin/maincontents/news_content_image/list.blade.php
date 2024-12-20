@@ -49,7 +49,7 @@ $controllerRoute = $module['controller_route'];
                     <th scope="row"><?=$sl++?></th>                      
                     <td>
                       <?php if($row->image_file != ''){?>
-                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$row->image_file?>" class="img-thumbnail" id="imageToCopy<?=$row->id?>" alt="<?=$row->image_title?>" style="width: 150px; height: 150px; margin-top: 10px;">
+                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$row->image_file?>" class="img-thumbnail" id="imageToCopy<?=$row->id?>" alt="<?=$row->image_title?>" style="width: 150px; height: 150px; margin-top: 10px;"><br><?=$row->image_file?>
                       <?php } else {?>
                         <img src="<?=env('NO_IMAGE')?>" alt="" class="img-thumbnail"  style="width: 150px; height: 150px; margin-top: 10px;">
                       <?php }?>
