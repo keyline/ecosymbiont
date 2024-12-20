@@ -209,8 +209,7 @@ use Illuminate\Support\Facades\DB;
                                         <input type="radio" id="" name="co_authors_position" value="Third position" @checked(old('co_authors_position', $co_authors_position ?? '') == 'Third position')>
                                         <label for="Third position">Third position</label>
                                     </div>
-                                </div>
-                                <div id="co_authors_position_error" class="error" style="color: red;"></div>
+                                </div>                                
                                 <div id="artimageFieldsContainer">
                                     @for ($i = 1; $i <= 2; $i++)
                                     <div class="card mb-3" id="author_card_{{$i}}" style="padding: 11px;border: 1px solid black; display:none;">
