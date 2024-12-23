@@ -90,6 +90,7 @@ include "include/header.php";
                                         <option value="I am interested in funding the work of ER and/or ERT">I am interested in funding the work of ER and/or ERT</option>
                                         <option value="I am interested in learning more about the work of ER and/or ERT">I am interested in learning more about the work of ER and/or ERT</option>
                                         <option value="I am interested in submitting Creative-Work to ERT">I am interested in submitting Creative-Work to ERT</option>
+                                        <option value="I'm having technical problems with EaRTh">I'm having technical problems with EaRTh</option>
                                     </select>
                                 </div>
                             <div class="form-group">
