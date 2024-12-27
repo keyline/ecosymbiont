@@ -1691,6 +1691,10 @@ class FrontController extends Controller
             $data['user']                   = User::find($user_id);
             $data['classification']         = UserClassification::where('user_id', '=', $user_id)->where('status', '=', 1)->orderBy('id', 'DESC')->get();
             $data['search_keyword']         = '';
+            $checkClassification            = UserClassification::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
+            if($checkClassification == 0){
+                return redirect(url('user/add-author-classification'))->with(['error_message' => 'Please Add Classification First !!!']);
+            }
             
             $title                          = 'Classification';
             $page_name                      = 'author-classification';
@@ -1760,14 +1764,19 @@ class FrontController extends Controller
         }
         public function profiles(Request $request)
         {
-            DB::enableQueryLog();
-            $user_id                        = session('user_id');
-            // Helper::pr($user_id);
-            $data['user']                   = User::find($user_id);
-            // $data['profiles']               = UserProfile::where('user_id', '=', $user_id)->where('status', '=', 1)->orderBy('id', 'DESC')->get();
+            // DB::enableQueryLog();
+            $user_id                        = session('user_id');            
+            $data['user']                   = User::find($user_id);            
             $data['profiles']                = UserProfile::where('user_id', '=', $user_id)->where('status', '=', 1)->orderBy('id', 'DESC')->get();
-            // dd(DB::getQueryLog());
-            //  dd($data['profiles']);
+            // dd(DB::getQueryLog());   
+            $checkClassification            = UserClassification::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
+            if($checkClassification == 0){
+                return redirect(url('user/add-author-classification'))->with(['error_message' => 'Please Add Classification First !!!']);
+            }
+            $checkProfile                   = UserProfile::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();         
+            if($checkProfile == 0){
+                return redirect(url('user/add-profile'))->with(['error_message' => 'Please Add Profile First !!!']);
+            }
             $data['search_keyword']         = '';
             
             $title                          = 'Profiles';
