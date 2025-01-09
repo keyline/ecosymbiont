@@ -794,17 +794,20 @@ use Illuminate\Support\Facades\DB;
                                     <div class="col-md-10 col-lg-8">
                                         <p>Once you have completed this form and uploaded all required files, click on the "Submit" button below. If you meet the eligibility criteria, you will receive an Eligibility E-mail with a Submission Reference Number ("SRN").</p>                                        
                                     </div>
-                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">29) Instructions for final submission of Creative-Work for consideration of publication:
+                                    <!-- <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">29) Instructions for final submission of Creative-Work for consideration of publication:
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <p>If your Creative-Work is accepted for publication (most likely, upon editorial revision), the editor(s) will e-mail you a Non-Exclusive License to Publish ("NELP"). Your Creative-Work will not be published until you e-mail back a completed and signed digital copy of the NELP.</p>                                                                        
-                                    </div>
+                                    </div> -->
                                     <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">30) If you are submitting a video: 
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <p>Please note that it may take several minutes for your video to upload. Please do not click on the “Submit” button more than once and do not navigate away from this page, until you are re-directed to a page that tells you: “Creative-Work submitted successfully!”</p>      
+                                        <p>Please note that it may take several minutes for your video to upload. Please do not click on the “Submit” button more than once and do not navigate away from this page, until you are re-directed to a page that tells you: “Creative-Work submitted successfully!”</p>
+                                        <p><b>Instructions for final submission of Creative-Work for consideration of publication:</b></p>
+                                        <p>If your Creative-Work is accepted for publication (most likely, upon editorial revision), the editor(s) will e-mail you a Non-Exclusive License to Publish ("NELP"). Your Creative-Work will not be published until you e-mail back a completed and signed digital copy of the NELP.</p>
                                         <input type="checkbox" id="acknowledge" name="acknowledge" value="1" required>
-                                        <label for="acknowledge">I understand</label>                                  
+                                        <!-- <label for="acknowledge">I understand</label> -->                                         
+                                        <label for="acknowledge">I have thoroughly read and understood the Terms and Conditions and hereby accept and agree to abide by them.</label>
                                     </div>
                                 </div>                                
                             </div>                  
