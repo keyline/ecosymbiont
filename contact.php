@@ -18,7 +18,7 @@ include "include/header.php";
                     
 
                     <div class="info-box"> 
-                        <p>If you are interested in funding or learning more about the work of Ecosymbionts Regenerate (ER) and/or Ecosymbionts Regenerate Together (ERT) or if you would like to submit Creative-Work, please contact us.</p>
+                        <p>If you are interested in funding or learning more about the work of Ecosymbionts Regenerate (ER) and/or Ecosymbionts all Regenerate Together (EaRTh) or if you would like to submit Creative-Work, please contact us.</p>
                     </div>
 
                     <div class="info-contact_form">
@@ -55,9 +55,9 @@ include "include/header.php";
                                 <div class="form-group col-6">
                                     <label class="form-check-label" for="exampleCheck1">Subject*</label>
                                     <select class="form-control" name="field1" id="field1" multiple onchange="console.log(Array.from(this.selectedOptions).map(x=>x.value??x.text))" multiselect-hide-x="true">
-                                        <option value="1">I am interested in fuding the work of ER and/or ERT</option>
-                                        <option value="2">I am interested in learning more about the work of ER and/or ERT</option>
-                                        <option value="3">I am interested in submitting Creative-Work to ERT</option>
+                                        <option value="1">I am interested in fuding the work of ER and/or EaRTh</option>
+                                        <option value="2">I am interested in learning more about the work of ER and/or EaRTh</option>
+                                        <option value="3">I am interested in submitting Creative-Work to EaRTh</option>
                                     </select> 
                                 </div>
                             </div>
@@ -87,9 +87,9 @@ include "include/header.php";
                             <div class="form-group ">
                                     <label for="subject">Subject*</label>
                                     <select class="form-control" name="subject[]" id="subject" multiple onchange="console.log(Array.from(this.selectedOptions).map(x=>x.value??x.text))" multiselect-hide-x="true" required>
-                                        <option value="I am interested in funding the work of ER and/or ERT">I am interested in funding the work of ER and/or ERT</option>
-                                        <option value="I am interested in learning more about the work of ER and/or ERT">I am interested in learning more about the work of ER and/or ERT</option>
-                                        <option value="I am interested in submitting Creative-Work to ERT">I am interested in submitting Creative-Work to ERT</option>
+                                        <option value="I am interested in funding the work of ER and/or EaRTh">I am interested in funding the work of ER and/or EaRTh</option>
+                                        <option value="I am interested in learning more about the work of ER and/or EaRTh">I am interested in learning more about the work of ER and/or EaRTh</option>
+                                        <option value="I am interested in submitting Creative-Work to EaRTh">I am interested in submitting Creative-Work to EaRTh</option>
                                         <option value="I'm having technical problems with EaRTh">I'm having technical problems with EaRTh</option>
                                     </select>
                                 </div>
