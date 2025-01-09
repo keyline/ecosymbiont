@@ -799,7 +799,7 @@ use Illuminate\Support\Facades\DB;
                                     <div class="col-md-10 col-lg-8">
                                         <p>If your Creative-Work is accepted for publication (most likely, upon editorial revision), the editor(s) will e-mail you a Non-Exclusive License to Publish ("NELP"). Your Creative-Work will not be published until you e-mail back a completed and signed digital copy of the NELP.</p>                                                                        
                                     </div> -->
-                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">30) If you are submitting a video: 
+                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">29) If you are submitting a video: 
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <p>Please note that it may take several minutes for your video to upload. Please do not click on the “Submit” button more than once and do not navigate away from this page, until you are re-directed to a page that tells you: “Creative-Work submitted successfully!”</p>
