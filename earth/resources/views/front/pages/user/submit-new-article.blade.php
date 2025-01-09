@@ -809,7 +809,7 @@ use Illuminate\Support\Facades\DB;
                                         </div>
                                         <input type="checkbox" id="acknowledge" name="acknowledge" value="1" required>
                                         <!-- <label for="acknowledge">I understand</label> -->                                         
-                                        <label for="acknowledge">I have thoroughly read and understood the Terms and Conditions and hereby accept and agree to abide by them.</label>
+                                        <label for="acknowledge">I have thoroughly read and understood the Terms and Conditions and hereby accept to abide by them.</label>
                                     </div>
                                 </div>                                
                             </div>                  
