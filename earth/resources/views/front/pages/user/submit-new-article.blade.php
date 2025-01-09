@@ -803,7 +803,7 @@ use Illuminate\Support\Facades\DB;
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <p>Please note that it may take several minutes for your video to upload. Please do not click on the “Submit” button more than once and do not navigate away from this page, until you are re-directed to a page that tells you: “Creative-Work submitted successfully!”</p>
-                                        <div class="border p-3">
+                                        <div style="border: 2px solid #686D72; padding: 4px; border-radius: 5px;">
                                             <p><b>Instructions for final submission of Creative-Work for consideration of publication:</b></p>
                                             <p>If your Creative-Work is accepted for publication (most likely, upon editorial revision), the editor(s) will e-mail you a Non-Exclusive License to Publish ("NELP"). Your Creative-Work will not be published until you e-mail back a completed and signed digital copy of the NELP.</p>
                                         </div>
