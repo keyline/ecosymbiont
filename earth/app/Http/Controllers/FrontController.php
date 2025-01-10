@@ -357,7 +357,7 @@ class FrontController extends Controller
         $requestData        = $request->all();
         
         $search_keyword     = $requestData['search_keyword'];
-        Helper::pr($search_keyword);
+        // Helper::pr($search_keyword);
         $searchResults      = NewsContent::select('id', 'new_title', 'slug', 'parent_category', 'sub_category')->where(function($query) {
                                                 $query->where('status', 1);
                                              })
@@ -365,6 +365,8 @@ class FrontController extends Controller
                                                 $query->where('new_title', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('sub_title', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('long_desc', 'LIKE', '%'.$search_keyword.'%')
+                                                      ->orWhere('author_name', 'LIKE', '%'.$search_keyword.'%')
+                                                      ->orWhere('organization_name', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('keywords', 'LIKE', '%'.$search_keyword.'%');
                                              })
                                              ->get();
