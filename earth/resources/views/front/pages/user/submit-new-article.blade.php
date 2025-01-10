@@ -868,8 +868,7 @@ use Illuminate\Support\Facades\DB;
                                         <p>i. <span style="width:10.21pt; text-indent:0pt; display:inline-block;">&nbsp;</span>All information that I have entered into this NELP is correct at the time of signature.</p>
                                         <p>ii. <span style="width:7.69pt; text-indent:0pt; display:inline-block;">&nbsp;</span><strong>EITHER</strong>, I am the sole author and owner of the copyright in the Contribution and I agree to the terms and conditions in this NELP.</p>
                                         <p>iii. <span style="width:5.16pt; text-indent:0pt; display:inline-block;">&nbsp;</span><strong>OR</strong>, the copyright in the Contribution is jointly owned by me and the Author(s) <em>mentioned in the submission form&nbsp;</em>and I agree to (and am authorized by each Author to agree to) the terms of this NELP on behalf of all Authors;</p>
-                                        <p>iv. <span style="width:5.24pt; text-indent:0pt; display:inline-block;">&nbsp;</span>AND, no other person nor entity has any copyright interest in the Contribution.</p>
-                                        <p style="bottom: 10px; right: 10px; position: absolute;"><a href="https://wordtohtml.net" target="_blank" style="font-size:11px; color: #d0d0d0;">Converted to HTML with WordToHTML.net</a></p>
+                                        <p>iv. <span style="width:5.24pt; text-indent:0pt; display:inline-block;">&nbsp;</span>AND, no other person nor entity has any copyright interest in the Contribution.</p>                                        
                                         </div>
                                         <!-- NELP form content -->
                                         <input type="checkbox" id="acknowledge" name="acknowledge" value="1" required>
