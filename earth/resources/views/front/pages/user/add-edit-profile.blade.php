@@ -109,28 +109,28 @@
                         <!-- <input type="hidden" name="form_action" id="formAction"> -->
                             @csrf
                             <div class="row mb-3">
-                                <label for="email" class="col-md-2 col-lg-4 col-form-label">Email address</label>
+                                <label for="email" class="col-md-2 col-lg-4 col-form-label">1) Email address</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="email" name="email" class="form-control" id="email"
                                         value="{{ old('email', $email) }}" required>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="author_classification" class="col-md-2 col-lg-4 col-form-label">Author Classification
+                                <label for="author_classification" class="col-md-2 col-lg-4 col-form-label">2) Author Classification
                                 </label>
                                 <div class="col-md-10 col-lg-8">                                                                      
                                     <input type="text" class="form-control" id="Ecoweb-rooted community" name="author_classification" value="{{ old('author_classification', $classification->name) }}" readonly>
                                 </div>
                             </div>                                                          
                             <div class="row mb-3">
-                                <label for="first_name" class="col-md-2 col-lg-4 col-form-label">Full Legal Name (exactly as it appears on your government-issued identification documents, e.g., passport and/or driver's license)</label>
+                                <label for="first_name" class="col-md-2 col-lg-4 col-form-label">3)Full Legal Name (exactly as it appears on your government-issued identification documents, e.g., passport and/or driver's license)</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" name="first_name" class="form-control" id="first_name"
                                         value="{{ old('first_name', $first_name) }}" required>
                                 </div>
                             </div>                                                 
                             <div class="row mb-3">
-                                <label for="for_publication_name" class="col-md-2 col-lg-4 col-form-label">Preferred name for publication (if different from full legal name)</label>
+                                <label for="for_publication_name" class="col-md-2 col-lg-4 col-form-label">4) Preferred name for publication (if different from full legal name)</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" name="for_publication_name" class="form-control" id="for_publication_name"
                                         value="{{ old('for_publication_name', $for_publication_name) }}">
@@ -151,7 +151,8 @@
                                 </div>
                             </div>   
                             <div class="row mb-3">
-                                <label for="pronoun" class="col-md-2 col-lg-4 col-form-label">Pronoun(s) (select all that apply)</label>
+                                <label for="pronoun" class="col-md-2 col-lg-4 col-form-label">5) Pronoun (note: if you use more than one pronoun, indicate this in question 19) 1-paragraph
+                                biography)</label>
                                 <div class="col-md-10 col-lg-8">                                                                
                                     @if ($pronoun)
                                         @foreach ($pronoun as $data)
@@ -164,7 +165,8 @@
                                 </div>
                             </div>                                                                                       
                             <div class="row mb-3">
-                                <label for="invited" class="col-md-2 col-lg-4 col-form-label">Were you invited to submit a Creative-Work to ERT?</label>
+                                <label for="invited" class="col-md-2 col-lg-4 col-form-label">6) Were you invited to submit a Creative-Work to EaRTh? (note: if you select “No” for question 7, you
+                                must select “Yes” for this question; otherwise, you will not be allowed to proceed and save a profile)</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="radio" id="invited_yes" name="invited" value="Yes" required @checked(old('invited', $invited) == 'Yes')>
                                     <label for="yes">Yes</label>
@@ -174,14 +176,15 @@
                             </div>  
                             <div id="invitedDetails" style="display: none;">
                                 <div class="row mb-3">
-                                    <label for="invited_by" class="col-md-2 col-lg-4 col-form-label">Full name of person who invited you to submit a Creative-Work to ERT</label>
+                                    <label for="invited_by" class="col-md-2 col-lg-4 col-form-label">6A) Full name of person who invited you to submit a Creative-Work to EaRTh (note: provide the name
+                                    of the specific person who invited you; if a specific person did not invite you, type in: Sramani Institute)</label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="invited_by" class="form-control" id="invited_by"
                                             value="{{ old('invited_by', $invited_by) }}">
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
-                                    <label for="invited_by_email" class="col-md-2 col-lg-4 col-form-label">Email address of person who invited you to submit a Creative-Work to ERT
+                                    <label for="invited_by_email" class="col-md-2 col-lg-4 col-form-label">6B) Email address of person who invited you to submit a Creative-Work to EaRTh (note: provide the email address of the specific person who invited you; if a specific person did not invite you, type in: media@ecosymbiont.org)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="invited_by_email" class="form-control" id="invited_by_email"
@@ -190,7 +193,7 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="participated" class="col-md-2 col-lg-4 col-form-label">Have you participated as a strategist at an in-person ER Synergy Meeting?
+                                <label for="participated" class="col-md-2 col-lg-4 col-form-label">7) Have you participated as a strategist at an in-person ER Synergy Meeting?
                                 </label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="radio" id="participated_yes" name="participated" value="Yes" required @checked(old('participated', $participated) == 'Yes')>
@@ -201,7 +204,7 @@
                             </div> 
                             <div id="participatedDetails" style="display: none;">
                                 <div class="row mb-3">
-                                    <label for="participated_info" class="col-md-2 col-lg-4 col-form-label">Provide date and location of most recent in-person ER Synergy Meeting in which you participated</label>
+                                    <label for="participated_info" class="col-md-2 col-lg-4 col-form-label">7A) Provide date and location of most recent in-person ER Synergy Meeting in which you participated</label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="participated_info" class="form-control" id="participated_info"
                                         value="{{ old('participated_info', $participated_info) }}">                                    
@@ -210,21 +213,21 @@
                             </div>
                             <div id="formDetails">
                                 <div class="row mb-3">
-                                    <label for="explanation" class="col-md-2 col-lg-4 col-form-label">Explain why you are a grassroots changemaker, innovator, and/or knowledge-holder (max. 100 words)</label>
+                                    <label for="explanation" class="col-md-2 col-lg-4 col-form-label">8) Explain why you are a grassroots changemaker, innovator, and/or knowledge-holder (max. 100 words)</label>
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="explanation" name="explanation" rows="4" cols="50" placeholder="Your explanation here..." required>{{ old('explanation', $explanation) }}</textarea>
                                         <div id="explanationError" class="error"></div>
                                     </div>
                                 </div>  
                                 <div class="row mb-3">
-                                    <label for="explanation_submission" class="col-md-2 col-lg-4 col-form-label">Explain why and how your Creative-Work relates to regenerating systems that restore, preserve, and foster the mutually beneficial interconnectivity and interdependence (symbiosis) of human communities within and to natural ecological webs (ecowebs) (max. 150 words)</label>
+                                    <label for="explanation_submission" class="col-md-2 col-lg-4 col-form-label">9) Explain why and how your Creative-Work relates to regenerating systems that restore, preserve, and foster the mutually beneficial interconnectivity and interdependence (symbiosis) of human communities within and to natural ecological webs (ecowebs) (max. 150 words)</label>
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="explanation_submission" name="explanation_submission" rows="4" cols="50" placeholder="Your explanation here..." required>{{ old('explanation_submission', $explanation_submission) }}</textarea>
                                         <div id="explanation_submissionError" class="error"></div>
                                     </div>
                                 </div>                                
                                 <div class="row mb-3">
-                                    <label for="country" class="col-md-2 col-lg-4 col-form-label">What country/nation do you live in? (Country of Residence)</label>
+                                    <label for="country" class="col-md-2 col-lg-4 col-form-label">10) What country/nation do you live in? (Country of Residence)</label>
                                     <div class="col-md-10 col-lg-8">
                                         <select name="country" class="form-control" id="country" required>
                                             <option value="" selected disabled>Select</option>
@@ -238,21 +241,21 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="state" class="col-md-2 col-lg-4 col-form-label">State/province of residence</label>
+                                    <label for="state" class="col-md-2 col-lg-4 col-form-label">11) State/province of residence</label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="state" class="form-control" id="state"
                                             value="{{ old('state', $state) }}">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="city" class="col-md-2 col-lg-4 col-form-label">Village/town/city of residence</label>
+                                    <label for="city" class="col-md-2 col-lg-4 col-form-label">12) Village/town/city of residence</label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="city" class="form-control" id="city"
                                             value="{{ old('city', $city ) }}">
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
-                                    <label for="organization_name" class="col-md-2 col-lg-4 col-form-label">Name of your grassroots organization/ ecoweb-rooted community/ movement (if no grassroots affiliation, type N/A)
+                                    <label for="organization_name" class="col-md-2 col-lg-4 col-form-label">13) Name of your grassroots organization/ ecoweb-rooted community/ movement (if no grassroots affiliation, type N/A)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="organization_name" class="form-control" id="organization_name"
@@ -260,7 +263,7 @@
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
-                                    <label for="organization_website" class="col-md-2 col-lg-4 col-form-label">Website of grassroots organization/ ecoweb-rooted community/ movement (if no website, type N/A)
+                                    <label for="organization_website" class="col-md-2 col-lg-4 col-form-label">14) Website of grassroots organization/ ecoweb-rooted community/ movement (if no website, type N/A)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="organization_website" class="form-control" id="organization_website"
@@ -268,7 +271,7 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="ecosystem_affiliation" class="col-md-2 col-lg-4 col-form-label">What continent are your ancestors originally from? (select all that apply)
+                                    <label for="ecosystem_affiliation" class="col-md-2 col-lg-4 col-form-label">15) What continent are your ancestors originally from? (select all that apply)
                                     </label>
                                     <div class="col-md-10 col-lg-8">                                                                                                
                                         @if ($ecosystem_affiliation)
@@ -279,7 +282,7 @@
                                     </div>
                                 </div>   
                                 <div class="row mb-3">
-                                    <label for="Indigenous_affiliation" class="col-md-2 col-lg-4 col-form-label">What specific region are your ancestors originally from OR what is the name of your Indigenous community? (example of specific region = Bengal; example of Indigenous community name = Lisjan Ohlone)
+                                    <label for="Indigenous_affiliation" class="col-md-2 col-lg-4 col-form-label">16) What specific region are your ancestors originally from OR what is the name of your Indigenous community? (example of specific region = Bengal; example of Indigenous community name = Lisjan Ohlone)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="indigenous_affiliation" class="form-control" id="indigenous_affiliation"
@@ -287,7 +290,7 @@
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
-                                    <label for="expertise_area" class="col-md-2 col-lg-4 col-form-label">Your expertise area (select all that apply)
+                                    <label for="expertise_area" class="col-md-2 col-lg-4 col-form-label">17) Your expertise area (select all that apply)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         @if ($expertise_area)
@@ -298,7 +301,7 @@
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
-                                    <label for="bio_short" class="col-md-2 col-lg-4 col-form-label">1-sentence biography (max. 40 words)
+                                    <label for="bio_short" class="col-md-2 col-lg-4 col-form-label">18) 1-sentence biography (max. 40 words)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="bio_short" name="bio_short" rows="4" cols="50" placeholder="Your explanation here..." required>{{ old('bio_short', $bio_short) }}</textarea>
@@ -306,7 +309,7 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label">1-paragraph biography (150-250 words)
+                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label">19) 1-paragraph biography (150-250 words)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="bio_long" name="bio_long" rows="4" cols="50" placeholder="Your explanation here..." required>{{ old('bio_long', $bio_long) }}</textarea>
