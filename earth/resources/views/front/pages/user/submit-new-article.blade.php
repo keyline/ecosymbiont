@@ -792,7 +792,7 @@ use Illuminate\Support\Facades\DB;
                                     <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">28) Instructions for initial submission of Creative-Work for eligibility screening:
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <p>Once you have completed this form and uploaded all required files, click on the "Submit" button below. If you meet the eligibility criteria <span class="colour: red">(determined in part by your response to question 12); also, you
+                                        <p>Once you have completed this form and uploaded all required files, click on the "Submit" button below. If you meet the eligibility criteria <span style="color: red !important">(determined in part by your response to question 12); also, you
                                         must have selected “Yes” for at least one of questions 10) and 11))</span>, you will receive an Eligibility E-mail with a Submission Reference Number ("SRN").</p>                                        
                                     </div>
                                     <!-- <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">29) Instructions for final submission of Creative-Work for consideration of publication:
@@ -808,7 +808,7 @@ use Illuminate\Support\Facades\DB;
                                     <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">30) Non-Exclusive License to Publish (NELP)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <p>Once you have completed this form and uploaded all required files, click on the "Submit" button below. If you meet the eligibility criteria <span class="colour: red">(determined in part by your response to question 12); also, you
+                                        <p>Once you have completed this form and uploaded all required files, click on the "Submit" button below. If you meet the eligibility criteria <span style="color: red !important">(determined in part by your response to question 12); also, you
                                         must have selected “Yes” for at least one of questions 10) and 11))</span>, you will receive an Eligibility E-mail with a Submission Reference Number ("SRN").</p>                                        
                                         <!-- NELP form content -->
                                         <div style="border: 2px solid #686D72; padding: 4px; margin-bottom: 10px; border-radius: 5px;height: 150px;overflow-y: auto;">
