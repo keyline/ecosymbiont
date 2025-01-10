@@ -357,6 +357,7 @@ class FrontController extends Controller
         $requestData        = $request->all();
         
         $search_keyword     = $requestData['search_keyword'];
+        Helper::pr($search_keyword);
         $searchResults      = NewsContent::select('id', 'new_title', 'slug', 'parent_category', 'sub_category')->where(function($query) {
                                                 $query->where('status', 1);
                                              })
