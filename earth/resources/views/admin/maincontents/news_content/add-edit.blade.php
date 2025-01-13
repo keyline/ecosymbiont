@@ -181,11 +181,11 @@ $controllerRoute = $module['controller_route'];
                             </label>           
                             <div class="col-md-10 col-lg-8">                 
                                 <?php if($page_header == "News Content Add" || $page_header == "News Content Update") {?>                                    
-                                <input type="radio" id="Human individual" name="author_classification" value="Human individual" @checked(old('author_classification', $author_classification) == 'Human individual')>
+                                <input type="radio" id="Human individual" name="author_classification" value="Human individual"  required @checked(old('author_classification', $author_classification) == 'Human individual')>
                                 <label for="Human individual">Human individual</label>
-                                <input type="radio" id="Ecoweb-rooted community" name="author_classification" value="Ecoweb-rooted community" @checked(old('author_classification', $author_classification) == 'Ecoweb-rooted community')>
+                                <input type="radio" id="Ecoweb-rooted community" name="author_classification" value="Ecoweb-rooted community"  required @checked(old('author_classification', $author_classification) == 'Ecoweb-rooted community')>
                                 <label for="Ecoweb-rooted community">Ecoweb-rooted community</label>
-                                <input type="radio" id="Movement" name="author_classification" value="Movement" @checked(old('author_classification', $author_classification) == 'Movement')>
+                                <input type="radio" id="Movement" name="author_classification" value="Movement"  required @checked(old('author_classification', $author_classification) == 'Movement')>
                                 <label for="Movement">Movement</label>                            
                                 <?php } else { ?>                                                                                                       
                                     <input type="text" class="form-control" id="Ecoweb-rooted community" name="author_classification" value="<?= $profile->name?>">                                
@@ -196,11 +196,11 @@ $controllerRoute = $module['controller_route'];
                             <label for="co_authors" class="col-md-2 col-lg-4 col-form-label">3) How many co-authors do you have?
                             </label>
                             <div class="col-md-10 col-lg-8">
-                                <input type="radio" id="co_authors_0" name="co_authors" value="0"required @checked(old('co_authors', $co_authors) == '0')>
+                                <input type="radio" id="co_authors_0" name="co_authors" value="0" required @checked(old('co_authors', $co_authors) == '0')>
                                 <label for="0">0</label>
-                                <input type="radio" id="co_authors_1" name="co_authors" value="1"required @checked(old('co_authors', $co_authors) == '1')>
+                                <input type="radio" id="co_authors_1" name="co_authors" value="1" required @checked(old('co_authors', $co_authors) == '1')>
                                 <label for="1">1</label>
-                                <input type="radio" id="co_authors_2" name="co_authors" value="2"required @checked(old('co_authors', $co_authors) == '2')>
+                                <input type="radio" id="co_authors_2" name="co_authors" value="2" required @checked(old('co_authors', $co_authors) == '2')>
                                 <label for="2">2</label>
                             </div>
                         </div>
