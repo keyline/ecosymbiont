@@ -40,7 +40,7 @@ $current_url = $protocol . $host . $uri;
                                                             <li>have participated as a strategist at an in-person Ecosymbionts Regenerate ("ER") <a target="_blank" href="<?=env('REGENERATE_URL')?>synergy-meetings.php" style="color: #d09c1c;">Synergy Meeting</a>.</li>
                                                         </ul>
                                                     </li>
-                                                    <li>Your Creative-Work must relate to <a href="<?=env('REGENERATE_URL')?>" style="color: #d09c1c;" target="_blank">(a) restoring, preserving, and/or fostering the symbiosis (interconnectivity and interdependence) between humans and natural ecological webs (ecowebs)); OR (b) elucidating how existing extractivist systems harm human-ecoweb symbiosis.</a>. </li>
+                                                    <li>Your Creative-Work must relate to <a href="<?=env('REGENERATE_URL')?>" style="color: #d09c1c;" target="_blank">(a) restoring, preserving, and/or fostering the symbiosis (interconnectivity and interdependence) between humans and natural ecological webs (ecowebs)); OR (b) elucidating how existing extractivist systems harm human-ecoweb symbiosis.</a></li>
                                                 </ul>
                                             </div>
 
