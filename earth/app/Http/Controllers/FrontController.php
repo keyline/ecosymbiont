@@ -608,8 +608,8 @@ class FrontController extends Controller
                             $checkmail = User::where('email', '=', $postData['email'])->first();                              
                             if ($checkValue > 0) {  
 
-                                if($checkmail->status == 0){
-                                    echo "Your Account is Deactivated Contact with admin!!!"; die;
+                                if($checkmail->status != 1){
+                                    // echo "Your Account is Deactivated Contact with admin!!!"; die;
                                     // Auth::guard('web')->logout();
                                     return redirect()->back()->with('error_message', 'Your Account is Deactivated Contact with admin!!!');
                                 } else{
