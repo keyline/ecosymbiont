@@ -647,7 +647,7 @@ class FrontController extends Controller
         {            
             $title                          = 'OTP Validation';
             $page_name                      = 'otpvalidation';
-            // $data['search_keyword']         = '';
+            $data         = [];
             if ($request->isMethod('post')) {
                 $postData = $request->all();
                  Helper::pr($postData);
@@ -722,6 +722,7 @@ class FrontController extends Controller
             $title                          = 'Reset Password';
             $page_name                      = 'resetpassword'; 
             $user_id                        = $id;           
+            $data         = [];
             if ($request->isMethod('post')) {
                 $postData = $request->all();
                 $rules      = [                    
