@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\Route;
         Route::match(['get', 'post'], '/signin', 'App\Http\Controllers\FrontController@signIn');
         Route::match(['get', 'post'], '/sign-in/{id}', 'App\Http\Controllers\FrontController@signIn');
         Route::match(['get', 'post'], '/signup', 'App\Http\Controllers\FrontController@signUp');
+        Route::match(['get', 'post'], '/forgetpassword', 'App\Http\Controllers\FrontController@forgetPassword');
         Route::match(['get', 'post'], '/submissions', 'App\Http\Controllers\FrontController@submissions');
         Route::match(['get', 'post'], '/contacts', 'App\Http\Controllers\FrontController@contacts');
         Route::match(['get', 'post'], '/fetch-search-suggestions', 'App\Http\Controllers\FrontController@fetch_search_suggestions');

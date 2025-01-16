@@ -564,6 +564,96 @@ class FrontController extends Controller
             }
             echo $this->front_before_login_layout($title, $page_name, $data);
         }
+        public function forgetPassword(Request $request)
+        {
+            $data['countries']              = Country::select('id', 'name')->where('status', '=', 1)->get();
+            $title                          = 'Forget Password';
+            $page_name                      = 'forgetpassword';
+            $data['search_keyword']         = '';
+            if ($request->isMethod('post')) {
+                $postData = $request->all();
+                //  Helper::pr($postData);
+                 // Get reCAPTCHA token from form POST data
+                    $recaptchaResponse = $postData['g-recaptcha-response'];
+
+                    // Your Google reCAPTCHA secret key
+                    $secretKey = '6LcIw04qAAAAAJCWh02op84FgNvxexQsh9LLCuqW';
+
+                    // Google reCAPTCHA verification URL
+                    $verifyURL = 'https://www.google.com/recaptcha/api/siteverify';
+
+                    // Prepare the POST request
+                    $data = array(
+                        'secret' => $secretKey,
+                        'response' => $recaptchaResponse,                       
+                    );
+
+                    // Initiate cURL
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, $verifyURL);
+                    curl_setopt($ch, CURLOPT_POST, true);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    $response = curl_exec($ch);
+                    curl_close($ch);
+
+                    // Decode JSON response
+                    $responseData = json_decode($response);
+
+                    // Check if reCAPTCHA validation was successful
+                    if ($responseData->success && $responseData->score >= 0.5) {
+                        // reCAPTCHA validation passed, proceed with form processing
+                        // echo "reCAPTCHA v3 validation passed. You can process the form."; die;
+                        $rules = [                                                                                               
+                            'email'                     => 'required',                                                                                                                                                                    
+                        ];
+                        if ($this->validate($request, $rules)) {
+                            $checkmail = User::where('email', '=', $postData['email'])->get();
+                            Helper::pr($checkmail);
+                            if ($checkValue <= 0) {        
+                                // Generate a random alphanumeric password
+                                $randomPassword = bin2hex(random_bytes(8));   
+
+                                $fields = [                        
+                                    'first_name'                => $postData['first_name'],            
+                                    'last_name'                 => $postData['last_name'],        
+                                    'middle_name'               => $postData['middle_name'],            
+                                    'email'                     => $postData['email'],                                                          
+                                    'country'                   => $postData['country'],
+                                    'role'                      => $postData['role'],
+                                    'password'                  => Hash::make($randomPassword),                         
+                                ];
+                                //  Helper::pr($fields);
+                                User::insert($fields);
+                                $generalSetting             = GeneralSetting::where('id', '=', 1)->first();
+                                $subject                    = 'Subject: Your Login Credentials for Portal Access';
+                                $message                    = "<table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
+                                                                    <tr><td style='padding: 8px 15px'>Dear " . htmlspecialchars($postData['first_name']) . ",</td></tr>
+                                                                    <tr><td style='padding: 8px 15px'>Thank you for registering with us. Below are your credentials to access the portal:</td></tr>                                                                    
+                                                                    <tr><td style='padding: 8px 15px'><strong>Sign-in Link: </strong><a href='" . htmlspecialchars(env('APP_URL') . "signin") . "'>" . htmlspecialchars(env('APP_URL') . "/signin") . "</a></td></tr>
+                                                                    <tr><td style='padding: 8px 15px'><strong>Email: </strong>" . htmlspecialchars($postData['email']) . "</td></tr>    
+                                                                    <tr><td style='padding: 8px 15px'><strong>Password: </strong>" . htmlspecialchars($randomPassword) . "</td></tr>                                         
+                                                                    
+                                                                    
+                                                                    <tr><td style='padding: 8px 15px'>Thank You,</td></tr>
+                                                                    <tr><td style='padding: 8px 15px'>Auto-generated from the Ecosymbiont Website.</td></tr>
+                                                                </table>";
+                                $this->sendMail($postData['email'], $subject, $message);
+                                return redirect(url('signin'))->with('success_message', 'Your sign-up was successful! Please check your email for your login credentials.');
+                            } else {
+                                return redirect()->back()->with('error_message', 'User Already Registered !!!');
+                            }
+                        } else {
+                            return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                        }
+
+                    } else {
+                        // reCAPTCHA validation failed
+                        return redirect()->back()->with('error_message', 'reCAPTCHA v3 validation failed. Please try again.');                        
+                    }                              
+            }
+            echo $this->front_before_login_layout($title, $page_name, $data);
+        }
     /* authentication */
     /* after login */
         public function signout(Request $request){
