@@ -605,7 +605,7 @@ class FrontController extends Controller
                         ];
                         if ($this->validate($request, $rules)) {
                             $checkValue = User::where('email', '=', $postData['email'])->first();                              
-                            if ($checkValue > 0) {    
+                            if ($checkValue) {    
                                 if($checkValue->status == 0){
                                     // Auth::guard('web')->logout();
                                     return redirect()->back()->with('error_message', 'Your Account is Deactivated Contact with admin!!!');
