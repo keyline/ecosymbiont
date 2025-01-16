@@ -406,12 +406,7 @@ class FrontController extends Controller
                         $request->session()->put('is_user_login', 1);
 
                         $exsistUser = UserActivity::where('user_email', '=', $sessionData->email)->count();
-                        //  Helper::pr($exsistUser);
-                        $user_status = User::where('email', '=', $sessionData->email)->first();
-                        if($user_status->status == 1){
-                            // Auth::guard('web')->logout();
-                            return redirect()->back()->with('error_message', 'Your Account is Deactivated Contact with admin!!!');
-                        }
+                        //  Helper::pr($exsistUser);                        
                         if($exsistUser > 0)
                         {
                             if($sessionData->role == 2)
@@ -452,7 +447,7 @@ class FrontController extends Controller
                             UserActivity::insert($activityData);
                         /* user activity */
                                                
-                    } else {
+                    } else {                        
                         /* user activity */
                             $activityData = [
                                 'user_email'        => $postData['email'],
@@ -467,7 +462,7 @@ class FrontController extends Controller
                         /* user activity */
                         return redirect()->back()->with('error_message', 'Invalid Email Or Password !!!');
                     }
-                } else {
+                } else {                    
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');
                 }
             }
@@ -609,10 +604,16 @@ class FrontController extends Controller
                             'email'                     => 'required',                                                                                                                                                                    
                         ];
                         if ($this->validate($request, $rules)) {
-                            $checkValue = User::where('email', '=', $postData['email'])->count();                                                        
-                            if ($checkValue > 0) {        
-                                // Generate a random 4-digit OTP
-                                $otp = rand(1000, 9999);
+                            $checkValue = User::where('email', '=', $postData['email'])->first();                              
+                            if ($checkValue > 0) {    
+                                if($checkValue->status == 0){
+                                    // Auth::guard('web')->logout();
+                                    return redirect()->back()->with('error_message', 'Your Account is Deactivated Contact with admin!!!');
+                                } else{
+                                    // Generate a random 4-digit OTP
+                                    $otp = rand(1000, 9999);
+                                }      
+                                
 
                                 $fields = [                                                            
                                     'otp'                  => $otp,                         
