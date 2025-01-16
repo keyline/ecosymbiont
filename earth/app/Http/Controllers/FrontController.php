@@ -572,7 +572,7 @@ class FrontController extends Controller
             $data['search_keyword']         = '';
             if ($request->isMethod('post')) {
                 $postData = $request->all();
-                 Helper::pr($postData);
+                //  Helper::pr($postData);
                  // Get reCAPTCHA token from form POST data
                     $recaptchaResponse = $postData['g-recaptcha-response'];
 
@@ -604,14 +604,12 @@ class FrontController extends Controller
                     if ($responseData->success && $responseData->score >= 0.5) {
                         // reCAPTCHA validation passed, proceed with form processing
                         // echo "reCAPTCHA v3 validation passed. You can process the form."; die;
-                        $rules = [                                 
-                            'first_name'                => 'required',            
-                            'last_name'                 => 'required',                                    
-                            'email'                     => 'required',                                                  
-                            'country'                   => 'required',                                                                                         
+                        $rules = [                                                                                               
+                            'email'                     => 'required',                                                                                                                                                                    
                         ];
                         if ($this->validate($request, $rules)) {
-                            $checkValue = User::where('email', '=', $postData['email'])->count();
+                            $checkmail = User::where('email', '=', $postData['email'])->get();
+                            Helper::pr($checkmail);
                             if ($checkValue <= 0) {        
                                 // Generate a random alphanumeric password
                                 $randomPassword = bin2hex(random_bytes(8));   
