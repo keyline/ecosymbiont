@@ -572,7 +572,7 @@ class FrontController extends Controller
             $data['search_keyword']         = '';
             if ($request->isMethod('post')) {
                 $postData = $request->all();
-                //  Helper::pr($postData);
+                 Helper::pr($postData);
                  // Get reCAPTCHA token from form POST data
                     $recaptchaResponse = $postData['g-recaptcha-response'];
 
