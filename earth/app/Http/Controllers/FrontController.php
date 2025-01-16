@@ -721,7 +721,7 @@ class FrontController extends Controller
         {            
             $title                          = 'Reset Password';
             $page_name                      = 'resetpassword'; 
-            $user_id                        = Helper::decode($id);   
+            $user_id                        = Helper::decoded($id);   
             $data['search_keyword']         = '';        
             if ($request->isMethod('post')) {
                 $postData = $request->all();
