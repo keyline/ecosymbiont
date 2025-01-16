@@ -615,22 +615,20 @@ class FrontController extends Controller
                                 } else{
                                     // Generate a random 4-digit OTP
                                     $otp = rand(1000, 9999);
-                                }      
-                                
-
-                                $fields = [                                                            
-                                    'otp'                  => $otp,                         
-                                ];                            
-                                User::where('email', $postData['email'])->update($fields);
-                                $generalSetting             = GeneralSetting::where('id', '=', 1)->first();
-                                $subject                    = 'Subject: OTP Verification';
-                                $message                    = "<table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
-                                                                    <tr><td style='padding: 8px 15px'>Your OTP code is: <strong>$otp</strong></td></tr>                                                                                                                                                                                                                                                   
-                                                                    <tr><td style='padding: 8px 15px'>Thank You,</td></tr>
-                                                                    <tr><td style='padding: 8px 15px'>Auto-generated from the Ecosymbiont Website.</td></tr>
-                                                                </table>";
-                                $this->sendMail($postData['email'], $subject, $message);
-                                return redirect(url('otpvalidation'))->with('success_message', 'Your OTP was successfully send your registered mail! Please check your email for your OTP.');
+                                    $fields = [                                                            
+                                        'otp'                  => $otp,                         
+                                    ];                            
+                                    User::where('email', $postData['email'])->update($fields);
+                                    $generalSetting             = GeneralSetting::where('id', '=', 1)->first();
+                                    $subject                    = 'Subject: OTP Verification';
+                                    $message                    = "<table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
+                                                                        <tr><td style='padding: 8px 15px'>Your OTP code is: <strong>$otp</strong></td></tr>                                                                                                                                                                                                                                                   
+                                                                        <tr><td style='padding: 8px 15px'>Thank You,</td></tr>
+                                                                        <tr><td style='padding: 8px 15px'>Auto-generated from the Ecosymbiont Website.</td></tr>
+                                                                    </table>";
+                                    $this->sendMail($postData['email'], $subject, $message);
+                                    return redirect(url('otpvalidation'))->with('success_message', 'Your OTP was successfully send your registered mail! Please check your email for your OTP.');
+                                }                                                                      
                             } else {
                                 return redirect()->back()->with('error_message', 'User Not Registered kindly signup first !!!');
                             }
