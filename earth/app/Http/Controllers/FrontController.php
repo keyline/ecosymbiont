@@ -683,7 +683,7 @@ class FrontController extends Controller
                         // reCAPTCHA validation passed, proceed with form processing
                         // echo "reCAPTCHA v3 validation passed. You can process the form."; die;
                         $rules = [                                                                                               
-                            'email'                     => 'required',                                                                                                                                                                    
+                            'otp'                     => 'required',                                                                                                                                                                    
                         ];
                         if ($this->validate($request, $rules)) {
                             $checkValue = User::where('otp', '=', $postData['otp'])->first();
