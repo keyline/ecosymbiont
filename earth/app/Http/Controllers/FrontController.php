@@ -650,36 +650,36 @@ class FrontController extends Controller
             $data['search_keyword']         = '';
             if ($request->isMethod('post')) {
                 $postData = $request->all();
-                //  Helper::pr($postData);
-                 // Get reCAPTCHA token from form POST data
-                    $recaptchaResponse = $postData['g-recaptcha-response'];
+                // //  Helper::pr($postData);
+                //  // Get reCAPTCHA token from form POST data
+                //     $recaptchaResponse = $postData['g-recaptcha-response'];
 
-                    // Your Google reCAPTCHA secret key
-                    $secretKey = '6LcIw04qAAAAAJCWh02op84FgNvxexQsh9LLCuqW';
+                //     // Your Google reCAPTCHA secret key
+                //     $secretKey = '6LcIw04qAAAAAJCWh02op84FgNvxexQsh9LLCuqW';
 
-                    // Google reCAPTCHA verification URL
-                    $verifyURL = 'https://www.google.com/recaptcha/api/siteverify';
+                //     // Google reCAPTCHA verification URL
+                //     $verifyURL = 'https://www.google.com/recaptcha/api/siteverify';
 
-                    // Prepare the POST request
-                    $data = array(
-                        'secret' => $secretKey,
-                        'response' => $recaptchaResponse,                       
-                    );
+                //     // Prepare the POST request
+                //     $data = array(
+                //         'secret' => $secretKey,
+                //         'response' => $recaptchaResponse,                       
+                //     );
 
-                    // Initiate cURL
-                    $ch = curl_init();
-                    curl_setopt($ch, CURLOPT_URL, $verifyURL);
-                    curl_setopt($ch, CURLOPT_POST, true);
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    $response = curl_exec($ch);
-                    curl_close($ch);
+                //     // Initiate cURL
+                //     $ch = curl_init();
+                //     curl_setopt($ch, CURLOPT_URL, $verifyURL);
+                //     curl_setopt($ch, CURLOPT_POST, true);
+                //     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+                //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                //     $response = curl_exec($ch);
+                //     curl_close($ch);
 
-                    // Decode JSON response
-                    $responseData = json_decode($response);
+                //     // Decode JSON response
+                //     $responseData = json_decode($response);
 
                     // Check if reCAPTCHA validation was successful
-                    if ($responseData->success && $responseData->score >= 0.5) {
+                    // if ($responseData->success && $responseData->score >= 0.5) {
                         // reCAPTCHA validation passed, proceed with form processing
                         // echo "reCAPTCHA v3 validation passed. You can process the form."; die;
                         $rules = [                                                                                               
@@ -713,12 +713,7 @@ class FrontController extends Controller
                             }
                         } else {
                             return redirect()->back()->with('error_message', 'All Fields Required !!!');
-                        }
-
-                    } else {
-                        // reCAPTCHA validation failed
-                        return redirect()->back()->with('error_message', 'reCAPTCHA v3 validation failed. Please try again.');                        
-                    }                              
+                        }                                                 
             }
             echo $this->front_before_login_layout($title, $page_name, $data);
         }
