@@ -54,3 +54,12 @@
         </div>
     </section>
 <!-- End block-wrapper-section -->
+<script src="https://www.google.com/recaptcha/api.js?render=6LcIw04qAAAAAGBE5JP7v7i3gYEa4OPNSWqBlvbH"></script>
+<script>
+grecaptcha.ready(function() {
+    grecaptcha.execute('6LcIw04qAAAAAGBE5JP7v7i3gYEa4OPNSWqBlvbH', {action: 'submit'}).then(function(token) {
+        // Add the token to your form submission
+        document.getElementById('g-recaptcha-response').value = token;
+    });
+});
+</script>
