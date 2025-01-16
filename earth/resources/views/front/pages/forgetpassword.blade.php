@@ -25,8 +25,8 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="card-header">
-                                            <h3 class="text-center">Sign into your account</h3>
-                                            <p class="text-center">Enter your email & password for login</p>
+                                            <h3 class="text-center">Forget Password</h3>
+                                            <p class="text-center">Enter your email for get login cretetential</p>
                                         </div>
                                         <form method="POST" action="">
                                             @csrf
@@ -36,22 +36,10 @@
                                               <div class="col-md-8 col-lg-9">
                                                 <input type="text" name="email" class="form-control" id="email" value="">
                                               </div>
-                                            </div>
-                                            <div class="row" style="margin-bottom: 15px;">
-                                              <label for="password" class="col-md-4 col-lg-3 col-form-label">Password</label>
-                                              <div class="col-md-8 col-lg-9">
-                                                <input type="password" name="password" class="form-control" id="password">
-                                              </div>
-                                            </div>
+                                            </div>                                            
                                             <div class="text-center">
-                                              <button type="submit" class="btn btn-primary">Sign In</button>
-                                            </div>
-                                            <div class="text-center" style="margin-bottom: 15px;">
-                                            Not registered yet? <a href="<?=url('signup')?>">Sign Up</a>
-                                            </div>
-                                            <div class="text-center" style="margin-bottom: 15px;">
-                                            <a href="<?=url('forgetPassword')?>">Forget Password</a>
-                                            </div>
+                                              <button type="submit" class="btn btn-primary">Submit</button>
+                                            </div>                                            
                                           </form>
                                     </div>
                                 </div>
