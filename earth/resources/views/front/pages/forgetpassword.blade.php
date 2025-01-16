@@ -38,6 +38,7 @@
                                               </div>
                                             </div>                                            
                                             <div class="text-center">
+                                            <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response"> 
                                               <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>                                            
                                           </form>
