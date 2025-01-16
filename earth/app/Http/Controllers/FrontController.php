@@ -565,8 +565,7 @@ class FrontController extends Controller
             echo $this->front_before_login_layout($title, $page_name, $data);
         }
         public function forgetPassword(Request $request)
-        {
-            $data['countries']              = Country::select('id', 'name')->where('status', '=', 1)->get();
+        {            
             $title                          = 'Forget Password';
             $page_name                      = 'forgetpassword';
             $data['search_keyword']         = '';
@@ -608,40 +607,30 @@ class FrontController extends Controller
                             'email'                     => 'required',                                                                                                                                                                    
                         ];
                         if ($this->validate($request, $rules)) {
-                            $checkmail = User::where('email', '=', $postData['email'])->get();
-                            Helper::pr($checkmail);
-                            if ($checkValue <= 0) {        
-                                // Generate a random alphanumeric password
-                                $randomPassword = bin2hex(random_bytes(8));   
+                            $checkValue = User::where('email', '=', $postData['email'])->count();
+                            // $user_id = User::where('email', '=', $postData['email'])->first();
+                            // Helper::pr($checkmail);
+                            if ($checkValue > 0) {        
+                                // Generate a random 4-digit OTP
+                                $otp = rand(1000, 9999);
 
-                                $fields = [                        
-                                    'first_name'                => $postData['first_name'],            
-                                    'last_name'                 => $postData['last_name'],        
-                                    'middle_name'               => $postData['middle_name'],            
-                                    'email'                     => $postData['email'],                                                          
-                                    'country'                   => $postData['country'],
-                                    'role'                      => $postData['role'],
-                                    'password'                  => Hash::make($randomPassword),                         
+                                $fields = [                                                            
+                                    'otp'                  => $otp,                         
                                 ];
                                 //  Helper::pr($fields);
-                                User::insert($fields);
+                                // User::insert($fields);
+                                User::where('email', $postData['email'])->update($fields);
                                 $generalSetting             = GeneralSetting::where('id', '=', 1)->first();
-                                $subject                    = 'Subject: Your Login Credentials for Portal Access';
+                                $subject                    = 'Subject: OTP Verification';
                                 $message                    = "<table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
-                                                                    <tr><td style='padding: 8px 15px'>Dear " . htmlspecialchars($postData['first_name']) . ",</td></tr>
-                                                                    <tr><td style='padding: 8px 15px'>Thank you for registering with us. Below are your credentials to access the portal:</td></tr>                                                                    
-                                                                    <tr><td style='padding: 8px 15px'><strong>Sign-in Link: </strong><a href='" . htmlspecialchars(env('APP_URL') . "signin") . "'>" . htmlspecialchars(env('APP_URL') . "/signin") . "</a></td></tr>
-                                                                    <tr><td style='padding: 8px 15px'><strong>Email: </strong>" . htmlspecialchars($postData['email']) . "</td></tr>    
-                                                                    <tr><td style='padding: 8px 15px'><strong>Password: </strong>" . htmlspecialchars($randomPassword) . "</td></tr>                                         
-                                                                    
-                                                                    
+                                                                    <tr><td style='padding: 8px 15px'>Your OTP code is: <strong>{{ $otp }}</strong></td></tr>                                                                                                                                                                                                                                                   
                                                                     <tr><td style='padding: 8px 15px'>Thank You,</td></tr>
                                                                     <tr><td style='padding: 8px 15px'>Auto-generated from the Ecosymbiont Website.</td></tr>
                                                                 </table>";
                                 $this->sendMail($postData['email'], $subject, $message);
-                                return redirect(url('signin'))->with('success_message', 'Your sign-up was successful! Please check your email for your login credentials.');
+                                return redirect(url('otpvalidation'))->with('success_message', 'Your OTP was successfully send your registerd mail! Please check your email for your OTP.');
                             } else {
-                                return redirect()->back()->with('error_message', 'User Already Registered !!!');
+                                return redirect()->back()->with('error_message', 'User Not Registered kindly signup first !!!');
                             }
                         } else {
                             return redirect()->back()->with('error_message', 'All Fields Required !!!');
@@ -651,6 +640,125 @@ class FrontController extends Controller
                         // reCAPTCHA validation failed
                         return redirect()->back()->with('error_message', 'reCAPTCHA v3 validation failed. Please try again.');                        
                     }                              
+            }
+            echo $this->front_before_login_layout($title, $page_name, $data);
+        }
+        public function otpValidation(Request $request)
+        {            
+            $title                          = 'OTP Validation';
+            $page_name                      = 'otpvalidation';
+            $data['search_keyword']         = '';
+            if ($request->isMethod('post')) {
+                $postData = $request->all();
+                //  Helper::pr($postData);
+                 // Get reCAPTCHA token from form POST data
+                    $recaptchaResponse = $postData['g-recaptcha-response'];
+
+                    // Your Google reCAPTCHA secret key
+                    $secretKey = '6LcIw04qAAAAAJCWh02op84FgNvxexQsh9LLCuqW';
+
+                    // Google reCAPTCHA verification URL
+                    $verifyURL = 'https://www.google.com/recaptcha/api/siteverify';
+
+                    // Prepare the POST request
+                    $data = array(
+                        'secret' => $secretKey,
+                        'response' => $recaptchaResponse,                       
+                    );
+
+                    // Initiate cURL
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, $verifyURL);
+                    curl_setopt($ch, CURLOPT_POST, true);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    $response = curl_exec($ch);
+                    curl_close($ch);
+
+                    // Decode JSON response
+                    $responseData = json_decode($response);
+
+                    // Check if reCAPTCHA validation was successful
+                    if ($responseData->success && $responseData->score >= 0.5) {
+                        // reCAPTCHA validation passed, proceed with form processing
+                        // echo "reCAPTCHA v3 validation passed. You can process the form."; die;
+                        $rules = [                                                                                               
+                            'email'                     => 'required',                                                                                                                                                                    
+                        ];
+                        if ($this->validate($request, $rules)) {
+                            $checkValue = User::where('otp', '=', $postData['otp'])->first();
+                            // $user_id = User::where('email', '=', $postData['email'])->first();
+                            // Helper::pr($checkmail);
+                            if ($checkValue) {        
+                                // // Generate a random 4-digit OTP
+                                // $otp = rand(1000, 9999);
+
+                                // $fields = [                                                            
+                                //     'otp'                  => $otp,                         
+                                // ];
+                                //  Helper::pr($fields);
+                                // User::insert($fields);
+                                // User::where('email', $postData['email'])->update($fields);
+                                // $generalSetting             = GeneralSetting::where('id', '=', 1)->first();
+                                // $subject                    = 'Subject: OTP Verification';
+                                // $message                    = "<table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
+                                //                                     <tr><td style='padding: 8px 15px'>Your OTP code is: <strong>{{ $otp }}</strong></td></tr>                                                                                                                                                                                                                                                   
+                                //                                     <tr><td style='padding: 8px 15px'>Thank You,</td></tr>
+                                //                                     <tr><td style='padding: 8px 15px'>Auto-generated from the Ecosymbiont Website.</td></tr>
+                                //                                 </table>";
+                                // $this->sendMail($postData['email'], $subject, $message);
+                                return redirect(url('resetpassword/'.$checkValue->id))->with('success_message', 'Your OTP was successfully validated! Please reset your password and sign up.');
+                            } else {
+                                return redirect()->back()->with('error_message', 'OTP is not validated !!!');
+                            }
+                        } else {
+                            return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                        }
+
+                    } else {
+                        // reCAPTCHA validation failed
+                        return redirect()->back()->with('error_message', 'reCAPTCHA v3 validation failed. Please try again.');                        
+                    }                              
+            }
+            echo $this->front_before_login_layout($title, $page_name, $data);
+        }
+        public function resetPassword(Request $request, $id)
+        {            
+            $title                          = 'Reset Password';
+            $page_name                      = 'resetpassword'; 
+            $user_id                        = $id;           
+            if ($request->isMethod('post')) {
+                $postData = $request->all();
+                $rules      = [                    
+                    'new_password'            => 'required',
+                    'confirm_password'        => 'required',
+                ];     
+                if($this->validate($request, $rules)){      
+                    $old_password       = User::find($user_id)->password;                    
+                    $new_password       = $postData['new_password'];
+                    $confirm_password   = $postData['confirm_password'];
+                    // if(Hash::check($old_password, $data['user']->password)){
+                        if($new_password == $confirm_password){
+                            if($new_password != $old_password){
+                                $fields = [
+                                    'password'            => Hash::make($new_password)
+                                ];
+                                Helper::pr($fields);
+                                User::where('id', '=', $user_id)->update($fields);
+                                return redirect()->back()->with('success_message', 'Password Reset Successfully !!!');
+                            } else {
+                                return redirect()->back()->with('error_message', 'New & Old Password Can\'t Be Same !!!');
+                            }
+                        } else {
+                            return redirect()->back()->with('error_message', 'New & Confirm Password Does Not Matched !!!');
+                        }
+                    // } else {
+                    //     return redirect()->back()->with('error_message', 'Current Password Is Incorrect !!!');
+                    // }
+                } else {
+                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                }           
+                                                 
             }
             echo $this->front_before_login_layout($title, $page_name, $data);
         }
