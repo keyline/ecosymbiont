@@ -25,8 +25,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="card-header">
-                                            <h3 class="text-center">Sign into your account</h3>
-                                            <p class="text-center">Enter your email & password for login</p>
+                                            <h3 class="text-center">Reset Your Password</h3>                                            
                                         </div>
                                         <form method="POST" action="">
                                             @csrf                                                                                        

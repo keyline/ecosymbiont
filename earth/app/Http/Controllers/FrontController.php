@@ -739,7 +739,7 @@ class FrontController extends Controller
                                 $fields = [
                                     'password'            => Hash::make($new_password)
                                 ];
-                                Helper::pr($fields);
+                                // Helper::pr($fields);
                                 User::where('id', '=', $user_id)->update($fields);
                                 return redirect()->back()->with('success_message', 'Password Reset Successfully !!!');
                             } else {
