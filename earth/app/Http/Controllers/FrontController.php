@@ -607,11 +607,8 @@ class FrontController extends Controller
                             $checkValue = User::where('email', '=', $postData['email'])->count();                              
                             $checkmail = User::where('email', '=', $postData['email'])->first();                              
                             if ($checkValue > 0) {  
-
-                                if($checkmail->status != 1){
-                                    // echo "Your Account is Deactivated Contact with admin!!!"; die;
-                                    // Auth::guard('web')->logout();
-                                    return redirect()->back()->with('error_message', 'Your Account is Deactivated Contact with admin!!!');
+                                if($checkmail->status != 1){                                    
+                                    return redirect()->back()->with('error_message', 'Your account is deactivated contact with admin!!!');
                                 } else{
                                     // Generate a random 4-digit OTP
                                     $otp = rand(1000, 9999);
@@ -627,7 +624,7 @@ class FrontController extends Controller
                                                                         <tr><td style='padding: 8px 15px'>Auto-generated from the Ecosymbiont Website.</td></tr>
                                                                     </table>";
                                     $this->sendMail($postData['email'], $subject, $message);
-                                    return redirect(url('otpvalidation'))->with('success_message', 'Your OTP was successfully send your registered mail! Please check your email for your OTP.');
+                                    return redirect(url('otpvalidation'))->with('success_message', 'Your OTP has been successfully sent to your registered email address. Please check your email to retrieve the OTP.');
                                 }                                                                      
                             } else {
                                 return redirect()->back()->with('error_message', 'User Not Registered kindly signup first !!!');
@@ -655,7 +652,7 @@ class FrontController extends Controller
                 if ($this->validate($request, $rules)) {
                     $checkValue = User::where('otp', '=', $postData['otp'])->first();                           
                     if ($checkValue) {                                        
-                        return redirect(url('resetpassword/'.Helper::encoded($checkValue->id)))->with('success_message', 'Your OTP was successfully validated! Please reset your password and sign up.');
+                        return redirect(url('resetpassword/'.Helper::encoded($checkValue->id)))->with('success_message', 'Your OTP has been successfully validated. Please reset your password to complete the sign-up process.');
                     } else {
                         return redirect()->back()->with('error_message', 'OTP is not validated !!!');
                     }
