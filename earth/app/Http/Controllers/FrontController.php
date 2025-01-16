@@ -688,7 +688,7 @@ class FrontController extends Controller
                         if ($this->validate($request, $rules)) {
                             $checkValue = User::where('otp', '=', $postData['otp'])->first();
                             // $user_id = User::where('email', '=', $postData['email'])->first();
-                            // Helper::pr($checkmail);
+                             Helper::pr($checkValue);
                             if ($checkValue) {        
                                 // // Generate a random 4-digit OTP
                                 // $otp = rand(1000, 9999);

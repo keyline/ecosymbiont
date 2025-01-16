@@ -32,7 +32,7 @@
                                             @csrf
                                             <!-- <input type="hidden" name="page_link" value="?=$page_link?>"> -->
                                             <div class="row" style="margin-bottom: 15px;">
-                                              <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                                              <label for="email" class="col-md-4 col-lg-3 col-form-label">Enter OIP</label>
                                               <div class="col-md-8 col-lg-9">
                                                 <input type="text" name="otp" id="otp" class="form-control" required>
                                               </div>
