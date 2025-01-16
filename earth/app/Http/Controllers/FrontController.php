@@ -394,7 +394,7 @@ class FrontController extends Controller
                                     'password'  => 'required|max:30',
                                 ];
                 if($this->validate($request, $rules)){
-                    if(Auth::guard('web')->attempt(['email' => $postData['email'], 'password' => $postData['password'], 'status' => 1])){
+                    if(Auth::guard('web')->attempt(['email' => $postData['email'], 'password' => $postData['password'], 'status' => 1])){                        
                         $sessionData = Auth::guard('web')->user();
                         $request->session()->put('user_id', $sessionData->id);
                         $request->session()->put('first_name', $sessionData->first_name);
@@ -407,6 +407,11 @@ class FrontController extends Controller
 
                         $exsistUser = UserActivity::where('user_email', '=', $sessionData->email)->count();
                         //  Helper::pr($exsistUser);
+                        $user_status = User::where('email', '=', $sessionData->email)->first();
+                        if($user_status->status == 1){
+                            // Auth::guard('web')->logout();
+                            return redirect()->back()->with('error_message', 'Your Account is Deactivated Contact with admin!!!');
+                        }
                         if($exsistUser > 0)
                         {
                             if($sessionData->role == 2)
@@ -621,7 +626,7 @@ class FrontController extends Controller
                                                                     <tr><td style='padding: 8px 15px'>Auto-generated from the Ecosymbiont Website.</td></tr>
                                                                 </table>";
                                 $this->sendMail($postData['email'], $subject, $message);
-                                return redirect(url('otpvalidation'))->with('success_message', 'Your OTP was successfully send your registerd mail! Please check your email for your OTP.');
+                                return redirect(url('otpvalidation'))->with('success_message', 'Your OTP was successfully send your registered mail! Please check your email for your OTP.');
                             } else {
                                 return redirect()->back()->with('error_message', 'User Not Registered kindly signup first !!!');
                             }
