@@ -627,7 +627,7 @@ class FrontController extends Controller
                                     return redirect(url('otpvalidation'))->with('success_message', 'Your OTP has been successfully sent to your registered email address. Please check your email to retrieve the OTP.');
                                 }                                                                      
                             } else {
-                                return redirect()->back()->with('error_message', 'User Not Registered kindly signup first !!!');
+                                return redirect()->back()->with('error_message', 'User not registered kindly signup first !!!');
                             }
                         } else {
                             return redirect()->back()->with('error_message', 'All Fields Required !!!');
@@ -689,7 +689,7 @@ class FrontController extends Controller
                                 return redirect()->back()->with('error_message', 'New & Old Password Can\'t Be Same !!!');
                             }
                         } else {
-                            return redirect()->back()->with('error_message', 'New & Confirm Password Does Not Matched !!!');
+                            return redirect()->back()->with('error_message', 'New & confirm password doesn\'t matched !!!');
                         }                    
                 } else {
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');
