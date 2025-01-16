@@ -707,7 +707,7 @@ class FrontController extends Controller
                                 //                                     <tr><td style='padding: 8px 15px'>Auto-generated from the Ecosymbiont Website.</td></tr>
                                 //                                 </table>";
                                 // $this->sendMail($postData['email'], $subject, $message);
-                                return redirect(url('resetpassword/'.$checkValue->id))->with('success_message', 'Your OTP was successfully validated! Please reset your password and sign up.');
+                                return redirect(url('resetpassword/'.Helper::encoded($checkValue->id)))->with('success_message', 'Your OTP was successfully validated! Please reset your password and sign up.');
                             } else {
                                 return redirect()->back()->with('error_message', 'OTP is not validated !!!');
                             }
@@ -721,7 +721,7 @@ class FrontController extends Controller
         {            
             $title                          = 'Reset Password';
             $page_name                      = 'resetpassword'; 
-            $user_id                        = $id;   
+            $user_id                        = Helper::decode($id);   
             $data['search_keyword']         = '';        
             if ($request->isMethod('post')) {
                 $postData = $request->all();
