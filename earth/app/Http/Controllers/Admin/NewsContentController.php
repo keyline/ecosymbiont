@@ -69,6 +69,7 @@ class NewsContentController extends Controller
                 'media'                     => 'required',     
                 'is_feature'                => 'required',  
                 'is_popular'                => 'required',  
+                'is_hot'                    => 'required',  
                 'subtitle'                  => 'required', 
             ];
             
@@ -169,6 +170,7 @@ class NewsContentController extends Controller
                     'keywords'                  => $postData['keywords'] ?? '',     
                     'is_feature'                => $postData['is_feature'],  
                     'is_popular'                => $postData['is_popular'],  
+                    'is_hot'                    => $postData['is_hot'],  
                     'short_desc'                => $postData['short_desc'] ?? '',    
                 ];
                 //   dd($fields);                                 
@@ -244,6 +246,7 @@ class NewsContentController extends Controller
                 'media'                     => 'required',     
                 'is_feature'                => 'required',  
                 'is_popular'                => 'required',  
+                'is_hot'                    => 'required',  
                 'subtitle'                 => 'required', 
             ];     
             if ($this->validate($request, $rules)) {
@@ -339,7 +342,8 @@ class NewsContentController extends Controller
                     'long_desc'                 => $postData['long_desc'] ?? '',     
                     'keywords'                  => $postData['keywords'] ?? '',     
                     'is_feature'                => $postData['is_feature'],  
-                    'is_popular'                => $postData['is_popular'],                      
+                    'is_popular'                => $postData['is_popular'], 
+                    'is_hot'                    => $postData['is_hot'],                      
                     'short_desc'                => $postData['short_desc'] ?? '', 
                 ];
                     //  dd($fields);                  
@@ -506,7 +510,8 @@ class NewsContentController extends Controller
                 'long_desc'                 => $postData['long_desc'] ?? '',     
                 'keywords'                  => $postData['keywords'] ?? '',     
                 'is_feature'                => $postData['is_feature'],  
-                'is_popular'                => $postData['is_popular'],  
+                'is_popular'                => $postData['is_popular'],
+                'is_hot'                    => $postData['is_hot'],   
                 'bio_short'                => $postData['author_short_bio'] ?? '',  
                 'nelp_form_number'          => $nelp_form_number ?? '',
                 'nelp_form_pdf'            => $nelp_pdf ?? '', 
@@ -527,7 +532,8 @@ class NewsContentController extends Controller
                 'country'                   => 'required',   
                 'media'                     => 'required',     
                 'is_feature'                => 'required',  
-                'is_popular'                => 'required',  
+                'is_popular'                => 'required', 
+                'is_hot'                    => 'required', 
                 'subtitle'                 => 'required', 
             ];     
             if ($this->validate($request, $rules)) {
@@ -642,7 +648,8 @@ class NewsContentController extends Controller
                     'long_desc'                 => $postData['long_desc'] ?? '',     
                     'keywords'                  => $postData['keywords'] ?? '',     
                     'is_feature'                => $postData['is_feature'],  
-                    'is_popular'                => $postData['is_popular'],  
+                    'is_popular'                => $postData['is_popular'],
+                    'is_hot'                    => $postData['is_hot'],  
                     'author_short_bio'                => $postData['author_short_bio'] ?? '',  
                     'nelp_form_number'          => $nelp_form_number,
                     'nelp_form_file'            => $nelp_pdf,                                                          
@@ -690,6 +697,7 @@ class NewsContentController extends Controller
                         'keywords'                  => $postData['keywords'] ?? '',     
                         'is_feature'                => $postData['is_feature'],  
                         'is_popular'                => $postData['is_popular'],  
+                        'is_hot'                    => $postData['is_hot'],
                         'bio_short'                => $postData['author_short_bio'] ?? '',  
                         'nelp_form_number'          => $nelp_form_number ?? '',
                         'nelp_form_pdf'            => $nelp_pdf ?? '', 
