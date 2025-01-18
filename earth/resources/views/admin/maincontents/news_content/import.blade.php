@@ -613,6 +613,15 @@ $controllerRoute = $module['controller_route'];
                             </div>
                         </div> 
                         <div class="row mb-3">
+                            <label for="is_hot" class="col-md-2 col-lg-2 col-form-label">25) Is Hot</label>
+                            <div class="col-md-10 col-lg-10">
+                                <input type="radio" id="is_hot_yes" name="is_hot" value="1" @checked(old('is_hot', $is_hot) == 1)>
+                                <label for="is_hot_yes">Yes</label>
+                                <input type="radio" id="is_hot_no" name="is_hot" value="0" @checked(old('is_hot', $is_hot) == 0)>
+                                <label for="is_hot_no">No</label>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
                             <label for="nelp_pdf" class="col-md-2 col-lg-2 col-form-label">27) Upload NELP</label>
                             <div class="col-md-10 col-lg-10">
                                 <input type="file" name="nelp_pdf" class="form-control" id="nelp_pdf" accept="application/pdf">                                                                
