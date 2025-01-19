@@ -1120,7 +1120,10 @@ class FrontController extends Controller
                                        } else {
                                            $narrativeimageFile[] = null;                                    
                                        }
-                                   }                                                                                        
+                                   } 
+                                   else {
+                                    return redirect()->back()->with(['error_message' => 'Please Upload narrative image File !!!']);
+                                }                                                                                       
                                } 
                            }                                          
                            /* narrative images details */                              
@@ -1185,7 +1188,7 @@ class FrontController extends Controller
                                    'bio_short'               => $postData['bio_short'],
                                    'bio_long'               => $postData['bio_long'],  
                                ];
-                                //    Helper::pr($fields);
+                                    Helper::pr($fields);
 
                                /* submission email */
                                 $generalSetting             = GeneralSetting::find('1');                            
@@ -1248,10 +1251,7 @@ class FrontController extends Controller
                                        } else {
                                            $artimageFile[] = null;                                    
                                        }
-                                   }  
-                                   else {
-                                    return redirect()->back()->withInput()->with(['error_message' => 'Please Upload art image File !!!']);
-                                }                                                                                      
+                                   }                                                                                                                      
                                } 
                            }                                          
                            /* art images details */
