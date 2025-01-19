@@ -1132,7 +1132,7 @@ class FrontController extends Controller
                                if ($imageFile != '') {
                                 $old_imageName      = $imageFile->getClientOriginalName();
                                 // Save the file name in the session
-                                session()->flash('narrative_file', $old_imageName);
+                                // session()->flash('narrative_file', $old_imageName);
                                 $imageName      = $article_no;
                                // Get file extension
                                  $fileExtension = pathinfo($old_imageName, PATHINFO_EXTENSION);                                 
@@ -1145,7 +1145,7 @@ class FrontController extends Controller
                                    }
                                } 
                                else {
-                                   return redirect()->back()->withInput()->with(['error_message' => 'Please Upload narrative File !!!']);
+                                   return redirect()->back()->withInput(['narrative_file_name' => $old_imageName])->with(['error_message' => 'Please Upload narrative File !!!']);
                                }
                            /* narrative doc file */
                            //save to database//
