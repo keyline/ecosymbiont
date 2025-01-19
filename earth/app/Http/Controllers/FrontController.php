@@ -1090,6 +1090,28 @@ class FrontController extends Controller
 
                     if($postData['co_authors'] == '0'){
                         if($postData['submission_types'] == '1'){ 
+
+                            /* narrative doc file */
+                            $imageFile      = $request->file('narrative_file');
+                            if ($imageFile != '') {
+                             $old_fileName      = $imageFile->getClientOriginalName();
+                             // Save the file name in the session
+                             session()->flash('narrative_file', $old_fileName);
+                             $imageName      = $article_no;
+                            // Get file extension
+                              $fileExtension = pathinfo($old_fileName, PATHINFO_EXTENSION);                                 
+                             $newFileName = $imageName . '.' . $fileExtension;
+                                $uploadedFile   = $this->upload_single_file('narrative_file', $newFileName, 'narrative', 'word');
+                                if ($uploadedFile['status']) {
+                                    $narrative_file = $uploadedFile['newFilename'];
+                                } else {
+                                    return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                                }
+                            } 
+                            else {
+                                return redirect()->back()->withInput()->with(['error_message' => 'Please Upload narrative File !!!']);
+                            }
+                        /* narrative doc file */
                            
                            /* narrative images details */
                            // Define the number of co-authors you want to handle (e.g., 3 in this case)
@@ -1127,27 +1149,7 @@ class FrontController extends Controller
                            }                                          
                            /* narrative images details */                              
    
-                           /* narrative doc file */
-                               $imageFile      = $request->file('narrative_file');
-                               if ($imageFile != '') {
-                                $old_imageName      = $imageFile->getClientOriginalName();
-                                // Save the file name in the session
-                                // session()->flash('narrative_file', $old_imageName);
-                                $imageName      = $article_no;
-                               // Get file extension
-                                 $fileExtension = pathinfo($old_imageName, PATHINFO_EXTENSION);                                 
-                                $newFileName = $imageName . '.' . $fileExtension;
-                                   $uploadedFile   = $this->upload_single_file('narrative_file', $newFileName, 'narrative', 'word');
-                                   if ($uploadedFile['status']) {
-                                       $narrative_file = $uploadedFile['newFilename'];
-                                   } else {
-                                       return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
-                                   }
-                               } 
-                               else {
-                                   return redirect()->back()->withInput(['narrative_file_name' => $old_imageName])->with(['error_message' => 'Please Upload narrative File !!!']);
-                               }
-                           /* narrative doc file */
+                           
                            //save to database//
                            if ($this->validate($request, $rules)) {                
                                $fields = [
