@@ -466,7 +466,7 @@ use Illuminate\Support\Facades\DB;
                                         ?>                                         
                                             @foreach ($sub_category as $sub)
                                                 <!-- <option value="{{ $parent->id }}" @selected($parent->id == $titleId)> -->
-                                                <input type="radio" id="yes" name="section_ert" value="{{ $sub->id }}"  @checked(old('section_ert', $sub->id) == $news_categoryId) >
+                                                <input type="radio" id="yes" name="section_ert" value="{{ $sub->id }}"  @checked(old('section_ert') == $sub->id) >
                                                 <label for="yes">{{$parent->sub_category}}: {{ $sub->sub_category }}</label> <br>
                                                     <!-- {{ $data->name }}</option> -->
                                             @endforeach
