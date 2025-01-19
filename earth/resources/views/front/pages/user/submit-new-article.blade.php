@@ -693,7 +693,7 @@ use Illuminate\Support\Facades\DB;
                                         <label for="art_video_desc" class="col-md-2 col-lg-4 col-form-label">17C2) TYPE C: descriptive narrative for video (100-250 words)
                                         </label>
                                         <div class="col-md-10 col-lg-8">
-                                            <textarea class="form-control" id="art_video_desc" name="art_video_desc" rows="4" cols="50" placeholder="Your art_video_desc here..." ><?= $art_video_desc ?></textarea>
+                                            <textarea class="form-control" id="art_video_desc" name="art_video_desc" rows="4" cols="50" placeholder="Your art_video_desc here..." >{{ old('art_video_desc', $art_video_desc ?? '') }}</textarea>
                                             <div id="art_video_descError" class="error"></div>
                                         </div>
                                     </div>
