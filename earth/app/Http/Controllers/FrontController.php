@@ -1251,7 +1251,9 @@ class FrontController extends Controller
                                            $artimageFile[] = null;                                    
                                        }
                                    }                                                                                                                      
-                               } 
+                               } else {
+                                return redirect()->back()->with(['error_message' => 'Please Upload art image File !!!']);
+                            }   
                            }                                          
                            /* art images details */
    
