@@ -1260,7 +1260,7 @@ class FrontController extends Controller
                             }   
                            }   
                            if($postData['art_desc'] == ''){
-                               return redirect()->back()->withInput()->with(['error_message' => 'Please enter art description !!!']);
+                               return redirect()->back()->withInput()->with(['error_message' => 'Please upload art image, caption and with descriptive narrative !!!']);
                            }
                            /* art images details */
    
