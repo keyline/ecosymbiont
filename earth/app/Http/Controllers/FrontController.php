@@ -1122,7 +1122,7 @@ class FrontController extends Controller
                                        }
                                    }                                                                                                                        
                                } else {
-                                return redirect()->back()->with(['error_message' => 'Please Upload narrative image File !!!']);
+                                return redirect()->back()->withInput()->with(['error_message' => 'Please Upload narrative image File !!!']);
                             }   
                            }                                          
                            /* narrative images details */                              
