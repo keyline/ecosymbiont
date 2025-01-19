@@ -1120,11 +1120,10 @@ class FrontController extends Controller
                                        } else {
                                            $narrativeimageFile[] = null;                                    
                                        }
-                                   } 
-                                   else {
-                                    return redirect()->back()->with(['error_message' => 'Please Upload narrative image File !!!']);
-                                }                                                                                       
-                               } 
+                                   }                                                                                                                        
+                               } else {
+                                return redirect()->back()->with(['error_message' => 'Please Upload narrative image File !!!']);
+                            }   
                            }                                          
                            /* narrative images details */                              
    
