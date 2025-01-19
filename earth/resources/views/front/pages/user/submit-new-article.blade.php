@@ -70,7 +70,8 @@ use Illuminate\Support\Facades\DB;
                 $explanation = $row->explanation;  
                 $explanation_submission = $row->explanation_submission;              
                 $titleId = $row->titleId;  
-                $news_categoryId = $row->section_ertId;
+                // $news_categoryId = $row->section_ertId;
+                $news_categoryId = $row->section_ertId ?? '';
                 $pronounId = $row->pronounId;
                 $subtitle = $row->subtitle;
                 $submission_types = $row->submission_types;
@@ -465,7 +466,7 @@ use Illuminate\Support\Facades\DB;
                                         ?>                                         
                                             @foreach ($sub_category as $sub)
                                                 <!-- <option value="{{ $parent->id }}" @selected($parent->id == $titleId)> -->
-                                                <input type="radio" id="yes" name="section_ert" value="{{ $sub->id }}"  @checked($sub->id == $news_categoryId) >
+                                                <input type="radio" id="yes" name="section_ert" value="{{ $sub->id }}"  @checked(old('section_ert', $sub->id) == $news_categoryId) >
                                                 <label for="yes">{{$parent->sub_category}}: {{ $sub->sub_category }}</label> <br>
                                                     <!-- {{ $data->name }}</option> -->
                                             @endforeach
