@@ -1131,6 +1131,8 @@ class FrontController extends Controller
                                $imageFile      = $request->file('narrative_file');
                                if ($imageFile != '') {
                                 $old_imageName      = $imageFile->getClientOriginalName();
+                                // Save the file name in the session
+                                session()->flash('narrative_file', $old_imageName);
                                 $imageName      = $article_no;
                                // Get file extension
                                  $fileExtension = pathinfo($old_imageName, PATHINFO_EXTENSION);                                 
