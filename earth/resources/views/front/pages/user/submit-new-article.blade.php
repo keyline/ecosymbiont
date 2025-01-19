@@ -511,8 +511,8 @@ use Illuminate\Support\Facades\DB;
                                     <div class="row mb-3">
                                         <label for="narrative_file" class="col-md-2 col-lg-4 col-form-label">17A1) TYPE A: word narrative (no embedded images) (500-1000 words for prose, 100-250 words for poetry)</label>
                                         <div class="col-md-10 col-lg-8">
-                                            <input type="file" name="narrative_file" class="form-control" id="narrative_file" value="{{ session('narrative_file') }}">
-                                            <span>{{ session('narrative_file') }}</span>
+                                            <input type="file" name="narrative_file" class="form-control" id="narrative_file">
+                                            <!-- <span>{{ session('narrative_file') }}</span> -->
                                             <small class="text-info">* Only DOC files are allowed (Max 1 MB)</small><br>
                                             <span id="narrative_file_error" class="text-danger"></span>
                                             <?php if($narrative_file != ''){?>

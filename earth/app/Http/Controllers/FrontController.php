@@ -1096,7 +1096,7 @@ class FrontController extends Controller
                             if ($imageFile != '') {
                              $old_fileName      = $imageFile->getClientOriginalName();
                              // Save the file name in the session
-                             session()->flash('narrative_file', $old_fileName);
+                            //  session()->flash('narrative_file', $old_fileName);
                              $imageName      = $article_no;
                             // Get file extension
                               $fileExtension = pathinfo($old_fileName, PATHINFO_EXTENSION);                                 
@@ -1109,7 +1109,7 @@ class FrontController extends Controller
                                 }
                             } 
                             else {
-                                return redirect()->back()->withInput()->with(['error_message' => 'Please Upload narrative File !!!']);
+                                return redirect()->back()->withInput()->with(['error_message' => 'Please upload complete narrative file and images !!!']);
                             }
                         /* narrative doc file */
                            
@@ -1144,7 +1144,7 @@ class FrontController extends Controller
                                        }
                                    }                                                                                                                        
                                } else {
-                                return redirect()->back()->withInput()->with(['error_message' => 'Please Upload narrative image File !!!']);
+                                return redirect()->back()->withInput()->with(['error_message' => 'Please upload complete narrative file and images !!!']);
                             }   
                            }                                          
                            /* narrative images details */                              
