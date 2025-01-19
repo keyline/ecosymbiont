@@ -564,7 +564,7 @@ use Illuminate\Support\Facades\DB;
                                                     <div class="row image-upload-div" id="image_upload_1">
                                                         <label for="first_image_file" class="col-md-2 col-lg-4 col-form-label">17A3a1) TYPE A: image 1 accompanying word narrative</label>
                                                         <div class="col-md-10 col-lg-8">
-                                                            <input type="file" name="image_file_1" class="form-control" id="image_file_1">
+                                                            <input type="file" name="image_file_1" class="form-control" id="image_file_1" value="{{ old('image_file_1', $image_file_0 ?? '') }}">
                                                             <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small>
                                                             <span id="image_file_1_error" class="text-danger"></span>                                                        
                                                             <?php if(isset($image_files[0]) && $image_files[0] != ''){?>
@@ -593,7 +593,7 @@ use Illuminate\Support\Facades\DB;
                                                     <div class="row image-upload-div" id="image_upload_{{ $i }}" >
                                                         <label for="image_file_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17A3a{{$i}}) TYPE A: image {{ $i }} accompanying word narrative</label>
                                                         <div class="col-md-10 col-lg-8">
-                                                            <input type="file" name="image_file_{{ $i }}" class="form-control" id="image_file_{{ $i }}">
+                                                            <input type="file" name="image_file_{{ $i }}" class="form-control" id="image_file_{{ $i }}" value="{{ old('image_file_'.$i, $image_files[$i-1] ?? '') }}">
                                                             <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small>
                                                             <span id="image_file_{{ $i }}_error" class="text-danger"></span>                                                        
                                                             <?php if(isset($image_files[$i-1]) && $image_files[$i-1] != ''){?>
