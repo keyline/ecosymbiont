@@ -501,7 +501,7 @@ use Illuminate\Support\Facades\DB;
                                                 $data = $submission_type[$i];
                                             @endphp
                                             <!-- Use Blade's templating syntax instead of echo inside @php block -->                                        
-                                            <input type="radio" id="submission_types_<?=$data->id?>" name="submission_types" value="<?php echo $data->id ?>" @checked($data->id == $submission_types)>
+                                            <input type="radio" id="submission_types_<?=$data->id?>" name="submission_types" value="<?php echo $data->id ?>" required @checked($data->id == $submission_types)>
                                             <label for="submission_types"><?php echo $data->name?></label><br>
                                         @endfor
                                     @endif                            
