@@ -1111,7 +1111,7 @@ class FrontController extends Controller
                             else {
                                 return redirect()->back()->withInput()->with(['error_message' => 'Please upload complete narrative file and images !!!']);
                             }
-                        /* narrative doc file */
+                            /* narrative doc file */
                            
                            /* narrative images details */
                            // Define the number of co-authors you want to handle (e.g., 3 in this case)
@@ -1398,7 +1398,7 @@ class FrontController extends Controller
                                    'bio_short'               => $postData['bio_short'],
                                    'bio_long'               => $postData['bio_long'],  
                                ];
-                                    Helper::pr($fields);
+                                    // Helper::pr($fields);
 
                                /* submission email */
                                 $generalSetting             = GeneralSetting::find('1');                            
@@ -1500,8 +1500,10 @@ class FrontController extends Controller
                                             } else {
                                                 $narrativeimageFile[] = null;                                    
                                             }
-                                        }                                                                                        
-                                    } 
+                                        }                                                                                         
+                                    } else {
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please upload complete narrative file and images !!!']);
+                                    }  
                                 }                                               
                                 /* narrative images details */
                         
@@ -1523,8 +1525,8 @@ class FrontController extends Controller
                                         }
                                     } 
                                     else {
-                                        return redirect()->back()->withInput()>with(['error_message' => 'Please Upload narrative File !!!']);
-                                    }
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please upload complete narrative file and images !!!']);
+                                    }   
                                 /* narrative doc file */
                                 
                                 //save to database//
@@ -1640,8 +1642,14 @@ class FrontController extends Controller
                                                 $artimageFile[] = null;                                    
                                             }
                                         }                                                                                        
-                                    } 
-                                }                                               
+                                    } else {
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please upload art image File !!!']);
+                                    }   
+                                   }   
+                                   if($postData['art_desc'] == ''){
+                                       return redirect()->back()->withInput()->with(['error_message' => 'Please upload art image, caption and with descriptive narrative !!!']);
+                                   }
+                                // }                                               
                                 /* art images details */
     
                                 if ($this->validate($request, $rules)) {                
@@ -1739,7 +1747,12 @@ class FrontController extends Controller
                                     } else {
                                         return redirect()->back()->withInput()->with(['error_message' => $uploadedFile['message']]);
                                     }
-                                }                             
+                                } else {
+                                    return redirect()->back()->withInput()->with(['error_message' => 'Please Upload art_video File !!!']);
+                                }
+                                if($postData['art_video_desc'] == ''){
+                                 return redirect()->back()->withInput()->with(['error_message' => 'Please upload art video and with descriptive narrative !!!']);
+                             }                            
                                 /* art_video file */   
     
                                 if ($this->validate($request, $rules)) {                
