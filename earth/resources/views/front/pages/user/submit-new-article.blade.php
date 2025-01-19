@@ -669,7 +669,7 @@ use Illuminate\Support\Facades\DB;
                                         <label for="art_desc" class="col-md-2 col-lg-4 col-form-label">17B3) TYPE B: descriptive narrative for art (100-250 words)
                                         </label>
                                         <div class="col-md-10 col-lg-8">
-                                            <textarea class="form-control" id="art_desc" name="art_desc" rows="4" cols="50" placeholder="Your art_desc here..." ><?= $art_desc ?></textarea>
+                                            <textarea class="form-control" id="art_desc" name="art_desc" rows="4" cols="50" placeholder="Your art_desc here..." >{{ old('art_desc', $art_desc ?? '') }}</textarea>
                                             <div id="art_descError" class="error"></div>
                                         </div>
                                     </div>                           
