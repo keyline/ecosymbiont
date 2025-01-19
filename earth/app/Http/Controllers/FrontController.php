@@ -1329,7 +1329,7 @@ class FrontController extends Controller
                                 } else {
                                     return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
                                 }                               
-                       } else {
+                       } else if($postData['submission_types'] == '3') {
                            /* art_video file */
                            $imageFile      = $request->file('art_video_file');
                            if ($imageFile != '') {
@@ -1420,6 +1420,8 @@ class FrontController extends Controller
                             } else {
                                 return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
                             }                               
+                       } else{
+                           return redirect()->back()->withInput()->with(['error_message' => 'Please Select Submission Type !!!']);
                        }                
                    } else {                    
                         /* co-author details */
