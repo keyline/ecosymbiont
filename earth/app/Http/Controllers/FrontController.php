@@ -1143,7 +1143,7 @@ class FrontController extends Controller
                                    }
                                } 
                                else {
-                                   return redirect()->back()->with(['error_message' => 'Please Upload narrative File !!!']);
+                                   return redirect()->back()->withInput()->with(['error_message' => 'Please Upload narrative File !!!']);
                                }
                            /* narrative doc file */
                            //save to database//
@@ -1252,7 +1252,7 @@ class FrontController extends Controller
                                        }
                                    }                                                                                                                      
                                } else {
-                                return redirect()->back()->with(['error_message' => 'Please Upload art image File !!!']);
+                                return redirect()->back()->withInput()->with(['error_message' => 'Please Upload art image File !!!']);
                             }   
                            }                                          
                            /* art images details */
@@ -1297,7 +1297,7 @@ class FrontController extends Controller
                                    'bio_short'               => $postData['bio_short'],
                                    'bio_long'               => $postData['bio_long'],  
                                ];
-                                //    Helper::pr($fields);
+                                    Helper::pr($fields);
 
                                 /* submission email */
                                 $generalSetting             = GeneralSetting::find('1');                            
@@ -1388,7 +1388,7 @@ class FrontController extends Controller
                                    'bio_short'               => $postData['bio_short'],
                                    'bio_long'               => $postData['bio_long'],  
                                ];
-                                //    Helper::pr($fields);
+                                    Helper::pr($fields);
 
                                /* submission email */
                                 $generalSetting             = GeneralSetting::find('1');                            
