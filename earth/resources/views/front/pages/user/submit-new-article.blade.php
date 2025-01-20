@@ -492,7 +492,7 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="submission_types" class="col-md-2 col-lg-4 col-form-label blue-text">17) Select the type of your Creative-Work
+                                    <label for="submission_types" class="col-md-2 col-lg-4 col-form-label blue-text">17) Select the type of your creative-Work
                                     </label>
                                     <div class="col-md-10 col-lg-8">                                
                                     @if ($submission_type)

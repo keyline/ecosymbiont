@@ -1116,38 +1116,42 @@ class FrontController extends Controller
                            /* narrative images details */
                            // Define the number of co-authors you want to handle (e.g., 3 in this case)
                            $narrativeImagesCount = $postData['narrative_images'];
-                           // Initialize empty arrays to hold the co-author data
-                           $narrativeImageDesc = [];
-                           $narrativeimageFile = [];                
-   
-                           // Loop through the number of co-authors and collect the data into arrays
-                           for ($i = 1; $i <= $narrativeImagesCount; $i++) {
-                               // Check if co-author name exists, to avoid null entries
-                               if ($request->input("narrative_image_desc_{$i}") !== null) {
-                                   $narrativeImageDesc[] = $request->input("narrative_image_desc_{$i}");
-   
-                               // Add image file to the array (it can be null if no file is uploaded)                        
-                                   $imageFile      = $request->file("image_file_{$i}");                            
-                                   if ($imageFile != '') {                                
-                                          $old_imageName      = $imageFile->getClientOriginalName();
-                                           $imageName      = $article_no;
-                                          // Get file extension
-                                            $fileExtension = pathinfo($old_imageName, PATHINFO_EXTENSION);
-                                            // Append the desired suffix ('a', 'b', 'c', etc.) based on $i
-                                            $suffix = chr(96 + $i); // Convert $i to a letter: 1 = 'a', 2 = 'b', 3 = 'c', etc.
-                                           $newFileName = $imageName . '-' . $suffix . '.' . $fileExtension;                                        
-                                       $uploadedFile   = $this->upload_single_file("image_file_{$i}", $newFileName, 'narrative', 'image');                                
-                                       if ($uploadedFile['status']) {
-                                           $narrativeimageFile[] = $uploadedFile['newFilename'];                                
-                                       } else {
-                                           $narrativeimageFile[] = null;                                    
-                                       }
-                                   }                                                                                                                        
-                               } else {
-                                return redirect()->back()->withInput()->with(['error_message' => 'Please upload complete narrative file and images !!!']);
-                            }   
-                           }                                          
-                           /* narrative images details */                              
+                           if ($narrativeImagesCount != null) {
+                               return redirect()->back()->withInput()->with(['error_message' => 'Please select number of narrative image !!!']);
+                           } else{
+                                // Initialize empty arrays to hold the co-author data
+                                $narrativeImageDesc = [];
+                                $narrativeimageFile = [];                
+        
+                                // Loop through the number of co-authors and collect the data into arrays
+                                for ($i = 1; $i <= $narrativeImagesCount; $i++) {
+                                    // Check if co-author name exists, to avoid null entries
+                                    if ($request->input("narrative_image_desc_{$i}") !== null) {
+                                        $narrativeImageDesc[] = $request->input("narrative_image_desc_{$i}");
+        
+                                    // Add image file to the array (it can be null if no file is uploaded)                        
+                                        $imageFile      = $request->file("image_file_{$i}");                            
+                                        if ($imageFile != '') {                                
+                                                $old_imageName      = $imageFile->getClientOriginalName();
+                                                $imageName      = $article_no;
+                                                // Get file extension
+                                                    $fileExtension = pathinfo($old_imageName, PATHINFO_EXTENSION);
+                                                    // Append the desired suffix ('a', 'b', 'c', etc.) based on $i
+                                                    $suffix = chr(96 + $i); // Convert $i to a letter: 1 = 'a', 2 = 'b', 3 = 'c', etc.
+                                                $newFileName = $imageName . '-' . $suffix . '.' . $fileExtension;                                        
+                                            $uploadedFile   = $this->upload_single_file("image_file_{$i}", $newFileName, 'narrative', 'image');                                
+                                            if ($uploadedFile['status']) {
+                                                $narrativeimageFile[] = $uploadedFile['newFilename'];                                
+                                            } else {
+                                                $narrativeimageFile[] = null;                                    
+                                            }
+                                        }                                                                                                                        
+                                    } else {
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please upload complete narrative file and images !!!']);
+                                    }   
+                                }                                          
+                                /* narrative images details */  
+                            }                            
    
                            
                            //save to database//
