@@ -1230,6 +1230,9 @@ class FrontController extends Controller
                                 }                               
                        } else if($postData['submission_types'] == '2'){
                            /* art images details */
+                           if (!isset($postData['art_images'])) {
+                            return redirect()->back()->withInput()->with(['error_message' => 'Please select number of narrative image !!!']);
+                        } else{
                            // Define the number of co-authors you want to handle (e.g., 3 in this case)
                            $artImagesCount = $postData['art_images'];
                            // Initialize empty arrays to hold the co-author data
@@ -1263,7 +1266,8 @@ class FrontController extends Controller
                                } else {
                                 return redirect()->back()->withInput()->with(['error_message' => 'Please upload art image File !!!']);
                             }   
-                           }   
+                           }  
+                        } 
                            if($postData['art_desc'] == ''){
                                return redirect()->back()->withInput()->with(['error_message' => 'Please upload art image, caption and with descriptive narrative !!!']);
                            }
