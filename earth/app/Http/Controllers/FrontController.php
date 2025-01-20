@@ -1481,42 +1481,44 @@ class FrontController extends Controller
                             if($postData['submission_types'] == '1'){    
                             
                                 /* narrative images details */
-                                // Define the number of co-authors you want to handle (e.g., 3 in this case)
-                                $narrativeImagesCount = $postData['narrative_images'];
-                                // Initialize empty arrays to hold the co-author data
-                                $narrativeImageDesc = [];
-                                $narrativeimageFile = [];                
-    
-                                // Loop through the number of co-authors and collect the data into arrays
-                                for ($i = 1; $i <= $narrativeImagesCount; $i++) {
-                                    // Check if co-author name exists, to avoid null entries
-                                    if ($request->input("narrative_image_desc_{$i}") !== null) {
-                                        $narrativeImageDesc[] = $request->input("narrative_image_desc_{$i}");
-    
-                                    // Add image file to the array (it can be null if no file is uploaded)                        
-                                        $imageFile      = $request->file("image_file_{$i}");                            
-                                        if ($imageFile != '') {       
-                                            $old_imageName      = $imageFile->getClientOriginalName();
-                                            $imageName      = $article_no;
-                                           // Get file extension
-                                             $fileExtension = pathinfo($old_imageName, PATHINFO_EXTENSION);
-                                             // Append the desired suffix ('a', 'b', 'c', etc.) based on $i
-                                             $suffix = chr(96 + $i); // Convert $i to a letter: 1 = 'a', 2 = 'b', 3 = 'c', etc.
-                                            $newFileName = $imageName . '-' . $suffix . '.' . $fileExtension;
-                                            $uploadedFile   = $this->upload_single_file("image_file_{$i}", $newFileName, 'narrative', 'image');                                
-                                            if ($uploadedFile['status']) {
-                                                $narrativeimageFile[] = $uploadedFile['newFilename'];                                
-                                            } else {
-                                                $narrativeimageFile[] = null;                                    
-                                            }
-                                        }                                                                                         
-                                    } else {
-                                        return redirect()->back()->withInput()->with(['error_message' => 'Please upload complete narrative file and images !!!']);
-                                    }  
-                                }                                               
-                                /* narrative images details */
-                        
-    
+                                if (!isset($postData['narrative_images'])) {
+                                    return redirect()->back()->withInput()->with(['error_message' => 'Please select number of narrative image !!!']);
+                                } else{
+                                    // Define the number of co-authors you want to handle (e.g., 3 in this case)
+                                    $narrativeImagesCount = $postData['narrative_images'];
+                                    // Initialize empty arrays to hold the co-author data
+                                    $narrativeImageDesc = [];
+                                    $narrativeimageFile = [];                
+        
+                                    // Loop through the number of co-authors and collect the data into arrays
+                                    for ($i = 1; $i <= $narrativeImagesCount; $i++) {
+                                        // Check if co-author name exists, to avoid null entries
+                                        if ($request->input("narrative_image_desc_{$i}") !== null) {
+                                            $narrativeImageDesc[] = $request->input("narrative_image_desc_{$i}");
+        
+                                        // Add image file to the array (it can be null if no file is uploaded)                        
+                                            $imageFile      = $request->file("image_file_{$i}");                            
+                                            if ($imageFile != '') {       
+                                                $old_imageName      = $imageFile->getClientOriginalName();
+                                                $imageName      = $article_no;
+                                            // Get file extension
+                                                $fileExtension = pathinfo($old_imageName, PATHINFO_EXTENSION);
+                                                // Append the desired suffix ('a', 'b', 'c', etc.) based on $i
+                                                $suffix = chr(96 + $i); // Convert $i to a letter: 1 = 'a', 2 = 'b', 3 = 'c', etc.
+                                                $newFileName = $imageName . '-' . $suffix . '.' . $fileExtension;
+                                                $uploadedFile   = $this->upload_single_file("image_file_{$i}", $newFileName, 'narrative', 'image');                                
+                                                if ($uploadedFile['status']) {
+                                                    $narrativeimageFile[] = $uploadedFile['newFilename'];                                
+                                                } else {
+                                                    $narrativeimageFile[] = null;                                    
+                                                }
+                                            }                                                                                         
+                                        } else {
+                                            return redirect()->back()->withInput()->with(['error_message' => 'Please upload complete narrative file and images !!!']);
+                                        }  
+                                    }                                               
+                                    /* narrative images details */
+                                }                            
                                 /* narrative doc file */
                                     $imageFile      = $request->file('narrative_file');
                                     if ($imageFile != '') {
@@ -1622,110 +1624,115 @@ class FrontController extends Controller
                             } else if($postData['submission_types'] == '2'){
     
                                 /* art images details */
-                                // Define the number of co-authors you want to handle (e.g., 3 in this case)
-                                $artImagesCount = $postData['art_images'];
-                                // Initialize empty arrays to hold the co-author data
-                                $artImageDesc = [];
-                                $artimageFile = [];                
-    
-                                // Loop through the number of co-authors and collect the data into arrays
-                                for ($i = 1; $i <= $artImagesCount; $i++) {
-                                    // Check if co-author name exists, to avoid null entries
-                                    if ($request->input("art_image_desc_{$i}") !== null) {
-                                        $artImageDesc[] = $request->input("art_image_desc_{$i}");
-    
-                                    // Add image file to the array (it can be null if no file is uploaded)                        
-                                        $imageFile      = $request->file("art_image_file_{$i}");                            
-                                        if ($imageFile != '') {                                                                       
-                                            $old_imageName      = $imageFile->getClientOriginalName();
-                                            $imageName      = $article_no;
-                                           // Get file extension
-                                             $fileExtension = pathinfo($old_imageName, PATHINFO_EXTENSION);
-                                             // Append the desired suffix ('a', 'b', 'c', etc.) based on $i
-                                             $suffix = chr(96 + $i); // Convert $i to a letter: 1 = 'a', 2 = 'b', 3 = 'c', etc.
-                                            $newFileName = $imageName . '-' . $suffix . '.' . $fileExtension;
-                                            $uploadedFile   = $this->upload_single_file("art_image_file_{$i}", $newFileName, 'art_image', 'image');                                
-                                            if ($uploadedFile['status']) {
-                                                $artimageFile[] = $uploadedFile['newFilename'];                                
-                                            } else {
-                                                $artimageFile[] = null;                                    
-                                            }
-                                        }                                                                                        
-                                    } else {
-                                        return redirect()->back()->withInput()->with(['error_message' => 'Please upload art image File !!!']);
+                                if (!isset($postData['art_images'])) {
+                                    return redirect()->back()->withInput()->with(['error_message' => 'Please select number of narrative image !!!']);
+                                }
+                                else{
+                                    // Define the number of co-authors you want to handle (e.g., 3 in this case)
+                                    $artImagesCount = $postData['art_images'];
+                                    // Initialize empty arrays to hold the co-author data
+                                    $artImageDesc = [];
+                                    $artimageFile = [];                
+        
+                                    // Loop through the number of co-authors and collect the data into arrays
+                                    for ($i = 1; $i <= $artImagesCount; $i++) {
+                                        // Check if co-author name exists, to avoid null entries
+                                        if ($request->input("art_image_desc_{$i}") !== null) {
+                                            $artImageDesc[] = $request->input("art_image_desc_{$i}");
+        
+                                        // Add image file to the array (it can be null if no file is uploaded)                        
+                                            $imageFile      = $request->file("art_image_file_{$i}");                            
+                                            if ($imageFile != '') {                                                                       
+                                                $old_imageName      = $imageFile->getClientOriginalName();
+                                                $imageName      = $article_no;
+                                            // Get file extension
+                                                $fileExtension = pathinfo($old_imageName, PATHINFO_EXTENSION);
+                                                // Append the desired suffix ('a', 'b', 'c', etc.) based on $i
+                                                $suffix = chr(96 + $i); // Convert $i to a letter: 1 = 'a', 2 = 'b', 3 = 'c', etc.
+                                                $newFileName = $imageName . '-' . $suffix . '.' . $fileExtension;
+                                                $uploadedFile   = $this->upload_single_file("art_image_file_{$i}", $newFileName, 'art_image', 'image');                                
+                                                if ($uploadedFile['status']) {
+                                                    $artimageFile[] = $uploadedFile['newFilename'];                                
+                                                } else {
+                                                    $artimageFile[] = null;                                    
+                                                }
+                                            }                                                                                        
+                                        } else {
+                                            return redirect()->back()->withInput()->with(['error_message' => 'Please upload art image File !!!']);
+                                        }   
                                     }   
-                                   }   
+                                }
                                    if($postData['art_desc'] == ''){
                                        return redirect()->back()->withInput()->with(['error_message' => 'Please upload art image, caption and with descriptive narrative !!!']);
                                    }
-                                // }                                               
-                                /* art images details */
+                                    // }                                               
+                                    /* art images details */
     
-                                if ($this->validate($request, $rules)) {                
-                                    $fields = [
-                                        'sl_no'                     => $next_sl_no,
-                                        'article_no'                => $article_no,
-                                        'user_id'                   => $user_id,          
-                                        'email'                     => $postData['email'],
-                                        'author_classification'     => $postData['author_classification'],
-                                        'co_authors'                => $postData['co_authors'],
-                                        'co_authors_position'       => $postData['co_authors_position'],
-                                        'co_author_names'           => json_encode($coAuthorNames),  // Storing as JSON string
-                                        'co_author_bios'            => json_encode($coAuthorBios),
-                                        'co_author_countries'       => json_encode($coAuthorCountries),
-                                        'co_author_organizations'   => json_encode($coAuthorOrganizations),
-                                        'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
-                                        'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
-                                        'co_author_classification'  => json_encode($coauthorClassification),                                
-                                        'first_name'                => $postData['first_name'],                                                                             
-                                        'for_publication_name'      => $postData['for_publication_name'],           
-                                        'pronounId'                 => $postData['pronoun'],
-                                        'orginal_work'              => $postData['orginal_work'],           
-                                        'copyright'                 => $postData['copyright'],
-                                        'invited'                   => $postData['invited'],
-                                        'invited_by'                => $invited_byInfo, 
-                                        'invited_by_email'          => $invited_emailInfo,
-                                        'participated'              => $postData['participated'],
-                                        'participated_info'         => $participatedInfo,
-                                        'explanation'               => $postData['explanation'],  
-                                        'explanation_submission'    => $postData['explanation_submission'],     
-                                        'titleId'                   => $postData['title'],                        
-                                        'creative_Work'             => $postData['creative_Work'],
-                                        'subtitle'                  => $postData['subtitle'],
-                                        'submission_types'          => $submission_typesInfo,
-                                        'section_ertId'             => $section_ertInfo,                                        
-                                        'art_images'                => $postData['art_images'],
-                                        'art_image_desc'            => json_encode($artImageDesc),  // Storing as JSON string
-                                        'art_image_file'            => json_encode($artimageFile),
-                                        'art_desc'                  => $postData['art_desc'],                                                                                                           
-                                        'country'                   => $postData['country'],
-                                        'state'                     => $postData['state'],
-                                        'city'                      => $postData['city'],
-                                        'organization_name'         => $postData['organization_name'],
-                                        'organization_website'      => $postData['organization_website'],
-                                        'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
-                                        'indigenous_affiliation'    => $postData['indigenous_affiliation'],
-                                        'expertise_areaId'          => $expertise_areaInfo,
-                                        'bio_short'               => $postData['bio_short'],
-                                        'bio_long'               => $postData['bio_long'],  
-                                    ];
-                                    //    Helper::pr($fields);
-                                    /* submission email */
-                                    $generalSetting             = GeneralSetting::find('1');                            
-                                    $fullName                   = $postData['first_name'];
-                                    $mailData                   = [
-                                        'fullName'                  => $fullName,
-                                        'email'                     => $postData['email'],
-                                        'article_no'                => $article_no,
-                                        'creative_Work'      => $postData['creative_Work'],
-                                    ];
-                                    $subject                    = $generalSetting->site_name.': Creative-Work submitted by ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
-                                    $message                    = view('email-templates.creative-work-submission',$mailData);
-                                    // echo $message;die;
-                                    $this->sendMail($postData['email'], $subject, $message);
-                                    $this->sendMail($generalSetting->system_email, $subject, $message);
-                                    /* submission email */
-                                    /* email log save */
+                                    if ($this->validate($request, $rules)) {                
+                                        $fields = [
+                                            'sl_no'                     => $next_sl_no,
+                                            'article_no'                => $article_no,
+                                            'user_id'                   => $user_id,          
+                                            'email'                     => $postData['email'],
+                                            'author_classification'     => $postData['author_classification'],
+                                            'co_authors'                => $postData['co_authors'],
+                                            'co_authors_position'       => $postData['co_authors_position'],
+                                            'co_author_names'           => json_encode($coAuthorNames),  // Storing as JSON string
+                                            'co_author_bios'            => json_encode($coAuthorBios),
+                                            'co_author_countries'       => json_encode($coAuthorCountries),
+                                            'co_author_organizations'   => json_encode($coAuthorOrganizations),
+                                            'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
+                                            'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
+                                            'co_author_classification'  => json_encode($coauthorClassification),                                
+                                            'first_name'                => $postData['first_name'],                                                                             
+                                            'for_publication_name'      => $postData['for_publication_name'],           
+                                            'pronounId'                 => $postData['pronoun'],
+                                            'orginal_work'              => $postData['orginal_work'],           
+                                            'copyright'                 => $postData['copyright'],
+                                            'invited'                   => $postData['invited'],
+                                            'invited_by'                => $invited_byInfo, 
+                                            'invited_by_email'          => $invited_emailInfo,
+                                            'participated'              => $postData['participated'],
+                                            'participated_info'         => $participatedInfo,
+                                            'explanation'               => $postData['explanation'],  
+                                            'explanation_submission'    => $postData['explanation_submission'],     
+                                            'titleId'                   => $postData['title'],                        
+                                            'creative_Work'             => $postData['creative_Work'],
+                                            'subtitle'                  => $postData['subtitle'],
+                                            'submission_types'          => $submission_typesInfo,
+                                            'section_ertId'             => $section_ertInfo,                                        
+                                            'art_images'                => $postData['art_images'],
+                                            'art_image_desc'            => json_encode($artImageDesc),  // Storing as JSON string
+                                            'art_image_file'            => json_encode($artimageFile),
+                                            'art_desc'                  => $postData['art_desc'],                                                                                                           
+                                            'country'                   => $postData['country'],
+                                            'state'                     => $postData['state'],
+                                            'city'                      => $postData['city'],
+                                            'organization_name'         => $postData['organization_name'],
+                                            'organization_website'      => $postData['organization_website'],
+                                            'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
+                                            'indigenous_affiliation'    => $postData['indigenous_affiliation'],
+                                            'expertise_areaId'          => $expertise_areaInfo,
+                                            'bio_short'               => $postData['bio_short'],
+                                            'bio_long'               => $postData['bio_long'],  
+                                        ];
+                                        //    Helper::pr($fields);
+                                        /* submission email */
+                                        $generalSetting             = GeneralSetting::find('1');                            
+                                        $fullName                   = $postData['first_name'];
+                                        $mailData                   = [
+                                            'fullName'                  => $fullName,
+                                            'email'                     => $postData['email'],
+                                            'article_no'                => $article_no,
+                                            'creative_Work'      => $postData['creative_Work'],
+                                        ];
+                                        $subject                    = $generalSetting->site_name.': Creative-Work submitted by ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
+                                        $message                    = view('email-templates.creative-work-submission',$mailData);
+                                        // echo $message;die;
+                                        $this->sendMail($postData['email'], $subject, $message);
+                                        $this->sendMail($generalSetting->system_email, $subject, $message);
+                                        /* submission email */
+                                        /* email log save */
                                         $postData2 = [
                                             'name'                  => $fullName,
                                             'email'                 => $postData['email'],
@@ -1733,10 +1740,10 @@ class FrontController extends Controller
                                             'message'               => $message
                                         ];
                                         EmailLog::insertGetId($postData2);
-                                    /* email log save */
+                                        /* email log save */
 
-                                    Article::insert($fields);
-                                    return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work submitted successfully!');
+                                        Article::insert($fields);
+                                        return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work submitted successfully!');
                                     } else {
                                         return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
                                     }                                    
