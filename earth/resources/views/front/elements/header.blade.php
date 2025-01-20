@@ -176,7 +176,7 @@ use App\Helpers\Helper;
                                     <h2><a href="<?=url('content/' . $rowContent->parent_category_slug. '/' . $rowContent->sub_category_slug . '/' . $rowContent->slug)?>"><?=$rowContent->new_title?></a></h2>
                                     <ul class="post-tags">
                                         <!-- <li><i class="fa fa-clock-o"></i><?=date_format(date_create($rowContent->created_at), "d M Y")?></li> -->
-                                        <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$rowContent->author_name?></a></li>
+                                        <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=implode(' ', array_slice(explode(' ', $rowContent->author_name), 0, 2))?>...</a></li>
                                     </ul>
                                 </div>
                             </div>
