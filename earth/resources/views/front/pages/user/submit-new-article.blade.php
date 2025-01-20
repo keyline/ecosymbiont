@@ -273,7 +273,7 @@ use Illuminate\Support\Facades\DB;
                                                                 <input type="checkbox" 
                                                                     name="co_ecosystem_affiliation_{{$i}}[]" 
                                                                     value="{{ $data->id }}" 
-                                                                    @if (isset($co_ecosystem_affiliations[$i-1]) && in_array($data->id, old("ecosystem_affiliation_{$i}", $co_ecosystem_affiliations[$i-1]) ?? [])) checked @endif>
+                                                                    @if (in_array($data->id, old("co_ecosystem_affiliation_{$i}", $co_ecosystem_affiliations[$i - 1] ?? []))) checked @endif>
                                                                 {{ $data->name }}<br>
                                                             @endforeach
                                                         @endif
