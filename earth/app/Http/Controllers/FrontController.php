@@ -1115,10 +1115,11 @@ class FrontController extends Controller
                            
                            /* narrative images details */
                            // Define the number of co-authors you want to handle (e.g., 3 in this case)
-                           $narrativeImagesCount = $postData['narrative_images'];
-                           if ($narrativeImagesCount != null) {
+                           
+                           if (!isset($postData['narrative_images'])) {
                                return redirect()->back()->withInput()->with(['error_message' => 'Please select number of narrative image !!!']);
                            } else{
+                                $narrativeImagesCount = $postData['narrative_images'];
                                 // Initialize empty arrays to hold the co-author data
                                 $narrativeImageDesc = [];
                                 $narrativeimageFile = [];                
