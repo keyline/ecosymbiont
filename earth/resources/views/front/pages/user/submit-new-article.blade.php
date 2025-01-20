@@ -476,7 +476,7 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>     
                                 <div class="row mb-3">
-                                    <label for="creative_Work" class="col-md-2 col-lg-4 col-form-label blue-text">15) Title of your Creative-Work (max. 10 words)
+                                    <label for="creative_Work" class="col-md-2 col-lg-4 col-form-label blue-text">15) Title of your creative-Work (max. 10 words)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="creative_Work" name="creative_Work" rows="4" cols="50" placeholder="Your creative_Work here..." required>{{ old('creative_Work', $creative_Work ?? '') }}</textarea>
