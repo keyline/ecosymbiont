@@ -1231,7 +1231,7 @@ class FrontController extends Controller
                        } else if($postData['submission_types'] == '2'){
                            /* art images details */
                            if (!isset($postData['art_images'])) {
-                            return redirect()->back()->withInput()->with(['error_message' => 'Please select number of narrative image !!!']);
+                            return redirect()->back()->withInput()->with(['error_message' => 'Please select number of art image !!!']);
                         } else{
                            // Define the number of co-authors you want to handle (e.g., 3 in this case)
                            $artImagesCount = $postData['art_images'];
@@ -1625,7 +1625,7 @@ class FrontController extends Controller
     
                                 /* art images details */
                                 if (!isset($postData['art_images'])) {
-                                    return redirect()->back()->withInput()->with(['error_message' => 'Please select number of narrative image !!!']);
+                                    return redirect()->back()->withInput()->with(['error_message' => 'Please select number of art image !!!']);
                                 }
                                 else{
                                     // Define the number of co-authors you want to handle (e.g., 3 in this case)
