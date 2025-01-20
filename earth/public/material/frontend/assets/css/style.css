@@ -756,6 +756,7 @@ header .list-line-posts div.list-post {
 }
 header .list-line-posts div.list-post img {
   width: 109px;
+  height: 109px;
   object-fit: cover;
 }
 header .list-line-posts div.list-post .post-content {
