@@ -1700,7 +1700,7 @@ class FrontController extends Controller
                                         'bio_short'               => $postData['bio_short'],
                                         'bio_long'               => $postData['bio_long'],  
                                     ];
-                                    //    Helper::pr($fields);
+                                       Helper::pr($fields);
                                     /* submission email */
                                     $generalSetting             = GeneralSetting::find('1');                            
                                     $fullName                   = $postData['first_name'];
@@ -1801,7 +1801,7 @@ class FrontController extends Controller
                                         'bio_short'               => $postData['bio_short'],
                                         'bio_long'               => $postData['bio_long'],  
                                     ];
-                                    //   Helper::pr($fields);
+                                       Helper::pr($fields);
 
                                     /* submission email */
                                     $generalSetting             = GeneralSetting::find('1');                            
