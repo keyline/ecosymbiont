@@ -1463,17 +1463,10 @@ class FrontController extends Controller
                                     $coAuthorBios[] = $request->input("co_author_short_bio_{$i}");
                                     $coAuthorCountries[] = $request->input("co_author_country_{$i}");
                                     $coAuthorOrganizations[] = $request->input("co_authororganization_name_{$i}");
-                                    if($request->input("co_ecosystem_affiliation_{$i}") !== null){
-                                        $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
-                                    } else{
-                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
-                                    }
-                                    // $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
+                                    
+                                    $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
                                     $coindigenousAffiliations[] = $request->input("co_indigenous_affiliation_{$i}");
-                                    if($request->input("co_author_classification_{$i}") !== null){                                        
                                     $coauthorClassification[] = $request->input("co_author_classification_{$i}");
-                                    } else{
-                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author classification !!!']);
                                 }
                             }                                            
                             /* co-author details */
