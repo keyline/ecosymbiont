@@ -295,17 +295,17 @@ use Illuminate\Support\Facades\DB;
                                                     <label for="co_author_classification_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3H{{$i}}) Co-Author Classification</label>
                                                     <div class="col-md-10 col-lg-8">
                                                         <input type="radio" id="Human individual" name="co_author_classification_{{$i}}" value="Human individual" 
-                                                            @checked((old('co_author_classification_{{$i}}') == 'Human individual') || 
+                                                            @checked((old('co_author_classification_{{$i}}', $co_author_classification[$i-1] ?? '') == 'Human individual') || 
                                                             (isset($co_author_classification[$i-1]) && $co_author_classification[$i-1] == 'Human individual'))>
                                                         <label for="Human individual">Human individual</label>
 
                                                         <input type="radio" id="Ecoweb-rooted community" name="co_author_classification_{{$i}}" value="Ecoweb-rooted community" 
-                                                            @checked((old('co_author_classification_{{$i}}') == 'Ecoweb-rooted community') || 
+                                                            @checked((old('co_author_classification_{{$i}}', $co_author_classification[$i-1] ?? '') == 'Ecoweb-rooted community') || 
                                                             (isset($co_author_classification[$i-1]) && $co_author_classification[$i-1] == 'Ecoweb-rooted community'))>
                                                         <label for="Ecoweb-rooted community">Ecoweb-rooted community</label>
 
                                                         <input type="radio" id="Movement" name="co_author_classification_{{$i}}" value="Movement" 
-                                                            @checked((old('co_author_classification_{{$i}}') == 'Movement') || 
+                                                            @checked((old('co_author_classification_{{$i}}', $co_author_classification[$i-1] ?? '') == 'Movement') || 
                                                             (isset($co_author_classification[$i-1]) && $co_author_classification[$i-1] == 'Movement'))>
                                                         <label for="Movement">Movement</label>
                                                     </div>
