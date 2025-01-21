@@ -256,7 +256,7 @@ $current_url = $protocol . $host . $uri;
                                             <h2><a href="<?=url('content/'. $parentCategoryContent2->parent_category_slug. '/' . $parentCategoryContent2->category_slug . '/' . $parentCategoryContent2->slug)?>"><?=$parentCategoryContent2->new_title?></a></h2>
                                             <ul class="post-tags">
                                                 <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent2->created_at), "d M Y")?></span></li> -->
-                                                <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$$parentCategoryContent2->for_publication_name ?? $$parentCategoryContent2->author_name?></a></li>
+                                                <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent2->for_publication_name ?? $parentCategoryContent2->author_name?></a></li>
                                             </ul>
                                             <p><?=$parentCategoryContent2->sub_title?></p>
                                         </div>
