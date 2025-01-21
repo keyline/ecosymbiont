@@ -2,6 +2,8 @@
 use App\Models\NewsCategory;
 use App\Models\NewsContent;
 use App\Helpers\Helper;
+use PHPUnit\TextUI\Help;
+
 // Get the IP address of the user
 // $ip = $_SERVER['REMOTE_ADDR']; // This gets the user's IP address
 // $APP_URL = $_SERVER['APP_URL'];
@@ -155,7 +157,7 @@ use App\Helpers\Helper;
                                                         ->orderBy('news_contents.id', 'DESC')
                                                         ->get();
                                            // dd(DB::getQueryLog());
-                        if($hotNewsContents){ foreach($hotNewsContents as $rowContent){
+                        if($hotNewsContents){ foreach($hotNewsContents as $rowContent){ Helper::pr($rowContent);
                         ?>
                             <div class="item list-post">
                                 
