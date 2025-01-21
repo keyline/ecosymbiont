@@ -675,7 +675,8 @@ $current_url = $protocol . $host . $uri;
                                                                 'news_contents.new_title', 
                                                                 'news_contents.sub_title', 
                                                                 'news_contents.slug', 
-                                                                'news_contents.author_name', 
+                                                                'news_contents.author_name',
+                                                                'news_contents.for_publication_name', 
                                                                 'news_contents.cover_image', 
                                                                 'news_contents.created_at',
                                                                 'news_contents.media',
@@ -721,7 +722,7 @@ $current_url = $protocol . $host . $uri;
                                                 <a href="<?=url('category/' . $recentContent->parent_category_slug)?>"><?=$recentContent->parent_category_name?></a>
                                                 <h2><a href="<?=url('content/' . $recentContent->parent_category_slug. '/' . $recentContent->category_slug . '/' . $recentContent->slug)?>"><?=$recentContent->new_title?></a></h2>
                                                 <ul class="post-tags">
-                                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$recentContent->author_name?></a></li>
+                                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$recentContent->for_publication_name ?? $recentContent->author_name?></a></li>
                                                     <?php
                                                     if($recentContent->indigenous_affiliation != ''){                                                    
                                                      ?>
