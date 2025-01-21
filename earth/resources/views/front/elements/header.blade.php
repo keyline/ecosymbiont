@@ -2,8 +2,6 @@
 use App\Models\NewsCategory;
 use App\Models\NewsContent;
 use App\Helpers\Helper;
-use PHPUnit\TextUI\Help;
-
 // Get the IP address of the user
 // $ip = $_SERVER['REMOTE_ADDR']; // This gets the user's IP address
 // $APP_URL = $_SERVER['APP_URL'];
@@ -157,7 +155,7 @@ use PHPUnit\TextUI\Help;
                                                         ->orderBy('news_contents.id', 'DESC')
                                                         ->get();
                                            // dd(DB::getQueryLog());
-                        if($hotNewsContents){ foreach($hotNewsContents as $rowContent){ Helper::pr($rowContent);
+                        if($hotNewsContents){ foreach($hotNewsContents as $rowContent){ 
                         ?>
                             <div class="item list-post">
                                 
@@ -179,7 +177,21 @@ use PHPUnit\TextUI\Help;
                                     <h2><a href="<?=url('content/' . $rowContent->parent_category_slug. '/' . $rowContent->sub_category_slug . '/' . $rowContent->slug)?>"><?=$rowContent->new_title?></a></h2>
                                     <ul class="post-tags">
                                         <!-- <li><i class="fa fa-clock-o"></i><?=date_format(date_create($rowContent->created_at), "d M Y")?></li> -->
-                                        <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=(count(explode(' ', $rowContent->for_publication_name ?? $rowContent->author_name)) > 2) ? implode(' ', array_slice(explode(' ', $rowContent->author_name), 0, 2)) . ' ...' : $rowContent->author_name; ?></a></li>
+                                        <!-- <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=(count(explode(' ', $rowContent->for_publication_name ?? $rowContent->author_name)) > 2) ? implode(' ', array_slice(explode(' ', $rowContent->author_name), 0, 2)) . ' ...' : $rowContent->author_name; ?></a></li> -->
+                                        <li>
+                                            <i class="fa fa-user"></i>
+                                            by 
+                                            <a href="javascript:void(0);">
+                                                <?php
+                                                $name = $rowContent->for_publication_name ?? $rowContent->author_name;
+                                                if (count(explode(' ', $name)) > 2) {
+                                                    echo implode(' ', array_slice(explode(' ', $name), 0, 2)) . ' ...';
+                                                } else {
+                                                    echo $name;
+                                                }
+                                                ?>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
