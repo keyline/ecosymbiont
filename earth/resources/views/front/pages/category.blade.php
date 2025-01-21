@@ -25,7 +25,7 @@ $current_url = $protocol . $host . $uri;
                         <!-- End article box -->
                         <!-- article box -->
                         <div class="article-box">
-                            <?php if($contents){ foreach($contents as $rowContent){?>
+                            <?php if($contents){ foreach($contents as $rowContent){ Helper::pr($rowContent)?>
                                 <div class="news-post article-post">
                                     <div class="row">
                                         <div class="col-sm-5">
