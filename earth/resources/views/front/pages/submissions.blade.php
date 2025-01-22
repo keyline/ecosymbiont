@@ -37,7 +37,7 @@ $current_url = $protocol . $host . $uri;
                                                     <li>At this time, you must:
                                                         <ul>
                                                             <!-- <li>be invited to submit a Creative-Work to Ecosymbionts all Regenerate Together ("EaRTh"); and/or</li> -->
-                                                            <li>be invited to submit a Creative-Work to Ecosymbionts all Regenerate Together (“EaRTh”) (however, there is a way around this: upon reading this page in its entirety, please watch the tutorial video below or simply click on the “Submit New Creative-Work” button below the video); and/or</li>
+                                                            <li>o	be invited to submit a Creative-Work to Ecosymbionts all Regenerate Together (“EaRTh”) (however, there is a way around this: upon reading this page in its entirety, please watch the tutorial video below or simply click on the “Submit New Creative-Work” button below the video); and/or</li>
                                                             <li>have participated as a strategist at an in-person Ecosymbionts Regenerate ("ER") <a target="_blank" href="<?=env('REGENERATE_URL')?>synergy-meetings.php" style="color: #d09c1c;">Synergy Meeting</a>.</li>
                                                         </ul>
                                                     </li>
