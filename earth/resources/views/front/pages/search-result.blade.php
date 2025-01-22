@@ -54,7 +54,7 @@ $current_url = $protocol . $host . $uri;
                                                 <h2><a href="<?=url('content/' . $rowContent->parent_category_slug. '/' . $rowContent->sub_category_slug . '/' . $rowContent->slug)?>"><?=$rowContent->new_title?></a></h2>
                                                 <ul class="post-tags">
                                                     <li><i class="fa fa-clock-o"></i><?=date_format(date_create($rowContent->created_at), "d M Y")?></li>
-                                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$rowContent->author_name?></a></li>
+                                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$rowContent->for_publication_name ?? $rowContent->author_name?></a></li>
                                                     <!-- <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
                                                     <li><i class="fa fa-eye"></i>872</li> -->
                                                 </ul>
@@ -87,6 +87,7 @@ $current_url = $protocol . $host . $uri;
                                                                     'news_contents.sub_title', 
                                                                     'news_contents.slug', 
                                                                     'news_contents.author_name', 
+                                                                    'news_contents.for_publication_name',
                                                                     'news_contents.cover_image', 
                                                                     'news_contents.created_at',
                                                                     'news_contents.media',

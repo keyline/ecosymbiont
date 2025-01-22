@@ -323,6 +323,7 @@ class FrontController extends Controller
                                                         'news_contents.sub_title', 
                                                         'news_contents.slug', 
                                                         'news_contents.author_name', 
+                                                        'news_contents.for_publication_name', 
                                                         'news_contents.cover_image', 
                                                         'news_contents.created_at',
                                                         'news_contents.media',

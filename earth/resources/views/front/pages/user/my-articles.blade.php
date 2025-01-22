@@ -25,7 +25,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>SRN</th>
-                                    <th>Submitted On</th>                                                                        
+                                    <th>Submitted on</th>                                                                        
                                     <th>NELP granted?</th>                                    
                                     <th>Status</th>
                                 </tr>
