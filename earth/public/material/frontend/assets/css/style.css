@@ -3289,8 +3289,11 @@ ul.list-posts > li {
 }
 ul.list-posts > li img {
   width: 100px;
-  margin-right: 20px;
+  /* margin-right: 20px; */
   float: left;
+}
+ul.list-posts > li .post-content{
+  margin-left: 20px;
 }
 ul.list-posts > li .post-content > a {
   display: inline-block;
