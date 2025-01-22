@@ -238,7 +238,7 @@ use App\Helpers\Helper;
                         <!-- desktop -->
                     </div>
                     <div class="seach_holder">
-                        <form class="navbar-form" method="GET" action="<?=url('search-result')?>" role="search" onsubmit="return validateSearchInput();">
+                        <form class="navbar-form" method="GET" action="<?=url('search-result')?>" role="search">
                             <!-- @csrf -->
                             <input type="text" name="article_search" id="article-search" placeholder="Search here" value="<?=$search_keyword?>" onkeyup="getSuggestions(this.value);" style="text-transform: lowercase;" required>
                             <button type="submit"><i class="fa fa-search"></i></button>
@@ -259,6 +259,12 @@ use App\Helpers\Helper;
 <script>
     function getSuggestions() {
         let search_keyword = $('#article-search').val();
+        // Check for HTML tags using a regular expression
+        if (/<[a-z][\s\S]*>/i.test(search_keyword)) {
+            alert("HTML tags are not allowed.");
+            $('#article-search').val(''); // Clear the field if invalid input is detected
+            return;
+        }
         if (search_keyword.length >= 3) {
             var url = '<?=url('/')?>';
             $.ajax({
@@ -272,16 +278,5 @@ use App\Helpers\Helper;
         } else {
             $('#suggestions').html('');
         }
-    }
-</script>
-<script>
-    function validateSearchInput() {
-        const searchInput = document.getElementById('article-search').value;
-        const invalidTags = /<\s*\/?\s*code\s*>/i; // Regex to match <code> tags
-        if (invalidTags.test(searchInput)) {
-            alert('Invalid input: Code tags are not allowed.');
-            return false;
-        }
-        return true;
     }
 </script>
