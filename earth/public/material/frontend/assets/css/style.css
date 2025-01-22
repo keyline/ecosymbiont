@@ -6999,6 +6999,13 @@ div.block-content {
   object-fit: cover;
   height: 100%;
 }
+.video_holder{
+  margin: 40px 0;
+}
+.video_holder iframe{
+  border-radius: 10px; 
+  box-shadow: 0 20px 15px -10px #ccc;
+}
 @media(max-width: 600px){
   .welcome_mucis_section {
       align-items: center;

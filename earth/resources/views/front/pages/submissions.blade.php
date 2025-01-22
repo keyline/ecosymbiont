@@ -36,7 +36,8 @@ $current_url = $protocol . $host . $uri;
                                                     <li>Your Creative-Work must not have been published on any other medium that has the exclusive right to publish your work.</li>
                                                     <li>At this time, you must:
                                                         <ul>
-                                                            <li>be invited to submit a Creative-Work to Ecosymbionts all Regenerate Together ("EaRTh"); and/or</li>
+                                                            <!-- <li>be invited to submit a Creative-Work to Ecosymbionts all Regenerate Together ("EaRTh"); and/or</li> -->
+                                                            <li>be invited to submit a Creative-Work to Ecosymbionts all Regenerate Together (“EaRTh”) (however, there is a way around this: upon reading this page in its entirety, please watch the tutorial video below or simply click on the “Submit New Creative-Work” button below the video); and/or</li>
                                                             <li>have participated as a strategist at an in-person Ecosymbionts Regenerate ("ER") <a target="_blank" href="<?=env('REGENERATE_URL')?>synergy-meetings.php" style="color: #d09c1c;">Synergy Meeting</a>.</li>
                                                         </ul>
                                                     </li>
@@ -52,7 +53,7 @@ $current_url = $protocol . $host . $uri;
                                                     <li>A Creative-Work may have up to three co-authors, wherein the first author listed must be a human individual ("Lead Author").</li>
                                                     <li>EaRTh encourages an ecoweb-rooted community or movement to be a co-author of a Creative-Work, but only if a human individual is also a co-author.</li>
                                                     <li>For the purposes of submissions of Creative-Work to EaRTh, an ecoweb-rooted community is defined as a self-associating group of human individuals that trace their origins to a particular ecoweb. Examples of ecoweb-rooted communities are: the Idu Mishmi of Arunachal Pradesh (India) and the Lisjan Ohlone of California (United States).</li>
-                                                    <li>Each co-author must submit a separate submission form, with a human individual representative of an ecoweb-rooted community co-author or movement co-author submitting on behalf of the ecoweb-rooted community or movement.</li>
+                                                    <!-- <li>Each co-author must submit a separate submission form, with a human individual representative of an ecoweb-rooted community co-author or movement co-author submitting on behalf of the ecoweb-rooted community or movement.</li> -->
                                                 </ul>
                                             </div>
 
@@ -187,6 +188,10 @@ $current_url = $protocol . $host . $uri;
                                             <div class="titleto-inner">
                                                 <h2>COPYRIGHT & LICENSE</h2>
                                                 <p class="black">As per the terms detailed in the NELP, you grant EaRTh, ER, and the Śramani Institute (the nonprofit host organization of ER and EaRTh) a non-exclusive license to publish and use your Content. You will retain the copyright to your work and the right to also publish elsewhere. </p>
+                                            </div>
+                                            <h4>Please watch the video tutorial below on how to submit your Creative-Work.</h4>
+                                            <div class="video_holder text-center">
+                                                <iframe width="560" height="315" src="https://www.youtube.com/embed/3T-yBnR0pw8?si=twhDD8-awecmqx3y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                                             </div>
                                             <!-- <p class="text-center"><a href="<?=env('REGENERATE_URL')?>contact.php" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Submit New Creative-Work</a></p> -->
                                             <?php if($button_show){?>
