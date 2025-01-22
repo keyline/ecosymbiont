@@ -238,7 +238,7 @@ use App\Helpers\Helper;
                         <!-- desktop -->
                     </div>
                     <div class="seach_holder">
-                        <form class="navbar-form" method="GET" action="<?=url('search-result')?>" role="search">
+                        <form class="navbar-form" method="GET" action="<?=url('search-result')?>" role="search" onsubmit="return validateSearchInput();">
                             <!-- @csrf -->
                             <input type="text" name="article_search" id="article-search" placeholder="Search here" value="<?=$search_keyword?>" onkeyup="getSuggestions(this.value);" style="text-transform: lowercase;" required>
                             <button type="submit"><i class="fa fa-search"></i></button>
@@ -272,5 +272,16 @@ use App\Helpers\Helper;
         } else {
             $('#suggestions').html('');
         }
+    }
+</script>
+<script>
+    function validateSearchInput() {
+        const searchInput = document.getElementById('article-search').value;
+        const invalidTags = /<\s*\/?\s*code\s*>/i; // Regex to match <code> tags
+        if (invalidTags.test(searchInput)) {
+            alert('Invalid input: Code tags are not allowed.');
+            return false;
+        }
+        return true;
     }
 </script>
