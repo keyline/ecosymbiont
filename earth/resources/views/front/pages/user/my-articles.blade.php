@@ -36,11 +36,9 @@
                                         <td><?=$sl++?></td>
                                         <td><?=$article->article_no?></td>
                                         <!-- <td>?=$article->creative_Work?></td> -->
-                                        <td><?=date_format(date_create($article->created_at), "d-m-Y")?></td>
-                                        <td>
-                                            <?php if($article->nelp_form_pdf){?>
-                                                <a href="<?=env('UPLOADS_URL').'newcontent/'.$article->nelp_form_pdf?>" target="_blank" class="label label-primary">View File</a>
-                                            <?php }?>
+                                        <!-- <td>?=date_format(date_create(), "d-m-Y")?></td> -->
+                                        <td><?=date('M d Y h:i A', strtotime($article->created_at))?></td>
+                                        <td>Yes                                            
                                         </td>
                                         <!-- <td>
                                             ?php if($article->nelp_form_scan_copy){?>
