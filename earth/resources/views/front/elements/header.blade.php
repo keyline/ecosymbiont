@@ -210,7 +210,7 @@ use App\Helpers\Helper;
                         <!-- desktop -->
                         <ul class="nav navbar-nav navbar-left">
                             <!-- <li><a class="active" href="<?=url('/')?>">Home</a></li> -->
-                            <li><a href="<?=url('communities')?>" style="color:black !imporatnt">COMMUNITIES</a></li>
+                            <li><a href="<?=url('communities')?>" style="color: black !important;">COMMUNITIES</a></li>
                             <?php if($parentCats){ foreach($parentCats as $parentCat){?>
                                 <li class="drop-arrow"><a href="<?=url('category/' . $parentCat->slug)?>"><?=$parentCat->sub_category?></a>
                                     <div class="megadropdown">
@@ -232,8 +232,8 @@ use App\Helpers\Helper;
                                     </div>
                                 </li>
                             <?php } }?>
-                            <li><a href="<?=url('submissions')?>" style="color:black !imporatnt">SUBMISSIONS</a></li>
-                            <li><a href="<?=env('REGENERATE_URL')?>contact.php" style="color:black !imporatnt">CONTACT</a></li>
+                            <li><a href="<?=url('submissions')?>" style="color: black !important;">SUBMISSIONS</a></li>
+                            <li><a href="<?=env('REGENERATE_URL')?>contact.php" style="color: black !important;">CONTACT</a></li>
                         </ul>
                         <!-- desktop -->
                     </div>
