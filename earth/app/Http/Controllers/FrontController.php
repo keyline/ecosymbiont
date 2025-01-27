@@ -176,8 +176,8 @@ class FrontController extends Controller
     public function aboutUs()
     {
         $data = [];
-        $title                          = 'About Us';
-        $page_name                      = 'aboutus';
+        $title                          = 'Communities';
+        $page_name                      = 'communities';
         $data['search_keyword']         = '';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
