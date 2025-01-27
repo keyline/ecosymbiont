@@ -184,16 +184,16 @@ class FrontController extends Controller
     public function schumacherWild()
     {
         $data = [];
-        $title                          = 'Schumacher Wild';
-        $page_name                      = 'schumacher-Wild';
+        $title                          = 'SchumacherWild';
+        $page_name                      = 'SchumacherWild';
         $data['search_keyword']         = '';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
     public function westoaklandmatters()
     {
         $data = [];
-        $title                          = 'West Oakland Matters';
-        $page_name                      = 'west-oakland-matters';
+        $title                          = 'WestOaklandMatters';
+        $page_name                      = 'WestOaklandMatters';
         $data['search_keyword']         = '';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
