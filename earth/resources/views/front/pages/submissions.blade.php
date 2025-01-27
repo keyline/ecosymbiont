@@ -53,6 +53,28 @@ $current_url = $protocol . $host . $uri;
                                             </div>
 
                                             <div class="titleto-inner">
+                                                <h2>About</h2>
+                                                <p style="color:#000;">Ecosymbionts all Regenerate Together (EaRTh) is an online knowledge-sharing and community-building platform for <a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">grassroots</a>  changemakers, innovators, and knowledge-holders from across the world.</p>
+                                                <p class="black">The purpose of EaRTh is two-fold:</p>
+                                                <ul>
+                                                    <li><strong><i>Facilitate synergies:</i></strong> Bring together and facilitate <a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">synergies</a> between grassroots changemakers, innovators, and knowledge-holders from across the world working to <a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">regenerate</a> systems that restore, preserve, and foster human-<a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">ecoweb</a> <a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">symbiosis</a>.
+                                                    </li>
+                                                    <li><strong><i>Regenerate systems: </i></strong> Collaboratively conceptualize and promote alternative systems that optimize ecoweb wellbeing (instead of exploiting, diminishing, and destroying ecowebs) by synthesizing the knowledge, ideas, and wisdom of grassroots changemakers, innovators, and knowledge-holders from across the world. 
+                                                    </li>     
+                                                </ul>
+                                            </div>
+                                            <div class="titleto-inner">
+                                                <h2>HOW TO CITE EaRTh CONTENT</h2>
+                                                <p class="black">If you are citing EaRTh content, please use the following format: Author name(s), <i>Title</i>, <strong>Ecosymbionts all Regenerate Together (EaRTh):</strong> DOI (publication date).</p>
+                                                <p class="black"><i>For example: </i></p>
+                                                <p class="black">F. Jahan, <i>From Bhopal to the Bay: Fighting Corporations Creating Industrial Wastelands</i>, <strong>Ecosymbionts all Regenerate Together (EaRTh):</strong> DOI-EaRTh092024-004 (25 September, 2024).</p>
+                                            </div>
+                                            <div class="titleto-inner">
+                                                <h2>TYPES OF CREATIVE-WORKS</h2>
+                                                <p class="black">Both fiction and non-fiction Creative-Works are published as content on EaRTh, in the form of (a) word narratives, (b) visual art, and (c) videos. EaRTh encourages content in vernacular languages, with English translations provided, and where applicable, English subtitles.</p>
+                                            </div>
+
+                                            <div class="titleto-inner">
                                                 <h2>AUTHORSHIP</h2>
                                                 <p class="black">EaRTh encourages human individuals, as well as ecoweb-rooted communities (see below for definition) or movements to be authors of Creative-Works submitted to EaRTh. Given the current legal framework associated with copyright and licensing, at least one human individual must be a co-author if an ecoweb-rooted community or movement is an author. Please also see the instructions below:</p>
                                                 
