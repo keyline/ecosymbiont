@@ -6329,7 +6329,7 @@ div#popup p {
   /* .navbar-nav > li.drop-arrow > a {
     padding-right: 30px;
   } */
-  .navbar-nav > li.drop-arrow > a:before {
+  /* .navbar-nav > li.drop-arrow > a:before {
     content: '\f107' !important;
     position: absolute;
     font-family: 'FontAwesome';
@@ -6341,7 +6341,7 @@ div#popup p {
     -moz-transition: all 0.2s ease-in-out;
     -webkit-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
-  }
+  } */
  
   .top-line ul.social-icons {
     display: none;
@@ -6353,8 +6353,8 @@ div#popup p {
     padding: 15px 8px;
     padding-right: 8px !important;
   }
-  .navbar-nav > li > a:after {
-    display: none;
+  .navbar-nav > li.drop-arrow > a:after {
+    right: -3px;
   }
   .advertisement .desktop-advert,
   .sidebar .advertisement .desktop-advert {
