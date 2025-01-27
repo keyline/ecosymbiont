@@ -16,6 +16,13 @@ $current_url = $protocol . $host . $uri;
                 <!-- block content -->
                 <div class="block-content">
                     <div class="article-box">
+                        <div class="col-md-12">
+                            <div class="welcome_mucis_section">
+                                <audio preload="auto" controls>
+                                    <source src="<?=env('FRONT_ASSETS_URL')?>Ecosymbionts-audio-28Oct2024.mp3">
+                                </audio>
+                            </div>
+                        </div>
                         <div class="titleto-box">
                             <h1>submissions</h1>  
                         </div>
