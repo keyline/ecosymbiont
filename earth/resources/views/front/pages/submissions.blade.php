@@ -52,6 +52,9 @@ $current_url = $protocol . $host . $uri;
                                                 <h2>TYPES OF CREATIVE-WORKS</h2>
                                                 <p class="black">Both fiction and non-fiction Creative-Works are published as content on EaRTh, in the form of (a) word narratives, (b) visual art, and (c) videos. EaRTh encourages content in vernacular languages, with English translations provided, and where applicable, English subtitles.</p>
                                             </div>
+                                            <div class="titleto-inner">
+                                                <h2>SUBMISSION GUIDELINES</h2>                                                
+                                            </div> 
                                             <p class="black">Before making a submission of your Creative-Work to our <a target="_blank" href="<?=url('/about-us')?>" style="color: #d09c1c;">online knowledge-sharing and community-building platform</a>, please read these submission guidelines in their entirety.</p>
 
                                             <div class="titleto-inner">
@@ -71,11 +74,7 @@ $current_url = $protocol . $host . $uri;
                                                     </li>
                                                     <li>Your Creative-Work must relate to <a href="<?=env('REGENERATE_URL')?>" style="color: #d09c1c;" target="_blank">(a) restoring, preserving, and/or fostering the symbiosis (interconnectivity and interdependence) between humans and natural ecological webs (ecowebs)); OR (b) elucidating how existing extractivist systems harm human-ecoweb symbiosis.</a></li>
                                                 </ul>
-                                            </div> 
-                                            <div class="titleto-inner">
-                                                <h2>SUBMISSION GUIDELINES</h2>                                                
-                                            </div> 
-
+                                            </div>                                             
                                             <div class="titleto-inner">
                                                 <h2>AUTHORSHIP</h2>
                                                 <p class="black">EaRTh encourages human individuals, as well as ecoweb-rooted communities (see below for definition) or movements to be authors of Creative-Works submitted to EaRTh. Given the current legal framework associated with copyright and licensing, at least one human individual must be a co-author if an ecoweb-rooted community or movement is an author. Please also see the instructions below:</p>
