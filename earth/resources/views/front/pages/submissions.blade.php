@@ -31,29 +31,8 @@ $current_url = $protocol . $host . $uri;
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="post-content">
-                                            <p class="black">Before making a submission of your Creative-Work to our <a target="_blank" href="<?=url('/about-us')?>" style="color: #d09c1c;">online knowledge-sharing and community-building platform</a>, please read these submission guidelines in their entirety.</p>
-
                                             <div class="titleto-inner">
-                                                <h2>ELIGIBILITY CRITERIA</h2>
-                                                <ul>
-                                                    <li>You ("Author") must be a grassroots changemaker, innovator, and/or knowledge-holder.</li>
-                                                    <li>All components of your word narrative, art image, and/or audio/video, including accompanying images and/or photographs (“Creative-Work”) must be your own original work.</li>
-                                                    <li>You must not have used Artificial Intelligence (AI) to generate any component of your Creative-Work.</li>
-                                                    <li>You must own the copyright and licensing rights to all components of your Creative-Work.</li>
-                                                    <li>Your Creative-Work must not have been published on any other medium that has the exclusive right to publish your work.</li>
-                                                    <li>At this time, you must:
-                                                        <ul>
-                                                            <!-- <li>be invited to submit a Creative-Work to Ecosymbionts all Regenerate Together ("EaRTh"); and/or</li> -->
-                                                            <li>be invited to submit a Creative-Work to Ecosymbionts all Regenerate Together (“EaRTh”) (however, there is a way around this: upon reading this page in its entirety, please watch the tutorial video below or simply click on the “Submit New Creative-Work” button below the video); and/or</li>
-                                                            <li>have participated as a strategist at an in-person Ecosymbionts Regenerate ("ER") <a target="_blank" href="<?=env('REGENERATE_URL')?>synergy-meetings.php" style="color: #d09c1c;">Synergy Meeting</a>.</li>
-                                                        </ul>
-                                                    </li>
-                                                    <li>Your Creative-Work must relate to <a href="<?=env('REGENERATE_URL')?>" style="color: #d09c1c;" target="_blank">(a) restoring, preserving, and/or fostering the symbiosis (interconnectivity and interdependence) between humans and natural ecological webs (ecowebs)); OR (b) elucidating how existing extractivist systems harm human-ecoweb symbiosis.</a></li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="titleto-inner">
-                                                <h2>About</h2>
+                                                <h2>ABOUT</h2>
                                                 <p style="color:#000;">Ecosymbionts all Regenerate Together (EaRTh) is an online knowledge-sharing and community-building platform for <a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">grassroots</a>  changemakers, innovators, and knowledge-holders from across the world.</p>
                                                 <p class="black">The purpose of EaRTh is two-fold:</p>
                                                 <ul>
@@ -73,6 +52,29 @@ $current_url = $protocol . $host . $uri;
                                                 <h2>TYPES OF CREATIVE-WORKS</h2>
                                                 <p class="black">Both fiction and non-fiction Creative-Works are published as content on EaRTh, in the form of (a) word narratives, (b) visual art, and (c) videos. EaRTh encourages content in vernacular languages, with English translations provided, and where applicable, English subtitles.</p>
                                             </div>
+                                            <p class="black">Before making a submission of your Creative-Work to our <a target="_blank" href="<?=url('/about-us')?>" style="color: #d09c1c;">online knowledge-sharing and community-building platform</a>, please read these submission guidelines in their entirety.</p>
+
+                                            <div class="titleto-inner">
+                                                <h2>ELIGIBILITY CRITERIA</h2>
+                                                <ul>
+                                                    <li>You ("Author") must be a grassroots changemaker, innovator, and/or knowledge-holder.</li>
+                                                    <li>All components of your word narrative, art image, and/or audio/video, including accompanying images and/or photographs (“Creative-Work”) must be your own original work.</li>
+                                                    <li>You must not have used Artificial Intelligence (AI) to generate any component of your Creative-Work.</li>
+                                                    <li>You must own the copyright and licensing rights to all components of your Creative-Work.</li>
+                                                    <li>Your Creative-Work must not have been published on any other medium that has the exclusive right to publish your work.</li>
+                                                    <li>At this time, you must:
+                                                        <ul>
+                                                            <!-- <li>be invited to submit a Creative-Work to Ecosymbionts all Regenerate Together ("EaRTh"); and/or</li> -->
+                                                            <li>be invited to submit a Creative-Work to Ecosymbionts all Regenerate Together (“EaRTh”) (however, there is a way around this: upon reading this page in its entirety, please watch the tutorial video below or simply click on the “Submit New Creative-Work” button below the video); and/or</li>
+                                                            <li>have participated as a strategist at an in-person Ecosymbionts Regenerate ("ER") <a target="_blank" href="<?=env('REGENERATE_URL')?>synergy-meetings.php" style="color: #d09c1c;">Synergy Meeting</a>.</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>Your Creative-Work must relate to <a href="<?=env('REGENERATE_URL')?>" style="color: #d09c1c;" target="_blank">(a) restoring, preserving, and/or fostering the symbiosis (interconnectivity and interdependence) between humans and natural ecological webs (ecowebs)); OR (b) elucidating how existing extractivist systems harm human-ecoweb symbiosis.</a></li>
+                                                </ul>
+                                            </div> 
+                                            <div class="titleto-inner">
+                                                <h2>SUBMISSION GUIDELINES</h2>                                                
+                                            </div> 
 
                                             <div class="titleto-inner">
                                                 <h2>AUTHORSHIP</h2>
