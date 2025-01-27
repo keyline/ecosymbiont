@@ -210,7 +210,7 @@ use App\Helpers\Helper;
                         <!-- desktop -->
                         <ul class="nav navbar-nav navbar-left">
                             <!-- <li><a class="active" href="<?=url('/')?>">Home</a></li> -->
-                            <li><a href="<?=url('about-us')?>">ABOUT</a></li>
+                            <li><a href="<?=url('communities')?>">COMMUNITIES</a></li>
                             <?php if($parentCats){ foreach($parentCats as $parentCat){?>
                                 <li class="drop-arrow"><a href="<?=url('category/' . $parentCat->slug)?>"><?=$parentCat->sub_category?></a>
                                     <div class="megadropdown">
