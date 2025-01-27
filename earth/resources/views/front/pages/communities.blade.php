@@ -17,10 +17,12 @@
                             <p class="black">As part of its <a target="_blank" href="<?=env('REGENERATE_URL')?>" style="color: #d09c1c;">Ecosymbionts Regenerate</a> initiative, the Śramani Institute provides several communities (whether formed through geography or like-minded collaboration) a <strong><em>Virtual Community Center</em></strong> dedicated to the specific needs of each community.</p>
                             <p class="black">We appreciate your patience as we develop this feature.</p>
                             <p class="black">Currently, we are working with the communities below.</p>
-                            <ul>
-                                <li><a target="_blank" href="<?=url('schumacher-Wild')?>" style="color: #d09c1c;"><em>Schumacher Wild</em></a> (global)</li>
-                                <li><a target="_blank" href="<?=url('west-oakland-matters')?>" style="color: #d09c1c;"><em>West Oakland Matters</em></a> (United States)</li>
-                            </ul>
+                            <div class="titleto-inner">
+                                <ul>
+                                    <li><a target="_blank" href="<?=url('communities/schumacher-Wild')?>" style="color: #d09c1c;"><em>Schumacher Wild</em></a> (global)</li>
+                                    <li><a target="_blank" href="<?=url('communities/west-oakland-matters')?>" style="color: #d09c1c;"><em>West Oakland Matters</em></a> (United States)</li>
+                                </ul>
+                            </div>
                             <p class="black">If your community is interested in having a <em>Virtual Community Center</em>, please <a href="<?=env('REGENERATE_URL')?>contact.php" style="color: #d09c1c;">contact us.</a></p>
                         </div>                          
                     </div>

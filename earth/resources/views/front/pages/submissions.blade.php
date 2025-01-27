@@ -24,15 +24,14 @@ $current_url = $protocol . $host . $uri;
                             </div>
                         </div>
                         <div class="titleto-box">
-                            <h1>submissions</h1>  
+                            <h1>ABOUT</h1>  
                         </div>
 
                             <div class="news-post article-post">
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="post-content">
-                                            <div class="titleto-inner">
-                                                <h2>ABOUT</h2>
+                                            <div class="titleto-inner">                                                
                                                 <p style="color:#000;">Ecosymbionts all Regenerate Together (EaRTh) is an online knowledge-sharing and community-building platform for <a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">grassroots</a>  changemakers, innovators, and knowledge-holders from across the world.</p>
                                                 <p class="black">The purpose of EaRTh is two-fold:</p>
                                                 <ul>
@@ -51,12 +50,19 @@ $current_url = $protocol . $host . $uri;
                                             <div class="titleto-inner">
                                                 <h2>TYPES OF CREATIVE-WORKS</h2>
                                                 <p class="black">Both fiction and non-fiction Creative-Works are published as content on EaRTh, in the form of (a) word narratives, (b) visual art, and (c) videos. EaRTh encourages content in vernacular languages, with English translations provided, and where applicable, English subtitles.</p>
-                                            </div>
-                                            <div class="titleto-inner">
-                                                <h2>SUBMISSION GUIDELINES</h2>                                                
-                                            </div> 
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="titleto-box">
+                            <h1>SUBMISSION GUIDELINES</h1>  
+                        </div>
+                            <div class="news-post article-post">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <div class="post-content">
                                             <p class="black">Before making a submission of your Creative-Work to our <a target="_blank" href="<?=url('/about-us')?>" style="color: #d09c1c;">online knowledge-sharing and community-building platform</a>, please read these submission guidelines in their entirety.</p>
-
                                             <div class="titleto-inner">
                                                 <h2>ELIGIBILITY CRITERIA</h2>
                                                 <ul>
@@ -232,7 +238,7 @@ $current_url = $protocol . $host . $uri;
                                                     <p class="text-center"><a href="<?=url('sign-in/' . Helper::encoded('https://ecosymbiont.org/earth/user/submit-new-article'))?>" class="btn btn-primary">Submit New Creative-Work</a></p>
                                                     <p style="color: red; text-align: center;">In case of technical difficulties please <a href="<?=env('REGENERATE_URL')?>contact.php">contact us.</a></p>
                                                 <?php }?>
-                                            <?php }?>
+                                            <?php }?>                                        
                                         </div>
                                     </div>
                                 </div>
