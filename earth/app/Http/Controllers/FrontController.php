@@ -181,6 +181,22 @@ class FrontController extends Controller
         $data['search_keyword']         = '';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
+    public function schumacherWild()
+    {
+        $data = [];
+        $title                          = 'Schumacher Wild';
+        $page_name                      = 'schumacher-Wild';
+        $data['search_keyword']         = '';
+        echo $this->front_before_login_layout($title, $page_name, $data);
+    }
+    public function westoaklandmatters()
+    {
+        $data = [];
+        $title                          = 'West Oakland Matters';
+        $page_name                      = 'west-oakland-matters';
+        $data['search_keyword']         = '';
+        echo $this->front_before_login_layout($title, $page_name, $data);
+    }
     public function pageContent($slug)
     {
         $data['row']                    = Page::select('page_name', 'page_content')->where('status', '=', 1)->where('page_slug', '=', $slug)->first();
