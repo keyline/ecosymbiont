@@ -14,7 +14,7 @@
                     <div class="article-box">                            
                         <div class="titleto-box">
                             <h1>WEST OAKLAND MATTERS</h1>  
-                            <p>We appreciate your patience as we develop the <em><strong>Virtual Community Center</strong></em> for West Oakland Matters.</p>
+                            <p class="black">We appreciate your patience as we develop the <em><strong>Virtual Community Center</strong></em> for West Oakland Matters.</p>
                         </div>                           
                     </div>
                 </div>
