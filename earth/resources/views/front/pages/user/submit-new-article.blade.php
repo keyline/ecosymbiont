@@ -91,6 +91,8 @@ use Illuminate\Support\Facades\DB;
                 $city = $row->city;
                 $participated = $row->participated;
                 $participated_info = $row->participated_info;
+                $community = $row->community;
+                
                 $organization_name = $row->organization_name;
                 $organization_website = $row->organization_website;
                 $ecosystem_affiliationId = (($row->ecosystem_affiliationId != '')?json_decode($row->ecosystem_affiliationId):[]);
@@ -654,7 +656,7 @@ use Illuminate\Support\Facades\DB;
                                                         <label for="art_image_desc_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17B2b{{$i}}) TYPE B: short caption for image {{ $i }} (max. 50 words)</label>
                                                         <div class="col-md-10 col-lg-8">
                                                             <textarea class="form-control" id="art_image_desc_{{ $i }}" name="art_image_desc_{{ $i }}" rows="4" cols="50" placeholder="If this is original artwork, please include the following information: Artist name: 'Title of work,' type of art, dimension of art (year created)
-(for example, Original Art by Barbara Mumby: ‘Las Mariposas,’ oil on canvas, 48 x 60 inches (2023))" ><?php if(isset($art_image_desc[$i-1]) && $art_image_desc[$i-1] != '') { echo $art_image_desc[$i-1]; }?></textarea>
+(for example, Original Art by Barbara Mumby: 'Las Mariposas,' oil on canvas, 48 x 60 inches (2023))" ><?php if(isset($art_image_desc[$i-1]) && $art_image_desc[$i-1] != '') { echo $art_image_desc[$i-1]; }?></textarea>
                                                             <div id="art_image_desc_{{ $i }}Error" class="error"></div>
                                                         </div>
                                                     </div>
@@ -789,7 +791,29 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">28) Instructions for initial submission of Creative-Work for eligibility screening:
+                                    <label for="community" class="col-md-2 col-lg-4 col-form-label">28) Are you a member of an EaRTh Community?
+                                    </label>
+                                    <div class="col-md-10 col-lg-8">
+                                        <input type="radio" id="community_yes" name="community" value="Yes" required @checked(old('community', $community) == 'Yes')>
+                                        <label for="yes">Yes</label>
+                                        <input type="radio" id="community_no" name="community" value="No" required @checked(old('community', $community) == 'No')>
+                                        <label for="no">No</label>
+                                    </div>
+                                </div> 
+                                <div id="communityDetails" style="display: none;">
+                                    <div class="row mb-3">
+                                        <label for="community_info" class="col-md-2 col-lg-4 col-form-label">28A) Drop down menu:</label>
+                                        <div class="col-md-10 col-lg-8">
+                                            <select name="community_name" class="form-control" id="community_name">
+                                                <option value="" selected >Select</option>
+                                                <option value="Schumacher Wild" @selected(old("community_name", $community_name ?? '') == 'Schumacher Wild') >Schumacher Wild</option>
+                                                <option value="West Oakland Matters" @selected(old("community_name", $community_name ?? '') == 'West Oakland Matters') >West Oakland Matters</option>
+                                            </select>
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">29) Instructions for initial submission of Creative-Work for eligibility screening:
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <p>Once you have completed this form and uploaded all required files, click on the "Submit" button below. If you meet the eligibility criteria <span style="color: red !important">(determined in part by your response to question 12); also, you
@@ -802,14 +826,14 @@ use Illuminate\Support\Facades\DB;
                                     </div> -->
                                 </div> 
                                 <div class="row mb-3">
-                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">29) If you are submitting a video: 
+                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">30) If you are submitting a video: 
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <p>Please note that it may take several minutes for your video to upload. Please do not click on the “Submit” button more than once and do not navigate away from this page, until you are re-directed to a page that tells you: “Creative-Work submitted successfully!”</p>                                        
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
-                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">30) Non-Exclusive License to Publish (NELP)
+                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">31) Non-Exclusive License to Publish (NELP)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <p>In the scrollable window below is the text of the Non-Exclusive License to Publish (NELP). Please note that for your Creative-Work to be published on EaRTh, you must sign this NELP (which you do by clicking the small box below the scrollable window). In essence, by signing the NELP, you declare among other things that: (a) all components of this Creative-Work are your (and, if applicable, your co-authors’) own original creation and not anyone else’s; (b) you (and, if applicable, your co-authors) have not used Artificial Intelligence (AI) to generate any of the components of this Creative-Work; and (c) you (and, if applicable, your co-authors) own the copyright to this Creative-Work and have the authority to grant the NELP. Please note that upon signing this NELP, you retain the copyright to your Creative-Work and the right to publish this Creative-Work on other platforms/in other publications, as long as such platforms/publications do not require an exclusive right to publish.</p>                                        
