@@ -653,7 +653,8 @@ use Illuminate\Support\Facades\DB;
                                                     <div class="row description-div" id="art_description_{{ $i }}" >
                                                         <label for="art_image_desc_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17B2b{{$i}}) TYPE B: short caption for image {{ $i }} (max. 50 words)</label>
                                                         <div class="col-md-10 col-lg-8">
-                                                            <textarea class="form-control" id="art_image_desc_{{ $i }}" name="art_image_desc_{{ $i }}" rows="4" cols="50" placeholder="Your art_image_desc here..." ><?php if(isset($art_image_desc[$i-1]) && $art_image_desc[$i-1] != '') { echo $art_image_desc[$i-1]; }?></textarea>
+                                                            <textarea class="form-control" id="art_image_desc_{{ $i }}" name="art_image_desc_{{ $i }}" rows="4" cols="50" placeholder="If this is original artwork, please include the following information: Artist name: 'Title of work,' type of art, dimension of art (year created)
+(for example, Original Art by Barbara Mumby: ‘Las Mariposas,’ oil on canvas, 48 x 60 inches (2023))" ><?php if(isset($art_image_desc[$i-1]) && $art_image_desc[$i-1] != '') { echo $art_image_desc[$i-1]; }?></textarea>
                                                             <div id="art_image_desc_{{ $i }}Error" class="error"></div>
                                                         </div>
                                                     </div>
