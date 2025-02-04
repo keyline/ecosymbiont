@@ -26,6 +26,7 @@ use Auth;
 use Session;
 use Helper;
 use Hash;
+use PHPUnit\TextUI\Help;
 
 class ReadersController extends Controller
 {
@@ -125,6 +126,7 @@ class ReadersController extends Controller
         // $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
 
         $data['classification']         = UserClassification::where('user_id', '=', $user_id)->first();
+        Helper::pr($data['classification']);
         $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
         $data['news_category']          = NewsCategory::where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'ASC')->get();        
         $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
