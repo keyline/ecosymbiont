@@ -92,7 +92,7 @@ use Illuminate\Support\Facades\DB;
                 $participated = $row->participated;
                 $participated_info = $row->participated_info;
                 $community = $row->community;
-                
+                $community_name = $row->community_name;
                 $organization_name = $row->organization_name;
                 $organization_website = $row->organization_website;
                 $ecosystem_affiliationId = (($row->ecosystem_affiliationId != '')?json_decode($row->ecosystem_affiliationId):[]);
@@ -996,6 +996,27 @@ use Illuminate\Support\Facades\DB;
         
     </script>
 <!-- Popup end (Initially hidden) -->
+ <!-- Function to show/hide the community fields -->
+<script>
+    $(document).ready(function() {
+        
+        function toggleFields() {            
+            const communityYes = $('#community_yes').is(':checked');            
+            
+            // Toggle individual sections            
+            $('#communityDetails').toggle(communityYes);
+        }
+
+        // Trigger on change
+        $('input[name="invited"], input[name="community"]').on('change', function() {
+            toggleFields();
+        });
+
+        // Check initial state on page load
+        toggleFields();
+    });
+</script>
+<!-- End Function to show/hide the community fields -->
 <!-- Function to show/hide the invited and participated fields -->
 <script>
     $(document).ready(function() {
