@@ -2195,8 +2195,7 @@ class FrontController extends Controller
 
         public function viewarticle(Request $request, $id)
         {                        
-            $id                                         = Helper::decoded($id);       
-            $data['module']                             = $this->data;            
+            $id                                         = Helper::decoded($id);                              
             $page_name                                  = 'article.view_details';
             $data['row']                                = Article::where('status', '!=', 3)->where('id', '=', $id)->orderBy('id', 'DESC')->first();
             // dd($data['row']);
