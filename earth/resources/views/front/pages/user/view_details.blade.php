@@ -82,7 +82,7 @@ use App\Models\ExpertiseArea;
       <div class="card">
         <div class="card-body">   
           <div class="d-flex justify-content-between">
-            <h3 class="card-title"><?=$page_header?></h3>       
+            <h4 class="card-title"><?=$page_header?></h4>       
           </div>
           <table class="table table-striped table-bordered nowrap">
             <thead>
