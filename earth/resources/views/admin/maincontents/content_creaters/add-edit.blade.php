@@ -164,13 +164,13 @@ $controllerRoute = $module['controller_route'];
                                     value="{{ old('email', $email) }}" required>
                             </div>
                         </div>
-                        <!-- <div class="row mb-3">
+                        <div class="row mb-3">
                             <label for="author_classification" class="col-md-2 col-lg-4 col-form-label">2) Author Classification
                             </label>
                             <div class="col-md-10 col-lg-8">                                                                      
                                 <input type="text" class="form-control" id="Ecoweb-rooted community" name="author_classification" value="{{ old('author_classification', $classification->name) }}" readonly>
                             </div>
-                        </div>                                                           -->
+                        </div>                                                          
                         <div class="row mb-3">
                             <label for="first_name" class="col-md-2 col-lg-4 col-form-label">3)Full Legal Name (exactly as it appears on your government-issued identification documents, e.g., passport and/or driver's license)</label>
                             <div class="col-md-10 col-lg-8">
