@@ -250,8 +250,7 @@ class ContentCreatersController extends Controller
                     $fields2 = [                        
                         'first_name'                => $postData['first_name'],                                    
                         'email'                     => $postData['email'],                                           
-                        'country'                   => $postData['country'],                                   
-                        'password'                  => Hash::make($postData['password']), 
+                        'country'                   => $postData['country'],                                                           
                     ];
                     User::where($this->data['primary_key'], '=', $user_id)->update($fields2);
                     UserProfile::where('user_id', '=', $user_id)->update($fields);
