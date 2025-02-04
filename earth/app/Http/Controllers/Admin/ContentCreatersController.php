@@ -247,6 +247,15 @@ class ContentCreatersController extends Controller
                         'bio_short'                 => $postData['bio_short'],
                         'bio_long'                  => $postData['bio_long'], 
                     ];
+                    $fields2 = [                        
+                        'first_name'                => $postData['first_name'],            
+                        'last_name'                 => $postData['last_name'],        
+                        'middle_name'               => $postData['middle_name'],            
+                        'email'                     => $postData['email'],                                           
+                        'country'                   => $postData['country'],                                   
+                        'password'                  => Hash::make($postData['password']), 
+                    ];
+                    User::where($this->data['primary_key'], '=', $user_id)->update($fields2);
                     UserProfile::where('user_id', '=', $user_id)->update($fields);
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');
                 // } else {
