@@ -113,30 +113,30 @@ class ReadersController extends Controller
     public function edit(Request $request, $id)
     {
         $data['module']                 = $this->data;
-        $user_id                            = Helper::decoded($id);
+        $id                            = Helper::decoded($id);
         // Helper::pr($user_id);
         $title                          = $this->data['title'] . ' Update';
         $page_name                      = 'readers.add-edit';
-        // $data['row']                    = User::where($this->data['primary_key'], '=', $id)->first();
-        // $data['country']                = Country::orderBy('name', 'ASC')->get();
-        // $data['role']                   = Role::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-        // $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-        // $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-        // $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-        // $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-        // $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-
-        // $data['classification']         = UserClassification::where('user_id', '=', $user_id)->first();
-        // Helper::pr($data['classification']);
-        $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-        $data['news_category']          = NewsCategory::where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'ASC')->get();        
-        $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-        $data['submission_type']        = SubmissionType::where('status', '=', 1)->get(); 
+        $data['row']                    = User::where($this->data['primary_key'], '=', $id)->first();
         $data['country']                = Country::orderBy('name', 'ASC')->get();
+        $data['role']                   = Role::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
         $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
         $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
         $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-        $data['row']                    = UserProfile::where('user_id', '=', $user_id)->where('id', '=', $id)->first();
+
+        // $data['classification']         = UserClassification::where('user_id', '=', $user_id)->first();
+        // Helper::pr($data['classification']);
+        // $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // $data['news_category']          = NewsCategory::where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'ASC')->get();        
+        // $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // $data['submission_type']        = SubmissionType::where('status', '=', 1)->get(); 
+        // $data['country']                = Country::orderBy('name', 'ASC')->get();
+        // $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // $data['row']                    = UserProfile::where('user_id', '=', $user_id)->where('id', '=', $id)->first();
 
         if ($request->isMethod('post')) {
             $postData = $request->all();
