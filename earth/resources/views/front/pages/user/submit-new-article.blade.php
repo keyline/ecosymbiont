@@ -793,7 +793,7 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="community" class="col-md-2 col-lg-4 col-form-label">28) Are you a member of an EaRTh Community?
+                                    <label for="community" class="col-md-2 col-lg-4 col-form-label blue-text">28) Are you a member of an EaRTh Community?
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="radio" id="community_yes" name="community" value="Yes" required @checked(old('community', $community) == 'Yes')>
@@ -804,7 +804,7 @@ use Illuminate\Support\Facades\DB;
                                 </div> 
                                 <div id="communityDetails" style="display: none;">
                                     <div class="row mb-3">
-                                        <label for="community_info" class="col-md-2 col-lg-4 col-form-label">28A) Drop down menu:</label>
+                                        <label for="community_info" class="col-md-2 col-lg-4 col-form-label blue-text">28A) Select Community :</label>
                                         <div class="col-md-10 col-lg-8">
                                             <select name="community_name" class="form-control" id="community_name">
                                                 <option value="" selected >Select</option>
