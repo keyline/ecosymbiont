@@ -160,7 +160,7 @@ class ContentCreatersController extends Controller
         //  Helper::pr($data['selected_ecosystem_affiliation']);
 
         $data['classification']         = UserClassification::where('user_id', '=', $user_id)->first();
-        Helper::pr($data['classification']);
+        // Helper::pr($data['classification']);
         $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
         $data['news_category']          = NewsCategory::where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'ASC')->get();        
         $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
