@@ -113,7 +113,7 @@ use App\Models\ExpertiseArea;
                 <?php }
                 // if ($row->is_import == 0) { 
                 ?>
-                <!-- <a href="?=url('admin/' . $controllerRoute . '/edit/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit"> Edit</i></a> -->
+                <!-- <a href="?=url('admin/' . $controllerRoute . '/edit/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit ?=$module['title']?>"><i class="fa fa-edit"> Edit</i></a> -->
                 <!-- ?php } ?> -->
               </p>
               <table class="table table-striped table-bordered nowrap">
