@@ -169,7 +169,7 @@ class ContentCreatersController extends Controller
         $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
         $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
         $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-        $data['row']                    = UserProfile::where('user_id', '=', $user_id)->where('id', '=', $id)->first();
+        $data['row']                    = UserProfile::where('user_id', '=', $user_id)->first();
 
 
 
