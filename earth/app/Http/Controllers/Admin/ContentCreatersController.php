@@ -176,64 +176,82 @@ class ContentCreatersController extends Controller
         if ($request->isMethod('post')) {
             $postData = $request->all();
             $rules = [                                 
-                'first_name'                => 'required',            
-                'last_name'                 => 'required',                                    
-                'email'                     => 'required',           
-                'phone'                     => 'required',           
-                'country'                   => 'required',                                      
-                'password'                  => 'required', 
-                'invited'                   => 'required',
-                'invited_by'                => 'required', 
-                'invited_by_email'          => 'required',                     
-                'section_ert'               => 'required',
+                // 'first_name'                => 'required',            
+                // 'last_name'                 => 'required',                                    
+                // 'email'                     => 'required',           
+                // 'phone'                     => 'required',           
+                // 'country'                   => 'required',                                      
+                // 'password'                  => 'required', 
+                // 'invited'                   => 'required',
+                // 'invited_by'                => 'required', 
+                // 'invited_by_email'          => 'required',                     
+                // 'section_ert'               => 'required',
+                // 'title'                     => 'required',
+                // 'pronoun'                   => 'required',
+                // 'participated'              => 'required',
+                // 'participated_info'         => 'required',
+                // 'organization_name'         => 'required',
+                // 'organization_website'      => 'required',
+                // 'ecosystem_affiliation'     => 'required',               
+                // 'expertise_area'            => 'required',                
+                // 'explanation'               => ['required', 'string', new MaxWords(100)],
+                // 'explanation_submission'    => ['required', 'string', new MaxWords(150)],
+                // 'bio_short'                 => ['required', 'string', new MaxWords(40)],
+                // 'bio_long'                  => ['required', 'string', new MaxWords(250)],   
+                
+                'author_classification'     => 'required',
+                'first_name'                => 'required',                                                               
+                'email'                     => 'required',                                      
+                'country'                   => 'required',                                                                                                                                            
                 'title'                     => 'required',
-                'pronoun'                   => 'required',
-                'participated'              => 'required',
-                'participated_info'         => 'required',
-                'organization_name'         => 'required',
-                'organization_website'      => 'required',
+                'pronoun'                   => 'required',   
                 'ecosystem_affiliation'     => 'required',               
                 'expertise_area'            => 'required',                
                 'explanation'               => ['required', 'string', new MaxWords(100)],
-                'explanation_submission'    => ['required', 'string', new MaxWords(150)],
+                'explanation_submission'    => ['required', 'string', new MaxWords(150)],                
+                // 'creative_Work'             => ['required', 'string', new MaxWords(10)],                                  
                 'bio_short'                 => ['required', 'string', new MaxWords(40)],
-                'bio_long'                  => ['required', 'string', new MaxWords(250)],            
+                'bio_long'                  => ['required', 'string', new MaxWords(250)],
             ];
+            $participatedInfo = isset($postData['participated_info']) ? $postData['participated_info'] : '';
+            $invited_byInfo = isset($postData['invited_by']) ? $postData['invited_by'] : '';
+            $invited_emailInfo = isset($postData['invited_by_email']) ? $postData['invited_by_email'] : '';                
+            $expertise_areaInfo = isset($postData['expertise_area']) ? json_encode($postData['expertise_area']) : '';
+            $ecosystem_affiliationInfo = isset($postData['ecosystem_affiliation']) ? json_encode($postData['ecosystem_affiliation']) : '';
             if ($this->validate($request, $rules)) {
-                $checkValue = User::where('first_name', '=', $postData['first_name'])->where('id', '!=', $id)->count();
-                if ($checkValue <= 0) {                    
+                // $checkValue = User::where('first_name', '=', $postData['first_name'])->where('id', '!=', $id)->count();
+                // if ($checkValue <= 0) {                    
                     $fields = [                        
-                        'first_name'                => $postData['first_name'],            
-                        'last_name'                 => $postData['last_name'],        
-                        'middle_name'               => $postData['middle_name'],            
-                        'email'                     => $postData['email'],           
-                        'phone'                     => $postData['phone'],           
-                        'country'                   => $postData['country'],           
-                        'role'                      => 2,           
-                        'password'                  => Hash::make($postData['password']), 
+                        'user_id'                   => $user_id,          
+                        'email'                     => $postData['email'],
+                        'author_classification'     => $postData['author_classification'],
+                        'first_name'                => $postData['first_name'],                                                                             
+                        'for_publication_name'      => $postData['for_publication_name'],           
+                        'pronounId'                 => $postData['pronoun'],                        
                         'invited'                   => $postData['invited'],
-                        'invited_by'                => $postData['invited_by'], 
-                        'invited_by_email'          => $postData['invited_by_email'],  
+                        'invited_by'                => $invited_byInfo, 
+                        'invited_by_email'          => $invited_emailInfo,
+                        'participated'              => $postData['participated'],
+                        'participated_info'         => $participatedInfo,
                         'explanation'               => $postData['explanation'],  
                         'explanation_submission'    => $postData['explanation_submission'],     
-                        'section_ertId'             => $postData['section_ert'],
-                        'titleId'                   => $postData['title'],
-                        'pronounId'                 => $postData['pronoun'],
-                        'participated'              => $postData['participated'],
-                        'participated_info'         => $postData['participated_info'],
+                        'titleId'                   => $postData['title'],                              
+                        'country'                   => $postData['country'],
+                        'state'                     => $postData['state'],
+                        'city'                      => $postData['city'],
                         'organization_name'         => $postData['organization_name'],
                         'organization_website'      => $postData['organization_website'],
-                        'ecosystem_affiliationId'   => json_encode($postData['ecosystem_affiliation']),
+                        'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
                         'indigenous_affiliation'    => $postData['indigenous_affiliation'],
-                        'expertise_areaId'          => json_encode($postData['expertise_area']),
-                        'bio_short'               => $postData['bio_short'],
-                        'bio_long'               => $postData['bio_long'],             
+                        'expertise_areaId'          => $expertise_areaInfo,
+                        'bio_short'                 => $postData['bio_short'],
+                        'bio_long'                  => $postData['bio_long'], 
                     ];
-                    User::where($this->data['primary_key'], '=', $id)->update($fields);
+                    UserProfile::where('user_id', '=', $user_id)->update($fields);
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');
-                } else {
-                    return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
-                }
+                // } else {
+                //     return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
+                // }
             } else {
                 return redirect()->back()->with('error_message', 'All Fields Required !!!');
             }
