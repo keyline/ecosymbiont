@@ -2192,5 +2192,29 @@ class FrontController extends Controller
             $page_name                      = 'profile-articles';
             echo $this->front_after_login_layout($title, $page_name, $data);
         }
+
+        public function viewarticle(Request $request, $id)
+        {                        
+            $id                                         = Helper::decoded($id);       
+            $data['module']                             = $this->data;            
+            $page_name                                  = 'article.view_details';
+            $data['row']                                = Article::where('status', '!=', 3)->where('id', '=', $id)->orderBy('id', 'DESC')->first();
+            // dd($data['row']);
+            $data['selected_ecosystem_affiliation']     = json_decode($data['row']->ecosystem_affiliationId);
+            $data['selected_expertise_area']            = json_decode($data['row']->expertise_areaId);
+            $data['selected_section_ertId']             = json_decode($data['row']->section_ertId);
+            $data['section_ert']                        = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['user_title']                         = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['submission_type']                    = SubmissionType::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['country']                            = Country::orderBy('name', 'ASC')->get();
+            $data['pronoun']                            = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['ecosystem_affiliation']              = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['expertise_area']                     = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['search_keyword']         = '';                        
+            
+            $title                          = ' View Details : ' . (($data['row'])?$data['row']->creative_Work. ' (' . $data['row']->article_no . ')':'');
+            $page_name                      = 'view_details';
+            echo $this->front_after_login_layout($title, $page_name, $data);
+        }
     /* after login */
 }
