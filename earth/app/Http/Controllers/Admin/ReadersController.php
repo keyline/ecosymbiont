@@ -114,6 +114,7 @@ class ReadersController extends Controller
     {
         $data['module']                 = $this->data;
         $user_id                            = Helper::decoded($id);
+        Helper::pr($user_id);
         $title                          = $this->data['title'] . ' Update';
         $page_name                      = 'readers.add-edit';
         // $data['row']                    = User::where($this->data['primary_key'], '=', $id)->first();
