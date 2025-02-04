@@ -1096,7 +1096,8 @@ class FrontController extends Controller
                     'acknowledge'               => 'required',                                                      
                     'section_ert'               => 'required',
                     'title'                     => 'required',
-                    'pronoun'                   => 'required',                
+                    'pronoun'                   => 'required',  
+                    'community'                 => 'required',
                     // 'organization_name'         => 'required',
                     // 'organization_website'      => 'required',
                     'ecosystem_affiliation'     => 'required',               
@@ -1204,6 +1205,8 @@ class FrontController extends Controller
                                    'invited_by_email'          => $invited_emailInfo,
                                    'participated'              => $postData['participated'],
                                    'participated_info'         => $participatedInfo,
+                                   'community'                 => $postData['community'],
+                                   'community_name'            => $postData['community_name'],
                                    'explanation'               => $postData['explanation'],  
                                    'explanation_submission'    => $postData['explanation_submission'],     
                                    'titleId'                   => $postData['title'],                        
@@ -1226,7 +1229,7 @@ class FrontController extends Controller
                                    'bio_short'               => $postData['bio_short'],
                                    'bio_long'               => $postData['bio_long'],  
                                ];
-                                    // Helper::pr($fields);
+                                     Helper::pr($fields);
 
                                /* submission email */
                                 $generalSetting             = GeneralSetting::find('1');                            
