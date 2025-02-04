@@ -4,7 +4,7 @@ use App\Models\SectionErt;
 use App\Models\EcosystemAffiliation;
 use App\Models\Country;
 use App\Models\ExpertiseArea;
-$controllerRoute = $module['controller_route'];
+// $controllerRoute = $module['controller_route'];
 ?>
 <div class="pagetitle">
   <h1><?=$page_header?></h1>
