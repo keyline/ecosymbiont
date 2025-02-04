@@ -33,7 +33,7 @@
                             <tbody>
                                 <?php if($articles){ $sl=1; foreach($articles as $article){?>
                                     <tr>
-                                        <td><?=$sl++?><a href="<?=url('user/view_details/' . Helper::encoded($article->id))?>" class="label label-primary"><i class="fa fa-eye"></i></a></td>
+                                        <td><?=$sl++?> <a href="<?=url('user/view_details/' . Helper::encoded($article->id))?>" class="label label-primary"><i class="fa fa-eye"></i></a></td>
                                         <td><?=$article->article_no?></td>
                                         <!-- <td>?=$article->creative_Work?></td> -->
                                         <!-- <td>?=date_format(date_create(), "d-m-Y")?></td> -->
