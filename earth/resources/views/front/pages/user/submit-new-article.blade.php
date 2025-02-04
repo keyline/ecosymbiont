@@ -140,6 +140,8 @@ use Illuminate\Support\Facades\DB;
                 $city = $profile->city;
                 $participated = $profile->participated;
                 $participated_info = $profile->participated_info;
+                $community = '';
+                $community_name = '';
                 $organization_name = $profile->organization_name;
                 $organization_website = $profile->organization_website;
                 $ecosystem_affiliationId = json_decode($profile->ecosystem_affiliationId);
