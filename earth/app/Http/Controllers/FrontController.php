@@ -424,8 +424,8 @@ class FrontController extends Controller
                         $request->session()->put('email', $sessionData->email);
                         $request->session()->put('is_user_login', 1);
 
-                        $exsistUser = User::where('email', '=', $sessionData->email)->count();
-                          Helper::pr($exsistUser);                        
+                        $exsistUser = UserActivity::where('user_email', '=', $sessionData->email)->count();
+                        //  Helper::pr($exsistUser);                        
                         if($exsistUser > 0)
                         {
                             if($sessionData->role == 2)
