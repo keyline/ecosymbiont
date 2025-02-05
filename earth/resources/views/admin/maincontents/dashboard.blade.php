@@ -60,7 +60,7 @@
 
       <div class="col-sm-12 col-lg-4 mb-3 mb-lg-5">
         <!-- Card -->
-        <a class="card card-hover-shadow h-100" href="<?= url('admin/article/list') ?>">
+        <a class="card card-hover-shadow h-100" href="<?= url('admin/article/submitted') ?>">
           <div class="card-body">
             <h6 class="card-subtitle">Creative-Work Submitted</h6>
             <div class="row align-items-center gx-2 mb-1">
@@ -79,7 +79,7 @@
       </div>
       <div class="col-sm-12 col-lg-4 mb-3 mb-lg-5">
         <!-- Card -->
-        <a class="card card-hover-shadow h-100" href="<?= url('admin/article/list') ?>">
+        <a class="card card-hover-shadow h-100" href="<?= url('admin/article/editing-checking') ?>">
           <div class="card-body">
             <h6 class="card-subtitle">Final Editing & Checking</h6>
             <div class="row align-items-center gx-2 mb-1">
@@ -136,7 +136,7 @@
       </div> -->
       <div class="col-sm-12 col-lg-4 mb-3 mb-lg-5">
         <!-- Card -->
-        <a class="card card-hover-shadow h-100" href="<?= url('admin/article/list') ?>">
+        <a class="card card-hover-shadow h-100" href="<?= url('admin/article/approved') ?>">
           <div class="card-body">
             <h6 class="card-subtitle">Approved & Published</h6>
             <div class="row align-items-center gx-2 mb-1">
