@@ -2092,7 +2092,13 @@ class FrontController extends Controller
                         'bio_long'               => $postData['bio_long'],                  
                     ];
                     // Helper::pr($fields);
+                    $fields2 = [                                                          
+                        'email'                     => $postData['email'],                        
+                        'first_name'                => $postData['first_name'],                                                                                                          
+                        'country'                   => $postData['country'],                       
+                    ];
                     UserProfile::insert($fields);
+                    User::where('id', '=', $user_id)->update($fields2);
                     return redirect(url('user/submit-new-article'))->with('success_message', 'Profile Created Successfully !!!');
                 } else {
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');

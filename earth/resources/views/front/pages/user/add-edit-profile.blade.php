@@ -63,7 +63,7 @@
                 $first_name = $user->first_name;                                 
                 $email = $user->email;           
                 $for_publication_name = '';           
-                $countryId = '';                                                                 
+                $countryId = $user->country;                                                                 
                 $invited = '';
                 $invited_by = '';
                 $invited_by_email = '';  
