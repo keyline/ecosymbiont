@@ -72,13 +72,13 @@ if($pageSegment == 'article'){
                     </div>                    
                 <!-- End news -->
                 <!-- Submitted Articles -->
-                    <div class="nav-item">
+                    <!-- <div class="nav-item">
                         <a class="nav-link <?= $pageSegment == 'article' ? 'active' : '' ?>"
                             href="<?= url('admin/article/list') ?>" data-placement="left">
                             <i class="fa fa-file-text nav-icon"></i>
                             <span class="nav-link-title">Submitted Creative-Work</span>
                         </a>
-                    </div>
+                    </div> -->
                     <div class="nav-item">
                         <a class="nav-link dropdown-toggle active <?=(($pageSegment == 'article')?'':'collapsed')?>" href="#navbarVerticalMenuarticle" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuarticle" aria-expanded="<?=(($pageSegment == 'article')?'true':'false')?>" aria-controls="navbarVerticalMenuAccess">
                         <i class="fa fa-database nav-icon"></i>
