@@ -45,11 +45,11 @@ class ArticlesController extends Controller
     public function list($slug)
     {
         $getArticleStatus               = $this->get_article_status($slug);
-        Helper::pr($getArticleStatus);
+        // Helper::pr($getArticleStatus);
         $data['module']                 = $this->data;
         $title                          = $this->data['title'] . ' List';
         $page_name                      = 'article.list';
-        $data['rows']                   = Article::where('status', '!=', 3)->orderBy('id', 'DESC')->get();
+        $data['rows']                   = Article::where('status', '!=', 3)->where('is_published', '=', $getArticleStatus)->orderBy('id', 'DESC')->get();
 
         echo $this->admin_after_login_layout($title, $page_name, $data);
     }    
