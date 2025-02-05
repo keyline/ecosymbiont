@@ -888,6 +888,7 @@ class FrontController extends Controller
             $data['articles']               = Article::where('user_id', '=', $user_id)->get();
             $data['classification']         = UserClassification::where('user_id', '=', $user_id)->first();
              $data['profile']               = UserProfile::where('user_id', '=', $user_id)->first();
+             Helper::pr($data['profile']);
             $data['search_keyword']         = '';
 
             if ($request->isMethod('post')) {
