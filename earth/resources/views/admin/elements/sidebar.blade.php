@@ -19,7 +19,7 @@ $slug = '';
 if($pageSegment == 'article'){
     $slug = $routeName->parameters()['id'];
   }
-   echo $slug;die;
+//    echo $slug;die;
 ?>
 <div class="navbar-vertical-container">
     <div class="navbar-vertical-footer-offset">
