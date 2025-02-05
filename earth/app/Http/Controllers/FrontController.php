@@ -2098,7 +2098,22 @@ class FrontController extends Controller
                         'country'                   => $postData['country'],                       
                     ];
                     UserProfile::insert($fields);
-                    User::where('id', '=', $user_id)->update($fields2);
+                    if($data['user']->email != $postData['email']){                        
+                        $generalSetting             = GeneralSetting::where('id', '=', 1)->first();
+                        $subject                    = 'Subject: Your Update Login Credentials for Portal Access';
+                        $message                    = "<table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
+                                                        <tr><td style='padding: 8px 15px'>Dear " . htmlspecialchars($postData['first_name']) . ",</td></tr>
+                                                        <tr><td style='padding: 8px 15px'>You have changed the email address associated with your Contributor profile on EaRTh.</td></tr>                                                                    
+                                                        <tr><td style='padding: 8px 15px'><strong>Please note that you can no longer use your previous email address to log in. You must use your new email address, along with your old password.</td></tr>
+                                                        <tr><td style='padding: 8px 15px'><strong>If you have forgotten your password, please log in using your new email address, and click on 'Forgot Password'.</td></tr>                                                            
+                                                        
+                                                        
+                                                        <tr><td style='padding: 8px 15px'>Sincerely,</td></tr>
+                                                        <tr><td style='padding: 8px 15px'>EaRTh Team</td></tr>
+                                                    </table>";
+                        $this->sendMail($postData['email'], $subject, $message);                                                                    
+                    } 
+                    User::where('id', '=', $user_id)->update($fields2);                                       
                     return redirect(url('user/submit-new-article'))->with('success_message', 'Profile Created Successfully !!!');
                 } else {
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');
