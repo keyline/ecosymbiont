@@ -2171,8 +2171,14 @@ class FrontController extends Controller
                         'bio_short'                 => $postData['bio_short'],
                         'bio_long'                  => $postData['bio_long'],    
                     ];
+                    $fields2 = [                                                          
+                        'email'                     => $postData['email'],                        
+                        'first_name'                => $postData['first_name'],                                                                                                          
+                        'country'                   => $postData['country'],                       
+                    ];
                     // Helper::pr($fields);
                     UserProfile::where('id', '=', $id)->update($fields);
+                    User::where('id', '=', $user_id)->update($fields2);
                     return redirect(url('user/profiles'))->with('success_message', 'Profile Updated Successfully !!!');
                 } else {
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');
