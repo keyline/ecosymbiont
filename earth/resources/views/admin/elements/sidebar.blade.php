@@ -79,6 +79,17 @@ if($pageSegment == 'article'){
                             <span class="nav-link-title">Submitted Creative-Work</span>
                         </a>
                     </div>
+                    <div class="nav-item">
+                        <a class="nav-link dropdown-toggle active <?=(($pageSegment == 'article')?'':'collapsed')?>" href="#navbarVerticalMenuarticle" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuarticle" aria-expanded="<?=(($pageSegment == 'article')?'true':'false')?>" aria-controls="navbarVerticalMenuAccess">
+                        <i class="fa fa-database nav-icon"></i>
+                        <span class="nav-link-title">Submitted Creative-Work</span>
+                        </a>                        
+                        <div id="navbarVerticalMenuarticle" class="nav-collapse collapse <?=(($pageSegment == 'article')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">             
+                        <a class="nav-link <?=(($pageSegment == 'article' && $slug == 'submitted')?'active':'')?>" href="<?=url('admin/article/submitted')?>">Submitted articles</a>
+                        <a class="nav-link <?=(($pageSegment == 'article' && $slug == 'editing')?'active':'')?>" href="<?=url('admin/article/approved')?>">Editing and checking articles </a>
+                        <a class="nav-link <?=(($pageSegment == 'article' && $slug == 'approved')?'active':'')?>" href="<?=url('admin/article/dispatch')?>">Approved articles </a>                        
+                        </div>
+                    </div>
                 <!-- End Submitted Articles -->                
                  <!-- users -->
                     <div class="nav-item">
