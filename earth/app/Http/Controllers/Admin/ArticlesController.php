@@ -1766,7 +1766,7 @@ class ArticlesController extends Controller
         $order_status = '';
         if($slug == 'submitted'){
             $order_status = 0;
-        } elseif($slug == 'editing and checking'){
+        } elseif($slug == 'editing-checking'){
             $order_status = 1;
         } elseif($slug == 'approved'){
             $order_status = 4;
