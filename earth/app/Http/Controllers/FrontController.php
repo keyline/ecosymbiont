@@ -2049,7 +2049,8 @@ class FrontController extends Controller
                     'ecosystem_affiliation'     => 'required',               
                     'expertise_area'            => 'required',                
                     'explanation'               => ['required', 'string', new MaxWords(100)],
-                    'explanation_submission'    => ['required', 'string', new MaxWords(150)],                
+                    'explanation_submission'    => ['required', 'string', new MaxWords(150)],  
+                    'community'                 => 'required',              
                     // 'creative_Work'             => ['required', 'string', new MaxWords(10)],                                  
                     'bio_short'                 => ['required', 'string', new MaxWords(40)],
                     'bio_long'                  => ['required', 'string', new MaxWords(250)],
@@ -2073,6 +2074,8 @@ class FrontController extends Controller
                         'invited_by_email'          => $invited_emailInfo,
                         'participated'              => $postData['participated'],
                         'participated_info'         => $participatedInfo,
+                        'community'                 => $postData['community'],
+                        'community_name'            => $postData['community_name'],
                         'explanation'               => $postData['explanation'],  
                         'explanation_submission'    => $postData['explanation_submission'],     
                         'titleId'                   => $postData['title'],                              
@@ -2126,7 +2129,8 @@ class FrontController extends Controller
                     'title'                     => 'required',
                     'pronoun'                   => 'required',   
                     'ecosystem_affiliation'     => 'required',               
-                    'expertise_area'            => 'required',                
+                    'expertise_area'            => 'required',          
+                    'community'                 => 'required',      
                     'explanation'               => ['required', 'string', new MaxWords(100)],
                     'explanation_submission'    => ['required', 'string', new MaxWords(150)],                
                     // 'creative_Work'             => ['required', 'string', new MaxWords(10)],                                  
@@ -2151,6 +2155,8 @@ class FrontController extends Controller
                         'invited_by_email'          => $invited_emailInfo,
                         'participated'              => $postData['participated'],
                         'participated_info'         => $participatedInfo,
+                        'community'                 => $postData['community'],
+                        'community_name'            => $postData['community_name'],
                         'explanation'               => $postData['explanation'],  
                         'explanation_submission'    => $postData['explanation_submission'],     
                         'titleId'                   => $postData['title'],                              
@@ -2165,6 +2171,7 @@ class FrontController extends Controller
                         'bio_short'                 => $postData['bio_short'],
                         'bio_long'                  => $postData['bio_long'],    
                     ];
+                    Helper::pr($fields);
                     UserProfile::where('id', '=', $id)->update($fields);
                     return redirect(url('user/profiles'))->with('success_message', 'Profile Updated Successfully !!!');
                 } else {
