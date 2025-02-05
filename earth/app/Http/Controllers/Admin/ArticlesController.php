@@ -42,15 +42,17 @@ class ArticlesController extends Controller
         );
     }
     /* list */
-    public function list()
+    public function list($slug)
     {
+        $getArticleStatus               = $this->get_article_status($slug);
+        Helper::pr($getArticleStatus);
         $data['module']                 = $this->data;
         $title                          = $this->data['title'] . ' List';
         $page_name                      = 'article.list';
         $data['rows']                   = Article::where('status', '!=', 3)->orderBy('id', 'DESC')->get();
 
         echo $this->admin_after_login_layout($title, $page_name, $data);
-    }
+    }    
     /* list */
     /* add */
     public function add(Request $request)
@@ -1758,5 +1760,17 @@ class ArticlesController extends Controller
             EmailLog::insertGetId($postData2);
         /* email log save */
         return redirect("admin/" . $this->data['controller_route'] . "/view_details/" . Helper::encoded($id))->with('success_message', $this->data['title'] . ' NELP Form Generated & Shared To User Successfully !!!');
+    }
+
+    public function get_article_status($slug){
+        $order_status = '';
+        if($slug == 'submitted'){
+            $order_status = 0;
+        } elseif($slug == 'editing and checking'){
+            $order_status = 1;
+        } elseif($slug == 'approved'){
+            $order_status = 4;
+        }
+        return $order_status;
     }
 }

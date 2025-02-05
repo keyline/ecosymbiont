@@ -19,7 +19,7 @@ $slug = '';
 if($pageSegment == 'article'){
     $slug = $routeName->parameters()['id'];
   }
-    echo $slug;die;
+    // echo $slug;die;
 ?>
 <div class="navbar-vertical-container">
     <div class="navbar-vertical-footer-offset">
@@ -86,7 +86,7 @@ if($pageSegment == 'article'){
                         </a>                        
                         <div id="navbarVerticalMenuarticle" class="nav-collapse collapse <?=(($pageSegment == 'article')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">             
                         <a class="nav-link <?=(($pageSegment == 'article' && $slug == 'submitted')?'active':'')?>" href="<?=url('admin/article/submitted')?>">Submitted articles</a>
-                        <a class="nav-link <?=(($pageSegment == 'article' && $slug == 'editing')?'active':'')?>" href="<?=url('admin/article/approved')?>">Editing and checking articles </a>
+                        <a class="nav-link <?=(($pageSegment == 'article' && $slug == 'editing and checking')?'active':'')?>" href="<?=url('admin/article/approved')?>">Editing and checking articles </a>
                         <a class="nav-link <?=(($pageSegment == 'article' && $slug == 'approved')?'active':'')?>" href="<?=url('admin/article/dispatch')?>">Approved articles </a>                        
                         </div>
                     </div>
