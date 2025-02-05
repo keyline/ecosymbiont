@@ -793,23 +793,23 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="community" class="col-md-2 col-lg-4 col-form-label blue-text">28) Are you a member of an EaRTh Community?
+                                    <label for="community" class="col-md-2 col-lg-4 col-form-label">28) Are you a member of an EaRTh Community?
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="radio" id="community_yes" name="community" value="Yes" required @checked(old('community', $community) == 'Yes')>
+                                        <input type="radio" class="readonly-input" id="community_yes" name="community" value="Yes" required @checked(old('community', $community) == 'Yes')>
                                         <label for="yes">Yes</label>
-                                        <input type="radio" id="community_no" name="community" value="No" required @checked(old('community', $community) == 'No')>
+                                        <input type="radio" class="readonly-input" id="community_no" name="community" value="No" required @checked(old('community', $community) == 'No')>
                                         <label for="no">No</label>
                                     </div>
                                 </div> 
                                 <div id="communityDetails" style="display: none;">
                                     <div class="row mb-3">
-                                        <label for="community_info" class="col-md-2 col-lg-4 col-form-label blue-text">28A) Select Community :</label>
+                                        <label for="community_info" class="col-md-2 col-lg-4 col-form-label">28A) Select Community :</label>
                                         <div class="col-md-10 col-lg-8">
                                             <select name="community_name" class="form-control" id="community_name">
                                                 <option value="" selected >Select</option>
-                                                <option value="Schumacher Wild" @selected(old("community_name", $community_name ?? '') == 'Schumacher Wild') >Schumacher Wild</option>
-                                                <option value="West Oakland Matters" @selected(old("community_name", $community_name ?? '') == 'West Oakland Matters') >West Oakland Matters</option>
+                                                <option value="Schumacher Wild" disabled @selected(old("community_name", $community_name ?? '') == 'Schumacher Wild') >Schumacher Wild</option>
+                                                <option value="West Oakland Matters" disabled @selected(old("community_name", $community_name ?? '') == 'West Oakland Matters') >West Oakland Matters</option>
                                             </select>
                                         </div>
                                     </div> 
