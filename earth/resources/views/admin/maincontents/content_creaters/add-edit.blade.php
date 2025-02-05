@@ -381,7 +381,7 @@ $controllerRoute = $module['controller_route'];
                             </div> 
                             <div id="communityDetails" style="display: none;">
                                 <div class="row mb-3">
-                                    <label for="community_info" class="col-md-2 col-lg-4 col-form-label blue-text">28A) Select Community :</label>
+                                    <label for="community_info" class="col-md-2 col-lg-4 col-form-label blue-text">28A) Select Community</label>
                                     <div class="col-md-10 col-lg-8">
                                         <select name="community_name" class="form-control" id="community_name">
                                             <option value="" selected >Select</option>

@@ -804,7 +804,7 @@ use Illuminate\Support\Facades\DB;
                                 </div> 
                                 <div id="communityDetails" style="display: none;">
                                     <div class="row mb-3">
-                                        <label for="community_info" class="col-md-2 col-lg-4 col-form-label">28A) Select Community :</label>
+                                        <label for="community_info" class="col-md-2 col-lg-4 col-form-label">28A) Select Community</label>
                                         <div class="col-md-10 col-lg-8">
                                             <select name="community_name" class="form-control" id="community_name">
                                                 <!-- <option value="" selected disabled>Select</option> -->
@@ -815,7 +815,7 @@ use Illuminate\Support\Facades\DB;
                                     </div> 
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">29) Instructions for initial submission of Creative-Work for eligibility screening:
+                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">29) Instructions for initial submission of Creative-Work for eligibility screening
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <p>Once you have completed this form and uploaded all required files, click on the "Submit" button below. If you meet the eligibility criteria <span style="color: red !important">(determined in part by your response to question 12); also, you
@@ -828,7 +828,7 @@ use Illuminate\Support\Facades\DB;
                                     </div> -->
                                 </div> 
                                 <div class="row mb-3">
-                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">30) If you are submitting a video: 
+                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">30) If you are submitting a video
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <p>Please note that it may take several minutes for your video to upload. Please do not click on the “Submit” button more than once and do not navigate away from this page, until you are re-directed to a page that tells you: “Creative-Work submitted successfully!”</p>                                        
