@@ -2020,8 +2020,7 @@ class FrontController extends Controller
         public function addProfile(Request $request)
         {
             $user_id                        = session('user_id');
-            $data['user']                   = User::find($user_id);
-            Helper::pr($data['user']);
+            $data['user']                   = User::find($user_id);            
             $data['classification']         = UserClassification::where('user_id', '=', $user_id)->first();
             $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['news_category']          = NewsCategory::where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'ASC')->get();        

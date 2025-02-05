@@ -60,8 +60,8 @@
             } else {
                 $user_id = '';
                 $author_classification = '';                
-                $first_name = '';                                 
-                $email = '';           
+                $first_name = $user->first_name;                                 
+                $email = $user->email;           
                 $for_publication_name = '';           
                 $countryId = '';                                                                 
                 $invited = '';
