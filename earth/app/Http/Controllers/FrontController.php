@@ -532,8 +532,7 @@ class FrontController extends Controller
                         // reCAPTCHA validation passed, proceed with form processing
                         // echo "reCAPTCHA v3 validation passed. You can process the form."; die;
                         $rules = [                                 
-                            'first_name'                => 'required',            
-                            'last_name'                 => 'required',                                    
+                            'first_name'                => 'required',                                                                           
                             'email'                     => 'required',                                                  
                             'country'                   => 'required',                                                                                         
                         ];
@@ -544,9 +543,7 @@ class FrontController extends Controller
                                 $randomPassword = bin2hex(random_bytes(8));   
 
                                 $fields = [                        
-                                    'first_name'                => $postData['first_name'],            
-                                    'last_name'                 => $postData['last_name'],        
-                                    'middle_name'               => $postData['middle_name'],            
+                                    'first_name'                => $postData['first_name'],                                                           
                                     'email'                     => $postData['email'],                                                          
                                     'country'                   => $postData['country'],
                                     'role'                      => $postData['role'],

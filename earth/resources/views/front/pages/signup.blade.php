@@ -40,7 +40,7 @@
                                                 <input type="text" name="first_name" class="form-control" id="first_name" placeholder="Enter First Name" required autocomplete="off">
                                               </div>
                                             </div>
-                                            <div class="row" style="margin-bottom: 15px;">
+                                            <!-- <div class="row" style="margin-bottom: 15px;">
                                               <label for="middle_name" class="col-md-4 col-lg-3 col-form-label">Middle Name</label>
                                               <div class="col-md-8 col-lg-9">
                                                 <input type="text" name="middle_name" class="form-control" id="middle_name" placeholder="Enter Middle Name" autocomplete="off">
@@ -51,7 +51,7 @@
                                               <div class="col-md-8 col-lg-9">
                                                 <input type="text" name="last_name" class="form-control" id="last_name" placeholder="Enter Surname" required autocomplete="off">
                                               </div>
-                                            </div>
+                                            </div> -->
                                             <div class="row" style="margin-bottom: 15px;">
                                               <label for="email" class="col-md-4 col-lg-3 col-form-label">Email*</label>
                                               <div class="col-md-8 col-lg-9">
