@@ -450,6 +450,12 @@ class FrontController extends Controller
                                 } else {
                                     return redirect($page_link);
                                 } 
+                            }else {
+                                if($page_link == ''){
+                                    return redirect('user/dashboard');
+                                } else {
+                                    return redirect($page_link);
+                                }
                             }
                         }
 
