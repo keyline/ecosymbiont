@@ -68,6 +68,8 @@ use App\Models\ExpertiseArea;
       $city = $row->city;
       $participated = $row->participated;
       $participated_info = $row->participated_info;
+      $community = $row->community;
+      $community_name = $row->community_name;
       $organization_name = $row->organization_name;
       $organization_website = $row->organization_website;
       $ecosystem_affiliationId = $selected_ecosystem_affiliation;
@@ -407,6 +409,14 @@ use App\Models\ExpertiseArea;
                 <tr>
                   <td>27) 1-paragraph biography (150-250 words)</td>
                   <td><?= $bio_long ?></td>
+                </tr>
+                <tr>
+                  <td>28) Are you a member of an EaRTh Community?</td>
+                  <td><?= $community ?></td>
+                </tr>
+                <tr>
+                  <td>28A) Select Community</td>
+                  <td><?= $community_name ?></td>
                 </tr>
             </tbody>
           </table>          
