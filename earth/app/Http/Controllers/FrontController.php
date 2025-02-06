@@ -1516,11 +1516,11 @@ class FrontController extends Controller
                                     $coindigenousAffiliations[] = $request->input("co_indigenous_affiliation_{$i}");
 
                                     if($request->input("co_author_classification_{$i}") !== null){
-                                        $coecosystemAffiliations[] = $request->input("co_author_classification_{$i}", []);
+                                        $coauthorClassification[] = $request->input("co_author_classification_{$i}", []);
                                     } else{
                                         return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
                                     }
-                                    $coauthorClassification[] = $request->input("co_author_classification_{$i}");
+                                    // $coauthorClassification[] = $request->input("co_author_classification_{$i}");
                                 }
                             }                                            
                             /* co-author details */
@@ -1646,7 +1646,7 @@ class FrontController extends Controller
                                         'bio_short'                 => $postData['bio_short'],
                                         'bio_long'                  => $postData['bio_long'],  
                                     ];
-                                    //    Helper::pr($fields);
+                                       Helper::pr($fields);
 
                                     /* submission email */
                                     $generalSetting             = GeneralSetting::find('1');                            
