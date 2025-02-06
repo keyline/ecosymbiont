@@ -110,10 +110,11 @@ use App\Models\ExpertiseArea;
                   <td>3A) (- if answer to (3) is 1 or 2) Indicate in which position your name should appear in the list of authors (the Lead Author, i.e., the first author listed, must be a human individual)</td>
                   <td><?= $co_authors_position ?></td>
                 </tr>
-                <!-- @for ($i = 1; $i <= $co_authors; $i++)
+                @for ($i = 1; $i <= $co_authors; $i++)
                 @php
                   // Decode the JSON field only once
                   $co_ecosystem_affiliations = json_decode($row->co_ecosystem_affiliations);
+                  Helper::pr($co_ecosystem_affiliations);
 
                   // Initialize affiliations array
                   $affiliations = [];
@@ -135,7 +136,7 @@ use App\Models\ExpertiseArea;
                   $county_ids = $co_author_countries[$i-1];
                   $getCoCountry = Country::select('name')->where('id', '=', $county_ids)->first();
 
-                @endphp                    -->                
+                @endphp               
                   <tr>
                     <td>3B{{$i}}) Co-Author Name</td> 
                     <td>{{ $co_author_name[$i - 1] }}</td>                       
