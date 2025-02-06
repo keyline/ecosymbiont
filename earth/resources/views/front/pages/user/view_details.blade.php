@@ -135,41 +135,7 @@ use App\Models\ExpertiseArea;
                   $county_ids = $co_author_countries[$i-1];
                   $getCoCountry = Country::select('name')->where('id', '=', $county_ids)->first();
 
-                @endphp                    -->
-                @for ($i = 1; $i <= $co_authors; $i++)
-    @php
-        // Decode the JSON field only once as an associative array
-        $co_ecosystem_affiliations = json_decode($row->co_ecosystem_affiliations, true);
-
-        // Initialize affiliations array
-        $affiliations = [];
-
-        // Check if $co_ecosystem_affiliations is an array and has the current index
-        if (is_array($co_ecosystem_affiliations) && isset($co_ecosystem_affiliations[$i-1])) {
-            $affiliation_ids = $co_ecosystem_affiliations[$i-1]; // Get the specific co-author's affiliations
-
-            // Ensure $affiliation_ids is an array before looping
-            if (is_array($affiliation_ids)) {
-                foreach ($affiliation_ids as $affiliation_id) {
-                    $getCoAffiliation = EcosystemAffiliation::select('name')->where('id', '=', $affiliation_id)->first();
-                    
-                    // Check if the affiliation was found and add it to the array
-                    if ($getCoAffiliation) {
-                        $affiliations[] = $getCoAffiliation->name;
-                    }
-                }
-            }
-        }
-
-        // Fix for co-author country ID retrieval
-        $county_ids = $co_author_countries[$i-1] ?? null;
-
-        // Ensure the country ID is valid before querying
-        $getCoCountry = null;
-        if (!empty($county_ids)) {
-            $getCoCountry = Country::select('name')->where('id', '=', $county_ids)->first();
-        }
-    @endphp
+                @endphp                    -->                
                   <tr>
                     <td>3B{{$i}}) Co-Author Name</td> 
                     <td>{{ $co_author_name[$i - 1] }}</td>                       
