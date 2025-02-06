@@ -1305,7 +1305,7 @@ class FrontController extends Controller
                            /* art images details */
    
                            if ($this->validate($request, $rules)) {        
-                            Helper::pr($postData);        
+                            // Helper::pr($postData);        
                                $fields = [
                                    'sl_no'                     => $next_sl_no,
                                    'article_no'                => $article_no,
@@ -1347,7 +1347,7 @@ class FrontController extends Controller
                                    'bio_short'               => $postData['bio_short'],
                                    'bio_long'               => $postData['bio_long'],  
                                ];
-                                      Helper::pr($fields);
+                                    //   Helper::pr($fields);
 
                                 /* submission email */
                                 $generalSetting             = GeneralSetting::find('1');                            
