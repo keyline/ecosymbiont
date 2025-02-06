@@ -113,8 +113,7 @@ use App\Models\ExpertiseArea;
                 @for ($i = 1; $i <= $co_authors; $i++)
                 @php
                   // Decode the JSON field only once
-                  $co_ecosystem_affiliations = json_decode($row->co_ecosystem_affiliations);
-                  <!-- Helper::pr($co_ecosystem_affiliations); -->
+                  $co_ecosystem_affiliations = json_decode($row->co_ecosystem_affiliations);                  
 
                   // Initialize affiliations array
                   $affiliations = [];
