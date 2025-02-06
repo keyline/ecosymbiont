@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Article;
 // use App\Models\Admin\Country;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -270,6 +271,7 @@ class ContentCreatersController extends Controller
                         $this->sendMail($postData['email'], $subject, $message);                                                                    
                     } 
                     User::where($this->data['primary_key'], '=', $user_id)->update($fields2);
+                    Article::where('user_id', '=', $user_id)->update($fields2);
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');
                 // } else {
                 //     return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
