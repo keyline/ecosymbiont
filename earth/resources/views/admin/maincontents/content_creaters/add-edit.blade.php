@@ -179,7 +179,7 @@ $controllerRoute = $module['controller_route'];
                             <label for="first_name" class="col-md-2 col-lg-4 col-form-label">4) Full Legal Name (exactly as it appears on your government-issued identification documents, e.g., passport and/or driver's license)</label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="text" name="first_name" class="form-control" id="first_name"
-                                    value="{{ old('first_name', $first_name) }}" readonly>
+                                    value="{{ old('first_name', $first_name) }}">
                             </div>
                         </div>                                                 
                         <div class="row mb-3">
