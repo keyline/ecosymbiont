@@ -1513,7 +1513,7 @@ class FrontController extends Controller
                                     } else{
                                         return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
                                     }
-                                    // $coauthorClassification[] = $request->input("co_author_classification_{$i}");
+                                    $coauthorClassification[] = $request->input("co_author_classification_{$i}");
                                 }
                             }                                            
                             /* co-author details */
