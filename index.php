@@ -12,7 +12,7 @@ include "include/header.php";
                     <div class="col-md-12">
                         <div class="info-box">
                             <h2>WELCOME</h2>  
-                            <p><i>Ecosymbionts Regenerate</i> is a major initiative of the <i>Śramani Institute</i>, a nonprofit entity that combines the activities of a research institute, thinktank, and implementation organization. The mission of the <i>Śramani Institute</i> is to realize the interconnected wellbeing of humans and ecologies. All of our initiatives have global and local aspects and focus on understanding and expressing &#x2014; at an individual and community level &#x2014; the <i><strong class="fontbold"><a target="_blank" href="#definitions">ecoself</a></i></strong>.</p>
+                            <p><i>Ecosymbionts Regenerate</i> is a major initiative of the <i>Śramani Institute</i>, a nonprofit entity that combines the activities of a research institute, thinktank, and implementation organization. The mission of the <i>Śramani Institute</i> is to realize the interconnected wellbeing of humans and ecologies. All of our initiatives have global and local aspects and focus on understanding and expressing &#x2014; at an individual and community level &#x2014; the <i><strong class="fontbold"><a target="_blank" href="https://ecosymbiont.org/earth/content/systems/ecoweb-rooted-framing/ecoself-restoring-our-wellbeing-rooted-in-nature-and-humanity">ecoself</a></i></strong>.</p>
                         </div>
                     </div>
                     
