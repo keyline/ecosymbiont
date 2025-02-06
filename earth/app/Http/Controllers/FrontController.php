@@ -1502,23 +1502,43 @@ class FrontController extends Controller
                             // Loop through the number of co-authors and collect the data into arrays
                             for ($i = 1; $i <= $coAuthorsCount; $i++) {
                                 // Check if co-author name exists, to avoid null entries
-                                if ($request->input("co_author_name_{$i}") !== null) {
+                                if ($request->input("co_author_name_{$i}") !== null) {                                    
                                     $coAuthorNames[] = $request->input("co_author_name_{$i}");
-                                    $coAuthorBios[] = $request->input("co_author_short_bio_{$i}");
+
+                                    if($request->input("co_author_short_bio_{$i}") !== null){
+                                        $coAuthorBios[] = $request->input("co_author_short_bio_{$i}", []);
+                                    } else{
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
+                                    }
+                                    // $coAuthorBios[] = $request->input("co_author_short_bio_{$i}");
+
                                     if($request->input("co_author_country_{$i}") !== null){
                                         $coAuthorCountries[] = $request->input("co_author_country_{$i}", []);
                                     } else{
                                         return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
                                     }
                                     // $coAuthorCountries[] = $request->input("co_author_country_{$i}");
-                                    $coAuthorOrganizations[] = $request->input("co_authororganization_name_{$i}");
+
+                                    if($request->input("co_authororganization_name_{$i}") !== null){
+                                        $coAuthorOrganizations[] = $request->input("co_authororganization_name_{$i}", []);
+                                    } else{
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
+                                    }
+                                    // $coAuthorOrganizations[] = $request->input("co_authororganization_name_{$i}");
+
                                     if($request->input("co_ecosystem_affiliation_{$i}") !== null){
                                         $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
                                     } else{
                                         return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
                                     }
                                     // $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
-                                    $coindigenousAffiliations[] = $request->input("co_indigenous_affiliation_{$i}");
+
+                                    if($request->input("co_indigenous_affiliation_{$i}") !== null){
+                                        $coindigenousAffiliations[] = $request->input("co_indigenous_affiliation_{$i}", []);
+                                    } else{
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
+                                    }
+                                    // $coindigenousAffiliations[] = $request->input("co_indigenous_affiliation_{$i}");
 
                                     if($request->input("co_author_classification_{$i}") !== null){
                                         $coauthorClassification[] = $request->input("co_author_classification_{$i}", []);
@@ -1526,6 +1546,8 @@ class FrontController extends Controller
                                         return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
                                     }
                                     // $coauthorClassification[] = $request->input("co_author_classification_{$i}");
+                                }else{
+                                    return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
                                 }
                             }                                            
                             /* co-author details */
