@@ -1505,7 +1505,12 @@ class FrontController extends Controller
                                 if ($request->input("co_author_name_{$i}") !== null) {
                                     $coAuthorNames[] = $request->input("co_author_name_{$i}");
                                     $coAuthorBios[] = $request->input("co_author_short_bio_{$i}");
-                                    $coAuthorCountries[] = $request->input("co_author_country_{$i}");
+                                    if($request->input("co_author_country_{$i}") !== null){
+                                        $coAuthorCountries[] = $request->input("co_author_country_{$i}", []);
+                                    } else{
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
+                                    }
+                                    // $coAuthorCountries[] = $request->input("co_author_country_{$i}");
                                     $coAuthorOrganizations[] = $request->input("co_authororganization_name_{$i}");
                                     if($request->input("co_ecosystem_affiliation_{$i}") !== null){
                                         $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
