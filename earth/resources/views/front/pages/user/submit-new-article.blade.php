@@ -811,6 +811,8 @@ use Illuminate\Support\Facades\DB;
                                                 <option value="Schumacher Wild" disabled @selected(old("community_name", $community_name ?? '') == 'Schumacher Wild') >Schumacher Wild</option>
                                                 <option value="West Oakland Matters" disabled @selected(old("community_name", $community_name ?? '') == 'West Oakland Matters') >West Oakland Matters</option>
                                             </select>
+                                            <!-- Hidden input to submit the selected value -->
+                                        <input type="hidden" name="community_name" value="{{ $community_name }}">
                                         </div>
                                     </div> 
                                 </div>
