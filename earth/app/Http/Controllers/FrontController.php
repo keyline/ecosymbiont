@@ -1404,7 +1404,7 @@ class FrontController extends Controller
                         }
                            /* art_video file */   
                            if ($this->validate($request, $rules)) {  
-                            Helper::pr($postData);              
+                            // Helper::pr($postData);              
                                $fields = [
                                    'sl_no'                     => $next_sl_no,
                                    'article_no'                => $article_no,
@@ -1823,7 +1823,8 @@ class FrontController extends Controller
                              }                            
                                 /* art_video file */   
     
-                                if ($this->validate($request, $rules)) {                
+                                if ($this->validate($request, $rules)) {    
+                                    Helper::pr($postData);            
                                     $fields = [
                                         'sl_no'                     => $next_sl_no,
                                         'article_no'                => $article_no,
