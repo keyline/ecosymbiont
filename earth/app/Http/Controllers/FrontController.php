@@ -425,7 +425,7 @@ class FrontController extends Controller
                         $request->session()->put('is_user_login', 1);
 
                         $exsistUser = UserActivity::where('user_email', '=', $sessionData->email)->count();
-                        //   Helper::pr($exsistUser);                        
+                          Helper::pr($exsistUser);                        
                         if($exsistUser > 0)
                         {
                             if($sessionData->role == 2)
@@ -443,6 +443,7 @@ class FrontController extends Controller
                                 }
                             }
                         } else{
+                            Helper::pr($sessionData->role);
                             if($sessionData->role == 2)
                             {
                                 if($page_link == ''){
