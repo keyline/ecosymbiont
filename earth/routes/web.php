@@ -87,7 +87,8 @@ use Illuminate\Support\Facades\Route;
         Route::match(['get','post'], "test-email", "UserController@testEmail");
         /* setting */
         /* submitted articles */
-        Route::get('article/list', 'ArticlesController@list');
+        // Route::get('article/list', 'ArticlesController@list');
+        Route::get('article/{id}', 'ArticlesController@list');
         Route::match(['get', 'post'], 'article/add', 'ArticlesController@add');
         Route::match(['get', 'post'], 'article/edit/{id}', 'ArticlesController@edit');
         Route::match(['get', 'post'], 'article/view_details/{id}', 'ArticlesController@viewDetails');

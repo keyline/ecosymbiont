@@ -425,7 +425,7 @@ class FrontController extends Controller
                         $request->session()->put('is_user_login', 1);
 
                         $exsistUser = UserActivity::where('user_email', '=', $sessionData->email)->count();
-                        //  Helper::pr($exsistUser);                        
+                        //   Helper::pr($exsistUser);                        
                         if($exsistUser > 0)
                         {
                             if($sessionData->role == 2)
@@ -443,6 +443,7 @@ class FrontController extends Controller
                                 }
                             }
                         } else{
+                            // Helper::pr($sessionData->role);
                             if($sessionData->role == 2)
                             {
                                 if($page_link == ''){
@@ -450,6 +451,12 @@ class FrontController extends Controller
                                 } else {
                                     return redirect($page_link);
                                 } 
+                            }else {
+                                if($page_link == ''){
+                                    return redirect('user/dashboard');
+                                } else {
+                                    return redirect($page_link);
+                                }
                             }
                         }
 
@@ -532,8 +539,7 @@ class FrontController extends Controller
                         // reCAPTCHA validation passed, proceed with form processing
                         // echo "reCAPTCHA v3 validation passed. You can process the form."; die;
                         $rules = [                                 
-                            'first_name'                => 'required',            
-                            'last_name'                 => 'required',                                    
+                            'first_name'                => 'required',                                                                           
                             'email'                     => 'required',                                                  
                             'country'                   => 'required',                                                                                         
                         ];
@@ -544,9 +550,7 @@ class FrontController extends Controller
                                 $randomPassword = bin2hex(random_bytes(8));   
 
                                 $fields = [                        
-                                    'first_name'                => $postData['first_name'],            
-                                    'last_name'                 => $postData['last_name'],        
-                                    'middle_name'               => $postData['middle_name'],            
+                                    'first_name'                => $postData['first_name'],                                                           
                                     'email'                     => $postData['email'],                                                          
                                     'country'                   => $postData['country'],
                                     'role'                      => $postData['role'],
@@ -891,6 +895,7 @@ class FrontController extends Controller
             $data['articles']               = Article::where('user_id', '=', $user_id)->get();
             $data['classification']         = UserClassification::where('user_id', '=', $user_id)->first();
              $data['profile']               = UserProfile::where('user_id', '=', $user_id)->first();
+            //  Helper::pr($data['profile']);
             $data['search_keyword']         = '';
 
             if ($request->isMethod('post')) {
@@ -1306,7 +1311,8 @@ class FrontController extends Controller
                            }
                            /* art images details */
    
-                           if ($this->validate($request, $rules)) {                
+                           if ($this->validate($request, $rules)) {        
+                            // Helper::pr($postData);        
                                $fields = [
                                    'sl_no'                     => $next_sl_no,
                                    'article_no'                => $article_no,
@@ -1348,7 +1354,7 @@ class FrontController extends Controller
                                    'bio_short'               => $postData['bio_short'],
                                    'bio_long'               => $postData['bio_long'],  
                                ];
-                                    //  Helper::pr($fields);
+                                    //   Helper::pr($fields);
 
                                 /* submission email */
                                 $generalSetting             = GeneralSetting::find('1');                            
@@ -1404,7 +1410,8 @@ class FrontController extends Controller
                             return redirect()->back()->withInput()->with(['error_message' => 'Please upload art video and with descriptive narrative !!!']);
                         }
                            /* art_video file */   
-                           if ($this->validate($request, $rules)) {                
+                           if ($this->validate($request, $rules)) {  
+                            // Helper::pr($postData);              
                                $fields = [
                                    'sl_no'                     => $next_sl_no,
                                    'article_no'                => $article_no,
@@ -1513,7 +1520,7 @@ class FrontController extends Controller
                                     } else{
                                         return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
                                     }
-                                    // $coauthorClassification[] = $request->input("co_author_classification_{$i}");
+                                    $coauthorClassification[] = $request->input("co_author_classification_{$i}");
                                 }
                             }                                            
                             /* co-author details */
@@ -1823,7 +1830,8 @@ class FrontController extends Controller
                              }                            
                                 /* art_video file */   
     
-                                if ($this->validate($request, $rules)) {                
+                                if ($this->validate($request, $rules)) {    
+                                    // Helper::pr($postData);            
                                     $fields = [
                                         'sl_no'                     => $next_sl_no,
                                         'article_no'                => $article_no,
@@ -2023,7 +2031,7 @@ class FrontController extends Controller
         public function addProfile(Request $request)
         {
             $user_id                        = session('user_id');
-            $data['user']                   = User::find($user_id);
+            $data['user']                   = User::find($user_id);            
             $data['classification']         = UserClassification::where('user_id', '=', $user_id)->first();
             $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['news_category']          = NewsCategory::where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'ASC')->get();        
@@ -2052,7 +2060,8 @@ class FrontController extends Controller
                     'ecosystem_affiliation'     => 'required',               
                     'expertise_area'            => 'required',                
                     'explanation'               => ['required', 'string', new MaxWords(100)],
-                    'explanation_submission'    => ['required', 'string', new MaxWords(150)],                
+                    'explanation_submission'    => ['required', 'string', new MaxWords(150)],  
+                    'community'                 => 'required',              
                     // 'creative_Work'             => ['required', 'string', new MaxWords(10)],                                  
                     'bio_short'                 => ['required', 'string', new MaxWords(40)],
                     'bio_long'                  => ['required', 'string', new MaxWords(250)],
@@ -2076,6 +2085,8 @@ class FrontController extends Controller
                         'invited_by_email'          => $invited_emailInfo,
                         'participated'              => $postData['participated'],
                         'participated_info'         => $participatedInfo,
+                        'community'                 => $postData['community'],
+                        'community_name'            => $postData['community_name'],
                         'explanation'               => $postData['explanation'],  
                         'explanation_submission'    => $postData['explanation_submission'],     
                         'titleId'                   => $postData['title'],                              
@@ -2091,7 +2102,28 @@ class FrontController extends Controller
                         'bio_long'               => $postData['bio_long'],                  
                     ];
                     // Helper::pr($fields);
+                    $fields2 = [                                                          
+                        'email'                     => $postData['email'],                        
+                        'first_name'                => $postData['first_name'],                                                                                                          
+                        'country'                   => $postData['country'],                       
+                    ];
                     UserProfile::insert($fields);
+                    if($data['user']->email != $postData['email']){                        
+                        $generalSetting             = GeneralSetting::where('id', '=', 1)->first();
+                        $subject                    = 'Subject: Your Update Login Credentials for Portal Access';
+                        $message                    = "<table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
+                                                        <tr><td style='padding: 8px 15px'>Dear " . htmlspecialchars($postData['first_name']) . ",</td></tr>
+                                                        <tr><td style='padding: 8px 15px'>You have changed the email address associated with your Contributor profile on EaRTh.</td></tr>                                                                    
+                                                        <tr><td style='padding: 8px 15px'>Please note that you can no longer use your previous email address to log in. You must use your new email address, along with your old password.</td></tr>
+                                                        <tr><td style='padding: 8px 15px'>If you have forgotten your password, please log in using your new email address, and click on 'Forgot Password'.</td></tr>                                                            
+                                                        
+                                                        
+                                                        <tr><td style='padding: 8px 15px'>Sincerely,</td></tr>
+                                                        <tr><td style='padding: 8px 15px'>EaRTh Team</td></tr>
+                                                    </table>";
+                        $this->sendMail($postData['email'], $subject, $message);                                                                    
+                    } 
+                    User::where('id', '=', $user_id)->update($fields2);                                       
                     return redirect(url('user/submit-new-article'))->with('success_message', 'Profile Created Successfully !!!');
                 } else {
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');
@@ -2129,7 +2161,8 @@ class FrontController extends Controller
                     'title'                     => 'required',
                     'pronoun'                   => 'required',   
                     'ecosystem_affiliation'     => 'required',               
-                    'expertise_area'            => 'required',                
+                    'expertise_area'            => 'required',          
+                    'community'                 => 'required',      
                     'explanation'               => ['required', 'string', new MaxWords(100)],
                     'explanation_submission'    => ['required', 'string', new MaxWords(150)],                
                     // 'creative_Work'             => ['required', 'string', new MaxWords(10)],                                  
@@ -2154,6 +2187,8 @@ class FrontController extends Controller
                         'invited_by_email'          => $invited_emailInfo,
                         'participated'              => $postData['participated'],
                         'participated_info'         => $participatedInfo,
+                        'community'                 => $postData['community'],
+                        'community_name'            => $postData['community_name'],
                         'explanation'               => $postData['explanation'],  
                         'explanation_submission'    => $postData['explanation_submission'],     
                         'titleId'                   => $postData['title'],                              
@@ -2168,7 +2203,29 @@ class FrontController extends Controller
                         'bio_short'                 => $postData['bio_short'],
                         'bio_long'                  => $postData['bio_long'],    
                     ];
+                    $fields2 = [                                                          
+                        'email'                     => $postData['email'],                        
+                        'first_name'                => $postData['first_name'],                                                                                                          
+                        'country'                   => $postData['country'],                       
+                    ];
+                    // Helper::pr($fields);
                     UserProfile::where('id', '=', $id)->update($fields);
+                    if($data['user']->email != $postData['email']){                        
+                        $generalSetting             = GeneralSetting::where('id', '=', 1)->first();
+                        $subject                    = 'Subject: Your Update Login Credentials for Portal Access';
+                        $message                    = "<table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
+                                                        <tr><td style='padding: 8px 15px'>Dear " . htmlspecialchars($postData['first_name']) . ",</td></tr>
+                                                        <tr><td style='padding: 8px 15px'>You have changed the email address associated with your Contributor profile on EaRTh.</td></tr>                                                                    
+                                                        <tr><td style='padding: 8px 15px'>Please note that you can no longer use your previous email address to log in. You must use your new email address, along with your old password.</td></tr>
+                                                        <tr><td style='padding: 8px 15px'>If you have forgotten your password, please log in using your new email address, and click on 'Forgot Password'.</td></tr>                                                            
+                                                        
+                                                        
+                                                        <tr><td style='padding: 8px 15px'>Sincerely,</td></tr>
+                                                        <tr><td style='padding: 8px 15px'>EaRTh Team</td></tr>
+                                                    </table>";
+                        $this->sendMail($postData['email'], $subject, $message);                                                                    
+                    } 
+                    User::where('id', '=', $user_id)->update($fields2);
                     return redirect(url('user/profiles'))->with('success_message', 'Profile Updated Successfully !!!');
                 } else {
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');

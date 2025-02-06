@@ -18,6 +18,10 @@ use App\Models\Title;
 use App\Models\Pronoun;
 use App\Models\EcosystemAffiliation;
 use App\Models\ExpertiseArea;
+use App\Models\NewsCategory;
+use App\Models\SubmissionType;
+use App\Models\UserClassification;
+use App\Models\UserProfile;
 use Auth;
 use Session;
 use Helper;
@@ -140,81 +144,120 @@ class ContentCreatersController extends Controller
     public function edit(Request $request, $id)
     {
         $data['module']                 = $this->data;
-        $id                             = Helper::decoded($id);
+        $user_id                            = Helper::decoded($id);
         $title                          = $this->data['title'] . ' Update';
         $page_name                      = 'content_creaters.add-edit';
-        $data['row']                    = User::where($this->data['primary_key'], '=', $id)->first();
-        $data['country']                = Country::orderBy('name', 'ASC')->get();
-        $data['role']                   = Role::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // $data['row']                    = User::where($this->data['primary_key'], '=', $id)->first();
+        // $data['country']                = Country::orderBy('name', 'ASC')->get();
+        // $data['role']                   = Role::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // $data['selected_ecosystem_affiliation'] = json_decode($data['row']->ecosystem_affiliationId);
+        // $data['selected_expertise_area'] = json_decode($data['row']->expertise_areaId);
+        //  Helper::pr($data['selected_ecosystem_affiliation']);
+
+        $data['classification']         = UserClassification::where('user_id', '=', $user_id)->first();
+        // Helper::pr($data['classification']);
         $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['news_category']          = NewsCategory::where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'ASC')->get();        
         $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['submission_type']        = SubmissionType::where('status', '=', 1)->get(); 
+        $data['country']                = Country::orderBy('name', 'ASC')->get();
         $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
         $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
         $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-        $data['selected_ecosystem_affiliation'] = json_decode($data['row']->ecosystem_affiliationId);
-        $data['selected_expertise_area'] = json_decode($data['row']->expertise_areaId);
-        //  Helper::pr($data['selected_ecosystem_affiliation']);
+        $data['row']                    = UserProfile::where('user_id', '=', $user_id)->first();
+
+
+
         if ($request->isMethod('post')) {
             $postData = $request->all();
             $rules = [                                 
-                'first_name'                => 'required',            
-                'last_name'                 => 'required',                                    
-                'email'                     => 'required',           
-                'phone'                     => 'required',           
-                'country'                   => 'required',                                      
-                'password'                  => 'required', 
-                'invited'                   => 'required',
-                'invited_by'                => 'required', 
-                'invited_by_email'          => 'required',                     
-                'section_ert'               => 'required',
+                // 'first_name'                => 'required',            
+                // 'last_name'                 => 'required',                                    
+                // 'email'                     => 'required',           
+                // 'phone'                     => 'required',           
+                // 'country'                   => 'required',                                      
+                // 'password'                  => 'required', 
+                // 'invited'                   => 'required',
+                // 'invited_by'                => 'required', 
+                // 'invited_by_email'          => 'required',                     
+                // 'section_ert'               => 'required',
+                // 'title'                     => 'required',
+                // 'pronoun'                   => 'required',
+                // 'participated'              => 'required',
+                // 'participated_info'         => 'required',
+                // 'organization_name'         => 'required',
+                // 'organization_website'      => 'required',
+                // 'ecosystem_affiliation'     => 'required',               
+                // 'expertise_area'            => 'required',                
+                // 'explanation'               => ['required', 'string', new MaxWords(100)],
+                // 'explanation_submission'    => ['required', 'string', new MaxWords(150)],
+                // 'bio_short'                 => ['required', 'string', new MaxWords(40)],
+                // 'bio_long'                  => ['required', 'string', new MaxWords(250)],   
+                
+                'author_classification'     => 'required',
+                'first_name'                => 'required',                                                               
+                'email'                     => 'required',                                      
+                'country'                   => 'required',                                                                                                                                            
                 'title'                     => 'required',
-                'pronoun'                   => 'required',
-                'participated'              => 'required',
-                'participated_info'         => 'required',
-                'organization_name'         => 'required',
-                'organization_website'      => 'required',
+                'pronoun'                   => 'required',   
                 'ecosystem_affiliation'     => 'required',               
                 'expertise_area'            => 'required',                
                 'explanation'               => ['required', 'string', new MaxWords(100)],
-                'explanation_submission'    => ['required', 'string', new MaxWords(150)],
+                'explanation_submission'    => ['required', 'string', new MaxWords(150)],                
+                // 'creative_Work'             => ['required', 'string', new MaxWords(10)],                                  
                 'bio_short'                 => ['required', 'string', new MaxWords(40)],
-                'bio_long'                  => ['required', 'string', new MaxWords(250)],            
+                'bio_long'                  => ['required', 'string', new MaxWords(250)],
             ];
+            $participatedInfo = isset($postData['participated_info']) ? $postData['participated_info'] : '';
+            $invited_byInfo = isset($postData['invited_by']) ? $postData['invited_by'] : '';
+            $invited_emailInfo = isset($postData['invited_by_email']) ? $postData['invited_by_email'] : '';                
+            $expertise_areaInfo = isset($postData['expertise_area']) ? json_encode($postData['expertise_area']) : '';
+            $ecosystem_affiliationInfo = isset($postData['ecosystem_affiliation']) ? json_encode($postData['ecosystem_affiliation']) : '';
             if ($this->validate($request, $rules)) {
-                $checkValue = User::where('first_name', '=', $postData['first_name'])->where('id', '!=', $id)->count();
-                if ($checkValue <= 0) {                    
+                // $checkValue = User::where('first_name', '=', $postData['first_name'])->where('id', '!=', $id)->count();
+                // if ($checkValue <= 0) {                    
                     $fields = [                        
-                        'first_name'                => $postData['first_name'],            
-                        'last_name'                 => $postData['last_name'],        
-                        'middle_name'               => $postData['middle_name'],            
-                        'email'                     => $postData['email'],           
-                        'phone'                     => $postData['phone'],           
-                        'country'                   => $postData['country'],           
-                        'role'                      => 2,           
-                        'password'                  => Hash::make($postData['password']), 
+                        'user_id'                   => $user_id,          
+                        'email'                     => $postData['email'],
+                        'author_classification'     => $postData['author_classification'],
+                        'first_name'                => $postData['first_name'],                                                                             
+                        'for_publication_name'      => $postData['for_publication_name'],           
+                        'pronounId'                 => $postData['pronoun'],                        
                         'invited'                   => $postData['invited'],
-                        'invited_by'                => $postData['invited_by'], 
-                        'invited_by_email'          => $postData['invited_by_email'],  
+                        'invited_by'                => $invited_byInfo, 
+                        'invited_by_email'          => $invited_emailInfo,
+                        'participated'              => $postData['participated'],
+                        'participated_info'         => $participatedInfo,
                         'explanation'               => $postData['explanation'],  
                         'explanation_submission'    => $postData['explanation_submission'],     
-                        'section_ertId'             => $postData['section_ert'],
-                        'titleId'                   => $postData['title'],
-                        'pronounId'                 => $postData['pronoun'],
-                        'participated'              => $postData['participated'],
-                        'participated_info'         => $postData['participated_info'],
+                        'titleId'                   => $postData['title'],                              
+                        'country'                   => $postData['country'],
+                        'state'                     => $postData['state'],
+                        'city'                      => $postData['city'],
                         'organization_name'         => $postData['organization_name'],
                         'organization_website'      => $postData['organization_website'],
-                        'ecosystem_affiliationId'   => json_encode($postData['ecosystem_affiliation']),
+                        'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
                         'indigenous_affiliation'    => $postData['indigenous_affiliation'],
-                        'expertise_areaId'          => json_encode($postData['expertise_area']),
-                        'bio_short'               => $postData['bio_short'],
-                        'bio_long'               => $postData['bio_long'],             
+                        'expertise_areaId'          => $expertise_areaInfo,
+                        'bio_short'                 => $postData['bio_short'],
+                        'bio_long'                  => $postData['bio_long'], 
                     ];
-                    User::where($this->data['primary_key'], '=', $id)->update($fields);
+                    $fields2 = [                        
+                        'first_name'                => $postData['first_name'],                                    
+                        'email'                     => $postData['email'],                                           
+                        'country'                   => $postData['country'],                                                           
+                    ];
+                    User::where($this->data['primary_key'], '=', $user_id)->update($fields2);
+                    UserProfile::where('user_id', '=', $user_id)->update($fields);
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');
-                } else {
-                    return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
-                }
+                // } else {
+                //     return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
+                // }
             } else {
                 return redirect()->back()->with('error_message', 'All Fields Required !!!');
             }
