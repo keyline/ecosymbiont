@@ -113,7 +113,7 @@ use App\Models\ExpertiseArea;
                 @for ($i = 1; $i <= $co_authors; $i++)
                 @php
                   // Decode the JSON field only once
-                  $co_ecosystem_affiliations = json_decode($row->co_ecosystem_affiliations);
+                  $co_ecosystem_affiliations = json_decode($row->co_ecosystem_affiliations);                  
 
                   // Initialize affiliations array
                   $affiliations = [];
@@ -135,7 +135,7 @@ use App\Models\ExpertiseArea;
                   $county_ids = $co_author_countries[$i-1];
                   $getCoCountry = Country::select('name')->where('id', '=', $county_ids)->first();
 
-                @endphp                   
+                @endphp               
                   <tr>
                     <td>3B{{$i}}) Co-Author Name</td> 
                     <td>{{ $co_author_name[$i - 1] }}</td>                       
