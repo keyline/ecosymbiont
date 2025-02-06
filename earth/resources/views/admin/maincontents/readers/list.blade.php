@@ -40,11 +40,10 @@ $controllerRoute = $module['controller_route'];
                   <th scope="col">#</th>
                   <th scope="col">User Type</th>
                   <th scope="col">Name</th>
-                  <th scope="col">Email</th>                  
-                  <th scope="col">Phone</th>                  
+                  <th scope="col">Email</th>                                                     
                   <th scope="col">Country</th>                  
                   <th scope="col">Registered Date</th>                  
-                  <th scope="col">Updated at</th>                  
+                  <th scope="col">Updated on</th>                  
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -54,8 +53,7 @@ $controllerRoute = $module['controller_route'];
                     <th scope="row"><?=$sl++?></th>
                     <td><?=$row->role_id->name?></td>
                     <td><?=$row->first_name?> <?=$row->last_name?></td>
-                    <td><?=$row->email?></td>                    
-                    <td><?=$row->phone?></td>                    
+                    <td><?=$row->email?></td>                                                        
                     <td><?=$row->country_id->name?></td>                    
                     <td><?=$row->registered_at?></td>                    
                     <td><?=$row->updated_at?></td>                                                          
