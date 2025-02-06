@@ -443,7 +443,7 @@ class FrontController extends Controller
                                 }
                             }
                         } else{
-                            Helper::pr($sessionData->role);
+                            // Helper::pr($sessionData->role);
                             if($sessionData->role == 2)
                             {
                                 if($page_link == ''){
