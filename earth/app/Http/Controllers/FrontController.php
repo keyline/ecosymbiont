@@ -784,7 +784,7 @@ class FrontController extends Controller
                         'email'                     => $postData['email'],                                    
                         'country'                   => $postData['country'],                        
                     ];
-                     Helper::pr($fields);
+                    //  Helper::pr($fields);
                     User::where('id', '=', $user_id)->update($fields);
                     return redirect()->back()->with('success_message', 'Profile Updated Successfully !!!');
                 } else {
