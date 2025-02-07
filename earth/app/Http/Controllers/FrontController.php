@@ -773,8 +773,7 @@ class FrontController extends Controller
             if ($request->isMethod('post')) {
                 $postData = $request->all();
                 $rules = [                                 
-                    'first_name'                => 'required',            
-                    'last_name'                 => 'required',                                    
+                    'first_name'                => 'required',                                                                 
                     'email'                     => 'required',           
                     'phone'                     => 'required',           
                     'country'                   => 'required',                        
@@ -795,9 +794,7 @@ class FrontController extends Controller
                         }
                     /* profile image */
                     $fields = [                        
-                        'first_name'                => $postData['first_name'],
-                        'last_name'                 => $postData['last_name'],
-                        'middle_name'               => $postData['middle_name'],
+                        'first_name'                => $postData['first_name'],                        
                         'phone'                     => $postData['phone'],           
                         'country'                   => $postData['country'],
                         'profile_image'             => $profile_image,
