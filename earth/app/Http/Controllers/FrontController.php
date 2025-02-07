@@ -786,6 +786,7 @@ class FrontController extends Controller
                     ];
                     //  Helper::pr($fields);
                     User::where('id', '=', $user_id)->update($fields);
+                    UserProfile::where('user_id', '=', $user_id)->update($fields);
                     return redirect()->back()->with('success_message', 'Profile Updated Successfully !!!');
                 } else {
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');

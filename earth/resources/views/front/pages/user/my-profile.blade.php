@@ -31,7 +31,7 @@
                             <div class="row" style="margin-bottom: 15px;">
                               <label for="first_name" class="col-md-4 col-lg-3 col-form-label">First Name</label>
                               <div class="col-md-8 col-lg-9">
-                                <input type="text" name="first_name" class="form-control" id="first_name" placeholder="Enter First Name" value="<?=(($user)?$user->first_name:'')?>" required autocomplete="off">
+                                <input type="text" name="first_name" class="form-control" id="first_name" placeholder="Enter First Name" value="<?=(($user)?$user->first_name:'')?>" required autocomplete="off" readonly>
                               </div>
                             </div>
                             <!-- <div class="row" style="margin-bottom: 15px;">
