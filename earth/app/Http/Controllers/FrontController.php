@@ -772,35 +772,19 @@ class FrontController extends Controller
 
             if ($request->isMethod('post')) {
                 $postData = $request->all();
-                Helper::pr($postData);
+                // Helper::pr($postData);
                 $rules = [                                 
                     'first_name'                => 'required',                                                                 
-                    'email'                     => 'required',           
-                    'phone'                     => 'required',           
+                    'email'                     => 'required',                                       
                     'country'                   => 'required',                        
                 ];
-                if ($this->validate($request, $rules)) {
-                    /* profile image */
-                        $imageFile      = $request->file('profile_image');
-                        if($imageFile != ''){
-                            $imageName      = $imageFile->getClientOriginalName();
-                            $uploadedFile   = $this->upload_single_file('profile_image', $imageName, 'user', 'image');
-                            if($uploadedFile['status']){
-                                $profile_image = $uploadedFile['newFilename'];
-                            } else {
-                                return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
-                            }
-                        } else {
-                            $profile_image = $data['user']->profile_image;
-                        }
-                    /* profile image */
+                if ($this->validate($request, $rules)) {                    
                     $fields = [                        
-                        'first_name'                => $postData['first_name'],                        
-                        'phone'                     => $postData['phone'],           
-                        'country'                   => $postData['country'],
-                        'profile_image'             => $profile_image,
+                        'first_name'                => $postData['first_name'], 
+                        'email'                     => $postData['email'],                                    
+                        'country'                   => $postData['country'],                        
                     ];
-                    // Helper::pr($fields);
+                     Helper::pr($fields);
                     User::where('id', '=', $user_id)->update($fields);
                     return redirect()->back()->with('success_message', 'Profile Updated Successfully !!!');
                 } else {
