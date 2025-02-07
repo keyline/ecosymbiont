@@ -772,6 +772,7 @@ class FrontController extends Controller
 
             if ($request->isMethod('post')) {
                 $postData = $request->all();
+                Helper::pr($postData);
                 $rules = [                                 
                     'first_name'                => 'required',                                                                 
                     'email'                     => 'required',           
