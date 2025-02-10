@@ -248,3 +248,43 @@ $current_url = $protocol . $host . $uri;
         </div>
     </section>
 <!-- End block-wrapper-section -->
+<script>
+    $(document).ready(function() {
+        // _________________________ load more _________________________
+        let page = 1;
+        let loading = false;
+
+        function loadMoreContent() {
+            if (!loading) {
+                loading = true; // Set loading to true
+                $('#loading').show(); // Show loading indicator
+
+                page++; // Increment the page number
+                $.ajax({
+                    url: 'api/load-blogs', // URL to load more content
+                    type: 'GET', // HTTP method
+                    data: {
+                        page: page
+                    }, // Pass the page number to the server
+                    success: function(response) {
+
+                        if (response.status) {
+                            $('#view_content').append(response.html); // Append new content
+                        } else {
+                            $('#load_more_btn').hide(); // Hide the button if no more content
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.error('Error loading blogs:', textStatus, errorThrown);
+                    },
+                    complete: function() {
+                        loading = false; // Reset loading flag
+                        $('#loading').hide(); // Hide loading indicator
+                    }
+                });
+            }
+        }
+
+        $('#load_more_btn').on('click', loadMoreContent);
+    });
+</script>
