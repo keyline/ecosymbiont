@@ -65,6 +65,8 @@ $current_url = $protocol . $host . $uri;
                                 </div>
                             <?php } }?>
                         </div>
+                        <button id="load_more_btn" style="float: right;background-color:#ed1c24;border: tomato;" class="btn btn-primary">Load More</button>
+                        <div id="loading" style="display: none;text-align: center;">
                         <!-- End article box -->
                     </div>
                     <!-- End block content -->
