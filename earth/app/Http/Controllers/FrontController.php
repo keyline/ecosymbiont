@@ -400,7 +400,7 @@ class FrontController extends Controller
                                                       ->orWhere('news_contents.keywords', 'LIKE', '%'.$search_keyword.'%');
                                              })
                                              ->get();
-            Helper::pr($contents);
+            // Helper::pr($contents);
             
             $data['search_keyword']         = $search_keyword;
             // Prepare the response
