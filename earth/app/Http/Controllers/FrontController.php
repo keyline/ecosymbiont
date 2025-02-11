@@ -369,7 +369,7 @@ class FrontController extends Controller
     }
     public function search_result_load(Request $request)
     {
-        if($request->isMethod('get')){
+        if($request->isMethod('post')){
             $postData           = $request->all();
             $search_keyword     = $postData['search_keyword'];
             $contents   = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
