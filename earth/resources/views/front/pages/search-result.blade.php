@@ -8,6 +8,15 @@ $host = $_SERVER['HTTP_HOST'];
 $uri = $_SERVER['REQUEST_URI'];
 $current_url = $protocol . $host . $uri;
 ?>
+<style>
+    svg {
+        width: 70px;
+        height: 70px;
+        margin: 20px;
+        display: inline-block;
+    }
+</style>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- block-wrapper-section ================================================== -->
     <section class="block-wrapper">
@@ -67,6 +76,37 @@ $current_url = $protocol . $host . $uri;
                         </div>
                         <button id="load_more_btn" style="float: right;background-color:#ed1c24;border: tomato;" class="btn btn-primary">Load More</button>
                         <div id="loading" style="display: none;text-align: center;">
+                            <svg version="1.1" id="L5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                            viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+                                <circle fill="#ed1c24" stroke="none" cx="6" cy="50" r="6">
+                                    <animateTransform
+                                        attributeName="transform"
+                                        dur="1s"
+                                        type="translate"
+                                        values="0 15 ; 0 -15; 0 15"
+                                        repeatCount="indefinite"
+                                        begin="0.1" />
+                                </circle>
+                                <circle fill="#ed1c24" stroke="none" cx="30" cy="50" r="6">
+                                    <animateTransform
+                                        attributeName="transform"
+                                        dur="1s"
+                                        type="translate"
+                                        values="0 10 ; 0 -10; 0 10"
+                                        repeatCount="indefinite"
+                                        begin="0.2" />
+                                </circle>
+                                <circle fill="#ed1c24" stroke="none" cx="54" cy="50" r="6">
+                                    <animateTransform
+                                        attributeName="transform"
+                                        dur="1s"
+                                        type="translate"
+                                        values="0 5 ; 0 -5; 0 5"
+                                        repeatCount="indefinite"
+                                        begin="0.3" />
+                                </circle>
+                            </svg>
+                        </div>
                         <!-- End article box -->
                     </div>
                     <!-- End block content -->
