@@ -299,7 +299,7 @@ $current_url = $protocol . $host . $uri;
     $('#load_more_btn').on('click', function () {
         $('#loading').show();
         $.ajax({
-            url: '<?= url('search-result') ?>',
+            url: '<?= url('search_result_load') ?>',
             type: 'POST',
             data: {
                 offset: offset,
