@@ -291,17 +291,13 @@ $current_url = $protocol . $host . $uri;
     </section>
 <!-- End block-wrapper-section -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function() {
-        alert('Hello');
-        // _________________________ load more _________________________
-        // let page = 1;
-        // let loading = false;
+<script>    
+    let offset = <?= count($contents) ?>; // Track how many products have been loaded
+    alert(offset);
+    const limit = 4; // Number of products per batch
 
-        function loadMoreContent() {
-            $('#loading').show(); // Show loading indicator            
-        }
-
-        $('#load_more_btn').on('click', loadMoreContent);
+    $('#load_more_btn').on('click', function () {
+        $('#loading').show();
+    
     });
 </script>
