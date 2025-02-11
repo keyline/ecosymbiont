@@ -298,6 +298,36 @@ $current_url = $protocol . $host . $uri;
 
     $('#load_more_btn').on('click', function () {
         $('#loading').show();
-            
+        $.ajax({
+            url: '<?= url('search_result_load') ?>',
+            type: 'POST',
+            data: {
+                offset: offset,
+                _token: '<?= csrf_token() ?>'
+            },
+            success: function (response) {
+                console.log(response);
+                const contents = JSON.parse(response);
+                let length = contents.length;
+                if(length > 0){
+                    let contentHtml = '';
+                    
+                    $('#content-list').append(contentHtml);
+                    offset += contents.length;
+                    $('#loading').hide();
+                }else {
+                $('#loading').hide();
+                $('#load_more_btn').hide();
+                if ($('#no_more_contents').length === 0) {
+                    $('#product_list').after('<p id="no_more_contents" class="text-center">No more contents to load.</p>');
+                }
+            }
+        },error: function () {
+            alert('Could not load more contents');
+            $('#loading').hide();
+        }                            
+           
+        });
+
     });
 </script>
