@@ -292,6 +292,7 @@ $current_url = $protocol . $host . $uri;
 <!-- End block-wrapper-section -->
 <script>
     $(document).ready(function() {
+        alert('Hello');
         // _________________________ load more _________________________
         // let page = 1;
         // let loading = false;
