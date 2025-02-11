@@ -298,67 +298,6 @@ $current_url = $protocol . $host . $uri;
 
     $('#load_more_btn').on('click', function () {
         $('#loading').show();
-        // $.ajax({
-        //     url: '<?= url('search_result_load') ?>',
-        //     type: 'POST',
-        //     data: {
-        //         offset: offset,
-        //         // limit: limit,
-        //         _token: '<?= csrf_token() ?>'
-        //     },
-        //     success: function (response) {
-        //         console.log(response);
-        //         const contents = JSON.parse(response);
-        //         let length = contents.length;
-        //         if(length > 0){
-        //             let contentHtml = '';
-        //             contents.forEach(content => {
-        //                 // contentHtml += `
-        //                 //     <div class="news-post article-post">
-        //                 //         <div class="row">
-        //                 //             <div class="col-sm-5">                                        
-        //                 //                 ${content.media === 'image' ? `
-        //                 //                     <div class="post-gallery">
-        //                 //                         <img src="<?=env('UPLOADS_URL').'newcontent/'?>${content.cover_image}" alt="${content.new_title}">
-        //                 //                         <span class="image-caption" style="color:skyblue;">${content.cover_image_caption}</span>
-        //                 //                     </div>
-        //                 //                 ` : `
-        //                 //                     <div class="post-gallery video-post">
-        //                 //                         <img alt="" src="https://img.youtube.com/vi/${content.videoId}/hqdefault.jpg">                                                
-        //                 //                         <a href="https://www.youtube.com/watch?v=${content.videoId}" class="video-link"><i class="fa fa-play-circle-o"></i></a>                                                
-        //                 //                     </div>
-        //                 //                 `}
-        //                 //             </div>
-        //                 //             <div class="col-sm-7">
-        //                 //                 <div class="post-content">
-        //                 //                     <a href="<?=url('category/')?>${content.parent_category_name}/${content.sub_category_slug}"><?=$content->sub_category_name?></a>
-        //                 //                     <h2><a href="<?=url('content/')?>${content.parent_category_slug}/${content.sub_category_slug}/${content.slug}">${content.new_title}</a></h2>
-        //                 //                     <ul class="post-tags">
-        //                 //                         <li><i class="fa fa-clock-o"></i>${new Date(content.created_at).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}</li>
-        //                 //                         <li><i class="fa fa-user"></i>by <a href="javascript:void(0);">${content.for_publication_name ?? content.author_name}</a></li>                                                
-        //                 //                     </ul>
-        //                 //                     <p>${content.sub_title}</p>
-        //                 //                 </div>
-        //                 //             </div>
-        //                 //         </div>
-        //                 //     </div>`;
-        //             });
-        //             $('#content-list').append(contentHtml);
-        //             offset += contents.length;
-        //             $('#loading').hide();
-        //         }else {
-        //         $('#loading').hide();
-        //         $('#load_more_btn').hide();
-        //         if ($('#no_more_contents').length === 0) {
-        //             $('#product_list').after('<p id="no_more_contents" class="text-center">No more contents to load.</p>');
-        //         }
-        //     }
-        // },error: function () {
-        //     alert('Could not load more contents');
-        //     $('#loading').hide();
-        // }                            
-           
-        // });
-    
+            
     });
 </script>
