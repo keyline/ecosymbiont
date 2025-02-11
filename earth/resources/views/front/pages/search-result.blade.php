@@ -29,6 +29,7 @@ $current_url = $protocol . $host . $uri;
                         <div class="article-box">
                             <div class="title-section">
                                 <h1><span><?=$page_header?></span></h1>
+                                <input type="text" id="search_keyword" value="<?=$search_keyword?>">
                             </div>
                         </div>
                         <!-- End article box -->
@@ -298,11 +299,13 @@ $current_url = $protocol . $host . $uri;
 
     $('#load_more_btn').on('click', function () {
         $('#loading').show();
+        var search_keyword = $('#search_keyword').val();
         $.ajax({
             url: '<?= url('search_result_load') ?>',
             type: 'POST',
             data: {
                 offset: offset,
+                search_keyword: search_keyword,
                 _token: '<?= csrf_token() ?>'
             },
             success: function (response) {

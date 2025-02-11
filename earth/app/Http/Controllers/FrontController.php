@@ -371,7 +371,7 @@ class FrontController extends Controller
     {
         if($request->isMethod('get')){
             $postData           = $request->all();
-            $search_keyword     = $postData['article_search'];
+            $search_keyword     = $postData['search_keyword'];
             $contents = [];
             $contents   = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
                                             ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
@@ -401,14 +401,14 @@ class FrontController extends Controller
                                                       ->orWhere('news_contents.keywords', 'LIKE', '%'.$search_keyword.'%');
                                              })
                                              ->get();
-            // Helper::pr($searchResults);
+            Helper::pr($contents);
             
             $data['search_keyword']         = $search_keyword;
             // Prepare the response
-        return $this->response->setJSON([
-            'status' => true,
-            'product' => $contents
-        ]);
+            return $this->response->setJSON([
+                'status'    => true,
+                'content'   => $contents
+            ]);
         }
     }
     public function fetch_search_suggestions(Request $request){
