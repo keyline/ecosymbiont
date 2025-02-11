@@ -406,7 +406,7 @@ class FrontController extends Controller
             // Prepare the response
             return $this->response->setJSON([
                 'status'    => true,
-                'product'   => $contents
+                'content'   => $contents
             ]);
         }
     }
