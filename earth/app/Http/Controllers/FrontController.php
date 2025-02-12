@@ -358,6 +358,7 @@ class FrontController extends Controller
                                                       ->orWhere('news_contents.long_desc', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('news_contents.keywords', 'LIKE', '%'.$search_keyword.'%');
                                              })
+                                             ->limit(4)
                                              ->get();
             // Helper::pr($searchResults);
             
