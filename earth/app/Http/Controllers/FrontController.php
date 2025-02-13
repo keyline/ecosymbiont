@@ -189,11 +189,27 @@ class FrontController extends Controller
         $data['search_keyword']         = '';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
-    public function westoaklandmatters()
+    public function westoakland()
     {
         $data = [];
-        $title                          = 'WestOaklandMatters';
-        $page_name                      = 'WestOaklandMatters';
+        $title                          = 'WestOakland';
+        $page_name                      = 'WestOakland';
+        $data['search_keyword']         = '';
+        echo $this->front_before_login_layout($title, $page_name, $data);
+    }
+    public function actchangemakers()
+    {
+        $data = [];
+        $title                          = 'ACTChangemakers';
+        $page_name                      = 'ACTChangemakers';
+        $data['search_keyword']         = '';
+        echo $this->front_before_login_layout($title, $page_name, $data);
+    }
+    public function ethosfellows()
+    {
+        $data = [];
+        $title                          = 'EthosFellows';
+        $page_name                      = 'EthosFellows';
         $data['search_keyword']         = '';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }

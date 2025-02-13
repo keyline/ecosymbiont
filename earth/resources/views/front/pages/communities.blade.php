@@ -19,8 +19,11 @@
                             <p class="black">Currently, we are working with the communities below.</p>
                             <div class="titleto-inner">
                                 <ul>
-                                    <li><a target="_blank" href="<?=url('communities/SchumacherWild')?>" style="color: #d09c1c;"><em>Schumacher Wild</em></a> (global)</li>
-                                    <li><a target="_blank" href="<?=url('communities/WestOaklandMatters')?>" style="color: #d09c1c;"><em>West Oakland Matters</em></a> (United States)</li>
+                                    <li><a target="_blank" href="<?=url('communities/ACTChangemakers')?>" style="color: #d09c1c;"><em>ACT Changemakers Web</em></a> (global)</li>
+                                    <li><a target="_blank" href="<?=url('communities/EthosFellows')?>" style="color: #d09c1c;"><em>Ethos Fellows Network</em></a> (global)</li>
+                                    <li><a target="_blank" href="<?=url('communities/SchumacherWild')?>" style="color: #d09c1c;"><em>Schumacher Wild Network</em></a> (global)</li>
+                                    <li><a target="_blank" href="<?=url('communities/WestOakland')?>" style="color: #d09c1c;"><em>West Oakland Living Heritage Center</em></a> (USA)</li>
+                                    
                                 </ul>
                             </div>
                             <p class="black">If your community is interested in having a <em>Virtual Community Center</em>, please <a href="<?=env('REGENERATE_URL')?>contact.php" style="color: #d09c1c;">contact us.</a></p>
