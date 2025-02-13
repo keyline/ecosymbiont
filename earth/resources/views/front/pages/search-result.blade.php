@@ -367,8 +367,8 @@ $current_url = $protocol . $host . $uri;
                                 </div>
                             </div>`;
                     });
-
-                    $('#content-list').append(contentHtml);
+                    console.log(contentHtml);
+                    $('#content-list').html(contentHtml);
                     offset += contents.length;
                 } else {
                     $('#load_more_btn').hide();
