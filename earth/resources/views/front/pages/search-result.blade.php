@@ -293,7 +293,7 @@ $current_url = $protocol . $host . $uri;
 <!-- End block-wrapper-section -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>    
-    let offset = <?= count($contents) ?>; // Track loaded items
+    let offset = 4; // Track loaded items
     const limit = 4; // Number of items per request
 
     $('#load_more_btn').on('click', function () {
@@ -305,6 +305,7 @@ $current_url = $protocol . $host . $uri;
             type: 'POST',
             data: {
                 offset: offset,
+                limit: limit,
                 search_keyword: search_keyword,
                 _token: '<?= csrf_token() ?>'
             },
