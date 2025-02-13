@@ -29,7 +29,7 @@ $current_url = $protocol . $host . $uri;
                         <div class="article-box">
                             <div class="title-section">
                                 <h1><span><?=$page_header?></span></h1>
-                                <input type="hidden" id="search_keyword" value="<?=$search_keyword?>">
+                                <input type="text" id="search_keyword" value="<?=$search_keyword?>">
                             </div>
                         </div>
                         <!-- End article box -->
@@ -310,16 +310,9 @@ $current_url = $protocol . $host . $uri;
                 _token: '<?= csrf_token() ?>'
             },
             success: function (response) {
-                $('#loading').hide();
-                contents = response.data;
-                // let contents;
-                // try {
-                //     contents = JSON.parse(response.data); // Ensure response is properly parsed
-                // } catch (e) {
-                //     console.error("JSON Parsing Error:", e);
-                //     $('#loading').hide();
-                //     return;
-                // }
+                contents = response;
+                console.log(contents);
+
                 if (contents.length > 0) {
                     let contentHtml = '';
 
@@ -366,17 +359,16 @@ $current_url = $protocol . $host . $uri;
                                 </div>
                             </div>`;
                     });
-                    $('#content-list').append(contentHtml);
+                    console.log(contentHtml);
+                    $('#content-list').html(contentHtml);
                     offset += contents.length;
-                    if (contents.length < 4) {
-                        $('#load_more_btn').hide();
-                    }
                 } else {
                     $('#load_more_btn').hide();
                     if ($('#no_more_contents').length === 0) {
                         $('#content-list').after('<p id="no_more_contents" class="text-center">No more contents to load.</p>');
                     }
-                }              
+                }
+                $('#loading').hide();
             },
             error: function () {
                 alert('Could not load more contents');

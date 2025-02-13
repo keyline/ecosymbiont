@@ -55,10 +55,10 @@ use App\Helpers\Helper;
                             <?php if(session('is_user_login')){?>
                                 <li>
                                     <!-- <img src="<?=(($user)?(($user->profile_image != '')?env('UPLOADS_URL').'user/'.$user->profile_image:env('NO_USER_IMAGE')):env('NO_USER_IMAGE'))?>" alt="<?=(($user)?$user->first_name . ' ' . $user->last_name:'')?>" class="img-responsive img-circle" style="width: 35px;height: 35px;"> -->
-                                    <a href="<?=url('user/dashboard')?>">Welcome <?=(($user)?$user->first_name . ' ' . $user->last_name:'')?></a></li>
+                                    <a href="<?=url('user/dashboard')?>">Welcome <?=(($user)?$user->first_name:'')?></a></li>
                                 <li><a href="<?=url('user/signout')?>">Sign Out</a></li>
                             <?php } else {?>
-                                <li><a href="<?=url('signin')?>">Sign In</a></li>
+                                <li><a href="<?=url('signin')?>">Sign In</a></li> 
                                 <li><a href="<?=url('signup')?>">Sign Up</a></li>
                             <?php }?>
                         </ul>

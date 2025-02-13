@@ -374,6 +374,7 @@ class FrontController extends Controller
                                                       ->orWhere('news_contents.long_desc', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('news_contents.keywords', 'LIKE', '%'.$search_keyword.'%');
                                              })
+                                             ->limit(4)
                                              ->get();
             // Helper::pr($searchResults);
             
@@ -381,6 +382,50 @@ class FrontController extends Controller
             $title                          = 'Search Result For : "' . $search_keyword . '"';
             $page_name                      = 'search-result';
             echo $this->front_before_login_layout($title, $page_name, $data);
+        }
+    }
+    public function search_result_load(Request $request)
+    {
+        if($request->isMethod('post')){
+            $postData           = $request->all();
+            $offset = $postData['offset'];
+            $limit = $postData['limit']; // Default to 4 per request
+            $search_keyword     = $postData['search_keyword'];
+            $contents   = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
+                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
+                                            ->select(
+                                                        'news_contents.id', 
+                                                        'news_contents.new_title', 
+                                                        'news_contents.sub_title', 
+                                                        'news_contents.slug', 
+                                                        'news_contents.author_name', 
+                                                        'news_contents.for_publication_name', 
+                                                        'news_contents.cover_image', 
+                                                        'news_contents.created_at',
+                                                        'news_contents.media',
+                                                        'news_contents.videoId',
+                                                        'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
+                                                        'parent_category.sub_category as parent_category_name', // From parent_category name
+                                                        'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
+                                                        'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                                    )
+                                            ->where(function($query) {
+                                                $query->where('news_contents.status', 1);
+                                             })
+                                             ->where(function($query) use ($search_keyword) {
+                                                $query->where('news_contents.new_title', 'LIKE', '%'.$search_keyword.'%')
+                                                      ->orWhere('news_contents.sub_title', 'LIKE', '%'.$search_keyword.'%')
+                                                      ->orWhere('news_contents.long_desc', 'LIKE', '%'.$search_keyword.'%')
+                                                      ->orWhere('news_contents.keywords', 'LIKE', '%'.$search_keyword.'%');
+                                             })
+                                             ->offset($offset)
+                                            ->limit($limit)
+                                             ->get();
+            // Helper::pr($contents);
+            
+            $data['search_keyword']         = $search_keyword;
+            // Prepare the response
+            return response()->json(['success' => true, 'data' => $contents]);
         }
     }
     public function fetch_search_suggestions(Request $request){
@@ -532,6 +577,9 @@ class FrontController extends Controller
                     // Google reCAPTCHA verification URL
                     $verifyURL = 'https://www.google.com/recaptcha/api/siteverify';
 
+                    // Your Google reCAPTCHA secret key [dev]
+                    $secretKey = '6Ldum88qAAAAANVww5Xe6aHFL-g_UHLsHl7HGKs5';
+
                     // Prepare the POST request
                     $data = array(
                         'secret' => $secretKey,
@@ -613,11 +661,15 @@ class FrontController extends Controller
                  // Get reCAPTCHA token from form POST data
                     $recaptchaResponse = $postData['g-recaptcha-response'];
 
-                    // Your Google reCAPTCHA secret key
+                    // Your Google reCAPTCHA secret key [live]
                     $secretKey = '6LcIw04qAAAAAJCWh02op84FgNvxexQsh9LLCuqW';
 
-                    // Google reCAPTCHA verification URL
+                    // Google reCAPTCHA verification URL [live]
                     $verifyURL = 'https://www.google.com/recaptcha/api/siteverify';
+
+                    // Your Google reCAPTCHA secret key [dev]
+                    $secretKey = '6Ldum88qAAAAANVww5Xe6aHFL-g_UHLsHl7HGKs5';
+                    
 
                     // Prepare the POST request
                     $data = array(
@@ -781,38 +833,21 @@ class FrontController extends Controller
 
             if ($request->isMethod('post')) {
                 $postData = $request->all();
+                // Helper::pr($postData);
                 $rules = [                                 
-                    'first_name'                => 'required',            
-                    'last_name'                 => 'required',                                    
-                    'email'                     => 'required',           
-                    'phone'                     => 'required',           
+                    'first_name'                => 'required',                                                                 
+                    'email'                     => 'required',                                       
                     'country'                   => 'required',                        
                 ];
-                if ($this->validate($request, $rules)) {
-                    /* profile image */
-                        $imageFile      = $request->file('profile_image');
-                        if($imageFile != ''){
-                            $imageName      = $imageFile->getClientOriginalName();
-                            $uploadedFile   = $this->upload_single_file('profile_image', $imageName, 'user', 'image');
-                            if($uploadedFile['status']){
-                                $profile_image = $uploadedFile['newFilename'];
-                            } else {
-                                return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
-                            }
-                        } else {
-                            $profile_image = $data['user']->profile_image;
-                        }
-                    /* profile image */
+                if ($this->validate($request, $rules)) {                    
                     $fields = [                        
-                        'first_name'                => $postData['first_name'],
-                        'last_name'                 => $postData['last_name'],
-                        'middle_name'               => $postData['middle_name'],
-                        'phone'                     => $postData['phone'],           
-                        'country'                   => $postData['country'],
-                        'profile_image'             => $profile_image,
+                        'first_name'                => $postData['first_name'], 
+                        'email'                     => $postData['email'],                                    
+                        'country'                   => $postData['country'],                        
                     ];
-                    // Helper::pr($fields);
+                    //  Helper::pr($fields);
                     User::where('id', '=', $user_id)->update($fields);
+                    UserProfile::where('user_id', '=', $user_id)->update($fields);
                     return redirect()->back()->with('success_message', 'Profile Updated Successfully !!!');
                 } else {
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');

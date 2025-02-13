@@ -29,9 +29,9 @@ $pageSegment = $pageName[1];
                     <a href="<?=url('user/my-articles')?>">My Creative-Works</a>
                 </li>
             <?php }?>
-            <li <?=(($pageSegment == 'my-profile')?'class="active"':'')?>>
-                <a href="<?=url('user/my-profile')?>">My Account</a>
-            </li>
+            <!-- <li ?=(($pageSegment == 'my-profile')?'class="active"':'')?>>
+                <a href="?=url('user/my-profile')?>">My Account</a>
+            </li> -->
             <li <?=(($pageSegment == 'change-password')?'class="active"':'')?>>
                 <a href="<?=url('user/change-password')?>">Change Password</a>
             </li>
