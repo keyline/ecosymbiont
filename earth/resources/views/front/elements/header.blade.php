@@ -65,12 +65,12 @@ use App\Helpers\Helper;
                     </div>  
                     <div class="col-md-3">
                         <ul class="social-icons">
-                            <li><a class="facebook" href="<?=$generalSetting->facebook_profile?>"><i class="fa fa-facebook"></i></a></li>
-                            <li><a class="twitter" href="<?=$generalSetting->twitter_profile?>"><i class="fa fa-twitter"></i></a></li>
+                            <li><a target="_blank" class="facebook" href="<?=$generalSetting->facebook_profile?>"><i class="fa fa-facebook"></i></a></li>
+                            <li><a target="_blank" class="twitter" href="<?=$generalSetting->twitter_profile?>"><i class="fa fa-twitter"></i></a></li>
                             <!-- <li><a class="rss" href="#"><i class="fa fa-rss"></i></a></li> -->
                             <!-- <li><a class="google" href="<?=$generalSetting->youtube_profile?>"><i class="fa fa-youtube"></i></a></li> -->
                             <!-- <li><a class="linkedin" href="<?=$generalSetting->linkedin_profile?>"><i class="fa fa-linkedin"></i></a></li> -->
-                            <li><a class="pinterest" href="<?=$generalSetting->instagram_profile?>"><i class="fa fa-instagram"></i></a></li>
+                            <li><a target="_blank" class="pinterest" href="<?=$generalSetting->instagram_profile?>"><i class="fa fa-instagram"></i></a></li>
                         </ul>
                     </div>  
                 </div>
