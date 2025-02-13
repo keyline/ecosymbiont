@@ -360,6 +360,9 @@ $current_url = $protocol . $host . $uri;
                     });
                     $('#content-list').append(contentHtml);
                     offset += contents.length;
+                    if (contents.length < 4) {
+                        $('#load_more_btn').hide();
+                    }
                 } else {
                     $('#load_more_btn').hide();
                     if ($('#no_more_contents').length === 0) {
