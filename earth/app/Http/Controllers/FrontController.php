@@ -578,7 +578,7 @@ class FrontController extends Controller
                     $verifyURL = 'https://www.google.com/recaptcha/api/siteverify';
 
                     // Your Google reCAPTCHA secret key [dev]
-                    $secretKey = '6Ldum88qAAAAANVww5Xe6aHFL-g_UHLsHl7HGKs5';
+                    // $secretKey = '6Ldum88qAAAAANVww5Xe6aHFL-g_UHLsHl7HGKs5';
 
                     // Prepare the POST request
                     $data = array(
@@ -668,7 +668,7 @@ class FrontController extends Controller
                     $verifyURL = 'https://www.google.com/recaptcha/api/siteverify';
 
                     // Your Google reCAPTCHA secret key [dev]
-                    $secretKey = '6Ldum88qAAAAANVww5Xe6aHFL-g_UHLsHl7HGKs5';
+                    // $secretKey = '6Ldum88qAAAAANVww5Xe6aHFL-g_UHLsHl7HGKs5';
                     
 
                     // Prepare the POST request
