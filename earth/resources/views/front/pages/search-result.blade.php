@@ -311,7 +311,8 @@ $current_url = $protocol . $host . $uri;
             },
             success: function (response) {
                 $('#loading').hide();
-                contents = response;
+                contents = response.data;
+                console.log(contents);
                 if (contents.length > 0) {
                     let contentHtml = '';
 
