@@ -29,7 +29,7 @@ $current_url = $protocol . $host . $uri;
                         <div class="article-box">
                             <div class="title-section">
                                 <h1><span><?=$page_header?></span></h1>
-                                <input type="text" id="search_keyword" value="<?=$search_keyword?>">
+                                <input type="hidden" id="search_keyword" value="<?=$search_keyword?>">
                             </div>
                         </div>
                         <!-- End article box -->
@@ -311,15 +311,15 @@ $current_url = $protocol . $host . $uri;
             },
             success: function (response) {
                 $('#loading').hide();
-                // contents = response.data;
-                let contents;
-                try {
-                    contents = JSON.parse(response.data); // Ensure response is properly parsed
-                } catch (e) {
-                    console.error("JSON Parsing Error:", e);
-                    $('#loading').hide();
-                    return;
-                }
+                contents = response.data;
+                // let contents;
+                // try {
+                //     contents = JSON.parse(response.data); // Ensure response is properly parsed
+                // } catch (e) {
+                //     console.error("JSON Parsing Error:", e);
+                //     $('#loading').hide();
+                //     return;
+                // }
                 if (contents.length > 0) {
                     let contentHtml = '';
 
