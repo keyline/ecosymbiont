@@ -312,14 +312,16 @@ $current_url = $protocol . $host . $uri;
             success: function (response) {
                 // console.log(response);
 
-                let contents;
-                try {
-                    contents = JSON.parse(response); // Ensure response is properly parsed
-                } catch (e) {
-                    console.error("JSON Parsing Error:", e);
-                    $('#loading').hide();
-                    return;
-                }
+                // let contents;
+                // try {
+                //     contents = JSON.parse(response); // Ensure response is properly parsed
+                // } catch (e) {
+                //     console.error("JSON Parsing Error:", e);
+                //     $('#loading').hide();
+                //     return;
+                // }
+                contents = JSON.parse(response);
+                console.log(contents);
 
                 if (contents.length > 0) {
                     let contentHtml = '';
