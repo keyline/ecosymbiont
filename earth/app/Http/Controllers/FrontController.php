@@ -372,8 +372,8 @@ class FrontController extends Controller
     {
         if($request->isMethod('post')){
             $postData           = $request->all();
-            $offset = $request->input('offset', 0);
-            $limit = $request->input('limit', 4); // Default to 4 per request
+            $offset = $postData['offset'];
+            $limit = $postData['limit']; // Default to 4 per request
             $search_keyword     = $postData['search_keyword'];
             $contents   = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
                                             ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
