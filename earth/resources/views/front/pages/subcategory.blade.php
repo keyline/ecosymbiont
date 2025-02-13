@@ -50,11 +50,11 @@ $current_url = $protocol . $host . $uri;
                                                 <?php } else {?>
                                                     <div class="post-gallery video-post">
                                                         <img alt="" src="https://img.youtube.com/vi/<?=$rowContent->videoId?>/hqdefault.jpg">
-                                                        <?php if(session('is_user_login')){?>
+                                                        <!-- ?php if(session('is_user_login')){?> -->
                                                             <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                                        <?php } else {?>
-                                                            <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
-                                                        <?php }?>
+                                                        <!-- ?php } else {?> -->
+                                                            <!-- <a href="?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a> -->
+                                                        <!-- ?php }?> -->
                                                     </div>
                                                 <?php } ?>
                                             </div>
@@ -64,7 +64,7 @@ $current_url = $protocol . $host . $uri;
                                                     <h2><a href="<?= url('content/' . $rowContent->parent_category_slug. '/' . $rowContent->sub_category_slug . '/' . $rowContent->slug) ?>"><?= $rowContent->new_title ?></a></h2>
                                                     <ul class="post-tags">
                                                         <li><i class="fa fa-clock-o"></i><?= date_format(date_create($rowContent->created_at), "d M Y") ?></li>
-                                                        <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?= $rowContent->author_name ?></a></li>
+                                                        <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?= $rowContent->for_publication_name ?? $rowContent->author_name ?></a></li>
                                                     </ul>
                                                     <p><?= $rowContent->sub_title ?></p>
                                                 </div>

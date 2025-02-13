@@ -3,6 +3,10 @@
 //  $routeName = Route::current();
 //  $pageName = explode('/', $routeName->uri());
 //  $pageSegment = $pageName[1];
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+$host = $_SERVER['HTTP_HOST'];
+$uri = $_SERVER['REQUEST_URI'];
+$current_url = $protocol . $host . $uri;
 ?>
 <!-- block-wrapper-section ================================================== -->
 <section class="block-wrapper">
@@ -12,16 +16,53 @@
                 <!-- block content -->
                 <div class="block-content">
                     <div class="article-box">
+                        <div class="col-md-12">
+                            <div class="welcome_mucis_section">
+                                <audio preload="auto" controls>
+                                    <source src="<?=env('FRONT_ASSETS_URL')?>Ecosymbionts-audio-28Oct2024.mp3">
+                                </audio>
+                            </div>
+                        </div>
                         <div class="titleto-box">
-                            <h1>submissions</h1>  
+                            <h1>ABOUT</h1>  
                         </div>
 
                             <div class="news-post article-post">
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="post-content">
+                                            <div class="titleto-inner">                                                
+                                                <p style="color:#000;">Ecosymbionts all Regenerate Together (EaRTh) is an online knowledge-sharing and community-building platform for <a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">grassroots</a>  changemakers, innovators, and knowledge-holders from across the world.</p>
+                                                <p class="black">The purpose of EaRTh is two-fold:</p>
+                                                <ul>
+                                                    <li><strong><i>Facilitate synergies:</i></strong> Bring together and facilitate <a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">synergies</a> between grassroots changemakers, innovators, and knowledge-holders from across the world working to <a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">regenerate</a> systems that restore, preserve, and foster human-<a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">ecoweb</a> <a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">symbiosis</a>.
+                                                    </li>
+                                                    <li><strong><i>Regenerate systems: </i></strong> Collaboratively conceptualize and promote alternative systems that optimize ecoweb wellbeing (instead of exploiting, diminishing, and destroying ecowebs) by synthesizing the knowledge, ideas, and wisdom of grassroots changemakers, innovators, and knowledge-holders from across the world. 
+                                                    </li>     
+                                                </ul>
+                                            </div>
+                                            <div class="titleto-inner">
+                                                <h2>HOW TO CITE EaRTh CONTENT</h2>
+                                                <p class="black">If you are citing EaRTh content, please use the following format: Author name(s), <i>Title</i>, <strong>Ecosymbionts all Regenerate Together (EaRTh):</strong> DOI (publication date).</p>
+                                                <p class="black"><i>For example: </i></p>
+                                                <p class="black">F. Jahan, <i>From Bhopal to the Bay: Fighting Corporations Creating Industrial Wastelands</i>, <strong>Ecosymbionts all Regenerate Together (EaRTh):</strong> DOI-EaRTh092024-004 (25 September, 2024).</p>
+                                            </div>
+                                            <div class="titleto-inner">
+                                                <h2>TYPES OF CREATIVE-WORKS</h2>
+                                                <p class="black">Both fiction and non-fiction Creative-Works are published as content on EaRTh, in the form of (a) word narratives, (b) visual art, and (c) videos. EaRTh encourages content in vernacular languages, with English translations provided, and where applicable, English subtitles.</p>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="titleto-box">
+                            <h1>SUBMISSION GUIDELINES</h1>  
+                        </div>
+                            <div class="news-post article-post">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <div class="post-content">
                                             <p class="black">Before making a submission of your Creative-Work to our <a target="_blank" href="<?=url('/about-us')?>" style="color: #d09c1c;">online knowledge-sharing and community-building platform</a>, please read these submission guidelines in their entirety.</p>
-
                                             <div class="titleto-inner">
                                                 <h2>ELIGIBILITY CRITERIA</h2>
                                                 <ul>
@@ -32,14 +73,14 @@
                                                     <li>Your Creative-Work must not have been published on any other medium that has the exclusive right to publish your work.</li>
                                                     <li>At this time, you must:
                                                         <ul>
-                                                            <li>be invited to submit a Creative-Work to Ecosymbionts all Regenerate Together ("EaRTh"); and/or</li>
+                                                            <!-- <li>be invited to submit a Creative-Work to Ecosymbionts all Regenerate Together ("EaRTh"); and/or</li> -->
+                                                            <li>be invited to submit a Creative-Work to Ecosymbionts all Regenerate Together (“EaRTh”) (however, there is a way around this: upon reading this page in its entirety, please watch the tutorial video below or simply click on the “Submit New Creative-Work” button below the video); and/or</li>
                                                             <li>have participated as a strategist at an in-person Ecosymbionts Regenerate ("ER") <a target="_blank" href="<?=env('REGENERATE_URL')?>synergy-meetings.php" style="color: #d09c1c;">Synergy Meeting</a>.</li>
                                                         </ul>
                                                     </li>
-                                                    <li>Your Creative-Work must relate to <a href="<?=env('REGENERATE_URL')?>" style="color: #d09c1c;" target="_blank">regenerating systems that restore, preserve, and foster the symbiosis humans natural ecological webs (ecowebs) or to elucidating how existing extractivist systems harm human-ecoweb symbiosis</a>. </li>
+                                                    <li>Your Creative-Work must relate to <a href="<?=env('REGENERATE_URL')?>" style="color: #d09c1c;" target="_blank">(a) restoring, preserving, and/or fostering the symbiosis (interconnectivity and interdependence) between humans and natural ecological webs (ecowebs)); OR (b) elucidating how existing extractivist systems harm human-ecoweb symbiosis.</a></li>
                                                 </ul>
-                                            </div>
-
+                                            </div>                                             
                                             <div class="titleto-inner">
                                                 <h2>AUTHORSHIP</h2>
                                                 <p class="black">EaRTh encourages human individuals, as well as ecoweb-rooted communities (see below for definition) or movements to be authors of Creative-Works submitted to EaRTh. Given the current legal framework associated with copyright and licensing, at least one human individual must be a co-author if an ecoweb-rooted community or movement is an author. Please also see the instructions below:</p>
@@ -48,7 +89,7 @@
                                                     <li>A Creative-Work may have up to three co-authors, wherein the first author listed must be a human individual ("Lead Author").</li>
                                                     <li>EaRTh encourages an ecoweb-rooted community or movement to be a co-author of a Creative-Work, but only if a human individual is also a co-author.</li>
                                                     <li>For the purposes of submissions of Creative-Work to EaRTh, an ecoweb-rooted community is defined as a self-associating group of human individuals that trace their origins to a particular ecoweb. Examples of ecoweb-rooted communities are: the Idu Mishmi of Arunachal Pradesh (India) and the Lisjan Ohlone of California (United States).</li>
-                                                    <li>Each co-author must submit a separate submission form, with a human individual representative of an ecoweb-rooted community co-author or movement co-author submitting on behalf of the ecoweb-rooted community or movement.</li>
+                                                    <!-- <li>Each co-author must submit a separate submission form, with a human individual representative of an ecoweb-rooted community co-author or movement co-author submitting on behalf of the ecoweb-rooted community or movement.</li> -->
                                                 </ul>
                                             </div>
 
@@ -170,8 +211,9 @@
 
                                             <div class="titleto-inner">
                                                 <h2>INSTRUCTIONS FOR SUBMISSION</h2>
-                                                <p class="black">Upon submitting a completed form to EaRTh, if you meet the eligibility criteria, you will receive an Eligibility E-mail with a Submission Reference Number (“SRN”) and accompanying Non-Exclusive License to Publish (“NELP”). Please date and sign the NELP and follow the upload instructions provided in your Eligibility E-mail. Once the editor(s) receive(s) your dated and signed NELP, we will begin substantively reviewing your Creative-Work.</p>
-                                                <p class="black">Please note that if there are multiple co-authors of a Creative-Work, certain details of each co-author must be listed in the same NELP and the Lead Author must sign and date the NELP on behalf of all co-authors. If one of the co-authors is an ecoweb-rooted community or movement, the details of a human individual representative of the ecoweb-rooted community or movement must be provided in the NELP.</p>
+                                                <!-- <p class="black">Upon submitting a completed form to EaRTh, if you meet the eligibility criteria, you will receive an Eligibility E-mail with a Submission Reference Number (“SRN”) and accompanying Non-Exclusive License to Publish (“NELP”). Please date and sign the NELP and follow the upload instructions provided in your Eligibility E-mail. Once the editor(s) receive(s) your dated and signed NELP, we will begin substantively reviewing your Creative-Work.</p>
+                                                <p class="black">Please note that if there are multiple co-authors of a Creative-Work, certain details of each co-author must be listed in the same NELP and the Lead Author must sign and date the NELP on behalf of all co-authors. If one of the co-authors is an ecoweb-rooted community or movement, the details of a human individual representative of the ecoweb-rooted community or movement must be provided in the NELP.</p> -->
+                                                <p class="black">Upon submitting a completed form to EaRTh, if you meet the eligibility criteria, you will receive an eligibility e-mail with a Submission Reference Number ("SRN"). You will not be able to click on the "Submit" button unless you check the box just below the scrollable text for the Non-Exclusive License to Publish ("NELP"). Once the editor(s) receive(s) your submission, we will begin substantively reviewing your Creative-Work.</p>
                                             </div>
 
                                             <div class="titleto-inner">
@@ -183,14 +225,20 @@
                                                 <h2>COPYRIGHT & LICENSE</h2>
                                                 <p class="black">As per the terms detailed in the NELP, you grant EaRTh, ER, and the Śramani Institute (the nonprofit host organization of ER and EaRTh) a non-exclusive license to publish and use your Content. You will retain the copyright to your work and the right to also publish elsewhere. </p>
                                             </div>
-                                            <p class="text-center"><a href="<?=env('REGENERATE_URL')?>contact.php" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Submit New Creative-Work</a></p>
-                                            <!-- <?php if($button_show){?>
+                                            <h4>Please watch the video tutorial below on how to submit your Creative-Work.</h4>
+                                            <div class="video_holder text-center">
+                                                <iframe width="560" height="315" src="https://www.youtube.com/embed/3T-yBnR0pw8?si=twhDD8-awecmqx3y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                            </div>
+                                            <!-- <p class="text-center"><a href="<?=env('REGENERATE_URL')?>contact.php" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Submit New Creative-Work</a></p> -->
+                                            <?php if($button_show){?>
                                                 <?php if(session('is_user_login')){?>
                                                     <p class="text-center"><a href="<?=url('user/submit-new-article')?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Submit New Creative-Work</a></p>
+                                                    <p style="color: red; text-align: center;">In case of technical difficulties please <a href="<?=env('REGENERATE_URL')?>contact.php">contact us.</a></p>
                                                 <?php } else {?>
-                                                    <p class="text-center"><a href="<?=url('signin')?>" class="btn btn-primary">Submit New Creative-Work</a></p>
+                                                    <p class="text-center"><a href="<?=url('sign-in/' . Helper::encoded('https://ecosymbiont.org/earth/user/submit-new-article'))?>" class="btn btn-primary">Submit New Creative-Work</a></p>
+                                                    <p style="color: red; text-align: center;">In case of technical difficulties please <a href="<?=env('REGENERATE_URL')?>contact.php">contact us.</a></p>
                                                 <?php }?>
-                                            <?php }?> -->
+                                            <?php }?>                                        
                                         </div>
                                     </div>
                                 </div>

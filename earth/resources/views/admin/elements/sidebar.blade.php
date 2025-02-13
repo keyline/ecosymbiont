@@ -15,6 +15,11 @@ if (!empty($parameters)) {
         $pId2 = Helper::decoded($parameters['id2']);
     }
 }
+$slug = '';
+if($pageSegment == 'article'){
+    $slug = $routeName->parameters()['id'];
+  }
+    // echo $slug;die;
 ?>
 <div class="navbar-vertical-container">
     <div class="navbar-vertical-footer-offset">
@@ -60,19 +65,30 @@ if (!empty($parameters)) {
                         </a>
                         <div id="navbarVerticalMenuNews" class="nav-collapse collapse <?=(($pageSegment == 'news_category' || $pageSegment == 'news_content' || $pageSegment == 'news_subcategory' || $pageSegment == 'news_content_image')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">
                           <a class="nav-link <?=(($pageSegment == 'news_category')?'active':'')?>" href="<?=url('admin/news_category/list')?>">Parent Categories</a>
-                          <a class="nav-link <?=(($pageSegment == 'news_subcategory')?'active':'')?>" href="<?=url('admin/news_subcategory/list')?>">Sub Categories</a>
-                          <a class="nav-link <?=(($pageSegment == 'news_content')?'active':'')?>" href="<?=url('admin/news_content/list')?>">Contents</a>
+                          <a class="nav-link <?=(($pageSegment == 'news_subcategory')?'active':'')?>" href="<?=url('admin/news_subcategory/list')?>">Sub-Categories</a>
+                          <a class="nav-link <?=(($pageSegment == 'news_content')?'active':'')?>" href="<?=url('admin/news_content/list')?>">Content</a>
                           <a class="nav-link <?=(($pageSegment == 'news_content_image')?'active':'')?>" href="<?=url('admin/news_content_image/list')?>">Media</a>
                         </div>
                     </div>                    
                 <!-- End news -->
                 <!-- Submitted Articles -->
-                    <div class="nav-item">
+                    <!-- <div class="nav-item">
                         <a class="nav-link <?= $pageSegment == 'article' ? 'active' : '' ?>"
                             href="<?= url('admin/article/list') ?>" data-placement="left">
                             <i class="fa fa-file-text nav-icon"></i>
-                            <span class="nav-link-title">Submit Creative-Work</span>
+                            <span class="nav-link-title">Submitted Creative-Work</span>
                         </a>
+                    </div> -->
+                    <div class="nav-item">
+                        <a class="nav-link dropdown-toggle active <?=(($pageSegment == 'article')?'':'collapsed')?>" href="#navbarVerticalMenuarticle" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuarticle" aria-expanded="<?=(($pageSegment == 'article')?'true':'false')?>" aria-controls="navbarVerticalMenuAccess">
+                        <i class="fa fa-database nav-icon"></i>
+                        <span class="nav-link-title">Submitted Creative-Work</span>
+                        </a>                        
+                        <div id="navbarVerticalMenuarticle" class="nav-collapse collapse <?=(($pageSegment == 'article')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">             
+                        <a class="nav-link <?=(($pageSegment == 'article' && $slug == 'submitted')?'active':'')?>" href="<?=url('admin/article/submitted')?>">Submitted articles</a>
+                        <a class="nav-link <?=(($pageSegment == 'article' && $slug == 'editing-checking')?'active':'')?>" href="<?=url('admin/article/editing-checking')?>">Editing and checking articles </a>
+                        <a class="nav-link <?=(($pageSegment == 'article' && $slug == 'approved')?'active':'')?>" href="<?=url('admin/article/approved')?>">Approved articles </a>                        
+                        </div>
                     </div>
                 <!-- End Submitted Articles -->                
                  <!-- users -->
@@ -82,7 +98,7 @@ if (!empty($parameters)) {
                           <span class="nav-link-title">Users</span>
                         </a>
                         <div id="navbarVerticalMenuUsers" class="nav-collapse collapse <?=(($pageSegment == 'content_creaters' || $pageSegment == 'editors'  || $pageSegment == 'readers')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">
-                          <a class="nav-link <?=(($pageSegment == 'content_creaters')?'active':'')?>" href="<?=url('admin/content_creaters/list')?>">Content Creater</a>
+                          <a class="nav-link <?=(($pageSegment == 'content_creaters')?'active':'')?>" href="<?=url('admin/content_creaters/list')?>">Content Creator</a>
                           <a class="nav-link <?=(($pageSegment == 'readers')?'active':'')?>" href="<?=url('admin/readers/list')?>">Readers</a>
                           <!-- <a class="nav-link <?=(($pageSegment == 'editors')?'active':'')?>" href="<?=url('admin/editors/list')?>">Editors</a> -->
                         </div>
@@ -112,7 +128,7 @@ if (!empty($parameters)) {
                           <a class="nav-link <?=(($pageSegment == 'pronoun')?'active':'')?>" href="<?=url('admin/pronoun/list')?>">Pronoun</a>
                           <a class="nav-link <?=(($pageSegment == 'title')?'active':'')?>" href="<?=url('admin/title/list')?>">Title</a>
                           <a class="nav-link <?=(($pageSegment == 'role')?'active':'')?>" href="<?=url('admin/role/list')?>">Role</a>
-                          <a class="nav-link <?=(($pageSegment == 'section_ert')?'active':'')?>" href="<?=url('admin/section_ert/list')?>">Section ERT</a>
+                          <a class="nav-link <?=(($pageSegment == 'section_ert')?'active':'')?>" href="<?=url('admin/section_ert/list')?>">Section EaRTh</a>
                           <a class="nav-link <?=(($pageSegment == 'submission_type')?'active':'')?>" href="<?=url('admin/submission_type/list')?>">Submission Type</a>
                           <a class="nav-link <?=(($pageSegment == 'country')?'active':'')?>" href="<?=url('admin/country/list')?>">Country</a>
                         </div>

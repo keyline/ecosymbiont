@@ -32,6 +32,7 @@ use App\Models\GeneralSetting;
 use App\Models\Enquiry;
 use App\Models\EmailLog;
 use App\Models\UserProfile;
+use App\Models\UserClassification;
 
 use Auth;
 use Session;
@@ -175,8 +176,24 @@ class FrontController extends Controller
     public function aboutUs()
     {
         $data = [];
-        $title                          = 'About Us';
-        $page_name                      = 'aboutus';
+        $title                          = 'Communities';
+        $page_name                      = 'communities';
+        $data['search_keyword']         = '';
+        echo $this->front_before_login_layout($title, $page_name, $data);
+    }
+    public function schumacherWild()
+    {
+        $data = [];
+        $title                          = 'SchumacherWild';
+        $page_name                      = 'SchumacherWild';
+        $data['search_keyword']         = '';
+        echo $this->front_before_login_layout($title, $page_name, $data);
+    }
+    public function westoaklandmatters()
+    {
+        $data = [];
+        $title                          = 'WestOaklandMatters';
+        $page_name                      = 'WestOaklandMatters';
         $data['search_keyword']         = '';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
@@ -202,6 +219,7 @@ class FrontController extends Controller
                                                         'news_contents.sub_title', 
                                                         'news_contents.slug', 
                                                         'news_contents.author_name', 
+                                                        'news_contents.for_publication_name', 
                                                         'news_contents.cover_image', 
                                                         'news_contents.created_at',
                                                         'news_contents.media',
@@ -236,6 +254,7 @@ class FrontController extends Controller
                                                     'news_contents.sub_title', 
                                                     'news_contents.slug', 
                                                     'news_contents.author_name', 
+                                                    'news_contents.for_publication_name', 
                                                     'news_contents.cover_image', 
                                                     'news_contents.created_at',
                                                     'news_contents.media',
@@ -320,6 +339,7 @@ class FrontController extends Controller
                                                         'news_contents.sub_title', 
                                                         'news_contents.slug', 
                                                         'news_contents.author_name', 
+                                                        'news_contents.for_publication_name', 
                                                         'news_contents.cover_image', 
                                                         'news_contents.created_at',
                                                         'news_contents.media',
@@ -338,6 +358,7 @@ class FrontController extends Controller
                                                       ->orWhere('news_contents.long_desc', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('news_contents.keywords', 'LIKE', '%'.$search_keyword.'%');
                                              })
+                                             ->limit(4)
                                              ->get();
             // Helper::pr($searchResults);
             
@@ -345,6 +366,50 @@ class FrontController extends Controller
             $title                          = 'Search Result For : "' . $search_keyword . '"';
             $page_name                      = 'search-result';
             echo $this->front_before_login_layout($title, $page_name, $data);
+        }
+    }
+    public function search_result_load(Request $request)
+    {
+        if($request->isMethod('post')){
+            $postData           = $request->all();
+            $offset = $postData['offset'];
+            $limit = $postData['limit']; // Default to 4 per request
+            $search_keyword     = $postData['search_keyword'];
+            $contents   = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
+                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
+                                            ->select(
+                                                        'news_contents.id', 
+                                                        'news_contents.new_title', 
+                                                        'news_contents.sub_title', 
+                                                        'news_contents.slug', 
+                                                        'news_contents.author_name', 
+                                                        'news_contents.for_publication_name', 
+                                                        'news_contents.cover_image', 
+                                                        'news_contents.created_at',
+                                                        'news_contents.media',
+                                                        'news_contents.videoId',
+                                                        'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
+                                                        'parent_category.sub_category as parent_category_name', // From parent_category name
+                                                        'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
+                                                        'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                                    )
+                                            ->where(function($query) {
+                                                $query->where('news_contents.status', 1);
+                                             })
+                                             ->where(function($query) use ($search_keyword) {
+                                                $query->where('news_contents.new_title', 'LIKE', '%'.$search_keyword.'%')
+                                                      ->orWhere('news_contents.sub_title', 'LIKE', '%'.$search_keyword.'%')
+                                                      ->orWhere('news_contents.long_desc', 'LIKE', '%'.$search_keyword.'%')
+                                                      ->orWhere('news_contents.keywords', 'LIKE', '%'.$search_keyword.'%');
+                                             })
+                                             ->offset($offset)
+                                            ->limit($limit)
+                                             ->get();
+            // Helper::pr($contents);
+            
+            $data['search_keyword']         = $search_keyword;
+            // Prepare the response
+            return response()->json(['success' => true, 'data' => $contents]);
         }
     }
     public function fetch_search_suggestions(Request $request){
@@ -356,6 +421,7 @@ class FrontController extends Controller
         $requestData        = $request->all();
         
         $search_keyword     = $requestData['search_keyword'];
+        // Helper::pr($search_keyword);
         $searchResults      = NewsContent::select('id', 'new_title', 'slug', 'parent_category', 'sub_category')->where(function($query) {
                                                 $query->where('status', 1);
                                              })
@@ -363,6 +429,8 @@ class FrontController extends Controller
                                                 $query->where('new_title', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('sub_title', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('long_desc', 'LIKE', '%'.$search_keyword.'%')
+                                                      ->orWhere('author_name', 'LIKE', '%'.$search_keyword.'%')
+                                                      ->orWhere('organization_name', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('keywords', 'LIKE', '%'.$search_keyword.'%');
                                              })
                                              ->get();
@@ -390,7 +458,7 @@ class FrontController extends Controller
                                     'password'  => 'required|max:30',
                                 ];
                 if($this->validate($request, $rules)){
-                    if(Auth::guard('web')->attempt(['email' => $postData['email'], 'password' => $postData['password'], 'status' => 1])){
+                    if(Auth::guard('web')->attempt(['email' => $postData['email'], 'password' => $postData['password'], 'status' => 1])){                        
                         $sessionData = Auth::guard('web')->user();
                         $request->session()->put('user_id', $sessionData->id);
                         $request->session()->put('first_name', $sessionData->first_name);
@@ -400,6 +468,42 @@ class FrontController extends Controller
                         $request->session()->put('role', $sessionData->role);
                         $request->session()->put('email', $sessionData->email);
                         $request->session()->put('is_user_login', 1);
+
+                        $exsistUser = UserActivity::where('user_email', '=', $sessionData->email)->count();
+                        //   Helper::pr($exsistUser);                        
+                        if($exsistUser > 0)
+                        {
+                            if($sessionData->role == 2)
+                            {
+                                if($page_link == ''){
+                                    return redirect('user/dashboard');
+                                } else {
+                                    return redirect($page_link);
+                                } 
+                            }else {
+                                if($page_link == ''){
+                                    return redirect('user/my-profile');
+                                } else {
+                                    return redirect($page_link);
+                                }
+                            }
+                        } else{
+                            // Helper::pr($sessionData->role);
+                            if($sessionData->role == 2)
+                            {
+                                if($page_link == ''){
+                                    return redirect('user/add-author-classification');
+                                } else {
+                                    return redirect($page_link);
+                                } 
+                            }else {
+                                if($page_link == ''){
+                                    return redirect('user/dashboard');
+                                } else {
+                                    return redirect($page_link);
+                                }
+                            }
+                        }
 
                         /* user activity */
                             $activityData = [
@@ -413,20 +517,8 @@ class FrontController extends Controller
                             ];
                             UserActivity::insert($activityData);
                         /* user activity */
-                        if($sessionData->role == 1){
-                            if($page_link == ''){
-                                return redirect('user/my-profile');
-                            } else {
-                                return redirect($page_link);
-                            }
-                        } else {
-                            if($page_link == ''){
-                                return redirect('user/dashboard');
-                            } else {
-                                return redirect($page_link);
-                            }
-                        }
-                    } else {
+                                               
+                    } else {                        
                         /* user activity */
                             $activityData = [
                                 'user_email'        => $postData['email'],
@@ -441,7 +533,7 @@ class FrontController extends Controller
                         /* user activity */
                         return redirect()->back()->with('error_message', 'Invalid Email Or Password !!!');
                     }
-                } else {
+                } else {                    
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');
                 }
             }
@@ -459,7 +551,7 @@ class FrontController extends Controller
             $data['search_keyword']         = '';
             if ($request->isMethod('post')) {
                 $postData = $request->all();
-                // Helper::pr($postData);
+                //  Helper::pr($postData);
                  // Get reCAPTCHA token from form POST data
                     $recaptchaResponse = $postData['g-recaptcha-response'];
 
@@ -468,6 +560,9 @@ class FrontController extends Controller
 
                     // Google reCAPTCHA verification URL
                     $verifyURL = 'https://www.google.com/recaptcha/api/siteverify';
+
+                    // Your Google reCAPTCHA secret key [dev]
+                    $secretKey = '6Ldum88qAAAAANVww5Xe6aHFL-g_UHLsHl7HGKs5';
 
                     // Prepare the POST request
                     $data = array(
@@ -492,8 +587,7 @@ class FrontController extends Controller
                         // reCAPTCHA validation passed, proceed with form processing
                         // echo "reCAPTCHA v3 validation passed. You can process the form."; die;
                         $rules = [                                 
-                            'first_name'                => 'required',            
-                            'last_name'                 => 'required',                                    
+                            'first_name'                => 'required',                                                                           
                             'email'                     => 'required',                                                  
                             'country'                   => 'required',                                                                                         
                         ];
@@ -504,9 +598,7 @@ class FrontController extends Controller
                                 $randomPassword = bin2hex(random_bytes(8));   
 
                                 $fields = [                        
-                                    'first_name'                => $postData['first_name'],            
-                                    'last_name'                 => $postData['last_name'],        
-                                    'middle_name'               => $postData['middle_name'],            
+                                    'first_name'                => $postData['first_name'],                                                           
                                     'email'                     => $postData['email'],                                                          
                                     'country'                   => $postData['country'],
                                     'role'                      => $postData['role'],
@@ -543,6 +635,144 @@ class FrontController extends Controller
             }
             echo $this->front_before_login_layout($title, $page_name, $data);
         }
+        public function forgetPassword(Request $request)
+        {            
+            $title                          = 'Forget Password';
+            $page_name                      = 'forgetpassword';
+            $data['search_keyword']         = '';
+            if ($request->isMethod('post')) {
+                $postData = $request->all();                
+                 // Get reCAPTCHA token from form POST data
+                    $recaptchaResponse = $postData['g-recaptcha-response'];
+
+                    // Your Google reCAPTCHA secret key [live]
+                    $secretKey = '6LcIw04qAAAAAJCWh02op84FgNvxexQsh9LLCuqW';
+
+                    // Google reCAPTCHA verification URL [live]
+                    $verifyURL = 'https://www.google.com/recaptcha/api/siteverify';
+
+                    // Your Google reCAPTCHA secret key [dev]
+                    $secretKey = '6Ldum88qAAAAANVww5Xe6aHFL-g_UHLsHl7HGKs5';
+                    
+
+                    // Prepare the POST request
+                    $data = array(
+                        'secret' => $secretKey,
+                        'response' => $recaptchaResponse,                       
+                    );
+
+                    // Initiate cURL
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, $verifyURL);
+                    curl_setopt($ch, CURLOPT_POST, true);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    $response = curl_exec($ch);
+                    curl_close($ch);
+
+                    // Decode JSON response
+                    $responseData = json_decode($response);
+
+                    // Check if reCAPTCHA validation was successful
+                    if ($responseData->success && $responseData->score >= 0.5) {                        
+                        $rules = [                                                                                               
+                            'email'                     => 'required',                                                                                                                                                                    
+                        ];
+                        if ($this->validate($request, $rules)) {
+                            $checkValue = User::where('email', '=', $postData['email'])->count();                              
+                            $checkmail = User::where('email', '=', $postData['email'])->first();                              
+                            if ($checkValue > 0) {  
+                                if($checkmail->status != 1){                                    
+                                    return redirect()->back()->with('error_message', 'Your account is deactivated contact with admin!!!');
+                                } else{
+                                    // Generate a random 4-digit OTP
+                                    $otp = rand(1000, 9999);
+                                    $fields = [                                                            
+                                        'otp'                  => $otp,                         
+                                    ];                            
+                                    User::where('email', $postData['email'])->update($fields);
+                                    $generalSetting             = GeneralSetting::where('id', '=', 1)->first();
+                                    $subject                    = 'Subject: OTP Verification';
+                                    $message                    = "<table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
+                                                                        <tr><td style='padding: 8px 15px'>Your OTP code is: <strong>$otp</strong></td></tr>                                                                                                                                                                                                                                                   
+                                                                        <tr><td style='padding: 8px 15px'>Thank You,</td></tr>
+                                                                        <tr><td style='padding: 8px 15px'>Auto-generated from the Ecosymbiont Website.</td></tr>
+                                                                    </table>";
+                                    $this->sendMail($postData['email'], $subject, $message);
+                                    return redirect(url('otpvalidation'))->with('success_message', 'Your OTP has been successfully sent to your registered email address. Please check your email to retrieve the OTP.');
+                                }                                                                      
+                            } else {
+                                return redirect()->back()->with('error_message', 'User not registered kindly signup first !!!');
+                            }
+                        } else {
+                            return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                        }
+
+                    } else {                        
+                        return redirect()->back()->with('error_message', 'reCAPTCHA v3 validation failed. Please try again.');                        
+                    }                              
+            }
+            echo $this->front_before_login_layout($title, $page_name, $data);
+        }
+        public function otpValidation(Request $request)
+        {            
+            $title                          = 'OTP Validation';
+            $page_name                      = 'otpvalidation';
+            $data['search_keyword']         = '';
+            if ($request->isMethod('post')) {
+                $postData = $request->all();                
+                $rules = [                                                                                               
+                    'otp'                     => 'required',                                                                                                                                                                    
+                ];
+                if ($this->validate($request, $rules)) {
+                    $checkValue = User::where('otp', '=', $postData['otp'])->first();                           
+                    if ($checkValue) {                                        
+                        return redirect(url('resetpassword/'.Helper::encoded($checkValue->id)))->with('success_message', 'Your OTP has been successfully validated. Please reset your password to complete the sign-up process.');
+                    } else {
+                        return redirect()->back()->with('error_message', 'OTP is not validated !!!');
+                    }
+                } else {
+                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                }                                                 
+            }
+            echo $this->front_before_login_layout($title, $page_name, $data);
+        }
+        public function resetPassword(Request $request, $id)
+        {            
+            $title                          = 'Reset Password';
+            $page_name                      = 'resetpassword'; 
+            $user_id                        = Helper::decoded($id);   
+            $data['search_keyword']         = '';        
+            if ($request->isMethod('post')) {
+                $postData = $request->all();
+                $rules      = [                    
+                    'new_password'            => 'required',
+                    'confirm_password'        => 'required',
+                ];     
+                if($this->validate($request, $rules)){      
+                    $old_password       = User::find($user_id)->password;                    
+                    $new_password       = $postData['new_password'];
+                    $confirm_password   = $postData['confirm_password'];                    
+                        if($new_password == $confirm_password){
+                            if($new_password != $old_password){
+                                $fields = [
+                                    'password'            => Hash::make($new_password)
+                                ];                                
+                                User::where('id', '=', $user_id)->update($fields);
+                                return redirect(url('signin'))->with('success_message', 'Password Reset Successfully !!!');
+                            } else {
+                                return redirect()->back()->with('error_message', 'New & Old Password Can\'t Be Same !!!');
+                            }
+                        } else {
+                            return redirect()->back()->with('error_message', 'New & confirm password doesn\'t matched !!!');
+                        }                    
+                } else {
+                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                }           
+                                                 
+            }
+            echo $this->front_before_login_layout($title, $page_name, $data);
+        }
     /* authentication */
     /* after login */
         public function signout(Request $request){
@@ -555,22 +785,23 @@ class FrontController extends Controller
                     'user_type'         => 'USER',
                     'ip_address'        => $request->ip(),
                     'activity_type'     => 2,
-                    'activity_details'  => 'You Are Successfully Sign Out !!!',
+                    'activity_details'  => 'You are successfully signed out!',
                     'platform_type'     => 'WEB',
                 ];
                 UserActivity::insert($activityData);
             /* user activity */
             $request->session()->forget(['user_id', 'name', 'email', 'first_name', 'middle_name', 'last_name', 'role', 'is_user_login']);
-            // Helper::pr(session()->all());die;
+            //  Helper::pr(session()->all());die;
             Auth::guard('web')->logout();
-            return redirect(url('signin'))->with('success_message', 'You Are Successfully Sign Out !!!');
+            return redirect(url('signin'))->with('success_message', 'You are successfully signed out!');
         }
         public function dashboard()
         {
             $user_id                        = session('user_id');
             $data['user']                   = User::find($user_id);
-            $data['approved_articles']      = Article::where('is_published', '=', 1)->where('user_id', '=', $user_id)->count();
-            $data['pending_articles']       = Article::where('is_published', '=', 0)->where('user_id', '=', $user_id)->count();
+            $data['approved_articles']      = Article::where('is_published', '=', 4)->where('user_id', '=', $user_id)->count();
+            // $data['pending_articles']       = Article::where('is_published', '=', 0)->orWhere('is_published', '=', 1)->where('user_id', '=', $user_id)->count();
+            $data['pending_articles']       = Article::whereIn('is_published', [0, 1])->where('user_id', '=', $user_id)->count();
 
             $data['search_keyword']         = '';
             $title                          = 'Dashboard';
@@ -586,38 +817,21 @@ class FrontController extends Controller
 
             if ($request->isMethod('post')) {
                 $postData = $request->all();
+                // Helper::pr($postData);
                 $rules = [                                 
-                    'first_name'                => 'required',            
-                    'last_name'                 => 'required',                                    
-                    'email'                     => 'required',           
-                    'phone'                     => 'required',           
+                    'first_name'                => 'required',                                                                 
+                    'email'                     => 'required',                                       
                     'country'                   => 'required',                        
                 ];
-                if ($this->validate($request, $rules)) {
-                    /* profile image */
-                        $imageFile      = $request->file('profile_image');
-                        if($imageFile != ''){
-                            $imageName      = $imageFile->getClientOriginalName();
-                            $uploadedFile   = $this->upload_single_file('profile_image', $imageName, 'user', 'image');
-                            if($uploadedFile['status']){
-                                $profile_image = $uploadedFile['newFilename'];
-                            } else {
-                                return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
-                            }
-                        } else {
-                            $profile_image = $data['user']->profile_image;
-                        }
-                    /* profile image */
+                if ($this->validate($request, $rules)) {                    
                     $fields = [                        
-                        'first_name'                => $postData['first_name'],
-                        'last_name'                 => $postData['last_name'],
-                        'middle_name'               => $postData['middle_name'],
-                        'phone'                     => $postData['phone'],           
-                        'country'                   => $postData['country'],
-                        'profile_image'             => $profile_image,
+                        'first_name'                => $postData['first_name'], 
+                        'email'                     => $postData['email'],                                    
+                        'country'                   => $postData['country'],                        
                     ];
-                    // Helper::pr($fields);
+                    //  Helper::pr($fields);
                     User::where('id', '=', $user_id)->update($fields);
+                    UserProfile::where('user_id', '=', $user_id)->update($fields);
                     return redirect()->back()->with('success_message', 'Profile Updated Successfully !!!');
                 } else {
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');
@@ -677,7 +891,11 @@ class FrontController extends Controller
             $data['user']                   = User::find($user_id);
             $data['articles']               = Article::where('user_id', '=', $user_id)->orderBy('id', 'DESC')->get();
             $data['search_keyword']         = '';
+            $checkClassification            = UserClassification::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
             $checkProfile                   = UserProfile::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
+            if($checkClassification <= 0){
+                return redirect(url('user/add-author-classification'))->with(['error_message' => 'Create Classification First !!!']);
+            }
             if($checkProfile <= 0){
                 return redirect(url('user/add-profile'))->with(['error_message' => 'Create Profile First !!!']);
             }
@@ -710,12 +928,14 @@ class FrontController extends Controller
             $user_id                        = session('user_id');
             $data['user']                   = User::find($user_id);
             $data['articles']               = Article::where('user_id', '=', $user_id)->get();
-            $data['profile']                = UserProfile::where('user_id', '=', $user_id)->first();
+            $data['classification']         = UserClassification::where('user_id', '=', $user_id)->first();
+             $data['profile']               = UserProfile::where('user_id', '=', $user_id)->first();
+            //  Helper::pr($data['profile']);
             $data['search_keyword']         = '';
 
             if ($request->isMethod('post')) {
                 $postData = $request->all();
-                //  dd($postData);
+                //   dd($postData);
                 /* article no generate */
                     $currentMonth   = date('m');
                     $currentYear    = date('Y');
@@ -736,8 +956,7 @@ class FrontController extends Controller
                 if ($postData['invited'] == 'No' && $postData['participated'] == 'No') {                    
                     $rules = [
                         'first_name'                => 'required',                                                                
-                        'email'                     => 'required',                                      
-                        'for_publication_name'      => 'required',                                      
+                        'email'                     => 'required',                                                                                                    
                         'orginal_work'              => 'required',                                     
                         'copyright'                 => 'required',                     
                         'title'                     => 'required',
@@ -767,9 +986,20 @@ class FrontController extends Controller
                             $coAuthorBios[] = $request->input("co_author_short_bio_{$i}");
                             $coAuthorCountries[] = $request->input("co_author_country_{$i}");
                             $coAuthorOrganizations[] = $request->input("co_authororganization_name_{$i}");
-                            $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
+                            if($request->input("co_ecosystem_affiliation_{$i}") !== null){
+                                $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
+                            } else{
+                                return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
+                            }
+                            // $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
+
                             $coindigenousAffiliations[] = $request->input("co_indigenous_affiliation_{$i}");
-                            $coauthorClassification[] = $request->input("co_author_classification_{$i}");
+                            if($request->input("co_author_classification_{$i}") !== null){                                        
+                                $coauthorClassification[] = $request->input("co_author_classification_{$i}");
+                                } else{
+                                    return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author classification !!!']);
+                            }
+                            // $coauthorClassification[] = $request->input("co_author_classification_{$i}");
                         }
                     }                
                     
@@ -798,7 +1028,7 @@ class FrontController extends Controller
                                 'participated'              => $postData['participated'],
                                 'participated_info'         => $participatedInfo                                                      
                             ];
-                            //  Helper::pr($fields);
+                            //   Helper::pr($fields);
 
                             /* submission email */
                             $generalSetting             = GeneralSetting::find('1');                            
@@ -807,9 +1037,9 @@ class FrontController extends Controller
                                 'fullName'                  => $fullName,
                                 'email'                     => $postData['email'],
                                 'article_no'                => $article_no,
-                                'for_publication_name'      => $postData['for_publication_name'],
+                                'creative_Work'      => $postData['creative_Work'],
                             ];
-                            $subject                    = $generalSetting->site_name.' :: Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
+                            $subject                    = $generalSetting->site_name.': Creative-Work submitted by ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                             $message                    = view('email-templates.creative-work-submission',$mailData);
                             // echo $message;die;
                             $this->sendMail($postData['email'], $subject, $message);
@@ -826,9 +1056,9 @@ class FrontController extends Controller
                             /* email log save */
 
                             Article::insert($fields);
-                            return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
+                            return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work submitted successfully!');
                             } else {
-                                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                                return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
                             }
                     } else{                    
                         //save to database//
@@ -860,7 +1090,7 @@ class FrontController extends Controller
                                 'participated'              => $postData['participated'],
                                 'participated_info'         => $participatedInfo                       
                             ];
-                            //  Helper::pr($fields);
+                            //   Helper::pr($fields);
                             /* submission email */
                             $generalSetting             = GeneralSetting::find('1');                            
                             $fullName                   = $postData['first_name'];
@@ -868,9 +1098,9 @@ class FrontController extends Controller
                                 'fullName'                  => $fullName,
                                 'email'                     => $postData['email'],
                                 'article_no'                => $article_no,
-                                'for_publication_name'      => $postData['for_publication_name'],
+                                'creative_Work'      => $postData['creative_Work'],
                             ];
-                            $subject                    = $generalSetting->site_name.' :: Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
+                            $subject                    = $generalSetting->site_name.': Creative-Work submitted by ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                             $message                    = view('email-templates.creative-work-submission',$mailData);
                             // echo $message;die;
                             $this->sendMail($postData['email'], $subject, $message);
@@ -887,9 +1117,9 @@ class FrontController extends Controller
                             /* email log save */
 
                             Article::insert($fields);
-                            return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
+                            return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work submitted successfully!');
                         } else {
-                                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                                return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
                         }
                     }
                 } else{
@@ -897,19 +1127,19 @@ class FrontController extends Controller
                     'author_classification'     => 'required',
                     'first_name'                => 'required',                                                               
                     'email'                     => 'required',                                      
-                    'country'                   => 'required',                                     
-                    'for_publication_name'      => 'required', 
+                    'country'                   => 'required',                                                          
                     'orginal_work'              => 'required', 
                     'copyright'                 => 'required', 
                     'submission_types'          => 'required',                
-                    'state'                     => 'required', 
-                    'city'                      => 'required', 
+                    // 'state'                     => 'required', 
+                    // 'city'                      => 'required', 
                     'acknowledge'               => 'required',                                                      
                     'section_ert'               => 'required',
                     'title'                     => 'required',
-                    'pronoun'                   => 'required',                
-                    'organization_name'         => 'required',
-                    'organization_website'      => 'required',
+                    'pronoun'                   => 'required',  
+                    'community'                 => 'required',
+                    // 'organization_name'         => 'required',
+                    // 'organization_website'      => 'required',
                     'ecosystem_affiliation'     => 'required',               
                     'expertise_area'            => 'required',                
                     'explanation'               => ['required', 'string', new MaxWords(100)],
@@ -931,50 +1161,71 @@ class FrontController extends Controller
 
                     if($postData['co_authors'] == '0'){
                         if($postData['submission_types'] == '1'){ 
+
+                            /* narrative doc file */
+                            $imageFile      = $request->file('narrative_file');
+                            if ($imageFile != '') {
+                             $old_fileName      = $imageFile->getClientOriginalName();
+                             // Save the file name in the session
+                            //  session()->flash('narrative_file', $old_fileName);
+                             $imageName      = $article_no;
+                            // Get file extension
+                              $fileExtension = pathinfo($old_fileName, PATHINFO_EXTENSION);                                 
+                             $newFileName = $imageName . '.' . $fileExtension;
+                                $uploadedFile   = $this->upload_single_file('narrative_file', $newFileName, 'narrative', 'word');
+                                if ($uploadedFile['status']) {
+                                    $narrative_file = $uploadedFile['newFilename'];
+                                } else {
+                                    return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                                }
+                            } 
+                            else {
+                                return redirect()->back()->withInput()->with(['error_message' => 'Please upload complete narrative file and images !!!']);
+                            }
+                            /* narrative doc file */
                            
                            /* narrative images details */
                            // Define the number of co-authors you want to handle (e.g., 3 in this case)
-                           $narrativeImagesCount = $postData['narrative_images'];
-                           // Initialize empty arrays to hold the co-author data
-                           $narrativeImageDesc = [];
-                           $narrativeimageFile = [];                
+                           
+                           if (!isset($postData['narrative_images'])) {
+                               return redirect()->back()->withInput()->with(['error_message' => 'Please select number of narrative image !!!']);
+                           } else{
+                                $narrativeImagesCount = $postData['narrative_images'];
+                                // Initialize empty arrays to hold the co-author data
+                                $narrativeImageDesc = [];
+                                $narrativeimageFile = [];                
+        
+                                // Loop through the number of co-authors and collect the data into arrays
+                                for ($i = 1; $i <= $narrativeImagesCount; $i++) {
+                                    // Check if co-author name exists, to avoid null entries
+                                    if ($request->input("narrative_image_desc_{$i}") !== null) {
+                                        $narrativeImageDesc[] = $request->input("narrative_image_desc_{$i}");
+        
+                                    // Add image file to the array (it can be null if no file is uploaded)                        
+                                        $imageFile      = $request->file("image_file_{$i}");                            
+                                        if ($imageFile != '') {                                
+                                                $old_imageName      = $imageFile->getClientOriginalName();
+                                                $imageName      = $article_no;
+                                                // Get file extension
+                                                    $fileExtension = pathinfo($old_imageName, PATHINFO_EXTENSION);
+                                                    // Append the desired suffix ('a', 'b', 'c', etc.) based on $i
+                                                    $suffix = chr(96 + $i); // Convert $i to a letter: 1 = 'a', 2 = 'b', 3 = 'c', etc.
+                                                $newFileName = $imageName . '-' . $suffix . '.' . $fileExtension;                                        
+                                            $uploadedFile   = $this->upload_single_file("image_file_{$i}", $newFileName, 'narrative', 'image');                                
+                                            if ($uploadedFile['status']) {
+                                                $narrativeimageFile[] = $uploadedFile['newFilename'];                                
+                                            } else {
+                                                $narrativeimageFile[] = null;                                    
+                                            }
+                                        }                                                                                                                        
+                                    } else {
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please upload complete narrative file and images !!!']);
+                                    }   
+                                }                                          
+                                /* narrative images details */  
+                            }                            
    
-                           // Loop through the number of co-authors and collect the data into arrays
-                           for ($i = 1; $i <= $narrativeImagesCount; $i++) {
-                               // Check if co-author name exists, to avoid null entries
-                               if ($request->input("narrative_image_desc_{$i}") !== null) {
-                                   $narrativeImageDesc[] = $request->input("narrative_image_desc_{$i}");
-   
-                               // Add image file to the array (it can be null if no file is uploaded)                        
-                                   $imageFile      = $request->file("image_file_{$i}");                            
-                                   if ($imageFile != '') {                                
-                                           $imageName      = $imageFile->getClientOriginalName();                                 
-                                       $uploadedFile   = $this->upload_single_file("image_file_{$i}", $imageName, 'narrative', 'image');                                
-                                       if ($uploadedFile['status']) {
-                                           $narrativeimageFile[] = $uploadedFile['newFilename'];                                
-                                       } else {
-                                           $narrativeimageFile[] = null;                                    
-                                       }
-                                   }                                                                                        
-                               } 
-                           }                                          
-                           /* narrative images details */                              
-   
-                           /* narrative doc file */
-                               $imageFile      = $request->file('narrative_file');
-                               if ($imageFile != '') {
-                                   $imageName      = $imageFile->getClientOriginalName();
-                                   $uploadedFile   = $this->upload_single_file('narrative_file', $imageName, 'narrative', 'word');
-                                   if ($uploadedFile['status']) {
-                                       $narrative_file = $uploadedFile['newFilename'];
-                                   } else {
-                                       return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
-                                   }
-                               } 
-                               else {
-                                   return redirect()->back()->with(['error_message' => 'Please Upload narrative File !!!']);
-                               }
-                           /* narrative doc file */
+                           
                            //save to database//
                            if ($this->validate($request, $rules)) {                
                                $fields = [
@@ -994,6 +1245,8 @@ class FrontController extends Controller
                                    'invited_by_email'          => $invited_emailInfo,
                                    'participated'              => $postData['participated'],
                                    'participated_info'         => $participatedInfo,
+                                   'community'                 => $postData['community'],
+                                   'community_name'            => $postData['community_name'],
                                    'explanation'               => $postData['explanation'],  
                                    'explanation_submission'    => $postData['explanation_submission'],     
                                    'titleId'                   => $postData['title'],                        
@@ -1016,7 +1269,7 @@ class FrontController extends Controller
                                    'bio_short'               => $postData['bio_short'],
                                    'bio_long'               => $postData['bio_long'],  
                                ];
-                                // Helper::pr($fields);
+                                    //  Helper::pr($fields);
 
                                /* submission email */
                                 $generalSetting             = GeneralSetting::find('1');                            
@@ -1025,9 +1278,9 @@ class FrontController extends Controller
                                     'fullName'                  => $fullName,
                                     'email'                     => $postData['email'],
                                     'article_no'                => $article_no,
-                                    'for_publication_name'      => $postData['for_publication_name'],
+                                    'creative_Work'      => $postData['creative_Work'],
                                 ];
-                                $subject                    = $generalSetting->site_name.' :: Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
+                                $subject                    = $generalSetting->site_name.': Creative-Work submitted by ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                                 $message                    = view('email-templates.creative-work-submission',$mailData);
                                 // echo $message;die;
                                 $this->sendMail($postData['email'], $subject, $message);
@@ -1044,12 +1297,15 @@ class FrontController extends Controller
                                 /* email log save */
 
                                 Article::insert($fields);
-                                return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
+                                return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work submitted successfully!');
                                 } else {
-                                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                                    return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
                                 }                               
                        } else if($postData['submission_types'] == '2'){
                            /* art images details */
+                           if (!isset($postData['art_images'])) {
+                            return redirect()->back()->withInput()->with(['error_message' => 'Please select number of art image !!!']);
+                        } else{
                            // Define the number of co-authors you want to handle (e.g., 3 in this case)
                            $artImagesCount = $postData['art_images'];
                            // Initialize empty arrays to hold the co-author data
@@ -1064,20 +1320,34 @@ class FrontController extends Controller
    
                                // Add image file to the array (it can be null if no file is uploaded)                        
                                    $imageFile      = $request->file("art_image_file_{$i}");                            
-                                   if ($imageFile != '') {                                
-                                           $imageName      = $imageFile->getClientOriginalName();                                 
-                                       $uploadedFile   = $this->upload_single_file("art_image_file_{$i}", $imageName, 'art_image', 'image');                                
+                                   if ($imageFile != '') {       
+                                        $old_imageName      = $imageFile->getClientOriginalName();
+                                           $imageName      = $article_no;
+                                          // Get file extension
+                                            $fileExtension = pathinfo($old_imageName, PATHINFO_EXTENSION);
+                                            // Append the desired suffix ('a', 'b', 'c', etc.) based on $i
+                                            $suffix = chr(96 + $i); // Convert $i to a letter: 1 = 'a', 2 = 'b', 3 = 'c', etc.
+                                           $newFileName = $imageName . '-' . $suffix . '.' . $fileExtension;                         
+                                        //    $imageName      = $imageFile->getClientOriginalName();                                 
+                                       $uploadedFile   = $this->upload_single_file("art_image_file_{$i}", $newFileName, 'art_image', 'image');                                
                                        if ($uploadedFile['status']) {
                                            $artimageFile[] = $uploadedFile['newFilename'];                                
                                        } else {
                                            $artimageFile[] = null;                                    
                                        }
-                                   }                                                                                        
-                               } 
-                           }                                          
+                                   }                                                                                                                      
+                               } else {
+                                return redirect()->back()->withInput()->with(['error_message' => 'Please upload art image File !!!']);
+                            }   
+                           }  
+                        } 
+                           if($postData['art_desc'] == ''){
+                               return redirect()->back()->withInput()->with(['error_message' => 'Please upload art image, caption and with descriptive narrative !!!']);
+                           }
                            /* art images details */
    
-                           if ($this->validate($request, $rules)) {                
+                           if ($this->validate($request, $rules)) {        
+                            // Helper::pr($postData);        
                                $fields = [
                                    'sl_no'                     => $next_sl_no,
                                    'article_no'                => $article_no,
@@ -1095,6 +1365,8 @@ class FrontController extends Controller
                                    'invited_by_email'          => $invited_emailInfo,
                                    'participated'              => $postData['participated'],
                                    'participated_info'         => $participatedInfo,
+                                   'community'                 => $postData['community'],
+                                   'community_name'            => $postData['community_name'],
                                    'explanation'               => $postData['explanation'],  
                                    'explanation_submission'    => $postData['explanation_submission'],     
                                    'titleId'                   => $postData['title'],                        
@@ -1117,7 +1389,7 @@ class FrontController extends Controller
                                    'bio_short'               => $postData['bio_short'],
                                    'bio_long'               => $postData['bio_long'],  
                                ];
-                                // Helper::pr($fields);
+                                    //   Helper::pr($fields);
 
                                 /* submission email */
                                 $generalSetting             = GeneralSetting::find('1');                            
@@ -1126,9 +1398,9 @@ class FrontController extends Controller
                                     'fullName'                  => $fullName,
                                     'email'                     => $postData['email'],
                                     'article_no'                => $article_no,
-                                    'for_publication_name'      => $postData['for_publication_name'],
+                                    'creative_Work'      => $postData['creative_Work'],
                                 ];
-                                $subject                    = $generalSetting->site_name.' :: Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
+                                $subject                    = $generalSetting->site_name.': Creative-Work submitted by ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                                 $message                    = view('email-templates.creative-work-submission',$mailData);
                                 // echo $message;die;
                                 $this->sendMail($postData['email'], $subject, $message);
@@ -1145,27 +1417,36 @@ class FrontController extends Controller
                                 /* email log save */
 
                                 Article::insert($fields);
-                                return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
+                                return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work submitted successfully!');
                                 } else {
-                                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                                    return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
                                 }                               
-                       } else {
+                       } else if($postData['submission_types'] == '3') {
                            /* art_video file */
                            $imageFile      = $request->file('art_video_file');
                            if ($imageFile != '') {
-                               $imageName      = $imageFile->getClientOriginalName();
-                               $uploadedFile   = $this->upload_single_file('art_video_file', $imageName, 'art_video', 'video');
+                            //    $imageName      = $imageFile->getClientOriginalName();
+                               $old_imageName      = $imageFile->getClientOriginalName();
+                                $imageName      = $article_no;
+                                // Get file extension
+                                $fileExtension = pathinfo($old_imageName, PATHINFO_EXTENSION);                                
+                                $newFileName = $imageName . '.' . $fileExtension;
+                               $uploadedFile   = $this->upload_single_file('art_video_file', $newFileName, 'art_video', 'video');
                                if ($uploadedFile['status']) {
                                    $art_video_file = $uploadedFile['newFilename'];
                                } else {
-                                   return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                                   return redirect()->back()->withInput()->with(['error_message' => $uploadedFile['message']]);
                                }
                            } 
                            else {
-                               return redirect()->back()->with(['error_message' => 'Please Upload art_video File !!!']);
+                               return redirect()->back()->withInput()->with(['error_message' => 'Please Upload art_video File !!!']);
                            }
+                           if($postData['art_video_desc'] == ''){
+                            return redirect()->back()->withInput()->with(['error_message' => 'Please upload art video and with descriptive narrative !!!']);
+                        }
                            /* art_video file */   
-                           if ($this->validate($request, $rules)) {                
+                           if ($this->validate($request, $rules)) {  
+                            // Helper::pr($postData);              
                                $fields = [
                                    'sl_no'                     => $next_sl_no,
                                    'article_no'                => $article_no,
@@ -1183,6 +1464,8 @@ class FrontController extends Controller
                                    'invited_by_email'          => $invited_emailInfo,
                                    'participated'              => $postData['participated'],
                                    'participated_info'         => $participatedInfo,
+                                   'community'                 => $postData['community'],
+                                   'community_name'            => $postData['community_name'],
                                    'explanation'               => $postData['explanation'],  
                                    'explanation_submission'    => $postData['explanation_submission'],     
                                    'titleId'                   => $postData['title'],                        
@@ -1190,7 +1473,7 @@ class FrontController extends Controller
                                    'subtitle'                  => $postData['subtitle'],
                                    'submission_types'          => $submission_typesInfo,
                                    'section_ertId'             => $section_ertInfo,                                
-                                   'art_video_file'            => $art_video_fileInfo,
+                                   'art_video_file'            => $art_video_file,
                                    'art_video_desc'            => $postData['art_video_desc'],                                                                        
                                    'country'                   => $postData['country'],
                                    'state'                     => $postData['state'],
@@ -1203,7 +1486,7 @@ class FrontController extends Controller
                                    'bio_short'               => $postData['bio_short'],
                                    'bio_long'               => $postData['bio_long'],  
                                ];
-                                // Helper::pr($fields);
+                                    // Helper::pr($fields);
 
                                /* submission email */
                                 $generalSetting             = GeneralSetting::find('1');                            
@@ -1212,9 +1495,9 @@ class FrontController extends Controller
                                     'fullName'                  => $fullName,
                                     'email'                     => $postData['email'],
                                     'article_no'                => $article_no,
-                                    'for_publication_name'      => $postData['for_publication_name'],
+                                    'creative_Work'      => $postData['creative_Work'],
                                 ];
-                                $subject                    = $generalSetting->site_name.' :: Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
+                                $subject                    = $generalSetting->site_name.': Creative-Work submitted by ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                                 $message                    = view('email-templates.creative-work-submission',$mailData);
                                 // echo $message;die;
                                 $this->sendMail($postData['email'], $subject, $message);
@@ -1231,10 +1514,12 @@ class FrontController extends Controller
                                 /* email log save */
 
                                 Article::insert($fields);
-                                return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
+                                return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work submitted successfully!');
                             } else {
-                                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                                return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
                             }                               
+                       } else{
+                           return redirect()->back()->withInput()->with(['error_message' => 'Please select submission type !!!']);
                        }                
                    } else {                    
                         /* co-author details */
@@ -1252,14 +1537,52 @@ class FrontController extends Controller
                             // Loop through the number of co-authors and collect the data into arrays
                             for ($i = 1; $i <= $coAuthorsCount; $i++) {
                                 // Check if co-author name exists, to avoid null entries
-                                if ($request->input("co_author_name_{$i}") !== null) {
+                                if ($request->input("co_author_name_{$i}") !== null) {                                    
                                     $coAuthorNames[] = $request->input("co_author_name_{$i}");
-                                    $coAuthorBios[] = $request->input("co_author_short_bio_{$i}");
-                                    $coAuthorCountries[] = $request->input("co_author_country_{$i}");
-                                    $coAuthorOrganizations[] = $request->input("co_authororganization_name_{$i}");
-                                    $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
-                                    $coindigenousAffiliations[] = $request->input("co_indigenous_affiliation_{$i}");
-                                    $coauthorClassification[] = $request->input("co_author_classification_{$i}");
+
+                                    if($request->input("co_author_short_bio_{$i}") !== null){
+                                        $coAuthorBios[] = $request->input("co_author_short_bio_{$i}", []);
+                                    } else{
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
+                                    }
+                                    // $coAuthorBios[] = $request->input("co_author_short_bio_{$i}");
+
+                                    if($request->input("co_author_country_{$i}") !== null){
+                                        $coAuthorCountries[] = $request->input("co_author_country_{$i}", []);
+                                    } else{
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
+                                    }
+                                    // $coAuthorCountries[] = $request->input("co_author_country_{$i}");
+
+                                    if($request->input("co_authororganization_name_{$i}") !== null){
+                                        $coAuthorOrganizations[] = $request->input("co_authororganization_name_{$i}", []);
+                                    } else{
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
+                                    }
+                                    // $coAuthorOrganizations[] = $request->input("co_authororganization_name_{$i}");
+
+                                    if($request->input("co_ecosystem_affiliation_{$i}") !== null){
+                                        $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
+                                    } else{
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
+                                    }
+                                    // $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
+
+                                    if($request->input("co_indigenous_affiliation_{$i}") !== null){
+                                        $coindigenousAffiliations[] = $request->input("co_indigenous_affiliation_{$i}", []);
+                                    } else{
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
+                                    }
+                                    // $coindigenousAffiliations[] = $request->input("co_indigenous_affiliation_{$i}");
+
+                                    if($request->input("co_author_classification_{$i}") !== null){
+                                        $coauthorClassification[] = $request->input("co_author_classification_{$i}", []);
+                                    } else{
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
+                                    }
+                                    // $coauthorClassification[] = $request->input("co_author_classification_{$i}");
+                                }else{
+                                    return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
                                 }
                             }                                            
                             /* co-author details */
@@ -1275,48 +1598,63 @@ class FrontController extends Controller
                             if($postData['submission_types'] == '1'){    
                             
                                 /* narrative images details */
-                                // Define the number of co-authors you want to handle (e.g., 3 in this case)
-                                $narrativeImagesCount = $postData['narrative_images'];
-                                // Initialize empty arrays to hold the co-author data
-                                $narrativeImageDesc = [];
-                                $narrativeimageFile = [];                
-    
-                                // Loop through the number of co-authors and collect the data into arrays
-                                for ($i = 1; $i <= $narrativeImagesCount; $i++) {
-                                    // Check if co-author name exists, to avoid null entries
-                                    if ($request->input("narrative_image_desc_{$i}") !== null) {
-                                        $narrativeImageDesc[] = $request->input("narrative_image_desc_{$i}");
-    
-                                    // Add image file to the array (it can be null if no file is uploaded)                        
-                                        $imageFile      = $request->file("image_file_{$i}");                            
-                                        if ($imageFile != '') {                                
-                                                $imageName      = $imageFile->getClientOriginalName();                                 
-                                            $uploadedFile   = $this->upload_single_file("image_file_{$i}", $imageName, 'narrative', 'image');                                
-                                            if ($uploadedFile['status']) {
-                                                $narrativeimageFile[] = $uploadedFile['newFilename'];                                
-                                            } else {
-                                                $narrativeimageFile[] = null;                                    
-                                            }
-                                        }                                                                                        
-                                    } 
-                                }                                               
-                                /* narrative images details */
-                        
-    
+                                if (!isset($postData['narrative_images'])) {
+                                    return redirect()->back()->withInput()->with(['error_message' => 'Please select number of narrative image !!!']);
+                                } else{
+                                    // Define the number of co-authors you want to handle (e.g., 3 in this case)
+                                    $narrativeImagesCount = $postData['narrative_images'];
+                                    // Initialize empty arrays to hold the co-author data
+                                    $narrativeImageDesc = [];
+                                    $narrativeimageFile = [];                
+        
+                                    // Loop through the number of co-authors and collect the data into arrays
+                                    for ($i = 1; $i <= $narrativeImagesCount; $i++) {
+                                        // Check if co-author name exists, to avoid null entries
+                                        if ($request->input("narrative_image_desc_{$i}") !== null) {
+                                            $narrativeImageDesc[] = $request->input("narrative_image_desc_{$i}");
+        
+                                        // Add image file to the array (it can be null if no file is uploaded)                        
+                                            $imageFile      = $request->file("image_file_{$i}");                            
+                                            if ($imageFile != '') {       
+                                                $old_imageName      = $imageFile->getClientOriginalName();
+                                                $imageName      = $article_no;
+                                            // Get file extension
+                                                $fileExtension = pathinfo($old_imageName, PATHINFO_EXTENSION);
+                                                // Append the desired suffix ('a', 'b', 'c', etc.) based on $i
+                                                $suffix = chr(96 + $i); // Convert $i to a letter: 1 = 'a', 2 = 'b', 3 = 'c', etc.
+                                                $newFileName = $imageName . '-' . $suffix . '.' . $fileExtension;
+                                                $uploadedFile   = $this->upload_single_file("image_file_{$i}", $newFileName, 'narrative', 'image');                                
+                                                if ($uploadedFile['status']) {
+                                                    $narrativeimageFile[] = $uploadedFile['newFilename'];                                
+                                                } else {
+                                                    $narrativeimageFile[] = null;                                    
+                                                }
+                                            }                                                                                         
+                                        } else {
+                                            return redirect()->back()->withInput()->with(['error_message' => 'Please upload complete narrative file and images !!!']);
+                                        }  
+                                    }                                               
+                                    /* narrative images details */
+                                }                            
                                 /* narrative doc file */
                                     $imageFile      = $request->file('narrative_file');
                                     if ($imageFile != '') {
-                                        $imageName      = $imageFile->getClientOriginalName();
-                                        $uploadedFile   = $this->upload_single_file('narrative_file', $imageName, 'narrative', 'word');
+                                        // $imageName      = $imageFile->getClientOriginalName();
+                                        $old_imageName      = $imageFile->getClientOriginalName();
+                                           $imageName      = $article_no;
+                                          // Get file extension
+                                            $fileExtension = pathinfo($old_imageName, PATHINFO_EXTENSION);                                            
+                                           $newFileName = $imageName . '.' . $fileExtension;
+                                        $uploadedFile   = $this->upload_single_file('narrative_file', $newFileName, 'narrative', 'word');
                                         if ($uploadedFile['status']) {
                                             $narrative_file = $uploadedFile['newFilename'];
                                         } else {
-                                            return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                                            return redirect()->back()->withInput()->with(['error_message' => $uploadedFile['message']]);
                                         }
                                     } 
                                     else {
-                                        return redirect()->back()->with(['error_message' => 'Please Upload narrative File !!!']);
-                                    }
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please upload complete narrative file and images !!!']);
+                                    }   
                                 /* narrative doc file */
                                 
                                 //save to database//
@@ -1346,6 +1684,8 @@ class FrontController extends Controller
                                         'invited_by_email'          => $invited_emailInfo,
                                         'participated'              => $postData['participated'],
                                         'participated_info'         => $participatedInfo,
+                                        'community'                 => $postData['community'],
+                                        'community_name'            => $postData['community_name'],
                                         'explanation'               => $postData['explanation'],  
                                         'explanation_submission'    => $postData['explanation_submission'],     
                                         'titleId'                   => $postData['title'],                        
@@ -1365,10 +1705,10 @@ class FrontController extends Controller
                                         'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
                                         'indigenous_affiliation'    => $postData['indigenous_affiliation'],
                                         'expertise_areaId'          => $expertise_areaInfo,
-                                        'bio_short'               => $postData['bio_short'],
-                                        'bio_long'               => $postData['bio_long'],  
+                                        'bio_short'                 => $postData['bio_short'],
+                                        'bio_long'                  => $postData['bio_long'],  
                                     ];
-                                    //  Helper::pr($fields);
+                                    //    Helper::pr($fields);
 
                                     /* submission email */
                                     $generalSetting             = GeneralSetting::find('1');                            
@@ -1377,9 +1717,9 @@ class FrontController extends Controller
                                         'fullName'                  => $fullName,
                                         'email'                     => $postData['email'],
                                         'article_no'                => $article_no,
-                                        'for_publication_name'      => $postData['for_publication_name'],
+                                        'creative_Work'      => $postData['creative_Work'],
                                     ];
-                                    $subject                    = $generalSetting->site_name.' :: Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
+                                    $subject                    = $generalSetting->site_name.': Creative-Work submitted by ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                                     $message                    = view('email-templates.creative-work-submission',$mailData);
                                     // echo $message;die;
                                     $this->sendMail($postData['email'], $subject, $message);
@@ -1396,105 +1736,124 @@ class FrontController extends Controller
                                     /* email log save */
 
                                     Article::insert($fields);
-                                    return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
+                                    return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work submitted successfully!');
                                     } else {
-                                        return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                                        return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
                                     }                                    
                             } else if($postData['submission_types'] == '2'){
     
                                 /* art images details */
-                                // Define the number of co-authors you want to handle (e.g., 3 in this case)
-                                $artImagesCount = $postData['art_images'];
-                                // Initialize empty arrays to hold the co-author data
-                                $artImageDesc = [];
-                                $artimageFile = [];                
+                                if (!isset($postData['art_images'])) {
+                                    return redirect()->back()->withInput()->with(['error_message' => 'Please select number of art image !!!']);
+                                }
+                                else{
+                                    // Define the number of co-authors you want to handle (e.g., 3 in this case)
+                                    $artImagesCount = $postData['art_images'];
+                                    // Initialize empty arrays to hold the co-author data
+                                    $artImageDesc = [];
+                                    $artimageFile = [];                
+        
+                                    // Loop through the number of co-authors and collect the data into arrays
+                                    for ($i = 1; $i <= $artImagesCount; $i++) {
+                                        // Check if co-author name exists, to avoid null entries
+                                        if ($request->input("art_image_desc_{$i}") !== null) {
+                                            $artImageDesc[] = $request->input("art_image_desc_{$i}");
+        
+                                        // Add image file to the array (it can be null if no file is uploaded)                        
+                                            $imageFile      = $request->file("art_image_file_{$i}");                            
+                                            if ($imageFile != '') {                                                                       
+                                                $old_imageName      = $imageFile->getClientOriginalName();
+                                                $imageName      = $article_no;
+                                            // Get file extension
+                                                $fileExtension = pathinfo($old_imageName, PATHINFO_EXTENSION);
+                                                // Append the desired suffix ('a', 'b', 'c', etc.) based on $i
+                                                $suffix = chr(96 + $i); // Convert $i to a letter: 1 = 'a', 2 = 'b', 3 = 'c', etc.
+                                                $newFileName = $imageName . '-' . $suffix . '.' . $fileExtension;
+                                                $uploadedFile   = $this->upload_single_file("art_image_file_{$i}", $newFileName, 'art_image', 'image');                                
+                                                if ($uploadedFile['status']) {
+                                                    $artimageFile[] = $uploadedFile['newFilename'];                                
+                                                } else {
+                                                    $artimageFile[] = null;                                    
+                                                }
+                                            }                                                                                        
+                                        } else {
+                                            return redirect()->back()->withInput()->with(['error_message' => 'Please upload art image File !!!']);
+                                        }   
+                                    }   
+                                }
+                                   if($postData['art_desc'] == ''){
+                                       return redirect()->back()->withInput()->with(['error_message' => 'Please upload art image, caption and with descriptive narrative !!!']);
+                                   }
+                                    // }                                               
+                                    /* art images details */
     
-                                // Loop through the number of co-authors and collect the data into arrays
-                                for ($i = 1; $i <= $artImagesCount; $i++) {
-                                    // Check if co-author name exists, to avoid null entries
-                                    if ($request->input("art_image_desc_{$i}") !== null) {
-                                        $artImageDesc[] = $request->input("art_image_desc_{$i}");
-    
-                                    // Add image file to the array (it can be null if no file is uploaded)                        
-                                        $imageFile      = $request->file("art_image_file_{$i}");                            
-                                        if ($imageFile != '') {                                
-                                                $imageName      = $imageFile->getClientOriginalName();                                 
-                                            $uploadedFile   = $this->upload_single_file("art_image_file_{$i}", $imageName, 'art_image', 'image');                                
-                                            if ($uploadedFile['status']) {
-                                                $artimageFile[] = $uploadedFile['newFilename'];                                
-                                            } else {
-                                                $artimageFile[] = null;                                    
-                                            }
-                                        }                                                                                        
-                                    } 
-                                }                                               
-                                /* art images details */
-    
-                                if ($this->validate($request, $rules)) {                
-                                    $fields = [
-                                        'sl_no'                     => $next_sl_no,
-                                        'article_no'                => $article_no,
-                                        'user_id'                   => $user_id,          
-                                        'email'                     => $postData['email'],
-                                        'author_classification'     => $postData['author_classification'],
-                                        'co_authors'                => $postData['co_authors'],
-                                        'co_authors_position'       => $postData['co_authors_position'],
-                                        'co_author_names'           => json_encode($coAuthorNames),  // Storing as JSON string
-                                        'co_author_bios'            => json_encode($coAuthorBios),
-                                        'co_author_countries'       => json_encode($coAuthorCountries),
-                                        'co_author_organizations'   => json_encode($coAuthorOrganizations),
-                                        'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
-                                        'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
-                                        'co_author_classification'  => json_encode($coauthorClassification),                                
-                                        'first_name'                => $postData['first_name'],                                                                             
-                                        'for_publication_name'      => $postData['for_publication_name'],           
-                                        'pronounId'                 => $postData['pronoun'],
-                                        'orginal_work'              => $postData['orginal_work'],           
-                                        'copyright'                 => $postData['copyright'],
-                                        'invited'                   => $postData['invited'],
-                                        'invited_by'                => $invited_byInfo, 
-                                        'invited_by_email'          => $invited_emailInfo,
-                                        'participated'              => $postData['participated'],
-                                        'participated_info'         => $participatedInfo,
-                                        'explanation'               => $postData['explanation'],  
-                                        'explanation_submission'    => $postData['explanation_submission'],     
-                                        'titleId'                   => $postData['title'],                        
-                                        'creative_Work'             => $postData['creative_Work'],
-                                        'subtitle'                  => $postData['subtitle'],
-                                        'submission_types'          => $submission_typesInfo,
-                                        'section_ertId'             => $section_ertInfo,                                        
-                                        'art_images'                => $postData['art_images'],
-                                        'art_image_desc'            => json_encode($artImageDesc),  // Storing as JSON string
-                                        'art_image_file'            => json_encode($artimageFile),
-                                        'art_desc'                  => $postData['art_desc'],                                                                                                           
-                                        'country'                   => $postData['country'],
-                                        'state'                     => $postData['state'],
-                                        'city'                      => $postData['city'],
-                                        'organization_name'         => $postData['organization_name'],
-                                        'organization_website'      => $postData['organization_website'],
-                                        'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
-                                        'indigenous_affiliation'    => $postData['indigenous_affiliation'],
-                                        'expertise_areaId'          => $expertise_areaInfo,
-                                        'bio_short'               => $postData['bio_short'],
-                                        'bio_long'               => $postData['bio_long'],  
-                                    ];
-                                    //  Helper::pr($fields);
-                                    /* submission email */
-                                    $generalSetting             = GeneralSetting::find('1');                            
-                                    $fullName                   = $postData['first_name'];
-                                    $mailData                   = [
-                                        'fullName'                  => $fullName,
-                                        'email'                     => $postData['email'],
-                                        'article_no'                => $article_no,
-                                        'for_publication_name'      => $postData['for_publication_name'],
-                                    ];
-                                    $subject                    = $generalSetting->site_name.' :: Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
-                                    $message                    = view('email-templates.creative-work-submission',$mailData);
-                                    // echo $message;die;
-                                    $this->sendMail($postData['email'], $subject, $message);
-                                    $this->sendMail($generalSetting->system_email, $subject, $message);
-                                    /* submission email */
-                                    /* email log save */
+                                    if ($this->validate($request, $rules)) {                
+                                        $fields = [
+                                            'sl_no'                     => $next_sl_no,
+                                            'article_no'                => $article_no,
+                                            'user_id'                   => $user_id,          
+                                            'email'                     => $postData['email'],
+                                            'author_classification'     => $postData['author_classification'],
+                                            'co_authors'                => $postData['co_authors'],
+                                            'co_authors_position'       => $postData['co_authors_position'],
+                                            'co_author_names'           => json_encode($coAuthorNames),  // Storing as JSON string
+                                            'co_author_bios'            => json_encode($coAuthorBios),
+                                            'co_author_countries'       => json_encode($coAuthorCountries),
+                                            'co_author_organizations'   => json_encode($coAuthorOrganizations),
+                                            'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
+                                            'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
+                                            'co_author_classification'  => json_encode($coauthorClassification),                                
+                                            'first_name'                => $postData['first_name'],                                                                             
+                                            'for_publication_name'      => $postData['for_publication_name'],           
+                                            'pronounId'                 => $postData['pronoun'],
+                                            'orginal_work'              => $postData['orginal_work'],           
+                                            'copyright'                 => $postData['copyright'],
+                                            'invited'                   => $postData['invited'],
+                                            'invited_by'                => $invited_byInfo, 
+                                            'invited_by_email'          => $invited_emailInfo,
+                                            'participated'              => $postData['participated'],
+                                            'participated_info'         => $participatedInfo,
+                                            'community'                 => $postData['community'],
+                                            'community_name'            => $postData['community_name'],
+                                            'explanation'               => $postData['explanation'],  
+                                            'explanation_submission'    => $postData['explanation_submission'],     
+                                            'titleId'                   => $postData['title'],                        
+                                            'creative_Work'             => $postData['creative_Work'],
+                                            'subtitle'                  => $postData['subtitle'],
+                                            'submission_types'          => $submission_typesInfo,
+                                            'section_ertId'             => $section_ertInfo,                                        
+                                            'art_images'                => $postData['art_images'],
+                                            'art_image_desc'            => json_encode($artImageDesc),  // Storing as JSON string
+                                            'art_image_file'            => json_encode($artimageFile),
+                                            'art_desc'                  => $postData['art_desc'],                                                                                                           
+                                            'country'                   => $postData['country'],
+                                            'state'                     => $postData['state'],
+                                            'city'                      => $postData['city'],
+                                            'organization_name'         => $postData['organization_name'],
+                                            'organization_website'      => $postData['organization_website'],
+                                            'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
+                                            'indigenous_affiliation'    => $postData['indigenous_affiliation'],
+                                            'expertise_areaId'          => $expertise_areaInfo,
+                                            'bio_short'               => $postData['bio_short'],
+                                            'bio_long'               => $postData['bio_long'],  
+                                        ];
+                                        //    Helper::pr($fields);
+                                        /* submission email */
+                                        $generalSetting             = GeneralSetting::find('1');                            
+                                        $fullName                   = $postData['first_name'];
+                                        $mailData                   = [
+                                            'fullName'                  => $fullName,
+                                            'email'                     => $postData['email'],
+                                            'article_no'                => $article_no,
+                                            'creative_Work'      => $postData['creative_Work'],
+                                        ];
+                                        $subject                    = $generalSetting->site_name.': Creative-Work submitted by ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
+                                        $message                    = view('email-templates.creative-work-submission',$mailData);
+                                        // echo $message;die;
+                                        $this->sendMail($postData['email'], $subject, $message);
+                                        $this->sendMail($generalSetting->system_email, $subject, $message);
+                                        /* submission email */
+                                        /* email log save */
                                         $postData2 = [
                                             'name'                  => $fullName,
                                             'email'                 => $postData['email'],
@@ -1502,29 +1861,39 @@ class FrontController extends Controller
                                             'message'               => $message
                                         ];
                                         EmailLog::insertGetId($postData2);
-                                    /* email log save */
+                                        /* email log save */
 
-                                    Article::insert($fields);
-                                    return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
+                                        Article::insert($fields);
+                                        return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work submitted successfully!');
                                     } else {
-                                        return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                                        return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
                                     }                                    
                             } else {
     
                                 /* art_video file */
                                 $imageFile      = $request->file('art_video_file');
                                 if ($imageFile != '') {
-                                    $imageName      = $imageFile->getClientOriginalName();
-                                    $uploadedFile   = $this->upload_single_file('art_video_file', $imageName, 'art_video', 'video');
+                                    $old_imageName      = $imageFile->getClientOriginalName();
+                                    $imageName      = $article_no;
+                                    // Get file extension
+                                    $fileExtension = pathinfo($old_imageName, PATHINFO_EXTENSION);                                    
+                                    $newFileName = $imageName . '.' . $fileExtension;
+                                    $uploadedFile   = $this->upload_single_file('art_video_file', $newFileName, 'art_video', 'video');
                                     if ($uploadedFile['status']) {
                                         $art_video_file = $uploadedFile['newFilename'];
                                     } else {
-                                        return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                                        return redirect()->back()->withInput()->with(['error_message' => $uploadedFile['message']]);
                                     }
-                                }                             
+                                } else {
+                                    return redirect()->back()->withInput()->with(['error_message' => 'Please Upload art_video File !!!']);
+                                }
+                                if($postData['art_video_desc'] == ''){
+                                 return redirect()->back()->withInput()->with(['error_message' => 'Please upload art video and with descriptive narrative !!!']);
+                             }                            
                                 /* art_video file */   
     
-                                if ($this->validate($request, $rules)) {                
+                                if ($this->validate($request, $rules)) {    
+                                    // Helper::pr($postData);            
                                     $fields = [
                                         'sl_no'                     => $next_sl_no,
                                         'article_no'                => $article_no,
@@ -1550,6 +1919,8 @@ class FrontController extends Controller
                                         'invited_by_email'          => $invited_emailInfo,
                                         'participated'              => $postData['participated'],
                                         'participated_info'         => $participatedInfo,
+                                        'community'                 => $postData['community'],
+                                        'community_name'            => $postData['community_name'],
                                         'explanation'               => $postData['explanation'],  
                                         'explanation_submission'    => $postData['explanation_submission'],     
                                         'titleId'                   => $postData['title'],                        
@@ -1570,7 +1941,7 @@ class FrontController extends Controller
                                         'bio_short'               => $postData['bio_short'],
                                         'bio_long'               => $postData['bio_long'],  
                                     ];
-                                    //  Helper::pr($fields);
+                                    //    Helper::pr($fields);
 
                                     /* submission email */
                                     $generalSetting             = GeneralSetting::find('1');                            
@@ -1579,9 +1950,9 @@ class FrontController extends Controller
                                         'fullName'                  => $fullName,
                                         'email'                     => $postData['email'],
                                         'article_no'                => $article_no,
-                                        'for_publication_name'      => $postData['for_publication_name'],
+                                        'creative_Work'             => $postData['creative_Work'],
                                     ];
-                                    $subject                    = $generalSetting->site_name.' :: Creative-Work Submitted From ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
+                                    $subject                    = $generalSetting->site_name.': Creative-Work submitted by ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                                     $message                    = view('email-templates.creative-work-submission',$mailData);
                                     // echo $message;die;
                                     $this->sendMail($postData['email'], $subject, $message);
@@ -1598,9 +1969,9 @@ class FrontController extends Controller
                                     /* email log save */
 
                                     Article::insert($fields);
-                                    return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work Submitted Successfully !!!');
+                                    return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work submitted successfully!');
                                 } else {
-                                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                                    return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
                                 }                                    
                             }
                    }
@@ -1620,26 +1991,30 @@ class FrontController extends Controller
             $data['row']                    = [];
             echo $this->front_after_login_layout($title, $page_name, $data);
         }
-        public function profiles(Request $request)
+        public function AuthorClassification(Request $request)
         {
             $user_id                        = session('user_id');
             $data['user']                   = User::find($user_id);
-            $data['profiles']               = UserProfile::where('user_id', '=', $user_id)->where('status', '=', 1)->orderBy('id', 'DESC')->get();
+            $data['classification']         = UserClassification::where('user_id', '=', $user_id)->where('status', '=', 1)->orderBy('id', 'DESC')->get();
             $data['search_keyword']         = '';
+            $checkClassification            = UserClassification::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
+            if($checkClassification == 0){
+                return redirect(url('user/add-author-classification'))->with(['error_message' => 'Please Add Classification First !!!']);
+            }
             
-            $title                          = 'Profiles';
-            $page_name                      = 'profiles';
+            $title                          = 'Classification';
+            $page_name                      = 'author-classification';
             echo $this->front_after_login_layout($title, $page_name, $data);
         }
-        public function addProfile(Request $request)
+        public function addAuthorClassification(Request $request)
         {
             $user_id                        = session('user_id');
             $data['user']                   = User::find($user_id);
             $data['row']                    = [];
             $data['search_keyword']         = '';
-            $checkProfile                   = UserProfile::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
-            if($checkProfile > 0){
-                return redirect(url('user/profiles'))->with(['error_message' => 'Profile Already Created !!!']);
+            $authorclassification           = UserClassification::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
+            if($authorclassification > 0){
+                return redirect(url('user/author-classification'))->with(['error_message' => 'Classification Already Created !!!']);
             }
 
             if ($request->isMethod('post')) {
@@ -1652,8 +2027,166 @@ class FrontController extends Controller
                         'user_id'             => $user_id,
                         'name'                => $postData['name'],
                     ];
+                    UserClassification::insert($fields);
+                    return redirect(url('user/add-profile'))->with('success_message', 'Classification Created Successfully !!!');
+                } else {
+                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                }
+            }
+            
+            $title                          = 'Add Classification';
+            $page_name                      = 'add-edit-classification';
+            echo $this->front_after_login_layout($title, $page_name, $data);
+        }
+
+        public function updateAuthorClassification(Request $request, $id)
+        {
+            $id                             = Helper::decoded($id);
+            $user_id                        = session('user_id');
+            $data['user']                   = User::find($user_id);
+            $data['row']                    = UserClassification::where('user_id', '=', $user_id)->where('id', '=', $id)->first();
+            $data['search_keyword']         = '';
+            
+            if ($request->isMethod('post')) {
+                $postData = $request->all();
+                $rules = [                                 
+                    'name'                => 'required'
+                ];
+                if ($this->validate($request, $rules)) {
+                    $fields = [                        
+                        'user_id'             => $user_id,
+                        'name'                => $postData['name'],
+                    ];
+                    UserClassification::where('id', '=', $id)->update($fields);
+                    return redirect(url('user/author-classification'))->with('success_message', 'Classification Updated Successfully !!!');
+                } else {
+                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                }
+            }
+            
+            $title                          = 'Update Classification';
+            $page_name                      = 'add-edit-classification';
+            echo $this->front_after_login_layout($title, $page_name, $data);
+        }
+        public function profiles(Request $request)
+        {
+            // DB::enableQueryLog();
+            $user_id                        = session('user_id');            
+            $data['user']                   = User::find($user_id);            
+            $data['profiles']                = UserProfile::where('user_id', '=', $user_id)->where('status', '=', 1)->orderBy('id', 'DESC')->get();
+            // dd(DB::getQueryLog());   
+            $checkClassification            = UserClassification::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
+            if($checkClassification == 0){
+                return redirect(url('user/add-author-classification'))->with(['error_message' => 'Please Add Classification First !!!']);
+            }
+            $checkProfile                   = UserProfile::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();         
+            if($checkProfile == 0){
+                return redirect(url('user/add-profile'))->with(['error_message' => 'Please Add Profile First !!!']);
+            }
+            $data['search_keyword']         = '';
+            
+            $title                          = 'Profiles';
+            $page_name                      = 'profiles';
+            echo $this->front_after_login_layout($title, $page_name, $data);
+        }
+
+        public function addProfile(Request $request)
+        {
+            $user_id                        = session('user_id');
+            $data['user']                   = User::find($user_id);            
+            $data['classification']         = UserClassification::where('user_id', '=', $user_id)->first();
+            $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['news_category']          = NewsCategory::where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'ASC')->get();        
+            $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['submission_type']        = SubmissionType::where('status', '=', 1)->get(); 
+            $data['country']                = Country::orderBy('name', 'ASC')->get();
+            $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['row']                    = [];
+            $data['search_keyword']         = '';
+            $checkProfile                   = UserProfile::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
+            if($checkProfile > 0){
+                return redirect(url('user/profiles'))->with(['error_message' => 'Profile Already Created !!!']);
+            }
+
+            if ($request->isMethod('post')) {
+                $postData = $request->all();
+                $rules = [                                 
+                    'author_classification'     => 'required',
+                    'first_name'                => 'required',                                                               
+                    'email'                     => 'required',                                      
+                    'country'                   => 'required',                                                                                                                                            
+                    'title'                     => 'required',
+                    'pronoun'                   => 'required',   
+                    'ecosystem_affiliation'     => 'required',               
+                    'expertise_area'            => 'required',                
+                    'explanation'               => ['required', 'string', new MaxWords(100)],
+                    'explanation_submission'    => ['required', 'string', new MaxWords(150)],  
+                    'community'                 => 'required',              
+                    // 'creative_Work'             => ['required', 'string', new MaxWords(10)],                                  
+                    'bio_short'                 => ['required', 'string', new MaxWords(40)],
+                    'bio_long'                  => ['required', 'string', new MaxWords(250)],
+                ];
+                $participatedInfo = isset($postData['participated_info']) ? $postData['participated_info'] : '';
+                $invited_byInfo = isset($postData['invited_by']) ? $postData['invited_by'] : '';
+                $invited_emailInfo = isset($postData['invited_by_email']) ? $postData['invited_by_email'] : '';                
+                $expertise_areaInfo = isset($postData['expertise_area']) ? json_encode($postData['expertise_area']) : '';
+                $ecosystem_affiliationInfo = isset($postData['ecosystem_affiliation']) ? json_encode($postData['ecosystem_affiliation']) : '';
+                
+                if ($this->validate($request, $rules)) {
+                    $fields = [                        
+                        'user_id'                   => $user_id,          
+                        'email'                     => $postData['email'],
+                        'author_classification'     => $postData['author_classification'],
+                        'first_name'                => $postData['first_name'],                                                                             
+                        'for_publication_name'      => $postData['for_publication_name'],           
+                        'pronounId'                 => $postData['pronoun'],                        
+                        'invited'                   => $postData['invited'],
+                        'invited_by'                => $invited_byInfo, 
+                        'invited_by_email'          => $invited_emailInfo,
+                        'participated'              => $postData['participated'],
+                        'participated_info'         => $participatedInfo,
+                        'community'                 => $postData['community'],
+                        'community_name'            => $postData['community_name'],
+                        'explanation'               => $postData['explanation'],  
+                        'explanation_submission'    => $postData['explanation_submission'],     
+                        'titleId'                   => $postData['title'],                              
+                        'country'                   => $postData['country'],
+                        'state'                     => $postData['state'],
+                        'city'                      => $postData['city'],
+                        'organization_name'         => $postData['organization_name'],
+                        'organization_website'      => $postData['organization_website'],
+                        'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
+                        'indigenous_affiliation'    => $postData['indigenous_affiliation'],
+                        'expertise_areaId'          => $expertise_areaInfo,
+                        'bio_short'               => $postData['bio_short'],
+                        'bio_long'               => $postData['bio_long'],                  
+                    ];
+                    // Helper::pr($fields);
+                    $fields2 = [                                                          
+                        'email'                     => $postData['email'],                        
+                        'first_name'                => $postData['first_name'],                                                                                                          
+                        'country'                   => $postData['country'],                       
+                    ];
                     UserProfile::insert($fields);
-                    return redirect(url('user/profiles'))->with('success_message', 'Profile Created Successfully !!!');
+                    if($data['user']->email != $postData['email']){                        
+                        $generalSetting             = GeneralSetting::where('id', '=', 1)->first();
+                        $subject                    = 'Subject: Your Update Login Credentials for Portal Access';
+                        $message                    = "<table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
+                                                        <tr><td style='padding: 8px 15px'>Dear " . htmlspecialchars($postData['first_name']) . ",</td></tr>
+                                                        <tr><td style='padding: 8px 15px'>You have changed the email address associated with your Contributor profile on EaRTh.</td></tr>                                                                    
+                                                        <tr><td style='padding: 8px 15px'>Please note that you can no longer use your previous email address to log in. You must use your new email address, along with your old password.</td></tr>
+                                                        <tr><td style='padding: 8px 15px'>If you have forgotten your password, please log in using your new email address, and click on 'Forgot Password'.</td></tr>                                                            
+                                                        
+                                                        
+                                                        <tr><td style='padding: 8px 15px'>Sincerely,</td></tr>
+                                                        <tr><td style='padding: 8px 15px'>EaRTh Team</td></tr>
+                                                    </table>";
+                        $this->sendMail($postData['email'], $subject, $message);                                                                    
+                    } 
+                    User::where('id', '=', $user_id)->update($fields2);                                       
+                    return redirect(url('user/submit-new-article'))->with('success_message', 'Profile Created Successfully !!!');
                 } else {
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');
                 }
@@ -1668,20 +2201,93 @@ class FrontController extends Controller
             $id                             = Helper::decoded($id);
             $user_id                        = session('user_id');
             $data['user']                   = User::find($user_id);
+            $data['classification']         = UserClassification::where('user_id', '=', $user_id)->first();
+            $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['news_category']          = NewsCategory::where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'ASC')->get();        
+            $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['submission_type']        = SubmissionType::where('status', '=', 1)->get(); 
+            $data['country']                = Country::orderBy('name', 'ASC')->get();
+            $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['row']                    = UserProfile::where('user_id', '=', $user_id)->where('id', '=', $id)->first();
             $data['search_keyword']         = '';
             
             if ($request->isMethod('post')) {
                 $postData = $request->all();
                 $rules = [                                 
-                    'name'                => 'required'
+                    'author_classification'     => 'required',
+                    'first_name'                => 'required',                                                               
+                    'email'                     => 'required',                                      
+                    'country'                   => 'required',                                                                                                                                            
+                    'title'                     => 'required',
+                    'pronoun'                   => 'required',   
+                    'ecosystem_affiliation'     => 'required',               
+                    'expertise_area'            => 'required',          
+                    'community'                 => 'required',      
+                    'explanation'               => ['required', 'string', new MaxWords(100)],
+                    'explanation_submission'    => ['required', 'string', new MaxWords(150)],                
+                    // 'creative_Work'             => ['required', 'string', new MaxWords(10)],                                  
+                    'bio_short'                 => ['required', 'string', new MaxWords(40)],
+                    'bio_long'                  => ['required', 'string', new MaxWords(250)],
                 ];
+                $participatedInfo = isset($postData['participated_info']) ? $postData['participated_info'] : '';
+                $invited_byInfo = isset($postData['invited_by']) ? $postData['invited_by'] : '';
+                $invited_emailInfo = isset($postData['invited_by_email']) ? $postData['invited_by_email'] : '';                
+                $expertise_areaInfo = isset($postData['expertise_area']) ? json_encode($postData['expertise_area']) : '';
+                $ecosystem_affiliationInfo = isset($postData['ecosystem_affiliation']) ? json_encode($postData['ecosystem_affiliation']) : '';
                 if ($this->validate($request, $rules)) {
                     $fields = [                        
-                        'user_id'             => $user_id,
-                        'name'                => $postData['name'],
+                        'user_id'                   => $user_id,          
+                        'email'                     => $postData['email'],
+                        'author_classification'     => $postData['author_classification'],
+                        'first_name'                => $postData['first_name'],                                                                             
+                        'for_publication_name'      => $postData['for_publication_name'],           
+                        'pronounId'                 => $postData['pronoun'],                        
+                        'invited'                   => $postData['invited'],
+                        'invited_by'                => $invited_byInfo, 
+                        'invited_by_email'          => $invited_emailInfo,
+                        'participated'              => $postData['participated'],
+                        'participated_info'         => $participatedInfo,
+                        'community'                 => $postData['community'],
+                        'community_name'            => $postData['community_name'],
+                        'explanation'               => $postData['explanation'],  
+                        'explanation_submission'    => $postData['explanation_submission'],     
+                        'titleId'                   => $postData['title'],                              
+                        'country'                   => $postData['country'],
+                        'state'                     => $postData['state'],
+                        'city'                      => $postData['city'],
+                        'organization_name'         => $postData['organization_name'],
+                        'organization_website'      => $postData['organization_website'],
+                        'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
+                        'indigenous_affiliation'    => $postData['indigenous_affiliation'],
+                        'expertise_areaId'          => $expertise_areaInfo,
+                        'bio_short'                 => $postData['bio_short'],
+                        'bio_long'                  => $postData['bio_long'],    
                     ];
+                    $fields2 = [                                                          
+                        'email'                     => $postData['email'],                        
+                        'first_name'                => $postData['first_name'],                                                                                                          
+                        'country'                   => $postData['country'],                       
+                    ];
+                    // Helper::pr($fields);
                     UserProfile::where('id', '=', $id)->update($fields);
+                    if($data['user']->email != $postData['email']){                        
+                        $generalSetting             = GeneralSetting::where('id', '=', 1)->first();
+                        $subject                    = 'Subject: Your Update Login Credentials for Portal Access';
+                        $message                    = "<table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
+                                                        <tr><td style='padding: 8px 15px'>Dear " . htmlspecialchars($postData['first_name']) . ",</td></tr>
+                                                        <tr><td style='padding: 8px 15px'>You have changed the email address associated with your Contributor profile on EaRTh.</td></tr>                                                                    
+                                                        <tr><td style='padding: 8px 15px'>Please note that you can no longer use your previous email address to log in. You must use your new email address, along with your old password.</td></tr>
+                                                        <tr><td style='padding: 8px 15px'>If you have forgotten your password, please log in using your new email address, and click on 'Forgot Password'.</td></tr>                                                            
+                                                        
+                                                        
+                                                        <tr><td style='padding: 8px 15px'>Sincerely,</td></tr>
+                                                        <tr><td style='padding: 8px 15px'>EaRTh Team</td></tr>
+                                                    </table>";
+                        $this->sendMail($postData['email'], $subject, $message);                                                                    
+                    } 
+                    User::where('id', '=', $user_id)->update($fields2);
                     return redirect(url('user/profiles'))->with('success_message', 'Profile Updated Successfully !!!');
                 } else {
                     return redirect()->back()->with('error_message', 'All Fields Required !!!');
@@ -1691,18 +2297,41 @@ class FrontController extends Controller
             $title                          = 'Update Profile';
             $page_name                      = 'add-edit-profile';
             echo $this->front_after_login_layout($title, $page_name, $data);
-        }
+        }        
         public function articleList(Request $request, $id)
         {
             $id                             = Helper::decoded($id);
             $user_id                        = session('user_id');
-            $data['profile']                = UserProfile::find($id);
+            $data['profile']                = UserClassification::find($id);
             $data['articles']               = Article::where('user_id', '=', $user_id)->where('author_classification', '=', $data['profile']->name)->get();            
             // Helper::pr($data['row']); 
             $data['search_keyword']         = '';                                   
             
             $title                          = 'Article List';
             $page_name                      = 'profile-articles';
+            echo $this->front_after_login_layout($title, $page_name, $data);
+        }
+
+        public function viewarticle(Request $request, $id)
+        {                        
+            $id                                         = Helper::decoded($id);                              
+            $page_name                                  = 'article.view_details';
+            $data['row']                                = Article::where('status', '!=', 3)->where('id', '=', $id)->orderBy('id', 'DESC')->first();
+            //  dd($data['row']);
+            $data['selected_ecosystem_affiliation']     = json_decode($data['row']->ecosystem_affiliationId);
+            $data['selected_expertise_area']            = json_decode($data['row']->expertise_areaId);
+            $data['selected_section_ertId']             = json_decode($data['row']->section_ertId);
+            $data['section_ert']                        = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['user_title']                         = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['submission_type']                    = SubmissionType::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['country']                            = Country::orderBy('name', 'ASC')->get();
+            $data['pronoun']                            = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['ecosystem_affiliation']              = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['expertise_area']                     = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['search_keyword']         = '';                        
+            
+            $title                          = ' View Details : ' . (($data['row'])?$data['row']->creative_Work. ' (' . $data['row']->article_no . ')':'');
+            $page_name                      = 'view_details';
             echo $this->front_after_login_layout($title, $page_name, $data);
         }
     /* after login */

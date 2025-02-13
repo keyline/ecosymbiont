@@ -149,7 +149,8 @@ function isActive($page) {
                     <ul class="nav navbar-nav">                        
                         <li><a class="<?= isActive('index') ?>" href="<?= BASE_URL; ?>">About</a></li>
                         <li><a href="<?= BASE_URL; ?>earth" style="text-transform: none;">EaRTh</a></li>
-                        <li><a class="<?= isActive('synergy-meetings') ?>" href="<?= BASE_URL; ?>synergy-meetings.php">Synergy Meetings</a></li>                        
+                        <li><a href="<?= BASE_URL; ?>earth/communities" style="text-transform: none;">COMMUNITIES</a></li>
+                        <!-- <li><a class="<?= isActive('synergy-meetings') ?>" href="<?= BASE_URL; ?>synergy-meetings.php">Synergy Meetings</a></li>                         -->
                         <li><a class="<?= isActive('in-the-media') ?>" href="<?= BASE_URL; ?>in-the-media.php">In the Media</a></li>
                         <li><a class="<?= isActive('contact') ?>" href="<?= BASE_URL; ?>contact.php">Contact</a></li>
                         <!-- <li class="dropdown">

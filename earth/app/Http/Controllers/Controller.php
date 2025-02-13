@@ -109,7 +109,7 @@ class Controller extends BaseController
                     $status = 1;
                 }
             } elseif($uploadType == 'video') {
-                if($imageFileType1 != "mp4" && $imageFileType1 != "3gp" && $imageFileType1 != "webm" && $imageFileType1 != "MP4" && $imageFileType1 != "3GP" && $imageFileType1 != "WEBM") {
+                if($imageFileType1 != "mp4" && $imageFileType1 != "AVI" && $imageFileType1 != "avi" && $imageFileType1 != "MOV" && $imageFileType1 != "mov" && $imageFileType1 != "MKV" && $imageFileType1 != "mkv" && $imageFileType1 != "3gp" && $imageFileType1 != "webm" && $imageFileType1 != "MP4" && $imageFileType1 != "3GP" && $imageFileType1 != "WEBM") {
                     $message = 'Sorry, only Video files are allowed';
                     $status = 0;
                 } else {
@@ -218,7 +218,8 @@ class Controller extends BaseController
                         }
                     }
 
-                    $newFilename = uniqid().".".$imageFileType1;
+                    // $newFilename = uniqid().".".$imageFileType1;
+                    $newFilename = $imge;
                     // $temp = $images[$p]->getTempName();
                     $temp = $images[$p]->getPathName();
                     if($path == '') {
@@ -246,7 +247,8 @@ class Controller extends BaseController
     {
         $data['generalSetting']             = GeneralSetting::find('1');
         $data['scrollNotice']               = ScrollNotice::find('1');
-        $data['title']                      = $title.' :: '.$data['generalSetting']->site_name;
+        // $data['title']                      = $title.' :: '.$data['generalSetting']->site_name;
+        $data['title']                      = $title;
         $data['page_header']                = $title;
         $user_id                            = session('user_id');
         $data['user']                       = User::find($user_id);
@@ -263,7 +265,7 @@ class Controller extends BaseController
     {
         $data['generalSetting']     = GeneralSetting::find('1');
         $data['scrollNotice']       = ScrollNotice::find('1');
-        $data['title']              = $title.' :: '.$data['generalSetting']->site_name;
+        $data['title']              = $title.': '.$data['generalSetting']->site_name;
         $data['page_header']        = $title;
         $user_id                    = session('user_id');
         $data['user']               = User::find($user_id);
@@ -280,7 +282,7 @@ class Controller extends BaseController
     public function admin_before_login_layout($title, $page_name, $data)
     {
         $data['generalSetting']     = GeneralSetting::find('1');
-        $data['title']              = $title.' :: '.$data['generalSetting']->site_name;
+        $data['title']              = $title.': '.$data['generalSetting']->site_name;
         $data['page_header']        = $title;
 
         $data['head']               = view('admin.elements.head', $data);
@@ -292,7 +294,7 @@ class Controller extends BaseController
     {
         // Helper::pr(session()->all());
         $data['generalSetting']     = GeneralSetting::find('1');
-        $data['title']              = $title.' :: '.$data['generalSetting']->site_name;
+        $data['title']              = $title.': '.$data['generalSetting']->site_name;
         $data['page_header']        = $title;
         $user_id                    = session('user_id');
         $data['admin']              = Admin::find($user_id);

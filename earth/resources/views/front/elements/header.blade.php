@@ -54,10 +54,10 @@ use App\Helpers\Helper;
                             <?php if(session('is_user_login')){?>
                                 <li>
                                     <!-- <img src="<?=(($user)?(($user->profile_image != '')?env('UPLOADS_URL').'user/'.$user->profile_image:env('NO_USER_IMAGE')):env('NO_USER_IMAGE'))?>" alt="<?=(($user)?$user->first_name . ' ' . $user->last_name:'')?>" class="img-responsive img-circle" style="width: 35px;height: 35px;"> -->
-                                    <a href="<?=url('user/dashboard')?>">Welcome <?=(($user)?$user->first_name . ' ' . $user->last_name:'')?></a></li>
+                                    <a href="<?=url('user/dashboard')?>">Welcome <?=(($user)?$user->first_name:'')?></a></li>
                                 <li><a href="<?=url('user/signout')?>">Sign Out</a></li>
                             <?php } else {?>
-                                <li><a href="<?=url('signin')?>">Sign In</a></li>
+                                <li><a href="<?=url('signin')?>">Sign In</a></li> 
                                 <li><a href="<?=url('signup')?>">Sign Up</a></li>
                             <?php }?>
                         </ul>
@@ -139,7 +139,8 @@ use App\Helpers\Helper;
                                                             'news_contents.new_title', 
                                                             'news_contents.sub_title', 
                                                             'news_contents.slug', 
-                                                            'news_contents.author_name', 
+                                                            'news_contents.author_name',
+                                                            'news_contents.for_publication_name', 
                                                             'news_contents.cover_image', 
                                                             'news_contents.created_at',
                                                             'news_contents.media',
@@ -154,7 +155,7 @@ use App\Helpers\Helper;
                                                         ->orderBy('news_contents.id', 'DESC')
                                                         ->get();
                                            // dd(DB::getQueryLog());
-                        if($hotNewsContents){ foreach($hotNewsContents as $rowContent){
+                        if($hotNewsContents){ foreach($hotNewsContents as $rowContent){ 
                         ?>
                             <div class="item list-post">
                                 
@@ -176,7 +177,21 @@ use App\Helpers\Helper;
                                     <h2><a href="<?=url('content/' . $rowContent->parent_category_slug. '/' . $rowContent->sub_category_slug . '/' . $rowContent->slug)?>"><?=$rowContent->new_title?></a></h2>
                                     <ul class="post-tags">
                                         <!-- <li><i class="fa fa-clock-o"></i><?=date_format(date_create($rowContent->created_at), "d M Y")?></li> -->
-                                        <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$rowContent->author_name?></a></li>
+                                        <!-- <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=(count(explode(' ', $rowContent->for_publication_name ?? $rowContent->author_name)) > 2) ? implode(' ', array_slice(explode(' ', $rowContent->author_name), 0, 2)) . ' ...' : $rowContent->author_name; ?></a></li> -->
+                                        <li>
+                                            <i class="fa fa-user"></i>
+                                            by 
+                                            <a href="javascript:void(0);">
+                                                <?php
+                                                $name = $rowContent->for_publication_name ?? $rowContent->author_name;
+                                                if (count(explode(' ', $name)) > 2) {
+                                                    echo implode(' ', array_slice(explode(' ', $name), 0, 2)) . ' ...';
+                                                } else {
+                                                    echo $name;
+                                                }
+                                                ?>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -195,7 +210,7 @@ use App\Helpers\Helper;
                         <!-- desktop -->
                         <ul class="nav navbar-nav navbar-left">
                             <!-- <li><a class="active" href="<?=url('/')?>">Home</a></li> -->
-                            <li><a href="<?=url('about-us')?>">ABOUT</a></li>
+                            <li><a href="<?=url('communities')?>" style="color: black !important;">COMMUNITIES</a></li>
                             <?php if($parentCats){ foreach($parentCats as $parentCat){?>
                                 <li class="drop-arrow"><a href="<?=url('category/' . $parentCat->slug)?>"><?=$parentCat->sub_category?></a>
                                     <div class="megadropdown">
@@ -217,8 +232,8 @@ use App\Helpers\Helper;
                                     </div>
                                 </li>
                             <?php } }?>
-                            <li><a href="<?=url('submissions')?>">SUBMISSIONS</a></li>
-                            <li><a href="<?=env('REGENERATE_URL')?>contact.php">CONTACT</a></li>
+                            <li><a href="<?=url('submissions')?>" style="color: black !important;">SUBMISSIONS</a></li>
+                            <li><a href="<?=env('REGENERATE_URL')?>contact.php" style="color: black !important;">CONTACT</a></li>
                         </ul>
                         <!-- desktop -->
                     </div>
@@ -244,6 +259,12 @@ use App\Helpers\Helper;
 <script>
     function getSuggestions() {
         let search_keyword = $('#article-search').val();
+        // Check for HTML tags using a regular expression
+        if (/<[a-z][\s\S]*>/i.test(search_keyword)) {
+            alert("HTML tags are not allowed.");
+            $('#article-search').val(''); // Clear the field if invalid input is detected
+            return;
+        }
         if (search_keyword.length >= 3) {
             var url = '<?=url('/')?>';
             $.ajax({

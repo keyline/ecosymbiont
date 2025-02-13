@@ -25,32 +25,24 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="card-header">
-                                            <h3 class="text-center">Sign into your account</h3>
-                                            <p class="text-center">Enter your email & password for login</p>
+                                            <h3 class="text-center">Reset Your Password</h3>                                            
                                         </div>
                                         <form method="POST" action="">
-                                            @csrf
-                                            <input type="hidden" name="page_link" value="<?=$page_link?>">
+                                            @csrf                                                                                        
                                             <div class="row" style="margin-bottom: 15px;">
-                                              <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                                              <label for="new_password" class="col-md-4 col-lg-3 col-form-label">New Password</label>
                                               <div class="col-md-8 col-lg-9">
-                                                <input type="text" name="email" class="form-control" id="email" value="">
+                                                <input type="password" name="new_password" class="form-control" id="new_password" minlength="8" maxlength="15">
                                               </div>
                                             </div>
                                             <div class="row" style="margin-bottom: 15px;">
-                                              <label for="password" class="col-md-4 col-lg-3 col-form-label">Password</label>
+                                              <label for="confirm_password" class="col-md-4 col-lg-3 col-form-label">Confirm New Password</label>
                                               <div class="col-md-8 col-lg-9">
-                                                <input type="password" name="password" class="form-control" id="password">
+                                                <input type="password" name="confirm_password" class="form-control" id="confirm_password" minlength="8" maxlength="15">
                                               </div>
                                             </div>
                                             <div class="text-center">
-                                              <button type="submit" class="btn btn-primary">Sign In</button>
-                                            </div>
-                                            <div class="text-center" style="margin-bottom: 15px;">
-                                            Not registered yet? <a href="<?=url('signup')?>">Sign Up</a>
-                                            </div>
-                                            <div class="text-center" style="margin-bottom: 15px;">
-                                            <a href="<?=url('forgetpassword')?>">Forget Password</a>
+                                              <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>
                                           </form>
                                     </div>

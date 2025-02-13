@@ -111,10 +111,10 @@ $controllerRoute = $module['controller_route'];
                     <a href="<?=url('admin/' . $controllerRoute . '/generate-nelp-form/'.Helper::encoded($row->id))?>" class="btn btn-outline-info btn-sm" title="Generate NELP Form & Shared"><i class="fa fa-pdf"> Generate NELP Form & Shared</i></a>
                   <?php }?>
                 <?php }
-                if ($row->is_import == 0) { 
+                // if ($row->is_import == 0) { 
                 ?>
-                <a href="<?=url('admin/' . $controllerRoute . '/edit/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit"> Edit</i></a>
-                <?php } ?>
+                <!-- <a href="?=url('admin/' . $controllerRoute . '/edit/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit"> Edit</i></a> -->
+                <!-- ?php } ?> -->
               </p>
               <table class="table table-striped table-bordered nowrap">
                 <thead>
@@ -302,6 +302,7 @@ $controllerRoute = $module['controller_route'];
                       <?php if($narrative_file != ''){?>
                         <a href="<?= env('UPLOADS_URL') . 'narrative/' . $narrative_file ?>" target="_blank"
                             class="badge bg-primary">View File</a>
+                            <br><a href="<?= env('UPLOADS_URL') . 'narrative/' . $narrative_file ?>" download="<?=$art_video_file?>" class="btn btn-outline-success btn-sm"><?=$narrative_file?> <i class="fa fa-download"></i></a>
                         <?php }?>                      
                       </td>
                     </tr>
@@ -315,6 +316,7 @@ $controllerRoute = $module['controller_route'];
                       <td>
                       <?php if($image_files[$i-1] != ''){?>
                         <img src="<?=env('UPLOADS_URL').'narrative/'.$image_files[$i-1]?>" alt="first_image_file" style="width: 150px; height: 150px; margin-top: 10px;">
+                        <br><a href="<?=env('UPLOADS_URL').'narrative/'.$image_files[$i-1]?>" download="<?=$art_video_file?>" class="btn btn-outline-success btn-sm"><?=$image_files[$i-1]?> <i class="fa fa-download"></i></a>
                         <?php } else {?>
                         <img src="<?=env('NO_IMAGE')?>" alt="first_image_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
                         <?php }?>
@@ -335,6 +337,7 @@ $controllerRoute = $module['controller_route'];
                       <td>
                       <?php if($art_image_file[$i-1] != ''){?>
                         <img src="<?=env('UPLOADS_URL').'art_image/'.$art_image_file[$i-1]?>" alt="first_image_file" style="width: 150px; height: 150px; margin-top: 10px;">
+                        <br><a href="<?=env('UPLOADS_URL').'art_image/'.$art_image_file[$i-1]?>" download="<?=$art_video_file?>" class="btn btn-outline-success btn-sm"><?=$art_image_file[$i-1]?> <i class="fa fa-download"></i></a>
                         <?php } else {?>
                         <img src="<?=env('NO_IMAGE')?>" alt="first_image_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
                         <?php }?>
@@ -356,7 +359,8 @@ $controllerRoute = $module['controller_route'];
                           <video width="350" height="250" controls>
                               <source src="<?=env('UPLOADS_URL').'art_video/'.$art_video_file?>" type="video/mp4">
                               Your browser does not support the video tag.
-                          </video>                      
+                          </video>                                                
+                      <br><a href="<?=env('UPLOADS_URL').'art_video/'.$art_video_file?>" download="<?=$art_video_file?>" class="btn btn-outline-success btn-sm"><?=$art_video_file?> <i class="fa fa-download"></i></a>
                       <?php }?>                      
                       </td>
                     </tr>

@@ -19,16 +19,19 @@ $pageSegment = $pageName[1];
                 <li <?=(($pageSegment == 'dashboard')?'class="active"':'')?>>
                     <a href="<?=url('user/dashboard')?>">Dashboard</a>
                 </li>
+                <li <?=(($pageSegment == 'author-classification')?'class="active"':'')?>>
+                    <a href="<?=url('user/author-classification')?>">Classification</a>
+                </li>
                 <li <?=(($pageSegment == 'profiles')?'class="active"':'')?>>
-                    <a href="<?=url('user/profiles')?>">Profiles</a>
+                    <a href="<?=url('user/profiles')?>">Profile</a>
                 </li>
                 <li <?=(($pageSegment == 'my-articles')?'class="active"':'')?>>
                     <a href="<?=url('user/my-articles')?>">My Creative-Works</a>
                 </li>
             <?php }?>
-            <li <?=(($pageSegment == 'my-profile')?'class="active"':'')?>>
-                <a href="<?=url('user/my-profile')?>">My Profile</a>
-            </li>
+            <!-- <li ?=(($pageSegment == 'my-profile')?'class="active"':'')?>>
+                <a href="?=url('user/my-profile')?>">My Account</a>
+            </li> -->
             <li <?=(($pageSegment == 'change-password')?'class="active"':'')?>>
                 <a href="<?=url('user/change-password')?>">Change Password</a>
             </li>

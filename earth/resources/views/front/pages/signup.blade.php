@@ -31,16 +31,16 @@
                                               <label for="first_name" class="col-md-4 col-lg-3 col-form-label">User Type</label>
                                               <div class="col-md-8 col-lg-9">
                                                 <input type="radio" name="role" id="role1" value="1" required> <label for="role1">Reader</label>
-                                                <input type="radio" name="role" id="role2" value="2" required> <label for="role2">Content Creator</label>
+                                                <input type="radio" name="role" id="role2" value="2" required> <label for="role2">Content Creator (Contributor)</label>
                                               </div>
                                             </div>
                                             <div class="row" style="margin-bottom: 15px;">
-                                              <label for="first_name" class="col-md-4 col-lg-3 col-form-label">First Name*</label>
+                                              <label for="first_name" class="col-md-4 col-lg-3 col-form-label">Full Legal Name (exactly as it appears on your government-issued identification documents, e.g., passport and/or driver's license)*</label>
                                               <div class="col-md-8 col-lg-9">
                                                 <input type="text" name="first_name" class="form-control" id="first_name" placeholder="Enter First Name" required autocomplete="off">
                                               </div>
                                             </div>
-                                            <div class="row" style="margin-bottom: 15px;">
+                                            <!-- <div class="row" style="margin-bottom: 15px;">
                                               <label for="middle_name" class="col-md-4 col-lg-3 col-form-label">Middle Name</label>
                                               <div class="col-md-8 col-lg-9">
                                                 <input type="text" name="middle_name" class="form-control" id="middle_name" placeholder="Enter Middle Name" autocomplete="off">
@@ -49,9 +49,9 @@
                                             <div class="row" style="margin-bottom: 15px;">
                                               <label for="last_name" class="col-md-4 col-lg-3 col-form-label">Surname*</label>
                                               <div class="col-md-8 col-lg-9">
-                                                <input type="text" name="last_name" class="form-control" id="last_name" placeholder="Enter Sur Name" required autocomplete="off">
+                                                <input type="text" name="last_name" class="form-control" id="last_name" placeholder="Enter Surname" required autocomplete="off">
                                               </div>
-                                            </div>
+                                            </div> -->
                                             <div class="row" style="margin-bottom: 15px;">
                                               <label for="email" class="col-md-4 col-lg-3 col-form-label">Email*</label>
                                               <div class="col-md-8 col-lg-9">
@@ -87,7 +87,7 @@
                                               <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>
                                             <div class="text-center" style="margin-bottom: 15px;">
-                                              Already Registered ? <a href="<?=url('signin')?>">Sign In</a>
+                                            Already registered? <a href="<?=url('signin')?>">Sign In</a>
                                             </div>
                                           </form>
                                     </div>
@@ -106,8 +106,8 @@
     <div id="popup">
       <h3>Submissions Eligibility Criteria</h3>
       <p>At this time, you must:<br>
-      (A) be invited to submit a Creative-Work to ERT; and/or <br>
-      (B) have participated as a strategist at an in-person ER Synergy Meeting. </p>
+      (A) be invited to submit a Creative-Work to EaRTh (if you have not been invited, follow the directions for question 6 when completing your profile); and/or <br>
+      (B) have participated as a strategist at an in-person ER Synergy Meeting.</p>
       <button id="closePopup">Close</button>
     </div>    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
