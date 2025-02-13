@@ -15,6 +15,7 @@ use App\Helpers\Helper;
                             <li><a href="<?=env('REGENERATE_URL')?>contact.php" target="_blank">Contact</a></li>
                             <li class="foot-social-icons"><a class="twitter" href="<?=$generalSetting->twitter_profile?>" target="_blank"><i class="fa fa-twitter"></i></a></li>
                             <li class="foot-social-icons"><a class="pinterest" href="<?=$generalSetting->instagram_profile?>" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                            <li class="foot-social-icons"><a target="_blank" class="facebook" href="<?=$generalSetting->facebook_profile?>"><i class="fa fa-facebook"></i></a></li>
                         </ul>
                     </nav>
                 </div>
