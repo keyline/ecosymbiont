@@ -310,17 +310,7 @@ $current_url = $protocol . $host . $uri;
                 _token: '<?= csrf_token() ?>'
             },
             success: function (response) {
-                // console.log(response);
-
-                // let contents;
-                // try {
-                //     contents = JSON.parse(response); // Ensure response is properly parsed
-                // } catch (e) {
-                //     console.error("JSON Parsing Error:", e);
-                //     $('#loading').hide();
-                //     return;
-                // }
-                contents = JSON.parse(response);
+                contents = response;
                 console.log(contents);
 
                 if (contents.length > 0) {
