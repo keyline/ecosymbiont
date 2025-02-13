@@ -405,10 +405,7 @@ class FrontController extends Controller
             
             $data['search_keyword']         = $search_keyword;
             // Prepare the response
-            return $this->response->setJSON([
-                'status'    => true,
-                'content'   => $contents
-            ]);
+            return response()->json(['success' => true, 'data' => $contents]);
         }
     }
     public function fetch_search_suggestions(Request $request){
