@@ -310,7 +310,7 @@ $current_url = $protocol . $host . $uri;
                 _token: '<?= csrf_token() ?>'
             },
             success: function (response) {
-                console.log(response);
+                // console.log(response);
 
                 let contents;
                 try {
