@@ -311,7 +311,15 @@ $current_url = $protocol . $host . $uri;
             },
             success: function (response) {
                 $('#loading').hide();
-                contents = response.data;
+                // contents = response.data;
+                let contents;
+                try {
+                    contents = JSON.parse(response.data); // Ensure response is properly parsed
+                } catch (e) {
+                    console.error("JSON Parsing Error:", e);
+                    $('#loading').hide();
+                    return;
+                }
                 if (contents.length > 0) {
                     let contentHtml = '';
 
