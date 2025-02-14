@@ -342,7 +342,7 @@ $current_url = $protocol . $host . $uri;
                                         ` : `
                                             <div class="video-post">
                                                 <img alt="" src="https://img.youtube.com/vi/${content.videoId}/hqdefault.jpg">                                                
-                                                <a href="https://www.youtube.com/watch?v=${content.videoId}" class="video-link">
+                                                <a target="_blank" href="https://www.youtube.com/watch?v=${content.videoId}" class="video-link">
                                                     <i class="fa fa-play-circle-o"></i>
                                                 </a>                     
                                             </div>
@@ -371,26 +371,6 @@ $current_url = $protocol . $host . $uri;
                                     </div>
                                 </div>
                             </div>`;
-
-                            $(document).on("click", ".video-link", function(e) {
-                                e.preventDefault();
-                                var videoUrl = $(this).attr("href");
-
-                                // Open YouTube video in a popup (you can customize this as needed)
-                                var popupHtml = `<div class="video-popup">
-                                                    <div class="video-popup-content">
-                                                        <iframe width="560" height="315" src="${videoUrl.replace("watch?v=", "embed/")}" frameborder="0" allowfullscreen></iframe>
-                                                        <span class="close-popup">×</span>
-                                                    </div>
-                                                 </div>`;
-
-                                $("body").append(popupHtml);
-
-                                // Close popup on click
-                                $(".close-popup").on("click", function() {
-                                    $(".video-popup").remove();
-                                });
-                            });
                     });
                     $('#content-list').append(contentHtml);
                     offset += contents.length;
@@ -410,6 +390,4 @@ $current_url = $protocol . $host . $uri;
             }
         });
     });
-    
-
 </script>
