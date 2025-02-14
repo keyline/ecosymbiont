@@ -374,12 +374,12 @@ $current_url = $protocol . $host . $uri;
                 } else {
                     $('#load_more_btn').hide();
                     if ($('#no_more_contents').length === 0) {
-                        $('#content-list').after('<p id="no_more_contents" class="text-center">No more contents to load.</p>');
+                        $('#content-list').after('<p id="no_more_contents" class="text-center">End of search results</p>');
                     }
                 }              
             },
             error: function () {
-                alert('Could not load more contents');
+                alert('End of search results');
                 $('#loading').hide();
             }
         });
