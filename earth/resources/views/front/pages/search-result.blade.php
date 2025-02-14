@@ -75,7 +75,7 @@ $current_url = $protocol . $host . $uri;
                                 </div>
                             <?php } }?>
                         </div>
-                        <button id="load_more_btn" style="float: right;background-color:#ed1c24;border: tomato;" class="btn btn-primary">Load More</button>
+                        <button id="load_more_btn" style="background-color: #d09c1c;border: #d09c1c;display: flex;margin: 0 auto;" class="btn btn-primary">Load More</button>
                         <div id="loading" style="display: none;text-align: center;">
                             <svg version="1.1" id="L5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                             viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
