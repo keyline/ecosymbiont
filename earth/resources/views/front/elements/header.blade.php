@@ -48,7 +48,8 @@ use App\Helpers\Helper;
                                 </svg>
                                 <span class="cel-temperature">+7</span>
                             </li> -->
-                            <li><span class="time-now"><?=date('l d F Y')?> / <?=date('H:i')?></span></li>
+                            <!-- <li><span class="time-now"><//?=date('l d F Y')?> / <//?=date('H:i')?></span></li> -->
+                            <li><span class="time-now"><?= date('l d F Y') ?> / <?= date('H:i T') ?></span></li>
                             <!-- <li><a href="#">Log In</a></li> -->
                             <!-- <li><a href="<?=url('contact-us')?>">Contact</a></li> -->
                             <?php if(session('is_user_login')){?>
@@ -64,12 +65,12 @@ use App\Helpers\Helper;
                     </div>  
                     <div class="col-md-3">
                         <ul class="social-icons">
-                            <!-- <li><a class="facebook" href="<?=$generalSetting->facebook_profile?>"><i class="fa fa-facebook"></i></a></li> -->
-                            <li><a class="twitter" href="<?=$generalSetting->twitter_profile?>"><i class="fa fa-twitter"></i></a></li>
+                            <li><a target="_blank" class="facebook" href="<?=$generalSetting->facebook_profile?>"><i class="fa fa-facebook"></i></a></li>
+                            <li><a target="_blank" class="twitter" href="<?=$generalSetting->twitter_profile?>"><i class="fa fa-twitter"></i></a></li>
                             <!-- <li><a class="rss" href="#"><i class="fa fa-rss"></i></a></li> -->
                             <!-- <li><a class="google" href="<?=$generalSetting->youtube_profile?>"><i class="fa fa-youtube"></i></a></li> -->
                             <!-- <li><a class="linkedin" href="<?=$generalSetting->linkedin_profile?>"><i class="fa fa-linkedin"></i></a></li> -->
-                            <li><a class="pinterest" href="<?=$generalSetting->instagram_profile?>"><i class="fa fa-instagram"></i></a></li>
+                            <li><a target="_blank" class="pinterest" href="<?=$generalSetting->instagram_profile?>"><i class="fa fa-instagram"></i></a></li>
                         </ul>
                     </div>  
                 </div>
@@ -85,7 +86,8 @@ use App\Helpers\Helper;
                     <div id="cssmenu">
                         <!-- mobile -->
                         <ul>
-                            <li><a href="<?=url('about-us')?>">ABOUT</a></li>
+                            <!-- <li><a href="<?=url('about-us')?>">ABOUT</a></li> -->
+                            <li><a href="<?=url('communities')?>" style="color: black !important;">COMMUNITIES</a></li>
                             <?php if($parentCats){ foreach($parentCats as $parentCat){?>
                                 <li><a href="<?=url('category/' . $parentCat->slug)?>"><?=$parentCat->sub_category?></a>
                                     
@@ -100,8 +102,8 @@ use App\Helpers\Helper;
                                     </ul>
                                 </li>
                             <?php } }?>
-                            <li><a href="<?=url('submissions')?>">SUBMISSIONS</a></li>
-                            <li><a href="<?=env('REGENERATE_URL')?>contact.php">CONTACT</a></li>
+                            <li><a href="<?=url('submissions')?>"  style="color: black !important;">SUBMISSIONS</a></li>
+                            <li><a href="<?=env('REGENERATE_URL')?>contact.php"  style="color: black !important;">CONTACT</a></li>
                         </ul>
                         <!-- mobile -->
                     </div>
