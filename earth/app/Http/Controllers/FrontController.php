@@ -365,7 +365,7 @@ class FrontController extends Controller
             // Helper::pr($searchResults);
             
             $data['search_keyword']         = $search_keyword;
-            $title                          = 'Search Result For : "' . $search_keyword . '"';
+            $title                          = 'Search result for: "' . $search_keyword . '"';
             $page_name                      = 'search-result';
             echo $this->front_before_login_layout($title, $page_name, $data);
         }
