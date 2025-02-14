@@ -390,4 +390,24 @@ $current_url = $protocol . $host . $uri;
             }
         });
     });
+    
+    $(document).on("click", ".video-link", function(e) {
+        e.preventDefault();
+        var videoUrl = $(this).attr("href");
+
+        // Open YouTube video in a popup (you can customize this as needed)
+        var popupHtml = `<div class="video-popup">
+                            <div class="video-popup-content">
+                                <iframe width="560" height="315" src="${videoUrl.replace("watch?v=", "embed/")}" frameborder="0" allowfullscreen></iframe>
+                                <span class="close-popup">×</span>
+                            </div>
+                         </div>`;
+
+        $("body").append(popupHtml);
+
+        // Close popup on click
+        $(".close-popup").on("click", function() {
+            $(".video-popup").remove();
+        });
+    });
 </script>
