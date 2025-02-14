@@ -51,7 +51,7 @@ $current_url = $protocol . $host . $uri;
                                                 <div class="video-post">
                                                     <img alt="" src="https://img.youtube.com/vi/<?=$rowContent->videoId?>/hqdefault.jpg">
                                                     <!-- ?php if(session('is_user_login')){?> -->
-                                                        <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                        <!-- <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a> -->
                                                     <!-- ?php } else {?> -->
                                                         <!-- <a href="?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a> -->
                                                     <!-- ?php }?> -->
@@ -76,7 +76,9 @@ $current_url = $protocol . $host . $uri;
                                 </div>
                             <?php } }?>
                         </div>
-                        <button id="load_more_btn" style="background-color: #d09c1c;border: #d09c1c;display: flex;margin: 0 auto;" class="btn btn-primary">Load More</button>
+                        <?php if(count($contents) > 4){?>
+                            <button id="load_more_btn" style="background-color: #d09c1c;border: #d09c1c;display: flex;margin: 0 auto;" class="btn btn-primary">Load More</button>
+                        <?php }?>
                         <div id="loading" style="display: none;text-align: center;">
                             <svg version="1.1" id="L5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                             viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
