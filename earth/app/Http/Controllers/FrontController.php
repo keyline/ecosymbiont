@@ -356,6 +356,8 @@ class FrontController extends Controller
                                                 $query->where('news_contents.new_title', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('news_contents.sub_title', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('news_contents.long_desc', 'LIKE', '%'.$search_keyword.'%')
+                                                      ->orWhere('news_contents.author_name', 'LIKE', '%'.$search_keyword.'%')
+                                                      ->orWhere('news_contents.organization_name', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('news_contents.keywords', 'LIKE', '%'.$search_keyword.'%');
                                              })
                                              ->limit(4)
