@@ -66,9 +66,9 @@ class FrontController extends Controller
                         'subscribers_email'            => $subscribe_email
                     ];
                     Subscriber::insert($fields);
-                    return redirect()->back()->with('success_message', 'Email Subscribed Successfully');
+                    return redirect()->back()->with('success_message', 'Email subscribed successfully');
                 } else {
-                    return redirect()->back()->with('error_message', 'Email Already Subscribed');
+                    return redirect()->back()->with('error_message', 'Email already subscribed');
                 }
             } else {
                 return redirect()->back()->with('error_message', 'All fields required');
@@ -158,9 +158,9 @@ class FrontController extends Controller
                                                             </table>";
                             $this->sendMail($generalSetting->site_mail, $subject, $message);
                             
-                            return redirect(url('contacts'))->with('success_message', 'Enquiry submitted Successfully');
+                            return redirect(url('contacts'))->with('success_message', 'Enquiry submitted successfully');
                         } else {
-                            return redirect()->back()->with('error_message', 'Enquiry Already Inserted');
+                            return redirect()->back()->with('error_message', 'Enquiry already inserted');
                         }
                     } else {
                         return redirect()->back()->with('error_message', 'All fields required');
@@ -552,7 +552,7 @@ class FrontController extends Controller
                             ];
                             UserActivity::insert($activityData);
                         /* user activity */
-                        return redirect()->back()->with('error_message', 'Invalid Email Or Password');
+                        return redirect()->back()->with('error_message', 'Invalid email or password');
                     }
                 } else {                    
                     return redirect()->back()->with('error_message', 'All fields required');
@@ -643,7 +643,7 @@ class FrontController extends Controller
                                 $this->sendMail($postData['email'], $subject, $message);
                                 return redirect(url('signin'))->with('success_message', 'Your sign-up was successful! Please check your email for your login credentials.');
                             } else {
-                                return redirect()->back()->with('error_message', 'User Already Registered');
+                                return redirect()->back()->with('error_message', 'User already registered');
                             }
                         } else {
                             return redirect()->back()->with('error_message', 'All fields required');
@@ -704,7 +704,7 @@ class FrontController extends Controller
                             $checkmail = User::where('email', '=', $postData['email'])->first();                              
                             if ($checkValue > 0) {  
                                 if($checkmail->status != 1){                                    
-                                    return redirect()->back()->with('error_message', 'Your account is deactivated contact with admin!!!');
+                                    return redirect()->back()->with('error_message', 'Your account is deactivated contact with admin');
                                 } else{
                                     // Generate a random 4-digit OTP
                                     $otp = rand(1000, 9999);
@@ -780,12 +780,12 @@ class FrontController extends Controller
                                     'password'            => Hash::make($new_password)
                                 ];                                
                                 User::where('id', '=', $user_id)->update($fields);
-                                return redirect(url('signin'))->with('success_message', 'Password Reset Successfully');
+                                return redirect(url('signin'))->with('success_message', 'Password reset successfully');
                             } else {
-                                return redirect()->back()->with('error_message', 'New & Old Password Can\'t Be Same');
+                                return redirect()->back()->with('error_message', 'New & old password can\'t be same');
                             }
                         } else {
-                            return redirect()->back()->with('error_message', 'New & confirm password doesn\'t matched !!!');
+                            return redirect()->back()->with('error_message', 'New & confirm password doesn\'t matched');
                         }                    
                 } else {
                     return redirect()->back()->with('error_message', 'All fields required');
@@ -853,7 +853,7 @@ class FrontController extends Controller
                     //  Helper::pr($fields);
                     User::where('id', '=', $user_id)->update($fields);
                     UserProfile::where('user_id', '=', $user_id)->update($fields);
-                    return redirect()->back()->with('success_message', 'Profile Updated Successfully');
+                    return redirect()->back()->with('success_message', 'Profile updated successfully');
                 } else {
                     return redirect()->back()->with('error_message', 'All fields required');
                 }
@@ -887,15 +887,15 @@ class FrontController extends Controller
                                     'password'            => Hash::make($new_password)
                                 ];
                                 User::where('id', '=', $user_id)->update($fields);
-                                return redirect()->back()->with('success_message', 'Password Changed Successfully');
+                                return redirect()->back()->with('success_message', 'Password changed successfully');
                             } else {
-                                return redirect()->back()->with('error_message', 'New & Old Password Can\'t Be Same');
+                                return redirect()->back()->with('error_message', 'New & old password can\'t be same');
                             }
                         } else {
-                            return redirect()->back()->with('error_message', 'New & Confirm Password Does Not Matched');
+                            return redirect()->back()->with('error_message', 'New & confirm password does not matched');
                         }
                     } else {
-                        return redirect()->back()->with('error_message', 'Current Password Is Incorrect');
+                        return redirect()->back()->with('error_message', 'Current password is incorrect');
                     }
                 } else {
                     return redirect()->back()->with('error_message', 'All fields required');
@@ -2049,7 +2049,7 @@ class FrontController extends Controller
                         'name'                => $postData['name'],
                     ];
                     UserClassification::insert($fields);
-                    return redirect(url('user/add-profile'))->with('success_message', 'Classification Created Successfully');
+                    return redirect(url('user/add-profile'))->with('success_message', 'Classification created successfully');
                 } else {
                     return redirect()->back()->with('error_message', 'All fields required');
                 }
@@ -2079,7 +2079,7 @@ class FrontController extends Controller
                         'name'                => $postData['name'],
                     ];
                     UserClassification::where('id', '=', $id)->update($fields);
-                    return redirect(url('user/author-classification'))->with('success_message', 'Classification Updated Successfully');
+                    return redirect(url('user/author-classification'))->with('success_message', 'Classification updated successfully');
                 } else {
                     return redirect()->back()->with('error_message', 'All fields required');
                 }
