@@ -30,7 +30,6 @@
             </div>
             <?php
             if ($row) {
-                //    Helper::pr($row);
                 $user_id = $row->user_id;
                 $author_classification = $row->author_classification;                
                 $first_name = $row->first_name;                               
@@ -336,8 +335,11 @@
                                         <div class="col-md-10 col-lg-8">
                                             <select name="community_name" class="form-control" id="community_name">
                                                 <option value="" selected >Select</option>
-                                                <option value="Schumacher Wild" @selected(old("community_name", $community_name ?? '') == 'Schumacher Wild') >Schumacher Wild</option>
-                                                <option value="West Oakland Matters" @selected(old("community_name", $community_name ?? '') == 'West Oakland Matters') >West Oakland Matters</option>
+                                                <!-- <option value="Schumacher Wild" @selected(old("community_name", $community_name ?? '') == 'Schumacher Wild') >Schumacher Wild</option>
+                                                <option value="West Oakland Matters" @selected(old("community_name", $community_name ?? '') == 'West Oakland Matters') >West Oakland Matters</option> -->
+                                                <?php if($communities){ foreach($communities as $cmn){?>
+                                                    <option value="<?=$cmn->name?>" <?=(($community_name == $cmn->name)?'selected':'')?>><?=$cmn->name?></option>
+                                                <?php } }?>
                                             </select>
                                         </div>
                                     </div> 
