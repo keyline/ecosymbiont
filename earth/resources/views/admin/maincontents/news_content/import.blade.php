@@ -106,6 +106,7 @@ $controllerRoute = $module['controller_route'];
             $cover_image_caption = $row->cover_image_caption;
             $others_image = $row->others_image;
             $long_desc = $row->long_desc;
+            $editors_comments = $row->editors_comments;
             $keywords = $row->keywords;
             // $short_desc = $row->short_desc;
             $is_feature = $row->is_feature;
@@ -148,6 +149,7 @@ $controllerRoute = $module['controller_route'];
             $cover_image_caption = '';
             // $others_image = '';
             $long_desc = '';
+            $editors_comments = '';
             $keywords = '';
             $short_desc = '';
             $is_feature = '';
@@ -575,7 +577,15 @@ $controllerRoute = $module['controller_route'];
                             <div class="col-md-10 col-lg-10">
                                 <textarea name="long_desc" class="form-control ckeditor"  rows="5"><?= $long_desc ?></textarea>
                             </div>
-                        </div>                        
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="ckeditor1" class="col-md-2 col-lg-2 col-form-label">23a) Editor’s comments</label>
+                            <div class="col-md-10 col-lg-10">
+                                <textarea name="editors_comments" class="form-control ckeditor" rows="5"><?= $editors_comments ?></textarea>
+                            </div>
+                        </div>
+
                         <div class="row mb-3">
                             <label for="keywords" class="col-md-2 col-lg-2 col-form-label">24) Keywords</label>
                             <div class="col-md-10 col-lg-10">

@@ -750,7 +750,7 @@ $controllerRoute = $module['controller_route'];
                                         @endforeach
                                     @endif                                
                                 </div>
-                            </div>   
+                            </div>
                             <div class="row mb-3">
                                 <label for="Indigenous_affiliation" class="col-md-2 col-lg-4 col-form-label">24) What specific region are your ancestors originally from OR what is the name of your Indigenous community? (example of specific region = Bengal; example of Indigenous community name = Lisjan Ohlone)
                                 </label>
