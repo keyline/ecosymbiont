@@ -50,7 +50,8 @@ class CommunityController extends Controller
                 $checkValue = Community::where('name', '=', $postData['name'])->count();
                 if ($checkValue <= 0) {                    
                     $fields = [
-                        'name'                      => $postData['name'],                        
+                        'name'                      => $postData['name'],
+                        'created_at'                => date('Y-m-d H:i:s'),
                     ];
                     Community::insert($fields);
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' inserted successfully');
@@ -86,7 +87,8 @@ class CommunityController extends Controller
                 $checkValue = Community::where('name', '=', $postData['name'])->where('id', '!=', $id)->count();
                 if ($checkValue <= 0) {                    
                     $fields = [
-                        'name'                      => $postData['name'],                        
+                        'name'                      => $postData['name'],
+                        'updated_at'                => date('Y-m-d H:i:s'),
                     ];
                     Community::where($this->data['primary_key'], '=', $id)->update($fields);
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' updated successfully');
