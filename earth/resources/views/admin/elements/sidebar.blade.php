@@ -130,6 +130,7 @@ if($pageSegment == 'article'){
                           <a class="nav-link <?=(($pageSegment == 'role')?'active':'')?>" href="<?=url('admin/role/list')?>">Role</a>
                           <a class="nav-link <?=(($pageSegment == 'section_ert')?'active':'')?>" href="<?=url('admin/section_ert/list')?>">Section EaRTh</a>
                           <a class="nav-link <?=(($pageSegment == 'submission_type')?'active':'')?>" href="<?=url('admin/submission_type/list')?>">Submission Type</a>
+                          <a class="nav-link <?=(($pageSegment == 'communities')?'active':'')?>" href="<?=url('admin/communities/list')?>">Communities</a>
                           <a class="nav-link <?=(($pageSegment == 'country')?'active':'')?>" href="<?=url('admin/country/list')?>">Country</a>
                         </div>
                     </div>
@@ -193,10 +194,10 @@ if($pageSegment == 'article'){
                 <li class="navbar-vertical-footer-list-item">
                     <!-- Style Switcher -->
                     <div class="dropdown dropup">
-                        <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle"
+                        <!-- <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle"
                             id="selectThemeDropdown" data-bs-toggle="dropdown" aria-expanded="false"
                             data-bs-dropdown-animation>
-                        </button>
+                        </button> -->
                         <div class="dropdown-menu navbar-dropdown-menu navbar-dropdown-menu-borderless"
                             aria-labelledby="selectThemeDropdown">
                             <a class="dropdown-item" href="#" data-icon="bi-moon-stars" data-value="auto">

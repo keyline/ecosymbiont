@@ -193,6 +193,13 @@ use Illuminate\Support\Facades\Route;
              Route::get('submission_type/change-status/{id}', 'SubmissionTypeController@change_status');
              Route::get('submission_type/change-archieve-status/{id}', 'SubmissionTypeController@change_archieve_status');
              /* Submission Type */
+             /* communities */
+                 Route::get('communities/list', 'CommunityController@list');
+                 Route::match(['get', 'post'], 'communities/add', 'CommunityController@add');
+                 Route::match(['get', 'post'], 'communities/edit/{id}', 'CommunityController@edit');
+                 Route::get('communities/delete/{id}', 'CommunityController@delete');
+                 Route::get('communities/change-status/{id}', 'CommunityController@change_status');
+             /* communities */
               /* title */
               Route::get('title/list', 'TitleController@list');
               Route::match(['get', 'post'], 'title/add', 'TitleController@add');
