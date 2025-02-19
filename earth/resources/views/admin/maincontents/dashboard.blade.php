@@ -23,7 +23,7 @@
         <!-- Card -->
         <a class="card card-hover-shadow h-100" href="<?=url('admin/readers/list')?>">
           <div class="card-body">
-            <h6 class="card-subtitle">Readers</h6>
+            <h6 class="card-subtitle">Reader</h6>
             <div class="row align-items-center gx-2 mb-1">
               <div class="col-12">
                 <h2 class="card-title text-inherit"><?=$readers?></h2>
@@ -42,7 +42,7 @@
         <!-- Card -->
         <a class="card card-hover-shadow h-100" href="<?=url('admin/content_creaters/list')?>">
           <div class="card-body">
-            <h6 class="card-subtitle">Content Creators</h6>
+            <h6 class="card-subtitle">Content Creator</h6>
             <div class="row align-items-center gx-2 mb-1">
               <div class="col-6">
                 <h2 class="card-title text-inherit"><?=$content_creators?></h2>
@@ -58,7 +58,7 @@
         <!-- End Card -->
       </div>
 
-      <div class="col-sm-12 col-lg-4 mb-3 mb-lg-5">
+      <div class="col-sm-12 col-lg-6 col-md-6 mb-3 mb-lg-5">
         <!-- Card -->
         <a class="card card-hover-shadow h-100" href="<?= url('admin/article/submitted') ?>">
           <div class="card-body">
@@ -77,7 +77,7 @@
         </a>
         <!-- End Card -->
       </div>
-      <div class="col-sm-12 col-lg-4 mb-3 mb-lg-5">
+      <div class="col-sm-12 col-lg-6 col-md-6 mb-3 mb-lg-5">
         <!-- Card -->
         <a class="card card-hover-shadow h-100" href="<?= url('admin/article/editing-checking') ?>">
           <div class="card-body">
@@ -134,7 +134,7 @@
         </a>
          End Card 
       </div> -->
-      <div class="col-sm-12 col-lg-4 mb-3 mb-lg-5">
+      <div class="col-sm-12 col-lg-6 col-md-6 mb-3 mb-lg-5">
         <!-- Card -->
         <a class="card card-hover-shadow h-100" href="<?= url('admin/article/approved') ?>">
           <div class="card-body">
@@ -153,7 +153,7 @@
         </a>
         <!-- End Card -->
       </div>
-      <div class="col-sm-12 col-lg-4 mb-3 mb-lg-5">
+      <div class="col-sm-12 col-lg-6 col-md-6 mb-3 mb-lg-5">
         <!-- Card -->
         <a class="card card-hover-shadow h-100" href="<?=url('admin/news_content/list')?>">
           <div class="card-body">
