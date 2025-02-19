@@ -716,8 +716,9 @@ class FrontController extends Controller
                                     $subject                    = 'Subject: OTP Verification';
                                     $message                    = "<table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
                                                                         <tr><td style='padding: 8px 15px'>Your OTP code is: <strong>$otp</strong></td></tr>                                                                                                                                                                                                                                                   
-                                                                        <tr><td style='padding: 8px 15px'>Thank You,</td></tr>
-                                                                        <tr><td style='padding: 8px 15px'>Auto-generated from the Ecosymbiont Website.</td></tr>
+                                                                        <tr><td style='padding: 8px 15px'>We look forward to receiving your creative-work submissions.</td></tr>
+                                                                        <tr><td style='padding: 8px 15px'>The EaRTh editorial team</td></tr>
+                                                                        <tr><td style='padding: 8px 15px'>This email is auto-generated from the EaRTh platform.</td></tr>
                                                                     </table>";
                                     $this->sendMail($postData['email'], $subject, $message);
                                     return redirect(url('otpvalidation'))->with('success_message', 'Your OTP has been successfully sent to your registered email address. Please check your email to retrieve the OTP.');

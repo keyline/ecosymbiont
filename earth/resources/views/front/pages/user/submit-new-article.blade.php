@@ -172,7 +172,7 @@ use Illuminate\Support\Facades\DB;
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="heading">Form: Creative-work</h3>
+                        <h3 class="heading">Form: Creative-Work</h3>
                     </div>
                     <div class="card-body">
                         <p style="color: #d81636; font-weight:500;font-size: 14px;margin-bottom: 25px;"><em>**Instructions: <b>Please make sure you have completed your Profile (click on Profile tab on the left to go there, if you haven't) before filling out this form.</b> All questions in BLUE must be answered. Please note that you will have to enter all information in one sitting, as there is no save option while you work. Unless you click the "Submit" button, your information will not be entered into the system. We apologize for any inconvenience. Thank you for your contribution.</em></p>
@@ -477,7 +477,7 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>     
                                 <div class="row mb-3">
-                                    <label for="creative_Work" class="col-md-2 col-lg-4 col-form-label blue-text">15) Title of your creative-Work (max. 10 words)
+                                    <label for="creative_Work" class="col-md-2 col-lg-4 col-form-label blue-text">15) Title of your Creative-Work (max. 10 words)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="creative_Work" name="creative_Work" rows="4" cols="50" placeholder="Your creative_Work here..." required>{{ old('creative_Work', $creative_Work ?? '') }}</textarea>
@@ -485,7 +485,7 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>                                            
                                 <div class="row mb-3">
-                                    <label for="subtitle" class="col-md-2 col-lg-4 col-form-label blue-text">16) Subtitle - brief engaging summary of your Creative-Work (max. 40 words)
+                                    <label for="subtitle" class="col-md-2 col-lg-4 col-form-label blue-text">16) Subtitle — brief engaging summary of your Creative-Work (30-40 words)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <textarea name="subtitle" class="form-control" id="subtitle" rows="3">{{ old('subtitle', $subtitle ?? '') }}</textarea>
@@ -493,7 +493,7 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="submission_types" class="col-md-2 col-lg-4 col-form-label blue-text">17) Select the type of your creative-Work
+                                    <label for="submission_types" class="col-md-2 col-lg-4 col-form-label blue-text">17) Select the type of your Creative-Work
                                     </label>
                                     <div class="col-md-10 col-lg-8">                                
                                     @if ($submission_type)
