@@ -37,7 +37,7 @@
                                             <div class="row" style="margin-bottom: 15px;">
                                               <label for="first_name" class="col-md-4 col-lg-3 col-form-label">Full Legal Name (exactly as it appears on your government-issued identification documents, e.g., passport and/or driver's license)*</label>
                                               <div class="col-md-8 col-lg-9">
-                                                <input type="text" name="first_name" class="form-control" id="first_name" placeholder="Enter First Name" required autocomplete="off">
+                                                <input type="text" name="first_name" class="form-control" id="first_name" placeholder="" required autocomplete="off">
                                               </div>
                                             </div>
                                             <!-- <div class="row" style="margin-bottom: 15px;">
@@ -55,7 +55,7 @@
                                             <div class="row" style="margin-bottom: 15px;">
                                               <label for="email" class="col-md-4 col-lg-3 col-form-label">Email*</label>
                                               <div class="col-md-8 col-lg-9">
-                                                <input type="email" name="email" class="form-control" id="email" placeholder="Enter Email" required autocomplete="off">
+                                                <input type="email" name="email" class="form-control" id="email" placeholder="" required autocomplete="off">
                                               </div>
                                             </div>
                                             <!-- <div class="row" style="margin-bottom: 15px;">
@@ -71,10 +71,10 @@
                                               </div>
                                             </div> -->
                                             <div class="row" style="margin-bottom: 15px;">
-                                              <label for="country" class="col-md-4 col-lg-3 col-form-label">Country*</label>
+                                              <label for="country" class="col-md-4 col-lg-3 col-form-label">Country of Residence*</label>
                                               <div class="col-md-8 col-lg-9">
                                                 <select name="country" class="form-control" required>
-                                                    <option value="" selected>Select Country</option>
+                                                    <option value="" selected>Select Country of Residence</option>
                                                     <?php if($countries){ foreach($countries as $country){?>
                                                         <option value="<?=$country->id?>"><?=$country->name?></option>
                                                     <?php } }?>
@@ -105,9 +105,14 @@
     <!-- Popup Div (Initially hidden) -->
     <div id="popup">
       <h3>Submissions Eligibility Criteria</h3>
-      <p>At this time, you must:<br>
+      <!-- <p>At this time, you must:<br>
       (A) be invited to submit a Creative-Work to EaRTh (if you have not been invited, follow the directions for question 6 when completing your profile); and/or <br>
-      (B) have participated as a strategist at an in-person ER Synergy Meeting.</p>
+      (B) have participated as a strategist at an in-person ER Synergy Meeting.</p> -->
+      <p>If you would like to submit creative-works to EaRTh, you must:</p>
+      <ul>
+        <li>be a grassroots human individual, ecoweb-rooted community, or movement; and</li>
+        <li>submit creative-works related to any aspect of human-ecological connectivity</li>
+      </ul>
       <button id="closePopup">Close</button>
     </div>    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
