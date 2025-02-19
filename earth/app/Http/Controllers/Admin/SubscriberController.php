@@ -72,7 +72,7 @@ class SubscriberController extends Controller
                             return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
                         }
                     } else {
-                        return redirect()->back()->with(['error_message' => 'Please Upload Notice File !!!']);
+                        return redirect()->back()->with(['error_message' => 'Please upload notice file']);
                     }
                     /* notice file */
                     $fields = [
@@ -91,12 +91,12 @@ class SubscriberController extends Controller
                         'is_archieve'               => $postData['is_archieve'],
                     ];
                     Notice::insert($fields);
-                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
+                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' inserted successfully');
                 } else {
-                    return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
+                    return redirect()->back()->with('error_message', $this->data['title'] . ' already exists');
                 }
             } else {
-                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                return redirect()->back()->with('error_message', 'All fields required');
             }
         }
         $data['module']                 = $this->data;
@@ -166,12 +166,12 @@ class SubscriberController extends Controller
                         'is_archieve'               => $postData['is_archieve'],
                     ];
                     Notice::where($this->data['primary_key'], '=', $id)->update($fields);
-                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');
+                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' updated successfully');
                 } else {
-                    return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
+                    return redirect()->back()->with('error_message', $this->data['title'] . ' already exists');
                 }
             } else {
-                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                return redirect()->back()->with('error_message', 'All fields required');
             }
         }
         echo $this->admin_after_login_layout($title, $page_name, $data);
@@ -185,7 +185,7 @@ class SubscriberController extends Controller
             'status'             => 3
         ];
         Subscriber::where($this->data['primary_key'], '=', $id)->update($fields);
-        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Deleted Successfully !!!');
+        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' deleted successfully');
     }
     /* delete */
     /* change status */
@@ -195,13 +195,13 @@ class SubscriberController extends Controller
         $model                          = Subscriber::find($id);
         if ($model->status == 1) {
             $model->status  = 0;
-            $msg            = 'Deactivated';
+            $msg            = 'deactivated';
         } else {
             $model->status  = 1;
-            $msg            = 'Activated';
+            $msg            = 'activated';
         }
         $model->save();
-        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' Successfully !!!');
+        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' successfully');
     }
     /* change status */
     /* change archieve status */
@@ -211,13 +211,13 @@ class SubscriberController extends Controller
         $model                          = Notice::find($id);
         if ($model->is_archieve == 1) {
             $model->is_archieve  = 0;
-            $msg            = 'Moved To Current List';
+            $msg            = 'moved to current list';
         } else {
             $model->is_archieve  = 1;
-            $msg            = 'Moved To Archieve List';
+            $msg            = 'moved to archieve list';
         }
         $model->save();
-        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' Successfully !!!');
+        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' successfully');
     }
     /* change archieve status */
 }

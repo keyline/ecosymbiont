@@ -81,12 +81,12 @@ class EditorsController extends Controller
                     //  dd($fields);
                     //  Helper::pr($fields);
                     User::insert($fields);
-                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
+                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' inserted successfully');
                 } else {
-                    return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
+                    return redirect()->back()->with('error_message', $this->data['title'] . ' already exists');
                 }
             } else {
-                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                return redirect()->back()->with('error_message', 'All fields required');
             }
         }
         $data['module']                 = $this->data;
@@ -144,12 +144,12 @@ class EditorsController extends Controller
                         'password'                  => Hash::make($postData['password']),                        
                     ];
                     User::where($this->data['primary_key'], '=', $id)->update($fields);
-                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');
+                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' updated successfully');
                 } else {
-                    return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
+                    return redirect()->back()->with('error_message', $this->data['title'] . ' already exists');
                 }
             } else {
-                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                return redirect()->back()->with('error_message', 'All fields required');
             }
         }
         echo $this->admin_after_login_layout($title, $page_name, $data);
@@ -163,7 +163,7 @@ class EditorsController extends Controller
             'status'             => 3
         ];
         User::where($this->data['primary_key'], '=', $id)->update($fields);
-        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Deleted Successfully !!!');
+        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' deleted successfully');
     }
     /* delete */
     /* change status */
@@ -173,13 +173,13 @@ class EditorsController extends Controller
         $model                          = User::find($id);
         if ($model->status == 1) {
             $model->status  = 0;
-            $msg            = 'Deactivated';
+            $msg            = 'deactivated';
         } else {
             $model->status  = 1;
-            $msg            = 'Activated';
+            $msg            = 'activated';
         }
         $model->save();
-        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' Successfully !!!');
+        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' successfully');
     }
     /* change status */
     /* change archieve status */
@@ -189,13 +189,13 @@ class EditorsController extends Controller
         $model                          = User::find($id);
         if ($model->is_archieve == 1) {
             $model->is_archieve  = 0;
-            $msg            = 'Moved To Current List';
+            $msg            = 'moved to current list';
         } else {
             $model->is_archieve  = 1;
-            $msg            = 'Moved To Archieve List';
+            $msg            = 'moved to archieve list';
         }
         $model->save();
-        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' Successfully !!!');
+        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' successfully');
     }
     /* change archieve status */
 }

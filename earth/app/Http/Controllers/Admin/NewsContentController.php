@@ -177,10 +177,10 @@ class NewsContentController extends Controller
                 NewsContent::insert($fields);                        
         
                 // Redirect after successful insertion
-                return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
+                return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' inserted successfully');
                 
             } else {
-                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                return redirect()->back()->with('error_message', 'All fields required');
             }
         }
         $data['module']                 = $this->data;
@@ -352,9 +352,9 @@ class NewsContentController extends Controller
                         'is_published'             => 4                                                         
                         ];
                     Article::where('article_no', '=', $postData['creative_work_SRN'])->update($fieldsArticle);
-                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');                
+                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' updated successfully');                
             } else {
-                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                return redirect()->back()->with('error_message', 'All fields required');
             }
         }
         echo $this->admin_after_login_layout($title, $page_name, $data);
@@ -462,13 +462,13 @@ class NewsContentController extends Controller
                     if ($uploadedFile['status']) {
                         $nelp_pdf = $uploadedFile['newFilename'];
                         // // Article::where('id', '=', $article_id)->update(['nelp_form_scan_copy' => $nelp_form_scan_copy, 'is_published' => 3]);
-                        // return redirect()->back()->with(['success_message' => 'Scan Copy Of NELP Form Uploaded Successfully !!!']);
+                        // return redirect()->back()->with(['success_message' => 'Scan Copy Of NELP Form Uploaded successfully']);
                     } else {
                         return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
                     }
                 } 
                 // else {
-                //     return redirect()->back()->with(['error_message' => 'Please Upload Scan Copy Of NELP Form !!!']);
+                //     return redirect()->back()->with(['error_message' => 'Please Upload Scan Copy Of NELP Form']);
                 // }       
                  /* NELP Pdf */        
                 $fields = [
@@ -507,7 +507,8 @@ class NewsContentController extends Controller
                 'cover_image_caption'       => $cover_image_caption ?? '',
                 'video_url'                 => $url ?? '',
                 'videoId'                   => $videoId ?? '',
-                'long_desc'                 => $postData['long_desc'] ?? '',     
+                'long_desc'                 => $postData['long_desc'] ?? '',
+                'editors_comments'          => $postData['editors_comments'] ?? '',
                 'keywords'                  => $postData['keywords'] ?? '',     
                 'is_feature'                => $postData['is_feature'],  
                 'is_popular'                => $postData['is_popular'],
@@ -520,7 +521,7 @@ class NewsContentController extends Controller
                 //   dd();                                 
                 //   Helper::pr($fields);
                  Article::where('id', '=', $id)->update($fields);
-                 return redirect("admin/article/list")->with('success_message', 'Article Saved Successfully !!!');                
+                 return redirect("admin/article/list")->with('success_message', 'Article saved successfully');                
             }
             $rules = [                                            
                 'section_ert'            => 'required',   
@@ -601,7 +602,7 @@ class NewsContentController extends Controller
                         if ($uploadedFile['status']) {
                             $nelp_pdf = $uploadedFile['newFilename'];
                             // // Article::where('id', '=', $article_id)->update(['nelp_form_scan_copy' => $nelp_form_scan_copy, 'is_published' => 3]);
-                            // return redirect()->back()->with(['success_message' => 'Scan Copy Of NELP Form Uploaded Successfully !!!']);
+                            // return redirect()->back()->with(['success_message' => 'Scan Copy Of NELP Form Uploaded successfully']);
                         } else {
                             return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
                         }
@@ -645,7 +646,8 @@ class NewsContentController extends Controller
                     'cover_image_caption'       => $postData['cover_image_caption'] ?? '',
                     'video_url'                 => $postData['video_url'] ?? '',
                     'videoId'                   => $videoId ?? '',
-                    'long_desc'                 => $postData['long_desc'] ?? '',     
+                    'long_desc'                 => $postData['long_desc'] ?? '',
+                    'editors_comments'          => $postData['editors_comments'] ?? '',
                     'keywords'                  => $postData['keywords'] ?? '',     
                     'is_feature'                => $postData['is_feature'],  
                     'is_popular'                => $postData['is_popular'],
@@ -693,7 +695,8 @@ class NewsContentController extends Controller
                         'cover_image_caption'       => $cover_image_caption ?? '',
                         'video_url'                 => $url ?? '',
                         'videoId'                   => $videoId ?? '',
-                        'long_desc'                 => $postData['long_desc'] ?? '',     
+                        'long_desc'                 => $postData['long_desc'] ?? '',
+                        'editors_comments'          => $postData['editors_comments'] ?? '',
                         'keywords'                  => $postData['keywords'] ?? '',     
                         'is_feature'                => $postData['is_feature'],  
                         'is_popular'                => $postData['is_popular'],  
@@ -705,9 +708,9 @@ class NewsContentController extends Controller
                         'is_published'             => 4                                                         
                         ];                       
                     Article::where('id', '=', $id)->update($fieldsArticle);
-                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');                
+                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' inserted successfully');                
             } else {
-                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                return redirect()->back()->with('error_message', 'All fields required');
             }
         }
         //  Helper::pr($data);
@@ -723,7 +726,7 @@ class NewsContentController extends Controller
             'status'             => 3
         ];
         NewsContent::where($this->data['primary_key'], '=', $id)->update($fields);
-        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Deleted Successfully !!!');
+        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' deleted successfully');
     }
     /* delete */
     /* change status */
@@ -733,13 +736,13 @@ class NewsContentController extends Controller
         $model                          = NewsContent::find($id);
         if ($model->status == 1) {
             $model->status  = 0;
-            $msg            = 'Deactivated';
+            $msg            = 'deactivated';
         } else {
             $model->status  = 1;
-            $msg            = 'Activated';
+            $msg            = 'activated';
         }
         $model->save();
-        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' Successfully !!!');
+        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' successfully');
     }
     /* change status */
     /* change archieve status */
@@ -749,13 +752,13 @@ class NewsContentController extends Controller
         $model                          = Notice::find($id);
         if ($model->is_archieve == 1) {
             $model->is_archieve  = 0;
-            $msg            = 'Moved To Current List';
+            $msg            = 'moved to current list';
         } else {
             $model->is_archieve  = 1;
-            $msg            = 'Moved To Archieve List';
+            $msg            = 'moved to archieve list';
         }
         $model->save();
-        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' Successfully !!!');
+        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' successfully');
     }
     /* change archieve status */
     /* image list */
@@ -811,10 +814,10 @@ class NewsContentController extends Controller
                 }
         
                 // Redirect after successful insertion
-                return redirect("admin/news_content_image/list")->with('success_message', 'Images inserted Successfully !!!');
+                return redirect("admin/news_content_image/list")->with('success_message', 'Images inserted successfully');
                 
             } else {
-                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                return redirect()->back()->with('error_message', 'All fields required');
             }
         }
         $data['module']                 = $this->data;
@@ -866,9 +869,9 @@ class NewsContentController extends Controller
                          }
                      }                                                                                                                        
                      
-                     return redirect("admin/news_content_image/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');                
+                     return redirect("admin/news_content_image/list")->with('success_message', $this->data['title'] . ' updated successfully');                
              } else {
-                 return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                 return redirect()->back()->with('error_message', 'All fields required');
              }
          }
          echo $this->admin_after_login_layout($title, $page_name, $data);
@@ -882,7 +885,7 @@ class NewsContentController extends Controller
             'status'             => 3
         ];
         NewsContentImage::where('id', '=', $id)->update($fields);
-        return redirect("admin/news_content_image/list")->with('success_message', 'Image Deleted Successfully !!!');
+        return redirect("admin/news_content_image/list")->with('success_message', 'Image deleted successfully');
     }
     /* delete image */
     /* change image status */
@@ -892,13 +895,13 @@ class NewsContentController extends Controller
         $model                          = NewsContentImage::find($id);
         if ($model->status == 1) {
             $model->status  = 0;
-            $msg            = 'Deactivated';
+            $msg            = 'deactivated';
         } else {
             $model->status  = 1;
-            $msg            = 'Activated';
+            $msg            = 'activated';
         }
         $model->save();
-        return redirect("admin/news_content_image/list")->with('success_message', 'Image ' . $msg . ' Successfully !!!');
+        return redirect("admin/news_content_image/list")->with('success_message', 'Image ' . $msg . ' successfully');
     }
     /* change image status */
 }

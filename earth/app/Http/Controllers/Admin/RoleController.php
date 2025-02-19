@@ -53,12 +53,12 @@ class RoleController extends Controller
                         'name'                      => $postData['name'],                        
                     ];
                     Role::insert($fields);
-                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
+                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' inserted successfully');
                 } else {
-                    return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
+                    return redirect()->back()->with('error_message', $this->data['title'] . ' already exists');
                 }
             } else {
-                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                return redirect()->back()->with('error_message', 'All fields required');
             }
         }
         $data['module']                 = $this->data;
@@ -89,12 +89,12 @@ class RoleController extends Controller
                         'name'                      => $postData['name'],                        
                     ];
                     Role::where($this->data['primary_key'], '=', $id)->update($fields);
-                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');
+                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' updated successfully');
                 } else {
-                    return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
+                    return redirect()->back()->with('error_message', $this->data['title'] . ' already exists');
                 }
             } else {
-                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                return redirect()->back()->with('error_message', 'All fields required');
             }
         }
         echo $this->admin_after_login_layout($title, $page_name, $data);
@@ -108,7 +108,7 @@ class RoleController extends Controller
             'status'             => 3
         ];
         Role::where($this->data['primary_key'], '=', $id)->update($fields);
-        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Deleted Successfully !!!');
+        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' deleted successfully');
     }
     /* delete */
     /* change status */
@@ -118,13 +118,13 @@ class RoleController extends Controller
         $model                          = Role::find($id);
         if ($model->status == 1) {
             $model->status  = 0;
-            $msg            = 'Deactivated';
+            $msg            = 'deactivated';
         } else {
             $model->status  = 1;
-            $msg            = 'Activated';
+            $msg            = 'activated';
         }
         $model->save();
-        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' Successfully !!!');
+        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' successfully');
     }
     /* change status */    
 }

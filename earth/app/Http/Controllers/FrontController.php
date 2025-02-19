@@ -33,6 +33,7 @@ use App\Models\Enquiry;
 use App\Models\EmailLog;
 use App\Models\UserProfile;
 use App\Models\UserClassification;
+use App\Models\Community;
 
 use Auth;
 use Session;
@@ -65,12 +66,12 @@ class FrontController extends Controller
                         'subscribers_email'            => $subscribe_email
                     ];
                     Subscriber::insert($fields);
-                    return redirect()->back()->with('success_message', 'Email Subscribed Successfully !!!');
+                    return redirect()->back()->with('success_message', 'Email subscribed successfully');
                 } else {
-                    return redirect()->back()->with('error_message', 'Email Already Subscribed !!!');
+                    return redirect()->back()->with('error_message', 'Email already subscribed');
                 }
             } else {
-                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                return redirect()->back()->with('error_message', 'All fields required');
             }
         }
         $data['search_keyword']         = '';
@@ -157,12 +158,12 @@ class FrontController extends Controller
                                                             </table>";
                             $this->sendMail($generalSetting->site_mail, $subject, $message);
                             
-                            return redirect(url('contacts'))->with('success_message', 'Enquiry submitted Successfully !!!');
+                            return redirect(url('contacts'))->with('success_message', 'Enquiry submitted successfully');
                         } else {
-                            return redirect()->back()->with('error_message', 'Enquiry Already Inserted !!!');
+                            return redirect()->back()->with('error_message', 'Enquiry already inserted');
                         }
                     } else {
-                        return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                        return redirect()->back()->with('error_message', 'All fields required');
                     }
 
                 } else {
@@ -551,10 +552,10 @@ class FrontController extends Controller
                             ];
                             UserActivity::insert($activityData);
                         /* user activity */
-                        return redirect()->back()->with('error_message', 'Invalid Email Or Password !!!');
+                        return redirect()->back()->with('error_message', 'Invalid email or password');
                     }
                 } else {                    
-                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                    return redirect()->back()->with('error_message', 'All fields required');
                 }
             }
             $data['page_link']              = (($page_link != '')?$page_link:'');
@@ -642,10 +643,10 @@ class FrontController extends Controller
                                 $this->sendMail($postData['email'], $subject, $message);
                                 return redirect(url('signin'))->with('success_message', 'Your sign-up was successful! Please check your email for your login credentials.');
                             } else {
-                                return redirect()->back()->with('error_message', 'User Already Registered !!!');
+                                return redirect()->back()->with('error_message', 'User already registered');
                             }
                         } else {
-                            return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                            return redirect()->back()->with('error_message', 'All fields required');
                         }
 
                     } else {
@@ -703,7 +704,7 @@ class FrontController extends Controller
                             $checkmail = User::where('email', '=', $postData['email'])->first();                              
                             if ($checkValue > 0) {  
                                 if($checkmail->status != 1){                                    
-                                    return redirect()->back()->with('error_message', 'Your account is deactivated contact with admin!!!');
+                                    return redirect()->back()->with('error_message', 'Your account is deactivated contact with admin');
                                 } else{
                                     // Generate a random 4-digit OTP
                                     $otp = rand(1000, 9999);
@@ -715,17 +716,18 @@ class FrontController extends Controller
                                     $subject                    = 'Subject: OTP Verification';
                                     $message                    = "<table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
                                                                         <tr><td style='padding: 8px 15px'>Your OTP code is: <strong>$otp</strong></td></tr>                                                                                                                                                                                                                                                   
-                                                                        <tr><td style='padding: 8px 15px'>Thank You,</td></tr>
-                                                                        <tr><td style='padding: 8px 15px'>Auto-generated from the Ecosymbiont Website.</td></tr>
+                                                                        <tr><td style='padding: 8px 15px'>We look forward to receiving your creative-work submissions.</td></tr>
+                                                                        <tr><td style='padding: 8px 15px'>The EaRTh editorial team</td></tr>
+                                                                        <tr><td style='padding: 8px 15px'>This email is auto-generated from the EaRTh platform.</td></tr>
                                                                     </table>";
                                     $this->sendMail($postData['email'], $subject, $message);
                                     return redirect(url('otpvalidation'))->with('success_message', 'Your OTP has been successfully sent to your registered email address. Please check your email to retrieve the OTP.');
                                 }                                                                      
                             } else {
-                                return redirect()->back()->with('error_message', 'User not registered kindly signup first !!!');
+                                return redirect()->back()->with('error_message', 'User not registered kindly signup first');
                             }
                         } else {
-                            return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                            return redirect()->back()->with('error_message', 'All fields required');
                         }
 
                     } else {                        
@@ -749,10 +751,10 @@ class FrontController extends Controller
                     if ($checkValue) {                                        
                         return redirect(url('resetpassword/'.Helper::encoded($checkValue->id)))->with('success_message', 'Your OTP has been successfully validated. Please reset your password to complete the sign-up process.');
                     } else {
-                        return redirect()->back()->with('error_message', 'OTP is not validated !!!');
+                        return redirect()->back()->with('error_message', 'OTP is not validated');
                     }
                 } else {
-                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                    return redirect()->back()->with('error_message', 'All fields required');
                 }                                                 
             }
             echo $this->front_before_login_layout($title, $page_name, $data);
@@ -779,15 +781,15 @@ class FrontController extends Controller
                                     'password'            => Hash::make($new_password)
                                 ];                                
                                 User::where('id', '=', $user_id)->update($fields);
-                                return redirect(url('signin'))->with('success_message', 'Password Reset Successfully !!!');
+                                return redirect(url('signin'))->with('success_message', 'Password reset successfully');
                             } else {
-                                return redirect()->back()->with('error_message', 'New & Old Password Can\'t Be Same !!!');
+                                return redirect()->back()->with('error_message', 'New & old password can\'t be same');
                             }
                         } else {
-                            return redirect()->back()->with('error_message', 'New & confirm password doesn\'t matched !!!');
+                            return redirect()->back()->with('error_message', 'New & confirm password doesn\'t matched');
                         }                    
                 } else {
-                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                    return redirect()->back()->with('error_message', 'All fields required');
                 }           
                                                  
             }
@@ -852,9 +854,9 @@ class FrontController extends Controller
                     //  Helper::pr($fields);
                     User::where('id', '=', $user_id)->update($fields);
                     UserProfile::where('user_id', '=', $user_id)->update($fields);
-                    return redirect()->back()->with('success_message', 'Profile Updated Successfully !!!');
+                    return redirect()->back()->with('success_message', 'Profile updated successfully');
                 } else {
-                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                    return redirect()->back()->with('error_message', 'All fields required');
                 }
             }
 
@@ -886,18 +888,18 @@ class FrontController extends Controller
                                     'password'            => Hash::make($new_password)
                                 ];
                                 User::where('id', '=', $user_id)->update($fields);
-                                return redirect()->back()->with('success_message', 'Password Changed Successfully !!!');
+                                return redirect()->back()->with('success_message', 'Password changed successfully');
                             } else {
-                                return redirect()->back()->with('error_message', 'New & Old Password Can\'t Be Same !!!');
+                                return redirect()->back()->with('error_message', 'New & old password can\'t be same');
                             }
                         } else {
-                            return redirect()->back()->with('error_message', 'New & Confirm Password Does Not Matched !!!');
+                            return redirect()->back()->with('error_message', 'New & confirm password does not matched');
                         }
                     } else {
-                        return redirect()->back()->with('error_message', 'Current Password Is Incorrect !!!');
+                        return redirect()->back()->with('error_message', 'Current password is incorrect');
                     }
                 } else {
-                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                    return redirect()->back()->with('error_message', 'All fields required');
                 }
             }
 
@@ -1078,7 +1080,7 @@ class FrontController extends Controller
                             Article::insert($fields);
                             return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work submitted successfully!');
                             } else {
-                                return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
+                                return redirect()->back()->withInput()->with('error_message', 'All fields required');
                             }
                     } else{                    
                         //save to database//
@@ -1139,7 +1141,7 @@ class FrontController extends Controller
                             Article::insert($fields);
                             return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work submitted successfully!');
                         } else {
-                                return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
+                                return redirect()->back()->withInput()->with('error_message', 'All fields required');
                         }
                     }
                 } else{
@@ -1319,7 +1321,7 @@ class FrontController extends Controller
                                 Article::insert($fields);
                                 return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work submitted successfully!');
                                 } else {
-                                    return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
+                                    return redirect()->back()->withInput()->with('error_message', 'All fields required');
                                 }                               
                        } else if($postData['submission_types'] == '2'){
                            /* art images details */
@@ -1439,7 +1441,7 @@ class FrontController extends Controller
                                 Article::insert($fields);
                                 return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work submitted successfully!');
                                 } else {
-                                    return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
+                                    return redirect()->back()->withInput()->with('error_message', 'All fields required');
                                 }                               
                        } else if($postData['submission_types'] == '3') {
                            /* art_video file */
@@ -1536,7 +1538,7 @@ class FrontController extends Controller
                                 Article::insert($fields);
                                 return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work submitted successfully!');
                             } else {
-                                return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
+                                return redirect()->back()->withInput()->with('error_message', 'All fields required');
                             }                               
                        } else{
                            return redirect()->back()->withInput()->with(['error_message' => 'Please select submission type !!!']);
@@ -1758,7 +1760,7 @@ class FrontController extends Controller
                                     Article::insert($fields);
                                     return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work submitted successfully!');
                                     } else {
-                                        return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
+                                        return redirect()->back()->withInput()->with('error_message', 'All fields required');
                                     }                                    
                             } else if($postData['submission_types'] == '2'){
     
@@ -1886,7 +1888,7 @@ class FrontController extends Controller
                                         Article::insert($fields);
                                         return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work submitted successfully!');
                                     } else {
-                                        return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
+                                        return redirect()->back()->withInput()->with('error_message', 'All fields required');
                                     }                                    
                             } else {
     
@@ -1991,7 +1993,7 @@ class FrontController extends Controller
                                     Article::insert($fields);
                                     return redirect(url('user/my-articles'))->with('success_message', 'Creative-Work submitted successfully!');
                                 } else {
-                                    return redirect()->back()->withInput()->with('error_message', 'All Fields Required !!!');
+                                    return redirect()->back()->withInput()->with('error_message', 'All fields required');
                                 }                                    
                             }
                    }
@@ -2048,9 +2050,9 @@ class FrontController extends Controller
                         'name'                => $postData['name'],
                     ];
                     UserClassification::insert($fields);
-                    return redirect(url('user/add-profile'))->with('success_message', 'Classification Created Successfully !!!');
+                    return redirect(url('user/add-profile'))->with('success_message', 'Classification created successfully');
                 } else {
-                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                    return redirect()->back()->with('error_message', 'All fields required');
                 }
             }
             
@@ -2078,9 +2080,9 @@ class FrontController extends Controller
                         'name'                => $postData['name'],
                     ];
                     UserClassification::where('id', '=', $id)->update($fields);
-                    return redirect(url('user/author-classification'))->with('success_message', 'Classification Updated Successfully !!!');
+                    return redirect(url('user/author-classification'))->with('success_message', 'Classification updated successfully');
                 } else {
-                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                    return redirect()->back()->with('error_message', 'All fields required');
                 }
             }
             
@@ -2206,9 +2208,9 @@ class FrontController extends Controller
                         $this->sendMail($postData['email'], $subject, $message);                                                                    
                     } 
                     User::where('id', '=', $user_id)->update($fields2);                                       
-                    return redirect(url('user/submit-new-article'))->with('success_message', 'Profile Created Successfully !!!');
+                    return redirect(url('user/submit-new-article'))->with('success_message', 'Profile created successfully');
                 } else {
-                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                    return redirect()->back()->with('error_message', 'All fields required');
                 }
             }
             
@@ -2231,6 +2233,7 @@ class FrontController extends Controller
             $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['row']                    = UserProfile::where('user_id', '=', $user_id)->where('id', '=', $id)->first();
+            $data['communities']            = Community::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['search_keyword']         = '';
             
             if ($request->isMethod('post')) {
@@ -2308,9 +2311,9 @@ class FrontController extends Controller
                         $this->sendMail($postData['email'], $subject, $message);                                                                    
                     } 
                     User::where('id', '=', $user_id)->update($fields2);
-                    return redirect(url('user/profiles'))->with('success_message', 'Profile Updated Successfully !!!');
+                    return redirect(url('user/profiles'))->with('success_message', 'Profile updated successfully');
                 } else {
-                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                    return redirect()->back()->with('error_message', 'All fields required');
                 }
             }
             

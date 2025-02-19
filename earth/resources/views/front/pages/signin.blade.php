@@ -50,7 +50,7 @@
                                             Not registered yet? <a href="<?=url('signup')?>">Sign Up</a>
                                             </div>
                                             <div class="text-center" style="margin-bottom: 15px;">
-                                            <a href="<?=url('forgetpassword')?>">Forget Password</a>
+                                            <a href="<?=url('forgetpassword')?>">Forgot Password</a>
                                             </div>
                                           </form>
                                     </div>

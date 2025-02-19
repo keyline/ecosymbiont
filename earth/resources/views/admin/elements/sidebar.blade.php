@@ -118,11 +118,11 @@ if($pageSegment == 'article'){
                     <!-- End Newsletter -->
                  <!-- masters -->
                  <div class="nav-item">
-                        <a class="nav-link dropdown-toggle active <?=(($pageSegment == 'expertise_area' || $pageSegment == 'ecosystem_affiliation' || $pageSegment == 'pronoun' || $pageSegment == 'title' || $pageSegment == 'role' || $pageSegment == 'section_ert' || $pageSegment == 'submission_type' || $pageSegment == 'country')?'':'collapsed')?>" href="#navbarVerticalMenuMasters2" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuMasters2" aria-expanded="<?=(($pageSegment == 'expertise_area' || $pageSegment == 'ecosystem_affiliation' || $pageSegment == 'pronoun' || $pageSegment == 'title' || $pageSegment == 'role' || $pageSegment == 'section_ert' || $pageSegment == 'submission_type' || $pageSegment == 'country')?'true':'false')?>" aria-controls="navbarVerticalMenuMasters2">
+                        <a class="nav-link dropdown-toggle active <?=(($pageSegment == 'expertise_area' || $pageSegment == 'ecosystem_affiliation' || $pageSegment == 'pronoun' || $pageSegment == 'title' || $pageSegment == 'role' || $pageSegment == 'section_ert' || $pageSegment == 'submission_type' || $pageSegment == 'country' || $pageSegment == 'communities')?'':'collapsed')?>" href="#navbarVerticalMenuMasters2" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuMasters2" aria-expanded="<?=(($pageSegment == 'expertise_area' || $pageSegment == 'ecosystem_affiliation' || $pageSegment == 'pronoun' || $pageSegment == 'title' || $pageSegment == 'role' || $pageSegment == 'section_ert' || $pageSegment == 'submission_type' || $pageSegment == 'country' || $pageSegment == 'communities')?'true':'false')?>" aria-controls="navbarVerticalMenuMasters2">
                           <i class="fa fa-database nav-icon"></i>
                           <span class="nav-link-title">Masters</span>
                         </a>
-                        <div id="navbarVerticalMenuMasters2" class="nav-collapse collapse <?=(($pageSegment == 'expertise_area' || $pageSegment == 'ecosystem_affiliation' || $pageSegment == 'pronoun' || $pageSegment == 'title' || $pageSegment == 'role' || $pageSegment == 'section_ert' || $pageSegment == 'submission_type' || $pageSegment == 'country')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">
+                        <div id="navbarVerticalMenuMasters2" class="nav-collapse collapse <?=(($pageSegment == 'expertise_area' || $pageSegment == 'ecosystem_affiliation' || $pageSegment == 'pronoun' || $pageSegment == 'title' || $pageSegment == 'role' || $pageSegment == 'section_ert' || $pageSegment == 'submission_type' || $pageSegment == 'country' || $pageSegment == 'communities')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">
                           <a class="nav-link <?=(($pageSegment == 'expertise_area')?'active':'')?>" href="<?=url('admin/expertise_area/list')?>">Expertise Area</a>
                           <a class="nav-link <?=(($pageSegment == 'ecosystem_affiliation')?'active':'')?>" href="<?=url('admin/ecosystem_affiliation/list')?>">Ecosystem Affiliation</a>
                           <a class="nav-link <?=(($pageSegment == 'pronoun')?'active':'')?>" href="<?=url('admin/pronoun/list')?>">Pronoun</a>
@@ -130,6 +130,7 @@ if($pageSegment == 'article'){
                           <a class="nav-link <?=(($pageSegment == 'role')?'active':'')?>" href="<?=url('admin/role/list')?>">Role</a>
                           <a class="nav-link <?=(($pageSegment == 'section_ert')?'active':'')?>" href="<?=url('admin/section_ert/list')?>">Section EaRTh</a>
                           <a class="nav-link <?=(($pageSegment == 'submission_type')?'active':'')?>" href="<?=url('admin/submission_type/list')?>">Submission Type</a>
+                          <a class="nav-link <?=(($pageSegment == 'communities')?'active':'')?>" href="<?=url('admin/communities/list')?>">Communities</a>
                           <a class="nav-link <?=(($pageSegment == 'country')?'active':'')?>" href="<?=url('admin/country/list')?>">Country</a>
                         </div>
                     </div>
@@ -193,10 +194,10 @@ if($pageSegment == 'article'){
                 <li class="navbar-vertical-footer-list-item">
                     <!-- Style Switcher -->
                     <div class="dropdown dropup">
-                        <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle"
+                        <!-- <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle"
                             id="selectThemeDropdown" data-bs-toggle="dropdown" aria-expanded="false"
                             data-bs-dropdown-animation>
-                        </button>
+                        </button> -->
                         <div class="dropdown-menu navbar-dropdown-menu navbar-dropdown-menu-borderless"
                             aria-labelledby="selectThemeDropdown">
                             <a class="dropdown-item" href="#" data-icon="bi-moon-stars" data-value="auto">

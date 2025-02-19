@@ -51,7 +51,7 @@ class EnquiryController extends Controller
                 'status'             => 3
             ];
             Enquiry::where($this->data['primary_key'], '=', $id)->update($fields);
-            return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'].' Deleted Successfully !!!');
+            return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'].' deleted successfully');
         }
     /* delete */
 }
