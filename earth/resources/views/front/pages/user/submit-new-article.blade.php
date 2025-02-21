@@ -492,10 +492,10 @@ use Illuminate\Support\Facades\DB;
                                     <label for="creative_Work" class="col-md-2 col-lg-4 col-form-label blue-text">15a) Is your Creative-Work fiction?
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="radio" class="readonly-input" id="community_yes" name="creative_Work_fiction" value="Yes" required @checked(old('creative_Work_fiction', $creative_Work_fiction) == 'Yes')>
-                                        <label for="yes">Yes</label>
-                                        <input type="radio" class="readonly-input" id="community_no" name="creative_Work_fiction" value="No" required @checked(old('creative_Work_fiction', $creative_Work_fiction) == 'No')>
-                                        <label for="no">No</label>
+                                        <input type="radio" id="fiction_yes" name="creative_Work_fiction" value="Yes" required @checked(old('creative_Work_fiction', $creative_Work_fiction) == 'Yes')>
+                                        <label for="fiction_yes">Yes</label>
+                                        <input type="radio" id="fiction_no" name="creative_Work_fiction" value="No" required @checked(old('creative_Work_fiction', $creative_Work_fiction) == 'No')>
+                                        <label for="fiction_no">No</label>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
