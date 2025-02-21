@@ -75,6 +75,7 @@ use Illuminate\Support\Facades\DB;
                 $co_ecosystem_affiliations = json_decode($row->co_ecosystem_affiliations);
                 $co_indigenous_affiliations = json_decode($row->co_indigenous_affiliations);
                 $co_author_classification = json_decode($row->co_author_classification);
+                $co_author_pronoun = json_decode($row->co_author_pronoun);
                 $first_name = $row->first_name;
                 $email = $row->email;
                 $for_publication_name = $row->for_publication_name;
@@ -291,7 +292,7 @@ use Illuminate\Support\Facades\DB;
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <label for="co_ecosystem_affiliation_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3F{{$i}}) What continent are first co-author’s ancestors originally from? (select all that apply)
+                                                    <label for="co_ecosystem_affiliation_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3F{{$i}}) What continent are <?=numberToOrdinal($i)?> co-author’s ancestors originally from? (select all that apply)
                                                     </label>
                                                     <div class="col-md-10 col-lg-8">
                                                         @if ($ecosystem_affiliation)
@@ -308,7 +309,7 @@ use Illuminate\Support\Facades\DB;
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <label for="co_Indigenous_affiliation_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3G{{$i}}) What specific region are first co-author’s ancestors originally from OR what is the name of first co-author’s Indigenous community? (example of specific region = Bengal; example of Indigenous community name = Lisjan Ohlone)
+                                                    <label for="co_Indigenous_affiliation_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3G{{$i}}) What specific region are <?=numberToOrdinal($i)?> co-author’s ancestors originally from OR what is the name of first co-author’s Indigenous community? (example of specific region = Bengal; example of Indigenous community name = Lisjan Ohlone)
                                                     </label>
                                                     <div class="col-md-10 col-lg-8">
                                                         <input type="text" name="co_indigenous_affiliation_{{$i}}" class="form-control" id="indigenous_affiliation_{{$i}}"
@@ -333,7 +334,18 @@ use Illuminate\Support\Facades\DB;
                                                         <label for="Movement">Movement</label>
                                                     </div>
                                                 </div> 
-                                            </div> 
+                                            </div>
+                                            <div class="col-md-12" style="margin-top: 15px">
+                                                <label for="pronoun" class="col-md-2 col-lg-4 col-form-label">3I{{$i}}) <?=numberToOrdinal($i)?> co-author’s pronoun</label>
+                                                <div class="col-md-10 col-lg-8">                                                                
+                                                    @if ($pronoun)
+                                                        @foreach ($pronoun as $data)
+                                                            <input type="radio" name="co_author_pronoun_{{$i}}" value="{{ $data->id }}" @checked($data->id == $co_author_pronoun[$i - 1]) >
+                                                            <label>{{ $data->name }}</label>
+                                                        @endforeach
+                                                    @endif                                
+                                                </div>
+                                            </div>
                                         </div> 
                                     </div> 
                                     @endfor
@@ -379,7 +391,7 @@ use Illuminate\Support\Facades\DB;
                                         @endforeach
                                     @endif                                
                                 </div>
-                            </div> 
+                            </div>
                             <div class="row mb-3">
                                 <label for="orginal_work" class="col-md-2 col-lg-4 col-form-label blue-text">8) Are all components of this Creative-Work your original work?
                                 </label>
