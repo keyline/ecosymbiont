@@ -343,25 +343,27 @@ use Illuminate\Support\Facades\DB;
                                                 </div> 
                                             </div>
                                             <div class="col-md-12" style="margin-top: 15px">
-                                                <label for="pronoun" class="col-md-2 col-lg-4 col-form-label">3I{{$i}}) <?=numberToOrdinal($i)?> co-author’s pronoun</label>
-                                                <div class="col-md-10 col-lg-8">                                                                
-                                                    @if ($pronoun)
-                                                        @foreach ($pronoun as $data)
-                                                            <?php
-                                                            if($co_author_pronoun != ''){
-                                                                if($data->id == $co_author_pronoun[$i - 1]){
-                                                                    $pronoun_checked = 'checked';
+                                                <div class="row">
+                                                    <label for="pronoun" class="col-md-2 col-lg-4 col-form-label">3I{{$i}}) <?=numberToOrdinal($i)?> co-author’s pronoun</label>
+                                                    <div class="col-md-10 col-lg-8">
+                                                        @if ($pronoun)
+                                                            @foreach ($pronoun as $data)
+                                                                <?php
+                                                                if($co_author_pronoun != ''){
+                                                                    if($data->id == $co_author_pronoun[$i - 1]){
+                                                                        $pronoun_checked = 'checked';
+                                                                    } else {
+                                                                        $pronoun_checked = '';
+                                                                    }
                                                                 } else {
                                                                     $pronoun_checked = '';
                                                                 }
-                                                            } else {
-                                                                $pronoun_checked = '';
-                                                            }
-                                                            ?>
-                                                            <input type="radio" name="co_author_pronoun_{{$i}}" value="{{ $data->id }}" <?=$pronoun_checked?>>
-                                                            <label>{{ $data->name }}</label>
-                                                        @endforeach
-                                                    @endif                                
+                                                                ?>
+                                                                <input type="radio" name="co_author_pronoun_{{$i}}" value="{{ $data->id }}" <?=$pronoun_checked?>>
+                                                                <label>{{ $data->name }}</label>
+                                                            @endforeach
+                                                        @endif                                
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div> 
