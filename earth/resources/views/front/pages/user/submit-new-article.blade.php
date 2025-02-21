@@ -57,12 +57,13 @@ use Illuminate\Support\Facades\DB;
                 $co_ecosystem_affiliations = json_decode($row->co_ecosystem_affiliations);
                 $co_indigenous_affiliations = json_decode($row->co_indigenous_affiliations);
                 $co_author_classification = json_decode($row->co_author_classification);
-                $first_name = $row->first_name;                               
-                $email = $row->email;          
-                $for_publication_name = $row->for_publication_name;          
-                $countryId = $row->country;                              
-                $creative_Work = $row->creative_Work;  
-                $orginal_work = $row->orginal_work;        
+                $first_name = $row->first_name;
+                $email = $row->email;
+                $for_publication_name = $row->for_publication_name;
+                $countryId = $row->country;
+                $creative_Work = $row->creative_Work;
+                $creative_Work_fiction = $row->creative_Work_fiction;
+                $orginal_work = $row->orginal_work;
                 $copyright = $row->copyright; 
                 $invited = $row->invited;
                 $invited_by = $row->invited_by;  
@@ -75,6 +76,7 @@ use Illuminate\Support\Facades\DB;
                 $pronounId = $row->pronounId;
                 $subtitle = $row->subtitle;
                 $submission_types = $row->submission_types;
+                $additional_information = $row->additional_information;
                 $narrative_file = $row->narrative_file;
                 $narrative_images = $row->narrative_images;
                 $image_files = json_decode($row->image_files);
@@ -112,7 +114,8 @@ use Illuminate\Support\Facades\DB;
                 $email = $profile->email;           
                 $for_publication_name = $profile->for_publication_name;           
                 $countryId = $profile->country;                                 
-                $creative_Work = '';  
+                $creative_Work = '';
+                $creative_Work_fiction = 0'';
                 $orginal_work = '';           
                 $copyright = ''; 
                 $invited = $profile->invited;
@@ -125,6 +128,7 @@ use Illuminate\Support\Facades\DB;
                 $pronounId = $profile->pronounId;
                 $subtitle = '';
                 $submission_types = '';
+                $additional_information = '';
                 $narrative_file = '';
                 $narrative_images = '';
                 $art_images = '';
@@ -483,7 +487,17 @@ use Illuminate\Support\Facades\DB;
                                         <textarea class="form-control" id="creative_Work" name="creative_Work" rows="4" cols="50" placeholder="Your creative_Work here..." required>{{ old('creative_Work', $creative_Work ?? '') }}</textarea>
                                         <div id="creative_WorkError" class="error"></div>
                                     </div>
-                                </div>                                            
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="creative_Work" class="col-md-2 col-lg-4 col-form-label blue-text">15a) Is your Creative-Work fiction?
+                                    </label>
+                                    <div class="col-md-10 col-lg-8">
+                                        <input type="radio" class="readonly-input" id="community_yes" name="creative_Work_fiction" value="Yes" required @checked(old('creative_Work_fiction', $creative_Work_fiction) == 'Yes')>
+                                        <label for="yes">Yes</label>
+                                        <input type="radio" class="readonly-input" id="community_no" name="creative_Work_fiction" value="No" required @checked(old('creative_Work_fiction', $creative_Work_fiction) == 'No')>
+                                        <label for="no">No</label>
+                                    </div>
+                                </div>
                                 <div class="row mb-3">
                                     <label for="subtitle" class="col-md-2 col-lg-4 col-form-label blue-text">16) Subtitle — brief engaging summary of your Creative-Work (30-40 words)
                                     </label>
@@ -507,8 +521,16 @@ use Illuminate\Support\Facades\DB;
                                         @endfor
                                     @endif                            
                                     </div>
-                                </div> 
-                                <div id="submission_types_a" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px; margin-bottom: 20px">                          
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="additional_information" class="col-md-2 col-lg-4 col-form-label">17a) (Optional: max. 100 words) Comments for the Editor(s) (any additional information you wish to share)
+                                    </label>
+                                    <div class="col-md-10 col-lg-8">
+                                        <textarea class="form-control" id="additional_information" name="additional_information" rows="4" cols="50">{{ old('additional_information', $additional_information) }}</textarea>
+                                        <div id="bio_shortError" class="error"></div>
+                                    </div>
+                                </div>
+                                <div id="submission_types_a" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px; margin-bottom: 20px">
                                     <div class="row mb-3">
                                         <label for="narrative_file" class="col-md-2 col-lg-4 col-form-label">17A1) TYPE A: word narrative (no embedded images) (500-1000 words for prose, 100-250 words for poetry)</label>
                                         <div class="col-md-10 col-lg-8">
@@ -657,8 +679,7 @@ use Illuminate\Support\Facades\DB;
                                                     <div class="row description-div" id="art_description_{{ $i }}" >
                                                         <label for="art_image_desc_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17B2b{{$i}}) TYPE B: short caption for image {{ $i }} (max. 50 words)</label>
                                                         <div class="col-md-10 col-lg-8">
-                                                            <textarea style="resize: none; height: 180px;" class="form-control" id="art_image_desc_{{ $i }}" name="art_image_desc_{{ $i }}" rows="4" cols="50" placeholder="If this is original artwork, please include the following information: Artist name: 'Title of work,' type of art, dimension of art (year created)
-(for example, Original Art by Barbara Mumby: 'Las Mariposas,' oil on canvas, 48 x 60 inches (2023))" ><?php if(isset($art_image_desc[$i-1]) && $art_image_desc[$i-1] != '') { echo $art_image_desc[$i-1]; }?></textarea>
+                                                            <textarea style="resize: none; height: 180px;" class="form-control" id="art_image_desc_{{ $i }}" name="art_image_desc_{{ $i }}" rows="4" cols="50" placeholder="If this is original artwork, please include the following information: Artist name: 'Title of work,' type of art, dimension of art (year created) (for example, Original Art by Barbara Mumby: 'Las Mariposas,' oil on canvas, 48 x 60 inches (2023))" ><?php if(isset($art_image_desc[$i-1]) && $art_image_desc[$i-1] != '') { echo $art_image_desc[$i-1]; }?></textarea>
                                                             <div id="art_image_desc_{{ $i }}Error" class="error"></div>
                                                         </div>
                                                     </div>
@@ -701,7 +722,7 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="country" class="col-md-2 col-lg-4 col-form-label">18) What country/nation do you live in? (Country of Residence)                                </label>
+                                    <label for="country" class="col-md-2 col-lg-4 col-form-label">18) What country/nation do you live in? (Country of Residence)</label>
                                     <div class="col-md-10 col-lg-8">
                                         <select name="country" class="form-control" id="country">
                                             <option value="" selected >Select</option>
