@@ -658,7 +658,7 @@ class FrontController extends Controller
         }
         public function forgetPassword(Request $request)
         {            
-            $title                          = 'Forget Password';
+            $title                          = 'Forgot Password';
             $page_name                      = 'forgetpassword';
             $data['search_keyword']         = '';
             if ($request->isMethod('post')) {
