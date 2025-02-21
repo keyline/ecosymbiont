@@ -637,8 +637,9 @@ class FrontController extends Controller
                                                                     <tr><td style='padding: 8px 15px'><strong>Password: </strong>" . htmlspecialchars($randomPassword) . "</td></tr>                                         
                                                                     
                                                                     
-                                                                    <tr><td style='padding: 8px 15px'>Thank You,</td></tr>
-                                                                    <tr><td style='padding: 8px 15px'>Auto-generated from the Ecosymbiont Website.</td></tr>
+                                                                    <tr><td style='padding: 8px 15px'>We look forward to receiving your creative-work submissions.</td></tr>
+                                                                    <tr><td style='padding: 8px 15px'>The EaRTh editorial team</td></tr>
+                                                                    <tr><td style='padding: 8px 15px'>This email is auto-generated from the EaRTh platform.</td></tr>
                                                                 </table>";
                                 $this->sendMail($postData['email'], $subject, $message);
                                 return redirect(url('signin'))->with('success_message', 'Your sign-up was successful! Please check your email for your login credentials.');
