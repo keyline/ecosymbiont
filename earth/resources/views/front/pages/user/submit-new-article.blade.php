@@ -115,7 +115,7 @@ use Illuminate\Support\Facades\DB;
                 $for_publication_name = $profile->for_publication_name;           
                 $countryId = $profile->country;                                 
                 $creative_Work = '';
-                $creative_Work_fiction = 0'';
+                $creative_Work_fiction = '';
                 $orginal_work = '';           
                 $copyright = ''; 
                 $invited = $profile->invited;
