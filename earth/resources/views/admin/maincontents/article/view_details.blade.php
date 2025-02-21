@@ -214,7 +214,7 @@ function numberToOrdinal($number) {
                       </tr>
                       <tr>
                         <td>3I{{$i}}) <?=numberToOrdinal($i)?> co-author’s pronoun</td>
-                        <td>{{ $co_author_pronoun[$i - 1] }}</td>
+                        <td><?=(($co_author_pronoun != '')?$co_author_pronoun[$i - 1]:'')?></td>
                       </tr>
                     @endfor
                     <tr>
