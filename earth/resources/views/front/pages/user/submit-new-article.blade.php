@@ -129,6 +129,13 @@ use Illuminate\Support\Facades\DB;
                 $co_authors_position = '';
                 $co_author_name = '';
                 $co_author_short_bio = '';
+                $co_author_countries = '';
+                $co_author_organizations = '';
+                $co_ecosystem_affiliations = '';
+                $co_indigenous_affiliations = '';
+                $co_author_classification = '';
+                $co_author_pronoun = '';
+
                 $first_name = $profile->first_name;                                 
                 $email = $profile->email;           
                 $for_publication_name = $profile->for_publication_name;           
