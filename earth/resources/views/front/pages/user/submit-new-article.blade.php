@@ -639,7 +639,7 @@ use Illuminate\Support\Facades\DB;
                                                         <label for="first_image_file" class="col-md-2 col-lg-4 col-form-label">17A3a1) TYPE A: image 1 accompanying word narrative</label>
                                                         <div class="col-md-10 col-lg-8">
                                                             <input type="file" name="image_file_1" class="form-control" id="image_file_1" value="{{ old('image_file_1', $image_file_0 ?? '') }}">
-                                                            <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small>
+                                                            <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed (max. 1 MB</small>
                                                             <span id="image_file_1_error" class="text-danger"></span>                                                        
                                                             <?php if(isset($image_files[0]) && $image_files[0] != ''){?>
                                                             <img src="<?=env('UPLOADS_URL').'narrative/'.$image_files[0]?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
@@ -651,7 +651,7 @@ use Illuminate\Support\Facades\DB;
                                                     <div class="row description-div" id="description_1" >
                                                         <label for="narrative_image_desc_1" class="col-md-2 col-lg-4 col-form-label">17A3b1) TYPE A: short caption for image 1 (max. 50 words)</label>
                                                         <div class="col-md-10 col-lg-8">
-                                                            <textarea class="form-control" id="narrative_image_desc_1" name="narrative_image_desc_1" rows="4" cols="50" placeholder="Your narrative_image_desc here..." ><?php if(isset($narrative_image_desc[0]) && $narrative_image_desc[0] != '') { echo $narrative_image_desc[0]; } ?></textarea>
+                                                            <textarea class="form-control" id="narrative_image_desc_1" name="narrative_image_desc_1" rows="4" cols="50"><?php if(isset($narrative_image_desc[0]) && $narrative_image_desc[0] != '') { echo $narrative_image_desc[0]; } ?></textarea>
                                                             <div id="narrative_image_desc_1Error" class="error"></div>
                                                         </div>
                                                     </div>
@@ -680,7 +680,7 @@ use Illuminate\Support\Facades\DB;
                                                     <div class="row description-div" id="description_{{ $i }}" >
                                                         <label for="narrative_image_desc_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17A3b{{$i}}) TYPE A: short caption for image {{ $i }} (max. 50 words)</label>
                                                         <div class="col-md-10 col-lg-8">
-                                                            <textarea class="form-control" id="narrative_image_desc_{{ $i }}" name="narrative_image_desc_{{ $i }}" rows="4" cols="50" placeholder="Your narrative_image_desc here..." ><?php if(isset($narrative_image_desc[$i-1]) && $narrative_image_desc[$i-1] != '') { echo $narrative_image_desc[$i-1]; }?></textarea>
+                                                            <textarea class="form-control" id="narrative_image_desc_{{ $i }}" name="narrative_image_desc_{{ $i }}" rows="4" cols="50"><?php if(isset($narrative_image_desc[$i-1]) && $narrative_image_desc[$i-1] != '') { echo $narrative_image_desc[$i-1]; }?></textarea>
                                                             <div id="narrative_image_desc_{{ $i }}Error" class="error"></div>
                                                         </div>
                                                     </div>
@@ -717,7 +717,7 @@ use Illuminate\Support\Facades\DB;
                                                         <label for="art_image_file_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17B2a{{$i}}) TYPE B: image {{ $i }} of art</label>
                                                         <div class="col-md-10 col-lg-8">
                                                             <input type="file" name="art_image_file_{{ $i }}" class="form-control" id="art_image_file_{{ $i }}">
-                                                            <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small>
+                                                            <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed (max. 1 MB</small>
                                                             <span id="art_image_file_{{ $i }}_error" class="text-danger"></span>                                                        
                                                             <?php if(isset($art_image_file[$i-1]) && $art_image_file[$i-1] != ''){?>
                                                             <img src="<?=env('UPLOADS_URL').'art_image/'.$art_image_file[$i-1]?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
@@ -729,7 +729,7 @@ use Illuminate\Support\Facades\DB;
                                                     <div class="row description-div" id="art_description_{{ $i }}" >
                                                         <label for="art_image_desc_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17B2b{{$i}}) TYPE B: short caption for image {{ $i }} (max. 50 words)</label>
                                                         <div class="col-md-10 col-lg-8">
-                                                            <textarea style="resize: none; height: 180px;" class="form-control" id="art_image_desc_{{ $i }}" name="art_image_desc_{{ $i }}" rows="4" cols="50" placeholder="If this is original artwork, please include the following information: Artist name: 'Title of work,' type of art, dimension of art (year created) (for example, Original Art by Barbara Mumby: 'Las Mariposas,' oil on canvas, 48 x 60 inches (2023))" ><?php if(isset($art_image_desc[$i-1]) && $art_image_desc[$i-1] != '') { echo $art_image_desc[$i-1]; }?></textarea>
+                                                            <textarea style="resize: none; height: 180px;" class="form-control" id="art_image_desc_{{ $i }}" name="art_image_desc_{{ $i }}" rows="4" cols="50"><?php if(isset($art_image_desc[$i-1]) && $art_image_desc[$i-1] != '') { echo $art_image_desc[$i-1]; }?></textarea>
                                                             <div id="art_image_desc_{{ $i }}Error" class="error"></div>
                                                         </div>
                                                     </div>
@@ -742,7 +742,7 @@ use Illuminate\Support\Facades\DB;
                                         <label for="art_desc" class="col-md-2 col-lg-4 col-form-label">17B3) TYPE B: descriptive narrative for art (100-250 words)
                                         </label>
                                         <div class="col-md-10 col-lg-8">
-                                            <textarea class="form-control" id="art_desc" name="art_desc" rows="4" cols="50" placeholder="Your art_desc here..." >{{ old('art_desc', $art_desc ?? '') }}</textarea>
+                                            <textarea class="form-control" id="art_desc" name="art_desc" rows="4" cols="50">{{ old('art_desc', $art_desc ?? '') }}</textarea>
                                             <div id="art_descError" class="error"></div>
                                         </div>
                                     </div>                           
@@ -752,7 +752,7 @@ use Illuminate\Support\Facades\DB;
                                         <label for="art_video_file" class="col-md-2 col-lg-4 col-form-label">17C1) TYPE C: Video (3-10 minutes, Max 1GB)</label>
                                         <div class="col-md-10 col-lg-8">
                                             <input type="file" name="art_video_file" class="form-control" id="art_video_file">
-                                            <small class="text-info">* Only MP4, AVI, MOV, MKV, WEBM files are allowed</small><br>  
+                                            <small class="text-info">* Only MP4, AVI, MOV, MKV, WEBM files are allowed (max. 1GB)</small><br>  
                                             <span id="art_video_file_error" class="text-danger"></span>                                  
                                             <?php if($art_video_file != ''){?>
                                                 <video width="350" height="250" controls>
@@ -766,7 +766,7 @@ use Illuminate\Support\Facades\DB;
                                         <label for="art_video_desc" class="col-md-2 col-lg-4 col-form-label">17C2) TYPE C: descriptive narrative for video (100-250 words)
                                         </label>
                                         <div class="col-md-10 col-lg-8">
-                                            <textarea class="form-control" id="art_video_desc" name="art_video_desc" rows="4" cols="50" placeholder="Your art_video_desc here..." >{{ old('art_video_desc', $art_video_desc ?? '') }}</textarea>
+                                            <textarea class="form-control" id="art_video_desc" name="art_video_desc" rows="4" cols="50">{{ old('art_video_desc', $art_video_desc ?? '') }}</textarea>
                                             <div id="art_video_descError" class="error"></div>
                                         </div>
                                     </div>
@@ -790,23 +790,20 @@ use Illuminate\Support\Facades\DB;
                                 <div class="row mb-3">
                                     <label for="state" class="col-md-2 col-lg-4 col-form-label">19) State/province of residence</label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="text" name="state" class="form-control" id="state"
-                                            value="<?= $state ?>" readonly>
+                                        <input type="text" name="state" class="form-control" id="state" value="<?= $state ?>" readonly>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="city" class="col-md-2 col-lg-4 col-form-label">20) Village/town/city of residence</label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="text" name="city" class="form-control" id="city"
-                                            value="<?= $city ?>" readonly>
+                                        <input type="text" name="city" class="form-control" id="city" value="<?= $city ?>" readonly>
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
                                     <label for="organization_name" class="col-md-2 col-lg-4 col-form-label">21) Name of your grassroots organization/ ecoweb-rooted community/ movement (if no grassroots affiliation, type N/A)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="text" name="organization_name" class="form-control" id="organization_name"
-                                            value="<?= $organization_name ?>" readonly>
+                                        <input type="text" name="organization_name" class="form-control" id="organization_name" value="<?= $organization_name ?>" readonly>
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
