@@ -247,14 +247,14 @@
                                     <label for="state" class="col-md-2 col-lg-4 col-form-label">19) State/province of residence</label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="state" class="form-control" id="state"
-                                            value="{{ old('state', $state) }}">
+                                            value="{{ old('state', $state) }}" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="city" class="col-md-2 col-lg-4 col-form-label">20) Village/town/city of residence</label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="city" class="form-control" id="city"
-                                            value="{{ old('city', $city ) }}">
+                                            value="{{ old('city', $city ) }}" required>
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
@@ -262,7 +262,7 @@
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="organization_name" class="form-control" id="organization_name"
-                                            value="{{ old('organization_name', $organization_name) }}" >
+                                            value="{{ old('organization_name', $organization_name) }}" required>
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
@@ -270,7 +270,7 @@
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="organization_website" class="form-control" id="organization_website"
-                                            value="{{ old('organization_website', $organization_website) }}" >
+                                            value="{{ old('organization_website', $organization_website) }}" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
