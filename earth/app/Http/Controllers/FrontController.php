@@ -604,7 +604,7 @@ class FrontController extends Controller
                     $responseData = json_decode($response);
 
                     // Check if reCAPTCHA validation was successful
-                    if ($responseData->success && $responseData->score >= 0.5) {
+                    // if ($responseData->success && $responseData->score >= 0.5) {
                         // reCAPTCHA validation passed, proceed with form processing
                         // echo "reCAPTCHA v3 validation passed. You can process the form."; die;
                         $rules = [                                 
@@ -649,10 +649,10 @@ class FrontController extends Controller
                             return redirect()->back()->with('error_message', 'All fields required');
                         }
 
-                    } else {
-                        // reCAPTCHA validation failed
-                        return redirect()->back()->with('error_message', 'reCAPTCHA v3 validation failed. Please try again.');                        
-                    }                              
+                    // } else {
+                    //     // reCAPTCHA validation failed
+                    //     return redirect()->back()->with('error_message', 'reCAPTCHA v3 validation failed. Please try again.');                        
+                    // }
             }
             echo $this->front_before_login_layout($title, $page_name, $data);
         }

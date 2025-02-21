@@ -25,7 +25,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="card-header">
-                                            <h3 class="text-center">Forget Password</h3>                                            
+                                            <h3 class="text-center">Forgot Password</h3>                                            
                                         </div>
                                         <form method="POST" action="">
                                             @csrf
