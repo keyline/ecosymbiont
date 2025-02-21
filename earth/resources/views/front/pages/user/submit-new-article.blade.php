@@ -18,6 +18,24 @@
         color: #6187ce;
     }
 </style>
+<?php
+function numberToOrdinal($number) {
+    $ordinals = [
+        1 => 'First',
+        2 => 'Second',
+        3 => 'Third',
+        4 => 'Fourth',
+        5 => 'Fifth',
+        6 => 'Sixth',
+        7 => 'Seventh',
+        8 => 'Eighth',
+        9 => 'Ninth',
+        10 => 'Tenth'
+    ];
+    
+    return $ordinals[$number] ?? $number;
+}
+?>
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
 <!-- <link rel="stylesheet" type="text/css" href="http://localhost/ecosymbiontgit/earth/public/material/frontend/assets/css/bootstrap.min.css" media="screen"> -->
 <!-- block content -->
@@ -228,7 +246,7 @@ use Illuminate\Support\Facades\DB;
                                         <div class="row mb-3">
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <label for="co_author_name_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3B{{$i}}) First co-author’s name</label>
+                                                    <label for="co_author_name_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3B{{$i}}) <?=numberToOrdinal($i)?> co-author’s name</label>
                                                     <div class="col-md-10 col-lg-8">
                                                         <input type="text" name="co_author_name_{{$i}}" class="form-control" id="co_author_name_{{$i}}"
                                                         value="{{ old("co_author_name_$i", $co_author_name[$i - 1] ?? '') }}">
@@ -237,7 +255,7 @@ use Illuminate\Support\Facades\DB;
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <label for="co_author_short_bio_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3C{{$i}}) First co-author’s short bio (30-40 words)</label>
+                                                    <label for="co_author_short_bio_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3C{{$i}}) <?=numberToOrdinal($i)?> co-author’s short bio (30-40 words)</label>
                                                     <div class="col-md-10 col-lg-8">
                                                         <input type="text" name="co_author_short_bio_{{$i}}" class="form-control" id="co_author_short_bio_{{$i}}"
                                                         value="{{ old("co_author_short_bio_$i", $co_author_short_bio[$i - 1] ?? '') }}">
@@ -246,7 +264,7 @@ use Illuminate\Support\Facades\DB;
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <label for="co_author_country_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3D{{$i}}) First co-author’s country of residence</label>
+                                                    <label for="co_author_country_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3D{{$i}}) <?=numberToOrdinal($i)?> co-author’s country of residence</label>
                                                     <div class="col-md-10 col-lg-8">
                                                         <select name="co_author_country_{{$i}}" class="form-control" id="co_author_country_{{$i}}" >
                                                             <option value="" selected disabled>Select</option>
@@ -263,7 +281,7 @@ use Illuminate\Support\Facades\DB;
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <label for="co_authororganization_name_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3E{{$i}}) First co-author’s grassroots organization/ ecoweb-rooted community/ movement
+                                                    <label for="co_authororganization_name_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3E{{$i}}) <?=numberToOrdinal($i)?> co-author’s grassroots organization/ ecoweb-rooted community/ movement
                                                     </label>
                                                     <div class="col-md-10 col-lg-8">
                                                         <input type="text" name="co_authororganization_name_{{$i}}" class="form-control" id="co_authororganization_name_{{$i}}"
@@ -300,7 +318,7 @@ use Illuminate\Support\Facades\DB;
                                             </div> 
                                             <div class="col-md-12" style="margin-top: 15px">
                                                 <div class="row">
-                                                    <label for="co_author_classification_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3H{{$i}}) First co-author’s classification</label>
+                                                    <label for="co_author_classification_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3H{{$i}}) <?=numberToOrdinal($i)?> co-author’s classification</label>
                                                     <div class="col-md-10 col-lg-8">
                                                         <input type="radio" id="Human individual" name="co_author_classification_{{$i}}" value="Human individual" 
                                                             @checked(old("co_author_classification_{$i}", $co_author_classification[$i - 1] ?? '') == 'Human individual')>
