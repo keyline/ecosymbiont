@@ -347,7 +347,18 @@ use Illuminate\Support\Facades\DB;
                                                 <div class="col-md-10 col-lg-8">                                                                
                                                     @if ($pronoun)
                                                         @foreach ($pronoun as $data)
-                                                            <input type="radio" name="co_author_pronoun_{{$i}}" value="{{ $data->id }}" @checked($data->id == $co_author_pronoun[$i - 1]) >
+                                                            <?php
+                                                            if($co_author_pronoun != ''){
+                                                                if($data->id == $co_author_pronoun[$i - 1]){
+                                                                    $pronoun_checked = 'checked';
+                                                                } else {
+                                                                    $pronoun_checked = '';
+                                                                }
+                                                            } else {
+                                                                $pronoun_checked = '';
+                                                            }
+                                                            ?>
+                                                            <input type="radio" name="co_author_pronoun_{{$i}}" value="{{ $data->id }}" <?=$pronoun_checked?>>
                                                             <label>{{ $data->name }}</label>
                                                         @endforeach
                                                     @endif                                
