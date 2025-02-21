@@ -1000,6 +1000,7 @@ class FrontController extends Controller
                     $coecosystemAffiliations = [];
                     $coindigenousAffiliations = [];
                     $coauthorClassification = [];
+                    $coauthorPronoun = [];
     
                     // Loop through the number of co-authors and collect the data into arrays
                     for ($i = 1; $i <= $coAuthorsCount; $i++) {
@@ -1022,7 +1023,12 @@ class FrontController extends Controller
                                 } else{
                                     return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author classification !!!']);
                             }
-                            // $coauthorClassification[] = $request->input("co_author_classification_{$i}");
+
+                            if($request->input("co_author_pronoun{$i}") !== null){                                        
+                                $coauthorPronoun[] = $request->input("co_author_pronoun{$i}");
+                                } else{
+                                    return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author pronoun !!!']);
+                            }
                         }
                     }                
                     
@@ -1101,6 +1107,7 @@ class FrontController extends Controller
                                 'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
                                 'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
                                 'co_author_classification'  => json_encode($coauthorClassification),
+                                'co_author_pronoun'         => json_encode($coauthorPronoun),
                                 'first_name'                => $postData['first_name'],                         
                                 'for_publication_name'      => $postData['for_publication_name'], 
                                 'titleId'                   => $postData['title'],             
@@ -1564,6 +1571,7 @@ class FrontController extends Controller
                             $coecosystemAffiliations = [];
                             $coindigenousAffiliations = [];
                             $coauthorClassification = [];
+                            $coauthorPronoun = [];
     
                             // Loop through the number of co-authors and collect the data into arrays
                             for ($i = 1; $i <= $coAuthorsCount; $i++) {
@@ -1574,44 +1582,49 @@ class FrontController extends Controller
                                     if($request->input("co_author_short_bio_{$i}") !== null){
                                         $coAuthorBios[] = $request->input("co_author_short_bio_{$i}", []);
                                     } else{
-                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author short bio !!!']);
                                     }
                                     // $coAuthorBios[] = $request->input("co_author_short_bio_{$i}");
 
                                     if($request->input("co_author_country_{$i}") !== null){
                                         $coAuthorCountries[] = $request->input("co_author_country_{$i}", []);
                                     } else{
-                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author country !!!']);
                                     }
                                     // $coAuthorCountries[] = $request->input("co_author_country_{$i}");
 
                                     if($request->input("co_authororganization_name_{$i}") !== null){
                                         $coAuthorOrganizations[] = $request->input("co_authororganization_name_{$i}", []);
                                     } else{
-                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author organization name !!!']);
                                     }
                                     // $coAuthorOrganizations[] = $request->input("co_authororganization_name_{$i}");
 
                                     if($request->input("co_ecosystem_affiliation_{$i}") !== null){
                                         $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
                                     } else{
-                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ecosystem affiliation !!!']);
                                     }
                                     // $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
 
                                     if($request->input("co_indigenous_affiliation_{$i}") !== null){
                                         $coindigenousAffiliations[] = $request->input("co_indigenous_affiliation_{$i}", []);
                                     } else{
-                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author indigenous affiliation !!!']);
                                     }
                                     // $coindigenousAffiliations[] = $request->input("co_indigenous_affiliation_{$i}");
 
                                     if($request->input("co_author_classification_{$i}") !== null){
                                         $coauthorClassification[] = $request->input("co_author_classification_{$i}", []);
                                     } else{
-                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author classification !!!']);
                                     }
-                                    // $coauthorClassification[] = $request->input("co_author_classification_{$i}");
+
+                                    if($request->input("co_author_pronoun_{$i}") !== null){
+                                        $coauthorPronoun[] = $request->input("co_author_pronoun_{$i}", []);
+                                    } else{
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author pronoun !!!']);
+                                    }
                                 }else{
                                     return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
                                 }
@@ -1704,7 +1717,8 @@ class FrontController extends Controller
                                         'co_author_organizations'   => json_encode($coAuthorOrganizations),
                                         'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
                                         'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
-                                        'co_author_classification'  => json_encode($coauthorClassification),                           
+                                        'co_author_classification'  => json_encode($coauthorClassification),
+                                        'co_author_pronoun'         => json_encode($coauthorPronoun),
                                         'first_name'                => $postData['first_name'],                          
                                         'for_publication_name'      => $postData['for_publication_name'],           
                                         'pronounId'                 => $postData['pronoun'],
@@ -1835,7 +1849,8 @@ class FrontController extends Controller
                                             'co_author_organizations'   => json_encode($coAuthorOrganizations),
                                             'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
                                             'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
-                                            'co_author_classification'  => json_encode($coauthorClassification),                                
+                                            'co_author_classification'  => json_encode($coauthorClassification),
+                                            'co_author_pronoun'         => json_encode($coauthorPronoun),
                                             'first_name'                => $postData['first_name'],                          
                                             'for_publication_name'      => $postData['for_publication_name'],           
                                             'pronounId'                 => $postData['pronoun'],
@@ -1943,7 +1958,8 @@ class FrontController extends Controller
                                         'co_author_organizations'   => json_encode($coAuthorOrganizations),
                                         'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
                                         'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
-                                        'co_author_classification'  => json_encode($coauthorClassification),     
+                                        'co_author_classification'  => json_encode($coauthorClassification),
+                                        'co_author_pronoun'         => json_encode($coauthorPronoun),     
                                         'first_name'                => $postData['first_name'],                          
                                         'for_publication_name'      => $postData['for_publication_name'],           
                                         'pronounId'                 => $postData['pronoun'],
