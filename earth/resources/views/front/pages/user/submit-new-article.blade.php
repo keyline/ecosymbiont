@@ -18,6 +18,24 @@
         color: #6187ce;
     }
 </style>
+<?php
+function numberToOrdinal($number) {
+    $ordinals = [
+        1 => 'First',
+        2 => 'Second',
+        3 => 'Third',
+        4 => 'Fourth',
+        5 => 'Fifth',
+        6 => 'Sixth',
+        7 => 'Seventh',
+        8 => 'Eighth',
+        9 => 'Ninth',
+        10 => 'Tenth'
+    ];
+    
+    return $ordinals[$number] ?? $number;
+}
+?>
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.3/css/bootstrap.min.css" integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
 <!-- <link rel="stylesheet" type="text/css" href="http://localhost/ecosymbiontgit/earth/public/material/frontend/assets/css/bootstrap.min.css" media="screen"> -->
 <!-- block content -->
@@ -57,12 +75,14 @@ use Illuminate\Support\Facades\DB;
                 $co_ecosystem_affiliations = json_decode($row->co_ecosystem_affiliations);
                 $co_indigenous_affiliations = json_decode($row->co_indigenous_affiliations);
                 $co_author_classification = json_decode($row->co_author_classification);
-                $first_name = $row->first_name;                               
-                $email = $row->email;          
-                $for_publication_name = $row->for_publication_name;          
-                $countryId = $row->country;                              
-                $creative_Work = $row->creative_Work;  
-                $orginal_work = $row->orginal_work;        
+                $co_author_pronoun = json_decode($row->co_author_pronoun);
+                $first_name = $row->first_name;
+                $email = $row->email;
+                $for_publication_name = $row->for_publication_name;
+                $countryId = $row->country;
+                $creative_Work = $row->creative_Work;
+                $creative_Work_fiction = $row->creative_Work_fiction;
+                $orginal_work = $row->orginal_work;
                 $copyright = $row->copyright; 
                 $invited = $row->invited;
                 $invited_by = $row->invited_by;  
@@ -75,6 +95,7 @@ use Illuminate\Support\Facades\DB;
                 $pronounId = $row->pronounId;
                 $subtitle = $row->subtitle;
                 $submission_types = $row->submission_types;
+                $additional_information = $row->additional_information;
                 $narrative_file = $row->narrative_file;
                 $narrative_images = $row->narrative_images;
                 $image_files = json_decode($row->image_files);
@@ -108,11 +129,19 @@ use Illuminate\Support\Facades\DB;
                 $co_authors_position = '';
                 $co_author_name = '';
                 $co_author_short_bio = '';
+                $co_author_countries = '';
+                $co_author_organizations = '';
+                $co_ecosystem_affiliations = '';
+                $co_indigenous_affiliations = '';
+                $co_author_classification = '';
+                $co_author_pronoun = '';
+
                 $first_name = $profile->first_name;                                 
                 $email = $profile->email;           
                 $for_publication_name = $profile->for_publication_name;           
                 $countryId = $profile->country;                                 
-                $creative_Work = '';  
+                $creative_Work = '';
+                $creative_Work_fiction = '';
                 $orginal_work = '';           
                 $copyright = ''; 
                 $invited = $profile->invited;
@@ -125,6 +154,7 @@ use Illuminate\Support\Facades\DB;
                 $pronounId = $profile->pronounId;
                 $subtitle = '';
                 $submission_types = '';
+                $additional_information = '';
                 $narrative_file = '';
                 $narrative_images = '';
                 $art_images = '';
@@ -207,7 +237,7 @@ use Illuminate\Support\Facades\DB;
                             </div>
                             <div id="co_authors_position" style="display: none;border: 1px solid #000; padding: 10px; border-radius: 7px; margin-bottom: 20px;">
                                 <div class="row mb-3">
-                                    <label for="co_authors_position" class="col-md-2 col-lg-4 col-form-label">3A) (- if answer to (3) is 1 or 2) Indicate in which position your name should appear in the list of authors (the Lead Author, i.e., the first author listed, must be a human individual)
+                                    <label for="co_authors_position" class="col-md-2 col-lg-4 col-form-label">3A) If you have co-author(s), indicate in which position your name should appear in the list of authors (the Lead Author, i.e., the first author listed, must be a human individual)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="radio" id="" name="co_authors_position" value="First position" @checked(old('co_authors_position', $co_authors_position ?? '') == 'First position')>
@@ -224,7 +254,7 @@ use Illuminate\Support\Facades\DB;
                                         <div class="row mb-3">
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <label for="co_author_name_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3B{{$i}}) Co-Author Name</label>
+                                                    <label for="co_author_name_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3B{{$i}}) <?=numberToOrdinal($i)?> co-author’s name</label>
                                                     <div class="col-md-10 col-lg-8">
                                                         <input type="text" name="co_author_name_{{$i}}" class="form-control" id="co_author_name_{{$i}}"
                                                         value="{{ old("co_author_name_$i", $co_author_name[$i - 1] ?? '') }}">
@@ -233,7 +263,7 @@ use Illuminate\Support\Facades\DB;
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <label for="co_author_short_bio_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3C{{$i}}) Co-Author Short Bio</label>
+                                                    <label for="co_author_short_bio_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3C{{$i}}) <?=numberToOrdinal($i)?> co-author’s short bio (30-40 words)</label>
                                                     <div class="col-md-10 col-lg-8">
                                                         <input type="text" name="co_author_short_bio_{{$i}}" class="form-control" id="co_author_short_bio_{{$i}}"
                                                         value="{{ old("co_author_short_bio_$i", $co_author_short_bio[$i - 1] ?? '') }}">
@@ -242,7 +272,7 @@ use Illuminate\Support\Facades\DB;
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <label for="co_author_country_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3D{{$i}}) Co-Author country/nation</label>
+                                                    <label for="co_author_country_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3D{{$i}}) <?=numberToOrdinal($i)?> co-author’s country of residence</label>
                                                     <div class="col-md-10 col-lg-8">
                                                         <select name="co_author_country_{{$i}}" class="form-control" id="co_author_country_{{$i}}" >
                                                             <option value="" selected disabled>Select</option>
@@ -259,7 +289,7 @@ use Illuminate\Support\Facades\DB;
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <label for="co_authororganization_name_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3E{{$i}}) Co-Author grassroots organization/ ecoweb-rooted community/ movement
+                                                    <label for="co_authororganization_name_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3E{{$i}}) <?=numberToOrdinal($i)?> co-author’s grassroots organization/ ecoweb-rooted community/ movement
                                                     </label>
                                                     <div class="col-md-10 col-lg-8">
                                                         <input type="text" name="co_authororganization_name_{{$i}}" class="form-control" id="co_authororganization_name_{{$i}}"
@@ -269,7 +299,7 @@ use Illuminate\Support\Facades\DB;
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <label for="co_ecosystem_affiliation_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3F{{$i}}) What continent are Co-Author ancestors originally from? (select all that apply)
+                                                    <label for="co_ecosystem_affiliation_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3F{{$i}}) What continent are <?=numberToOrdinal($i)?> co-author’s ancestors originally from? (select all that apply)
                                                     </label>
                                                     <div class="col-md-10 col-lg-8">
                                                         @if ($ecosystem_affiliation)
@@ -286,7 +316,7 @@ use Illuminate\Support\Facades\DB;
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <label for="co_Indigenous_affiliation_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3G{{$i}}) What specific region are Co-author ancestors originally from OR what is the name of your Indigenous community? (example of specific region = Bengal; example of Indigenous community name = Lisjan Ohlone)
+                                                    <label for="co_Indigenous_affiliation_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3G{{$i}}) What specific region are <?=numberToOrdinal($i)?> co-author’s ancestors originally from OR what is the name of first co-author’s Indigenous community? (example of specific region = Bengal; example of Indigenous community name = Lisjan Ohlone)
                                                     </label>
                                                     <div class="col-md-10 col-lg-8">
                                                         <input type="text" name="co_indigenous_affiliation_{{$i}}" class="form-control" id="indigenous_affiliation_{{$i}}"
@@ -296,7 +326,7 @@ use Illuminate\Support\Facades\DB;
                                             </div> 
                                             <div class="col-md-12" style="margin-top: 15px">
                                                 <div class="row">
-                                                    <label for="co_author_classification_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3H{{$i}}) Co-Author Classification</label>
+                                                    <label for="co_author_classification_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3H{{$i}}) <?=numberToOrdinal($i)?> co-author’s classification</label>
                                                     <div class="col-md-10 col-lg-8">
                                                         <input type="radio" id="Human individual" name="co_author_classification_{{$i}}" value="Human individual" 
                                                             @checked(old("co_author_classification_{$i}", $co_author_classification[$i - 1] ?? '') == 'Human individual')>
@@ -311,7 +341,31 @@ use Illuminate\Support\Facades\DB;
                                                         <label for="Movement">Movement</label>
                                                     </div>
                                                 </div> 
-                                            </div> 
+                                            </div>
+                                            <div class="col-md-12" style="margin-top: 15px">
+                                                <div class="row">
+                                                    <label for="pronoun" class="col-md-2 col-lg-4 col-form-label">3I{{$i}}) <?=numberToOrdinal($i)?> co-author’s pronoun</label>
+                                                    <div class="col-md-10 col-lg-8">
+                                                        @if ($pronoun)
+                                                            @foreach ($pronoun as $data)
+                                                                <?php
+                                                                if($co_author_pronoun != ''){
+                                                                    if($data->id == $co_author_pronoun[$i - 1]){
+                                                                        $pronoun_checked = 'checked';
+                                                                    } else {
+                                                                        $pronoun_checked = '';
+                                                                    }
+                                                                } else {
+                                                                    $pronoun_checked = '';
+                                                                }
+                                                                ?>
+                                                                <input type="radio" name="co_author_pronoun_{{$i}}" value="{{ $data->id }}" <?=$pronoun_checked?>>
+                                                                <label>{{ $data->name }}</label>
+                                                            @endforeach
+                                                        @endif                                
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div> 
                                     </div> 
                                     @endfor
@@ -357,7 +411,7 @@ use Illuminate\Support\Facades\DB;
                                         @endforeach
                                     @endif                                
                                 </div>
-                            </div> 
+                            </div>
                             <div class="row mb-3">
                                 <label for="orginal_work" class="col-md-2 col-lg-4 col-form-label blue-text">8) Are all components of this Creative-Work your original work?
                                 </label>
@@ -483,7 +537,17 @@ use Illuminate\Support\Facades\DB;
                                         <textarea class="form-control" id="creative_Work" name="creative_Work" rows="4" cols="50" placeholder="Your creative_Work here..." required>{{ old('creative_Work', $creative_Work ?? '') }}</textarea>
                                         <div id="creative_WorkError" class="error"></div>
                                     </div>
-                                </div>                                            
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="creative_Work" class="col-md-2 col-lg-4 col-form-label blue-text">15a) Is your Creative-Work fiction?
+                                    </label>
+                                    <div class="col-md-10 col-lg-8">
+                                        <input type="radio" id="fiction_yes" name="creative_Work_fiction" value="Yes" required @checked(old('creative_Work_fiction', $creative_Work_fiction) == 'Yes')>
+                                        <label for="fiction_yes">Yes</label>
+                                        <input type="radio" id="fiction_no" name="creative_Work_fiction" value="No" required @checked(old('creative_Work_fiction', $creative_Work_fiction) == 'No')>
+                                        <label for="fiction_no">No</label>
+                                    </div>
+                                </div>
                                 <div class="row mb-3">
                                     <label for="subtitle" class="col-md-2 col-lg-4 col-form-label blue-text">16) Subtitle — brief engaging summary of your Creative-Work (30-40 words)
                                     </label>
@@ -507,8 +571,16 @@ use Illuminate\Support\Facades\DB;
                                         @endfor
                                     @endif                            
                                     </div>
-                                </div> 
-                                <div id="submission_types_a" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px; margin-bottom: 20px">                          
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="additional_information" class="col-md-2 col-lg-4 col-form-label">17a) (Optional: max. 100 words) Comments for the Editor(s) (any additional information you wish to share)
+                                    </label>
+                                    <div class="col-md-10 col-lg-8">
+                                        <textarea class="form-control" id="additional_information" name="additional_information" rows="4" cols="50">{{ old('additional_information', $additional_information) }}</textarea>
+                                        <div id="bio_shortError" class="error"></div>
+                                    </div>
+                                </div>
+                                <div id="submission_types_a" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px; margin-bottom: 20px">
                                     <div class="row mb-3">
                                         <label for="narrative_file" class="col-md-2 col-lg-4 col-form-label">17A1) TYPE A: word narrative (no embedded images) (500-1000 words for prose, 100-250 words for poetry)</label>
                                         <div class="col-md-10 col-lg-8">
@@ -567,7 +639,7 @@ use Illuminate\Support\Facades\DB;
                                                         <label for="first_image_file" class="col-md-2 col-lg-4 col-form-label">17A3a1) TYPE A: image 1 accompanying word narrative</label>
                                                         <div class="col-md-10 col-lg-8">
                                                             <input type="file" name="image_file_1" class="form-control" id="image_file_1" value="{{ old('image_file_1', $image_file_0 ?? '') }}">
-                                                            <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small>
+                                                            <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed (max. 1 MB</small>
                                                             <span id="image_file_1_error" class="text-danger"></span>                                                        
                                                             <?php if(isset($image_files[0]) && $image_files[0] != ''){?>
                                                             <img src="<?=env('UPLOADS_URL').'narrative/'.$image_files[0]?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
@@ -579,7 +651,7 @@ use Illuminate\Support\Facades\DB;
                                                     <div class="row description-div" id="description_1" >
                                                         <label for="narrative_image_desc_1" class="col-md-2 col-lg-4 col-form-label">17A3b1) TYPE A: short caption for image 1 (max. 50 words)</label>
                                                         <div class="col-md-10 col-lg-8">
-                                                            <textarea class="form-control" id="narrative_image_desc_1" name="narrative_image_desc_1" rows="4" cols="50" placeholder="Your narrative_image_desc here..." ><?php if(isset($narrative_image_desc[0]) && $narrative_image_desc[0] != '') { echo $narrative_image_desc[0]; } ?></textarea>
+                                                            <textarea class="form-control" id="narrative_image_desc_1" name="narrative_image_desc_1" rows="4" cols="50"><?php if(isset($narrative_image_desc[0]) && $narrative_image_desc[0] != '') { echo $narrative_image_desc[0]; } ?></textarea>
                                                             <div id="narrative_image_desc_1Error" class="error"></div>
                                                         </div>
                                                     </div>
@@ -608,7 +680,7 @@ use Illuminate\Support\Facades\DB;
                                                     <div class="row description-div" id="description_{{ $i }}" >
                                                         <label for="narrative_image_desc_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17A3b{{$i}}) TYPE A: short caption for image {{ $i }} (max. 50 words)</label>
                                                         <div class="col-md-10 col-lg-8">
-                                                            <textarea class="form-control" id="narrative_image_desc_{{ $i }}" name="narrative_image_desc_{{ $i }}" rows="4" cols="50" placeholder="Your narrative_image_desc here..." ><?php if(isset($narrative_image_desc[$i-1]) && $narrative_image_desc[$i-1] != '') { echo $narrative_image_desc[$i-1]; }?></textarea>
+                                                            <textarea class="form-control" id="narrative_image_desc_{{ $i }}" name="narrative_image_desc_{{ $i }}" rows="4" cols="50"><?php if(isset($narrative_image_desc[$i-1]) && $narrative_image_desc[$i-1] != '') { echo $narrative_image_desc[$i-1]; }?></textarea>
                                                             <div id="narrative_image_desc_{{ $i }}Error" class="error"></div>
                                                         </div>
                                                     </div>
@@ -645,7 +717,7 @@ use Illuminate\Support\Facades\DB;
                                                         <label for="art_image_file_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17B2a{{$i}}) TYPE B: image {{ $i }} of art</label>
                                                         <div class="col-md-10 col-lg-8">
                                                             <input type="file" name="art_image_file_{{ $i }}" class="form-control" id="art_image_file_{{ $i }}">
-                                                            <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small>
+                                                            <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed (max. 1 MB</small>
                                                             <span id="art_image_file_{{ $i }}_error" class="text-danger"></span>                                                        
                                                             <?php if(isset($art_image_file[$i-1]) && $art_image_file[$i-1] != ''){?>
                                                             <img src="<?=env('UPLOADS_URL').'art_image/'.$art_image_file[$i-1]?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
@@ -657,8 +729,7 @@ use Illuminate\Support\Facades\DB;
                                                     <div class="row description-div" id="art_description_{{ $i }}" >
                                                         <label for="art_image_desc_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17B2b{{$i}}) TYPE B: short caption for image {{ $i }} (max. 50 words)</label>
                                                         <div class="col-md-10 col-lg-8">
-                                                            <textarea style="resize: none; height: 180px;" class="form-control" id="art_image_desc_{{ $i }}" name="art_image_desc_{{ $i }}" rows="4" cols="50" placeholder="If this is original artwork, please include the following information: Artist name: 'Title of work,' type of art, dimension of art (year created)
-(for example, Original Art by Barbara Mumby: 'Las Mariposas,' oil on canvas, 48 x 60 inches (2023))" ><?php if(isset($art_image_desc[$i-1]) && $art_image_desc[$i-1] != '') { echo $art_image_desc[$i-1]; }?></textarea>
+                                                            <textarea style="resize: none; height: 180px;" class="form-control" id="art_image_desc_{{ $i }}" name="art_image_desc_{{ $i }}" rows="4" cols="50"><?php if(isset($art_image_desc[$i-1]) && $art_image_desc[$i-1] != '') { echo $art_image_desc[$i-1]; }?></textarea>
                                                             <div id="art_image_desc_{{ $i }}Error" class="error"></div>
                                                         </div>
                                                     </div>
@@ -671,7 +742,7 @@ use Illuminate\Support\Facades\DB;
                                         <label for="art_desc" class="col-md-2 col-lg-4 col-form-label">17B3) TYPE B: descriptive narrative for art (100-250 words)
                                         </label>
                                         <div class="col-md-10 col-lg-8">
-                                            <textarea class="form-control" id="art_desc" name="art_desc" rows="4" cols="50" placeholder="Your art_desc here..." >{{ old('art_desc', $art_desc ?? '') }}</textarea>
+                                            <textarea class="form-control" id="art_desc" name="art_desc" rows="4" cols="50">{{ old('art_desc', $art_desc ?? '') }}</textarea>
                                             <div id="art_descError" class="error"></div>
                                         </div>
                                     </div>                           
@@ -681,7 +752,7 @@ use Illuminate\Support\Facades\DB;
                                         <label for="art_video_file" class="col-md-2 col-lg-4 col-form-label">17C1) TYPE C: Video (3-10 minutes, Max 1GB)</label>
                                         <div class="col-md-10 col-lg-8">
                                             <input type="file" name="art_video_file" class="form-control" id="art_video_file">
-                                            <small class="text-info">* Only MP4, AVI, MOV, MKV, WEBM files are allowed</small><br>  
+                                            <small class="text-info">* Only MP4, AVI, MOV, MKV, WEBM files are allowed (max. 1GB)</small><br>  
                                             <span id="art_video_file_error" class="text-danger"></span>                                  
                                             <?php if($art_video_file != ''){?>
                                                 <video width="350" height="250" controls>
@@ -695,13 +766,13 @@ use Illuminate\Support\Facades\DB;
                                         <label for="art_video_desc" class="col-md-2 col-lg-4 col-form-label">17C2) TYPE C: descriptive narrative for video (100-250 words)
                                         </label>
                                         <div class="col-md-10 col-lg-8">
-                                            <textarea class="form-control" id="art_video_desc" name="art_video_desc" rows="4" cols="50" placeholder="Your art_video_desc here..." >{{ old('art_video_desc', $art_video_desc ?? '') }}</textarea>
+                                            <textarea class="form-control" id="art_video_desc" name="art_video_desc" rows="4" cols="50">{{ old('art_video_desc', $art_video_desc ?? '') }}</textarea>
                                             <div id="art_video_descError" class="error"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="country" class="col-md-2 col-lg-4 col-form-label">18) What country/nation do you live in? (Country of Residence)                                </label>
+                                    <label for="country" class="col-md-2 col-lg-4 col-form-label">18) What country/nation do you live in? (Country of Residence)</label>
                                     <div class="col-md-10 col-lg-8">
                                         <select name="country" class="form-control" id="country">
                                             <option value="" selected >Select</option>
@@ -719,23 +790,20 @@ use Illuminate\Support\Facades\DB;
                                 <div class="row mb-3">
                                     <label for="state" class="col-md-2 col-lg-4 col-form-label">19) State/province of residence</label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="text" name="state" class="form-control" id="state"
-                                            value="<?= $state ?>" readonly>
+                                        <input type="text" name="state" class="form-control" id="state" value="<?= $state ?>" readonly>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="city" class="col-md-2 col-lg-4 col-form-label">20) Village/town/city of residence</label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="text" name="city" class="form-control" id="city"
-                                            value="<?= $city ?>" readonly>
+                                        <input type="text" name="city" class="form-control" id="city" value="<?= $city ?>" readonly>
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
                                     <label for="organization_name" class="col-md-2 col-lg-4 col-form-label">21) Name of your grassroots organization/ ecoweb-rooted community/ movement (if no grassroots affiliation, type N/A)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="text" name="organization_name" class="form-control" id="organization_name"
-                                            value="<?= $organization_name ?>" readonly>
+                                        <input type="text" name="organization_name" class="form-control" id="organization_name" value="<?= $organization_name ?>" readonly>
                                     </div>
                                 </div> 
                                 <div class="row mb-3">

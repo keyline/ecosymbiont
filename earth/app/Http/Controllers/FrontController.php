@@ -604,7 +604,7 @@ class FrontController extends Controller
                     $responseData = json_decode($response);
 
                     // Check if reCAPTCHA validation was successful
-                    if ($responseData->success && $responseData->score >= 0.5) {
+                    // if ($responseData->success && $responseData->score >= 0.5) {
                         // reCAPTCHA validation passed, proceed with form processing
                         // echo "reCAPTCHA v3 validation passed. You can process the form."; die;
                         $rules = [                                 
@@ -637,8 +637,9 @@ class FrontController extends Controller
                                                                     <tr><td style='padding: 8px 15px'><strong>Password: </strong>" . htmlspecialchars($randomPassword) . "</td></tr>                                         
                                                                     
                                                                     
-                                                                    <tr><td style='padding: 8px 15px'>Thank You,</td></tr>
-                                                                    <tr><td style='padding: 8px 15px'>Auto-generated from the Ecosymbiont Website.</td></tr>
+                                                                    <tr><td style='padding: 8px 15px'>We look forward to receiving your creative-work submissions.</td></tr>
+                                                                    <tr><td style='padding: 8px 15px'>The EaRTh editorial team</td></tr>
+                                                                    <tr><td style='padding: 8px 15px'>This email is auto-generated from the EaRTh platform.</td></tr>
                                                                 </table>";
                                 $this->sendMail($postData['email'], $subject, $message);
                                 return redirect(url('signin'))->with('success_message', 'Your sign-up was successful! Please check your email for your login credentials.');
@@ -649,16 +650,16 @@ class FrontController extends Controller
                             return redirect()->back()->with('error_message', 'All fields required');
                         }
 
-                    } else {
-                        // reCAPTCHA validation failed
-                        return redirect()->back()->with('error_message', 'reCAPTCHA v3 validation failed. Please try again.');                        
-                    }                              
+                    // } else {
+                    //     // reCAPTCHA validation failed
+                    //     return redirect()->back()->with('error_message', 'reCAPTCHA v3 validation failed. Please try again.');                        
+                    // }
             }
             echo $this->front_before_login_layout($title, $page_name, $data);
         }
         public function forgetPassword(Request $request)
         {            
-            $title                          = 'Forget Password';
+            $title                          = 'Forgot Password';
             $page_name                      = 'forgetpassword';
             $data['search_keyword']         = '';
             if ($request->isMethod('post')) {
@@ -978,7 +979,7 @@ class FrontController extends Controller
                 if ($postData['invited'] == 'No' && $postData['participated'] == 'No') {                    
                     $rules = [
                         'first_name'                => 'required',                                                                
-                        'email'                     => 'required',                                                                                                    
+                        'email'                     => 'required',                                                             
                         'orginal_work'              => 'required',                                     
                         'copyright'                 => 'required',                     
                         'title'                     => 'required',
@@ -999,6 +1000,7 @@ class FrontController extends Controller
                     $coecosystemAffiliations = [];
                     $coindigenousAffiliations = [];
                     $coauthorClassification = [];
+                    $coauthorPronoun = [];
     
                     // Loop through the number of co-authors and collect the data into arrays
                     for ($i = 1; $i <= $coAuthorsCount; $i++) {
@@ -1021,7 +1023,12 @@ class FrontController extends Controller
                                 } else{
                                     return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author classification !!!']);
                             }
-                            // $coauthorClassification[] = $request->input("co_author_classification_{$i}");
+
+                            if($request->input("co_author_pronoun{$i}") !== null){                                        
+                                $coauthorPronoun[] = $request->input("co_author_pronoun{$i}");
+                                } else{
+                                    return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author pronoun !!!']);
+                            }
                         }
                     }                
                     
@@ -1038,8 +1045,8 @@ class FrontController extends Controller
                                 'email'                     => $postData['email'],
                                 'author_classification'     => $postData['author_classification'],
                                 'co_authors'                => $postData['co_authors'],                            
-                                'first_name'                => $postData['first_name'],                                                                             
-                                'for_publication_name'      => $postData['for_publication_name'], 
+                                'first_name'                => $postData['first_name'],
+                                'for_publication_name'      => $postData['for_publication_name'],
                                 'titleId'                   => $postData['title'],             
                                 'pronounId'                 => $postData['pronoun'],
                                 'orginal_work'              => $postData['orginal_work'],           
@@ -1100,7 +1107,8 @@ class FrontController extends Controller
                                 'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
                                 'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
                                 'co_author_classification'  => json_encode($coauthorClassification),
-                                'first_name'                => $postData['first_name'],                                                                             
+                                'co_author_pronoun'         => json_encode($coauthorPronoun),
+                                'first_name'                => $postData['first_name'],                         
                                 'for_publication_name'      => $postData['for_publication_name'], 
                                 'titleId'                   => $postData['title'],             
                                 'pronounId'                 => $postData['pronoun'],
@@ -1152,9 +1160,10 @@ class FrontController extends Controller
                     'country'                   => 'required',                                                          
                     'orginal_work'              => 'required', 
                     'copyright'                 => 'required', 
-                    'submission_types'          => 'required',                
-                    // 'state'                     => 'required', 
-                    // 'city'                      => 'required', 
+                    'submission_types'          => 'required',
+                    'additional_information'    => ['required', 'string', new MaxWords(100)], 
+                    'state'                     => 'required',
+                    'city'                      => 'required', 
                     'acknowledge'               => 'required',                                                      
                     'section_ert'               => 'required',
                     'title'                     => 'required',
@@ -1162,11 +1171,12 @@ class FrontController extends Controller
                     'community'                 => 'required',
                     // 'organization_name'         => 'required',
                     // 'organization_website'      => 'required',
-                    'ecosystem_affiliation'     => 'required',               
-                    'expertise_area'            => 'required',                
+                    'ecosystem_affiliation'     => 'required',
+                    'expertise_area'            => 'required',
                     'explanation'               => ['required', 'string', new MaxWords(100)],
                     'explanation_submission'    => ['required', 'string', new MaxWords(150)],                
                     'creative_Work'             => ['required', 'string', new MaxWords(10)],
+                    'creative_Work_fiction'     => 'required',
                     'subtitle'                  => ['required', 'string', new MaxWords(40)],                
                     'bio_short'                 => ['required', 'string', new MaxWords(40)],
                     'bio_long'                  => ['required', 'string', new MaxWords(250)], 
@@ -1257,7 +1267,7 @@ class FrontController extends Controller
                                    'email'                     => $postData['email'],
                                    'author_classification'     => $postData['author_classification'],
                                    'co_authors'                => $postData['co_authors'],                           
-                                   'first_name'                => $postData['first_name'],                                                                             
+                                   'first_name'                => $postData['first_name'],
                                    'for_publication_name'      => $postData['for_publication_name'],           
                                    'pronounId'                 => $postData['pronoun'],
                                    'orginal_work'              => $postData['orginal_work'],           
@@ -1273,13 +1283,15 @@ class FrontController extends Controller
                                    'explanation_submission'    => $postData['explanation_submission'],     
                                    'titleId'                   => $postData['title'],                        
                                    'creative_Work'             => $postData['creative_Work'],
+                                   'creative_Work_fiction'     => $postData['creative_Work_fiction'],
                                    'subtitle'                  => $postData['subtitle'],
                                    'submission_types'          => $submission_typesInfo,
+                                   'additional_information'    => $postData['additional_information'],
                                    'section_ertId'             => $section_ertInfo,
                                    'narrative_file'            => $narrative_file,
                                    'narrative_images'          => $postData['narrative_images'],
                                    'narrative_image_desc'      => json_encode($narrativeImageDesc),  // Storing as JSON string
-                                   'image_files'               => json_encode($narrativeimageFile),                                                                                                          
+                                   'image_files'               => json_encode($narrativeimageFile),
                                    'country'                   => $postData['country'],
                                    'state'                     => $postData['state'],
                                    'city'                      => $postData['city'],
@@ -1377,7 +1389,7 @@ class FrontController extends Controller
                                    'email'                     => $postData['email'],
                                    'author_classification'     => $postData['author_classification'],
                                    'co_authors'                => $postData['co_authors'],                           
-                                   'first_name'                => $postData['first_name'],                                                                             
+                                   'first_name'                => $postData['first_name'],                         
                                    'for_publication_name'      => $postData['for_publication_name'],           
                                    'pronounId'                 => $postData['pronoun'],
                                    'orginal_work'              => $postData['orginal_work'],           
@@ -1393,13 +1405,15 @@ class FrontController extends Controller
                                    'explanation_submission'    => $postData['explanation_submission'],     
                                    'titleId'                   => $postData['title'],                        
                                    'creative_Work'             => $postData['creative_Work'],
+                                   'creative_Work_fiction'     => $postData['creative_Work_fiction'],
                                    'subtitle'                  => $postData['subtitle'],
                                    'submission_types'          => $submission_typesInfo,
+                                   'additional_information'    => $postData['additional_information'],
                                    'section_ertId'             => $section_ertInfo,                                  
                                    'art_images'                => $postData['art_images'],
                                    'art_image_desc'            => json_encode($artImageDesc),  // Storing as JSON string
                                    'art_image_file'            => json_encode($artimageFile),
-                                   'art_desc'                  => $postData['art_desc'],                                                                                                      
+                                   'art_desc'                  => $postData['art_desc'],
                                    'country'                   => $postData['country'],
                                    'state'                     => $postData['state'],
                                    'city'                      => $postData['city'],
@@ -1420,7 +1434,7 @@ class FrontController extends Controller
                                     'fullName'                  => $fullName,
                                     'email'                     => $postData['email'],
                                     'article_no'                => $article_no,
-                                    'creative_Work'      => $postData['creative_Work'],
+                                    'creative_Work'             => $postData['creative_Work'],
                                 ];
                                 $subject                    = $generalSetting->site_name.': Creative-Work submitted by ' . $fullName . ' (' . $postData['email'] . ') ' . '#' . $article_no;
                                 $message                    = view('email-templates.creative-work-submission',$mailData);
@@ -1476,7 +1490,7 @@ class FrontController extends Controller
                                    'email'                     => $postData['email'],
                                    'author_classification'     => $postData['author_classification'],
                                    'co_authors'                => $postData['co_authors'],                           
-                                   'first_name'                => $postData['first_name'],                                                                             
+                                   'first_name'                => $postData['first_name'],
                                    'for_publication_name'      => $postData['for_publication_name'],           
                                    'pronounId'                 => $postData['pronoun'],
                                    'orginal_work'              => $postData['orginal_work'],           
@@ -1492,11 +1506,13 @@ class FrontController extends Controller
                                    'explanation_submission'    => $postData['explanation_submission'],     
                                    'titleId'                   => $postData['title'],                        
                                    'creative_Work'             => $postData['creative_Work'],
+                                   'creative_Work_fiction'     => $postData['creative_Work_fiction'],
                                    'subtitle'                  => $postData['subtitle'],
                                    'submission_types'          => $submission_typesInfo,
+                                   'additional_information'    => $postData['additional_information'],
                                    'section_ertId'             => $section_ertInfo,                                
                                    'art_video_file'            => $art_video_file,
-                                   'art_video_desc'            => $postData['art_video_desc'],                                                                        
+                                   'art_video_desc'            => $postData['art_video_desc'],                 
                                    'country'                   => $postData['country'],
                                    'state'                     => $postData['state'],
                                    'city'                      => $postData['city'],
@@ -1555,6 +1571,7 @@ class FrontController extends Controller
                             $coecosystemAffiliations = [];
                             $coindigenousAffiliations = [];
                             $coauthorClassification = [];
+                            $coauthorPronoun = [];
     
                             // Loop through the number of co-authors and collect the data into arrays
                             for ($i = 1; $i <= $coAuthorsCount; $i++) {
@@ -1565,44 +1582,49 @@ class FrontController extends Controller
                                     if($request->input("co_author_short_bio_{$i}") !== null){
                                         $coAuthorBios[] = $request->input("co_author_short_bio_{$i}", []);
                                     } else{
-                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author short bio !!!']);
                                     }
                                     // $coAuthorBios[] = $request->input("co_author_short_bio_{$i}");
 
                                     if($request->input("co_author_country_{$i}") !== null){
                                         $coAuthorCountries[] = $request->input("co_author_country_{$i}", []);
                                     } else{
-                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author country !!!']);
                                     }
                                     // $coAuthorCountries[] = $request->input("co_author_country_{$i}");
 
                                     if($request->input("co_authororganization_name_{$i}") !== null){
                                         $coAuthorOrganizations[] = $request->input("co_authororganization_name_{$i}", []);
                                     } else{
-                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author organization name !!!']);
                                     }
                                     // $coAuthorOrganizations[] = $request->input("co_authororganization_name_{$i}");
 
                                     if($request->input("co_ecosystem_affiliation_{$i}") !== null){
                                         $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
                                     } else{
-                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ecosystem affiliation !!!']);
                                     }
                                     // $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
 
                                     if($request->input("co_indigenous_affiliation_{$i}") !== null){
                                         $coindigenousAffiliations[] = $request->input("co_indigenous_affiliation_{$i}", []);
                                     } else{
-                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author indigenous affiliation !!!']);
                                     }
                                     // $coindigenousAffiliations[] = $request->input("co_indigenous_affiliation_{$i}");
 
                                     if($request->input("co_author_classification_{$i}") !== null){
                                         $coauthorClassification[] = $request->input("co_author_classification_{$i}", []);
                                     } else{
-                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author classification !!!']);
                                     }
-                                    // $coauthorClassification[] = $request->input("co_author_classification_{$i}");
+
+                                    if($request->input("co_author_pronoun_{$i}") !== null){
+                                        $coauthorPronoun[] = $request->input("co_author_pronoun_{$i}", []);
+                                    } else{
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author pronoun !!!']);
+                                    }
                                 }else{
                                     return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
                                 }
@@ -1695,8 +1717,9 @@ class FrontController extends Controller
                                         'co_author_organizations'   => json_encode($coAuthorOrganizations),
                                         'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
                                         'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
-                                        'co_author_classification'  => json_encode($coauthorClassification),                           
-                                        'first_name'                => $postData['first_name'],                                                                             
+                                        'co_author_classification'  => json_encode($coauthorClassification),
+                                        'co_author_pronoun'         => json_encode($coauthorPronoun),
+                                        'first_name'                => $postData['first_name'],                          
                                         'for_publication_name'      => $postData['for_publication_name'],           
                                         'pronounId'                 => $postData['pronoun'],
                                         'orginal_work'              => $postData['orginal_work'],           
@@ -1712,13 +1735,15 @@ class FrontController extends Controller
                                         'explanation_submission'    => $postData['explanation_submission'],     
                                         'titleId'                   => $postData['title'],                        
                                         'creative_Work'             => $postData['creative_Work'],
+                                        'creative_Work_fiction'     => $postData['creative_Work_fiction'],
                                         'subtitle'                  => $postData['subtitle'],
                                         'submission_types'          => $submission_typesInfo,
+                                        'additional_information'    => $postData['additional_information'],
                                         'section_ertId'             => $section_ertInfo,
                                         'narrative_file'            => $narrative_file,
                                         'narrative_images'          => $postData['narrative_images'],
                                         'narrative_image_desc'      => json_encode($narrativeImageDesc),  // Storing as JSON string
-                                        'image_files'               => json_encode($narrativeimageFile),                                                                                                                
+                                        'image_files'               => json_encode($narrativeimageFile),  
                                         'country'                   => $postData['country'],
                                         'state'                     => $postData['state'],
                                         'city'                      => $postData['city'],
@@ -1824,8 +1849,9 @@ class FrontController extends Controller
                                             'co_author_organizations'   => json_encode($coAuthorOrganizations),
                                             'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
                                             'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
-                                            'co_author_classification'  => json_encode($coauthorClassification),                                
-                                            'first_name'                => $postData['first_name'],                                                                             
+                                            'co_author_classification'  => json_encode($coauthorClassification),
+                                            'co_author_pronoun'         => json_encode($coauthorPronoun),
+                                            'first_name'                => $postData['first_name'],                          
                                             'for_publication_name'      => $postData['for_publication_name'],           
                                             'pronounId'                 => $postData['pronoun'],
                                             'orginal_work'              => $postData['orginal_work'],           
@@ -1841,13 +1867,15 @@ class FrontController extends Controller
                                             'explanation_submission'    => $postData['explanation_submission'],     
                                             'titleId'                   => $postData['title'],                        
                                             'creative_Work'             => $postData['creative_Work'],
+                                            'creative_Work_fiction'     => $postData['creative_Work_fiction'],
                                             'subtitle'                  => $postData['subtitle'],
                                             'submission_types'          => $submission_typesInfo,
+                                            'additional_information'    => $postData['additional_information'],
                                             'section_ertId'             => $section_ertInfo,                                        
                                             'art_images'                => $postData['art_images'],
                                             'art_image_desc'            => json_encode($artImageDesc),  // Storing as JSON string
                                             'art_image_file'            => json_encode($artimageFile),
-                                            'art_desc'                  => $postData['art_desc'],                                                                                                           
+                                            'art_desc'                  => $postData['art_desc'],
                                             'country'                   => $postData['country'],
                                             'state'                     => $postData['state'],
                                             'city'                      => $postData['city'],
@@ -1930,8 +1958,9 @@ class FrontController extends Controller
                                         'co_author_organizations'   => json_encode($coAuthorOrganizations),
                                         'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
                                         'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
-                                        'co_author_classification'  => json_encode($coauthorClassification),     
-                                        'first_name'                => $postData['first_name'],                                                                             
+                                        'co_author_classification'  => json_encode($coauthorClassification),
+                                        'co_author_pronoun'         => json_encode($coauthorPronoun),     
+                                        'first_name'                => $postData['first_name'],                          
                                         'for_publication_name'      => $postData['for_publication_name'],           
                                         'pronounId'                 => $postData['pronoun'],
                                         'orginal_work'              => $postData['orginal_work'],           
@@ -1947,11 +1976,13 @@ class FrontController extends Controller
                                         'explanation_submission'    => $postData['explanation_submission'],     
                                         'titleId'                   => $postData['title'],                        
                                         'creative_Work'             => $postData['creative_Work'],
+                                        'creative_Work_fiction'     => $postData['creative_Work_fiction'],
                                         'subtitle'                  => $postData['subtitle'],
                                         'submission_types'          => $submission_typesInfo,
+                                        'additional_information'    => $postData['additional_information'],
                                         'section_ertId'             => $section_ertInfo,                                
                                         'art_video_file'            => $art_video_file,
-                                        'art_video_desc'            => $postData['art_video_desc'],                                                                        
+                                        'art_video_desc'            => $postData['art_video_desc'],
                                         'country'                   => $postData['country'],
                                         'state'                     => $postData['state'],
                                         'city'                      => $postData['city'],
@@ -2126,6 +2157,7 @@ class FrontController extends Controller
             $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['row']                    = [];
+            $data['communities']            = Community::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['search_keyword']         = '';
             $checkProfile                   = UserProfile::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
             if($checkProfile > 0){
