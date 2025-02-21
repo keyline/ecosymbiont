@@ -2127,6 +2127,7 @@ class FrontController extends Controller
             $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['row']                    = [];
+            $data['communities']            = Community::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['search_keyword']         = '';
             $checkProfile                   = UserProfile::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
             if($checkProfile > 0){
