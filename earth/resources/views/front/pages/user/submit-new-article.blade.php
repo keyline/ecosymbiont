@@ -122,6 +122,11 @@ use Illuminate\Support\Facades\DB;
                 $bio_short = $row->bio_short;
                 $bio_long = $row->bio_long;            
                 $acknowledge = $row->acknowledge;
+
+                $is_series                  = $row->is_series;
+                $series_article_no          = $row->series_article_no;
+                $current_article_no         = $row->current_article_no;
+                $other_article_part_doi_no  = (($row->other_article_part_doi_no != '')?json_decode($row->other_article_part_doi_no):[]);
             } else {
                 $user_id = '';
                 $author_classification = '';
@@ -180,6 +185,11 @@ use Illuminate\Support\Facades\DB;
                 $bio_short = $profile->bio_short;
                 $bio_long = $profile->bio_long;                        
                 $acknowledge = '';
+
+                $is_series                  = '';
+                $series_article_no          = '';
+                $current_article_no         = '';
+                $other_article_part_doi_no  = [];
             }
             ?>
              @if ($errors->any())
@@ -869,7 +879,7 @@ use Illuminate\Support\Facades\DB;
                                         <input type="radio" class="readonly-input" id="community_no" name="community" value="No" required @checked(old('community', $community) == 'No')>
                                         <label for="no">No</label>
                                     </div>
-                                </div> 
+                                </div>
                                 <div id="communityDetails" style="display: none;">
                                     <div class="row mb-3">
                                         <label for="community_info" class="col-md-2 col-lg-4 col-form-label">28A) Select Community</label>
@@ -896,14 +906,47 @@ use Illuminate\Support\Facades\DB;
                                     <div class="col-md-10 col-lg-8">
                                         <p>If your Creative-Work is accepted for publication (most likely, upon editorial revision), the editor(s) will e-mail you a Non-Exclusive License to Publish ("NELP"). Your Creative-Work will not be published until you e-mail back a completed and signed digital copy of the NELP.</p>                                                                        
                                     </div> -->
-                                </div> 
+                                </div>
                                 <div class="row mb-3">
                                     <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">30) If you are submitting a video
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <p>Please note that it may take several minutes for your video to upload. Please do not click on the “Submit” button more than once and do not navigate away from this page, until you are re-directed to a page that tells you: “Creative-Work submitted successfully!”</p>                                        
                                     </div>
-                                </div> 
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="is_series" class="col-md-2 col-lg-4 col-form-label">Is it a series ? yes/no
+                                    </label>
+                                    <div class="col-md-10 col-lg-8">
+                                        <input type="radio" class="readonly-input" id="series_yes" name="is_series" value="Yes" required>
+                                        <label for="series_yes">Yes</label>
+                                        <input type="radio" class="readonly-input" id="series_no" name="is_series" value="No" required>
+                                        <label for="series_no">No</label>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label">How many articles in this series
+                                    </label>
+                                    <div class="col-md-10 col-lg-8">
+                                        <input type="text" name="series_article_no" class="form-control" id="series_article_no">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label">Current article no.
+                                    </label>
+                                    <div class="col-md-10 col-lg-8">
+                                        <input type="text" name="current_article_no" class="form-control" id="current_article_no">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label">If current article no is greater than 1 then enter each of series DOI number into it. Lets say I am submitting 4th part of the series then I have to enter previous three part articles DOI number
+                                    </label>
+                                    <div class="col-md-10 col-lg-8">
+                                        <input type="text" name="other_article_part_doi_no" class="form-control" id="other_article_part_doi_no">
+                                    </div>
+                                </div>
+
                                 <div class="row mb-3">
                                     <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">31) Non-Exclusive License to Publish (NELP)
                                     </label>
