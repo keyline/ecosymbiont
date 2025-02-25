@@ -964,8 +964,8 @@ class FrontController extends Controller
                     $current_article_no         = $postData['current_article_no'];
                     $other_article_part_doi_no  = $postData['other_article_part_doi_no'];
                 } else {
-                    $series_article_no          = '';
-                    $current_article_no         = '';
+                    $series_article_no          = 0;
+                    $current_article_no         = 0;
                     $other_article_part_doi_no  = '';
                 }
                 
