@@ -916,7 +916,7 @@ use Illuminate\Support\Facades\DB;
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="is_series" class="col-md-2 col-lg-4 col-form-label">Is it a series ? yes/no
+                                    <label for="is_series" class="col-md-2 col-lg-4 col-form-label">31) Is it a series ? yes/no
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="radio" class="readonly-input" id="series_yes" name="is_series" value="Yes" required>
@@ -926,21 +926,21 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label">How many articles in this series
+                                    <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label">32) How many articles in this series
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="series_article_no" class="form-control" id="series_article_no">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label">Current article no.
+                                    <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label">33) Current article no.
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="current_article_no" class="form-control" id="current_article_no">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label">If current article no is greater than 1 then enter each of series DOI number into it. Lets say I am submitting 4th part of the series then I have to enter previous three part articles DOI number
+                                    <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label">34) If current article no is greater than 1 then enter each of series DOI number into it. Lets say I am submitting 4th part of the series then I have to enter previous three part articles DOI number
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="other_article_part_doi_no" class="form-control" id="other_article_part_doi_no">
