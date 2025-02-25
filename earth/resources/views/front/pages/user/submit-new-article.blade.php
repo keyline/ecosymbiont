@@ -189,7 +189,7 @@ use Illuminate\Support\Facades\DB;
                 $is_series                  = '';
                 $series_article_no          = '';
                 $current_article_no         = '';
-                $other_article_part_doi_no  = [];
+                $other_article_part_doi_no  = '';
             }
             ?>
              @if ($errors->any())
