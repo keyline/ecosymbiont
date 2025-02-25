@@ -126,7 +126,7 @@ use Illuminate\Support\Facades\DB;
                 $is_series                  = $row->is_series;
                 $series_article_no          = $row->series_article_no;
                 $current_article_no         = $row->current_article_no;
-                $other_article_part_doi_no  = (($row->other_article_part_doi_no != '')?json_decode($row->other_article_part_doi_no):[]);
+                $other_article_part_doi_no  = $row->other_article_part_doi_no;
             } else {
                 $user_id = '';
                 $author_classification = '';
@@ -943,7 +943,21 @@ use Illuminate\Support\Facades\DB;
                                     <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label">34) If current article no is greater than 1 then enter each of series DOI number into it. Lets say I am submitting 4th part of the series then I have to enter previous three part articles DOI number
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="text" name="other_article_part_doi_no" class="form-control" id="other_article_part_doi_no">
+                                        <input type="text" class="form-control" id="input-tags">
+                                        <textarea class="form-control" name="other_article_part_doi_no" id="other_article_part_doi_no" style="display:none;"><?=$other_article_part_doi_no?></textarea>
+                                        <small class="text-primary">Enter DOI with comma separated</small>
+                                        <div id="badge-container">
+                                            <?php
+                                            if($other_article_part_doi_no != ''){
+                                                $deal_keywords = explode(",", $other_article_part_doi_no);
+                                                if(!empty($deal_keywords)){
+                                                for($k=0;$k<count($deal_keywords);$k++){
+                                            ?>
+                                                <span class="badge"><?=$deal_keywords[$k]?> <span class="remove" data-tag="<?=$deal_keywords[$k]?>">&times;</span></span>
+                                            <?php } }
+                                            }
+                                            ?>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -1495,6 +1509,44 @@ use Illuminate\Support\Facades\DB;
                 $('#current_article_no').attr('required', false);
                 $('#other_article_part_doi_no').attr('required', false);
             }
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var tagsArray = [];
+        var beforeData = $('#other_article_part_doi_no').val();
+        if(beforeData.length > 0){
+          tagsArray = beforeData.split(',');
+        }
+        $('#input-tags').on('input', function() {
+            var input = $(this).val();
+            if (input.includes(',')) {
+                var tags = input.split(',');
+                tags.forEach(function(tag) {
+                    tag = tag.trim();
+                    if (tag.length > 0 && !tagsArray.includes(tag)) {
+                        tagsArray.push(tag);
+                        $('#badge-container').append(
+                            '<span class="badge">' + tag + ' <span class="remove" data-tag="' + tag + '">&times;</span></span>'
+                        );
+                    }
+                });
+                $('#other_article_part_doi_no').val(tagsArray);
+                // console.log(tagsArray);
+                $(this).val('');
+            }
+        });
+        // console.log(tagsArray);
+        $(document).on('click', '.remove', function() {
+            var tag = $(this).data('tag');
+            tagsArray = tagsArray.filter(function(item) {
+                return item !== tag;
+            });
+            $(this).parent().remove();
+            $('#other_article_part_doi_no').val(tagsArray);
+            // console.log(tagsArray);
         });
     });
 </script>
