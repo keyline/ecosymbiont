@@ -956,8 +956,19 @@ class FrontController extends Controller
             $data['search_keyword']         = '';
 
             if ($request->isMethod('post')) {
-                $postData = $request->all();
-                //   dd($postData);
+                $postData                   = $request->all();
+
+                $is_series                  = $postData['is_series'];
+                if($is_series == 'Yes'){
+                    $series_article_no          = $postData['series_article_no'];
+                    $current_article_no         = $postData['current_article_no'];
+                    $other_article_part_doi_no  = json_encode(implode(",", $postData['other_article_part_doi_no']));
+                } else {
+                    $series_article_no          = '';
+                    $current_article_no         = '';
+                    $other_article_part_doi_no  = '';
+                }
+                
                 /* article no generate */
                     $currentMonth   = date('m');
                     $currentYear    = date('Y');
@@ -1054,7 +1065,11 @@ class FrontController extends Controller
                                 'invited_by'                => $invited_byInfo, 
                                 'invited_by_email'          => $invited_emailInfo,
                                 'participated'              => $postData['participated'],
-                                'participated_info'         => $participatedInfo                                                      
+                                'participated_info'         => $participatedInfo,
+                                'is_series'                 => $is_series,
+                                'series_article_no'         => $series_article_no,
+                                'current_article_no'        => $current_article_no,
+                                'other_article_part_doi_no' => $other_article_part_doi_no,
                             ];
                             //   Helper::pr($fields);
 
@@ -1117,7 +1132,11 @@ class FrontController extends Controller
                                 'invited_by'                => $invited_byInfo, 
                                 'invited_by_email'          => $invited_emailInfo,
                                 'participated'              => $postData['participated'],
-                                'participated_info'         => $participatedInfo                       
+                                'participated_info'         => $participatedInfo,
+                                'is_series'                 => $is_series,
+                                'series_article_no'         => $series_article_no,
+                                'current_article_no'        => $current_article_no,
+                                'other_article_part_doi_no' => $other_article_part_doi_no,
                             ];
                             //   Helper::pr($fields);
                             /* submission email */
@@ -1260,47 +1279,51 @@ class FrontController extends Controller
                            //save to database//
                            if ($this->validate($request, $rules)) {                
                                $fields = [
-                                   'sl_no'                     => $next_sl_no,
-                                   'article_no'                => $article_no,
-                                   'user_id'                   => $user_id,     
-                                   'email'                     => $postData['email'],
-                                   'author_classification'     => $postData['author_classification'],
-                                   'co_authors'                => $postData['co_authors'],                           
-                                   'first_name'                => $postData['first_name'],
-                                   'for_publication_name'      => $postData['for_publication_name'],           
-                                   'pronounId'                 => $postData['pronoun'],
-                                   'orginal_work'              => $postData['orginal_work'],           
-                                   'copyright'                 => $postData['copyright'],
-                                   'invited'                   => $postData['invited'],
-                                   'invited_by'                => $invited_byInfo, 
-                                   'invited_by_email'          => $invited_emailInfo,
-                                   'participated'              => $postData['participated'],
-                                   'participated_info'         => $participatedInfo,
-                                   'community'                 => $postData['community'],
-                                   'community_name'            => $postData['community_name'],
-                                   'explanation'               => $postData['explanation'],  
-                                   'explanation_submission'    => $postData['explanation_submission'],     
-                                   'titleId'                   => $postData['title'],                        
-                                   'creative_Work'             => $postData['creative_Work'],
-                                   'creative_Work_fiction'     => $postData['creative_Work_fiction'],
-                                   'subtitle'                  => $postData['subtitle'],
-                                   'submission_types'          => $submission_typesInfo,
-                                   'additional_information'    => $postData['additional_information'],
-                                   'section_ertId'             => $section_ertInfo,
-                                   'narrative_file'            => $narrative_file,
-                                   'narrative_images'          => $postData['narrative_images'],
-                                   'narrative_image_desc'      => json_encode($narrativeImageDesc),  // Storing as JSON string
-                                   'image_files'               => json_encode($narrativeimageFile),
-                                   'country'                   => $postData['country'],
-                                   'state'                     => $postData['state'],
-                                   'city'                      => $postData['city'],
-                                   'organization_name'         => $postData['organization_name'],
-                                   'organization_website'      => $postData['organization_website'],
-                                   'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
-                                   'indigenous_affiliation'    => $postData['indigenous_affiliation'],
-                                   'expertise_areaId'          => $expertise_areaInfo,
-                                   'bio_short'               => $postData['bio_short'],
-                                   'bio_long'               => $postData['bio_long'],  
+                                    'sl_no'                     => $next_sl_no,
+                                    'article_no'                => $article_no,
+                                    'user_id'                   => $user_id,     
+                                    'email'                     => $postData['email'],
+                                    'author_classification'     => $postData['author_classification'],
+                                    'co_authors'                => $postData['co_authors'],                           
+                                    'first_name'                => $postData['first_name'],
+                                    'for_publication_name'      => $postData['for_publication_name'],           
+                                    'pronounId'                 => $postData['pronoun'],
+                                    'orginal_work'              => $postData['orginal_work'],           
+                                    'copyright'                 => $postData['copyright'],
+                                    'invited'                   => $postData['invited'],
+                                    'invited_by'                => $invited_byInfo, 
+                                    'invited_by_email'          => $invited_emailInfo,
+                                    'participated'              => $postData['participated'],
+                                    'participated_info'         => $participatedInfo,
+                                    'community'                 => $postData['community'],
+                                    'community_name'            => $postData['community_name'],
+                                    'explanation'               => $postData['explanation'],  
+                                    'explanation_submission'    => $postData['explanation_submission'],     
+                                    'titleId'                   => $postData['title'],                        
+                                    'creative_Work'             => $postData['creative_Work'],
+                                    'creative_Work_fiction'     => $postData['creative_Work_fiction'],
+                                    'subtitle'                  => $postData['subtitle'],
+                                    'submission_types'          => $submission_typesInfo,
+                                    'additional_information'    => $postData['additional_information'],
+                                    'section_ertId'             => $section_ertInfo,
+                                    'narrative_file'            => $narrative_file,
+                                    'narrative_images'          => $postData['narrative_images'],
+                                    'narrative_image_desc'      => json_encode($narrativeImageDesc),  // Storing as JSON string
+                                    'image_files'               => json_encode($narrativeimageFile),
+                                    'country'                   => $postData['country'],
+                                    'state'                     => $postData['state'],
+                                    'city'                      => $postData['city'],
+                                    'organization_name'         => $postData['organization_name'],
+                                    'organization_website'      => $postData['organization_website'],
+                                    'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
+                                    'indigenous_affiliation'    => $postData['indigenous_affiliation'],
+                                    'expertise_areaId'          => $expertise_areaInfo,
+                                    'bio_short'                 => $postData['bio_short'],
+                                    'bio_long'                  => $postData['bio_long'],
+                                    'is_series'                 => $is_series,
+                                    'series_article_no'         => $series_article_no,
+                                    'current_article_no'        => $current_article_no,
+                                    'other_article_part_doi_no' => $other_article_part_doi_no,
                                ];
                                     //  Helper::pr($fields);
 
@@ -1382,47 +1405,51 @@ class FrontController extends Controller
                            if ($this->validate($request, $rules)) {        
                             // Helper::pr($postData);        
                                $fields = [
-                                   'sl_no'                     => $next_sl_no,
-                                   'article_no'                => $article_no,
-                                   'user_id'                   => $user_id,              
-                                   'email'                     => $postData['email'],
-                                   'author_classification'     => $postData['author_classification'],
-                                   'co_authors'                => $postData['co_authors'],                           
-                                   'first_name'                => $postData['first_name'],                         
-                                   'for_publication_name'      => $postData['for_publication_name'],           
-                                   'pronounId'                 => $postData['pronoun'],
-                                   'orginal_work'              => $postData['orginal_work'],           
-                                   'copyright'                 => $postData['copyright'],
-                                   'invited'                   => $postData['invited'],
-                                   'invited_by'                => $invited_byInfo, 
-                                   'invited_by_email'          => $invited_emailInfo,
-                                   'participated'              => $postData['participated'],
-                                   'participated_info'         => $participatedInfo,
-                                   'community'                 => $postData['community'],
-                                   'community_name'            => $postData['community_name'],
-                                   'explanation'               => $postData['explanation'],  
-                                   'explanation_submission'    => $postData['explanation_submission'],     
-                                   'titleId'                   => $postData['title'],                        
-                                   'creative_Work'             => $postData['creative_Work'],
-                                   'creative_Work_fiction'     => $postData['creative_Work_fiction'],
-                                   'subtitle'                  => $postData['subtitle'],
-                                   'submission_types'          => $submission_typesInfo,
-                                   'additional_information'    => $postData['additional_information'],
-                                   'section_ertId'             => $section_ertInfo,                                  
-                                   'art_images'                => $postData['art_images'],
-                                   'art_image_desc'            => json_encode($artImageDesc),  // Storing as JSON string
-                                   'art_image_file'            => json_encode($artimageFile),
-                                   'art_desc'                  => $postData['art_desc'],
-                                   'country'                   => $postData['country'],
-                                   'state'                     => $postData['state'],
-                                   'city'                      => $postData['city'],
-                                   'organization_name'         => $postData['organization_name'],
-                                   'organization_website'      => $postData['organization_website'],
-                                   'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
-                                   'indigenous_affiliation'    => $postData['indigenous_affiliation'],
-                                   'expertise_areaId'          => $expertise_areaInfo,
-                                   'bio_short'               => $postData['bio_short'],
-                                   'bio_long'               => $postData['bio_long'],  
+                                    'sl_no'                     => $next_sl_no,
+                                    'article_no'                => $article_no,
+                                    'user_id'                   => $user_id,              
+                                    'email'                     => $postData['email'],
+                                    'author_classification'     => $postData['author_classification'],
+                                    'co_authors'                => $postData['co_authors'],                           
+                                    'first_name'                => $postData['first_name'],                         
+                                    'for_publication_name'      => $postData['for_publication_name'],           
+                                    'pronounId'                 => $postData['pronoun'],
+                                    'orginal_work'              => $postData['orginal_work'],           
+                                    'copyright'                 => $postData['copyright'],
+                                    'invited'                   => $postData['invited'],
+                                    'invited_by'                => $invited_byInfo, 
+                                    'invited_by_email'          => $invited_emailInfo,
+                                    'participated'              => $postData['participated'],
+                                    'participated_info'         => $participatedInfo,
+                                    'community'                 => $postData['community'],
+                                    'community_name'            => $postData['community_name'],
+                                    'explanation'               => $postData['explanation'],  
+                                    'explanation_submission'    => $postData['explanation_submission'],     
+                                    'titleId'                   => $postData['title'],                        
+                                    'creative_Work'             => $postData['creative_Work'],
+                                    'creative_Work_fiction'     => $postData['creative_Work_fiction'],
+                                    'subtitle'                  => $postData['subtitle'],
+                                    'submission_types'          => $submission_typesInfo,
+                                    'additional_information'    => $postData['additional_information'],
+                                    'section_ertId'             => $section_ertInfo,                                  
+                                    'art_images'                => $postData['art_images'],
+                                    'art_image_desc'            => json_encode($artImageDesc),  // Storing as JSON string
+                                    'art_image_file'            => json_encode($artimageFile),
+                                    'art_desc'                  => $postData['art_desc'],
+                                    'country'                   => $postData['country'],
+                                    'state'                     => $postData['state'],
+                                    'city'                      => $postData['city'],
+                                    'organization_name'         => $postData['organization_name'],
+                                    'organization_website'      => $postData['organization_website'],
+                                    'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
+                                    'indigenous_affiliation'    => $postData['indigenous_affiliation'],
+                                    'expertise_areaId'          => $expertise_areaInfo,
+                                    'bio_short'                 => $postData['bio_short'],
+                                    'bio_long'                  => $postData['bio_long'],
+                                    'is_series'                 => $is_series,
+                                    'series_article_no'         => $series_article_no,
+                                    'current_article_no'        => $current_article_no,
+                                    'other_article_part_doi_no' => $other_article_part_doi_no,
                                ];
                                     //   Helper::pr($fields);
 
@@ -1483,45 +1510,49 @@ class FrontController extends Controller
                            if ($this->validate($request, $rules)) {  
                             // Helper::pr($postData);              
                                $fields = [
-                                   'sl_no'                     => $next_sl_no,
-                                   'article_no'                => $article_no,
-                                   'user_id'                   => $user_id,          
-                                   'email'                     => $postData['email'],
-                                   'author_classification'     => $postData['author_classification'],
-                                   'co_authors'                => $postData['co_authors'],                           
-                                   'first_name'                => $postData['first_name'],
-                                   'for_publication_name'      => $postData['for_publication_name'],           
-                                   'pronounId'                 => $postData['pronoun'],
-                                   'orginal_work'              => $postData['orginal_work'],           
-                                   'copyright'                 => $postData['copyright'],
-                                   'invited'                   => $postData['invited'],
-                                   'invited_by'                => $invited_byInfo, 
-                                   'invited_by_email'          => $invited_emailInfo,
-                                   'participated'              => $postData['participated'],
-                                   'participated_info'         => $participatedInfo,
-                                   'community'                 => $postData['community'],
-                                   'community_name'            => $postData['community_name'],
-                                   'explanation'               => $postData['explanation'],  
-                                   'explanation_submission'    => $postData['explanation_submission'],     
-                                   'titleId'                   => $postData['title'],                        
-                                   'creative_Work'             => $postData['creative_Work'],
-                                   'creative_Work_fiction'     => $postData['creative_Work_fiction'],
-                                   'subtitle'                  => $postData['subtitle'],
-                                   'submission_types'          => $submission_typesInfo,
-                                   'additional_information'    => $postData['additional_information'],
-                                   'section_ertId'             => $section_ertInfo,                                
-                                   'art_video_file'            => $art_video_file,
-                                   'art_video_desc'            => $postData['art_video_desc'],                 
-                                   'country'                   => $postData['country'],
-                                   'state'                     => $postData['state'],
-                                   'city'                      => $postData['city'],
-                                   'organization_name'         => $postData['organization_name'],
-                                   'organization_website'      => $postData['organization_website'],
-                                   'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
-                                   'indigenous_affiliation'    => $postData['indigenous_affiliation'],
-                                   'expertise_areaId'          => $expertise_areaInfo,
-                                   'bio_short'               => $postData['bio_short'],
-                                   'bio_long'               => $postData['bio_long'],  
+                                    'sl_no'                     => $next_sl_no,
+                                    'article_no'                => $article_no,
+                                    'user_id'                   => $user_id,          
+                                    'email'                     => $postData['email'],
+                                    'author_classification'     => $postData['author_classification'],
+                                    'co_authors'                => $postData['co_authors'],                           
+                                    'first_name'                => $postData['first_name'],
+                                    'for_publication_name'      => $postData['for_publication_name'],           
+                                    'pronounId'                 => $postData['pronoun'],
+                                    'orginal_work'              => $postData['orginal_work'],           
+                                    'copyright'                 => $postData['copyright'],
+                                    'invited'                   => $postData['invited'],
+                                    'invited_by'                => $invited_byInfo, 
+                                    'invited_by_email'          => $invited_emailInfo,
+                                    'participated'              => $postData['participated'],
+                                    'participated_info'         => $participatedInfo,
+                                    'community'                 => $postData['community'],
+                                    'community_name'            => $postData['community_name'],
+                                    'explanation'               => $postData['explanation'],  
+                                    'explanation_submission'    => $postData['explanation_submission'],     
+                                    'titleId'                   => $postData['title'],                        
+                                    'creative_Work'             => $postData['creative_Work'],
+                                    'creative_Work_fiction'     => $postData['creative_Work_fiction'],
+                                    'subtitle'                  => $postData['subtitle'],
+                                    'submission_types'          => $submission_typesInfo,
+                                    'additional_information'    => $postData['additional_information'],
+                                    'section_ertId'             => $section_ertInfo,                                
+                                    'art_video_file'            => $art_video_file,
+                                    'art_video_desc'            => $postData['art_video_desc'],                 
+                                    'country'                   => $postData['country'],
+                                    'state'                     => $postData['state'],
+                                    'city'                      => $postData['city'],
+                                    'organization_name'         => $postData['organization_name'],
+                                    'organization_website'      => $postData['organization_website'],
+                                    'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
+                                    'indigenous_affiliation'    => $postData['indigenous_affiliation'],
+                                    'expertise_areaId'          => $expertise_areaInfo,
+                                    'bio_short'                 => $postData['bio_short'],
+                                    'bio_long'                  => $postData['bio_long'],
+                                    'is_series'                 => $is_series,
+                                    'series_article_no'         => $series_article_no,
+                                    'current_article_no'        => $current_article_no,
+                                    'other_article_part_doi_no' => $other_article_part_doi_no,
                                ];
                                     // Helper::pr($fields);
 
@@ -1752,7 +1783,11 @@ class FrontController extends Controller
                                         'indigenous_affiliation'    => $postData['indigenous_affiliation'],
                                         'expertise_areaId'          => $expertise_areaInfo,
                                         'bio_short'                 => $postData['bio_short'],
-                                        'bio_long'                  => $postData['bio_long'],  
+                                        'bio_long'                  => $postData['bio_long'],
+                                        'is_series'                 => $is_series,
+                                        'series_article_no'         => $series_article_no,
+                                        'current_article_no'        => $current_article_no,
+                                        'other_article_part_doi_no' => $other_article_part_doi_no,  
                                     ];
                                     //    Helper::pr($fields);
 
@@ -1883,8 +1918,12 @@ class FrontController extends Controller
                                             'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
                                             'indigenous_affiliation'    => $postData['indigenous_affiliation'],
                                             'expertise_areaId'          => $expertise_areaInfo,
-                                            'bio_short'               => $postData['bio_short'],
-                                            'bio_long'               => $postData['bio_long'],  
+                                            'bio_short'                 => $postData['bio_short'],
+                                            'bio_long'                  => $postData['bio_long'],
+                                            'is_series'                 => $is_series,
+                                            'series_article_no'         => $series_article_no,
+                                            'current_article_no'        => $current_article_no,
+                                            'other_article_part_doi_no' => $other_article_part_doi_no,
                                         ];
                                         //    Helper::pr($fields);
                                         /* submission email */
@@ -1990,8 +2029,12 @@ class FrontController extends Controller
                                         'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
                                         'indigenous_affiliation'    => $postData['indigenous_affiliation'],
                                         'expertise_areaId'          => $expertise_areaInfo,
-                                        'bio_short'               => $postData['bio_short'],
-                                        'bio_long'               => $postData['bio_long'],  
+                                        'bio_short'                 => $postData['bio_short'],
+                                        'bio_long'                  => $postData['bio_long'],
+                                        'is_series'                 => $is_series,
+                                        'series_article_no'         => $series_article_no,
+                                        'current_article_no'        => $current_article_no,
+                                        'other_article_part_doi_no' => $other_article_part_doi_no,
                                     ];
                                     //    Helper::pr($fields);
 
@@ -2027,15 +2070,15 @@ class FrontController extends Controller
                                 }                                    
                             }
                    }
-                }                                                                    
+                }
             }
 
             $title                          = 'Submit New Creative-Work';
             $page_name                      = 'submit-new-article';
             $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-            $data['news_category']          = NewsCategory::where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'ASC')->get();        
+            $data['news_category']          = NewsCategory::where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'ASC')->get();
             $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-            $data['submission_type']       = SubmissionType::where('status', '=', 1)->get(); 
+            $data['submission_type']        = SubmissionType::where('status', '=', 1)->get(); 
             $data['country']                = Country::orderBy('name', 'ASC')->get();
             $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
@@ -2365,9 +2408,8 @@ class FrontController extends Controller
             $page_name                      = 'profile-articles';
             echo $this->front_after_login_layout($title, $page_name, $data);
         }
-
         public function viewarticle(Request $request, $id)
-        {                        
+        {
             $id                                         = Helper::decoded($id);                              
             $page_name                                  = 'article.view_details';
             $data['row']                                = Article::where('status', '!=', 3)->where('id', '=', $id)->orderBy('id', 'DESC')->first();
