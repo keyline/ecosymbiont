@@ -925,21 +925,21 @@ use Illuminate\Support\Facades\DB;
                                         <label for="series_no">No</label>
                                     </div>
                                 </div>
-                                <div class="row mb-3">
+                                <div class="row series_yes mb-3">
                                     <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label">32) How many articles in this series
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="text" name="series_article_no" class="form-control" id="series_article_no">
+                                        <input type="number" name="series_article_no" class="form-control" id="series_article_no" min="1">
                                     </div>
                                 </div>
-                                <div class="row mb-3">
+                                <div class="row series_yes mb-3">
                                     <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label">33) Current article no.
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="current_article_no" class="form-control" id="current_article_no">
                                     </div>
                                 </div>
-                                <div class="row mb-3">
+                                <div class="row series_yes mb-3">
                                     <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label">34) If current article no is greater than 1 then enter each of series DOI number into it. Lets say I am submitting 4th part of the series then I have to enter previous three part articles DOI number
                                     </label>
                                     <div class="col-md-10 col-lg-8">
@@ -1470,12 +1470,25 @@ use Illuminate\Support\Facades\DB;
     }
 </script>
 <!-- End all word count validation -->
- <!-- prefill radio button value -->
- <script>
+<!-- prefill radio button value -->
+<script>
     // Prevent changes to the radio buttons
     document.querySelectorAll('.readonly-input').forEach(input => {
         input.addEventListener('click', function(e) {
             e.preventDefault(); // Block any change
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".series_yes").hide();
+        $('input[name="is_series"]').change(function() {
+            if ($(this).val() === "Yes") {
+                $(".series_yes").show();
+            } else {
+                $(".series_yes").hide();
+            }
         });
     });
 </script>
