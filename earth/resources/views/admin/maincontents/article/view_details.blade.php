@@ -97,6 +97,8 @@ function numberToOrdinal($number) {
       $city = $row->city;
       $participated = $row->participated;
       $participated_info = $row->participated_info;
+      $community = $row->community;
+      $community_name = $row->community_name;
       $organization_name = $row->organization_name;
       $organization_website = $row->organization_website;
       $ecosystem_affiliationId = $selected_ecosystem_affiliation;
