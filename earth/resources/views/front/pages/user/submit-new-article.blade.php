@@ -17,6 +17,21 @@
     .blue-text{
         color: #6187ce;
     }
+    .badge {
+        display: inline-block;
+        min-width: 10px;
+        padding: 3px 7px;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 1;
+        color: #fff;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        background-color: #d09c1c;
+        border-radius: 10px;
+        margin-right: 3px;
+    }
 </style>
 <?php
 function numberToOrdinal($number) {
@@ -919,9 +934,9 @@ use Illuminate\Support\Facades\DB;
                                     <label for="is_series" class="col-md-2 col-lg-4 col-form-label">31) Is it a series ? yes/no
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="radio" id="series_yes" name="is_series" value="Yes" required>
+                                        <input type="radio" id="series_yes" name="is_series" value="Yes" <?=(($is_series == 'Yes')?'checked':'')?> required>
                                         <label for="series_yes">Yes</label>
-                                        <input type="radio" id="series_no" name="is_series" value="No" required>
+                                        <input type="radio" id="series_no" name="is_series" value="No" <?=(($is_series == 'No')?'checked':'')?> required>
                                         <label for="series_no">No</label>
                                     </div>
                                 </div>
@@ -929,14 +944,14 @@ use Illuminate\Support\Facades\DB;
                                     <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label">32) How many articles in this series
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="number" name="series_article_no" class="form-control" id="series_article_no" min="1">
+                                        <input type="number" name="series_article_no" class="form-control" id="series_article_no" min="1" value="<?=$series_article_no?>">
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
                                     <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label">33) Current article no.
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="text" name="current_article_no" class="form-control" id="current_article_no">
+                                        <input type="text" name="current_article_no" class="form-control" id="current_article_no" value="<?=$current_article_no?>">
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
