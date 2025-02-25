@@ -919,9 +919,9 @@ use Illuminate\Support\Facades\DB;
                                     <label for="is_series" class="col-md-2 col-lg-4 col-form-label">31) Is it a series ? yes/no
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="radio" class="readonly-input" id="series_yes" name="is_series" value="Yes" required>
+                                        <input type="radio" id="series_yes" name="is_series" value="Yes" required>
                                         <label for="series_yes">Yes</label>
-                                        <input type="radio" class="readonly-input" id="series_no" name="is_series" value="No" required>
+                                        <input type="radio" id="series_no" name="is_series" value="No" required>
                                         <label for="series_no">No</label>
                                     </div>
                                 </div>
