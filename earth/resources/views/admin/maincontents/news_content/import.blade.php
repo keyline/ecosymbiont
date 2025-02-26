@@ -788,7 +788,6 @@ function numberToOrdinal($number) {
                                 <small class="text-primary">Enter DOI with comma separated</small>
                                 <div id="badge-container">
                                     <?php
-                                    echo $other_article_part_doi_no;
                                     if($other_article_part_doi_no != ''){
                                         $deal_keywords = explode(",", $other_article_part_doi_no);
                                         if(!empty($deal_keywords)){
