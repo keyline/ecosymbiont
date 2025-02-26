@@ -271,132 +271,127 @@ function numberToOrdinal($number) {
                             </div>
                             <div id="artimageFieldsContainer">
                                 @for ($i = 1; $i <= 2; $i++)
-                                <div class="card mb-3" id="author_card_{{$i}}" style="padding: 11px;border: 1px solid black; display:none;">
-                                    <div class="row mb-3">
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <label for="co_author_name_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3B{{$i}}) <?=numberToOrdinal($i)?> co-author’s name</label>
-                                                <div class="col-md-10 col-lg-8">
-                                                    <input type="text" name="co_author_name_{{$i}}" class="form-control" id="co_author_name_{{$i}}"
-                                                        value="<?php if(isset($co_author_name[$i-1]) && $co_author_name[$i-1] != ''){ echo $co_author_name[$i-1]; }  ?>">
+                                    <div class="card mb-3" id="author_card_{{$i}}" style="padding: 11px;border: 1px solid black; display:none;">
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <label for="co_author_name_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3B{{$i}}) <?=numberToOrdinal($i)?> co-author’s name</label>
+                                                    <div class="col-md-10 col-lg-8">
+                                                        <input type="text" name="co_author_name_{{$i}}" class="form-control" id="co_author_name_{{$i}}"
+                                                            value="<?php if(isset($co_author_name[$i-1]) && $co_author_name[$i-1] != ''){ echo $co_author_name[$i-1]; }  ?>">
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <label for="co_author_short_bio_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3C{{$i}}) <?=numberToOrdinal($i)?> co-author’s short bio (30-40 words)</label>
-                                                <div class="col-md-10 col-lg-8">
-                                                    <input type="text" name="co_author_short_bio_{{$i}}" class="form-control" id="co_author_short_bio_{{$i}}"
-                                                        value="<?php if(isset($co_author_short_bio[$i-1]) && $co_author_short_bio[$i-1] != '') { echo $co_author_short_bio[$i-1]; } ?>">
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <label for="co_author_short_bio_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3C{{$i}}) <?=numberToOrdinal($i)?> co-author’s short bio (30-40 words)</label>
+                                                    <div class="col-md-10 col-lg-8">
+                                                        <input type="text" name="co_author_short_bio_{{$i}}" class="form-control" id="co_author_short_bio_{{$i}}"
+                                                            value="<?php if(isset($co_author_short_bio[$i-1]) && $co_author_short_bio[$i-1] != '') { echo $co_author_short_bio[$i-1]; } ?>">
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <label for="co_author_country_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3D{{$i}}) <?=numberToOrdinal($i)?> co-author’s country of residence</label>
-                                                <div class="col-md-10 col-lg-8">
-                                                    <select name="co_author_country_{{$i}}" class="form-control" id="co_author_country_{{$i}}" >
-                                                        <option value="" selected disabled>Select</option>
-                                                        @if ($country)
-                                                            @foreach ($country as $data)
-                                                                <option value="{{ $data->id }}" @if(isset($co_author_countries[$i-1]) && $co_author_countries[$i-1] == $data->id) selected @endif>
-                                                                    {{ $data->name }}
-                                                                </option>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <label for="co_author_country_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3D{{$i}}) <?=numberToOrdinal($i)?> co-author’s country of residence</label>
+                                                    <div class="col-md-10 col-lg-8">
+                                                        <select name="co_author_country_{{$i}}" class="form-control" id="co_author_country_{{$i}}" >
+                                                            <option value="" selected disabled>Select</option>
+                                                            @if ($country)
+                                                                @foreach ($country as $data)
+                                                                    <option value="{{ $data->id }}" @if(isset($co_author_countries[$i-1]) && $co_author_countries[$i-1] == $data->id) selected @endif>
+                                                                        {{ $data->name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            @endif
+                                                        </select>
+                                                    </div>
+                                                </div>                                        
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <label for="co_authororganization_name_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3E{{$i}}) <?=numberToOrdinal($i)?> co-author’s grassroots organization/ ecoweb-rooted community/ movement
+                                                    </label>
+                                                    <div class="col-md-10 col-lg-8">
+                                                        <input type="text" name="co_authororganization_name_{{$i}}" class="form-control" id="co_authororganization_name_{{$i}}"
+                                                            value="<?php if(isset($co_author_organizations[$i-1]) && $co_author_organizations[$i-1] != '') { echo $co_author_organizations[$i-1]; } ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <label for="co_ecosystem_affiliation_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3F{{$i}}) What continent are <?=numberToOrdinal($i)?> co-author’s ancestors originally from? (select all that apply)
+                                                    </label>
+                                                    <div class="col-md-10 col-lg-8">
+                                                        @if ($ecosystem_affiliation)
+                                                            @foreach ($ecosystem_affiliation as $data)
+                                                                <input type="checkbox" 
+                                                                    name="co_ecosystem_affiliation_{{$i}}[]" 
+                                                                    value="{{ $data->id }}" 
+                                                                    @if (isset($co_ecosystem_affiliations[$i-1]) && in_array($data->id, $co_ecosystem_affiliations[$i-1] ?? [])) checked @endif>
+                                                                {{ $data->name }}<br>
                                                             @endforeach
                                                         @endif
-                                                    </select>
-                                                </div>
-                                            </div>                                        
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <label for="co_authororganization_name_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3E{{$i}}) <?=numberToOrdinal($i)?> co-author’s grassroots organization/ ecoweb-rooted community/ movement
-                                                </label>
-                                                <div class="col-md-10 col-lg-8">
-                                                    <input type="text" name="co_authororganization_name_{{$i}}" class="form-control" id="co_authororganization_name_{{$i}}"
-                                                        value="<?php if(isset($co_author_organizations[$i-1]) && $co_author_organizations[$i-1] != '') { echo $co_author_organizations[$i-1]; } ?>">
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <label for="co_ecosystem_affiliation_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3F{{$i}}) What continent are <?=numberToOrdinal($i)?> co-author’s ancestors originally from? (select all that apply)
-                                                </label>
-                                                <div class="col-md-10 col-lg-8">
-                                                    @if ($ecosystem_affiliation)
-                                                        @foreach ($ecosystem_affiliation as $data)
-                                                            <input type="checkbox" 
-                                                                name="co_ecosystem_affiliation_{{$i}}[]" 
-                                                                value="{{ $data->id }}" 
-                                                                @if (isset($co_ecosystem_affiliations[$i-1]) && in_array($data->id, $co_ecosystem_affiliations[$i-1] ?? [])) checked @endif>
-                                                            {{ $data->name }}<br>
-                                                        @endforeach
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <label for="co_Indigenous_affiliation_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3G{{$i}}) What specific region are <?=numberToOrdinal($i)?> co-author’s ancestors originally from OR what is the name of first co-author’s Indigenous community? (example of specific region = Bengal; example of Indigenous community name = Lisjan Ohlone)
-                                                </label>
-                                                <div class="col-md-10 col-lg-8">
-                                                    <input type="text" name="co_indigenous_affiliation_{{$i}}" class="form-control" id="indigenous_affiliation_{{$i}}"
-                                                    value="<?php if(isset($co_indigenous_affiliations[$i-1]) && $co_indigenous_affiliations[$i-1] != '') { echo $co_indigenous_affiliations[$i-1]; } ?>" >
-                                                </div>
-                                            </div>
-                                        </div> 
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <label for="co_author_classification_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3H{{$i}}) <?=numberToOrdinal($i)?> co-author’s classification</label>
-                                                <div class="col-md-10 col-lg-8">
-                                                    <input type="radio" id="Human individual" name="co_author_classification_{{$i}}" value="Human individual" 
-                                                        @checked((old('co_author_classification') == 'Human individual') || 
-                                                        (isset($co_author_classification[$i-1]) && $co_author_classification[$i-1] == 'Human individual'))>
-                                                    <label for="Human individual">Human individual</label>
-
-                                                    <input type="radio" id="Ecoweb-rooted community" name="co_author_classification_{{$i}}" value="Ecoweb-rooted community" 
-                                                        @checked((old('co_author_classification') == 'Ecoweb-rooted community') || 
-                                                        (isset($co_author_classification[$i-1]) && $co_author_classification[$i-1] == 'Ecoweb-rooted community'))>
-                                                    <label for="Ecoweb-rooted community">Ecoweb-rooted community</label>
-
-                                                    <input type="radio" id="Movement" name="co_author_classification_{{$i}}" value="Movement" 
-                                                        @checked((old('co_author_classification') == 'Movement') || 
-                                                        (isset($co_author_classification[$i-1]) && $co_author_classification[$i-1] == 'Movement'))>
-                                                    <label for="Movement">Movement</label>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <label for="co_Indigenous_affiliation_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3G{{$i}}) What specific region are <?=numberToOrdinal($i)?> co-author’s ancestors originally from OR what is the name of first co-author’s Indigenous community? (example of specific region = Bengal; example of Indigenous community name = Lisjan Ohlone)
+                                                    </label>
+                                                    <div class="col-md-10 col-lg-8">
+                                                        <input type="text" name="co_indigenous_affiliation_{{$i}}" class="form-control" id="indigenous_affiliation_{{$i}}"
+                                                        value="<?php if(isset($co_indigenous_affiliations[$i-1]) && $co_indigenous_affiliations[$i-1] != '') { echo $co_indigenous_affiliations[$i-1]; } ?>" >
+                                                    </div>
                                                 </div>
                                             </div> 
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <label for="pronoun" class="col-md-2 col-lg-4 col-form-label">3I{{$i}}) <?=numberToOrdinal($i)?> co-author’s pronoun</label>
-                                                <div class="col-md-10 col-lg-8">
-                                                    <?php
-                                                    print_r($co_author_pronoun);
-                                                    echo $co_author_pronoun[0];
-                                                    ?>
-                                                    @if ($pronoun)
-                                                        @foreach ($pronoun as $data)
-                                                            <?php
-                                                            // if($co_author_pronoun != ''){
-                                                            //     if($data->id == $co_author_pronoun[$i - 1]){
-                                                            //         $pronoun_checked = 'checked';
-                                                            //     } else {
-                                                            //         $pronoun_checked = '';
-                                                            //     }
-                                                            // } else {
-                                                            //     $pronoun_checked = '';
-                                                            // }
-                                                            $pronoun_checked = '';
-                                                            ?>
-                                                            <input type="radio" name="co_author_pronoun_{{$i}}" value="{{ $data->id }}" <?=$pronoun_checked?>>
-                                                            <label>{{ $data->name }}</label>
-                                                        @endforeach
-                                                    @endif                                
-                                                </div>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <label for="co_author_classification_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3H{{$i}}) <?=numberToOrdinal($i)?> co-author’s classification</label>
+                                                    <div class="col-md-10 col-lg-8">
+                                                        <input type="radio" id="Human individual" name="co_author_classification_{{$i}}" value="Human individual" 
+                                                            @checked((old('co_author_classification') == 'Human individual') || 
+                                                            (isset($co_author_classification[$i-1]) && $co_author_classification[$i-1] == 'Human individual'))>
+                                                        <label for="Human individual">Human individual</label>
+
+                                                        <input type="radio" id="Ecoweb-rooted community" name="co_author_classification_{{$i}}" value="Ecoweb-rooted community" 
+                                                            @checked((old('co_author_classification') == 'Ecoweb-rooted community') || 
+                                                            (isset($co_author_classification[$i-1]) && $co_author_classification[$i-1] == 'Ecoweb-rooted community'))>
+                                                        <label for="Ecoweb-rooted community">Ecoweb-rooted community</label>
+
+                                                        <input type="radio" id="Movement" name="co_author_classification_{{$i}}" value="Movement" 
+                                                            @checked((old('co_author_classification') == 'Movement') || 
+                                                            (isset($co_author_classification[$i-1]) && $co_author_classification[$i-1] == 'Movement'))>
+                                                        <label for="Movement">Movement</label>
+                                                    </div>
+                                                </div> 
                                             </div>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <label for="pronoun" class="col-md-2 col-lg-4 col-form-label">3I{{$i}}) <?=numberToOrdinal($i)?> co-author’s pronoun</label>
+                                                    <div class="col-md-10 col-lg-8">
+                                                        @if ($pronoun)
+                                                            @foreach ($pronoun as $data)
+                                                                <?php
+                                                                if($co_author_pronoun != ''){
+                                                                    if($data->id == $co_author_pronoun[$i - 1]){
+                                                                        $pronoun_checked = 'checked';
+                                                                    } else {
+                                                                        $pronoun_checked = '';
+                                                                    }
+                                                                } else {
+                                                                    $pronoun_checked = '';
+                                                                }
+                                                                ?>
+                                                                <input type="radio" name="co_author_pronoun_{{$i}}" value="{{ $data->id }}" <?=$pronoun_checked?>>
+                                                                <label>{{ $data->name }}</label>
+                                                            @endforeach
+                                                        @endif                                
+                                                    </div>
+                                                </div>
+                                            </div> 
                                         </div> 
                                     </div> 
-                                </div> 
                                 @endfor
                             </div>                                                                           
                         </div> 
