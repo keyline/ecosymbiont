@@ -372,6 +372,7 @@ function numberToOrdinal($number) {
                                                 <div class="col-md-10 col-lg-8">
                                                     <?php
                                                     print_r($co_author_pronoun);
+                                                    echo $co_author_pronoun[0];
                                                     ?>
                                                     @if ($pronoun)
                                                         @foreach ($pronoun as $data)
