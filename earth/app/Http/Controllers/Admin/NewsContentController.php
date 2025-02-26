@@ -369,13 +369,12 @@ class NewsContentController extends Controller
         $id                             = Helper::decoded($id);        
         $title                          = $this->data['title'] . ' import';
         $page_name                      = 'news_content.import';
-        // $data['row']                    = NewsContent::where($this->data['primary_key'], '=', $id)->first();        
         $data['row']                    = Article::where($this->data['primary_key'], '=', $id)->first();  
-        //  Helper::pr($data['row']);
+        
         $user_id                        = $data['row']->user_id;   
         $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();  
         $data['news_category']          = NewsCategory::where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'ASC')->get();        
-        $data['submission_type']       = SubmissionType::where('status', '=', 1)->orderBy('name', 'ASC')->get();  
+        $data['submission_type']        = SubmissionType::where('status', '=', 1)->orderBy('name', 'ASC')->get();  
         $data['news_images']            = NewsContentImage::where('status', '!=', 3)->where('news_id', '=', $id)->get();
         $data['parent_category']        = NewsCategory::where('status', '!=', 3)->where('parent_category', '=', 0)->orderBy('id', 'DESC')->get();
         $data['sub_category']           = NewsCategory::where('status', '!=', 3)->where('parent_category', '!=', 0)->orderBy('id', 'DESC')->get();
@@ -389,9 +388,20 @@ class NewsContentController extends Controller
 
         if ($request->isMethod('post')) {
             $postData = $request->all();
-            $parent_category                = NewsCategory::where('id', '=', $postData['section_ert'])->first();       
-            //   dd($postData);
-            $actionMode = $postData['action_mode']; // Get action mode from the form
+
+            $is_series                  = $postData['is_series'];
+            if($is_series == 'Yes'){
+                $series_article_no          = $postData['series_article_no'];
+                $current_article_no         = $postData['current_article_no'];
+                $other_article_part_doi_no  = $postData['other_article_part_doi_no'];
+            } else {
+                $series_article_no          = 0;
+                $current_article_no         = 0;
+                $other_article_part_doi_no  = '';
+            }
+
+            $parent_category                = NewsCategory::where('id', '=', $postData['section_ert'])->first();
+            $actionMode                     = $postData['action_mode']; // Get action mode from the form
             if ($actionMode === 'save') {
                 // Generate a unique slug
                 $slug = Str::slug($postData['creative_Work']);  
@@ -491,7 +501,7 @@ class NewsContentController extends Controller
                 'titleId'                   => $postData['title'],
                 // 'parent_category'           => $parent_category->parent_category,                                           
                 'section_ertId'              => $postData['section_ert'],                                           
-                 'slug'                      => $slug,
+                'slug'                      => $slug,
                 'country'                   => $postData['country'],  
                 'state'                     => $postData['state'],
                 'city'                      => $postData['city'],
@@ -513,19 +523,23 @@ class NewsContentController extends Controller
                 'is_feature'                => $postData['is_feature'],  
                 'is_popular'                => $postData['is_popular'],
                 'is_hot'                    => $postData['is_hot'],   
-                'bio_short'                => $postData['author_short_bio'] ?? '',  
+                'bio_short'                 => $postData['author_short_bio'] ?? '',  
                 'nelp_form_number'          => $nelp_form_number ?? '',
-                'nelp_form_pdf'            => $nelp_pdf ?? '', 
+                'nelp_form_pdf'             => $nelp_pdf ?? '',
+                'creative_Work_fiction'     => $postData['creative_Work_fiction'],
+                'additional_information'    => $postData['additional_information'],
+                'is_series'                 => $is_series,
+                'series_article_no'         => $series_article_no,
+                'current_article_no'        => $current_article_no,
+                'other_article_part_doi_no' => $other_article_part_doi_no,
                 'is_published'              => 1,                                                         
                 ];
-                //   dd();                                 
-                //   Helper::pr($fields);
-                 Article::where('id', '=', $id)->update($fields);
-                 return redirect("admin/article/list")->with('success_message', 'Article saved successfully');                
+                Article::where('id', '=', $id)->update($fields);
+                return redirect("admin/article/list")->with('success_message', 'Article saved successfully');                
             }
             $rules = [                                            
-                'section_ert'            => 'required',   
-                'creative_Work'                 => 'required',
+                'section_ert'               => 'required',   
+                'creative_Work'             => 'required',
                 'creative_work_SRN'         => 'required',
                 'creative_work_DOI'         => 'required',                
                 'pronoun'                   => 'required',   
@@ -535,184 +549,193 @@ class NewsContentController extends Controller
                 'is_feature'                => 'required',  
                 'is_popular'                => 'required', 
                 'is_hot'                    => 'required', 
-                'subtitle'                 => 'required', 
+                'subtitle'                  => 'required', 
             ];     
             if ($this->validate($request, $rules)) {
-                
-                    // Generate a unique slug
-                    $slug = Str::slug($postData['creative_Work']);  
-                    /* co-author details */
-                    // Define the number of co-authors you want to handle (e.g., 3 in this case)
-                
-                    $coAuthorsCount = $postData['co_authors']; 
-                    // Initialize empty arrays to hold the co-author data
-                    $coAuthorNames = [];
-                    $coAuthorBios = [];
-                    $coAuthorCountries = [];
-                    $coAuthorOrganizations = [];
-                    $coecosystemAffiliations = [];
-                    $coindigenousAffiliations = [];
-                    $coauthorClassification = [];
+                // Generate a unique slug
+                $slug = Str::slug($postData['creative_Work']);  
+                /* co-author details */
+                // Define the number of co-authors you want to handle (e.g., 3 in this case)
+            
+                $coAuthorsCount = $postData['co_authors']; 
+                // Initialize empty arrays to hold the co-author data
+                $coAuthorNames = [];
+                $coAuthorBios = [];
+                $coAuthorCountries = [];
+                $coAuthorOrganizations = [];
+                $coecosystemAffiliations = [];
+                $coindigenousAffiliations = [];
+                $coauthorClassification = [];
 
-                    // Loop through the number of co-authors and collect the data into arrays
-                    for ($i = 1; $i <= $coAuthorsCount; $i++) {
-                        // Check if co-author name exists, to avoid null entries
-                        if ($request->input("co_author_name_{$i}") !== null) {
-                            $coAuthorNames[] = $request->input("co_author_name_{$i}");
-                            $coAuthorBios[] = $request->input("co_author_short_bio_{$i}");
-                            $coAuthorCountries[] = $request->input("co_author_country_{$i}");
-                            $coAuthorOrganizations[] = $request->input("co_authororganization_name_{$i}");
-                            $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
-                            $coindigenousAffiliations[] = $request->input("co_indigenous_affiliation_{$i}");
-                            $coauthorClassification[] = $request->input("co_author_classification_{$i}");
-                        }
-                    }                                   
-                    if ($postData['media'] == 'image') {   
-                        /* banner image */
-                        $imageFile      = $request->file('cover_image');
-                            if($imageFile != ''){
-                                $imageName      = $imageFile->getClientOriginalName();
-                                $uploadedFile   = $this->upload_single_file('cover_image', $imageName, 'newcontent', 'image');
-                                if($uploadedFile['status']){
-                                    $cover_image = $uploadedFile['newFilename'];
-                                } else {
-                                    return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
-                                }
-                            } else {
-                                $cover_image = $data['row']->cover_image;
-                            }
-                        /* banner image */                      
-                    } 
-                    else{
-                        //fetch video code form url
-                        $url = $postData['video_url'];                        
-                        // Regular expression to match both types of YouTube URLs
-                        preg_match("/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([a-zA-Z0-9_-]{11})/", $url, $matches1);
-                        $videoId = $matches1[1]; // This will give you the part after 'v='
-
-                    }      
-                     /* NELP Pdf */                    
-                    $imageFile      = $request->file('nelp_pdf');
-                    // echo $imageFile; die;
-
-                    $nelp_form_number = str_replace("SRN","NELP",$postData['creative_work_SRN']);
-                    if ($imageFile != '') {
-                        $imageName      = str_replace($imageFile->getClientOriginalName(),$nelp_form_number.'.pdf',$imageFile->getClientOriginalName());
-                        $uploadedFile   = $this->upload_single_file('nelp_pdf', $imageName, 'newcontent', 'pdf');                        
-                        if ($uploadedFile['status']) {
-                            $nelp_pdf = $uploadedFile['newFilename'];
-                            // // Article::where('id', '=', $article_id)->update(['nelp_form_scan_copy' => $nelp_form_scan_copy, 'is_published' => 3]);
-                            // return redirect()->back()->with(['success_message' => 'Scan Copy Of NELP Form Uploaded successfully']);
-                        } else {
-                            return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
-                        }
-                    } else {
-                        $nelp_pdf = $data['row']->nelp_form_pdf;
+                // Loop through the number of co-authors and collect the data into arrays
+                for ($i = 1; $i <= $coAuthorsCount; $i++) {
+                    // Check if co-author name exists, to avoid null entries
+                    if ($request->input("co_author_name_{$i}") !== null) {
+                        $coAuthorNames[] = $request->input("co_author_name_{$i}");
+                        $coAuthorBios[] = $request->input("co_author_short_bio_{$i}");
+                        $coAuthorCountries[] = $request->input("co_author_country_{$i}");
+                        $coAuthorOrganizations[] = $request->input("co_authororganization_name_{$i}");
+                        $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
+                        $coindigenousAffiliations[] = $request->input("co_indigenous_affiliation_{$i}");
+                        $coauthorClassification[] = $request->input("co_author_classification_{$i}");
                     }
-                     /* NELP Pdf */        
-                    $fields = [
-                        'author_email'              => $postData['email'], 
-                        'author_classification'     => $postData['author_classification'] ?? '',
-                        'co_authors'                => $postData['co_authors'] ?? '',
-                        'co_authors_position'       => $postData['co_authors_position'] ?? '',
-                        'co_author_names'           => json_encode($coAuthorNames),  // Storing as JSON string
-                        'co_author_bios'            => json_encode($coAuthorBios),
-                        'co_author_countries'       => json_encode($coAuthorCountries),
-                        'co_author_organizations'   => json_encode($coAuthorOrganizations),
-                        'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
-                        'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
-                        'co_author_classification'  => json_encode($coauthorClassification),
-                        'author_name'               => $postData['first_name'], 
-                        'for_publication_name'      => $postData['for_publication_name'],
-                        'new_title'                 => $postData['creative_Work'],
-                        'sub_title'                 => $postData['subtitle'], 
-                        'author_pronoun'            => $postData['pronoun'],   
-                        'title'                     => $postData['title'],
-                        'parent_category'           => $parent_category->parent_category,                                           
-                        'sub_category'              => $postData['section_ert'],                                           
-                        'slug'                      => $slug,
-                        'country'                   => $postData['country'],  
-                        'state'                     => $postData['state'],
-                        'city'                      => $postData['city'],
-                        'organization_name'         => $postData['organization_name'] ?? '',   
-                        'organization_website'      => $postData['organization_website'],
-                        'author_affiliation'        => json_encode($postData['ecosystem_affiliation'] ?? []),  
-                        'indigenous_affiliation'    => $postData['indigenous_affiliation'] ?? '',   
-                        'expertise_area'            => json_encode($postData['expertise_area'] ?? []),                         
-                        'creative_work_SRN'         => $postData['creative_work_SRN'],
-                        'creative_work_DOI'         => $postData['creative_work_DOI'],                        
-                        'media'                     => $postData['media'],   
-                        'cover_image'               => $cover_image ?? '',
-                        'cover_image_caption'       => $postData['cover_image_caption'] ?? '',
-                        'video_url'                 => $postData['video_url'] ?? '',
-                        'videoId'                   => $videoId ?? '',
-                        'long_desc'                 => $postData['long_desc'] ?? '',
-                        'editors_comments'          => $postData['editors_comments'] ?? '',
-                        'keywords'                  => $postData['keywords'] ?? '',     
-                        'is_feature'                => $postData['is_feature'],  
-                        'is_popular'                => $postData['is_popular'],
-                        'is_hot'                    => $postData['is_hot'],  
-                        'author_short_bio'                => $postData['author_short_bio'] ?? '',  
-                        'nelp_form_number'          => $nelp_form_number,
-                        'nelp_form_file'            => $nelp_pdf,                                                          
-                    ];
-                    NewsContent::insert($fields);
+                }                                   
+                if ($postData['media'] == 'image') {   
+                    /* banner image */
+                    $imageFile      = $request->file('cover_image');
+                        if($imageFile != ''){
+                            $imageName      = $imageFile->getClientOriginalName();
+                            $uploadedFile   = $this->upload_single_file('cover_image', $imageName, 'newcontent', 'image');
+                            if($uploadedFile['status']){
+                                $cover_image = $uploadedFile['newFilename'];
+                            } else {
+                                return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                            }
+                        } else {
+                            $cover_image = $data['row']->cover_image;
+                        }
+                    /* banner image */                      
+                } 
+                else{
+                    //fetch video code form url
+                    $url = $postData['video_url'];                        
+                    // Regular expression to match both types of YouTube URLs
+                    preg_match("/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([a-zA-Z0-9_-]{11})/", $url, $matches1);
+                    $videoId = $matches1[1]; // This will give you the part after 'v='
 
-                    $fieldsArticle = [
-                        'email'                     => $postData['email'], 
-                        'author_classification'     => $postData['author_classification'] ?? '',
-                        'co_authors'                => $postData['co_authors'] ?? '',
-                        'co_authors_position'       => $postData['co_authors_position'] ?? '',
-                        'co_author_names'           => json_encode($coAuthorNames),  // Storing as JSON string
-                        'co_author_bios'            => json_encode($coAuthorBios),
-                        'co_author_countries'       => json_encode($coAuthorCountries),
-                        'co_author_organizations'   => json_encode($coAuthorOrganizations),
-                        'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
-                        'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
-                        'co_author_classification'  => json_encode($coauthorClassification),
-                        'first_name'                => $postData['first_name'], 
-                        'for_publication_name'      => $postData['for_publication_name'],
-                        'creative_Work'             => $postData['creative_Work'],
-                        'subtitle'                  => $postData['subtitle'], 
-                        'pronounId'                 => $postData['pronoun'],   
-                        'titleId'                   => $postData['title'],
-                        // 'parent_category'           => $parent_category->parent_category,                                           
-                        'section_ertId'              => $postData['section_ert'],                                           
-                         'slug'                      => $slug,
-                        'country'                   => $postData['country'],  
-                        'state'                     => $postData['state'],
-                        'city'                      => $postData['city'],
-                        'organization_name'         => $postData['organization_name'] ?? '',   
-                        'organization_website'      => $postData['organization_website'],
-                        'ecosystem_affiliationId'   => json_encode($postData['ecosystem_affiliation'] ?? []),  
-                        'indigenous_affiliation'    => $postData['indigenous_affiliation'] ?? '',   
-                        'expertise_areaId'          => json_encode($postData['expertise_area'] ?? []),                         
-                        'article_no'                => $postData['creative_work_SRN'],
-                        'creative_work_DOI'         => $postData['creative_work_DOI'],                                                                                                                                                           
-                        'media'                     => $postData['media']?? '',   
-                        'cover_image'               => $cover_image ?? '',
-                        'cover_image_caption'       => $cover_image_caption ?? '',
-                        'video_url'                 => $url ?? '',
-                        'videoId'                   => $videoId ?? '',
-                        'long_desc'                 => $postData['long_desc'] ?? '',
-                        'editors_comments'          => $postData['editors_comments'] ?? '',
-                        'keywords'                  => $postData['keywords'] ?? '',     
-                        'is_feature'                => $postData['is_feature'],  
-                        'is_popular'                => $postData['is_popular'],  
-                        'is_hot'                    => $postData['is_hot'],
-                        'bio_short'                => $postData['author_short_bio'] ?? '',  
-                        'nelp_form_number'          => $nelp_form_number ?? '',
-                        'nelp_form_pdf'            => $nelp_pdf ?? '', 
-                        'is_import'                 => 1,  
-                        'is_published'             => 4                                                         
-                        ];                       
-                    Article::where('id', '=', $id)->update($fieldsArticle);
-                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' inserted successfully');                
+                }      
+                 /* NELP Pdf */                    
+                $imageFile      = $request->file('nelp_pdf');
+                // echo $imageFile; die;
+
+                $nelp_form_number = str_replace("SRN","NELP",$postData['creative_work_SRN']);
+                if ($imageFile != '') {
+                    $imageName      = str_replace($imageFile->getClientOriginalName(),$nelp_form_number.'.pdf',$imageFile->getClientOriginalName());
+                    $uploadedFile   = $this->upload_single_file('nelp_pdf', $imageName, 'newcontent', 'pdf');                        
+                    if ($uploadedFile['status']) {
+                        $nelp_pdf = $uploadedFile['newFilename'];
+                        // // Article::where('id', '=', $article_id)->update(['nelp_form_scan_copy' => $nelp_form_scan_copy, 'is_published' => 3]);
+                        // return redirect()->back()->with(['success_message' => 'Scan Copy Of NELP Form Uploaded successfully']);
+                    } else {
+                        return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
+                    }
+                } else {
+                    $nelp_pdf = $data['row']->nelp_form_pdf;
+                }
+                 /* NELP Pdf */        
+                $fields = [
+                    'author_email'              => $postData['email'], 
+                    'author_classification'     => $postData['author_classification'] ?? '',
+                    'co_authors'                => $postData['co_authors'] ?? '',
+                    'co_authors_position'       => $postData['co_authors_position'] ?? '',
+                    'co_author_names'           => json_encode($coAuthorNames),  // Storing as JSON string
+                    'co_author_bios'            => json_encode($coAuthorBios),
+                    'co_author_countries'       => json_encode($coAuthorCountries),
+                    'co_author_organizations'   => json_encode($coAuthorOrganizations),
+                    'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
+                    'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
+                    'co_author_classification'  => json_encode($coauthorClassification),
+                    'author_name'               => $postData['first_name'], 
+                    'for_publication_name'      => $postData['for_publication_name'],
+                    'new_title'                 => $postData['creative_Work'],
+                    'sub_title'                 => $postData['subtitle'], 
+                    'author_pronoun'            => $postData['pronoun'],   
+                    'title'                     => $postData['title'],
+                    'parent_category'           => $parent_category->parent_category,                                           
+                    'sub_category'              => $postData['section_ert'],                                           
+                    'slug'                      => $slug,
+                    'country'                   => $postData['country'],  
+                    'state'                     => $postData['state'],
+                    'city'                      => $postData['city'],
+                    'organization_name'         => $postData['organization_name'] ?? '',   
+                    'organization_website'      => $postData['organization_website'],
+                    'author_affiliation'        => json_encode($postData['ecosystem_affiliation'] ?? []),  
+                    'indigenous_affiliation'    => $postData['indigenous_affiliation'] ?? '',   
+                    'expertise_area'            => json_encode($postData['expertise_area'] ?? []),                         
+                    'creative_work_SRN'         => $postData['creative_work_SRN'],
+                    'creative_work_DOI'         => $postData['creative_work_DOI'],                        
+                    'media'                     => $postData['media'],   
+                    'cover_image'               => $cover_image ?? '',
+                    'cover_image_caption'       => $postData['cover_image_caption'] ?? '',
+                    'video_url'                 => $postData['video_url'] ?? '',
+                    'videoId'                   => $videoId ?? '',
+                    'long_desc'                 => $postData['long_desc'] ?? '',
+                    'editors_comments'          => $postData['editors_comments'] ?? '',
+                    'keywords'                  => $postData['keywords'] ?? '',     
+                    'is_feature'                => $postData['is_feature'],  
+                    'is_popular'                => $postData['is_popular'],
+                    'is_hot'                    => $postData['is_hot'],  
+                    'author_short_bio'          => $postData['author_short_bio'] ?? '',  
+                    'nelp_form_number'          => $nelp_form_number,
+                    'nelp_form_file'            => $nelp_pdf,
+                    'creative_Work_fiction'     => $postData['creative_Work_fiction'],
+                    'additional_information'    => $postData['additional_information'],
+                    'is_series'                 => $is_series,
+                    'series_article_no'         => $series_article_no,
+                    'current_article_no'        => $current_article_no,
+                    'other_article_part_doi_no' => $other_article_part_doi_no,
+                ];
+                NewsContent::insert($fields);
+
+                $fieldsArticle = [
+                    'email'                     => $postData['email'], 
+                    'author_classification'     => $postData['author_classification'] ?? '',
+                    'co_authors'                => $postData['co_authors'] ?? '',
+                    'co_authors_position'       => $postData['co_authors_position'] ?? '',
+                    'co_author_names'           => json_encode($coAuthorNames),  // Storing as JSON string
+                    'co_author_bios'            => json_encode($coAuthorBios),
+                    'co_author_countries'       => json_encode($coAuthorCountries),
+                    'co_author_organizations'   => json_encode($coAuthorOrganizations),
+                    'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
+                    'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
+                    'co_author_classification'  => json_encode($coauthorClassification),
+                    'first_name'                => $postData['first_name'], 
+                    'for_publication_name'      => $postData['for_publication_name'],
+                    'creative_Work'             => $postData['creative_Work'],
+                    'subtitle'                  => $postData['subtitle'], 
+                    'pronounId'                 => $postData['pronoun'],   
+                    'titleId'                   => $postData['title'],
+                    'section_ertId'             => $postData['section_ert'],                                           
+                    'slug'                      => $slug,
+                    'country'                   => $postData['country'],  
+                    'state'                     => $postData['state'],
+                    'city'                      => $postData['city'],
+                    'organization_name'         => $postData['organization_name'] ?? '',   
+                    'organization_website'      => $postData['organization_website'],
+                    'ecosystem_affiliationId'   => json_encode($postData['ecosystem_affiliation'] ?? []),  
+                    'indigenous_affiliation'    => $postData['indigenous_affiliation'] ?? '',   
+                    'expertise_areaId'          => json_encode($postData['expertise_area'] ?? []),                         
+                    'article_no'                => $postData['creative_work_SRN'],
+                    'creative_work_DOI'         => $postData['creative_work_DOI'],                            
+                    'media'                     => $postData['media']?? '',   
+                    'cover_image'               => $cover_image ?? '',
+                    'cover_image_caption'       => $cover_image_caption ?? '',
+                    'video_url'                 => $url ?? '',
+                    'videoId'                   => $videoId ?? '',
+                    'long_desc'                 => $postData['long_desc'] ?? '',
+                    'editors_comments'          => $postData['editors_comments'] ?? '',
+                    'keywords'                  => $postData['keywords'] ?? '',     
+                    'is_feature'                => $postData['is_feature'],  
+                    'is_popular'                => $postData['is_popular'],  
+                    'is_hot'                    => $postData['is_hot'],
+                    'bio_short'                 => $postData['author_short_bio'] ?? '',  
+                    'nelp_form_number'          => $nelp_form_number ?? '',
+                    'nelp_form_pdf'             => $nelp_pdf ?? '',
+                    'creative_Work_fiction'     => $postData['creative_Work_fiction'],
+                    'additional_information'    => $postData['additional_information'],
+                    'is_series'                 => $is_series,
+                    'series_article_no'         => $series_article_no,
+                    'current_article_no'        => $current_article_no,
+                    'other_article_part_doi_no' => $other_article_part_doi_no,
+                    'is_import'                 => 1,  
+                    'is_published'              => 4                                                         
+                    ];                       
+                Article::where('id', '=', $id)->update($fieldsArticle);
+                return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' inserted successfully');
             } else {
                 return redirect()->back()->with('error_message', 'All fields required');
             }
         }
-        //  Helper::pr($data);
         echo $this->admin_after_login_layout($title, $page_name, $data);
     }
     /* import */
