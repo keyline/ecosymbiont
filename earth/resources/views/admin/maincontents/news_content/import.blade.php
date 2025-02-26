@@ -134,12 +134,10 @@ function numberToOrdinal($number) {
             $is_feature = $row->is_feature;
             $is_popular = $row->is_popular;   
             $is_hot = $row->is_hot;
-            $media = $row->media;     
+            $media = $row->media;
             $video_url = $row->video_url;  
             $videoId = $row->videoId;    
             $nelp_pdf = $row->nelp_form_pdf;
-            // echo $nelp_pdf; die;
-
             $is_series                  = $row->is_series;
             $series_article_no          = $row->series_article_no;
             $current_article_no         = $row->current_article_no;
@@ -198,7 +196,6 @@ function numberToOrdinal($number) {
             $video_url = '';        
             $videoId = '';
             $nelp_pdf = '';
-
             $is_series                  = '';
             $series_article_no          = '';
             $current_article_no         = '';
@@ -647,14 +644,12 @@ function numberToOrdinal($number) {
                                 <textarea name="long_desc" class="form-control ckeditor"  rows="5"><?= $long_desc ?></textarea>
                             </div>
                         </div>
-
                         <div class="row mb-3">
                             <label for="ckeditor1" class="col-md-2 col-lg-4 col-form-label">23a) Editor’s comments</label>
                             <div class="col-md-10 col-lg-8">
                                 <textarea name="editors_comments" class="form-control ckeditor" rows="5"><?= $editors_comments ?></textarea>
                             </div>
                         </div>
-
                         <div class="row mb-3">
                             <label for="keywords" class="col-md-2 col-lg-4 col-form-label">24) Keywords</label>
                             <div class="col-md-10 col-lg-8">
