@@ -1053,3 +1053,79 @@ $controllerRoute = $module['controller_route'];
         });
     });
 </script> -->
+<script>
+    $(document).ready(function() {
+        function toggleFields() {            
+            const communityYes = $('#community_yes').is(':checked');            
+            
+            // Toggle individual sections            
+            $('#communityDetails').toggle(communityYes);
+        }
+        $('input[name="invited"], input[name="community"]').on('change', function() {
+            toggleFields();
+        });
+        toggleFields();
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".series_yes").hide();
+        $('input[name="is_series"]').change(function() {
+            if ($(this).val() === "Yes") {
+                $(".series_yes").show();
+                $('#series_article_no').attr('required', true);
+                $('#current_article_no').attr('required', true);
+                $('#other_article_part_doi_no').attr('required', true);
+            } else {
+                $(".series_yes").hide();
+                $('#series_article_no').attr('required', false);
+                $('#current_article_no').attr('required', false);
+                $('#other_article_part_doi_no').attr('required', false);
+            }
+        });
+        $('#current_article_no').on('input', function(){
+            var current_article_no = parseInt($('#current_article_no').val());
+            if(current_article_no <= 1){
+                $('#current_article_no').attr('required', false);
+                $('#other_article_part_doi_no').attr('required', false);
+            } else {
+                $('#current_article_no').attr('required', true);
+                $('#other_article_part_doi_no').attr('required', true);
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var tagsArray = [];
+        var beforeData = $('#other_article_part_doi_no').val();
+        if(beforeData.length > 0){
+          tagsArray = beforeData.split(',');
+        }
+        $('#input-tags').on('input', function() {
+            var input = $(this).val();
+            if (input.includes(',')) {
+                var tags = input.split(',');
+                tags.forEach(function(tag) {
+                    tag = tag.trim();
+                    if (tag.length > 0 && !tagsArray.includes(tag)) {
+                        tagsArray.push(tag);
+                        $('#badge-container').append(
+                            '<span class="badge">' + tag + ' <span class="remove" data-tag="' + tag + '">&times;</span></span>'
+                        );
+                    }
+                });
+                $('#other_article_part_doi_no').val(tagsArray);
+                $(this).val('');
+            }
+        });
+        $(document).on('click', '.remove', function() {
+            var tag = $(this).data('tag');
+            tagsArray = tagsArray.filter(function(item) {
+                return item !== tag;
+            });
+            $(this).parent().remove();
+            $('#other_article_part_doi_no').val(tagsArray);
+        });
+    });
+</script>
