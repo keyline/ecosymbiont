@@ -417,6 +417,7 @@ class NewsContentController extends Controller
                 $coecosystemAffiliations = [];
                 $coindigenousAffiliations = [];
                 $coauthorClassification = [];
+                $coauthorPronoun = [];
 
                 // Loop through the number of co-authors and collect the data into arrays
                 for ($i = 1; $i <= $coAuthorsCount; $i++) {
@@ -429,6 +430,7 @@ class NewsContentController extends Controller
                         $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
                         $coindigenousAffiliations[] = $request->input("co_indigenous_affiliation_{$i}");
                         $coauthorClassification[] = $request->input("co_author_classification_{$i}");
+                        $coauthorPronoun[] = $request->input("co_author_pronoun{$i}");
                     }
                 }          
                 
@@ -493,16 +495,16 @@ class NewsContentController extends Controller
                 'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
                 'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
                 'co_author_classification'  => json_encode($coauthorClassification),
+                'co_author_pronoun'         => json_encode($coauthorPronoun),
                 'first_name'                => $postData['first_name'], 
                 'for_publication_name'      => $postData['for_publication_name'],
                 'creative_Work'             => $postData['creative_Work'],
-                'subtitle'                  => $postData['subtitle'], 
-                'pronounId'                 => $postData['pronoun'],   
+                'subtitle'                  => $postData['subtitle'],
+                'pronounId'                 => $postData['pronoun'],
                 'titleId'                   => $postData['title'],
-                // 'parent_category'           => $parent_category->parent_category,                                           
-                'section_ertId'              => $postData['section_ert'],                                           
+                'section_ertId'             => $postData['section_ert'],
                 'slug'                      => $slug,
-                'country'                   => $postData['country'],  
+                'country'                   => $postData['country'],
                 'state'                     => $postData['state'],
                 'city'                      => $postData['city'],
                 'organization_name'         => $postData['organization_name'] ?? '',   
@@ -566,6 +568,7 @@ class NewsContentController extends Controller
                 $coecosystemAffiliations = [];
                 $coindigenousAffiliations = [];
                 $coauthorClassification = [];
+                $coauthorPronoun = [];
 
                 // Loop through the number of co-authors and collect the data into arrays
                 for ($i = 1; $i <= $coAuthorsCount; $i++) {
@@ -578,6 +581,7 @@ class NewsContentController extends Controller
                         $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
                         $coindigenousAffiliations[] = $request->input("co_indigenous_affiliation_{$i}");
                         $coauthorClassification[] = $request->input("co_author_classification_{$i}");
+                        $coauthorPronoun[] = $request->input("co_author_pronoun{$i}");
                     }
                 }                                   
                 if ($postData['media'] == 'image') {   
@@ -635,6 +639,7 @@ class NewsContentController extends Controller
                     'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
                     'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
                     'co_author_classification'  => json_encode($coauthorClassification),
+                    'co_author_pronoun'         => json_encode($coauthorPronoun),
                     'author_name'               => $postData['first_name'], 
                     'for_publication_name'      => $postData['for_publication_name'],
                     'new_title'                 => $postData['creative_Work'],
@@ -689,6 +694,7 @@ class NewsContentController extends Controller
                     'co_ecosystem_affiliations' => json_encode($coecosystemAffiliations),
                     'co_indigenous_affiliations'=> json_encode($coindigenousAffiliations),
                     'co_author_classification'  => json_encode($coauthorClassification),
+                    'co_author_pronoun'         => json_encode($coauthorPronoun),
                     'first_name'                => $postData['first_name'], 
                     'for_publication_name'      => $postData['for_publication_name'],
                     'creative_Work'             => $postData['creative_Work'],
