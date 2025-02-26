@@ -373,15 +373,16 @@ function numberToOrdinal($number) {
                                                         @if ($pronoun)
                                                             @foreach ($pronoun as $data)
                                                                 <?php
-                                                                if($co_author_pronoun != ''){
-                                                                    if($data->id == $co_author_pronoun[$i - 1]){
-                                                                        $pronoun_checked = 'checked';
-                                                                    } else {
-                                                                        $pronoun_checked = '';
-                                                                    }
-                                                                } else {
-                                                                    $pronoun_checked = '';
-                                                                }
+                                                                // if($co_author_pronoun != ''){
+                                                                //     if($data->id == $co_author_pronoun[$i - 1]){
+                                                                //         $pronoun_checked = 'checked';
+                                                                //     } else {
+                                                                //         $pronoun_checked = '';
+                                                                //     }
+                                                                // } else {
+                                                                //     $pronoun_checked = '';
+                                                                // }
+                                                                $pronoun_checked = '';
                                                                 ?>
                                                                 <input type="radio" name="co_author_pronoun_{{$i}}" value="{{ $data->id }}" <?=$pronoun_checked?>>
                                                                 <label>{{ $data->name }}</label>
