@@ -1070,6 +1070,19 @@ $controllerRoute = $module['controller_route'];
 <script type="text/javascript">
     $(document).ready(function() {
         $(".series_yes").hide();
+        var is_series= '<?=$is_series?>';
+        if (is_series === "Yes") {
+            $(".series_yes").show();
+            $('#series_article_no').attr('required', true);
+            $('#current_article_no').attr('required', true);
+            $('#other_article_part_doi_no').attr('required', true);
+        } else {
+            $(".series_yes").hide();
+            $('#series_article_no').attr('required', false);
+            $('#current_article_no').attr('required', false);
+            $('#other_article_part_doi_no').attr('required', false);
+        }
+        
         $('input[name="is_series"]').change(function() {
             if ($(this).val() === "Yes") {
                 $(".series_yes").show();
