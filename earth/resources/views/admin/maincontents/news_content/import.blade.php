@@ -205,7 +205,7 @@ $controllerRoute = $module['controller_route'];
                         <div class="row mb-3">
                             <label for="author_classification" class="col-md-2 col-lg-4 col-form-label">2) Author Classification
                             </label>           
-                            <div class="col-md-10 col-lg-8">                 
+                            <div class="col-md-10 col-lg-8">
                                 <?php if($page_header == "News Content Add" || $page_header == "News Content Update") {?>                                    
                                 <input type="radio" id="Human individual" name="author_classification" value="Human individual" @checked(old('author_classification', $author_classification) == 'Human individual')>
                                 <label for="Human individual">Human individual</label>
@@ -416,14 +416,14 @@ $controllerRoute = $module['controller_route'];
                                 </div>
                             </div>  
                             <div class="row mb-3">
-                            <label for="creative_work_SRN" class="col-md-2 col-lg-2 col-form-label">10) Creative-Work SRN</label>
-                            <div class="col-md-10 col-lg-10">
+                            <label for="creative_work_SRN" class="col-md-2 col-lg-4 col-form-label">10) Creative-Work SRN</label>
+                            <div class="col-md-10 col-lg-8">
                                 <input type="text" name="creative_work_SRN" class="form-control" id="creative_work_SRN" value="<?= $creative_work_SRN ?>">
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="creative_work_DOI" class="col-md-2 col-lg-2 col-form-label">11) Creative-Work DOI</label>
-                            <div class="col-md-10 col-lg-10">
+                            <label for="creative_work_DOI" class="col-md-2 col-lg-4 col-form-label">11) Creative-Work DOI</label>
+                            <div class="col-md-10 col-lg-8">
                                 <input type="text" name="creative_work_DOI" class="form-control" id="creative_work_DOI" value="<?= str_replace("SRN","DOI",$creative_work_SRN)?>">
                             </div>
                         </div>
@@ -522,8 +522,8 @@ $controllerRoute = $module['controller_route'];
                             </div>
                          
                         <div class="row mb-3">
-                            <label for="media" class="col-md-2 col-lg-2 col-form-label">22) Media Type</label>
-                            <div class="col-md-10 col-lg-10">
+                            <label for="media" class="col-md-2 col-lg-4 col-form-label">22) Media Type</label>
+                            <div class="col-md-10 col-lg-8">
                                 <input type="radio" id="media_image" name="media" value="image" @checked(old('media', $media) == 'image')>
                                 <label for="media_image">Image</label>
                                 <input type="radio" id="media_video" name="media" value="video" @checked(old('media', $media) == 'video')>
@@ -532,8 +532,8 @@ $controllerRoute = $module['controller_route'];
                         </div>
                         <div id="imageDetails" style="display: none;">  
                             <div class="row mb-3">
-                                <label for="cover_image" class="col-md-2 col-lg-2 col-form-label">22A1) Cover Image</label>
-                                <div class="col-md-10 col-lg-10">
+                                <label for="cover_image" class="col-md-2 col-lg-4 col-form-label">22A1) Cover Image</label>
+                                <div class="col-md-10 col-lg-8">
                                     <input type="file" name="cover_image" class="form-control" id="cover_image">
                                     <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>
                                     <span id="cover_image_error" class="text-danger"></span>  
@@ -543,8 +543,8 @@ $controllerRoute = $module['controller_route'];
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="cover_image_caption" class="col-md-2 col-lg-2 col-form-label">22A2) Cover Image Caption</label>
-                                <div class="col-md-10 col-lg-10">
+                                <label for="cover_image_caption" class="col-md-2 col-lg-4 col-form-label">22A2) Cover Image Caption</label>
+                                <div class="col-md-10 col-lg-8">
                                     <input type="text" name="cover_image_caption" class="form-control" id="cover_image_caption" value="<?= $cover_image_caption ?>">
                                 </div>
                             </div>
@@ -575,9 +575,9 @@ $controllerRoute = $module['controller_route'];
                         </div>
                         <div id="videoDetails" style="display: none;">
                             <div class="row mb-3">
-                                <label for="video_url" class="col-md-2 col-lg-2 col-form-label">22B) Video Url
+                                <label for="video_url" class="col-md-2 col-lg-4 col-form-label">22B) Video Url
                                 </label>
-                                <div class="col-md-10 col-lg-10">
+                                <div class="col-md-10 col-lg-8">
                                     <input type="text" name="video_url" class="form-control" id="video_url"
                                         value="<?= $video_url ?>">
                                     <?php if($video_url != ''){?>
@@ -591,22 +591,22 @@ $controllerRoute = $module['controller_route'];
                             </div> 
                         </div>
                         <div class="row mb-3">
-                            <label for="ckeditor1" class="col-md-2 col-lg-2 col-form-label">23) Description</label>
-                            <div class="col-md-10 col-lg-10">
+                            <label for="ckeditor1" class="col-md-2 col-lg-4 col-form-label">23) Description</label>
+                            <div class="col-md-10 col-lg-8">
                                 <textarea name="long_desc" class="form-control ckeditor"  rows="5"><?= $long_desc ?></textarea>
                             </div>
                         </div>
 
                         <div class="row mb-3">
-                            <label for="ckeditor1" class="col-md-2 col-lg-2 col-form-label">23a) Editor’s comments</label>
-                            <div class="col-md-10 col-lg-10">
+                            <label for="ckeditor1" class="col-md-2 col-lg-4 col-form-label">23a) Editor’s comments</label>
+                            <div class="col-md-10 col-lg-8">
                                 <textarea name="editors_comments" class="form-control ckeditor" rows="5"><?= $editors_comments ?></textarea>
                             </div>
                         </div>
 
                         <div class="row mb-3">
-                            <label for="keywords" class="col-md-2 col-lg-2 col-form-label">24) Keywords</label>
-                            <div class="col-md-10 col-lg-10">
+                            <label for="keywords" class="col-md-2 col-lg-4 col-form-label">24) Keywords</label>
+                            <div class="col-md-10 col-lg-8">
                                 <input type="text" id="input-tags" class="form-control" placeholder="Enter Keywords">
                                 <textarea class="form-control" name="keywords" id="keywords" style="display:none;"><?=$keywords?></textarea>
                                 <small class="text-primary">Enter keywords with comma separated</small>
@@ -625,8 +625,8 @@ $controllerRoute = $module['controller_route'];
                             </div>
                         </div>                        
                         <div class="row mb-3">
-                            <label for="is_feature" class="col-md-2 col-lg-2 col-form-label">25) Is Features</label>
-                            <div class="col-md-10 col-lg-10">
+                            <label for="is_feature" class="col-md-2 col-lg-4 col-form-label">25) Is Features</label>
+                            <div class="col-md-10 col-lg-8">
                                 <input type="radio" id="is_feature_yes" name="is_feature" value="1" @checked(old('is_feature', $is_feature) == 1)>
                                 <label for="is_feature_yes">Yes</label>
                                 <input type="radio" id="is_feature_no" name="is_feature" value="0" @checked(old('is_feature', $is_feature) == 0)>
@@ -634,8 +634,8 @@ $controllerRoute = $module['controller_route'];
                             </div>
                         </div>  
                         <div class="row mb-3">
-                            <label for="is_popular" class="col-md-2 col-lg-2 col-form-label">26) Is Popular</label>
-                            <div class="col-md-10 col-lg-10">
+                            <label for="is_popular" class="col-md-2 col-lg-4 col-form-label">26) Is Popular</label>
+                            <div class="col-md-10 col-lg-8">
                                 <input type="radio" id="is_popular_yes" name="is_popular" value="1" @checked(old('is_popular', $is_popular) == 1)>
                                 <label for="is_popular_yes">Yes</label>
                                 <input type="radio" id="is_popular_no" name="is_popular" value="0" @checked(old('is_popular', $is_popular) == 0)>
@@ -643,8 +643,8 @@ $controllerRoute = $module['controller_route'];
                             </div>
                         </div> 
                         <div class="row mb-3">
-                            <label for="is_hot" class="col-md-2 col-lg-2 col-form-label">25) Is Hot</label>
-                            <div class="col-md-10 col-lg-10">
+                            <label for="is_hot" class="col-md-2 col-lg-4 col-form-label">27) Is Hot</label>
+                            <div class="col-md-10 col-lg-8">
                                 <input type="radio" id="is_hot_yes" name="is_hot" value="1" @checked(old('is_hot', $is_hot) == 1)>
                                 <label for="is_hot_yes">Yes</label>
                                 <input type="radio" id="is_hot_no" name="is_hot" value="0" @checked(old('is_hot', $is_hot) == 0)>
@@ -652,8 +652,26 @@ $controllerRoute = $module['controller_route'];
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="nelp_pdf" class="col-md-2 col-lg-2 col-form-label">27) Upload NELP</label>
-                            <div class="col-md-10 col-lg-10">
+                            <label for="creative_Work" class="col-md-2 col-lg-4 col-form-label blue-text">28) Is your Creative-Work fiction?
+                            </label>
+                            <div class="col-md-10 col-lg-8">
+                                <input type="radio" id="fiction_yes" name="creative_Work_fiction" value="Yes" required @checked(old('creative_Work_fiction', $creative_Work_fiction) == 'Yes')>
+                                <label for="fiction_yes">Yes</label>
+                                <input type="radio" id="fiction_no" name="creative_Work_fiction" value="No" required @checked(old('creative_Work_fiction', $creative_Work_fiction) == 'No')>
+                                <label for="fiction_no">No</label>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="additional_information" class="col-md-2 col-lg-4 col-form-label">29) (Optional: max. 100 words) Comments for the Editor(s) (any additional information you wish to share)
+                            </label>
+                            <div class="col-md-10 col-lg-8">
+                                <textarea class="form-control" id="additional_information" name="additional_information" rows="4" cols="50">{{ old('additional_information', $additional_information) }}</textarea>
+                                <div id="bio_shortError" class="error"></div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="nelp_pdf" class="col-md-2 col-lg-4 col-form-label">30) Upload NELP</label>
+                            <div class="col-md-10 col-lg-8">
                                 <input type="file" name="nelp_pdf" class="form-control" id="nelp_pdf" accept="application/pdf">                                                                
                                 <?php if($nelp_pdf != ''){?>
                                 <a href="<?= env('UPLOADS_URL') . 'newcontent/' . $nelp_pdf ?>" target="_blank"
@@ -663,7 +681,7 @@ $controllerRoute = $module['controller_route'];
                         </div>
 
                         <div class="row mb-3">
-                            <label for="community" class="col-md-2 col-lg-4 col-form-label">28) Are you a member of an EaRTh Community?
+                            <label for="community" class="col-md-2 col-lg-4 col-form-label">31) Are you a member of an EaRTh Community?
                             </label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="radio" class="readonly-input" id="community_yes" name="community" value="Yes" required @checked(old('community', $community) == 'Yes')>
@@ -674,7 +692,7 @@ $controllerRoute = $module['controller_route'];
                         </div>
                         <div id="communityDetails" style="display: none;">
                             <div class="row mb-3">
-                                <label for="community_info" class="col-md-2 col-lg-4 col-form-label">28A) Select Community</label>
+                                <label for="community_info" class="col-md-2 col-lg-4 col-form-label">31A) Select Community</label>
                                 <div class="col-md-10 col-lg-8">
                                     <select name="community_name" class="form-control" id="community_name">
                                         <option value="" selected disabled>Select</option>
@@ -687,7 +705,7 @@ $controllerRoute = $module['controller_route'];
                             </div> 
                         </div>
                         <div class="row mb-3">
-                            <label for="is_series" class="col-md-2 col-lg-4 col-form-label">31) Is it a series? yes/no
+                            <label for="is_series" class="col-md-2 col-lg-4 col-form-label">32) Is it a series? yes/no
                             </label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="radio" id="series_yes" name="is_series" value="Yes" <?=(($is_series == 'Yes')?'checked':'')?> required>
@@ -697,17 +715,38 @@ $controllerRoute = $module['controller_route'];
                             </div>
                         </div>
                         <div class="row series_yes mb-3">
-                            <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label">32) How many articles in this series
+                            <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label">32A) How many articles in this series
                             </label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="number" name="series_article_no" class="form-control" id="series_article_no" min="1" value="<?=$series_article_no?>">
                             </div>
                         </div>
                         <div class="row series_yes mb-3">
-                            <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label">33) Current article no.
+                            <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label">32B) Current article no.
                             </label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="text" name="current_article_no" class="form-control" id="current_article_no" value="<?=$current_article_no?>">
+                            </div>
+                        </div>
+                        <div class="row series_yes mb-3">
+                            <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label">32C) If current article no is greater than 1 then enter each of series DOI number into it. Lets say I am submitting 4th part of the series then I have to enter previous three part articles DOI number
+                            </label>
+                            <div class="col-md-10 col-lg-8">
+                                <input type="text" class="form-control" id="input-tags">
+                                <textarea class="form-control" name="other_article_part_doi_no" id="other_article_part_doi_no" style="display:none;"><?=$other_article_part_doi_no?></textarea>
+                                <small class="text-primary">Enter DOI with comma separated</small>
+                                <div id="badge-container">
+                                    <?php
+                                    if($other_article_part_doi_no != ''){
+                                        $deal_keywords = explode(",", $other_article_part_doi_no);
+                                        if(!empty($deal_keywords)){
+                                        for($k=0;$k<count($deal_keywords);$k++){
+                                    ?>
+                                        <span class="badge"><?=$deal_keywords[$k]?> <span class="remove" data-tag="<?=$deal_keywords[$k]?>">&times;</span></span>
+                                    <?php } }
+                                    }
+                                    ?>
+                                </div>
                             </div>
                         </div>
                         <div class="text-center">
@@ -1082,7 +1121,7 @@ $controllerRoute = $module['controller_route'];
             $('#current_article_no').attr('required', false);
             $('#other_article_part_doi_no').attr('required', false);
         }
-        
+
         $('input[name="is_series"]').change(function() {
             if ($(this).val() === "Yes") {
                 $(".series_yes").show();
