@@ -951,8 +951,8 @@ class FrontController extends Controller
             $data['user']                   = User::find($user_id);
             $data['articles']               = Article::where('user_id', '=', $user_id)->get();
             $data['classification']         = UserClassification::where('user_id', '=', $user_id)->first();
-             $data['profile']               = UserProfile::where('user_id', '=', $user_id)->first();
-            //  Helper::pr($data['profile']);
+            $data['profile']                = UserProfile::where('user_id', '=', $user_id)->first();
+            $data['communities']            = Community::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['search_keyword']         = '';
 
             if ($request->isMethod('post')) {

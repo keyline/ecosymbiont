@@ -73,34 +73,41 @@ $controllerRoute = $module['controller_route'];
             $co_ecosystem_affiliations = json_decode($row->co_ecosystem_affiliations);
             $co_indigenous_affiliations = json_decode($row->co_indigenous_affiliations);
             $co_author_classification = json_decode($row->co_author_classification);
+            $co_author_pronoun = json_decode($row->co_author_pronoun);
             $first_name = $row->first_name;                               
             $email = $row->email;          
             $for_publication_name = $row->for_publication_name;          
             $titleId = $row->titleId;  
             $pronounId = $row->pronounId;
             $news_categoryId = $row->section_ertId;
-            $creative_Work = $row->creative_Work;  
+            $creative_Work = $row->creative_Work;
+            $creative_Work_fiction = $row->creative_Work_fiction;
             $orginal_work = $row->orginal_work;        
-            $copyright = $row->copyright; 
-            $subtitle = $row->subtitle;           
+            $copyright = $row->copyright;
+            $subtitle = $row->subtitle;
+            $additional_information = $row->additional_information;
             $state = $row->state;
             $city = $row->city;
+            $community = $row->community;
+            $community_name = $row->community_name;
             $organization_name = $row->organization_name;
             $organization_website = $row->organization_website;
             $ecosystem_affiliationId = (($row->ecosystem_affiliationId != '')?json_decode($row->ecosystem_affiliationId):[]);
             $indigenous_affiliation = $row->indigenous_affiliation;
             $expertise_areaId = (($row->expertise_areaId != '')?json_decode($row->expertise_areaId):[]);
             $bio_short = $row->bio_short;
-            $bio_long = $row->bio_long;            
+            $bio_long = $row->bio_long;
             $new_title = $row->new_title;
             $sub_title = $row->sub_title;
             $creative_work_SRN = $row->article_no;
             $creative_work_DOI = $row->creative_work_DOI;
-            $author_name = $row->author_name;             
+            $author_name = $row->author_name;
             // $pronounId = $row->author_pronoun;  
             // $author_affiliationId = $selected_ecosystem_affiliation;
             $indigenous_affiliation = $row->indigenous_affiliation;            
             $countryId = $row->country;
+            $community = $profile->community;
+            $community_name = $profile->community_name;
             $organization_name = $row->organization_name;
             $cover_image = $row->cover_image;
             $cover_image_caption = $row->cover_image_caption;
@@ -115,8 +122,13 @@ $controllerRoute = $module['controller_route'];
             $media = $row->media;     
             $video_url = $row->video_url;  
             $videoId = $row->videoId;    
-            $nelp_pdf = $row->nelp_form_pdf; 
+            $nelp_pdf = $row->nelp_form_pdf;
             // echo $nelp_pdf; die;
+
+            $is_series                  = $row->is_series;
+            $series_article_no          = $row->series_article_no;
+            $current_article_no         = $row->current_article_no;
+            $other_article_part_doi_no  = $row->other_article_part_doi_no;
         } else {
             $author_classification ='';
             $co_authors = '';
@@ -129,7 +141,9 @@ $controllerRoute = $module['controller_route'];
             $titleId = '';
             $news_categoryId = '';
             $creative_Work = '';
+            $creative_Work_fiction = '';
             $subtitle = '';
+            $additional_information = '';
             $state = '';
             $city = '';
             $organization_website = '';
@@ -159,6 +173,11 @@ $controllerRoute = $module['controller_route'];
             $video_url = '';        
             $videoId = '';
             $nelp_pdf = '';
+
+            $is_series                  = '';
+            $series_article_no          = '';
+            $current_article_no         = '';
+            $other_article_part_doi_no  = '';
         }
         ?>
         <div class="col-xl-12">
@@ -641,6 +660,55 @@ $controllerRoute = $module['controller_route'];
                                 <a href="<?= env('UPLOADS_URL') . 'newcontent/' . $nelp_pdf ?>" target="_blank"
                                     class="badge bg-primary">View PDF</a>
                                 <?php }?>                                
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="community" class="col-md-2 col-lg-4 col-form-label">28) Are you a member of an EaRTh Community?
+                            </label>
+                            <div class="col-md-10 col-lg-8">
+                                <input type="radio" class="readonly-input" id="community_yes" name="community" value="Yes" required @checked(old('community', $community) == 'Yes')>
+                                <label for="yes">Yes</label>
+                                <input type="radio" class="readonly-input" id="community_no" name="community" value="No" required @checked(old('community', $community) == 'No')>
+                                <label for="no">No</label>
+                            </div>
+                        </div>
+                        <div id="communityDetails" style="display: none;">
+                            <div class="row mb-3">
+                                <label for="community_info" class="col-md-2 col-lg-4 col-form-label">28A) Select Community</label>
+                                <div class="col-md-10 col-lg-8">
+                                    <select name="community_name" class="form-control" id="community_name">
+                                        <option value="" selected disabled>Select</option>
+                                        <?php if($communities){ foreach($communities as $cmn){?>
+                                            <option value="<?=$cmn->name?>" <?=(($community_name == $cmn->name)?'selected':'')?>><?=$cmn->name?></option>
+                                        <?php } }?>
+                                    </select>
+                                <input type="hidden" name="community_name" value="{{ $community_name }}">
+                                </div>
+                            </div> 
+                        </div>
+                        <div class="row mb-3">
+                            <label for="is_series" class="col-md-2 col-lg-4 col-form-label">31) Is it a series? yes/no
+                            </label>
+                            <div class="col-md-10 col-lg-8">
+                                <input type="radio" id="series_yes" name="is_series" value="Yes" <?=(($is_series == 'Yes')?'checked':'')?> required>
+                                <label for="series_yes">Yes</label>
+                                <input type="radio" id="series_no" name="is_series" value="No" <?=(($is_series == 'No')?'checked':'')?> required>
+                                <label for="series_no">No</label>
+                            </div>
+                        </div>
+                        <div class="row series_yes mb-3">
+                            <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label">32) How many articles in this series
+                            </label>
+                            <div class="col-md-10 col-lg-8">
+                                <input type="number" name="series_article_no" class="form-control" id="series_article_no" min="1" value="<?=$series_article_no?>">
+                            </div>
+                        </div>
+                        <div class="row series_yes mb-3">
+                            <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label">33) Current article no.
+                            </label>
+                            <div class="col-md-10 col-lg-8">
+                                <input type="text" name="current_article_no" class="form-control" id="current_article_no" value="<?=$current_article_no?>">
                             </div>
                         </div>
                         <div class="text-center">

@@ -900,12 +900,12 @@ use Illuminate\Support\Facades\DB;
                                         <label for="community_info" class="col-md-2 col-lg-4 col-form-label">28A) Select Community</label>
                                         <div class="col-md-10 col-lg-8">
                                             <select name="community_name" class="form-control" id="community_name">
-                                                <!-- <option value="" selected disabled>Select</option> -->
-                                                <option value="Schumacher Wild" disabled @selected(old("community_name", $community_name ?? '') == 'Schumacher Wild') >Schumacher Wild</option>
-                                                <option value="West Oakland Matters" disabled @selected(old("community_name", $community_name ?? '') == 'West Oakland Matters') >West Oakland Matters</option>
+                                                <option value="" selected disabled>Select</option>
+                                                <?php if($communities){ foreach($communities as $cmn){?>
+                                                    <option value="<?=$cmn->name?>" <?=(($community_name == $cmn->name)?'selected':'')?>><?=$cmn->name?></option>
+                                                <?php } }?>
                                             </select>
-                                            <!-- Hidden input to submit the selected value -->
-                                        <input type="hidden" name="community_name" value="{{ $community_name }}">
+                                            <input type="hidden" name="community_name" value="{{ $community_name }}">
                                         </div>
                                     </div> 
                                 </div>
@@ -931,7 +931,7 @@ use Illuminate\Support\Facades\DB;
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="is_series" class="col-md-2 col-lg-4 col-form-label">31) Is it a series ? yes/no
+                                    <label for="is_series" class="col-md-2 col-lg-4 col-form-label">31) Is it a series? yes/no
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="radio" id="series_yes" name="is_series" value="Yes" <?=(($is_series == 'Yes')?'checked':'')?> required>

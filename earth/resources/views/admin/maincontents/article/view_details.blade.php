@@ -485,7 +485,7 @@ function numberToOrdinal($number) {
                       <td><?= $community_name ?></td>
                     </tr>
                     <tr>
-                      <td>31) Is it a series ? yes/no</td>
+                      <td>31) Is it a series? yes/no</td>
                       <td><?=$is_series?></td>
                     </tr>
                     <?php if($is_series == 'Yes'){?>
