@@ -602,12 +602,12 @@ class FrontController extends Controller
 
                     // Decode JSON response
                     $responseData = json_decode($response);
-                    Helper::pr($responseData);
+                    // Helper::pr($responseData);
 
                     // Check if reCAPTCHA validation was successful
                     if ($responseData->success && $responseData->score >= 0.5) {
                         // reCAPTCHA validation passed, proceed with form processing
-                        echo "reCAPTCHA v3 validation passed. You can process the form."; die;
+                        // echo "reCAPTCHA v3 validation passed. You can process the form."; die;
                         $rules = [                                 
                             'first_name'                => 'required',                                                                           
                             'email'                     => 'required',                                                  
@@ -652,7 +652,7 @@ class FrontController extends Controller
                         }
                     } else {
                         // reCAPTCHA validation failed
-                        echo "reCAPTCHA v3 validation failed."; die;
+                        // echo "reCAPTCHA v3 validation failed."; die;
                         return redirect()->back()->with('error_message', 'reCAPTCHA v3 validation failed. Please try again.');                        
                     }
             }
