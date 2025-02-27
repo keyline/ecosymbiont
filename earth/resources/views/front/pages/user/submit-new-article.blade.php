@@ -639,7 +639,7 @@ use Illuminate\Support\Facades\DB;
                                                         <label for="first_image_file" class="col-md-2 col-lg-4 col-form-label">17A3a1) TYPE A: image 1 accompanying word narrative</label>
                                                         <div class="col-md-10 col-lg-8">
                                                             <input type="file" name="image_file_1" class="form-control" id="image_file_1" value="{{ old('image_file_1', $image_file_0 ?? '') }}">
-                                                            <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed (max. 1 MB</small>
+                                                            <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed (max. 1 MB)</small>
                                                             <span id="image_file_1_error" class="text-danger"></span>                                                        
                                                             <?php if(isset($image_files[0]) && $image_files[0] != ''){?>
                                                             <img src="<?=env('UPLOADS_URL').'narrative/'.$image_files[0]?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
@@ -668,7 +668,7 @@ use Illuminate\Support\Facades\DB;
                                                         <label for="image_file_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17A3a{{$i}}) TYPE A: image {{ $i }} accompanying word narrative</label>
                                                         <div class="col-md-10 col-lg-8">
                                                             <input type="file" name="image_file_{{ $i }}" class="form-control" id="image_file_{{ $i }}" value="{{ old('image_file_'.$i, $image_files[$i-1] ?? '') }}">
-                                                            <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small>
+                                                            <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed (max. 1 MB)</small>
                                                             <span id="image_file_{{ $i }}_error" class="text-danger"></span>                                                        
                                                             <?php if(isset($image_files[$i-1]) && $image_files[$i-1] != ''){?>
                                                             <img src="<?=env('UPLOADS_URL').'narrative/'.$image_files[$i-1]?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
@@ -717,7 +717,7 @@ use Illuminate\Support\Facades\DB;
                                                         <label for="art_image_file_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17B2a{{$i}}) TYPE B: image {{ $i }} of art</label>
                                                         <div class="col-md-10 col-lg-8">
                                                             <input type="file" name="art_image_file_{{ $i }}" class="form-control" id="art_image_file_{{ $i }}">
-                                                            <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed (max. 1 MB</small>
+                                                            <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed (max. 1 MB)</small>
                                                             <span id="art_image_file_{{ $i }}_error" class="text-danger"></span>                                                        
                                                             <?php if(isset($art_image_file[$i-1]) && $art_image_file[$i-1] != ''){?>
                                                             <img src="<?=env('UPLOADS_URL').'art_image/'.$art_image_file[$i-1]?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">

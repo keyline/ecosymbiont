@@ -291,7 +291,7 @@ class ContentCreatersController extends Controller
             'status'             => 3
         ];
         User::where($this->data['primary_key'], '=', $id)->update($fields);
-        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' deleted successfully');
+        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] .'(s) deleted successfully');
     }
     /* delete */
     /* change status */

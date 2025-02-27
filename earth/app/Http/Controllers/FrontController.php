@@ -2082,7 +2082,7 @@ class FrontController extends Controller
                         'name'                => $postData['name'],
                     ];
                     UserClassification::insert($fields);
-                    return redirect(url('user/add-profile'))->with('success_message', 'Classification created successfully');
+                    return redirect(url('user/add-profile'))->with('success_message', 'Classification selected successfully');
                 } else {
                     return redirect()->back()->with('error_message', 'All fields required');
                 }
