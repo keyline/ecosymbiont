@@ -22,7 +22,7 @@
                               @endif
                             </div>
                             <div class="col-md-12">
-                              <p style="color:red; font-style: italic;">
+                              <p style="color:red; font-style: italic;font-size: 14px;text-align: justify;">
                                 We are experiencing some technical difficulties; if you see an error message after entering your information and clicking the "Submit" button, please refresh your screen and try a second time to enter your information and hit "Submit." We apologize for the inconvenience.
                               </p>
                               <div class="card">
