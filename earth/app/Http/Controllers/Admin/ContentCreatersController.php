@@ -33,7 +33,7 @@ class ContentCreatersController extends Controller
     public function __construct()
     {
         $this->data = array(
-            'title'             => 'Content Creator',
+            'title'             => 'Content creator',
             'controller'        => 'ContentCreatersController',
             'controller_route'  => 'content_creaters',
             'primary_key'       => 'id',
