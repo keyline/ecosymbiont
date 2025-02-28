@@ -91,6 +91,7 @@
                                         </div>
                                         <div class="text-center" style="margin-bottom: 15px;">
                                         Already registered? <a href="<?=url('signin')?>">Sign In</a>
+                                        <br>Having technical problems? <a href="<?=env('REGENERATE_URL')?>contact.php">Contact us</a>.
                                         </div>
                                       </form>
                                 </div>
