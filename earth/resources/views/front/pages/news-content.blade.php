@@ -46,40 +46,82 @@ $current_url = $protocol . $host . $uri;
                                     $current_article_no         = $rowContent->current_article_no;
                                     $other_article_part_doi_no      = explode(",", $rowContent->other_article_part_doi_no);
                                     // Helper::pr($other_article_part_doi_no,0);
+                                    $other_articles_in_this_series_ids = [];
                                     $other_articles_in_this_series = [];
                                     if($is_series == 'Yes'){
                                         if($current_article_no == 1){
-                                            $other_articles_in_this_series[] = $rowContent->creative_work_DOI;
+                                            $other_articles_in_this_series_ids[] = $rowContent->creative_work_DOI;
                                             $getOtherArticles = NewsContent::select('creative_work_DOI')->where('status', '=', 1)->where('other_article_part_doi_no', 'LIKE', '%'.$rowContent->creative_work_DOI.'%')->orderBy('current_article_no', 'ASC')->get();
                                             if($getOtherArticles){
                                                 foreach($getOtherArticles as $getOtherArticle){
-                                                    $other_articles_in_this_series[] = $getOtherArticle->creative_work_DOI;
+                                                    $other_articles_in_this_series_ids[] = $getOtherArticle->creative_work_DOI;
                                                 }
                                             }
                                         } elseif($current_article_no == $series_article_no){
                                             if(!empty($other_article_part_doi_no)){
                                                 for($k=0;$k<count($other_article_part_doi_no);$k++){
-                                                    $other_articles_in_this_series[] = $other_article_part_doi_no[$k];
+                                                    $other_articles_in_this_series_ids[] = $other_article_part_doi_no[$k];
                                                 }
                                             }
-                                            $other_articles_in_this_series[] = $rowContent->creative_work_DOI;
+                                            $other_articles_in_this_series_ids[] = $rowContent->creative_work_DOI;
                                         } else {
                                             if(!empty($other_article_part_doi_no)){
                                                 for($k=0;$k<count($other_article_part_doi_no);$k++){
-                                                    $other_articles_in_this_series[] = $other_article_part_doi_no[$k];
+                                                    $other_articles_in_this_series_ids[] = $other_article_part_doi_no[$k];
                                                 }
                                             }
-                                            $other_articles_in_this_series[] = $rowContent->creative_work_DOI;
+                                            $other_articles_in_this_series_ids[] = $rowContent->creative_work_DOI;
                                             $getOtherArticles = NewsContent::select('creative_work_DOI')->where('status', '=', 1)->where('other_article_part_doi_no', 'LIKE', '%'.$rowContent->creative_work_DOI.'%')->orderBy('current_article_no', 'ASC')->get();
                                             if($getOtherArticles){
                                                 foreach($getOtherArticles as $getOtherArticle){
-                                                    $other_articles_in_this_series[] = $getOtherArticle->creative_work_DOI;
+                                                    $other_articles_in_this_series_ids[] = $getOtherArticle->creative_work_DOI;
                                                 }
                                             }
                                         }
+
+                                        if(!empty($other_articles_in_this_series_ids)){
+                                            for($m=0;$m<count($other_articles_in_this_series_ids);$m++){
+                                                $getContent = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                                                ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
+                                                                ->select(
+                                                                    'news_contents.id', 
+                                                                    'news_contents.new_title', 
+                                                                    'news_contents.sub_title', 
+                                                                    'news_contents.slug', 
+                                                                    'news_contents.author_name', 
+                                                                    'news_contents.cover_image', 
+                                                                    'news_contents.created_at',
+                                                                    'news_contents.media',
+                                                                    'news_contents.videoId',
+                                                                    'sub_category.sub_category as category_name',
+                                                                    'sub_category.slug as category_slug',
+                                                                    'parent_category.slug as parent_category_slug'
+                                                                )
+                                                                ->where('news_contents.status', 1)
+                                                                ->where('news_contents.creative_work_DOI', $other_articles_in_this_series_ids[$m])
+                                                                ->first();
+                                                if($getContent){
+                                                    $other_articles_in_this_series[] = [
+                                                        'new_title'             => $getContent->new_title,
+                                                        'slug'                  => $getContent->slug,
+                                                        'parent_category_slug'  => $getContent->parent_category_slug,
+                                                        'category_slug'         => $getContent->category_slug,
+                                                    ];
+                                                }
+                                            }
+                                        }
+
                                     }
-                                    Helper::pr($other_articles_in_this_series,0);
                                     ?>
+                                    <?php if($is_series == 'Yes'){?>
+                                        <ul>
+                                            <?php if($other_articles_in_this_series){ foreach($other_articles_in_this_series as $other_articles_in_this_series_row){?>
+                                                <li>
+                                                    <a href="<?=url('content/' . $other_articles_in_this_series_row->parent_category_slug. '/' . $other_articles_in_this_series_row->category_slug . '/' . $other_articles_in_this_series_row->slug)?>"><?=$other_articles_in_this_series_row->new_title?></a>
+                                                </li>
+                                            <?php } } ?>
+                                        </ul>
+                                    <?php }?>
                                 </div>
                                 <div class="share-post-box">
                                     <ul class="share-box">
