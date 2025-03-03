@@ -50,7 +50,7 @@ $current_url = $protocol . $host . $uri;
                                     $other_articles_in_this_series = [];
                                     if($is_series == 'Yes'){
                                         if($current_article_no == 1){
-                                            $other_articles_in_this_series_ids[] = $rowContent->creative_work_DOI;
+                                            // $other_articles_in_this_series_ids[] = $rowContent->creative_work_DOI;
                                             $getOtherArticles = NewsContent::select('creative_work_DOI')->where('status', '=', 1)->where('other_article_part_doi_no', 'LIKE', '%'.$rowContent->creative_work_DOI.'%')->orderBy('current_article_no', 'ASC')->get();
                                             if($getOtherArticles){
                                                 foreach($getOtherArticles as $getOtherArticle){
@@ -63,14 +63,14 @@ $current_url = $protocol . $host . $uri;
                                                     $other_articles_in_this_series_ids[] = $other_article_part_doi_no[$k];
                                                 }
                                             }
-                                            $other_articles_in_this_series_ids[] = $rowContent->creative_work_DOI;
+                                            // $other_articles_in_this_series_ids[] = $rowContent->creative_work_DOI;
                                         } else {
                                             if(!empty($other_article_part_doi_no)){
                                                 for($k=0;$k<count($other_article_part_doi_no);$k++){
                                                     $other_articles_in_this_series_ids[] = $other_article_part_doi_no[$k];
                                                 }
                                             }
-                                            $other_articles_in_this_series_ids[] = $rowContent->creative_work_DOI;
+                                            // $other_articles_in_this_series_ids[] = $rowContent->creative_work_DOI;
                                             $getOtherArticles = NewsContent::select('creative_work_DOI')->where('status', '=', 1)->where('other_article_part_doi_no', 'LIKE', '%'.$rowContent->creative_work_DOI.'%')->orderBy('current_article_no', 'ASC')->get();
                                             if($getOtherArticles){
                                                 foreach($getOtherArticles as $getOtherArticle){
