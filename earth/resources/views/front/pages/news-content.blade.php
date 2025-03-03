@@ -117,7 +117,7 @@ $current_url = $protocol . $host . $uri;
                                         <ul>
                                             <?php if($other_articles_in_this_series){ foreach($other_articles_in_this_series as $other_articles_in_this_series_row){?>
                                                 <li>
-                                                    <a href="<?=url('content/' . $other_articles_in_this_series_row->parent_category_slug. '/' . $other_articles_in_this_series_row->category_slug . '/' . $other_articles_in_this_series_row->slug)?>"><?=$other_articles_in_this_series_row->new_title?></a>
+                                                    <a href="<?=url('content/' . $other_articles_in_this_series_row['parent_category_slug']. '/' . $other_articles_in_this_series_row['category_slug'] . '/' . $other_articles_in_this_series_row['slug'])?>"><?=$other_articles_in_this_series_row['new_title']?></a>
                                                 </li>
                                             <?php } } ?>
                                         </ul>
