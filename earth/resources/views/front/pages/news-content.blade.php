@@ -40,6 +40,16 @@ $current_url = $protocol . $host . $uri;
                                         <li><i class="fa fa-eye"></i>872</li> -->
                                     </ul>
                                     <h5><?=$rowContent->sub_title?></h5>
+                                    <?php
+                                    echo $is_series                  = $rowContent->is_series;
+                                    echo '<br>';
+                                    echo $series_article_no          = $rowContent->series_article_no;
+                                    echo '<br>';
+                                    echo $current_article_no         = $rowContent->current_article_no;
+                                    echo '<br>';
+                                    $other_article_part_doi_no  = explode(",", $rowContent->other_article_part_doi_no);
+                                    Helper::pr($other_article_part_doi_no,0);
+                                    ?>
                                 </div>
                                 <div class="share-post-box">
                                     <ul class="share-box">
