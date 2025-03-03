@@ -41,56 +41,39 @@ $current_url = $protocol . $host . $uri;
                                     </ul>
                                     <h5><?=$rowContent->sub_title?></h5>
                                     <?php
-                                    echo $is_series                  = $rowContent->is_series;
-                                    echo '<br>';
-                                    echo $series_article_no          = $rowContent->series_article_no;
-                                    echo '<br>';
-                                    echo $current_article_no         = $rowContent->current_article_no;
-                                    echo '<br>';
+                                    $is_series                  = $rowContent->is_series;
+                                    $series_article_no          = $rowContent->series_article_no;
+                                    $current_article_no         = $rowContent->current_article_no;
                                     $other_article_part_doi_no      = explode(",", $rowContent->other_article_part_doi_no);
-                                    Helper::pr($other_article_part_doi_no,0);
+                                    // Helper::pr($other_article_part_doi_no,0);
                                     $other_articles_in_this_series = [];
                                     if($is_series == 'Yes'){
                                         if($current_article_no == 1){
-                                            $other_articles_in_this_series[] = [
-                                                'creative_work_DOI' => $rowContent->creative_work_DOI
-                                            ];
+                                            $other_articles_in_this_series[] = $rowContent->creative_work_DOI;
                                             $getOtherArticles = NewsContent::select('creative_work_DOI')->where('status', '=', 1)->where('other_article_part_doi_no', 'LIKE', '%'.$rowContent->creative_work_DOI.'%')->orderBy('current_article_no', 'ASC')->get();
                                             if($getOtherArticles){
                                                 foreach($getOtherArticles as $getOtherArticle){
-                                                    $other_articles_in_this_series[] = [
-                                                        'creative_work_DOI' => $getOtherArticle->creative_work_DOI
-                                                    ];
+                                                    $other_articles_in_this_series[] = $getOtherArticle->creative_work_DOI;
                                                 }
                                             }
                                         } elseif($current_article_no == $series_article_no){
                                             if(!empty($other_article_part_doi_no)){
                                                 for($k=0;$k<count($other_article_part_doi_no);$k++){
-                                                    $other_articles_in_this_series[] = [
-                                                        'creative_work_DOI' => $other_article_part_doi_no[$k]
-                                                    ];
+                                                    $other_articles_in_this_series[] = $other_article_part_doi_no[$k];
                                                 }
                                             }
-                                            $other_articles_in_this_series[] = [
-                                                'creative_work_DOI' => $rowContent->creative_work_DOI
-                                            ];
+                                            $other_articles_in_this_series[] = $rowContent->creative_work_DOI;
                                         } else {
                                             if(!empty($other_article_part_doi_no)){
                                                 for($k=0;$k<count($other_article_part_doi_no);$k++){
-                                                    $other_articles_in_this_series[] = [
-                                                        'creative_work_DOI' => $other_article_part_doi_no[$k]
-                                                    ];
+                                                    $other_articles_in_this_series[] = $other_article_part_doi_no[$k];
                                                 }
                                             }
-                                            $other_articles_in_this_series[] = [
-                                                'creative_work_DOI' => $rowContent->creative_work_DOI
-                                            ];
+                                            $other_articles_in_this_series[] = $rowContent->creative_work_DOI;
                                             $getOtherArticles = NewsContent::select('creative_work_DOI')->where('status', '=', 1)->where('other_article_part_doi_no', 'LIKE', '%'.$rowContent->creative_work_DOI.'%')->orderBy('current_article_no', 'ASC')->get();
                                             if($getOtherArticles){
                                                 foreach($getOtherArticles as $getOtherArticle){
-                                                    $other_articles_in_this_series[] = [
-                                                        'creative_work_DOI' => $getOtherArticle->creative_work_DOI
-                                                    ];
+                                                    $other_articles_in_this_series[] = $getOtherArticle->creative_work_DOI;
                                                 }
                                             }
                                         }
