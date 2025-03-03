@@ -47,8 +47,36 @@ $current_url = $protocol . $host . $uri;
                                     echo '<br>';
                                     echo $current_article_no         = $rowContent->current_article_no;
                                     echo '<br>';
-                                    $other_article_part_doi_no  = explode(",", $rowContent->other_article_part_doi_no);
+                                    $other_article_part_doi_no      = explode(",", $rowContent->other_article_part_doi_no);
                                     Helper::pr($other_article_part_doi_no,0);
+                                    $other_articles_in_this_series = [];
+                                    if($is_series == 'Yes'){
+                                        $other_articles_in_this_series[] = [
+                                            'creative_work_DOI' => $rowContent->creative_work_DOI
+                                        ];
+                                        if($current_article_no == 1){
+                                            $getOtherArticles = NewsContent::select('creative_work_DOI')->where('status', '=', 1)->where('other_article_part_doi_no', 'LIKE', '%'.$rowContent->creative_work_DOI.'%')->get();
+                                            if($getOtherArticles){
+                                                foreach($getOtherArticles as $getOtherArticle){
+                                                    $other_articles_in_this_series[] = [
+                                                        'creative_work_DOI' => $getOtherArticle->creative_work_DOI
+                                                    ];
+                                                }
+                                            }
+                                        } else {
+                                            if(!empty($other_article_part_doi_no)){
+                                                for($k=0;$k<count();$k++){
+                                                    $other_articles_in_this_series[] = [
+                                                        'creative_work_DOI' => $other_article_part_doi_no[$k]
+                                                    ];
+                                                }
+                                            }
+                                            $other_articles_in_this_series[] = [
+                                                'creative_work_DOI' => $rowContent->creative_work_DOI
+                                            ];
+                                        }
+                                    }
+                                    Helper::pr($other_articles_in_this_series,0);
                                     ?>
                                 </div>
                                 <div class="share-post-box">
