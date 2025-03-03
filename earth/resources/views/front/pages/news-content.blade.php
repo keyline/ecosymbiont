@@ -51,10 +51,10 @@ $current_url = $protocol . $host . $uri;
                                     Helper::pr($other_article_part_doi_no,0);
                                     $other_articles_in_this_series = [];
                                     if($is_series == 'Yes'){
-                                        $other_articles_in_this_series[] = [
-                                            'creative_work_DOI' => $rowContent->creative_work_DOI
-                                        ];
                                         if($current_article_no == 1){
+                                            $other_articles_in_this_series[] = [
+                                                'creative_work_DOI' => $rowContent->creative_work_DOI
+                                            ];
                                             $getOtherArticles = NewsContent::select('creative_work_DOI')->where('status', '=', 1)->where('other_article_part_doi_no', 'LIKE', '%'.$rowContent->creative_work_DOI.'%')->orderBy('current_article_no', 'ASC')->get();
                                             if($getOtherArticles){
                                                 foreach($getOtherArticles as $getOtherArticle){
