@@ -65,7 +65,7 @@ $current_url = $protocol . $host . $uri;
                                             }
                                         } else {
                                             if(!empty($other_article_part_doi_no)){
-                                                for($k=0;$k<count();$k++){
+                                                for($k=0;$k<count($other_article_part_doi_no);$k++){
                                                     $other_articles_in_this_series[] = [
                                                         'creative_work_DOI' => $other_article_part_doi_no[$k]
                                                     ];
