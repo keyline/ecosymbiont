@@ -63,6 +63,17 @@ $current_url = $protocol . $host . $uri;
                                                     ];
                                                 }
                                             }
+                                        } elseif($current_article_no == $series_article_no){
+                                            if(!empty($other_article_part_doi_no)){
+                                                for($k=0;$k<count($other_article_part_doi_no);$k++){
+                                                    $other_articles_in_this_series[] = [
+                                                        'creative_work_DOI' => $other_article_part_doi_no[$k]
+                                                    ];
+                                                }
+                                            }
+                                            $other_articles_in_this_series[] = [
+                                                'creative_work_DOI' => $rowContent->creative_work_DOI
+                                            ];
                                         } else {
                                             if(!empty($other_article_part_doi_no)){
                                                 for($k=0;$k<count($other_article_part_doi_no);$k++){
@@ -74,6 +85,14 @@ $current_url = $protocol . $host . $uri;
                                             $other_articles_in_this_series[] = [
                                                 'creative_work_DOI' => $rowContent->creative_work_DOI
                                             ];
+                                            $getOtherArticles = NewsContent::select('creative_work_DOI')->where('status', '=', 1)->where('other_article_part_doi_no', 'LIKE', '%'.$rowContent->creative_work_DOI.'%')->orderBy('current_article_no', 'ASC')->get();
+                                            if($getOtherArticles){
+                                                foreach($getOtherArticles as $getOtherArticle){
+                                                    $other_articles_in_this_series[] = [
+                                                        'creative_work_DOI' => $getOtherArticle->creative_work_DOI
+                                                    ];
+                                                }
+                                            }
                                         }
                                     }
                                     Helper::pr($other_articles_in_this_series,0);
