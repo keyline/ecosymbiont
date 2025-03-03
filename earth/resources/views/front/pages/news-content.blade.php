@@ -55,7 +55,7 @@ $current_url = $protocol . $host . $uri;
                                             'creative_work_DOI' => $rowContent->creative_work_DOI
                                         ];
                                         if($current_article_no == 1){
-                                            $getOtherArticles = NewsContent::select('creative_work_DOI')->where('status', '=', 1)->where('other_article_part_doi_no', 'LIKE', '%'.$rowContent->creative_work_DOI.'%')->get();
+                                            $getOtherArticles = NewsContent::select('creative_work_DOI')->where('status', '=', 1)->where('other_article_part_doi_no', 'LIKE', '%'.$rowContent->creative_work_DOI.'%')->orderBy('current_article_no', 'ASC')->get();
                                             if($getOtherArticles){
                                                 foreach($getOtherArticles as $getOtherArticle){
                                                     $other_articles_in_this_series[] = [
