@@ -465,8 +465,8 @@ $current_url = $protocol . $host . $uri;
                                             <?php } }?>
                                         <?php } else {?>
                                             <?php
-                                            echo $series_article_no.'||'.$current_article_no;
-                                            Helper::pr($other_articles_in_this_series);
+                                            // echo $series_article_no.'||'.$current_article_no;
+                                            // Helper::pr($other_articles_in_this_series);
                                             $otherArticleCount = count($other_articles_in_this_series);
                                             ?>
                                             <?php if($current_article_no > 1){?>
@@ -476,7 +476,9 @@ $current_url = $protocol . $host . $uri;
                                                 <a href="<?=url('content/' . $other_articles_in_this_series[$rowIndex]['parent_category_slug']. '/' . $other_articles_in_this_series[$rowIndex]['category_slug'] . '/' . $other_articles_in_this_series[$rowIndex]['slug'])?>" class="btn btn-info">Previous Article</a>
                                             <?php }?>
                                             <?php if($current_article_no != $series_article_no){?>
-                                                <a href="<?=url('content/' . $other_articles_in_this_series[$current_article_no]['parent_category_slug']. '/' . $other_articles_in_this_series[$current_article_no]['category_slug'] . '/' . $other_articles_in_this_series[$current_article_no]['slug'])?>" class="btn btn-info">Next Article</a>
+                                                <?php if(($current_article_no != 1) && ($otherArticleCount > $current_article_no)){?>
+                                                    <a href="<?=url('content/' . $other_articles_in_this_series[$current_article_no]['parent_category_slug']. '/' . $other_articles_in_this_series[$current_article_no]['category_slug'] . '/' . $other_articles_in_this_series[$current_article_no]['slug'])?>" class="btn btn-info">Next Article</a>
+                                                <?php }?>
                                             <?php }?>
                                         <?php } ?>
                                     </div>
