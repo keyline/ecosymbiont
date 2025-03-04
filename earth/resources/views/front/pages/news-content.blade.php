@@ -464,8 +464,12 @@ $current_url = $protocol . $host . $uri;
                                                 </div>
                                             <?php } }?>
                                         <?php } else {?>
-                                            <a href="" class="btn btn-info btn-sm">Previous</a>
-                                            <a href="" class="btn btn-info btn-sm">Next</a>
+                                            <?php
+                                            echo $series_article_no.'||'.$current_article_no;
+                                            Helper::pr($other_articles_in_this_series);
+                                            ?>
+                                            <a href="" class="btn btn-info">Previous Article</a>
+                                            <a href="" class="btn btn-info">Next Article</a>
                                         <?php } ?>
                                     </div>
                                 </div>
