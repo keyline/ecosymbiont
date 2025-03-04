@@ -677,6 +677,10 @@ $current_url = $protocol . $host . $uri;
                                                         'news_contents.cover_image', 
                                                         'news_contents.created_at',
                                                         'news_contents.videoId',
+                                                        'news_contents.is_series',
+                                                        'news_contents.series_article_no',
+                                                        'news_contents.current_article_no',
+                                                        'news_contents.other_article_part_doi_no',
                                                         'parent_category.sub_category as parent_category_name',
                                                         'sub_category.sub_category as category_name',
                                                         'sub_category.slug as category_slug',
@@ -689,27 +693,44 @@ $current_url = $protocol . $host . $uri;
                                                     ->get();
                     if($videoContents){ foreach($videoContents as $videoContent){
                     ?>
-                        <div class="item news-post video-post">
-                            <img alt="" src="https://img.youtube.com/vi/<?=$videoContent->videoId?>/hqdefault.jpg">
-                            <!-- <?php if(session('is_user_login')){?>
+                        <?php
+                        $is_series                  = $videoContent->is_series;
+                        $series_article_no          = $videoContent->series_article_no;
+                        $current_article_no         = $videoContent->current_article_no;
+                        $other_article_part_doi_no  = explode(",", $videoContent->other_article_part_doi_no);
+                        if($is_series == 'Yes'){
+                            if($current_article_no == 1){
+                                $isShow = true;
+                            } else {
+                                $isShow = false;
+                            }
+                        } else {
+                            $isShow = true;
+                        }
+                        if($isShow){
+                        ?>
+                            <div class="item news-post video-post">
+                                <img alt="" src="https://img.youtube.com/vi/<?=$videoContent->videoId?>/hqdefault.jpg">
+                                <!-- <?php if(session('is_user_login')){?>
+                                    <a href="https://www.youtube.com/watch?v=<?=$videoContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                <?php } else {?>
+                                    <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
+                                <?php }?> -->
                                 <a href="https://www.youtube.com/watch?v=<?=$videoContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                            <?php } else {?>
-                                <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
-                            <?php }?> -->
-                            <a href="https://www.youtube.com/watch?v=<?=$videoContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                            <div class="hover-box">
-                                <a href="<?=url('category/' . $videoContent->parent_category_slug)?>"><?=$videoContent->parent_category_name?></a>
-                                <h2><a href="<?=url('content/' . $videoContent->parent_category_slug. '/' . $videoContent->category_slug . '/' . $videoContent->slug)?>"><?=$videoContent->new_title?></a></h2>
-                                <ul class="post-tags">
-                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$videoContent->for_publication_name ?? $videoContent->author_name?></a></li>
-                                    <?php if($videoContent->indigenous_affiliation != ''){ ?>
-                                        <li><i class="fa fa-map-marker"></i><a href="javascript:void(0);"><?=$videoContent->indigenous_affiliation?></a></li>
-                                    <?php } ?>
-                                    <li><i class="fa fa-clock-o"></i><?=date_format(date_create($videoContent->created_at), "d M Y")?></li>
-                                </ul>
-                                <!-- <p><?=$videoContent->sub_title?></p> -->
+                                <div class="hover-box">
+                                    <a href="<?=url('category/' . $videoContent->parent_category_slug)?>"><?=$videoContent->parent_category_name?></a>
+                                    <h2><a href="<?=url('content/' . $videoContent->parent_category_slug. '/' . $videoContent->category_slug . '/' . $videoContent->slug)?>"><?=$videoContent->new_title?></a></h2>
+                                    <ul class="post-tags">
+                                        <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$videoContent->for_publication_name ?? $videoContent->author_name?></a></li>
+                                        <?php if($videoContent->indigenous_affiliation != ''){ ?>
+                                            <li><i class="fa fa-map-marker"></i><a href="javascript:void(0);"><?=$videoContent->indigenous_affiliation?></a></li>
+                                        <?php } ?>
+                                        <li><i class="fa fa-clock-o"></i><?=date_format(date_create($videoContent->created_at), "d M Y")?></li>
+                                    </ul>
+                                    <!-- <p><?=$videoContent->sub_title?></p> -->
+                                </div>
                             </div>
-                        </div>
+                        <?php }?>
                     <?php } }?>
                 </div>
             </div>
