@@ -50,7 +50,7 @@ $current_url = $protocol . $host . $uri;
                                     $other_articles_in_this_series = [];
                                     if($is_series == 'Yes'){
                                         if($current_article_no == 1){
-                                            // $other_articles_in_this_series_ids[] = $rowContent->creative_work_DOI;
+                                            $other_articles_in_this_series_ids[] = $rowContent->creative_work_DOI;
                                             $getOtherArticles = NewsContent::select('creative_work_DOI')->where('status', '=', 1)->where('other_article_part_doi_no', 'LIKE', '%'.$rowContent->creative_work_DOI.'%')->orderBy('current_article_no', 'ASC')->get();
                                             if($getOtherArticles){
                                                 foreach($getOtherArticles as $getOtherArticle){
@@ -70,7 +70,7 @@ $current_url = $protocol . $host . $uri;
                                                     $other_articles_in_this_series_ids[] = $other_article_part_doi_no[$k];
                                                 }
                                             }
-                                            // $other_articles_in_this_series_ids[] = $rowContent->creative_work_DOI;
+                                            $other_articles_in_this_series_ids[] = $rowContent->creative_work_DOI;
                                             $getOtherArticles = NewsContent::select('creative_work_DOI')->where('status', '=', 1)->where('other_article_part_doi_no', 'LIKE', '%'.$rowContent->creative_work_DOI.'%')->orderBy('current_article_no', 'ASC')->get();
                                             if($getOtherArticles){
                                                 foreach($getOtherArticles as $getOtherArticle){
@@ -467,9 +467,15 @@ $current_url = $protocol . $host . $uri;
                                             <?php
                                             echo $series_article_no.'||'.$current_article_no;
                                             Helper::pr($other_articles_in_this_series);
+                                            $otherArticleCount = count($other_articles_in_this_series);
                                             ?>
-                                            <a href="" class="btn btn-info">Previous Article</a>
-                                            <a href="" class="btn btn-info">Next Article</a>
+                                            <?php if($current_article_no > 1){?>
+
+                                                <a href="" class="btn btn-info">Previous Article</a>
+                                            <?php }?>
+                                            <?php if($current_article_no != $series_article_no){?>
+                                                <a href="" class="btn btn-info">Next Article</a>
+                                            <?php }?>
                                         <?php } ?>
                                     </div>
                                 </div>
