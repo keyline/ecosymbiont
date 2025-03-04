@@ -330,8 +330,8 @@ $current_url = $protocol . $host . $uri;
             </div>
         </div>
     </section>
-    <!-- End heading-news-section -->
-    <!-- block-wrapper-section ================================================== -->
+<!-- End heading-news-section -->
+<!-- block-wrapper-section ================================================== -->
     <section class="block-wrapper">
         <div class="container">
             <div class="row">
@@ -428,12 +428,15 @@ $current_url = $protocol . $host . $uri;
                                                                     'news_contents.new_title', 
                                                                     'news_contents.sub_title', 
                                                                     'news_contents.slug', 
-                                                                    'news_contents.author_name',
-                                                                    'news_contents.for_publication_name', 
+                                                                    'news_contents.author_name', 
                                                                     'news_contents.cover_image', 
                                                                     'news_contents.created_at',
                                                                     'news_contents.media',
                                                                     'news_contents.videoId',
+                                                                    'news_contents.is_series',
+                                                                    'news_contents.series_article_no',
+                                                                    'news_contents.current_article_no',
+                                                                    'news_contents.other_article_part_doi_no',
                                                                     'sub_category.sub_category as category_name',  // Correct alias for subcategory name
                                                                     'sub_category.slug as category_slug',  // Correct alias for subcategory slug                                                                            
                                                                     'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
@@ -445,29 +448,46 @@ $current_url = $protocol . $host . $uri;
                                                                 ->get();
                                 if($featuredContents){ foreach($featuredContents as $featuredContent){
                                 ?>
-                                    <li>
-                                        <?php if($featuredContent->media == 'image'){?>
-                                            <!-- <div class="post-gallery"> -->
-                                                <img src="<?=env('UPLOADS_URL').'newcontent/'.$featuredContent->cover_image?>" alt="<?=$featuredContent->new_title?>">
-                                            <!-- </div> -->
-                                        <?php } else {?>
-                                            <div class="video-post">
-                                                <img alt="" src="https://img.youtube.com/vi/<?=$featuredContent->videoId?>/hqdefault.jpg">
-                                                <!-- <?php if(session('is_user_login')){?>
+                                    <?php
+                                    $is_series                  = $featuredContent->is_series;
+                                    $series_article_no          = $featuredContent->series_article_no;
+                                    $current_article_no         = $featuredContent->current_article_no;
+                                    $other_article_part_doi_no  = explode(",", $featuredContent->other_article_part_doi_no);
+                                    if($is_series == 'Yes'){
+                                        if($current_article_no == 1){
+                                            $isShow = true;
+                                        } else {
+                                            $isShow = false;
+                                        }
+                                    } else {
+                                        $isShow = true;
+                                    }
+                                    if($isShow){
+                                    ?>
+                                        <li>
+                                            <?php if($featuredContent->media == 'image'){?>
+                                                <!-- <div class="post-gallery"> -->
+                                                    <img src="<?=env('UPLOADS_URL').'newcontent/'.$featuredContent->cover_image?>" alt="<?=$featuredContent->new_title?>">
+                                                <!-- </div> -->
+                                            <?php } else {?>
+                                                <div class="video-post">
+                                                    <img alt="" src="https://img.youtube.com/vi/<?=$featuredContent->videoId?>/hqdefault.jpg">
+                                                    <!-- <?php if(session('is_user_login')){?>
+                                                        <a href="https://www.youtube.com/watch?v=<?=$featuredContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                    <?php } else {?>
+                                                        <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
+                                                    <?php }?> -->
                                                     <a href="https://www.youtube.com/watch?v=<?=$featuredContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                                <?php } else {?>
-                                                    <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
-                                                <?php }?> -->
-                                                <a href="https://www.youtube.com/watch?v=<?=$featuredContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                </div>
+                                            <?php } ?>
+                                            <div class="post-content">
+                                                <h2><a href="<?=url('content/' . $featuredContent->parent_category_slug. '/' . $featuredContent->category_slug . '/' . $featuredContent->slug)?>"><?=$featuredContent->new_title?></a></h2>
+                                                <ul class="post-tags">
+                                                    <li><i class="fa fa-clock-o"></i><?=date_format(date_create($featuredContent->created_at), "d M Y")?></li>
+                                                </ul>
                                             </div>
-                                        <?php } ?>
-                                        <div class="post-content">
-                                            <h2><a href="<?=url('content/' . $featuredContent->parent_category_slug. '/' . $featuredContent->category_slug . '/' . $featuredContent->slug)?>"><?=$featuredContent->new_title?></a></h2>
-                                            <ul class="post-tags">
-                                                <li><i class="fa fa-clock-o"></i><?=date_format(date_create($featuredContent->created_at), "d M Y")?></li>
-                                            </ul>
-                                        </div>
-                                    </li>
+                                        </li>
+                                    <?php }?>
                                 <?php } }?>
                             </ul>
                         </div>
@@ -496,6 +516,10 @@ $current_url = $protocol . $host . $uri;
                                                                 'news_contents.created_at',
                                                                 'news_contents.media',
                                                                 'news_contents.videoId',
+                                                                'news_contents.is_series',
+                                                                'news_contents.series_article_no',
+                                                                'news_contents.current_article_no',
+                                                                'news_contents.other_article_part_doi_no',
                                                                 'sub_category.sub_category as category_name',  // Correct alias for subcategory name
                                                                 'sub_category.slug as category_slug',  // Correct alias for subcategory slug
                                                                 'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
@@ -507,29 +531,46 @@ $current_url = $protocol . $host . $uri;
                                                             ->get();
                                         if($popularContents){ foreach($popularContents as $popularContent){
                                         ?>
-                                            <li>
-                                                <?php if($popularContent->media == 'image'){?>
-                                                    <!-- <div class="post-gallery"> -->
-                                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$popularContent->cover_image?>" alt="<?=$popularContent->new_title?>">
-                                                    <!-- </div> -->
-                                                <?php } else {?>
-                                                    <div class="video-post">
-                                                        <img alt="" src="https://img.youtube.com/vi/<?=$popularContent->videoId?>/hqdefault.jpg">
-                                                        <!-- <?php if(session('is_user_login')){?>
+                                            <?php
+                                            $is_series                  = $popularContent->is_series;
+                                            $series_article_no          = $popularContent->series_article_no;
+                                            $current_article_no         = $popularContent->current_article_no;
+                                            $other_article_part_doi_no  = explode(",", $popularContent->other_article_part_doi_no);
+                                            if($is_series == 'Yes'){
+                                                if($current_article_no == 1){
+                                                    $isShow = true;
+                                                } else {
+                                                    $isShow = false;
+                                                }
+                                            } else {
+                                                $isShow = true;
+                                            }
+                                            if($isShow){
+                                            ?>
+                                                <li>
+                                                    <?php if($popularContent->media == 'image'){?>
+                                                        <!-- <div class="post-gallery"> -->
+                                                            <img src="<?=env('UPLOADS_URL').'newcontent/'.$popularContent->cover_image?>" alt="<?=$popularContent->new_title?>">
+                                                        <!-- </div> -->
+                                                    <?php } else {?>
+                                                        <div class="video-post">
+                                                            <img alt="" src="https://img.youtube.com/vi/<?=$popularContent->videoId?>/hqdefault.jpg">
+                                                            <!-- <?php if(session('is_user_login')){?>
+                                                                <a href="https://www.youtube.com/watch?v=<?=$popularContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                            <?php } else {?>
+                                                                <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
+                                                            <?php }?> -->
                                                             <a href="https://www.youtube.com/watch?v=<?=$popularContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                                        <?php } else {?>
-                                                            <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
-                                                        <?php }?> -->
-                                                        <a href="https://www.youtube.com/watch?v=<?=$popularContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                        </div>
+                                                    <?php } ?>
+                                                    <div class="post-content">
+                                                        <h2><a href="<?=url('content/'. $popularContent->parent_category_slug. '/' . $popularContent->category_slug . '/' .  $popularContent->slug)?>"><?=$popularContent->new_title?></a></h2>
+                                                        <ul class="post-tags">
+                                                            <li><i class="fa fa-clock-o"></i><?=date_format(date_create($popularContent->created_at), "d M Y")?></li>
+                                                        </ul>
                                                     </div>
-                                                <?php } ?>
-                                                <div class="post-content">
-                                                    <h2><a href="<?=url('content/'. $popularContent->parent_category_slug. '/' . $popularContent->category_slug . '/' .  $popularContent->slug)?>"><?=$popularContent->new_title?></a></h2>
-                                                    <ul class="post-tags">
-                                                        <li><i class="fa fa-clock-o"></i><?=date_format(date_create($popularContent->created_at), "d M Y")?></li>
-                                                    </ul>
-                                                </div>
-                                            </li>
+                                                </li>
+                                            <?php }?>
                                         <?php } }?>
                                     </ul>
                                 </div>
@@ -548,6 +589,10 @@ $current_url = $protocol . $host . $uri;
                                                                             'news_contents.created_at',
                                                                             'news_contents.media',
                                                                             'news_contents.videoId',
+                                                                            'news_contents.is_series',
+                                                                            'news_contents.series_article_no',
+                                                                            'news_contents.current_article_no',
+                                                                            'news_contents.other_article_part_doi_no',
                                                                             'sub_category.sub_category as category_name',  // Correct alias for subcategory name
                                                                             'sub_category.slug as category_slug',  // Correct alias for subcategory slug
                                                                             'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
@@ -558,29 +603,46 @@ $current_url = $protocol . $host . $uri;
                                                                         ->get();
                                         if($recentContents){ foreach($recentContents as $recentContent){
                                         ?>
-                                            <li>
-                                                <?php if($recentContent->media == 'image'){?>
-                                                    <!-- <div class="post-gallery"> -->
-                                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$recentContent->cover_image?>" alt="<?=$recentContent->new_title?>">
-                                                    <!-- </div> -->
-                                                <?php } else {?>
-                                                    <div class="video-post">
-                                                        <img alt="" src="https://img.youtube.com/vi/<?=$recentContent->videoId?>/hqdefault.jpg">
-                                                        <!-- <?php if(session('is_user_login')){?>
+                                            <?php
+                                            $is_series                  = $recentContent->is_series;
+                                            $series_article_no          = $recentContent->series_article_no;
+                                            $current_article_no         = $recentContent->current_article_no;
+                                            $other_article_part_doi_no      = explode(",", $recentContent->other_article_part_doi_no);
+                                            if($is_series == 'Yes'){
+                                                if($current_article_no == 1){
+                                                    $isShow = true;
+                                                } else {
+                                                    $isShow = false;
+                                                }
+                                            } else {
+                                                $isShow = true;
+                                            }
+                                            if($isShow){
+                                            ?>
+                                                <li>
+                                                    <?php if($recentContent->media == 'image'){?>
+                                                        <!-- <div class="post-gallery"> -->
+                                                            <img src="<?=env('UPLOADS_URL').'newcontent/'.$recentContent->cover_image?>" alt="<?=$recentContent->new_title?>">
+                                                        <!-- </div> -->
+                                                    <?php } else {?>
+                                                        <div class="video-post">
+                                                            <img alt="" src="https://img.youtube.com/vi/<?=$recentContent->videoId?>/hqdefault.jpg">
+                                                            <!-- <?php if(session('is_user_login')){?>
+                                                                <a href="https://www.youtube.com/watch?v=<?=$recentContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                            <?php } else {?>
+                                                                <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
+                                                            <?php }?> -->
                                                             <a href="https://www.youtube.com/watch?v=<?=$recentContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                                        <?php } else {?>
-                                                            <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
-                                                        <?php }?> -->
-                                                        <a href="https://www.youtube.com/watch?v=<?=$recentContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                        </div>
+                                                    <?php } ?>
+                                                    <div class="post-content">
+                                                        <h2><a href="<?=url('content/' . $recentContent->parent_category_slug. '/' . $recentContent->category_slug . '/' .  $recentContent->slug)?>"><?=$recentContent->new_title?></a></h2>
+                                                        <ul class="post-tags">
+                                                            <li><i class="fa fa-clock-o"></i><?=date_format(date_create($recentContent->created_at), "d M Y")?></li>
+                                                        </ul>
                                                     </div>
-                                                <?php } ?>
-                                                <div class="post-content">
-                                                    <h2><a href="<?=url('content/' . $recentContent->parent_category_slug. '/' . $recentContent->category_slug . '/' .  $recentContent->slug)?>"><?=$recentContent->new_title?></a></h2>
-                                                    <ul class="post-tags">
-                                                        <li><i class="fa fa-clock-o"></i><?=date_format(date_create($recentContent->created_at), "d M Y")?></li>
-                                                    </ul>
-                                                </div>
-                                            </li>
+                                                </li>
+                                            <?php }?>
                                         <?php } }?>
                                     </ul>                                       
                                 </div>
@@ -592,7 +654,8 @@ $current_url = $protocol . $host . $uri;
             </div>
         </div>
     </section>
-    <!-- feature-video-section ================================================== -->
+<!-- block-wrapper-section ================================================== -->
+<!-- feature-video-section ================================================== -->
     <section class="feature-video">
         <div class="container">
             <div class="title-section white">
@@ -652,9 +715,8 @@ $current_url = $protocol . $host . $uri;
             </div>
         </div>
     </section>
-    <!-- End feature-video-section -->
-    <!-- block-wrapper-section
-        ================================================== -->
+<!-- End feature-video-section -->
+<!-- block-wrapper-section ================================================== -->
     <section class="block-wrapper">
         <div class="container">
             <div class="row">
@@ -781,4 +843,4 @@ $current_url = $protocol . $host . $uri;
             </div>
         </div>
     </section>
-    <!-- End block-wrapper-section -->
+<!-- End block-wrapper-section -->
