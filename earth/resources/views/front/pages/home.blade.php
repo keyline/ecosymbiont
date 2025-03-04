@@ -731,75 +731,95 @@ $current_url = $protocol . $host . $uri;
                             <?php
                             // DB::enableQueryLog(); // Enable query log
                             $recentContents = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
-                                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
-                                                            ->select(
-                                                                'news_contents.id', 
-                                                                'news_contents.new_title', 
-                                                                'news_contents.sub_title', 
-                                                                'news_contents.slug', 
-                                                                'news_contents.author_name',
-                                                                'news_contents.for_publication_name', 
-                                                                'news_contents.cover_image', 
-                                                                'news_contents.created_at',
-                                                                'news_contents.media',
-                                                                'news_contents.videoId',
-                                                                'parent_category.sub_category as parent_category_name', // Corrected alias to sub_category
-                                                                'sub_category.sub_category as category_name',  // Correct alias for subcategory name
-                                                                'sub_category.slug as category_slug',  // Correct alias for subcategory slug
-                                                                'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
-                                                            )
-                                                            ->where('news_contents.status', 1)  // Fetch only active content
-                                                            ->where('news_contents.is_feature', 1)  // Fetch only featured content
-                                                            ->inRandomOrder()  // Randomize the result order
-                                                            ->limit(6)  // Limit to 3 records
-                                                            ->get();
-                                            //    dd(DB::getQueryLog());
+                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
+                                            ->select(
+                                                'news_contents.id', 
+                                                'news_contents.new_title', 
+                                                'news_contents.sub_title', 
+                                                'news_contents.slug', 
+                                                'news_contents.author_name',
+                                                'news_contents.for_publication_name', 
+                                                'news_contents.cover_image', 
+                                                'news_contents.created_at',
+                                                'news_contents.media',
+                                                'news_contents.videoId',
+                                                'news_contents.is_series',
+                                                'news_contents.series_article_no',
+                                                'news_contents.current_article_no',
+                                                'news_contents.other_article_part_doi_no',
+                                                'parent_category.sub_category as parent_category_name', // Corrected alias to sub_category
+                                                'sub_category.sub_category as category_name',  // Correct alias for subcategory name
+                                                'sub_category.slug as category_slug',  // Correct alias for subcategory slug
+                                                'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                            )
+                                            ->where('news_contents.status', 1)  // Fetch only active content
+                                            ->where('news_contents.is_feature', 1)  // Fetch only featured content
+                                            ->inRandomOrder()  // Randomize the result order
+                                            ->limit(6)  // Limit to 3 records
+                                            ->get();
                             if($recentContents){ foreach($recentContents as $recentContent){
                             ?>
-                                <div class="news-post article-post">
-                                    <div class="row">
-                                        <div class="col-sm-5">
-                                            <!-- <div class="post-gallery">
-                                                <img src="<?=env('UPLOADS_URL').'newcontent/'.$recentContent->cover_image?>" alt="<?=$recentContent->new_title?>">
-                                            </div> -->
-                                            <?php if($recentContent->media == 'image'){?>
-                                                <div class="post-gallery">
+                                <?php
+                                $is_series                  = $recentContent->is_series;
+                                $series_article_no          = $recentContent->series_article_no;
+                                $current_article_no         = $recentContent->current_article_no;
+                                $other_article_part_doi_no  = explode(",", $recentContent->other_article_part_doi_no);
+                                if($is_series == 'Yes'){
+                                    if($current_article_no == 1){
+                                        $isShow = true;
+                                    } else {
+                                        $isShow = false;
+                                    }
+                                } else {
+                                    $isShow = true;
+                                }
+                                if($isShow){
+                                ?>
+                                    <div class="news-post article-post">
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <!-- <div class="post-gallery">
                                                     <img src="<?=env('UPLOADS_URL').'newcontent/'.$recentContent->cover_image?>" alt="<?=$recentContent->new_title?>">
-                                                    <span class="image-caption" style="color:skyblue;"><?=$recentContent->cover_image_caption?></span>
-                                                </div>
-                                            <?php } else {?>
-                                                <div class="post-gallery video-post">
-                                                    <img alt="" src="https://img.youtube.com/vi/<?=$recentContent->videoId?>/hqdefault.jpg">
-                                                    <!-- <?php if(session('is_user_login')){?>
+                                                </div> -->
+                                                <?php if($recentContent->media == 'image'){?>
+                                                    <div class="post-gallery">
+                                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$recentContent->cover_image?>" alt="<?=$recentContent->new_title?>">
+                                                        <span class="image-caption" style="color:skyblue;"><?=$recentContent->cover_image_caption?></span>
+                                                    </div>
+                                                <?php } else {?>
+                                                    <div class="post-gallery video-post">
+                                                        <img alt="" src="https://img.youtube.com/vi/<?=$recentContent->videoId?>/hqdefault.jpg">
+                                                        <!-- <?php if(session('is_user_login')){?>
+                                                            <a href="https://www.youtube.com/watch?v=<?=$recentContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                        <?php } else {?>
+                                                            <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
+                                                        <?php }?> -->
                                                         <a href="https://www.youtube.com/watch?v=<?=$recentContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                                    <?php } else {?>
-                                                        <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
-                                                    <?php }?> -->
-                                                    <a href="https://www.youtube.com/watch?v=<?=$recentContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                    </div>
+                                                <?php } ?>
+                                            </div>
+                                            <div class="col-sm-7">
+                                                <div class="post-content">
+                                                    <a href="<?=url('category/' . $recentContent->parent_category_slug)?>"><?=$recentContent->parent_category_name?></a>
+                                                    <h2><a href="<?=url('content/' . $recentContent->parent_category_slug. '/' . $recentContent->category_slug . '/' . $recentContent->slug)?>"><?=$recentContent->new_title?></a></h2>
+                                                    <ul class="post-tags">
+                                                        <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$recentContent->for_publication_name ?? $recentContent->author_name?></a></li>
+                                                        <?php
+                                                        if($recentContent->indigenous_affiliation != ''){                                                    
+                                                         ?>
+                                                            <li><i class="fa fa-map-marker"></i><a href="javascript:void(0);"><?=$recentContent->indigenous_affiliation?></a></li>
+                                                        <?php } ?>
+                                                        <!-- <li><i class="fa fa-clock-o"></i><?=date_format(date_create($recentContent->created_at), "d M Y")?></li> -->
+                                                        
+                                                        <!-- <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
+                                                        <li><i class="fa fa-eye"></i>872</li> -->
+                                                    </ul>
+                                                    <p><?=$recentContent->sub_title?></p>
                                                 </div>
-                                            <?php } ?>
-                                        </div>
-                                        <div class="col-sm-7">
-                                            <div class="post-content">
-                                                <a href="<?=url('category/' . $recentContent->parent_category_slug)?>"><?=$recentContent->parent_category_name?></a>
-                                                <h2><a href="<?=url('content/' . $recentContent->parent_category_slug. '/' . $recentContent->category_slug . '/' . $recentContent->slug)?>"><?=$recentContent->new_title?></a></h2>
-                                                <ul class="post-tags">
-                                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$recentContent->for_publication_name ?? $recentContent->author_name?></a></li>
-                                                    <?php
-                                                    if($recentContent->indigenous_affiliation != ''){                                                    
-                                                     ?>
-                                                        <li><i class="fa fa-map-marker"></i><a href="javascript:void(0);"><?=$recentContent->indigenous_affiliation?></a></li>
-                                                    <?php } ?>
-                                                    <!-- <li><i class="fa fa-clock-o"></i><?=date_format(date_create($recentContent->created_at), "d M Y")?></li> -->
-                                                    
-                                                    <!-- <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
-                                                    <li><i class="fa fa-eye"></i>872</li> -->
-                                                </ul>
-                                                <p><?=$recentContent->sub_title?></p>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                <?php }?>
                             <?php } }?>
                         </div>
                     </div>
