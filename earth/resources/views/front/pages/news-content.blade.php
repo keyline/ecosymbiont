@@ -465,8 +465,8 @@ $current_url = $protocol . $host . $uri;
                                             <?php } }?>
                                         <?php } else {?>
                                             <?php
-                                            // echo $series_article_no.'||'.$current_article_no;
-                                            // Helper::pr($other_articles_in_this_series);
+                                            echo $series_article_no.'||'.$current_article_no;
+                                            Helper::pr($other_articles_in_this_series);
                                             $otherArticleCount = count($other_articles_in_this_series);
                                             ?>
                                             <?php if($current_article_no > 1){?>
