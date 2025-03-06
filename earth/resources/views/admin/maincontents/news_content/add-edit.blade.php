@@ -25,6 +25,24 @@ $controllerRoute = $module['controller_route'];
         margin-left: 5px;
     }
 </style>
+<?php
+function numberToOrdinal($number) {
+    $ordinals = [
+        1 => 'First',
+        2 => 'Second',
+        3 => 'Third',
+        4 => 'Fourth',
+        5 => 'Fifth',
+        6 => 'Sixth',
+        7 => 'Seventh',
+        8 => 'Eighth',
+        9 => 'Ninth',
+        10 => 'Tenth'
+    ];
+    
+    return $ordinals[$number] ?? $number;
+}
+?>
 <div class="pagetitle">
     <h1><?= $page_header ?></h1>
     <nav>
