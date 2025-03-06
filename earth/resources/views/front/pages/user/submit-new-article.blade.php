@@ -598,7 +598,7 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="additional_information" class="col-md-2 col-lg-4 col-form-label">17a) (Optional: max. 100 words) Comments for the Editor(s) (any additional information you wish to share)
+                                    <label for="additional_information" class="col-md-2 col-lg-4 col-form-label" style="color: grey;">17a) (Optional: max. 100 words) Comments for the Editor(s) (any additional information you wish to share)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="additional_information" name="additional_information" rows="4" cols="50">{{ old('additional_information', $additional_information) }}</textarea>
@@ -931,7 +931,7 @@ use Illuminate\Support\Facades\DB;
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="is_series" class="col-md-2 col-lg-4 col-form-label">31) Is this part of a series?
+                                    <label for="is_series" class="col-md-2 col-lg-4 col-form-label blue-text">31) Is this part of a series?
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="radio" id="series_yes" name="is_series" value="Yes" <?=(($is_series == 'Yes')?'checked':'')?> required>
@@ -941,21 +941,21 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
-                                    <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label">32) How many total creative-works in this series?
+                                    <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label blue-text">32) How many total creative-works in this series?
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="number" name="series_article_no" class="form-control" id="series_article_no" min="1" value="<?=$series_article_no?>">
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
-                                    <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label">33) What number in the series is this creative-work?
+                                    <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label blue-text">33) What number in the series is this creative-work?
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="current_article_no" class="form-control" id="current_article_no" value="<?=$current_article_no?>">
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
-                                    <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label">34) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).
+                                    <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label blue-text">34) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" class="form-control" id="input-tags">
