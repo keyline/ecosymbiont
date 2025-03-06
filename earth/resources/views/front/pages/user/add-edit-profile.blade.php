@@ -9,6 +9,7 @@
         background: #d09c1c;
         color: #fff;
     }
+    .error { color: red; }
 </style>
 <!-- block content -->
     <div class="block-content">
@@ -389,6 +390,7 @@
         var words = field.value.trim().split(/\s+/).filter(word => word.length > 0).length;
         if (words > limit) {
             document.getElementById(errorField).innerText = "Exceeded word limit of " + limit + " words.";
+            field.value = words.slice(0, limit).join(" "); // Trim input to the allowed limit
             return false;
         } else {
             document.getElementById(errorField).innerText = "";
