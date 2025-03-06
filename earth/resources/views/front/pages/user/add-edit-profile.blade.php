@@ -221,7 +221,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="explanation" name="explanation" rows="4" cols="50" required>{{ old('explanation', $explanation) }}</textarea>
                                         <div id="explanationError" class="error"></div>
-                                        <div>Words left: <span id="wordCounter">150</span></div>
+                                        <div>Words left: <span id="wordCounter">100</span></div>
                                     </div>
                                 </div>  
                                 <div class="row mb-3">
@@ -229,6 +229,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="explanation_submission" name="explanation_submission" rows="4" cols="50" required>{{ old('explanation_submission', $explanation_submission) }}</textarea>
                                         <div id="explanation_submissionError" class="error"></div>
+                                        <div>Words left: <span id="wordCounter">150</span></div>
                                     </div>
                                 </div>                                
                                 <div class="row mb-3">
