@@ -220,16 +220,14 @@
                                     <label for="explanation" class="col-md-2 col-lg-4 col-form-label">12) Explain why you are a grassroots changemaker, innovator, and/or knowledge-holder (max. 100 words)</label>
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="explanation" name="explanation" rows="4" cols="50" required>{{ old('explanation', $explanation) }}</textarea>
-                                        <div id="explanationError" class="error"></div>
-                                        <div>Words left: <span id="wordCounter">100</span></div>
+                                        <div id="explanationError" class="error"></div>                                    
                                     </div>
                                 </div>  
                                 <div class="row mb-3">
                                     <label for="explanation_submission" class="col-md-2 col-lg-4 col-form-label">13) Explain why and how your Creative-Work relates to regenerating systems that restore, preserve, and foster the mutually beneficial interconnectivity and interdependence (symbiosis) of human communities within and to natural ecological webs (ecowebs) (max. 150 words)</label>
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="explanation_submission" name="explanation_submission" rows="4" cols="50" required>{{ old('explanation_submission', $explanation_submission) }}</textarea>
-                                        <div id="explanation_submissionError" class="error"></div>
-                                        <div>Words left: <span id="wordCounter">150</span></div>
+                                        <div id="explanation_submissionError" class="error"></div>                                        
                                     </div>
                                 </div>                                
                                 <div class="row mb-3">
@@ -399,16 +397,16 @@
             return false;
         } else {
             document.getElementById(errorField).innerText = "";
-            document.getElementById('wordCounter').innerText = limit - words;
+            // document.getElementById('wordCounter').innerText = limit - words;
             return true;
         }
     }
 
     function validateForm() {
         let allValid = true;
-        allValid &= checkWordLimit(document.getElementById('explanation'), 100, 'explanationError');
-        allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');        
-        allValid &= checkWordLimit(document.getElementById('subtitle'), 40, 'subtitleError');                
+        // allValid &= checkWordLimit(document.getElementById('explanation'), 100, 'explanationError');
+        // allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');        
+        // allValid &= checkWordLimit(document.getElementById('subtitle'), 40, 'subtitleError');                
         allValid &= checkWordLimit(document.getElementById('bio_short'), 40, 'bio_shortError');
         allValid &= checkWordLimit(document.getElementById('bio_long'), 250, 'bio_longError');        
 
