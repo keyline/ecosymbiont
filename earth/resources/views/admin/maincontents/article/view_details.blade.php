@@ -485,20 +485,20 @@ function numberToOrdinal($number) {
                       <td><?= $community_name ?></td>
                     </tr>
                     <tr>
-                      <td>31) Is it a series? yes/no</td>
+                      <td>31) Is this part of a series?</td>
                       <td><?=$is_series?></td>
                     </tr>
                     <?php if($is_series == 'Yes'){?>
                       <tr>
-                        <td>32) How many articles in this series</td>
+                        <td>32) How many total creative-works in this series?</td>
                         <td><?=$series_article_no?></td>
                       </tr>
                       <tr>
-                        <td>33) Current article no.</td>
+                        <td>33) What number in the series is this creative-work?</td>
                         <td><?=$current_article_no?></td>
                       </tr>
                       <tr>
-                        <td>34) If current article no is greater than 1 then enter each of series DOI number into it. Lets say I am submitting 4th part of the series then I have to enter previous three part articles DOI number</td>
+                        <td>34) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).</td>
                         <td><?=$other_article_part_doi_no?></td>
                       </tr>
                     <?php }?>
