@@ -393,6 +393,7 @@
             // Truncate the input field's value to the last valid word limit
             let truncatedValue = field.value.trim().split(/\s+/).slice(0, limit).join(' ');
             field.value = truncatedValue;
+            event.preventDefault();
             return false;
         } else {
             document.getElementById(errorField).innerText = "";
