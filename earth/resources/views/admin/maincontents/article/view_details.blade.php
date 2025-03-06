@@ -97,6 +97,8 @@ function numberToOrdinal($number) {
       $city = $row->city;
       $participated = $row->participated;
       $participated_info = $row->participated_info;
+      $community = $row->community;
+      $community_name = $row->community_name;
       $organization_name = $row->organization_name;
       $organization_website = $row->organization_website;
       $ecosystem_affiliationId = $selected_ecosystem_affiliation;
@@ -105,6 +107,10 @@ function numberToOrdinal($number) {
       $bio_short = $row->bio_short;
       $bio_long = $row->bio_long;            
       $acknowledge = $row->acknowledge;
+      $is_series                  = $row->is_series;
+      $series_article_no          = $row->series_article_no;
+      $current_article_no         = $row->current_article_no;
+      $other_article_part_doi_no  = $row->other_article_part_doi_no;
     }
     ?>
     <div class="col-lg-12">
@@ -470,6 +476,32 @@ function numberToOrdinal($number) {
                       <td>27) 1-paragraph biography (150-250 words)</td>
                       <td><?= $bio_long ?></td>
                     </tr>
+                    <tr>
+                      <td>28) Are you a member of an EaRTh Community?</td>
+                      <td><?= $community ?></td>
+                    </tr>
+                    <tr>
+                      <td>28A) Select Community</td>
+                      <td><?= $community_name ?></td>
+                    </tr>
+                    <tr>
+                      <td>31) Is this part of a series?</td>
+                      <td><?=$is_series?></td>
+                    </tr>
+                    <?php if($is_series == 'Yes'){?>
+                      <tr>
+                        <td>32) How many total creative-works in this series?</td>
+                        <td><?=$series_article_no?></td>
+                      </tr>
+                      <tr>
+                        <td>33) What number in the series is this creative-work?</td>
+                        <td><?=$current_article_no?></td>
+                      </tr>
+                      <tr>
+                        <td>34) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).</td>
+                        <td><?=$other_article_part_doi_no?></td>
+                      </tr>
+                    <?php }?>
                 </tbody>
               </table>              
             </div>

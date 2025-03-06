@@ -41,7 +41,8 @@ use App\Models\ExpertiseArea;
       $for_publication_name = $row->for_publication_name;          
       $countryId = $row->country;          
       $roleId = $row->role;          
-      $creative_Work = $row->creative_Work;  
+      $creative_Work = $row->creative_Work;
+      $creative_Work_fiction = $row->creative_Work_fiction;
       $orginal_work = $row->orginal_work;        
       $copyright = $row->copyright; 
       $invited = $row->invited;
@@ -54,6 +55,7 @@ use App\Models\ExpertiseArea;
       $pronounId = $row->pronounId;
       $subtitle = $row->subtitle;
       $submission_types = $row->submission_types;
+      $additional_information = $row->additional_information;
       $narrative_images = $row->narrative_images;
       $narrative_file = $row->narrative_file;
       $image_files = json_decode($row->image_files);
@@ -78,6 +80,10 @@ use App\Models\ExpertiseArea;
       $bio_short = $row->bio_short;
       $bio_long = $row->bio_long;            
       $acknowledge = $row->acknowledge;
+      $is_series                  = $row->is_series;
+      $series_article_no          = $row->series_article_no;
+      $current_article_no         = $row->current_article_no;
+      $other_article_part_doi_no  = $row->other_article_part_doi_no;
     }
     ?>
     <div class="col-lg-12">
@@ -251,6 +257,10 @@ use App\Models\ExpertiseArea;
                   <td><?= $creative_Work ?></td>
                 </tr>
                 <tr>
+                  <td>15a) Is your Creative-Work fiction?</td>
+                  <td><?=$creative_Work_fiction?></td>
+                </tr>
+                <tr>
                   <td>16) Subtitle - brief engaging summary of your Creative-Work (this is what readers will be able to read before logging on to ERT, if your Creative-Work is published on ERT as Content) (max. 40 words)</td>
                   <td><?= $subtitle ?></td>
                 </tr>
@@ -265,6 +275,10 @@ use App\Models\ExpertiseArea;
                     <?=$submission_type->name?>
                     <?php } ?>
                   </td>
+                </tr>
+                <tr>
+                  <td>17a) (Optional: max. 100 words) Comments for the Editor(s) (any additional information you wish to share)</td>
+                  <td><?=$additional_information?></td>
                 </tr>
                 <tr>
                   <td>17A1) TYPE A: word narrative (no embedded images) (500-1000 words for prose, 100-250 words for poetry)</td>
@@ -418,6 +432,24 @@ use App\Models\ExpertiseArea;
                   <td>28A) Select Community</td>
                   <td><?= $community_name ?></td>
                 </tr>
+                <tr>
+                  <td>31) Is this part of a series?</td>
+                  <td><?=$is_series?></td>
+                </tr>
+                <?php if($is_series == 'Yes'){?>
+                  <tr>
+                    <td>32) How many total creative-works in this series?</td>
+                    <td><?=$series_article_no?></td>
+                  </tr>
+                  <tr>
+                    <td>33) What number in the series is this creative-work?</td>
+                    <td><?=$current_article_no?></td>
+                  </tr>
+                  <tr>
+                    <td>34) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).</td>
+                    <td><?=$other_article_part_doi_no?></td>
+                  </tr>
+                <?php }?>
             </tbody>
           </table>          
         </div>

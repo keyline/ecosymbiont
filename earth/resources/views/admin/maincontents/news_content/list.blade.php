@@ -54,9 +54,11 @@ $controllerRoute = $module['controller_route'];
                   <th scope="col">SRN<br>DOI<br>Parent Category<br>Sub Category</th>
                   <th scope="col">Title<br>Sub Title</th>
                   <th scope="col">Author Name<br>Pronoun<br>Affiliation<br>Email<br>Country<br>Organization</th>
-                  <th scope="col">Keywords</th>
+                  <!-- <th scope="col">Keywords</th> -->
                   <th scope="col">Is Feature</th>
                   <th scope="col">Is Popular</th>
+                  <th scope="col">Is Fiction</th>
+                  <th scope="col">Is Series</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -117,7 +119,7 @@ $controllerRoute = $module['controller_route'];
                       <?php } ?><br>
                       <?=$row->organization_name?>
                     </td>
-                    <td>
+                    <!-- <td>
                       <?php
                       if($row->keywords != ''){
                           $deal_keywords = explode(",", $row->keywords);
@@ -128,9 +130,11 @@ $controllerRoute = $module['controller_route'];
                       <?php } }
                       }
                       ?>
-                    </td>
+                    </td> -->
                     <td><span class="<?=(($row->is_feature)?'badge bg-success':'badge bg-danger')?>"><?=(($row->is_feature)?'<i class="fa fa-check"></i> YES':'<i class="fa fa-times"></i> NO')?></span></td>                 
                     <td><span class="<?=(($row->is_popular)?'badge bg-success':'badge bg-danger')?>"><?=(($row->is_popular)?'<i class="fa fa-check"></i> YES':'<i class="fa fa-times"></i> NO')?></span></td>
+                    <td><span class="<?=(($row->creative_Work_fiction)?'badge bg-success':'badge bg-danger')?>"><?=(($row->creative_Work_fiction)?'<i class="fa fa-check"></i> YES':'<i class="fa fa-times"></i> NO')?></span></td>
+                    <td><span class="<?=(($row->is_series)?'badge bg-success':'badge bg-danger')?>"><?=(($row->is_series)?'<i class="fa fa-check"></i> YES':'<i class="fa fa-times"></i> NO')?></span></td>
                     <td>
                       <a href="<?=url('admin/' . $controllerRoute . '/edit/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit"></i></a>
                       <a href="<?=url('admin/' . $controllerRoute . '/delete/'.Helper::encoded($row->id))?>" class="btn btn-outline-danger btn-sm" title="Delete <?=$module['title']?>" onclick="return confirm('Do You Want To Delete This <?=$module['title']?>');"><i class="fa fa-trash"></i></a>

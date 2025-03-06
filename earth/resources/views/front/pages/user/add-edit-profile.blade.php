@@ -9,6 +9,7 @@
         background: #d09c1c;
         color: #fff;
     }
+    .error { color: red; }
 </style>
 <!-- block content -->
     <div class="block-content">
@@ -219,14 +220,14 @@
                                     <label for="explanation" class="col-md-2 col-lg-4 col-form-label">12) Explain why you are a grassroots changemaker, innovator, and/or knowledge-holder (max. 100 words)</label>
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="explanation" name="explanation" rows="4" cols="50" required>{{ old('explanation', $explanation) }}</textarea>
-                                        <div id="explanationError" class="error"></div>
+                                        <div id="explanationError" class="error"></div>                                    
                                     </div>
                                 </div>  
                                 <div class="row mb-3">
                                     <label for="explanation_submission" class="col-md-2 col-lg-4 col-form-label">13) Explain why and how your Creative-Work relates to regenerating systems that restore, preserve, and foster the mutually beneficial interconnectivity and interdependence (symbiosis) of human communities within and to natural ecological webs (ecowebs) (max. 150 words)</label>
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="explanation_submission" name="explanation_submission" rows="4" cols="50" required>{{ old('explanation_submission', $explanation_submission) }}</textarea>
-                                        <div id="explanation_submissionError" class="error"></div>
+                                        <div id="explanation_submissionError" class="error"></div>                                        
                                     </div>
                                 </div>                                
                                 <div class="row mb-3">
@@ -388,10 +389,15 @@
         //  console.log(field);
         var words = field.value.trim().split(/\s+/).filter(word => word.length > 0).length;
         if (words > limit) {
-            document.getElementById(errorField).innerText = "Exceeded word limit of " + limit + " words.";
+            document.getElementById(errorField).innerText = "Exceeded word limit of " + limit + " words.";           
+            // Truncate the input field's value to the last valid word limit
+            let truncatedValue = field.value.trim().split(/\s+/).slice(0, limit).join(' ');
+            field.value = truncatedValue;
+            event.preventDefault();
             return false;
         } else {
             document.getElementById(errorField).innerText = "";
+            // document.getElementById('wordCounter').innerText = limit - words;
             return true;
         }
     }
@@ -400,7 +406,7 @@
         let allValid = true;
         allValid &= checkWordLimit(document.getElementById('explanation'), 100, 'explanationError');
         allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');        
-        allValid &= checkWordLimit(document.getElementById('subtitle'), 40, 'subtitleError');                
+        // allValid &= checkWordLimit(document.getElementById('subtitle'), 40, 'subtitleError');                
         allValid &= checkWordLimit(document.getElementById('bio_short'), 40, 'bio_shortError');
         allValid &= checkWordLimit(document.getElementById('bio_long'), 250, 'bio_longError');        
 

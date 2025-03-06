@@ -148,3 +148,12 @@ grecaptcha.ready(function() {
     });
 });
 </script>
+<!-- <script src="https://www.google.com/recaptcha/api.js?render=6Ldum88qAAAAAGgaGIGZqvD0cZP_KzBWgN9CRUYO"></script>
+<script>
+grecaptcha.ready(function() {
+    grecaptcha.execute('6Ldum88qAAAAAGgaGIGZqvD0cZP_KzBWgN9CRUYO', {action: 'submit'}).then(function(token) {
+        // Add the token to your form submission
+        document.getElementById('g-recaptcha-response').value = token;
+    });
+});
+</script> -->

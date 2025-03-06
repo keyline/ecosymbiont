@@ -17,6 +17,21 @@
     .blue-text{
         color: #6187ce;
     }
+    .badge {
+        display: inline-block;
+        min-width: 10px;
+        padding: 3px 7px;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 1;
+        color: #fff;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        background-color: #d09c1c;
+        border-radius: 10px;
+        margin-right: 3px;
+    }
 </style>
 <?php
 function numberToOrdinal($number) {
@@ -122,6 +137,11 @@ use Illuminate\Support\Facades\DB;
                 $bio_short = $row->bio_short;
                 $bio_long = $row->bio_long;            
                 $acknowledge = $row->acknowledge;
+
+                $is_series                  = $row->is_series;
+                $series_article_no          = $row->series_article_no;
+                $current_article_no         = $row->current_article_no;
+                $other_article_part_doi_no  = $row->other_article_part_doi_no;
             } else {
                 $user_id = '';
                 $author_classification = '';
@@ -180,6 +200,11 @@ use Illuminate\Support\Facades\DB;
                 $bio_short = $profile->bio_short;
                 $bio_long = $profile->bio_long;                        
                 $acknowledge = '';
+
+                $is_series                  = '';
+                $series_article_no          = '';
+                $current_article_no         = '';
+                $other_article_part_doi_no  = '';
             }
             ?>
              @if ($errors->any())
@@ -498,14 +523,14 @@ use Illuminate\Support\Facades\DB;
                                 <div class="row mb-3">
                                     <label for="explanation" class="col-md-2 col-lg-4 col-form-label">12) Explain why you are a grassroots changemaker, innovator, and/or knowledge-holder (max. 100 words)</label>
                                     <div class="col-md-10 col-lg-8">
-                                        <textarea class="form-control" id="explanation" name="explanation" rows="4" cols="50" placeholder="Your explanation here..." readonly><?= $explanation ?></textarea>
+                                        <textarea class="form-control" id="explanation" name="explanation" rows="4" cols="50"  readonly><?= $explanation ?></textarea>
                                         <div id="explanationError" class="error"></div>
                                     </div>
                                 </div>  
                                 <div class="row mb-3">
                                     <label for="explanation_submission" class="col-md-2 col-lg-4 col-form-label">13) Explain why and how your Creative-Work relates to regenerating systems that restore, preserve, and foster the mutually beneficial interconnectivity and interdependence (symbiosis) of human communities within and to natural ecological webs (ecowebs) (max. 150 words)</label>
                                     <div class="col-md-10 col-lg-8">
-                                        <textarea class="form-control" id="explanation_submission" name="explanation_submission" rows="4" cols="50" placeholder="Your explanation here..." readonly><?= $explanation_submission ?></textarea>
+                                        <textarea class="form-control" id="explanation_submission" name="explanation_submission" rows="4" cols="50" readonly><?= $explanation_submission ?></textarea>
                                         <div id="explanation_submissionError" class="error"></div>
                                     </div>
                                 </div> 
@@ -534,7 +559,7 @@ use Illuminate\Support\Facades\DB;
                                     <label for="creative_Work" class="col-md-2 col-lg-4 col-form-label blue-text">15) Title of your Creative-Work (max. 10 words)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <textarea class="form-control" id="creative_Work" name="creative_Work" rows="4" cols="50" placeholder="Your creative_Work here..." required>{{ old('creative_Work', $creative_Work ?? '') }}</textarea>
+                                        <textarea class="form-control" id="creative_Work" name="creative_Work" rows="4" cols="50"  required>{{ old('creative_Work', $creative_Work ?? '') }}</textarea>
                                         <div id="creative_WorkError" class="error"></div>
                                     </div>
                                 </div>
@@ -571,15 +596,7 @@ use Illuminate\Support\Facades\DB;
                                         @endfor
                                     @endif                            
                                     </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="additional_information" class="col-md-2 col-lg-4 col-form-label">17a) (Optional: max. 100 words) Comments for the Editor(s) (any additional information you wish to share)
-                                    </label>
-                                    <div class="col-md-10 col-lg-8">
-                                        <textarea class="form-control" id="additional_information" name="additional_information" rows="4" cols="50">{{ old('additional_information', $additional_information) }}</textarea>
-                                        <div id="bio_shortError" class="error"></div>
-                                    </div>
-                                </div>
+                                </div>                                
                                 <div id="submission_types_a" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px; margin-bottom: 20px">
                                     <div class="row mb-3">
                                         <label for="narrative_file" class="col-md-2 col-lg-4 col-form-label">17A1) TYPE A: word narrative (no embedded images) (500-1000 words for prose, 100-250 words for poetry)</label>
@@ -772,6 +789,14 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>
                                 <div class="row mb-3">
+                                    <label for="additional_information" class="col-md-2 col-lg-4 col-form-label" style="color: grey;">17a) (Optional: max. 100 words) Comments for the Editor(s) (any additional information you wish to share)
+                                    </label>
+                                    <div class="col-md-10 col-lg-8">
+                                        <textarea class="form-control" id="additional_information" name="additional_information" rows="4" cols="50">{{ old('additional_information', $additional_information) }}</textarea>
+                                        <div id="additional_informationError" class="error"></div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
                                     <label for="country" class="col-md-2 col-lg-4 col-form-label">18) What country/nation do you live in? (Country of Residence)</label>
                                     <div class="col-md-10 col-lg-8">
                                         <select name="country" class="form-control" id="country">
@@ -848,7 +873,7 @@ use Illuminate\Support\Facades\DB;
                                     <label for="bio_short" class="col-md-2 col-lg-4 col-form-label">26) 1-sentence biography (max. 40 words)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <textarea class="form-control" id="bio_short" name="bio_short" rows="4" cols="50" placeholder="Your explanation here..." readonly><?= $bio_short ?></textarea>
+                                        <textarea class="form-control" id="bio_short" name="bio_short" rows="4" cols="50"  readonly><?= $bio_short ?></textarea>
                                         <div id="bio_shortError" class="error"></div>
                                     </div>
                                 </div>
@@ -856,7 +881,7 @@ use Illuminate\Support\Facades\DB;
                                     <label for="bio_long" class="col-md-2 col-lg-4 col-form-label">27) 1-paragraph biography (150-250 words)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <textarea class="form-control" id="bio_long" name="bio_long" rows="4" cols="50" placeholder="Your explanation here..." readonly><?= $bio_long ?></textarea>
+                                        <textarea class="form-control" id="bio_long" name="bio_long" rows="4" cols="50"  readonly><?= $bio_long ?></textarea>
                                         <div id="bio_longError" class="error"></div>
                                     </div>
                                 </div>
@@ -869,18 +894,18 @@ use Illuminate\Support\Facades\DB;
                                         <input type="radio" class="readonly-input" id="community_no" name="community" value="No" required @checked(old('community', $community) == 'No')>
                                         <label for="no">No</label>
                                     </div>
-                                </div> 
+                                </div>
                                 <div id="communityDetails" style="display: none;">
                                     <div class="row mb-3">
                                         <label for="community_info" class="col-md-2 col-lg-4 col-form-label">28A) Select Community</label>
                                         <div class="col-md-10 col-lg-8">
                                             <select name="community_name" class="form-control" id="community_name">
-                                                <!-- <option value="" selected disabled>Select</option> -->
-                                                <option value="Schumacher Wild" disabled @selected(old("community_name", $community_name ?? '') == 'Schumacher Wild') >Schumacher Wild</option>
-                                                <option value="West Oakland Matters" disabled @selected(old("community_name", $community_name ?? '') == 'West Oakland Matters') >West Oakland Matters</option>
+                                                <option value="" selected disabled>Select</option>
+                                                <?php if($communities){ foreach($communities as $cmn){?>
+                                                    <option value="<?=$cmn->name?>" <?=(($community_name == $cmn->name)?'selected':'')?>><?=$cmn->name?></option>
+                                                <?php } }?>
                                             </select>
-                                            <!-- Hidden input to submit the selected value -->
-                                        <input type="hidden" name="community_name" value="{{ $community_name }}">
+                                            <input type="hidden" name="community_name" value="{{ $community_name }}">
                                         </div>
                                     </div> 
                                 </div>
@@ -896,21 +921,68 @@ use Illuminate\Support\Facades\DB;
                                     <div class="col-md-10 col-lg-8">
                                         <p>If your Creative-Work is accepted for publication (most likely, upon editorial revision), the editor(s) will e-mail you a Non-Exclusive License to Publish ("NELP"). Your Creative-Work will not be published until you e-mail back a completed and signed digital copy of the NELP.</p>                                                                        
                                     </div> -->
-                                </div> 
+                                </div>
                                 <div class="row mb-3">
                                     <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">30) If you are submitting a video
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <p>Please note that it may take several minutes for your video to upload. Please do not click on the “Submit” button more than once and do not navigate away from this page, until you are re-directed to a page that tells you: “Creative-Work submitted successfully!”</p>                                        
                                     </div>
-                                </div> 
+                                </div>
+
                                 <div class="row mb-3">
-                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">31) Non-Exclusive License to Publish (NELP)
+                                    <label for="is_series" class="col-md-2 col-lg-4 col-form-label blue-text">31) Is this part of a series?
+                                    </label>
+                                    <div class="col-md-10 col-lg-8">
+                                        <input type="radio" id="series_yes" name="is_series" value="Yes" <?=(($is_series == 'Yes')?'checked':'')?> required>
+                                        <label for="series_yes">Yes</label>
+                                        <input type="radio" id="series_no" name="is_series" value="No" <?=(($is_series == 'No')?'checked':'')?> required>
+                                        <label for="series_no">No</label>
+                                    </div>
+                                </div>
+                                <div class="row series_yes mb-3">
+                                    <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label blue-text">32) How many total creative-works in this series?
+                                    </label>
+                                    <div class="col-md-10 col-lg-8">
+                                        <input type="number" name="series_article_no" class="form-control" id="series_article_no" min="1" value="<?=$series_article_no?>">
+                                    </div>
+                                </div>
+                                <div class="row series_yes mb-3">
+                                    <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label blue-text">33) What number in the series is this creative-work?
+                                    </label>
+                                    <div class="col-md-10 col-lg-8">
+                                        <input type="text" name="current_article_no" class="form-control" id="current_article_no" value="<?=$current_article_no?>">
+                                    </div>
+                                </div>
+                                <div class="row series_yes mb-3">
+                                    <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label blue-text">34) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).
+                                    </label>
+                                    <div class="col-md-10 col-lg-8">
+                                        <input type="text" class="form-control" id="input-tags">
+                                        <textarea class="form-control" name="other_article_part_doi_no" id="other_article_part_doi_no" style="display:none;"><?=$other_article_part_doi_no?></textarea>
+                                        <small class="text-primary">Separate each DOI with a comma</small>
+                                        <div id="badge-container">
+                                            <?php
+                                            if($other_article_part_doi_no != ''){
+                                                $deal_keywords = explode(",", $other_article_part_doi_no);
+                                                if(!empty($deal_keywords)){
+                                                for($k=0;$k<count($deal_keywords);$k++){
+                                            ?>
+                                                <span class="badge"><?=$deal_keywords[$k]?> <span class="remove" data-tag="<?=$deal_keywords[$k]?>">&times;</span></span>
+                                            <?php } }
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">35) Non-Exclusive License to Publish (NELP)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <p>In the scrollable window below is the text of the Non-Exclusive License to Publish (NELP). Please note that for your Creative-Work to be published on EaRTh, you must sign this NELP (which you do by clicking the small box below the scrollable window). In essence, by signing the NELP, you declare among other things that: (a) all components of this Creative-Work are your (and, if applicable, your co-authors’) own original creation and not anyone else’s; (b) you (and, if applicable, your co-authors) have not used Artificial Intelligence (AI) to generate any of the components of this Creative-Work; and (c) you (and, if applicable, your co-authors) own the copyright to this Creative-Work and have the authority to grant the NELP. Please note that upon signing this NELP, you retain the copyright to your Creative-Work and the right to publish this Creative-Work on other platforms/in other publications, as long as such platforms/publications do not require an exclusive right to publish.</p>                                        
                                         <!-- NELP form content -->
-                                        <div style="border: 2px solid #686D72; padding: 4px; margin-bottom: 10px; border-radius: 5px;height: 150px;overflow-y: auto;">
+                                        <div style="border: 1px solid #686d72c2; padding: 7px; margin-bottom: 10px; border-radius: 5px;height: 150px;overflow-y: auto;">
                                         <p><strong>NON-EXCLUSIVE LICENSE TO PUBLISH (&ldquo;NELP&rdquo;)</strong></p>                                        
                                         <p>This NELP records the terms under which the Creative-Work (also known as the Contribution) specified in the submission form and below will be published online only on <strong>EaRTh (Ecosymbionts all Regenerate Together)&nbsp;</strong>(the &ldquo;<strong>Platform</strong>&rdquo;). The Platform is published by <strong>Ecosymbionts Regenerate</strong> (the &ldquo;<strong>Publisher</strong>&rdquo;). The Platform is owned by the Śramani Institute (the &ldquo;<strong>Proprietor</strong>&rdquo;).</p>                                        
                                         <p>The <strong>Submission Reference Number (&ldquo;SRN&rdquo;)&nbsp;</strong>associated with this Creative-Work (Contribution) will be sent to the Lead Author once the Creative-Work has been submitted.</p>                                        
@@ -1384,6 +1456,10 @@ use Illuminate\Support\Facades\DB;
         var words = field.value.trim().split(/\s+/).filter(word => word.length > 0).length;
         if (words > limit) {
             document.getElementById(errorField).innerText = "Exceeded word limit of " + limit + " words.";
+            // Truncate the input field's value to the last valid word limit
+            let truncatedValue = field.value.trim().split(/\s+/).slice(0, limit).join(' ');
+            field.value = truncatedValue;
+            event.preventDefault();
             return false;
         } else {
             document.getElementById(errorField).innerText = "";
@@ -1393,10 +1469,11 @@ use Illuminate\Support\Facades\DB;
 
     function validateForm() {
         let allValid = true;
-        allValid &= checkWordLimit(document.getElementById('explanation'), 100, 'explanationError');
-        allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');
+        // allValid &= checkWordLimit(document.getElementById('explanation'), 100, 'explanationError');
+        // allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');
         allValid &= checkWordLimit(document.getElementById('creative_Work'), 10, 'creative_WorkError');
         allValid &= checkWordLimit(document.getElementById('subtitle'), 40, 'subtitleError');
+        allValid &= checkWordLimit(document.getElementById('additional_information'), 100, 'additional_informationError');
         allValid &= checkWordLimit(document.getElementById('narrative_image_desc_1'), 50, 'narrative_image_desc_1Error');
         // Loop through the dynamically generated textareas
         for (let i = 2; i <= 5; i++) {
@@ -1427,12 +1504,92 @@ use Illuminate\Support\Facades\DB;
     }
 </script>
 <!-- End all word count validation -->
- <!-- prefill radio button value -->
- <script>
+<!-- prefill radio button value -->
+<script>
     // Prevent changes to the radio buttons
     document.querySelectorAll('.readonly-input').forEach(input => {
         input.addEventListener('click', function(e) {
             e.preventDefault(); // Block any change
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".series_yes").hide();
+        var is_series= '<?=$is_series?>';
+        if (is_series === "Yes") {
+            $(".series_yes").show();
+            $('#series_article_no').attr('required', true);
+            $('#current_article_no').attr('required', true);
+            $('#other_article_part_doi_no').attr('required', true);
+        } else {
+            $(".series_yes").hide();
+            $('#series_article_no').attr('required', false);
+            $('#current_article_no').attr('required', false);
+            $('#other_article_part_doi_no').attr('required', false);
+        }
+        
+        $('input[name="is_series"]').change(function() {
+            if ($(this).val() === "Yes") {
+                $(".series_yes").show();
+                $('#series_article_no').attr('required', true);
+                $('#current_article_no').attr('required', true);
+                $('#other_article_part_doi_no').attr('required', true);
+            } else {
+                $(".series_yes").hide();
+                $('#series_article_no').attr('required', false);
+                $('#current_article_no').attr('required', false);
+                $('#other_article_part_doi_no').attr('required', false);
+            }
+        });
+        $('#current_article_no').on('input', function(){
+            var current_article_no = parseInt($('#current_article_no').val());
+            if(current_article_no <= 1){
+                $('#current_article_no').attr('required', false);
+                $('#other_article_part_doi_no').attr('required', false);
+            } else {
+                $('#current_article_no').attr('required', true);
+                $('#other_article_part_doi_no').attr('required', true);
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var tagsArray = [];
+        var beforeData = $('#other_article_part_doi_no').val();
+        if(beforeData.length > 0){
+          tagsArray = beforeData.split(',');
+        }
+        $('#input-tags').on('input', function() {
+            var input = $(this).val();
+            if (input.includes(',')) {
+                var tags = input.split(',');
+                tags.forEach(function(tag) {
+                    tag = tag.trim();
+                    if (tag.length > 0 && !tagsArray.includes(tag)) {
+                        tagsArray.push(tag);
+                        $('#badge-container').append(
+                            '<span class="badge">' + tag + ' <span class="remove" data-tag="' + tag + '">&times;</span></span>'
+                        );
+                    }
+                });
+                $('#other_article_part_doi_no').val(tagsArray);
+                // console.log(tagsArray);
+                $(this).val('');
+            }
+        });
+        // console.log(tagsArray);
+        $(document).on('click', '.remove', function() {
+            var tag = $(this).data('tag');
+            tagsArray = tagsArray.filter(function(item) {
+                return item !== tag;
+            });
+            $(this).parent().remove();
+            $('#other_article_part_doi_no').val(tagsArray);
+            // console.log(tagsArray);
         });
     });
 </script>
