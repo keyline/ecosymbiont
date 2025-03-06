@@ -389,8 +389,10 @@
         //  console.log(field);
         var words = field.value.trim().split(/\s+/).filter(word => word.length > 0).length;
         if (words > limit) {
-            document.getElementById(errorField).innerText = "Exceeded word limit of " + limit + " words.";
-            event.preventDefault();
+            document.getElementById(errorField).innerText = "Exceeded word limit of " + limit + " words.";           
+            // Truncate the input field's value to the last valid word limit
+            let truncatedValue = field.value.trim().split(/\s+/).slice(0, limit).join(' ');
+            field.value = truncatedValue;
             return false;
         } else {
             document.getElementById(errorField).innerText = "";
