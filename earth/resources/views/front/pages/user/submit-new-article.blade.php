@@ -596,15 +596,7 @@ use Illuminate\Support\Facades\DB;
                                         @endfor
                                     @endif                            
                                     </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="additional_information" class="col-md-2 col-lg-4 col-form-label" style="color: grey;">17a) (Optional: max. 100 words) Comments for the Editor(s) (any additional information you wish to share)
-                                    </label>
-                                    <div class="col-md-10 col-lg-8">
-                                        <textarea class="form-control" id="additional_information" name="additional_information" rows="4" cols="50">{{ old('additional_information', $additional_information) }}</textarea>
-                                        <div id="additional_informationError" class="error"></div>
-                                    </div>
-                                </div>
+                                </div>                                
                                 <div id="submission_types_a" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px; margin-bottom: 20px">
                                     <div class="row mb-3">
                                         <label for="narrative_file" class="col-md-2 col-lg-4 col-form-label">17A1) TYPE A: word narrative (no embedded images) (500-1000 words for prose, 100-250 words for poetry)</label>
@@ -794,6 +786,14 @@ use Illuminate\Support\Facades\DB;
                                             <textarea class="form-control" id="art_video_desc" name="art_video_desc" rows="4" cols="50">{{ old('art_video_desc', $art_video_desc ?? '') }}</textarea>
                                             <div id="art_video_descError" class="error"></div>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="additional_information" class="col-md-2 col-lg-4 col-form-label" style="color: grey;">17a) (Optional: max. 100 words) Comments for the Editor(s) (any additional information you wish to share)
+                                    </label>
+                                    <div class="col-md-10 col-lg-8">
+                                        <textarea class="form-control" id="additional_information" name="additional_information" rows="4" cols="50">{{ old('additional_information', $additional_information) }}</textarea>
+                                        <div id="additional_informationError" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
