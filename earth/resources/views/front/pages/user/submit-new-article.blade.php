@@ -602,7 +602,7 @@ use Illuminate\Support\Facades\DB;
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="additional_information" name="additional_information" rows="4" cols="50">{{ old('additional_information', $additional_information) }}</textarea>
-                                        <div id="bio_shortError" class="error"></div>
+                                        <div id="additional_informationError" class="error"></div>
                                     </div>
                                 </div>
                                 <div id="submission_types_a" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px; margin-bottom: 20px">
@@ -1473,6 +1473,7 @@ use Illuminate\Support\Facades\DB;
         // allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');
         allValid &= checkWordLimit(document.getElementById('creative_Work'), 10, 'creative_WorkError');
         allValid &= checkWordLimit(document.getElementById('subtitle'), 40, 'subtitleError');
+        allValid &= checkWordLimit(document.getElementById('additional_information'), 100, 'additional_informationError');
         allValid &= checkWordLimit(document.getElementById('narrative_image_desc_1'), 50, 'narrative_image_desc_1Error');
         // Loop through the dynamically generated textareas
         for (let i = 2; i <= 5; i++) {
