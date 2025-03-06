@@ -1456,6 +1456,10 @@ use Illuminate\Support\Facades\DB;
         var words = field.value.trim().split(/\s+/).filter(word => word.length > 0).length;
         if (words > limit) {
             document.getElementById(errorField).innerText = "Exceeded word limit of " + limit + " words.";
+            // Truncate the input field's value to the last valid word limit
+            let truncatedValue = field.value.trim().split(/\s+/).slice(0, limit).join(' ');
+            field.value = truncatedValue;
+            event.preventDefault();
             return false;
         } else {
             document.getElementById(errorField).innerText = "";
@@ -1465,8 +1469,8 @@ use Illuminate\Support\Facades\DB;
 
     function validateForm() {
         let allValid = true;
-        allValid &= checkWordLimit(document.getElementById('explanation'), 100, 'explanationError');
-        allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');
+        // allValid &= checkWordLimit(document.getElementById('explanation'), 100, 'explanationError');
+        // allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');
         allValid &= checkWordLimit(document.getElementById('creative_Work'), 10, 'creative_WorkError');
         allValid &= checkWordLimit(document.getElementById('subtitle'), 40, 'subtitleError');
         allValid &= checkWordLimit(document.getElementById('narrative_image_desc_1'), 50, 'narrative_image_desc_1Error');
