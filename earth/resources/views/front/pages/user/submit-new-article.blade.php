@@ -523,14 +523,14 @@ use Illuminate\Support\Facades\DB;
                                 <div class="row mb-3">
                                     <label for="explanation" class="col-md-2 col-lg-4 col-form-label">12) Explain why you are a grassroots changemaker, innovator, and/or knowledge-holder (max. 100 words)</label>
                                     <div class="col-md-10 col-lg-8">
-                                        <textarea class="form-control" id="explanation" name="explanation" rows="4" cols="50" placeholder="Your explanation here..." readonly><?= $explanation ?></textarea>
+                                        <textarea class="form-control" id="explanation" name="explanation" rows="4" cols="50"  readonly><?= $explanation ?></textarea>
                                         <div id="explanationError" class="error"></div>
                                     </div>
                                 </div>  
                                 <div class="row mb-3">
                                     <label for="explanation_submission" class="col-md-2 col-lg-4 col-form-label">13) Explain why and how your Creative-Work relates to regenerating systems that restore, preserve, and foster the mutually beneficial interconnectivity and interdependence (symbiosis) of human communities within and to natural ecological webs (ecowebs) (max. 150 words)</label>
                                     <div class="col-md-10 col-lg-8">
-                                        <textarea class="form-control" id="explanation_submission" name="explanation_submission" rows="4" cols="50" placeholder="Your explanation here..." readonly><?= $explanation_submission ?></textarea>
+                                        <textarea class="form-control" id="explanation_submission" name="explanation_submission" rows="4" cols="50" readonly><?= $explanation_submission ?></textarea>
                                         <div id="explanation_submissionError" class="error"></div>
                                     </div>
                                 </div> 
@@ -559,7 +559,7 @@ use Illuminate\Support\Facades\DB;
                                     <label for="creative_Work" class="col-md-2 col-lg-4 col-form-label blue-text">15) Title of your Creative-Work (max. 10 words)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <textarea class="form-control" id="creative_Work" name="creative_Work" rows="4" cols="50" placeholder="Your creative_Work here..." required>{{ old('creative_Work', $creative_Work ?? '') }}</textarea>
+                                        <textarea class="form-control" id="creative_Work" name="creative_Work" rows="4" cols="50"  required>{{ old('creative_Work', $creative_Work ?? '') }}</textarea>
                                         <div id="creative_WorkError" class="error"></div>
                                     </div>
                                 </div>
@@ -873,7 +873,7 @@ use Illuminate\Support\Facades\DB;
                                     <label for="bio_short" class="col-md-2 col-lg-4 col-form-label">26) 1-sentence biography (max. 40 words)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <textarea class="form-control" id="bio_short" name="bio_short" rows="4" cols="50" placeholder="Your explanation here..." readonly><?= $bio_short ?></textarea>
+                                        <textarea class="form-control" id="bio_short" name="bio_short" rows="4" cols="50"  readonly><?= $bio_short ?></textarea>
                                         <div id="bio_shortError" class="error"></div>
                                     </div>
                                 </div>
@@ -881,7 +881,7 @@ use Illuminate\Support\Facades\DB;
                                     <label for="bio_long" class="col-md-2 col-lg-4 col-form-label">27) 1-paragraph biography (150-250 words)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <textarea class="form-control" id="bio_long" name="bio_long" rows="4" cols="50" placeholder="Your explanation here..." readonly><?= $bio_long ?></textarea>
+                                        <textarea class="form-control" id="bio_long" name="bio_long" rows="4" cols="50"  readonly><?= $bio_long ?></textarea>
                                         <div id="bio_longError" class="error"></div>
                                     </div>
                                 </div>
