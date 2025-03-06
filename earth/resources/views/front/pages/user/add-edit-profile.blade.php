@@ -404,8 +404,8 @@
 
     function validateForm() {
         let allValid = true;
-        // allValid &= checkWordLimit(document.getElementById('explanation'), 100, 'explanationError');
-        // allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');        
+        allValid &= checkWordLimit(document.getElementById('explanation'), 100, 'explanationError');
+        allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');        
         // allValid &= checkWordLimit(document.getElementById('subtitle'), 40, 'subtitleError');                
         allValid &= checkWordLimit(document.getElementById('bio_short'), 40, 'bio_shortError');
         allValid &= checkWordLimit(document.getElementById('bio_long'), 250, 'bio_longError');        
