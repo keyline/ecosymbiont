@@ -740,7 +740,7 @@ function numberToOrdinal($number) {
                             </div> 
                         </div>
                         <div class="row mb-3">
-                            <label for="is_series" class="col-md-2 col-lg-4 col-form-label">32) Is it a series? yes/no
+                            <label for="is_series" class="col-md-2 col-lg-4 col-form-label">32) Is this part of a series?
                             </label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="radio" id="series_yes" name="is_series" value="Yes" <?=(($is_series == 'Yes')?'checked':'')?> required>
@@ -750,26 +750,26 @@ function numberToOrdinal($number) {
                             </div>
                         </div>
                         <div class="row series_yes mb-3">
-                            <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label">32A) How many articles in this series
+                            <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label">32A) How many total creative-works in this series?
                             </label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="number" name="series_article_no" class="form-control" id="series_article_no" min="1" value="<?=$series_article_no?>">
                             </div>
                         </div>
                         <div class="row series_yes mb-3">
-                            <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label">32B) Current article no.
+                            <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label">32B) What number in the series is this creative-work?
                             </label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="text" name="current_article_no" class="form-control" id="current_article_no" value="<?=$current_article_no?>">
                             </div>
                         </div>
                         <div class="row series_yes mb-3">
-                            <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label">32C) If current article no is greater than 1 then enter each of series DOI number into it. Lets say I am submitting 4th part of the series then I have to enter previous three part articles DOI number
+                            <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label">32C) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).
                             </label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="text" class="form-control" id="input-tags">
                                 <textarea class="form-control" name="other_article_part_doi_no" id="other_article_part_doi_no" style="display:none;"><?=$other_article_part_doi_no?></textarea>
-                                <small class="text-primary">Enter DOI with comma separated</small>
+                                <small class="text-primary">Separate each DOI with a comma</small>
                                 <div id="badge-container">
                                     <?php
                                     if($other_article_part_doi_no != ''){
