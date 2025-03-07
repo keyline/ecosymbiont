@@ -464,7 +464,7 @@ $current_url = $protocol . $host . $uri;
                                                 </div>
                                             <?php } }?>
                                         <?php } else {?>
-                                            <?php
+                                            <!-- <?php
                                             // echo $series_article_no.'||'.$current_article_no;
                                             // Helper::pr($other_articles_in_this_series);
                                             $otherArticleCount = count($other_articles_in_this_series);
@@ -479,7 +479,10 @@ $current_url = $protocol . $host . $uri;
                                                 <?php if(($current_article_no != 1) && ($otherArticleCount > $current_article_no)){?>
                                                     <a href="<?=url('content/' . $other_articles_in_this_series[$current_article_no]['parent_category_slug']. '/' . $other_articles_in_this_series[$current_article_no]['category_slug'] . '/' . $other_articles_in_this_series[$current_article_no]['slug'])?>" class="btn btn-info">Next Article</a>
                                                 <?php }?>
-                                            <?php }?>
+                                            <?php }?> -->
+                                            <?php
+                                            Helper::pr($other_articles_in_this_series,0);
+                                            ?>
                                         <?php } ?>
                                     </div>
                                 </div>
