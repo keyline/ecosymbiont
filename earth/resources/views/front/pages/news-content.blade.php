@@ -114,13 +114,13 @@ $current_url = $protocol . $host . $uri;
                                     }
                                     ?>
                                     <?php if($is_series == 'Yes'){?>
-                                        <ul>
+                                        <!-- <ul>
                                             <?php if($other_articles_in_this_series){ foreach($other_articles_in_this_series as $other_articles_in_this_series_row){?>
                                                 <li>
                                                     <a href="<?=url('content/' . $other_articles_in_this_series_row['parent_category_slug']. '/' . $other_articles_in_this_series_row['category_slug'] . '/' . $other_articles_in_this_series_row['slug'])?>"><?=$other_articles_in_this_series_row['new_title']?></a>
                                                 </li>
                                             <?php } } ?>
-                                        </ul>
+                                        </ul> -->
                                     <?php }?>
                                 </div>
                                 <div class="share-post-box">
@@ -423,7 +423,7 @@ $current_url = $protocol . $host . $uri;
                                 <div class="carousel-box owl-wrapper">
                                     <div class="title-section">
                                         <?php if($is_series == 'Yes'){?>
-                                            <h1><span>Other articles</span></h1>
+                                            <h1><span>Other parts of this series</span></h1>
                                         <?php } else {?>
                                             <h1><span>You may also like</span></h1>
                                         <?php } ?>
