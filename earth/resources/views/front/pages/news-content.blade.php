@@ -95,7 +95,8 @@ $current_url = $protocol . $host . $uri;
                                                                     'news_contents.videoId',
                                                                     'sub_category.sub_category as category_name',
                                                                     'sub_category.slug as category_slug',
-                                                                    'parent_category.slug as parent_category_slug'
+                                                                    'parent_category.slug as parent_category_slug',
+                                                                    'news_contents.creative_work_DOI',
                                                                 )
                                                                 ->where('news_contents.status', 1)
                                                                 ->where('news_contents.creative_work_DOI', $other_articles_in_this_series_ids[$m])
@@ -485,37 +486,39 @@ $current_url = $protocol . $host . $uri;
                                             //Helper::pr($other_articles_in_this_series,0);
                                             ?>
                                             <?php if($other_articles_in_this_series){ foreach($other_articles_in_this_series as $other_articles_in_this_series_row){?>
-                                                <div class="item news-post video-post video_post_text">
-                                                    <!-- <img src="<?=env('UPLOADS_URL').'newcontent/'.$other_articles_in_this_series_row->cover_image?>" alt="<?=$other_articles_in_this_series_row->new_title?>"> -->
-                                                    <?php if($other_articles_in_this_series_row->media == 'image'){?>
-                                                        <!-- <div class="post-gallery"> -->
-                                                            <img src="<?=env('UPLOADS_URL').'newcontent/'.$other_articles_in_this_series_row->cover_image?>" alt="<?=$other_articles_in_this_series_row->new_title?>">
-                                                        <!-- </div> -->
-                                                    <?php } else {?>
-                                                        <div class="video-post">
-                                                            <img alt="" src="https://img.youtube.com/vi/<?=$other_articles_in_this_series_row->videoId?>/hqdefault.jpg">
-                                                            <!-- <?php if(session('is_user_login')){?>
-                                                                <a href="https://www.youtube.com/watch?v=<?=$other_articles_in_this_series_row->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                                            <?php } else {?>
-                                                                <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
-                                                            <?php }?> -->
-                                                            <!-- ?php if(session('is_user_login')){?>
-                                                                <a href="https://www.youtube.com/watch?v=?=$featuredContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                                            ?php } else {?>
-                                                                <a href="?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
-                                                            ?php }?> -->
-                                                            <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                <?php if($current_article_no != $other_articles_in_this_series_row->creative_work_DOI){?>
+                                                    <div class="item news-post video-post video_post_text">
+                                                        <!-- <img src="<?=env('UPLOADS_URL').'newcontent/'.$other_articles_in_this_series_row->cover_image?>" alt="<?=$other_articles_in_this_series_row->new_title?>"> -->
+                                                        <?php if($other_articles_in_this_series_row->media == 'image'){?>
+                                                            <!-- <div class="post-gallery"> -->
+                                                                <img src="<?=env('UPLOADS_URL').'newcontent/'.$other_articles_in_this_series_row->cover_image?>" alt="<?=$other_articles_in_this_series_row->new_title?>">
+                                                            <!-- </div> -->
+                                                        <?php } else {?>
+                                                            <div class="video-post">
+                                                                <img alt="" src="https://img.youtube.com/vi/<?=$other_articles_in_this_series_row->videoId?>/hqdefault.jpg">
+                                                                <!-- <?php if(session('is_user_login')){?>
+                                                                    <a href="https://www.youtube.com/watch?v=<?=$other_articles_in_this_series_row->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                                <?php } else {?>
+                                                                    <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
+                                                                <?php }?> -->
+                                                                <!-- ?php if(session('is_user_login')){?>
+                                                                    <a href="https://www.youtube.com/watch?v=?=$featuredContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                                ?php } else {?>
+                                                                    <a href="?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
+                                                                ?php }?> -->
+                                                                <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                            </div>
+                                                        <?php } ?>
+                                                        <div class="hover-box">
+                                                            <a href="<?=url('category/' . $other_articles_in_this_series_row->parent_category_slug. '/' . $other_articles_in_this_series_row->sub_category_slug)?>"><?=$other_articles_in_this_series_row->sub_category_name?></a>
+                                                            <h2 style="font-size: 10px;"><a href="<?=url('content/' . $other_articles_in_this_series_row->parent_category_slug. '/' . $other_articles_in_this_series_row->sub_category_slug . '/' . $other_articles_in_this_series_row->slug)?>"><?=$other_articles_in_this_series_row->new_title?></a></h2>
+                                                            <ul class="post-tags">
+                                                                <li><i class="fa fa-clock-o"></i><?=date_format(date_create($other_articles_in_this_series_row->created_at), "d M Y")?></li>
+                                                                <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$other_articles_in_this_series_row->author_name?></a></li>
+                                                            </ul>
                                                         </div>
-                                                    <?php } ?>
-                                                    <div class="hover-box">
-                                                        <a href="<?=url('category/' . $other_articles_in_this_series_row->parent_category_slug. '/' . $other_articles_in_this_series_row->sub_category_slug)?>"><?=$other_articles_in_this_series_row->sub_category_name?></a>
-                                                        <h2><a href="<?=url('content/' . $other_articles_in_this_series_row->parent_category_slug. '/' . $other_articles_in_this_series_row->sub_category_slug . '/' . $other_articles_in_this_series_row->slug)?>"><?=$other_articles_in_this_series_row->new_title?></a></h2>
-                                                        <ul class="post-tags">
-                                                            <li><i class="fa fa-clock-o"></i><?=date_format(date_create($other_articles_in_this_series_row->created_at), "d M Y")?></li>
-                                                            <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$other_articles_in_this_series_row->author_name?></a></li>
-                                                        </ul>
                                                     </div>
-                                                </div>
+                                                <?php }?>
                                             <?php } }?>
                                         <?php } ?>
                                     </div>
