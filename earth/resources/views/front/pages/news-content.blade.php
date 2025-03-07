@@ -97,6 +97,7 @@ $current_url = $protocol . $host . $uri;
                                                                     'sub_category.slug as category_slug',
                                                                     'parent_category.slug as parent_category_slug',
                                                                     'news_contents.creative_work_DOI',
+                                                                    'news_contents.current_article_no',
                                                                 )
                                                                 ->where('news_contents.status', 1)
                                                                 ->where('news_contents.creative_work_DOI', $other_articles_in_this_series_ids[$m])
@@ -486,7 +487,7 @@ $current_url = $protocol . $host . $uri;
                                             //Helper::pr($other_articles_in_this_series,0);
                                             ?>
                                             <?php if($other_articles_in_this_series){ foreach($other_articles_in_this_series as $other_articles_in_this_series_row){?>
-                                                <?php if($current_article_no != $other_articles_in_this_series_row->creative_work_DOI){?>
+                                                <?php if($current_article_no != $other_articles_in_this_series_row->current_article_no){?>
                                                     <div class="item news-post video-post video_post_text">
                                                         <!-- <img src="<?=env('UPLOADS_URL').'newcontent/'.$other_articles_in_this_series_row->cover_image?>" alt="<?=$other_articles_in_this_series_row->new_title?>"> -->
                                                         <?php if($other_articles_in_this_series_row->media == 'image'){?>
