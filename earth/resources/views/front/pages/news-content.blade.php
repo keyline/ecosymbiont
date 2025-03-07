@@ -101,12 +101,13 @@ $current_url = $protocol . $host . $uri;
                                                                 ->where('news_contents.creative_work_DOI', $other_articles_in_this_series_ids[$m])
                                                                 ->first();
                                                 if($getContent){
-                                                    $other_articles_in_this_series[] = [
-                                                        'new_title'             => $getContent->new_title,
-                                                        'slug'                  => $getContent->slug,
-                                                        'parent_category_slug'  => $getContent->parent_category_slug,
-                                                        'category_slug'         => $getContent->category_slug,
-                                                    ];
+                                                    // $other_articles_in_this_series[] = [
+                                                    //     'new_title'             => $getContent->new_title,
+                                                    //     'slug'                  => $getContent->slug,
+                                                    //     'parent_category_slug'  => $getContent->parent_category_slug,
+                                                    //     'category_slug'         => $getContent->category_slug,
+                                                    // ];
+                                                    $other_articles_in_this_series[] = $getContent;
                                                 }
                                             }
                                         }
