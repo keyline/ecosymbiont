@@ -269,7 +269,7 @@ use App\Helpers\Helper;
                         <div class="search_suggestion">
                             <ul id="suggestions"></ul>
                         </div>
-                        <a href="#flipFlop" data-toggle="modal" data-target="#flipFlop" class="advserach_btn">Advanced</a>
+                        <!-- <a href="#flipFlop" data-toggle="modal" data-target="#flipFlop" class="advserach_btn">Advanced</a> -->
                         
                     </div>
                 </div>
