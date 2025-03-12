@@ -177,29 +177,29 @@ $ecosystem_affiliation  = EcosystemAffiliation::select('id', 'name')->where('sta
             var search_type = $("#search_type").val();
             console.log(search_type);
             if(search_type == 'Country of residence'){
-                $('#search_keyword').hide();
-                $('#search_keyword').attr('required', false);
-                $('#search_type_affiliation').hide();
-                $('#search_type_affiliation').attr('required', false);
+                $('input[name="search_keyword0"]').hide();
+                $('input[name="search_keyword0"]').attr('required', false);
+                $('input[name="search_keyword2"]').hide();
+                $('input[name="search_keyword2"]').attr('required', false);
 
-                $('#search_type_country').show();
-                $('#search_type_country').attr('required', true);
+                $('input[name="search_keyword1"]').show();
+                $('input[name="search_keyword1"]').attr('required', true);
             } else if(search_type == 'Ancestral ecoweb'){
-                $('#search_keyword').hide();
-                $('#search_keyword').attr('required', false);
-                $('#search_type_country').hide();
-                $('#search_type_country').attr('required', false);
+                $('input[name="search_keyword0"]').hide();
+                $('input[name="search_keyword0"]').attr('required', false);
+                $('input[name="search_keyword1"]').hide();
+                $('input[name="search_keyword1"]').attr('required', false);
 
-                $('#search_type_affiliation').show();
-                $('#search_type_affiliation').attr('required', true);
+                $('input[name="search_keyword2"]').show();
+                $('input[name="search_keyword2"]').attr('required', true);
             } else {
-                $('#search_type_country').hide();
-                $('#search_type_country').attr('required', false);
-                $('#search_type_affiliation').hide();
-                $('#search_type_affiliation').attr('required', false);
+                $('input[name="search_keyword1"]').hide();
+                $('input[name="search_keyword1"]').attr('required', false);
+                $('input[name="search_keyword2"]').hide();
+                $('input[name="search_keyword2"]').attr('required', false);
 
-                $('#search_keyword').show();
-                $('#search_keyword').attr('required', true);
+                $('input[name="search_keyword0"]').show();
+                $('input[name="search_keyword0"]').attr('required', true);
             }
         });
     })
