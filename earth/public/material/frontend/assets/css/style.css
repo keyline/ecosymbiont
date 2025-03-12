@@ -155,7 +155,7 @@ website:    http://www.themepunch.com
 /* header 1 */
 header {
   position: relative;
-  z-index: 99999 !important;
+  z-index: 99 !important;
 }
 .nav-list-container {
   width: 100%;
@@ -623,6 +623,14 @@ header.active .nav-list-container {
 .seach_holder .navbar-form{
   padding: 0;
 }
+.seach_holder form.navbar-form {
+  margin-bottom: 0;
+}
+.seach_holder a.advserach_btn {
+  color: #fff;
+  line-height: 1.25;
+  font-size: 12px;
+}
 .search_suggestion{
   position: absolute;
   top: 39px;
@@ -639,7 +647,47 @@ header.active .nav-list-container {
 .search_suggestion::-webkit-scrollbar {
   width: 7px;
 }
-
+.modal-content.advarnseach_section {
+  background: #d09c1c;
+}
+.advarnseach_section h4.modal-title {
+  text-align: center;
+  color: #fff;
+}
+.advarnseach_section .modal-body {
+  padding: 30px 30px;
+}
+.advarnseach_section .modal-body .advance_inner_search {
+  display: flex
+;
+  flex-wrap: wrap;
+}
+.advarnseach_section .modal-body .advance_inner_search select {
+  height: 40px;
+  border: none;
+  margin-right: 10px;
+  width: 20%;
+}
+.advarnseach_section .modal-body .advance_inner_search input {
+  width: 78%;
+  height: 40px;
+  box-shadow: none;
+  border: none;
+  padding: 10px;
+}
+.advarnseach_section .modal-body .advance_inner_search button {
+  width: 100%;
+  margin-top: 10px;
+  height: 40px;
+  background: #1e1e1e;
+  color: #fff;
+  border: none;
+}
+.advarnseach_section .modal-body .advance_inner_search button:hover {
+  background: #206081;
+  color: #fff;
+  border: none;
+}
 /* Track */
 .search_suggestion::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px grey; 
