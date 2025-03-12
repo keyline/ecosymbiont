@@ -705,7 +705,7 @@ class FrontController extends Controller
                     $responseData = json_decode($response);
 
                     // Check if reCAPTCHA validation was successful
-                    // if ($responseData->success && $responseData->score >= 0.5) {                        
+                    if ($responseData->success && $responseData->score >= 0.5) {                        
                         $rules = [                                                                                               
                             'email'                     => 'required',                                                                                                                                                                    
                         ];
@@ -740,9 +740,9 @@ class FrontController extends Controller
                             return redirect()->back()->with('error_message', 'All fields required');
                         }
 
-                    // } else {                        
-                    //     return redirect()->back()->with('error_message', 'reCAPTCHA v3 validation failed. Please try again.');                        
-                    // }                              
+                    } else {                        
+                        return redirect()->back()->with('error_message', 'reCAPTCHA v3 validation failed. Please try again.');                        
+                    }                              
             }
             echo $this->front_before_login_layout($title, $page_name, $data);
         }
@@ -1189,7 +1189,7 @@ class FrontController extends Controller
                     'orginal_work'              => 'required', 
                     'copyright'                 => 'required', 
                     'submission_types'          => 'required',
-                    'additional_information'    => ['required', 'string', new MaxWords(100)], 
+                    // 'additional_information'    => ['required', 'string', new MaxWords(100)],
                     'state'                     => 'required',
                     'city'                      => 'required', 
                     'acknowledge'               => 'required',                                                      
