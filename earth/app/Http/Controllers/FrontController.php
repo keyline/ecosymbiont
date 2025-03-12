@@ -403,9 +403,7 @@ class FrontController extends Controller
             $search_keyword     = $postData['search_keyword'];
 
             if($search_type == 'Title'){
-                $data['contents']   = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
-                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
-                                            ->select(
+                $data['contents']   = NewsContent::select(
                                                         'news_contents.id', 
                                                         'news_contents.new_title', 
                                                         'news_contents.sub_title', 
@@ -421,16 +419,13 @@ class FrontController extends Controller
                                                         'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
                                                         'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
                                                     )
+                                            ->join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
                                             ->where(function($query) {
                                                 $query->where('news_contents.status', 1);
                                              })
                                              ->where(function($query) use ($search_keyword) {
-                                                $query->where('news_contents.new_title', 'LIKE', '%'.$search_keyword.'%')
-                                                      ->orWhere('news_contents.sub_title', 'LIKE', '%'.$search_keyword.'%')
-                                                      ->orWhere('news_contents.long_desc', 'LIKE', '%'.$search_keyword.'%')
-                                                      ->orWhere('news_contents.author_name', 'LIKE', '%'.$search_keyword.'%')
-                                                      ->orWhere('news_contents.organization_name', 'LIKE', '%'.$search_keyword.'%')
-                                                      ->orWhere('news_contents.keywords', 'LIKE', '%'.$search_keyword.'%');
+                                                $query->where('news_contents.new_title', 'LIKE', '%'.$search_keyword.'%');
                                              })
                                              ->limit(4)
                                              ->get();
@@ -451,11 +446,10 @@ class FrontController extends Controller
             } elseif($search_type == 'Text'){
                 
             }
-            
-            // Helper::pr($searchResults);
+            Helper::pr($data['contents']);
             
             $data['search_keyword']         = $search_keyword;
-            echo $title                          = 'Search result for: "' . $search_keyword . '" ('.$search_type.')';die;
+            $title                          = 'Search result for: "' . $search_keyword . '" ('.$search_type.')';
             $page_name                      = 'search-result';
             echo $this->front_before_login_layout($title, $page_name, $data);
         }
