@@ -150,13 +150,13 @@ $ecosystem_affiliation  = EcosystemAffiliation::select('id', 'name')->where('sta
                             <option value="Text">Text</option>
                         </select>
 
-                        <select id="search_type_country" class="adv-search-field field-selector" name="search_type" style="display: none;">
+                        <select id="search_type_country" class="adv-search-field field-selector" name="search_keyword" style="display: none;">
                             <option value="All Fields" selected="selected">Select Country</option>
                             <?php if($country){ foreach($country as $cnt){?>
                                 <option value="<?=$cnt->id?>"><?=$cnt->name?></option>
                             <?php } }?>
                         </select>
-                        <select id="search_type_affiliation" class="adv-search-field field-selector" name="search_type" style="display: none;">
+                        <select id="search_type_affiliation" class="adv-search-field field-selector" name="search_keyword" style="display: none;">
                             <option value="All Fields" selected="selected">Select Ecoweb Affiliation</option>
                             <?php if($ecosystem_affiliation){ foreach($ecosystem_affiliation as $ecoaff){?>
                                 <option value="<?=$ecoaff->id?>"><?=$ecoaff->name?></option>
