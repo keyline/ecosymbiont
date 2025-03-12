@@ -399,8 +399,14 @@ class FrontController extends Controller
     {
         if($request->isMethod('get')){
             $postData           = $request->all();
-            echo $search_type        = $postData['search_type'];
-            echo $search_keyword     = $postData['search_keyword'];
+            $search_type        = $postData['search_type'];
+            if($search_type == 'Country of residence'){
+                $search_keyword     = $postData['search_keyword1'];
+            } elseif($search_type == 'Ancestral ecoweb'){
+                $search_keyword     = $postData['search_keyword2'];
+            } else {
+                $search_keyword     = $postData['search_keyword0'];
+            }
             $data['contents']   = [];
 
             if($search_type == 'Title'){

@@ -150,19 +150,19 @@ $ecosystem_affiliation  = EcosystemAffiliation::select('id', 'name')->where('sta
                             <option value="Text">Text</option>
                         </select>
 
-                        <select id="search_type_country" class="adv-search-field field-selector" name="search_keyword" style="display: none;">
-                            <option value="All Fields" selected="selected">Select Country</option>
+                        <select id="search_type_country" class="adv-search-field field-selector" name="search_keyword1" style="display: none;">
+                            <option value="" selected="selected">Select Country</option>
                             <?php if($country){ foreach($country as $cnt){?>
                                 <option value="<?=$cnt->id?>"><?=$cnt->name?></option>
                             <?php } }?>
                         </select>
-                        <select id="search_type_affiliation" class="adv-search-field field-selector" name="search_keyword" style="display: none;">
-                            <option value="All Fields" selected="selected">Select Ecoweb Affiliation</option>
+                        <select id="search_type_affiliation" class="adv-search-field field-selector" name="search_keyword2" style="display: none;">
+                            <option value="" selected="selected">Select Ecoweb Affiliation</option>
                             <?php if($ecosystem_affiliation){ foreach($ecosystem_affiliation as $ecoaff){?>
                                 <option value="<?=$ecoaff->id?>"><?=$ecoaff->name?></option>
                             <?php } }?>
                         </select>
-                        <input type="text" id="search_keyword" name="search_keyword" placeholder="Enter a search term" required>
+                        <input type="text" id="search_keyword" name="search_keyword0" placeholder="Enter a search term" required>
                         <button type="submit" class="btn btn-default"><i class="fa fa-search"></i> Search</button>
                     </div>
                 </form>
@@ -175,7 +175,6 @@ $ecosystem_affiliation  = EcosystemAffiliation::select('id', 'name')->where('sta
     $(function(){
         $('#search_type').on('change', function(){
             var search_type = $("#search_type").val();
-            console.log(search_type);
             if(search_type == 'Country of residence'){
                 $('#search_keyword').hide();
                 $('#search_keyword').attr('required', false);
