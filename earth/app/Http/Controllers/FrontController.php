@@ -647,7 +647,7 @@ class FrontController extends Controller
                                              ->limit(4)
                                              ->get();
             }
-            Helper::pr($data['contents']);
+            // Helper::pr($data['contents']);
             
             $data['search_keyword']         = $search_keyword;
             $title                          = 'Search result for: "' . $search_keyword . '" ('.$search_type.')';
