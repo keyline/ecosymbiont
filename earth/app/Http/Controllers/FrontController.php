@@ -560,7 +560,7 @@ class FrontController extends Controller
                                                 $query->where('news_contents.status', 1);
                                              })
                                              ->where(function($query) use ($search_keyword) {
-                                                $query->->where('news_contents.organization_name', 'LIKE', '%'.$search_keyword.'%');
+                                                $query->where('news_contents.organization_name', 'LIKE', '%'.$search_keyword.'%');
                                              })
                                              ->limit(4)
                                              ->get();
