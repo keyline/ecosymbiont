@@ -138,7 +138,7 @@ $ecosystem_affiliation  = EcosystemAffiliation::select('id', 'name')->where('sta
                 <form method="GET" action="<?=url('advance-search-result')?>">
                     <div class="advance_inner_search">
                         <select id="search_type" class="adv-search-field field-selector" name="search_type" required>
-                            <option value="All Fields" selected="selected">All Fields</option>
+                            <option value="" selected="selected">All Fields</option>
                             <option value="Title">Title</option>
                             <option value="Author name">Author name</option>
                             <option value="Subtitle">Subtitle</option>
@@ -196,7 +196,7 @@ $ecosystem_affiliation  = EcosystemAffiliation::select('id', 'name')->where('sta
                 $('#search_type_country').attr('required', false);
                 $('#search_type_affiliation').hide();
                 $('#search_type_affiliation').attr('required', false);
-                
+
                 $('#search_keyword').show();
                 $('#search_keyword').attr('required', true);
             }
