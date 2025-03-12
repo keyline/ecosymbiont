@@ -175,6 +175,7 @@ $ecosystem_affiliation  = EcosystemAffiliation::select('id', 'name')->where('sta
     $(function(){
         $('#search_type').on('change', function(){
             var search_type = $("#search_type").val();
+            console.log(search_type);
             if(search_type == 'Country of residence'){
                 $('#search_keyword').hide();
                 $('#search_keyword').attr('required', false);
