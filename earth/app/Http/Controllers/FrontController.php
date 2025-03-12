@@ -402,10 +402,15 @@ class FrontController extends Controller
             $search_type        = $postData['search_type'];
             if($search_type == 'Country of residence'){
                 $search_keyword     = $postData['search_keyword1'];
+                $getCountry         = Country::select('name')->where('id', '=', $search_keyword)->first();
+                $title              = 'Search result for: "' . (($getCountry)?$getCountry->name:'') . '" ('.$search_type.')';
             } elseif($search_type == 'Ancestral ecoweb'){
                 $search_keyword     = $postData['search_keyword2'];
+                $getAffiliation     = EcosystemAffiliation::select('name')->where('id', '=', $search_keyword)->first();
+                $title              = 'Search result for: "' . (($getAffiliation)?$getAffiliation->name:'') . '" ('.$search_type.')';
             } else {
                 $search_keyword     = $postData['search_keyword0'];
+                $title              = 'Search result for: "' . $search_keyword . '" ('.$search_type.')';
             }
             $data['contents']   = [];
 
@@ -654,9 +659,8 @@ class FrontController extends Controller
                                              ->get();
             }
             // Helper::pr($data['contents']);
-            
-            $data['search_keyword']         = $search_keyword;
-            $title                          = 'Search result for: "' . $search_keyword . '" ('.$search_type.')';
+            $data['search_keyword']         = '';
+            // $title                          = 'Search result for: "' . $search_keyword . '" ('.$search_type.')';
             $page_name                      = 'search-result';
             echo $this->front_before_login_layout($title, $page_name, $data);
         }
