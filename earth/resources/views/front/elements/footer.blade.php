@@ -131,7 +131,7 @@ use App\Helpers\Helper;
                 <h4 class="modal-title" id="modalLabel">Advanced Search</h4>
             </div>
             <div class="modal-body">
-                <form class="navbar-form" method="GET" action="<?=url('advance-search-result')?>" role="search">
+                <form method="GET" action="<?=url('advance-search-result')?>">
                     <div class="advance_inner_search">
                         <select id="search_type" class="adv-search-field field-selector" name="search_type" required>
                             <option value="All Fields" selected="selected">All Fields</option>
@@ -145,7 +145,7 @@ use App\Helpers\Helper;
                             <option value="Tag">Tag</option>
                             <option value="Text">Text</option>
                         </select>
-                        <input type="search" id="search_keyword" name="search_keyword" placeholder="Enter a search term" required>
+                        <input type="text" id="search_keyword" name="search_keyword" placeholder="Enter a search term" required>
                         <button type="submit" class="btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search"></i> Search</button>
                     </div>
                 </form>
