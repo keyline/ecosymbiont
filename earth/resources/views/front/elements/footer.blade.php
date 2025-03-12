@@ -175,28 +175,28 @@ $ecosystem_affiliation  = EcosystemAffiliation::select('id', 'name')->where('sta
     $(function(){
         $('#search_type').on('change', function(){
             var search_type = $("#search_type").val();
-            console.log(search_type);
+            // console.log(search_type);
             if(search_type == 'Country of residence'){
                 $('input[name="search_keyword0"]').hide();
                 $('input[name="search_keyword0"]').attr('required', false);
-                $('input[name="search_keyword2"]').hide();
-                $('input[name="search_keyword2"]').attr('required', false);
+                $('select[name="search_keyword2"]').hide();
+                $('select[name="search_keyword2"]').attr('required', false);
 
-                $('input[name="search_keyword1"]').show();
-                $('input[name="search_keyword1"]').attr('required', true);
+                $('select[name="search_keyword1"]').show();
+                $('select[name="search_keyword1"]').attr('required', true);
             } else if(search_type == 'Ancestral ecoweb'){
                 $('input[name="search_keyword0"]').hide();
                 $('input[name="search_keyword0"]').attr('required', false);
-                $('input[name="search_keyword1"]').hide();
-                $('input[name="search_keyword1"]').attr('required', false);
+                $('select[name="search_keyword1"]').hide();
+                $('select[name="search_keyword1"]').attr('required', false);
 
-                $('input[name="search_keyword2"]').show();
-                $('input[name="search_keyword2"]').attr('required', true);
+                $('select[name="search_keyword2"]').show();
+                $('select[name="search_keyword2"]').attr('required', true);
             } else {
-                $('input[name="search_keyword1"]').hide();
-                $('input[name="search_keyword1"]').attr('required', false);
-                $('input[name="search_keyword2"]').hide();
-                $('input[name="search_keyword2"]').attr('required', false);
+                $('select[name="search_keyword1"]').hide();
+                $('select[name="search_keyword1"]').attr('required', false);
+                $('select[name="search_keyword2"]').hide();
+                $('select[name="search_keyword2"]').attr('required', false);
 
                 $('input[name="search_keyword0"]').show();
                 $('input[name="search_keyword0"]').attr('required', true);
