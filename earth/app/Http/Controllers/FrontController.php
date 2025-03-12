@@ -430,21 +430,221 @@ class FrontController extends Controller
                                              ->limit(4)
                                              ->get();
             } elseif($search_type == 'Author name'){
-                
+                $data['contents']   = NewsContent::select(
+                                                        'news_contents.id', 
+                                                        'news_contents.new_title', 
+                                                        'news_contents.sub_title', 
+                                                        'news_contents.slug', 
+                                                        'news_contents.author_name', 
+                                                        'news_contents.for_publication_name', 
+                                                        'news_contents.cover_image', 
+                                                        'news_contents.created_at',
+                                                        'news_contents.media',
+                                                        'news_contents.videoId',
+                                                        'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
+                                                        'parent_category.sub_category as parent_category_name', // From parent_category name
+                                                        'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
+                                                        'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                                    )
+                                            ->join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
+                                            ->where(function($query) {
+                                                $query->where('news_contents.status', 1);
+                                             })
+                                             ->where(function($query) use ($search_keyword) {
+                                                $query->where('news_contents.author_name', 'LIKE', '%'.$search_keyword.'%');
+                                             })
+                                             ->limit(4)
+                                             ->get();
             } elseif($search_type == 'Subtitle'){
-                
+                $data['contents']   = NewsContent::select(
+                                                        'news_contents.id', 
+                                                        'news_contents.new_title', 
+                                                        'news_contents.sub_title', 
+                                                        'news_contents.slug', 
+                                                        'news_contents.author_name', 
+                                                        'news_contents.for_publication_name', 
+                                                        'news_contents.cover_image', 
+                                                        'news_contents.created_at',
+                                                        'news_contents.media',
+                                                        'news_contents.videoId',
+                                                        'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
+                                                        'parent_category.sub_category as parent_category_name', // From parent_category name
+                                                        'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
+                                                        'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                                    )
+                                            ->join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
+                                            ->where(function($query) {
+                                                $query->where('news_contents.status', 1);
+                                             })
+                                             ->where(function($query) use ($search_keyword) {
+                                                $query->where('news_contents.sub_title', 'LIKE', '%'.$search_keyword.'%');
+                                             })
+                                             ->limit(4)
+                                             ->get();
             } elseif($search_type == 'Ancestral ecoweb'){
-                
+                $data['contents']   = NewsContent::select(
+                                                        'news_contents.id', 
+                                                        'news_contents.new_title', 
+                                                        'news_contents.sub_title', 
+                                                        'news_contents.slug', 
+                                                        'news_contents.author_name', 
+                                                        'news_contents.for_publication_name', 
+                                                        'news_contents.cover_image', 
+                                                        'news_contents.created_at',
+                                                        'news_contents.media',
+                                                        'news_contents.videoId',
+                                                        'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
+                                                        'parent_category.sub_category as parent_category_name', // From parent_category name
+                                                        'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
+                                                        'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                                    )
+                                            ->join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
+                                            ->where(function($query) {
+                                                $query->where('news_contents.status', 1);
+                                             })
+                                             ->where(function($query) use ($search_keyword) {
+                                                $query->where('news_contents.author_affiliation', 'LIKE', '%'.$search_keyword.'%');
+                                             })
+                                             ->limit(4)
+                                             ->get();
             } elseif($search_type == 'Country of residence'){
-                
+                $data['contents']   = NewsContent::select(
+                                                        'news_contents.id', 
+                                                        'news_contents.new_title', 
+                                                        'news_contents.sub_title', 
+                                                        'news_contents.slug', 
+                                                        'news_contents.author_name', 
+                                                        'news_contents.for_publication_name', 
+                                                        'news_contents.cover_image', 
+                                                        'news_contents.created_at',
+                                                        'news_contents.media',
+                                                        'news_contents.videoId',
+                                                        'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
+                                                        'parent_category.sub_category as parent_category_name', // From parent_category name
+                                                        'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
+                                                        'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                                    )
+                                            ->join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
+                                            ->where(function($query) {
+                                                $query->where('news_contents.status', 1);
+                                             })
+                                             ->where(function($query) use ($search_keyword) {
+                                                $query->where('news_contents.country', 'LIKE', '%'.$search_keyword.'%');
+                                             })
+                                             ->limit(4)
+                                             ->get();
             } elseif($search_type == 'Organization'){
-                
+                $data['contents']   = NewsContent::select(
+                                                        'news_contents.id', 
+                                                        'news_contents.new_title', 
+                                                        'news_contents.sub_title', 
+                                                        'news_contents.slug', 
+                                                        'news_contents.author_name', 
+                                                        'news_contents.for_publication_name', 
+                                                        'news_contents.cover_image', 
+                                                        'news_contents.created_at',
+                                                        'news_contents.media',
+                                                        'news_contents.videoId',
+                                                        'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
+                                                        'parent_category.sub_category as parent_category_name', // From parent_category name
+                                                        'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
+                                                        'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                                    )
+                                            ->join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
+                                            ->where(function($query) {
+                                                $query->where('news_contents.status', 1);
+                                             })
+                                             ->where(function($query) use ($search_keyword) {
+                                                $query->->where('news_contents.organization_name', 'LIKE', '%'.$search_keyword.'%');
+                                             })
+                                             ->limit(4)
+                                             ->get();
             } elseif($search_type == 'Community'){
-                
+                $data['contents']   = NewsContent::select(
+                                                        'news_contents.id', 
+                                                        'news_contents.new_title', 
+                                                        'news_contents.sub_title', 
+                                                        'news_contents.slug', 
+                                                        'news_contents.author_name', 
+                                                        'news_contents.for_publication_name', 
+                                                        'news_contents.cover_image', 
+                                                        'news_contents.created_at',
+                                                        'news_contents.media',
+                                                        'news_contents.videoId',
+                                                        'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
+                                                        'parent_category.sub_category as parent_category_name', // From parent_category name
+                                                        'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
+                                                        'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                                    )
+                                            ->join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
+                                            ->where(function($query) {
+                                                $query->where('news_contents.status', 1);
+                                             })
+                                             ->where(function($query) use ($search_keyword) {
+                                                $query->where('news_contents.community_name', 'LIKE', '%'.$search_keyword.'%');
+                                             })
+                                             ->limit(4)
+                                             ->get();
             } elseif($search_type == 'Tag'){
-                
+                $data['contents']   = NewsContent::select(
+                                                        'news_contents.id', 
+                                                        'news_contents.new_title', 
+                                                        'news_contents.sub_title', 
+                                                        'news_contents.slug', 
+                                                        'news_contents.author_name', 
+                                                        'news_contents.for_publication_name', 
+                                                        'news_contents.cover_image', 
+                                                        'news_contents.created_at',
+                                                        'news_contents.media',
+                                                        'news_contents.videoId',
+                                                        'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
+                                                        'parent_category.sub_category as parent_category_name', // From parent_category name
+                                                        'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
+                                                        'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                                    )
+                                            ->join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
+                                            ->where(function($query) {
+                                                $query->where('news_contents.status', 1);
+                                             })
+                                             ->where(function($query) use ($search_keyword) {
+                                                $query->where('news_contents.keywords', 'LIKE', '%'.$search_keyword.'%');
+                                             })
+                                             ->limit(4)
+                                             ->get();
             } elseif($search_type == 'Text'){
-                
+                $data['contents']   = NewsContent::select(
+                                                        'news_contents.id', 
+                                                        'news_contents.new_title', 
+                                                        'news_contents.sub_title', 
+                                                        'news_contents.slug', 
+                                                        'news_contents.author_name', 
+                                                        'news_contents.for_publication_name', 
+                                                        'news_contents.cover_image', 
+                                                        'news_contents.created_at',
+                                                        'news_contents.media',
+                                                        'news_contents.videoId',
+                                                        'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
+                                                        'parent_category.sub_category as parent_category_name', // From parent_category name
+                                                        'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
+                                                        'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                                    )
+                                            ->join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
+                                            ->where(function($query) {
+                                                $query->where('news_contents.status', 1);
+                                             })
+                                             ->where(function($query) use ($search_keyword) {
+                                                $query->where('news_contents.long_desc', 'LIKE', '%'.$search_keyword.'%');
+                                             })
+                                             ->limit(4)
+                                             ->get();
             }
             Helper::pr($data['contents']);
             

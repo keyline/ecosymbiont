@@ -1,41 +1,45 @@
 <?php
 use App\Models\NewsCategory;
 use App\Models\NewsContent;
+use App\Models\Country;
+use App\Models\EcosystemAffiliation;
 use App\Helpers\Helper;
+
+$country                = Country::select('id', 'name')->where('status', '=', 1)->orderBy('name', 'ASC')->get();
+$ecosystem_affiliation  = EcosystemAffiliation::select('id', 'name')->where('status', '=', 1)->orderBy('name', 'ASC')->get();
 ?>
+<div class="footer_top_menu">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="footer-nav">
+                    <ul>
+                        <li><a href="<?=url('/') ?>" target="_blank">Home</a></li>
+                        <!-- <li><a href="<?=url('about-us')?>" target="_blank">About</a></li> -->
+                        <li><a href="<?=url('communities')?>" target="_blank">Communities</a></li>
+                        <li><a href="<?=env('REGENERATE_URL')?>contact.php" target="_blank">Contact</a></li>
+                        <li class="foot-social-icons"><a class="twitter" href="<?=$generalSetting->twitter_profile?>" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                        <li class="foot-social-icons"><a class="pinterest" href="<?=$generalSetting->instagram_profile?>" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                        <li class="foot-social-icons"><a target="_blank" class="facebook" href="<?=$generalSetting->facebook_profile?>"><i class="fa fa-facebook"></i></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <div class="footer_top_menu">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <nav class="footer-nav">
-                        <ul>
-                            <li><a href="<?=url('/') ?>" target="_blank">Home</a></li>
-                            <!-- <li><a href="<?=url('about-us')?>" target="_blank">About</a></li> -->
-                            <li><a href="<?=url('communities')?>" target="_blank">Communities</a></li>
-                            <li><a href="<?=env('REGENERATE_URL')?>contact.php" target="_blank">Contact</a></li>
-                            <li class="foot-social-icons"><a class="twitter" href="<?=$generalSetting->twitter_profile?>" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                            <li class="foot-social-icons"><a class="pinterest" href="<?=$generalSetting->instagram_profile?>" target="_blank"><i class="fa fa-instagram"></i></a></li>
-                            <li class="foot-social-icons"><a target="_blank" class="facebook" href="<?=$generalSetting->facebook_profile?>"><i class="fa fa-facebook"></i></a></li>
-                        </ul>
-                    </nav>
+<div class="footer_copy_pow">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="foot_copyinfo"><?=$generalSetting->footer_description?></div>
+                <div class="kelfot">
+                    <a href="https://keylines.net/" target="_blank">Powered by Keyline</a>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="footer_copy_pow">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="foot_copyinfo"><?=$generalSetting->footer_description?></div>
-                    <div class="kelfot">
-                        <a href="https://keylines.net/" target="_blank">Powered by Keyline</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
 
 <!-- <div class="container">
     <div class="footer-widgets-part">
@@ -145,6 +149,19 @@ use App\Helpers\Helper;
                             <option value="Tag">Tag</option>
                             <option value="Text">Text</option>
                         </select>
+
+                        <select id="search_type_country" class="adv-search-field field-selector" name="search_type" style="display: none;">
+                            <option value="All Fields" selected="selected">Select Country</option>
+                            <?php if($country){ foreach($country as $cnt){?>
+                                <option value="<?=$cnt->id?>"><?=$cnt->name?></option>
+                            <?php } }?>
+                        </select>
+                        <select id="search_type_affiliation" class="adv-search-field field-selector" name="search_type" style="display: none;">
+                            <option value="All Fields" selected="selected">Select Ecoweb Affiliation</option>
+                            <?php if($ecosystem_affiliation){ foreach($ecosystem_affiliation as $ecoaff){?>
+                                <option value="<?=$ecoaff->id?>"><?=$ecoaff->name?></option>
+                            <?php } }?>
+                        </select>
                         <input type="text" id="search_keyword" name="search_keyword" placeholder="Enter a search term" required>
                         <button type="submit" class="btn btn-default"><i class="fa fa-search"></i> Search</button>
                     </div>
@@ -153,3 +170,9 @@ use App\Helpers\Helper;
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(function(){
+        alert('ok');
+    })
+</script>
