@@ -146,7 +146,7 @@ use App\Helpers\Helper;
                             <option value="Text">Text</option>
                         </select>
                         <input type="text" id="search_keyword" name="search_keyword" placeholder="Enter a search term" required>
-                        <button type="submit" class="btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search"></i> Search</button>
+                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i> Search</button>
                     </div>
                 </form>
             </div>

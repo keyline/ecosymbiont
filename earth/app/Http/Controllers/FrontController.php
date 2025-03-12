@@ -399,10 +399,11 @@ class FrontController extends Controller
     {
         if($request->isMethod('get')){
             $postData           = $request->all();
-            Helper::pr($postData);
             $search_type        = $postData['search_type'];
             $search_keyword     = $postData['search_keyword'];
-            $data['contents']   = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
+
+            if($search_type == 'Title'){
+                $data['contents']   = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
                                             ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
                                             ->select(
                                                         'news_contents.id', 
@@ -433,10 +434,28 @@ class FrontController extends Controller
                                              })
                                              ->limit(4)
                                              ->get();
+            } elseif($search_type == 'Author name'){
+                
+            } elseif($search_type == 'Subtitle'){
+                
+            } elseif($search_type == 'Ancestral ecoweb'){
+                
+            } elseif($search_type == 'Country of residence'){
+                
+            } elseif($search_type == 'Organization'){
+                
+            } elseif($search_type == 'Community'){
+                
+            } elseif($search_type == 'Tag'){
+                
+            } elseif($search_type == 'Text'){
+                
+            }
+            
             // Helper::pr($searchResults);
             
             $data['search_keyword']         = $search_keyword;
-            $title                          = 'Search result for: "' . $search_keyword . '"';
+            echo $title                          = 'Search result for: "' . $search_keyword . '" ('.$search_type.')';die;
             $page_name                      = 'search-result';
             echo $this->front_before_login_layout($title, $page_name, $data);
         }
