@@ -941,21 +941,21 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
-                                    <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label blue-text">32) How many total creative-works in this series?
+                                    <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label blue-text">31a) How many total creative-works in this series?
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="number" name="series_article_no" class="form-control" id="series_article_no" min="1" value="<?=$series_article_no?>">
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
-                                    <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label blue-text">33) What number in the series is this creative-work?
+                                    <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label blue-text">31b) What number in the series is this creative-work?
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="current_article_no" class="form-control" id="current_article_no" value="<?=$current_article_no?>">
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
-                                    <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label blue-text">34) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).
+                                    <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label blue-text">31c) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" class="form-control" id="input-tags">
@@ -977,7 +977,7 @@ use Illuminate\Support\Facades\DB;
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">35) Non-Exclusive License to Publish (NELP)
+                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">32) Non-Exclusive License to Publish (NELP)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <p>In the scrollable window below is the text of the Non-Exclusive License to Publish (NELP). Please note that for your Creative-Work to be published on EaRTh, you must sign this NELP (which you do by clicking the small box below the scrollable window). In essence, by signing the NELP, you declare among other things that: (a) all components of this Creative-Work are your (and, if applicable, your co-authors’) own original creation and not anyone else’s; (b) you (and, if applicable, your co-authors) have not used Artificial Intelligence (AI) to generate any of the components of this Creative-Work; and (c) you (and, if applicable, your co-authors) own the copyright to this Creative-Work and have the authority to grant the NELP. Please note that upon signing this NELP, you retain the copyright to your Creative-Work and the right to publish this Creative-Work on other platforms/in other publications, as long as such platforms/publications do not require an exclusive right to publish.</p>                                        
