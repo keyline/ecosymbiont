@@ -178,11 +178,17 @@ $ecosystem_affiliation  = EcosystemAffiliation::select('id', 'name')->where('sta
             if(search_type == 'Country of residence'){
                 $('#search_keyword').hide();
                 $('#search_keyword').attr('required', false);
+                $('#search_type_affiliation').hide();
+                $('#search_type_affiliation').attr('required', false);
+
                 $('#search_type_country').show();
                 $('#search_type_country').attr('required', true);
             } else if(search_type == 'Ancestral ecoweb'){
                 $('#search_keyword').hide();
                 $('#search_keyword').attr('required', false);
+                $('#search_type_country').hide();
+                $('#search_type_country').attr('required', false);
+
                 $('#search_type_affiliation').show();
                 $('#search_type_affiliation').attr('required', true);
             } else {
@@ -190,6 +196,7 @@ $ecosystem_affiliation  = EcosystemAffiliation::select('id', 'name')->where('sta
                 $('#search_type_country').attr('required', false);
                 $('#search_type_affiliation').hide();
                 $('#search_type_affiliation').attr('required', false);
+                
                 $('#search_keyword').show();
                 $('#search_keyword').attr('required', true);
             }
