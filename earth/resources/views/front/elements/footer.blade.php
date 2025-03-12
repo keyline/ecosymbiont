@@ -131,7 +131,7 @@ use App\Helpers\Helper;
                 <h4 class="modal-title" id="modalLabel">Advanced Search</h4>
             </div>
             <div class="modal-body">
-                <form class="navbar-form" method="GET" action="<?=url('search-result')?>" role="search">
+                <form class="navbar-form" method="GET" action="<?=url('advance-search-result')?>" role="search">
                     <div class="advance_inner_search">
                         <select id="search_type" class="adv-search-field field-selector" name="search_type" required>
                             <option value="All Fields" selected="selected">All Fields</option>
