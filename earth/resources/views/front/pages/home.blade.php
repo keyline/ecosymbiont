@@ -370,7 +370,7 @@ $current_url = $protocol . $host . $uri;
                                                                 'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
                                                             )
                                                             ->where('news_contents.status', 1) // Fetch only active content
-                                                            // ->where('news_contents.is_popular', 1) // Uncomment if you want to filter by popular content
+                                                            ->where('news_contents.is_popular', 1) // Uncomment if you want to filter by popular content
                                                             ->where('news_contents.parent_category', 9) // Parent category filter
                                                             ->orderBy('news_contents.id', 'DESC') // Order by most recent
                                                             ->first(); // Fetch single record
