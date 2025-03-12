@@ -126,21 +126,29 @@ use App\Helpers\Helper;
         <div class="modal-content advarnseach_section">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">&times;</span>
                 </button>
-            <h4 class="modal-title" id="modalLabel">Advanced Search</h4>
+                <h4 class="modal-title" id="modalLabel">Advanced Search</h4>
             </div>
             <div class="modal-body">
-                <div class="advance_inner_search">
-                    <select id="" class="adv-search-field field-selector">>
-                        <option value="All Fields" selected="selected">All Fields</option>
-                        <option value="Title">Title</option>
-                        <option value="Author name">Author name</option>
-                        <option value="Subtitle">Subtitle</option>
-                    </select>
-                    <input type="search" id="id_term" placeholder="Enter a search term">
-                    <button type="button" class="btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search</button>
-                </div>
+                <form class="navbar-form" method="GET" action="<?=url('search-result')?>" role="search">
+                    <div class="advance_inner_search">
+                        <select id="search_type" class="adv-search-field field-selector" name="search_type" required>
+                            <option value="All Fields" selected="selected">All Fields</option>
+                            <option value="Title">Title</option>
+                            <option value="Author name">Author name</option>
+                            <option value="Subtitle">Subtitle</option>
+                            <option value="Ancestral ecoweb">Ancestral ecoweb</option>
+                            <option value="Country of residence">Country of residence</option>
+                            <option value="Organization">Organization</option>
+                            <option value="Community">Community</option>
+                            <option value="Tag">Tag</option>
+                            <option value="Text">Text</option>
+                        </select>
+                        <input type="search" id="search_keyword" name="search_keyword" placeholder="Enter a search term" required>
+                        <button type="submit" class="btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
