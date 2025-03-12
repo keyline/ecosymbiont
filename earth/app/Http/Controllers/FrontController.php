@@ -399,8 +399,8 @@ class FrontController extends Controller
     {
         if($request->isMethod('get')){
             $postData           = $request->all();
-            $search_type        = $postData['search_type'];
-            $search_keyword     = $postData['search_keyword'];
+            echo $search_type        = $postData['search_type'];
+            echo $search_keyword     = $postData['search_keyword'];
             $data['contents']   = [];
 
             if($search_type == 'Title'){
