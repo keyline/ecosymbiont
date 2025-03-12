@@ -401,7 +401,8 @@ class FrontController extends Controller
             $postData           = $request->all();
             $search_type        = $postData['search_type'];
             $search_keyword     = $postData['search_keyword'];
-
+            $data               = [];
+            
             if($search_type == 'Title'){
                 $data['contents']   = NewsContent::select(
                                                         'news_contents.id', 
