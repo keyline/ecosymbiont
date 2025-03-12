@@ -119,3 +119,29 @@ use App\Helpers\Helper;
         </div>
     </div>
 </div> -->
+
+<!-- The modal -->
+<div class="modal fade" id="flipFlop" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-center" role="document">
+        <div class="modal-content advarnseach_section">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            <h4 class="modal-title" id="modalLabel">Advanced Search</h4>
+            </div>
+            <div class="modal-body">
+                <div class="advance_inner_search">
+                    <select id="" class="adv-search-field field-selector">>
+                        <option value="All Fields" selected="selected">All Fields</option>
+                        <option value="Title">Title</option>
+                        <option value="Author name">Author name</option>
+                        <option value="Subtitle">Subtitle</option>
+                    </select>
+                    <input type="search" id="id_term" placeholder="Enter a search term">
+                    <button type="button" class="btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

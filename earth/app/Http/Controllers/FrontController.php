@@ -541,7 +541,7 @@ class FrontController extends Controller
                                 'user_type'         => 'USER',
                                 'ip_address'        => $request->ip(),
                                 'activity_type'     => 1,
-                                'activity_details'  => 'Sign In Success !!!',
+                                'activity_details'  => 'Sign In Success',
                                 'platform_type'     => 'WEB',
                             ];
                             UserActivity::insert($activityData);
@@ -555,7 +555,7 @@ class FrontController extends Controller
                                 'user_type'         => 'USER',
                                 'ip_address'        => $request->ip(),
                                 'activity_type'     => 0,
-                                'activity_details'  => 'Invalid Email Or Password !!!',
+                                'activity_details'  => 'Invalid Email Or Password',
                                 'platform_type'     => 'WEB',
                             ];
                             UserActivity::insert($activityData);
@@ -926,10 +926,10 @@ class FrontController extends Controller
             $checkClassification            = UserClassification::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
             $checkProfile                   = UserProfile::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
             if($checkClassification <= 0){
-                return redirect(url('user/add-author-classification'))->with(['error_message' => 'Create Classification First !!!']);
+                return redirect(url('user/add-author-classification'))->with(['error_message' => 'Create Classification First']);
             }
             if($checkProfile <= 0){
-                return redirect(url('user/add-profile'))->with(['error_message' => 'Create Profile First !!!']);
+                return redirect(url('user/add-profile'))->with(['error_message' => 'Create Profile First']);
             }
 
             if ($request->isMethod('post')) {
@@ -942,12 +942,12 @@ class FrontController extends Controller
                     if ($uploadedFile['status']) {
                         $nelp_form_scan_copy = $uploadedFile['newFilename'];
                         Article::where('id', '=', $article_id)->update(['nelp_form_scan_copy' => $nelp_form_scan_copy, 'is_published' => 3]);
-                        return redirect()->back()->with(['success_message' => 'Scan Copy Of NELP Form Uploaded Successfully !!!']);
+                        return redirect()->back()->with(['success_message' => 'Scan Copy Of NELP Form Uploaded Successfully']);
                     } else {
                         return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
                     }
                 } else {
-                    return redirect()->back()->with(['error_message' => 'Please Upload Scan Copy Of NELP Form !!!']);
+                    return redirect()->back()->with(['error_message' => 'Please Upload Scan Copy Of NELP Form']);
                 }
             }
 
@@ -1033,7 +1033,7 @@ class FrontController extends Controller
                             if($request->input("co_ecosystem_affiliation_{$i}") !== null){
                                 $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
                             } else{
-                                return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
+                                return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors']);
                             }
                             // $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
 
@@ -1041,13 +1041,13 @@ class FrontController extends Controller
                             if($request->input("co_author_classification_{$i}") !== null){                                        
                                 $coauthorClassification[] = $request->input("co_author_classification_{$i}");
                                 } else{
-                                    return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author classification !!!']);
+                                    return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author classification']);
                             }
 
                             if($request->input("co_author_pronoun{$i}") !== null){                                        
                                 $coauthorPronoun[] = $request->input("co_author_pronoun{$i}");
                                 } else{
-                                    return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author pronoun !!!']);
+                                    return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author pronoun']);
                             }
                         }
                     }                
@@ -1189,7 +1189,7 @@ class FrontController extends Controller
                     'orginal_work'              => 'required', 
                     'copyright'                 => 'required', 
                     'submission_types'          => 'required',
-                    'additional_information'    => ['required', 'string', new MaxWords(100)], 
+                    // 'additional_information'    => ['required', 'string', new MaxWords(100)],
                     'state'                     => 'required',
                     'city'                      => 'required', 
                     'acknowledge'               => 'required',                                                      
@@ -1240,7 +1240,7 @@ class FrontController extends Controller
                                 }
                             } 
                             else {
-                                return redirect()->back()->withInput()->with(['error_message' => 'Please upload complete narrative file and images !!!']);
+                                return redirect()->back()->withInput()->with(['error_message' => 'Please upload a word narrative (Type A) along with word narrative images']);
                             }
                             /* narrative doc file */
                            
@@ -1248,7 +1248,7 @@ class FrontController extends Controller
                            // Define the number of co-authors you want to handle (e.g., 3 in this case)
                            
                            if (!isset($postData['narrative_images'])) {
-                               return redirect()->back()->withInput()->with(['error_message' => 'Please select number of narrative image !!!']);
+                               return redirect()->back()->withInput()->with(['error_message' => 'Please select number of narrative image']);
                            } else{
                                 $narrativeImagesCount = $postData['narrative_images'];
                                 // Initialize empty arrays to hold the co-author data
@@ -1279,7 +1279,7 @@ class FrontController extends Controller
                                             }
                                         }                                                                                                                        
                                     } else {
-                                        return redirect()->back()->withInput()->with(['error_message' => 'Please upload complete narrative file and images !!!']);
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please upload a word narrative (Type A) along with word narrative images']);
                                     }   
                                 }                                          
                                 /* narrative images details */  
@@ -1370,7 +1370,7 @@ class FrontController extends Controller
                        } else if($postData['submission_types'] == '2'){
                            /* art images details */
                            if (!isset($postData['art_images'])) {
-                            return redirect()->back()->withInput()->with(['error_message' => 'Please select number of art image !!!']);
+                            return redirect()->back()->withInput()->with(['error_message' => 'Please select number of art image (Type B)']);
                         } else{
                            // Define the number of co-authors you want to handle (e.g., 3 in this case)
                            $artImagesCount = $postData['art_images'];
@@ -1403,12 +1403,12 @@ class FrontController extends Controller
                                        }
                                    }                                                                                                                      
                                } else {
-                                return redirect()->back()->withInput()->with(['error_message' => 'Please upload art image File !!!']);
+                                return redirect()->back()->withInput()->with(['error_message' => 'Please upload an art image (Type B)']);
                             }   
                            }  
                         } 
                            if($postData['art_desc'] == ''){
-                               return redirect()->back()->withInput()->with(['error_message' => 'Please upload art image, caption and with descriptive narrative !!!']);
+                               return redirect()->back()->withInput()->with(['error_message' => 'If you are submitting an art image (Type B), please ensure that you have also included a descriptive narrative (100-250 words).']);
                            }
                            /* art images details */
    
@@ -1511,10 +1511,10 @@ class FrontController extends Controller
                                }
                            } 
                            else {
-                               return redirect()->back()->withInput()->with(['error_message' => 'Please Upload art_video File !!!']);
+                               return redirect()->back()->withInput()->with(['error_message' => 'Please upload an art video (Type C)']);
                            }
                            if($postData['art_video_desc'] == ''){
-                            return redirect()->back()->withInput()->with(['error_message' => 'Please upload art video and with descriptive narrative !!!']);
+                            return redirect()->back()->withInput()->with(['error_message' => 'If you are submitting an art video (Type C), please ensure that you have also included a descriptive narrative (100-250 words).']);
                         }
                            /* art_video file */   
                            if ($this->validate($request, $rules)) {  
@@ -1597,7 +1597,7 @@ class FrontController extends Controller
                                 return redirect()->back()->withInput()->with('error_message', 'All fields required');
                             }                               
                        } else{
-                           return redirect()->back()->withInput()->with(['error_message' => 'Please select submission type !!!']);
+                           return redirect()->back()->withInput()->with(['error_message' => 'Please select submission type']);
                        }                
                    } else {                    
                         /* co-author details */
@@ -1622,51 +1622,51 @@ class FrontController extends Controller
                                     if($request->input("co_author_short_bio_{$i}") !== null){
                                         $coAuthorBios[] = $request->input("co_author_short_bio_{$i}", []);
                                     } else{
-                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author short bio !!!']);
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author short bio']);
                                     }
                                     // $coAuthorBios[] = $request->input("co_author_short_bio_{$i}");
 
                                     if($request->input("co_author_country_{$i}") !== null){
                                         $coAuthorCountries[] = $request->input("co_author_country_{$i}", []);
                                     } else{
-                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author country !!!']);
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author country']);
                                     }
                                     // $coAuthorCountries[] = $request->input("co_author_country_{$i}");
 
                                     if($request->input("co_authororganization_name_{$i}") !== null){
                                         $coAuthorOrganizations[] = $request->input("co_authororganization_name_{$i}", []);
                                     } else{
-                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author organization name !!!']);
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author organization name']);
                                     }
                                     // $coAuthorOrganizations[] = $request->input("co_authororganization_name_{$i}");
 
                                     if($request->input("co_ecosystem_affiliation_{$i}") !== null){
                                         $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
                                     } else{
-                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ecosystem affiliation !!!']);
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ecosystem affiliation']);
                                     }
                                     // $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
 
                                     if($request->input("co_indigenous_affiliation_{$i}") !== null){
                                         $coindigenousAffiliations[] = $request->input("co_indigenous_affiliation_{$i}", []);
                                     } else{
-                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author indigenous affiliation !!!']);
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author indigenous affiliation']);
                                     }
                                     // $coindigenousAffiliations[] = $request->input("co_indigenous_affiliation_{$i}");
 
                                     if($request->input("co_author_classification_{$i}") !== null){
                                         $coauthorClassification[] = $request->input("co_author_classification_{$i}", []);
                                     } else{
-                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author classification !!!']);
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author classification']);
                                     }
 
                                     if($request->input("co_author_pronoun_{$i}") !== null){
                                         $coauthorPronoun[] = $request->input("co_author_pronoun_{$i}", []);
                                     } else{
-                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author pronoun !!!']);
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author pronoun']);
                                     }
                                 }else{
-                                    return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors !!!']);
+                                    return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ancestors']);
                                 }
                             }                                            
                             /* co-author details */
@@ -1683,7 +1683,7 @@ class FrontController extends Controller
                             
                                 /* narrative images details */
                                 if (!isset($postData['narrative_images'])) {
-                                    return redirect()->back()->withInput()->with(['error_message' => 'Please select number of narrative image !!!']);
+                                    return redirect()->back()->withInput()->with(['error_message' => 'Please select number of narrative image']);
                                 } else{
                                     // Define the number of co-authors you want to handle (e.g., 3 in this case)
                                     $narrativeImagesCount = $postData['narrative_images'];
@@ -1715,7 +1715,7 @@ class FrontController extends Controller
                                                 }
                                             }                                                                                         
                                         } else {
-                                            return redirect()->back()->withInput()->with(['error_message' => 'Please upload complete narrative file and images !!!']);
+                                            return redirect()->back()->withInput()->with(['error_message' => 'Please upload a word narrative (Type A) along with word narrative images']);
                                         }  
                                     }                                               
                                     /* narrative images details */
@@ -1737,7 +1737,7 @@ class FrontController extends Controller
                                         }
                                     } 
                                     else {
-                                        return redirect()->back()->withInput()->with(['error_message' => 'Please upload complete narrative file and images !!!']);
+                                        return redirect()->back()->withInput()->with(['error_message' => 'Please upload a word narrative (Type A) along with word narrative images']);
                                     }   
                                 /* narrative doc file */
                                 
@@ -1835,7 +1835,7 @@ class FrontController extends Controller
     
                                 /* art images details */
                                 if (!isset($postData['art_images'])) {
-                                    return redirect()->back()->withInput()->with(['error_message' => 'Please select number of art image !!!']);
+                                    return redirect()->back()->withInput()->with(['error_message' => 'Please select number of art image (Type B)']);
                                 }
                                 else{
                                     // Define the number of co-authors you want to handle (e.g., 3 in this case)
@@ -1868,12 +1868,12 @@ class FrontController extends Controller
                                                 }
                                             }                                                                                        
                                         } else {
-                                            return redirect()->back()->withInput()->with(['error_message' => 'Please upload art image File !!!']);
+                                            return redirect()->back()->withInput()->with(['error_message' => 'Please upload an art image (Type B)']);
                                         }   
                                     }   
                                 }
                                    if($postData['art_desc'] == ''){
-                                       return redirect()->back()->withInput()->with(['error_message' => 'Please upload art image, caption and with descriptive narrative !!!']);
+                                       return redirect()->back()->withInput()->with(['error_message' => 'If you are submitting an art image (Type B), please ensure that you have also included a descriptive narrative (100-250 words).']);
                                    }
                                     // }                                               
                                     /* art images details */
@@ -1983,10 +1983,10 @@ class FrontController extends Controller
                                         return redirect()->back()->withInput()->with(['error_message' => $uploadedFile['message']]);
                                     }
                                 } else {
-                                    return redirect()->back()->withInput()->with(['error_message' => 'Please Upload art_video File !!!']);
+                                    return redirect()->back()->withInput()->with(['error_message' => 'Please upload an art video (Type C)']);
                                 }
                                 if($postData['art_video_desc'] == ''){
-                                 return redirect()->back()->withInput()->with(['error_message' => 'Please upload art video and with descriptive narrative !!!']);
+                                 return redirect()->back()->withInput()->with(['error_message' => 'If you are submitting an art video (Type C), please ensure that you have also included a descriptive narrative (100-250 words).']);
                              }                            
                                 /* art_video file */   
     
@@ -2104,7 +2104,7 @@ class FrontController extends Controller
             $data['search_keyword']         = '';
             $checkClassification            = UserClassification::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
             if($checkClassification == 0){
-                return redirect(url('user/add-author-classification'))->with(['error_message' => 'Please Add Classification First !!!']);
+                return redirect(url('user/add-author-classification'))->with(['error_message' => 'Please Add Classification First']);
             }
             
             $title                          = 'Classification';
@@ -2119,7 +2119,7 @@ class FrontController extends Controller
             $data['search_keyword']         = '';
             $authorclassification           = UserClassification::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
             if($authorclassification > 0){
-                return redirect(url('user/author-classification'))->with(['error_message' => 'Classification Already Created !!!']);
+                return redirect(url('user/author-classification'))->with(['error_message' => 'Classification Already Created']);
             }
 
             if ($request->isMethod('post')) {
@@ -2182,11 +2182,11 @@ class FrontController extends Controller
             // dd(DB::getQueryLog());   
             $checkClassification            = UserClassification::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
             if($checkClassification == 0){
-                return redirect(url('user/add-author-classification'))->with(['error_message' => 'Please Add Classification First !!!']);
+                return redirect(url('user/add-author-classification'))->with(['error_message' => 'Please Add Classification First']);
             }
             $checkProfile                   = UserProfile::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();         
             if($checkProfile == 0){
-                return redirect(url('user/add-profile'))->with(['error_message' => 'Please Add Profile First !!!']);
+                return redirect(url('user/add-profile'))->with(['error_message' => 'Please Add Profile First']);
             }
             $data['search_keyword']         = '';
             
@@ -2213,7 +2213,7 @@ class FrontController extends Controller
             $data['search_keyword']         = '';
             $checkProfile                   = UserProfile::where('user_id', '=', $user_id)->where('status', '!=', 3)->count();
             if($checkProfile > 0){
-                return redirect(url('user/profiles'))->with(['error_message' => 'Profile Already Created !!!']);
+                return redirect(url('user/profiles'))->with(['error_message' => 'Profile Already Created']);
             }
 
             if ($request->isMethod('post')) {
