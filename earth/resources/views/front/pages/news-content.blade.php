@@ -426,7 +426,9 @@ $current_url = $protocol . $host . $uri;
                                 <div class="carousel-box owl-wrapper">
                                     <div class="title-section">
                                         <?php if($is_series == 'Yes'){?>
-                                            <h1><span>Other parts of this series</span></h1>
+                                            <?php if(count($other_articles_in_this_series) > 1){?>
+                                                <h1><span>Other parts of this series</span></h1>
+                                            <?php }?>
                                         <?php } else {?>
                                             <h1><span>You may also like</span></h1>
                                         <?php } ?>
