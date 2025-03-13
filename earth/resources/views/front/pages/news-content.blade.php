@@ -467,17 +467,9 @@ $current_url = $protocol . $host . $uri;
                                                 </div>
                                             <?php } }?>
                                         <?php } else {?>
-                                            <!--<?php if($current_article_no > 1){?>
-                                                <?php
-                                                $rowIndex = ($current_article_no - 2);
-                                                ?>
-                                                <a href="<?=url('content/' . $other_articles_in_this_series[$rowIndex]['parent_category_slug']. '/' . $other_articles_in_this_series[$rowIndex]['category_slug'] . '/' . $other_articles_in_this_series[$rowIndex]['slug'])?>" class="btn btn-info">Previous Article</a>
-                                            <?php }?>
-                                            <?php if($current_article_no != $series_article_no){?>
-                                                <?php if(($current_article_no != 1) && ($otherArticleCount > $current_article_no)){?>
-                                                    <a href="<?=url('content/' . $other_articles_in_this_series[$current_article_no]['parent_category_slug']. '/' . $other_articles_in_this_series[$current_article_no]['category_slug'] . '/' . $other_articles_in_this_series[$current_article_no]['slug'])?>" class="btn btn-info">Next Article</a>
-                                                <?php }?>
-                                            <?php }?> -->
+                                            <?php
+                                            Helper::pr($other_articles_in_this_series);
+                                            ?>
                                             <?php if($other_articles_in_this_series){ foreach($other_articles_in_this_series as $other_articles_in_this_series_row){?>
                                                 <?php if($current_article_no != $other_articles_in_this_series_row->current_article_no){?>
                                                     <div class="item news-post video-post video_post_text">
@@ -499,7 +491,7 @@ $current_url = $protocol . $host . $uri;
                                                                 ?php } else {?>
                                                                     <a href="?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
                                                                 ?php }?> -->
-                                                                <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                                <a href="https://www.youtube.com/watch?v=<?=$other_articles_in_this_series_row->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                                             </div>
                                                         <?php } ?>
                                                         <div class="hover-box">
