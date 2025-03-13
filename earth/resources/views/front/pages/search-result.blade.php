@@ -352,7 +352,7 @@ $current_url = $protocol . $host . $uri;
                                         <div class="post-content">
                                             <a href="<?=url('category/')?>${content.parent_category_name}/${content.sub_category_slug}">${content.sub_category_name}</a>
                                             <h2>
-                                                <a href="<?=url('content/')?>${content.parent_category_slug}/${content.sub_category_slug}/${content.slug}">
+                                                <a href="<?=url('content/')?>/${content.parent_category_slug}/${content.sub_category_slug}/${content.slug}">
                                                     ${content.new_title}
                                                 </a>
                                             </h2>
