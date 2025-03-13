@@ -468,7 +468,7 @@ $current_url = $protocol . $host . $uri;
                                             <?php } }?>
                                         <?php } else {?>
                                             <?php
-                                            Helper::pr($other_articles_in_this_series);
+                                            // Helper::pr($other_articles_in_this_series);
                                             ?>
                                             <?php if($other_articles_in_this_series){ foreach($other_articles_in_this_series as $other_articles_in_this_series_row){?>
                                                 <?php if($current_article_no != $other_articles_in_this_series_row->current_article_no){?>
@@ -496,7 +496,7 @@ $current_url = $protocol . $host . $uri;
                                                         <?php } ?>
                                                         <div class="hover-box">
                                                             <a href="<?=url('category/' . $other_articles_in_this_series_row->parent_category_slug. '/' . $other_articles_in_this_series_row->sub_category_slug)?>"><?=$other_articles_in_this_series_row->sub_category_name?></a>
-                                                            <h2 style="font-size: 10px;"><a href="<?=url('content/' . $other_articles_in_this_series_row->parent_category_slug. '/' . $other_articles_in_this_series_row->sub_category_slug . '/' . $other_articles_in_this_series_row->slug)?>"><?=$other_articles_in_this_series_row->new_title?></a></h2>
+                                                            <h2 style="font-size: 10px;"><a href="<?=url('content/' . $other_articles_in_this_series_row->parent_category_slug. '/' . $other_articles_in_this_series_row->category_slug . '/' . $other_articles_in_this_series_row->slug)?>"><?=$other_articles_in_this_series_row->new_title?></a></h2>
                                                             <ul class="post-tags">
                                                                 <li><i class="fa fa-clock-o"></i><?=date_format(date_create($other_articles_in_this_series_row->created_at), "d M Y")?></li>
                                                                 <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$other_articles_in_this_series_row->author_name?></a></li>
