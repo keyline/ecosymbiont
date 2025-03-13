@@ -16,202 +16,227 @@ $current_url = $protocol . $host . $uri;
                 <div class="row">
                     <div class="col-md-3 pl-1 pr-1">
                         <div class="home_blog_left">
+                            <!-- ACTION -->
                             <?php
-                                $parentCategoryContent1 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
-                                                                        ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
-                                                                        ->select(
-                                                                            'news_contents.id', 
-                                                                            'news_contents.new_title', 
-                                                                            'news_contents.sub_title', 
-                                                                            'news_contents.slug', 
-                                                                            'news_contents.author_name', 
-                                                                            'news_contents.for_publication_name', 
-                                                                            'news_contents.cover_image', 
-                                                                            'news_contents.created_at',
-                                                                            'news_contents.media',
-                                                                            'news_contents.videoId',
-                                                                            'news_contents.is_series',
-                                                                            'news_contents.series_article_no',
-                                                                            'news_contents.current_article_no',
-                                                                            'news_contents.other_article_part_doi_no',
-                                                                            'parent_category.sub_category as parent_category_name', // Corrected alias to sub_category
-                                                                            'sub_category.sub_category as category_name', // Corrected alias to sub_category
-                                                                            'sub_category.slug as category_slug', // Corrected alias to sub_category
-                                                                            'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
-                                                                        )
-                                                                        ->where('news_contents.status', 1) // Fetch only active content
-                                                                        // ->where('news_contents.is_popular', 1) // Uncomment if you want to filter by popular content
-                                                                        ->where('news_contents.parent_category', 1) // Parent category filter
-                                                                        ->orderBy('news_contents.id', 'DESC') // Order by most recent
-                                                                        ->first(); // Fetch single record
-                                                                        //  Helper::pr($parentCategoryContent1);
-                                if($parentCategoryContent1){
+                            $parentCategoryContent1 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                                    ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
+                                                    ->select(
+                                                        'news_contents.id', 
+                                                        'news_contents.new_title', 
+                                                        'news_contents.sub_title', 
+                                                        'news_contents.slug', 
+                                                        'news_contents.author_name', 
+                                                        'news_contents.for_publication_name', 
+                                                        'news_contents.cover_image', 
+                                                        'news_contents.created_at',
+                                                        'news_contents.media',
+                                                        'news_contents.videoId',
+                                                        'news_contents.is_series',
+                                                        'news_contents.series_article_no',
+                                                        'news_contents.current_article_no',
+                                                        'news_contents.other_article_part_doi_no',
+                                                        'parent_category.sub_category as parent_category_name',
+                                                        'sub_category.sub_category as category_name',
+                                                        'sub_category.slug as category_slug',
+                                                        'parent_category.slug as parent_category_slug'
+                                                    )
+                                                    ->where('news_contents.status', 1)
+                                                    ->where('news_contents.parent_category', 1)
+                                                    ->orderBy('news_contents.id', 'DESC')
+                                                    ->first();
+                            if($parentCategoryContent1){
+                            ?>
+                                <?php
+                                $is_series                  = $parentCategoryContent1->is_series;
+                                $series_article_no          = $parentCategoryContent1->series_article_no;
+                                $current_article_no         = $parentCategoryContent1->current_article_no;
+                                $other_article_part_doi_no  = explode(",", $parentCategoryContent1->other_article_part_doi_no);
+                                if($is_series == 'Yes'){
+                                    if($current_article_no == 1){
+                                        $isShow = true;
+                                    } else {
+                                        $parentCategoryContent1 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                                        ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
+                                                        ->select(
+                                                            'news_contents.id', 
+                                                            'news_contents.new_title', 
+                                                            'news_contents.sub_title', 
+                                                            'news_contents.slug', 
+                                                            'news_contents.author_name', 
+                                                            'news_contents.for_publication_name', 
+                                                            'news_contents.cover_image', 
+                                                            'news_contents.created_at',
+                                                            'news_contents.media',
+                                                            'news_contents.videoId',
+                                                            'news_contents.is_series',
+                                                            'news_contents.series_article_no',
+                                                            'news_contents.current_article_no',
+                                                            'news_contents.other_article_part_doi_no',
+                                                            'parent_category.sub_category as parent_category_name',
+                                                            'sub_category.sub_category as category_name',
+                                                            'sub_category.slug as category_slug',
+                                                            'parent_category.slug as parent_category_slug'
+                                                        )
+                                                        ->where('news_contents.status', 1)
+                                                        ->where('news_contents.parent_category', 1)
+                                                        ->where('news_contents.is_series', 'Yes')
+                                                        ->where('news_contents.current_article_no', 1)
+                                                        ->orderBy('news_contents.id', 'DESC')
+                                                        ->first();
+                                        
+                                        $isShow = true;
+                                    }
+                                } else {
+                                    $isShow = true;
+                                }
+                                if($isShow){
                                 ?>
-                                    <?php
-                                    $is_series                  = $parentCategoryContent1->is_series;
-                                    $series_article_no          = $parentCategoryContent1->series_article_no;
-                                    $current_article_no         = $parentCategoryContent1->current_article_no;
-                                    $other_article_part_doi_no  = explode(",", $parentCategoryContent1->other_article_part_doi_no);
-                                    if($is_series == 'Yes'){
-                                        if($current_article_no == 1){
-                                            $isShow = true;
-                                        } else {
-                                            $isShow = false;
-                                        }
-                                    } else {
-                                        $isShow = true;
-                                    }
-                                    if($isShow){
-                                    ?>
-                                        <div class="news-post homesmall_box image-post default-size">
-                                            <!-- <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent1->cover_image?>" alt="<?=$parentCategoryContent1->new_title?>"> -->
-                                            <?php if($parentCategoryContent1->media == 'image'){?>
-                                                <!-- <div class="post-gallery"> -->
-                                                    <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent1->cover_image?>" alt="<?=$parentCategoryContent1->new_title?>">
-                                                <!-- </div> -->
-                                            <?php } else {?>
-                                                <div class="video-post">
-                                                    <img alt="" src="https://img.youtube.com/vi/<?=$parentCategoryContent1->videoId?>/hqdefault.jpg">
-                                                    <!-- <?php if(session('is_user_login')){?>
-                                                        <a href="https://www.youtube.com/watch?v=<?=$parentCategoryContent1->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                                    <?php } else {?>
-                                                        <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
-                                                    <?php }?> -->
+                                    <div class="news-post homesmall_box image-post default-size">
+                                        <!-- <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent1->cover_image?>" alt="<?=$parentCategoryContent1->new_title?>"> -->
+                                        <?php if($parentCategoryContent1->media == 'image'){?>
+                                            <!-- <div class="post-gallery"> -->
+                                                <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent1->cover_image?>" alt="<?=$parentCategoryContent1->new_title?>">
+                                            <!-- </div> -->
+                                        <?php } else {?>
+                                            <div class="video-post">
+                                                <img alt="" src="https://img.youtube.com/vi/<?=$parentCategoryContent1->videoId?>/hqdefault.jpg">
+                                                <!-- <?php if(session('is_user_login')){?>
                                                     <a href="https://www.youtube.com/watch?v=<?=$parentCategoryContent1->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                                </div>
-                                            <?php } ?>
-                                            <div class="hover-box">
-                                                <div class="inner-hover">
-                                                    <a class="category-post" href="<?=url('category/' . $parentCategoryContent1->parent_category_slug)?>"><?=$parentCategoryContent1->parent_category_name?></a>
-                                                    <h2><a href="<?=url('content/' . $parentCategoryContent1->parent_category_slug. '/' . $parentCategoryContent1->category_slug . '/' . $parentCategoryContent1->slug)?>"><?=$parentCategoryContent1->new_title?></a></h2>
-                                                    <ul class="post-tags">
-                                                        <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent1->created_at), "d M Y")?></span></li> -->
-                                                        <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent1->for_publication_name ?? $parentCategoryContent1->author_name?></a></li>
-                                                    </ul>
-                                                    <p><?=$parentCategoryContent1->sub_title?></p>
-                                                </div>
+                                                <?php } else {?>
+                                                    <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
+                                                <?php }?> -->
+                                                <a href="https://www.youtube.com/watch?v=<?=$parentCategoryContent1->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                            </div>
+                                        <?php } ?>
+                                        <div class="hover-box">
+                                            <div class="inner-hover">
+                                                <a class="category-post" href="<?=url('category/' . $parentCategoryContent1->parent_category_slug)?>"><?=$parentCategoryContent1->parent_category_name?></a>
+                                                <h2><a href="<?=url('content/' . $parentCategoryContent1->parent_category_slug. '/' . $parentCategoryContent1->category_slug . '/' . $parentCategoryContent1->slug)?>"><?=$parentCategoryContent1->new_title?></a></h2>
+                                                <ul class="post-tags">
+                                                    <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent1->created_at), "d M Y")?></span></li> -->
+                                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent1->for_publication_name ?? $parentCategoryContent1->author_name?></a></li>
+                                                </ul>
+                                                <p><?=$parentCategoryContent1->sub_title?></p>
                                             </div>
                                         </div>
-                                    <?php }?>
+                                    </div>
                                 <?php }?>
-
-
-                            <!--- box 2-->
-                            <?php 
-                            $parentCategoryContent8 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
-                                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
-                                                            ->select(
-                                                                'news_contents.id', 
-                                                                'news_contents.new_title', 
-                                                                'news_contents.sub_title', 
-                                                                'news_contents.slug', 
-                                                                'news_contents.author_name', 
-                                                                'news_contents.for_publication_name', 
-                                                                'news_contents.cover_image', 
-                                                                'news_contents.created_at',
-                                                                'news_contents.media',
-                                                                'news_contents.videoId',
-                                                                'news_contents.is_series',
-                                                                'news_contents.series_article_no',
-                                                                'news_contents.current_article_no',
-                                                                'news_contents.other_article_part_doi_no',
-                                                                'parent_category.sub_category as parent_category_name', // Corrected alias to sub_category
-                                                                'sub_category.sub_category as category_name', // Corrected alias to sub_category
-                                                                'sub_category.slug as category_slug', // Corrected alias to sub_category
-                                                                'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
-                                                            )
-                                                            ->where('news_contents.status', 1) // Fetch only active content
-                                                            // ->where('news_contents.is_popular', 1) // Uncomment if you want to filter by popular content
-                                                            ->where('news_contents.parent_category', 8) // Parent category filter
-                                                            ->orderBy('news_contents.id', 'DESC') // Order by most recent
-                                                            ->first(); // Fetch single record
+                            <?php }?>
+                            <!-- ACTION -->
+                            <!-- REGENERATIVE -->
+                            <?php
+                            $parentCategoryContent8 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                                    ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
+                                                    ->select(
+                                                        'news_contents.id', 
+                                                        'news_contents.new_title', 
+                                                        'news_contents.sub_title', 
+                                                        'news_contents.slug', 
+                                                        'news_contents.author_name', 
+                                                        'news_contents.for_publication_name', 
+                                                        'news_contents.cover_image', 
+                                                        'news_contents.created_at',
+                                                        'news_contents.media',
+                                                        'news_contents.videoId',
+                                                        'news_contents.is_series',
+                                                        'news_contents.series_article_no',
+                                                        'news_contents.current_article_no',
+                                                        'news_contents.other_article_part_doi_no',
+                                                        'parent_category.sub_category as parent_category_name',
+                                                        'sub_category.sub_category as category_name',
+                                                        'sub_category.slug as category_slug',
+                                                        'parent_category.slug as parent_category_slug'
+                                                    )
+                                                    ->where('news_contents.status', 1)
+                                                    ->where('news_contents.parent_category', 8)
+                                                    ->orderBy('news_contents.id', 'DESC')
+                                                    ->first();
                                 
-                                if($parentCategoryContent8){?>
-                                    <?php
-                                    $is_series                  = $parentCategoryContent8->is_series;
-                                    $series_article_no          = $parentCategoryContent8->series_article_no;
-                                    $current_article_no         = $parentCategoryContent8->current_article_no;
-                                    $other_article_part_doi_no  = explode(",", $parentCategoryContent8->other_article_part_doi_no);
-                                    if($is_series == 'Yes'){
-                                        if($current_article_no == 1){
-                                            $isShow = true;
-                                        } else {
-                                            $parentCategoryContent8 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
-                                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
-                                                            ->select(
-                                                                'news_contents.id', 
-                                                                'news_contents.new_title', 
-                                                                'news_contents.sub_title', 
-                                                                'news_contents.slug', 
-                                                                'news_contents.author_name', 
-                                                                'news_contents.for_publication_name', 
-                                                                'news_contents.cover_image', 
-                                                                'news_contents.created_at',
-                                                                'news_contents.media',
-                                                                'news_contents.videoId',
-                                                                'news_contents.is_series',
-                                                                'news_contents.series_article_no',
-                                                                'news_contents.current_article_no',
-                                                                'news_contents.other_article_part_doi_no',
-                                                                'parent_category.sub_category as parent_category_name',
-                                                                'sub_category.sub_category as category_name',
-                                                                'sub_category.slug as category_slug',
-                                                                'parent_category.slug as parent_category_slug'
-                                                            )
-                                                            ->where('news_contents.status', 1)
-                                                            ->where('news_contents.parent_category', 8)
-                                                            ->where('news_contents.is_series', 'Yes')
-                                                            ->where('news_contents.current_article_no', 1)
-                                                            ->orderBy('news_contents.id', 'DESC')
-                                                            ->first();
-                                            
-                                            $isShow = true;
-                                        }
+                            if($parentCategoryContent8){?>
+                                <?php
+                                $is_series                  = $parentCategoryContent8->is_series;
+                                $series_article_no          = $parentCategoryContent8->series_article_no;
+                                $current_article_no         = $parentCategoryContent8->current_article_no;
+                                $other_article_part_doi_no  = explode(",", $parentCategoryContent8->other_article_part_doi_no);
+                                if($is_series == 'Yes'){
+                                    if($current_article_no == 1){
+                                        $isShow = true;
                                     } else {
+                                        $parentCategoryContent8 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                                        ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
+                                                        ->select(
+                                                            'news_contents.id', 
+                                                            'news_contents.new_title', 
+                                                            'news_contents.sub_title', 
+                                                            'news_contents.slug', 
+                                                            'news_contents.author_name', 
+                                                            'news_contents.for_publication_name', 
+                                                            'news_contents.cover_image', 
+                                                            'news_contents.created_at',
+                                                            'news_contents.media',
+                                                            'news_contents.videoId',
+                                                            'news_contents.is_series',
+                                                            'news_contents.series_article_no',
+                                                            'news_contents.current_article_no',
+                                                            'news_contents.other_article_part_doi_no',
+                                                            'parent_category.sub_category as parent_category_name',
+                                                            'sub_category.sub_category as category_name',
+                                                            'sub_category.slug as category_slug',
+                                                            'parent_category.slug as parent_category_slug'
+                                                        )
+                                                        ->where('news_contents.status', 1)
+                                                        ->where('news_contents.parent_category', 8)
+                                                        ->where('news_contents.is_series', 'Yes')
+                                                        ->where('news_contents.current_article_no', 1)
+                                                        ->orderBy('news_contents.id', 'DESC')
+                                                        ->first();
+
                                         $isShow = true;
                                     }
-                                    if($isShow){
-                                    ?>
-                                        <div class="news-post homesmall_box image-post">
-                                            <!-- <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent8->cover_image?>" alt="<?=$parentCategoryContent8->new_title?>"> -->
-                                            <?php if($parentCategoryContent8->media == 'image'){?>
-                                                <!-- <div class="post-gallery"> -->
-                                                    <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent8->cover_image?>" alt="<?=$parentCategoryContent8->new_title?>">
-                                                <!-- </div> -->
-                                            <?php } else {?>
-                                                <div class="video-post">
-                                                    <img alt="" src="https://img.youtube.com/vi/<?=$parentCategoryContent8->videoId?>/hqdefault.jpg">
-                                                    <!-- <?php if(session('is_user_login')){?>
-                                                        <a href="https://www.youtube.com/watch?v=<?=$parentCategoryContent8->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                                    <?php } else {?>
-                                                        <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
-                                                    <?php }?> -->
+                                } else {
+                                    $isShow = true;
+                                }
+                                if($isShow){
+                                ?>
+                                    <div class="news-post homesmall_box image-post">
+                                        <!-- <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent8->cover_image?>" alt="<?=$parentCategoryContent8->new_title?>"> -->
+                                        <?php if($parentCategoryContent8->media == 'image'){?>
+                                            <!-- <div class="post-gallery"> -->
+                                                <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent8->cover_image?>" alt="<?=$parentCategoryContent8->new_title?>">
+                                            <!-- </div> -->
+                                        <?php } else {?>
+                                            <div class="video-post">
+                                                <img alt="" src="https://img.youtube.com/vi/<?=$parentCategoryContent8->videoId?>/hqdefault.jpg">
+                                                <!-- <?php if(session('is_user_login')){?>
                                                     <a href="https://www.youtube.com/watch?v=<?=$parentCategoryContent8->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                                </div>
-                                            <?php } ?>
-                                            <div class="hover-box">
-                                                <div class="inner-hover">
-                                                    <a class="category-post" href="<?=url('category/' . $parentCategoryContent8->parent_category_slug)?>"><?=$parentCategoryContent8->parent_category_name?></a>
-                                                    <h2><a href="<?=url('content/' . $parentCategoryContent8->parent_category_slug. '/' . $parentCategoryContent8->category_slug . '/' . $parentCategoryContent8->slug)?>"><?=$parentCategoryContent8->new_title?></a></h2>
-                                                    <ul class="post-tags">
-                                                        <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent8->created_at), "d M Y")?></span></li> -->
-                                                        <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent8->for_publication_name ?? $parentCategoryContent8->author_name?></a></li>
-                                                    </ul>
-                                                    <p><?=$parentCategoryContent8->sub_title?></p>
-                                                </div>
+                                                <?php } else {?>
+                                                    <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
+                                                <?php }?> -->
+                                                <a href="https://www.youtube.com/watch?v=<?=$parentCategoryContent8->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                            </div>
+                                        <?php } ?>
+                                        <div class="hover-box">
+                                            <div class="inner-hover">
+                                                <a class="category-post" href="<?=url('category/' . $parentCategoryContent8->parent_category_slug)?>"><?=$parentCategoryContent8->parent_category_name?></a>
+                                                <h2><a href="<?=url('content/' . $parentCategoryContent8->parent_category_slug. '/' . $parentCategoryContent8->category_slug . '/' . $parentCategoryContent8->slug)?>"><?=$parentCategoryContent8->new_title?></a></h2>
+                                                <ul class="post-tags">
+                                                    <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent8->created_at), "d M Y")?></span></li> -->
+                                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent8->for_publication_name ?? $parentCategoryContent8->author_name?></a></li>
+                                                </ul>
+                                                <p><?=$parentCategoryContent8->sub_title?></p>
                                             </div>
                                         </div>
-                                    <?php }?>
+                                    </div>
                                 <?php }?>
-                            <!--- box 2-->
+                            <?php }?>
+                            <!-- REGENERATIVE -->
                         </div>
                     </div>
                     <div class="col-md-6 pl-1 pr-1">
                         <div class="image-slider snd-size">
                             <span class="top-stories">TOP STORIES</span>
                             <ul class="bxslider">
-                                <?php         
-                                // DB::enableQueryLog(); // Enable query log               
+                                <?php
                                 $parentCategoryContents3 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
                                                                         ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
                                                                         ->select('news_contents.id', 
@@ -293,10 +318,48 @@ $current_url = $protocol . $host . $uri;
                         </div>
                     </div>
                     <div class="col-md-3 pl-1 pr-1">
-                        <!--- box 4-->
+                        <!-- WELLBEING -->
+                        <?php
+                        $parentCategoryContent2 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                                    ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
+                                                    ->select(
+                                                        'news_contents.id', 
+                                                        'news_contents.new_title', 
+                                                        'news_contents.sub_title', 
+                                                        'news_contents.slug', 
+                                                        'news_contents.author_name', 
+                                                        'news_contents.for_publication_name', 
+                                                        'news_contents.cover_image', 
+                                                        'news_contents.created_at',
+                                                        'news_contents.media',
+                                                        'news_contents.videoId',
+                                                        'news_contents.is_series',
+                                                        'news_contents.series_article_no',
+                                                        'news_contents.current_article_no',
+                                                        'news_contents.other_article_part_doi_no',
+                                                        'parent_category.sub_category as parent_category_name',
+                                                        'sub_category.sub_category as category_name',
+                                                        'sub_category.slug as category_slug',
+                                                        'parent_category.slug as parent_category_slug'
+                                                    )
+                                                    ->where('news_contents.status', 1)
+                                                    ->where('news_contents.parent_category', 2)
+                                                    ->orderBy('news_contents.id', 'DESC')
+                                                    ->first();
+                    
+                        if($parentCategoryContent2){
+                        ?>
                             <?php
-                            $parentCategoryContent2 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
-                                                        ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
+                            $is_series                  = $parentCategoryContent2->is_series;
+                            $series_article_no          = $parentCategoryContent2->series_article_no;
+                            $current_article_no         = $parentCategoryContent2->current_article_no;
+                            $other_article_part_doi_no  = explode(",", $parentCategoryContent2->other_article_part_doi_no);
+                            if($is_series == 'Yes'){
+                                if($current_article_no == 1){
+                                    $isShow = true;
+                                } else {
+                                    $parentCategoryContent2 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                                        ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
                                                         ->select(
                                                             'news_contents.id', 
                                                             'news_contents.new_title', 
@@ -312,98 +375,85 @@ $current_url = $protocol . $host . $uri;
                                                             'news_contents.series_article_no',
                                                             'news_contents.current_article_no',
                                                             'news_contents.other_article_part_doi_no',
-                                                            'parent_category.sub_category as parent_category_name', // Corrected alias to sub_category
-                                                            'sub_category.sub_category as category_name', // Corrected alias to sub_category
-                                                            'sub_category.slug as category_slug', // Corrected alias to sub_category
-                                                            'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                                            'parent_category.sub_category as parent_category_name',
+                                                            'sub_category.sub_category as category_name',
+                                                            'sub_category.slug as category_slug',
+                                                            'parent_category.slug as parent_category_slug'
                                                         )
-                                                        ->where('news_contents.status', 1) // Fetch only active content
-                                                        // ->where('news_contents.is_popular', 1) // Uncomment if you want to filter by popular content
-                                                        ->where('news_contents.parent_category', 2) // Parent category filter
-                                                        ->orderBy('news_contents.id', 'DESC') // Order by most recent
-                                                        ->first(); // Fetch single record
-                        
-                            if($parentCategoryContent2){
-                            ?>
-                                <?php
-                                $is_series                  = $parentCategoryContent2->is_series;
-                                $series_article_no          = $parentCategoryContent2->series_article_no;
-                                $current_article_no         = $parentCategoryContent2->current_article_no;
-                                $other_article_part_doi_no  = explode(",", $parentCategoryContent2->other_article_part_doi_no);
-                                if($is_series == 'Yes'){
-                                    if($current_article_no == 1){
-                                        $isShow = true;
-                                    } else {
-                                        $isShow = false;
-                                    }
-                                } else {
+                                                        ->where('news_contents.status', 1)
+                                                        ->where('news_contents.parent_category', 2)
+                                                        ->where('news_contents.is_series', 'Yes')
+                                                        ->where('news_contents.current_article_no', 1)
+                                                        ->orderBy('news_contents.id', 'DESC')
+                                                        ->first();
+                                        
                                     $isShow = true;
                                 }
-                                if($isShow){
-                                ?>
-                                    <div class="news-post homesmall_box image-post">
-                                        <!-- <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent2->cover_image?>" alt="<?=$parentCategoryContent2->new_title?>"> -->
-                                        <?php if($parentCategoryContent2->media == 'image'){?>
-                                            <!-- <div class="post-gallery"> -->
-                                                <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent2->cover_image?>" alt="<?=$parentCategoryContent2->new_title?>">
-                                            <!-- </div> -->
-                                        <?php } else {?>
-                                            <div class="video-post">
-                                                <img alt="" src="https://img.youtube.com/vi/<?=$parentCategoryContent2->videoId?>/hqdefault.jpg">
-                                                <!-- <?php if(session('is_user_login')){?>
-                                                    <a href="https://www.youtube.com/watch?v=<?=$parentCategoryContent2->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                                <?php } else {?>
-                                                    <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
-                                                <?php }?> -->
+                            } else {
+                                $isShow = true;
+                            }
+                            if($isShow){
+                            ?>
+                                <div class="news-post homesmall_box image-post">
+                                    <!-- <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent2->cover_image?>" alt="<?=$parentCategoryContent2->new_title?>"> -->
+                                    <?php if($parentCategoryContent2->media == 'image'){?>
+                                        <!-- <div class="post-gallery"> -->
+                                            <img src="<?=env('UPLOADS_URL').'newcontent/'.$parentCategoryContent2->cover_image?>" alt="<?=$parentCategoryContent2->new_title?>">
+                                        <!-- </div> -->
+                                    <?php } else {?>
+                                        <div class="video-post">
+                                            <img alt="" src="https://img.youtube.com/vi/<?=$parentCategoryContent2->videoId?>/hqdefault.jpg">
+                                            <!-- <?php if(session('is_user_login')){?>
                                                 <a href="https://www.youtube.com/watch?v=<?=$parentCategoryContent2->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                            </div>
-                                        <?php } ?>
-                                        <div class="hover-box">
-                                            <div class="inner-hover">
-                                                <a class="category-post" href="<?=url('category/' . $parentCategoryContent2->parent_category_slug)?>"><?=$parentCategoryContent2->parent_category_name?></a>
-                                                <h2><a href="<?=url('content/'. $parentCategoryContent2->parent_category_slug. '/' . $parentCategoryContent2->category_slug . '/' . $parentCategoryContent2->slug)?>"><?=$parentCategoryContent2->new_title?></a></h2>
-                                                <ul class="post-tags">
-                                                    <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent2->created_at), "d M Y")?></span></li> -->
-                                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent2->for_publication_name ?? $parentCategoryContent2->author_name?></a></li>
-                                                </ul>
-                                                <p><?=$parentCategoryContent2->sub_title?></p>
-                                            </div>
+                                            <?php } else {?>
+                                                <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
+                                            <?php }?> -->
+                                            <a href="https://www.youtube.com/watch?v=<?=$parentCategoryContent2->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                        </div>
+                                    <?php } ?>
+                                    <div class="hover-box">
+                                        <div class="inner-hover">
+                                            <a class="category-post" href="<?=url('category/' . $parentCategoryContent2->parent_category_slug)?>"><?=$parentCategoryContent2->parent_category_name?></a>
+                                            <h2><a href="<?=url('content/'. $parentCategoryContent2->parent_category_slug. '/' . $parentCategoryContent2->category_slug . '/' . $parentCategoryContent2->slug)?>"><?=$parentCategoryContent2->new_title?></a></h2>
+                                            <ul class="post-tags">
+                                                <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent2->created_at), "d M Y")?></span></li> -->
+                                                <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent2->for_publication_name ?? $parentCategoryContent2->author_name?></a></li>
+                                            </ul>
+                                            <p><?=$parentCategoryContent2->sub_title?></p>
                                         </div>
                                     </div>
-                                <?php }?>
+                                </div>
                             <?php }?>
-                        <!--- box 4-->
-
-                        <!--- box 5-->
-                        <?php 
-                            $parentCategoryContent9 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
-                                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
-                                                            ->select(
-                                                                'news_contents.id', 
-                                                                'news_contents.new_title', 
-                                                                'news_contents.sub_title', 
-                                                                'news_contents.slug', 
-                                                                'news_contents.author_name', 
-                                                                'news_contents.for_publication_name', 
-                                                                'news_contents.cover_image', 
-                                                                'news_contents.created_at',
-                                                                'news_contents.media',
-                                                                'news_contents.videoId',
-                                                                'news_contents.is_series',
-                                                                'news_contents.series_article_no',
-                                                                'news_contents.current_article_no',
-                                                                'news_contents.other_article_part_doi_no',
-                                                                'parent_category.sub_category as parent_category_name', // Corrected alias to sub_category
-                                                                'sub_category.sub_category as category_name', // Corrected alias to sub_category
-                                                                'sub_category.slug as category_slug', // Corrected alias to sub_category
-                                                                'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
-                                                            )
-                                                            ->where('news_contents.status', 1) // Fetch only active content
-                                                            // ->where('news_contents.is_popular', 1) // Uncomment if you want to filter by popular content
-                                                            ->where('news_contents.parent_category', 9) // Parent category filter
-                                                            ->orderBy('news_contents.id', 'DESC') // Order by most recent
-                                                            ->first(); // Fetch single record
-                            // Helper::pr($parentCategoryContent9);
+                        <?php }?>
+                        <!-- WELLBEING -->
+                        <!-- SYSTEMS -->
+                        <?php
+                        $parentCategoryContent9 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                                ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
+                                                ->select(
+                                                    'news_contents.id', 
+                                                    'news_contents.new_title', 
+                                                    'news_contents.sub_title', 
+                                                    'news_contents.slug', 
+                                                    'news_contents.author_name', 
+                                                    'news_contents.for_publication_name', 
+                                                    'news_contents.cover_image', 
+                                                    'news_contents.created_at',
+                                                    'news_contents.media',
+                                                    'news_contents.videoId',
+                                                    'news_contents.is_series',
+                                                    'news_contents.series_article_no',
+                                                    'news_contents.current_article_no',
+                                                    'news_contents.other_article_part_doi_no',
+                                                    'parent_category.sub_category as parent_category_name',
+                                                    'sub_category.sub_category as category_name',
+                                                    'sub_category.slug as category_slug',
+                                                    'parent_category.slug as parent_category_slug'
+                                                )
+                                                ->where('news_contents.status', 1)
+                                                ->where('news_contents.parent_category', 9)
+                                                ->orderBy('news_contents.id', 'DESC')
+                                                ->first();
                         ?>
                         <?php if($parentCategoryContent9){?>
                             <?php
@@ -415,7 +465,36 @@ $current_url = $protocol . $host . $uri;
                                 if($current_article_no == 1){
                                     $isShow = true;
                                 } else {
-                                    $isShow = false;
+                                    $parentCategoryContent9 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                        ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
+                                        ->select(
+                                            'news_contents.id', 
+                                            'news_contents.new_title', 
+                                            'news_contents.sub_title', 
+                                            'news_contents.slug', 
+                                            'news_contents.author_name', 
+                                            'news_contents.for_publication_name', 
+                                            'news_contents.cover_image', 
+                                            'news_contents.created_at',
+                                            'news_contents.media',
+                                            'news_contents.videoId',
+                                            'news_contents.is_series',
+                                            'news_contents.series_article_no',
+                                            'news_contents.current_article_no',
+                                            'news_contents.other_article_part_doi_no',
+                                            'parent_category.sub_category as parent_category_name',
+                                            'sub_category.sub_category as category_name',
+                                            'sub_category.slug as category_slug',
+                                            'parent_category.slug as parent_category_slug'
+                                        )
+                                        ->where('news_contents.status', 1)
+                                        ->where('news_contents.parent_category', 9)
+                                        ->where('news_contents.is_series', 'Yes')
+                                        ->where('news_contents.current_article_no', 1)
+                                        ->orderBy('news_contents.id', 'DESC')
+                                        ->first();
+                                    
+                                    $isShow = true;
                                 }
                             } else {
                                 $isShow = true;
@@ -453,7 +532,7 @@ $current_url = $protocol . $host . $uri;
                                 </div>
                             <?php }?>
                         <?php }?>
-                        <!--- box 5-->
+                        <!-- SYSTEMS -->
                     </div>
                 </div>
                 <!-- <div class="iso-call heading-news-box">
