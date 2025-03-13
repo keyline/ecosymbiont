@@ -716,8 +716,7 @@ function numberToOrdinal($number) {
                             </div>
 
                             <div class="row mb-3">
-                                <label for="community" class="col-md-2 col-lg-4 col-form-label">31) Are you a member of an EaRTh Community?
-                                </label>
+                                <label for="community" class="col-md-2 col-lg-4 col-form-label">31) Are you a member of an EaRTh Community?</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="radio" class="readonly-input" id="community_yes" name="community" value="Yes" required @checked(old('community', $community) == 'Yes')>
                                     <label for="yes">Yes</label>
@@ -1124,6 +1123,20 @@ function numberToOrdinal($number) {
         input.addEventListener('click', function(e) {
             e.preventDefault(); // Block any change
         });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        function toggleFields() {            
+            const communityYes = $('#community_yes').is(':checked');            
+            
+            // Toggle individual sections            
+            $('#communityDetails').toggle(communityYes);
+        }
+        $('input[name="invited"], input[name="community"]').on('change', function() {
+            toggleFields();
+        });
+        toggleFields();
     });
 </script>
 <script type="text/javascript">
