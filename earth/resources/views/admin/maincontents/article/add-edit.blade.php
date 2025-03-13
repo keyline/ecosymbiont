@@ -819,7 +819,8 @@ $controllerRoute = $module['controller_route'];
         </div>
     </div>
 </section>
-<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+<!-- <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script> -->
+<script src="https://cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -830,6 +831,14 @@ $controllerRoute = $module['controller_route'];
             renderChoiceLimit: 30
         });
     });
+</script>
+<script>
+    CKEDITOR.replace('long_desc', {   
+        allowedContent: true,       
+    stylesSet: [        
+        { name: 'others_image_colour', element: 'em', attributes: { 'style': 'display: inline-block; color: #87ceeb;font-size: 16px;font-family: "proximanova_regular", sans-serif;font-style: italic;margin: 0;text-align: left !important;width: 100%;' } },        
+    ]
+});
 </script>
 <script>
     $(document).ready(function() {

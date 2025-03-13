@@ -630,7 +630,7 @@ function numberToOrdinal($number) {
                             <div class="row mb-3">
                                 <label for="ckeditor1" class="col-md-2 col-lg-4 col-form-label">23) Description</label>
                                 <div class="col-md-10 col-lg-8">
-                                    <textarea name="long_desc" class="form-control ckeditor" id="long_desc"  rows="5"><?= $long_desc ?></textarea>
+                                    <textarea name="long_desc" class="form-control ckeditor" id="long_desc" rows="5"><?= $long_desc ?></textarea>
                                 </div>
                             </div>
                             <div class="row mb-3">
