@@ -125,7 +125,7 @@ $current_url = $protocol . $host . $uri;
                                                             ->where('news_contents.parent_category', 8) // Parent category filter
                                                             ->orderBy('news_contents.id', 'DESC') // Order by most recent
                                                             ->first(); // Fetch single record
-                                Helper::pr($parentCategoryContent8);
+                                // Helper::pr($parentCategoryContent8);
                                 if($parentCategoryContent8){?>
                                     <?php
                                     $is_series                  = $parentCategoryContent8->is_series;
