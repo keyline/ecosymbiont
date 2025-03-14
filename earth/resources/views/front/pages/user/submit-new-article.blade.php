@@ -1067,7 +1067,7 @@ use Illuminate\Support\Facades\DB;
 <!-- Popup Div (Initially hidden) -->
     <div id="popup">
       <h3><i class="bi bi-exclamation-triangle-fill"></i> Warning</h3>
-      <p>You must submit an original Creative-Eork and you must own the copyright and licensing rights to your original Creative-Work.</p>
+      <p>You must submit an original Creative-Work and you must own the copyright and licensing rights to your original Creative-Work.</p>
       <button id="closePopup">Close</button>
     </div>  
     <!-- <div id="save">

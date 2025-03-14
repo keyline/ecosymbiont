@@ -426,7 +426,9 @@ $current_url = $protocol . $host . $uri;
                                 <div class="carousel-box owl-wrapper">
                                     <div class="title-section">
                                         <?php if($is_series == 'Yes'){?>
-                                            <h1><span>Other parts of this series</span></h1>
+                                            <?php if(count($other_articles_in_this_series) > 1){?>
+                                                <h1><span>Other parts of this series</span></h1>
+                                            <?php }?>
                                         <?php } else {?>
                                             <h1><span>You may also like</span></h1>
                                         <?php } ?>
@@ -467,17 +469,9 @@ $current_url = $protocol . $host . $uri;
                                                 </div>
                                             <?php } }?>
                                         <?php } else {?>
-                                            <!--<?php if($current_article_no > 1){?>
-                                                <?php
-                                                $rowIndex = ($current_article_no - 2);
-                                                ?>
-                                                <a href="<?=url('content/' . $other_articles_in_this_series[$rowIndex]['parent_category_slug']. '/' . $other_articles_in_this_series[$rowIndex]['category_slug'] . '/' . $other_articles_in_this_series[$rowIndex]['slug'])?>" class="btn btn-info">Previous Article</a>
-                                            <?php }?>
-                                            <?php if($current_article_no != $series_article_no){?>
-                                                <?php if(($current_article_no != 1) && ($otherArticleCount > $current_article_no)){?>
-                                                    <a href="<?=url('content/' . $other_articles_in_this_series[$current_article_no]['parent_category_slug']. '/' . $other_articles_in_this_series[$current_article_no]['category_slug'] . '/' . $other_articles_in_this_series[$current_article_no]['slug'])?>" class="btn btn-info">Next Article</a>
-                                                <?php }?>
-                                            <?php }?> -->
+                                            <?php
+                                            // Helper::pr($other_articles_in_this_series);
+                                            ?>
                                             <?php if($other_articles_in_this_series){ foreach($other_articles_in_this_series as $other_articles_in_this_series_row){?>
                                                 <?php if($current_article_no != $other_articles_in_this_series_row->current_article_no){?>
                                                     <div class="item news-post video-post video_post_text">
@@ -499,12 +493,12 @@ $current_url = $protocol . $host . $uri;
                                                                 ?php } else {?>
                                                                     <a href="?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
                                                                 ?php }?> -->
-                                                                <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                                <a href="https://www.youtube.com/watch?v=<?=$other_articles_in_this_series_row->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                                             </div>
                                                         <?php } ?>
                                                         <div class="hover-box">
                                                             <a href="<?=url('category/' . $other_articles_in_this_series_row->parent_category_slug. '/' . $other_articles_in_this_series_row->sub_category_slug)?>"><?=$other_articles_in_this_series_row->sub_category_name?></a>
-                                                            <h2 style="font-size: 10px;"><a href="<?=url('content/' . $other_articles_in_this_series_row->parent_category_slug. '/' . $other_articles_in_this_series_row->sub_category_slug . '/' . $other_articles_in_this_series_row->slug)?>"><?=$other_articles_in_this_series_row->new_title?></a></h2>
+                                                            <h2 style="font-size: 10px;"><a href="<?=url('content/' . $other_articles_in_this_series_row->parent_category_slug. '/' . $other_articles_in_this_series_row->category_slug . '/' . $other_articles_in_this_series_row->slug)?>"><?=$other_articles_in_this_series_row->new_title?></a></h2>
                                                             <ul class="post-tags">
                                                                 <li><i class="fa fa-clock-o"></i><?=date_format(date_create($other_articles_in_this_series_row->created_at), "d M Y")?></li>
                                                                 <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$other_articles_in_this_series_row->author_name?></a></li>

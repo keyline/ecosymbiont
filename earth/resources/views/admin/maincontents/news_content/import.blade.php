@@ -641,7 +641,7 @@ function numberToOrdinal($number) {
                         <div class="row mb-3">
                             <label for="ckeditor1" class="col-md-2 col-lg-4 col-form-label">23) Description</label>
                             <div class="col-md-10 col-lg-8">
-                                <textarea name="long_desc" class="form-control ckeditor"  rows="5"><?= $long_desc ?></textarea>
+                                <textarea name="long_desc" class="form-control ckeditor" rows="5"><?= $long_desc ?></textarea>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -809,7 +809,8 @@ function numberToOrdinal($number) {
         </div>
     </div>
 </section>
-<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+<!-- <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script> -->
+<script src="https://cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.14.5/sweetalert2.min.js" integrity="sha512-JCDnPKShC1tVU4pNu5mhCEt6KWmHf0XPojB0OILRMkr89Eq9BHeBP+54oUlsmj8R5oWqmJstG1QoY6HkkKeUAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
@@ -846,6 +847,14 @@ function numberToOrdinal($number) {
             renderChoiceLimit: 30
         });
     });
+</script>
+<script>
+    CKEDITOR.replace('long_desc', {   
+        allowedContent: true,       
+    stylesSet: [        
+        { name: 'others_image_colour', element: 'em', attributes: { 'style': 'display: inline-block; color: #87ceeb;font-size: 16px;font-family: "proximanova_regular", sans-serif;font-style: italic;margin: 0;text-align: left !important;width: 100%;' } },        
+    ]
+});
 </script>
 <script>
     $(document).ready(function() {
