@@ -379,11 +379,8 @@ class NewsContentController extends Controller
                         'current_article_no'        => $current_article_no,
                         'other_article_part_doi_no' => $other_article_part_doi_no,
                     ];
-                    Helper::pr($fields);
                     NewsContent::where($this->data['primary_key'], '=', $id)->update($fields);   
-                    $fieldsArticle = [                         
-                        'is_published'             => 4                                                         
-                        ];
+                    $fieldsArticle = ['is_published'             => 4];
                     Article::where('article_no', '=', $postData['creative_work_SRN'])->update($fieldsArticle);
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' updated successfully');
                 } else {
