@@ -547,7 +547,7 @@ class FrontController extends Controller
                                              ->where(function($query) use ($search_keyword) {
                                                 $query->where('news_contents.country', 'LIKE', '%'.$search_keyword.'%');
                                              })
-                                             ->limit(4)
+                                             // ->limit(4)
                                              ->get();
             } elseif($search_type == 'Organization'){
                 $data['contents']   = NewsContent::select(
@@ -661,7 +661,7 @@ class FrontController extends Controller
             // Helper::pr($data['contents']);
             $data['search_keyword']         = '';
             // $title                          = 'Search result for: "' . $search_keyword . '" ('.$search_type.')';
-            $page_name                      = 'search-result';
+            $page_name                      = 'advance-search-result';
             echo $this->front_before_login_layout($title, $page_name, $data);
         }
     }
