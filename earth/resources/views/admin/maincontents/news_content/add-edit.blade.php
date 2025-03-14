@@ -714,9 +714,9 @@ function numberToOrdinal($number) {
                             <div class="row mb-3">
                                 <label for="community" class="col-md-2 col-lg-4 col-form-label">31) Are you a member of an EaRTh Community?</label>
                                 <div class="col-md-10 col-lg-8">
-                                    <input type="radio" class="readonly-input" id="community_yes" name="community" value="Yes" required @checked(old('community', $community) == 'Yes')>
+                                    <input type="radio" class="readonly-input" id="community_yes" name="community" value="Yes" required <?=(($community == 'Yes')?'checked':'')?>>
                                     <label for="yes">Yes</label>
-                                    <input type="radio" class="readonly-input" id="community_no" name="community" value="No" required @checked(old('community', $community) == 'No')>
+                                    <input type="radio" class="readonly-input" id="community_no" name="community" value="No" required <?=(($community != 'Yes')?'checked':'')?>>
                                     <label for="no">No</label>
                                 </div>
                             </div>
