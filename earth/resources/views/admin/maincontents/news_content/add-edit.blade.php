@@ -780,7 +780,7 @@ function numberToOrdinal($number) {
                                 </div>
                             </div>
                             <div class="text-center">
-                                <button type="submit" id="submitFormButton" class="btn btn-primary"><?= $row ? 'Update' : 'Add' ?></button>
+                                <button type="submit" class="btn btn-primary"><?= $row ? 'Update' : 'Add' ?></button>
                             </div> 
                     </form>
                 </div>
