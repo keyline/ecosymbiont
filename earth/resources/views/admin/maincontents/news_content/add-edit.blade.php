@@ -208,8 +208,7 @@ function numberToOrdinal($number) {
                         <div class="row mb-3">
                             <label for="email" class="col-md-2 col-lg-4 col-form-label">1) Email address</label>
                             <div class="col-md-10 col-lg-8">
-                                <input type="email" name="email" class="form-control" id="email"
-                                    value="<?= $email ?>">
+                                <input type="email" name="email" class="form-control" id="email" value="<?= $email ?>">
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -217,11 +216,11 @@ function numberToOrdinal($number) {
                             </label>           
                             <div class="col-md-10 col-lg-8">                 
                                 <?php if($page_header == "News Content Add" || $page_header == "News Content Update") {?>                                    
-                                <input type="radio" id="Human individual" name="author_classification" value="Human individual"  required @checked(old('author_classification', $author_classification) == 'Human individual')>
+                                <input type="radio" id="Human individual" name="author_classification" value="Human individual" required @checked(old('author_classification', $author_classification) == 'Human individual')>
                                 <label for="Human individual">Human individual</label>
-                                <input type="radio" id="Ecoweb-rooted community" name="author_classification" value="Ecoweb-rooted community"  required @checked(old('author_classification', $author_classification) == 'Ecoweb-rooted community')>
+                                <input type="radio" id="Ecoweb-rooted community" name="author_classification" value="Ecoweb-rooted community" required @checked(old('author_classification', $author_classification) == 'Ecoweb-rooted community')>
                                 <label for="Ecoweb-rooted community">Ecoweb-rooted community</label>
-                                <input type="radio" id="Movement" name="author_classification" value="Movement"  required @checked(old('author_classification', $author_classification) == 'Movement')>
+                                <input type="radio" id="Movement" name="author_classification" value="Movement" required @checked(old('author_classification', $author_classification) == 'Movement')>
                                 <label for="Movement">Movement</label>                            
                                 <?php } else { ?>                                                                                                       
                                     <input type="text" class="form-control" id="Ecoweb-rooted community" name="author_classification" value="<?= $profile->name?>">                                
@@ -395,8 +394,7 @@ function numberToOrdinal($number) {
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="title" class="col-md-2 col-lg-4 col-form-label">6) Title
-                            </label>
+                            <label for="title" class="col-md-2 col-lg-4 col-form-label">6) Title</label>
                             <div class="col-md-10 col-lg-8">                                
                                 @if ($user_title)
                                     @foreach ($user_title as $data)
