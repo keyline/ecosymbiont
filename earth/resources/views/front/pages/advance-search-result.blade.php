@@ -34,8 +34,7 @@ $current_url = $protocol . $host . $uri;
                         </div>
                         <!-- End article box -->
                         <!-- article box -->
-                        <?=$search_type?><br>
-                        <?=$keyword?><br>
+
                         <div class="article-box" id="content-list">
                             <?php if($contents){ foreach($contents as $rowContent){?>
                                 <div class="news-post article-post">
@@ -283,17 +282,18 @@ $current_url = $protocol . $host . $uri;
 <script>    
     let offset = 4;
     const limit = 4;
-
+    
     $('#load_more_btn').on('click', function () {
         $('#loading').show();
-        var search_keyword = $('#search_keyword').val();
-
+        var search_type = '<?=$search_type?>';
+        var search_keyword = '<?=$keyword?>';
         $.ajax({
-            url: '<?= url('search_result_load') ?>',
+            url: '<?= url('advance_search_result_load') ?>',
             type: 'POST',
             data: {
                 offset: offset,
                 limit: limit,
+                search_type: search_type,
                 search_keyword: search_keyword,
                 _token: '<?= csrf_token() ?>'
             },
