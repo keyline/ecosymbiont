@@ -400,17 +400,21 @@ class FrontController extends Controller
         if($request->isMethod('get')){
             $postData           = $request->all();
             $search_type        = $postData['search_type'];
+            $data['search_type'] = $search_type;
             if($search_type == 'Country of residence'){
                 $search_keyword     = $postData['search_keyword1'];
                 $getCountry         = Country::select('name')->where('id', '=', $search_keyword)->first();
                 $title              = 'Search result for: "' . (($getCountry)?$getCountry->name:'') . '" ('.$search_type.')';
+                $data['keyword']    = $search_keyword;
             } elseif($search_type == 'Ancestral ecoweb'){
                 $search_keyword     = $postData['search_keyword2'];
                 $getAffiliation     = EcosystemAffiliation::select('name')->where('id', '=', $search_keyword)->first();
                 $title              = 'Search result for: "' . (($getAffiliation)?$getAffiliation->name:'') . '" ('.$search_type.')';
+                $data['keyword']    = $search_keyword;
             } else {
                 $search_keyword     = $postData['search_keyword0'];
                 $title              = 'Search result for: "' . $search_keyword . '" ('.$search_type.')';
+                $data['keyword']    = $search_keyword;
             }
             $data['contents']   = [];
 

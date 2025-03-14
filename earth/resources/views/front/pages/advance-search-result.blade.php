@@ -34,6 +34,8 @@ $current_url = $protocol . $host . $uri;
                         </div>
                         <!-- End article box -->
                         <!-- article box -->
+                        <?=$search_type?><br>
+                        <?=$keyword?><br>
                         <div class="article-box" id="content-list">
                             <?php if($contents){ foreach($contents as $rowContent){?>
                                 <div class="news-post article-post">
