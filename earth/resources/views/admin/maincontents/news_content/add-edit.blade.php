@@ -844,21 +844,6 @@ function numberToOrdinal($number) {
         },        
     ]
 });
-
-function removePInsideBlockquote(html) {
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = html;
-    const blockquotes = tempDiv.querySelectorAll('blockquote p');
-    blockquotes.forEach(p => {
-        p.outerHTML = p.innerHTML; // Remove the <p> tag but keep its content
-    });
-    return tempDiv.innerHTML;
-}
-
-const editorContent = CKEDITOR.instances.long_desc.getData();
-const cleanedContent = removePInsideBlockquote(editorContent);
-console.log(cleanedContent);
-
 </script>
 <script>
     $(document).ready(function() {
