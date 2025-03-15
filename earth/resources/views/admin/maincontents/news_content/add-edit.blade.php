@@ -1180,7 +1180,7 @@ function numberToOrdinal($number) {
                 $('#other_article_part_doi_no').attr('required', false);
             } else {
                 $('#current_article_no').attr('required', true);
-                $('#other_article_part_doi_no').attr('required', true);
+                $('#other_article_part_doi_no').attr('required', false);
             }
         });
     });
