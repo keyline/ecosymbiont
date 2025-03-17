@@ -561,6 +561,8 @@ class NewsContentController extends Controller
                     'nelp_form_number'          => $nelp_form_number ?? '',
                     'nelp_form_pdf'             => $nelp_pdf ?? '',
                     'creative_Work_fiction'     => $postData['creative_Work_fiction'],
+                    'community'                 => $postData['community'],
+                    'community_name'            => $postData['community_name'],
                     'additional_information'    => $postData['additional_information'],
                     'is_series'                 => $is_series,
                     'series_article_no'         => $series_article_no,
@@ -568,6 +570,7 @@ class NewsContentController extends Controller
                     'other_article_part_doi_no' => $other_article_part_doi_no,
                     'is_published'              => 1,                                                         
                     ];
+                    Helper::pr($fields);
                     Article::where('id', '=', $id)->update($fields);
                     return redirect("admin/article/list")->with('success_message', 'Article saved successfully');                
                 }
