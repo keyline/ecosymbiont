@@ -832,9 +832,16 @@ function numberToOrdinal($number) {
 </script>
 <script>
     CKEDITOR.replace('long_desc', {   
-        allowedContent: true,       
+        allowedContent: true,         
+        removeFormatAttributes: '',      
     stylesSet: [        
-        { name: 'others_image_colour', element: 'em', attributes: { 'style': 'display: inline-block; color: #87ceeb;font-size: 16px;font-family: "proximanova_regular", sans-serif;font-style: italic;margin: 0;text-align: left !important;width: 100%;' } },        
+        { 
+            name: 'others_image_colour', 
+            element: 'em', 
+            attributes: { 
+                'style': 'display: inline-block; color: #87ceeb; font-size: 16px; font-family: \'proximanova_regular\', sans-serif; font-style: italic; margin: 0; text-align: left !important; width: 100%;' 
+            } 
+        },        
     ]
 });
 </script>
@@ -1152,7 +1159,7 @@ function numberToOrdinal($number) {
             $(".series_yes").show();
             $('#series_article_no').attr('required', true);
             $('#current_article_no').attr('required', true);
-            $('#other_article_part_doi_no').attr('required', true);
+            $('#other_article_part_doi_no').attr('required', false);
         } else {
             $(".series_yes").hide();
             $('#series_article_no').attr('required', false);
@@ -1165,7 +1172,7 @@ function numberToOrdinal($number) {
                 $(".series_yes").show();
                 $('#series_article_no').attr('required', true);
                 $('#current_article_no').attr('required', true);
-                $('#other_article_part_doi_no').attr('required', true);
+                $('#other_article_part_doi_no').attr('required', false);
             } else {
                 $(".series_yes").hide();
                 $('#series_article_no').attr('required', false);
@@ -1180,7 +1187,7 @@ function numberToOrdinal($number) {
                 $('#other_article_part_doi_no').attr('required', false);
             } else {
                 $('#current_article_no').attr('required', true);
-                $('#other_article_part_doi_no').attr('required', true);
+                $('#other_article_part_doi_no').attr('required', false);
             }
         });
     });
