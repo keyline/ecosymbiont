@@ -718,7 +718,7 @@ class NewsContentController extends Controller
                         'current_article_no'        => $current_article_no,
                         'other_article_part_doi_no' => $other_article_part_doi_no,
                     ];
-                    Helper::pr($fields);
+                    // Helper::pr($fields);
                     NewsContent::insert($fields);
 
                     $fieldsArticle = [
@@ -775,7 +775,7 @@ class NewsContentController extends Controller
                         'is_import'                 => 1,  
                         'is_published'              => 4                                                         
                         ];                       
-                        Helper::pr($fieldsArticle);
+                        // Helper::pr($fieldsArticle);
                     Article::where('id', '=', $id)->update($fieldsArticle);
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' inserted successfully');
                 } else {
