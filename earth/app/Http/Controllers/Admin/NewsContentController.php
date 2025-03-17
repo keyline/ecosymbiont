@@ -29,6 +29,7 @@ use Auth;
 use Session;
 use Helper;
 use Hash;
+use PHPUnit\TextUI\Help;
 
 class NewsContentController extends Controller
 {
@@ -709,12 +710,15 @@ class NewsContentController extends Controller
                         'nelp_form_number'          => $nelp_form_number,
                         'nelp_form_file'            => $nelp_pdf,
                         'creative_Work_fiction'     => $postData['creative_Work_fiction'],
+                        'community'                 => $postData['community'],
+                        'community_name'            => $postData['community_name'],
                         'additional_information'    => $postData['additional_information'],
                         'is_series'                 => $is_series,
                         'series_article_no'         => $series_article_no,
                         'current_article_no'        => $current_article_no,
                         'other_article_part_doi_no' => $other_article_part_doi_no,
                     ];
+                    Helper::pr($fields);
                     NewsContent::insert($fields);
 
                     $fieldsArticle = [
@@ -771,6 +775,7 @@ class NewsContentController extends Controller
                         'is_import'                 => 1,  
                         'is_published'              => 4                                                         
                         ];                       
+                        Helper::pr($fieldsArticle);
                     Article::where('id', '=', $id)->update($fieldsArticle);
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' inserted successfully');
                 } else {
