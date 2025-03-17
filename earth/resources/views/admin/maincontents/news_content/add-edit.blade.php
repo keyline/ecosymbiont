@@ -482,7 +482,7 @@ function numberToOrdinal($number) {
                                         @endif
                                     </select>
                                     <!-- Hidden input to submit the selected value -->
-                                    <input type="hidden" name="country" value="{{ $countryId }}">
+                                    <!-- <input type="hidden" name="country" value="{{ $countryId }}"> -->
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -699,19 +699,9 @@ function numberToOrdinal($number) {
                                     <textarea class="form-control" id="additional_information" name="additional_information" rows="4" cols="50">{{ old('additional_information', $additional_information) }}</textarea>
                                     <div id="bio_shortError" class="error"></div>
                                 </div>
-                            </div>
+                            </div>                            
                             <div class="row mb-3">
-                                <label for="nelp_pdf" class="col-md-2 col-lg-4 col-form-label">30) Upload NELP</label>
-                                <div class="col-md-10 col-lg-8">
-                                    <input type="file" name="nelp_pdf" class="form-control" id="nelp_pdf" accept="application/pdf">                                                                
-                                    <?php if($nelp_pdf != ''){?>
-                                    <a href="<?= env('UPLOADS_URL') . 'newcontent/' . $nelp_pdf ?>" target="_blank"
-                                        class="badge bg-primary">View PDF</a>
-                                    <?php }?>                                
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label for="creative_Work" class="col-md-2 col-lg-4 col-form-label blue-text">31) Is your Creative-Work fiction?
+                                <label for="creative_Work" class="col-md-2 col-lg-4 col-form-label blue-text">30) Is your Creative-Work fiction?
                                 </label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="radio" id="fiction_yes" name="creative_Work_fiction" value="Yes" required <?=(($creative_Work_fiction == 'Yes')?'checked':'')?>>
@@ -721,7 +711,7 @@ function numberToOrdinal($number) {
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="community" class="col-md-2 col-lg-4 col-form-label">32) Are you a member of an EaRTh Community?</label>
+                                <label for="community" class="col-md-2 col-lg-4 col-form-label">31) Are you a member of an EaRTh Community?</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="radio" class="readonly-input" id="community_yes" name="community" value="Yes" required <?=(($community == 'Yes')?'checked':'')?>>
                                     <label for="yes">Yes</label>
@@ -731,20 +721,20 @@ function numberToOrdinal($number) {
                             </div>
                             <div id="communityDetails" style="display: none;">
                                 <div class="row mb-3">
-                                    <label for="community_info" class="col-md-2 col-lg-4 col-form-label">32A) Select Community</label>
+                                    <label for="community_info" class="col-md-2 col-lg-4 col-form-label">31A) Select Community</label>
                                     <div class="col-md-10 col-lg-8">
                                         <select name="community_name" class="form-control" id="community_name">
-                                            <option value="" selected disabled>Select</option>
+                                            <option value="" selected>Select</option>
                                             <?php if($communities){ foreach($communities as $cmn){?>
                                                 <option value="<?=$cmn->name?>" <?=(($community_name == $cmn->name)?'selected':'')?>><?=$cmn->name?></option>
                                             <?php } }?>
                                         </select>
-                                    <input type="hidden" name="community_name" value="{{ $community_name }}">
+                                    <!-- <input type="hidden" name="community_name" value="{{ $community_name }}"> -->
                                     </div>
                                 </div> 
                             </div>
                             <div class="row mb-3">
-                                <label for="is_series" class="col-md-2 col-lg-4 col-form-label">33) Is this part of a series?
+                                <label for="is_series" class="col-md-2 col-lg-4 col-form-label">32) Is this part of a series?
                                 </label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="radio" id="series_yes" name="is_series" value="Yes" <?=(($is_series == 'Yes')?'checked':'')?> required>
@@ -754,21 +744,21 @@ function numberToOrdinal($number) {
                                 </div>
                             </div>
                             <div class="row series_yes mb-3">
-                                <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label">33A) How many total creative-works in this series?
+                                <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label">32A) How many total creative-works in this series?
                                 </label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" name="series_article_no" class="form-control" id="series_article_no" min="1" value="<?=$series_article_no?>">
                                 </div>
                             </div>
                             <div class="row series_yes mb-3">
-                                <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label">33B) What number in the series is this creative-work?
+                                <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label">32B) What number in the series is this creative-work?
                                 </label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" name="current_article_no" class="form-control" id="current_article_no" value="<?=$current_article_no?>">
                                 </div>
                             </div>
                             <div class="row series_yes mb-3">
-                                <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label">33C) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).
+                                <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label">32C) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).
                                 </label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" class="form-control" id="input-tags">

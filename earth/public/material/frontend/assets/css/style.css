@@ -666,10 +666,11 @@ header.active .nav-list-container {
   height: 40px;
   border: none;
   margin-right: 10px;
-  width: 20%;
+  padding: 10px;
+  width: 48%;
 }
 .advarnseach_section .modal-body .advance_inner_search input {
-  width: 78%;
+  width: 50%;
   height: 40px;
   box-shadow: none;
   border: none;
