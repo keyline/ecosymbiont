@@ -666,7 +666,8 @@ header.active .nav-list-container {
   height: 40px;
   border: none;
   margin-right: 10px;
-  width: 20%;
+  /* width: 20%; */
+  width: 48%;
 }
 .advarnseach_section .modal-body .advance_inner_search input {
   width: 78%;
