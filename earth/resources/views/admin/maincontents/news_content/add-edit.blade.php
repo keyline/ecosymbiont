@@ -482,7 +482,7 @@ function numberToOrdinal($number) {
                                         @endif
                                     </select>
                                     <!-- Hidden input to submit the selected value -->
-                                    <input type="hidden" name="country" value="{{ $countryId }}">
+                                    <!-- <input type="hidden" name="country" value="{{ $countryId }}"> -->
                                 </div>
                             </div>
                             <div class="row mb-3">
