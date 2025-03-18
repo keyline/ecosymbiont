@@ -128,7 +128,7 @@ $current_url = $protocol . $host . $uri;
                                 </div>
                                 <div class="share-post-box">
                                     <ul class="share-box">
-                                        <li><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#citeModal">
+                                        <li><button class="btn btn-primary" id="#cite">
                                             <i class="fa fa-quote-left"></i> Cite</button>
                                         </li>
                                         <li><i class="fa fa-share-alt"></i><span>Share Post</span></li>
@@ -786,9 +786,34 @@ $current_url = $protocol . $host . $uri;
         </div>
     </section>
 <!-- End block-wrapper-section -->
+<div id="popup">
+    <h3>Submissions Eligibility Criteria</h3>
+    <!-- <p>At this time, you must:<br>
+    (A) be invited to submit a Creative-Work to EaRTh (if you have not been invited, follow the directions for question 6 when completing your profile); and/or <br>
+    (B) have participated as a strategist at an in-person ER Synergy Meeting.</p> -->
+    <p>If you would like to submit creative-works to EaRTh, you must:</p>
+    <ul>
+    <li>be a grassroots human individual, ecoweb-rooted community, or movement; and</li>
+    <li>submit creative-works related to any aspect of human-ecological connectivity</li>
+    </ul>
+    <button id="closePopup">Close</button>
+</div>   
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+    $('#popup').hide();
+    // Trigger popup on button click
+    $('#cite').change(function() {
+        $('#popup').fadeIn();
+    });
+
+    // Close the popup
+    $('#closePopup').click(function() {
+        $('#popup').fadeOut();
+    });
+    });
+</script>
 <script>
     function copyText() {
         let textField = document.getElementById("citationText");
