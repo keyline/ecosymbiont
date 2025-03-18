@@ -142,7 +142,8 @@ $current_url = $protocol . $host . $uri;
                                 <div id="popup">
                                     <h3>CITE</h3>  
                                     <div>                                  
-                                        <p><?php 
+                                        <p><?php
+                                        Helper::pr($rowContent); 
                                         $author_name = $rowContent->author_name;
                                         $new_title = $rowContent->new_title;
                                         $doi = $rowContent->creative_work_DOI;
@@ -163,9 +164,11 @@ $current_url = $protocol . $host . $uri;
                                         $last_name = end($name_parts); // Get the last name
 
                                          if($rowContent->co_authors > 0){
-                                            echo "author more than one";
+                                            echo "$initials. $last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
+                                            <a href=\"{$current_url}\">$new_title</a>";
                                         } elseif($rowContent->co_authors > 1){ 
-                                            echo "authors more than two";
+                                            echo "$initials. $last_name, <em>et al., $new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
+                                            <a href=\"{$current_url}\">$new_title</a>";
                                         } else {
                                             echo "$initials. $last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
                                             <a href=\"{$current_url}\">$new_title</a>";
