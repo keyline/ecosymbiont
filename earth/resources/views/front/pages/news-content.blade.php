@@ -790,6 +790,7 @@ $current_url = $protocol . $host . $uri;
 <script>
     function copyText() {
         let textField = document.getElementById("citationText");
+        alert(textField.value);
         textField.select();
         // textField.setSelectionRange(0, 99999); // For mobile devices
         // navigator.clipboard.writeText(textField.value);
