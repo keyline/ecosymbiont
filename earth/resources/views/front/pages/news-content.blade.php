@@ -142,12 +142,34 @@ $current_url = $protocol . $host . $uri;
                                 <div id="popup">
                                     <h3>CITE</h3>  
                                     <div>                                  
-                                        <p><?php Helper::pr($rowContent); if($rowContent->co_authors > 0){
+                                        <p><?php 
+                                        $author_name = $rowContent->author_name;
+                                        $new_title = $rowContent->new_title;
+                                        $doi = $rowContent->creative_work_DOI;
+                                        
+                                        function getInitials($author_name) {
+                                            $words = explode(" ", $author_name); // Split the name into words
+                                            $initials = "";
+                                        
+                                            foreach ($words as $word) {
+                                                $initials .= strtoupper($word[0]); // Get the first letter of each word
+                                            }
+                                        
+                                            return $initials;
+                                        }
+                                        // Extract initials and last name
+                                        $name_parts = explode(" ", $author_name);
+                                        $initials = getInitials($author_name);
+                                        $last_name = end($name_parts); // Get the last name
+
+                                         if($rowContent->co_authors > 0){
                                             echo "author more than one";
                                         } elseif($rowContent->co_authors > 1){ 
                                             echo "authors more than two";
                                         } else {
-                                            echo "First initial. Surname, [Title-italics], [Ecosymbionts all Regenerate Together (EaRTh): bold] DOI... (DD Month, Year). url.";
+                                            echo "$initials. $last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
+                                            <a href=\"{$rowContent->parent_category_name}/{$rowContent->sub_category_slug}/{$rowContent->slug}\">$new_title</a>";
+                                            // echo "$initials. $words[1], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. <a href="$rowContent->parent_category_name/$rowContent->sub_category_slug/$rowContent->slug">$new_title</a>";
                                         }
                                             ?></p>  
                                     </div>
