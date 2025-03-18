@@ -143,7 +143,7 @@ $current_url = $protocol . $host . $uri;
                                     <h3>CITE</h3>  
                                     <div>                                  
                                         <p><?php
-                                        // Helper::pr($rowContent); 
+                                        Helper::pr($rowContent); 
                                         Helper::pr($co_author); 
                                         $co_author = $rowContent->co_authors;
                                         $author_name = $rowContent->author_name;
