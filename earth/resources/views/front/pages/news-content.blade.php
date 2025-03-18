@@ -143,9 +143,9 @@ $current_url = $protocol . $host . $uri;
                                     <h3>CITE</h3>  
                                     <div>                                  
                                         <p><?php
-                                        Helper::pr($rowContent); 
+                                        // Helper::pr($rowContent); 
                                         Helper::pr($co_author); 
-                                        $co_author = json_decode($rowContent->co_authors) ;
+                                        $co_author = json_decode($rowContent->co_author_names) ;
                                         $author_name = $rowContent->author_name;
                                         $new_title = $rowContent->new_title;
                                         $doi = $rowContent->creative_work_DOI;
