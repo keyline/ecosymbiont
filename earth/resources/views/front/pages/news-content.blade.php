@@ -138,7 +138,19 @@ $current_url = $protocol . $host . $uri;
                                         <li><a class="linkedin" href="{{ $linkdinShareUrl }}" target="_blank"><i class="fa fa-linkedin"></i><span>&nbsp;&nbsp;&nbsp;Share on Linkedin</span></a></li>
                                     </ul>
                                 </div>
-                                <!-- Modal -->                                
+                                <!-- Modal -->     
+                                <div id="popup">
+                                    <h3>Submissions Eligibility Criteria</h3>
+                                    <!-- <p>At this time, you must:<br>
+                                    (A) be invited to submit a Creative-Work to EaRTh (if you have not been invited, follow the directions for question 6 when completing your profile); and/or <br>
+                                    (B) have participated as a strategist at an in-person ER Synergy Meeting.</p> -->
+                                    <p>If you would like to submit creative-works to EaRTh, you must:</p>
+                                    <ul>
+                                    <li>be a grassroots human individual, ecoweb-rooted community, or movement; and</li>
+                                    <li>submit creative-works related to any aspect of human-ecological connectivity</li>
+                                    </ul>
+                                    <button id="closePopup">Close</button>
+                                </div>                              
                                 <?php if($rowContent->media == 'image'){?>
                                     <div class="post-gallery">
                                         <img src="<?=env('UPLOADS_URL').'newcontent/'.$rowContent->cover_image?>" alt="<?=$rowContent->new_title?>">
@@ -765,25 +777,13 @@ $current_url = $protocol . $host . $uri;
         </div>
     </section>
 <!-- End block-wrapper-section -->
-<div id="popup">
-    <h3>Submissions Eligibility Criteria</h3>
-    <!-- <p>At this time, you must:<br>
-    (A) be invited to submit a Creative-Work to EaRTh (if you have not been invited, follow the directions for question 6 when completing your profile); and/or <br>
-    (B) have participated as a strategist at an in-person ER Synergy Meeting.</p> -->
-    <p>If you would like to submit creative-works to EaRTh, you must:</p>
-    <ul>
-    <li>be a grassroots human individual, ecoweb-rooted community, or movement; and</li>
-    <li>submit creative-works related to any aspect of human-ecological connectivity</li>
-    </ul>
-    <button id="closePopup">Close</button>
-</div>   
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
     $('#popup').hide();
     // Trigger popup on button click
-    $('#cite').change(function() {
+    $('#cite').click(function() {
         $('#popup').fadeIn();
     });
 
