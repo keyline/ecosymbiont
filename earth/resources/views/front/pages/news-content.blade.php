@@ -141,7 +141,7 @@ $current_url = $protocol . $host . $uri;
                                 <!-- Modal -->     
                                 <div id="popup">
                                     <h3>CITE</h3>                                    
-                                    <p id="citationText">If you would like to submit creative-works to EaRTh, you must:</p>                                    
+                                    <p>If you would like to submit creative-works to EaRTh, you must:</p>                                    
                                     <button id="closePopup">Close</button>
                                     <button onclick="copyText()"><i class="fa fa-copy"></i> Copy</button>
                                 </div>                              
@@ -789,13 +789,16 @@ $current_url = $protocol . $host . $uri;
 </script>
 <script>
     function copyText() {
-        let textField = document.getElementById("citationText");
-        alert(textField.value);
-        textField.select();
-        // textField.setSelectionRange(0, 99999); // For mobile devices
-        // navigator.clipboard.writeText(textField.value);
-        // alert("Copied: " + textField.value);
-        document.execCommand("copy"); // Works in Bootstrap 3 compatible browsers
-        alert("Copied: " + textField.value);
+        // Get text inside the popup
+        let textToCopy = $('#popup').text().trim();
+
+        // Create a temporary textarea to copy text
+        let tempTextArea = $('<textarea>');
+        $('body').append(tempTextArea);
+        tempTextArea.val(textToCopy).select();
+        document.execCommand('copy');
+        tempTextArea.remove();
+
+        alert("Copied: " + textToCopy);
     }
 </script>
