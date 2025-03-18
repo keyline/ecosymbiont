@@ -164,7 +164,7 @@ $current_url = $protocol . $host . $uri;
                                         }
                                         // Extract initials and last name
                                         $name_parts = explode(" ", $author_name);
-                                        Helper::pr($name_parts);
+                                        // Helper::pr($name_parts);
                                         $initials = getInitials($author_name);
                                         $last_name = end($name_parts); // Get the last name
                                         for($i = 1; $i <= $co_authors; $i++)
