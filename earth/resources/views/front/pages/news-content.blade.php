@@ -145,11 +145,12 @@ $current_url = $protocol . $host . $uri;
                                         <p><?php
                                         // Helper::pr($rowContent); 
                                         
-                                        $co_author = json_decode($rowContent->co_author_names) ;
-                                        Helper::pr($co_author); 
+                                        // $co_author_name = json_decode($rowContent->co_author_names) ;
+                                        // Helper::pr($co_author); 
                                         $author_name = $rowContent->author_name;
                                         $new_title = $rowContent->new_title;
                                         $doi = $rowContent->creative_work_DOI;
+                                        $co_authors = $rowContent->co_authors;
                                         
                                         function getInitials($author_name) {
                                             $words = explode(" ", $author_name); // Split the name into words
@@ -161,6 +162,16 @@ $current_url = $protocol . $host . $uri;
                                         
                                             return $initials;
                                         }
+                                        for($i = 1; $i <= $co_authors; $i++)
+                                        {
+                                            $co_author_name = json_decode($rowContent->co_author_names);
+                                            $co_author = $co_author_name[$i-1];
+                                            $co_author_initials = getInitials($co_author);
+                                            $co_author_last_name = end(explode(" ", $co_author));
+                                            $co_author_name = $co_author_initials . ". " . $co_author_last_name;
+                                            Helper::pr($co_author_name);
+                                        }
+
                                         // Extract initials and last name
                                         $name_parts = explode(" ", $author_name);
                                         $initials = getInitials($author_name);
