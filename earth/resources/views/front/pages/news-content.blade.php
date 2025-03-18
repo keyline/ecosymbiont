@@ -170,7 +170,7 @@ $current_url = $protocol . $host . $uri;
                                             $co_author_initials = getInitials($co_author);
                                             $co_author_last_name = end($co_author_nameparts);
                                             $co_author_name = $co_author_initials . ". " . $co_author_last_name;
-                                            Helper::pr($co_author_name);
+                                            // Helper::pr($co_author_name);
                                         }
 
                                         // Extract initials and last name
@@ -179,7 +179,7 @@ $current_url = $protocol . $host . $uri;
                                         $last_name = end($name_parts); // Get the last name
 
                                          if($rowContent->co_authors > 0){
-                                            echo "$initials. $last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
+                                            echo "$initials. $last_name & $co_author_initials. $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
                                             <a href=\"{$current_url}\">$new_title</a>";
                                         } elseif($rowContent->co_authors > 1){ 
                                             echo "$initials. $last_name, <em>et al., $new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
