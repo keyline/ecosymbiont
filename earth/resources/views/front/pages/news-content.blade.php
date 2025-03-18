@@ -195,7 +195,7 @@ $current_url = $protocol . $host . $uri;
                                     </div>
                                     <button onclick="copyText()"><i class="fa fa-copy"></i> Copy</button>                                  
                                     <button id="closePopup">Close</button>                                    
-                                    <p id="copyMessage">Copied successfully!</p>
+                                    <h3 id="copyMessage">Copied successfully!</h3>
                                 </div>                              
                                 <?php if($rowContent->media == 'image'){?>
                                     <div class="post-gallery">
