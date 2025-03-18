@@ -820,7 +820,7 @@ $current_url = $protocol . $host . $uri;
             <p><?php echo $current_url;  ?></p>  
         </div>
         <button onclick="copyText2()"><i class="fa fa-copy"></i> Copy</button>                                  
-        <button id="closeparmalink">Close</button>                                    
+        <button id="closepermalink">Close</button>                                    
         <h3 id="copyMessage2">Copied successfully!</h3>
     </div>  
 <!-- End block-wrapper-section -->
@@ -890,7 +890,7 @@ $current_url = $protocol . $host . $uri;
         });
 
         // Close Permalink popup
-        $('#closeparmalink').click(function () {
+        $('#closepermalink').click(function () {
             $('#permalink').fadeOut();
         });
     });
