@@ -826,7 +826,7 @@ $current_url = $protocol . $host . $uri;
 <!-- End block-wrapper-section -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
+<!-- <script>
     $(document).ready(function() {
     $('#popup').hide();
     // Trigger popup on button click
@@ -840,7 +840,7 @@ $current_url = $protocol . $host . $uri;
         $('#popup').fadeOut();
     });
     });
-</script>
+</script> -->
 <script>
     function copyText() {
         // Get text inside the popup
@@ -867,18 +867,32 @@ $current_url = $protocol . $host . $uri;
     }
 </script>
 <script>
-    $(document).ready(function() {
-    $('#permalink').hide();
-    // Trigger popup on button click
-    $('#permalink_button').click(function() {
-        $('#permalink').fadeIn();
-        $('#copyMessage2').hide();
-    });
+    $(document).ready(function () {
+        // Hide popups initially
+        $('#popup, #permalink').hide();
+        $('#copyMessage, #copyMessage2').hide();
 
-    // Close the popup
-    $('#closeparmalink').click(function() {
-        $('#permalink').fadeOut();
-    });
+        // Open Cite popup
+        $('#cite').click(function () {
+            $('#popup').fadeIn();
+            $('#copyMessage').hide();
+        });
+
+        // Close Cite popup
+        $('#closePopup').click(function () {
+            $('#popup').fadeOut();
+        });
+
+        // Open Permalink popup
+        $('#permalink_button').click(function () {
+            $('#permalink').fadeIn();
+            $('#copyMessage2').hide();
+        });
+
+        // Close Permalink popup
+        $('#closeparmalink').click(function () {
+            $('#permalink').fadeOut();
+        });
     });
 </script>
 <script>
