@@ -142,7 +142,7 @@ $current_url = $protocol . $host . $uri;
                                 <div id="popup">
                                     <h3>CITE</h3>  
                                     <div>                                  
-                                        <p><?php echo count($rowContent->author_name)?>If you would like to submit creative-works to EaRTh, you must:</p>  
+                                        <p><?php Helper::pr($rowContent)?>If you would like to submit creative-works to EaRTh, you must:</p>  
                                     </div>
                                     <button onclick="copyText()"><i class="fa fa-copy"></i> Copy</button>                                  
                                     <button id="closePopup">Close</button>                                    
