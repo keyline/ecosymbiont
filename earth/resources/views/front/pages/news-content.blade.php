@@ -128,12 +128,35 @@ $current_url = $protocol . $host . $uri;
                                 </div>
                                 <div class="share-post-box">
                                     <ul class="share-box">
+                                        <li><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#citeModal">
+                                            <i class="fa fa-quote-left"></i> Cite</button>
+                                        </li>
                                         <li><i class="fa fa-share-alt"></i><span>Share Post</span></li>
                                         <li><a class="facebook" href="{{ $facebookShareUrl }}" target="_blank"><i class="fa fa-facebook"></i><span>Share on Facebook</span></a></li>
                                         <li><a class="twitter" href="{{ $twitterShareUrl }}" target="_blank"><i class="fa fa-twitter"></i><span>Share on Twitter</span></a></li>
                                         <!-- <li><a class="google" href="#"><i class="fa fa-google-plus"></i><span></span></a></li> -->
                                         <li><a class="linkedin" href="{{ $linkdinShareUrl }}" target="_blank"><i class="fa fa-linkedin"></i><span>&nbsp;&nbsp;&nbsp;Share on Linkedin</span></a></li>
                                     </ul>
+                                </div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="citeModal" tabindex="-1" aria-labelledby="citeModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="citeModalLabel">CITE</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <label for="citationText" class="form-label">Copy the text below:</label>
+                                                <div class="input-group">
+                                                    <input type="text" id="citationText" class="form-control" value="This is a citation text.">
+                                                    <button class="btn btn-outline-secondary" onclick="copyText()">
+                                                        <i class="fa fa-copy"></i> Copy
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <?php if($rowContent->media == 'image'){?>
                                     <div class="post-gallery">
@@ -761,3 +784,13 @@ $current_url = $protocol . $host . $uri;
         </div>
     </section>
 <!-- End block-wrapper-section -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function copyText() {
+        let textField = document.getElementById("citationText");
+        textField.select();
+        textField.setSelectionRange(0, 99999); // For mobile devices
+        navigator.clipboard.writeText(textField.value);
+        alert("Copied: " + textField.value);
+    }
+</script>
