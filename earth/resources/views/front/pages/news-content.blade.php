@@ -780,6 +780,7 @@ $current_url = $protocol . $host . $uri;
     // Trigger popup on button click
     $('#cite').click(function() {
         $('#popup').fadeIn();
+        $('#copyMessage').hide();
     });
 
     // Close the popup
