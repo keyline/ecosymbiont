@@ -149,11 +149,11 @@ $current_url = $protocol . $host . $uri;
                                         
                                         function getInitials($author_name) {
                                             $words = explode(" ", $author_name); // Split the name into words
-                                            $initials = "";
+                                            $initials = strtoupper($words[0][0]) . ".";
                                         
-                                            foreach ($words as $word) {
-                                                $initials .= strtoupper($word[0]); // Get the first letter of each word
-                                            }
+                                            // foreach ($words as $word) {
+                                            //     $initials .= strtoupper($word[0]); // Get the first letter of each word
+                                            // }
                                         
                                             return $initials;
                                         }
