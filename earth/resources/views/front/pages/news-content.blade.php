@@ -179,13 +179,13 @@ $current_url = $protocol . $host . $uri;
                                         $last_name = end($name_parts); // Get the last name
 
                                          if($rowContent->co_authors > 0){
-                                            echo "$initials. $last_name & $co_author_initials. $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
+                                            echo "$initials $last_name & $co_author_initials. $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
                                             <a href=\"{$current_url}\">$new_title</a>";
                                         } elseif($rowContent->co_authors > 1){ 
-                                            echo "$initials. $last_name, <em>et al., $new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
+                                            echo "$initials $last_name, <em>et al., $new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
                                             <a href=\"{$current_url}\">$new_title</a>";
                                         } else {
-                                            echo "$initials. $last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
+                                            echo "$initials $last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
                                             <a href=\"{$current_url}\">$new_title</a>";
                                             // echo "$initials. $words[1], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. <a href="$rowContent->parent_category_name/$rowContent->sub_category_slug/$rowContent->slug">$new_title</a>";
                                         }
