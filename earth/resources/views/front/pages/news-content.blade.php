@@ -140,8 +140,10 @@ $current_url = $protocol . $host . $uri;
                                 </div>
                                 <!-- Modal -->     
                                 <div id="popup">
-                                    <h3>CITE</h3>                                    
-                                    <p>If you would like to submit creative-works to EaRTh, you must:</p>  
+                                    <h3>CITE</h3>  
+                                    <div>                                  
+                                        <p>If you would like to submit creative-works to EaRTh, you must:</p>  
+                                    </div>
                                     <button onclick="copyText()"><i class="fa fa-copy"></i> Copy</button>                                  
                                     <button id="closePopup">Close</button>                                    
                                     <p id="copyMessage">Copied successfully!</p>
