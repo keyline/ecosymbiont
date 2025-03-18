@@ -139,20 +139,22 @@ $current_url = $protocol . $host . $uri;
                                     </ul>
                                 </div>
                                 <!-- Modal -->
-                                <div class="modal fade" id="citeModal" tabindex="-1" aria-labelledby="citeModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
+                                <div class="modal fade" id="citeModal" tabindex="-1" role="dialog" aria-labelledby="citeModalLabel">
+                                    <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="citeModalLabel">CITE</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>&times;</span></button>
+                                                <h4 class="modal-title" id="citeModalLabel">Citation</h4>
                                             </div>
                                             <div class="modal-body">
-                                                <label for="citationText" class="form-label">Copy the text below:</label>
+                                                <label for="citationText">Copy the text below:</label>
                                                 <div class="input-group">
                                                     <input type="text" id="citationText" class="form-control" value="This is a citation text.">
-                                                    <button class="btn btn-outline-secondary" onclick="copyText()">
-                                                        <i class="fa fa-copy"></i> Copy
-                                                    </button>
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-default" onclick="copyText()">
+                                                            <i class="fa fa-copy"></i> Copy
+                                                        </button>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -784,13 +786,15 @@ $current_url = $protocol . $host . $uri;
         </div>
     </section>
 <!-- End block-wrapper-section -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
 <script>
     function copyText() {
         let textField = document.getElementById("citationText");
         textField.select();
-        textField.setSelectionRange(0, 99999); // For mobile devices
-        navigator.clipboard.writeText(textField.value);
+        // textField.setSelectionRange(0, 99999); // For mobile devices
+        // navigator.clipboard.writeText(textField.value);
+        // alert("Copied: " + textField.value);
+        document.execCommand("copy"); // Works in Bootstrap 3 compatible browsers
         alert("Copied: " + textField.value);
     }
 </script>
