@@ -176,12 +176,10 @@ $current_url = $protocol . $host . $uri;
                                             $co_author_last_name = end($co_author_nameparts);
                                             $co_author_name = $co_author_initials . ". " . $co_author_last_name;
                                             // Helper::pr($co_author_name);
-                                        }
-
-                                        
+                                        }                                        
 
                                          if($rowContent->co_authors > 0){
-                                            echo "$initials $last_name & $co_author_initials. $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
+                                            echo "$initials $last_name & $co_author_initials $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
                                             <a href=\"{$current_url}\">$new_title</a>";
                                         } elseif($rowContent->co_authors > 1){ 
                                             echo "$initials $last_name, <em>et al., $new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
@@ -291,13 +289,28 @@ $current_url = $protocol . $host . $uri;
                                 </div>
                                 <div class="share-post-box">
                                     <ul class="share-box">
+                                        <li><button class="btn btn-primary" id="cite">
+                                            <i class="fa fa-quote-left"></i> Cite</button>
+                                        </li>
+                                        <li><button class="btn btn-primary" id="permalink_button">
+                                            <i class="fa fa-share-alt"></i> Permalink</button>
+                                        </li>
                                         <li><i class="fa fa-share-alt"></i><span>Share Post</span></li>                                        
-                                        <li><a class="facebook" href="{{ $facebookShareUrl }}" target="_blank"><i class="fa fa-facebook"></i><span>Share on Facebook</span></a></li>
-                                        <li><a class="twitter" href="{{ $twitterShareUrl }}" target="_blank"><i class="fa fa-twitter"></i><span>Share on Twitter</span></a></li>
+                                        <li><a class="facebook" href="{{ $facebookShareUrl }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a class="twitter" href="{{ $twitterShareUrl }}" target="_blank"><i class="fa fa-twitter"></i></a></li>
                                         <!-- <li><a class="google" href="#"><i class="fa fa-google-plus"></i><span></span></a></li> -->
-                                        <li><a class="linkedin" href="{{ $linkdinShareUrl }}" target="_blank"><i class="fa fa-linkedin"></i><span>&nbsp;&nbsp;&nbsp;Share on Linkedin</span></a></li>
+                                        <li><a class="linkedin" href="{{ $linkdinShareUrl }}" target="_blank"><i class="fa fa-linkedin"></i></a></li>
                                     </ul>
                                 </div>
+                                <div id="permalink">
+                                    <h3>PERMALINK</h3>  
+                                    <div>                                  
+                                        <p><?php echo $current_url;  ?></p>  
+                                    </div>
+                                    <button onclick="copyText()"><i class="fa fa-copy"></i> Copy</button>                                  
+                                    <button id="closeparmalink">Close</button>                                    
+                                    <h3 id="copyMessage2">Copied successfully!</h3>
+                                </div>        
                                 <div class="about-more-autor">
                                     <ul class="nav nav-tabs">
                                         <li class="active" style="width: 100%;">
@@ -860,6 +873,46 @@ $current_url = $protocol . $host . $uri;
         // Hide message after 3 seconds
         setTimeout(function() {
             $('#copyMessage').fadeOut();
+        }, 3000);
+
+        // alert("Copied: " + textToCopy);
+    }
+</script>
+<script>
+    $(document).ready(function() {
+    $('#permalink').hide();
+    // Trigger popup on button click
+    $('#permalink_button').click(function() {
+        $('#permalink').fadeIn();
+        $('#copyMessage2').hide();
+    });
+
+    // Close the popup
+    $('#closeparmalink').click(function() {
+        $('#permalink').fadeOut();
+    });
+    });
+</script>
+<script>
+    function copyText() {
+        // Get text inside the popup
+        let textToCopy = $('#permalink p').map(function() {
+            return $(this).text().trim();
+        }).get().join("\n"); // Join text with new lines
+
+        // Create a temporary textarea to copy text
+        let tempTextArea = $('<textarea>');
+        $('body').append(tempTextArea);
+        tempTextArea.val(textToCopy).select();
+        document.execCommand('copy');
+        tempTextArea.remove();
+
+        // Show copied message
+        $('#copyMessage2').fadeIn();
+
+        // Hide message after 3 seconds
+        setTimeout(function() {
+            $('#copyMessage2').fadeOut();
         }, 3000);
 
         // alert("Copied: " + textToCopy);
