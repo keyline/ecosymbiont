@@ -168,7 +168,7 @@ $current_url = $protocol . $host . $uri;
                                             echo "authors more than two";
                                         } else {
                                             echo "$initials. $last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
-                                            <a href=\"{$rowContent->parent_category_name}/{$rowContent->sub_category_slug}/{$rowContent->slug}\">$new_title</a>";
+                                            <a href=\"{$current_url}\">$new_title</a>";
                                             // echo "$initials. $words[1], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. <a href="$rowContent->parent_category_name/$rowContent->sub_category_slug/$rowContent->slug">$new_title</a>";
                                         }
                                             ?></p>  
