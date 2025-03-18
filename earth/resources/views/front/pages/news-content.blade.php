@@ -166,8 +166,9 @@ $current_url = $protocol . $host . $uri;
                                         {
                                             $co_author_name = json_decode($rowContent->co_author_names);
                                             $co_author = $co_author_name[$i-1];
+                                            $co_author_nameparts = explode(" ", $co_author);
                                             $co_author_initials = getInitials($co_author);
-                                            $co_author_last_name = end(explode(" ", $co_author));
+                                            $co_author_last_name = end($co_author_nameparts);
                                             $co_author_name = $co_author_initials . ". " . $co_author_last_name;
                                             Helper::pr($co_author_name);
                                         }
