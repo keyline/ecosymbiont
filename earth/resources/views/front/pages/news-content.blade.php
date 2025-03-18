@@ -128,7 +128,7 @@ $current_url = $protocol . $host . $uri;
                                 </div>
                                 <div class="share-post-box">
                                     <ul class="share-box">
-                                        <li><button class="btn btn-primary" id="#cite">
+                                        <li><button class="btn btn-primary" id="cite">
                                             <i class="fa fa-quote-left"></i> Cite</button>
                                         </li>
                                         <li><i class="fa fa-share-alt"></i><span>Share Post</span></li>
@@ -138,28 +138,7 @@ $current_url = $protocol . $host . $uri;
                                         <li><a class="linkedin" href="{{ $linkdinShareUrl }}" target="_blank"><i class="fa fa-linkedin"></i><span>&nbsp;&nbsp;&nbsp;Share on Linkedin</span></a></li>
                                     </ul>
                                 </div>
-                                <!-- Modal -->
-                                <div class="modal fade" id="citeModal" tabindex="-1" role="dialog" aria-labelledby="citeModalLabel">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>&times;</span></button>
-                                                <h4 class="modal-title" id="citeModalLabel">Citation</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <label for="citationText">Copy the text below:</label>
-                                                <div class="input-group">
-                                                    <input type="text" id="citationText" class="form-control" value="This is a citation text.">
-                                                    <span class="input-group-btn">
-                                                        <button class="btn btn-default" onclick="copyText()">
-                                                            <i class="fa fa-copy"></i> Copy
-                                                        </button>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <!-- Modal -->                                
                                 <?php if($rowContent->media == 'image'){?>
                                     <div class="post-gallery">
                                         <img src="<?=env('UPLOADS_URL').'newcontent/'.$rowContent->cover_image?>" alt="<?=$rowContent->new_title?>">
