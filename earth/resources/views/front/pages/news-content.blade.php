@@ -142,7 +142,14 @@ $current_url = $protocol . $host . $uri;
                                 <div id="popup">
                                     <h3>CITE</h3>  
                                     <div>                                  
-                                        <p><?php Helper::pr($rowContent)?>If you would like to submit creative-works to EaRTh, you must:</p>  
+                                        <p><?php if($rowContent->co_authors > 0){
+                                            echo "author more than one";
+                                        } elseif($rowContent->co_authors > 1){ 
+                                            echo "authors more than two";
+                                        } else {
+                                            echo "single author";
+                                        }
+                                            ?>If you would like to submit creative-works to EaRTh, you must:</p>  
                                     </div>
                                     <button onclick="copyText()"><i class="fa fa-copy"></i> Copy</button>                                  
                                     <button id="closePopup">Close</button>                                    
