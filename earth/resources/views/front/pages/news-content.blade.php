@@ -137,64 +137,7 @@ $current_url = $protocol . $host . $uri;
                                         <!-- <li><a class="google" href="#"><i class="fa fa-google-plus"></i><span></span></a></li> -->
                                         <li><a class="linkedin" href="{{ $linkdinShareUrl }}" target="_blank"><i class="fa fa-linkedin"></i><span>&nbsp;&nbsp;&nbsp;Share on Linkedin</span></a></li>
                                     </ul>
-                                </div>
-                                <!-- Modal -->     
-                                <div id="popup">
-                                    <h3>CITE</h3>  
-                                    <div>                                  
-                                        <p><?php
-                                        // Helper::pr($rowContent); 
-                                        
-                                        // $co_author_name = json_decode($rowContent->co_author_names) ;
-                                        // Helper::pr($co_author); 
-                                        $author_name = $rowContent->author_name;
-                                        $new_title = $rowContent->new_title;
-                                        $doi = $rowContent->creative_work_DOI;
-                                        $co_authors = $rowContent->co_authors;
-                                        
-                                        function getInitials($author_name) {
-                                            $words = explode(" ", $author_name); // Split the name into words
-                                            $initials = strtoupper($words[0][0]) . ".";
-                                        
-                                            // foreach ($words as $word) {
-                                            //     $initials .= strtoupper($word[0]); // Get the first letter of each word
-                                            // }
-                                        
-                                            return $initials;
-                                        }
-                                        // Extract initials and last name
-                                        $name_parts = explode(" ", $author_name);
-                                        // Helper::pr($name_parts);
-                                        $initials = getInitials($author_name);
-                                        $last_name = end($name_parts); // Get the last name
-                                        for($i = 1; $i <= $co_authors; $i++)
-                                        {
-                                            $co_author_name = json_decode($rowContent->co_author_names);
-                                            $co_author = $co_author_name[$i-1];
-                                            $co_author_nameparts = explode(" ", $co_author);
-                                            $co_author_initials = getInitials($co_author);
-                                            $co_author_last_name = end($co_author_nameparts);
-                                            $co_author_name = $co_author_initials . ". " . $co_author_last_name;
-                                            // Helper::pr($co_author_name);
-                                        }                                        
-
-                                         if($rowContent->co_authors > 0){
-                                            echo "$initials $last_name & $co_author_initials $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
-                                            <a href=\"{$current_url}\">$new_title</a>";
-                                        } elseif($rowContent->co_authors > 1){ 
-                                            echo "$initials $last_name, <em>et al., $new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
-                                            <a href=\"{$current_url}\">$new_title</a>";
-                                        } else {
-                                            echo "$initials $last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
-                                            <a href=\"{$current_url}\">$new_title</a>";
-                                            // echo "$initials. $words[1], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. <a href="$rowContent->parent_category_name/$rowContent->sub_category_slug/$rowContent->slug">$new_title</a>";
-                                        }
-                                            ?></p>  
-                                    </div>
-                                    <button onclick="copyText()"><i class="fa fa-copy"></i> Copy</button>                                  
-                                    <button id="closePopup">Close</button>                                    
-                                    <h3 id="copyMessage">Copied successfully!</h3>
-                                </div>                              
+                                </div>                                                              
                                 <?php if($rowContent->media == 'image'){?>
                                     <div class="post-gallery">
                                         <img src="<?=env('UPLOADS_URL').'newcontent/'.$rowContent->cover_image?>" alt="<?=$rowContent->new_title?>">
@@ -301,16 +244,7 @@ $current_url = $protocol . $host . $uri;
                                         <!-- <li><a class="google" href="#"><i class="fa fa-google-plus"></i><span></span></a></li> -->
                                         <li><a class="linkedin" href="{{ $linkdinShareUrl }}" target="_blank"><i class="fa fa-linkedin"></i></a></li>
                                     </ul>
-                                </div>
-                                <div id="permalink">
-                                    <h3>PERMALINK</h3>  
-                                    <div>                                  
-                                        <p><?php echo $current_url;  ?></p>  
-                                    </div>
-                                    <button onclick="copyText()"><i class="fa fa-copy"></i> Copy</button>                                  
-                                    <button id="closeparmalink">Close</button>                                    
-                                    <h3 id="copyMessage2">Copied successfully!</h3>
-                                </div>        
+                                </div>                                      
                                 <div class="about-more-autor">
                                     <ul class="nav nav-tabs">
                                         <li class="active" style="width: 100%;">
@@ -835,6 +769,72 @@ $current_url = $protocol . $host . $uri;
             </div>
         </div>
     </section>
+    <!-- Modal -->     
+    <div id="popup">
+        <h3>CITE</h3>  
+        <div>                                  
+            <p><?php
+            // Helper::pr($rowContent); 
+            
+            // $co_author_name = json_decode($rowContent->co_author_names) ;
+            // Helper::pr($co_author); 
+            $author_name = $rowContent->author_name;
+            $new_title = $rowContent->new_title;
+            $doi = $rowContent->creative_work_DOI;
+            $co_authors = $rowContent->co_authors;
+            
+            function getInitials($author_name) {
+                $words = explode(" ", $author_name); // Split the name into words
+                $initials = strtoupper($words[0][0]) . ".";
+            
+                // foreach ($words as $word) {
+                //     $initials .= strtoupper($word[0]); // Get the first letter of each word
+                // }
+            
+                return $initials;
+            }
+            // Extract initials and last name
+            $name_parts = explode(" ", $author_name);
+            // Helper::pr($name_parts);
+            $initials = getInitials($author_name);
+            $last_name = end($name_parts); // Get the last name
+            for($i = 1; $i <= $co_authors; $i++)
+            {
+                $co_author_name = json_decode($rowContent->co_author_names);
+                $co_author = $co_author_name[$i-1];
+                $co_author_nameparts = explode(" ", $co_author);
+                $co_author_initials = getInitials($co_author);
+                $co_author_last_name = end($co_author_nameparts);
+                $co_author_name = $co_author_initials . ". " . $co_author_last_name;
+                // Helper::pr($co_author_name);
+            }                                        
+
+                if($rowContent->co_authors > 0){
+                echo "$initials $last_name & $co_author_initials $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
+                <a href=\"{$current_url}\">$new_title</a>";
+            } elseif($rowContent->co_authors > 1){ 
+                echo "$initials $last_name, <em>et al., $new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
+                <a href=\"{$current_url}\">$new_title</a>";
+            } else {
+                echo "$initials $last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
+                <a href=\"{$current_url}\">$new_title</a>";
+                // echo "$initials. $words[1], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. <a href="$rowContent->parent_category_name/$rowContent->sub_category_slug/$rowContent->slug">$new_title</a>";
+            }
+                ?></p>  
+        </div>
+        <button onclick="copyText()"><i class="fa fa-copy"></i> Copy</button>                                  
+        <button id="closePopup">Close</button>                                    
+        <h3 id="copyMessage">Copied successfully!</h3>
+    </div>
+    <div id="permalink">
+        <h3>PERMALINK</h3>  
+        <div>                                  
+            <p><?php echo $current_url;  ?></p>  
+        </div>
+        <button onclick="copyText2()"><i class="fa fa-copy"></i> Copy</button>                                  
+        <button id="closeparmalink">Close</button>                                    
+        <h3 id="copyMessage2">Copied successfully!</h3>
+    </div>  
 <!-- End block-wrapper-section -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -894,7 +894,7 @@ $current_url = $protocol . $host . $uri;
     });
 </script>
 <script>
-    function copyText() {
+    function copyText2() {
         // Get text inside the popup
         let textToCopy = $('#permalink p').map(function() {
             return $(this).text().trim();
