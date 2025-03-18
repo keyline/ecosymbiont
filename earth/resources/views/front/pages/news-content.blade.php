@@ -162,6 +162,11 @@ $current_url = $protocol . $host . $uri;
                                         
                                             return $initials;
                                         }
+                                        // Extract initials and last name
+                                        $name_parts = explode(" ", $author_name);
+                                        Helper::pr($name_parts);
+                                        $initials = getInitials($author_name);
+                                        $last_name = end($name_parts); // Get the last name
                                         for($i = 1; $i <= $co_authors; $i++)
                                         {
                                             $co_author_name = json_decode($rowContent->co_author_names);
@@ -173,10 +178,7 @@ $current_url = $protocol . $host . $uri;
                                             // Helper::pr($co_author_name);
                                         }
 
-                                        // Extract initials and last name
-                                        $name_parts = explode(" ", $author_name);
-                                        $initials = getInitials($author_name);
-                                        $last_name = end($name_parts); // Get the last name
+                                        
 
                                          if($rowContent->co_authors > 0){
                                             echo "$initials $last_name & $co_author_initials. $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
