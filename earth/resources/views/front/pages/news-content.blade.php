@@ -140,16 +140,10 @@ $current_url = $protocol . $host . $uri;
                                 </div>
                                 <!-- Modal -->     
                                 <div id="popup">
-                                    <h3>Submissions Eligibility Criteria</h3>
-                                    <!-- <p>At this time, you must:<br>
-                                    (A) be invited to submit a Creative-Work to EaRTh (if you have not been invited, follow the directions for question 6 when completing your profile); and/or <br>
-                                    (B) have participated as a strategist at an in-person ER Synergy Meeting.</p> -->
-                                    <p>If you would like to submit creative-works to EaRTh, you must:</p>
-                                    <ul>
-                                    <li>be a grassroots human individual, ecoweb-rooted community, or movement; and</li>
-                                    <li>submit creative-works related to any aspect of human-ecological connectivity</li>
-                                    </ul>
+                                    <h3>CITE</h3>                                    
+                                    <p id="citationText">If you would like to submit creative-works to EaRTh, you must:</p>                                    
                                     <button id="closePopup">Close</button>
+                                    <button onclick="copyText()"><i class="fa fa-copy"></i> Copy</button>
                                 </div>                              
                                 <?php if($rowContent->media == 'image'){?>
                                     <div class="post-gallery">
