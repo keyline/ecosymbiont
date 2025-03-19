@@ -6285,6 +6285,7 @@ div#popup h3 {
 }
 div#popup p {
   line-height: 30px;
+  word-wrap: break-word;
 }
 #popup {
   position: fixed;
