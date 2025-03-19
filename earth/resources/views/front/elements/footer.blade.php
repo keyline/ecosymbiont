@@ -167,7 +167,7 @@ $community  = Community::select('id', 'name')->where('status', '=', 1)->orderBy(
                         <select id="search_type_community" class="adv-search-field field-selector" name="search_keyword3" style="display: none;">
                             <option value="" selected="selected">Select Community</option>
                             <?php if($community){ foreach($community as $community_one){?>
-                                <option value="<?=$community_one->id?>"><?=$community_one->name?></option>
+                                <option value="<?=$community_one->name?>"><?=$community_one->name?></option>
                             <?php } }?>
                         </select>
                         <input type="text" id="search_keyword" name="search_keyword0" placeholder="Enter a search term" required>
