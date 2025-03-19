@@ -817,8 +817,10 @@ $current_url = $protocol . $host . $uri;
         <div>                                  
             <p><?php echo $current_url;  ?></p>  
         </div>
-        <button onclick="copyText2()"><i class="fa fa-copy"></i> Copy</button>                                  
-        <button id="closepermalink">Close</button>                                    
+        <div class="cite_button">
+            <button class="btn btn-primary" onclick="copyText2()"><i class="fa fa-copy"></i> Copy</button>                                  
+            <button id="closepermalink">Close</button>
+        </div>                                   
         <h3 id="copyMessage2">Copied successfully!</h3>
     </div>  
 <!-- End block-wrapper-section -->

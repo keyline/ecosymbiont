@@ -6267,6 +6267,13 @@ button#closePopup {
   margin-left: auto !important;
   text-align: center;
 }
+.cite_button button#closepermalink {  
+  display: block;
+  width: auto;
+  margin: 0;
+  margin-left: auto !important;
+  text-align: center;
+}
 div#popup h3 {
   font-size: 18px;
   font-weight: 600;
@@ -6299,7 +6306,7 @@ div#permalink {
 button#closepermalink {
   display: table;
   margin: 0 auto;
-  background: #337ab7;
+  background: #b73333;
   border: none;
   color: #fff;
   padding: 6px 20px;
