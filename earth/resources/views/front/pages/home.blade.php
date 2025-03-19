@@ -920,6 +920,7 @@ $current_url = $protocol . $host . $uri;
                                                     ->where('news_contents.status', 1)
                                                     ->where('news_contents.media', 'video')
                                                     ->inRandomOrder()
+                                                    ->orderBy('news_contents.created_at', 'DESC')
                                                     ->limit(8)
                                                     ->get();
                     if($videoContents){ foreach($videoContents as $videoContent){
