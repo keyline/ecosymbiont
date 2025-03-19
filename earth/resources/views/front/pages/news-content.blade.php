@@ -796,16 +796,25 @@ $current_url = $protocol . $host . $uri;
             // echo $co_authorclassification; die;
 
                 if($rowContent->co_authors > 0){
-                echo "$initials $last_name & $co_author_initials $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
-                <a href=\"{$current_url}\">$new_title</a>";
-            } elseif($rowContent->co_authors > 1){ 
-                echo "$initials $last_name, <em>et al., $new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
-                <a href=\"{$current_url}\">$new_title</a>";
-            } else {
-                echo "$initials $last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
-                <a href=\"{$current_url}\">$new_title</a>";
-                // echo "$initials. $words[1], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. <a href="$rowContent->parent_category_name/$rowContent->sub_category_slug/$rowContent->slug">$new_title</a>";
-            }
+                    $co_author_class = json_decode($rowContent->co_author_classification) ;
+                    if($co_author_class[0] == 'Movement'){
+                        echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
+                        <a href=\"{$current_url}\">$new_title</a>";
+                    } elseif($co_author_class[0] == 'Ecoweb-rooted community'){
+                        echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
+                        <a href=\"{$current_url}\">$new_title</a>";
+                    } else{
+                        echo "$initials $last_name & $co_author_initials $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
+                        <a href=\"{$current_url}\">$new_title</a>";
+                    }
+                } elseif($rowContent->co_authors > 1){ 
+                    echo "$initials $last_name, <em>et al., $new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
+                    <a href=\"{$current_url}\">$new_title</a>";
+                } else {
+                    echo "$initials $last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
+                    <a href=\"{$current_url}\">$new_title</a>";
+                    // echo "$initials. $words[1], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. <a href="$rowContent->parent_category_name/$rowContent->sub_category_slug/$rowContent->slug">$new_title</a>";
+                }
                 ?></p>  
         </div>
         <div class="cite_button">
