@@ -795,14 +795,14 @@ $current_url = $protocol . $host . $uri;
                 $co_author_name = $co_author_initials . ". " . $co_author_last_name;
                 // Helper::pr($co_authorclassification);                
             }     
-             echo $co_author_class; die;
+             echo $co_authorclassification; die;
 
                 if($rowContent->co_authors == 1){
-                    $co_author_class = json_decode($rowContent->co_author_classification) ;
-                    if($co_author_class == 'Movement'){
+                    // $co_author_class = json_decode($rowContent->co_author_classification) ;
+                    if($co_authorclassification == 'Movement'){
                         echo "$initials $last_name & $co_author_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
                         $url";
-                    } elseif($co_author_class == 'Ecoweb-rooted community'){
+                    } elseif($co_authorclassification == 'Ecoweb-rooted community'){
                         echo "$initials $last_name & $co_author_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
                         $url";
                     } else{
