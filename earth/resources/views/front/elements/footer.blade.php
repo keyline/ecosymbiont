@@ -4,9 +4,11 @@ use App\Models\NewsContent;
 use App\Models\Country;
 use App\Models\EcosystemAffiliation;
 use App\Helpers\Helper;
+use App\Models\Community;
 
 $country                = Country::select('id', 'name')->where('status', '=', 1)->orderBy('name', 'ASC')->get();
 $ecosystem_affiliation  = EcosystemAffiliation::select('id', 'name')->where('status', '=', 1)->orderBy('name', 'ASC')->get();
+$community  = Community::select('id', 'name')->where('status', '=', 1)->orderBy('name', 'ASC')->get();
 ?>
 <div class="footer_top_menu">
     <div class="container">
@@ -162,6 +164,12 @@ $ecosystem_affiliation  = EcosystemAffiliation::select('id', 'name')->where('sta
                                 <option value="<?=$ecoaff->id?>"><?=$ecoaff->name?></option>
                             <?php } }?>
                         </select>
+                        <select id="search_type_community" class="adv-search-field field-selector" name="search_keyword3" style="display: none;">
+                            <option value="" selected="selected">Select Ecoweb Affiliation</option>
+                            <?php if($community){ foreach($community as $community_one){?>
+                                <option value="<?=$community_one->id?>"><?=$community_one->name?></option>
+                            <?php } }?>
+                        </select>
                         <input type="text" id="search_keyword" name="search_keyword0" placeholder="Enter a search term" required>
                         <button type="submit" class="btn btn-default"><i class="fa fa-search"></i> Search</button>
                     </div>
@@ -181,6 +189,8 @@ $ecosystem_affiliation  = EcosystemAffiliation::select('id', 'name')->where('sta
                 $('input[name="search_keyword0"]').attr('required', false);
                 $('select[name="search_keyword2"]').hide();
                 $('select[name="search_keyword2"]').attr('required', false);
+                $('select[name="search_keyword3"]').hide();
+                $('select[name="search_keyword3"]').attr('required', false);
 
                 $('select[name="search_keyword1"]').show();
                 $('select[name="search_keyword1"]').attr('required', true);
@@ -189,9 +199,21 @@ $ecosystem_affiliation  = EcosystemAffiliation::select('id', 'name')->where('sta
                 $('input[name="search_keyword0"]').attr('required', false);
                 $('select[name="search_keyword1"]').hide();
                 $('select[name="search_keyword1"]').attr('required', false);
+                $('select[name="search_keyword3"]').hide();
+                $('select[name="search_keyword3"]').attr('required', false);
 
                 $('select[name="search_keyword2"]').show();
                 $('select[name="search_keyword2"]').attr('required', true);
+            } else if(search_type == 'Community'){
+                $('input[name="search_keyword0"]').hide();
+                $('input[name="search_keyword0"]').attr('required', false);
+                $('select[name="search_keyword1"]').hide();
+                $('select[name="search_keyword1"]').attr('required', false);
+                $('select[name="search_keyword2"]').hide();
+                $('select[name="search_keyword2"]').attr('required', false);
+
+                $('select[name="search_keyword3"]').show();
+                $('select[name="search_keyword3"]').attr('required', true);
             } else {
                 $('select[name="search_keyword1"]').hide();
                 $('select[name="search_keyword1"]').attr('required', false);
