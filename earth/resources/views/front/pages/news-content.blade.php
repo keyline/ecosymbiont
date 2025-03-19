@@ -758,7 +758,7 @@ $current_url = $protocol . $host . $uri;
         <h3>CITE</h3>  
         <div>                                  
             <p><?php
-             Helper::pr($rowContent->co_authors); 
+            //  Helper::pr($rowContent->co_authors); 
             
              
             //  Helper::pr($co_author_class); 
