@@ -807,8 +807,8 @@ $current_url = $protocol . $host . $uri;
                 ?></p>  
         </div>
         <div class="cite_button">
-            <button onclick="copyText()"><i class="fa fa-copy"></i> Copy</button>                                  
-            <button id="closePopup">Close</button>
+            <button class="btn btn-primary" onclick="copyText()"><i class="fa fa-copy"></i> Copy</button>                                  
+            <button class="btn btn-danger" id="closePopup">Close</button>
         </div>                                    
         <h3 id="copyMessage">Copied successfully!</h3>
     </div>

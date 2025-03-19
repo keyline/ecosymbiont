@@ -6261,7 +6261,11 @@ button#closePopup {
   align-items: center;
 }
 .cite_button button#closePopup {  
-  display: inline-block;
+  display: block;
+  width: auto;
+  margin: 0;
+  margin-left: auto !important;
+  text-align: center;
 }
 div#popup h3 {
   font-size: 18px;
