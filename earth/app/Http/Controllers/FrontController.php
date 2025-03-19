@@ -386,6 +386,7 @@ class FrontController extends Controller
                                                       ->orWhere('news_contents.organization_name', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('news_contents.keywords', 'LIKE', '%'.$search_keyword.'%');
                                              })
+                                             ->orderBy('news_contents.created_at', 'DESC')
                                              ->limit(4)
                                              ->get();
             // Helper::pr($searchResults);
@@ -732,6 +733,7 @@ class FrontController extends Controller
                                                       ->orWhere('news_contents.organization_name', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('news_contents.keywords', 'LIKE', '%'.$search_keyword.'%');
                                              })
+                                             ->orderBy('news_contents.created_at', 'DESC')
                                              ->offset($offset)
                                             ->limit($limit)
                                              ->get();
@@ -1050,6 +1052,7 @@ class FrontController extends Controller
                                                       ->orWhere('organization_name', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('keywords', 'LIKE', '%'.$search_keyword.'%');
                                              })
+                                             ->orderBy('news_contents.created_at', 'DESC')
                                              ->get();
         
         if($searchResults){
