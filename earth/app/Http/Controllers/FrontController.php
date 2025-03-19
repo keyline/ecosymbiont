@@ -413,7 +413,7 @@ class FrontController extends Controller
                 $title              = 'Search result for: "' . (($getAffiliation)?$getAffiliation->name:'') . '" ('.$search_type.')';
                 $data['keyword']    = $search_keyword;
             } elseif($search_type == 'Community'){
-                echo $search_keyword     = $postData['search_keyword3'];                die;
+                $search_keyword     = $postData['search_keyword3'];
                 $getCommunity       = Community::select('name')->where('id', '=', $search_keyword)->first();
                 $title              = 'Search result for: "' . (($getCommunity)?$getCommunity->name:'') . '" ('.$search_type.')';
                 $data['keyword']    = $search_keyword;
