@@ -478,6 +478,7 @@ class FrontController extends Controller
                                              ->where(function($query) use ($search_keyword) {
                                                 $query->where('news_contents.author_name', 'LIKE', '%'.$search_keyword.'%');
                                              })
+                                             ->orderBy('news_contents.created_at', 'DESC')
                                              ->limit(4)
                                              ->get();
             } elseif($search_type == 'Subtitle'){
@@ -535,10 +536,7 @@ class FrontController extends Controller
                                                 $query->where('news_contents.author_affiliation', 'LIKE', '%'.$search_keyword.'%');
                                              })
                                              ->limit(4)
-                                             ->get();
-                                             // Get raw SQL
-// $sql = $data['contents']->toSql();
-// dd($sql);
+                                             ->get();                                             
             } elseif($search_type == 'Country of residence'){
                 $data['contents']   = NewsContent::select(
                                                         'news_contents.id', 
