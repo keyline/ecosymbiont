@@ -6255,6 +6255,14 @@ button#closePopup {
   padding: 6px 20px;
   border-radius: 4px;
 }
+.cite_button{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cite_button button#closePopup {  
+  display: inline-block;
+}
 div#popup h3 {
   font-size: 18px;
   font-weight: 600;
