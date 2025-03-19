@@ -766,6 +766,8 @@ $current_url = $protocol . $host . $uri;
             $new_title = $rowContent->new_title;
             $doi = $rowContent->creative_work_DOI;
             $co_authors = $rowContent->co_authors;
+            $publish_date = date_format(date_create($rowContent->created_at), "d M Y");
+            $url = $current_url;
             
             function getInitials($author_name) {
                 $words = explode(" ", $author_name); // Split the name into words
@@ -798,21 +800,21 @@ $current_url = $protocol . $host . $uri;
                 if($rowContent->co_authors == 1){
                     $co_author_class = json_decode($rowContent->co_author_classification) ;
                     if($co_author_class[0] == 'Movement'){
-                        echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi(date_format(date_create($rowContent->created_at), 'd M Y')). 
-                        $current_url";
+                        echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi($publish_date). 
+                        $url";
                     } elseif($co_author_class[0] == 'Ecoweb-rooted community'){
-                        echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi(date_format(date_create($rowContent->created_at), 'd M Y')). 
-                        $current_url";
+                        echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi($publish_date). 
+                        $url";
                     } else{
-                        echo "$initials $last_name & $co_author_initials $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi(date_format(date_create($rowContent->created_at), 'd M Y')). 
-                        $current_url";
+                        echo "$initials $last_name & $co_author_initials $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi($publish_date). 
+                        $url";
                     }
                 } elseif($rowContent->co_authors > 1){ 
-                    echo "$initials $last_name, <em>et al.</em>, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi(date_format(date_create($rowContent->created_at), 'd M Y')). 
-                    $current_url";
+                    echo "$initials $last_name, <em>et al.</em>, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi($publish_date). 
+                    $url";
                 } else {
-                    echo "$initials $last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi(date_format(date_create($rowContent->created_at), 'd M Y')). 
-                    $current_url";
+                    echo "$initials $last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi($publish_date). 
+                    $url";
                     // echo "$initials. $words[1], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. <a href="$rowContent->parent_category_name/$rowContent->sub_category_slug/$rowContent->slug">$new_title</a>";
                 }
                 ?></p>  
