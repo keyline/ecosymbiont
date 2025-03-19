@@ -893,6 +893,7 @@ $current_url = $protocol . $host . $uri;
         // Open Cite popup
         $('#cite').click(function () {
             $('#popup').fadeIn();
+            $('#permalink').hide();
             $('#copyMessage').hide();
         });
 
@@ -904,6 +905,7 @@ $current_url = $protocol . $host . $uri;
         // Open Permalink popup
         $('#permalink_button').click(function () {
             $('#permalink').fadeIn();
+            $('#popup').hide();
             $('#copyMessage2').hide();
         });
 
