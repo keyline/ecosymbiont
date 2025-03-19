@@ -281,12 +281,14 @@ $current_url = $protocol . $host . $uri;
                                                             <span><?= $organization_name = (isset($rowContent->organization_name) > 0) ? trim($rowContent->organization_name) : ''; ?></span>
                                                         </span>
                                                     </div>
+                                                    <?php if($rowContent->community_name != ''){?>
                                                     <div class="autor-title">
                                                         <span>
                                                             <img src="<?=env('UPLOADS_URL').'icon/EaRTh-Communities-Logo.png'?>" alt="Community" title="Community" data-toogle="tooltip">                                                                    
                                                             <span><?= $rowContent->community_name; ?></span>
                                                         </span>
                                                     </div>
+                                                    <?php }?>
                                                 </div>
                                             </div>
                                         </div>                                                
