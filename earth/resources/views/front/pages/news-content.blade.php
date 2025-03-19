@@ -795,7 +795,7 @@ $current_url = $protocol . $host . $uri;
             }     
             // echo $co_authorclassification; die;
 
-                if($rowContent->co_authors > 0){
+                if($rowContent->co_authors == 1){
                     $co_author_class = json_decode($rowContent->co_author_classification) ;
                     if($co_author_class[0] == 'Movement'){
                         echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
