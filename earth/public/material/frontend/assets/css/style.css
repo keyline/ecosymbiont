@@ -7027,7 +7027,7 @@ div.block-content {
     font-size: 16px;
     line-height: 24px;
   }
-  #popup {
+  #popup, #permalink {
     max-width: 320px;
   }
 }
