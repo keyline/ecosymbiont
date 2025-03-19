@@ -760,8 +760,8 @@ $current_url = $protocol . $host . $uri;
             <p><?php
             // Helper::pr($rowContent); 
             
-            // $co_author_name = json_decode($rowContent->co_author_names) ;
-            // Helper::pr($co_author); 
+             $co_author_class = json_decode($rowContent->co_author_classification) ;
+             Helper::pr($co_author_class); 
             $author_name = $rowContent->author_name;
             $new_title = $rowContent->new_title;
             $doi = $rowContent->creative_work_DOI;
@@ -778,8 +778,7 @@ $current_url = $protocol . $host . $uri;
                 return $initials;
             }
             // Extract initials and last name
-            $name_parts = explode(" ", $author_name);
-            // Helper::pr($name_parts);
+            $name_parts = explode(" ", $author_name);    
             $initials = getInitials($author_name);
             $last_name = end($name_parts); // Get the last name
             for($i = 1; $i <= $co_authors; $i++)
