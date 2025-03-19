@@ -808,7 +808,7 @@ $current_url = $protocol . $host . $uri;
                         <a href=\"{$current_url}\">$new_title</a>";
                     }
                 } elseif($rowContent->co_authors > 1){ 
-                    echo "$initials $last_name, <em>et al., $new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
+                    echo "$initials $last_name, <em>et al.</em>, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
                     <a href=\"{$current_url}\">$new_title</a>";
                 } else {
                     echo "$initials $last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
