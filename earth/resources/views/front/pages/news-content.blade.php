@@ -791,21 +791,16 @@ $current_url = $protocol . $host . $uri;
                 $co_author = $co_author_name[$i-1];
                 $co_author_nameparts = explode(" ", $co_author);
                 $co_author_initials = getInitials($co_author);
-                $co_author_last_name = end($co_author_nameparts);
-                // $co_author_name = $co_author_initials . ". " . $co_author_last_name;
-                // Helper::pr($co_authorclassification);                
-            }     
-             echo $co_author_name[0]; die;
+                $co_author_last_name = end($co_author_nameparts);                
+            }                 
 
                 if($rowContent->co_authors == 1){
                     // $co_author_class = json_decode($rowContent->co_author_classification) ;
-                    if($co_authorclassification == 'Movement'){
-                        // echo 'movement'; die;
-                        echo "$initials $last_name & $co_author_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
+                    if($co_authorclassification == 'Movement'){                        
+                        echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
                         $url";
-                    } elseif($co_authorclassification == 'Ecoweb-rooted community'){
-                        echo 'community'; die;
-                        echo "$initials $last_name & $co_author_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
+                    } elseif($co_authorclassification == 'Ecoweb-rooted community'){                        
+                        echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
                         $url";
                     } else{
                         echo "$initials $last_name & $co_author_initials $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
