@@ -536,6 +536,9 @@ class FrontController extends Controller
                                              })
                                              ->limit(4)
                                              ->get();
+                                             // Get raw SQL
+$sql = $data['contents']->toSql();
+dd($sql);
             } elseif($search_type == 'Country of residence'){
                 $data['contents']   = NewsContent::select(
                                                         'news_contents.id', 
