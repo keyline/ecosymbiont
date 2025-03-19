@@ -412,7 +412,12 @@ class FrontController extends Controller
                 $getAffiliation     = EcosystemAffiliation::select('name')->where('id', '=', $search_keyword)->first();
                 $title              = 'Search result for: "' . (($getAffiliation)?$getAffiliation->name:'') . '" ('.$search_type.')';
                 $data['keyword']    = $search_keyword;
-            } else {
+            } elseif($search_type == 'Community'){
+                $search_keyword     = $postData['search_keyword3'];
+                $getCommunity       = Community::select('name')->where('id', '=', $search_keyword)->first();
+                $title              = 'Search result for: "' . (($getCommunity)?$getCommunity->name:'') . '" ('.$search_type.')';
+                $data['keyword']    = $search_keyword;
+            }else {
                 $search_keyword     = $postData['search_keyword0'];
                 $title              = 'Search result for: "' . $search_keyword . '" ('.$search_type.')';
                 $data['keyword']    = $search_keyword;
