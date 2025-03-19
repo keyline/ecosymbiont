@@ -281,6 +281,12 @@ $current_url = $protocol . $host . $uri;
                                                             <span><?= $organization_name = (isset($rowContent->organization_name) > 0) ? trim($rowContent->organization_name) : ''; ?></span>
                                                         </span>
                                                     </div>
+                                                    <div class="autor-title">
+                                                        <span>
+                                                            <img src="<?=env('UPLOADS_URL').'icon/EaRTh-Communities-Logo.png'?>" alt="Community" title="Community" data-toogle="tooltip">                                                                    
+                                                            <span><?= $organization_name = (isset($rowContent->organization_name) > 0) ? trim($rowContent->organization_name) : ''; ?></span>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>                                                
@@ -372,7 +378,7 @@ $current_url = $protocol . $host . $uri;
                                                                 <span>
                                                                     <img src="<?=env('UPLOADS_URL').'icon/organizational.png'?>" alt="organizational" title="Organizational Affiliation" data-toogle="tooltip">                                                                    
                                                                     <!-- <span><?= $organization_name = (isset($organization[$i]) > 0) ? trim($organization[$i]) : ''; ?></span> -->
-                                                                    <span><?= $co_author_organizations[$i - 1] ?></span>
+                                                                    <!-- <span><?= $co_author_organizations[$i - 1] ?></span> -->
                                                                 </span>
                                                             </div>
                                                         </div>
