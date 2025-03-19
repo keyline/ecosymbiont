@@ -134,11 +134,7 @@ $current_url = $protocol . $host . $uri;
                                         <li><button class="btn btn-primary" id="permalink_button">
                                             <i class="fa fa-share-alt"></i> Permalink</button>
                                         </li>
-                                        <li><i class="fa fa-share-alt"></i><span>Share Post</span></li>                                        
-                                        <li><a class="facebook" href="{{ $facebookShareUrl }}" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a class="twitter" href="{{ $twitterShareUrl }}" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                                        <!-- <li><a class="google" href="#"><i class="fa fa-google-plus"></i><span></span></a></li> -->
-                                        <li><a class="linkedin" href="{{ $linkdinShareUrl }}" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                        
                                     </ul>
                                 </div>                                                              
                                 <?php if($rowContent->media == 'image'){?>
