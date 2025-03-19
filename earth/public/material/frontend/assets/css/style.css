@@ -6323,6 +6323,7 @@ div#permalink h3 {
 }
 div#permalink p {
   line-height: 30px;
+  word-wrap: break-word;
 }
 #permalink {
   position: fixed;
