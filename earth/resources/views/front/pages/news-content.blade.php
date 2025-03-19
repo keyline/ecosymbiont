@@ -800,9 +800,11 @@ $current_url = $protocol . $host . $uri;
                 if($rowContent->co_authors == 1){
                     // $co_author_class = json_decode($rowContent->co_author_classification) ;
                     if($co_authorclassification == 'Movement'){
+                        echo 'movement'; die;
                         echo "$initials $last_name & $co_author_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
                         $url";
                     } elseif($co_authorclassification == 'Ecoweb-rooted community'){
+                        echo 'community'; die;
                         echo "$initials $last_name & $co_author_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
                         $url";
                     } else{
