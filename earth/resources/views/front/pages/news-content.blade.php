@@ -761,7 +761,7 @@ $current_url = $protocol . $host . $uri;
             // Helper::pr($rowContent); 
             
              $co_author_class = json_decode($rowContent->co_author_classification) ;
-             Helper::pr($co_author_class); 
+            //  Helper::pr($co_author_class); 
             $author_name = $rowContent->author_name;
             $new_title = $rowContent->new_title;
             $doi = $rowContent->creative_work_DOI;
