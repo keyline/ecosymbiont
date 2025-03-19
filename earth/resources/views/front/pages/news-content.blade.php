@@ -760,7 +760,7 @@ $current_url = $protocol . $host . $uri;
             <p><?php
             // Helper::pr($rowContent); 
             
-             $co_author_class = json_decode($rowContent->co_author_classification) ;
+             
             //  Helper::pr($co_author_class); 
             $author_name = $rowContent->author_name;
             $new_title = $rowContent->new_title;
@@ -784,13 +784,16 @@ $current_url = $protocol . $host . $uri;
             for($i = 1; $i <= $co_authors; $i++)
             {
                 $co_author_name = json_decode($rowContent->co_author_names);
+                $co_author_class = json_decode($rowContent->co_author_classification) ;
+                $co_authorclassification = $co_author_class[$i-1];
                 $co_author = $co_author_name[$i-1];
                 $co_author_nameparts = explode(" ", $co_author);
                 $co_author_initials = getInitials($co_author);
                 $co_author_last_name = end($co_author_nameparts);
                 $co_author_name = $co_author_initials . ". " . $co_author_last_name;
-                // Helper::pr($co_author_name);
-            }                                        
+                // Helper::pr($co_author_name);                
+            }     
+            echo $co_authorclassification; die;
 
                 if($rowContent->co_authors > 0){
                 echo "$initials $last_name & $co_author_initials $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
