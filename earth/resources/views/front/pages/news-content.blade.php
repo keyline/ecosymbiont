@@ -806,8 +806,10 @@ $current_url = $protocol . $host . $uri;
             }
                 ?></p>  
         </div>
-        <button onclick="copyText()"><i class="fa fa-copy"></i> Copy</button>                                  
-        <button id="closePopup">Close</button>                                    
+        <div>
+            <button onclick="copyText()"><i class="fa fa-copy"></i> Copy</button>                                  
+            <button id="closePopup">Close</button>
+        </div>                                    
         <h3 id="copyMessage">Copied successfully!</h3>
     </div>
     <div id="permalink">
