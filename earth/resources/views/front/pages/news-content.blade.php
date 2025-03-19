@@ -792,7 +792,7 @@ $current_url = $protocol . $host . $uri;
                 $co_author_nameparts = explode(" ", $co_author);
                 $co_author_initials = getInitials($co_author);
                 $co_author_last_name = end($co_author_nameparts);
-                $co_author_name = $co_author_initials . ". " . $co_author_last_name;
+                // $co_author_name = $co_author_initials . ". " . $co_author_last_name;
                 // Helper::pr($co_authorclassification);                
             }     
              echo $co_author_name; die;
