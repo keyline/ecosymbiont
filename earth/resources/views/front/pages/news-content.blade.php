@@ -791,9 +791,9 @@ $current_url = $protocol . $host . $uri;
                 $co_author_initials = getInitials($co_author);
                 $co_author_last_name = end($co_author_nameparts);
                 $co_author_name = $co_author_initials . ". " . $co_author_last_name;
-                // Helper::pr($co_author_name);                
+                Helper::pr($co_authorclassification);                
             }     
-            echo $co_authorclassification; die;
+            // echo $co_authorclassification; die;
 
                 if($rowContent->co_authors > 0){
                 echo "$initials $last_name & $co_author_initials $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. 
