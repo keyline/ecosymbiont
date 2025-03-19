@@ -799,11 +799,11 @@ $current_url = $protocol . $host . $uri;
 
                 if($rowContent->co_authors == 1){
                     $co_author_class = json_decode($rowContent->co_author_classification) ;
-                    if($co_author_class[0] == 'Movement'){
-                        echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
+                    if($co_author_class == 'Movement'){
+                        echo "$initials $last_name & $co_author_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
                         $url";
-                    } elseif($co_author_class[0] == 'Ecoweb-rooted community'){
-                        echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
+                    } elseif($co_author_class == 'Ecoweb-rooted community'){
+                        echo "$initials $last_name & $co_author_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
                         $url";
                     } else{
                         echo "$initials $last_name & $co_author_initials $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
