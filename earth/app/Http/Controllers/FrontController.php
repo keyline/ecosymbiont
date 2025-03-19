@@ -596,7 +596,7 @@ class FrontController extends Controller
                                              ->limit(4)
                                              ->get();
             } elseif($search_type == 'Community'){
-                DB::enableQueryLog();
+                // DB::enableQueryLog();
                 $data['contents']   = NewsContent::select(
                                                         'news_contents.id', 
                                                         'news_contents.new_title', 
@@ -624,7 +624,7 @@ class FrontController extends Controller
                                              })
                                              ->limit(4)
                                              ->get();
-                                             dd(DB::getQueryLog());
+                                            //  dd(DB::getQueryLog());
             } elseif($search_type == 'Tag'){
                 $data['contents']   = NewsContent::select(
                                                         'news_contents.id', 
