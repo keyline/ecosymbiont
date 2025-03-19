@@ -799,6 +799,7 @@ class FrontController extends Controller
                                              ->where(function($query) use ($search_keyword) {
                                                 $query->where('news_contents.author_name', 'LIKE', '%'.$search_keyword.'%');
                                              })
+                                             ->orderBy('news_contents.created_at', 'DESC')
                                             ->offset($offset)
                                             ->limit($limit)
                                             ->get();
