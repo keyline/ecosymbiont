@@ -922,6 +922,7 @@ $current_url = $protocol . $host . $uri;
                             $query->where('news_contents.current_article_no', 1) // Include first video of each series
                                 ->orWhere('news_contents.is_series', 'No');    // Include standalone videos
                         })
+                        ->inRandomOrder()
                         ->orderBy('news_contents.created_at', 'DESC') // Latest videos first
                         ->limit(8)
                         ->get();
