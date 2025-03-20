@@ -38,13 +38,13 @@ $controllerRoute = $module['controller_route'];
               <thead>
                 <tr>
                   <th scope="col">#</th>
+                  <th scope="col">Action</th>
                   <th scope="col">SRN</th>
                   <th scope="col">Author Info</th>                  
                   <th scope="col">Creative-Work Info</th>                  
                   <th scope="col">Submitted At</th>                  
                   <th scope="col">Published Status</th>                  
-                  <!-- <th scope="col">Published Action</th> -->
-                  <th scope="col">Action</th>
+                  <!-- <th scope="col">Published Action</th> -->                  
                 </tr>
               </thead>
               <tbody>
@@ -53,6 +53,13 @@ $controllerRoute = $module['controller_route'];
                   { ?>
                       <tr>
                         <th scope="row"><?=$sl++?></th>
+                        <td>                      
+                          <a href="<?=url('admin/' . $controllerRoute . '/view_details/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="ViewDetails <?=$module['title']?>">View Details</a><br>
+                          <?php if ($row->is_import == 0) { ?>
+                            <a href="<?=url('admin/news_content/import/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="ViewDetails <?=$module['title']?>">Edit / Import to News Content</a><br>
+                          <?php } ?>
+                          <a href="<?=url('admin/' . $controllerRoute . '/delete/'.Helper::encoded($row->id))?>" class="btn btn-outline-danger btn-sm" title="Delete <?=$module['title']?>" onclick="return confirm('Do you want to delete this Creative-Work ?');"><i class="fa fa-trash"></i> Delete</a>
+                        </td>
                         <td><?=$row->article_no?></td>
                         <td>
                           <?=$row->first_name?> <?=$row->last_name?><br> <?=$row->email?></td>
@@ -84,14 +91,7 @@ $controllerRoute = $module['controller_route'];
                             <a href="?=url('admin/' . $controllerRoute . '/change_status_reject/'.Helper::encoded($row->id))?>" class="btn btn-danger btn-sm" title="Reject ?=$module['title']?>"><i class="fa fa-times"></i> Reject</a>
                         ?php }?>
                           
-                        </td> -->
-                        <td>                      
-                          <a href="<?=url('admin/' . $controllerRoute . '/view_details/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="ViewDetails <?=$module['title']?>">View Details</a>
-                          <?php if ($row->is_import == 0) { ?>
-                            <a href="<?=url('admin/news_content/import/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="ViewDetails <?=$module['title']?>">Edit / Import to News Content</a>
-                          <?php } ?>
-                          <a href="<?=url('admin/' . $controllerRoute . '/delete/'.Helper::encoded($row->id))?>" class="btn btn-outline-danger btn-sm" title="Delete <?=$module['title']?>" onclick="return confirm('Do you want to delete this Creative-Work ?');"><i class="fa fa-trash"></i> Delete</a>
-                        </td>
+                        </td> -->                        
                       </tr>
                     <?php 
                   } 
