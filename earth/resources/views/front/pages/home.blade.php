@@ -1002,7 +1002,7 @@ $current_url = $protocol . $host . $uri;
                             //                 ->limit(6)  // Limit to 3 records
                             //                 ->get();
                             // Get second last article from each category
-                            $recentContents = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                            $latestarticles = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
                             ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
                             ->select(
                                 'news_contents.id',
@@ -1069,7 +1069,7 @@ $current_url = $protocol . $host . $uri;
                             // $recentContents = $secondLastArticles->merge($seriesArticles);
 
 
-                            if($recentContents){ foreach($recentContents as $recentContent){
+                            if($latestarticles){ foreach($latestarticles as $recentContent){
                             ?>
                                 <?php
                                 $is_series                  = $recentContent->is_series;
