@@ -122,7 +122,7 @@ $controllerRoute = $module['controller_route'];
                       ?>
                         <?=$countries->name?>
                       <?php } ?><br>
-                      <?=wordwrap($row->organization_name, 10, "<br>\n");?>
+                      <?=wordwrap($row->organization_name, 20, "<br>\n");?>
                     </td>
                     <!-- <td>
                       <?php
