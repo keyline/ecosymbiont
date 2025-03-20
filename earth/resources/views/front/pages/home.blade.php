@@ -1026,19 +1026,14 @@ $current_url = $protocol . $host . $uri;
                             )
                             ->where('news_contents.status', 1)                            
                             ->whereRaw("
-                                news_contents.created_at = (
-                                    SELECT MAX(nc.created_at) 
-                                    FROM news_contents nc 
-                                    WHERE nc.sub_category = news_contents.sub_category 
-                                    AND nc.created_at < (
-                                        SELECT MAX(nc2.created_at) 
-                                        FROM news_contents nc2 
-                                        WHERE nc2.sub_category = news_contents.sub_category
+                                    news_contents.id = (
+                                        SELECT id FROM news_contents AS nc
+                                        WHERE nc.sub_category = news_contents.sub_category
+                                        ORDER BY nc.created_at DESC
+                                        LIMIT 1 OFFSET 1
                                     )
-                                )
-                            ")
-                            ->inRandomOrder()  // Randomize the result order
-                            ->orderBy('news_contents.created_at', 'DESC') // Latest videos first
+                                ") // Second last article of each category
+                            ->inRandomOrder()  // Randomize the result order                            
                             ->limit(6) 
                             ->get();
 
