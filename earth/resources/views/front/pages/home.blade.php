@@ -1002,74 +1002,85 @@ $current_url = $protocol . $host . $uri;
                             //                 ->limit(6)  // Limit to 3 records
                             //                 ->get();
                             // Get second last article from each category
-                            $secondLastArticles = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
-                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
-                            ->select(
-                                'news_contents.id',
-                                'news_contents.new_title',
-                                'news_contents.sub_title',
-                                'news_contents.slug',
-                                'news_contents.author_name',
-                                'news_contents.for_publication_name',
-                                'news_contents.cover_image',
-                                'news_contents.created_at',
-                                'news_contents.media',
-                                'news_contents.videoId',
-                                'news_contents.is_series',
-                                'news_contents.series_article_no',
-                                'news_contents.current_article_no',
-                                'news_contents.other_article_part_doi_no',
-                                'parent_category.sub_category as parent_category_name',
-                                'sub_category.sub_category as category_name',
-                                'sub_category.slug as category_slug',
-                                'parent_category.slug as parent_category_slug'
-                            )
-                            ->where('news_contents.status', 1)                            
-                            ->whereRaw("
+                            // Query for the second-to-last article from each category
+                                $categoryArticles = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
+                                ->select(
+                                    'news_contents.id',
+                                    'news_contents.new_title',
+                                    'news_contents.sub_title',
+                                    'news_contents.slug',
+                                    'news_contents.author_name',
+                                    'news_contents.for_publication_name',
+                                    'news_contents.cover_image',
+                                    'news_contents.created_at',
+                                    'news_contents.media',
+                                    'news_contents.videoId',
+                                    'news_contents.is_series',
+                                    'news_contents.series_article_no',
+                                    'news_contents.current_article_no',
+                                    'news_contents.other_article_part_doi_no',
+                                    'parent_category.sub_category as parent_category_name',
+                                    'sub_category.sub_category as category_name',
+                                    'sub_category.slug as category_slug',
+                                    'parent_category.slug as parent_category_slug'
+                                )
+                                ->where('news_contents.status', 1)
+                                ->where('news_contents.is_feature', 1)
+                                ->whereRaw("
                                     news_contents.id = (
                                         SELECT id FROM news_contents AS nc
                                         WHERE nc.sub_category = news_contents.sub_category
                                         ORDER BY nc.created_at DESC
                                         LIMIT 1 OFFSET 1
                                     )
-                                ") // Second last article of each category
-                            ->inRandomOrder()  // Randomize the result order                            
-                            ->limit(6) 
-                            ->get();
+                                ") // Get second last article per category
+                                ->get();
 
-                            // Get first article from each series
-                            $seriesArticles = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
-                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
-                            ->select(
-                                'news_contents.id',
-                                'news_contents.new_title',
-                                'news_contents.sub_title',
-                                'news_contents.slug',
-                                'news_contents.author_name',
-                                'news_contents.for_publication_name',
-                                'news_contents.cover_image',
-                                'news_contents.created_at',
-                                'news_contents.media',
-                                'news_contents.videoId',
-                                'news_contents.is_series',
-                                'news_contents.series_article_no',
-                                'news_contents.current_article_no',
-                                'news_contents.other_article_part_doi_no',
-                                'parent_category.sub_category as parent_category_name',
-                                'sub_category.sub_category as category_name',
-                                'sub_category.slug as category_slug',
-                                'parent_category.slug as parent_category_slug'
-                            )
-                            ->where('news_contents.status', 1)                            
-                            ->where('news_contents.is_series', 1) // Ensure it's a series
-                            ->where('news_contents.series_article_no', 1) // First article of the series
-                            ->get();
+                                // Query for the first article from each series
+                                $seriesArticles = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
+                                ->select(
+                                    'news_contents.id',
+                                    'news_contents.new_title',
+                                    'news_contents.sub_title',
+                                    'news_contents.slug',
+                                    'news_contents.author_name',
+                                    'news_contents.for_publication_name',
+                                    'news_contents.cover_image',
+                                    'news_contents.created_at',
+                                    'news_contents.media',
+                                    'news_contents.videoId',
+                                    'news_contents.is_series',
+                                    'news_contents.series_article_no',
+                                    'news_contents.current_article_no',
+                                    'news_contents.other_article_part_doi_no',
+                                    'parent_category.sub_category as parent_category_name',
+                                    'sub_category.sub_category as category_name',
+                                    'sub_category.slug as category_slug',
+                                    'parent_category.slug as parent_category_slug'
+                                )
+                                ->where('news_contents.status', 1)
+                                ->where('news_contents.is_feature', 1)
+                                ->where('news_contents.is_series', 1) // Ensure it's a series
+                                ->where('news_contents.series_article_no', 1) // Get the first article of each series
+                                ->get();
 
-                            // Merge both collections
-                            $recentContents = $secondLastArticles->merge($seriesArticles);
+                                // Merge both collections
+                                $combinedArticles = $categoryArticles->merge($seriesArticles);
+
+                                // Shuffle the merged results randomly
+                                $shuffledArticles = $combinedArticles->shuffle();
+
+                                // Limit the final result to 6 articles
+                                $finalArticles = $shuffledArticles->take(6);
+
+                                // Return the result
+                                return $finalArticles;
 
 
-                            if($recentContents){ foreach($recentContents as $recentContent){
+
+                            if($finalArticles){ foreach($finalArticles as $recentContent){
                             ?>
                                 <?php
                                 $is_series                  = $recentContent->is_series;
