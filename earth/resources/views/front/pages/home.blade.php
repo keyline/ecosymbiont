@@ -972,7 +972,7 @@ $current_url = $protocol . $host . $uri;
                                 <h1><span>Latest Creative Works</span></h1>
                             </div>
                             <?php
-                            // DB::enableQueryLog(); // Enable query log
+                            DB::enableQueryLog(); // Enable query log
                             // $recentContents = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
                             //                 ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
                             //                 ->select(
@@ -1036,7 +1036,7 @@ $current_url = $protocol . $host . $uri;
                             ->inRandomOrder()  // Randomize the result order                            
                             ->limit(6) 
                             ->get();
-
+                            dd(DB::getQueryLog());
                             // Get first article from each series
                             // $seriesArticles = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
                             // ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
