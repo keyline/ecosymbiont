@@ -759,6 +759,7 @@ $current_url = $protocol . $host . $uri;
                                                             )
                                                             ->where('news_contents.status', 1)  // Fetch only active content
                                                             ->where('news_contents.is_popular', 1)  // Fetch only featured content
+                                                            ->orderBy('news_contents.created_at', 'DESC') // Latest videos first
                                                             ->inRandomOrder()  // Randomize the result order
                                                             ->limit(3)  // Limit to 3 records
                                                             ->get();
@@ -832,6 +833,7 @@ $current_url = $protocol . $host . $uri;
                                                                         )
                                                                         ->where('news_contents.status', 1)  // Fetch only active content                                                                        
                                                                         ->inRandomOrder()  // Randomize the result order
+                                                                        ->orderBy('news_contents.created_at', 'DESC') // Latest videos first
                                                                         ->limit(3)  // Limit to 3 records
                                                                         ->get();
                                         if($recentContents){ foreach($recentContents as $recentContent){
