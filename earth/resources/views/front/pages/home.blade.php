@@ -969,7 +969,7 @@ $current_url = $protocol . $host . $uri;
                         <!-- article box -->
                         <div class="article-box">
                             <div class="title-section">
-                                <h1><span>Latest Articles</span></h1>
+                                <h1><span>Latest Creative Works</span></h1>
                             </div>
                             <?php
                             // DB::enableQueryLog(); // Enable query log
@@ -998,6 +998,7 @@ $current_url = $protocol . $host . $uri;
                                             ->where('news_contents.status', 1)  // Fetch only active content
                                             ->where('news_contents.is_feature', 1)  // Fetch only featured content
                                             ->inRandomOrder()  // Randomize the result order
+                                            ->orderBy('news_contents.created_at', 'DESC') // Latest videos first
                                             ->limit(6)  // Limit to 3 records
                                             ->get();
                             if($recentContents){ foreach($recentContents as $recentContent){
