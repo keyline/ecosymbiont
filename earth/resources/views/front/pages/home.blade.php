@@ -894,76 +894,67 @@ $current_url = $protocol . $host . $uri;
             </div>
             <div class="features-video-box owl-wrapper">
                 <!-- <h2 style="color: white; text-align: center;">Coming Soon</h2> -->
-                <div class="owl-carousel" data-num="2">
-                    <?php
+                <?php
                     $videoContents = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
-                                                    ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
-                                                    ->select(
-                                                        'news_contents.id', 
-                                                        'news_contents.new_title', 
-                                                        'news_contents.sub_title', 
-                                                        'news_contents.slug', 
-                                                        'news_contents.author_name',
-                                                        'news_contents.for_publication_name', 
-                                                        'news_contents.cover_image', 
-                                                        'news_contents.created_at',
-                                                        'news_contents.videoId',
-                                                        'news_contents.is_series',
-                                                        'news_contents.series_article_no',
-                                                        'news_contents.current_article_no',
-                                                        'news_contents.other_article_part_doi_no',
-                                                        'parent_category.sub_category as parent_category_name',
-                                                        'sub_category.sub_category as category_name',
-                                                        'sub_category.slug as category_slug',
-                                                        'parent_category.slug as parent_category_slug'
-                                                    )
-                                                    ->where('news_contents.status', 1)
-                                                    ->where('news_contents.media', 'video')
-                                                    ->inRandomOrder()
-                                                    ->limit(8)
-                                                    ->get();
-                    if($videoContents){ foreach($videoContents as $videoContent){
+                        ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
+                        ->select(
+                            'news_contents.id', 
+                            'news_contents.new_title', 
+                            'news_contents.sub_title', 
+                            'news_contents.slug', 
+                            'news_contents.author_name',
+                            'news_contents.for_publication_name', 
+                            'news_contents.cover_image', 
+                            'news_contents.created_at',
+                            'news_contents.videoId',
+                            'news_contents.is_series',
+                            'news_contents.series_article_no',
+                            'news_contents.current_article_no',
+                            'news_contents.other_article_part_doi_no',
+                            'parent_category.sub_category as parent_category_name',
+                            'sub_category.sub_category as category_name',
+                            'sub_category.slug as category_slug',
+                            'parent_category.slug as parent_category_slug'
+                        )
+                        ->where('news_contents.status', 1)
+                        ->where('news_contents.media', 'video')
+                        ->where(function($query) {
+                            $query->where('news_contents.current_article_no', 1) // Include first video of each series
+                                ->orWhere('news_contents.is_series', 'No');    // Include standalone videos
+                        })
+                        ->inRandomOrder()
+                        ->orderBy('news_contents.created_at', 'DESC') // Latest videos first
+                        ->limit(8)
+                        ->get();
                     ?>
-                        <?php
-                        $is_series                  = $videoContent->is_series;
-                        $series_article_no          = $videoContent->series_article_no;
-                        $current_article_no         = $videoContent->current_article_no;
-                        $other_article_part_doi_no  = explode(",", $videoContent->other_article_part_doi_no);
-                        if($is_series == 'Yes'){
-                            if($current_article_no == 1){
-                                $isShow = true;
-                            } else {
-                                $isShow = false;
-                            }
-                        } else {
-                            $isShow = true;
-                        }
-                        if($isShow){
-                        ?>
+
+                    <div class="owl-carousel" data-num="2">
+                        <?php if($videoContents){ foreach($videoContents as $videoContent){ ?>
                             <div class="item news-post video-post">
                                 <img alt="" src="https://img.youtube.com/vi/<?=$videoContent->videoId?>/hqdefault.jpg">
-                                <!-- <?php if(session('is_user_login')){?>
-                                    <a href="https://www.youtube.com/watch?v=<?=$videoContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                <?php } else {?>
-                                    <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
-                                <?php }?> -->
-                                <a href="https://www.youtube.com/watch?v=<?=$videoContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                <a href="https://www.youtube.com/watch?v=<?=$videoContent->videoId?>" class="video-link">
+                                    <i class="fa fa-play-circle-o"></i>
+                                </a>
                                 <div class="hover-box">
                                     <a href="<?=url('category/' . $videoContent->parent_category_slug)?>"><?=$videoContent->parent_category_name?></a>
-                                    <h2><a href="<?=url('content/' . $videoContent->parent_category_slug. '/' . $videoContent->category_slug . '/' . $videoContent->slug)?>"><?=$videoContent->new_title?></a></h2>
+                                    <h2>
+                                        <a href="<?=url('content/' . $videoContent->parent_category_slug. '/' . $videoContent->category_slug . '/' . $videoContent->slug)?>">
+                                            <?=$videoContent->new_title?>
+                                        </a>
+                                    </h2>
                                     <ul class="post-tags">
-                                        <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$videoContent->for_publication_name ?? $videoContent->author_name?></a></li>
+                                        <li><i class="fa fa-user"></i>by <a href="javascript:void(0);">
+                                            <?=$videoContent->for_publication_name ?? $videoContent->author_name?>
+                                        </a></li>
                                         <?php if($videoContent->indigenous_affiliation != ''){ ?>
                                             <li><i class="fa fa-map-marker"></i><a href="javascript:void(0);"><?=$videoContent->indigenous_affiliation?></a></li>
                                         <?php } ?>
                                         <li><i class="fa fa-clock-o"></i><?=date_format(date_create($videoContent->created_at), "d M Y")?></li>
                                     </ul>
-                                    <!-- <p><?=$videoContent->sub_title?></p> -->
                                 </div>
                             </div>
-                        <?php }?>
-                    <?php } }?>
-                </div>
+                        <?php } } ?>
+                    </div>
             </div>
         </div>
     </section>
