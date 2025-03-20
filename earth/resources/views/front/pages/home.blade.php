@@ -1069,13 +1069,13 @@ $current_url = $protocol . $host . $uri;
                             // $recentContents = $secondLastArticles->merge($seriesArticles);
 
 
-                            if($latestarticles){ foreach($latestarticles as $recentContent){
+                            if($latestarticles){ foreach($latestarticles as $latestarticle){
                             ?>
                                 <?php
-                                $is_series                  = $recentContent->is_series;
-                                $series_article_no          = $recentContent->series_article_no;
-                                $current_article_no         = $recentContent->current_article_no;
-                                $other_article_part_doi_no  = explode(",", $recentContent->other_article_part_doi_no);
+                                $is_series                  = $latestarticle->is_series;
+                                $series_article_no          = $latestarticle->series_article_no;
+                                $current_article_no         = $latestarticle->current_article_no;
+                                $other_article_part_doi_no  = explode(",", $latestarticle->other_article_part_doi_no);
                                 if($is_series == 'Yes'){
                                     if($current_article_no == 1){
                                         $isShow = true;
@@ -1091,42 +1091,42 @@ $current_url = $protocol . $host . $uri;
                                         <div class="row">
                                             <div class="col-sm-5">
                                                 <!-- <div class="post-gallery">
-                                                    <img src="<?=env('UPLOADS_URL').'newcontent/'.$recentContent->cover_image?>" alt="<?=$recentContent->new_title?>">
+                                                    <img src="<?=env('UPLOADS_URL').'newcontent/'.$latestarticle->cover_image?>" alt="<?=$latestarticle->new_title?>">
                                                 </div> -->
-                                                <?php if($recentContent->media == 'image'){?>
+                                                <?php if($latestarticle->media == 'image'){?>
                                                     <div class="post-gallery">
-                                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$recentContent->cover_image?>" alt="<?=$recentContent->new_title?>">
-                                                        <span class="image-caption" style="color:skyblue;"><?=$recentContent->cover_image_caption?></span>
+                                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$latestarticle->cover_image?>" alt="<?=$latestarticle->new_title?>">
+                                                        <span class="image-caption" style="color:skyblue;"><?=$latestarticle->cover_image_caption?></span>
                                                     </div>
                                                 <?php } else {?>
                                                     <div class="post-gallery video-post">
-                                                        <img alt="" src="https://img.youtube.com/vi/<?=$recentContent->videoId?>/hqdefault.jpg">
+                                                        <img alt="" src="https://img.youtube.com/vi/<?=$latestarticle->videoId?>/hqdefault.jpg">
                                                         <!-- <?php if(session('is_user_login')){?>
-                                                            <a href="https://www.youtube.com/watch?v=<?=$recentContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                            <a href="https://www.youtube.com/watch?v=<?=$latestarticle->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                                         <?php } else {?>
                                                             <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
                                                         <?php }?> -->
-                                                        <a href="https://www.youtube.com/watch?v=<?=$recentContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                        <a href="https://www.youtube.com/watch?v=<?=$latestarticle->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                                     </div>
                                                 <?php } ?>
                                             </div>
                                             <div class="col-sm-7">
                                                 <div class="post-content">
-                                                    <a href="<?=url('category/' . $recentContent->parent_category_slug)?>"><?=$recentContent->parent_category_name?></a>
-                                                    <h2><a href="<?=url('content/' . $recentContent->parent_category_slug. '/' . $recentContent->category_slug . '/' . $recentContent->slug)?>"><?=$recentContent->new_title?></a></h2>
+                                                    <a href="<?=url('category/' . $latestarticle->parent_category_slug)?>"><?=$latestarticle->parent_category_name?></a>
+                                                    <h2><a href="<?=url('content/' . $latestarticle->parent_category_slug. '/' . $latestarticle->category_slug . '/' . $latestarticle->slug)?>"><?=$latestarticle->new_title?></a></h2>
                                                     <ul class="post-tags">
-                                                        <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$recentContent->for_publication_name ?? $recentContent->author_name?></a></li>
+                                                        <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$latestarticle->for_publication_name ?? $latestarticle->author_name?></a></li>
                                                         <?php
-                                                        if($recentContent->indigenous_affiliation != ''){                                                    
+                                                        if($latestarticle->indigenous_affiliation != ''){                                                    
                                                          ?>
-                                                            <li><i class="fa fa-map-marker"></i><a href="javascript:void(0);"><?=$recentContent->indigenous_affiliation?></a></li>
+                                                            <li><i class="fa fa-map-marker"></i><a href="javascript:void(0);"><?=$latestarticle->indigenous_affiliation?></a></li>
                                                         <?php } ?>
-                                                        <!-- <li><i class="fa fa-clock-o"></i><?=date_format(date_create($recentContent->created_at), "d M Y")?></li> -->
+                                                        <!-- <li><i class="fa fa-clock-o"></i><?=date_format(date_create($latestarticle->created_at), "d M Y")?></li> -->
                                                         
                                                         <!-- <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
                                                         <li><i class="fa fa-eye"></i>872</li> -->
                                                     </ul>
-                                                    <p><?=$recentContent->sub_title?></p>
+                                                    <p><?=$latestarticle->sub_title?></p>
                                                 </div>
                                             </div>
                                         </div>
