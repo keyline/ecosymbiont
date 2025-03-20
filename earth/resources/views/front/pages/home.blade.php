@@ -1025,14 +1025,15 @@ $current_url = $protocol . $host . $uri;
                                 'parent_category.slug as parent_category_slug'
                             )
                             ->where('news_contents.status', 1)                            
-                            ->whereRaw("
-                                    news_contents.id = (
-                                        SELECT id FROM news_contents AS nc
-                                        WHERE nc.sub_category = news_contents.sub_category
-                                        ORDER BY nc.created_at DESC
-                                        LIMIT 1 OFFSET 1
-                                    )
-                                ") // Second last article of each category
+                            // ->whereRaw("
+                            //         news_contents.id = (
+                            //             SELECT id FROM news_contents AS nc
+                            //             WHERE nc.sub_category = news_contents.sub_category
+                            //             ORDER BY nc.created_at DESC
+                            //             LIMIT 1 OFFSET 1
+                            //         )
+                            //     ") // Second last article of each category
+                            ->orderBy('news_contents.created_at', 'DESC') // Latest videos first
                             ->inRandomOrder()  // Randomize the result order                            
                             ->limit(6) 
                             ->get();
