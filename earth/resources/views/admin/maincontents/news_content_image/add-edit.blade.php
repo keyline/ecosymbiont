@@ -82,7 +82,7 @@ $controllerRoute = $module['controller_route'];
                             </div>
                         </div>   
                         <div class="row mb-3">
-                            <label for="image_title" class="col-md-4 col-lg-3 col-form-label">Image Title</label>
+                            <label for="image_title" class="col-md-4 col-lg-3 col-form-label">Image Alt Tag</label>
                             <div class="col-md-8 col-lg-9">
                                 <input type="text" name="image_title" class="form-control" id="image_title"
                                     value="<?= $image_title ?>" required>

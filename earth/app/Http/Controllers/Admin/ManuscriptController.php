@@ -38,7 +38,7 @@ class ManuscriptController extends Controller
                 'status'             => 3
             ];
             Manuscript::where($this->data['primary_key'], '=', $id)->update($fields);
-            return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'].' Deleted Successfully !!!');
+            return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'].' deleted successfully');
         }
     /* delete */
     /* change status */
@@ -48,13 +48,13 @@ class ManuscriptController extends Controller
             if($status == 1)
             {
                 $updated_status     = 1;
-                $msg                = 'Approved';
+                $msg                = 'approved';
             } else {
                 $updated_status     = 2;
-                $msg                = 'Rejected';
+                $msg                = 'rejected';
             }   
             Manuscript::where('id', '=', $id)->update(['status' => $updated_status, 'approve_reject_timestamp' => date('Y-m-d H:i:s')]);
-            return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'].' '.$msg.' Successfully !!!');
+            return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'].' '.$msg.' successfully');
         }
     /* change status */
 }

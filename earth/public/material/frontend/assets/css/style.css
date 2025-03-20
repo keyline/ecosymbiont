@@ -155,7 +155,7 @@ website:    http://www.themepunch.com
 /* header 1 */
 header {
   position: relative;
-  z-index: 99999 !important;
+  z-index: 99 !important;
 }
 .nav-list-container {
   width: 100%;
@@ -623,6 +623,14 @@ header.active .nav-list-container {
 .seach_holder .navbar-form{
   padding: 0;
 }
+.seach_holder form.navbar-form {
+  margin-bottom: 0;
+}
+.seach_holder a.advserach_btn {
+  color: #fff;
+  line-height: 1.25;
+  font-size: 12px;
+}
 .search_suggestion{
   position: absolute;
   top: 39px;
@@ -639,7 +647,48 @@ header.active .nav-list-container {
 .search_suggestion::-webkit-scrollbar {
   width: 7px;
 }
-
+.modal-content.advarnseach_section {
+  background: #d09c1c;
+}
+.advarnseach_section h4.modal-title {
+  text-align: center;
+  color: #fff;
+}
+.advarnseach_section .modal-body {
+  padding: 30px 30px;
+}
+.advarnseach_section .modal-body .advance_inner_search {
+  display: flex
+;
+  flex-wrap: wrap;
+}
+.advarnseach_section .modal-body .advance_inner_search select {
+  height: 40px;
+  border: none;
+  margin-right: 10px;
+  padding: 10px;
+  width: 48%;
+}
+.advarnseach_section .modal-body .advance_inner_search input {
+  width: 50%;
+  height: 40px;
+  box-shadow: none;
+  border: none;
+  padding: 10px;
+}
+.advarnseach_section .modal-body .advance_inner_search button {
+  width: 100%;
+  margin-top: 10px;
+  height: 40px;
+  background: #1e1e1e;
+  color: #fff;
+  border: none;
+}
+.advarnseach_section .modal-body .advance_inner_search button:hover {
+  background: #206081;
+  color: #fff;
+  border: none;
+}
 /* Track */
 .search_suggestion::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px grey; 
@@ -756,6 +805,7 @@ header .list-line-posts div.list-post {
 }
 header .list-line-posts div.list-post img {
   width: 109px;
+  height: 109px;
   object-fit: cover;
 }
 header .list-line-posts div.list-post .post-content {
@@ -3288,8 +3338,11 @@ ul.list-posts > li {
 }
 ul.list-posts > li img {
   width: 100px;
-  margin-right: 20px;
+  /* margin-right: 20px; */
   float: left;
+}
+ul.list-posts > li .post-content{
+  margin-left: 20px;
 }
 ul.list-posts > li .post-content > a {
   display: inline-block;
@@ -3345,7 +3398,7 @@ ul.list-posts > li .post-content h2 a:hover {
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 15px 20px;
+  padding: 7px 20px;
   background: rgba(17, 17, 17, 0.5);
   transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
@@ -4020,6 +4073,13 @@ div.list-post .post-content h2 a:hover {
   padding: 0 20px;
   margin-bottom: 18px;
 }
+.single-post-box > .post-content li{
+  font-size: 18px;
+    color: #666666;
+    font-family: 'proximanova_regular', sans-serif;
+    font-weight: 400;
+    line-height: 1.25;
+}
 .single-post-box h5 {
   font-size: 18px;
   font-family: 'proximanova_regular';
@@ -4049,7 +4109,7 @@ div.list-post .post-content h2 a:hover {
 .single-post-box > .post-content blockquote p {
   color: #222222;
   font-size: 18px;
-  font-style: italic;
+  /* font-style: italic; */
   margin-bottom: 0;
   line-height: 24px;
 }
@@ -6318,7 +6378,7 @@ div#popup p {
   /* .navbar-nav > li.drop-arrow > a {
     padding-right: 30px;
   } */
-  .navbar-nav > li.drop-arrow > a:before {
+  /* .navbar-nav > li.drop-arrow > a:before {
     content: '\f107' !important;
     position: absolute;
     font-family: 'FontAwesome';
@@ -6330,7 +6390,7 @@ div#popup p {
     -moz-transition: all 0.2s ease-in-out;
     -webkit-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;
-  }
+  } */
  
   .top-line ul.social-icons {
     display: none;
@@ -6342,8 +6402,8 @@ div#popup p {
     padding: 15px 8px;
     padding-right: 8px !important;
   }
-  .navbar-nav > li > a:after {
-    display: none;
+  .navbar-nav > li.drop-arrow > a:after {
+    right: -3px;
   }
   .advertisement .desktop-advert,
   .sidebar .advertisement .desktop-advert {
@@ -6990,6 +7050,13 @@ div.block-content {
 .item.news-post.video-post.video_post_text img {
   object-fit: cover;
   height: 100%;
+}
+.video_holder{
+  margin: 40px 0;
+}
+.video_holder iframe{
+  border-radius: 10px; 
+  box-shadow: 0 20px 15px -10px #ccc;
 }
 @media(max-width: 600px){
   .welcome_mucis_section {

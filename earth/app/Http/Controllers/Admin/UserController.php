@@ -67,7 +67,7 @@ class UserController extends Controller
                                 'user_type'         => 'ADMIN',
                                 'ip_address'        => $request->ip(),
                                 'activity_type'     => 1,
-                                'activity_details'  => 'Login Success !!!',
+                                'activity_details'  => 'Login Success',
                                 'platform_type'     => 'WEB',
                             ];
                             UserActivity::insert($activityData);
@@ -82,15 +82,15 @@ class UserController extends Controller
                                 'user_type'         => 'ADMIN',
                                 'ip_address'        => $request->ip(),
                                 'activity_type'     => 0,
-                                'activity_details'  => 'Invalid Email Or Password !!!',
+                                'activity_details'  => 'Invalid email or password',
                                 'platform_type'     => 'WEB',
                             ];
                             UserActivity::insert($activityData);
                         /* user activity */
-                        return redirect()->back()->with('error_message', 'Invalid Email Or Password !!!');
+                        return redirect()->back()->with('error_message', 'Invalid email or password');
                     }
                 } else {
-                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                    return redirect()->back()->with('error_message', 'All fields required');
                 }
             }
             $data                           = [];
@@ -117,12 +117,12 @@ class UserController extends Controller
                         $subject = "Reset Password";
                         $message = "Your Reset Password is :" . $otp;
                         // $this->sendMail('avijit@keylines.net',$subject,$message);
-                        return redirect('/admin/validateOtp/'.Helper::encoded($row->id))->with('success_message', 'OTP Sent To Your Registered Email !!!');
+                        return redirect('/admin/validateOtp/'.Helper::encoded($row->id))->with('success_message', 'OTP sent to your registered email');
                     }else{
-                        return redirect()->back()->with('error_message', 'We Don\'t Recognized Your Email !!!');
+                        return redirect()->back()->with('error_message', 'We don\'t recognized your email');
                     }
                 } else {
-                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                    return redirect()->back()->with('error_message', 'All fields required');
                 }
             }
             $data                           = [];
@@ -159,15 +159,15 @@ class UserController extends Controller
                                             'remember_token'        => '',
                                         ];
                             Admin::where('id', '=', $checkUser->id)->update($postData);
-                            return redirect('/admin/changePassword/'.Helper::encoded($checkUser->id))->with('success_message', 'OTP Validated. Just Reset Your Password !!!');
+                            return redirect('/admin/changePassword/'.Helper::encoded($checkUser->id))->with('success_message', 'OTP Validated. Just Reset Your Password');
                         } else {
-                            return redirect()->back()->with('error_message', 'OTP Mismatched !!!');
+                            return redirect()->back()->with('error_message', 'OTP mismatched');
                         }
                     } else {
-                        return redirect()->back()->with('error_message', 'We Don\'t Recognize You !!!');
+                        return redirect()->back()->with('error_message', 'We don\'t recognize you');
                     }
                 } else {
-                    return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                    return redirect()->back()->with('error_message', 'All fields required');
                 }
             }
             $title                          = 'Validate OTP';
@@ -188,9 +188,9 @@ class UserController extends Controller
                 $subject = "Reset Password";
                 $message = "Your Reset Password is :" . $otp;
                 // $this->sendMail('avijit@keylines.net',$subject,$message);
-                return redirect('/admin/validateOtp/'.Helper::encoded($row->id))->with('success_message', 'OTP Resend To Your Registered Email !!!');
+                return redirect('/admin/validateOtp/'.Helper::encoded($row->id))->with('success_message', 'OTP Resend To Your Registered Email');
             }else{
-                return redirect()->back()->with('error_message', 'We Don\'t Recognized Your Email !!!');
+                return redirect()->back()->with('error_message', 'We don\'t recognized your email');
             }
         }
         public function changePassword(Request $request ,$id){
@@ -199,16 +199,16 @@ class UserController extends Controller
                 $postData = $request->all();
                 $getAdmin                     = Admin::where('id','=',$ID)->first();
                 if($postData['new_password'] != $postData['confirm_password'] ){
-                    return redirect()->back()->with('error_message', 'Password Doesn\'t match !!!');
+                    return redirect()->back()->with('error_message', 'Password Doesn\'t match');
                 } else {
                     if(!Hash::check($postData['new_password'], $getAdmin->password)){
                         $postData = [
                                         'password'        => Hash::make($postData['new_password']),
                                     ];
                         Admin::where('id', '=', $ID)->update($postData);
-                        return redirect('/admin')->with('success_message', 'Password Reset Successfully. Please Sign In !!!');
+                        return redirect('/admin')->with('success_message', 'Password reset successfully. Please sign in');
                     } else {
-                        return redirect()->back()->with('error_message', 'New Password Can\'t Be Same With Existing Password !!!');
+                        return redirect()->back()->with('error_message', 'New password can\'t be same with existing password');
                     }
                 }
             }
@@ -227,15 +227,15 @@ class UserController extends Controller
                     'user_type'         => 'ADMIN',
                     'ip_address'        => $request->ip(),
                     'activity_type'     => 2,
-                    'activity_details'  => 'You Are Successfully Logged Out !!!',
+                    'activity_details'  => 'You Are successfully Logged Out',
                     'platform_type'     => 'WEB',
                 ];
                 UserActivity::insert($activityData);
             /* user activity */
-            $request->session()->forget(['user_id', 'name', 'email']);
+            $request->session()->forget(['user_id', 'name', 'email', 'is_admin_login', 'type']);
             // Helper::pr(session()->all());die;
             Auth::guard('admin')->logout();
-            return redirect()->back()->with('success_message', 'You Are Successfully Logged Out !!!');
+            return redirect()->back()->with('success_message', 'You are successfully logged out');
         }
     /* authentication */
     /* dashboard */
@@ -296,9 +296,9 @@ class UserController extends Controller
                 ];
                 // Helper::pr($fields);
                 Admin::where('id', '=', $uId)->update($fields);
-                return redirect()->back()->with('success_message', 'Profile Settings Updated Successfully !!!');
+                return redirect()->back()->with('success_message', 'Profile settings updated successfully');
             } else {
-                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                return redirect()->back()->with('error_message', 'All fields required');
             }
         }
         public function general_settings(Request $request){
@@ -386,9 +386,9 @@ class UserController extends Controller
                 ];
                 //  Helper::pr($fields);
                 GeneralSetting::where('id', '=', 1)->update($fields);
-                return redirect()->back()->with('success_message', 'General Settings Updated Successfully !!!');
+                return redirect()->back()->with('success_message', 'General settings updated successfully');
             } else {
-                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                return redirect()->back()->with('error_message', 'All fields required');
             }
         }
         public function change_password(Request $request){
@@ -410,15 +410,15 @@ class UserController extends Controller
                             'password'            => Hash::make($new_password)
                         ];
                         Admin::where('id', '=', $uId)->update($fields);
-                        return redirect()->back()->with('success_message', 'Password Changed Successfully !!!');
+                        return redirect()->back()->with('success_message', 'Password changed successfully');
                     } else {
-                        return redirect()->back()->with('error_message', 'New & Confirm Password Does Not Matched !!!');
+                        return redirect()->back()->with('error_message', 'New & confirm password does not matched');
                     }
                 } else {
-                    return redirect()->back()->with('error_message', 'Current Password Is Incorrect !!!');
+                    return redirect()->back()->with('error_message', 'Current password is incorrect');
                 }
             } else {
-                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                return redirect()->back()->with('error_message', 'All fields required');
             }
         }
         public function email_settings(Request $request){
@@ -441,9 +441,9 @@ class UserController extends Controller
                     'smtp_port'             => $postData['smtp_port'],
                 ];
                 GeneralSetting::where('id', '=', 1)->update($fields);
-                return redirect()->back()->with('success_message', 'Email Settings Updated Successfully !!!');
+                return redirect()->back()->with('success_message', 'Email settings updated successfully');
             } else {
-                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                return redirect()->back()->with('error_message', 'All fields required');
             }
         }
         public function email_template(Request $request){
@@ -465,9 +465,9 @@ class UserController extends Controller
                     'email_template_contactus'                          => $postData['email_template_contactus'],
                 ];
                 GeneralSetting::where('id', '=', 1)->update($fields);
-                return redirect()->back()->with('success_message', 'Email Templates Updated Successfully !!!');
+                return redirect()->back()->with('success_message', 'Email templates updated successfully');
             } else {
-                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                return redirect()->back()->with('error_message', 'All fields required');
             }
         }
         public function sms_settings(Request $request){
@@ -484,9 +484,9 @@ class UserController extends Controller
                     'sms_base_url'                      => $postData['sms_base_url'],
                 ];
                 GeneralSetting::where('id', '=', 1)->update($fields);
-                return redirect()->back()->with('success_message', 'SMS Settings Updated Successfully !!!');
+                return redirect()->back()->with('success_message', 'SMS settings updated successfully');
             } else {
-                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                return redirect()->back()->with('error_message', 'All fields required');
             }
         }
         public function footer_settings(Request $request){
@@ -564,9 +564,9 @@ class UserController extends Controller
                 ];
                 // Helper::pr($fields);
                 GeneralSetting::where('id', '=', 1)->update($fields);
-                return redirect()->back()->with('success_message', 'Footer Settings Updated Successfully !!!');
+                return redirect()->back()->with('success_message', 'Footer settings updated successfully');
             } else {
-                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                return redirect()->back()->with('error_message', 'All fields required');
             }
         }
         public function seo_settings(Request $request){
@@ -581,9 +581,9 @@ class UserController extends Controller
                     'meta_description'      => $postData['meta_description']
                 ];
                 GeneralSetting::where('id', '=', 1)->update($fields);
-                return redirect()->back()->with('success_message', 'SEO Settings Updated Successfully !!!');
+                return redirect()->back()->with('success_message', 'SEO settings updated successfully');
             } else {
-                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                return redirect()->back()->with('error_message', 'All fields required');
             }
         }
         public function payment_settings(Request $request){
@@ -604,9 +604,9 @@ class UserController extends Controller
                     'stripe_live_pk'        => $postData['stripe_live_pk'],
                 ];
                 GeneralSetting::where('id', '=', 1)->update($fields);
-                return redirect()->back()->with('success_message', 'Payment Settings Updated Successfully !!!');
+                return redirect()->back()->with('success_message', 'Payment settings updated successfully');
             } else {
-                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                return redirect()->back()->with('error_message', 'All fields required');
             }
         }
         public function color_settings(Request $request){
@@ -635,9 +635,9 @@ class UserController extends Controller
                     'color_complete_button'             => $postData['color_complete_button'],
                 ];
                 GeneralSetting::where('id', '=', 1)->update($fields);
-                return redirect()->back()->with('success_message', 'Color Settings Updated Successfully !!!');
+                return redirect()->back()->with('success_message', 'Color settings updated successfully');
             } else {
-                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                return redirect()->back()->with('error_message', 'All fields required');
             }
         }
         public function signature_settings(Request $request){
@@ -658,7 +658,7 @@ class UserController extends Controller
             ];
             // Helper::pr($fields);
             GeneralSetting::where('id', '=', 1)->update($fields);
-            return redirect()->back()->with('success_message', 'Owner Signature Settings Updated Successfully !!!');
+            return redirect()->back()->with('success_message', 'Owner Signature settings updated successfully');
         }
     /* settings */
     /* email logs */
@@ -692,7 +692,7 @@ class UserController extends Controller
             $subject                    = 'Test email subject on '.date('Y-m-d H:i:s');
             $message                    = 'Test email message body on '.date('Y-m-d H:i:s');
             $this->sendMail($generalSetting->site_mail, $subject, $message);
-            return redirect()->back()->with('success_message', 'Test Email Sent Successfully !!!');            
+            return redirect()->back()->with('success_message', 'Test email sent successfully');            
             
         }
 /* test email */

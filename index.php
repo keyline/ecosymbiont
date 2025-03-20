@@ -8,55 +8,61 @@ include "include/header.php";
         <section class="banner-info">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
-                      <div class="welcome_mucis_section">
-                        <audio preload="auto" controls>
-                              <source src="Ecosymbionts-audio-28Oct2024.mp3">
-                        </audio>
-                      </div>
-                    </div>
+                    
                     <div class="col-md-12">
                         <div class="info-box">
-                            <h2>OUR MISSION</h2>  
-                            <p id="our-focus">We work globally to disrupt <span><a target="_blank" href="#definitions">extractivist</a></span> systems that cause ecocide and inequity, and locally to transition to <span><a target="_blank" href="#definitions">regenerative</a></span>  systems that ensure the interconnected wellbeing of humans and ecologies.</p>
+                            <h2>WELCOME</h2>  
+                            <p><i>Ecosymbionts Regenerate</i> is a major initiative of the <i>Śramani Institute</i>, a nonprofit entity that combines the activities of a research institute, thinktank, and implementation organization. The mission of the <i>Śramani Institute</i> is to realize the interconnected wellbeing of humans and ecologies. All of our initiatives have global and local aspects and focus on understanding and expressing &#x2014; at an individual and community level &#x2014; the <i><strong class="fontbold"><a target="_blank" href="https://ecosymbiont.org/earth/content/systems/ecoweb-rooted-framing/ecoself-restoring-our-wellbeing-rooted-in-nature-and-humanity">ecoself</a></i></strong>.</p>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="info-box">
-                            <h2>OUR FOCUS</h2>
-                            <p>We focus on transitioning to regenerative systems that advance food sovereignty, healthy living, and biodiversity preservation, all rooted locally in <a target="_blank" href="#definitions">ecoweb</a>-integrated human communities. These systems are of two types:</p>
-                            <ul>
-                                <li><i><strong class="fontbold">human activity systems:</strong></i> ecoweb-specific systems of
-                                    knowledge, technologies, and practices developed by ecoweb-rooted human communities
-                                    &#x2014; such as Indigenous and tribal communities &#x2014; that are based and rely on the
-                                    specific and preserved <a target="_blank" href="#definitions">biodiversity</a> of each ecoweb; and</li>
-                                <li><strong><i>legal-economic-governance systems:</i></strong> legal, trade, and government systems that optimize the wellbeing of human communities and the ecowebs of which they are a <a target="_blank" href="#definitions">symbiotic</a> part and that operate locally, regionally, and globally.</li>
-                            </ul>
-                        </div>
-                    </div>
+                    
                     <div class="col-md-12">
                       <div class="theory_inner">
-                          <h4>THEORY OF CHANGE</h4>
+                          <h4><i>ECOSELF</i> &#x2014; ROOTING OURSELVES IN NATURE AND HUMANITY</h4>
                           <div>
-                          Exploiting, without replenishing, human and ecological resources (extractivism) by profit-making <a target="_blank" href="#definitions">corporations</a> is a modern (400+ years) form of imperialism that is enabled by a global system of extractivist education, technologies, laws, trade edicts, and governance structures imposed on nearly all peoples. This system disconnects humans from ecowebs and causes widespread ecocide (<i>e.g.</i>, climate crisis, biodiversity loss) and inequity (<i>e.g.</i>, food insecurity, violence). Thus, it must be disrupted and replaced in its entirety if ecowebs (humans included) are to survive. The collaborative conceptualizing and implementing of locally-rooted (regenerative) systems that optimize ecoweb wellbeing are essential to transition away from the globally institutionalized extractivist system.  
+                          <i>Ecoself</i> is a reimagined Indigenous concept; understanding and expressing our <i>ecoself</i> restores our wellbeing. Our <i>ecoself</i> is who we are as individuals and communities in the context of our own natures, abilities, and experiences, our genetics, our ancestral <i><strong class="fontbold"><a target="_blank" href="#definitions">ecological webs (ecowebs)</a></i></strong>, and &#x2014; for migrants &#x2014; our adopted ecowebs. When we are unrooted in our <i>ecoself</i>, we misperceive ourselves as being separate from each other and our <i>ecowebs</i>, leading us to engage in behaviors that cause ecocide (resulting in <a target="_blank" href="#definitions">biodiversity</a> loss, climate crisis) and inequity(injustice, poverty, disenfranchisement, identity loss, hunger, violence). But when we become aware of our <i>ecoself</i>, we anchor ourselves in the Great Web of nature and humanity and are able to live in <a target="_blank" href="#definitions">symbiosis</a> with both. <a target="_blank" href="https://ecosymbiont.org/earth/content/systems/ecoweb-rooted-framing/ecoself-restoring-our-wellbeing-rooted-in-nature-and-humanity">Link to full article here</a>.
                           </div>
                       </div>
                     </div>
                     <div class="col-md-12" id="our-approach">
                         <div class="info-box">
-                            <h2>OUR APPROACH</h2>
-                            <p>We fulfill our mission in three interconnected ways:</p>
+                            <h2>OUR OBJECTIVE</h2>
+                            <p>The objective of <i>Ecosymbionts Regenerate</i> is to regenerate human-ecological symbiosis (ecosymbiosis), namely, the connectivity and dependence between and among humans, other living beings, and the nonliving parts of our ecowebs.</p>
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-12" id="our-approach">
+                      <div class="info-box">
+                        <h2>OUR APPROACH</h2>
+                        <p>We fulfill the objective of <i>Ecosymbionts Regenerate</i> by transforming <a target="_blank" href="#definitions">extractivist</a> (<i>i.e.</i>, exploiting human and ecological resources without replenishing them) man-made systems &#x2014; causing ecocide and inequity &#x2014; into transitional and <a target="_blank" href="#definitions">regenerative</a> <i>ecoweb</i>-rooted systems based in understanding and expressing the <i>ecoself</i>, both at an individual and community level.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="theory_inner theory_inner_lightred">
+                          <h4>THEORY OF CHANGE</h4>
+                          <div>
+                          Exploiting, without replenishing, human and ecological resources (extractivism) by profit-making <a target="_blank" href="#definitions">corporations</a> is a modern (400+ years) form of imperialism that is enabled by a global system of extractivist education, technologies, laws, trade edicts, and governance structures imposed on nearly all peoples. This system disconnects humans from ecowebs and causes widespread ecocide and inequity. Thus, it must be disrupted and replaced in its entirety if ecowebs (humans included) are to survive. The collaborative conceptualizing and implementing of locally-rooted (regenerative) systems that optimize ecoweb wellbeing are essential to transition away from the globally institutionalized extractivist system.  
+                          </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="info-box">
+                            <h2>OUR PROJECTS</h2>  
+                            <p>The <i>Ecosymbionts Regenerate</i> initiative encompasses four projects:</p>
                             <ul>
-                                <li><strong><i>Disrupt extractivist systems:</i></strong> We work to disrupt and transition away from the globally institutionalized legal-economic-governance system that destroys human-ecoweb symbiosis by promoting corporate extractivism (exploitation of human and non-human ecoweb resources without replenishment). This work is done through legal action and thinktank activities.
-                                </li>
-                                <li><strong><i>Facilitate grassroots synergies:</i> </strong>We bring together and facilitate
-                                    <span><a target="_blank" href="#definitions">synergies</a></span> between <span><a target="_blank" href="#definitions">grassroots</a></span> changemakers,
-                                    innovators, and knowledge-holders working to regenerate systems that restore,
-                                    preserve, and foster human-ecoweb symbiosis. We do this through in-person
-                                    <strong><a href="<?=$base_url?>synergy-meetings.php" target="_blank">Synergy Meetings</a></strong> and through our online knowledge-sharing and
-                                    community-building platform, <strong><a href="<?=$base_url?>earth" target="_blank">Ecosymbionts all Regenerate Together (EaRTh)</a></strong>.
-                                </li>
-                                <li><strong><i>Transition to regenerative systems:</i> </strong> We collaboratively conceptualize, promote, and implement alternative, locally-rooted systems that optimize ecoweb wellbeing, instead of destroying it. We do this by synthesizing our thinktank work with the knowledge, ideas, and wisdom of grassroots changemakers, innovators, and knowledge-holders from across the world shared on <a href="<?=$base_url?>earth" target="_blank">Ecosymbionts all Regenerate Together (EaRTh)</a>. </li>
+                              <li><strong><i>FiveBecomings</i></strong>. Our <i>FiveBecomings</i> projects are land-based projects with the objective of (re)establishing integrated self-reliant and resilient wellbeing for <i>ecoself</i>- and <i>ecoweb</i>-rooted communities by regenerating human-ecological symbiosis. <a target="_blank" href="https://ecosymbiont.org/earth/content/regenerative/human-ecowebintegration/reestablishing-integrated-self-reliant-wellbeing-for-communities-implementing-fivebecomings">Link to full article here</a>.
+                              </li>
+                              <li>
+                              <strong><i>EaRTh (Ecosymbionts all Regenerate Together)</i></strong>. <i>EaRTh</i> is a professionally edited online knowledge-sharing and community-building platform providing <a target="_blank" href="#definitions">grassroots</a> individuals, <i>ecoweb</i>-rooted communities, and movements anywhere in the world an inviting space to share ideas, thoughts, music, art, performance, or practical implementations related to human-ecological interconnectivity. Soon, <i>EaRTh</i> will feature a private portal through which contributors can securely connect with each other to co-learn and collaborate. <a target="_blank" href="https://ecosymbiont.org/earth/">Link to EaRTh here</a>.
+                              </li>
+                              <li>
+                                <strong>Systems Transformation</strong>. Our systems transformation work focuses on transforming man-made extractivist systems (<i>e.g.</i>,  economics-law-governance-education (ELGE) systems) causing widespread ecocide and inequity worldwide. We provide thought leadership and collaboratively implement global-local actions &#x2014; in <a target="_blank" href="#definitions">synergy</a> with civic organizations and communities &#x2014; to help effect lasting systems change.
+                              </li>
+                              <li>
+                              <strong><i>ReRoot</i></strong>. Our <i>ReRoot</i> campaigns aim to inspire human beings from all walks of life, everywhere in the world, to understand and express their individual and community <i>ecoself</i>. We invite anyone with passion to co-create art, music, and/or performance pieces that encourage people to (a) unlearn, <i>i.e.</i>, to peel away the layers of, inhibition and untruths that may be burdening them with perspectives and beliefs that lead to self-deprecation and/or ecocidal/inequitable behaviors; and (b) relearn how to understand and express their <i>ecoselves</i>. <a target="_blank" href="https://ecosymbiont.org/earth/content/action/activism/reroot-campaigns-for-ecoself-rooted-public-unlearning-and-relearning">Link to full article here</a>.
+                              </li>
                             </ul>
                         </div>
                     </div>

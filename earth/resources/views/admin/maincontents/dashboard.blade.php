@@ -23,7 +23,7 @@
         <!-- Card -->
         <a class="card card-hover-shadow h-100" href="<?=url('admin/readers/list')?>">
           <div class="card-body">
-            <h6 class="card-subtitle">Readers</h6>
+            <h6 class="card-subtitle">Reader</h6>
             <div class="row align-items-center gx-2 mb-1">
               <div class="col-12">
                 <h2 class="card-title text-inherit"><?=$readers?></h2>
@@ -42,7 +42,7 @@
         <!-- Card -->
         <a class="card card-hover-shadow h-100" href="<?=url('admin/content_creaters/list')?>">
           <div class="card-body">
-            <h6 class="card-subtitle">Content Creators</h6>
+            <h6 class="card-subtitle">Content Creator</h6>
             <div class="row align-items-center gx-2 mb-1">
               <div class="col-6">
                 <h2 class="card-title text-inherit"><?=$content_creators?></h2>
@@ -58,9 +58,9 @@
         <!-- End Card -->
       </div>
 
-      <div class="col-sm-12 col-lg-4 mb-3 mb-lg-5">
+      <div class="col-sm-12 col-lg-6 col-md-6 mb-3 mb-lg-5">
         <!-- Card -->
-        <a class="card card-hover-shadow h-100" href="<?= url('admin/article/list') ?>">
+        <a class="card card-hover-shadow h-100" href="<?= url('admin/article/submitted') ?>">
           <div class="card-body">
             <h6 class="card-subtitle">Creative-Work Submitted</h6>
             <div class="row align-items-center gx-2 mb-1">
@@ -77,11 +77,11 @@
         </a>
         <!-- End Card -->
       </div>
-      <div class="col-sm-12 col-lg-4 mb-3 mb-lg-5">
+      <div class="col-sm-12 col-lg-6 col-md-6 mb-3 mb-lg-5">
         <!-- Card -->
-        <a class="card card-hover-shadow h-100" href="<?= url('admin/article/list') ?>">
+        <a class="card card-hover-shadow h-100" href="<?= url('admin/article/editing-checking') ?>">
           <div class="card-body">
-            <h6 class="card-subtitle">Final Edited & Checked</h6>
+            <h6 class="card-subtitle">Final Editing & Checking</h6>
             <div class="row align-items-center gx-2 mb-1">
               <div class="col-6">
                 <h2 class="card-title text-inherit"><?=$final_edited?></h2>
@@ -96,8 +96,8 @@
         </a>
         <!-- End Card -->
       </div>
-      <div class="col-sm-12 col-lg-4 mb-3 mb-lg-5">
-        <!-- Card -->
+      <!-- <div class="col-sm-12 col-lg-4 mb-3 mb-lg-5">
+         Card 
         <a class="card card-hover-shadow h-100" href="<?= url('admin/article/list') ?>">
           <div class="card-body">
             <h6 class="card-subtitle">NELP Form Generated & Shared</h6>
@@ -106,17 +106,17 @@
                 <h2 class="card-title text-inherit"><?=$nelp_generated?></h2>
               </div>
             </div>
-            <!-- End Row -->
-            <!-- <span class="badge bg-soft-success text-success">
+             End Row 
+             <span class="badge bg-soft-success text-success">
               <i class="bi-graph-up"></i> 1.7%
             </span>
-            <span class="text-body fs-6 ms-1">from 29.1%</span> -->
+            <span class="text-body fs-6 ms-1">from 29.1%</span> 
           </div>
         </a>
-        <!-- End Card -->
-      </div>
-      <div class="col-sm-12 col-lg-4 mb-3 mb-lg-5">
-        <!-- Card -->
+         End Card
+      </div> -->
+      <!-- <div class="col-sm-12 col-lg-4 mb-3 mb-lg-5">
+         Card 
         <a class="card card-hover-shadow h-100" href="<?= url('admin/article/list') ?>">
           <div class="card-body">
             <h6 class="card-subtitle">Scan Copy Uploaded</h6>
@@ -125,20 +125,20 @@
                 <h2 class="card-title text-inherit"><?=$scan_copy_uploaded?></h2>
               </div>
             </div>
-            <!-- End Row -->
+            End Row -->
             <!-- <span class="badge bg-soft-success text-success">
               <i class="bi-graph-up"></i> 1.7%
             </span>
-            <span class="text-body fs-6 ms-1">from 29.1%</span> -->
+            <span class="text-body fs-6 ms-1">from 29.1%</span> 
           </div>
         </a>
-        <!-- End Card -->
-      </div>
-      <div class="col-sm-12 col-lg-4 mb-3 mb-lg-5">
+         End Card 
+      </div> -->
+      <div class="col-sm-12 col-lg-6 col-md-6 mb-3 mb-lg-5">
         <!-- Card -->
-        <a class="card card-hover-shadow h-100" href="<?= url('admin/article/list') ?>">
+        <a class="card card-hover-shadow h-100" href="<?= url('admin/article/approved') ?>">
           <div class="card-body">
-            <h6 class="card-subtitle">Approved</h6>
+            <h6 class="card-subtitle">Approved & Published</h6>
             <div class="row align-items-center gx-2 mb-1">
               <div class="col-6">
                 <h2 class="card-title text-inherit"><?=$approved?></h2>
@@ -153,11 +153,11 @@
         </a>
         <!-- End Card -->
       </div>
-      <div class="col-sm-12 col-lg-4 mb-3 mb-lg-5">
+      <div class="col-sm-12 col-lg-6 col-md-6 mb-3 mb-lg-5">
         <!-- Card -->
         <a class="card card-hover-shadow h-100" href="<?=url('admin/news_content/list')?>">
           <div class="card-body">
-            <h6 class="card-subtitle">News Contents</h6>
+            <h6 class="card-subtitle">News Content</h6>
             <div class="row align-items-center gx-2 mb-1">
               <div class="col-6">
                 <h2 class="card-title text-inherit"><?=$news_content?></h2>

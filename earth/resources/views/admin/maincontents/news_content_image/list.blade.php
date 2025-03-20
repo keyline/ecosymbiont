@@ -49,7 +49,7 @@ $controllerRoute = $module['controller_route'];
                     <th scope="row"><?=$sl++?></th>                      
                     <td>
                       <?php if($row->image_file != ''){?>
-                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$row->image_file?>" class="img-thumbnail" id="imageToCopy<?=$row->id?>" alt="<?=$row->image_title?>" style="width: 150px; height: 150px; margin-top: 10px;">
+                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$row->image_file?>" class="img-thumbnail" id="imageToCopy<?=$row->id?>" alt="<?=$row->image_title?>" style="width: 150px; height: 150px; margin-top: 10px;"><br><?=$row->image_file?>
                       <?php } else {?>
                         <img src="<?=env('NO_IMAGE')?>" alt="" class="img-thumbnail"  style="width: 150px; height: 150px; margin-top: 10px;">
                       <?php }?>
@@ -63,7 +63,7 @@ $controllerRoute = $module['controller_route'];
                     <td>
                       <a href="<?=url('admin/news_content_image/edit_image/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit News Content Image"><i class="fa fa-edit"></i></a>
                       <!-- <a href="<?=url('admin/news_content_image/delete_image/'.Helper::encoded($row->id))?>" class="btn btn-outline-danger btn-sm" title="Delete News Content Image" onclick="return confirm('Do You Want To Delete This News Content Image');"><i class="fa fa-trash"></i></a>                       -->
-                      <a href="<?=env('UPLOADS_URL').'newcontent/'.$row->image_file?>" download="<?=$row->image_title?>" class="btn btn-outline-success btn-sm"><i class="fa fa-download"></i></a>
+                      <a href="<?=env('UPLOADS_URL').'newcontent/'.$row->image_file?>" download="<?=$row->image_file?>" class="btn btn-outline-success btn-sm"><i class="fa fa-download"></i></a>
                     </td>
                   </tr>
                 <?php } } else {?>

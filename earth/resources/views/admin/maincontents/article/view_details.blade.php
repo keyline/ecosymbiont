@@ -5,6 +5,22 @@ use App\Models\EcosystemAffiliation;
 use App\Models\Country;
 use App\Models\ExpertiseArea;
 $controllerRoute = $module['controller_route'];
+function numberToOrdinal($number) {
+    $ordinals = [
+        1 => 'First',
+        2 => 'Second',
+        3 => 'Third',
+        4 => 'Fourth',
+        5 => 'Fifth',
+        6 => 'Sixth',
+        7 => 'Seventh',
+        8 => 'Eighth',
+        9 => 'Ninth',
+        10 => 'Tenth'
+    ];
+    
+    return $ordinals[$number] ?? $number;
+}
 ?>
 <div class="pagetitle">
   <h1><?=$page_header?></h1>
@@ -33,18 +49,18 @@ $controllerRoute = $module['controller_route'];
     </div>
     <?php
     if ($row) {
-      
       $author_classification = $row->author_classification;
       $co_authors = $row->co_authors;
       $co_authors_position = $row->co_authors_position;
       $co_author_name = json_decode($row->co_author_names);
-//  dd($co_author_name[0]); die;
+      //  dd($co_author_name[0]); die;
       $co_author_bios = json_decode($row->co_author_bios);
       $co_author_countries =json_decode($row->co_author_countries);
       $co_author_organizations = json_decode($row->co_author_organizations);
       $co_ecosystem_affiliations = json_decode($row->co_ecosystem_affiliations);
       $co_indigenous_affiliations = json_decode($row->co_indigenous_affiliations);
       $co_author_classification = json_decode($row->co_author_classification);
+      $co_author_pronoun = json_decode($row->co_author_pronoun);
       $first_name = $row->first_name;            
       $last_name = $row->last_name;            
       $middle_name = $row->middle_name;            
@@ -52,7 +68,8 @@ $controllerRoute = $module['controller_route'];
       $for_publication_name = $row->for_publication_name;          
       $countryId = $row->country;          
       $roleId = $row->role;          
-      $creative_Work = $row->creative_Work;  
+      $creative_Work = $row->creative_Work;
+      $creative_Work_fiction = $row->creative_Work_fiction;
       $orginal_work = $row->orginal_work;        
       $copyright = $row->copyright; 
       $invited = $row->invited;
@@ -65,6 +82,7 @@ $controllerRoute = $module['controller_route'];
       $pronounId = $row->pronounId;
       $subtitle = $row->subtitle;
       $submission_types = $row->submission_types;
+      $additional_information = $row->additional_information;
       $narrative_images = $row->narrative_images;
       $narrative_file = $row->narrative_file;
       $image_files = json_decode($row->image_files);
@@ -79,6 +97,8 @@ $controllerRoute = $module['controller_route'];
       $city = $row->city;
       $participated = $row->participated;
       $participated_info = $row->participated_info;
+      $community = $row->community;
+      $community_name = $row->community_name;
       $organization_name = $row->organization_name;
       $organization_website = $row->organization_website;
       $ecosystem_affiliationId = $selected_ecosystem_affiliation;
@@ -87,6 +107,10 @@ $controllerRoute = $module['controller_route'];
       $bio_short = $row->bio_short;
       $bio_long = $row->bio_long;            
       $acknowledge = $row->acknowledge;
+      $is_series                  = $row->is_series;
+      $series_article_no          = $row->series_article_no;
+      $current_article_no         = $row->current_article_no;
+      $other_article_part_doi_no  = $row->other_article_part_doi_no;
     }
     ?>
     <div class="col-lg-12">
@@ -96,12 +120,12 @@ $controllerRoute = $module['controller_route'];
             <li class="nav-item">
               <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab1">Submission Details</button>
             </li>            
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab2">NELP PDF</button>
             </li>            
             <li class="nav-item">
               <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab3">NELP Scan Copy</button>
-            </li>                               
+            </li> -->
           </ul> 
           <div class="tab-content pt-2">     
             <div class="tab-pane fade show active" id="tab1">
@@ -110,8 +134,11 @@ $controllerRoute = $module['controller_route'];
                   <?php if($row->is_published == 1){?>
                     <a href="<?=url('admin/' . $controllerRoute . '/generate-nelp-form/'.Helper::encoded($row->id))?>" class="btn btn-outline-info btn-sm" title="Generate NELP Form & Shared"><i class="fa fa-pdf"> Generate NELP Form & Shared</i></a>
                   <?php }?>
-                <?php }?>
-                <a href="<?=url('admin/' . $controllerRoute . '/edit/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit"> Edit</i></a>
+                <?php }
+                // if ($row->is_import == 0) { 
+                ?>
+                <!-- <a href="?=url('admin/' . $controllerRoute . '/edit/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit"> Edit</i></a> -->
+                <!-- ?php } ?> -->
               </p>
               <table class="table table-striped table-bordered nowrap">
                 <thead>
@@ -134,7 +161,7 @@ $controllerRoute = $module['controller_route'];
                       <td><?= $co_authors ?></td>
                     </tr>
                     <tr>
-                      <td>3A) (- if answer to (3) is 1 or 2) Indicate in which position your name should appear in the list of authors (the Lead Author, i.e., the first author listed, must be a human individual)</td>
+                      <td>3A) If you have co-author(s), indicate in which position your name should appear in the list of authors (the Lead Author, i.e., the first author listed, must be a human individual)</td>
                       <td><?= $co_authors_position ?></td>
                     </tr>
                     @for ($i = 1; $i <= $co_authors; $i++)
@@ -164,32 +191,36 @@ $controllerRoute = $module['controller_route'];
 
                     @endphp                   
                       <tr>
-                        <td>3B{{$i}}) Co-Author Name</td> 
+                        <td>3B{{$i}}) <?=numberToOrdinal($i)?> co-author’s name</td> 
                         <td>{{ $co_author_name[$i - 1] }}</td>                       
                       </tr>
                        <tr>
-                        <td>3C{{$i}}) Co-Author Short Bio</td>
+                        <td>3C{{$i}}) <?=numberToOrdinal($i)?> co-author’s short bio (30-40 words)</td>
                         <td>{{ $co_author_bios[$i - 1] }}</td>
                       </tr>
                       <tr>
-                        <td>3D{{$i}}) Co-Author country/nation</td>
+                        <td>3D{{$i}}) <?=numberToOrdinal($i)?> co-author’s country of residence</td>
                         <td>{{ $getCoCountry->name }}</td>
                       </tr>
                       <tr>
-                        <td>3E{{$i}}) Co-Author grassroots organization/ ecoweb-rooted community/ movement</td>
+                        <td>3E{{$i}}) <?=numberToOrdinal($i)?> co-author’s grassroots organization/ ecoweb-rooted community/ movement</td>
                         <td>{{ $co_author_organizations[$i - 1] }}</td>
                       </tr>
                       <tr>
-                        <td>3F{{$i}}) What continent are Co-Author ancestors originally from?</td>
+                        <td>3F{{$i}}) What continent are <?=numberToOrdinal($i)?> co-author’s ancestors originally from? (select all that apply)</td>
                         <td>{{ implode(', ', $affiliations) }}</td>
                       </tr>
                       <tr>
-                        <td>3G{{$i}}) What specific region are Co-author ancestors originally from OR what is the name of your Indigenous community?</td>
+                        <td>3G{{$i}}) What specific region are <?=numberToOrdinal($i)?> co-author’s ancestors originally from OR what is the name of <?=numberToOrdinal($i)?> co-author’s Indigenous community? (example of specific region = Bengal; example of Indigenous community name = Lisjan Ohlone)</td>
                         <td>{{ $co_indigenous_affiliations[$i - 1] }}</td>
                       </tr>
                       <tr>
-                        <td>3H{{$i}}) Co-Author Classification</td>
+                        <td>3H{{$i}}) <?=numberToOrdinal($i)?> co-author’s classification</td>
                         <td>{{ $co_author_classification[$i - 1] }}</td>
+                      </tr>
+                      <tr>
+                        <td>3I{{$i}}) <?=numberToOrdinal($i)?> co-author’s pronoun</td>
+                        <td><?=(($co_author_pronoun != '')?$co_author_pronoun[$i - 1]:'')?></td>
                       </tr>
                     @endfor
                     <tr>
@@ -278,6 +309,10 @@ $controllerRoute = $module['controller_route'];
                       <td><?= $creative_Work ?></td>
                     </tr>
                     <tr>
+                      <td>15a) Is your Creative-Work fiction?</td>
+                      <td><?=$creative_Work_fiction?></td>
+                    </tr>
+                    <tr>
                       <td>16) Subtitle - brief engaging summary of your Creative-Work (this is what readers will be able to read before logging on to ERT, if your Creative-Work is published on ERT as Content) (max. 40 words)</td>
                       <td><?= $subtitle ?></td>
                     </tr>
@@ -294,11 +329,16 @@ $controllerRoute = $module['controller_route'];
                       </td>
                     </tr>
                     <tr>
+                      <td>17a) (Optional: max. 100 words) Comments for the Editor(s) (any additional information you wish to share)</td>
+                      <td><?=$additional_information?></td>
+                    </tr>
+                    <tr>
                       <td>17A1) TYPE A: word narrative (no embedded images) (500-1000 words for prose, 100-250 words for poetry)</td>
                       <td>
                       <?php if($narrative_file != ''){?>
                         <a href="<?= env('UPLOADS_URL') . 'narrative/' . $narrative_file ?>" target="_blank"
                             class="badge bg-primary">View File</a>
+                            <br><a href="<?= env('UPLOADS_URL') . 'narrative/' . $narrative_file ?>" download="<?=$art_video_file?>" class="btn btn-outline-success btn-sm"><?=$narrative_file?> <i class="fa fa-download"></i></a>
                         <?php }?>                      
                       </td>
                     </tr>
@@ -312,6 +352,7 @@ $controllerRoute = $module['controller_route'];
                       <td>
                       <?php if($image_files[$i-1] != ''){?>
                         <img src="<?=env('UPLOADS_URL').'narrative/'.$image_files[$i-1]?>" alt="first_image_file" style="width: 150px; height: 150px; margin-top: 10px;">
+                        <br><a href="<?=env('UPLOADS_URL').'narrative/'.$image_files[$i-1]?>" download="<?=$art_video_file?>" class="btn btn-outline-success btn-sm"><?=$image_files[$i-1]?> <i class="fa fa-download"></i></a>
                         <?php } else {?>
                         <img src="<?=env('NO_IMAGE')?>" alt="first_image_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
                         <?php }?>
@@ -332,6 +373,7 @@ $controllerRoute = $module['controller_route'];
                       <td>
                       <?php if($art_image_file[$i-1] != ''){?>
                         <img src="<?=env('UPLOADS_URL').'art_image/'.$art_image_file[$i-1]?>" alt="first_image_file" style="width: 150px; height: 150px; margin-top: 10px;">
+                        <br><a href="<?=env('UPLOADS_URL').'art_image/'.$art_image_file[$i-1]?>" download="<?=$art_video_file?>" class="btn btn-outline-success btn-sm"><?=$art_image_file[$i-1]?> <i class="fa fa-download"></i></a>
                         <?php } else {?>
                         <img src="<?=env('NO_IMAGE')?>" alt="first_image_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
                         <?php }?>
@@ -353,7 +395,8 @@ $controllerRoute = $module['controller_route'];
                           <video width="350" height="250" controls>
                               <source src="<?=env('UPLOADS_URL').'art_video/'.$art_video_file?>" type="video/mp4">
                               Your browser does not support the video tag.
-                          </video>                      
+                          </video>                                                
+                      <br><a href="<?=env('UPLOADS_URL').'art_video/'.$art_video_file?>" download="<?=$art_video_file?>" class="btn btn-outline-success btn-sm"><?=$art_video_file?> <i class="fa fa-download"></i></a>
                       <?php }?>                      
                       </td>
                     </tr>
@@ -433,10 +476,36 @@ $controllerRoute = $module['controller_route'];
                       <td>27) 1-paragraph biography (150-250 words)</td>
                       <td><?= $bio_long ?></td>
                     </tr>
+                    <tr>
+                      <td>28) Are you a member of an EaRTh Community?</td>
+                      <td><?= $community ?></td>
+                    </tr>
+                    <tr>
+                      <td>28A) Select Community</td>
+                      <td><?= $community_name ?></td>
+                    </tr>
+                    <tr>
+                      <td>31) Is this part of a series?</td>
+                      <td><?=$is_series?></td>
+                    </tr>
+                    <?php if($is_series == 'Yes'){?>
+                      <tr>
+                        <td>32) How many total creative-works in this series?</td>
+                        <td><?=$series_article_no?></td>
+                      </tr>
+                      <tr>
+                        <td>33) What number in the series is this creative-work?</td>
+                        <td><?=$current_article_no?></td>
+                      </tr>
+                      <tr>
+                        <td>34) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).</td>
+                        <td><?=$other_article_part_doi_no?></td>
+                      </tr>
+                    <?php }?>
                 </tbody>
               </table>              
             </div>
-            <div class="tab-pane fade pt-3" id="tab2">
+            <!-- <div class="tab-pane fade pt-3" id="tab2">
                 <h4>NELP PDF</h4>
                 <?php if($row->nelp_form_pdf){?>
                   <embed src="<?=env('UPLOADS_URL').'article/'.$row->nelp_form_pdf?>" type="application/pdf" width="100%" height="600px" />
@@ -447,7 +516,7 @@ $controllerRoute = $module['controller_route'];
                 <?php if($row->nelp_form_scan_copy){?>
                   <embed src="<?=env('UPLOADS_URL').'article/'.$row->nelp_form_scan_copy?>" type="application/pdf" width="100%" height="600px" />
                 <?php }?>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

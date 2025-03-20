@@ -18,10 +18,15 @@ use App\Models\Title;
 use App\Models\Pronoun;
 use App\Models\EcosystemAffiliation;
 use App\Models\ExpertiseArea;
+use App\Models\NewsCategory;
+use App\Models\SubmissionType;
+use App\Models\UserClassification;
+use App\Models\UserProfile;
 use Auth;
 use Session;
 use Helper;
 use Hash;
+use PHPUnit\TextUI\Help;
 
 class ReadersController extends Controller
 {
@@ -81,12 +86,12 @@ class ReadersController extends Controller
                     //  dd($fields);
                     //  Helper::pr($fields);
                     User::insert($fields);
-                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
+                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' inserted successfully');
                 } else {
-                    return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
+                    return redirect()->back()->with('error_message', $this->data['title'] . ' already exists');
                 }
             } else {
-                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                return redirect()->back()->with('error_message', 'All fields required');
             }
         }
         $data['module']                 = $this->data;
@@ -108,7 +113,8 @@ class ReadersController extends Controller
     public function edit(Request $request, $id)
     {
         $data['module']                 = $this->data;
-        $id                             = Helper::decoded($id);
+        $id                            = Helper::decoded($id);
+        // Helper::pr($user_id);
         $title                          = $this->data['title'] . ' Update';
         $page_name                      = 'readers.add-edit';
         $data['row']                    = User::where($this->data['primary_key'], '=', $id)->first();
@@ -119,6 +125,18 @@ class ReadersController extends Controller
         $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
         $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
         $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+
+        // $data['classification']         = UserClassification::where('user_id', '=', $user_id)->first();
+        // Helper::pr($data['classification']);
+        // $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // $data['news_category']          = NewsCategory::where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'ASC')->get();        
+        // $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // $data['submission_type']        = SubmissionType::where('status', '=', 1)->get(); 
+        // $data['country']                = Country::orderBy('name', 'ASC')->get();
+        // $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // $data['row']                    = UserProfile::where('user_id', '=', $user_id)->where('id', '=', $id)->first();
 
         if ($request->isMethod('post')) {
             $postData = $request->all();
@@ -144,12 +162,12 @@ class ReadersController extends Controller
                         'password'                  => Hash::make($postData['password']),                        
                     ];
                     User::where($this->data['primary_key'], '=', $id)->update($fields);
-                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');
+                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' updated successfully');
                 } else {
-                    return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
+                    return redirect()->back()->with('error_message', $this->data['title'] . ' already exists');
                 }
             } else {
-                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                return redirect()->back()->with('error_message', 'All fields required');
             }
         }
         echo $this->admin_after_login_layout($title, $page_name, $data);
@@ -163,7 +181,7 @@ class ReadersController extends Controller
             'status'             => 3
         ];
         User::where($this->data['primary_key'], '=', $id)->update($fields);
-        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Deleted Successfully !!!');
+        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' deleted successfully');
     }
     /* delete */
     /* change status */
@@ -173,13 +191,13 @@ class ReadersController extends Controller
         $model                          = User::find($id);
         if ($model->status == 1) {
             $model->status  = 0;
-            $msg            = 'Deactivated';
+            $msg            = 'deactivated';
         } else {
             $model->status  = 1;
-            $msg            = 'Activated';
+            $msg            = 'activated';
         }
         $model->save();
-        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' Successfully !!!');
+        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' successfully');
     }
     /* change status */
     /* change archieve status */
@@ -189,13 +207,13 @@ class ReadersController extends Controller
         $model                          = User::find($id);
         if ($model->is_archieve == 1) {
             $model->is_archieve  = 0;
-            $msg            = 'Moved To Current List';
+            $msg            = 'moved to current list';
         } else {
             $model->is_archieve  = 1;
-            $msg            = 'Moved To Archieve List';
+            $msg            = 'moved to archieve list';
         }
         $model->save();
-        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' Successfully !!!');
+        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' successfully');
     }
     /* change archieve status */
 }

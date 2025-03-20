@@ -360,9 +360,9 @@ $controllerRoute = $module['controller_route'];
                             <label for="orginal_work" class="col-md-2 col-lg-4 col-form-label">8) Are all components of this Creative-Work your original work?
                             </label>
                             <div class="col-md-10 col-lg-8">
-                                <input type="radio" id="yes" name="orginal_work" value="Yes" @checked(old('orginal_work', $orginal_work) == 'Yes')>
+                                <input type="radio" id="yes" name="orginal_work" value="Yes" @checked(old('orginal_work', $orginal_work) == 'Yes') onclick="hideModal()">
                                 <label for="yes">Yes</label>
-                                <input type="radio" id="no" name="orginal_work" value="No" @checked(old('orginal_work', $orginal_work) == 'No')>
+                                <input type="radio" id="no" name="orginal_work" value="No" @checked(old('orginal_work', $orginal_work) == 'No') onclick="showModal()">
                                 <label for="no">No</label>
                             </div>
                         </div>
@@ -370,12 +370,29 @@ $controllerRoute = $module['controller_route'];
                             <label for="copyright" class="col-md-2 col-lg-4 col-form-label">9) Do you own the copyright and licensing rights to all components of your Creative-Work?
                             </label>
                             <div class="col-md-10 col-lg-8">
-                                <input type="radio" id="yes" name="copyright" value="Yes" @checked(old('copyright', $copyright) == 'Yes')>
+                                <input type="radio" id="yes" name="copyright" value="Yes" @checked(old('copyright', $copyright) == 'Yes') onclick="hideModal()">
                                 <label for="yes">Yes</label>
-                                <input type="radio" id="no" name="copyright" value="No" @checked(old('copyright', $copyright) == 'No')>
+                                <input type="radio" id="no" name="copyright" value="No" @checked(old('copyright', $copyright) == 'No') onclick="showModal()">
                                 <label for="no">No</label>
                             </div>
-                        </div>  
+                        </div> 
+                        <!-- Modal -->
+                        <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="alertModalLabel"><i class="bi bi-exclamation-triangle-fill"></i> Warning</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                    You must submit an original Creative-Eork and you must own the copyright and licensing rights to your original Creative-Work.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                         
                         <div class="row mb-3">
                             <label for="invited" class="col-md-2 col-lg-4 col-form-label">10) Were you invited to submit a Creative-Work to ERT?</label>
                             <div class="col-md-10 col-lg-8">
@@ -733,7 +750,7 @@ $controllerRoute = $module['controller_route'];
                                         @endforeach
                                     @endif                                
                                 </div>
-                            </div>   
+                            </div>
                             <div class="row mb-3">
                                 <label for="Indigenous_affiliation" class="col-md-2 col-lg-4 col-form-label">24) What specific region are your ancestors originally from OR what is the name of your Indigenous community? (example of specific region = Bengal; example of Indigenous community name = Lisjan Ohlone)
                                 </label>
@@ -802,7 +819,8 @@ $controllerRoute = $module['controller_route'];
         </div>
     </div>
 </section>
-<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+<!-- <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script> -->
+<script src="https://cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -813,6 +831,14 @@ $controllerRoute = $module['controller_route'];
             renderChoiceLimit: 30
         });
     });
+</script>
+<script>
+    CKEDITOR.replace('long_desc', {   
+        allowedContent: true,       
+    stylesSet: [        
+        { name: 'others_image_colour', element: 'em', attributes: { 'style': 'display: inline-block; color: #87ceeb;font-size: 16px;font-family: "proximanova_regular", sans-serif;font-style: italic;margin: 0;text-align: left !important;width: 100%;' } },        
+    ]
+});
 </script>
 <script>
     $(document).ready(function() {
@@ -1087,4 +1113,19 @@ $controllerRoute = $module['controller_route'];
             document.getElementById(errorElementId).innerText = '';
         }
     }
+</script>
+<script>
+    function showModal() {
+    const modal = new bootstrap.Modal(document.getElementById('alertModal'));
+    modal.show();
+    submitButton.disabled = true;
+}
+
+function hideModal() {
+    const modal = bootstrap.Modal.getInstance(document.getElementById('alertModal'));
+    if (modal) {
+        modal.hide();
+        submitButton.disabled = false;
+    }
+}
 </script>

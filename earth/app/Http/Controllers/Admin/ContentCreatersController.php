@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Article;
 // use App\Models\Admin\Country;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -18,6 +19,10 @@ use App\Models\Title;
 use App\Models\Pronoun;
 use App\Models\EcosystemAffiliation;
 use App\Models\ExpertiseArea;
+use App\Models\NewsCategory;
+use App\Models\SubmissionType;
+use App\Models\UserClassification;
+use App\Models\UserProfile;
 use Auth;
 use Session;
 use Helper;
@@ -28,7 +33,7 @@ class ContentCreatersController extends Controller
     public function __construct()
     {
         $this->data = array(
-            'title'             => 'Content Creaters',
+            'title'             => 'Content creator',
             'controller'        => 'ContentCreatersController',
             'controller_route'  => 'content_creaters',
             'primary_key'       => 'id',
@@ -113,12 +118,12 @@ class ContentCreatersController extends Controller
                     //  dd($fields);
                     //  Helper::pr($fields);
                     User::insert($fields);
-                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
+                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' inserted successfully');
                 } else {
-                    return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
+                    return redirect()->back()->with('error_message', $this->data['title'] . ' already exists');
                 }
             } else {
-                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                return redirect()->back()->with('error_message', 'All fields required');
             }
         }
         $data['module']                 = $this->data;
@@ -140,83 +145,139 @@ class ContentCreatersController extends Controller
     public function edit(Request $request, $id)
     {
         $data['module']                 = $this->data;
-        $id                             = Helper::decoded($id);
+        $user_id                            = Helper::decoded($id);
+        $data['user']                   = User::where($this->data['primary_key'], '=', $user_id)->first();
         $title                          = $this->data['title'] . ' Update';
         $page_name                      = 'content_creaters.add-edit';
-        $data['row']                    = User::where($this->data['primary_key'], '=', $id)->first();
-        $data['country']                = Country::orderBy('name', 'ASC')->get();
-        $data['role']                   = Role::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // $data['row']                    = User::where($this->data['primary_key'], '=', $id)->first();
+        // $data['country']                = Country::orderBy('name', 'ASC')->get();
+        // $data['role']                   = Role::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        // $data['selected_ecosystem_affiliation'] = json_decode($data['row']->ecosystem_affiliationId);
+        // $data['selected_expertise_area'] = json_decode($data['row']->expertise_areaId);
+        //  Helper::pr($data['selected_ecosystem_affiliation']);
+
+        $data['classification']         = UserClassification::where('user_id', '=', $user_id)->first();
+        // Helper::pr($data['classification']);
         $data['section_ert']            = SectionErt::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['news_category']          = NewsCategory::where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'ASC')->get();        
         $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+        $data['submission_type']        = SubmissionType::where('status', '=', 1)->get(); 
+        $data['country']                = Country::orderBy('name', 'ASC')->get();
         $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
         $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
         $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-        $data['selected_ecosystem_affiliation'] = json_decode($data['row']->ecosystem_affiliationId);
-        $data['selected_expertise_area'] = json_decode($data['row']->expertise_areaId);
-        //  Helper::pr($data['selected_ecosystem_affiliation']);
+        $data['row']                    = UserProfile::where('user_id', '=', $user_id)->first();
+
+
+
         if ($request->isMethod('post')) {
             $postData = $request->all();
             $rules = [                                 
-                'first_name'                => 'required',            
-                'last_name'                 => 'required',                                    
-                'email'                     => 'required',           
-                'phone'                     => 'required',           
-                'country'                   => 'required',                                      
-                'password'                  => 'required', 
-                'invited'                   => 'required',
-                'invited_by'                => 'required', 
-                'invited_by_email'          => 'required',                     
-                'section_ert'               => 'required',
+                // 'first_name'                => 'required',            
+                // 'last_name'                 => 'required',                                    
+                // 'email'                     => 'required',           
+                // 'phone'                     => 'required',           
+                // 'country'                   => 'required',                                      
+                // 'password'                  => 'required', 
+                // 'invited'                   => 'required',
+                // 'invited_by'                => 'required', 
+                // 'invited_by_email'          => 'required',                     
+                // 'section_ert'               => 'required',
+                // 'title'                     => 'required',
+                // 'pronoun'                   => 'required',
+                // 'participated'              => 'required',
+                // 'participated_info'         => 'required',
+                // 'organization_name'         => 'required',
+                // 'organization_website'      => 'required',
+                // 'ecosystem_affiliation'     => 'required',               
+                // 'expertise_area'            => 'required',                
+                // 'explanation'               => ['required', 'string', new MaxWords(100)],
+                // 'explanation_submission'    => ['required', 'string', new MaxWords(150)],
+                // 'bio_short'                 => ['required', 'string', new MaxWords(40)],
+                // 'bio_long'                  => ['required', 'string', new MaxWords(250)],   
+                
+                'author_classification'     => 'required',
+                'first_name'                => 'required',                                                               
+                'email'                     => 'required',                                      
+                'country'                   => 'required',                                                                                                                                            
                 'title'                     => 'required',
-                'pronoun'                   => 'required',
-                'participated'              => 'required',
-                'participated_info'         => 'required',
-                'organization_name'         => 'required',
-                'organization_website'      => 'required',
+                'pronoun'                   => 'required',   
                 'ecosystem_affiliation'     => 'required',               
                 'expertise_area'            => 'required',                
                 'explanation'               => ['required', 'string', new MaxWords(100)],
-                'explanation_submission'    => ['required', 'string', new MaxWords(150)],
+                'explanation_submission'    => ['required', 'string', new MaxWords(150)],                
+                // 'creative_Work'             => ['required', 'string', new MaxWords(10)],                                  
                 'bio_short'                 => ['required', 'string', new MaxWords(40)],
-                'bio_long'                  => ['required', 'string', new MaxWords(250)],            
+                'bio_long'                  => ['required', 'string', new MaxWords(250)],
             ];
+            $participatedInfo = isset($postData['participated_info']) ? $postData['participated_info'] : '';
+            $invited_byInfo = isset($postData['invited_by']) ? $postData['invited_by'] : '';
+            $invited_emailInfo = isset($postData['invited_by_email']) ? $postData['invited_by_email'] : '';                
+            $expertise_areaInfo = isset($postData['expertise_area']) ? json_encode($postData['expertise_area']) : '';
+            $ecosystem_affiliationInfo = isset($postData['ecosystem_affiliation']) ? json_encode($postData['ecosystem_affiliation']) : '';
             if ($this->validate($request, $rules)) {
-                $checkValue = User::where('first_name', '=', $postData['first_name'])->where('id', '!=', $id)->count();
-                if ($checkValue <= 0) {                    
+                // $checkValue = User::where('first_name', '=', $postData['first_name'])->where('id', '!=', $id)->count();
+                // if ($checkValue <= 0) {                    
                     $fields = [                        
-                        'first_name'                => $postData['first_name'],            
-                        'last_name'                 => $postData['last_name'],        
-                        'middle_name'               => $postData['middle_name'],            
-                        'email'                     => $postData['email'],           
-                        'phone'                     => $postData['phone'],           
-                        'country'                   => $postData['country'],           
-                        'role'                      => 2,           
-                        'password'                  => Hash::make($postData['password']), 
+                        'user_id'                   => $user_id,          
+                        'email'                     => $postData['email'],
+                        'author_classification'     => $postData['author_classification'],
+                        'first_name'                => $postData['first_name'],                                                                             
+                        'for_publication_name'      => $postData['for_publication_name'],           
+                        'pronounId'                 => $postData['pronoun'],                        
                         'invited'                   => $postData['invited'],
-                        'invited_by'                => $postData['invited_by'], 
-                        'invited_by_email'          => $postData['invited_by_email'],  
+                        'invited_by'                => $invited_byInfo, 
+                        'invited_by_email'          => $invited_emailInfo,
+                        'participated'              => $postData['participated'],
+                        'participated_info'         => $participatedInfo,
                         'explanation'               => $postData['explanation'],  
                         'explanation_submission'    => $postData['explanation_submission'],     
-                        'section_ertId'             => $postData['section_ert'],
-                        'titleId'                   => $postData['title'],
-                        'pronounId'                 => $postData['pronoun'],
-                        'participated'              => $postData['participated'],
-                        'participated_info'         => $postData['participated_info'],
+                        'titleId'                   => $postData['title'],                              
+                        'country'                   => $postData['country'],
+                        'state'                     => $postData['state'],
+                        'city'                      => $postData['city'],
                         'organization_name'         => $postData['organization_name'],
                         'organization_website'      => $postData['organization_website'],
-                        'ecosystem_affiliationId'   => json_encode($postData['ecosystem_affiliation']),
+                        'ecosystem_affiliationId'   => $ecosystem_affiliationInfo,
                         'indigenous_affiliation'    => $postData['indigenous_affiliation'],
-                        'expertise_areaId'          => json_encode($postData['expertise_area']),
-                        'bio_short'               => $postData['bio_short'],
-                        'bio_long'               => $postData['bio_long'],             
+                        'expertise_areaId'          => $expertise_areaInfo,
+                        'bio_short'                 => $postData['bio_short'],
+                        'bio_long'                  => $postData['bio_long'], 
                     ];
-                    User::where($this->data['primary_key'], '=', $id)->update($fields);
-                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');
-                } else {
-                    return redirect()->back()->with('error_message', $this->data['title'] . ' Already Exists !!!');
-                }
+                    $fields2 = [                        
+                        'first_name'                => $postData['first_name'],                                    
+                        'email'                     => $postData['email'],                                           
+                        'country'                   => $postData['country'],                                                           
+                    ];                    
+                    UserProfile::where('user_id', '=', $user_id)->update($fields);
+                    if($data['user']->email != $postData['email']){                        
+                        $generalSetting             = GeneralSetting::where('id', '=', 1)->first();
+                        $subject                    = 'Subject: Your Update Login Credentials for Portal Access';
+                        $message                    = "<table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
+                                                        <tr><td style='padding: 8px 15px'>Dear " . htmlspecialchars($postData['first_name']) . ",</td></tr>
+                                                        <tr><td style='padding: 8px 15px'>You have changed the email address associated with your Contributor profile on EaRTh.</td></tr>                                                                    
+                                                        <tr><td style='padding: 8px 15px'>Please note that you can no longer use your previous email address to log in. You must use your new email address, along with your old password.</td></tr>
+                                                        <tr><td style='padding: 8px 15px'>If you have forgotten your password, please log in using your new email address, and click on 'Forgot Password'.</td></tr>                                                            
+                                                        
+                                                        
+                                                        <tr><td style='padding: 8px 15px'>Sincerely,</td></tr>
+                                                        <tr><td style='padding: 8px 15px'>EaRTh Team</td></tr>
+                                                    </table>";
+                        $this->sendMail($postData['email'], $subject, $message);                                                                    
+                    } 
+                    User::where($this->data['primary_key'], '=', $user_id)->update($fields2);
+                    Article::where('user_id', '=', $user_id)->update($fields2);
+                    return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' updated successfully');
+                // } else {
+                //     return redirect()->back()->with('error_message', $this->data['title'] . ' Alseady Exists');
+                // }
             } else {
-                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                return redirect()->back()->with('error_message', 'All fields required');
             }
         }
         echo $this->admin_after_login_layout($title, $page_name, $data);
@@ -230,7 +291,7 @@ class ContentCreatersController extends Controller
             'status'             => 3
         ];
         User::where($this->data['primary_key'], '=', $id)->update($fields);
-        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Deleted Successfully !!!');
+        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] .'(s) deleted successfully');
     }
     /* delete */
     /* change status */
@@ -240,13 +301,13 @@ class ContentCreatersController extends Controller
         $model                          = User::find($id);
         if ($model->status == 1) {
             $model->status  = 0;
-            $msg            = 'Deactivated';
+            $msg            = 'deactivated';
         } else {
             $model->status  = 1;
-            $msg            = 'Activated';
+            $msg            = 'activated';
         }
         $model->save();
-        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' Successfully !!!');
+        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' successfully');
     }
     /* change status */
     /* change archieve status */
@@ -256,13 +317,13 @@ class ContentCreatersController extends Controller
         $model                          = User::find($id);
         if ($model->is_archieve == 1) {
             $model->is_archieve  = 0;
-            $msg            = 'Moved To Current List';
+            $msg            = 'moved to current list';
         } else {
             $model->is_archieve  = 1;
-            $msg            = 'Moved To Archieve List';
+            $msg            = 'moved to archieve list';
         }
         $model->save();
-        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' Successfully !!!');
+        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' successfully');
     }
     /* change archieve status */
 }

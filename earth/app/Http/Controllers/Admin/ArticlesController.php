@@ -42,15 +42,17 @@ class ArticlesController extends Controller
         );
     }
     /* list */
-    public function list()
+    public function list($slug)
     {
+        $getArticleStatus               = $this->get_article_status($slug);
+        // Helper::pr($getArticleStatus);
         $data['module']                 = $this->data;
         $title                          = $this->data['title'] . ' List';
         $page_name                      = 'article.list';
-        $data['rows']                   = Article::where('status', '!=', 3)->orderBy('id', 'DESC')->get();
+        $data['rows']                   = Article::where('status', '!=', 3)->where('is_published', '=', $getArticleStatus)->orderBy('id', 'DESC')->get();
 
         echo $this->admin_after_login_layout($title, $page_name, $data);
-    }
+    }    
     /* list */
     /* add */
     public function add(Request $request)
@@ -135,9 +137,9 @@ class ArticlesController extends Controller
                         ];
                         // Helper::pr($fields);
                         Article::insert($fields);
-                        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');                    
+                        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' inserted successfully');                    
                     } else {
-                        return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                        return redirect()->back()->with('error_message', 'All fields required');
                     }
                 } else{                    
                     //save to database//
@@ -169,9 +171,9 @@ class ArticlesController extends Controller
                         ];
                         // Helper::pr($fields);
                         Article::insert($fields);
-                        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');                    
+                        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' inserted successfully');                    
                     } else {
-                        return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                        return redirect()->back()->with('error_message', 'All fields required');
                     }
                 }
             } else{
@@ -262,7 +264,7 @@ class ArticlesController extends Controller
                                 }
                             } 
                             // else {
-                            //     return redirect()->back()->with(['error_message' => 'Please Upload narrative File !!!']);
+                            //     return redirect()->back()->with(['error_message' => 'Please Upload narrative File']);
                             // }
                         /* narrative doc file */
                         //save to database//
@@ -311,10 +313,10 @@ class ArticlesController extends Controller
                             ];
                             // Helper::pr($fields);
                             Article::insert($fields);
-                            return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
+                            return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' inserted successfully');
                         
                         } else {
-                            return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                            return redirect()->back()->with('error_message', 'All fields required');
                         }
                     } else if($postData['submission_types'] == '2'){
                         /* art images details */
@@ -397,10 +399,10 @@ class ArticlesController extends Controller
                             ];
                             // Helper::pr($fields);
                             Article::insert($fields);
-                            return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
+                            return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' inserted successfully');
                         
                         } else {
-                            return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                            return redirect()->back()->with('error_message', 'All fields required');
                         }
                     } else {
                         /* art_video file */
@@ -415,7 +417,7 @@ class ArticlesController extends Controller
                             }
                         } 
                         // else {
-                        //     return redirect()->back()->with(['error_message' => 'Please Upload art_video File !!!']);
+                        //     return redirect()->back()->with(['error_message' => 'Please Upload art_video File']);
                         // }
                         /* art_video file */   
                         if ($this->validate($request, $rules)) {                
@@ -456,10 +458,10 @@ class ArticlesController extends Controller
                             ];
                             // Helper::pr($fields);
                             Article::insert($fields);
-                            return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
+                            return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' inserted successfully');
                         
                         } else {
-                            return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                            return redirect()->back()->with('error_message', 'All fields required');
                         }
                     }                
                 } else {                    
@@ -560,7 +562,7 @@ class ArticlesController extends Controller
                                     }
                                 } 
                                 // else {
-                                //     return redirect()->back()->with(['error_message' => 'Please Upload narrative File !!!']);
+                                //     return redirect()->back()->with(['error_message' => 'Please Upload narrative File']);
                                 // }
                             /* narrative doc file */
                             
@@ -618,10 +620,10 @@ class ArticlesController extends Controller
                                 ];
                                 // Helper::pr($fields);
                                 Article::insert($fields);
-                                return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
+                                return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' inserted successfully');
                             
                             } else {
-                                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                                return redirect()->back()->with('error_message', 'All fields required');
                             }
                         } else if($postData['submission_types'] == '2'){
 
@@ -713,10 +715,10 @@ class ArticlesController extends Controller
                                 ];
                                 // Helper::pr($fields);
                                 Article::insert($fields);
-                                return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
+                                return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' inserted successfully');
                             
                             } else {
-                                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                                return redirect()->back()->with('error_message', 'All fields required');
                             }
                         } else {
 
@@ -779,10 +781,10 @@ class ArticlesController extends Controller
                                 ];
                                 //  Helper::pr($fields);
                                 Article::insert($fields);
-                                return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Inserted Successfully !!!');
+                                return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' inserted successfully');
                             
                             } else {
-                                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                                return redirect()->back()->with('error_message', 'All fields required');
                             }
                         }        
                 }
@@ -906,9 +908,9 @@ class ArticlesController extends Controller
                         // Helper::pr($fields);
                         // Article::insert($fields);
                         Article::where($this->data['primary_key'], '=', $id)->update($fields);
-                        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');                    
+                        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' updated successfully');                    
                     } else {
-                        return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                        return redirect()->back()->with('error_message', 'All fields required');
                     }
                 } else{                    
                     //save to database//
@@ -941,9 +943,9 @@ class ArticlesController extends Controller
                         // Helper::pr($fields);
                         // Article::insert($fields);
                         Article::where($this->data['primary_key'], '=', $id)->update($fields);
-                        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');                    
+                        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' updated successfully');                    
                     } else {
-                        return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                        return redirect()->back()->with('error_message', 'All fields required');
                     }
                 }
             } else{
@@ -1075,7 +1077,7 @@ class ArticlesController extends Controller
                             } 
                             else {
                                 $narrative_file = $data['row']->narrative_file;
-                                // return redirect()->back()->with(['error_message' => 'Please Upload art_image File !!!']);
+                                // return redirect()->back()->with(['error_message' => 'Please Upload art_image File']);
                             }
                         /* narrative doc file */
                         
@@ -1133,10 +1135,10 @@ class ArticlesController extends Controller
                             // Helper::pr($fields);
                             // Article::insert($fields);
                             Article::where($this->data['primary_key'], '=', $id)->update($fields);
-                            return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');
+                            return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' updated successfully');
                         
                         } else {
-                            return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                            return redirect()->back()->with('error_message', 'All fields required');
                         }
                     } else if($postData['submission_types'] == '2'){
                         /* art images details */
@@ -1166,7 +1168,7 @@ class ArticlesController extends Controller
                                     }
                                 } else {
                                     $artimageFile[] = $exsisting_artimage[$i-1];
-                                    // return redirect()->back()->with(['error_message' => 'Please Upload art_image File !!!']);
+                                    // return redirect()->back()->with(['error_message' => 'Please Upload art_image File']);
                                 }                                                                                       
                             } 
                         }               
@@ -1232,10 +1234,10 @@ class ArticlesController extends Controller
                             // Helper::pr($fields);
                             // Article::insert($fields);
                             Article::where($this->data['primary_key'], '=', $id)->update($fields);
-                            return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');
+                            return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' updated successfully');
                         
                         } else {
-                            return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                            return redirect()->back()->with('error_message', 'All fields required');
                         }
                     } else {                        
                         /* art_video file */
@@ -1253,7 +1255,7 @@ class ArticlesController extends Controller
                         else {
                             $art_video_file = $data['row']->art_video_file;
                             // echo "exsisting";
-                            // return redirect()->back()->with(['error_message' => 'Please Upload art_image File !!!']);
+                            // return redirect()->back()->with(['error_message' => 'Please Upload art_image File']);
                         } 
 
                         // dd($art_video_fileInfo);
@@ -1313,10 +1315,10 @@ class ArticlesController extends Controller
                             //  Helper::pr($fields);
                             // Article::insert($fields);
                             Article::where($this->data['primary_key'], '=', $id)->update($fields);
-                            return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');
+                            return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' updated successfully');
                         
                         } else {
-                            return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                            return redirect()->back()->with('error_message', 'All fields required');
                         }
                     }                
                 } else {                                                                                                                    
@@ -1380,7 +1382,7 @@ class ArticlesController extends Controller
                                     }
                                 } else {
                                     $narrative_file = $data['row']->narrative_file;
-                                    // return redirect()->back()->with(['error_message' => 'Please Upload art_image File !!!']);
+                                    // return redirect()->back()->with(['error_message' => 'Please Upload art_image File']);
                                 }                            
                             /* narrative doc file */
 
@@ -1440,10 +1442,10 @@ class ArticlesController extends Controller
                                 //   Helper::pr($fields);
                                 // Article::insert($fields);
                                 Article::where($this->data['primary_key'], '=', $id)->update($fields);
-                                return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');
+                                return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' updated successfully');
                             
                             } else {
-                                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                                return redirect()->back()->with('error_message', 'All fields required');
                             }
                         } else if($postData['submission_types'] == '2'){
                             /* art images details */
@@ -1474,7 +1476,7 @@ class ArticlesController extends Controller
                                         }
                                     } else {
                                         $artimageFile[] = $exsisting_artimage[$i-1];
-                                        // return redirect()->back()->with(['error_message' => 'Please Upload art_image File !!!']);
+                                        // return redirect()->back()->with(['error_message' => 'Please Upload art_image File']);
                                     }                                                                                       
                                 } 
                             }               
@@ -1541,10 +1543,10 @@ class ArticlesController extends Controller
                                 //   Helper::pr($fields);
                                 //Article::insert($fields);
                                 Article::where($this->data['primary_key'], '=', $id)->update($fields);
-                                return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');
+                                return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' updated successfully');
                             
                             } else {
-                                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                                return redirect()->back()->with('error_message', 'All fields required');
                             }
                         } else {
 
@@ -1560,7 +1562,7 @@ class ArticlesController extends Controller
                                 }
                             }else {
                                 $art_video_file = $data['row']->art_video_file;
-                                // return redirect()->back()->with(['error_message' => 'Please Upload art_image File !!!']);
+                                // return redirect()->back()->with(['error_message' => 'Please Upload art_image File']);
                             }                       
                             /* art_video file */        
 
@@ -1619,10 +1621,10 @@ class ArticlesController extends Controller
                                 //    Helper::pr($fields);
                                 // Article::insert($fields);
                                 Article::where($this->data['primary_key'], '=', $id)->update($fields);
-                                return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Updated Successfully !!!');
+                                return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' updated successfully');
                             
                             } else {
-                                return redirect()->back()->with('error_message', 'All Fields Required !!!');
+                                return redirect()->back()->with('error_message', 'All fields required');
                             }
                         }        
                 }
@@ -1639,7 +1641,7 @@ class ArticlesController extends Controller
             'status'             => 3
         ];
         Article::where($this->data['primary_key'], '=', $id)->update($fields);
-        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' Deleted Successfully !!!');
+        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' deleted successfully');
     }
     /* delete */
     /* change status */
@@ -1649,13 +1651,13 @@ class ArticlesController extends Controller
         $model                          = Article::find($id);
         if ($model->status == 1) {
             $model->status  = 0;
-            $msg            = 'Deactivated';
+            $msg            = 'deactivated';
         } else {
             $model->status  = 1;
-            $msg            = 'Activated';
+            $msg            = 'activated';
         }
         $model->save();
-        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' Successfully !!!');
+        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' successfully');
     }
     /* change status */
     /* change archieve status */
@@ -1668,10 +1670,10 @@ class ArticlesController extends Controller
             'is_published' => 2,
         ];
                    
-        $msg            = 'Accept';        
+        $msg            = 'accepted';        
         // $model->save();
         Article::where($this->data['primary_key'], '=', $id)->update($fields);
-        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' Successfully !!!');
+        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' successfully');
     }
     public function change_status_reject($id)
     {
@@ -1682,10 +1684,10 @@ class ArticlesController extends Controller
             'is_published' => 3,
         ];
                    
-        $msg            = 'Reject';        
+        $msg            = 'rejected';        
         // $model->save();
         Article::where($this->data['primary_key'], '=', $id)->update($fields);
-        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' Successfully !!!');
+        return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' ' . $msg . ' successfully');
     }
     /* change archieve status */
 
@@ -1697,6 +1699,7 @@ class ArticlesController extends Controller
         
         $page_name                                  = 'article.view_details';
         $data['row']                                = Article::where('status', '!=', 3)->where('id', '=', $id)->orderBy('id', 'DESC')->first();
+        // dd($data['row']);
         $data['selected_ecosystem_affiliation']     = json_decode($data['row']->ecosystem_affiliationId);
         $data['selected_expertise_area']            = json_decode($data['row']->expertise_areaId);
         $data['selected_section_ertId']             = json_decode($data['row']->section_ertId);
@@ -1756,6 +1759,18 @@ class ArticlesController extends Controller
             ];
             EmailLog::insertGetId($postData2);
         /* email log save */
-        return redirect("admin/" . $this->data['controller_route'] . "/view_details/" . Helper::encoded($id))->with('success_message', $this->data['title'] . ' NELP Form Generated & Shared To User Successfully !!!');
+        return redirect("admin/" . $this->data['controller_route'] . "/view_details/" . Helper::encoded($id))->with('success_message', $this->data['title'] . ' NELP form generated & shared to user successfully');
+    }
+
+    public function get_article_status($slug){
+        $order_status = '';
+        if($slug == 'submitted'){
+            $order_status = 0;
+        } elseif($slug == 'editing-checking'){
+            $order_status = 1;
+        } elseif($slug == 'approved'){
+            $order_status = 4;
+        }
+        return $order_status;
     }
 }

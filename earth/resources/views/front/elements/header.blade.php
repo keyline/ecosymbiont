@@ -48,28 +48,29 @@ use App\Helpers\Helper;
                                 </svg>
                                 <span class="cel-temperature">+7</span>
                             </li> -->
-                            <li><span class="time-now"><?=date('l d F Y')?> / <?=date('H:i')?></span></li>
+                            <!-- <li><span class="time-now"><//?=date('l d F Y')?> / <//?=date('H:i')?></span></li> -->
+                            <li><span class="time-now"><?= date('l d F Y') ?> / <?= date('H:i T') ?></span></li>
                             <!-- <li><a href="#">Log In</a></li> -->
                             <!-- <li><a href="<?=url('contact-us')?>">Contact</a></li> -->
                             <?php if(session('is_user_login')){?>
                                 <li>
                                     <!-- <img src="<?=(($user)?(($user->profile_image != '')?env('UPLOADS_URL').'user/'.$user->profile_image:env('NO_USER_IMAGE')):env('NO_USER_IMAGE'))?>" alt="<?=(($user)?$user->first_name . ' ' . $user->last_name:'')?>" class="img-responsive img-circle" style="width: 35px;height: 35px;"> -->
-                                    <a href="<?=url('user/dashboard')?>">Welcome <?=(($user)?$user->first_name . ' ' . $user->last_name:'')?></a></li>
+                                    <a href="<?=url('user/dashboard')?>">Welcome <?=(($user)?$user->first_name:'')?></a></li>
                                 <li><a href="<?=url('user/signout')?>">Sign Out</a></li>
                             <?php } else {?>
-                                <li><a href="<?=url('signin')?>">Sign In</a></li>
+                                <li><a href="<?=url('signin')?>">Sign In</a></li> 
                                 <li><a href="<?=url('signup')?>">Sign Up</a></li>
                             <?php }?>
                         </ul>
                     </div>  
                     <div class="col-md-3">
                         <ul class="social-icons">
-                            <!-- <li><a class="facebook" href="<?=$generalSetting->facebook_profile?>"><i class="fa fa-facebook"></i></a></li> -->
-                            <li><a class="twitter" href="<?=$generalSetting->twitter_profile?>"><i class="fa fa-twitter"></i></a></li>
+                            <li><a target="_blank" class="facebook" href="<?=$generalSetting->facebook_profile?>"><i class="fa fa-facebook"></i></a></li>
+                            <li><a target="_blank" class="twitter" href="<?=$generalSetting->twitter_profile?>"><i class="fa fa-twitter"></i></a></li>
                             <!-- <li><a class="rss" href="#"><i class="fa fa-rss"></i></a></li> -->
                             <!-- <li><a class="google" href="<?=$generalSetting->youtube_profile?>"><i class="fa fa-youtube"></i></a></li> -->
                             <!-- <li><a class="linkedin" href="<?=$generalSetting->linkedin_profile?>"><i class="fa fa-linkedin"></i></a></li> -->
-                            <li><a class="pinterest" href="<?=$generalSetting->instagram_profile?>"><i class="fa fa-instagram"></i></a></li>
+                            <li><a target="_blank" class="pinterest" href="<?=$generalSetting->instagram_profile?>"><i class="fa fa-instagram"></i></a></li>
                         </ul>
                     </div>  
                 </div>
@@ -85,7 +86,8 @@ use App\Helpers\Helper;
                     <div id="cssmenu">
                         <!-- mobile -->
                         <ul>
-                            <li><a href="<?=url('about-us')?>">ABOUT</a></li>
+                            <!-- <li><a href="<?=url('about-us')?>">ABOUT</a></li> -->
+                            <li><a href="<?=url('communities')?>" style="color: black !important;">COMMUNITIES</a></li>
                             <?php if($parentCats){ foreach($parentCats as $parentCat){?>
                                 <li><a href="<?=url('category/' . $parentCat->slug)?>"><?=$parentCat->sub_category?></a>
                                     
@@ -100,8 +102,8 @@ use App\Helpers\Helper;
                                     </ul>
                                 </li>
                             <?php } }?>
-                            <li><a href="<?=url('submissions')?>">SUBMISSIONS</a></li>
-                            <li><a href="<?=env('REGENERATE_URL')?>contact.php">CONTACT</a></li>
+                            <li><a href="<?=url('submissions')?>"  style="color: black !important;">SUBMISSIONS</a></li>
+                            <li><a href="<?=env('REGENERATE_URL')?>contact.php"  style="color: black !important;">CONTACT</a></li>
                         </ul>
                         <!-- mobile -->
                     </div>
@@ -139,11 +141,16 @@ use App\Helpers\Helper;
                                                             'news_contents.new_title', 
                                                             'news_contents.sub_title', 
                                                             'news_contents.slug', 
-                                                            'news_contents.author_name', 
+                                                            'news_contents.author_name',
+                                                            'news_contents.for_publication_name', 
                                                             'news_contents.cover_image', 
                                                             'news_contents.created_at',
                                                             'news_contents.media',
                                                             'news_contents.videoId',
+                                                            'news_contents.is_series',
+                                                            'news_contents.series_article_no',
+                                                            'news_contents.current_article_no',
+                                                            'news_contents.other_article_part_doi_no',
                                                             'sub_category.sub_category as sub_category_name', // From sub_category name
                                                             'parent_category.sub_category as parent_category_name', // From parent_category name
                                                             'sub_category.slug as sub_category_slug', // From sub_category alias
@@ -154,32 +161,63 @@ use App\Helpers\Helper;
                                                         ->orderBy('news_contents.id', 'DESC')
                                                         ->get();
                                            // dd(DB::getQueryLog());
-                        if($hotNewsContents){ foreach($hotNewsContents as $rowContent){
+                        if($hotNewsContents){ foreach($hotNewsContents as $rowContent){ 
                         ?>
-                            <div class="item list-post">
-                                
-                                <?php if($rowContent->media == 'image'){?>
-                                    <!-- <div class="post-gallery"> -->
-                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$rowContent->cover_image?>" alt="<?=$rowContent->new_title?>">
-                                    <!-- </div> -->
-                                <?php } else {?>
-                                    <div class="video-post">
-                                        <img alt="" src="https://img.youtube.com/vi/<?=$rowContent->videoId?>/hqdefault.jpg">
-                                        <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                            <?php
+                            $is_series                  = $rowContent->is_series;
+                            $series_article_no          = $rowContent->series_article_no;
+                            $current_article_no         = $rowContent->current_article_no;
+                            $other_article_part_doi_no  = explode(",", $rowContent->other_article_part_doi_no);
+                            if($is_series == 'Yes'){
+                                if($current_article_no == 1){
+                                    $isShow = true;
+                                } else {
+                                    $isShow = false;
+                                }
+                            } else {
+                                $isShow = true;
+                            }
+                            if($isShow){
+                            ?>
+                                <div class="item list-post">
+                                    
+                                    <?php if($rowContent->media == 'image'){?>
+                                        <!-- <div class="post-gallery"> -->
+                                            <img src="<?=env('UPLOADS_URL').'newcontent/'.$rowContent->cover_image?>" alt="<?=$rowContent->new_title?>">
+                                        <!-- </div> -->
+                                    <?php } else {?>
+                                        <div class="video-post">
+                                            <img alt="" src="https://img.youtube.com/vi/<?=$rowContent->videoId?>/hqdefault.jpg">
+                                            <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                        </div>
+                                    <?php } ?>
+
+
+                                    <div class="post-content">
+                                        <a href="<?=url('category/' . $rowContent->parent_category_slug. '/' . $rowContent->sub_category_slug)?>"><?=$rowContent->sub_category_name?></a>
+                                        <!-- <a href="?=url('subcategory/' . $rowContent->sub_category_slug)?>">?=$rowContent->sub_category_name?></a> -->
+                                        <h2><a href="<?=url('content/' . $rowContent->parent_category_slug. '/' . $rowContent->sub_category_slug . '/' . $rowContent->slug)?>"><?=$rowContent->new_title?></a></h2>
+                                        <ul class="post-tags">
+                                            <!-- <li><i class="fa fa-clock-o"></i><?=date_format(date_create($rowContent->created_at), "d M Y")?></li> -->
+                                            <!-- <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=(count(explode(' ', $rowContent->for_publication_name ?? $rowContent->author_name)) > 2) ? implode(' ', array_slice(explode(' ', $rowContent->author_name), 0, 2)) . ' ...' : $rowContent->author_name; ?></a></li> -->
+                                            <li>
+                                                <i class="fa fa-user"></i>
+                                                by 
+                                                <a href="javascript:void(0);">
+                                                    <?php
+                                                    $name = $rowContent->for_publication_name ?? $rowContent->author_name;
+                                                    if (count(explode(' ', $name)) > 2) {
+                                                        echo implode(' ', array_slice(explode(' ', $name), 0, 2)) . ' ...';
+                                                    } else {
+                                                        echo $name;
+                                                    }
+                                                    ?>
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </div>
-                                <?php } ?>
-
-
-                                <div class="post-content">
-                                    <a href="<?=url('category/' . $rowContent->parent_category_slug. '/' . $rowContent->sub_category_slug)?>"><?=$rowContent->sub_category_name?></a>
-                                    <!-- <a href="?=url('subcategory/' . $rowContent->sub_category_slug)?>">?=$rowContent->sub_category_name?></a> -->
-                                    <h2><a href="<?=url('content/' . $rowContent->parent_category_slug. '/' . $rowContent->sub_category_slug . '/' . $rowContent->slug)?>"><?=$rowContent->new_title?></a></h2>
-                                    <ul class="post-tags">
-                                        <!-- <li><i class="fa fa-clock-o"></i><?=date_format(date_create($rowContent->created_at), "d M Y")?></li> -->
-                                        <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$rowContent->author_name?></a></li>
-                                    </ul>
                                 </div>
-                            </div>
+                            <?php }?>
                         <?php } }?>
                     </div>
                 </div>
@@ -195,7 +233,7 @@ use App\Helpers\Helper;
                         <!-- desktop -->
                         <ul class="nav navbar-nav navbar-left">
                             <!-- <li><a class="active" href="<?=url('/')?>">Home</a></li> -->
-                            <li><a href="<?=url('about-us')?>">ABOUT</a></li>
+                            <li><a href="<?=url('communities')?>" style="color: black !important;">COMMUNITIES</a></li>
                             <?php if($parentCats){ foreach($parentCats as $parentCat){?>
                                 <li class="drop-arrow"><a href="<?=url('category/' . $parentCat->slug)?>"><?=$parentCat->sub_category?></a>
                                     <div class="megadropdown">
@@ -217,8 +255,8 @@ use App\Helpers\Helper;
                                     </div>
                                 </li>
                             <?php } }?>
-                            <li><a href="<?=url('submissions')?>">SUBMISSIONS</a></li>
-                            <li><a href="<?=env('REGENERATE_URL')?>contact.php">CONTACT</a></li>
+                            <li><a href="<?=url('submissions')?>" style="color: black !important;">SUBMISSIONS</a></li>
+                            <li><a href="<?=env('REGENERATE_URL')?>contact.php" style="color: black !important;">CONTACT</a></li>
                         </ul>
                         <!-- desktop -->
                     </div>
@@ -231,6 +269,7 @@ use App\Helpers\Helper;
                         <div class="search_suggestion">
                             <ul id="suggestions"></ul>
                         </div>
+                        <a href="#flipFlop" data-toggle="modal" data-target="#flipFlop" class="advserach_btn">Advanced</a>
                     </div>
                 </div>
                 
@@ -244,6 +283,12 @@ use App\Helpers\Helper;
 <script>
     function getSuggestions() {
         let search_keyword = $('#article-search').val();
+        // Check for HTML tags using a regular expression
+        if (/<[a-z][\s\S]*>/i.test(search_keyword)) {
+            alert("HTML tags are not allowed.");
+            $('#article-search').val(''); // Clear the field if invalid input is detected
+            return;
+        }
         if (search_keyword.length >= 3) {
             var url = '<?=url('/')?>';
             $.ajax({
@@ -259,3 +304,4 @@ use App\Helpers\Helper;
         }
     }
 </script>
+

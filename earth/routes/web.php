@@ -20,7 +20,11 @@ use Illuminate\Support\Facades\Route;
     // before login
         Route::match(['get', 'post'], '/', 'App\Http\Controllers\FrontController@home');
         Route::match(['get', 'post'], '/contact-us', 'App\Http\Controllers\FrontController@contactUs');
-        Route::match(['get', 'post'], '/about-us', 'App\Http\Controllers\FrontController@aboutUs');
+        Route::match(['get', 'post'], '/communities', 'App\Http\Controllers\FrontController@aboutUs');
+        Route::match(['get', 'post'], '/communities/SchumacherWild', 'App\Http\Controllers\FrontController@schumacherWild');
+        Route::match(['get', 'post'], '/communities/WestOakland', 'App\Http\Controllers\FrontController@westoakland');
+        Route::match(['get', 'post'], '/communities/ACTChangemakers', 'App\Http\Controllers\FrontController@actchangemakers');
+        Route::match(['get', 'post'], '/communities/EthosFellows', 'App\Http\Controllers\FrontController@ethosfellows');
         Route::match(['get', 'post'], '/page/{id}', 'App\Http\Controllers\FrontController@pageContent');
         Route::match(['get', 'post'], '/category/{id}', 'App\Http\Controllers\FrontController@category');
         Route::match(['get', 'post'], '/category/{categoryname}/{id}', 'App\Http\Controllers\FrontController@subcategory');
@@ -28,10 +32,16 @@ use Illuminate\Support\Facades\Route;
         Route::match(['get', 'post'], '/signin', 'App\Http\Controllers\FrontController@signIn');
         Route::match(['get', 'post'], '/sign-in/{id}', 'App\Http\Controllers\FrontController@signIn');
         Route::match(['get', 'post'], '/signup', 'App\Http\Controllers\FrontController@signUp');
+        Route::match(['get', 'post'], '/forgetpassword', 'App\Http\Controllers\FrontController@forgetPassword');
+        Route::match(['get', 'post'], '/otpvalidation', 'App\Http\Controllers\FrontController@otpValidation');
+        Route::match(['get', 'post'], '/resetpassword/{id}', 'App\Http\Controllers\FrontController@resetPassword');
         Route::match(['get', 'post'], '/submissions', 'App\Http\Controllers\FrontController@submissions');
         Route::match(['get', 'post'], '/contacts', 'App\Http\Controllers\FrontController@contacts');
         Route::match(['get', 'post'], '/fetch-search-suggestions', 'App\Http\Controllers\FrontController@fetch_search_suggestions');
         Route::match(['get', 'post'], '/search-result', 'App\Http\Controllers\FrontController@search_result');
+        Route::match(['get', 'post'], '/search_result_load', 'App\Http\Controllers\FrontController@search_result_load');
+        Route::match(['get', 'post'], '/advance-search-result', 'App\Http\Controllers\FrontController@advance_search_result');
+        Route::match(['get', 'post'], '/advance_search_result_load', 'App\Http\Controllers\FrontController@advance_search_result_load');
     // before login
     // after login
         Route::group(['prefix' => 'user', 'middleware' => ['user']], function () {
@@ -39,10 +49,14 @@ use Illuminate\Support\Facades\Route;
             Route::get('dashboard', 'App\Http\Controllers\FrontController@dashboard');
             Route::match(['get', 'post'], '/my-profile', 'App\Http\Controllers\FrontController@myProfile');
             Route::match(['get', 'post'], '/change-password', 'App\Http\Controllers\FrontController@changePassword');
+            Route::match(['get', 'post'], '/author-classification', 'App\Http\Controllers\FrontController@AuthorClassification');
+            Route::match(['get', 'post'], '/add-author-classification', 'App\Http\Controllers\FrontController@addAuthorClassification');
+            Route::match(['get', 'post'], '/update-author-classification/{id}', 'App\Http\Controllers\FrontController@updateAuthorClassification');
             Route::match(['get', 'post'], '/profiles', 'App\Http\Controllers\FrontController@profiles');
             Route::match(['get', 'post'], '/add-profile', 'App\Http\Controllers\FrontController@addProfile');
-            Route::match(['get', 'post'], '/update-profile/{id}', 'App\Http\Controllers\FrontController@updateProfile');
+            Route::match(['get', 'post'], '/update-profile/{id}', 'App\Http\Controllers\FrontController@updateProfile');        
             Route::match(['get', 'post'], '/article-list/{id}', 'App\Http\Controllers\FrontController@articleList');
+            Route::match(['get', 'post'], '/view_details/{id}', 'App\Http\Controllers\FrontController@viewarticle');
             Route::get('my-articles', 'App\Http\Controllers\FrontController@myArticle');
             Route::post('my-articles', 'App\Http\Controllers\FrontController@myArticle');
             Route::match(['get', 'post'], '/submit-new-article', 'App\Http\Controllers\FrontController@submitNewArticle');
@@ -78,7 +92,8 @@ use Illuminate\Support\Facades\Route;
         Route::match(['get','post'], "test-email", "UserController@testEmail");
         /* setting */
         /* submitted articles */
-        Route::get('article/list', 'ArticlesController@list');
+        // Route::get('article/list', 'ArticlesController@list');
+        Route::get('article/{id}', 'ArticlesController@list');
         Route::match(['get', 'post'], 'article/add', 'ArticlesController@add');
         Route::match(['get', 'post'], 'article/edit/{id}', 'ArticlesController@edit');
         Route::match(['get', 'post'], 'article/view_details/{id}', 'ArticlesController@viewDetails');
@@ -180,6 +195,13 @@ use Illuminate\Support\Facades\Route;
              Route::get('submission_type/change-status/{id}', 'SubmissionTypeController@change_status');
              Route::get('submission_type/change-archieve-status/{id}', 'SubmissionTypeController@change_archieve_status');
              /* Submission Type */
+             /* communities */
+                 Route::get('communities/list', 'CommunityController@list');
+                 Route::match(['get', 'post'], 'communities/add', 'CommunityController@add');
+                 Route::match(['get', 'post'], 'communities/edit/{id}', 'CommunityController@edit');
+                 Route::get('communities/delete/{id}', 'CommunityController@delete');
+                 Route::get('communities/change-status/{id}', 'CommunityController@change_status');
+             /* communities */
               /* title */
               Route::get('title/list', 'TitleController@list');
               Route::match(['get', 'post'], 'title/add', 'TitleController@add');

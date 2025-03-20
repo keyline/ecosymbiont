@@ -1,39 +1,45 @@
 <?php
 use App\Models\NewsCategory;
 use App\Models\NewsContent;
+use App\Models\Country;
+use App\Models\EcosystemAffiliation;
 use App\Helpers\Helper;
+
+$country                = Country::select('id', 'name')->where('status', '=', 1)->orderBy('name', 'ASC')->get();
+$ecosystem_affiliation  = EcosystemAffiliation::select('id', 'name')->where('status', '=', 1)->orderBy('name', 'ASC')->get();
 ?>
+<div class="footer_top_menu">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="footer-nav">
+                    <ul>
+                        <li><a href="<?=url('/') ?>" target="_blank">Home</a></li>
+                        <!-- <li><a href="<?=url('about-us')?>" target="_blank">About</a></li> -->
+                        <li><a href="<?=url('communities')?>" target="_blank">Communities</a></li>
+                        <li><a href="<?=env('REGENERATE_URL')?>contact.php" target="_blank">Contact</a></li>
+                        <li class="foot-social-icons"><a class="twitter" href="<?=$generalSetting->twitter_profile?>" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                        <li class="foot-social-icons"><a class="pinterest" href="<?=$generalSetting->instagram_profile?>" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                        <li class="foot-social-icons"><a target="_blank" class="facebook" href="<?=$generalSetting->facebook_profile?>"><i class="fa fa-facebook"></i></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <div class="footer_top_menu">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <nav class="footer-nav">
-                        <ul>
-                            <li><a href="<?=url('/') ?>" target="_blank">Home</a></li>
-                            <li><a href="<?=url('about-us')?>" target="_blank">About</a></li>
-                            <li><a href="<?=env('REGENERATE_URL')?>contact.php" target="_blank">Contact</a></li>
-                            <li class="foot-social-icons"><a class="twitter" href="<?=$generalSetting->twitter_profile?>" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                            <li class="foot-social-icons"><a class="pinterest" href="<?=$generalSetting->instagram_profile?>" target="_blank"><i class="fa fa-instagram"></i></a></li>
-                        </ul>
-                    </nav>
+<div class="footer_copy_pow">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="foot_copyinfo"><?=$generalSetting->footer_description?></div>
+                <div class="kelfot">
+                    <a href="https://keylines.net/" target="_blank">Powered by Keyline</a>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="footer_copy_pow">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="foot_copyinfo"><?=$generalSetting->footer_description?></div>
-                    <div class="kelfot">
-                        <a href="https://keylines.net/" target="_blank">Powered by Keyline</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
 
 <!-- <div class="container">
     <div class="footer-widgets-part">
@@ -117,3 +123,84 @@ use App\Helpers\Helper;
         </div>
     </div>
 </div> -->
+
+<!-- The modal -->
+<div class="modal fade" id="flipFlop" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-center" role="document">
+        <div class="modal-content advarnseach_section">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="modalLabel">Advanced Search</h4>
+            </div>
+            <div class="modal-body">
+                <form method="GET" action="<?=url('advance-search-result')?>">
+                    <div class="advance_inner_search">
+                        <select id="search_type" class="adv-search-field field-selector" name="search_type" required>
+                            <option value="" selected="selected">All Fields</option>
+                            <option value="Title">Title</option>
+                            <option value="Author name">Author name</option>
+                            <option value="Subtitle">Subtitle</option>
+                            <option value="Ancestral ecoweb">Ancestral ecoweb</option>
+                            <option value="Country of residence">Country of residence</option>
+                            <option value="Organization">Organization</option>
+                            <option value="Community">Community</option>
+                            <option value="Tag">Tag</option>
+                            <option value="Text">Text</option>
+                        </select>
+
+                        <select id="search_type_country" class="adv-search-field field-selector" name="search_keyword1" style="display: none;">
+                            <option value="" selected="selected">Select Country</option>
+                            <?php if($country){ foreach($country as $cnt){?>
+                                <option value="<?=$cnt->id?>"><?=$cnt->name?></option>
+                            <?php } }?>
+                        </select>
+                        <select id="search_type_affiliation" class="adv-search-field field-selector" name="search_keyword2" style="display: none;">
+                            <option value="" selected="selected">Select Ecoweb Affiliation</option>
+                            <?php if($ecosystem_affiliation){ foreach($ecosystem_affiliation as $ecoaff){?>
+                                <option value="<?=$ecoaff->id?>"><?=$ecoaff->name?></option>
+                            <?php } }?>
+                        </select>
+                        <input type="text" id="search_keyword" name="search_keyword0" placeholder="Enter a search term" required>
+                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i> Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $('#search_type').on('change', function(){
+            var search_type = $("#search_type").val();
+            // console.log(search_type);
+            if(search_type == 'Country of residence'){
+                $('input[name="search_keyword0"]').hide();
+                $('input[name="search_keyword0"]').attr('required', false);
+                $('select[name="search_keyword2"]').hide();
+                $('select[name="search_keyword2"]').attr('required', false);
+
+                $('select[name="search_keyword1"]').show();
+                $('select[name="search_keyword1"]').attr('required', true);
+            } else if(search_type == 'Ancestral ecoweb'){
+                $('input[name="search_keyword0"]').hide();
+                $('input[name="search_keyword0"]').attr('required', false);
+                $('select[name="search_keyword1"]').hide();
+                $('select[name="search_keyword1"]').attr('required', false);
+
+                $('select[name="search_keyword2"]').show();
+                $('select[name="search_keyword2"]').attr('required', true);
+            } else {
+                $('select[name="search_keyword1"]').hide();
+                $('select[name="search_keyword1"]').attr('required', false);
+                $('select[name="search_keyword2"]').hide();
+                $('select[name="search_keyword2"]').attr('required', false);
+
+                $('input[name="search_keyword0"]').show();
+                $('input[name="search_keyword0"]').attr('required', true);
+            }
+        });
+    })
+</script>

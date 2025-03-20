@@ -25,30 +25,26 @@
                                 <tr>
                                     <th>#</th>
                                     <th>SRN</th>
-                                    <th>Title</th>
-                                    <th>Submitted At</th>
-                                    <th>NELP</th>
-                                    <th>NELP Scan Copy</th>
+                                    <th>Submitted on</th>                                                                        
+                                    <th>NELP granted?</th>                                    
                                     <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php if($articles){ $sl=1; foreach($articles as $article){?>
                                     <tr>
-                                        <td><?=$sl++?></td>
+                                        <td><?=$sl++?> <a href="<?=url('user/view_details/' . Helper::encoded($article->id))?>" class="label label-primary"><i class="fa fa-eye"></i></a></td>
                                         <td><?=$article->article_no?></td>
-                                        <td><?=$article->creative_Work?></td>
-                                        <td><?=date_format(date_create($article->created_at), "d-m-Y")?></td>
-                                        <td>
-                                            <?php if($article->nelp_form_pdf){?>
-                                                <a href="<?=env('UPLOADS_URL').'article/'.$article->nelp_form_pdf?>" target="_blank" class="label label-primary">View File</a>
-                                            <?php }?>
+                                        <!-- <td>?=$article->creative_Work?></td> -->
+                                        <!-- <td>?=date_format(date_create(), "d-m-Y")?></td> -->
+                                        <td><?=date('M d Y h:i A', strtotime($article->created_at))?></td>
+                                        <td>Yes                                            
                                         </td>
-                                        <td>
-                                            <?php if($article->nelp_form_scan_copy){?>
+                                        <!-- <td>
+                                            ?php if($article->nelp_form_scan_copy){?>
                                                 <a href="<?=env('UPLOADS_URL').'article/'.$article->nelp_form_scan_copy?>" target="_blank" class="label label-primary">View File</a>
-                                            <?php } else {?>
-                                                <?php if($article->is_published == 2){?>
+                                            ?php } else {?>
+                                                ?php if($article->is_published == 2){?>
                                                     <form method="POST" action="" enctype="multipart/form-data" style="border: 1px solid #00000057;padding: 10px;border-radius: 10px;margin-bottom: 10px;margin-top: 10px;">
                                                         @csrf
                                                         <input type="hidden" name="article_id" value="<?=$article->id?>">
@@ -57,21 +53,21 @@
                                                         <small class="text-info">* Only PDF files are allowed</small><br>
                                                         <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-upload"></i> Upload</button>
                                                     </form>
-                                                <?php } ?>
-                                            <?php }?>
-                                        </td>
+                                                ?php } ?>
+                                            ?php }?>
+                                        </td> -->
                                         <td>
                                             <?php
                                             if($article->is_published == 0){
                                                 echo "<h6>Submitted</h6>";
                                             } elseif($article->is_published == 1){
-                                                echo "<h6>Final Edited & Checked</h6>";
+                                                echo "<h6>Final Editing & Checking</h6>";
                                             } elseif($article->is_published == 2){
                                                 echo "<h6>NELP Form Generated & Shared</h6>";
                                             } elseif($article->is_published == 3){
                                                 echo "<h6>Scan Copy Uploaded</h6>";
                                             } elseif($article->is_published == 4){
-                                                echo "<h6>Approved</h6>";
+                                                echo "<h6>Approved & Published</h6>";
                                             } elseif($article->is_published == 5){
                                                 echo "<h6>Rejected</h6>";
                                             }

@@ -145,107 +145,20 @@ $current_url = $protocol . $host . $uri;
                                         <li><a class="linkedin" href="{{ $linkdinShareUrl }}" target="_blank"><i class="fa fa-linkedin"></i><span>&nbsp;&nbsp;&nbsp;Share on Linkedin</span></a></li>
                                     </ul>
                                 </div>
-                                <div class="about-more-autor">
-                                    <ul class="nav nav-tabs">
-                                        <li class="active" style="width: 100%;">
-                                            <a href="#about-autor" data-toggle="tab">
-                                            <?php echo 'About The Lead Author'; ?>
-                                            </a>
-                                        </li>
-                                    </ul>                                    
-                                    <div class="tab-content">
-                                        <div class="tab-pane active" id="about-autor">
-                                            <div class="autor-box">                                                
-                                                <div class="autor-content postdetails-icon">
-                                                    <div class="autor-title">
-                                                        <span>
-                                                            <img src="<?=env('UPLOADS_URL').'icon/author.png'?>" alt="author" title="Author Bio" data-toogle="tooltip">                                                            
-                                                            <span><?=$rowContent->author_short_bio?></span>
-                                                            
-                                                            <!-- <a href="javascript:void(0);"><?=$authorPostCount?> Posts</a> -->
-                                                        </span>
-                                                    </div>
-                                                    <div class="autor-title">
-                                                        <span>
-                                                            <img src="<?=env('UPLOADS_URL').'icon/ancestral.png'?>" alt="author_affiliation" title="Ancestral Ecoweb" data-toogle="tooltip">
-                                                            <?php
-                                                            $author_affiliation = json_decode($rowContent->author_affiliation);
-                                                            $affiliations       = [];
-                                                            if(!empty($author_affiliation)){ for($k=0;$k<count($author_affiliation);$k++){
-                                                                $getAffiliation = EcosystemAffiliation::select('name')->where('id', '=', $author_affiliation[$k])->first();
-                                                                $affiliations[]       = $getAffiliation->name;
-                                                            } }?>
-                                                            
-                                                            <?php
-                                                                $indigenous_affiliation = (isset($rowContent->indigenous_affiliation) && !empty($rowContent->indigenous_affiliation)) ? trim($rowContent->indigenous_affiliation) : trim($rowContent->indigenous_affiliation);
-                                                            ?>
-                                                            <span><?= implode(", ", $affiliations) ?><?= !empty($indigenous_affiliation) ? ' | ' . $indigenous_affiliation : ''; ?></span>
-                                                        </span>
-                                                    </div>
-                                                    <div class="autor-title">
-                                                        <span>
-                                                            <img src="<?=env('UPLOADS_URL').'icon/residence.png'?>" alt="residence" title="Residence" data-toogle="tooltip">
-                                                            <?php
-                                                            $getCountry = Country::select('name')->where('id', '=', $rowContent->country)->first();
-                                                            ?>
-                                                            <span><?=(($getCountry)?$getCountry->name:'')?></span>
-                                                        </span>
-                                                    </div>
-                                                    <div class="autor-title">
-                                                        <span>
-                                                            <img src="<?=env('UPLOADS_URL').'icon/organizational.png'?>" alt="organizational" title="Organizational Affiliation" data-toogle="tooltip">                                                                    
-                                                            <span><?= $organization_name = (isset($rowContent->organization_name) > 0) ? trim($rowContent->organization_name) : ''; ?></span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>                                                
-                                    </div>
-                                </div>
                                 <?php  // Split the string into two parts using the '#' as a delimiter
-                                $co_authors = $rowContent->co_authors;
-                                // $co_author_name = json_decode($row->co_author_names);
-                            //  dd($co_author_name[0]); die;
-                                $co_author_bios = json_decode($rowContent->co_author_bios);
-                                $co_author_countries =json_decode($rowContent->co_author_countries);
-                                $co_author_organizations = json_decode($rowContent->co_author_organizations);
-                                $co_ecosystem_affiliations = json_decode($rowContent->co_ecosystem_affiliations);
-                                $co_indigenous_affiliations = json_decode($rowContent->co_indigenous_affiliations);
-                                $co_author_classification = json_decode($rowContent->co_author_classification);
-                                    // $paragraphs = explode('#', $rowContent->author_short_bio);  
-                                    // $indigenous = explode('#',$rowContent->indigenous_affiliation);
-                                    // $organization = explode('#',$rowContent->organization_name);                                      
-                                    for($i = 1; $i <= $co_authors; $i++)
-                                    {
-                                        // Decode the JSON field only once
-                                        $co_ecosystem_affiliations = json_decode($rowContent->co_ecosystem_affiliations);
-
-                                        // Initialize affiliations array
-                                        $affiliations = [];
-
-                                        // Check if $co_ecosystem_affiliations is not null and has the current index
-                                        if (!empty($co_ecosystem_affiliations) && isset($co_ecosystem_affiliations[$i-1])) {
-                                            $affiliation_ids = $co_ecosystem_affiliations[$i-1]; // Get the specific co-author's affiliations
-
-                                            // Loop through the affiliation IDs and fetch names
-                                            foreach ($affiliation_ids as $affiliation_id) {
-                                            $getCoAffiliation = EcosystemAffiliation::select('name')->where('id', '=', $affiliation_id)->first();
-                                            
-                                            // Check if the affiliation was found and add it to the array
-                                            if ($getCoAffiliation) {
-                                                $affiliations[] = $getCoAffiliation->name;
-                                            }
-                                            }
-                                        }
-                                        $county_ids = $co_author_countries[$i-1];
-                                        $getCoCountry = Country::select('name')->where('id', '=', $county_ids)->first();
-                                        ?>
+                                    $paragraphs = explode('#', $rowContent->author_short_bio);  
+                                    $indigenous = explode('#',$rowContent->indigenous_affiliation);
+                                    $organization = explode('#',$rowContent->organization_name);                                      
+                                    for($i=0; $i<count($paragraphs); $i++)
+                                    {?>
                                         <div class="about-more-autor">
                                             <ul class="nav nav-tabs">
                                                 <li class="active" style="width: 100%;">
                                                     <a href="#about-autor" data-toggle="tab">
                                                     <?php 
-                                                        if ($i == 1) {
+                                                        if ($i == 0) {
+                                                            echo 'About The Lead Author';
+                                                        } elseif ($i == 1) {
                                                             echo 'About The Second Author';
                                                         } elseif ($i == 2) {
                                                             echo 'About The Third Author';
@@ -261,34 +174,41 @@ $current_url = $protocol . $host . $uri;
                                                             <div class="autor-title">
                                                                 <span>
                                                                     <img src="<?=env('UPLOADS_URL').'icon/author.png'?>" alt="author" title="Author Bio" data-toogle="tooltip">                                                            
-                                                                    <!-- <span>?=$author_short_bio = trim($paragraphs[$i])?></span> -->
-                                                                    <span><?=$co_author_bios[$i - 1]?></span>
+                                                                    <span><?=$author_short_bio = trim($paragraphs[$i])?></span>
                                                                     
                                                                     <!-- <a href="javascript:void(0);"><?=$authorPostCount?> Posts</a> -->
                                                                 </span>
                                                             </div>
                                                             <div class="autor-title">
                                                                 <span>
-                                                                    <img src="<?=env('UPLOADS_URL').'icon/ancestral.png'?>" alt="author_affiliation" title="Ancestral Ecoweb" data-toogle="tooltip">                                                                                                                                        
+                                                                    <img src="<?=env('UPLOADS_URL').'icon/ancestral.png'?>" alt="author_affiliation" title="Ancestral Ecoweb" data-toogle="tooltip">
                                                                     <?php
-                                                                        // $indigenous_affiliation = (isset($indigenous[$i]) && !empty($indigenous[$i])) ? trim($indigenous[$i]) : trim($indigenous[0]);
-                                                                        $indigenous_affiliation = $co_indigenous_affiliations[$i - 1];
+                                                                    $author_affiliation = json_decode($rowContent->author_affiliation);
+                                                                    $affiliations       = [];
+                                                                    if(!empty($author_affiliation)){ for($k=0;$k<count($author_affiliation);$k++){
+                                                                        $getAffiliation = EcosystemAffiliation::select('name')->where('id', '=', $author_affiliation[$k])->first();
+                                                                        $affiliations[]       = $getAffiliation->name;
+                                                                    } }?>
+                                                                    
+                                                                    <?php
+                                                                        $indigenous_affiliation = (isset($indigenous[$i]) && !empty($indigenous[$i])) ? trim($indigenous[$i]) : trim($indigenous[0]);
                                                                     ?>
                                                                     <span><?= implode(", ", $affiliations) ?><?= !empty($indigenous_affiliation) ? ' | ' . $indigenous_affiliation : ''; ?></span>
                                                                 </span>
                                                             </div>
                                                             <div class="autor-title">
                                                                 <span>
-                                                                    <img src="<?=env('UPLOADS_URL').'icon/residence.png'?>" alt="residence" title="Residence" data-toogle="tooltip">                                                                    
-                                                                    <!-- <span>?=(($getCountry)?$getCountry->name:'')?></span> -->
-                                                                    <span><?=$getCoCountry->name?></span>
+                                                                    <img src="<?=env('UPLOADS_URL').'icon/residence.png'?>" alt="residence" title="Residence" data-toogle="tooltip">
+                                                                    <?php
+                                                                    $getCountry = Country::select('name')->where('id', '=', $rowContent->country)->first();
+                                                                    ?>
+                                                                    <span><?=(($getCountry)?$getCountry->name:'')?></span>
                                                                 </span>
                                                             </div>
                                                             <div class="autor-title">
                                                                 <span>
                                                                     <img src="<?=env('UPLOADS_URL').'icon/organizational.png'?>" alt="organizational" title="Organizational Affiliation" data-toogle="tooltip">                                                                    
-                                                                    <!-- <span><?= $organization_name = (isset($organization[$i]) > 0) ? trim($organization[$i]) : ''; ?></span> -->
-                                                                    <span><?= $co_author_organizations[$i - 1] ?></span>
+                                                                    <span><?= $organization_name = (isset($organization[$i]) > 0) ? trim($organization[$i]) : ''; ?></span>
                                                                 </span>
                                                             </div>
                                                         </div>
@@ -395,6 +315,10 @@ $current_url = $protocol . $host . $uri;
                                                                     'news_contents.created_at',
                                                                     'news_contents.media',
                                                                     'news_contents.videoId',
+                                                                    'news_contents.is_series',
+                                                                    'news_contents.series_article_no',
+                                                                    'news_contents.current_article_no',
+                                                                    'news_contents.other_article_part_doi_no',
                                                                     'sub_category.sub_category as category_name',  // Correct alias for subcategory name
                                                                     'sub_category.slug as category_slug',  // Correct alias for subcategory slug                                                                            
                                                                     'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
@@ -406,28 +330,46 @@ $current_url = $protocol . $host . $uri;
                                                                 ->get();
                                 if($featuredContents){ foreach($featuredContents as $featuredContent){
                                 ?>
-                                    <li>
-                                        <?php if($featuredContent->media == 'image'){?>
-                                            <!-- <div class="post-gallery"> -->
-                                                <img src="<?=env('UPLOADS_URL').'newcontent/'.$featuredContent->cover_image?>" alt="<?=$featuredContent->new_title?>">
-                                            <!-- </div> -->
-                                        <?php } else {?>
-                                            <div class="video-post">
-                                                <img alt="" src="https://img.youtube.com/vi/<?=$featuredContent->videoId?>/hqdefault.jpg">
-                                                <?php if(session('is_user_login')){?>
+                                    <?php
+                                    $is_series                  = $featuredContent->is_series;
+                                    $series_article_no          = $featuredContent->series_article_no;
+                                    $current_article_no         = $featuredContent->current_article_no;
+                                    $other_article_part_doi_no  = explode(",", $featuredContent->other_article_part_doi_no);
+                                    if($is_series == 'Yes'){
+                                        if($current_article_no == 1){
+                                            $isShow = true;
+                                        } else {
+                                            $isShow = false;
+                                        }
+                                    } else {
+                                        $isShow = true;
+                                    }
+                                    if($isShow){
+                                    ?>
+                                        <li>
+                                            <?php if($featuredContent->media == 'image'){?>
+                                                <!-- <div class="post-gallery"> -->
+                                                    <img src="<?=env('UPLOADS_URL').'newcontent/'.$featuredContent->cover_image?>" alt="<?=$featuredContent->new_title?>">
+                                                <!-- </div> -->
+                                            <?php } else {?>
+                                                <div class="video-post">
+                                                    <img alt="" src="https://img.youtube.com/vi/<?=$featuredContent->videoId?>/hqdefault.jpg">
+                                                    <!-- <?php if(session('is_user_login')){?>
+                                                        <a href="https://www.youtube.com/watch?v=<?=$featuredContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                    <?php } else {?>
+                                                        <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
+                                                    <?php }?> -->
                                                     <a href="https://www.youtube.com/watch?v=<?=$featuredContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                                <?php } else {?>
-                                                    <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
-                                                <?php }?>
+                                                </div>
+                                            <?php } ?>
+                                            <div class="post-content">
+                                                <h2><a href="<?=url('content/' . $featuredContent->parent_category_slug. '/' . $featuredContent->category_slug . '/' . $featuredContent->slug)?>"><?=$featuredContent->new_title?></a></h2>
+                                                <ul class="post-tags">
+                                                    <li><i class="fa fa-clock-o"></i><?=date_format(date_create($featuredContent->created_at), "d M Y")?></li>
+                                                </ul>
                                             </div>
-                                        <?php } ?>
-                                        <div class="post-content">
-                                            <h2><a href="<?=url('content/' . $featuredContent->parent_category_slug. '/' . $featuredContent->category_slug . '/' . $featuredContent->slug)?>"><?=$featuredContent->new_title?></a></h2>
-                                            <ul class="post-tags">
-                                                <li><i class="fa fa-clock-o"></i><?=date_format(date_create($featuredContent->created_at), "d M Y")?></li>
-                                            </ul>
-                                        </div>
-                                    </li>
+                                        </li>
+                                    <?php }?>
                                 <?php } }?>
                             </ul>
                         </div>
@@ -456,6 +398,10 @@ $current_url = $protocol . $host . $uri;
                                                                 'news_contents.created_at',
                                                                 'news_contents.media',
                                                                 'news_contents.videoId',
+                                                                'news_contents.is_series',
+                                                                'news_contents.series_article_no',
+                                                                'news_contents.current_article_no',
+                                                                'news_contents.other_article_part_doi_no',
                                                                 'sub_category.sub_category as category_name',  // Correct alias for subcategory name
                                                                 'sub_category.slug as category_slug',  // Correct alias for subcategory slug
                                                                 'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
@@ -467,28 +413,46 @@ $current_url = $protocol . $host . $uri;
                                                             ->get();
                                         if($popularContents){ foreach($popularContents as $popularContent){
                                         ?>
-                                            <li>
-                                                <?php if($popularContent->media == 'image'){?>
-                                                    <!-- <div class="post-gallery"> -->
-                                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$popularContent->cover_image?>" alt="<?=$popularContent->new_title?>">
-                                                    <!-- </div> -->
-                                                <?php } else {?>
-                                                    <div class="video-post">
-                                                        <img alt="" src="https://img.youtube.com/vi/<?=$popularContent->videoId?>/hqdefault.jpg">
-                                                        <?php if(session('is_user_login')){?>
+                                            <?php
+                                            $is_series                  = $popularContent->is_series;
+                                            $series_article_no          = $popularContent->series_article_no;
+                                            $current_article_no         = $popularContent->current_article_no;
+                                            $other_article_part_doi_no  = explode(",", $popularContent->other_article_part_doi_no);
+                                            if($is_series == 'Yes'){
+                                                if($current_article_no == 1){
+                                                    $isShow = true;
+                                                } else {
+                                                    $isShow = false;
+                                                }
+                                            } else {
+                                                $isShow = true;
+                                            }
+                                            if($isShow){
+                                            ?>
+                                                <li>
+                                                    <?php if($popularContent->media == 'image'){?>
+                                                        <!-- <div class="post-gallery"> -->
+                                                            <img src="<?=env('UPLOADS_URL').'newcontent/'.$popularContent->cover_image?>" alt="<?=$popularContent->new_title?>">
+                                                        <!-- </div> -->
+                                                    <?php } else {?>
+                                                        <div class="video-post">
+                                                            <img alt="" src="https://img.youtube.com/vi/<?=$popularContent->videoId?>/hqdefault.jpg">
+                                                            <!-- <?php if(session('is_user_login')){?>
+                                                                <a href="https://www.youtube.com/watch?v=<?=$popularContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                            <?php } else {?>
+                                                                <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
+                                                            <?php }?> -->
                                                             <a href="https://www.youtube.com/watch?v=<?=$popularContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                                        <?php } else {?>
-                                                            <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
-                                                        <?php }?>
+                                                        </div>
+                                                    <?php } ?>
+                                                    <div class="post-content">
+                                                        <h2><a href="<?=url('content/'. $popularContent->parent_category_slug. '/' . $popularContent->category_slug . '/' .  $popularContent->slug)?>"><?=$popularContent->new_title?></a></h2>
+                                                        <ul class="post-tags">
+                                                            <li><i class="fa fa-clock-o"></i><?=date_format(date_create($popularContent->created_at), "d M Y")?></li>
+                                                        </ul>
                                                     </div>
-                                                <?php } ?>
-                                                <div class="post-content">
-                                                    <h2><a href="<?=url('content/'. $popularContent->parent_category_slug. '/' . $popularContent->category_slug . '/' .  $popularContent->slug)?>"><?=$popularContent->new_title?></a></h2>
-                                                    <ul class="post-tags">
-                                                        <li><i class="fa fa-clock-o"></i><?=date_format(date_create($popularContent->created_at), "d M Y")?></li>
-                                                    </ul>
-                                                </div>
-                                            </li>
+                                                </li>
+                                            <?php }?>
                                         <?php } }?>
                                     </ul>
                                 </div>
@@ -507,6 +471,10 @@ $current_url = $protocol . $host . $uri;
                                                                             'news_contents.created_at',
                                                                             'news_contents.media',
                                                                             'news_contents.videoId',
+                                                                            'news_contents.is_series',
+                                                                            'news_contents.series_article_no',
+                                                                            'news_contents.current_article_no',
+                                                                            'news_contents.other_article_part_doi_no',
                                                                             'sub_category.sub_category as category_name',  // Correct alias for subcategory name
                                                                             'sub_category.slug as category_slug',  // Correct alias for subcategory slug
                                                                             'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
@@ -517,28 +485,46 @@ $current_url = $protocol . $host . $uri;
                                                                         ->get();
                                         if($recentContents){ foreach($recentContents as $recentContent){
                                         ?>
-                                            <li>
-                                                <?php if($recentContent->media == 'image'){?>
-                                                    <!-- <div class="post-gallery"> -->
-                                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$recentContent->cover_image?>" alt="<?=$recentContent->new_title?>">
-                                                    <!-- </div> -->
-                                                <?php } else {?>
-                                                    <div class="video-post">
-                                                        <img alt="" src="https://img.youtube.com/vi/<?=$recentContent->videoId?>/hqdefault.jpg">
-                                                        <?php if(session('is_user_login')){?>
+                                            <?php
+                                            $is_series                  = $recentContent->is_series;
+                                            $series_article_no          = $recentContent->series_article_no;
+                                            $current_article_no         = $recentContent->current_article_no;
+                                            $other_article_part_doi_no      = explode(",", $recentContent->other_article_part_doi_no);
+                                            if($is_series == 'Yes'){
+                                                if($current_article_no == 1){
+                                                    $isShow = true;
+                                                } else {
+                                                    $isShow = false;
+                                                }
+                                            } else {
+                                                $isShow = true;
+                                            }
+                                            if($isShow){
+                                            ?>
+                                                <li>
+                                                    <?php if($recentContent->media == 'image'){?>
+                                                        <!-- <div class="post-gallery"> -->
+                                                            <img src="<?=env('UPLOADS_URL').'newcontent/'.$recentContent->cover_image?>" alt="<?=$recentContent->new_title?>">
+                                                        <!-- </div> -->
+                                                    <?php } else {?>
+                                                        <div class="video-post">
+                                                            <img alt="" src="https://img.youtube.com/vi/<?=$recentContent->videoId?>/hqdefault.jpg">
+                                                            <!-- <?php if(session('is_user_login')){?>
+                                                                <a href="https://www.youtube.com/watch?v=<?=$recentContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                            <?php } else {?>
+                                                                <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
+                                                            <?php }?> -->
                                                             <a href="https://www.youtube.com/watch?v=<?=$recentContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                                        <?php } else {?>
-                                                            <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
-                                                        <?php }?>
+                                                        </div>
+                                                    <?php } ?>
+                                                    <div class="post-content">
+                                                        <h2><a href="<?=url('content/' . $recentContent->parent_category_slug. '/' . $recentContent->category_slug . '/' .  $recentContent->slug)?>"><?=$recentContent->new_title?></a></h2>
+                                                        <ul class="post-tags">
+                                                            <li><i class="fa fa-clock-o"></i><?=date_format(date_create($recentContent->created_at), "d M Y")?></li>
+                                                        </ul>
                                                     </div>
-                                                <?php } ?>
-                                                <div class="post-content">
-                                                    <h2><a href="<?=url('content/' . $recentContent->parent_category_slug. '/' . $recentContent->category_slug . '/' .  $recentContent->slug)?>"><?=$recentContent->new_title?></a></h2>
-                                                    <ul class="post-tags">
-                                                        <li><i class="fa fa-clock-o"></i><?=date_format(date_create($recentContent->created_at), "d M Y")?></li>
-                                                    </ul>
-                                                </div>
-                                            </li>
+                                                </li>
+                                            <?php }?>
                                         <?php } }?>
                                     </ul>                                       
                                 </div>

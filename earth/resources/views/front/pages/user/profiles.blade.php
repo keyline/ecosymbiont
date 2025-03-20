@@ -1,5 +1,9 @@
 <?php
 use App\Helpers\Helper;
+use App\Models\EcosystemAffiliation;
+use App\Models\ExpertiseArea;
+use Illuminate\Support\Facades\DB;
+
 ?>
 <!-- block content -->
     <div class="block-content">
@@ -25,27 +29,66 @@ use App\Helpers\Helper;
                         <?php if(count($profiles) <= 0){?>
                             <a href="<?=url('user/add-profile')?>" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i> Add New Profile</a>
                         <?php }?>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Name</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php if($profiles){ $sl=1; foreach($profiles as $profile){?>
+                        <div class="table-responsive">                        
+                            <table class="table table-striped">
+                                <thead>
                                     <tr>
-                                        <td><?=$sl++?></td>
-                                        <td><?=$profile->name?></td>
-                                        <td>
-                                            <a href="<?=url('user/update-profile/' . Helper::encoded($profile->id))?>" class="label label-primary">Edit</a>
-                                            <a href="<?=url('user/article-list/' . Helper::encoded($profile->id))?>" class="label label-primary">View Article List</a>
-                                        </td>
+                                        <th>#</th>
+                                        <th>Name <br> Email <br> Author Classification</th>                                                                                
+                                        <th>Country <br> State <br> City</th>
+                                        <th>Organization Name <br> Organization Website</th>                                        
+                                        <th>Ecosystem Affiliation <br> Indigenous Affiliation</th>                                        
+                                        <th>Expertise Area</th>
+                                        <th>Short Bio</th>
+                                        <!-- <th>Long Bio</th> -->
+                                        <th>Created at</th>                                    
+                                        <!-- <th>Action</th> -->
                                     </tr>
-                                <?php } }?>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <?php if($profiles){ $sl=1; foreach($profiles as $profile){?>
+                                        <tr>
+                                            <td><?=$sl++?><a href="<?=url('user/update-profile/' . Helper::encoded($profile->id))?>" class="label label-primary"><i class="fa fa-edit"></i></a></td>
+                                            <td><?=$profile->first_name?> <br><?=$profile->email?> <br> <?=$profile->author_classification?></td>                                            
+                                            <td>
+                                            <?php                                        
+                                            $getCountry = DB::table('countries')->where('id', '=', $profile->country)->first();    
+                                            echo $getCountry->name?><br><?=$profile->state?> <br> <?=$profile->city?></td>
+                                            <td><?=$profile->organization_name?> <br> <?=$profile->organization_website?></td>                                            
+                                            <td><?php
+                                            $ecosystem_affiliationId = json_decode($profile->ecosystem_affiliationId);
+                                            $ecosystem = [];
+                                            if(!empty($ecosystem_affiliationId)){
+                                                for($k=0;$k<count($ecosystem_affiliationId);$k++){
+                                                $getAffiliation = EcosystemAffiliation::select('name')->where('id', '=', $ecosystem_affiliationId[$k])->first();
+                                                $ecosystem[] = (($getAffiliation)?$getAffiliation->name:'');
+                                                }
+                                            }
+                                            echo implode(', ', $ecosystem);
+                                            ?><br> <?=$profile->indigenous_affiliation?></td>                                            
+                                            <td><?php
+                                            $expertise_areaId = json_decode($profile->expertise_areaId);
+                                            $expertise = [];
+                                            if(!empty($expertise_areaId)){
+                                                for($k=0;$k<count($expertise_areaId);$k++){
+                                                $getAffiliation = ExpertiseArea::select('name')->where('id', '=', $expertise_areaId[$k])->first();
+                                                $expertise[] = (($getAffiliation)?$getAffiliation->name:'');
+                                                }
+                                            }
+                                            echo implode(', ', $expertise);
+                                            ?></td>
+                                            <td><?=wordwrap($profile->bio_short,75,"<br>\n") ?></td>
+                                            <!-- <td>?=wordwrap($profile->bio_long,75,"<br>\n") ?></td> -->
+                                            <td><?=date('M d Y h:i A', strtotime($profile->created_at))?></td>                                        
+                                            <!-- <td>
+                                                <a href="<?=url('user/update-profile/' . Helper::encoded($profile->id))?>" class="label label-primary">Edit</a>
+                                                <a href="<?=url('user/article-list/' . Helper::encoded($profile->id))?>" class="label label-primary">View Article List</a> 
+                                            </td> -->
+                                        </tr>
+                                    <?php } }?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
