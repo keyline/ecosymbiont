@@ -580,6 +580,7 @@ $current_url = $protocol . $host . $uri;
                                                                         )
                                                                         ->where('news_contents.status', 1)  // Fetch only active content
                                                                         ->where('news_contents.is_feature', 1)  // Fetch only featured content
+                                                                        ->orderBy('news_contents.created_at', 'DESC') // Latest videos first
                                                                         ->inRandomOrder()  // Randomize the result order
                                                                         ->limit(3)  // Limit to 3 records
                                                                         ->get();
@@ -1001,43 +1002,7 @@ $current_url = $protocol . $host . $uri;
                                             ->orderBy('news_contents.created_at', 'DESC') // Latest videos first
                                             ->limit(6)  // Limit to 3 records
                                             ->get();
-                            // Get second last article from each category
-                            // $latestarticles = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
-                            // ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
-                            // ->select(
-                            //     'news_contents.id',
-                            //     'news_contents.new_title',
-                            //     'news_contents.sub_title',
-                            //     'news_contents.slug',
-                            //     'news_contents.author_name',
-                            //     'news_contents.for_publication_name',
-                            //     'news_contents.cover_image',
-                            //     'news_contents.created_at',
-                            //     'news_contents.media',
-                            //     'news_contents.videoId',
-                            //     'news_contents.is_series',
-                            //     'news_contents.series_article_no',
-                            //     'news_contents.current_article_no',
-                            //     'news_contents.other_article_part_doi_no',
-                            //     'parent_category.sub_category as parent_category_name',
-                            //     'sub_category.sub_category as category_name',
-                            //     'sub_category.slug as category_slug',
-                            //     'parent_category.slug as parent_category_slug'
-                            // )
-                            // ->where('news_contents.status', 1)                            
-                            // // ->whereRaw("
-                            // //         news_contents.id = (
-                            // //             SELECT id FROM news_contents AS nc
-                            // //             WHERE nc.sub_category = news_contents.sub_category
-                            // //             ORDER BY nc.created_at DESC
-                            // //             LIMIT 1 OFFSET 1
-                            // //         )
-                            // //     ") // Second last article of each category
-                            // ->orderBy('news_contents.created_at', 'DESC') // Latest videos first
-                            // ->inRandomOrder()  // Randomize the result order                            
-                            // ->limit(6) 
-                            // ->get();                            
-                            
+                                                        
                             if($latestarticles){ foreach($latestarticles as $latestarticle){
                             ?>
                                 <?php
