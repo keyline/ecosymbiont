@@ -50,20 +50,29 @@ $controllerRoute = $module['controller_route'];
             <table id="simpletable" class="table table-striped table-bordered nowrap">
               <thead>
                 <tr>
+                  <th scope="col">Action</th>
                   <th scope="col">#</th>
                   <th scope="col">SRN<br>DOI<br>Parent Category<br>Sub Category</th>
                   <th scope="col">Title</th>
                   <th scope="col">Sub Title</th>
                   <th scope="col">Author Name<br>Pronoun<br>Affiliation<br>Email<br>Country<br>Organization</th>
                   <!-- <th scope="col">Keywords</th> -->
-                  <th scope="col">Is Feature<br>Is Popular<br>Is Fiction<br>Is Series</th>
-                  <th scope="col">Action</th>
+                  <th scope="col">Is Feature<br>Is Popular<br>Is Fiction<br>Is Series</th>                  
                 </tr>
               </thead>
               <tbody>
                 <?php if(count($rows)>0){ $sl=1; foreach($rows as $row){?>
                   <tr>
                     <th scope="row"><?=$sl++?></th>
+                    <td>
+                      <a href="<?=url('admin/' . $controllerRoute . '/edit/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit"></i></a>
+                      <a href="<?=url('admin/' . $controllerRoute . '/delete/'.Helper::encoded($row->id))?>" class="btn btn-outline-danger btn-sm" title="Delete <?=$module['title']?>" onclick="return confirm('Do You Want To Delete This <?=$module['title']?>');"><i class="fa fa-trash"></i></a>
+                      <?php if($row->status){?>
+                        <a href="<?=url('admin/' . $controllerRoute . '/change-status/'.Helper::encoded($row->id))?>" class="btn btn-outline-success btn-sm" title="Activate <?=$module['title']?>"><i class="fa fa-check"></i></a>
+                      <?php } else {?>
+                        <a href="<?=url('admin/' . $controllerRoute . '/change-status/'.Helper::encoded($row->id))?>" class="btn btn-outline-warning btn-sm" title="Deactivate <?=$module['title']?>"><i class="fa fa-times"></i></a>
+                      <?php }?>
+                    </td>
                     <td>
                       <?=$row->creative_work_SRN?><br>
                       <?=$row->creative_work_DOI?><br>
@@ -129,19 +138,10 @@ $controllerRoute = $module['controller_route'];
                     </td> -->
                     <td>
                       <b>Is Feature :</b> <span class="<?=(($row->is_feature)?'badge bg-success':'badge bg-danger')?>"><?=(($row->is_feature)?'<i class="fa fa-check"></i> YES':'<i class="fa fa-times"></i> NO')?></span><br><br>
-                      <b>Is Pupolar :</b> <span class="<?=(($row->is_popular)?'badge bg-success':'badge bg-danger')?>"><?=(($row->is_popular)?'<i class="fa fa-check"></i> YES':'<i class="fa fa-times"></i> NO')?></span><br><br>
+                      <b>Is Popular :</b> <span class="<?=(($row->is_popular)?'badge bg-success':'badge bg-danger')?>"><?=(($row->is_popular)?'<i class="fa fa-check"></i> YES':'<i class="fa fa-times"></i> NO')?></span><br><br>
                       <b>Is Fiction :</b> <span class="<?=(($row->creative_Work_fiction == 'Yes')?'badge bg-success':'badge bg-danger')?>"><?=(($row->creative_Work_fiction == 'Yes')?'<i class="fa fa-check"></i> YES':'<i class="fa fa-times"></i> NO')?></span><br><br>
                       <b>Is Series :</b> <span class="<?=(($row->is_series)?'badge bg-success':'badge bg-danger')?>"><?=(($row->is_series)?'<i class="fa fa-check"></i> YES':'<i class="fa fa-times"></i> NO')?></span>
-                    </td>
-                    <td>
-                      <a href="<?=url('admin/' . $controllerRoute . '/edit/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit"></i></a>
-                      <a href="<?=url('admin/' . $controllerRoute . '/delete/'.Helper::encoded($row->id))?>" class="btn btn-outline-danger btn-sm" title="Delete <?=$module['title']?>" onclick="return confirm('Do You Want To Delete This <?=$module['title']?>');"><i class="fa fa-trash"></i></a>
-                      <?php if($row->status){?>
-                        <a href="<?=url('admin/' . $controllerRoute . '/change-status/'.Helper::encoded($row->id))?>" class="btn btn-outline-success btn-sm" title="Activate <?=$module['title']?>"><i class="fa fa-check"></i></a>
-                      <?php } else {?>
-                        <a href="<?=url('admin/' . $controllerRoute . '/change-status/'.Helper::encoded($row->id))?>" class="btn btn-outline-warning btn-sm" title="Deactivate <?=$module['title']?>"><i class="fa fa-times"></i></a>
-                      <?php }?>
-                    </td>
+                    </td>                    
                   </tr>
                 <?php } } else {?>
                   <tr>
