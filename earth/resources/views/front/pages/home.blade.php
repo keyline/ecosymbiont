@@ -973,16 +973,16 @@ $current_url = $protocol . $host . $uri;
                             </div>
                             <?php
                             // DB::enableQueryLog(); // Enable query log
-                            $recentContents = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
-                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
+                            $recentContents = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
                                             ->select(
-                                                'news_contents.id', 
-                                                'news_contents.new_title', 
-                                                'news_contents.sub_title', 
-                                                'news_contents.slug', 
+                                                'news_contents.id',
+                                                'news_contents.new_title',
+                                                'news_contents.sub_title',
+                                                'news_contents.slug',
                                                 'news_contents.author_name',
-                                                'news_contents.for_publication_name', 
-                                                'news_contents.cover_image', 
+                                                'news_contents.for_publication_name',
+                                                'news_contents.cover_image',
                                                 'news_contents.created_at',
                                                 'news_contents.media',
                                                 'news_contents.videoId',
@@ -990,17 +990,18 @@ $current_url = $protocol . $host . $uri;
                                                 'news_contents.series_article_no',
                                                 'news_contents.current_article_no',
                                                 'news_contents.other_article_part_doi_no',
-                                                'parent_category.sub_category as parent_category_name', // Corrected alias to sub_category
-                                                'sub_category.sub_category as category_name',  // Correct alias for subcategory name
-                                                'sub_category.slug as category_slug',  // Correct alias for subcategory slug
-                                                'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                                'parent_category.sub_category as parent_category_name',
+                                                'sub_category.sub_category as category_name',
+                                                'sub_category.slug as category_slug',
+                                                'parent_category.slug as parent_category_slug'
                                             )
-                                            ->where('news_contents.status', 1)  // Fetch only active content
-                                            ->where('news_contents.is_feature', 1)  // Fetch only featured content
-                                            ->inRandomOrder()  // Randomize the result order
-                                            ->orderBy('news_contents.created_at', 'DESC') // Latest videos first
-                                            ->limit(6)  // Limit to 3 records
+                                            ->where('news_contents.status', 1)
+                                            ->where('news_contents.is_feature', 1)
+                                            ->where('news_contents.is_series', 1) // Ensure it's a series
+                                            ->where('news_contents.series_article_no', 1) // First article of the series
+                                            ->whereRaw('news_contents.created_at = (SELECT MAX(nc.created_at) FROM news_contents nc WHERE nc.sub_category = news_contents.sub_category)')
                                             ->get();
+
                             if($recentContents){ foreach($recentContents as $recentContent){
                             ?>
                                 <?php
