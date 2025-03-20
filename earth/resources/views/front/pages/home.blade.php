@@ -997,8 +997,8 @@ $current_url = $protocol . $host . $uri;
                                             )
                                             ->where('news_contents.status', 1)
                                             ->where('news_contents.is_feature', 1)
-                                            ->where('news_contents.is_series', 1) // Ensure it's a series
-                                            ->where('news_contents.series_article_no', 1) // First article of the series
+                                            // ->where('news_contents.is_series', 1) // Ensure it's a series
+                                            // ->where('news_contents.series_article_no', 1) // First article of the series
                                             ->whereRaw('news_contents.created_at = (SELECT MAX(nc.created_at) FROM news_contents nc WHERE nc.sub_category = news_contents.sub_category)')
                                             ->get();
 
