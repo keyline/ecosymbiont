@@ -38,7 +38,7 @@ $controllerRoute = $module['controller_route'];
               <thead>
                 <tr>
                   <th class="admin-select-none"><a href="javascript:selectToggle(selete);" id="show"
-                      onclick="checkALL();">Select All</a> | <a
+                      onclick="checkALL();">Select All</a> | <br> <a
                       href="javascript:selectToggle(unselect);" id="hide"
                       onclick="unCheckALL();">Deselect All</a>
                   </th>
