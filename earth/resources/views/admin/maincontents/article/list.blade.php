@@ -65,7 +65,7 @@ $controllerRoute = $module['controller_route'];
                           <a href="<?=url('admin/' . $controllerRoute . '/view_details/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="ViewDetails <?=$module['title']?>"><i class="fa fa-eye"></i></a>
                           <a href="<?=url('admin/' . $controllerRoute . '/delete/'.Helper::encoded($row->id))?>" class="btn btn-outline-danger btn-sm" title="Delete <?=$module['title']?>" onclick="return confirm('Do you want to delete this Creative-Work ?');"><i class="fa fa-trash"></i></a><br>
                           <?php if ($row->is_import == 0) { ?>
-                            <a href="<?=url('admin/news_content/import/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="ViewDetails <?=$module['title']?>"><i class="fa fa-edit"></i>/<i class="fa fa-file-import"></i></a><br>
+                            <a href="<?=url('admin/news_content/import/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit/Import <?=$module['title']?>"><i class="fa fa-edit"></i>/<i class="fa fa-file-import"></i></a><br>
                           <?php } ?>                          
                         </td>
                         <td><?=$row->article_no?></td>
