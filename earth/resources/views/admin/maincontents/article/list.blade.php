@@ -120,7 +120,7 @@ $controllerRoute = $module['controller_route'];
     </div>
   </div>
 </section>
-<script>
+<!-- <script>
   function checkALL() {
     var chk_arr = document.getElementsByName("draw[]");
     for (k = 0; k < chk_arr.length; k++) {
@@ -170,4 +170,67 @@ $controllerRoute = $module['controller_route'];
       checkAny() ? showFirstButton() : hideFirstButton();
       isCheckAll() ? showSecondButton() : hideSecondButton();
   }
+</script> -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let selectAllBtn = document.getElementById("show");
+    let deselectAllBtn = document.getElementById("hide");
+    let checkboxes = document.querySelectorAll("input[name='draw[]']");
+    let deleteButton = document.getElementById("first_button");
+
+    function updateButtonVisibility() {
+        let anyChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+        deleteButton.style.display = anyChecked ? "block" : "none";
+    }
+
+    // Select All
+    selectAllBtn.addEventListener("click", function () {
+        checkboxes.forEach(checkbox => checkbox.checked = true);
+        updateButtonVisibility();
+    });
+
+    // Deselect All
+    deselectAllBtn.addEventListener("click", function () {
+        checkboxes.forEach(checkbox => checkbox.checked = false);
+        updateButtonVisibility();
+    });
+
+    // Individual Checkbox Click Event
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener("change", updateButtonVisibility);
+    });
+
+    // Delete Selected Records
+    document.querySelector("#first_button button").addEventListener("click", function () {
+        let selectedIds = Array.from(checkboxes)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.value);
+
+        if (selectedIds.length === 0) {
+            alert("Please select at least one record.");
+            return;
+        }
+
+        if (confirm("Are you sure you want to update selected records?")) {
+            fetch("{{ route('admin/' . $controllerRoute . '/multiple_delete') }}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                },
+                body: JSON.stringify({ ids: selectedIds })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                location.reload();
+            })
+            .catch(error => {
+                alert("An error occurred while updating records.");
+                console.error(error);
+            });
+        }
+    });
+});
+
 </script>
