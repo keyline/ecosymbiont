@@ -98,7 +98,7 @@ use Illuminate\Support\Facades\Route;
         Route::match(['get', 'post'], 'article/edit/{id}', 'ArticlesController@edit');
         Route::match(['get', 'post'], 'article/view_details/{id}', 'ArticlesController@viewDetails');
         Route::get('article/delete/{id}', 'ArticlesController@delete');
-        Route::post('article/multiple_delete', 'ArticlesController@multiple_delete');
+        Route::post('article/multiple_delete', 'ArticlesController@multiple_delete')->name('admin.article.multiple_delete');        
         Route::get('article/change-status/{id}', 'ArticlesController@change_status');
         Route::match(['get', 'post'], 'article/change_status_accept/{id}', 'ArticlesController@change_status_accept');
         Route::match(['get', 'post'], 'article/change_status_reject/{id}', 'ArticlesController@change_status_reject');

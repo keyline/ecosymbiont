@@ -212,7 +212,7 @@ $controllerRoute = $module['controller_route'];
         }
 
         if (confirm("Are you sure you want to update selected records?")) {
-            fetch("{{ route('admin/' . $controllerRoute . '/multiple_delete') }}", {
+            fetch("{{ route('admin.article.multiple_delete') }}", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
