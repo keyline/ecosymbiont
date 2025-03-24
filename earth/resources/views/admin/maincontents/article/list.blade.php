@@ -36,13 +36,8 @@ $controllerRoute = $module['controller_route'];
           <div class="dt-responsive table-responsive">
             <table id="simpletable" class="table table-striped table-bordered nowrap">
               <thead>
-                <tr>
-                  <th class="admin-select-none"><a href="javascript:selectToggle(selete);" id="show"
-                      onclick="checkALL();">Select All</a> | <a
-                      href="javascript:selectToggle(unselect);" id="hide"
-                      onclick="unCheckALL();">Deselect All</a>
-                  </th>
-                  <th scope="col">#</th>
+                <tr>                  
+                  <th scope="col"><input type="checkbox" id="selectAll">#</th>
                   <th scope="col">Action</th>
                   <th scope="col">SRN</th>
                   <th scope="col">Author Info</th>                  
@@ -56,11 +51,8 @@ $controllerRoute = $module['controller_route'];
                 <?php if(count($rows)>0)
                 { $sl=1; foreach($rows as $row)
                   { ?>
-                      <tr>
-                        <td>
-                            <input type='checkbox' name='draw[]' value="<?php echo $row->id ?>" id="required-checkbox1" onClick="CheckIfChecked()">
-                        </td>
-                        <th scope="row"><?=$sl++?></th>
+                      <tr>                        
+                        <th scope="row"><input type='checkbox' class='rowCheckbox' name='draw[]' value="<?php echo $row->id ?>"> <?=$sl++?></th>
                         <td>                      
                           <a href="<?=url('admin/' . $controllerRoute . '/view_details/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="ViewDetails <?=$module['title']?>">View Details</a>
                           <a href="<?=url('admin/' . $controllerRoute . '/delete/'.Helper::encoded($row->id))?>" class="btn btn-outline-danger btn-sm" title="Delete <?=$module['title']?>" onclick="return confirm('Do you want to delete this Creative-Work ?');"><i class="fa fa-trash"></i> Delete</a><br>
@@ -110,8 +102,8 @@ $controllerRoute = $module['controller_route'];
                   </tr>
                 <?php } ?>
               </tbody>
-              <div id="first_button" style="display:none; " margin-bottom: -6px;>
-                      <p align="left"><button type="submit" class="btn btn-danger" name="save">DELETE</button></p>
+              <div id="deleteButtonContainer" style="display:none; " margin-bottom: 10px;>
+                      <p align="left"><button type="button" id="deleteSelected" class="btn btn-danger">DELETE</button></p>
               </div>
             </table>
           </div>
@@ -121,53 +113,52 @@ $controllerRoute = $module['controller_route'];
   </div>
 </section>
 <script>
-  function checkALL() {
-    var chk_arr = document.getElementsByName("draw[]");
-    for (k = 0; k < chk_arr.length; k++) {
-        chk_arr[k].checked = true;
+  $(document).ready(function () {
+    // Select All Checkboxes
+    $("#selectAll").click(function () {
+        $(".rowCheckbox").prop("checked", this.checked);
+        toggleDeleteButton();
+    });
+
+    // Handle individual checkbox click
+    $(".rowCheckbox").click(function () {
+        $("#selectAll").prop("checked", $(".rowCheckbox:checked").length === $(".rowCheckbox").length);
+        toggleDeleteButton();
+    });
+
+    // Show/Hide delete button
+    function toggleDeleteButton() {
+        $("#deleteButtonContainer").toggle($(".rowCheckbox:checked").length > 0);
     }
-    CheckIfChecked();
-  }
 
-  function unCheckALL() {
-      var chk_arr = document.getElementsByName("draw[]");
-      for (k = 0; k < chk_arr.length; k++) {
-          chk_arr[k].checked = false;
-      }
-      CheckIfChecked();
-  }
+    // Delete Selected Rows
+    $("#deleteSelected").click(function () {
+        let selectedIds = $(".rowCheckbox:checked").map(function () {
+            return $(this).val();
+        }).get();
 
+        if (selectedIds.length === 0) {
+            alert("Please select at least one record to delete.");
+            return;
+        }
 
-  function checkAny() {
-      var chk_arr = document.getElementsByName("draw[]");
-      for (k = 0; k < chk_arr.length; k++) {
-          if (chk_arr[k].checked == true) {
-              return true;
-          }
-      }
-      return false;
-  }
-
-  function isCheckAll() {
-      var chk_arr = document.getElementsByName("draw[]");
-      for (k = 0; k < chk_arr.length; k++) {
-          if (chk_arr[k].checked == false) {
-              return false;
-          }
-      }
-      return true;
-  }
-
-  function showFirstButton() {
-      document.getElementById('first_button').style.display = "block";
-  }
-
-  function hideFirstButton() {
-      document.getElementById('first_button').style.display = "none";
-  }
-
-  function CheckIfChecked() {
-      checkAny() ? showFirstButton() : hideFirstButton();
-      isCheckAll() ? showSecondButton() : hideSecondButton();
-  }
+        if (confirm("Are you sure you want to delete selected records?")) {
+            $.ajax({
+                url: "<?= url('admin/' . $controllerRoute . '/multiple_delete') ?>",
+                type: "POST",
+                data: {
+                    ids: selectedIds,
+                    _token: "{{ csrf_token() }}" // Pass CSRF token
+                },
+                success: function (response) {
+                    alert(response);
+                    location.reload(); // Refresh after deletion
+                },
+                error: function () {
+                    alert("An error occurred while deleting records.");
+                }
+            });
+        }
+    });
+  });
 </script>
