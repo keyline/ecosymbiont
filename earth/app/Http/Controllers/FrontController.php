@@ -1165,7 +1165,7 @@ class FrontController extends Controller
         }
         public function signUp(Request $request)
         {
-            $data['countries']              = Country::select('id', 'name')->where('status', '=', 1)->get();
+            $data['countries']              = Country::select('id', 'name')->where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $title                          = 'Sign Up';
             $page_name                      = 'signup';
             $data['search_keyword']         = '';
@@ -1435,7 +1435,7 @@ class FrontController extends Controller
         {
             $user_id                        = session('user_id');
             $data['user']                   = User::find($user_id);
-            $data['countries']              = Country::select('id', 'name')->where('status', '=', 1)->get();
+            $data['countries']              = Country::select('id', 'name')->where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['search_keyword']         = '';
 
             if ($request->isMethod('post')) {
@@ -2680,7 +2680,7 @@ class FrontController extends Controller
             $data['news_category']          = NewsCategory::where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'ASC')->get();
             $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['submission_type']        = SubmissionType::where('status', '=', 1)->get(); 
-            $data['country']                = Country::orderBy('name', 'ASC')->get();
+            $data['country']                = Country::select('id', 'name')->where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();                               
@@ -2795,7 +2795,7 @@ class FrontController extends Controller
             $data['news_category']          = NewsCategory::where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'ASC')->get();        
             $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['submission_type']        = SubmissionType::where('status', '=', 1)->get(); 
-            $data['country']                = Country::orderBy('name', 'ASC')->get();
+            $data['country']                = Country::select('id', 'name')->where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
@@ -2903,7 +2903,7 @@ class FrontController extends Controller
             $data['news_category']          = NewsCategory::where('status', '=', 1)->where('parent_category', '=', 0)->orderBy('sub_category', 'ASC')->get();        
             $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['submission_type']        = SubmissionType::where('status', '=', 1)->get(); 
-            $data['country']                = Country::orderBy('name', 'ASC')->get();
+            $data['country']                = Country::select('id', 'name')->where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['pronoun']                = Pronoun::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
