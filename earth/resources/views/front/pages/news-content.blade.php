@@ -128,13 +128,15 @@ $current_url = $protocol . $host . $uri;
                                 </div>
                                 <div class="share-post-box">
                                     <ul class="share-box">
-                                        <li><i class="fa fa-share-alt"></i><span>Share Post</span></li>
-                                        <li><a class="facebook" href="{{ $facebookShareUrl }}" target="_blank"><i class="fa fa-facebook"></i><span>Share on Facebook</span></a></li>
-                                        <li><a class="twitter" href="{{ $twitterShareUrl }}" target="_blank"><i class="fa fa-twitter"></i><span>Share on Twitter</span></a></li>
-                                        <!-- <li><a class="google" href="#"><i class="fa fa-google-plus"></i><span></span></a></li> -->
-                                        <li><a class="linkedin" href="{{ $linkdinShareUrl }}" target="_blank"><i class="fa fa-linkedin"></i><span>&nbsp;&nbsp;&nbsp;Share on Linkedin</span></a></li>
+                                        <li><button class="btn btn-primary" id="cite">
+                                            <i class="fa fa-quote-left"></i> Cite</button>
+                                        </li>
+                                        <li><button class="btn btn-primary" id="permalink_button">
+                                            <i class="fa fa-share-alt"></i> Permalink</button>
+                                        </li>
+                                        
                                     </ul>
-                                </div>
+                                </div>                                                              
                                 <?php if($rowContent->media == 'image'){?>
                                     <div class="post-gallery">
                                         <img src="<?=env('UPLOADS_URL').'newcontent/'.$rowContent->cover_image?>" alt="<?=$rowContent->new_title?>">
@@ -226,16 +228,7 @@ $current_url = $protocol . $host . $uri;
                                             <li><a href="javascript:void(0);"><?=$keywords[$k]?></a></li>
                                         <?php } }?>
                                     </ul>
-                                </div>
-                                <div class="share-post-box">
-                                    <ul class="share-box">
-                                        <li><i class="fa fa-share-alt"></i><span>Share Post</span></li>                                        
-                                        <li><a class="facebook" href="{{ $facebookShareUrl }}" target="_blank"><i class="fa fa-facebook"></i><span>Share on Facebook</span></a></li>
-                                        <li><a class="twitter" href="{{ $twitterShareUrl }}" target="_blank"><i class="fa fa-twitter"></i><span>Share on Twitter</span></a></li>
-                                        <!-- <li><a class="google" href="#"><i class="fa fa-google-plus"></i><span></span></a></li> -->
-                                        <li><a class="linkedin" href="{{ $linkdinShareUrl }}" target="_blank"><i class="fa fa-linkedin"></i><span>&nbsp;&nbsp;&nbsp;Share on Linkedin</span></a></li>
-                                    </ul>
-                                </div>
+                                </div>                                                                    
                                 <div class="about-more-autor">
                                     <ul class="nav nav-tabs">
                                         <li class="active" style="width: 100%;">
@@ -288,6 +281,14 @@ $current_url = $protocol . $host . $uri;
                                                             <span><?= $organization_name = (isset($rowContent->organization_name) > 0) ? trim($rowContent->organization_name) : ''; ?></span>
                                                         </span>
                                                     </div>
+                                                    <?php if($rowContent->community_name != ''){?>
+                                                    <div class="autor-title">
+                                                        <span>
+                                                            <img src="<?=env('UPLOADS_URL').'icon/EaRTh-Communities-Logo.png'?>" alt="Community" title="Community" data-toogle="tooltip">                                                                    
+                                                            <span><?= $rowContent->community_name; ?></span>
+                                                        </span>
+                                                    </div>
+                                                    <?php }?>
                                                 </div>
                                             </div>
                                         </div>                                                
@@ -760,4 +761,182 @@ $current_url = $protocol . $host . $uri;
             </div>
         </div>
     </section>
+    <!-- Modal -->     
+    <div id="popup">
+        <h3>CITE</h3>  
+        <div>                                  
+            <p><?php
+            //  Helper::pr($rowContent->co_authors); 
+            
+             
+            //  Helper::pr($co_author_class); 
+            $author_name = $rowContent->author_name;
+            $new_title = $rowContent->new_title;
+            $doi = $rowContent->creative_work_DOI;
+            $co_authors = $rowContent->co_authors;
+            $publish_date = date_format(date_create($rowContent->created_at), "d M, Y");
+            $url = $current_url;
+            
+            function getInitials($author_name) {
+                $words = explode(" ", $author_name); // Split the name into words
+                $initials = strtoupper($words[0][0]) . ".";
+            
+                // foreach ($words as $word) {
+                //     $initials .= strtoupper($word[0]); // Get the first letter of each word
+                // }
+            
+                return $initials;
+            }
+            // Extract initials and last name
+            $name_parts = explode(" ", $author_name);    
+            $initials = getInitials($author_name);
+            $last_name = end($name_parts); // Get the last name
+            for($i = 1; $i <= $co_authors; $i++)
+            {
+                $co_author_name = json_decode($rowContent->co_author_names);
+                $co_author_class = json_decode($rowContent->co_author_classification) ;
+                $co_authorclassification = $co_author_class[$i-1];
+                $co_author = $co_author_name[$i-1];
+                $co_author_nameparts = explode(" ", $co_author);
+                $co_author_initials = getInitials($co_author);
+                $co_author_last_name = end($co_author_nameparts);                
+            }                 
+
+                if($rowContent->co_authors == 1){
+                    // $co_author_class = json_decode($rowContent->co_author_classification) ;
+                    if($co_authorclassification == 'Movement'){                        
+                        echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
+                        $url";
+                    } elseif($co_authorclassification == 'Ecoweb-rooted community'){                        
+                        echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
+                        $url";
+                    } else{
+                        echo "$initials $last_name & $co_author_initials $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
+                        $url";
+                    }
+                } elseif($rowContent->co_authors > 1){ 
+                    echo "$initials $last_name, <em>et al.</em>, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
+                    $url";
+                } else {
+                    echo "$initials $last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
+                    $url";
+                    // echo "$initials. $words[1], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. <a href="$rowContent->parent_category_name/$rowContent->sub_category_slug/$rowContent->slug">$new_title</a>";
+                }
+                ?></p>  
+        </div>
+        <div class="cite_button">
+            <button class="btn btn-primary" onclick="copyText()"><i class="fa fa-copy"></i> Copy</button>                                  
+            <button id="closePopup">Close</button>
+        </div>                                    
+        <h3 id="copyMessage">Copied successfully!</h3>
+    </div>
+    <div id="permalink">
+        <h3>PERMALINK</h3>  
+        <div>                                  
+            <p><?php echo $current_url;  ?></p>  
+        </div>
+        <div class="cite_button">
+            <button class="btn btn-primary" onclick="copyText2()"><i class="fa fa-copy"></i> Copy</button>                                  
+            <button id="closepermalink">Close</button>
+        </div>                                   
+        <h3 id="copyMessage2">Copied successfully!</h3>
+    </div>  
 <!-- End block-wrapper-section -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- <script>
+    $(document).ready(function() {
+    $('#popup').hide();
+    // Trigger popup on button click
+    $('#cite').click(function() {
+        $('#popup').fadeIn();
+        $('#copyMessage').hide();
+    });
+
+    // Close the popup
+    $('#closePopup').click(function() {
+        $('#popup').fadeOut();
+    });
+    });
+</script> -->
+<script>
+    function copyText() {
+        // Get text inside the popup
+        let textToCopy = $('#popup p').map(function() {
+            return $(this).text().trim();
+        }).get().join("\n"); // Join text with new lines
+
+        // Create a temporary textarea to copy text
+        let tempTextArea = $('<textarea>');
+        $('body').append(tempTextArea);
+        tempTextArea.val(textToCopy).select();
+        document.execCommand('copy');
+        tempTextArea.remove();
+
+        // Show copied message
+        $('#copyMessage').fadeIn();
+
+        // Hide message after 3 seconds
+        setTimeout(function() {
+            $('#copyMessage').fadeOut();
+        }, 3000);
+
+        // alert("Copied: " + textToCopy);
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        // Hide popups initially
+        $('#popup, #permalink').hide();
+        $('#copyMessage, #copyMessage2').hide();
+
+        // Open Cite popup
+        $('#cite').click(function () {
+            $('#popup').fadeIn();
+            $('#permalink').hide();
+            $('#copyMessage').hide();
+        });
+
+        // Close Cite popup
+        $('#closePopup').click(function () {
+            $('#popup').fadeOut();
+        });
+
+        // Open Permalink popup
+        $('#permalink_button').click(function () {
+            $('#permalink').fadeIn();
+            $('#popup').hide();
+            $('#copyMessage2').hide();
+        });
+
+        // Close Permalink popup
+        $('#closepermalink').click(function () {
+            $('#permalink').fadeOut();
+        });
+    });
+</script>
+<script>
+    function copyText2() {
+        // Get text inside the popup
+        let textToCopy = $('#permalink p').map(function() {
+            return $(this).text().trim();
+        }).get().join("\n"); // Join text with new lines
+
+        // Create a temporary textarea to copy text
+        let tempTextArea = $('<textarea>');
+        $('body').append(tempTextArea);
+        tempTextArea.val(textToCopy).select();
+        document.execCommand('copy');
+        tempTextArea.remove();
+
+        // Show copied message
+        $('#copyMessage2').fadeIn();
+
+        // Hide message after 3 seconds
+        setTimeout(function() {
+            $('#copyMessage2').fadeOut();
+        }, 3000);
+
+        // alert("Copied: " + textToCopy);
+    }
+</script>
