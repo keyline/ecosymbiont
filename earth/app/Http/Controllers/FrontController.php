@@ -385,7 +385,7 @@ class FrontController extends Controller
                                                     ->orWhere('news_contents.keywords', 'LIKE', '%' . $search_keyword . '%');
                                             })
                                             ->where(function ($query) {
-                                                $query->whereNull('news_contents.series_id') // Standalone articles
+                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
                                                     ->orWhere('news_contents.current_article_no', 1); // First part of series
                                             })
                                             ->orderBy('news_contents.created_at', 'DESC')
