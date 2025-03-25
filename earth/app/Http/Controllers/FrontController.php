@@ -356,42 +356,37 @@ class FrontController extends Controller
         if($request->isMethod('get')){
             $postData           = $request->all();
             $search_keyword     = $postData['article_search'];
-            $data['contents']   = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
-                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
+            $data['contents'] = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
                                             ->select(
-                                                        'news_contents.id', 
-                                                        'news_contents.new_title', 
-                                                        'news_contents.sub_title', 
-                                                        'news_contents.slug', 
-                                                        'news_contents.author_name', 
-                                                        'news_contents.for_publication_name', 
-                                                        'news_contents.cover_image',
-                                                        'news_contents.cover_image_caption',
-                                                        'news_contents.created_at',
-                                                        'news_contents.media',
-                                                        'news_contents.videoId',
-                                                        'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
-                                                        'parent_category.sub_category as parent_category_name', // From parent_category name
-                                                        'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
-                                                        'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
-                                                    )
-                                            ->where(function($query) {
-                                                $query->where('news_contents.status', 1);
-                                             })
-                                             ->where(function($query) use ($search_keyword) {
-                                                $query->where('news_contents.new_title', 'LIKE', '%'.$search_keyword.'%')
-                                                      ->orWhere('news_contents.sub_title', 'LIKE', '%'.$search_keyword.'%')
-                                                      ->orWhere('news_contents.long_desc', 'LIKE', '%'.$search_keyword.'%')
-                                                      ->orWhere('news_contents.author_name', 'LIKE', '%'.$search_keyword.'%')
-                                                      ->orWhere('news_contents.organization_name', 'LIKE', '%'.$search_keyword.'%')
-                                                      ->orWhere('news_contents.keywords', 'LIKE', '%'.$search_keyword.'%');
-                                             })
-                                             ->where(function ($query) {
-                                                $query->where('news_contents.current_article_no', 1);                                                      
-                                            })
-                                             ->orderBy('news_contents.created_at', 'DESC')
-                                             ->limit(4)
-                                             ->get();
+                                                'news_contents.id', 
+                                                'news_contents.new_title', 
+                                                'news_contents.sub_title', 
+                                                'news_contents.slug', 
+                                                'news_contents.author_name', 
+                                                'news_contents.for_publication_name', 
+                                                'news_contents.cover_image',
+                                                'news_contents.cover_image_caption',
+                                                'news_contents.created_at',
+                                                'news_contents.media',
+                                                'news_contents.videoId',
+                                                'sub_category.sub_category as sub_category_name', 
+                                                'parent_category.sub_category as parent_category_name',
+                                                'sub_category.slug as sub_category_slug',
+                                                'parent_category.slug as parent_category_slug'
+                                            )
+                                            ->where('news_contents.status', 1)
+                                            ->whereRaw("(news_contents.new_title LIKE ? OR 
+                                                    news_contents.sub_title LIKE ? OR 
+                                                    news_contents.long_desc LIKE ? OR 
+                                                    news_contents.author_name LIKE ? OR 
+                                                    news_contents.organization_name LIKE ? OR 
+                                                    news_contents.keywords LIKE ?)", 
+                                                    ["%$search_keyword%", "%$search_keyword%", "%$search_keyword%", "%$search_keyword%", "%$search_keyword%", "%$search_keyword%"])
+                                            ->where('news_contents.current_article_no', 1) // Ensures only the first part of a series is shown
+                                            ->orderBy('news_contents.created_at', 'DESC')
+                                            ->limit(4)
+                                            ->get();
             // Helper::pr($searchResults);
             
             $data['search_keyword']         = $search_keyword;
