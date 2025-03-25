@@ -376,17 +376,22 @@ class FrontController extends Controller
                                                 'parent_category.slug as parent_category_slug'
                                             )
                                             ->where('news_contents.status', 1)
-                                            ->whereRaw("(news_contents.new_title LIKE ? OR 
-                                                    news_contents.sub_title LIKE ? OR 
-                                                    news_contents.long_desc LIKE ? OR 
-                                                    news_contents.author_name LIKE ? OR 
-                                                    news_contents.organization_name LIKE ? OR 
-                                                    news_contents.keywords LIKE ?)", 
-                                                    ["%$search_keyword%", "%$search_keyword%", "%$search_keyword%", "%$search_keyword%", "%$search_keyword%", "%$search_keyword%"])
-                                            ->where('news_contents.current_article_no', 1) // Ensures only the first part of a series is shown
+                                            ->where(function ($query) use ($search_keyword) {
+                                                $query->where('news_contents.new_title', 'LIKE', '%' . $search_keyword . '%')
+                                                    ->orWhere('news_contents.sub_title', 'LIKE', '%' . $search_keyword . '%')
+                                                    ->orWhere('news_contents.long_desc', 'LIKE', '%' . $search_keyword . '%')
+                                                    ->orWhere('news_contents.author_name', 'LIKE', '%' . $search_keyword . '%')
+                                                    ->orWhere('news_contents.organization_name', 'LIKE', '%' . $search_keyword . '%')
+                                                    ->orWhere('news_contents.keywords', 'LIKE', '%' . $search_keyword . '%');
+                                            })
+                                            ->where(function ($query) {
+                                                $query->whereNull('news_contents.series_id') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
+                                            })
                                             ->orderBy('news_contents.created_at', 'DESC')
                                             ->limit(4)
                                             ->get();
+
             // Helper::pr($searchResults);
             
             $data['search_keyword']         = $search_keyword;
