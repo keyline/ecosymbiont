@@ -41,57 +41,66 @@
                         <div class="weave_communities">
                             <h4>EaRTh WEAVE COMMUNITIES</h4>
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <img src="<?=env('UPLOADS_URL').'EaRTh-Weave-Communities-Text-Logo.jpg'?>" alt="">
                                 </div>
-                                <div class="col-md-8">
-                                    <ul>
-                                        <li>a Community-composed public-facing page on the EaRTh platform</li>
-                                        <li>tailored private pages accessible upon secure login through a private portal</li>
-                                        <li>a feature enabling private interactive communication between members without needing to exchange contact information until trust is established</li>
-                                        <li>searchable and customizable knowledge- and information-sharing</li>
-                                    </ul>
+                                <div class="col-md-10">
+                                    <div class="titleto-inner">
+                                        <ul>
+                                            <li>a Community-composed public-facing page on the EaRTh platform</li>
+                                            <li>tailored private pages accessible upon secure login through a private portal</li>
+                                            <li>a feature enabling private interactive communication between members without needing to exchange contact information until trust is established</li>
+                                            <li>searchable and customizable knowledge- and information-sharing</li>
+                                        </ul>
+                                    </div>
+                                    
                                 </div>
                             </div>
                             <h5>Our current EaRTh Weave Communities</h5>
                             <p>We appreciate your patience as we work with each Community to develop their public profile.</p>
-                            <ul>
-                                <li>
-                                    <a href=""><i>ACT Changemakers Web</i> (global)</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i>Ethos Fellows Network</i> (global)</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i>Schumacher Wild Network</i> (global)</a>
-                                </li>
-                            </ul>
+                            <div class="titleto-inner">
+                                <ul>
+                                    <li>
+                                        <a href=""><i>ACT Changemakers Web</i> (global)</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i>Ethos Fellows Network</i> (global)</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i>Schumacher Wild Network</i> (global)</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>  
                         <div class="thrive_communities">
                             <h4>EaRTh THRIVE COMMUNITIES</h4>
                             <div class="row">
-                                <div class="col-md-4">
-                                    <img src="" alt="">
+                                <div class="col-md-2">
+                                    <img src="<?=env('UPLOADS_URL').'EaRTh-Thrive-Communities-Text-Logo.jpg'?>" alt="">
                                 </div>
-                                <div class="col-md-8">
-                                    <ul>
-                                        <li>all features available to <i>EaRTh Weave Communities</i></li>
-                                        <li>living wages for Community members submitting creative-works published on EaRTh</li>
-                                        <li>funding for ecoweb-rooted livelihoods and innovations collaboratively generated and implemented by Community members, with sharing of knowledge within the Community</li>
-                                        <li>access to expertise of EaRTh creators outside of the Community</li>
-                                    </ul>
+                                <div class="col-md-10">
+                                    <div class="titleto-inner">
+                                        <ul>
+                                            <li>all features available to <i>EaRTh Weave Communities</i></li>
+                                            <li>living wages for Community members submitting creative-works published on EaRTh</li>
+                                            <li>funding for ecoweb-rooted livelihoods and innovations collaboratively generated and implemented by Community members, with sharing of knowledge within the Community</li>
+                                            <li>access to expertise of EaRTh creators outside of the Community</li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                             <h5>Our current EaRTh Thrive Communities</h5>
                             <p>We appreciate your patience as we work with each Community to develop their public profile.</p>
-                            <ul>
-                                <li>
-                                    <a href=""><i>Hella Love</i> (USA)</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i>West Oakland Living Heritage Center</i> (USA)</a>
-                                </li>
-                            </ul>
+                                <div class="titleto-inner">
+                                    <ul>
+                                        <li>
+                                            <a href=""><i>Hella Love</i> (USA)</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><i>West Oakland Living Heritage Center</i> (USA)</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             <p>If you are interested in becoming an <i>EaRTh Community</i>, please <a href="#">contact us.</a></p>
                         </div>                  
                     </div>
