@@ -15,7 +15,7 @@ use Session;
 use Helper;
 use Hash;
 
-class CommunityController extends Controller
+class ProjectController extends Controller
 {
     public function __construct()
     {
