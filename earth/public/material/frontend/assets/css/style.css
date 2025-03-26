@@ -6338,6 +6338,11 @@ div#permalink p {
   max-width: 400px;
   transform: translate(-50%, -50%);
 }
+
+.weave_communities h4{
+  color: #90201f;
+}
+
 /*-------------------------------------------------*/
 /* =  Responsive Part
 /*-------------------------------------------------*/
