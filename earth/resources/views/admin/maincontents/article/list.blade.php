@@ -38,9 +38,9 @@ $controllerRoute = $module['controller_route'];
               <thead>
                 <tr>
                   <th class="admin-select-none"><a href="javascript:selectToggle(selete);" id="show"
-                      onclick="checkALL();">Select All</a> | <br> <a
+                      onclick="checkALL();">Select</a> | <br> <a
                       href="javascript:selectToggle(unselect);" id="hide"
-                      onclick="unCheckALL();">Deselect All</a>
+                      onclick="unCheckALL();">Deselect</a>
                   </th>
                   <th scope="col">#</th>
                   <th scope="col">Action</th>
@@ -111,7 +111,7 @@ $controllerRoute = $module['controller_route'];
                 <?php } ?>
               </tbody>
               <div id="first_button" style="display:none; " margin-bottom: -6px;>
-                      <p align="left"><button type="submit" class="btn btn-danger" name="save">DELETE</button></p>
+                  <p align="left"><button type="submit" class="btn btn-danger" name="save">DELETE</button></p>
               </div>
             </table>
           </div>
@@ -232,5 +232,4 @@ $controllerRoute = $module['controller_route'];
         }
     });
 });
-
 </script>

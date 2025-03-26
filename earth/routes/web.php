@@ -127,6 +127,7 @@ use Illuminate\Support\Facades\Route;
              Route::match(['get', 'post'], 'news_content/edit/{id}', 'NewsContentController@edit');
              Route::match(['get', 'post'], 'news_content/import/{id}', 'NewsContentController@import');
              Route::get('news_content/delete/{id}', 'NewsContentController@delete');
+             Route::post('news_content/multiple_delete', 'NewsContentController@multiple_delete')->name('admin.news_content.multiple_delete');  
              Route::get('news_content/change-status/{id}', 'NewsContentController@change_status');
              Route::get('news_content/change-archieve-status/{id}', 'NewsContentController@change_archieve_status');
              Route::get('news_content/get-subcategories/{parent_id}', 'NewsContentController@getSubcategories'); // AJAX route
