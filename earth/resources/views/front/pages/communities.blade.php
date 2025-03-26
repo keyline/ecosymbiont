@@ -61,13 +61,13 @@
                             <div class="titleto-inner">
                                 <ul>
                                     <li>
-                                        <a href=""><i>ACT Changemakers Web</i> (global)</a>
+                                        <a href=""><i>ACT Changemakers Web</i> </a>(global)
                                     </li>
                                     <li>
-                                        <a href="#"><i>Ethos Fellows Network</i> (global)</a>
+                                        <a href="#"><i>Ethos Fellows Network</i> </a>(global)
                                     </li>
                                     <li>
-                                        <a href="#"><i>Schumacher Wild Network</i> (global)</a>
+                                        <a href="#"><i>Schumacher Wild Network</i> </a>(global)
                                     </li>
                                 </ul>
                             </div>
@@ -97,7 +97,7 @@
                                             <a href=""><i>Hella Love</i> (USA)</a>
                                         </li>
                                         <li>
-                                            <a href="#"><i>West Oakland Living Heritage Center</i> (USA)</a>
+                                            <a href="#"><i>West Oakland Living Heritage Center</i> </a>(USA)
                                         </li>
                                     </ul>
                                 </div>
