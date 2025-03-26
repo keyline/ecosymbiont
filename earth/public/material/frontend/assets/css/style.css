@@ -6166,7 +6166,10 @@ footer .footer-last-line nav.footer-nav ul li:first-child:before {
   color: #90201f;
   font-weight: bold;
   font-size: 30px;
-  /* text-transform: uppercase; */
+  text-transform: uppercase;
+}
+.titleto-box.titleto-box2 h1 {
+  text-transform: none !important;
 }
 .titleto-inner {
   margin-bottom: 25px;

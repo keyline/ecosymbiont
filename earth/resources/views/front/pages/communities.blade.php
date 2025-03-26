@@ -12,7 +12,7 @@
                 <!-- block content -->
                 <div class="block-content">
                     <div class="article-box">                            
-                        <div class="titleto-box">
+                        <div class="titleto-box titleto-box2">
                             <h1>EaRTh COMMUNITIES</h1>  
                             {{-- <p class="black">As part of its <a target="_blank" href="?=env('REGENERATE_URL')?>" style="color: #d09c1c;">Ecosymbionts Regenerate</a> initiative, the Śramani Institute provides several communities (whether formed through geography or like-minded collaboration) a <strong><em>Virtual Community Center</em></strong> dedicated to the specific needs of each community.</p> --}}
                             {{-- <p class="black">We appreciate your patience as we develop this feature.</p>
