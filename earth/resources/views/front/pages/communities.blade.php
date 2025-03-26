@@ -40,7 +40,7 @@
                         </div>       
                         <div class="weave_communities">
                             <h4>EaRTh WEAVE COMMUNITIES</h4>
-                            <div class="row">
+                            <div class="row" style="margin: 20px 0;">
                                 <div class="col-md-2">
                                     <img src="<?=env('UPLOADS_URL').'EaRTh-Weave-Communities-Text-Logo.jpg'?>" alt="">
                                 </div>
@@ -56,7 +56,7 @@
                                     
                                 </div>
                             </div>
-                            <h5>Our current EaRTh Weave Communities</h5>
+                            <h5 style="font-weight: 600">Our current EaRTh Weave Communities</h5>
                             <p>We appreciate your patience as we work with each Community to develop their public profile.</p>
                             <div class="titleto-inner">
                                 <ul>
