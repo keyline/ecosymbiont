@@ -203,6 +203,13 @@ use Illuminate\Support\Facades\Route;
                  Route::get('communities/delete/{id}', 'CommunityController@delete');
                  Route::get('communities/change-status/{id}', 'CommunityController@change_status');
              /* communities */
+             /* projects */
+             Route::get('projects/list', 'ProjectController@list');
+             Route::match(['get', 'post'], 'projects/add', 'ProjectController@add');
+             Route::match(['get', 'post'], 'projects/edit/{id}', 'ProjectController@edit');
+             Route::get('projects/delete/{id}', 'ProjectController@delete');
+             Route::get('projects/change-status/{id}', 'ProjectController@change_status');
+         /* projects */
               /* title */
               Route::get('title/list', 'TitleController@list');
               Route::match(['get', 'post'], 'title/add', 'TitleController@add');
