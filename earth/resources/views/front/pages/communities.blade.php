@@ -61,20 +61,20 @@
                             <div class="titleto-inner">
                                 <ul>
                                     <li>
-                                        <a href=""><i>ACT Changemakers Web</i> </a>(global)
+                                        <a target="_blank" href="<?=url('communities/ACTChangemakers')?>" style="text-decoration: underline;"><i>ACT Changemakers Web</i> </a>(global)
                                     </li>
                                     <li>
-                                        <a href="#"><i>Ethos Fellows Network</i> </a>(global)
+                                        <a target="_blank" href="<?=url('communities/EthosFellows')?>" style="text-decoration: underline;"><i>Ethos Fellows Network</i> </a>(global)
                                     </li>
                                     <li>
-                                        <a href="#"><i>Schumacher Wild Network</i> </a>(global)
+                                        <a target="_blank" href="<?=url('communities/SchumacherWild')?>" style="text-decoration: underline;"><i>Schumacher Wild Network</i> </a>(global)
                                     </li>
                                 </ul>
                             </div>
                         </div>  
                         <div class="thrive_communities">
                             <h4>EaRTh THRIVE COMMUNITIES</h4>
-                            <div class="row">
+                            <div class="row" style="margin: 20px 0;">
                                 <div class="col-md-2">
                                     <img src="<?=env('UPLOADS_URL').'EaRTh-Thrive-Communities-Text-Logo.jpg'?>" alt="">
                                 </div>
@@ -89,15 +89,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <h5>Our current EaRTh Thrive Communities</h5>
+                            <h5 style="font-weight: 600">Our current EaRTh Thrive Communities</h5>
                             <p>We appreciate your patience as we work with each Community to develop their public profile.</p>
                                 <div class="titleto-inner">
                                     <ul>
                                         <li>
-                                            <a href=""><i>Hella Love</i> (USA)</a>
+                                            <a href="" style="text-decoration: underline;"><i>Hella Love</i> (USA)</a>
                                         </li>
                                         <li>
-                                            <a href="#"><i>West Oakland Living Heritage Center</i> </a>(USA)
+                                            <a target="_blank" href="<?=url('communities/WestOakland')?>" style="text-decoration: underline;"><i>West Oakland Living Heritage Center</i> </a>(USA)
                                         </li>
                                     </ul>
                                 </div>
