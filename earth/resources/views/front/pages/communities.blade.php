@@ -42,7 +42,7 @@
                             <h4>EaRTh WEAVE COMMUNITIES</h4>
                             <div class="row" style="margin: 20px 0;">
                                 <div class="col-md-2">
-                                    <img src="<?=env('UPLOADS_URL').'EaRTh-Weave-Communities-Text-Logo.jpg'?>" alt="" style="width: 100%; max-width: 200px; margin-bottom: 20px;">
+                                    <img src="<?=env('UPLOADS_URL').'EaRTh-Weave-Communities-Text-Logo.jpg'?>" alt="" style="width: 100%; max-width: 160px; margin-bottom: 20px;">
                                 </div>
                                 <div class="col-md-10">
                                     <div class="titleto-inner">
@@ -76,7 +76,7 @@
                             <h4>EaRTh THRIVE COMMUNITIES</h4>
                             <div class="row" style="margin: 20px 0;">
                                 <div class="col-md-2">
-                                    <img src="<?=env('UPLOADS_URL').'EaRTh-Thrive-Communities-Text-Logo.jpg'?>" alt="" style="width: 100%; max-width: 200px; margin-bottom: 20px;">>
+                                    <img src="<?=env('UPLOADS_URL').'EaRTh-Thrive-Communities-Text-Logo.jpg'?>" alt="" style="width: 100%; max-width: 160px; margin-bottom: 20px;">>
                                 </div>
                                 <div class="col-md-10">
                                     <div class="titleto-inner">
