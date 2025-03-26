@@ -42,7 +42,7 @@
                             <h4>EaRTh WEAVE COMMUNITIES</h4>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <img src="<?=env('UPLOADS_URL').'/author.png'?>" alt="">
+                                    <img src="<?=env('UPLOADS_URL').'/EaRTh-Weave-Communities-Text-Logo.jpg'?>" alt="">
                                 </div>
                                 <div class="col-md-8">
                                     <ul>
