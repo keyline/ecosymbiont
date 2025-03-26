@@ -94,14 +94,14 @@
                                 <div class="titleto-inner">
                                     <ul>
                                         <li>
-                                            <a href="" style="text-decoration: underline;"><i>Hella Love</i> (USA)</a>
+                                            <i>Hella Love</i> (USA)
                                         </li>
                                         <li>
                                             <a target="_blank" href="<?=url('communities/WestOakland')?>" style="text-decoration: underline;"><i>West Oakland Living Heritage Center</i> </a>(USA)
                                         </li>
                                     </ul>
                                 </div>
-                            <p>If you are interested in becoming an <i>EaRTh Community</i>, please <a href="#">contact us.</a></p>
+                            <p>If you are interested in becoming an <i>EaRTh Community</i>, please <a href="<?=env('REGENERATE_URL')?>contact.php">contact us.</a></p>
                         </div>                  
                     </div>
                 </div>
