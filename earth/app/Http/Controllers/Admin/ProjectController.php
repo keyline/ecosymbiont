@@ -9,7 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Models\GeneralSetting;
-use App\Models\Community;
+use App\Models\Project;
 use Auth;
 use Session;
 use Helper;
@@ -20,9 +20,9 @@ class ProjectController extends Controller
     public function __construct()
     {
         $this->data = array(
-            'title'             => 'Community',
-            'controller'        => 'CommunityController',
-            'controller_route'  => 'communities',
+            'title'             => 'Project',
+            'controller'        => 'ProjectController',
+            'controller_route'  => 'projects',
             'primary_key'       => 'id',
         );
     }
@@ -31,8 +31,8 @@ class ProjectController extends Controller
     {
         $data['module']                 = $this->data;
         $title                          = $this->data['title'] . ' List';
-        $page_name                      = 'communities.list';
-        $data['rows']                   = Community::where('status', '!=', 3)->orderBy('id', 'DESC')->get();
+        $page_name                      = 'projects.list';
+        $data['rows']                   = Project::where('status', '!=', 3)->orderBy('id', 'DESC')->get();
 
         echo $this->admin_after_login_layout($title, $page_name, $data);
     }
@@ -47,13 +47,13 @@ class ProjectController extends Controller
                 'name'                      => 'required',               
             ];
             if ($this->validate($request, $rules)) {
-                $checkValue = Community::where('name', '=', $postData['name'])->count();
+                $checkValue = Project::where('name', '=', $postData['name'])->count();
                 if ($checkValue <= 0) {                    
                     $fields = [
                         'name'                      => $postData['name'],
                         'created_at'                => date('Y-m-d H:i:s'),
                     ];
-                    Community::insert($fields);
+                    Project::insert($fields);
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' inserted successfully');
                 } else {
                     return redirect()->back()->with('error_message', $this->data['title'] . ' already exists');
@@ -64,7 +64,7 @@ class ProjectController extends Controller
         }
         $data['module']                 = $this->data;
         $title                          = $this->data['title'] . ' Add';        
-        $page_name                      = 'communities.add-edit';
+        $page_name                      = 'projects.add-edit';
         $data['row']                    = [];
         echo $this->admin_after_login_layout($title, $page_name, $data);
     }
@@ -75,8 +75,8 @@ class ProjectController extends Controller
         $data['module']                 = $this->data;
         $id                             = Helper::decoded($id);
         $title                          = $this->data['title'] . ' Update';
-        $page_name                      = 'communities.add-edit';
-        $data['row']                    = Community::where($this->data['primary_key'], '=', $id)->first();        
+        $page_name                      = 'projects.add-edit';
+        $data['row']                    = Project::where($this->data['primary_key'], '=', $id)->first();        
 
         if ($request->isMethod('post')) {
             $postData = $request->all();
@@ -84,13 +84,13 @@ class ProjectController extends Controller
                 'name'                      => 'required',              
             ];
             if ($this->validate($request, $rules)) {
-                $checkValue = Community::where('name', '=', $postData['name'])->where('id', '!=', $id)->count();
+                $checkValue = Project::where('name', '=', $postData['name'])->where('id', '!=', $id)->count();
                 if ($checkValue <= 0) {                    
                     $fields = [
                         'name'                      => $postData['name'],
                         'updated_at'                => date('Y-m-d H:i:s'),
                     ];
-                    Community::where($this->data['primary_key'], '=', $id)->update($fields);
+                    Project::where($this->data['primary_key'], '=', $id)->update($fields);
                     return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' updated successfully');
                 } else {
                     return redirect()->back()->with('error_message', $this->data['title'] . ' already exists');
@@ -109,7 +109,7 @@ class ProjectController extends Controller
         $fields = [
             'status'             => 3
         ];
-        Community::where($this->data['primary_key'], '=', $id)->update($fields);
+        Project::where($this->data['primary_key'], '=', $id)->update($fields);
         return redirect("admin/" . $this->data['controller_route'] . "/list")->with('success_message', $this->data['title'] . ' deleted successfully');
     }
     /* delete */
@@ -117,7 +117,7 @@ class ProjectController extends Controller
     public function change_status(Request $request, $id)
     {
         $id                             = Helper::decoded($id);
-        $model                          = Community::find($id);
+        $model                          = Project::find($id);
         if ($model->status == 1) {
             $model->status  = 0;
             $msg            = 'deactivated';
