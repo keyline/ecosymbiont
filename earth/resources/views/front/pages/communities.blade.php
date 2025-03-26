@@ -33,8 +33,8 @@
                             <p>Through <strong><i>EaRTh Communities</i></strong>, we help members of Communities (whether formed based on geography or like-minded collaboration) to:</p>
                             <div class="titleto-inner">
                                 <ul>
-                                    <li><strong><i>weave</i></strong> with each other, by securely connecting to share ideas, experiences, and knowledge</li>
-                                    <li><strong><i>thrive</i></strong> together, by co-creating and co-implementing ecology-rooted livelihoods and innovations</li>
+                                    <li><strong class="black"><i>weave</i></strong> with each other, by securely connecting to share ideas, experiences, and knowledge</li>
+                                    <li><strong class="black"><i>thrive</i></strong> together, by co-creating and co-implementing ecology-rooted livelihoods and innovations</li>
                                 </ul>
                             </div>
                         </div>       
@@ -61,13 +61,13 @@
                             <div class="titleto-inner">
                                 <ul>
                                     <li>
-                                        <a target="_blank" href="<?=url('communities/ACTChangemakers')?>" style="text-decoration: underline;"><i>ACT Changemakers Web</i> </a>(global)
+                                        <a target="_blank" href="<?=url('communities/ACTChangemakers')?>" style="text-decoration: underline;"><i>ACT Changemakers Web</i></a> (global)
                                     </li>
                                     <li>
-                                        <a target="_blank" href="<?=url('communities/EthosFellows')?>" style="text-decoration: underline;"><i>Ethos Fellows Network</i> </a>(global)
+                                        <a target="_blank" href="<?=url('communities/EthosFellows')?>" style="text-decoration: underline;"><i>Ethos Fellows Network</i></a> (global)
                                     </li>
                                     <li>
-                                        <a target="_blank" href="<?=url('communities/SchumacherWild')?>" style="text-decoration: underline;"><i>Schumacher Wild Network</i> </a>(global)
+                                        <a target="_blank" href="<?=url('communities/SchumacherWild')?>" style="text-decoration: underline;"><i>Schumacher Wild Network</i></a> (global)
                                     </li>
                                 </ul>
                             </div>
@@ -76,7 +76,7 @@
                             <h4>EaRTh THRIVE COMMUNITIES</h4>
                             <div class="row" style="margin: 20px 0;">
                                 <div class="col-md-2">
-                                    <img src="<?=env('UPLOADS_URL').'EaRTh-Thrive-Communities-Text-Logo.jpg'?>" alt="" style="width: 100%; max-width: 160px; margin-bottom: 20px;">>
+                                    <img src="<?=env('UPLOADS_URL').'EaRTh-Thrive-Communities-Text-Logo.jpg'?>" alt="" style="width: 100%; max-width: 160px; margin-bottom: 20px;">
                                 </div>
                                 <div class="col-md-10">
                                     <div class="titleto-inner">
@@ -97,7 +97,7 @@
                                             <i>Hella Love</i> (USA)
                                         </li>
                                         <li>
-                                            <a target="_blank" href="<?=url('communities/WestOakland')?>" style="text-decoration: underline;"><i>West Oakland Living Heritage Center</i> </a>(USA)
+                                            <a target="_blank" href="<?=url('communities/WestOakland')?>" style="text-decoration: underline;"><i>West Oakland Living Heritage Center</i></a> (USA)
                                         </li>
                                     </ul>
                                 </div>
