@@ -49,7 +49,7 @@ use App\Helpers\Helper;
                                 <span class="cel-temperature">+7</span>
                             </li> -->
                             <!-- <li><span class="time-now"><//?=date('l d F Y')?> / <//?=date('H:i')?></span></li> -->
-                            <li><span class="time-now"><?= date('l d F Y') ?> / <?= date('H:i T') ?></span></li>
+                            <li><span class="time-now"><?= date('l F Y') ?> / <?= date('H:i T') ?></span></li>
                             <!-- <li><a href="#">Log In</a></li> -->
                             <!-- <li><a href="<?=url('contact-us')?>">Contact</a></li> -->
                             <?php if(session('is_user_login')){?>
