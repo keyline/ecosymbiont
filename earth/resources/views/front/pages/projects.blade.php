@@ -42,7 +42,7 @@
                             </div>
                         </div>     
                         <div class="thrive_communities">
-                            <p>If you are interested in submitting one or more Creative-Works to a special <i>EaRTh Project,</i> please <a href="<?=env('REGENERATE_URL')?>contact.php">contact us.</a></p>
+                            <p>If you are interested in submitting one or more Creative-Works to a special <i>EaRTh Project,</i> please <a href="<?=env('REGENERATE_URL')?>contact.php" target="_blank">contact us.</a></p>
                         </div>                  
                     </div>
                 </div>
