@@ -6923,7 +6923,7 @@ div#permalink p {
   top: -120px;
 }
 #cssmenu ul{
-  position: relative;
+  position: absolute;
   background: #d09c1c;
 }
 .seach_holder {
