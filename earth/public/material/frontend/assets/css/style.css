@@ -6921,7 +6921,7 @@ div#permalink p {
   width: 52px;
   position: absolute;
   right: 22px;
-  top: -120px;
+  top: -115px;
   background: #d09c1c;
 }
 #cssmenu.small-screen #menu-button:before,
@@ -6933,6 +6933,11 @@ div#permalink p {
 #cssmenu.small-screen #menu-button:after{
   border-top: 2px solid #fff;
   border-bottom: 2px solid #fff;
+}
+
+#cssmenu.small-screen #menu-button.menu-opened:after,
+#cssmenu.small-screen #menu-button.menu-opened:before {
+  right: 19px;
 }
 
 #cssmenu ul{
