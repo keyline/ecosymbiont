@@ -4,8 +4,8 @@
             <div class="col-md-12">
                 <ul>
                     <li class="foot_logo"><a href="index.php"><img src="images/logo.webp" alt="" class="img-responsive"></a></li>
-                    <li><a target="_blank" href="in-the-media.php" class="footer_btn">Communities</a></li>
-                    <li><a target="_blank" href="in-the-media.php" class="footer_btn">Projects</a></li>
+                    <li><a target="_blank" href="" class="footer_btn">Communities</a></li>
+                    <li><a target="_blank" href="" class="footer_btn">Projects</a></li>
                     <li><a target="_blank" href="contact.php" class="footer_btn">Contact</a></li>
                     <li><a target="_blank" href="<?=$base_url?>earth" class="footer_btn_2">EaRTh</a></li>
                 </ul>
