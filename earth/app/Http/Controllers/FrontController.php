@@ -186,7 +186,7 @@ class FrontController extends Controller
     {
         $data = [];
         $title                          = 'Projects';
-        $page_name                      = 'Projects';
+        $page_name                      = 'projects';
         $data['search_keyword']         = '';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
