@@ -219,7 +219,8 @@ header.active .nav-list-container {
 }
 .top-line ul.top-line-list li a {
   display: inline-block;
-  text-decoration: none;
+  text-decoration: underline;
+  color: #337ab7;
   transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
