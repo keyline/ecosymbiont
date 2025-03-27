@@ -625,12 +625,17 @@ header.active .nav-list-container {
   padding: 0;
 }
 .seach_holder form.navbar-form {
-  margin-bottom: 0;
+  margin-bottom: 18px;
 }
 .seach_holder a.advserach_btn {
-  color: #fff;
-  line-height: 1.25;
+  color: #000;
   font-size: 12px;
+  background: #fff;
+  padding: 7px 7px;
+  border-radius: 3px;
+  margin-top: -55px;
+  top: -8px;
+  position: relative;
 }
 .search_suggestion{
   position: absolute;
