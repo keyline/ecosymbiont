@@ -6678,9 +6678,6 @@ div#permalink p {
   .d-md-none {
     display: none;
   }
-  .box_heading{
-    font-size: 15px;
-  }
 }
 @media (max-width: 767px) {
   .top-line {
@@ -6923,6 +6920,9 @@ div#permalink p {
 }
 .seach_holder .navbar-form{
   margin: 0;
+}
+.box_heading{
+  font-size: 15px;
 }
 }
 @media (max-width: 650px) {
