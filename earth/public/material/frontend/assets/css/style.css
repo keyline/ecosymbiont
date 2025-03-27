@@ -640,6 +640,7 @@ header.active .nav-list-container {
   margin-top: -55px;
   top: -8px;
   position: relative;
+  border: 1px solid #eeeeee;
 }
 .search_suggestion{
   position: absolute;
@@ -6919,14 +6920,16 @@ div#permalink p {
 #cssmenu.small-screen #menu-button {
   position: absolute;
   right: 0;
-  top: -90px;
+  top: -120px;
 }
 .seach_holder {
   width: 33%;
   margin-bottom: 8px;
   position: absolute;
-  top: -86px;
-  right: 60px;
+  /* top: -86px;
+  right: 60px; */
+  top: -120px;
+  right: 85px;
 }
 .seach_holder .navbar-form{
   margin: 0;
