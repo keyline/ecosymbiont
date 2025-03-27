@@ -153,7 +153,7 @@ function isActive($page) {
                         <!-- <li><a class="<?= isActive('synergy-meetings') ?>" href="<?= BASE_URL; ?>synergy-meetings.php">Synergy Meetings</a></li>                         -->
                         <li><a class="<?= isActive('in-the-media') ?>" href="<?= BASE_URL; ?>in-the-media.php">In the Media</a></li>
                         <!-- <li><a class="<?= isActive('contact') ?>" href="<?= BASE_URL; ?>contact.php">Contact</a></li> -->
-                        <li><a class="<?= isActive('contact') ?>" href="<?=url('projects')?>">Projects</a></li>
+                        <li><a class="<?= isActive('projects') ?>" href="<?=url('projects')?>">Projects</a></li>
                         <!-- <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
