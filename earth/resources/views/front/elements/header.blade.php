@@ -228,7 +228,7 @@ use App\Helpers\Helper;
         <div class="nav-list-container">
             <div class="container">
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="d-flex">
+                <div class="d-flex align-items-center">
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <!-- desktop -->
                         <ul class="nav navbar-nav navbar-left">
