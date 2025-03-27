@@ -6922,13 +6922,17 @@ div#permalink p {
   right: 0;
   top: -120px;
 }
+#cssmenu ul{
+  position: relative;
+  background: #d09c1c;
+}
 .seach_holder {
   width: 33%;
   margin-bottom: 8px;
-  position: fixed;
+  position: absolute;
   /* top: -86px;
   right: 60px; */
-  top: 120px;
+  top: -120px;
   right: 85px;
 }
 .seach_holder .navbar-form{
