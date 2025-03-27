@@ -29,7 +29,7 @@
                             <p class="black">If your community is interested in having a <em>Virtual Community Center</em>, please <a href="?=env('REGENERATE_URL')?>contact.php" style="color: #d09c1c;">contact us.</a></p> --}}
                             <p><strong class="black">EaRTh</strong> is a custom-built, professionally edited knowledge-sharing and community-building platform for grassroots changemakers, innovators, and knowledge-holders (creators) all across the world.</p>
                             <p><strong class="black">EaRTh</strong> honors all (digitizable) modes of knowledge-sharing — through written narratives, images, and videos — of fiction and non-fiction, work and creative expression (visual art, music, performance), ideas and implementations, and personal stories and professional interviews.</p>
-                            <h3 style="padding: 5px; border: 1px solid #000; text-align: center; font-weight: 600; margin: 25px 0 20px;">But that’s not all EaRTh is.</h3>
+                            <h3 class="box_heading">But that’s not all EaRTh is.</h3>
                             <p>Through <strong><i>EaRTh Communities</i></strong>, we help members of Communities (whether formed based on geography or like-minded collaboration) to:</p>
                             <div class="titleto-inner">
                                 <ul>

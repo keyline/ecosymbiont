@@ -6351,6 +6351,15 @@ div#permalink p {
   font-weight: 700;
 }
 
+.box_heading{
+  padding: 8px; 
+  border: 1px solid #000; 
+  text-align: center; 
+  font-weight: 600; 
+  margin: 25px 0 20px;
+  font-size: 20px;
+}
+
 /*-------------------------------------------------*/
 /* =  Responsive Part
 /*-------------------------------------------------*/
