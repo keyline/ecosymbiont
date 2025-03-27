@@ -580,6 +580,7 @@ $current_url = $protocol . $host . $uri;
                                                                         )
                                                                         ->where('news_contents.status', 1)  // Fetch only active content
                                                                         ->where('news_contents.is_feature', 1)  // Fetch only featured content
+                                                                        ->orderBy('news_contents.created_at', 'DESC') // Latest videos first
                                                                         ->inRandomOrder()  // Randomize the result order
                                                                         ->limit(3)  // Limit to 3 records
                                                                         ->get();
@@ -674,6 +675,7 @@ $current_url = $protocol . $host . $uri;
                                                                 )
                                                                 ->where('news_contents.status', 1)  // Fetch only active content
                                                                 ->where('news_contents.is_hot', 1)  // Fetch only featured content
+                                                                ->orderBy('news_contents.created_at', 'DESC') // Latest videos first
                                                                 ->inRandomOrder()  // Randomize the result order
                                                                 ->limit(3)  // Limit to 3 records
                                                                 ->get();
@@ -757,6 +759,7 @@ $current_url = $protocol . $host . $uri;
                                                             )
                                                             ->where('news_contents.status', 1)  // Fetch only active content
                                                             ->where('news_contents.is_popular', 1)  // Fetch only featured content
+                                                            ->orderBy('news_contents.created_at', 'DESC') // Latest videos first
                                                             ->inRandomOrder()  // Randomize the result order
                                                             ->limit(3)  // Limit to 3 records
                                                             ->get();
@@ -830,6 +833,7 @@ $current_url = $protocol . $host . $uri;
                                                                         )
                                                                         ->where('news_contents.status', 1)  // Fetch only active content                                                                        
                                                                         ->inRandomOrder()  // Randomize the result order
+                                                                        ->orderBy('news_contents.created_at', 'DESC') // Latest videos first
                                                                         ->limit(3)  // Limit to 3 records
                                                                         ->get();
                                         if($recentContents){ foreach($recentContents as $recentContent){
@@ -969,11 +973,11 @@ $current_url = $protocol . $host . $uri;
                         <!-- article box -->
                         <div class="article-box">
                             <div class="title-section">
-                                <h1><span>Latest Articles</span></h1>
+                                <h1><span>Latest Creative Works</span></h1>
                             </div>
                             <?php
                             // DB::enableQueryLog(); // Enable query log
-                            $recentContents = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
+                            $latestarticles = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
                                             ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
                                             ->select(
                                                 'news_contents.id', 
@@ -996,17 +1000,19 @@ $current_url = $protocol . $host . $uri;
                                                 'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
                                             )
                                             ->where('news_contents.status', 1)  // Fetch only active content
-                                            ->where('news_contents.is_feature', 1)  // Fetch only featured content
+                                            // ->where('news_contents.is_feature', 1)  // Fetch only featured content
                                             ->inRandomOrder()  // Randomize the result order
+                                            ->orderBy('news_contents.created_at', 'DESC') // Latest videos first
                                             ->limit(6)  // Limit to 3 records
                                             ->get();
-                            if($recentContents){ foreach($recentContents as $recentContent){
+                                                        
+                            if($latestarticles){ foreach($latestarticles as $latestarticle){
                             ?>
                                 <?php
-                                $is_series                  = $recentContent->is_series;
-                                $series_article_no          = $recentContent->series_article_no;
-                                $current_article_no         = $recentContent->current_article_no;
-                                $other_article_part_doi_no  = explode(",", $recentContent->other_article_part_doi_no);
+                                $is_series                  = $latestarticle->is_series;
+                                $series_article_no          = $latestarticle->series_article_no;
+                                $current_article_no         = $latestarticle->current_article_no;
+                                $other_article_part_doi_no  = explode(",", $latestarticle->other_article_part_doi_no);
                                 if($is_series == 'Yes'){
                                     if($current_article_no == 1){
                                         $isShow = true;
@@ -1022,42 +1028,42 @@ $current_url = $protocol . $host . $uri;
                                         <div class="row">
                                             <div class="col-sm-5">
                                                 <!-- <div class="post-gallery">
-                                                    <img src="<?=env('UPLOADS_URL').'newcontent/'.$recentContent->cover_image?>" alt="<?=$recentContent->new_title?>">
+                                                    <img src="<?=env('UPLOADS_URL').'newcontent/'.$latestarticle->cover_image?>" alt="<?=$latestarticle->new_title?>">
                                                 </div> -->
-                                                <?php if($recentContent->media == 'image'){?>
+                                                <?php if($latestarticle->media == 'image'){?>
                                                     <div class="post-gallery">
-                                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$recentContent->cover_image?>" alt="<?=$recentContent->new_title?>">
-                                                        <span class="image-caption" style="color:skyblue;"><?=$recentContent->cover_image_caption?></span>
+                                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$latestarticle->cover_image?>" alt="<?=$latestarticle->new_title?>">
+                                                        <span class="image-caption" style="color:skyblue;"><?=$latestarticle->cover_image_caption?></span>
                                                     </div>
                                                 <?php } else {?>
                                                     <div class="post-gallery video-post">
-                                                        <img alt="" src="https://img.youtube.com/vi/<?=$recentContent->videoId?>/hqdefault.jpg">
+                                                        <img alt="" src="https://img.youtube.com/vi/<?=$latestarticle->videoId?>/hqdefault.jpg">
                                                         <!-- <?php if(session('is_user_login')){?>
-                                                            <a href="https://www.youtube.com/watch?v=<?=$recentContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                            <a href="https://www.youtube.com/watch?v=<?=$latestarticle->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                                         <?php } else {?>
                                                             <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
                                                         <?php }?> -->
-                                                        <a href="https://www.youtube.com/watch?v=<?=$recentContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                        <a href="https://www.youtube.com/watch?v=<?=$latestarticle->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                                     </div>
                                                 <?php } ?>
                                             </div>
                                             <div class="col-sm-7">
                                                 <div class="post-content">
-                                                    <a href="<?=url('category/' . $recentContent->parent_category_slug)?>"><?=$recentContent->parent_category_name?></a>
-                                                    <h2><a href="<?=url('content/' . $recentContent->parent_category_slug. '/' . $recentContent->category_slug . '/' . $recentContent->slug)?>"><?=$recentContent->new_title?></a></h2>
+                                                    <a href="<?=url('category/' . $latestarticle->parent_category_slug)?>"><?=$latestarticle->parent_category_name?></a>
+                                                    <h2><a href="<?=url('content/' . $latestarticle->parent_category_slug. '/' . $latestarticle->category_slug . '/' . $latestarticle->slug)?>"><?=$latestarticle->new_title?></a></h2>
                                                     <ul class="post-tags">
-                                                        <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$recentContent->for_publication_name ?? $recentContent->author_name?></a></li>
+                                                        <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$latestarticle->for_publication_name ?? $latestarticle->author_name?></a></li>
                                                         <?php
-                                                        if($recentContent->indigenous_affiliation != ''){                                                    
+                                                        if($latestarticle->indigenous_affiliation != ''){                                                    
                                                          ?>
-                                                            <li><i class="fa fa-map-marker"></i><a href="javascript:void(0);"><?=$recentContent->indigenous_affiliation?></a></li>
+                                                            <li><i class="fa fa-map-marker"></i><a href="javascript:void(0);"><?=$latestarticle->indigenous_affiliation?></a></li>
                                                         <?php } ?>
-                                                        <!-- <li><i class="fa fa-clock-o"></i><?=date_format(date_create($recentContent->created_at), "d M Y")?></li> -->
+                                                        <!-- <li><i class="fa fa-clock-o"></i><?=date_format(date_create($latestarticle->created_at), "d M Y")?></li> -->
                                                         
                                                         <!-- <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
                                                         <li><i class="fa fa-eye"></i>872</li> -->
                                                     </ul>
-                                                    <p><?=$recentContent->sub_title?></p>
+                                                    <p><?=$latestarticle->sub_title?></p>
                                                 </div>
                                             </div>
                                         </div>

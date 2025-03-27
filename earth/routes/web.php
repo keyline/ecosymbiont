@@ -99,6 +99,7 @@ use Illuminate\Support\Facades\Route;
         Route::match(['get', 'post'], 'article/edit/{id}', 'ArticlesController@edit');
         Route::match(['get', 'post'], 'article/view_details/{id}', 'ArticlesController@viewDetails');
         Route::get('article/delete/{id}', 'ArticlesController@delete');
+        Route::post('article/multiple_delete', 'ArticlesController@multiple_delete')->name('admin.article.multiple_delete');        
         Route::get('article/change-status/{id}', 'ArticlesController@change_status');
         Route::match(['get', 'post'], 'article/change_status_accept/{id}', 'ArticlesController@change_status_accept');
         Route::match(['get', 'post'], 'article/change_status_reject/{id}', 'ArticlesController@change_status_reject');
@@ -127,6 +128,7 @@ use Illuminate\Support\Facades\Route;
              Route::match(['get', 'post'], 'news_content/edit/{id}', 'NewsContentController@edit');
              Route::match(['get', 'post'], 'news_content/import/{id}', 'NewsContentController@import');
              Route::get('news_content/delete/{id}', 'NewsContentController@delete');
+             Route::post('news_content/multiple_delete', 'NewsContentController@multiple_delete')->name('admin.news_content.multiple_delete');  
              Route::get('news_content/change-status/{id}', 'NewsContentController@change_status');
              Route::get('news_content/change-archieve-status/{id}', 'NewsContentController@change_archieve_status');
              Route::get('news_content/get-subcategories/{parent_id}', 'NewsContentController@getSubcategories'); // AJAX route
@@ -203,6 +205,13 @@ use Illuminate\Support\Facades\Route;
                  Route::get('communities/delete/{id}', 'CommunityController@delete');
                  Route::get('communities/change-status/{id}', 'CommunityController@change_status');
              /* communities */
+             /* projects */
+             Route::get('projects/list', 'ProjectController@list');
+             Route::match(['get', 'post'], 'projects/add', 'ProjectController@add');
+             Route::match(['get', 'post'], 'projects/edit/{id}', 'ProjectController@edit');
+             Route::get('projects/delete/{id}', 'ProjectController@delete');
+             Route::get('projects/change-status/{id}', 'ProjectController@change_status');
+         /* projects */
               /* title */
               Route::get('title/list', 'TitleController@list');
               Route::match(['get', 'post'], 'title/add', 'TitleController@add');

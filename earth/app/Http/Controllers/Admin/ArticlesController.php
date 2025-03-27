@@ -1773,4 +1773,14 @@ class ArticlesController extends Controller
         }
         return $order_status;
     }
+
+    public function multiple_delete(Request $request)
+    {
+        if ($request->has('ids')) {           
+            Article::whereIn('id', $request->ids)->update(['status' => 3]);
+            return response()->json(['message' => 'Selected records deleted successfully.']);
+        } else {
+            return response()->json(['message' => 'No records selected.'], 400);
+        }
+    }
 }
