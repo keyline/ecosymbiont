@@ -6918,18 +6918,23 @@ div#permalink p {
   position: relative;
 }
 #cssmenu.small-screen #menu-button {
+  width: 52px;
   position: absolute;
-  right: 0;
+  right: 22px;
   top: -120px;
   background: #d09c1c;
 }
-#cssmenu.small-screen #menu-button:before{
+#cssmenu.small-screen #menu-button:before,
+#cssmenu.small-screen #menu-button.menu-opened:after
+
+{
   background: #fff !important;
 }
 #cssmenu.small-screen #menu-button:after{
   border-top: 2px solid #fff;
   border-bottom: 2px solid #fff;
 }
+
 #cssmenu ul{
   position: absolute;
   background: #d09c1c;
