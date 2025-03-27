@@ -7215,4 +7215,7 @@ div.block-content {
   #cssmenu.small-screen #menu-button{
     top: -105px;
   }
+  .block-wrapper{
+    margin-top: 25px;
+  }
 }
