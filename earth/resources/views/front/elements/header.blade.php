@@ -256,7 +256,8 @@ use App\Helpers\Helper;
                                 </li>
                             <?php } }?>
                             <li><a href="<?=url('submissions')?>" style="color: black !important;">SUBMISSIONS</a></li>
-                            <li><a href="<?=env('REGENERATE_URL')?>contact.php" style="color: black !important;">CONTACT</a></li>
+                            {{-- <li><a href="?=env('REGENERATE_URL')?>contact.php" style="color: black !important;">CONTACT</a></li> --}}
+                            <li><a href="<?=url('projects')?>" style="color: black !important;">PROJECTS</a></li>
                         </ul>
                         <!-- desktop -->
                     </div>
