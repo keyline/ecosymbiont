@@ -56,7 +56,7 @@
                                     
                                 </div>
                             </div>
-                            <h5 style="font-weight: 600">Our current EaRTh Weave Communities</h5>
+                            <h5 style="font-weight: 600">Our Current EaRTh Weave Communities</h5>
                             <p>We appreciate your patience as we work with each Community to develop their public profile.</p>
                             <div class="titleto-inner">
                                 <ul>
@@ -89,7 +89,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <h5 style="font-weight: 600">Our current EaRTh Thrive Communities</h5>
+                            <h5 style="font-weight: 600">Our Current EaRTh Thrive Communities</h5>
                             <p>We appreciate your patience as we work with each Community to develop their public profile.</p>
                                 <div class="titleto-inner">
                                     <ul>
