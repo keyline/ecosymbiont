@@ -39,7 +39,7 @@
                             </div>
                         </div>       
                         <div class="weave_communities">
-                            <h4>EaRTh WEAVE COMMUNITIES</h4>
+                            <h3>EaRTh WEAVE COMMUNITIES</h3>
                             <div class="row" style="margin: 20px 0;">
                                 <div class="col-md-2">
                                     <img src="<?=env('UPLOADS_URL').'EaRTh-Weave-Communities-Text-Logo.jpg'?>" alt="" style="width: 100%; max-width: 160px; margin-bottom: 20px;">
@@ -56,7 +56,7 @@
                                     
                                 </div>
                             </div>
-                            <h5 style="font-weight: 600">Our Current EaRTh Weave Communities</h5>
+                            <h4 style="font-weight: 600">Our Current EaRTh Weave Communities</h4>
                             <p>We appreciate your patience as we work with each Community to develop their public profile.</p>
                             <div class="titleto-inner">
                                 <ul>
@@ -73,7 +73,7 @@
                             </div>
                         </div>  
                         <div class="thrive_communities">
-                            <h4>EaRTh THRIVE COMMUNITIES</h4>
+                            <h3>EaRTh THRIVE COMMUNITIES</h3>
                             <div class="row" style="margin: 20px 0;">
                                 <div class="col-md-2">
                                     <img src="<?=env('UPLOADS_URL').'EaRTh-Thrive-Communities-Text-Logo.jpg'?>" alt="" style="width: 100%; max-width: 160px; margin-bottom: 20px;">
@@ -89,7 +89,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <h5 style="font-weight: 600">Our Current EaRTh Thrive Communities</h5>
+                            <h4 style="font-weight: 600">Our Current EaRTh Thrive Communities</h4>
                             <p>We appreciate your patience as we work with each Community to develop their public profile.</p>
                                 <div class="titleto-inner">
                                     <ul>

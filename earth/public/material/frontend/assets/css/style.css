@@ -6345,8 +6345,8 @@ div#permalink p {
   transform: translate(-50%, -50%);
 }
 
-.weave_communities h4,
-.thrive_communities h4{
+.weave_communities h3,
+.thrive_communities h3{
   color: #90201f;
   font-weight: 700;
 }
