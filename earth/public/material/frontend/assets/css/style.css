@@ -6925,10 +6925,10 @@ div#permalink p {
 .seach_holder {
   width: 33%;
   margin-bottom: 8px;
-  position: absolute;
+  position: fixed;
   /* top: -86px;
   right: 60px; */
-  top: -120px;
+  top: 120px;
   right: 85px;
 }
 .seach_holder .navbar-form{
