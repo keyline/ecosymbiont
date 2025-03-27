@@ -7184,6 +7184,9 @@ div.block-content {
       text-align: center;
       justify-content: center;
   }
+  .advarnseach_section .modal-body .advance_inner_search input{
+    width: 48%;
+  }
 }
 .display_contents{
   display: inline !important;
