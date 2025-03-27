@@ -618,6 +618,9 @@ header.active .nav-list-container {
   justify-content: space-between;
   flex-wrap: wrap;
 }
+.align-items-center{
+  align-items: center;
+}
 .seach_holder{
   position: relative;
 }
