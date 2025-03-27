@@ -6921,6 +6921,14 @@ div#permalink p {
   position: absolute;
   right: 0;
   top: -120px;
+  background: #d09c1c;
+}
+#cssmenu.small-screen #menu-button:before{
+  background: #fff !important;
+}
+#cssmenu.small-screen #menu-button:after{
+  border-top: 2px solid #fff;
+  border-bottom: 2px solid #fff;
 }
 #cssmenu ul{
   position: absolute;
