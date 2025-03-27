@@ -654,6 +654,7 @@ header.active .nav-list-container {
   overflow-x: hidden;
   overflow-y: auto;
   height: 300px;
+  z-index: 9;
 }
 .search_suggestion::-webkit-scrollbar {
   width: 7px;
