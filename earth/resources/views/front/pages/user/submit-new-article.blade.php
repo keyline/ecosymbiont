@@ -192,6 +192,8 @@ use Illuminate\Support\Facades\DB;
                 $participated_info = $profile->participated_info;
                 $community = $profile->community;
                 $community_name = $profile->community_name;
+                $projects = $profile->community;
+                $projects_name = $profile->community_name;
                 $organization_name = $profile->organization_name;
                 $organization_website = $profile->organization_website;
                 $ecosystem_affiliationId = json_decode($profile->ecosystem_affiliationId);
@@ -910,7 +912,7 @@ use Illuminate\Support\Facades\DB;
                                     </div> 
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="projects" class="col-md-2 col-lg-4 col-form-label">28) Are you a member of an EaRTh projects?
+                                    <label for="projects" class="col-md-2 col-lg-4 col-form-label">29) Is this a special EaRTh Project?
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="radio" class="readonly-input" id="projects_yes" name="projects" value="Yes" required @checked(old('projects', $projects) == 'Yes')>
@@ -921,12 +923,12 @@ use Illuminate\Support\Facades\DB;
                                 </div>
                                 <div id="projectsDetails" style="display: none;">
                                     <div class="row mb-3">
-                                        <label for="projects_info" class="col-md-2 col-lg-4 col-form-label">28A) Select projects</label>
+                                        <label for="projects_info" class="col-md-2 col-lg-4 col-form-label">29A) Select Projects</label>
                                         <div class="col-md-10 col-lg-8">
                                             <select name="projects_name" class="form-control" id="projects_name">
                                                 <option value="" selected disabled>Select</option>
-                                                <?php if($projects){ foreach($projects as $cmn){?>
-                                                    <option value="<?=$cmn->name?>" <?=(($projects_name == $cmn->name)?'selected':'')?>><?=$cmn->name?></option>
+                                                <?php if($projects){ foreach($projects as $proj){?>
+                                                    <option value="<?=$proj->name?>" <?=(($projects_name == $proj->name)?'selected':'')?>><?=$proj->name?></option>
                                                 <?php } }?>
                                             </select>
                                             <input type="hidden" name="projects_name" value="{{ $projects_name }}">
