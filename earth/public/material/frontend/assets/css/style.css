@@ -6456,9 +6456,25 @@ div#permalink p {
   .d-flex{
     justify-content: center;
   }
-  .seach_holder {
-    width: 100%;
-    margin-bottom: 8px;
+.seach_holder {
+  width: 100%;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.seach_holder form.navbar-form {
+  margin-bottom: 18px;
+  margin-top: 5px;
+  width: 80%;
+}
+.seach_holder a.advserach_btn{
+  display: block;
+  width: 10%;
+  width: 20%;
+  margin-left: auto;
+}
 }
 .seach_holder .navbar-form input[type="text"]{
   width: 100%;
