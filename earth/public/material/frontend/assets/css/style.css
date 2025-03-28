@@ -6939,7 +6939,8 @@ div#permalink p {
   width: 52px;
   position: absolute;
   right: 22px;
-  top: -115px;
+  /* top: -115px; */
+  top: -83px;
   background: #d09c1c;
 }
 #cssmenu.small-screen #menu-button:before,
@@ -6964,12 +6965,13 @@ div#permalink p {
 }
 .seach_holder {
   width: 33%;
-  margin-bottom: 8px;
-  position: absolute;
+  margin-bottom: 0;
+  position: relative;
   /* top: -86px;
   right: 60px; */
-  top: -120px;
-  right: 85px;
+  top: 0;
+  right: auto;
+  left: auto;
 }
 .seach_holder .navbar-form{
   margin: 0;
@@ -7222,9 +7224,9 @@ div.block-content {
   .seach_holder {
     width: 98%;
     margin-bottom: 8px;
-    position: absolute;
-    top: -34px;
-    right: 4px;
+    position: relative;
+    top: 0;
+    right: auto;
   }
   #cssmenu > ul.open{
     top: 44px
