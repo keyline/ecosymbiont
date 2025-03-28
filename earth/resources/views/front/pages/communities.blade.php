@@ -37,12 +37,11 @@
                                     <li><strong class="black"><i>thrive</i></strong> together, by co-creating and co-implementing ecology-rooted livelihoods and innovations</li>
                                 </ul>
                             </div>
-                        </div>
-                        <div class="titleto-inner">
-                            <h2>EaRTh WEAVE COMMUNITIES</h2>
-                        </div>       
+                        </div>    
                         <div class="weave_communities">
-                            <h3>EaRTh WEAVE COMMUNITIES</h3>
+                            <div class="titleto-inner">
+                                <h2>EaRTh WEAVE COMMUNITIES</h2>
+                            </div>
                             <div class="row" style="margin: 20px 0;">
                                 <div class="col-md-2">
                                     <img src="<?=env('UPLOADS_URL').'EaRTh-Weave-Communities-Text-Logo.jpg'?>" alt="" style="width: 100%; max-width: 160px; margin-bottom: 20px;">
@@ -76,7 +75,9 @@
                             </div>
                         </div>  
                         <div class="thrive_communities">
-                            <h3>EaRTh THRIVE COMMUNITIES</h3>
+                            <div class="titleto-inner">
+                                <h3>EaRTh THRIVE COMMUNITIES</h3>
+                            </div>
                             <div class="row" style="margin: 20px 0;">
                                 <div class="col-md-2">
                                     <img src="<?=env('UPLOADS_URL').'EaRTh-Thrive-Communities-Text-Logo.jpg'?>" alt="" style="width: 100%; max-width: 160px; margin-bottom: 20px;">

@@ -6193,6 +6193,8 @@ footer .footer-last-line nav.footer-nav ul li:first-child:before {
 .titleto-inner h2 {
   color: #90201f !important;
   font-size: 20px !important;
+  font-family: 'proximanova_regular', sans-serif;
+  font-weight: 700;
 }
 .titleto-inner li {
   font-size: 18px;
