@@ -65,7 +65,7 @@
                                             
                                         </div>
                                     </div>
-                                    <h4 style="font-weight: 600">Our Current EaRTh Weave Communities</h4>
+                                    <h3 style="font-weight: 600">Our Current EaRTh Weave Communities</h3>
                                     <p>We appreciate your patience as we work with each Community to develop their public profile.</p>
                                     <div class="titleto-inner">
                                         <ul>
@@ -83,7 +83,7 @@
                                 </div>  
                                 <div class="thrive_communities">
                                     <div class="titleto-inner">
-                                        <h3>EaRTh THRIVE COMMUNITIES</h3>
+                                        <h2>EaRTh THRIVE COMMUNITIES</h2>
                                     </div>
                                     <div class="row" style="margin: 20px 0;">
                                         <div class="col-md-2">
@@ -100,7 +100,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <h4 style="font-weight: 600">Our Current EaRTh Thrive Communities</h4>
+                                    <h3 style="font-weight: 600">Our Current EaRTh Thrive Communities</h3>
                                     <p>We appreciate your patience as we work with each Community to develop their public profile.</p>
                                         <div class="titleto-inner">
                                             <ul>
