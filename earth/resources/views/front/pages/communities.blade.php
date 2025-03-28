@@ -43,76 +43,80 @@
                             </div>   
                         </div>
                                                
-                         
-                        <div class="weave_communities">
-                            <div class="titleto-inner">
-                                <h2>EaRTh WEAVE COMMUNITIES</h2>
-                            </div>
-                            <div class="row" style="margin: 20px 0;">
-                                <div class="col-md-2">
-                                    <img src="<?=env('UPLOADS_URL').'EaRTh-Weave-Communities-Text-Logo.jpg'?>" alt="" style="width: 100%; max-width: 160px; margin-bottom: 20px;">
-                                </div>
-                                <div class="col-md-10">
+                        <div class="article-post">
+                            <div class="post-content">
+                                <div class="weave_communities">
+                                    <div class="titleto-inner">
+                                        <h2>EaRTh WEAVE COMMUNITIES</h2>
+                                    </div>
+                                    <div class="row" style="margin: 20px 0;">
+                                        <div class="col-md-2">
+                                            <img src="<?=env('UPLOADS_URL').'EaRTh-Weave-Communities-Text-Logo.jpg'?>" alt="" style="width: 100%; max-width: 160px; margin-bottom: 20px;">
+                                        </div>
+                                        <div class="col-md-10">
+                                            <div class="titleto-inner">
+                                                <ul>
+                                                    <li>a Community-composed public-facing page on the EaRTh platform</li>
+                                                    <li>tailored private pages accessible upon secure login through a private portal</li>
+                                                    <li>a feature enabling private interactive communication between members without needing to exchange contact information until trust is established</li>
+                                                    <li>searchable and customizable knowledge- and information-sharing</li>
+                                                </ul>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <h4 style="font-weight: 600">Our Current EaRTh Weave Communities</h4>
+                                    <p>We appreciate your patience as we work with each Community to develop their public profile.</p>
                                     <div class="titleto-inner">
                                         <ul>
-                                            <li>a Community-composed public-facing page on the EaRTh platform</li>
-                                            <li>tailored private pages accessible upon secure login through a private portal</li>
-                                            <li>a feature enabling private interactive communication between members without needing to exchange contact information until trust is established</li>
-                                            <li>searchable and customizable knowledge- and information-sharing</li>
+                                            <li>
+                                                <a target="_blank" href="<?=url('communities/ACTChangemakers')?>" style="text-decoration: underline;"><i>ACT Changemakers Web</i></a> (global)
+                                            </li>
+                                            <li>
+                                                <a target="_blank" href="<?=url('communities/EthosFellows')?>" style="text-decoration: underline;"><i>Ethos Fellows Network</i></a> (global)
+                                            </li>
+                                            <li>
+                                                <a target="_blank" href="<?=url('communities/SchumacherWild')?>" style="text-decoration: underline;"><i>Schumacher Wild Network</i></a> (global)
+                                            </li>
                                         </ul>
                                     </div>
-                                    
-                                </div>
-                            </div>
-                            <h4 style="font-weight: 600">Our Current EaRTh Weave Communities</h4>
-                            <p>We appreciate your patience as we work with each Community to develop their public profile.</p>
-                            <div class="titleto-inner">
-                                <ul>
-                                    <li>
-                                        <a target="_blank" href="<?=url('communities/ACTChangemakers')?>" style="text-decoration: underline;"><i>ACT Changemakers Web</i></a> (global)
-                                    </li>
-                                    <li>
-                                        <a target="_blank" href="<?=url('communities/EthosFellows')?>" style="text-decoration: underline;"><i>Ethos Fellows Network</i></a> (global)
-                                    </li>
-                                    <li>
-                                        <a target="_blank" href="<?=url('communities/SchumacherWild')?>" style="text-decoration: underline;"><i>Schumacher Wild Network</i></a> (global)
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>  
-                        <div class="thrive_communities">
-                            <div class="titleto-inner">
-                                <h3>EaRTh THRIVE COMMUNITIES</h3>
-                            </div>
-                            <div class="row" style="margin: 20px 0;">
-                                <div class="col-md-2">
-                                    <img src="<?=env('UPLOADS_URL').'EaRTh-Thrive-Communities-Text-Logo.jpg'?>" alt="" style="width: 100%; max-width: 160px; margin-bottom: 20px;">
-                                </div>
-                                <div class="col-md-10">
+                                </div>  
+                                <div class="thrive_communities">
                                     <div class="titleto-inner">
-                                        <ul>
-                                            <li>all features available to <i>EaRTh Weave Communities</i></li>
-                                            <li>living wages for Community members submitting creative-works published on EaRTh</li>
-                                            <li>funding for ecoweb-rooted livelihoods and innovations collaboratively generated and implemented by Community members, with sharing of knowledge within the Community</li>
-                                            <li>access to expertise of EaRTh creators outside of the Community</li>
-                                        </ul>
+                                        <h3>EaRTh THRIVE COMMUNITIES</h3>
                                     </div>
-                                </div>
+                                    <div class="row" style="margin: 20px 0;">
+                                        <div class="col-md-2">
+                                            <img src="<?=env('UPLOADS_URL').'EaRTh-Thrive-Communities-Text-Logo.jpg'?>" alt="" style="width: 100%; max-width: 160px; margin-bottom: 20px;">
+                                        </div>
+                                        <div class="col-md-10">
+                                            <div class="titleto-inner">
+                                                <ul>
+                                                    <li>all features available to <i>EaRTh Weave Communities</i></li>
+                                                    <li>living wages for Community members submitting creative-works published on EaRTh</li>
+                                                    <li>funding for ecoweb-rooted livelihoods and innovations collaboratively generated and implemented by Community members, with sharing of knowledge within the Community</li>
+                                                    <li>access to expertise of EaRTh creators outside of the Community</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h4 style="font-weight: 600">Our Current EaRTh Thrive Communities</h4>
+                                    <p>We appreciate your patience as we work with each Community to develop their public profile.</p>
+                                        <div class="titleto-inner">
+                                            <ul>
+                                                <li>
+                                                    <i>Hella Love</i> (USA)
+                                                </li>
+                                                <li>
+                                                    <a target="_blank" href="<?=url('communities/WestOakland')?>" style="text-decoration: underline;"><i>West Oakland Living Heritage Center</i></a> (USA)
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    <p>If you are interested in becoming an <i>EaRTh Community</i>, please <a href="<?=env('REGENERATE_URL')?>contact.php" target="_blank">contact us.</a></p>
+                                </div>  
                             </div>
-                            <h4 style="font-weight: 600">Our Current EaRTh Thrive Communities</h4>
-                            <p>We appreciate your patience as we work with each Community to develop their public profile.</p>
-                                <div class="titleto-inner">
-                                    <ul>
-                                        <li>
-                                            <i>Hella Love</i> (USA)
-                                        </li>
-                                        <li>
-                                            <a target="_blank" href="<?=url('communities/WestOakland')?>" style="text-decoration: underline;"><i>West Oakland Living Heritage Center</i></a> (USA)
-                                        </li>
-                                    </ul>
-                                </div>
-                            <p>If you are interested in becoming an <i>EaRTh Community</i>, please <a href="<?=env('REGENERATE_URL')?>contact.php" target="_blank">contact us.</a></p>
-                        </div>                  
+                        </div>
+                                        
                     </div>
                 </div>
                 <!-- End block content -->
