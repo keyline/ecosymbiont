@@ -129,6 +129,8 @@ use Illuminate\Support\Facades\DB;
                 $participated_info = $row->participated_info;
                 $community = $row->community;
                 $community_name = $row->community_name;
+                $projects = $row->projects;
+                $projects_name = $row->projects_name;
                 $organization_name = $row->organization_name;
                 $organization_website = $row->organization_website;
                 $ecosystem_affiliationId = (($row->ecosystem_affiliationId != '')?json_decode($row->ecosystem_affiliationId):[]);
