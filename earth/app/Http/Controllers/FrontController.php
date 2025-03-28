@@ -1275,13 +1275,13 @@ class FrontController extends Controller
                     $recaptchaResponse = $postData['g-recaptcha-response'];
 
                     // Your Google reCAPTCHA secret key [live]
-                    $secretKey = '6LcIw04qAAAAAJCWh02op84FgNvxexQsh9LLCuqW';
+                    // $secretKey = '6LcIw04qAAAAAJCWh02op84FgNvxexQsh9LLCuqW';
 
                     // Google reCAPTCHA verification URL [live]
                     $verifyURL = 'https://www.google.com/recaptcha/api/siteverify';
 
                     // Your Google reCAPTCHA secret key [dev]
-                    // $secretKey = '6Ldum88qAAAAANVww5Xe6aHFL-g_UHLsHl7HGKs5';
+                    $secretKey = '6Ldum88qAAAAANVww5Xe6aHFL-g_UHLsHl7HGKs5';
                     
 
                     // Prepare the POST request
