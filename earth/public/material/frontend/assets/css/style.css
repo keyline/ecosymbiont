@@ -6456,14 +6456,14 @@ div#permalink p {
   .d-flex{
     justify-content: center;
   }
-/* .seach_holder {
+.seach_holder {
   width: 100%;
   margin-bottom: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 15px;
-} */
+}
 .seach_holder form.navbar-form {
   margin-bottom: 18px;
   margin-top: 5px;
@@ -6472,10 +6472,10 @@ div#permalink p {
 .seach_holder a.advserach_btn{
   display: block;
   width: 10%;
-  width: 20%;
+  width: 20% !important;
   margin-left: auto;
 }
-}
+
 .seach_holder .navbar-form input[type="text"]{
   width: 100%;
 }
