@@ -921,7 +921,7 @@ use Illuminate\Support\Facades\DB;
                                         <label for="no">No</label>
                                     </div>
                                 </div>
-                                <?php dd($projects); ?>
+                                <!-- ?php dd($projects); ?> -->
                                 <div id="projectsDetails" style="display: none;">
                                     <div class="row mb-3">
                                         <label for="projects_info" class="col-md-2 col-lg-4 col-form-label">29A) Select Projects</label>
