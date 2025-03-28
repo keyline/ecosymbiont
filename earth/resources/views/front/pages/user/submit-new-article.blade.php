@@ -917,9 +917,9 @@ use Illuminate\Support\Facades\DB;
                                     <label for="projects" class="col-md-2 col-lg-4 col-form-label">29) Is this a special EaRTh Project?
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="radio" class="readonly-input" id="projects_yes" name="projects" value="Yes" required @checked(old('projects', $projects) == 'Yes')>
+                                        <input type="radio" id="projects_yes" name="projects" value="Yes" required @checked(old('projects', $projects) == 'Yes')>
                                         <label for="yes">Yes</label>
-                                        <input type="radio" class="readonly-input" id="projects_no" name="projects" value="No" required @checked(old('projects', $projects) == 'No')>
+                                        <input type="radio" id="projects_no" name="projects" value="No" required @checked(old('projects', $projects) == 'No')>
                                         <label for="no">No</label>
                                     </div>
                                 </div>
@@ -928,12 +928,12 @@ use Illuminate\Support\Facades\DB;
                                         <label for="projects_info" class="col-md-2 col-lg-4 col-form-label">29A) Select Projects</label>
                                         <div class="col-md-10 col-lg-8">
                                             <select name="projects_name" class="form-control" id="projects_name">
-                                                <option value="" selected disabled>Select</option>
+                                                <option value="" selected>Select</option>
                                                 <?php if($projects){ foreach($projects as $proj){?>
                                                     <option value="<?=$proj->name?>" <?=(($projects_name == $proj->name)?'selected':'')?>><?=$proj->name?></option>
                                                 <?php } }?>
                                             </select>
-                                            <input type="hidden" name="projects_name" value="{{ $projects_name }}">
+                                            <!-- <input type="hidden" name="projects_name" value="{{ $projects_name }}"> -->
                                         </div>
                                     </div> 
                                 </div>
