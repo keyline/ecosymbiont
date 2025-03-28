@@ -921,13 +921,14 @@ use Illuminate\Support\Facades\DB;
                                         <label for="no">No</label>
                                     </div>
                                 </div>
+                                <?php dd($projects); ?>
                                 <div id="projectsDetails" style="display: none;">
                                     <div class="row mb-3">
                                         <label for="projects_info" class="col-md-2 col-lg-4 col-form-label">29A) Select Projects</label>
                                         <div class="col-md-10 col-lg-8">
                                             <select name="projects_name" class="form-control" id="projects_name">
                                                 <option value="" selected>Select</option>
-                                                <?php dd($projects); if($projects){ foreach($projects as $proj){?>
+                                                <?php if($projects){ foreach($projects as $proj){?>
                                                     <option value="<?=$proj->name?>" <?=(($projects_name == $proj->name)?'selected':'')?>><?=$proj->name?></option>
                                                 <?php } }?>
                                             </select>
