@@ -972,4 +972,13 @@ class NewsContentController extends Controller
             return redirect("admin/news_content_image/list")->with('success_message', 'Image ' . $msg . ' successfully');
         }
     /* change image status */
+    public function multiple_delete(Request $request)
+    {
+        if ($request->has('ids')) {           
+            NewsContent::whereIn('id', $request->ids)->update(['status' => 3]);
+            return response()->json(['message' => 'Selected records deleted successfully.']);
+        } else {
+            return response()->json(['message' => 'No records selected.'], 400);
+        }
+    }
 }

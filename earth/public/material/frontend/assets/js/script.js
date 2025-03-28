@@ -140,11 +140,11 @@ $(document).ready(function($) {
 							dataNum3 = 1;
 						} else if ( dataNum == 2 ) {
 							dataNum2 = 2;
-							dataNum3 = dataNum - 1;
+							dataNum3 = dataNum - 0;
 						}
 						 else {
-							dataNum2 = dataNum - 1;
-							dataNum3 = dataNum - 2;
+							dataNum2 = dataNum - 0;
+							dataNum3 = dataNum - 0;
 						}
 	
 
