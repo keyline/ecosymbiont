@@ -37,6 +37,9 @@
                                     <li><strong class="black"><i>thrive</i></strong> together, by co-creating and co-implementing ecology-rooted livelihoods and innovations</li>
                                 </ul>
                             </div>
+                        </div>
+                        <div class="titleto-inner">
+                            <h2>EaRTh WEAVE COMMUNITIES</h2>
                         </div>       
                         <div class="weave_communities">
                             <h3>EaRTh WEAVE COMMUNITIES</h3>
