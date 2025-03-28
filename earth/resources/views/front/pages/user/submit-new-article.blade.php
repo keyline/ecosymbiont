@@ -194,7 +194,7 @@ use Illuminate\Support\Facades\DB;
                 $participated_info = $profile->participated_info;
                 $community = $profile->community;
                 $community_name = $profile->community_name;
-                $projects = $profile->community;
+                $projects = '';
                 $projects_name = $profile->community_name;
                 $organization_name = $profile->organization_name;
                 $organization_website = $profile->organization_website;
