@@ -6738,7 +6738,7 @@ div#permalink p {
     text-align: left;
   }
   .logo-advertisement .navbar-header a.navbar-brand {
-    padding: 30px 15px 25px;
+    padding: 5px 15px 5px;
   }
   .navbar-toggle {
     margin-top: 15px;
@@ -7231,9 +7231,9 @@ div.block-content {
   #cssmenu > ul.open{
     top: 44px
   }
-  #cssmenu.small-screen #menu-button{
+  /* #cssmenu.small-screen #menu-button{
     top: -105px;
-  }
+  } */
   .block-wrapper{
     margin-top: 25px;
   }
