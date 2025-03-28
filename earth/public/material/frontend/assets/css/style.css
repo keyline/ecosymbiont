@@ -7217,6 +7217,9 @@ div.block-content {
   .advarnseach_section .modal-body .advance_inner_search input{
     width: 48%;
   }
+  .seach_holder a.advserach_btn{
+    width: 35% !important;
+  }
 }
 .display_contents{
   display: inline !important;
@@ -7232,8 +7235,8 @@ div.block-content {
 }
 @media(max-width: 400px){
   .seach_holder {
-    width: 98%;
-    margin-bottom: 8px;
+    width: 100%;
+    margin-bottom: 0;
     position: relative;
     top: 0;
     right: auto;
@@ -7246,5 +7249,8 @@ div.block-content {
   } */
   .block-wrapper{
     margin-top: 25px;
+  }
+  .seach_holder a.advserach_btn{
+    width: 55% !important;
   }
 }
