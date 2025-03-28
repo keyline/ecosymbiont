@@ -143,7 +143,7 @@ $(document).ready(function($) {
 							dataNum3 = dataNum - 0;
 						}
 						 else {
-							dataNum2 = dataNum - 1;
+							dataNum2 = dataNum - 0;
 							dataNum3 = dataNum - 0;
 						}
 	
