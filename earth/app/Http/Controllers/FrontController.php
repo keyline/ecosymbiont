@@ -1801,13 +1801,13 @@ class FrontController extends Controller
                     // 'organization_website'      => 'required',
                     'ecosystem_affiliation'     => 'required',
                     'expertise_area'            => 'required',
-                    'explanation'               => ['required', 'string', new MaxWords(100)],
-                    'explanation_submission'    => ['required', 'string', new MaxWords(150)],                
-                    'creative_Work'             => ['required', 'string', new MaxWords(10)],
+                    'explanation'               => 'required',
+                    'explanation_submission'    => 'required',                
+                    'creative_Work'             => 'required',
                     'creative_Work_fiction'     => 'required',
-                    'subtitle'                  => ['required', 'string', new MaxWords(40)],                
-                    'bio_short'                 => ['required', 'string', new MaxWords(40)],
-                    'bio_long'                  => ['required', 'string', new MaxWords(250)], 
+                    'subtitle'                  => 'required',                
+                    'bio_short'                 => 'required',
+                    'bio_long'                  => 'required', 
                     ];                                    
                     
                     $participatedInfo = isset($postData['participated_info']) ? $postData['participated_info'] : '';
@@ -1937,7 +1937,7 @@ class FrontController extends Controller
                                     'current_article_no'        => $current_article_no,
                                     'other_article_part_doi_no' => $other_article_part_doi_no,
                                ];
-                                    //  Helper::pr($fields);
+                                     Helper::pr($fields);
 
                                /* submission email */
                                 $generalSetting             = GeneralSetting::find('1');                            
