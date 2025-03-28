@@ -167,11 +167,11 @@ header {
   position: relative;
   background: #d09c1c;
 }
-header.active .nav-list-container {
+/* header.active .nav-list-container {
   position: fixed;
   top: 0;
   left: 0;
-}
+} */
 .navbar-default {
   background: #fafafa;
   border: none;
