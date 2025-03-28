@@ -670,9 +670,9 @@ header.active .nav-list-container {
   padding: 30px 30px;
 }
 .advarnseach_section .modal-body .advance_inner_search {
-  display: flex
-;
+  display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 .advarnseach_section .modal-body .advance_inner_search select {
   height: 40px;
