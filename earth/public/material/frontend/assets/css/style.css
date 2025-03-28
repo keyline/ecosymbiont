@@ -6474,6 +6474,7 @@ div#permalink p {
   width: 10%;
   width: 20% !important;
   margin-left: auto;
+  margin-top: 0;
 }
 
 .seach_holder .navbar-form input[type="text"]{
