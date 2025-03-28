@@ -6960,7 +6960,7 @@ div#permalink p {
 }
 
 #cssmenu ul{
-  position: absolute;
+  position: relative;
   background: #d09c1c;
 }
 .seach_holder {
@@ -7242,7 +7242,7 @@ div.block-content {
     right: auto;
   }
   #cssmenu > ul.open{
-    top: 44px
+    top: 0
   }
   /* #cssmenu.small-screen #menu-button{
     top: -105px;
@@ -7252,5 +7252,8 @@ div.block-content {
   }
   .seach_holder a.advserach_btn{
     width: 55% !important;
+  }
+  .advarnseach_section .modal-body .advance_inner_search select{
+    width: 46%;
   }
 }
