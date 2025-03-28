@@ -6470,7 +6470,7 @@ div#permalink p {
   width: 80%;
 }
 .seach_holder a.advserach_btn{
-  display: block;
+  /* display: block; */
   width: 10%;
   width: 20%;
   margin-left: auto;
