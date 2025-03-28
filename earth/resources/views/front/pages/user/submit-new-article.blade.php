@@ -910,6 +910,30 @@ use Illuminate\Support\Facades\DB;
                                     </div> 
                                 </div>
                                 <div class="row mb-3">
+                                    <label for="projects" class="col-md-2 col-lg-4 col-form-label">28) Are you a member of an EaRTh projects?
+                                    </label>
+                                    <div class="col-md-10 col-lg-8">
+                                        <input type="radio" class="readonly-input" id="projects_yes" name="projects" value="Yes" required @checked(old('projects', $projects) == 'Yes')>
+                                        <label for="yes">Yes</label>
+                                        <input type="radio" class="readonly-input" id="projects_no" name="projects" value="No" required @checked(old('projects', $projects) == 'No')>
+                                        <label for="no">No</label>
+                                    </div>
+                                </div>
+                                <div id="projectsDetails" style="display: none;">
+                                    <div class="row mb-3">
+                                        <label for="projects_info" class="col-md-2 col-lg-4 col-form-label">28A) Select projects</label>
+                                        <div class="col-md-10 col-lg-8">
+                                            <select name="projects_name" class="form-control" id="projects_name">
+                                                <option value="" selected disabled>Select</option>
+                                                <?php if($projects){ foreach($projects as $cmn){?>
+                                                    <option value="<?=$cmn->name?>" <?=(($projects_name == $cmn->name)?'selected':'')?>><?=$cmn->name?></option>
+                                                <?php } }?>
+                                            </select>
+                                            <input type="hidden" name="projects_name" value="{{ $projects_name }}">
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="row mb-3">
                                     <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">29) Instructions for initial submission of Creative-Work for eligibility screening
                                     </label>
                                     <div class="col-md-10 col-lg-8">
@@ -1161,6 +1185,27 @@ use Illuminate\Support\Facades\DB;
     });
 </script>
 <!-- End Function to show/hide the community fields -->
+ <!-- Function to show/hide the project fields -->
+<script>
+    $(document).ready(function() {
+        
+        function toggleFields() {            
+            const projectsYes = $('#projects_yes').is(':checked');            
+            
+            // Toggle individual sections            
+            $('#projectsDetails').toggle(projectsYes);
+        }
+
+        // Trigger on change
+        $('input[name="invited"], input[name="projects"]').on('change', function() {
+            toggleFields();
+        });
+
+        // Check initial state on page load
+        toggleFields();
+    });
+</script>
+<!-- End Function to show/hide the project fields -->
 <!-- Function to show/hide the invited and participated fields -->
 <script>
     $(document).ready(function() {

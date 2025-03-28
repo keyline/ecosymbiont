@@ -34,7 +34,7 @@ use App\Models\EmailLog;
 use App\Models\UserProfile;
 use App\Models\UserClassification;
 use App\Models\Community;
-
+use App\Models\Project;
 use Auth;
 use Session;
 use Helper;
@@ -1561,6 +1561,7 @@ class FrontController extends Controller
             $data['classification']         = UserClassification::where('user_id', '=', $user_id)->first();
             $data['profile']                = UserProfile::where('user_id', '=', $user_id)->first();
             $data['communities']            = Community::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['projects']            = Project::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['search_keyword']         = '';
 
             if ($request->isMethod('post')) {
