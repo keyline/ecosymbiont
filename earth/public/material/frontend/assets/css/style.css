@@ -641,6 +641,7 @@ header {
   top: -8px;
   position: relative;
   border: 1px solid #eeeeee;
+  text-align: center;
 }
 .search_suggestion{
   position: absolute;
