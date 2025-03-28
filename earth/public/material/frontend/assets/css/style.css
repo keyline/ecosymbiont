@@ -6465,7 +6465,7 @@ div#permalink p {
   gap: 15px;
 }
 .seach_holder form.navbar-form {
-  margin-bottom: 18px;
+  margin-bottom: 5px;
   margin-top: 5px;
   width: 80%;
 }
@@ -6475,6 +6475,7 @@ div#permalink p {
   width: 20% !important;
   margin-left: auto;
   margin-top: 0;
+  top: 0;
 }
 
 .seach_holder .navbar-form input[type="text"]{
