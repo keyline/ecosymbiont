@@ -6964,7 +6964,8 @@ div#permalink p {
   background: #d09c1c;
 }
 .seach_holder {
-  width: 33%;
+  /* width: 33%; */
+  width: 100%;
   margin-bottom: 0;
   position: relative;
   /* top: -86px;
@@ -6978,6 +6979,15 @@ div#permalink p {
 }
 .box_heading{
   font-size: 18px;
+}
+.seach_holder a.advserach_btn{
+  margin-top: 0;
+  top: 0;
+}
+.seach_holder form.navbar-form {
+  margin-bottom: 6px;
+  margin-top: 5px;
+  width: 80%;
 }
 }
 @media (max-width: 650px) {
