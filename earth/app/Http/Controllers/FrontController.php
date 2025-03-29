@@ -910,6 +910,7 @@ class FrontController extends Controller
                                             ->limit($limit)
                                             ->get();
             } elseif($search_type == 'Ancestral ecoweb'){
+                DB::enableQueryLog();
                 $contents   = NewsContent::select(
                                                         'news_contents.id', 
                                                         'news_contents.new_title', 
