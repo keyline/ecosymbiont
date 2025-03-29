@@ -476,14 +476,14 @@ $current_url = $protocol . $host . $uri;
                                             ?>
                                             <?php if($other_articles_in_this_series){ foreach($other_articles_in_this_series as $other_articles_in_this_series_row){?>
                                                 <?php if($current_article_no != $other_articles_in_this_series_row->current_article_no){?>
-                                                    <div class="item news-post video-post video_post_text">
+                                                    <div class="item news-post">
                                                         <!-- <img src="<?=env('UPLOADS_URL').'newcontent/'.$other_articles_in_this_series_row->cover_image?>" alt="<?=$other_articles_in_this_series_row->new_title?>"> -->
                                                         <?php if($other_articles_in_this_series_row->media == 'image'){?>
                                                             <!-- <div class="post-gallery"> -->
                                                                 <img src="<?=env('UPLOADS_URL').'newcontent/'.$other_articles_in_this_series_row->cover_image?>" alt="<?=$other_articles_in_this_series_row->new_title?>">
                                                             <!-- </div> -->
                                                         <?php } else {?>
-                                                            <div class="video-post">
+                                                            <div>
                                                                 <img alt="" src="https://img.youtube.com/vi/<?=$other_articles_in_this_series_row->videoId?>/hqdefault.jpg">
                                                                 <!-- <?php if(session('is_user_login')){?>
                                                                     <a href="https://www.youtube.com/watch?v=<?=$other_articles_in_this_series_row->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
@@ -495,7 +495,7 @@ $current_url = $protocol . $host . $uri;
                                                                 ?php } else {?>
                                                                     <a href="?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
                                                                 ?php }?> -->
-                                                                <a href="https://www.youtube.com/watch?v=<?=$other_articles_in_this_series_row->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                                <a href="<?=url('content/' . $alsoLikeContent->parent_category_slug. '/' . $alsoLikeContent->sub_category_slug . '/' . $alsoLikeContent->slug)?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                                             </div>
                                                         <?php } ?>
                                                         <div class="hover-box">
