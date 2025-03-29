@@ -180,7 +180,7 @@ function numberToOrdinal($number) {
             $email = '';
             $countryId = '';
             $community = '';
-            $community_name = '';
+            // $community_name = '';
             $organization_name = '';
             $cover_image = '';
             $cover_image_caption = '';
@@ -741,7 +741,7 @@ function numberToOrdinal($number) {
                                 <label for="community_info" class="col-md-2 col-lg-4 col-form-label">31A) Select Community</label>
                                 <div class="col-md-10 col-lg-8">
                                     <select name="community_name" class="form-control" id="community_name">
-                                        <option value="" selected>Select</option>
+                                        <option value="">Select</option>
                                         <?php if($communities){ foreach($communities as $cmn){?>
                                             <option value="<?=$cmn->name?>" <?=(($community_name == $cmn->name)?'selected':'')?>><?=$cmn->name?></option>
                                         <?php } }?>
