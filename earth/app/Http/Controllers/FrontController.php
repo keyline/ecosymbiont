@@ -943,6 +943,7 @@ class FrontController extends Controller
                                             ->offset($offset)
                                             ->limit($limit)
                                             ->get();
+                                             dd(DB::getQueryLog());
             } elseif($search_type == 'Country of residence'){
                 $contents   = NewsContent::select(
                                                         'news_contents.id', 
