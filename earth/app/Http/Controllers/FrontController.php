@@ -492,6 +492,10 @@ class FrontController extends Controller
                                              ->where(function($query) use ($search_keyword) {
                                                 $query->where('news_contents.author_name', 'LIKE', '%'.$search_keyword.'%');
                                              })
+                                             ->where(function ($query) {
+                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
+                                            })
                                              ->orderBy('news_contents.created_at', 'DESC')
                                              ->limit(4)
                                              ->get();
