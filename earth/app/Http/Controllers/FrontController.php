@@ -462,10 +462,15 @@ class FrontController extends Controller
                                              ->where(function($query) use ($search_keyword) {
                                                 $query->where('news_contents.new_title', 'LIKE', '%'.$search_keyword.'%');
                                              })
+                                             ->where(function ($query) {
+                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
+                                            })
                                              ->orderBy('news_contents.created_at', 'DESC')
                                              ->limit(4)
                                              ->get();
             } elseif($search_type == 'Author name'){
+                // DB::enableQueryLog();
                 $data['contents']   = NewsContent::select(
                                                         'news_contents.id', 
                                                         'news_contents.new_title', 
@@ -491,9 +496,14 @@ class FrontController extends Controller
                                              ->where(function($query) use ($search_keyword) {
                                                 $query->where('news_contents.author_name', 'LIKE', '%'.$search_keyword.'%');
                                              })
+                                             ->where(function ($query) {
+                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
+                                            })
                                              ->orderBy('news_contents.created_at', 'DESC')
                                              ->limit(4)
                                              ->get();
+                                            //   dd(DB::getQueryLog());
             } elseif($search_type == 'Subtitle'){
                 $data['contents']   = NewsContent::select(
                                                         'news_contents.id', 
@@ -520,10 +530,15 @@ class FrontController extends Controller
                                              ->where(function($query) use ($search_keyword) {
                                                 $query->where('news_contents.sub_title', 'LIKE', '%'.$search_keyword.'%');
                                              })
+                                             ->where(function ($query) {
+                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
+                                            })
                                              ->orderBy('news_contents.created_at', 'DESC')
                                              ->limit(4)
                                              ->get();
             } elseif($search_type == 'Ancestral ecoweb'){
+                // DB::enableQueryLog();
                 $data['contents']   = NewsContent::select(
                                                         'news_contents.id', 
                                                         'news_contents.new_title', 
@@ -547,11 +562,17 @@ class FrontController extends Controller
                                                 $query->where('news_contents.status', 1);
                                              })
                                              ->where(function($query) use ($search_keyword) {
-                                                $query->where('news_contents.author_affiliation', 'LIKE', '%'.$search_keyword.'%');
+                                                // $query->where JSON_CONTAINS('news_contents.author_affiliation', $search_keyword);
+                                                $query->whereRaw("JSON_CONTAINS(news_contents.author_affiliation, ?)", [json_encode($search_keyword)]);
                                              })
+                                             ->where(function ($query) {
+                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
+                                            })
                                              ->orderBy('news_contents.created_at', 'DESC')
                                              ->limit(4)
-                                             ->get();                                             
+                                             ->get();  
+                                            //   dd(DB::getQueryLog());                                           
             } elseif($search_type == 'Country of residence'){
                 $data['contents']   = NewsContent::select(
                                                         'news_contents.id', 
@@ -578,6 +599,10 @@ class FrontController extends Controller
                                              ->where(function($query) use ($search_keyword) {
                                                 $query->where('news_contents.country', 'LIKE', '%'.$search_keyword.'%');
                                              })
+                                             ->where(function ($query) {
+                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
+                                            })
                                              ->orderBy('news_contents.created_at', 'DESC')
                                              ->limit(4)
                                              ->get();
@@ -607,6 +632,10 @@ class FrontController extends Controller
                                              ->where(function($query) use ($search_keyword) {
                                                 $query->where('news_contents.organization_name', 'LIKE', '%'.$search_keyword.'%');
                                              })
+                                             ->where(function ($query) {
+                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
+                                            })
                                              ->orderBy('news_contents.created_at', 'DESC')
                                              ->limit(4)
                                              ->get();
@@ -637,6 +666,10 @@ class FrontController extends Controller
                                              ->where(function($query) use ($search_keyword) {
                                                 $query->where('news_contents.community_name', 'LIKE', '%'.$search_keyword.'%');
                                              })
+                                             ->where(function ($query) {
+                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
+                                            })
                                              ->orderBy('news_contents.created_at', 'DESC')
                                              ->limit(4)
                                              ->get();
@@ -667,6 +700,10 @@ class FrontController extends Controller
                                              ->where(function($query) use ($search_keyword) {
                                                 $query->where('news_contents.keywords', 'LIKE', '%'.$search_keyword.'%');
                                              })
+                                             ->where(function ($query) {
+                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
+                                            })
                                              ->orderBy('news_contents.created_at', 'DESC')
                                              ->limit(4)
                                              ->get();
@@ -696,6 +733,10 @@ class FrontController extends Controller
                                              ->where(function($query) use ($search_keyword) {
                                                 $query->where('news_contents.long_desc', 'LIKE', '%'.$search_keyword.'%');
                                              })
+                                             ->where(function ($query) {
+                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
+                                            })
                                              ->orderBy('news_contents.created_at', 'DESC')
                                              ->limit(4)
                                              ->get();
@@ -795,6 +836,10 @@ class FrontController extends Controller
                                              ->where(function($query) use ($search_keyword) {
                                                 $query->where('news_contents.new_title', 'LIKE', '%'.$search_keyword.'%');
                                              })
+                                             ->where(function ($query) {
+                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
+                                            })
                                              ->orderBy('news_contents.created_at', 'DESC')
                                             ->offset($offset)
                                             ->limit($limit)
@@ -825,6 +870,10 @@ class FrontController extends Controller
                                              ->where(function($query) use ($search_keyword) {
                                                 $query->where('news_contents.author_name', 'LIKE', '%'.$search_keyword.'%');
                                              })
+                                             ->where(function ($query) {
+                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
+                                            })
                                              ->orderBy('news_contents.created_at', 'DESC')
                                             ->offset($offset)
                                             ->limit($limit)
@@ -855,11 +904,16 @@ class FrontController extends Controller
                                              ->where(function($query) use ($search_keyword) {
                                                 $query->where('news_contents.sub_title', 'LIKE', '%'.$search_keyword.'%');
                                              })
+                                             ->where(function ($query) {
+                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
+                                            })
                                              ->orderBy('news_contents.created_at', 'DESC')
                                             ->offset($offset)
                                             ->limit($limit)
                                             ->get();
             } elseif($search_type == 'Ancestral ecoweb'){
+                
                 $contents   = NewsContent::select(
                                                         'news_contents.id', 
                                                         'news_contents.new_title', 
@@ -883,12 +937,18 @@ class FrontController extends Controller
                                                 $query->where('news_contents.status', 1);
                                              })
                                              ->where(function($query) use ($search_keyword) {
-                                                $query->where('news_contents.author_affiliation', 'LIKE', '%'.$search_keyword.'%');
+                                                // $query->where('news_contents.author_affiliation', $search_keyword);
+                                                $query->whereRaw("JSON_CONTAINS(news_contents.author_affiliation, ?)", [json_encode($search_keyword)]);
                                              })
+                                             ->where(function ($query) {
+                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
+                                            })
                                              ->orderBy('news_contents.created_at', 'DESC')
                                             ->offset($offset)
                                             ->limit($limit)
                                             ->get();
+                                            //  dd(DB::getQueryLog());
             } elseif($search_type == 'Country of residence'){
                 $contents   = NewsContent::select(
                                                         'news_contents.id', 
@@ -915,6 +975,10 @@ class FrontController extends Controller
                                              ->where(function($query) use ($search_keyword) {
                                                 $query->where('news_contents.country', 'LIKE', '%'.$search_keyword.'%');
                                              })
+                                             ->where(function ($query) {
+                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
+                                            })
                                              ->orderBy('news_contents.created_at', 'DESC')
                                             ->offset($offset)
                                             ->limit($limit)
@@ -945,6 +1009,10 @@ class FrontController extends Controller
                                              ->where(function($query) use ($search_keyword) {
                                                 $query->where('news_contents.organization_name', 'LIKE', '%'.$search_keyword.'%');
                                              })
+                                             ->where(function ($query) {
+                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
+                                            })
                                              ->orderBy('news_contents.created_at', 'DESC')
                                             ->offset($offset)
                                             ->limit($limit)
@@ -975,6 +1043,10 @@ class FrontController extends Controller
                                              ->where(function($query) use ($search_keyword) {
                                                 $query->where('news_contents.community_name', 'LIKE', '%'.$search_keyword.'%');
                                              })
+                                             ->where(function ($query) {
+                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
+                                            })
                                              ->orderBy('news_contents.created_at', 'DESC')
                                             ->offset($offset)
                                             ->limit($limit)
@@ -1005,6 +1077,10 @@ class FrontController extends Controller
                                              ->where(function($query) use ($search_keyword) {
                                                 $query->where('news_contents.keywords', 'LIKE', '%'.$search_keyword.'%');
                                              })
+                                             ->where(function ($query) {
+                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
+                                            })
                                              ->orderBy('news_contents.created_at', 'DESC')
                                             ->offset($offset)
                                             ->limit($limit)
@@ -1035,6 +1111,10 @@ class FrontController extends Controller
                                              ->where(function($query) use ($search_keyword) {
                                                 $query->where('news_contents.long_desc', 'LIKE', '%'.$search_keyword.'%');
                                              })
+                                             ->where(function ($query) {
+                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
+                                            })
                                              ->orderBy('news_contents.created_at', 'DESC')
                                             ->offset($offset)
                                             ->limit($limit)

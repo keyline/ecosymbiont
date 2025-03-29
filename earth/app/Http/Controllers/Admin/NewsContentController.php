@@ -396,7 +396,8 @@ class NewsContentController extends Controller
     /* edit */
 
     /* import */
-        public function import(Request $request, $id)
+        public 
+        function import(Request $request, $id)
         {
             $data['module']                 = $this->data;
             $id                             = Helper::decoded($id);        
@@ -435,6 +436,7 @@ class NewsContentController extends Controller
 
                 $parent_category                = NewsCategory::where('id', '=', $postData['section_ert'])->first();
                 $actionMode                     = $postData['action_mode']; // Get action mode from the form
+                // echo $actionMode; die;
                 if ($actionMode === 'save') {
                     // Generate a unique slug
                     $slug = Str::slug($postData['creative_Work']);  
@@ -573,7 +575,8 @@ class NewsContentController extends Controller
                     ];
                     // Helper::pr($fields);
                     Article::where('id', '=', $id)->update($fields);
-                    return redirect("admin/article/list")->with('success_message', 'Article saved successfully');                
+                    // return redirect("admin/article/list")->with('success_message', 'Article saved successfully');                
+                    return redirect("admin/article/editing-checking")->with('success_message', 'Article saved successfully');                
                 }
                 $rules = [                                            
                     'section_ert'               => 'required',   
