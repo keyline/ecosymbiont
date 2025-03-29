@@ -499,7 +499,7 @@ class FrontController extends Controller
                                              ->orderBy('news_contents.created_at', 'DESC')
                                              ->limit(4)
                                              ->get();
-                                              dd(DB::getQueryLog());
+                                            //   dd(DB::getQueryLog());
             } elseif($search_type == 'Subtitle'){
                 $data['contents']   = NewsContent::select(
                                                         'news_contents.id', 
