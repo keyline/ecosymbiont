@@ -575,7 +575,8 @@ class NewsContentController extends Controller
                     ];
                     // Helper::pr($fields);
                     Article::where('id', '=', $id)->update($fields);
-                    return redirect("admin/article/list")->with('success_message', 'Article saved successfully');                
+                    // return redirect("admin/article/list")->with('success_message', 'Article saved successfully');                
+                    return redirect("admin/article/editing-checking")->with('success_message', 'Article saved successfully');                
                 }
                 $rules = [                                            
                     'section_ert'               => 'required',   
