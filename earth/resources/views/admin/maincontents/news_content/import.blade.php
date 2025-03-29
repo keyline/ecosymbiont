@@ -202,7 +202,7 @@ function numberToOrdinal($number) {
             $other_article_part_doi_no  = '';
         }
         ?>
-        <?php echo $community_name; die;?>
+        
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body pt-3">
@@ -726,7 +726,7 @@ function numberToOrdinal($number) {
                                 <?php }?>                                
                             </div>
                         </div>
-
+                        <?php echo $community_name; die;?>
                         <div class="row mb-3">
                             <label for="community" class="col-md-2 col-lg-4 col-form-label">31) Are you a member of an EaRTh Community?
                             </label>
