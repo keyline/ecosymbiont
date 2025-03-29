@@ -437,14 +437,14 @@ $current_url = $protocol . $host . $uri;
                                     <div class="owl-carousel" data-num="3">
                                         <?php if($is_series != 'Yes'){?>
                                             <?php if($alsoLikeContents){ foreach($alsoLikeContents as $alsoLikeContent){?>
-                                                <div class="item news-post video-post video_post_text">
+                                                <div class="item news-post">
                                                     <!-- <img src="<?=env('UPLOADS_URL').'newcontent/'.$alsoLikeContent->cover_image?>" alt="<?=$alsoLikeContent->new_title?>"> -->
                                                     <?php if($alsoLikeContent->media == 'image'){?>
                                                         <!-- <div class="post-gallery"> -->
                                                             <img src="<?=env('UPLOADS_URL').'newcontent/'.$alsoLikeContent->cover_image?>" alt="<?=$alsoLikeContent->new_title?>">
                                                         <!-- </div> -->
                                                     <?php } else {?>
-                                                        <div class="video-post">
+                                                        <div>
                                                             <img alt="" src="https://img.youtube.com/vi/<?=$alsoLikeContent->videoId?>/hqdefault.jpg">
                                                             <!-- <?php if(session('is_user_login')){?>
                                                                 <a href="https://www.youtube.com/watch?v=<?=$alsoLikeContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
@@ -456,7 +456,8 @@ $current_url = $protocol . $host . $uri;
                                                             ?php } else {?>
                                                                 <a href="?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
                                                             ?php }?> -->
-                                                            <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                            <!-- <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a> -->
+                                                            <a href="<?=url('content/' . $alsoLikeContent->parent_category_slug. '/' . $alsoLikeContent->sub_category_slug . '/' . $alsoLikeContent->slug)?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                                         </div>
                                                     <?php } ?>
                                                     <div class="hover-box">
