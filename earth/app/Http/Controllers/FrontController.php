@@ -937,7 +937,8 @@ class FrontController extends Controller
                                                 $query->where('news_contents.status', 1);
                                              })
                                              ->where(function($query) use ($search_keyword) {
-                                                $query->where('news_contents.author_affiliation', $search_keyword);
+                                                // $query->where('news_contents.author_affiliation', $search_keyword);
+                                                $query->whereRaw("JSON_CONTAINS(news_contents.author_affiliation, ?)", [json_encode($search_keyword)]);
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
