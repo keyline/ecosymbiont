@@ -725,8 +725,7 @@ function numberToOrdinal($number) {
                                     class="badge bg-primary">View PDF</a>
                                 <?php }?>                                
                             </div>
-                        </div>
-                        <?php echo $community_name; die;?>
+                        </div>                        
                         <div class="row mb-3">
                             <label for="community" class="col-md-2 col-lg-4 col-form-label">31) Are you a member of an EaRTh Community?
                             </label>
@@ -737,6 +736,7 @@ function numberToOrdinal($number) {
                                 <label for="no">No</label>
                             </div>
                         </div>
+                        <?php echo $community_name; die;?>
                         <div id="communityDetails" style="display: none;">
                             <div class="row mb-3">
                                 <label for="community_info" class="col-md-2 col-lg-4 col-form-label">31A) Select Community</label>
