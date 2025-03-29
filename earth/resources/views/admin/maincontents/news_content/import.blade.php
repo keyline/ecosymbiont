@@ -765,7 +765,7 @@ function numberToOrdinal($number) {
                             <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label">32A) How many total creative-works in this series?
                             </label>
                             <div class="col-md-10 col-lg-8">
-                                <input type="number" name="series_article_no" class="form-control" id="series_article_no" min="1" value="<?=$series_article_no?>">
+                                <input type="number" name="series_article_no" class="form-control" id="series_article_no" value="<?=$series_article_no?>">
                             </div>
                         </div>
                         <div class="row series_yes mb-3">
