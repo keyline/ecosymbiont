@@ -538,6 +538,7 @@ class FrontController extends Controller
                                              ->limit(4)
                                              ->get();
             } elseif($search_type == 'Ancestral ecoweb'){
+                DB::enableQueryLog();
                 $data['contents']   = NewsContent::select(
                                                         'news_contents.id', 
                                                         'news_contents.new_title', 
@@ -569,7 +570,8 @@ class FrontController extends Controller
                                             })
                                              ->orderBy('news_contents.created_at', 'DESC')
                                              ->limit(4)
-                                             ->get();                                             
+                                             ->get();  
+                                              dd(DB::getQueryLog());                                           
             } elseif($search_type == 'Country of residence'){
                 $data['contents']   = NewsContent::select(
                                                         'news_contents.id', 
@@ -910,7 +912,7 @@ class FrontController extends Controller
                                             ->limit($limit)
                                             ->get();
             } elseif($search_type == 'Ancestral ecoweb'){
-                DB::enableQueryLog();
+                
                 $contents   = NewsContent::select(
                                                         'news_contents.id', 
                                                         'news_contents.new_title', 
