@@ -202,6 +202,7 @@ function numberToOrdinal($number) {
             $other_article_part_doi_no  = '';
         }
         ?>
+        <?php echo $community_name; die;?>
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body pt-3">
@@ -739,8 +740,7 @@ function numberToOrdinal($number) {
                         <div id="communityDetails" style="display: none;">
                             <div class="row mb-3">
                                 <label for="community_info" class="col-md-2 col-lg-4 col-form-label">31A) Select Community</label>
-                                <div class="col-md-10 col-lg-8">
-                                    <?php echo $community_name; die;?>
+                                <div class="col-md-10 col-lg-8">                                    
                                     <select name="community_name" class="form-control" id="community_name">
                                         <option value="">Select</option>
                                         <?php if($communities){ foreach($communities as $cmn){?>
