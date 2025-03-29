@@ -740,6 +740,7 @@ function numberToOrdinal($number) {
                             <div class="row mb-3">
                                 <label for="community_info" class="col-md-2 col-lg-4 col-form-label">31A) Select Community</label>
                                 <div class="col-md-10 col-lg-8">
+                                    <?php echo $community_name; die;?>
                                     <select name="community_name" class="form-control" id="community_name">
                                         <option value="">Select</option>
                                         <?php if($communities){ foreach($communities as $cmn){?>
