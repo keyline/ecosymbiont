@@ -736,7 +736,7 @@ function numberToOrdinal($number) {
                                 <label for="no">No</label>
                             </div>
                         </div>
-                        <?php echo $community_name; die;?>
+                        <!-- ?php echo $community_name; die;?> -->
                         <div id="communityDetails" style="display: none;">
                             <div class="row mb-3">
                                 <label for="community_info" class="col-md-2 col-lg-4 col-form-label">31A) Select Community</label>
@@ -744,7 +744,7 @@ function numberToOrdinal($number) {
                                     <select name="community_name" class="form-control" id="community_name">
                                         <option value="">Select</option>
                                         <?php if($communities){ foreach($communities as $cmn){?>
-                                            <option value="<?=$cmn->name?>" <?=(($community_name == $cmn->name)?'selected':'')?>><?=$cmn->name?></option>
+                                            <option value="<?=$cmn->name?>" <?=(($community_name == $cmn->name) ? 'selected' : '')?>><?=$cmn->name?></option>
                                         <?php } }?>
                                     </select>
                                 <!-- <input type="hidden" name="community_name" value="{{ $community_name }}"> -->
