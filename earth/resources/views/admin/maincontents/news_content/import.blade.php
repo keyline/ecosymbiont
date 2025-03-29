@@ -77,7 +77,7 @@ function numberToOrdinal($number) {
         <?php
         $setting = GeneralSetting::where('id', '=', 1)->first();
         if ($row) {
-              dd($row);
+            //   dd($row);
             //  Helper::pr($row);
 
             $user_id = $row->user_id;
