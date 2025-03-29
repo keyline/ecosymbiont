@@ -571,7 +571,7 @@ class FrontController extends Controller
                                              ->orderBy('news_contents.created_at', 'DESC')
                                              ->limit(4)
                                              ->get();  
-                                              dd(DB::getQueryLog());                                           
+                                            //   dd(DB::getQueryLog());                                           
             } elseif($search_type == 'Country of residence'){
                 $data['contents']   = NewsContent::select(
                                                         'news_contents.id', 
@@ -936,7 +936,7 @@ class FrontController extends Controller
                                                 $query->where('news_contents.status', 1);
                                              })
                                              ->where(function($query) use ($search_keyword) {
-                                                $query->where('news_contents.author_affiliation', 'LIKE', '%'.$search_keyword.'%');
+                                                $query->where('news_contents.author_affiliation', $search_keyword);
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
