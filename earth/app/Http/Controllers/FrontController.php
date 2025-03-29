@@ -470,7 +470,7 @@ class FrontController extends Controller
                                              ->limit(4)
                                              ->get();
             } elseif($search_type == 'Author name'){
-                DB::enableQueryLog();
+                // DB::enableQueryLog();
                 $data['contents']   = NewsContent::select(
                                                         'news_contents.id', 
                                                         'news_contents.new_title', 
@@ -538,7 +538,7 @@ class FrontController extends Controller
                                              ->limit(4)
                                              ->get();
             } elseif($search_type == 'Ancestral ecoweb'){
-                DB::enableQueryLog();
+                // DB::enableQueryLog();
                 $data['contents']   = NewsContent::select(
                                                         'news_contents.id', 
                                                         'news_contents.new_title', 
@@ -948,7 +948,7 @@ class FrontController extends Controller
                                             ->offset($offset)
                                             ->limit($limit)
                                             ->get();
-                                             dd(DB::getQueryLog());
+                                            //  dd(DB::getQueryLog());
             } elseif($search_type == 'Country of residence'){
                 $contents   = NewsContent::select(
                                                         'news_contents.id', 
