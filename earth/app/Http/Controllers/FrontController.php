@@ -34,7 +34,7 @@ use App\Models\EmailLog;
 use App\Models\UserProfile;
 use App\Models\UserClassification;
 use App\Models\Community;
-
+use App\Models\Project;
 use Auth;
 use Session;
 use Helper;
@@ -356,39 +356,42 @@ class FrontController extends Controller
         if($request->isMethod('get')){
             $postData           = $request->all();
             $search_keyword     = $postData['article_search'];
-            $data['contents']   = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
-                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
+            $data['contents'] = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
                                             ->select(
-                                                        'news_contents.id', 
-                                                        'news_contents.new_title', 
-                                                        'news_contents.sub_title', 
-                                                        'news_contents.slug', 
-                                                        'news_contents.author_name', 
-                                                        'news_contents.for_publication_name', 
-                                                        'news_contents.cover_image',
-                                                        'news_contents.cover_image_caption',
-                                                        'news_contents.created_at',
-                                                        'news_contents.media',
-                                                        'news_contents.videoId',
-                                                        'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
-                                                        'parent_category.sub_category as parent_category_name', // From parent_category name
-                                                        'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
-                                                        'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
-                                                    )
-                                            ->where(function($query) {
-                                                $query->where('news_contents.status', 1);
-                                             })
-                                             ->where(function($query) use ($search_keyword) {
-                                                $query->where('news_contents.new_title', 'LIKE', '%'.$search_keyword.'%')
-                                                      ->orWhere('news_contents.sub_title', 'LIKE', '%'.$search_keyword.'%')
-                                                      ->orWhere('news_contents.long_desc', 'LIKE', '%'.$search_keyword.'%')
-                                                      ->orWhere('news_contents.author_name', 'LIKE', '%'.$search_keyword.'%')
-                                                      ->orWhere('news_contents.organization_name', 'LIKE', '%'.$search_keyword.'%')
-                                                      ->orWhere('news_contents.keywords', 'LIKE', '%'.$search_keyword.'%');
-                                             })
-                                             ->orderBy('news_contents.created_at', 'DESC')
-                                             ->limit(4)
-                                             ->get();
+                                                'news_contents.id', 
+                                                'news_contents.new_title', 
+                                                'news_contents.sub_title', 
+                                                'news_contents.slug', 
+                                                'news_contents.author_name', 
+                                                'news_contents.for_publication_name', 
+                                                'news_contents.cover_image',
+                                                'news_contents.cover_image_caption',
+                                                'news_contents.created_at',
+                                                'news_contents.media',
+                                                'news_contents.videoId',
+                                                'sub_category.sub_category as sub_category_name', 
+                                                'parent_category.sub_category as parent_category_name',
+                                                'sub_category.slug as sub_category_slug',
+                                                'parent_category.slug as parent_category_slug'
+                                            )
+                                            ->where('news_contents.status', 1)
+                                            ->where(function ($query) use ($search_keyword) {
+                                                $query->where('news_contents.new_title', 'LIKE', '%' . $search_keyword . '%')
+                                                    ->orWhere('news_contents.sub_title', 'LIKE', '%' . $search_keyword . '%')
+                                                    ->orWhere('news_contents.long_desc', 'LIKE', '%' . $search_keyword . '%')
+                                                    ->orWhere('news_contents.author_name', 'LIKE', '%' . $search_keyword . '%')
+                                                    ->orWhere('news_contents.organization_name', 'LIKE', '%' . $search_keyword . '%')
+                                                    ->orWhere('news_contents.keywords', 'LIKE', '%' . $search_keyword . '%');
+                                            })
+                                            ->where(function ($query) {
+                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
+                                            })
+                                            ->orderBy('news_contents.created_at', 'DESC')
+                                            ->limit(4)
+                                            ->get();
+
             // Helper::pr($searchResults);
             
             $data['search_keyword']         = $search_keyword;
@@ -733,6 +736,10 @@ class FrontController extends Controller
                                                       ->orWhere('news_contents.organization_name', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('news_contents.keywords', 'LIKE', '%'.$search_keyword.'%');
                                              })
+                                             ->where(function ($query) {
+                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
+                                            })
                                              ->orderBy('news_contents.created_at', 'DESC')
                                              ->offset($offset)
                                             ->limit($limit)
@@ -1268,13 +1275,13 @@ class FrontController extends Controller
                     $recaptchaResponse = $postData['g-recaptcha-response'];
 
                     // Your Google reCAPTCHA secret key [live]
-                    $secretKey = '6LcIw04qAAAAAJCWh02op84FgNvxexQsh9LLCuqW';
+                    // $secretKey = '6LcIw04qAAAAAJCWh02op84FgNvxexQsh9LLCuqW';
 
                     // Google reCAPTCHA verification URL [live]
                     $verifyURL = 'https://www.google.com/recaptcha/api/siteverify';
 
                     // Your Google reCAPTCHA secret key [dev]
-                    // $secretKey = '6Ldum88qAAAAANVww5Xe6aHFL-g_UHLsHl7HGKs5';
+                    $secretKey = '6Ldum88qAAAAANVww5Xe6aHFL-g_UHLsHl7HGKs5';
                     
 
                     // Prepare the POST request
@@ -1554,6 +1561,8 @@ class FrontController extends Controller
             $data['classification']         = UserClassification::where('user_id', '=', $user_id)->first();
             $data['profile']                = UserProfile::where('user_id', '=', $user_id)->first();
             $data['communities']            = Community::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['projects']               = Project::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            // Helper::pr($data['projects']);
             $data['search_keyword']         = '';
 
             if ($request->isMethod('post')) {
@@ -1792,13 +1801,13 @@ class FrontController extends Controller
                     // 'organization_website'      => 'required',
                     'ecosystem_affiliation'     => 'required',
                     'expertise_area'            => 'required',
-                    'explanation'               => ['required', 'string', new MaxWords(100)],
-                    'explanation_submission'    => ['required', 'string', new MaxWords(150)],                
-                    'creative_Work'             => ['required', 'string', new MaxWords(10)],
+                    'explanation'               => 'required',
+                    'explanation_submission'    => 'required',                
+                    'creative_Work'             => 'required',
                     'creative_Work_fiction'     => 'required',
-                    'subtitle'                  => ['required', 'string', new MaxWords(40)],                
-                    'bio_short'                 => ['required', 'string', new MaxWords(40)],
-                    'bio_long'                  => ['required', 'string', new MaxWords(250)], 
+                    'subtitle'                  => 'required',                
+                    'bio_short'                 => 'required',
+                    'bio_long'                  => 'required', 
                     ];                                    
                     
                     $participatedInfo = isset($postData['participated_info']) ? $postData['participated_info'] : '';
@@ -1898,6 +1907,8 @@ class FrontController extends Controller
                                     'participated_info'         => $participatedInfo,
                                     'community'                 => $postData['community'],
                                     'community_name'            => $postData['community_name'],
+                                    'projects'                 => $postData['projects'],
+                                    'projects_name'            => $postData['projects_name'],
                                     'explanation'               => $postData['explanation'],  
                                     'explanation_submission'    => $postData['explanation_submission'],     
                                     'titleId'                   => $postData['title'],                        
@@ -1926,7 +1937,7 @@ class FrontController extends Controller
                                     'current_article_no'        => $current_article_no,
                                     'other_article_part_doi_no' => $other_article_part_doi_no,
                                ];
-                                    //  Helper::pr($fields);
+                                     Helper::pr($fields);
 
                                /* submission email */
                                 $generalSetting             = GeneralSetting::find('1');                            
@@ -2024,6 +2035,8 @@ class FrontController extends Controller
                                     'participated_info'         => $participatedInfo,
                                     'community'                 => $postData['community'],
                                     'community_name'            => $postData['community_name'],
+                                    'projects'                 => $postData['projects'],
+                                    'projects_name'            => $postData['projects_name'],
                                     'explanation'               => $postData['explanation'],  
                                     'explanation_submission'    => $postData['explanation_submission'],     
                                     'titleId'                   => $postData['title'],                        
@@ -2052,7 +2065,7 @@ class FrontController extends Controller
                                     'current_article_no'        => $current_article_no,
                                     'other_article_part_doi_no' => $other_article_part_doi_no,
                                ];
-                                    //   Helper::pr($fields);
+                                      Helper::pr($fields);
 
                                 /* submission email */
                                 $generalSetting             = GeneralSetting::find('1');                            
@@ -2129,6 +2142,8 @@ class FrontController extends Controller
                                     'participated_info'         => $participatedInfo,
                                     'community'                 => $postData['community'],
                                     'community_name'            => $postData['community_name'],
+                                    'projects'                 => $postData['projects'],
+                                    'projects_name'            => $postData['projects_name'],
                                     'explanation'               => $postData['explanation'],  
                                     'explanation_submission'    => $postData['explanation_submission'],     
                                     'titleId'                   => $postData['title'],                        
@@ -2155,7 +2170,7 @@ class FrontController extends Controller
                                     'current_article_no'        => $current_article_no,
                                     'other_article_part_doi_no' => $other_article_part_doi_no,
                                ];
-                                    // Helper::pr($fields);
+                                    Helper::pr($fields);
 
                                /* submission email */
                                 $generalSetting             = GeneralSetting::find('1');                            
@@ -2362,6 +2377,8 @@ class FrontController extends Controller
                                         'participated_info'         => $participatedInfo,
                                         'community'                 => $postData['community'],
                                         'community_name'            => $postData['community_name'],
+                                        'projects'                 => $postData['projects'],
+                                        'projects_name'            => $postData['projects_name'],
                                         'explanation'               => $postData['explanation'],  
                                         'explanation_submission'    => $postData['explanation_submission'],     
                                         'titleId'                   => $postData['title'],                        
@@ -2498,6 +2515,8 @@ class FrontController extends Controller
                                             'participated_info'         => $participatedInfo,
                                             'community'                 => $postData['community'],
                                             'community_name'            => $postData['community_name'],
+                                            'projects'                 => $postData['projects'],
+                                            'projects_name'            => $postData['projects_name'],
                                             'explanation'               => $postData['explanation'],  
                                             'explanation_submission'    => $postData['explanation_submission'],     
                                             'titleId'                   => $postData['title'],                        
@@ -2611,6 +2630,8 @@ class FrontController extends Controller
                                         'participated_info'         => $participatedInfo,
                                         'community'                 => $postData['community'],
                                         'community_name'            => $postData['community_name'],
+                                        'projects'                 => $postData['projects'],
+                                        'projects_name'            => $postData['projects_name'],
                                         'explanation'               => $postData['explanation'],  
                                         'explanation_submission'    => $postData['explanation_submission'],     
                                         'titleId'                   => $postData['title'],                        

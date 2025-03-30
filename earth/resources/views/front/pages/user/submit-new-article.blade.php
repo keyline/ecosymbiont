@@ -129,6 +129,8 @@ use Illuminate\Support\Facades\DB;
                 $participated_info = $row->participated_info;
                 $community = $row->community;
                 $community_name = $row->community_name;
+                $projects = $row->projects;
+                $projects_name = $row->projects_name;
                 $organization_name = $row->organization_name;
                 $organization_website = $row->organization_website;
                 $ecosystem_affiliationId = (($row->ecosystem_affiliationId != '')?json_decode($row->ecosystem_affiliationId):[]);
@@ -191,7 +193,8 @@ use Illuminate\Support\Facades\DB;
                 $participated = $profile->participated;
                 $participated_info = $profile->participated_info;
                 $community = $profile->community;
-                $community_name = $profile->community_name;
+                $community_name = $profile->community_name;  
+                $projects_name = '';                              
                 $organization_name = $profile->organization_name;
                 $organization_website = $profile->organization_website;
                 $ecosystem_affiliationId = json_decode($profile->ecosystem_affiliationId);
@@ -910,6 +913,31 @@ use Illuminate\Support\Facades\DB;
                                     </div> 
                                 </div>
                                 <div class="row mb-3">
+                                    <label for="projects" class="col-md-2 col-lg-4 col-form-label">29) Is this a special EaRTh Project?
+                                    </label>
+                                    <div class="col-md-10 col-lg-8">
+                                        <input type="radio" id="projects_yes" name="projects" value="Yes" required @checked(old('projects', $projects) == 'Yes')>
+                                        <label for="yes">Yes</label>
+                                        <input type="radio" id="projects_no" name="projects" value="No" required @checked(old('projects', $projects) == 'No')>
+                                        <label for="no">No</label>
+                                    </div>
+                                </div>
+                                <!-- ?php dd($projects); ?> -->
+                                <div id="projectsDetails" style="display: none;">
+                                    <div class="row mb-3">
+                                        <label for="projects_info" class="col-md-2 col-lg-4 col-form-label">29A) Select Projects</label>
+                                        <div class="col-md-10 col-lg-8">
+                                            <select name="projects_name" class="form-control" id="projects_name">
+                                                <option value="" selected>Select</option>
+                                                <?php if($projects){ foreach($projects as $proj){?>
+                                                    <option value="<?=$proj->name?>" <?=(($projects_name == $proj->name)?'selected':'')?>><?=$proj->name?></option>
+                                                <?php } }?>
+                                            </select>
+                                            <!-- <input type="hidden" name="projects_name" value="{{ $projects_name }}"> -->
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="row mb-3">
                                     <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">29) Instructions for initial submission of Creative-Work for eligibility screening
                                     </label>
                                     <div class="col-md-10 col-lg-8">
@@ -1161,6 +1189,27 @@ use Illuminate\Support\Facades\DB;
     });
 </script>
 <!-- End Function to show/hide the community fields -->
+ <!-- Function to show/hide the project fields -->
+<script>
+    $(document).ready(function() {
+        
+        function toggleFields() {            
+            const projectsYes = $('#projects_yes').is(':checked');            
+            
+            // Toggle individual sections            
+            $('#projectsDetails').toggle(projectsYes);
+        }
+
+        // Trigger on change
+        $('input[name="invited"], input[name="projects"]').on('change', function() {
+            toggleFields();
+        });
+
+        // Check initial state on page load
+        toggleFields();
+    });
+</script>
+<!-- End Function to show/hide the project fields -->
 <!-- Function to show/hide the invited and participated fields -->
 <script>
     $(document).ready(function() {
