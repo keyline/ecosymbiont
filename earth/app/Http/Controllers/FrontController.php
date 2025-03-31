@@ -1138,7 +1138,7 @@ class FrontController extends Controller
         
         $search_keyword     = $requestData['search_keyword'];
         // Helper::pr($search_keyword);
-        DB::enableQueryLog();
+        // DB::enableQueryLog();
         $searchResults      = NewsContent::select('id', 'new_title', 'slug', 'parent_category', 'sub_category')->where(function($query) {
                                                 $query->where('status', 1);
                                              })
@@ -1152,7 +1152,7 @@ class FrontController extends Controller
                                              })
                                              ->orderBy('news_contents.created_at', 'DESC')
                                              ->get();
-                                               dd(DB::getQueryLog());
+                                            //    dd(DB::getQueryLog());
         
         if($searchResults){
             foreach ($searchResults as $searchResult) {
