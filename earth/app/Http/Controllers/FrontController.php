@@ -364,6 +364,7 @@ class FrontController extends Controller
         if($request->isMethod('get')){
             $postData           = $request->all();
             $search_keyword     = $postData['article_search'];
+            DB::enableQueryLog();
             $data['contents'] = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
                                             ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
                                             ->select(
@@ -399,6 +400,7 @@ class FrontController extends Controller
                                             ->orderBy('news_contents.created_at', 'DESC')
                                             ->limit(4)
                                             ->get();
+                                              dd(DB::getQueryLog());
 
             // Helper::pr($searchResults);
             
