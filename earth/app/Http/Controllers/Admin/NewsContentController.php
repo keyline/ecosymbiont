@@ -517,6 +517,7 @@ class NewsContentController extends Controller
                     } 
                     else {
                         $nelp_pdf = $data['row']->nelp_form_pdf;
+                        $nelp_form_number = $data['row']->nelp_form_number;
                         // $cover_image_caption = '';
                     }
                     // else {
