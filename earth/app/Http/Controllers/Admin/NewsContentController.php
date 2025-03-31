@@ -404,7 +404,7 @@ class NewsContentController extends Controller
             $title                          = $this->data['title'] . ' import';
             $page_name                      = 'news_content.import';
             $data['row']                    = Article::where($this->data['primary_key'], '=', $id)->first();  
-            Helper::pr($data['row']);
+            // Helper::pr($data['row']);
             
             $user_id                        = $data['row']->user_id;   
             $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();  
@@ -516,7 +516,7 @@ class NewsContentController extends Controller
                         }
                     } 
                     else {
-                        $nelp_pdf = $data['row']->nelp_pdf;
+                        $nelp_pdf = $data['row']->nelp_form_pdf;
                         // $cover_image_caption = '';
                     }
                     // else {
