@@ -1171,7 +1171,7 @@ function numberToOrdinal($number) {
             $(".series_yes").show();
             $('#series_article_no').attr('required', true);
             $('#current_article_no').attr('required', true);
-            $('#other_article_part_doi_no').attr('required', true);
+            // $('#other_article_part_doi_no').attr('required', true);
         } else {
             $(".series_yes").hide();
             $('#series_article_no').attr('required', false);
@@ -1184,7 +1184,7 @@ function numberToOrdinal($number) {
                 $(".series_yes").show();
                 $('#series_article_no').attr('required', true);
                 $('#current_article_no').attr('required', true);
-                $('#other_article_part_doi_no').attr('required', true);
+                // $('#other_article_part_doi_no').attr('required', true);
             } else {
                 $(".series_yes").hide();
                 $('#series_article_no').attr('required', false);
