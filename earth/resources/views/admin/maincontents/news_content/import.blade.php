@@ -385,7 +385,7 @@ function numberToOrdinal($number) {
                                                                 // $pronoun_checked = '';
                                                                 ?> -->
                                                                 <!-- <input type="radio" name="co_author_pronoun_{{$i}}" value="{{ $data->id }}" ?=$pronoun_checked?>> -->
-                                                                <input type="radio" name="co_author_pronoun_{{$i}}" value="{{ $data->id }}"  @checked($data->id == ($co_author_pronoun[$i - 1])) >
+                                                                <input type="radio" name="co_author_pronoun_{{$i}}" value="{{ $data->id }}"  @checked($data->id == ($co_author_pronoun[$i - 1] ?? null)) >
                                                                 <label>{{ $data->name }}</label>
                                                             @endforeach
                                                         @endif                                
