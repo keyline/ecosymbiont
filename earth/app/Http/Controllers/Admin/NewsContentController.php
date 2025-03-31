@@ -404,6 +404,7 @@ class NewsContentController extends Controller
             $title                          = $this->data['title'] . ' import';
             $page_name                      = 'news_content.import';
             $data['row']                    = Article::where($this->data['primary_key'], '=', $id)->first();  
+            // Helper::pr($data['row']);
             
             $user_id                        = $data['row']->user_id;   
             $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();  
@@ -413,6 +414,7 @@ class NewsContentController extends Controller
             $data['parent_category']        = NewsCategory::where('status', '!=', 3)->where('parent_category', '=', 0)->orderBy('id', 'DESC')->get();
             $data['sub_category']           = NewsCategory::where('status', '!=', 3)->where('parent_category', '!=', 0)->orderBy('id', 'DESC')->get();
             $data['pronoun']                = Pronoun::where('status', '!=', 3)->orderBy('id', 'ASC')->get();
+            // Helper::pr($data['pronoun']);
             $data['author_affiliation']     = EcosystemAffiliation::where('status', '!=', 3)->orderBy('name', 'ASC')->get();
             $data['country']                = Country::where('status', '!=', 3)->orderBy('name', 'ASC')->get();
             $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
@@ -436,7 +438,7 @@ class NewsContentController extends Controller
 
                 $parent_category                = NewsCategory::where('id', '=', $postData['section_ert'])->first();
                 $actionMode                     = $postData['action_mode']; // Get action mode from the form
-                // echo $actionMode; die;
+                //  echo $actionMode; die;
                 if ($actionMode === 'save') {
                     // Generate a unique slug
                     $slug = Str::slug($postData['creative_Work']);  
@@ -514,6 +516,11 @@ class NewsContentController extends Controller
                             return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
                         }
                     } 
+                    else {
+                        $nelp_pdf = $data['row']->nelp_form_pdf;
+                        $nelp_form_number = $data['row']->nelp_form_number;
+                        // $cover_image_caption = '';
+                    }
                     // else {
                     //     return redirect()->back()->with(['error_message' => 'Please Upload Scan Copy Of NELP Form']);
                     // }       
@@ -573,7 +580,7 @@ class NewsContentController extends Controller
                     'other_article_part_doi_no' => $other_article_part_doi_no,
                     'is_published'              => 1,                                                         
                     ];
-                    // Helper::pr($fields);
+                    //  Helper::pr($fields);
                     Article::where('id', '=', $id)->update($fields);
                     // return redirect("admin/article/list")->with('success_message', 'Article saved successfully');                
                     return redirect("admin/article/editing-checking")->with('success_message', 'Article saved successfully');                

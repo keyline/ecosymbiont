@@ -364,6 +364,7 @@ class FrontController extends Controller
         if($request->isMethod('get')){
             $postData           = $request->all();
             $search_keyword     = $postData['article_search'];
+            // DB::enableQueryLog();
             $data['contents'] = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
                                             ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
                                             ->select(
@@ -394,11 +395,13 @@ class FrontController extends Controller
                                             })
                                             ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 0) // First part of series
                                                     ->orWhere('news_contents.current_article_no', 1); // First part of series
                                             })
                                             ->orderBy('news_contents.created_at', 'DESC')
                                             ->limit(4)
                                             ->get();
+                                            //   dd(DB::getQueryLog());
 
             // Helper::pr($searchResults);
             
@@ -463,7 +466,8 @@ class FrontController extends Controller
                                                 $query->where('news_contents.new_title', 'LIKE', '%'.$search_keyword.'%');
                                              })
                                              ->where(function ($query) {
-                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                $query->whereNull('news_contents.current_article_no') 
+                                                        ->orWhere('news_contents.current_article_no', 0) // Standalone articles
                                                     ->orWhere('news_contents.current_article_no', 1); // First part of series
                                             })
                                              ->orderBy('news_contents.created_at', 'DESC')
@@ -498,6 +502,7 @@ class FrontController extends Controller
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 0) // First part of series
                                                     ->orWhere('news_contents.current_article_no', 1); // First part of series
                                             })
                                              ->orderBy('news_contents.created_at', 'DESC')
@@ -532,6 +537,7 @@ class FrontController extends Controller
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 0) 
                                                     ->orWhere('news_contents.current_article_no', 1); // First part of series
                                             })
                                              ->orderBy('news_contents.created_at', 'DESC')
@@ -567,6 +573,7 @@ class FrontController extends Controller
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                ->orWhere('news_contents.current_article_no', 0) 
                                                     ->orWhere('news_contents.current_article_no', 1); // First part of series
                                             })
                                              ->orderBy('news_contents.created_at', 'DESC')
@@ -601,6 +608,7 @@ class FrontController extends Controller
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                ->orWhere('news_contents.current_article_no', 0) 
                                                     ->orWhere('news_contents.current_article_no', 1); // First part of series
                                             })
                                              ->orderBy('news_contents.created_at', 'DESC')
@@ -634,6 +642,7 @@ class FrontController extends Controller
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                ->orWhere('news_contents.current_article_no', 0) 
                                                     ->orWhere('news_contents.current_article_no', 1); // First part of series
                                             })
                                              ->orderBy('news_contents.created_at', 'DESC')
@@ -668,6 +677,7 @@ class FrontController extends Controller
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                ->orWhere('news_contents.current_article_no', 0) 
                                                     ->orWhere('news_contents.current_article_no', 1); // First part of series
                                             })
                                              ->orderBy('news_contents.created_at', 'DESC')
@@ -702,6 +712,7 @@ class FrontController extends Controller
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                ->orWhere('news_contents.current_article_no', 0) 
                                                     ->orWhere('news_contents.current_article_no', 1); // First part of series
                                             })
                                              ->orderBy('news_contents.created_at', 'DESC')
@@ -735,6 +746,7 @@ class FrontController extends Controller
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                ->orWhere('news_contents.current_article_no', 0) 
                                                     ->orWhere('news_contents.current_article_no', 1); // First part of series
                                             })
                                              ->orderBy('news_contents.created_at', 'DESC')
@@ -787,6 +799,7 @@ class FrontController extends Controller
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 0) // First part of series
                                                     ->orWhere('news_contents.current_article_no', 1); // First part of series
                                             })
                                              ->orderBy('news_contents.created_at', 'DESC')
@@ -838,6 +851,7 @@ class FrontController extends Controller
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                ->orWhere('news_contents.current_article_no', 0) 
                                                     ->orWhere('news_contents.current_article_no', 1); // First part of series
                                             })
                                              ->orderBy('news_contents.created_at', 'DESC')
@@ -872,6 +886,7 @@ class FrontController extends Controller
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                ->orWhere('news_contents.current_article_no', 0) 
                                                     ->orWhere('news_contents.current_article_no', 1); // First part of series
                                             })
                                              ->orderBy('news_contents.created_at', 'DESC')
@@ -906,6 +921,7 @@ class FrontController extends Controller
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                ->orWhere('news_contents.current_article_no', 0) 
                                                     ->orWhere('news_contents.current_article_no', 1); // First part of series
                                             })
                                              ->orderBy('news_contents.created_at', 'DESC')
@@ -942,6 +958,7 @@ class FrontController extends Controller
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                ->orWhere('news_contents.current_article_no', 0) 
                                                     ->orWhere('news_contents.current_article_no', 1); // First part of series
                                             })
                                              ->orderBy('news_contents.created_at', 'DESC')
@@ -977,6 +994,7 @@ class FrontController extends Controller
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                ->orWhere('news_contents.current_article_no', 0) 
                                                     ->orWhere('news_contents.current_article_no', 1); // First part of series
                                             })
                                              ->orderBy('news_contents.created_at', 'DESC')
@@ -1011,6 +1029,7 @@ class FrontController extends Controller
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                ->orWhere('news_contents.current_article_no', 0) 
                                                     ->orWhere('news_contents.current_article_no', 1); // First part of series
                                             })
                                              ->orderBy('news_contents.created_at', 'DESC')
@@ -1045,6 +1064,7 @@ class FrontController extends Controller
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                ->orWhere('news_contents.current_article_no', 0) 
                                                     ->orWhere('news_contents.current_article_no', 1); // First part of series
                                             })
                                              ->orderBy('news_contents.created_at', 'DESC')
@@ -1079,6 +1099,7 @@ class FrontController extends Controller
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                ->orWhere('news_contents.current_article_no', 0) 
                                                     ->orWhere('news_contents.current_article_no', 1); // First part of series
                                             })
                                              ->orderBy('news_contents.created_at', 'DESC')
@@ -1113,6 +1134,7 @@ class FrontController extends Controller
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                ->orWhere('news_contents.current_article_no', 0) 
                                                     ->orWhere('news_contents.current_article_no', 1); // First part of series
                                             })
                                              ->orderBy('news_contents.created_at', 'DESC')
@@ -1136,6 +1158,7 @@ class FrontController extends Controller
         
         $search_keyword     = $requestData['search_keyword'];
         // Helper::pr($search_keyword);
+        // DB::enableQueryLog();
         $searchResults      = NewsContent::select('id', 'new_title', 'slug', 'parent_category', 'sub_category')->where(function($query) {
                                                 $query->where('status', 1);
                                              })
@@ -1147,8 +1170,14 @@ class FrontController extends Controller
                                                       ->orWhere('organization_name', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('keywords', 'LIKE', '%'.$search_keyword.'%');
                                              })
-                                             ->orderBy('news_contents.created_at', 'DESC')
+                                             ->where(function ($query) {
+                                                $query->whereNull('current_article_no') // Standalone articles
+                                                    ->orWhere('current_article_no', 0) // First part of series
+                                                    ->orWhere('current_article_no', 1); // First part of series
+                                            })
+                                             ->orderBy('created_at', 'DESC')
                                              ->get();
+                                            //    dd(DB::getQueryLog());
         
         if($searchResults){
             foreach ($searchResults as $searchResult) {
@@ -1362,14 +1391,17 @@ class FrontController extends Controller
                  // Get reCAPTCHA token from form POST data
                     $recaptchaResponse = $postData['g-recaptcha-response'];
 
-                    // Your Google reCAPTCHA secret key [live]
-                    $secretKey = '6LcIw04qAAAAAJCWh02op84FgNvxexQsh9LLCuqW';
-
                     // Google reCAPTCHA verification URL [live]
                     $verifyURL = 'https://www.google.com/recaptcha/api/siteverify';
 
+                    // Your Google reCAPTCHA secret key [live]
+                    // $secretKey = '6LcIw04qAAAAAJCWh02op84FgNvxexQsh9LLCuqW';
+                
                     // Your Google reCAPTCHA secret key [dev]
                     // $secretKey = '6Ldum88qAAAAANVww5Xe6aHFL-g_UHLsHl7HGKs5';
+
+                    // Your Google reCAPTCHA secret key [uat]
+                    $secretKey = '6Lco6wQrAAAAAJksrZFpNTfW07l2QLUKMsQ6bREb';
                     
 
                     // Prepare the POST request

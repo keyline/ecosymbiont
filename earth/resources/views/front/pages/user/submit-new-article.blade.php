@@ -292,6 +292,7 @@ use Illuminate\Support\Facades\DB;
                                                     <div class="col-md-10 col-lg-8">
                                                         <input type="text" name="co_author_short_bio_{{$i}}" class="form-control" id="co_author_short_bio_{{$i}}"
                                                         value="{{ old("co_author_short_bio_$i", $co_author_short_bio[$i - 1] ?? '') }}">
+                                                        <div id="co_author_short_bio_{{$i}}Error" class="error"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1475,6 +1476,16 @@ use Illuminate\Support\Facades\DB;
         allValid &= checkWordLimit(document.getElementById('subtitle'), 40, 'subtitleError');
         allValid &= checkWordLimit(document.getElementById('additional_information'), 100, 'additional_informationError');
         allValid &= checkWordLimit(document.getElementById('narrative_image_desc_1'), 50, 'narrative_image_desc_1Error');
+        // Loop through the dynamically generated textareas
+        for (let i = 1; i <= 3; i++) {
+            const textarea = document.getElementById(`co_author_short_bio_${i}`);
+            const errorDiv = document.getElementById(`co_author_short_bio_${i}Error`);
+
+            if (textarea) {
+                // Perform word limit validation for each textarea
+                allValid &= checkWordLimit(textarea, 40, `co_author_short_bio_${i}Error`);
+            }
+        } 
         // Loop through the dynamically generated textareas
         for (let i = 2; i <= 5; i++) {
             const textarea = document.getElementById(`narrative_image_desc_${i}`);
