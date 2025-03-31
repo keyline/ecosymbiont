@@ -78,7 +78,7 @@ function numberToOrdinal($number) {
         $setting = GeneralSetting::where('id', '=', 1)->first();
         if ($row) {
             //   dd($row);
-             Helper::pr($row);
+            //  Helper::pr($row);
 
             $user_id = $row->user_id;
             $author_classification = $row->author_classification;
