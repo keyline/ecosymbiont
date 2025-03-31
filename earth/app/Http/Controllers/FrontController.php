@@ -1907,7 +1907,7 @@ class FrontController extends Controller
                     'orginal_work'              => 'required', 
                     'copyright'                 => 'required', 
                     'submission_types'          => 'required',
-                    // 'additional_information'    => ['required', 'string', new MaxWords(100)],
+                    // 'additional_information'    => 'required',
                     'state'                     => 'required',
                     'city'                      => 'required', 
                     'acknowledge'               => 'required',                                                      
@@ -2945,12 +2945,12 @@ class FrontController extends Controller
                     'pronoun'                   => 'required',   
                     'ecosystem_affiliation'     => 'required',               
                     'expertise_area'            => 'required',                
-                    'explanation'               => ['required', 'string', new MaxWords(100)],
-                    'explanation_submission'    => ['required', 'string', new MaxWords(150)],  
+                    'explanation'               => 'required',
+                    'explanation_submission'    => 'required',  
                     'community'                 => 'required',              
-                    // 'creative_Work'             => ['required', 'string', new MaxWords(10)],                                  
-                    'bio_short'                 => ['required', 'string', new MaxWords(40)],
-                    'bio_long'                  => ['required', 'string', new MaxWords(250)],
+                    // 'creative_Work'             => 'required',,                                  
+                    'bio_short'                 => 'required',
+                    'bio_long'                  => 'required',
                 ];
                 $participatedInfo = isset($postData['participated_info']) ? $postData['participated_info'] : '';
                 $invited_byInfo = isset($postData['invited_by']) ? $postData['invited_by'] : '';
@@ -3050,11 +3050,11 @@ class FrontController extends Controller
                     'ecosystem_affiliation'     => 'required',               
                     'expertise_area'            => 'required',          
                     'community'                 => 'required',      
-                    'explanation'               => ['required', 'string', new MaxWords(100)],
-                    'explanation_submission'    => ['required', 'string', new MaxWords(150)],                
-                    // 'creative_Work'             => ['required', 'string', new MaxWords(10)],                                  
-                    'bio_short'                 => ['required', 'string', new MaxWords(40)],
-                    'bio_long'                  => ['required', 'string', new MaxWords(250)],
+                    'explanation'               => 'required',
+                    'explanation_submission'    => 'required',                
+                    // 'creative_Work'             => 'required',,                                  
+                    'bio_short'                 => 'required',
+                    'bio_long'                  => 'required',
                 ];
                 $participatedInfo = isset($postData['participated_info']) ? $postData['participated_info'] : '';
                 $invited_byInfo = isset($postData['invited_by']) ? $postData['invited_by'] : '';
