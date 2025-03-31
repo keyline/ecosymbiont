@@ -723,7 +723,7 @@ function numberToOrdinal($number) {
                                 <?php if($nelp_pdf != ''){?>
                                 <a href="<?= env('UPLOADS_URL') . 'newcontent/' . $nelp_pdf ?>" target="_blank"
                                     class="badge bg-primary">View PDF</a>
-                                    <input type="hidden" name="nelp_pdf" value="<?= $nelp_pdf ?>">
+                                    <!-- <input type="hidden" name="nelp_pdf" value="?= $nelp_pdf ?>"> -->
                                 <?php }?>                                
                             </div>
                         </div>                        

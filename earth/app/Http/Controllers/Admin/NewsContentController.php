@@ -514,6 +514,10 @@ class NewsContentController extends Controller
                             return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
                         }
                     } 
+                    else {
+                        $nelp_pdf = $data['row']->nelp_pdf;
+                        // $cover_image_caption = '';
+                    }
                     // else {
                     //     return redirect()->back()->with(['error_message' => 'Please Upload Scan Copy Of NELP Form']);
                     // }       
