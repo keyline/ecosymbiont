@@ -78,7 +78,7 @@ function numberToOrdinal($number) {
         $setting = GeneralSetting::where('id', '=', 1)->first();
         if ($row) {
             //   dd($row);
-             Helper::pr($row);
+            //  Helper::pr($row);
 
             $user_id = $row->user_id;
             $author_classification = $row->author_classification;
@@ -723,6 +723,7 @@ function numberToOrdinal($number) {
                                 <?php if($nelp_pdf != ''){?>
                                 <a href="<?= env('UPLOADS_URL') . 'newcontent/' . $nelp_pdf ?>" target="_blank"
                                     class="badge bg-primary">View PDF</a>
+                                    <input type="hidden" name="nelp_pdf" value="<?= $nelp_pdf ?>">
                                 <?php }?>                                
                             </div>
                         </div>                        
