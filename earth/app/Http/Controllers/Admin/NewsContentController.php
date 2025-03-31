@@ -436,7 +436,7 @@ class NewsContentController extends Controller
 
                 $parent_category                = NewsCategory::where('id', '=', $postData['section_ert'])->first();
                 $actionMode                     = $postData['action_mode']; // Get action mode from the form
-                 echo $actionMode; die;
+                //  echo $actionMode; die;
                 if ($actionMode === 'save') {
                     // Generate a unique slug
                     $slug = Str::slug($postData['creative_Work']);  
@@ -573,7 +573,7 @@ class NewsContentController extends Controller
                     'other_article_part_doi_no' => $other_article_part_doi_no,
                     'is_published'              => 1,                                                         
                     ];
-                    // Helper::pr($fields);
+                    Helper::pr($fields);
                     Article::where('id', '=', $id)->update($fields);
                     // return redirect("admin/article/list")->with('success_message', 'Article saved successfully');                
                     return redirect("admin/article/editing-checking")->with('success_message', 'Article saved successfully');                
