@@ -106,7 +106,7 @@ $controllerRoute = $module['controller_route'];
                 } else 
                 { ?>
                   <tr>
-                    <td colspan="8" style="text-align: center;color: red;">No Records Found !!!</td>
+                    <td colspan="8" style="text-align: center;color: red;">No Records Found</td>
                   </tr>
                 <?php } ?>
               </tbody>

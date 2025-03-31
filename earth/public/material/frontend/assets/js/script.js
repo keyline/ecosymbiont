@@ -208,14 +208,14 @@ $(document).ready(function($) {
 
 	}
 
-	// try {
-	// 	// Example with multiple objects
-	// 	$('.video-link').magnificPopup({
-	// 		type: 'iframe'
-	// 	});
-	// } catch(err) {
+	try {
+		// Example with multiple objects
+		$('.video-link').magnificPopup({
+			type: 'iframe'
+		});
+	} catch(err) {
 
-	// }
+	}
 
 	try {
 		var magnLink = $('.log-in-popup');
