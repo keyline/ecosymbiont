@@ -50,11 +50,11 @@ $controllerRoute = $module['controller_route'];
             <table id="simpletable" class="table table-striped table-bordered nowrap">
               <thead>
                 <tr>                  
-                  <th class="admin-select-none"><a href="javascript:selectToggle(selete);" id="show"
+                  <!-- <th class="admin-select-none"><a href="javascript:selectToggle(selete);" id="show"
                       onclick="checkALL();">Select</a> | <br> <a
                       href="javascript:selectToggle(unselect);" id="hide"
                       onclick="unCheckALL();">Deselect</a>
-                  </th>
+                  </th> -->
                   <th scope="col">#</th>
                   <th scope="col">Action</th>
                   <th scope="col">SRN<br>DOI<br>Parent Category<br>Sub Category</th>
@@ -68,9 +68,9 @@ $controllerRoute = $module['controller_route'];
               <tbody>
                 <?php if(count($rows)>0){ $sl=1; foreach($rows as $row){?>
                   <tr>
-                    <td>
-                      <input type='checkbox' name='draw[]' value="<?php echo $row->id ?>" id="required-checkbox1" onClick="CheckIfChecked()">
-                    </td>
+                    <!-- <td>
+                      <input type='checkbox' name='draw[]' value="?php echo $row->id ?>" id="required-checkbox1" onClick="CheckIfChecked()">
+                    </td> -->
                     <th scope="row"><?=$sl++?></th>
                     <td>
                       <a href="<?=url('admin/' . $controllerRoute . '/edit/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-edit"></i></a><br>
@@ -153,13 +153,13 @@ $controllerRoute = $module['controller_route'];
                   </tr>
                 <?php } } else {?>
                   <tr>
-                    <td colspan="7" style="text-align: center;color: red;">No Records Found !!!</td>
+                    <td colspan="7" style="text-align: center;color: red;">No Records Found</td>
                   </tr>
                 <?php }?>
               </tbody>
-              <div id="first_button" style="display:none; " margin-bottom: -6px;>
+              <!-- <div id="first_button" style="display:none; " margin-bottom: -6px;>
                   <p align="left"><button type="submit" class="btn btn-danger" name="save">DELETE</button></p>
-              </div>
+              </div> -->
             </table>
           </div>
         </div>
