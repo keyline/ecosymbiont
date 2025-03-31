@@ -368,7 +368,7 @@ function numberToOrdinal($number) {
                                                 <div class="row">
                                                     <label for="pronoun" class="col-md-2 col-lg-4 col-form-label">3I{{$i}}) <?=numberToOrdinal($i)?> co-author’s pronoun</label>
                                                     <div class="col-md-10 col-lg-8">
-                                                        <?php Helper::pr($pronoun); ?>
+                                                        <!-- ?php Helper::pr($pronoun); ?> -->
                                                         @if ($pronoun)
                                                             @foreach ($pronoun as $data)
                                                                 <?php
