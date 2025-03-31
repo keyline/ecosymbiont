@@ -395,6 +395,7 @@ class FrontController extends Controller
                                             })
                                             ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 0) // First part of series
                                                     ->orWhere('news_contents.current_article_no', 1); // First part of series
                                             })
                                             ->orderBy('news_contents.created_at', 'DESC')
@@ -1138,7 +1139,7 @@ class FrontController extends Controller
         
         $search_keyword     = $requestData['search_keyword'];
         // Helper::pr($search_keyword);
-        DB::enableQueryLog();
+        // DB::enableQueryLog();
         $searchResults      = NewsContent::select('id', 'new_title', 'slug', 'parent_category', 'sub_category')->where(function($query) {
                                                 $query->where('status', 1);
                                              })
@@ -1150,9 +1151,14 @@ class FrontController extends Controller
                                                       ->orWhere('organization_name', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('keywords', 'LIKE', '%'.$search_keyword.'%');
                                              })
-                                             ->orderBy('news_contents.created_at', 'DESC')
+                                             ->where(function ($query) {
+                                                $query->whereNull('current_article_no') // Standalone articles
+                                                    ->orWhere('current_article_no', 0) // First part of series
+                                                    ->orWhere('current_article_no', 1); // First part of series
+                                            })
+                                             ->orderBy('created_at', 'DESC')
                                              ->get();
-                                               dd(DB::getQueryLog());
+                                            //    dd(DB::getQueryLog());
         
         if($searchResults){
             foreach ($searchResults as $searchResult) {
