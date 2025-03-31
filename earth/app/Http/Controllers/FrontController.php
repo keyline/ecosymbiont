@@ -790,6 +790,7 @@ class FrontController extends Controller
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 0) // First part of series
                                                     ->orWhere('news_contents.current_article_no', 1); // First part of series
                                             })
                                              ->orderBy('news_contents.created_at', 'DESC')
