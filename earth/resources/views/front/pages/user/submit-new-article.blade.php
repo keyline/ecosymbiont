@@ -1479,11 +1479,11 @@ use Illuminate\Support\Facades\DB;
         // Loop through the dynamically generated textareas
         for (let i = 1; i <= 3; i++) {
             const textarea = document.getElementById(`co_author_short_bio_${i}`);
-            const errorDiv = document.getElementById(`narrative_image_desc_${i}Error`);
+            const errorDiv = document.getElementById(`co_author_short_bio_${i}Error`);
 
             if (textarea) {
                 // Perform word limit validation for each textarea
-                allValid &= checkWordLimit(textarea, 50, `narrative_image_desc_${i}Error`);
+                allValid &= checkWordLimit(textarea, 40, `co_author_short_bio_${i}Error`);
             }
         } 
         // Loop through the dynamically generated textareas
