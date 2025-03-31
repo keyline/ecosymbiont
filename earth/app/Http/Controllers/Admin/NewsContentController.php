@@ -404,6 +404,7 @@ class NewsContentController extends Controller
             $title                          = $this->data['title'] . ' import';
             $page_name                      = 'news_content.import';
             $data['row']                    = Article::where($this->data['primary_key'], '=', $id)->first();  
+            Helper::pr($data['row']);
             
             $user_id                        = $data['row']->user_id;   
             $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();  
