@@ -1395,13 +1395,13 @@ class FrontController extends Controller
                     $verifyURL = 'https://www.google.com/recaptcha/api/siteverify';
 
                     // Your Google reCAPTCHA secret key [live]
-                    // $secretKey = '6LcIw04qAAAAAJCWh02op84FgNvxexQsh9LLCuqW';
+                    $secretKey = '6LcIw04qAAAAAJCWh02op84FgNvxexQsh9LLCuqW';
                 
                     // Your Google reCAPTCHA secret key [dev]
                     // $secretKey = '6Ldum88qAAAAANVww5Xe6aHFL-g_UHLsHl7HGKs5';
 
                     // Your Google reCAPTCHA secret key [uat]
-                    $secretKey = '6Lco6wQrAAAAAJksrZFpNTfW07l2QLUKMsQ6bREb';
+                    // $secretKey = '6Lco6wQrAAAAAJksrZFpNTfW07l2QLUKMsQ6bREb';
                     
 
                     // Prepare the POST request
