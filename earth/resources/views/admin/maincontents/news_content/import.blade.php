@@ -775,6 +775,7 @@ function numberToOrdinal($number) {
                                 <input type="text" name="current_article_no" class="form-control" id="current_article_no" value="<?=$current_article_no?>">
                             </div>
                         </div>
+
                         <div class="row series_yes mb-3">
                             <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label">32C) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).
                             </label>
@@ -1193,7 +1194,7 @@ function numberToOrdinal($number) {
         });
         $('#current_article_no').on('input', function(){
             var current_article_no = parseInt($('#current_article_no').val());
-            if(current_article_no <= 1){
+            if(current_article_no < 1){
                 $('#current_article_no').attr('required', false);
                 $('#other_article_part_doi_no').attr('required', false);
             } else {
