@@ -4061,6 +4061,11 @@ div.list-post .post-content h2 a:hover {
   text-align: left !important;
   width: 100%;
 }
+.single-post-box .post-content > div img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
 .others_image_colour {
   display: inline-block;
   color: #87ceeb;
