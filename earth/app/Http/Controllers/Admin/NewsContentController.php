@@ -25,6 +25,7 @@ use App\Models\ExpertiseArea;
 use App\Models\UserClassification;
 use App\Models\UserProfile;
 use App\Models\Community;
+use App\Models\Project;
 use Auth;
 use Session;
 use Helper;
@@ -421,6 +422,7 @@ class NewsContentController extends Controller
             $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['classification']         = UserClassification::where('user_id', '=', $user_id)->first();
             $data['communities']            = Community::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['projects']            = Project::where('status', '=', 1)->orderBy('name', 'ASC')->get();
 
             if ($request->isMethod('post')) {
                 $postData = $request->all();
@@ -573,6 +575,8 @@ class NewsContentController extends Controller
                     'creative_Work_fiction'     => $postData['creative_Work_fiction'],
                     'community'                 => $postData['community'],
                     'community_name'            => $postData['community_name'],
+                    'projects'                 => $postData['projects'],
+                    'projects_name'            => $postData['projects_name'],
                     'additional_information'    => $postData['additional_information'],
                     'is_series'                 => $is_series,
                     'series_article_no'         => $series_article_no,
@@ -580,7 +584,7 @@ class NewsContentController extends Controller
                     'other_article_part_doi_no' => $other_article_part_doi_no,
                     'is_published'              => 1,                                                         
                     ];
-                    //  Helper::pr($fields);
+                     Helper::pr($fields);
                     Article::where('id', '=', $id)->update($fields);
                     // return redirect("admin/article/list")->with('success_message', 'Article saved successfully');                
                     return redirect("admin/article/editing-checking")->with('success_message', 'Article saved successfully');                

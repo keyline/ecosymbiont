@@ -78,7 +78,7 @@ function numberToOrdinal($number) {
         $setting = GeneralSetting::where('id', '=', 1)->first();
         if ($row) {
             //   dd($row);
-             Helper::pr($row);
+            //  Helper::pr($row);
 
             $user_id = $row->user_id;
             $author_classification = $row->author_classification;
@@ -775,8 +775,8 @@ function numberToOrdinal($number) {
                                 <div class="col-md-10 col-lg-8">                                    
                                     <select name="projects_name" class="form-control" id="projects_name">
                                         <option value="">Select</option>
-                                        <?php if($communities){ foreach($communities as $cmn){?>
-                                            <option value="<?=$cmn->name?>" <?=(($projects_name == $cmn->name) ? 'selected' : '')?>><?=$cmn->name?></option>
+                                        <?php if($projects){ foreach($projects as $proj){?>
+                                            <option value="<?=$proj->name?>" <?=(($projects_name == $proj->name) ? 'selected' : '')?>><?=$proj->name?></option>
                                         <?php } }?>
                                     </select>
                                 <!-- <input type="hidden" name="community_name" value="{{ $community_name }}"> -->
