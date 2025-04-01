@@ -775,7 +775,7 @@ function numberToOrdinal($number) {
                                 <div class="col-md-10 col-lg-8">                                    
                                     <select name="projects_name" class="form-control" id="projects_name">
                                         <option value="">Select</option>
-                                        <?php if($projects){ foreach($projects as $proj){?>
+                                        <?php dd($projects); if($projects){ foreach($projects as $proj){?>
                                             <option value="<?=$proj->name?>" <?=(($projects_name == $proj->name) ? 'selected' : '')?>><?=$proj->name?></option>
                                         <?php } }?>
                                     </select>
