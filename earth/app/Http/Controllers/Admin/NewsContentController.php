@@ -735,7 +735,7 @@ class NewsContentController extends Controller
                         'current_article_no'        => $current_article_no,
                         'other_article_part_doi_no' => $other_article_part_doi_no,
                     ];
-                    Helper::pr($fields);
+                    // Helper::pr($fields);
                     NewsContent::insert($fields);
 
                     $fieldsArticle = [
