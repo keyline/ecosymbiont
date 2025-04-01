@@ -854,7 +854,7 @@ function numberToOrdinal($number) {
         document.getElementById('actionMode').value = mode;
     }
 </script>
-<script>    
+<!-- <script>    
     document.querySelector('#submitFormButton').addEventListener('click', function (e) {
     e.preventDefault(); // Prevent default form submission
     document.getElementById("import_form").dataset.mode = mode; // Store mode in form dataset
@@ -887,7 +887,41 @@ function numberToOrdinal($number) {
         }
     });
 });
+</script> -->
+<script>
+    document.querySelector('#submitFormButton').addEventListener('click', function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        var pdfFile = document.getElementById("nelp_pdf").files.length;
+        var existingPdf = document.querySelector("input[name='existing_nelp_pdf']");
+
+        // Validate PDF upload only for final publishing
+        if (pdfFile === 0 && !existingPdf) {
+            Swal.fire({
+                icon: 'error',
+                title: 'PDF Required!',
+                text: 'Please upload a PDF before publishing.',
+            });
+            return; // Stop further execution
+        }
+
+        // Confirmation popup
+        Swal.fire({
+            title: 'Are you sure?',
+            html: "Once the final submission is made, further edits to this article cannot be made here. However, you can make edits through the 'News Content' module.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#4CAF50',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Publish it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.querySelector('#import_form').submit();
+            }
+        });
+    });
 </script>
+
 <script type="text/javascript">
     $(document).ready(function() {
         var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
@@ -1299,20 +1333,4 @@ function numberToOrdinal($number) {
             $('#other_article_part_doi_no').val(tagsArray);
         });
     });
-</script>
-<script>
-    function setMode(mode) {
-        document.getElementById("import_form").dataset.mode = mode; // Store mode in form dataset
-
-        if (mode === 'submit') {
-            var pdfFile = document.getElementById("nelp_pdf").files.length;
-            var existingPdf = document.querySelector("input[name='existing_nelp_pdf']");
-
-            if (pdfFile === 0 && !existingPdf) {
-                alert("Please upload a PDF before publishing.");
-                return false; // Prevent form submission
-            }
-        }
-        return true; // Allow form submission
-    }
 </script>
