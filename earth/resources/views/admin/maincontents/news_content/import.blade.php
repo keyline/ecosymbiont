@@ -756,6 +756,31 @@ function numberToOrdinal($number) {
                             </div> 
                         </div>
                         <div class="row mb-3">
+                            <label for="projects" class="col-md-2 col-lg-4 col-form-label">32) Is this a special EaRTh Project?
+                            </label>
+                            <div class="col-md-10 col-lg-8">
+                                <input type="radio" class="readonly-input" id="projects_yes" name="projects" value="Yes" required @checked(old('projects', $projects) == 'Yes')>
+                                <label for="yes">Yes</label>
+                                <input type="radio" class="readonly-input" id="projects_no" name="projects" value="No" required @checked(old('projects', $projects) == 'No')>
+                                <label for="no">No</label>
+                            </div>
+                        </div>
+                        <!-- ?php echo $projects_name; die;?> -->
+                        <div id="projectsDetails" style="display: none;">
+                            <div class="row mb-3">
+                                <label for="projects_info" class="col-md-2 col-lg-4 col-form-label">32A) Select projects</label>
+                                <div class="col-md-10 col-lg-8">                                    
+                                    <select name="projects_name" class="form-control" id="projects_name">
+                                        <option value="">Select</option>
+                                        <?php if($communities){ foreach($communities as $cmn){?>
+                                            <option value="<?=$cmn->name?>" <?=(($projects_name == $cmn->name) ? 'selected' : '')?>><?=$cmn->name?></option>
+                                        <?php } }?>
+                                    </select>
+                                <!-- <input type="hidden" name="community_name" value="{{ $community_name }}"> -->
+                                </div>
+                            </div> 
+                        </div>
+                        <div class="row mb-3">
                             <label for="is_series" class="col-md-2 col-lg-4 col-form-label">32) Is this part of a series?
                             </label>
                             <div class="col-md-10 col-lg-8">
@@ -1153,6 +1178,20 @@ function numberToOrdinal($number) {
         });
     });
 </script> -->
+<script>
+    $(document).ready(function() {
+        function toggleFields() {            
+            const communityYes = $('#community_yes').is(':checked');            
+            
+            // Toggle individual sections            
+            $('#communityDetails').toggle(communityYes);
+        }
+        $('input[name="invited"], input[name="community"]').on('change', function() {
+            toggleFields();
+        });
+        toggleFields();
+    });
+</script>
 <script>
     $(document).ready(function() {
         function toggleFields() {            
