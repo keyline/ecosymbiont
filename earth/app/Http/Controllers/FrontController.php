@@ -1941,7 +1941,7 @@ class FrontController extends Controller
 
                     if($postData['co_authors'] == '0'){
                         if($postData['submission_types'] == '1'){ 
-                            echo $postData['submission_types'];die;
+                            // echo $postData['submission_types'];die;
 
                             /* narrative doc file */
                             $imageFile      = $request->file('narrative_file');
