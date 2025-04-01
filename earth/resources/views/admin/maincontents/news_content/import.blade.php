@@ -109,6 +109,8 @@ function numberToOrdinal($number) {
             $city = $row->city;
             $community = $row->community;
             $community_name = $row->community_name;
+            $projects = $row->projects;
+            $projects_name = $row->projects_name;
             $organization_name = $row->organization_name;
             $organization_website = $row->organization_website;
             $ecosystem_affiliationId = (($row->ecosystem_affiliationId != '')?json_decode($row->ecosystem_affiliationId):[]);
@@ -181,6 +183,7 @@ function numberToOrdinal($number) {
             $email = '';
             $countryId = '';
             $community = '';
+            $projects = '';
             // $community_name = '';
             $organization_name = '';
             $cover_image = '';
@@ -1195,12 +1198,12 @@ function numberToOrdinal($number) {
 <script>
     $(document).ready(function() {
         function toggleFields() {            
-            const communityYes = $('#community_yes').is(':checked');            
+            const projectsYes = $('#projects_yes').is(':checked');            
             
             // Toggle individual sections            
-            $('#communityDetails').toggle(communityYes);
+            $('#projectsDetails').toggle(projectsYes);
         }
-        $('input[name="invited"], input[name="community"]').on('change', function() {
+        $('input[name="invited"], input[name="projects"]').on('change', function() {
             toggleFields();
         });
         toggleFields();
