@@ -757,8 +757,7 @@ function numberToOrdinal($number) {
                                 <!-- <input type="hidden" name="community_name" value="{{ $community_name }}"> -->
                                 </div>
                             </div> 
-                        </div>
-                        <?php dd($project);?>
+                        </div>                        
                         <div class="row mb-3">
                             <label for="projects" class="col-md-2 col-lg-4 col-form-label">32) Is this a special EaRTh Project?
                             </label>
