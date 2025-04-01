@@ -251,6 +251,7 @@ class NewsContentController extends Controller
             $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['communities']            = Community::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['project']            = Project::where('status', '=', 1)->orderBy('name', 'ASC')->get();
 
             if ($request->isMethod('post')) {
                 $postData                   = $request->all();
@@ -377,6 +378,8 @@ class NewsContentController extends Controller
                         'creative_Work_fiction'     => $postData['creative_Work_fiction'],
                         'community'                 => $postData['community'],
                         'community_name'            => $postData['community_name'],
+                        'projects'                 => $postData['projects'],
+                        'projects_name'            => $postData['projects_name'],
                         'additional_information'    => $postData['additional_information'],
                         'is_series'                 => $is_series,
                         'series_article_no'         => $series_article_no,
