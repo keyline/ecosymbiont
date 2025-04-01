@@ -758,6 +758,7 @@ function numberToOrdinal($number) {
                                 </div>
                             </div> 
                         </div>
+                        <?php dd($projects);?>
                         <div class="row mb-3">
                             <label for="projects" class="col-md-2 col-lg-4 col-form-label">32) Is this a special EaRTh Project?
                             </label>
@@ -775,7 +776,7 @@ function numberToOrdinal($number) {
                                 <div class="col-md-10 col-lg-8">                                    
                                     <select name="projects_name" class="form-control" id="projects_name">
                                         <option value="">Select</option>
-                                        <?php dd($projects); if($projects){ foreach($projects as $proj){?>
+                                        <?php  if($projects){ foreach($projects as $proj){?>
                                             <option value="<?=$proj->name?>" <?=(($projects_name == $proj->name) ? 'selected' : '')?>><?=$proj->name?></option>
                                         <?php } }?>
                                     </select>
