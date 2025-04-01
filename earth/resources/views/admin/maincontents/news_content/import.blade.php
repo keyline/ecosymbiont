@@ -857,6 +857,21 @@ function numberToOrdinal($number) {
 <script>    
     document.querySelector('#submitFormButton').addEventListener('click', function (e) {
     e.preventDefault(); // Prevent default form submission
+    document.getElementById("import_form").dataset.mode = mode; // Store mode in form dataset
+
+    if (mode === 'submit') {
+    var pdfFile = document.getElementById("nelp_pdf").files.length;
+        var existingPdf = document.querySelector("input[name='existing_nelp_pdf']");
+
+        if (pdfFile === 0 && !existingPdf) {
+            Swal.fire({
+                icon: 'error',
+                title: 'PDF Required!',
+                text: 'Please upload a PDF before publishing.',
+            });
+            return; // Stop further execution
+        }
+    }
 
     Swal.fire({
         title: 'Are you sure?',
