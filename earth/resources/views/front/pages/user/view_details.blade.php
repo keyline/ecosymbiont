@@ -72,6 +72,8 @@ use App\Models\ExpertiseArea;
       $participated_info = $row->participated_info;
       $community = $row->community;
       $community_name = $row->community_name;
+      $projects = $row->projects;
+      $projects_name = $row->projects_name;
       $organization_name = $row->organization_name;
       $organization_website = $row->organization_website;
       $ecosystem_affiliationId = $selected_ecosystem_affiliation;
