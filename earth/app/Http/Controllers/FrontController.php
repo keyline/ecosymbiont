@@ -3001,7 +3001,7 @@ class FrontController extends Controller
                         'bio_short'               => $postData['bio_short'],
                         'bio_long'               => $postData['bio_long'],                  
                     ];
-                    // Helper::pr($fields);
+                     Helper::pr($fields);
                     $fields2 = [                                                          
                         'email'                     => $postData['email'],                        
                         'first_name'                => $postData['first_name'],                                                                                                          
