@@ -74,3 +74,14 @@ grecaptcha.ready(function() {
     });
 });
 </script>
+
+<!-- site key [uat] -->
+<!-- <script src="https://www.google.com/recaptcha/api.js?render=6Lco6wQrAAAAAA6CUefDtu4VFOND-y_vJvvsGJTj"></script>
+<script>
+grecaptcha.ready(function() {
+    grecaptcha.execute('6Lco6wQrAAAAAA6CUefDtu4VFOND-y_vJvvsGJTj', {action: 'submit'}).then(function(token) {
+        // Add the token to your form submission
+        document.getElementById('g-recaptcha-response').value = token;
+    });
+});
+</script> -->

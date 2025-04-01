@@ -77,7 +77,7 @@ function numberToOrdinal($number) {
         <?php
         $setting = GeneralSetting::where('id', '=', 1)->first();
         if ($row) {
-            //  dd($row1);
+            //   dd($row);
             //  Helper::pr($row);
 
             $user_id = $row->user_id;
@@ -92,6 +92,7 @@ function numberToOrdinal($number) {
             $co_indigenous_affiliations = json_decode($row->co_indigenous_affiliations);
             $co_author_classification = json_decode($row->co_author_classification);
             $co_author_pronoun = json_decode($row->co_author_pronoun);
+            // dd($co_author_pronoun);
             $first_name = $row->first_name;                               
             $email = $row->email;          
             $for_publication_name = $row->for_publication_name;          
@@ -180,7 +181,7 @@ function numberToOrdinal($number) {
             $email = '';
             $countryId = '';
             $community = '';
-            $community_name = '';
+            // $community_name = '';
             $organization_name = '';
             $cover_image = '';
             $cover_image_caption = '';
@@ -202,6 +203,7 @@ function numberToOrdinal($number) {
             $other_article_part_doi_no  = '';
         }
         ?>
+        
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body pt-3">
@@ -367,21 +369,23 @@ function numberToOrdinal($number) {
                                                 <div class="row">
                                                     <label for="pronoun" class="col-md-2 col-lg-4 col-form-label">3I{{$i}}) <?=numberToOrdinal($i)?> co-author’s pronoun</label>
                                                     <div class="col-md-10 col-lg-8">
+                                                        <!-- ?php Helper::pr($pronoun); ?> -->
                                                         @if ($pronoun)
                                                             @foreach ($pronoun as $data)
-                                                                <?php
-                                                                // if($co_author_pronoun != ''){
-                                                                //     if($data->id == $co_author_pronoun[$i - 1]){
-                                                                //         $pronoun_checked = 'checked';
-                                                                //     } else {
-                                                                //         $pronoun_checked = '';
-                                                                //     }
-                                                                // } else {
-                                                                //     $pronoun_checked = '';
-                                                                // }
-                                                                $pronoun_checked = '';
-                                                                ?>
-                                                                <input type="radio" name="co_author_pronoun_{{$i}}" value="{{ $data->id }}" <?=$pronoun_checked?>>
+                                                                <!-- ?php
+                                                                if($co_author_pronoun != ''){
+                                                                    if($data->id == $co_author_pronoun[$i - 1]){
+                                                                        $pronoun_checked = 'checked';
+                                                                    } else {
+                                                                        $pronoun_checked = '';
+                                                                    }
+                                                                } else {
+                                                                    $pronoun_checked = '';
+                                                                }
+                                                                // $pronoun_checked = '';
+                                                                ?> -->
+                                                                <!-- <input type="radio" name="co_author_pronoun_{{$i}}" value="{{ $data->id }}" ?=$pronoun_checked?>> -->
+                                                                <input type="radio" name="co_author_pronoun_{{$i}}" value="{{ $data->id }}"  @checked($data->id == ($co_author_pronoun[$i - 1] ?? null)) >
                                                                 <label>{{ $data->name }}</label>
                                                             @endforeach
                                                         @endif                                
@@ -722,10 +726,10 @@ function numberToOrdinal($number) {
                                 <?php if($nelp_pdf != ''){?>
                                 <a href="<?= env('UPLOADS_URL') . 'newcontent/' . $nelp_pdf ?>" target="_blank"
                                     class="badge bg-primary">View PDF</a>
+                                    <!-- <input type="hidden" name="nelp_pdf" value="?= $nelp_pdf ?>"> -->
                                 <?php }?>                                
                             </div>
-                        </div>
-
+                        </div>                        
                         <div class="row mb-3">
                             <label for="community" class="col-md-2 col-lg-4 col-form-label">31) Are you a member of an EaRTh Community?
                             </label>
@@ -736,14 +740,15 @@ function numberToOrdinal($number) {
                                 <label for="no">No</label>
                             </div>
                         </div>
+                        <!-- ?php echo $community_name; die;?> -->
                         <div id="communityDetails" style="display: none;">
                             <div class="row mb-3">
                                 <label for="community_info" class="col-md-2 col-lg-4 col-form-label">31A) Select Community</label>
-                                <div class="col-md-10 col-lg-8">
+                                <div class="col-md-10 col-lg-8">                                    
                                     <select name="community_name" class="form-control" id="community_name">
-                                        <option value="" selected>Select</option>
+                                        <option value="">Select</option>
                                         <?php if($communities){ foreach($communities as $cmn){?>
-                                            <option value="<?=$cmn->name?>" <?=(($community_name == $cmn->name)?'selected':'')?>><?=$cmn->name?></option>
+                                            <option value="<?=$cmn->name?>" <?=(($community_name == $cmn->name) ? 'selected' : '')?>><?=$cmn->name?></option>
                                         <?php } }?>
                                     </select>
                                 <!-- <input type="hidden" name="community_name" value="{{ $community_name }}"> -->
@@ -764,7 +769,7 @@ function numberToOrdinal($number) {
                             <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label">32A) How many total creative-works in this series?
                             </label>
                             <div class="col-md-10 col-lg-8">
-                                <input type="number" name="series_article_no" class="form-control" id="series_article_no" min="1" value="<?=$series_article_no?>">
+                                <input type="number" name="series_article_no" class="form-control" id="series_article_no" value="<?=$series_article_no?>">
                             </div>
                         </div>
                         <div class="row series_yes mb-3">
@@ -774,6 +779,7 @@ function numberToOrdinal($number) {
                                 <input type="text" name="current_article_no" class="form-control" id="current_article_no" value="<?=$current_article_no?>">
                             </div>
                         </div>
+
                         <div class="row series_yes mb-3">
                             <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label">32C) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).
                             </label>
@@ -1169,7 +1175,7 @@ function numberToOrdinal($number) {
             $(".series_yes").show();
             $('#series_article_no').attr('required', true);
             $('#current_article_no').attr('required', true);
-            $('#other_article_part_doi_no').attr('required', true);
+            // $('#other_article_part_doi_no').attr('required', true);
         } else {
             $(".series_yes").hide();
             $('#series_article_no').attr('required', false);
@@ -1182,7 +1188,7 @@ function numberToOrdinal($number) {
                 $(".series_yes").show();
                 $('#series_article_no').attr('required', true);
                 $('#current_article_no').attr('required', true);
-                $('#other_article_part_doi_no').attr('required', true);
+                // $('#other_article_part_doi_no').attr('required', true);
             } else {
                 $(".series_yes").hide();
                 $('#series_article_no').attr('required', false);
@@ -1192,7 +1198,7 @@ function numberToOrdinal($number) {
         });
         $('#current_article_no').on('input', function(){
             var current_article_no = parseInt($('#current_article_no').val());
-            if(current_article_no <= 1){
+            if(current_article_no < 1){
                 $('#current_article_no').attr('required', false);
                 $('#other_article_part_doi_no').attr('required', false);
             } else {

@@ -77,7 +77,9 @@ $current_url = $protocol . $host . $uri;
                                 </div>
                             <?php } }?>
                         </div>
+                        <?php if(count($contents) >= 4) { ?>
                         <button id="load_more_btn" style="background-color: #d09c1c;border: #d09c1c;display: flex;margin: 0 auto;" class="btn btn-primary">Load More</button>
+                        <?php }?>
                         <div id="loading" style="display: none;text-align: center;">
                             <svg version="1.1" id="L5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                             viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">

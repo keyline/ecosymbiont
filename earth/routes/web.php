@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
         Route::match(['get', 'post'], '/', 'App\Http\Controllers\FrontController@home');
         Route::match(['get', 'post'], '/contact-us', 'App\Http\Controllers\FrontController@contactUs');
         Route::match(['get', 'post'], '/communities', 'App\Http\Controllers\FrontController@aboutUs');
+        Route::match(['get', 'post'], '/projects', 'App\Http\Controllers\FrontController@projects');
         Route::match(['get', 'post'], '/communities/SchumacherWild', 'App\Http\Controllers\FrontController@schumacherWild');
         Route::match(['get', 'post'], '/communities/WestOakland', 'App\Http\Controllers\FrontController@westoakland');
         Route::match(['get', 'post'], '/communities/ACTChangemakers', 'App\Http\Controllers\FrontController@actchangemakers');
