@@ -4063,6 +4063,7 @@ div.list-post .post-content h2 a:hover {
 }
 .single-post-box .post-content > div img{
   width: 100%;
+  max-width: 100%;
   height: auto;
   display: block;
 }
