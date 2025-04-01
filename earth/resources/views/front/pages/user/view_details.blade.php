@@ -433,6 +433,14 @@ use App\Models\ExpertiseArea;
                   <td><?= $community_name ?></td>
                 </tr>
                 <tr>
+                  <td>29) Is this a special EaRTh Project?</td>
+                  <td><?= $projects ?></td>
+                </tr>
+                <tr>
+                  <td>29A) Select Project</td>
+                  <td><?= $projects_name ?></td>
+                </tr>
+                <tr>
                   <td>31) Is this part of a series?</td>
                   <td><?=$is_series?></td>
                 </tr>
