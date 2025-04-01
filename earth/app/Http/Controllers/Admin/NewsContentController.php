@@ -423,7 +423,7 @@ class NewsContentController extends Controller
             $data['classification']         = UserClassification::where('user_id', '=', $user_id)->first();
             $data['communities']            = Community::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['projects']            = Project::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-            Helper::pr($data['projects']);
+            // Helper::pr($data['projects']);
 
             if ($request->isMethod('post')) {
                 $postData = $request->all();
