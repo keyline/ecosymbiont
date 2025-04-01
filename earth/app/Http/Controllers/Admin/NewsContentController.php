@@ -422,7 +422,7 @@ class NewsContentController extends Controller
             $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['classification']         = UserClassification::where('user_id', '=', $user_id)->first();
             $data['communities']            = Community::where('status', '=', 1)->orderBy('name', 'ASC')->get();
-            $data['projects']            = Project::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['project']            = Project::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             // Helper::pr($data['projects']);
 
             if ($request->isMethod('post')) {
