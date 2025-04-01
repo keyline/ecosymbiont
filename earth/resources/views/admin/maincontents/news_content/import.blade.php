@@ -730,6 +730,7 @@ function numberToOrdinal($number) {
                                 <a href="<?= env('UPLOADS_URL') . 'newcontent/' . $nelp_pdf ?>" target="_blank"
                                     class="badge bg-primary">View PDF</a>
                                     <!-- <input type="hidden" name="nelp_pdf" value="?= $nelp_pdf ?>"> -->
+                                    <input type="hidden" name="existing_nelp_pdf" value="<?= $nelp_pdf ?>">
                                 <?php }?>                                
                             </div>
                         </div>                        
@@ -1283,4 +1284,20 @@ function numberToOrdinal($number) {
             $('#other_article_part_doi_no').val(tagsArray);
         });
     });
+</script>
+<script>
+    function setMode(mode) {
+        document.getElementById("import_form").dataset.mode = mode; // Store mode in form dataset
+
+        if (mode === 'submit') {
+            var pdfFile = document.getElementById("nelp_pdf").files.length;
+            var existingPdf = document.querySelector("input[name='existing_nelp_pdf']");
+
+            if (pdfFile === 0 && !existingPdf) {
+                alert("Please upload a PDF before publishing.");
+                return false; // Prevent form submission
+            }
+        }
+        return true; // Allow form submission
+    }
 </script>
