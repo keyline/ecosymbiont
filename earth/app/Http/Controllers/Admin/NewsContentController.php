@@ -585,7 +585,7 @@ class NewsContentController extends Controller
                     'other_article_part_doi_no' => $other_article_part_doi_no,
                     'is_published'              => 1,                                                         
                     ];
-                     Helper::pr($fields);
+                    //  Helper::pr($fields);
                     Article::where('id', '=', $id)->update($fields);
                     // return redirect("admin/article/list")->with('success_message', 'Article saved successfully');                
                     return redirect("admin/article/editing-checking")->with('success_message', 'Article saved successfully');                
@@ -727,13 +727,15 @@ class NewsContentController extends Controller
                         'creative_Work_fiction'     => $postData['creative_Work_fiction'],
                         'community'                 => $postData['community'],
                         'community_name'            => $postData['community_name'],
+                        'projects'                 => $postData['projects'],
+                        'projects_name'            => $postData['projects_name'],
                         'additional_information'    => $postData['additional_information'],
                         'is_series'                 => $is_series,
                         'series_article_no'         => $series_article_no,
                         'current_article_no'        => $current_article_no,
                         'other_article_part_doi_no' => $other_article_part_doi_no,
                     ];
-                    // Helper::pr($fields);
+                    Helper::pr($fields);
                     NewsContent::insert($fields);
 
                     $fieldsArticle = [
