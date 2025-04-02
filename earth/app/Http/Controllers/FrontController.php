@@ -379,6 +379,7 @@ class FrontController extends Controller
                                                 'news_contents.created_at',
                                                 'news_contents.media',
                                                 'news_contents.videoId',
+                                                'news_contents.co_author_names',
                                                 'sub_category.sub_category as sub_category_name', 
                                                 'parent_category.sub_category as parent_category_name',
                                                 'sub_category.slug as sub_category_slug',
@@ -391,8 +392,9 @@ class FrontController extends Controller
                                                     ->orWhere('news_contents.long_desc', 'LIKE', '%' . $search_keyword . '%')
                                                     ->orWhere('news_contents.author_name', 'LIKE', '%' . $search_keyword . '%')
                                                     ->orWhere('news_contents.organization_name', 'LIKE', '%' . $search_keyword . '%')
-                                                    ->orWhere('news_contents.keywords', 'LIKE', '%' . $search_keyword . '%');
-                                            })
+                                                    ->orWhere('news_contents.keywords', 'LIKE', '%' . $search_keyword . '%')
+                                                    ->orWhereRaw("JSON_CONTAINS(news_contents.co_author_names, ?)", [json_encode($search_keyword)]);
+                                            })                                            
                                             ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
                                                     ->orWhere('news_contents.current_article_no', 0) // First part of series
@@ -475,39 +477,39 @@ class FrontController extends Controller
                                              ->get();
             } elseif($search_type == 'Author name'){
                 // DB::enableQueryLog();
-                $data['contents']   = NewsContent::select(
-                                                        'news_contents.id', 
-                                                        'news_contents.new_title', 
-                                                        'news_contents.sub_title', 
-                                                        'news_contents.slug', 
-                                                        'news_contents.author_name', 
-                                                        'news_contents.for_publication_name', 
-                                                        'news_contents.cover_image',
-                                                        'news_contents.cover_image_caption',
-                                                        'news_contents.created_at',
-                                                        'news_contents.media',
-                                                        'news_contents.videoId',
-                                                        'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
-                                                        'parent_category.sub_category as parent_category_name', // From parent_category name
-                                                        'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
-                                                        'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
-                                                    )
-                                            ->join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
-                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
-                                            ->where(function($query) {
-                                                $query->where('news_contents.status', 1);
-                                             })
-                                             ->where(function($query) use ($search_keyword) {
-                                                $query->where('news_contents.author_name', 'LIKE', '%'.$search_keyword.'%');
-                                             })
-                                             ->where(function ($query) {
-                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
-                                                    ->orWhere('news_contents.current_article_no', 0) // First part of series
-                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
-                                            })
-                                             ->orderBy('news_contents.created_at', 'DESC')
-                                             ->limit(4)
-                                             ->get();
+                $data['contents'] = NewsContent::select(
+                                            'news_contents.id', 
+                                            'news_contents.new_title', 
+                                            'news_contents.sub_title', 
+                                            'news_contents.slug', 
+                                            'news_contents.author_name', 
+                                            'news_contents.for_publication_name', 
+                                            'news_contents.cover_image',
+                                            'news_contents.cover_image_caption',
+                                            'news_contents.created_at',
+                                            'news_contents.media',
+                                            'news_contents.videoId',
+                                            'news_contents.co_author_names',
+                                            'sub_category.sub_category as sub_category_name', 
+                                            'parent_category.sub_category as parent_category_name', 
+                                            'sub_category.slug as sub_category_slug', 
+                                            'parent_category.slug as parent_category_slug' 
+                                        )
+                                        ->join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                        ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
+                                        ->where('news_contents.status', 1)
+                                        ->where(function ($query) use ($search_keyword) {
+                                            $query->where('news_contents.author_name', 'LIKE', '%' . $search_keyword . '%')
+                                                  ->orWhereRaw("JSON_CONTAINS(news_contents.co_author_names, ?)", [json_encode($search_keyword)]);
+                                        })
+                                        ->where(function ($query) {
+                                            $query->whereNull('news_contents.current_article_no')
+                                                ->orWhere('news_contents.current_article_no', 0)
+                                                ->orWhere('news_contents.current_article_no', 1);
+                                        })
+                                        ->orderBy('news_contents.created_at', 'DESC')
+                                        ->limit(4)
+                                        ->get();            
                                             //   dd(DB::getQueryLog());
             } elseif($search_type == 'Subtitle'){
                 $data['contents']   = NewsContent::select(
@@ -871,6 +873,7 @@ class FrontController extends Controller
                                                         'news_contents.created_at',
                                                         'news_contents.media',
                                                         'news_contents.videoId',
+                                                        'news_contents.co_author_names',
                                                         'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
                                                         'parent_category.sub_category as parent_category_name', // From parent_category name
                                                         'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
@@ -882,7 +885,8 @@ class FrontController extends Controller
                                                 $query->where('news_contents.status', 1);
                                              })
                                              ->where(function($query) use ($search_keyword) {
-                                                $query->where('news_contents.author_name', 'LIKE', '%'.$search_keyword.'%');
+                                                $query->whereRaw('news_contents.author_name', 'LIKE', '%'.$search_keyword.'%')
+                                                      ->orwhereRaw("JSON_CONTAINS(news_contents.co_author_names, ?)", [json_encode($search_keyword)]);
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
@@ -1168,7 +1172,8 @@ class FrontController extends Controller
                                                       ->orWhere('long_desc', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('author_name', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('organization_name', 'LIKE', '%'.$search_keyword.'%')
-                                                      ->orWhere('keywords', 'LIKE', '%'.$search_keyword.'%');
+                                                      ->orWhere('keywords', 'LIKE', '%'.$search_keyword.'%')
+                                                      ->orWhereRaw("JSON_CONTAINS(co_author_names, ?)", [json_encode($search_keyword)]);
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('current_article_no') // Standalone articles
@@ -1395,13 +1400,13 @@ class FrontController extends Controller
                     $verifyURL = 'https://www.google.com/recaptcha/api/siteverify';
 
                     // Your Google reCAPTCHA secret key [live]
-                    // $secretKey = '6LcIw04qAAAAAJCWh02op84FgNvxexQsh9LLCuqW';
+                    $secretKey = '6LcIw04qAAAAAJCWh02op84FgNvxexQsh9LLCuqW';
                 
                     // Your Google reCAPTCHA secret key [dev]
                     // $secretKey = '6Ldum88qAAAAANVww5Xe6aHFL-g_UHLsHl7HGKs5';
 
                     // Your Google reCAPTCHA secret key [uat]
-                    $secretKey = '6Lco6wQrAAAAAJksrZFpNTfW07l2QLUKMsQ6bREb';
+                    // $secretKey = '6Lco6wQrAAAAAJksrZFpNTfW07l2QLUKMsQ6bREb';
                     
 
                     // Prepare the POST request
@@ -1907,7 +1912,7 @@ class FrontController extends Controller
                     'orginal_work'              => 'required', 
                     'copyright'                 => 'required', 
                     'submission_types'          => 'required',
-                    // 'additional_information'    => ['required', 'string', new MaxWords(100)],
+                    // 'additional_information'    => 'required',
                     'state'                     => 'required',
                     'city'                      => 'required', 
                     'acknowledge'               => 'required',                                                      
@@ -1919,13 +1924,13 @@ class FrontController extends Controller
                     // 'organization_website'      => 'required',
                     'ecosystem_affiliation'     => 'required',
                     'expertise_area'            => 'required',
-                    'explanation'               => ['required', 'string', new MaxWords(100)],
-                    'explanation_submission'    => ['required', 'string', new MaxWords(150)],                
-                    'creative_Work'             => ['required', 'string', new MaxWords(10)],
+                    'explanation'               => 'required',
+                    'explanation_submission'    => 'required',                
+                    'creative_Work'             => 'required',
                     'creative_Work_fiction'     => 'required',
-                    'subtitle'                  => ['required', 'string', new MaxWords(40)],                
-                    'bio_short'                 => ['required', 'string', new MaxWords(40)],
-                    'bio_long'                  => ['required', 'string', new MaxWords(250)], 
+                    'subtitle'                  => 'required',                
+                    'bio_short'                 => 'required',
+                    'bio_long'                  => 'required', 
                     ];                                    
                     
                     $participatedInfo = isset($postData['participated_info']) ? $postData['participated_info'] : '';
@@ -2945,12 +2950,12 @@ class FrontController extends Controller
                     'pronoun'                   => 'required',   
                     'ecosystem_affiliation'     => 'required',               
                     'expertise_area'            => 'required',                
-                    'explanation'               => ['required', 'string', new MaxWords(100)],
-                    'explanation_submission'    => ['required', 'string', new MaxWords(150)],  
+                    'explanation'               => 'required',
+                    'explanation_submission'    => 'required',  
                     'community'                 => 'required',              
-                    // 'creative_Work'             => ['required', 'string', new MaxWords(10)],                                  
-                    'bio_short'                 => ['required', 'string', new MaxWords(40)],
-                    'bio_long'                  => ['required', 'string', new MaxWords(250)],
+                    // 'creative_Work'             => 'required',,                                  
+                    'bio_short'                 => 'required',
+                    'bio_long'                  => 'required',
                 ];
                 $participatedInfo = isset($postData['participated_info']) ? $postData['participated_info'] : '';
                 $invited_byInfo = isset($postData['invited_by']) ? $postData['invited_by'] : '';
@@ -3050,11 +3055,11 @@ class FrontController extends Controller
                     'ecosystem_affiliation'     => 'required',               
                     'expertise_area'            => 'required',          
                     'community'                 => 'required',      
-                    'explanation'               => ['required', 'string', new MaxWords(100)],
-                    'explanation_submission'    => ['required', 'string', new MaxWords(150)],                
-                    // 'creative_Work'             => ['required', 'string', new MaxWords(10)],                                  
-                    'bio_short'                 => ['required', 'string', new MaxWords(40)],
-                    'bio_long'                  => ['required', 'string', new MaxWords(250)],
+                    'explanation'               => 'required',
+                    'explanation_submission'    => 'required',                
+                    // 'creative_Work'             => 'required',,                                  
+                    'bio_short'                 => 'required',
+                    'bio_long'                  => 'required',
                 ];
                 $participatedInfo = isset($postData['participated_info']) ? $postData['participated_info'] : '';
                 $invited_byInfo = isset($postData['invited_by']) ? $postData['invited_by'] : '';
@@ -3140,7 +3145,8 @@ class FrontController extends Controller
         {
             $id                                         = Helper::decoded($id);                              
             $page_name                                  = 'article.view_details';
-            $data['row']                                = Article::where('status', '!=', 3)->where('id', '=', $id)->orderBy('id', 'DESC')->first();
+            $data['row']                                = Article::where('id', '=', $id)->orderBy('id', 'DESC')->first();
+            // $data['row']                                = Article::where('status', '!=', 3)->where('id', '=', $id)->orderBy('id', 'DESC')->first();
             //  dd($data['row']);
             $data['selected_ecosystem_affiliation']     = json_decode($data['row']->ecosystem_affiliationId);
             $data['selected_expertise_area']            = json_decode($data['row']->expertise_areaId);
