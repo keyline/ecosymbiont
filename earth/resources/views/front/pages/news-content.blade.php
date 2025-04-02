@@ -37,7 +37,7 @@ $current_url = $protocol . $host . $uri;
                                         <li><i class="fa fa-clock-o"></i><?=date_format(date_create($rowContent->created_at), "d M Y")?></li>
                                         <?php         
                                         $co_authors = $rowContent->co_authors;
-                                        $co_author_name = json_decode($row->co_author_names); 
+                                        $co_author_name = json_decode($rowContent->co_author_names); 
                                         for($i = 1; $i <= $co_authors; $i++)
                                             {
                                                 if ($i == 1) { ?>
