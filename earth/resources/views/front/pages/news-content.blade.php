@@ -39,11 +39,11 @@ $current_url = $protocol . $host . $uri;
                                         $co_authors = $rowContent->co_authors;
                                         $co_author_name = json_decode($rowContent->co_author_names);                                         
                                             if ($co_authors == 0) { ?>
-                                                <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?= $rowContent->for_publication_name ?? $rowContent->author_name ?> | <?=$rowContent->creative_work_DOI?></a></li>
+                                                <li><i class="fa fa-user"></i>by <?= $rowContent->for_publication_name ?? $rowContent->author_name ?> | <?=$rowContent->creative_work_DOI?></li>
                                             <?php } elseif ($co_authors == 1) { ?>
-                                            <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?= $rowContent->for_publication_name ?? $rowContent->author_name ?> & <?= $co_author_name[$co_authors-1] ?> | <?=$rowContent->creative_work_DOI?></a></li>
+                                            <li><i class="fa fa-user"></i>by <?= $rowContent->for_publication_name ?? $rowContent->author_name ?> & <?= $co_author_name[$co_authors-1] ?> | <?=$rowContent->creative_work_DOI?></li>
                                             <?php } else { ?>
-                                                <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?= $rowContent->for_publication_name ?? $rowContent->author_name ?>, <?= $co_author_name[$co_authors-2] ?> & <?= $co_author_name[$co_authors-1] ?> | <?=$rowContent->creative_work_DOI?></a></li>
+                                                <li><i class="fa fa-user"></i>by <?= $rowContent->for_publication_name ?? $rowContent->author_name ?>, <?= $co_author_name[$co_authors-2] ?> & <?= $co_author_name[$co_authors-1] ?> | <?=$rowContent->creative_work_DOI?></li>
                                             <?php }
                                         ?>                                                                        
                                         <!-- <li><a href="#"><i class="fa fa-comments-o"></i><span>0</span></a></li>
