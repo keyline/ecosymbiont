@@ -478,7 +478,7 @@ class FrontController extends Controller
                                              ->limit(4)
                                              ->get();
             } elseif($search_type == 'Author name'){
-                // DB::enableQueryLog();
+                DB::enableQueryLog();
                 $data['contents']   = NewsContent::select(
                                                         'news_contents.id', 
                                                         'news_contents.new_title', 
@@ -503,9 +503,12 @@ class FrontController extends Controller
                                                 $query->where('news_contents.status', 1);
                                              })
                                              ->where(function($query) use ($search_keyword) {
-                                                $query->whereRaw('news_contents.author_name', 'LIKE', '%'.$search_keyword.'%')
-                                                    ->orwhereRaw("JSON_CONTAINS(news_contents.co_author_names, ?)", [json_encode($search_keyword)]);
-                                             })                                             
+                                                $query->where('news_contents.author_name', 'LIKE', '%'.$search_keyword.'%');
+                                                    // ->orwhereRaw("JSON_CONTAINS(news_contents.co_author_names, ?)", [json_encode($search_keyword)]);
+                                             })                 
+                                             ->where(function($query) use ($search_keyword) {                                                
+                                                $query->whereRaw("JSON_CONTAINS(news_contents.co_author_names, ?)", [json_encode($search_keyword)]);
+                                             })                            
                                              ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
                                                     ->orWhere('news_contents.current_article_no', 0) // First part of series
@@ -514,7 +517,7 @@ class FrontController extends Controller
                                              ->orderBy('news_contents.created_at', 'DESC')
                                              ->limit(4)
                                              ->get();
-                                            //   dd(DB::getQueryLog());
+                                              dd(DB::getQueryLog());
             } elseif($search_type == 'Subtitle'){
                 $data['contents']   = NewsContent::select(
                                                         'news_contents.id', 
