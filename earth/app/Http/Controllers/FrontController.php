@@ -499,20 +499,15 @@ class FrontController extends Controller
                                                     )
                                             ->join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
                                             ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
-                                            ->where(function($query) {
-                                                $query->where('news_contents.status', 1);
-                                             })
-                                             ->where(function($query) use ($search_keyword) {
+                                            ->where('news_contents.status', 1)
+                                            ->where(function ($query) use ($search_keyword) {
                                                 $query->whereRaw('news_contents.author_name', 'LIKE', '%'.$search_keyword.'%')
-                                                    ->orwhereRaw("JSON_CONTAINS(news_contents.co_author_names, ?)", [json_encode($search_keyword)]);
-                                             })                 
-                                            //  ->where(function($query) use ($search_keyword) {                                                
-                                            //     $query->whereRaw("JSON_CONTAINS(news_contents.co_author_names, ?)", [json_encode($search_keyword)]);
-                                            //  })                            
-                                             ->where(function ($query) {
-                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
-                                                    ->orWhere('news_contents.current_article_no', 0) // First part of series
-                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
+                                                    ->orWhereRaw("JSON_CONTAINS(news_contents.co_author_names, ?)", [json_encode([$search_keyword])]); 
+                                            })
+                                            ->where(function ($query) {
+                                                $query->whereNull('news_contents.current_article_no')
+                                                    ->orWhere('news_contents.current_article_no', 0)
+                                                    ->orWhere('news_contents.current_article_no', 1);
                                             })
                                              ->orderBy('news_contents.created_at', 'DESC')
                                              ->limit(4)
