@@ -35,7 +35,20 @@ $current_url = $protocol . $host . $uri;
                                     <h1><?=$rowContent->new_title?></h1>
                                     <ul class="post-tags">
                                         <li><i class="fa fa-clock-o"></i><?=date_format(date_create($rowContent->created_at), "d M Y")?></li>
-                                        <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?= $rowContent->for_publication_name ?? $rowContent->author_name ?> | <?=$rowContent->creative_work_DOI?></a></li>
+                                        <?php         
+                                        $co_authors = $rowContent->co_authors;
+                                        $co_author_name = json_decode($row->co_author_names); 
+                                        for($i = 1; $i <= $co_authors; $i++)
+                                            {
+                                                if ($i == 1) { ?>
+                                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?= $rowContent->for_publication_name ?? $rowContent->author_name ?> & <?= $co_author_name[$i-1] ?> | <?=$rowContent->creative_work_DOI?></a></li>
+                                                <?php } elseif ($i == 2) { ?>
+                                                <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?= $rowContent->for_publication_name ?? $rowContent->author_name ?>, <?= $co_author_name[$i-2] ?> & <?= $co_author_name[$i-1] ?> | <?=$rowContent->creative_work_DOI?></a></li>
+                                                <?php } else { ?>
+                                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?= $rowContent->for_publication_name ?? $rowContent->author_name ?> | <?=$rowContent->creative_work_DOI?></a></li>
+                                                <?php }
+                                            }
+                                        ?>                                                                        
                                         <!-- <li><a href="#"><i class="fa fa-comments-o"></i><span>0</span></a></li>
                                         <li><i class="fa fa-eye"></i>872</li> -->
                                     </ul>
