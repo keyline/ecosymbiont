@@ -534,8 +534,8 @@ class FrontController extends Controller
                 ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
                 ->where('news_contents.status', 1)
                 ->where(function ($query) use ($search_keyword) {
-                    $query->whereRaw("LOWER(news_contents.author_name) LIKE ?", ['%' . strtolower($search_keyword) . '%'])
-                        ->orWhereRaw("JSON_CONTAINS(CAST(news_contents.co_author_names AS JSON), ?)", [json_encode([$search_keyword])]); 
+                    $query->where('news_contents.author_name', 'LIKE', '%' . $search_keyword . '%')
+              ->orWhereRaw("JSON_CONTAINS(news_contents.co_author_names, ?)", [json_encode($search_keyword)]);
                 })
                 ->where(function ($query) {
                     $query->whereNull('news_contents.current_article_no')
