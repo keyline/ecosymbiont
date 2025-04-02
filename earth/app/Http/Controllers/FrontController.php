@@ -364,7 +364,7 @@ class FrontController extends Controller
         if($request->isMethod('get')){
             $postData           = $request->all();
             $search_keyword     = $postData['article_search'];
-            // DB::enableQueryLog();
+            DB::enableQueryLog();
             $data['contents'] = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
                                             ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
                                             ->select(
@@ -379,6 +379,7 @@ class FrontController extends Controller
                                                 'news_contents.created_at',
                                                 'news_contents.media',
                                                 'news_contents.videoId',
+                                                'news_contents.co_author_names',
                                                 'sub_category.sub_category as sub_category_name', 
                                                 'parent_category.sub_category as parent_category_name',
                                                 'sub_category.slug as sub_category_slug',
@@ -393,6 +394,9 @@ class FrontController extends Controller
                                                     ->orWhere('news_contents.organization_name', 'LIKE', '%' . $search_keyword . '%')
                                                     ->orWhere('news_contents.keywords', 'LIKE', '%' . $search_keyword . '%');
                                             })
+                                            ->where(function($query) use ($search_keyword) {                                                
+                                                $query->whereRaw("JSON_CONTAINS(news_contents.co_author_names, ?)", [json_encode($search_keyword)]);
+                                             })
                                             ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
                                                     ->orWhere('news_contents.current_article_no', 0) // First part of series
@@ -401,7 +405,7 @@ class FrontController extends Controller
                                             ->orderBy('news_contents.created_at', 'DESC')
                                             ->limit(4)
                                             ->get();
-                                            //   dd(DB::getQueryLog());
+                                              dd(DB::getQueryLog());
 
             // Helper::pr($searchResults);
             
