@@ -36,19 +36,19 @@ $current_url = $protocol . $host . $uri;
                                     <ul class="post-tags">
                                         <li><i class="fa fa-clock-o"></i><?=date_format(date_create($rowContent->created_at), "d M Y")?></li>
                                         <?php         
-                                        echo $co_authors = $rowContent->co_authors;
+                                        $co_authors = $rowContent->co_authors;
                                         $co_author_name = json_decode($rowContent->co_author_names); 
-                                        for($i = 0; $i <= $co_authors; $i++)
-                                            {
-                                                $co_author_count = $i;
-                                            }
-                                            echo $co_author_count;
-                                            if ($co_author_count == 0) { ?>
+                                        // for($i = 0; $i <= $co_authors; $i++)
+                                        //     {
+                                        //         $co_author_count = $i;
+                                        //     }
+                                        //     echo $co_author_count;
+                                            if ($co_authors == 0) { ?>
                                                 <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?= $rowContent->for_publication_name ?? $rowContent->author_name ?> | <?=$rowContent->creative_work_DOI?></a></li>
-                                            <?php } elseif ($co_author_count == 1) { ?>
-                                            <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?= $rowContent->for_publication_name ?? $rowContent->author_name ?> & <?= $co_author_name[$co_author_count-1] ?> | <?=$rowContent->creative_work_DOI?></a></li>
+                                            <?php } elseif ($co_authors == 1) { ?>
+                                            <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?= $rowContent->for_publication_name ?? $rowContent->author_name ?> & <?= $co_author_name[$co_authors-1] ?> | <?=$rowContent->creative_work_DOI?></a></li>
                                             <?php } else { ?>
-                                                <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?= $rowContent->for_publication_name ?? $rowContent->author_name ?>, <?= $co_author_name[$co_author_count-2] ?> & <?= $co_author_name[$co_author_count-1] ?> | <?=$rowContent->creative_work_DOI?></a></li>
+                                                <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?= $rowContent->for_publication_name ?? $rowContent->author_name ?>, <?= $co_author_name[$co_authors-2] ?> & <?= $co_author_name[$co_authors-1] ?> | <?=$rowContent->creative_work_DOI?></a></li>
                                             <?php }
                                         ?>                                                                        
                                         <!-- <li><a href="#"><i class="fa fa-comments-o"></i><span>0</span></a></li>
