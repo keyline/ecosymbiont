@@ -479,39 +479,73 @@ class FrontController extends Controller
                                              ->get();
             } elseif($search_type == 'Author name'){
                 DB::enableQueryLog();
-                $data['contents']   = NewsContent::select(
-                                                        'news_contents.id', 
-                                                        'news_contents.new_title', 
-                                                        'news_contents.sub_title', 
-                                                        'news_contents.slug', 
-                                                        'news_contents.author_name', 
-                                                        'news_contents.for_publication_name', 
-                                                        'news_contents.cover_image',
-                                                        'news_contents.cover_image_caption',
-                                                        'news_contents.created_at',
-                                                        'news_contents.media',
-                                                        'news_contents.videoId',
-                                                        'news_contents.co_author_names',
-                                                        'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
-                                                        'parent_category.sub_category as parent_category_name', // From parent_category name
-                                                        'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
-                                                        'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
-                                                    )
-                                            ->join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
-                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
-                                            ->where('news_contents.status', 1)
-                                            ->where(function ($query) use ($search_keyword) {
-                                                $query->whereRaw('news_contents.author_name', 'LIKE', '%'.$search_keyword.'%')
-                                                    ->orWhereRaw("JSON_CONTAINS(news_contents.co_author_names, ?)", [json_encode([$search_keyword])]); 
-                                            })
-                                            ->where(function ($query) {
-                                                $query->whereNull('news_contents.current_article_no')
-                                                    ->orWhere('news_contents.current_article_no', 0)
-                                                    ->orWhere('news_contents.current_article_no', 1);
-                                            })
-                                             ->orderBy('news_contents.created_at', 'DESC')
-                                             ->limit(4)
-                                             ->get();
+                // $data['contents']   = NewsContent::select(
+                //                                         'news_contents.id', 
+                //                                         'news_contents.new_title', 
+                //                                         'news_contents.sub_title', 
+                //                                         'news_contents.slug', 
+                //                                         'news_contents.author_name', 
+                //                                         'news_contents.for_publication_name', 
+                //                                         'news_contents.cover_image',
+                //                                         'news_contents.cover_image_caption',
+                //                                         'news_contents.created_at',
+                //                                         'news_contents.media',
+                //                                         'news_contents.videoId',
+                //                                         'news_contents.co_author_names',
+                //                                         'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
+                //                                         'parent_category.sub_category as parent_category_name', // From parent_category name
+                //                                         'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
+                //                                         'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                //                                     )
+                //                             ->join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                //                             ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
+                //                             ->where('news_contents.status', 1)
+                //                             ->where(function ($query) use ($search_keyword) {
+                //                                 $query->whereRaw('news_contents.author_name', 'LIKE', '%'.$search_keyword.'%')
+                //                                     ->orWhereRaw("JSON_CONTAINS(news_contents.co_author_names, ?)", [json_encode([$search_keyword])]); 
+                //                             })
+                //                             ->where(function ($query) {
+                //                                 $query->whereNull('news_contents.current_article_no')
+                //                                     ->orWhere('news_contents.current_article_no', 0)
+                //                                     ->orWhere('news_contents.current_article_no', 1);
+                //                             })
+                //                              ->orderBy('news_contents.created_at', 'DESC')
+                //                              ->limit(4)
+                //                              ->get();
+                $data['contents'] = NewsContent::select(
+                    'news_contents.id', 
+                    'news_contents.new_title', 
+                    'news_contents.sub_title', 
+                    'news_contents.slug', 
+                    'news_contents.author_name', 
+                    'news_contents.for_publication_name', 
+                    'news_contents.cover_image',
+                    'news_contents.cover_image_caption',
+                    'news_contents.created_at',
+                    'news_contents.media',
+                    'news_contents.videoId',
+                    'news_contents.co_author_names',
+                    'sub_category.sub_category as sub_category_name', 
+                    'parent_category.sub_category as parent_category_name', 
+                    'sub_category.slug as sub_category_slug', 
+                    'parent_category.slug as parent_category_slug' 
+                )
+                ->join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
+                ->where('news_contents.status', 1)
+                ->where(function ($query) use ($search_keyword) {
+                    $query->whereRaw("LOWER(news_contents.author_name) LIKE ?", ['%' . strtolower($search_keyword) . '%'])
+                        ->orWhereRaw("JSON_CONTAINS(CAST(news_contents.co_author_names AS JSON), ?)", [json_encode([$search_keyword])]); 
+                })
+                ->where(function ($query) {
+                    $query->whereNull('news_contents.current_article_no')
+                        ->orWhere('news_contents.current_article_no', 0)
+                        ->orWhere('news_contents.current_article_no', 1);
+                })
+                ->orderBy('news_contents.created_at', 'DESC')
+                ->limit(4)
+                ->get();
+            
                                               dd(DB::getQueryLog());
             } elseif($search_type == 'Subtitle'){
                 $data['contents']   = NewsContent::select(
