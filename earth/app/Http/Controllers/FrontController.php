@@ -1172,7 +1172,8 @@ class FrontController extends Controller
                                                       ->orWhere('long_desc', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('author_name', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('organization_name', 'LIKE', '%'.$search_keyword.'%')
-                                                      ->orWhere('keywords', 'LIKE', '%'.$search_keyword.'%');
+                                                      ->orWhere('keywords', 'LIKE', '%'.$search_keyword.'%')
+                                                      ->orWhereRaw("JSON_CONTAINS(co_author_names, ?)", [json_encode($search_keyword)]);
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('current_article_no') // Standalone articles
