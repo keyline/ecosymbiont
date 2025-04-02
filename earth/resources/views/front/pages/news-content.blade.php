@@ -37,12 +37,7 @@ $current_url = $protocol . $host . $uri;
                                         <li><i class="fa fa-clock-o"></i><?=date_format(date_create($rowContent->created_at), "d M Y")?></li>
                                         <?php         
                                         $co_authors = $rowContent->co_authors;
-                                        $co_author_name = json_decode($rowContent->co_author_names); 
-                                        // for($i = 0; $i <= $co_authors; $i++)
-                                        //     {
-                                        //         $co_author_count = $i;
-                                        //     }
-                                        //     echo $co_author_count;
+                                        $co_author_name = json_decode($rowContent->co_author_names);                                         
                                             if ($co_authors == 0) { ?>
                                                 <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?= $rowContent->for_publication_name ?? $rowContent->author_name ?> | <?=$rowContent->creative_work_DOI?></a></li>
                                             <?php } elseif ($co_authors == 1) { ?>
@@ -785,7 +780,8 @@ $current_url = $protocol . $host . $uri;
             
              
             //  Helper::pr($co_author_class); 
-            $author_name = $rowContent->author_name;
+            // $author_name = $rowContent->author_name;
+            $author_name = $rowContent->for_publication_name ?? $rowContent->author_name;            
             $new_title = $rowContent->new_title;
             $doi = $rowContent->creative_work_DOI;
             $co_authors = $rowContent->co_authors;
