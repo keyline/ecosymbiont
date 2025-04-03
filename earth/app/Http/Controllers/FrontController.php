@@ -887,7 +887,7 @@ class FrontController extends Controller
                                                 $query->where('news_contents.status', 1);
                                              })
                                              ->where(function($query) use ($search_keyword) {
-                                                $query->whereRaw('news_contents.author_name', 'LIKE', '%'.$search_keyword.'%')
+                                                $query->where('news_contents.author_name', 'LIKE', '%'.$search_keyword.'%')
                                                 ->orWhereRaw("JSON_CONTAINS(news_contents.co_author_names, ?)", [json_encode($search_keyword)]);
                                                 // ->orWhereRaw("JSON_SEARCH(COALESCE(news_contents.co_author_names, '[]'), 'all', ?)", [$search_keyword]);
                                              })
