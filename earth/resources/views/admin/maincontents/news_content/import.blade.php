@@ -899,8 +899,8 @@ function numberToOrdinal($number) {
         if (pdfFile === 0 && !existingPdf) {
             Swal.fire({
                 icon: 'error',
-                title: 'PDF Required!',
-                text: 'Please upload a PDF before publishing.',
+                title: 'NELP Required!',
+                text: 'Please upload an NELP before submitting.',
             });
             return; // Stop further execution
         }
