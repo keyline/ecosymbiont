@@ -888,7 +888,7 @@ class FrontController extends Controller
                                              })
                                              ->where(function($query) use ($search_keyword) {
                                                 $query->whereRaw('news_contents.author_name', 'LIKE', '%'.$search_keyword.'%')
-                                                ->orWhereRaw("JSON_SEARCH(news_contents.co_author_names, 'all', ?)", [$search_keyword]);
+                                                ->orWhereRaw("JSON_SEARCH(COALESCE(news_contents.co_author_names, '[]'), 'all', ?)", [$search_keyword]);
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
