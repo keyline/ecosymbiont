@@ -360,7 +360,7 @@ $current_url = $protocol . $host . $uri;
                 }              
             },
             error: function () {
-                alert('End of search results');
+                alert('End of search results with error');
                 $('#loading').hide();
             }
         });
