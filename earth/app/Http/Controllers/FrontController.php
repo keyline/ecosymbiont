@@ -837,6 +837,7 @@ class FrontController extends Controller
                                                         'news_contents.cover_image',
                                                         'news_contents.cover_image_caption',
                                                         'news_contents.created_at',
+                                                        'news_contents.co_author_names',                                                        
                                                         'news_contents.media',
                                                         'news_contents.videoId',
                                                         'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
