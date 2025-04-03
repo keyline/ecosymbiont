@@ -296,7 +296,8 @@ $current_url = $protocol . $host . $uri;
                                                         <?php } else {?>
                                                             <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
                                                         <?php }?> -->
-                                                        <a href="https://www.youtube.com/watch?v=<?=$parentCategoryContent3->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                        <!-- <a href="https://www.youtube.com/watch?v=?=$parentCategoryContent3->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a> -->
+                                                        <a href="<?=url('content/' . $parentCategoryContent3->parent_category_slug. '/' . $parentCategoryContent3->sub_category_slug. '/' . $parentCategoryContent3->slug)?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                                     </div>
                                                 <?php } ?>
                                                 <div class="hover-box">
