@@ -393,7 +393,8 @@ class FrontController extends Controller
                                                     ->orWhere('news_contents.author_name', 'LIKE', '%' . $search_keyword . '%')
                                                     ->orWhere('news_contents.organization_name', 'LIKE', '%' . $search_keyword . '%')
                                                     ->orWhere('news_contents.keywords', 'LIKE', '%' . $search_keyword . '%')
-                                                    ->orWhereRaw("JSON_CONTAINS(news_contents.co_author_names, ?)", [json_encode($search_keyword)]);
+                                                    // ->orWhereRaw("JSON_CONTAINS(news_contents.co_author_names, ?)", [json_encode($search_keyword)]);
+                                                    ->orWhereRaw("JSON_UNQUOTE(JSON_EXTRACT(COALESCE(news_contents.co_author_names, '[]'), '$[*]')) LIKE ?", ['%' . $search_keyword . '%']);
                                             })                                            
                                             ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
@@ -500,7 +501,8 @@ class FrontController extends Controller
                                         ->where('news_contents.status', 1)
                                         ->where(function ($query) use ($search_keyword) {
                                             $query->where('news_contents.author_name', 'LIKE', '%' . $search_keyword . '%')
-                                                  ->orWhereRaw("JSON_CONTAINS(news_contents.co_author_names, ?)", [json_encode($search_keyword)]);
+                                                //   ->orWhereRaw("JSON_CONTAINS(news_contents.co_author_names, 'LIKE')", '%'. [json_encode($search_keyword)] . '%')
+                                                ->orWhereRaw("JSON_UNQUOTE(JSON_EXTRACT(COALESCE(news_contents.co_author_names, '[]'), '$[*]')) LIKE ?", ['%' . $search_keyword . '%']);
                                         })
                                         ->where(function ($query) {
                                             $query->whereNull('news_contents.current_article_no')
@@ -783,6 +785,7 @@ class FrontController extends Controller
                                                         'news_contents.created_at',
                                                         'news_contents.media',
                                                         'news_contents.videoId',
+                                                        'news_contents.co_author_names',
                                                         'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
                                                         'parent_category.sub_category as parent_category_name', // From parent_category name
                                                         'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
@@ -797,7 +800,8 @@ class FrontController extends Controller
                                                       ->orWhere('news_contents.long_desc', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('news_contents.author_name', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('news_contents.organization_name', 'LIKE', '%'.$search_keyword.'%')
-                                                      ->orWhere('news_contents.keywords', 'LIKE', '%'.$search_keyword.'%');
+                                                      ->orWhere('news_contents.keywords', 'LIKE', '%'.$search_keyword.'%')
+                                                      ->orWhereRaw("JSON_UNQUOTE(JSON_EXTRACT(COALESCE(news_contents.co_author_names, '[]'), '$[*]')) LIKE ?", ['%' . $search_keyword . '%']);
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
@@ -835,7 +839,7 @@ class FrontController extends Controller
                                                         'news_contents.for_publication_name', 
                                                         'news_contents.cover_image',
                                                         'news_contents.cover_image_caption',
-                                                        'news_contents.created_at',
+                                                        'news_contents.created_at',                                                                                                                
                                                         'news_contents.media',
                                                         'news_contents.videoId',
                                                         'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
@@ -849,7 +853,7 @@ class FrontController extends Controller
                                                 $query->where('news_contents.status', 1);
                                              })
                                              ->where(function($query) use ($search_keyword) {
-                                                $query->where('news_contents.new_title', 'LIKE', '%'.$search_keyword.'%');
+                                                $query->where('news_contents.new_title', 'LIKE', '%'.$search_keyword.'%');                                                
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
@@ -861,6 +865,7 @@ class FrontController extends Controller
                                             ->limit($limit)
                                             ->get();
             } elseif($search_type == 'Author name'){
+                // DB::enableQueryLog();
                 $contents   = NewsContent::select(
                                                         'news_contents.id', 
                                                         'news_contents.new_title', 
@@ -885,8 +890,8 @@ class FrontController extends Controller
                                                 $query->where('news_contents.status', 1);
                                              })
                                              ->where(function($query) use ($search_keyword) {
-                                                $query->whereRaw('news_contents.author_name', 'LIKE', '%'.$search_keyword.'%')
-                                                      ->orwhereRaw("JSON_CONTAINS(news_contents.co_author_names, ?)", [json_encode($search_keyword)]);
+                                                $query->where('news_contents.author_name', 'LIKE', '%'.$search_keyword.'%')                                                
+                                                ->orWhereRaw("JSON_UNQUOTE(JSON_EXTRACT(COALESCE(news_contents.co_author_names, '[]'), '$[*]')) LIKE ?", ['%' . $search_keyword . '%']);                                                
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('news_contents.current_article_no') // Standalone articles
@@ -897,6 +902,7 @@ class FrontController extends Controller
                                             ->offset($offset)
                                             ->limit($limit)
                                             ->get();
+                                            //  dd(DB::getQueryLog());
             } elseif($search_type == 'Subtitle'){
                 $contents   = NewsContent::select(
                                                         'news_contents.id', 
@@ -1173,7 +1179,8 @@ class FrontController extends Controller
                                                       ->orWhere('author_name', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('organization_name', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('keywords', 'LIKE', '%'.$search_keyword.'%')
-                                                      ->orWhereRaw("JSON_CONTAINS(co_author_names, ?)", [json_encode($search_keyword)]);
+                                                    //   ->orWhereRaw("JSON_CONTAINS(co_author_names, ?)", [json_encode($search_keyword)]);
+                                                    ->orWhereRaw("JSON_UNQUOTE(JSON_EXTRACT(COALESCE(news_contents.co_author_names, '[]'), '$[*]')) LIKE ?", ['%' . $search_keyword . '%']);
                                              })
                                              ->where(function ($query) {
                                                 $query->whereNull('current_article_no') // Standalone articles
