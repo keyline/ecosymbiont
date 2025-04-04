@@ -1,3 +1,8 @@
+<?php
+use App\Models\NewsCategory;
+use App\Models\NewsContent;
+use App\Helpers\Helper;
+?>
 <div class="col-md-3 col-sm-4 sidebar-sticky">
                     <!-- sidebar -->
                     <div class="sidebar large-sidebar theiaStickySidebar">
