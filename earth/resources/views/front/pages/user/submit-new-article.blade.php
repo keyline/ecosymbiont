@@ -581,7 +581,7 @@ use Illuminate\Support\Facades\DB;
                                     <label for="subtitle" class="col-md-2 col-lg-4 col-form-label blue-text">16) Subtitle — brief engaging summary of your Creative-Work (30-40 words)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <textarea name="subtitle" class="form-control" id="subtitle" rows="3">{{ old('subtitle', $subtitle ?? '') }}</textarea>
+                                        <textarea name="subtitle" class="form-control" id="subtitle" rows="3" required>{{ old('subtitle', $subtitle ?? '') }}</textarea>
                                         <div id="subtitleError" class="error"></div>
                                     </div>
                                 </div>
