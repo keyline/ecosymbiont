@@ -165,7 +165,7 @@ $current_url = $protocol . $host . $uri;
                                         ?php } else {?>
                                             <a href="?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
                                         ?php }?> -->
-                                        <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link video-link-popup"><i class="fa fa-play-circle-o"></i></a>
+                                        <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link-popup"><i class="fa fa-play-circle-o"></i></a>
                                     </div>
                                 <?php } ?>
                                 <div class="post-content">
