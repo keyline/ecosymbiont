@@ -115,7 +115,7 @@ $current_url = $protocol . $host . $uri;
                     </div>
                     <!-- End block content -->
                 </div>
-                @include('layouts._sidebar')
+                @include('front.pages.rightsidebar')
             </div>
         </div>
     </section>
