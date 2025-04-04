@@ -466,7 +466,8 @@ $current_url = $protocol . $host . $uri;
                                                             ?php } else {?>
                                                                 <a href="?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
                                                             ?php }?> -->
-                                                            <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                            <!-- <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a> -->
+                                                            <a href="<?=url('content/' . $alsoLikeContent->parent_category_slug. '/' . $alsoLikeContent->sub_category_slug . '/' . $alsoLikeContent->slug)?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                                         </div>
                                                     <?php } ?>
                                                     <div class="hover-box">
@@ -480,9 +481,6 @@ $current_url = $protocol . $host . $uri;
                                                 </div>
                                             <?php } }?>
                                         <?php } else {?>
-                                            <?php
-                                            // Helper::pr($other_articles_in_this_series);
-                                            ?>
                                             <?php if($other_articles_in_this_series){ foreach($other_articles_in_this_series as $other_articles_in_this_series_row){?>
                                                 <?php if($current_article_no != $other_articles_in_this_series_row->current_article_no){?>
                                                     <div class="item news-post video-post video_post_text">
@@ -504,7 +502,8 @@ $current_url = $protocol . $host . $uri;
                                                                 ?php } else {?>
                                                                     <a href="?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
                                                                 ?php }?> -->
-                                                                <a href="https://www.youtube.com/watch?v=<?=$other_articles_in_this_series_row->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                                <!-- <a href="https://www.youtube.com/watch?v=<?=$other_articles_in_this_series_row->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a> -->
+                                                                <a href="<?=url('content/' . $other_articles_in_this_series_row->parent_category_slug. '/' . $other_articles_in_this_series_row->category_slug . '/' . $other_articles_in_this_series_row->slug)?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                                             </div>
                                                         <?php } ?>
                                                         <div class="hover-box">

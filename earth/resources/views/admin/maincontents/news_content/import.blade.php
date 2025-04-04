@@ -109,6 +109,8 @@ function numberToOrdinal($number) {
             $city = $row->city;
             $community = $row->community;
             $community_name = $row->community_name;
+            $projects = $row->projects;
+            $projects_name = $row->projects_name;
             $organization_name = $row->organization_name;
             $organization_website = $row->organization_website;
             $ecosystem_affiliationId = (($row->ecosystem_affiliationId != '')?json_decode($row->ecosystem_affiliationId):[]);
@@ -181,6 +183,7 @@ function numberToOrdinal($number) {
             $email = '';
             $countryId = '';
             $community = '';
+            $projects = '';
             // $community_name = '';
             $organization_name = '';
             $cover_image = '';
@@ -727,6 +730,7 @@ function numberToOrdinal($number) {
                                 <a href="<?= env('UPLOADS_URL') . 'newcontent/' . $nelp_pdf ?>" target="_blank"
                                     class="badge bg-primary">View PDF</a>
                                     <!-- <input type="hidden" name="nelp_pdf" value="?= $nelp_pdf ?>"> -->
+                                    <input type="hidden" name="existing_nelp_pdf" value="<?= $nelp_pdf ?>">
                                 <?php }?>                                
                             </div>
                         </div>                        
@@ -749,6 +753,31 @@ function numberToOrdinal($number) {
                                         <option value="">Select</option>
                                         <?php if($communities){ foreach($communities as $cmn){?>
                                             <option value="<?=$cmn->name?>" <?=(($community_name == $cmn->name) ? 'selected' : '')?>><?=$cmn->name?></option>
+                                        <?php } }?>
+                                    </select>
+                                <!-- <input type="hidden" name="community_name" value="{{ $community_name }}"> -->
+                                </div>
+                            </div> 
+                        </div>                        
+                        <div class="row mb-3">
+                            <label for="projects" class="col-md-2 col-lg-4 col-form-label">32) Is this a special EaRTh Project?
+                            </label>
+                            <div class="col-md-10 col-lg-8">
+                                <input type="radio" class="readonly-input" id="projects_yes" name="projects" value="Yes" required @checked(old('projects', $projects) == 'Yes')>
+                                <label for="yes">Yes</label>
+                                <input type="radio" class="readonly-input" id="projects_no" name="projects" value="No" required @checked(old('projects', $projects) == 'No')>
+                                <label for="no">No</label>
+                            </div>
+                        </div>
+                        <!-- ?php echo $projects_name; die;?> -->
+                        <div id="projectsDetails" style="display: none;">
+                            <div class="row mb-3">
+                                <label for="projects_info" class="col-md-2 col-lg-4 col-form-label">32A) Select projects</label>
+                                <div class="col-md-10 col-lg-8">                                    
+                                    <select name="projects_name" class="form-control" id="projects_name">
+                                        <option value="">Select</option>
+                                        <?php  if($project){ foreach($project as $proj){?>
+                                            <option value="<?=$proj->name?>" <?=(($projects_name == $proj->name) ? 'selected' : '')?>><?=$proj->name?></option>
                                         <?php } }?>
                                     </select>
                                 <!-- <input type="hidden" name="community_name" value="{{ $community_name }}"> -->
@@ -825,9 +854,24 @@ function numberToOrdinal($number) {
         document.getElementById('actionMode').value = mode;
     }
 </script>
-<script>    
+<!-- <script>    
     document.querySelector('#submitFormButton').addEventListener('click', function (e) {
     e.preventDefault(); // Prevent default form submission
+    document.getElementById("import_form").dataset.mode = mode; // Store mode in form dataset
+
+    if (mode === 'submit') {
+    var pdfFile = document.getElementById("nelp_pdf").files.length;
+        var existingPdf = document.querySelector("input[name='existing_nelp_pdf']");
+
+        if (pdfFile === 0 && !existingPdf) {
+            Swal.fire({
+                icon: 'error',
+                title: 'PDF Required!',
+                text: 'Please upload a PDF before publishing.',
+            });
+            return; // Stop further execution
+        }
+    }
 
     Swal.fire({
         title: 'Are you sure?',
@@ -843,7 +887,41 @@ function numberToOrdinal($number) {
         }
     });
 });
+</script> -->
+<script>
+    document.querySelector('#submitFormButton').addEventListener('click', function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        var pdfFile = document.getElementById("nelp_pdf").files.length;
+        var existingPdf = document.querySelector("input[name='existing_nelp_pdf']");
+
+        // Validate PDF upload only for final publishing
+        if (pdfFile === 0 && !existingPdf) {
+            Swal.fire({
+                icon: 'error',
+                title: 'NELP Required!',
+                text: 'Please upload an NELP before submitting.',
+            });
+            return; // Stop further execution
+        }
+
+        // Confirmation popup
+        Swal.fire({
+            title: 'Are you sure?',
+            html: "Once the final submission is made, further edits to this article cannot be made here. However, you can make edits through the 'News Content' module.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#4CAF50',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Publish it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.querySelector('#import_form').submit();
+            }
+        });
+    });
 </script>
+
 <script type="text/javascript">
     $(document).ready(function() {
         var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
@@ -1162,6 +1240,20 @@ function numberToOrdinal($number) {
             $('#communityDetails').toggle(communityYes);
         }
         $('input[name="invited"], input[name="community"]').on('change', function() {
+            toggleFields();
+        });
+        toggleFields();
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        function toggleFields() {            
+            const projectsYes = $('#projects_yes').is(':checked');            
+            
+            // Toggle individual sections            
+            $('#projectsDetails').toggle(projectsYes);
+        }
+        $('input[name="invited"], input[name="projects"]').on('change', function() {
             toggleFields();
         });
         toggleFields();

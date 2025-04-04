@@ -188,7 +188,8 @@ use App\Helpers\Helper;
                                     <?php } else {?>
                                         <div class="video-post">
                                             <img alt="" src="https://img.youtube.com/vi/<?=$rowContent->videoId?>/hqdefault.jpg">
-                                            <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                            <!-- <a href="https://www.youtube.com/watch?v=?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a> -->
+                                            <a href="<?=url('content/' . $rowContent->parent_category_slug. '/' . $rowContent->sub_category_slug . '/' . $rowContent->slug)?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                         </div>
                                     <?php } ?>
 

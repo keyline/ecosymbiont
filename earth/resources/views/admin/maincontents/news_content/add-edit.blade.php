@@ -104,6 +104,8 @@ function numberToOrdinal($number) {
             $city = $row->city;
             $community = $row->community;
             $community_name = $row->community_name;
+            $projects = $row->projects;
+            $projects_name = $row->projects_name;
             $organization_name = $row->organization_name;
             $organization_website = $row->organization_website;
             $ecosystem_affiliationId = (($row->author_affiliation != '')?json_decode($row->author_affiliation):[]);
@@ -734,6 +736,31 @@ function numberToOrdinal($number) {
                                 </div> 
                             </div>
                             <div class="row mb-3">
+                            <label for="projects" class="col-md-2 col-lg-4 col-form-label">32) Is this a special EaRTh Project?
+                            </label>
+                            <div class="col-md-10 col-lg-8">
+                                <input type="radio" class="readonly-input" id="projects_yes" name="projects" value="Yes" required @checked(old('projects', $projects) == 'Yes')>
+                                <label for="yes">Yes</label>
+                                <input type="radio" class="readonly-input" id="projects_no" name="projects" value="No" required @checked(old('projects', $projects) == 'No')>
+                                <label for="no">No</label>
+                            </div>
+                        </div>
+                        <!-- ?php echo $projects_name; die;?> -->
+                        <div id="projectsDetails" style="display: none;">
+                            <div class="row mb-3">
+                                <label for="projects_info" class="col-md-2 col-lg-4 col-form-label">32A) Select projects</label>
+                                <div class="col-md-10 col-lg-8">                                    
+                                    <select name="projects_name" class="form-control" id="projects_name">
+                                        <option value="">Select</option>
+                                        <?php  if($project){ foreach($project as $proj){?>
+                                            <option value="<?=$proj->name?>" <?=(($projects_name == $proj->name) ? 'selected' : '')?>><?=$proj->name?></option>
+                                        <?php } }?>
+                                    </select>
+                                <!-- <input type="hidden" name="community_name" value="{{ $community_name }}"> -->
+                                </div>
+                            </div> 
+                        </div>
+                            <div class="row mb-3">
                                 <label for="is_series" class="col-md-2 col-lg-4 col-form-label">32) Is this part of a series?
                                 </label>
                                 <div class="col-md-10 col-lg-8">
@@ -1136,6 +1163,20 @@ function numberToOrdinal($number) {
             $('#communityDetails').toggle(communityYes);
         }
         $('input[name="invited"], input[name="community"]').on('change', function() {
+            toggleFields();
+        });
+        toggleFields();
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        function toggleFields() {            
+            const projectsYes = $('#projects_yes').is(':checked');            
+            
+            // Toggle individual sections            
+            $('#projectsDetails').toggle(projectsYes);
+        }
+        $('input[name="invited"], input[name="projects"]').on('change', function() {
             toggleFields();
         });
         toggleFields();
