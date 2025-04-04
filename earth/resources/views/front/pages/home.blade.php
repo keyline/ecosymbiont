@@ -105,7 +105,8 @@ $current_url = $protocol . $host . $uri;
                                                 <?php } else {?>
                                                     <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
                                                 <?php }?> -->
-                                                <a href="https://www.youtube.com/watch?v=<?=$parentCategoryContent1->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                <!-- <a href="https://www.youtube.com/watch?v=?=$parentCategoryContent1->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a> -->
+                                                <a href="<?=url('content/' . $parentCategoryContent1->parent_category_slug. '/' . $parentCategoryContent1->category_slug . '/' . $parentCategoryContent1->slug)?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                             </div>
                                         <?php } ?>
                                         <div class="hover-box">
@@ -212,7 +213,8 @@ $current_url = $protocol . $host . $uri;
                                                 <?php } else {?>
                                                     <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
                                                 <?php }?> -->
-                                                <a href="https://www.youtube.com/watch?v=<?=$parentCategoryContent8->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                <!-- <a href="https://www.youtube.com/watch?v=?=$parentCategoryContent8->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a> -->
+                                                <a href="<?=url('content/' . $parentCategoryContent8->parent_category_slug. '/' . $parentCategoryContent8->category_slug . '/' . $parentCategoryContent8->slug)?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                             </div>
                                         <?php } ?>
                                         <div class="hover-box">
@@ -409,7 +411,8 @@ $current_url = $protocol . $host . $uri;
                                             <?php } else {?>
                                                 <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
                                             <?php }?> -->
-                                            <a href="https://www.youtube.com/watch?v=<?=$parentCategoryContent2->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                            <!-- <a href="https://www.youtube.com/watch?v=?=$parentCategoryContent2->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a> -->
+                                            <a href="<?=url('content/'. $parentCategoryContent2->parent_category_slug. '/' . $parentCategoryContent2->category_slug . '/' . $parentCategoryContent2->slug)?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                         </div>
                                     <?php } ?>
                                     <div class="hover-box">
@@ -516,7 +519,8 @@ $current_url = $protocol . $host . $uri;
                                             <?php } else {?>
                                                 <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
                                             <?php }?> -->
-                                            <a href="https://www.youtube.com/watch?v=<?=$parentCategoryContent9->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                            <!-- <a href="https://www.youtube.com/watch?v=?=$parentCategoryContent9->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a> -->
+                                            <a href="<?=url('content/' . $parentCategoryContent9->parent_category_slug. '/' . $parentCategoryContent9->category_slug . '/' . $parentCategoryContent9->slug)?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                         </div>
                                     <?php } ?>
                                     <div class="hover-box">
@@ -619,7 +623,8 @@ $current_url = $protocol . $host . $uri;
                                                                 <?php } else {?>
                                                                     <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
                                                                 <?php }?> -->
-                                                                <a href="https://www.youtube.com/watch?v=<?=$featuredContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                                <!-- <a href="https://www.youtube.com/watch?v=<=$featuredContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a> -->
+                                                                <a href="<?=url('content/' . $featuredContent->parent_category_slug. '/' . $featuredContent->category_slug . '/' . $featuredContent->slug)?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                                             </div>
                                                         </div>
                                                     <?php } ?>
@@ -711,7 +716,8 @@ $current_url = $protocol . $host . $uri;
                                                     <?php } else {?>
                                                         <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
                                                     <?php }?> -->
-                                                    <a href="https://www.youtube.com/watch?v=<?=$featuredContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                    <!-- <a href="https://www.youtube.com/watch?v=?=$featuredContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a> -->
+                                                    <a href="<?=url('content/' . $featuredContent->parent_category_slug. '/' . $featuredContent->category_slug . '/' . $featuredContent->slug)?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                                 </div>
                                             <?php } ?>
                                             <div class="post-content">
@@ -795,7 +801,8 @@ $current_url = $protocol . $host . $uri;
                                                             <?php } else {?>
                                                                 <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
                                                             <?php }?> -->
-                                                            <a href="https://www.youtube.com/watch?v=<?=$popularContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                            <!-- <a href="https://www.youtube.com/watch?v=?=$popularContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a> -->
+                                                            <a href="<?=url('content/'. $popularContent->parent_category_slug. '/' . $popularContent->category_slug . '/' .  $popularContent->slug)?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                                         </div>
                                                     <?php } ?>
                                                     <div class="post-content">
@@ -868,7 +875,8 @@ $current_url = $protocol . $host . $uri;
                                                             <?php } else {?>
                                                                 <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
                                                             <?php }?> -->
-                                                            <a href="https://www.youtube.com/watch?v=<?=$recentContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                            <!-- <a href="https://www.youtube.com/watch?v=<?=$recentContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a> -->
+                                                            <a href="<?=url('content/' . $recentContent->parent_category_slug. '/' . $recentContent->category_slug . '/' .  $recentContent->slug)?>"class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                                         </div>
                                                     <?php } ?>
                                                     <div class="post-content">
@@ -937,9 +945,12 @@ $current_url = $protocol . $host . $uri;
                         <?php if($videoContents){ foreach($videoContents as $videoContent){ ?>
                             <div class="item news-post video-post">
                                 <img alt="" src="https://img.youtube.com/vi/<?=$videoContent->videoId?>/hqdefault.jpg">
-                                <a href="https://www.youtube.com/watch?v=<?=$videoContent->videoId?>" class="video-link">
+                                <!-- <a href="https://www.youtube.com/watch?v=<?=$videoContent->videoId?>" class="video-link">
                                     <i class="fa fa-play-circle-o"></i>
-                                </a>
+                                </a> -->
+                                <a href="<?=url('content/' . $videoContent->parent_category_slug. '/' . $videoContent->category_slug . '/' . $videoContent->slug)?>" class="video-link">
+                                <i class="fa fa-play-circle-o"></i>                                
+                                        </a>
                                 <div class="hover-box">
                                     <a href="<?=url('category/' . $videoContent->parent_category_slug)?>"><?=$videoContent->parent_category_name?></a>
                                     <h2>
@@ -1044,7 +1055,8 @@ $current_url = $protocol . $host . $uri;
                                                         <?php } else {?>
                                                             <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
                                                         <?php }?> -->
-                                                        <a href="https://www.youtube.com/watch?v=<?=$latestarticle->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                        <!-- <a href="https://www.youtube.com/watch?v=?=$latestarticle->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a> -->
+                                                        <a href="<?=url('content/' . $latestarticle->parent_category_slug. '/' . $latestarticle->category_slug . '/' . $latestarticle->slug)?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                                     </div>
                                                 <?php } ?>
                                             </div>
