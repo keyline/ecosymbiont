@@ -906,7 +906,7 @@ use Illuminate\Support\Facades\DB;
                                             <select name="community_name" class="form-control" id="community_name">
                                                 <!-- <option value="" selected>Select</option>
                                                 ?php if($communities){ foreach($communities as $cmn){?>
-                                                    <option value="?=$cmn->name?>" disabled<?=(($community_name == $cmn->name)?'selected':'')?>><?=$cmn->name?></option>
+                                                    <option value="?=$cmn->name?>" disabled<\?=(($community_name == $cmn->name)?'selected':'')?>><\?=$cmn->name?></option>
                                                 ?php } }?> -->
 
                                                 @if ($communities)
