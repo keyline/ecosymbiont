@@ -904,10 +904,17 @@ use Illuminate\Support\Facades\DB;
                                         <label for="community_info" class="col-md-2 col-lg-4 col-form-label">28A) Select Community</label>
                                         <div class="col-md-10 col-lg-8">
                                             <select name="community_name" class="form-control" id="community_name">
-                                                <option value="" selected>Select</option>
-                                                <?php if($communities){ foreach($communities as $cmn){?>
-                                                    <option value="<?=$cmn->name?>" disabled<?=(($community_name == $cmn->name)?'selected':'')?>><?=$cmn->name?></option>
-                                                <?php } }?>
+                                                <!-- <option value="" selected>Select</option>
+                                                ?php if($communities){ foreach($communities as $cmn){?>
+                                                    <option value="?=$cmn->name?>" disabled<?=(($community_name == $cmn->name)?'selected':'')?>><?=$cmn->name?></option>
+                                                ?php } }?> -->
+
+                                                @if ($communities)
+                                                @foreach ($communities as $data)
+                                                    <option value="{{ $data->name }}" disabled @selected($data->name == $community_name)>
+                                                        {{ $data->name }}</option>
+                                                @endforeach
+                                            @endif
                                             </select>
                                             <input type="hidden" name="community_name" value="{{ $community_name }}">
                                         </div>
