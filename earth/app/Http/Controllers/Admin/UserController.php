@@ -676,6 +676,21 @@ class UserController extends Controller
             echo $this->admin_after_login_layout($title,$page_name,$data);
         }
     /* email logs */
+    /* home control */
+    public function homeControl(){
+        $data['gallery']                = NewsContent::where('status', '=', 1)->where('is_gallery', '=', 1)->orderBy('id', 'DESC')->get();
+        $data['featured']               = NewsContent::where('status', '=', 1)->where('is_feature', '=', 1)->orderBy('id', 'DESC')->get();
+        $data['projects']               = NewsContent::where('status', '=', 1)->where('projects', '=', 'yes')->where('is_home', '=', 1)->orderBy('id', 'DESC')->get();
+        $data['interviews']              = NewsContent::where('status', '=', 1)->where('projects', '=', 'yes')->where('is_home', '=', 1)->orderBy('id', 'DESC')->get();
+        $data['webinars']                = NewsContent::where('status', '=', 1)->where('projects', '=', 'yes')->where('is_home', '=', 1)->orderBy('id', 'DESC')->get();
+        $data['video_content']            = NewsContent::where('status', '=', 1)->where('media', '=', 'video')->where('is_home', '=', 1)->orderBy('id', 'DESC')->get();
+        $data['webinars']                = NewsContent::where('status', '=', 1)->where('projects', '=', 'yes')->where('is_home', '=', 1)->orderBy('id', 'DESC')->get();
+        $title                          = 'Home Control';
+        $page_name                      = 'home-control';
+        echo $this->admin_after_login_layout($title,$page_name,$data);
+    }
+    /* home control */
+
     /* login logs */
         public function loginLogs(){
             $data['rows1']                   = UserActivity::where('activity_type', '=', 0)->orderBy('activity_id', 'DESC')->get();

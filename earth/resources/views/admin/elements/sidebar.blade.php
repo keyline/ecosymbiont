@@ -136,6 +136,15 @@ if($pageSegment == 'article'){
                         </div>
                     </div>
                 <!-- End masters -->
+                 <!-- Home control -->
+                 <div class="nav-item">
+                        <a class="nav-link <?= $pageSegment == 'home-control' ? 'active' : '' ?>"
+                            href="<?= url('admin/home-control') ?>" data-placement="left">
+                            <i class="fa fa-home nav-icon"></i>
+                            <span class="nav-link-title">Home control</span>
+                        </a>
+                    </div>
+                <!-- End Home control -->
                 <!-- email logs -->
                     <div class="nav-item">
                         <a class="nav-link <?= $pageSegment == 'email-logs' ? 'active' : '' ?>"
