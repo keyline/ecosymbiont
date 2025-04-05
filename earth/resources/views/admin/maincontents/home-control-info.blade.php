@@ -46,7 +46,7 @@ use App\Helpers\Helper;
                 <?php if($rows){ $sl=1; foreach($rows as $row){?>
                   <tr>
                     <td>
-                      <input type='checkbox' name='draw[]' value="<?php echo $row->id ?>" class="required-checkbox">
+                      <input type='checkbox' name='draw[]' value="<?php echo $row->id ?>" class="required-checkbox" onclick="limitCheckboxes(this)">
                     </td>
                     <th scope="row"><?=$sl++?></th>
                     <td><?=$row->new_title?></td>
@@ -64,3 +64,20 @@ use App\Helpers\Helper;
     </div>
   </div>
 </section>
+
+<script>
+function limitCheckboxes(clickedCheckbox) {
+    const checkboxes = document.querySelectorAll('.row-checkbox');
+    const maxChecked = 5;
+
+    let checkedCount = 0;
+    checkboxes.forEach(cb => {
+        if (cb.checked) checkedCount++;
+    });
+
+    if (checkedCount > maxChecked) {
+        clickedCheckbox.checked = false;
+        alert("You can select a maximum of 5 rows only.");
+    }
+}
+</script>
