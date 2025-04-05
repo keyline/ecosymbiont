@@ -58,13 +58,13 @@ use App\Helpers\Helper;
               <?php for ($i = 0; $i < $max; $i++) { ?>
                 <tr>
                   <th scope="row"><?= $i + 1 ?></th>
-                  <td><?= isset($gallery[$i]) ? $gallery[$i]->new_title : '-' ?></td>
-                  <td><?= isset($featured[$i]) ? $featured[$i]->new_title : '-' ?></td>
-                  <td><?= isset($projects[$i]) ? $projects[$i]->new_title : '-' ?></td>
-                  <td><?= isset($interviews[$i]) ? $interviews[$i]->new_title : '-' ?></td>
-                  <td><?= isset($webinars[$i]) ? $webinars[$i]->new_title : '-' ?></td>
-                  <td><?= isset($video_content[$i]) ? $video_content[$i]->new_title : '-' ?></td>
-                  <td><?= isset($explore_projects[$i]) ? $explore_projects[$i]->new_title : '-' ?></td>
+                  <td><?= isset($gallery[$i]) ? wordwrap($gallery[$i]->new_title, 10, "<br>") : '-' ?></td>
+                  <td><?= isset($featured[$i]) ? wordwrap($featured[$i]->new_title, 10, "<br>") : '-' ?></td>
+                  <td><?= isset($projects[$i]) ? wordwrap($projects[$i]->new_title, 10, "<br>") : '-' ?></td>
+                  <td><?= isset($interviews[$i]) ? wordwrap($interviews[$i]->new_title, 10, "<br>") : '-' ?></td>
+                  <td><?= isset($webinars[$i]) ? wordwrap($webinars[$i]->new_title, 10, "<br>") : '-' ?></td>
+                  <td><?= isset($video_content[$i]) ? wordwrap($video_content[$i]->new_title, 10, "<br>") : '-' ?></td>
+                  <td><?= isset($explore_projects[$i]) ? wordwrap($explore_projects[$i]->new_title, 10, "<br>") : '-' ?></td>
                 </tr>
               <?php } ?>
               </tbody>
