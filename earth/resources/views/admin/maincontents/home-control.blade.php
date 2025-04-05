@@ -50,10 +50,10 @@ use App\Helpers\Helper;
                     <td><?=$gallery1->new_title?></td>
                     <td></td>
                     <td></td>
-                    <td><?=date_format(date_create($row->created_at), "M d, Y h:i A")?></td>
-                    <td>
-                      <a class="btn btn-info btn-sm" href="<?=url('admin/email-logs/details/'.Helper::encoded($row->id))?>"><i class="fa fa-eye"></i> Details</a>
-                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                   </tr>
                 <?php } }?>
               </tbody>
