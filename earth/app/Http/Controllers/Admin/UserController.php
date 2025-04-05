@@ -720,6 +720,7 @@ class UserController extends Controller
             // Save these IDs to another table, or process them as needed
             foreach ($selected_ids as $id) {
                 // Helper::pr($id);
+                $fields = [];
                 // Save or update logic here
                 if($slug == 'Gallery'){
                     $fields = [
