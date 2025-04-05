@@ -216,6 +216,14 @@ $(document).ready(function($) {
 	// } catch(err) {
 
 	// }
+	try {
+		// Example with multiple objects
+		$('.video-link-popup').magnificPopup({
+			type: 'iframe'
+		});
+	} catch(err) {
+
+	}
 
 	try {
 		var magnLink = $('.log-in-popup');
