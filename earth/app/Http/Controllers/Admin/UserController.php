@@ -710,6 +710,24 @@ class UserController extends Controller
         $page_name                      = 'home-control-info';
         echo $this->admin_after_login_layout($title,$page_name,$data);
     }
+    public function homeControlSaveDetails(Request $request, $slug){
+        $slug = $slug;
+        $postData   = $request->all();
+        $selected_ids         = $postData['draw'];
+        // $selected_ids = $this->input->post('draw');
+        if ($selected_ids) {
+            // Save these IDs to another table, or process them as needed
+            foreach ($selected_ids as $id) {
+                Helper::pr($id);
+                // Save or update logic here
+            }
+    
+            // Redirect or return response
+            return redirect()->back()->with('success_message', 'Updated successfully'); 
+        } else {
+            return redirect()->back()->with('error_message', 'update failed'); 
+        }        
+    }
     /* home control */
 
     /* login logs */
