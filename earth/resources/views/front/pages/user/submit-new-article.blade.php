@@ -1309,6 +1309,8 @@ use Illuminate\Support\Facades\DB;
 
         if (submissionTypes == '1') {
             submissionTypesADiv.style.display = 'block';
+            $('#narrative_file').attr('required', true);
+            $('#narrative_images_1').attr('required', true);            
         } else {
             submissionTypesADiv.style.display = 'none';
         }
@@ -1356,6 +1358,8 @@ use Illuminate\Support\Facades\DB;
             // Show only the number of fields selected
             for (let i = 1; i <= count; i++) {            
                 document.getElementById('card_' + i).style.display = 'block';
+                $('#image_file_1').attr('required', true);
+                $('#narrative_image_desc_1').attr('required', true);
             }
         }
 
