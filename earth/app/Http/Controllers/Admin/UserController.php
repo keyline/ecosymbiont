@@ -690,8 +690,22 @@ class UserController extends Controller
         echo $this->admin_after_login_layout($title,$page_name,$data);
     }
     public function homeControlDetails(Request $request,$slug ){
-        echo $slug = $slug; die;
-        $data['logData']                   = EmailLog::where('id', '=', $id)->orderBy('id', 'DESC')->first();
+        $slug = $slug;
+        if($slug == 'gallery'){
+            $data['rows']                   = NewsContent::where('status', '=', 1)->orderBy('id', 'DESC')->get();
+        } elseif($slug == 'featured'){
+            $data['rows']                   = NewsContent::where('status', '=', 1)->orderBy('id', 'DESC')->get();
+        } elseif($slug == 'projects'){
+            $data['rows']                   = NewsContent::where('status', '=', 1)->where('projects', '=', 'yes')->orderBy('id', 'DESC')->get();
+        } elseif($slug == 'interviews'){
+            $data['rows']                   = NewsContent::where('status', '=', 1)->where('projects_name', '=', 'Interviews')->orderBy('id', 'DESC')->get();
+        } elseif($slug == 'webinars'){
+            $data['rows']                   = NewsContent::where('status', '=', 1)->where('projects_name', '=', 'Webinars')->orderBy('id', 'DESC')->get();
+        } elseif($slug == 'video_content'){
+            $data['rows']                   = NewsContent::where('status', '=', 1)->where('media', '=', 'video')->orderBy('id', 'DESC')->get();
+        } elseif($slug == 'explore_projects'){
+            $data['rows']                   = NewsContent::where('status', '=', 1)->where('projects', '=', 'yes')->orderBy('id', 'DESC')->get();
+        }           
         $title                          = 'Home Control Details';
         $page_name                      = 'home-control-info';
         echo $this->admin_after_login_layout($title,$page_name,$data);
