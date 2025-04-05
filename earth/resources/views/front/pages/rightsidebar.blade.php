@@ -34,7 +34,7 @@ use App\Helpers\Helper;
                                                                     'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
                                                                 )
                                                                 ->where('news_contents.status', 1)  // Fetch only active content
-                                                                ->where('news_contents.is_hot', 1)  // Fetch only featured content
+                                                                ->where('news_contents.is_gallery', 1)  // Fetch only featured content
                                                                 ->orderBy('news_contents.created_at', 'DESC') // Latest videos first
                                                                 ->inRandomOrder()  // Randomize the result order
                                                                 ->limit(3)  // Limit to 3 records
