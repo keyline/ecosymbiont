@@ -48,7 +48,9 @@ use App\Helpers\Helper;
                   <tr>
                     <th scope="row"><?=$sl++?></th>
                     <td><?=$gallery1->new_title?></td>
-                    <td></td>
+                    <?php foreach($featured as $featured1){ ?>
+                    <td><?=$featured1->new_title?></td>
+                    <?php } ?>
                     <td></td>
                     <td></td>
                     <td></td>
