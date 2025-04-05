@@ -750,10 +750,10 @@ class UserController extends Controller
                         'is_explore_projects'   => 1
                     ];
                 }
+                // Update the database with the selected IDs            
+                NewsContent::where('id', '=', $id)->update($fields);  
             }
-            Helper::pr($fields);
-            // Update the database with the selected IDs            
-                NewsContent::where('id', '=', $id)->update($fields);            
+            // Helper::pr($fields);                      
     
             // Redirect or return response
             return redirect()->back()->with('success_message', 'Updated successfully'); 
