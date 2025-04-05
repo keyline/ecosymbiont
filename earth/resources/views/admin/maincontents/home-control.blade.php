@@ -42,30 +42,20 @@ use App\Helpers\Helper;
                   <th scope="col">Video Content</th>
                   <th scope="col">Explore Projects</th>
                 </tr>
-              </thead>
+              </thead>            
               <tbody>
-                
+                <?php if($gallery){ $sl=1; foreach($gallery as $gallery1){?>
                   <tr>
-                  <?php if($gallery){ $sl=1; foreach($gallery as $gallery1){?>
                     <th scope="row"><?=$sl++?></th>
-                    <td><?=$gallery1->new_title?></td> 
-                    <?php } } if($featured){ foreach($featured as $featured1){ ?>                   
-                    <td><?=$featured1->new_title?></td>   
-                    <?php } } if($projects){ foreach($projects as $projects1){?>                 
-                    <td><?=$projects1->new_title?></td>  
-                    <?php } } if($interviews){  foreach($interviews as $interviews1){?>                  
-                    <td><?=$interviews1->new_title?></td>  
-                    <?php } } if($webinars){  foreach($webinars as $webinars1){?>                  
-                    <td><?=$webinars1->new_title?></td>  
-                    <?php } } if($video_content){  foreach($video_content as $video_content1){?>                  
-                    <td><?=$video_content1->new_title?></td>   
-                    <?php } } if($explore_projects){  foreach($explore_projects as $explore_projects1){?>
-                    <td><?=$explore_projects1->new_title?></td>                      
-                    <?php } } ?>               
-                    <!-- <td>
-                      <a class="btn btn-info btn-sm" href="?=url('admin/email-logs/details/'.Helper::encoded($row->id))?>"><i class="fa fa-eye"></i> Details</a>
-                    </td> -->
-                  </tr>                
+                    <td><?=$gallery1->new_title?></td>
+                    <td></td>
+                    <td></td>
+                    <td><?=date_format(date_create($row->created_at), "M d, Y h:i A")?></td>
+                    <td>
+                      <a class="btn btn-info btn-sm" href="<?=url('admin/email-logs/details/'.Helper::encoded($row->id))?>"><i class="fa fa-eye"></i> Details</a>
+                    </td>
+                  </tr>
+                <?php } }?>
               </tbody>
             </table>
           </div>
