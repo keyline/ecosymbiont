@@ -45,7 +45,7 @@ use App\Helpers\Helper;
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Gallery</th>
+                  <th scope="col">Gallery <a href="<?=url('admin/home-control/details/Gallery')?>"><i class="fa fa-eye"></i></a></th>
                   <th scope="col">Featured</th>
                   <th scope="col">Projects</th>
                   <th scope="col">Interviews</th>

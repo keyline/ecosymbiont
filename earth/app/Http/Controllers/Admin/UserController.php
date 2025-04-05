@@ -689,6 +689,13 @@ class UserController extends Controller
         $page_name                      = 'home-control';
         echo $this->admin_after_login_layout($title,$page_name,$data);
     }
+    public function homeControlDetails(Request $request,$slug ){
+        echo $slug = $slug; die;
+        $data['logData']                   = EmailLog::where('id', '=', $id)->orderBy('id', 'DESC')->first();
+        $title                          = 'Home Control Details';
+        $page_name                      = 'home-control-info';
+        echo $this->admin_after_login_layout($title,$page_name,$data);
+    }
     /* home control */
 
     /* login logs */
