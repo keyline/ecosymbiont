@@ -705,7 +705,8 @@ class UserController extends Controller
             $data['rows']                   = NewsContent::where('status', '=', 1)->where('media', '=', 'video')->orderBy('id', 'DESC')->get();
         } elseif($slug == 'Explore Projects'){
             $data['rows']                   = NewsContent::where('status', '=', 1)->where('projects', '=', 'yes')->orderBy('id', 'DESC')->get();
-        }           
+        }   
+        $data['slug']                   = $slug;        
         $title                          = 'Home Control Details';
         $page_name                      = 'home-control-info';
         echo $this->admin_after_login_layout($title,$page_name,$data);
