@@ -719,9 +719,41 @@ class UserController extends Controller
         if ($selected_ids) {
             // Save these IDs to another table, or process them as needed
             foreach ($selected_ids as $id) {
-                Helper::pr($id);
+                // Helper::pr($id);
                 // Save or update logic here
+                if($slug == 'Gallery'){
+                    $fields = [
+                        'is_gallery'            => 1
+                    ];
+                } elseif($slug == 'Featured'){
+                    $fields = [
+                        'is_feature'            => 1
+                    ];
+                } elseif($slug == 'Projects'){
+                    $fields = [
+                        'is_home'              => 1
+                    ];
+                } elseif($slug == 'Interviews'){
+                    $fields = [
+                        'is_home'         => 1
+                    ];
+                } elseif($slug == 'Webinars'){
+                    $fields = [
+                        'is_home'         => 1
+                    ];
+                } elseif($slug == 'Video Content'){
+                    $fields = [
+                        'is_home'                 => 1
+                    ];
+                } elseif($slug == 'Explore Projects'){
+                    $fields = [
+                        'is_explore_projects'   => 1
+                    ];
+                }
             }
+            Helper::pr($fields);
+            // Update the database with the selected IDs            
+                NewsContent::where('id', '=', $id)->update($fields);            
     
             // Redirect or return response
             return redirect()->back()->with('success_message', 'Updated successfully'); 
