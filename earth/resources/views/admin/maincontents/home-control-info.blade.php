@@ -55,8 +55,9 @@ use App\Helpers\Helper;
                   </tr>
                 <?php } }?>
               </tbody>
-            <!-- End Table with stripped rows -->
-            <button type="submit" class="btn btn-primary mt-3">Save Selected</button>
+              <!-- End Table with stripped rows -->
+              <button type="submit" class="btn btn-primary mt-3">Save Selected</button>
+            </table>
           </form>
         </div>
       </div>
