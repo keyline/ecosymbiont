@@ -30,7 +30,7 @@ use App\Helpers\Helper;
     <div class="col-lg-12">
       <div class="card">
         <div class="card-body" style="margin-top: 20px">
-          <form action="<?= base_url('controller/save_selected') ?>" method="post">
+          <form action="" method="post">
             <!-- Table with stripped rows -->
             <table id="simpletable" class="table table-striped table-bordered nowrap">
               <thead>
