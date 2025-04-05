@@ -681,10 +681,10 @@ class UserController extends Controller
         $data['gallery']                = NewsContent::where('status', '=', 1)->where('is_gallery', '=', 1)->orderBy('id', 'DESC')->get();
         $data['featured']               = NewsContent::where('status', '=', 1)->where('is_feature', '=', 1)->orderBy('id', 'DESC')->get();
         $data['projects']               = NewsContent::where('status', '=', 1)->where('projects', '=', 'yes')->where('is_home', '=', 1)->orderBy('id', 'DESC')->get();
-        $data['interviews']              = NewsContent::where('status', '=', 1)->where('projects', '=', 'yes')->where('is_home', '=', 1)->orderBy('id', 'DESC')->get();
-        $data['webinars']                = NewsContent::where('status', '=', 1)->where('projects', '=', 'yes')->where('is_home', '=', 1)->orderBy('id', 'DESC')->get();
+        $data['interviews']              = NewsContent::where('status', '=', 1)->where('projects_name', '=', 'Interviews')->where('is_home', '=', 1)->orderBy('id', 'DESC')->get();
+        $data['webinars']                = NewsContent::where('status', '=', 1)->where('projects_name', '=', 'Webinars')->where('is_home', '=', 1)->orderBy('id', 'DESC')->get();
         $data['video_content']            = NewsContent::where('status', '=', 1)->where('media', '=', 'video')->where('is_home', '=', 1)->orderBy('id', 'DESC')->get();
-        $data['webinars']                = NewsContent::where('status', '=', 1)->where('projects', '=', 'yes')->where('is_home', '=', 1)->orderBy('id', 'DESC')->get();
+        $data['explore_projects']                = NewsContent::where('status', '=', 1)->where('projects', '=', 'yes')->where('is_explore_projects', '=', 1)->orderBy('id', 'DESC')->get();
         $title                          = 'Home Control';
         $page_name                      = 'home-control';
         echo $this->admin_after_login_layout($title,$page_name,$data);
