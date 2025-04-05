@@ -30,6 +30,17 @@ use App\Helpers\Helper;
       <div class="card">
         <div class="card-body">
           <div class="dt-responsive table-responsive">
+            <?php 
+            $max = max(
+              count($gallery),
+              count($featured),
+              count($projects),
+              count($interviews),
+              count($webinars),
+              count($video_content),
+              count($explore_projects)
+            );
+            ?>
             <table id="simpletable" class="table table-striped table-bordered nowrap">
               <thead>
                 <tr>
@@ -44,20 +55,18 @@ use App\Helpers\Helper;
                 </tr>
               </thead>            
               <tbody>
-                <?php if($gallery){ $sl=1; foreach($gallery as $gallery1){?>
-                  <tr>
-                    <th scope="row"><?=$sl++?></th>
-                    <td><?=$gallery1->new_title?></td>
-                    <?php foreach($featured as $featured1){ ?>
-                    <td><?=$featured1->new_title?></td>
-                    <?php } ?>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                <?php } }?>
+              <?php for ($i = 0; $i < $max; $i++) { ?>
+                <tr>
+                  <th scope="row"><?= $i + 1 ?></th>
+                  <td><?= isset($gallery[$i]) ? $gallery[$i]->new_title : '-' ?></td>
+                  <td><?= isset($featured[$i]) ? $featured[$i]->new_title : '-' ?></td>
+                  <td><?= isset($projects[$i]) ? $projects[$i]->new_title : '-' ?></td>
+                  <td><?= isset($interviews[$i]) ? $interviews[$i]->new_title : '-' ?></td>
+                  <td><?= isset($webinars[$i]) ? $webinars[$i]->new_title : '-' ?></td>
+                  <td><?= isset($video_content[$i]) ? $video_content[$i]->new_title : '-' ?></td>
+                  <td><?= isset($explore_projects[$i]) ? $explore_projects[$i]->new_title : '-' ?></td>
+                </tr>
+              <?php } ?>
               </tbody>
             </table>
           </div>
