@@ -260,9 +260,9 @@ function numberToOrdinal($number) {
                         </div>
                         <div id="co_authors_position" style="display: none;border: 1px solid #000; padding: 10px; border-radius: 7px;">
                             <div class="row mb-3">
-                                <label for="co_authors_position" class="col-md-2 col-lg-4 col-form-label">3A) If you have co-author(s), indicate in which position your name should appear in the list of authors (the Lead Author, i.e., the first author listed, must be a human individual)
+                                <label for="co_authors_position" class="col-md-4 col-lg-4 col-form-label">3A) If you have co-author(s), indicate in which position your name should appear in the list of authors (the Lead Author, i.e., the first author listed, must be a human individual)
                                 </label>
-                                <div class="col-md-10 col-lg-8">
+                                <div class="col-md-8 col-lg-8">
                                     <input type="radio" id="" name="co_authors_position" value="First position" @checked(old('co_authors_position', $co_authors_position) == 'First position')>
                                     <label for="First position">First position</label>
                                     <input type="radio" id="" name="co_authors_position" value="Second position" @checked(old('co_authors_position', $co_authors_position) == 'Second position')>
@@ -275,19 +275,19 @@ function numberToOrdinal($number) {
                                 @for ($i = 1; $i <= 2; $i++)
                                     <div class="card mb-3" id="author_card_{{$i}}" style="padding: 11px;border: 1px solid black; display:none;">
                                         <div class="row mb-3">
-                                            <div class="col-md-6">
+                                            <div class="col-lg-6">
                                                 <div class="row">
-                                                    <label for="co_author_name_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3B{{$i}}) <?=numberToOrdinal($i)?> co-author’s name</label>
-                                                    <div class="col-md-10 col-lg-8">
+                                                    <label for="co_author_name_{{$i}}" class="col-md-4 col-lg-4 col-form-label">3B{{$i}}) <?=numberToOrdinal($i)?> co-author’s name</label>
+                                                    <div class="col-md-8 col-lg-8">
                                                         <input type="text" name="co_author_name_{{$i}}" class="form-control" id="co_author_name_{{$i}}"
                                                             value="<?php if(isset($co_author_name[$i-1]) && $co_author_name[$i-1] != ''){ echo $co_author_name[$i-1]; }  ?>">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-lg-6">
                                                 <div class="row">
-                                                    <label for="co_author_short_bio_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3C{{$i}}) <?=numberToOrdinal($i)?> co-author’s short bio (30-40 words)</label>
-                                                    <div class="col-md-10 col-lg-8">
+                                                    <label for="co_author_short_bio_{{$i}}" class="col-md-4 col-lg-4 col-form-label">3C{{$i}}) <?=numberToOrdinal($i)?> co-author’s short bio (30-40 words)</label>
+                                                    <div class="col-md-8 col-lg-8">
                                                         <input type="text" name="co_author_short_bio_{{$i}}" class="form-control" id="co_author_short_bio_{{$i}}"
                                                             value="<?php if(isset($co_author_short_bio[$i-1]) && $co_author_short_bio[$i-1] != '') { echo $co_author_short_bio[$i-1]; } ?>">
                                                     </div>
