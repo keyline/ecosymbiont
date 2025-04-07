@@ -937,6 +937,14 @@ function numberToOrdinal($number) {
         allowedContent: true,       
     stylesSet: [        
         { name: 'others_image_colour', element: 'em', attributes: { 'style': 'display: inline-block; color: #87ceeb;font-size: 16px;font-family: "proximanova_regular", sans-serif;font-style: italic;margin: 0;text-align: left !important;width: 100%;' } },        
+        {
+            name: 'Box Style',
+            element: 'div',
+            attributes: {
+                'class': 'custom-box-style',
+                'style': 'border: 2px solid #ccc; padding: 15px; background-color:rgb(4, 4, 4); margin: 10px 0; border-radius: 8px;'
+            }
+        }
     ]
 });
 </script>
