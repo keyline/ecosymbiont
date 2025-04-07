@@ -738,7 +738,7 @@ $current_url = $protocol . $host . $uri;
                         <!-- article box -->
                         <div class="article-box">
                             <div class="title-section">
-                                <h1><span>Latest Creative Works</span></h1>
+                                <h1><span>Explore EaRTh Projects</span></h1>
                             </div>
                             <?php
                             // DB::enableQueryLog(); // Enable query log
@@ -747,6 +747,7 @@ $current_url = $protocol . $host . $uri;
                                             ->select(
                                                 'news_contents.id', 
                                                 'news_contents.new_title', 
+                                                'news_contents.projects_name', 
                                                 'news_contents.sub_title', 
                                                 'news_contents.slug', 
                                                 'news_contents.author_name',
@@ -815,7 +816,7 @@ $current_url = $protocol . $host . $uri;
                                             </div>
                                             <div class="col-sm-7">
                                                 <div class="post-content">
-                                                    <a href="<?=url('category/' . $latestarticle->parent_category_slug)?>"><?=$latestarticle->parent_category_name?></a>
+                                                    <a href="<?=url('category/' . $latestarticle->parent_category_slug)?>"><?=$latestarticle->projects_name?></a>
                                                     <h2><a href="<?=url('content/' . $latestarticle->parent_category_slug. '/' . $latestarticle->category_slug . '/' . $latestarticle->slug)?>"><?=$latestarticle->new_title?></a></h2>
                                                     <ul class="post-tags">
                                                         <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$latestarticle->for_publication_name ?? $latestarticle->author_name?></a></li>
