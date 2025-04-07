@@ -73,6 +73,7 @@ use App\Helpers\Helper;
                 <?php } }?>
               </tbody>
               <!-- End Table with stripped rows -->
+              <div id="selected-draws"></div>
               <button type="submit" class="btn btn-primary mt-3">Save Selected</button>
             </table>
           </form>
@@ -82,7 +83,7 @@ use App\Helpers\Helper;
   </div>
 </section>
 
-<script>
+<!-- <script>
 function limitCheckboxes(clickedCheckbox) {
     const checkboxes = document.querySelectorAll('.row-checkbox');
     const maxChecked = 5;
@@ -97,4 +98,45 @@ function limitCheckboxes(clickedCheckbox) {
         alert("You can select a maximum of 5 rows only.");
     }
 }
+</script> -->
+<script>
+let selectedIds = new Set();
+
+function limitCheckboxes(checkbox) {
+    const id = checkbox.value;
+
+    if (checkbox.checked) {
+        if (selectedIds.size >= 5) {
+            checkbox.checked = false;
+            alert("You can select a maximum of 5 rows only.");
+        } else {
+            selectedIds.add(id);
+        }
+    } else {
+        selectedIds.delete(id);
+    }
+
+    updateHiddenInputs();
+}
+
+function updateHiddenInputs() {
+    const container = document.getElementById('selected-draws');
+    container.innerHTML = ''; // Clear previous inputs
+
+    selectedIds.forEach(id => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'draw[]';
+        input.value = id;
+        container.appendChild(input);
+    });
+}
+
+// When page loads, pre-fill selectedIds from checked boxes (e.g. from server)
+window.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.row-checkbox:checked').forEach(cb => {
+        selectedIds.add(cb.value);
+    });
+    updateHiddenInputs();
+});
 </script>
