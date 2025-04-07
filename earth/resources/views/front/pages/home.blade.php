@@ -816,7 +816,7 @@ $current_url = $protocol . $host . $uri;
                                             </div>
                                             <div class="col-sm-7">
                                                 <div class="post-content">
-                                                    <a href="<?=url('category/' . $latestarticle->parent_category_slug)?>"><?=$latestarticle->projects_name?></a>
+                                                    <a href="<?=url('category/' . $latestarticle->parent_category_slug)?>"><?=strtoupper($latestarticle->projects_name)?></a>
                                                     <h2><a href="<?=url('content/' . $latestarticle->parent_category_slug. '/' . $latestarticle->category_slug . '/' . $latestarticle->slug)?>"><?=$latestarticle->new_title?></a></h2>
                                                     <ul class="post-tags">
                                                         <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$latestarticle->for_publication_name ?? $latestarticle->author_name?></a></li>
