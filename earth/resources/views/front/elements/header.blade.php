@@ -132,7 +132,7 @@ use App\Helpers\Helper;
                 <div class="owl-wrapper">
                     <div class="owl-carousel" data-num="3">
                         <?php
-                        // DB::enableQueryLog(); // Enable query log
+                        DB::enableQueryLog(); // Enable query log
 
                         $hotNewsContents = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
                                                         ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
@@ -160,7 +160,7 @@ use App\Helpers\Helper;
                                                         ->where('news_contents.is_gallery', 1)
                                                         ->orderBy('news_contents.id', 'DESC')
                                                         ->get();
-                                           // dd(DB::getQueryLog());
+                                           dd(DB::getQueryLog());
                         if($hotNewsContents){ foreach($hotNewsContents as $rowContent){ 
                         ?>
                             <?php
