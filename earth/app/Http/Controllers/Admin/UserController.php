@@ -694,17 +694,17 @@ class UserController extends Controller
         if($slug == 'Gallery'){
             $data['rows']                   = NewsContent::where('status', '=', 1)->orderBy('is_gallery', 'DESC')->get();
         } elseif($slug == 'Featured'){
-            $data['rows']                   = NewsContent::where('status', '=', 1)->orderBy('id', 'DESC')->get();
+            $data['rows']                   = NewsContent::where('status', '=', 1)->orderBy('is_feature', 'DESC')->get();
         } elseif($slug == 'Projects'){
-            $data['rows']                   = NewsContent::where('status', '=', 1)->where('projects', '=', 'yes')->orderBy('id', 'DESC')->get();
+            $data['rows']                   = NewsContent::where('status', '=', 1)->where('projects', '=', 'yes')->orderBy('is_home', 'DESC')->get();
         } elseif($slug == 'Interviews'){
-            $data['rows']                   = NewsContent::where('status', '=', 1)->where('projects_name', '=', 'Interviews')->orderBy('id', 'DESC')->get();
+            $data['rows']                   = NewsContent::where('status', '=', 1)->where('projects_name', '=', 'Interviews')->orderBy('is_home', 'DESC')->get();
         } elseif($slug == 'Webinars'){
-            $data['rows']                   = NewsContent::where('status', '=', 1)->where('projects_name', '=', 'Webinars')->orderBy('id', 'DESC')->get();
+            $data['rows']                   = NewsContent::where('status', '=', 1)->where('projects_name', '=', 'Webinars')->orderBy('is_home', 'DESC')->get();
         } elseif($slug == 'Video Content'){
-            $data['rows']                   = NewsContent::where('status', '=', 1)->where('media', '=', 'video')->orderBy('id', 'DESC')->get();
+            $data['rows']                   = NewsContent::where('status', '=', 1)->where('media', '=', 'video')->orderBy('is_home', 'DESC')->get();
         } elseif($slug == 'Explore Projects'){
-            $data['rows']                   = NewsContent::where('status', '=', 1)->where('projects', '=', 'yes')->orderBy('id', 'DESC')->get();
+            $data['rows']                   = NewsContent::where('status', '=', 1)->where('projects', '=', 'yes')->orderBy('is_explore_projects', 'DESC')->get();
         }   
         $data['slug']                   = $slug;        
         $title                          = 'Home Control Details';

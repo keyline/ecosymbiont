@@ -46,12 +46,12 @@ use App\Helpers\Helper;
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Gallery <a href="<?=url('admin/home-control/details/Gallery')?>"><i class="fa fa-eye"></i></a></th>
-                  <th scope="col">Featured</th>
-                  <th scope="col">Projects</th>
-                  <th scope="col">Interviews</th>
-                  <th scope="col">Webinars</th>
-                  <th scope="col">Video Content</th>
-                  <th scope="col">Explore Projects</th>
+                  <th scope="col">Featured <a href="<?=url('admin/home-control/details/Featured')?>"><i class="fa fa-eye"></i></a></th>
+                  <th scope="col">Projects <a href="<?=url('admin/home-control/details/Projects')?>"><i class="fa fa-eye"></i></a></th>
+                  <th scope="col">Interviews <a href="<?=url('admin/home-control/details/Interviews')?>"><i class="fa fa-eye"></i></a></th>
+                  <th scope="col">Webinars <a href="<?=url('admin/home-control/details/Webinars')?>"><i class="fa fa-eye"></i></a></th>
+                  <th scope="col">Video Content <a href="<?=url('admin/home-control/details/Video Content')?>"><i class="fa fa-eye"></i></a></th>
+                  <th scope="col">Explore Projects <a href="<?=url('admin/home-control/details/Explore Projects')?>"><i class="fa fa-eye"></i></a></th>
                 </tr>
               </thead>            
               <tbody>
