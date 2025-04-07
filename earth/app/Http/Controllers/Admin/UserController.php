@@ -711,57 +711,98 @@ class UserController extends Controller
         $page_name                      = 'home-control-info';
         echo $this->admin_after_login_layout($title,$page_name,$data);
     }
-    public function homeControlSaveDetails(Request $request, $slug){
-        $slug = $slug;
-        $postData   = $request->all();
-        $selected_ids         = $postData['draw'];
-        // $selected_ids = $this->input->post('draw');
-        if ($selected_ids) {
-            // Save these IDs to another table, or process them as needed
-            foreach ($selected_ids as $id) {
-                // Helper::pr($id);
-                $fields = [];
-                // Save or update logic here
-                if($slug == 'Gallery'){
-                    $fields = [
-                        'is_gallery'            => 1
-                    ];
-                } elseif($slug == 'Featured'){
-                    $fields = [
-                        'is_feature'            => 1
-                    ];
-                } elseif($slug == 'Projects'){
-                    $fields = [
-                        'is_home'              => 1
-                    ];
-                } elseif($slug == 'Interviews'){
-                    $fields = [
-                        'is_home'         => 1
-                    ];
-                } elseif($slug == 'Webinars'){
-                    $fields = [
-                        'is_home'         => 1
-                    ];
-                } elseif($slug == 'Video Content'){
-                    $fields = [
-                        'is_home'                 => 1
-                    ];
-                } elseif($slug == 'Explore Projects'){
-                    $fields = [
-                        'is_explore_projects'   => 1
-                    ];
-                }
-                // Update the database with the selected IDs            
-                NewsContent::where('id', '=', $id)->update($fields);  
-            }
-            // Helper::pr($fields);                      
+    // public function homeControlSaveDetails(Request $request, $slug){
+    //     $slug = $slug;
+    //     $postData   = $request->all();
+    //     $selected_ids         = $postData['draw'];
+    //     // $selected_ids = $this->input->post('draw');
+    //     if ($selected_ids) {
+    //         // Save these IDs to another table, or process them as needed
+    //         foreach ($selected_ids as $id) {
+    //             // Helper::pr($id);
+    //             $fields = [];
+    //             // Save or update logic here
+    //             if($slug == 'Gallery'){
+    //                 $fields = [
+    //                     'is_gallery'            => 1
+    //                 ];
+    //             } elseif($slug == 'Featured'){
+    //                 $fields = [
+    //                     'is_feature'            => 1
+    //                 ];
+    //             } elseif($slug == 'Projects'){
+    //                 $fields = [
+    //                     'is_home'              => 1
+    //                 ];
+    //             } elseif($slug == 'Interviews'){
+    //                 $fields = [
+    //                     'is_home'         => 1
+    //                 ];
+    //             } elseif($slug == 'Webinars'){
+    //                 $fields = [
+    //                     'is_home'         => 1
+    //                 ];
+    //             } elseif($slug == 'Video Content'){
+    //                 $fields = [
+    //                     'is_home'                 => 1
+    //                 ];
+    //             } elseif($slug == 'Explore Projects'){
+    //                 $fields = [
+    //                     'is_explore_projects'   => 1
+    //                 ];
+    //             }
+    //             // Update the database with the selected IDs            
+    //             NewsContent::where('id', '=', $id)->update($fields);  
+    //         }
+    //         // Helper::pr($fields);                      
     
-            // Redirect or return response
-            return redirect()->back()->with('success_message', 'Updated successfully'); 
-        } else {
-            return redirect()->back()->with('error_message', 'update failed'); 
-        }        
+    //         // Redirect or return response
+    //         return redirect()->back()->with('success_message', 'Updated successfully'); 
+    //     } else {
+    //         return redirect()->back()->with('error_message', 'update failed'); 
+    //     }        
+    // }
+    public function homeControlSaveDetails(Request $request, $slug)
+    {
+        $postData     = $request->all();
+        $selected_ids = $postData['draw'] ?? [];
+
+        if (!empty($selected_ids)) {
+            $fieldName = '';
+
+            // Map slug to the correct column
+            switch ($slug) {
+                case 'Gallery':
+                    $fieldName = 'is_gallery';
+                    break;
+                case 'Featured':
+                    $fieldName = 'is_feature';
+                    break;
+                case 'Projects':
+                case 'Interviews':
+                case 'Webinars':
+                case 'Video Content':
+                    $fieldName = 'is_home';
+                    break;
+                case 'Explore Projects':
+                    $fieldName = 'is_explore_projects';
+                    break;
+                default:
+                    return redirect()->back()->with('error_message', 'Invalid slug');
+            }
+
+            // Step 1: Set field to 1 for selected IDs
+            NewsContent::whereIn('id', $selected_ids)->update([$fieldName => 1]);
+
+            // Step 2: Set field to 0 for non-selected IDs (if you want to reset the others)
+            NewsContent::whereNotIn('id', $selected_ids)->update([$fieldName => 0]);
+
+            return redirect()->back()->with('success_message', 'Updated successfully');
+        }
+
+        return redirect()->back()->with('error_message', 'Update failed');
     }
+
     /* home control */
 
     /* login logs */
