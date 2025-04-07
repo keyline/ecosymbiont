@@ -129,6 +129,8 @@ use Illuminate\Support\Facades\DB;
                 $participated_info = $row->participated_info;
                 $community = $row->community;
                 $community_name = $row->community_name;
+                $projects = $row->projects;
+                $projects_name = $row->projects_name;
                 $organization_name = $row->organization_name;
                 $organization_website = $row->organization_website;
                 $ecosystem_affiliationId = (($row->ecosystem_affiliationId != '')?json_decode($row->ecosystem_affiliationId):[]);
@@ -191,7 +193,8 @@ use Illuminate\Support\Facades\DB;
                 $participated = $profile->participated;
                 $participated_info = $profile->participated_info;
                 $community = $profile->community;
-                $community_name = $profile->community_name;
+                $community_name = $profile->community_name;  
+                $projects_name = '';                              
                 $organization_name = $profile->organization_name;
                 $organization_website = $profile->organization_website;
                 $ecosystem_affiliationId = json_decode($profile->ecosystem_affiliationId);
@@ -578,7 +581,7 @@ use Illuminate\Support\Facades\DB;
                                     <label for="subtitle" class="col-md-2 col-lg-4 col-form-label blue-text">16) Subtitle — brief engaging summary of your Creative-Work (30-40 words)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <textarea name="subtitle" class="form-control" id="subtitle" rows="3">{{ old('subtitle', $subtitle ?? '') }}</textarea>
+                                        <textarea name="subtitle" class="form-control" id="subtitle" rows="3" required>{{ old('subtitle', $subtitle ?? '') }}</textarea>
                                         <div id="subtitleError" class="error"></div>
                                     </div>
                                 </div>
@@ -790,7 +793,7 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="additional_information" class="col-md-2 col-lg-4 col-form-label" style="color: grey;">17a) (Optional: max. 100 words) Comments for the Editor(s) (any additional information you wish to share)
+                                    <label for="additional_information" class="col-md-2 col-lg-4 col-form-label" style="color: grey;">17a) (Optional: max. 100 words) Please share your instagram, facebook, and twitter (x) handles and any comments for the Editor(s).
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="additional_information" name="additional_information" rows="4" cols="50">{{ old('additional_information', $additional_information) }}</textarea>
@@ -900,13 +903,41 @@ use Illuminate\Support\Facades\DB;
                                     <div class="row mb-3">
                                         <label for="community_info" class="col-md-2 col-lg-4 col-form-label">28A) Select Community</label>
                                         <div class="col-md-10 col-lg-8">
-                                            <select name="community_name" class="form-control" id="community_name">
-                                                <option value="" selected disabled>Select</option>
-                                                <?php if($communities){ foreach($communities as $cmn){?>
-                                                    <option value="<?=$cmn->name?>" <?=(($community_name == $cmn->name)?'selected':'')?>><?=$cmn->name?></option>
-                                                <?php } }?>
+                                            <select name="community_name" class="form-control" id="community_name">                                              
+
+                                                @if ($communities)
+                                                @foreach ($communities as $data)
+                                                    <option value="{{ $data->name }}" disabled @selected($data->name == $community_name)>
+                                                        {{ $data->name }}</option>
+                                                @endforeach
+                                            @endif
                                             </select>
                                             <input type="hidden" name="community_name" value="{{ $community_name }}">
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="projects" class="col-md-2 col-lg-4 col-form-label">29) Is this a special EaRTh Project?
+                                    </label>
+                                    <div class="col-md-10 col-lg-8">
+                                        <input type="radio" id="projects_yes" name="projects" value="Yes" required @checked(old('projects', $projects) == 'Yes')>
+                                        <label for="yes">Yes</label>
+                                        <input type="radio" id="projects_no" name="projects" value="No" required @checked(old('projects', $projects) == 'No')>
+                                        <label for="no">No</label>
+                                    </div>
+                                </div>
+                                <!-- ?php dd($projects); ?> -->
+                                <div id="projectsDetails" style="display: none;">
+                                    <div class="row mb-3">
+                                        <label for="projects_info" class="col-md-2 col-lg-4 col-form-label">29A) Select Projects</label>
+                                        <div class="col-md-10 col-lg-8">
+                                            <select name="projects_name" class="form-control" id="projects_name">
+                                                <option value="" selected>Select</option>
+                                                <?php if($projects){ foreach($projects as $proj){?>
+                                                    <option value="<?=$proj->name?>" <?=(($projects_name == $proj->name)?'selected':'')?>><?=$proj->name?></option>
+                                                <?php } }?>
+                                            </select>
+                                            <!-- <input type="hidden" name="projects_name" value="{{ $projects_name }}"> -->
                                         </div>
                                     </div> 
                                 </div>
@@ -1141,38 +1172,48 @@ use Illuminate\Support\Facades\DB;
         
     </script>
 <!-- Popup end (Initially hidden) -->
- <!-- Function to show/hide the community fields -->
-<script>
-    $(document).ready(function() {
-        
-        function toggleFields() {            
-            const communityYes = $('#community_yes').is(':checked');            
-            
-            // Toggle individual sections            
-            $('#communityDetails').toggle(communityYes);
-        }
-
-        // Trigger on change
-        $('input[name="invited"], input[name="community"]').on('change', function() {
-            toggleFields();
-        });
-
-        // Check initial state on page load
-        toggleFields();
-    });
-</script>
-<!-- End Function to show/hide the community fields -->
 <!-- Function to show/hide the invited and participated fields -->
 <script>
     $(document).ready(function() {
         
         function toggleFields() {
             const invitedYes = $('#invited_yes').is(':checked');
-            const participatedYes = $('#participated_yes').is(':checked');            
+            const participatedYes = $('#participated_yes').is(':checked');  
+            const projectsYes = $('#projects_yes').is(':checked');   
+            const communityYes = $('#community_yes').is(':checked'); 
+            
+            // Handle required for community_name
+            if (communityYes) {
+                $('#community_name').attr('required', true);
+            } else {
+                $('#community_name').removeAttr('required');
+            }
+            
+            // Handle required for invited_by and invited_by_email
+            if (invitedYes) {
+                $('#invited_by, #invited_by_email').attr('required', true);
+            } else {
+                $('#invited_by, #invited_by_email').removeAttr('required');
+            }
+            // Handle required for participated_info
+            if (participatedYes) {
+                $('#participated_info').attr('required', true);
+            } else {
+                $('#participated_info').removeAttr('required');
+            }           
+
+            // Handle required for projects_name
+            if (projectsYes) {
+                $('#projects_name').attr('required', true);
+            } else {
+                $('#projects_name').removeAttr('required');
+            }
             
             // Toggle individual sections
             $('#invitedDetails').toggle(invitedYes);
             $('#participatedDetails').toggle(participatedYes);
+            $('#communityDetails').toggle(communityYes);
+            $('#projectsDetails').toggle(projectsYes);
 
             // Check if both are "No" and hide the rest of the form
             const invitedNo = $('#invited_no').is(':checked');
@@ -1190,7 +1231,7 @@ use Illuminate\Support\Facades\DB;
         }
 
         // Trigger on change
-        $('input[name="invited"], input[name="participated"]').on('change', function() {
+        $('input[name="invited"], input[name="participated"], input[name="community"], input[name="projects"]').on('change', function() {
             toggleFields();
         });
 
@@ -1268,6 +1309,8 @@ use Illuminate\Support\Facades\DB;
 
         if (submissionTypes == '1') {
             submissionTypesADiv.style.display = 'block';
+            $('#narrative_file').attr('required', true);
+            $('#narrative_images_1').attr('required', true);            
         } else {
             submissionTypesADiv.style.display = 'none';
         }
@@ -1315,6 +1358,8 @@ use Illuminate\Support\Facades\DB;
             // Show only the number of fields selected
             for (let i = 1; i <= count; i++) {            
                 document.getElementById('card_' + i).style.display = 'block';
+                $('#image_file_1').attr('required', true);
+                $('#narrative_image_desc_1').attr('required', true);
             }
         }
 

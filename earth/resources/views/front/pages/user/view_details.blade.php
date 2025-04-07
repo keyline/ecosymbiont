@@ -72,6 +72,8 @@ use App\Models\ExpertiseArea;
       $participated_info = $row->participated_info;
       $community = $row->community;
       $community_name = $row->community_name;
+      $projects = $row->projects;
+      $projects_name = $row->projects_name;
       $organization_name = $row->organization_name;
       $organization_website = $row->organization_website;
       $ecosystem_affiliationId = $selected_ecosystem_affiliation;
@@ -431,6 +433,14 @@ use App\Models\ExpertiseArea;
                 <tr>
                   <td>28A) Select Community</td>
                   <td><?= $community_name ?></td>
+                </tr>
+                <tr>
+                  <td>29) Is this a special EaRTh Project?</td>
+                  <td><?= $projects ?></td>
+                </tr>
+                <tr>
+                  <td>29A) Select Project</td>
+                  <td><?= $projects_name ?></td>
                 </tr>
                 <tr>
                   <td>31) Is this part of a series?</td>

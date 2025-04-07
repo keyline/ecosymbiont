@@ -34,7 +34,7 @@ use App\Models\EmailLog;
 use App\Models\UserProfile;
 use App\Models\UserClassification;
 use App\Models\Community;
-
+use App\Models\Project;
 use Auth;
 use Session;
 use Helper;
@@ -1693,6 +1693,8 @@ class FrontController extends Controller
             $data['classification']         = UserClassification::where('user_id', '=', $user_id)->first();
             $data['profile']                = UserProfile::where('user_id', '=', $user_id)->first();
             $data['communities']            = Community::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['projects']               = Project::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            // Helper::pr($data['projects']);
             $data['search_keyword']         = '';
 
             if ($request->isMethod('post')) {
@@ -1951,6 +1953,7 @@ class FrontController extends Controller
 
                     if($postData['co_authors'] == '0'){
                         if($postData['submission_types'] == '1'){ 
+                            // echo $postData['submission_types'];die;
 
                             /* narrative doc file */
                             $imageFile      = $request->file('narrative_file');
@@ -2037,6 +2040,8 @@ class FrontController extends Controller
                                     'participated_info'         => $participatedInfo,
                                     'community'                 => $postData['community'],
                                     'community_name'            => $postData['community_name'],
+                                    'projects'                 => $postData['projects'],
+                                    'projects_name'            => $postData['projects_name'],
                                     'explanation'               => $postData['explanation'],  
                                     'explanation_submission'    => $postData['explanation_submission'],     
                                     'titleId'                   => $postData['title'],                        
@@ -2163,6 +2168,8 @@ class FrontController extends Controller
                                     'participated_info'         => $participatedInfo,
                                     'community'                 => $postData['community'],
                                     'community_name'            => $postData['community_name'],
+                                    'projects'                 => $postData['projects'],
+                                    'projects_name'            => $postData['projects_name'],
                                     'explanation'               => $postData['explanation'],  
                                     'explanation_submission'    => $postData['explanation_submission'],     
                                     'titleId'                   => $postData['title'],                        
@@ -2268,6 +2275,8 @@ class FrontController extends Controller
                                     'participated_info'         => $participatedInfo,
                                     'community'                 => $postData['community'],
                                     'community_name'            => $postData['community_name'],
+                                    'projects'                 => $postData['projects'],
+                                    'projects_name'            => $postData['projects_name'],
                                     'explanation'               => $postData['explanation'],  
                                     'explanation_submission'    => $postData['explanation_submission'],     
                                     'titleId'                   => $postData['title'],                        
@@ -2501,6 +2510,8 @@ class FrontController extends Controller
                                         'participated_info'         => $participatedInfo,
                                         'community'                 => $postData['community'],
                                         'community_name'            => $postData['community_name'],
+                                        'projects'                 => $postData['projects'],
+                                        'projects_name'            => $postData['projects_name'],
                                         'explanation'               => $postData['explanation'],  
                                         'explanation_submission'    => $postData['explanation_submission'],     
                                         'titleId'                   => $postData['title'],                        
@@ -2637,6 +2648,8 @@ class FrontController extends Controller
                                             'participated_info'         => $participatedInfo,
                                             'community'                 => $postData['community'],
                                             'community_name'            => $postData['community_name'],
+                                            'projects'                 => $postData['projects'],
+                                            'projects_name'            => $postData['projects_name'],
                                             'explanation'               => $postData['explanation'],  
                                             'explanation_submission'    => $postData['explanation_submission'],     
                                             'titleId'                   => $postData['title'],                        
@@ -2750,6 +2763,8 @@ class FrontController extends Controller
                                         'participated_info'         => $participatedInfo,
                                         'community'                 => $postData['community'],
                                         'community_name'            => $postData['community_name'],
+                                        'projects'                 => $postData['projects'],
+                                        'projects_name'            => $postData['projects_name'],
                                         'explanation'               => $postData['explanation'],  
                                         'explanation_submission'    => $postData['explanation_submission'],     
                                         'titleId'                   => $postData['title'],                        
@@ -2999,7 +3014,7 @@ class FrontController extends Controller
                         'bio_short'               => $postData['bio_short'],
                         'bio_long'               => $postData['bio_long'],                  
                     ];
-                    // Helper::pr($fields);
+                    //  Helper::pr($fields);
                     $fields2 = [                                                          
                         'email'                     => $postData['email'],                        
                         'first_name'                => $postData['first_name'],                                                                                                          
