@@ -6,7 +6,7 @@ use App\Helpers\Helper;
   <nav>
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="<?=url('admin/dashboard')?>">Home</a></li>
-      <li class="breadcrumb-item"><a href="<?=url('admin/email-logs')?>">Email-logs List</a></li>
+      <li class="breadcrumb-item"><a href="<?=url('admin/home-control')?>">Home Control Panel</a></li>
       <li class="breadcrumb-item active"><?=$page_header?></li>
     </ol>
   </nav>
