@@ -224,8 +224,8 @@ function numberToOrdinal($number) {
                         <!-- Hidden input to determine button action -->
                         <input type="hidden" name="action_mode" id="actionMode" value="">
                         <div class="row mb-3">
-                            <label for="email" class="col-md-2 col-lg-4 col-form-label">1) Email address</label>
-                            <div class="col-md-10 col-lg-8">
+                            <label for="email" class="col-md-4 col-lg-4 col-form-label">1) Email address</label>
+                            <div class="col-md-8 col-lg-8">
                                 <input type="email" name="email" class="form-control" id="email"
                                     value="<?= $email ?>">
                             </div>
