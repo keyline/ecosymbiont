@@ -46,7 +46,24 @@ use App\Helpers\Helper;
                 <?php if($rows){ $sl=1; foreach($rows as $row){?>
                   <tr>
                     <td>
-                      <input type='checkbox' name='draw[]' value="<?php echo $row->id ?>" class="row-checkbox" onclick="limitCheckboxes(this)" <?= $row->is_gallery == 1 ? 'checked' : '' ?>>
+                      <input type='checkbox' name='draw[]' value="<?php echo $row->id ?>" class="row-checkbox" onclick="limitCheckboxes(this)"                       
+                      <?php  
+                      if($slug == 'Gallery'){
+                        echo $row->is_gallery == 1 ? 'checked' : '';
+                      } elseif($slug == 'Featured'){
+                        echo $row->is_featured == 1 ? 'checked' : '';
+                      } elseif($slug == 'Projects'){
+                        echo $row->is_home == 1 ? 'checked' : '';
+                      } elseif($slug == 'Interviews'){
+                        echo $row->is_home == 1 ? 'checked' : '';
+                      } elseif($slug == 'Webinars'){
+                        echo $row->is_home == 1 ? 'checked' : '';
+                      } elseif($slug == 'Video Content'){
+                        echo $row->is_home == 1 ? 'checked' : '';
+                      } elseif($slug == 'Explore Projects'){
+                        echo $row->is_explore_projects == 1 ? 'checked' : '';
+                      }  ?>
+                      >
                     </td>
                     <th scope="row"><?=$sl++?></th>
                     <td><?=$row->new_title?></td>
