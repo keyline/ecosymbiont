@@ -942,7 +942,7 @@ function numberToOrdinal($number) {
             element: 'div',
             attributes: {
                 'class': 'custom-box-style',
-                'style': 'border: 2px solid #ccc; padding: 15px; background-color:rgb(4, 4, 4); margin: 10px 0; border-radius: 8px;'
+                'style': 'border: 2px solid #ccc; padding: 15px; background-color:rgb(252, 252, 252); margin: 10px 0; border-radius: 8px;'
             }
         }
     ]
