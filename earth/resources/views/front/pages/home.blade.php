@@ -765,8 +765,8 @@ $current_url = $protocol . $host . $uri;
                                                 'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
                                             )
                                             ->where('news_contents.status', 1)  // Fetch only active content
-                                            // ->where('news_contents.is_feature', 1)  // Fetch only featured content
-                                            ->inRandomOrder()  // Randomize the result order
+                                            ->where('news_contents.is_explore_projects', 1)  // Fetch only featured content
+                                            // ->inRandomOrder()  // Randomize the result order
                                             ->orderBy('news_contents.created_at', 'DESC') // Latest videos first
                                             ->limit(6)  // Limit to 3 records
                                             ->get();
