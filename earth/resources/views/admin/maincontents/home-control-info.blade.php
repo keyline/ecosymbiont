@@ -51,7 +51,7 @@ use App\Helpers\Helper;
                       if($slug == 'Gallery'){
                         echo $row->is_gallery == 1 ? 'checked' : '';
                       } elseif($slug == 'Featured'){
-                        echo $row->is_featured == 1 ? 'checked' : '';
+                        echo $row->is_feature == 1 ? 'checked' : '';
                       } elseif($slug == 'Projects'){
                         echo $row->is_home == 1 ? 'checked' : '';
                       } elseif($slug == 'Interviews'){
