@@ -683,12 +683,12 @@ $current_url = $protocol . $host . $uri;
                             'parent_category.slug as parent_category_slug'
                         )
                         ->where('news_contents.status', 1)
-                        ->where('news_contents.media', 'video')
+                        ->where('news_contents.is_home_video', 1)
                         ->where(function($query) {
                             $query->where('news_contents.current_article_no', 1) // Include first video of each series
                                 ->orWhere('news_contents.is_series', 'No');    // Include standalone videos
                         })
-                        ->inRandomOrder()
+                        // ->inRandomOrder()
                         ->orderBy('news_contents.created_at', 'DESC') // Latest videos first
                         ->limit(8)
                         ->get();
