@@ -224,16 +224,16 @@ function numberToOrdinal($number) {
                         <!-- Hidden input to determine button action -->
                         <input type="hidden" name="action_mode" id="actionMode" value="">
                         <div class="row mb-3">
-                            <label for="email" class="col-md-2 col-lg-4 col-form-label">1) Email address</label>
-                            <div class="col-md-10 col-lg-8">
+                            <label for="email" class="col-md-4 col-lg-4 col-form-label">1) Email address</label>
+                            <div class="col-md-8 col-lg-8">
                                 <input type="email" name="email" class="form-control" id="email"
                                     value="<?= $email ?>">
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="author_classification" class="col-md-2 col-lg-4 col-form-label">2) Author Classification
+                            <label for="author_classification" class="col-md-4 col-lg-4 col-form-label">2) Author Classification
                             </label>           
-                            <div class="col-md-10 col-lg-8">
+                            <div class="col-md-8 col-lg-8">
                                 <?php if($page_header == "News Content Add" || $page_header == "News Content Update") {?>                                    
                                 <input type="radio" id="Human individual" name="author_classification" value="Human individual" @checked(old('author_classification', $author_classification) == 'Human individual')>
                                 <label for="Human individual">Human individual</label>
@@ -247,9 +247,9 @@ function numberToOrdinal($number) {
                             </div>
                         </div> 
                         <div class="row mb-3">
-                            <label for="co_authors" class="col-md-2 col-lg-4 col-form-label">3) How many co-authors do you have?
+                            <label for="co_authors" class="col-md-4 col-lg-4 col-form-label">3) How many co-authors do you have?
                             </label>
-                            <div class="col-md-10 col-lg-8">
+                            <div class="col-md-8 col-lg-8">
                                 <input type="radio" id="co_authors_0" name="co_authors" value="0" @checked(old('co_authors', $co_authors) == '0')>
                                 <label for="0">0</label>
                                 <input type="radio" id="co_authors_1" name="co_authors" value="1" @checked(old('co_authors', $co_authors) == '1')>
@@ -260,9 +260,9 @@ function numberToOrdinal($number) {
                         </div>
                         <div id="co_authors_position" style="display: none;border: 1px solid #000; padding: 10px; border-radius: 7px;">
                             <div class="row mb-3">
-                                <label for="co_authors_position" class="col-md-2 col-lg-4 col-form-label">3A) If you have co-author(s), indicate in which position your name should appear in the list of authors (the Lead Author, i.e., the first author listed, must be a human individual)
+                                <label for="co_authors_position" class="col-md-12 col-lg-4 col-form-label">3A) If you have co-author(s), indicate in which position your name should appear in the list of authors (the Lead Author, i.e., the first author listed, must be a human individual)
                                 </label>
-                                <div class="col-md-10 col-lg-8">
+                                <div class="col-md-12 col-lg-8">
                                     <input type="radio" id="" name="co_authors_position" value="First position" @checked(old('co_authors_position', $co_authors_position) == 'First position')>
                                     <label for="First position">First position</label>
                                     <input type="radio" id="" name="co_authors_position" value="Second position" @checked(old('co_authors_position', $co_authors_position) == 'Second position')>
@@ -275,7 +275,7 @@ function numberToOrdinal($number) {
                                 @for ($i = 1; $i <= 2; $i++)
                                     <div class="card mb-3" id="author_card_{{$i}}" style="padding: 11px;border: 1px solid black; display:none;">
                                         <div class="row mb-3">
-                                            <div class="col-md-6">
+                                            <div class="col-lg-6">
                                                 <div class="row">
                                                     <label for="co_author_name_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3B{{$i}}) <?=numberToOrdinal($i)?> co-author’s name</label>
                                                     <div class="col-md-10 col-lg-8">
@@ -284,7 +284,7 @@ function numberToOrdinal($number) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-lg-6">
                                                 <div class="row">
                                                     <label for="co_author_short_bio_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3C{{$i}}) <?=numberToOrdinal($i)?> co-author’s short bio (30-40 words)</label>
                                                     <div class="col-md-10 col-lg-8">
@@ -293,7 +293,7 @@ function numberToOrdinal($number) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-lg-6">
                                                 <div class="row">
                                                     <label for="co_author_country_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3D{{$i}}) <?=numberToOrdinal($i)?> co-author’s country of residence</label>
                                                     <div class="col-md-10 col-lg-8">
@@ -310,7 +310,7 @@ function numberToOrdinal($number) {
                                                     </div>
                                                 </div>                                        
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-lg-6">
                                                 <div class="row">
                                                     <label for="co_authororganization_name_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3E{{$i}}) <?=numberToOrdinal($i)?> co-author’s grassroots organization/ ecoweb-rooted community/ movement
                                                     </label>
@@ -320,7 +320,7 @@ function numberToOrdinal($number) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-lg-6">
                                                 <div class="row">
                                                     <label for="co_ecosystem_affiliation_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3F{{$i}}) What continent are <?=numberToOrdinal($i)?> co-author’s ancestors originally from? (select all that apply)
                                                     </label>
@@ -337,7 +337,7 @@ function numberToOrdinal($number) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-lg-6">
                                                 <div class="row">
                                                     <label for="co_Indigenous_affiliation_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3G{{$i}}) What specific region are <?=numberToOrdinal($i)?> co-author’s ancestors originally from OR what is the name of first co-author’s Indigenous community? (example of specific region = Bengal; example of Indigenous community name = Lisjan Ohlone)
                                                     </label>
@@ -347,7 +347,7 @@ function numberToOrdinal($number) {
                                                     </div>
                                                 </div>
                                             </div> 
-                                            <div class="col-md-6">
+                                            <div class="col-lg-6">
                                                 <div class="row">
                                                     <label for="co_author_classification_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3H{{$i}}) <?=numberToOrdinal($i)?> co-author’s classification</label>
                                                     <div class="col-md-10 col-lg-8">
@@ -368,7 +368,7 @@ function numberToOrdinal($number) {
                                                     </div>
                                                 </div> 
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-lg-6">
                                                 <div class="row">
                                                     <label for="pronoun" class="col-md-2 col-lg-4 col-form-label">3I{{$i}}) <?=numberToOrdinal($i)?> co-author’s pronoun</label>
                                                     <div class="col-md-10 col-lg-8">
