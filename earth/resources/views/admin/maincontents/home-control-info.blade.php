@@ -53,13 +53,13 @@ use App\Helpers\Helper;
                       } elseif($slug == 'Featured'){
                         echo $row->is_feature == 1 ? 'checked' : '';
                       } elseif($slug == 'Projects'){
-                        echo $row->is_home == 1 ? 'checked' : '';
+                        echo $row->is_home_projects == 1 ? 'checked' : '';
                       } elseif($slug == 'Interviews'){
-                        echo $row->is_home == 1 ? 'checked' : '';
+                        echo $row->is_home_interviews == 1 ? 'checked' : '';
                       } elseif($slug == 'Webinars'){
-                        echo $row->is_home == 1 ? 'checked' : '';
+                        echo $row->is_home_webinars == 1 ? 'checked' : '';
                       } elseif($slug == 'Video Content'){
-                        echo $row->is_home == 1 ? 'checked' : '';
+                        echo $row->is_home_video == 1 ? 'checked' : '';
                       } elseif($slug == 'Explore Projects'){
                         echo $row->is_explore_projects == 1 ? 'checked' : '';
                       }  ?>

@@ -696,13 +696,13 @@ class UserController extends Controller
         } elseif($slug == 'Featured'){
             $data['rows']                   = NewsContent::where('status', '=', 1)->orderBy('is_feature', 'DESC')->get();
         } elseif($slug == 'Projects'){
-            $data['rows']                   = NewsContent::where('status', '=', 1)->where('projects', '=', 'yes')->orderBy('is_home', 'DESC')->get();
+            $data['rows']                   = NewsContent::where('status', '=', 1)->where('projects', '=', 'yes')->orderBy('is_home_projects', 'DESC')->get();
         } elseif($slug == 'Interviews'){
-            $data['rows']                   = NewsContent::where('status', '=', 1)->where('projects_name', '=', 'Interviews')->orderBy('is_home', 'DESC')->get();
+            $data['rows']                   = NewsContent::where('status', '=', 1)->where('projects_name', '=', 'Interviews')->orderBy('is_home_interviews', 'DESC')->get();
         } elseif($slug == 'Webinars'){
-            $data['rows']                   = NewsContent::where('status', '=', 1)->where('projects_name', '=', 'Webinars')->orderBy('is_home', 'DESC')->get();
+            $data['rows']                   = NewsContent::where('status', '=', 1)->where('projects_name', '=', 'Webinars')->orderBy('is_home_webinars', 'DESC')->get();
         } elseif($slug == 'Video Content'){
-            $data['rows']                   = NewsContent::where('status', '=', 1)->where('media', '=', 'video')->orderBy('is_home', 'DESC')->get();
+            $data['rows']                   = NewsContent::where('status', '=', 1)->where('media', '=', 'video')->orderBy('is_home_video', 'DESC')->get();
         } elseif($slug == 'Explore Projects'){
             $data['rows']                   = NewsContent::where('status', '=', 1)->where('projects', '=', 'yes')->orderBy('is_explore_projects', 'DESC')->get();
         }   
@@ -779,10 +779,16 @@ class UserController extends Controller
                     $fieldName = 'is_feature';
                     break;
                 case 'Projects':
+                    $fieldName = 'is_home_projects';
+                    break;
                 case 'Interviews':
+                    $fieldName = 'is_home_interviews';
+                    break;
                 case 'Webinars':
+                    $fieldName = 'is_home_webinars';
+                    break;
                 case 'Video Content':
-                    $fieldName = 'is_home';
+                    $fieldName = 'is_home_video';
                     break;
                 case 'Explore Projects':
                     $fieldName = 'is_explore_projects';
