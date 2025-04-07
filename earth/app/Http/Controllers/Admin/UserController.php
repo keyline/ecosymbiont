@@ -692,7 +692,7 @@ class UserController extends Controller
     public function homeControlDetails(Request $request,$slug ){
         $slug = $slug;
         if($slug == 'Gallery'){
-            $data['rows']                   = NewsContent::where('status', '=', 1)->orderBy('id', 'DESC')->get();
+            $data['rows']                   = NewsContent::where('status', '=', 1)->orderBy('is_gallery', 'DESC')->get();
         } elseif($slug == 'Featured'){
             $data['rows']                   = NewsContent::where('status', '=', 1)->orderBy('id', 'DESC')->get();
         } elseif($slug == 'Projects'){
