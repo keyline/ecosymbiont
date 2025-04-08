@@ -638,11 +638,11 @@ function numberToOrdinal($number) {
                                         <div class="input-group d-block col-md-12 col-lg-12" data-index="1">
                                             <div class="row mt-3">
                                                 <div class="col-md-8">
-                                                    <input type="text" name="citation[1][value]" class="form-control" placeholder="Citation" value="<?= $citation_value[$i] ?? '' ?>">
-                                                    <input type="hidden" name="citation[1][id]" value="<?= $citation_id[$i] ?? 'citation_1_old' ?>">
+                                                    <input type="text" name="citation[$i+1][value]" class="form-control" placeholder="Citation" value="<?= $citation_value[$i] ?? '' ?>">
+                                                    <input type="hidden" name="citation[$i+1][id]" value="<?= $citation_id[$i] ?? 'citation_1_old' ?>">
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <button class="btn btn-outline-secondary copy-btn" type="button" data-id="citation_1">Copy ID</button>
+                                                    <button class="btn btn-outline-secondary copy-btn" type="button" data-id="citation_$i+1">Copy ID</button>
                                                     <!-- <button class="btn btn-outline-danger remove-field" type="button">-</button> -->
                                                 </div>
                                             </div>                                                                                       
