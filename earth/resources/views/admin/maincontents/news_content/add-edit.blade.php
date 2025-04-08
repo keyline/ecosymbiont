@@ -88,6 +88,10 @@ function numberToOrdinal($number) {
             $co_indigenous_affiliations = json_decode($row->co_indigenous_affiliations);
             $co_author_classification = json_decode($row->co_author_classification);
             $co_author_pronoun = json_decode($row->co_author_pronoun);
+            $citation_value = json_decode($row->citation_value);
+            Helper::pr($citation_value);
+            $citation_id = json_decode($row->citation_id);
+            Helper::pr($citation_id);
             $first_name = $row->author_name;                               
             $email = $row->author_email;          
             $for_publication_name = $row->for_publication_name;          
