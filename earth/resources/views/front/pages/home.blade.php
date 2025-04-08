@@ -262,7 +262,8 @@ $current_url = $protocol . $host . $uri;
                                                                         ->where('news_contents.status', '=', 1)
                                                                         // ->where('news_contents.is_popular', '=', 1) // Uncomment if needed
                                                                         ->where('news_contents.parent_category', '=', 3)
-                                                                        ->inRandomOrder()
+                                                                        // ->inRandomOrder()
+                                                                        ->orderBy('news_contents.id', 'DESC')
                                                                         ->get();       
                                                                         // dd(DB::getQueryLog());                                                        
                                 if($parentCategoryContents3){ foreach($parentCategoryContents3 as $parentCategoryContent3){
