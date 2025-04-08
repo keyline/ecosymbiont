@@ -389,8 +389,8 @@ class NewsContentController extends Controller
                         'video_url'                 => $postData['video_url'],
                         'videoId'                   => $videoId ?? '',
                         'long_desc'                 => $postData['long_desc'] ?? '',   
-                        'citation'                 => json_encode($citation_value),
-                        'citation_id'              => json_encode($citation_id),  
+                        'citation_value'            => json_encode($citation_value),
+                        'citation_id'               => json_encode($citation_id),  
                         'keywords'                  => $postData['keywords'] ?? '',     
                         'is_feature'                => $postData['is_feature'],  
                         'is_popular'                => $postData['is_popular'], 
@@ -408,7 +408,7 @@ class NewsContentController extends Controller
                         'current_article_no'        => $current_article_no,
                         'other_article_part_doi_no' => $other_article_part_doi_no,
                     ];
-                    Helper::pr($fields);
+                    // Helper::pr($fields);
                     NewsContent::where($this->data['primary_key'], '=', $id)->update($fields);   
                     $fieldsArticle = ['is_published'             => 4];
                     Article::where('article_no', '=', $postData['creative_work_SRN'])->update($fieldsArticle);
