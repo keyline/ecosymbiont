@@ -630,7 +630,7 @@ function numberToOrdinal($number) {
                                 <div class="col-md-10 col-lg-8">
                                     <textarea name="long_desc" class="form-control ckeditor" id="long_desc" rows="5"><?= $long_desc ?></textarea>
                                     <div id="field-repeater">
-                                        <div class="col-md-12 col-lg-12" data-index="1">
+                                        <div class="input-group d-block col-md-12 col-lg-12" data-index="1">
                                             <div class="row mt-3">
                                                 <div class="col-md-8">
                                                     <input type="text" name="fields[1][value]" class="form-control">
@@ -1321,7 +1321,7 @@ $('#add-field').click(function () {
     const newId = 'field_' + fieldIndex;
 
     $('#field-repeater').append(`
-        <div class="input-group col-md-12 col-lg-12" data-index="${fieldIndex}">
+        <div class="input-group d-block col-md-12 col-lg-12" data-index="${fieldIndex}">
             <div class="row mt-3">
                 <div class="col-md-8">
                     <input type="text" name="fields[${fieldIndex}][value]" class="form-control">
