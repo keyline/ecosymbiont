@@ -628,20 +628,46 @@ function numberToOrdinal($number) {
                             <div class="row mb-3">
                                 <label for="ckeditor1" class="col-md-2 col-lg-4 col-form-label">23) Description</label>
                                 <div class="col-md-10 col-lg-8">
-                                    <textarea name="long_desc" class="form-control ckeditor" id="long_desc" rows="5"><?= $long_desc ?></textarea>
+                                    <textarea name="long_desc" class="form-control ckeditor" id="long_desc" rows="5"><?= $long_desc ?></textarea>                                    
                                     <div id="field-repeater">
-                                        <div class="input-group d-block col-md-12 col-lg-12" data-index="1">
-                                            <div class="row mt-3">
-                                                <div class="col-md-8">
-                                                    <input type="text" name="citation[1][value]" class="form-control" placeholder="Citation">
-                                                    <input type="hidden" name="citation[1][id]" value="citation_1">
+                                        <?php 
+                                        if (!empty($citation_value)) {
+                                            foreach ($citation_value as $index => $value) {
+                                                $i = $index + 1;
+                                                $id = $citation_id[$index];
+                                        ?>
+                                            <div class="input-group d-block col-md-12 col-lg-12" data-index="<?= $i ?>">
+                                                <div class="row mt-3">
+                                                    <div class="col-md-8">
+                                                        <input type="text" name="citation[<?= $i ?>][value]" class="form-control" placeholder="Citation" value="<?= htmlspecialchars($value) ?>">
+                                                        <input type="hidden" name="citation[<?= $i ?>][id]" value="<?= $id ?>">
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <button class="btn btn-outline-secondary copy-btn" type="button" data-id="<?= $id ?>">Copy ID</button>
+                                                        <button class="btn btn-outline-danger remove-field" type="button">-</button>
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-4">
-                                                    <button class="btn btn-outline-secondary copy-btn" type="button" data-id="citation_1">Copy ID</button>
-                                                    <!-- <button class="btn btn-outline-danger remove-field" type="button">-</button> -->
+                                            </div>
+                                        <?php 
+                                            }
+                                            $fieldIndex = count($citation_value) + 1;
+                                        } else {
+                                            // Default field for new entry
+                                            $fieldIndex = 2;
+                                        ?>
+                                            <div class="input-group d-block col-md-12 col-lg-12" data-index="1">
+                                                <div class="row mt-3">
+                                                    <div class="col-md-8">
+                                                        <input type="text" name="citation[1][value]" class="form-control" placeholder="Citation">
+                                                        <input type="hidden" name="citation[1][id]" value="citation_1">
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <button class="btn btn-outline-secondary copy-btn" type="button" data-id="citation_1">Copy ID</button>
+                                                        <button class="btn btn-outline-danger remove-field" type="button">-</button>
+                                                    </div>
                                                 </div>
-                                            </div>                                                                                       
-                                        </div>
+                                            </div>
+                                        <?php } ?>
                                     </div>
                                     <button class="btn btn-success mt-2" type="button" id="add-citation">+</button>
                                     <br><br>
