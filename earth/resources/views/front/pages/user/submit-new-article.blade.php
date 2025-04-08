@@ -917,7 +917,7 @@ use Illuminate\Support\Facades\DB;
                                     </div> 
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="projects" class="col-md-2 col-lg-4 col-form-label">29) Is this a special EaRTh Project?
+                                    <label for="projects" class="col-md-2 col-lg-4 col-form-label blue-text">29) Is this a special EaRTh Project?
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="radio" id="projects_yes" name="projects" value="Yes" required @checked(old('projects', $projects) == 'Yes')>
@@ -929,7 +929,7 @@ use Illuminate\Support\Facades\DB;
                                 <!-- ?php dd($projects); ?> -->
                                 <div id="projectsDetails" style="display: none;">
                                     <div class="row mb-3">
-                                        <label for="projects_info" class="col-md-2 col-lg-4 col-form-label">29A) Select Projects</label>
+                                        <label for="projects_info" class="col-md-2 col-lg-4 col-form-label blue-text">29A) Select Projects</label>
                                         <div class="col-md-10 col-lg-8">
                                             <select name="projects_name" class="form-control" id="projects_name">
                                                 <option value="" selected>Select</option>
@@ -942,7 +942,7 @@ use Illuminate\Support\Facades\DB;
                                     </div> 
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">29) Instructions for initial submission of Creative-Work for eligibility screening
+                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">30) Instructions for initial submission of Creative-Work for eligibility screening
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <p>Once you have completed this form and uploaded all required files, click on the "Submit" button below. If you meet the eligibility criteria <span style="color: red !important">(determined in part by your response to question 12); also, you
@@ -955,7 +955,7 @@ use Illuminate\Support\Facades\DB;
                                     </div> -->
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">30) If you are submitting a video
+                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">31) If you are submitting a video
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <p>Please note that it may take several minutes for your video to upload. Please do not click on the “Submit” button more than once and do not navigate away from this page, until you are re-directed to a page that tells you: “Creative-Work submitted successfully!”</p>                                        
@@ -963,7 +963,7 @@ use Illuminate\Support\Facades\DB;
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="is_series" class="col-md-2 col-lg-4 col-form-label blue-text">31) Is this part of a series?
+                                    <label for="is_series" class="col-md-2 col-lg-4 col-form-label blue-text">32) Is this part of a series?
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="radio" id="series_yes" name="is_series" value="Yes" <?=(($is_series == 'Yes')?'checked':'')?> required>
@@ -973,21 +973,21 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
-                                    <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label blue-text">31a) How many total creative-works in this series?
+                                    <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label blue-text">32a) How many total creative-works in this series?
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="number" name="series_article_no" class="form-control" id="series_article_no" min="1" value="<?=$series_article_no?>">
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
-                                    <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label blue-text">31b) What number in the series is this creative-work?
+                                    <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label blue-text">32b) What number in the series is this creative-work?
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="current_article_no" class="form-control" id="current_article_no" value="<?=$current_article_no?>">
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
-                                    <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label blue-text">31c) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).
+                                    <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label blue-text">32c) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" class="form-control" id="input-tags">
@@ -1009,7 +1009,7 @@ use Illuminate\Support\Facades\DB;
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">32) Non-Exclusive License to Publish (NELP)
+                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">33) Non-Exclusive License to Publish (NELP)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <p>In the scrollable window below is the text of the Non-Exclusive License to Publish (NELP). Please note that for your Creative-Work to be published on EaRTh, you must sign this NELP (which you do by clicking the small box below the scrollable window). In essence, by signing the NELP, you declare among other things that: (a) all components of this Creative-Work are your (and, if applicable, your co-authors’) own original creation and not anyone else’s; (b) you (and, if applicable, your co-authors) have not used Artificial Intelligence (AI) to generate any of the components of this Creative-Work; and (c) you (and, if applicable, your co-authors) own the copyright to this Creative-Work and have the authority to grant the NELP. Please note that upon signing this NELP, you retain the copyright to your Creative-Work and the right to publish this Creative-Work on other platforms/in other publications, as long as such platforms/publications do not require an exclusive right to publish.</p>                                        
