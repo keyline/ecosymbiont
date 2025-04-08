@@ -631,7 +631,7 @@ function numberToOrdinal($number) {
                                     <textarea name="long_desc" class="form-control ckeditor" id="long_desc" rows="5"><?= $long_desc ?></textarea>
                                     <div id="field-repeater">
                                         <div class="col-md-12 col-lg-12" data-index="1">
-                                            <div class="row">
+                                            <div class="row mt-3">
                                                 <div class="col-md-8">
                                                     <input type="text" name="fields[1][value]" class="form-control">
                                                     <input type="hidden" name="fields[1][id]" value="field_1">
@@ -643,7 +643,7 @@ function numberToOrdinal($number) {
                                             </div>                                                                                       
                                         </div>
                                     </div>
-                                    <button class="btn btn-success mt-2" type="button" id="add-field">+ Add</button>
+                                    <button class="btn btn-success mt-2" type="button" id="add-field">+</button>
                                     <br><br>
                                 </div>                                                                
                             </div>
@@ -1312,4 +1312,40 @@ function numberToOrdinal($number) {
             $('#other_article_part_doi_no').val(tagsArray);
         });
     });
+</script>
+
+<script>
+let fieldIndex = 2; // start from 2 because 1 is already rendered
+
+$('#add-field').click(function () {
+    const newId = 'field_' + fieldIndex;
+
+    $('#field-repeater').append(`
+        <div class="col-md-12 col-lg-12" data-index="${fieldIndex}">
+            <div class="row mt-3">
+                <div class="col-md-8">
+                    <input type="text" name="fields[${fieldIndex}][value]" class="form-control">
+                    <input type="hidden" name="fields[${fieldIndex}][id]" value="${newId}">
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-outline-secondary copy-btn" type="button" data-id="${newId}">Copy ID</button>
+                    <button class="btn btn-outline-danger remove-field" type="button">-</button>
+                </div>
+            </div>
+        </div>
+    `);
+
+    fieldIndex++;
+});
+
+$(document).on('click', '.remove-field', function () {
+    $(this).closest('.input-group').remove();
+});
+
+$(document).on('click', '.copy-btn', function () {
+    const id = $(this).data('id');
+    navigator.clipboard.writeText(id).then(() => {
+        alert('Copied ID: ' + id);
+    });
+});
 </script>
