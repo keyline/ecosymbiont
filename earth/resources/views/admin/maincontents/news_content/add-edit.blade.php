@@ -633,17 +633,17 @@ function numberToOrdinal($number) {
                                         <div class="input-group d-block col-md-12 col-lg-12" data-index="1">
                                             <div class="row mt-3">
                                                 <div class="col-md-8">
-                                                    <input type="text" name="fields[1][value]" class="form-control" placeholder="Citation">
-                                                    <input type="hidden" name="fields[1][id]" value="field_1">
+                                                    <input type="text" name="citation[1][value]" class="form-control" placeholder="Citation">
+                                                    <input type="hidden" name="citation[1][id]" value="citation_1">
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <button class="btn btn-outline-secondary copy-btn" type="button" data-id="field_1">Copy ID</button>
+                                                    <button class="btn btn-outline-secondary copy-btn" type="button" data-id="citation_1">Copy ID</button>
                                                     <!-- <button class="btn btn-outline-danger remove-field" type="button">-</button> -->
                                                 </div>
                                             </div>                                                                                       
                                         </div>
                                     </div>
-                                    <button class="btn btn-success mt-2" type="button" id="add-field">+</button>
+                                    <button class="btn btn-success mt-2" type="button" id="add-citation">+</button>
                                     <br><br>
                                 </div>                                                                
                             </div>
@@ -1317,19 +1317,19 @@ function numberToOrdinal($number) {
 <script>
 let fieldIndex = 2; // start from 2 because 1 is already rendered
 
-$('#add-field').click(function () {
-    const newId = 'field_' + fieldIndex;
+$('#add-citation').click(function () {
+    const newId = 'citation_' + fieldIndex;
 
     $('#field-repeater').append(`
         <div class="input-group d-block col-md-12 col-lg-12" data-index="${fieldIndex}">
             <div class="row mt-3">
                 <div class="col-md-8">
-                    <input type="text" name="fields[${fieldIndex}][value]" class="form-control" placeholder="Citation">
-                    <input type="hidden" name="fields[${fieldIndex}][id]" value="${newId}">
+                    <input type="text" name="citation[${fieldIndex}][value]" class="form-control" placeholder="Citation">
+                    <input type="hidden" name="citation[${fieldIndex}][id]" value="${newId}">
                 </div>
                 <div class="col-md-4">
                     <button class="btn btn-outline-secondary copy-btn" type="button" data-id="${newId}">Copy ID</button>
-                    <button class="btn btn-outline-danger remove-field" type="button">-</button>
+                    <button class="btn btn-outline-danger remove-citation" type="button">-</button>
                 </div>
             </div>
         </div>
@@ -1338,7 +1338,7 @@ $('#add-field').click(function () {
     fieldIndex++;
 });
 
-$(document).on('click', '.remove-field', function () {
+$(document).on('click', '.remove-citation', function () {
     $(this).closest('.input-group').remove();
 });
 
