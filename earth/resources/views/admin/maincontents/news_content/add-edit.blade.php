@@ -634,11 +634,12 @@ function numberToOrdinal($number) {
                                 <div class="col-md-10 col-lg-8">
                                     <textarea name="long_desc" class="form-control ckeditor" id="long_desc" rows="5"><?= $long_desc ?></textarea>                                    
                                     <div id="field-repeater">
+                                        @for ($i = 0; $i <= count($citation_value); $i++)
                                         <div class="input-group d-block col-md-12 col-lg-12" data-index="1">
                                             <div class="row mt-3">
                                                 <div class="col-md-8">
-                                                    <input type="text" name="citation[1][value]" class="form-control" placeholder="Citation" value="<?= $citation_value[0] ?? '' ?>">
-                                                    <input type="hidden" name="citation[1][id]" value="<?= $citation_id[0] ?? 'citation_1_old' ?>">
+                                                    <input type="text" name="citation[1][value]" class="form-control" placeholder="Citation" value="<?= $citation_value[$i] ?? '' ?>">
+                                                    <input type="hidden" name="citation[1][id]" value="<?= $citation_id[$i] ?? 'citation_1_old' ?>">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <button class="btn btn-outline-secondary copy-btn" type="button" data-id="citation_1">Copy ID</button>
@@ -646,6 +647,7 @@ function numberToOrdinal($number) {
                                                 </div>
                                             </div>                                                                                       
                                         </div>
+                                        @endfor
                                     </div>
                                     <button class="btn btn-success mt-2" type="button" id="add-citation">+</button>
                                     <br><br>
