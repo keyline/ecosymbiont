@@ -372,7 +372,7 @@ class NewsContentController extends Controller
                         'keywords'                  => $postData['keywords'] ?? '',     
                         'is_feature'                => $postData['is_feature'],  
                         'is_popular'                => $postData['is_popular'], 
-                        'is_hot'                    => $postData['is_hot'],                      
+                        // 'is_hot'                    => $postData['is_hot'],                      
                         'short_desc'                => $postData['short_desc'] ?? '',
                         'editors_comments'          => $postData['editors_comments'] ?? '',
                         'creative_Work_fiction'     => $postData['creative_Work_fiction'],
