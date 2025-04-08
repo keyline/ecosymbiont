@@ -309,13 +309,21 @@ class NewsContentController extends Controller
                             }
                         }
                         
-                        $citation = count($postData['citation']);
+                        // $citation = count($postData['citation']);
                         $citation_value = [];
                         $citation_id = [];
-                        for ($i = 1; $i < $citation; $i++) {
-                            if ($postData['citation'][$i] != '') {
-                                $citation_value[] = $postData['citation'][$i];
-                                $citation_id[] = $postData['citation_id'][$i];
+                        // for ($i = 1; $i < $citation; $i++) {
+                        //     if ($postData['citation'][$i] != '') {
+                        //         $citation_value[] = $postData['citation'][$i];
+                        //         $citation_id[] = $postData['citation_id'][$i];
+                        //     }
+                        // }
+                        if (!empty($postData['citation']) && is_array($postData['citation'])) {
+                            foreach ($postData['citation'] as $citation) {
+                                if (!empty($citation['value'])) {
+                                    $citation_value[] = $citation['value'];
+                                    $citation_id[] = $citation['id'];
+                                }
                             }
                         }
 
