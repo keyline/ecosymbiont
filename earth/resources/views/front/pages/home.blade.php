@@ -239,6 +239,11 @@ $current_url = $protocol . $host . $uri;
                             <span class="top-stories">TOP STORIES</span>
                             <ul class="bxslider">
                                 <?php
+                                $latestArticleIds = NewsContent::selectRaw('MAX(id) as id')
+                                ->where('status', 1)
+                                ->where('parent_category', 3)
+                                ->groupBy('sub_category')
+                                ->pluck('id');
                                 $parentCategoryContents3 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
                                                                         ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
                                                                         ->select('news_contents.id', 
@@ -258,11 +263,8 @@ $current_url = $protocol . $host . $uri;
                                                                                 'parent_category.sub_category as parent_category_name', 
                                                                                 'parent_category.slug as parent_category_slug', 
                                                                                 'sub_category.sub_category as sub_category_name', 
-                                                                                'sub_category.slug as sub_category_slug')
-                                                                        ->where('news_contents.status', '=', 1)
-                                                                        // ->where('news_contents.is_popular', '=', 1) // Uncomment if needed
-                                                                        ->where('news_contents.parent_category', '=', 3)
-                                                                        // ->inRandomOrder()
+                                                                                'sub_category.slug as sub_category_slug')                                                                        
+                                                                        ->whereIn('news_contents.id', $latestArticleIds)                                                                                                                                                                                                                        
                                                                         ->orderBy('news_contents.id', 'DESC')
                                                                         ->get();       
                                                                         // dd(DB::getQueryLog());                                                        
