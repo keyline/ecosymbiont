@@ -633,12 +633,12 @@ function numberToOrdinal($number) {
                                         <div class="input-group d-block col-md-12 col-lg-12" data-index="1">
                                             <div class="row mt-3">
                                                 <div class="col-md-8">
-                                                    <input type="text" name="fields[1][value]" class="form-control">
+                                                    <input type="text" name="fields[1][value]" class="form-control" placeholder="Citation">
                                                     <input type="hidden" name="fields[1][id]" value="field_1">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <button class="btn btn-outline-secondary copy-btn" type="button" data-id="field_1">Copy ID</button>
-                                                    <button class="btn btn-outline-danger remove-field" type="button">-</button>
+                                                    <!-- <button class="btn btn-outline-danger remove-field" type="button">-</button> -->
                                                 </div>
                                             </div>                                                                                       
                                         </div>
@@ -1324,7 +1324,7 @@ $('#add-field').click(function () {
         <div class="input-group d-block col-md-12 col-lg-12" data-index="${fieldIndex}">
             <div class="row mt-3">
                 <div class="col-md-8">
-                    <input type="text" name="fields[${fieldIndex}][value]" class="form-control">
+                    <input type="text" name="fields[${fieldIndex}][value]" class="form-control" placeholder="Citation">
                     <input type="hidden" name="fields[${fieldIndex}][id]" value="${newId}">
                 </div>
                 <div class="col-md-4">
