@@ -848,9 +848,41 @@ function numberToOrdinal($number) {
     });
 </script>
 <script>
+    CKEDITOR.plugins.add('boxWrapper', {
+        init: function (editor) {
+            editor.addCommand('wrapInBox', {
+                exec: function (editor) {
+                    var selection = editor.getSelection();
+                    var ranges = selection.getRanges();
+
+                    if (ranges.length > 0) {
+                        var wrapper = new CKEDITOR.dom.element('div');
+                        wrapper.setAttribute('class', 'custom-box-style');
+                        wrapper.setAttribute('style', 'border: 4px solid #366236; padding: 15px; background-color:rgb(252, 252, 252); margin: 10px 0; border-radius: 8px;');
+
+                        var fragment = ranges[0].cloneContents();
+                        wrapper.append(fragment);
+
+                        ranges[0].deleteContents();
+                        ranges[0].insertNode(wrapper);
+                    }
+                }
+            });
+
+            editor.ui.addButton('BoxWrapper', {
+                label: 'Wrap in Box Style',
+                command: 'wrapInBox',
+                toolbar: 'styles',
+                icon: 'https://cdn-icons-png.flaticon.com/512/565/565547.png' // You can use any icon here
+            });
+        }
+    });
+</script>
+<script>
     CKEDITOR.replace('long_desc', {   
         allowedContent: true,         
-        removeFormatAttributes: '',      
+        removeFormatAttributes: '',  
+        extraPlugins: 'boxWrapper',    
     stylesSet: [        
         { 
             name: 'others_image_colour', 
