@@ -1321,7 +1321,7 @@ $('#add-field').click(function () {
     const newId = 'field_' + fieldIndex;
 
     $('#field-repeater').append(`
-        <div class="col-md-12 col-lg-12" data-index="${fieldIndex}">
+        <div class="input-group col-md-12 col-lg-12" data-index="${fieldIndex}">
             <div class="row mt-3">
                 <div class="col-md-8">
                     <input type="text" name="fields[${fieldIndex}][value]" class="form-control">
