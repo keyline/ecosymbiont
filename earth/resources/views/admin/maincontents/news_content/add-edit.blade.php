@@ -847,7 +847,7 @@ function numberToOrdinal($number) {
         });
     });
 </script>
-<script>
+<!-- <script>
     CKEDITOR.plugins.add('boxWrapper', {
         init: function (editor) {
             editor.addCommand('wrapInBox', {
@@ -877,12 +877,12 @@ function numberToOrdinal($number) {
             });
         }
     });
-</script>
+</script> -->
 <script>
     CKEDITOR.replace('long_desc', {   
         allowedContent: true,         
         removeFormatAttributes: '',  
-        extraPlugins: 'boxWrapper',    
+        // extraPlugins: 'boxWrapper',    
     stylesSet: [        
         { 
             name: 'others_image_colour', 
