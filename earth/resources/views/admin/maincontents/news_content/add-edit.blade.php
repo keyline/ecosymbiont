@@ -630,6 +630,16 @@ function numberToOrdinal($number) {
                                 <div class="col-md-10 col-lg-8">
                                     <textarea name="long_desc" class="form-control ckeditor" id="long_desc" rows="5"><?= $long_desc ?></textarea>
                                 </div>
+                                <div id="field-repeater">
+                                    <div class="input-group mb-2" data-index="1">
+                                        <input type="text" name="fields[1][value]" class="form-control" placeholder="Enter value">
+                                        <input type="hidden" name="fields[1][id]" value="field_1">
+                                        <button class="btn btn-outline-secondary copy-btn" type="button" data-id="field_1">Copy ID</button>
+                                        <button class="btn btn-outline-danger remove-field" type="button">-</button>
+                                    </div>
+                                </div>
+                                <button class="btn btn-success mt-2" type="button" id="add-field">+ Add</button>
+                                <br><br>
                             </div>
                             <div class="row mb-3">
                                 <label for="ckeditor1" class="col-md-2 col-lg-4 col-form-label">23a) Editor’s comments</label>
