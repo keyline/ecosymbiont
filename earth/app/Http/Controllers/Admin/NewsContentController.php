@@ -255,7 +255,7 @@ class NewsContentController extends Controller
 
             if ($request->isMethod('post')) {
                 $postData                   = $request->all();
-                Helper::pr($postData);
+                // Helper::pr($postData);
                 $is_series                  = $postData['is_series'];
                 if($is_series == 'Yes'){
                     $series_article_no          = $postData['series_article_no'];
@@ -307,7 +307,18 @@ class NewsContentController extends Controller
                                 $coauthorClassification[]       = $request->input("co_author_classification_{$i}");
                                 $coauthorPronoun[]              = $request->input("co_author_pronoun{$i}");
                             }
-                        }                             
+                        }
+                        
+                        $citation = count($postData['citation']);
+                        $citation_value = [];
+                        $citation_id = [];
+                        for ($i = 0; $i < $citation; $i++) {
+                            if ($postData['citation'][$i] != '') {
+                                $citation_value[] = $postData['citation'][$i];
+                                $citation_id[] = $postData['citation_id'][$i];
+                            }
+                        }
+
                         if ($postData['media'] == 'image') {   
                             /* banner image */
                             $imageFile      = $request->file('cover_image');
@@ -369,7 +380,9 @@ class NewsContentController extends Controller
                         'cover_image_caption'       => $postData['cover_image_caption'] ?? '',
                         'video_url'                 => $postData['video_url'],
                         'videoId'                   => $videoId ?? '',
-                        'long_desc'                 => $postData['long_desc'] ?? '',     
+                        'long_desc'                 => $postData['long_desc'] ?? '',   
+                        'citation'                 => json_encode($citation_value),
+                        'citation_id'              => json_encode($citation_id),  
                         'keywords'                  => $postData['keywords'] ?? '',     
                         'is_feature'                => $postData['is_feature'],  
                         'is_popular'                => $postData['is_popular'], 
@@ -387,7 +400,7 @@ class NewsContentController extends Controller
                         'current_article_no'        => $current_article_no,
                         'other_article_part_doi_no' => $other_article_part_doi_no,
                     ];
-                    // Helper::pr($fields);
+                    Helper::pr($fields);
                     NewsContent::where($this->data['primary_key'], '=', $id)->update($fields);   
                     $fieldsArticle = ['is_published'             => 4];
                     Article::where('article_no', '=', $postData['creative_work_SRN'])->update($fieldsArticle);
