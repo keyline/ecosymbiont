@@ -430,6 +430,7 @@ class NewsContentController extends Controller
 
             if ($request->isMethod('post')) {
                 $postData = $request->all();
+                Helper::pr($postData);
 
                 $is_series                  = $postData['is_series'];
                 if($is_series == 'Yes'){
