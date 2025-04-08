@@ -312,7 +312,7 @@ class NewsContentController extends Controller
                         $citation = count($postData['citation']);
                         $citation_value = [];
                         $citation_id = [];
-                        for ($i = 0; $i < $citation; $i++) {
+                        for ($i = 1; $i < $citation; $i++) {
                             if ($postData['citation'][$i] != '') {
                                 $citation_value[] = $postData['citation'][$i];
                                 $citation_id[] = $postData['citation_id'][$i];
