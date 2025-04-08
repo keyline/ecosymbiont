@@ -635,7 +635,7 @@ function numberToOrdinal($number) {
                                     <textarea name="long_desc" class="form-control ckeditor" id="long_desc" rows="5"><?= $long_desc ?></textarea>                                    
                                     <div id="field-repeater">
                                         @for ($i = 0; $i <= count($citation_value); $i++)
-                                        <div class="input-group d-block col-md-12 col-lg-12" data-index="1">
+                                        <div class="input-group d-block col-md-12 col-lg-12" data-index="{{$i+1}}">
                                             <div class="row mt-3">
                                                 <div class="col-md-8">
                                                     <input type="text" name="citation[{{$i+1}}][value]" class="form-control" placeholder="Citation" value="<?= $citation_value[$i] ?? '' ?>">
