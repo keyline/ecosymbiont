@@ -239,6 +239,7 @@ $current_url = $protocol . $host . $uri;
                             <span class="top-stories">TOP STORIES</span>
                             <ul class="bxslider">
                                 <?php
+                                DB::enableQueryLog(); // Enable query log
                                 $latestArticleIds = NewsContent::selectRaw('MAX(id) as id')
                                 ->where('status', 1)
                                 ->where('parent_category', 3)
@@ -267,7 +268,7 @@ $current_url = $protocol . $host . $uri;
                                                                         ->whereIn('news_contents.id', $latestArticleIds)                                                                                                                                                                                                                        
                                                                         ->orderBy('news_contents.id', 'DESC')
                                                                         ->get();       
-                                                                        // dd(DB::getQueryLog());                                                        
+                                                                        dd(DB::getQueryLog());                                                        
                                 if($parentCategoryContents3){ foreach($parentCategoryContents3 as $parentCategoryContent3){
                                 ?>
                                     <?php
