@@ -631,7 +631,7 @@ function numberToOrdinal($number) {
                                     <textarea name="long_desc" class="form-control ckeditor" id="long_desc" rows="5"><?= $long_desc ?></textarea>
                                 </div>
                                 <div id="field-repeater">
-                                    <div class="col-md-10 col-lg-8" data-index="1">
+                                    <div class="col-md-10 col-lg-8 offset-lg-4" data-index="1">
                                         <input type="text" name="fields[1][value]" class="form-control">
                                         <input type="hidden" name="fields[1][id]" value="field_1">
                                         <button class="btn btn-outline-secondary copy-btn" type="button" data-id="field_1">Copy ID</button>
