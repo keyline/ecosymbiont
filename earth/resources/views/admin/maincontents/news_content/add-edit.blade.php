@@ -637,7 +637,7 @@ function numberToOrdinal($number) {
                                         <div class="input-group d-block col-md-12 col-lg-12" data-index="1">
                                             <div class="row mt-3">
                                                 <div class="col-md-8">
-                                                    <input type="text" name="citation[1][value]" class="form-control" placeholder="Citation" value="<?= $citation[0]['value'] ?? '' ?>">
+                                                    <input type="text" name="citation[1][value]" class="form-control" placeholder="Citation" value="<?= $citation_value[0] ?? '' ?>">
                                                     <input type="hidden" name="citation[1][id]" value="citation_1">
                                                 </div>
                                                 <div class="col-md-4">
