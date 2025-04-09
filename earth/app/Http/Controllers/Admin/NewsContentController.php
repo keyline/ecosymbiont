@@ -309,15 +309,9 @@ class NewsContentController extends Controller
                             }
                         }
                         
-                        // $citation = count($postData['citation']);
+                        /* citation details */  
                         $citation_value = [];
-                        $citation_id = [];
-                        // for ($i = 1; $i < $citation; $i++) {
-                        //     if ($postData['citation'][$i] != '') {
-                        //         $citation_value[] = $postData['citation'][$i];
-                        //         $citation_id[] = $postData['citation_id'][$i];
-                        //     }
-                        // }
+                        $citation_id = [];                        
                         if (!empty($postData['citation']) && is_array($postData['citation'])) {
                             foreach ($postData['citation'] as $citation) {
                                 if (!empty($citation['value'])) {
@@ -422,8 +416,7 @@ class NewsContentController extends Controller
     /* edit */
 
     /* import */
-        public 
-        function import(Request $request, $id)
+        public function import(Request $request, $id)
         {
             $data['module']                 = $this->data;
             $id                             = Helper::decoded($id);        
@@ -498,6 +491,18 @@ class NewsContentController extends Controller
                             $coauthorPronoun[] = $request->input("co_author_pronoun{$i}");
                         }
                     }          
+
+                    /* citation details */  
+                    $citation_value = [];
+                    $citation_id = [];                        
+                    if (!empty($postData['citation']) && is_array($postData['citation'])) {
+                        foreach ($postData['citation'] as $citation) {
+                            if (!empty($citation['value'])) {
+                                $citation_value[] = $citation['value'];
+                                $citation_id[] = $citation['id'];
+                            }
+                        }
+                    }
                     
                     if (!isset($postData['media']) || empty($postData['media'])) {
                         // Media type is not selected; skip this method and save the form
@@ -590,6 +595,8 @@ class NewsContentController extends Controller
                     'video_url'                 => $url ?? '',
                     'videoId'                   => $videoId ?? '',
                     'long_desc'                 => $postData['long_desc'] ?? '',
+                    'citation_value'            => json_encode($citation_value),
+                    'citation_id'               => json_encode($citation_id),  
                     'editors_comments'          => $postData['editors_comments'] ?? '',
                     'keywords'                  => $postData['keywords'] ?? '',     
                     'is_feature'                => $postData['is_feature'],  
@@ -659,7 +666,18 @@ class NewsContentController extends Controller
                             $coauthorClassification[] = $request->input("co_author_classification_{$i}");
                             $coauthorPronoun[] = $request->input("co_author_pronoun{$i}");
                         }
-                    }                                   
+                    }           
+                    /* citation details */  
+                    $citation_value = [];
+                    $citation_id = [];                        
+                    if (!empty($postData['citation']) && is_array($postData['citation'])) {
+                        foreach ($postData['citation'] as $citation) {
+                            if (!empty($citation['value'])) {
+                                $citation_value[] = $citation['value'];
+                                $citation_id[] = $citation['id'];
+                            }
+                        }
+                    }                        
                     if ($postData['media'] == 'image') {   
                         /* banner image */
                         $imageFile      = $request->file('cover_image');
@@ -741,6 +759,8 @@ class NewsContentController extends Controller
                         'video_url'                 => $postData['video_url'] ?? '',
                         'videoId'                   => $videoId ?? '',
                         'long_desc'                 => $postData['long_desc'] ?? '',
+                        'citation_value'            => json_encode($citation_value),
+                        'citation_id'               => json_encode($citation_id),  
                         'editors_comments'          => $postData['editors_comments'] ?? '',
                         'keywords'                  => $postData['keywords'] ?? '',     
                         'is_feature'                => $postData['is_feature'],  
@@ -799,6 +819,8 @@ class NewsContentController extends Controller
                         'video_url'                 => $url ?? '',
                         'videoId'                   => $videoId ?? '',
                         'long_desc'                 => $postData['long_desc'] ?? '',
+                        'citation_value'            => json_encode($citation_value),
+                        'citation_id'               => json_encode($citation_id),  
                         'editors_comments'          => $postData['editors_comments'] ?? '',
                         'keywords'                  => $postData['keywords'] ?? '',     
                         'is_feature'                => $postData['is_feature'],  

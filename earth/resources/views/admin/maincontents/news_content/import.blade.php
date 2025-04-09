@@ -92,6 +92,8 @@ function numberToOrdinal($number) {
             $co_indigenous_affiliations = json_decode($row->co_indigenous_affiliations);
             $co_author_classification = json_decode($row->co_author_classification);
             $co_author_pronoun = json_decode($row->co_author_pronoun);
+            $citation_value = json_decode($row->citation_value);            
+            $citation_id = json_decode($row->citation_id);
             // dd($co_author_pronoun);
             $first_name = $row->first_name;                               
             $email = $row->email;          
@@ -649,6 +651,41 @@ function numberToOrdinal($number) {
                             <label for="ckeditor1" class="col-md-2 col-lg-4 col-form-label">23) Description</label>
                             <div class="col-md-10 col-lg-8">
                                 <textarea name="long_desc" class="form-control ckeditor" rows="5"><?= $long_desc ?></textarea>
+                                @if (!empty($citation_value))
+                                    <div id="field-repeater">
+                                        @for ($i = 0; $i <= count($citation_value); $i++)
+                                        <div class="input-group d-block col-md-12 col-lg-12" data-index="{{$i+1}}">
+                                            <div class="row mt-3">
+                                                <div class="col-md-8">
+                                                    <input type="text" name="citation[{{$i+1}}][value]" class="form-control" placeholder="Citation" value="<?= $citation_value[$i] ?? '' ?>">
+                                                    <input type="hidden" name="citation[{{$i+1}}][id]" value="<?= $citation_id[$i] ?? 'citation_' . ($i+1) ?>">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button class="btn btn-outline-secondary copy-btn" type="button" data-id="citation_{{$i+1}}">Copy ID</button>
+                                                    <button class="btn btn-outline-danger remove-citation" type="button">-</button>
+                                                </div>
+                                            </div>                                                                                       
+                                        </div>
+                                        @endfor
+                                    </div>
+                                    @else
+                                    <div id="field-repeater">
+                                        <div class="input-group d-block col-md-12 col-lg-12" data-index="1">
+                                            <div class="row mt-3">
+                                                <div class="col-md-8">
+                                                    <input type="text" name="citation[1][value]" class="form-control" placeholder="Citation" value="">
+                                                    <input type="hidden" name="citation[1][id]" value="citation_1">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button class="btn btn-outline-secondary copy-btn" type="button" data-id="citation_1">Copy ID</button>
+                                                    <!-- <button class="btn btn-outline-danger remove-citation" type="button">-</button> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endif
+                                <button class="btn btn-success mt-2" type="button" id="add-citation">+</button>
+                                <br><br>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -1339,6 +1376,47 @@ function numberToOrdinal($number) {
             });
             $(this).parent().remove();
             $('#other_article_part_doi_no').val(tagsArray);
+        });
+    });
+</script>
+<script>
+    @php
+        $citationCount = !empty($citation_value) ? count($citation_value) : 0;
+    @endphp
+
+    let citationValues = {{ $citationCount }};
+    let fieldIndex = citationValues > 0 ? citationValues + 2 : 2;
+
+
+    $('#add-citation').click(function () {
+        const newId = 'citation_' + fieldIndex;
+
+        $('#field-repeater').append(`
+            <div class="input-group d-block col-md-12 col-lg-12" data-index="${fieldIndex}">
+                <div class="row mt-3">
+                    <div class="col-md-8">
+                        <input type="text" name="citation[${fieldIndex}][value]" class="form-control" placeholder="Citation">
+                        <input type="hidden" name="citation[${fieldIndex}][id]" value="${newId}">
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-outline-secondary copy-btn" type="button" data-id="${newId}">Copy ID</button>
+                        <button class="btn btn-outline-danger remove-citation" type="button">-</button>
+                    </div>
+                </div>
+            </div>
+        `);
+
+        fieldIndex++;
+    });
+
+    $(document).on('click', '.remove-citation', function () {
+        $(this).closest('.input-group').remove();
+    });
+
+    $(document).on('click', '.copy-btn', function () {
+        const id = $(this).data('id');
+        navigator.clipboard.writeText(id).then(() => {
+            alert('Copied ID: ' + id);
         });
     });
 </script>
