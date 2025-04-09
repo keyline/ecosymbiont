@@ -199,6 +199,7 @@ $current_url = $protocol . $host . $uri;
                                         <div><?=$rowContent->long_desc?></div>
                                         <?php 
                                             $citation_value = json_decode($rowContent->citation_value);
+                                            $citation_id = json_decode($rowContent->citation_id);
                                             if (!empty($citation_value))
                                             { ?>
                                             <hr>
