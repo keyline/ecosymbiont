@@ -2071,7 +2071,7 @@ class FrontController extends Controller
                                     'is_series'                 => $is_series,
                                     'series_article_no'         => $series_article_no,
                                     'current_article_no'        => $current_article_no,
-                                    'other_article_part_doi_no' => $other_article_part_doi_no,
+                                    'other_article_part_doi_no' => str_replace('DOI', 'SRN', $other_article_part_doi_no),
                                ];
                                      Helper::pr($fields);
 
