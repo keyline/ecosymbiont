@@ -987,12 +987,12 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
-                                    <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label blue-text">31c) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).
+                                    <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label blue-text">31c) List (in order is submission) the SRNs of each previously submitted creative-work in series (enter a comma after each SRN)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" class="form-control" id="input-tags">
                                         <textarea class="form-control" name="other_article_part_doi_no" id="other_article_part_doi_no" style="display:none;"><?=$other_article_part_doi_no?></textarea>
-                                        <small class="text-primary">Separate each DOI with a comma</small>
+                                        <small class="text-primary">Type a comma after each SRN</small>
                                         <div id="badge-container">
                                             <?php
                                             if($other_article_part_doi_no != ''){
