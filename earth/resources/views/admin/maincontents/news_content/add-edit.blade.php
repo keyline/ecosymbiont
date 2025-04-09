@@ -1343,7 +1343,7 @@ function numberToOrdinal($number) {
     @endphp
 
     let citationValues = {{ $citationCount }};
-    let fieldIndex = citationValues > 0 ? citationValues + 1 : 2;
+    let fieldIndex = citationValues > 0 ? citationValues + 2 : 2;
 
 
     $('#add-citation').click(function () {
