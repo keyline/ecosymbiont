@@ -200,6 +200,8 @@ $current_url = $protocol . $host . $uri;
                                         <?php 
                                             $citation_value = json_decode($rowContent->citation_value);
                                             $citation_id = json_decode($rowContent->citation_id);
+                                            Helper::pr($citation_value);
+                                            Helper::pr($citation_id);
                                             if (!empty($citation_value))
                                             { ?>
                                             <hr>
