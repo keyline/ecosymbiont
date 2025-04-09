@@ -638,10 +638,10 @@ function numberToOrdinal($number) {
                                             <div class="row mt-3">
                                                 <div class="col-md-8">
                                                     <input type="text" name="citation[{{$i+1}}][value]" class="form-control" placeholder="Citation" value="<?= $citation_value[$i] ?? '' ?>">
-                                                    <input type="hidden" name="citation[{{$i+1}}][id]" value="<?= $citation_id[$i] ?? 'citation_' . ($i+1) ?>">
+                                                    <input type="hidden" name="citation[{{$i+1}}][id]" value="<?= $citation_id[$i] ?? '#citation_' . ($i+1) ?>">
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <button class="btn btn-outline-secondary copy-btn" type="button" data-id="citation_{{$i+1}}">Copy ID</button>
+                                                    <button class="btn btn-outline-secondary copy-btn" type="button" data-id="#citation_{{$i+1}}">Copy ID</button>
                                                     <button class="btn btn-outline-danger remove-citation" type="button">-</button>
                                                 </div>
                                             </div>                                                                                       
@@ -654,10 +654,10 @@ function numberToOrdinal($number) {
                                             <div class="row mt-3">
                                                 <div class="col-md-8">
                                                     <input type="text" name="citation[1][value]" class="form-control" placeholder="Citation" value="">
-                                                    <input type="hidden" name="citation[1][id]" value="citation_1">
+                                                    <input type="hidden" name="citation[1][id]" value="#citation_1">
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <button class="btn btn-outline-secondary copy-btn" type="button" data-id="citation_1">Copy ID</button>
+                                                    <button class="btn btn-outline-secondary copy-btn" type="button" data-id="#citation_1">Copy ID</button>
                                                     <!-- <button class="btn btn-outline-danger remove-citation" type="button">-</button> -->
                                                 </div>
                                             </div>
@@ -1345,7 +1345,7 @@ function numberToOrdinal($number) {
 
 
     $('#add-citation').click(function () {
-        const newId = 'citation_' + fieldIndex;
+        const newId = '#citation_' + fieldIndex;
 
         $('#field-repeater').append(`
             <div class="input-group d-block col-md-12 col-lg-12" data-index="${fieldIndex}">
