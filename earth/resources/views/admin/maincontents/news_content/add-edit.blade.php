@@ -640,7 +640,7 @@ function numberToOrdinal($number) {
                                             <div class="row mt-3">
                                                 <div class="col-md-8">
                                                     <input type="text" name="citation[{{$i+1}}][value]" class="form-control" placeholder="Citation" value="<?= $citation_value[$i] ?? '' ?>">
-                                                    <input type="hidden" name="citation[{{$i+1}}][id]" value="<?= $citation_id[$i] ?? 'citation_{{$i+1}}' ?>">
+                                                    <input type="hidden" name="citation[{{$i+1}}][id]" value="<?= $citation_id[$i] ?? 'citation_' . ($i+1) ?>">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <button class="btn btn-outline-secondary copy-btn" type="button" data-id="citation_{{$i+1}}">Copy ID</button>
