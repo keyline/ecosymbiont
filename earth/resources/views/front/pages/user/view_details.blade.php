@@ -456,8 +456,8 @@ use App\Models\ExpertiseArea;
                     <td><?=$current_article_no?></td>
                   </tr>
                   <tr>
-                    <td>34) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).</td>
-                    <td><?=$other_article_part_doi_no?></td>
+                    <td>34) List (in order is submission) the SRNs of each previously submitted creative-work in series (enter a comma after each SRN)</td>
+                    <td><?=str_replace('DOI', 'SRN', $other_article_part_doi_no)?></td>
                   </tr>
                 <?php }?>
             </tbody>
