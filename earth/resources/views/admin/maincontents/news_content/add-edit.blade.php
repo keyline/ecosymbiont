@@ -644,7 +644,7 @@ function numberToOrdinal($number) {
                                                 </div>
                                                 <div class="col-md-4">
                                                     <button class="btn btn-outline-secondary copy-btn" type="button" data-id="citation_{{$i+1}}">Copy ID</button>
-                                                    <!-- <button class="btn btn-outline-danger remove-field" type="button">-</button> -->
+                                                    <button class="btn btn-outline-danger remove-field" type="button">-</button>
                                                 </div>
                                             </div>                                                                                       
                                         </div>
