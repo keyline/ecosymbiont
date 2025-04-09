@@ -201,12 +201,12 @@ $current_url = $protocol . $host . $uri;
                                             $citation_value = json_decode($rowContent->citation_value);
                                             $citation_id = json_decode($rowContent->citation_id);
                                             // Helper::pr($citation_value);
-                                            Helper::pr($citation_id);
+                                            // Helper::pr($citation_id);
                                             if (!empty($citation_value))
                                             { ?>
                                             <hr>
                                             <div>
-                                            <?php for ($i = 0; $i <= count($citation_value); $i++)
+                                            <?php for ($i = 0; $i < count($citation_value); $i++)
                                             { ?>                                                                                                    
                                                 <p id="<?= $citation_id[$i] ?>"><?= $citation_value[$i] ?></p>                                                
                                            <?php } ?>
