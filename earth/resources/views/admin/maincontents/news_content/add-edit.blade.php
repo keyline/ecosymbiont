@@ -633,6 +633,7 @@ function numberToOrdinal($number) {
                                 <label for="ckeditor1" class="col-md-2 col-lg-4 col-form-label">23) Description</label>
                                 <div class="col-md-10 col-lg-8">
                                     <textarea name="long_desc" class="form-control ckeditor" id="long_desc" rows="5"><?= $long_desc ?></textarea>                                    
+                                    @if (!empty($citation_value))
                                     <div id="field-repeater">
                                         @for ($i = 0; $i <= count($citation_value); $i++)
                                         <div class="input-group d-block col-md-12 col-lg-12" data-index="{{$i+1}}">
@@ -649,6 +650,22 @@ function numberToOrdinal($number) {
                                         </div>
                                         @endfor
                                     </div>
+                                    @else
+                                    <div id="field-repeater">
+                                        <div class="input-group d-block col-md-12 col-lg-12" data-index="1">
+                                            <div class="row mt-3">
+                                                <div class="col-md-8">
+                                                    <input type="text" name="citation[1][value]" class="form-control" placeholder="Citation" value="">
+                                                    <input type="hidden" name="citation[1][id]" value="citation_1_old">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button class="btn btn-outline-secondary copy-btn" type="button" data-id="citation_1">Copy ID</button>
+                                                    <!-- <button class="btn btn-outline-danger remove-field" type="button">-</button> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endif
                                     <button class="btn btn-success mt-2" type="button" id="add-citation">+</button>
                                     <br><br>
                                 </div>                                                                
