@@ -1338,37 +1338,43 @@ function numberToOrdinal($number) {
 </script>
 
 <script>
-let fieldIndex = 2; // start from 2 because 1 is already rendered
+    @php
+        $citationCount = !empty($citation_value) ? count($citation_value) : 0;
+    @endphp
 
-$('#add-citation').click(function () {
-    const newId = 'citation_' + fieldIndex;
+    let citationValues = {{ $citationCount }};
+    let fieldIndex = citationValues > 0 ? citationValues + 1 : 2;
 
-    $('#field-repeater').append(`
-        <div class="input-group d-block col-md-12 col-lg-12" data-index="${fieldIndex}">
-            <div class="row mt-3">
-                <div class="col-md-8">
-                    <input type="text" name="citation[${fieldIndex}][value]" class="form-control" placeholder="Citation">
-                    <input type="hidden" name="citation[${fieldIndex}][id]" value="${newId}">
-                </div>
-                <div class="col-md-4">
-                    <button class="btn btn-outline-secondary copy-btn" type="button" data-id="${newId}">Copy ID</button>
-                    <button class="btn btn-outline-danger remove-citation" type="button">-</button>
+
+    $('#add-citation').click(function () {
+        const newId = 'citation_' + fieldIndex;
+
+        $('#field-repeater').append(`
+            <div class="input-group d-block col-md-12 col-lg-12" data-index="${fieldIndex}">
+                <div class="row mt-3">
+                    <div class="col-md-8">
+                        <input type="text" name="citation[${fieldIndex}][value]" class="form-control" placeholder="Citation">
+                        <input type="hidden" name="citation[${fieldIndex}][id]" value="${newId}">
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-outline-secondary copy-btn" type="button" data-id="${newId}">Copy ID</button>
+                        <button class="btn btn-outline-danger remove-citation" type="button">-</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    `);
+        `);
 
-    fieldIndex++;
-});
-
-$(document).on('click', '.remove-citation', function () {
-    $(this).closest('.input-group').remove();
-});
-
-$(document).on('click', '.copy-btn', function () {
-    const id = $(this).data('id');
-    navigator.clipboard.writeText(id).then(() => {
-        alert('Copied ID: ' + id);
+        fieldIndex++;
     });
-});
+
+    $(document).on('click', '.remove-citation', function () {
+        $(this).closest('.input-group').remove();
+    });
+
+    $(document).on('click', '.copy-btn', function () {
+        const id = $(this).data('id');
+        navigator.clipboard.writeText(id).then(() => {
+            alert('Copied ID: ' + id);
+        });
+    });
 </script>
