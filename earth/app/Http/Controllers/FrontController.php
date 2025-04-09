@@ -1814,7 +1814,7 @@ class FrontController extends Controller
                                 'is_series'                 => $is_series,
                                 'series_article_no'         => $series_article_no,
                                 'current_article_no'        => $current_article_no,
-                                'other_article_part_doi_no' => $other_article_part_doi_no,
+                                'other_article_part_doi_no' => str_replace('SRN', 'DOI', $other_article_part_doi_no),
                             ];
                             //   Helper::pr($fields);
 
@@ -1881,7 +1881,7 @@ class FrontController extends Controller
                                 'is_series'                 => $is_series,
                                 'series_article_no'         => $series_article_no,
                                 'current_article_no'        => $current_article_no,
-                                'other_article_part_doi_no' => $other_article_part_doi_no,
+                                'other_article_part_doi_no' => str_replace('SRN', 'DOI', $other_article_part_doi_no),
                             ];
                             //   Helper::pr($fields);
                             /* submission email */
@@ -2073,7 +2073,7 @@ class FrontController extends Controller
                                     'current_article_no'        => $current_article_no,
                                     'other_article_part_doi_no' => str_replace('SRN', 'DOI', $other_article_part_doi_no),
                                ];
-                                     Helper::pr($fields);
+                                    //  Helper::pr($fields);
 
                                /* submission email */
                                 $generalSetting             = GeneralSetting::find('1');                            
@@ -2199,7 +2199,7 @@ class FrontController extends Controller
                                     'is_series'                 => $is_series,
                                     'series_article_no'         => $series_article_no,
                                     'current_article_no'        => $current_article_no,
-                                    'other_article_part_doi_no' => $other_article_part_doi_no,
+                                    'other_article_part_doi_no' => str_replace('SRN', 'DOI', $other_article_part_doi_no),
                                ];
                                     //   Helper::pr($fields);
 
@@ -2304,7 +2304,7 @@ class FrontController extends Controller
                                     'is_series'                 => $is_series,
                                     'series_article_no'         => $series_article_no,
                                     'current_article_no'        => $current_article_no,
-                                    'other_article_part_doi_no' => $other_article_part_doi_no,
+                                    'other_article_part_doi_no' => str_replace('SRN', 'DOI', $other_article_part_doi_no),
                                ];
                                     // Helper::pr($fields);
 
@@ -2541,7 +2541,7 @@ class FrontController extends Controller
                                         'is_series'                 => $is_series,
                                         'series_article_no'         => $series_article_no,
                                         'current_article_no'        => $current_article_no,
-                                        'other_article_part_doi_no' => $other_article_part_doi_no,  
+                                        'other_article_part_doi_no' => str_replace('SRN', 'DOI', $other_article_part_doi_no),
                                     ];
                                     //    Helper::pr($fields);
 
@@ -2679,7 +2679,7 @@ class FrontController extends Controller
                                             'is_series'                 => $is_series,
                                             'series_article_no'         => $series_article_no,
                                             'current_article_no'        => $current_article_no,
-                                            'other_article_part_doi_no' => $other_article_part_doi_no,
+                                            'other_article_part_doi_no' => str_replace('SRN', 'DOI', $other_article_part_doi_no),
                                         ];
                                         //    Helper::pr($fields);
                                         /* submission email */
@@ -2792,7 +2792,7 @@ class FrontController extends Controller
                                         'is_series'                 => $is_series,
                                         'series_article_no'         => $series_article_no,
                                         'current_article_no'        => $current_article_no,
-                                        'other_article_part_doi_no' => $other_article_part_doi_no,
+                                        'other_article_part_doi_no' => str_replace('SRN', 'DOI', $other_article_part_doi_no),
                                     ];
                                     //    Helper::pr($fields);
 
