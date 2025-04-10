@@ -935,7 +935,7 @@ function numberToOrdinal($number) {
 <script>
     document.querySelector('#submitFormButton').addEventListener('click', function (e) {
         e.preventDefault(); // Prevent default form submission
-
+        const caption = document.getElementById('cover_image_caption').value.trim();
         var pdfFile = document.getElementById("nelp_pdf").files.length;
         var existingPdf = document.querySelector("input[name='existing_nelp_pdf']");
 
@@ -947,6 +947,11 @@ function numberToOrdinal($number) {
                 text: 'Please upload an NELP before submitting.',
             });
             return; // Stop further execution
+        }
+        if (caption === '') {
+            $('#cover_image_caption').attr('required', true);
+            document.getElementById('cover_image_caption').focus();
+            return false; // Prevent form submission
         }
 
         // Confirmation popup
@@ -1474,17 +1479,4 @@ function numberToOrdinal($number) {
             }, 2000); // Hide message after 2 seconds
         });
     });
-</script>
-<script>
-    function setMode(mode) {
-    // If cover image caption is empty, prevent form submission
-    const caption = document.getElementById('cover_image_caption').value.trim();
-    if (caption === '') {
-        $('#cover_image_caption').attr('required', true);
-        // alert('Cover Image Caption is required.');
-        document.getElementById('cover_image_caption').focus();
-        return false; // Prevent form submission
-    }
-}
-
 </script>
