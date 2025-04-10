@@ -35,58 +35,60 @@ use App\Models\NewsContent;
         <div class="card-body" style="margin-top: 20px">
           <form action="<?=url('admin/home-control/'.$slug.'/save')?>" method="post">
             <!-- Table with stripped rows -->
-            <table id="simpletable" class="table table-striped table-bordered nowrap">
-              <thead>
-                <tr>
-                  <th scope="col">Select</th>
-                  <th scope="col">#</th>                  
-                  <th scope="col">Title</th> 
-                  <th scope="col">Category/Subcategory</th>                                   
-                  <th scope="col">Author</th>                  
-                  <th scope="col">Date of publication</th>                
-                </tr>
-              </thead>
-              <tbody>
-                <?php if($rows){ $sl=1; foreach($rows as $row){?>
+            <div style="overflow-x: auto; width: 100%;">
+              <table id="simpletable" class="table table-striped table-bordered nowrap" style="width:100%;">
+                <thead>
                   <tr>
-                    <td>
-                      <input type='checkbox' name='draw[]' value="<?php echo $row->id ?>" class="row-checkbox" onclick="limitCheckboxes(this)"                       
-                      <?php  
-                      if($slug == 'Gallery'){
-                        echo $row->is_gallery == 1 ? 'checked' : '';
-                      } elseif($slug == 'Featured'){
-                        echo $row->is_feature == 1 ? 'checked' : '';
-                      } elseif($slug == 'Projects'){
-                        echo $row->is_home_projects == 1 ? 'checked' : '';
-                      } elseif($slug == 'Interviews'){
-                        echo $row->is_home_interviews == 1 ? 'checked' : '';
-                      } elseif($slug == 'Webinars'){
-                        echo $row->is_home_webinars == 1 ? 'checked' : '';
-                      } elseif($slug == 'Video Content'){
-                        echo $row->is_home_video == 1 ? 'checked' : '';
-                      } elseif($slug == 'Explore Projects'){
-                        echo $row->is_explore_projects == 1 ? 'checked' : '';
-                      }  ?>
-                      >
-                    </td>
-                    <th scope="row"><?=$sl++?></th>
-                    <td><?=$row->new_title?></td>  
-                    <td><?php 
-                      $categoryId = $row->parent_category;
-                      $subcategoryId = $row->sub_category;
-                      $categoryName = NewsCategory::where('id', $categoryId)->first();
-                      $subcategoryName = NewsCategory::where('id', $subcategoryId)->first();
-                      echo $categoryName->sub_category .'/'. $subcategoryName->sub_category;?>
-                    </td>                  
-                    <td><?=$row->author_name?></td>                  
-                    <td><?=date_format(date_create($row->created_at), "M d, Y h:i A")?></td>                  
+                    <th scope="col">Select</th>
+                    <th scope="col">#</th>                  
+                    <th scope="col">Title</th> 
+                    <th scope="col">Category/Subcategory</th>                                   
+                    <th scope="col">Author</th>                  
+                    <th scope="col">Date of publication</th>                
                   </tr>
-                <?php } }?>
-              </tbody>
-              <!-- End Table with stripped rows -->
-              <div id="selected-draws"></div>
-              <button type="submit" class="btn btn-primary mt-3">Save Selected</button>
-            </table>
+                </thead>
+                <tbody>
+                  <?php if($rows){ $sl=1; foreach($rows as $row){?>
+                    <tr>
+                      <td>
+                        <input type='checkbox' name='draw[]' value="<?php echo $row->id ?>" class="row-checkbox" onclick="limitCheckboxes(this)"                       
+                        <?php  
+                        if($slug == 'Gallery'){
+                          echo $row->is_gallery == 1 ? 'checked' : '';
+                        } elseif($slug == 'Featured'){
+                          echo $row->is_feature == 1 ? 'checked' : '';
+                        } elseif($slug == 'Projects'){
+                          echo $row->is_home_projects == 1 ? 'checked' : '';
+                        } elseif($slug == 'Interviews'){
+                          echo $row->is_home_interviews == 1 ? 'checked' : '';
+                        } elseif($slug == 'Webinars'){
+                          echo $row->is_home_webinars == 1 ? 'checked' : '';
+                        } elseif($slug == 'Video Content'){
+                          echo $row->is_home_video == 1 ? 'checked' : '';
+                        } elseif($slug == 'Explore Projects'){
+                          echo $row->is_explore_projects == 1 ? 'checked' : '';
+                        }  ?>
+                        >
+                      </td>
+                      <th scope="row"><?=$sl++?></th>
+                      <td><?=$row->new_title?></td>  
+                      <td><?php 
+                        $categoryId = $row->parent_category;
+                        $subcategoryId = $row->sub_category;
+                        $categoryName = NewsCategory::where('id', $categoryId)->first();
+                        $subcategoryName = NewsCategory::where('id', $subcategoryId)->first();
+                        echo $categoryName->sub_category .'/'. $subcategoryName->sub_category;?>
+                      </td>                  
+                      <td><?=$row->author_name?></td>                  
+                      <td><?=date_format(date_create($row->created_at), "M d, Y h:i A")?></td>                  
+                    </tr>
+                  <?php } }?>
+                </tbody>
+                <!-- End Table with stripped rows -->
+                <div id="selected-draws"></div>
+                <button type="submit" class="btn btn-primary mt-3">Save Selected</button>
+              </table>
+            </div>
           </form>
         </div>
       </div>
