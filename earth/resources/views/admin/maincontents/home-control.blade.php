@@ -106,6 +106,7 @@ use App\Models\NewsCategory;
                   </td>
                   <td><?= isset($webinars[$i]) ? wordwrap($webinars[$i]->new_title, 10, "<br>") : '-' ?><hr class="my-3">
                     <?php
+                    if(isset($webinars[$i])){
                       $categoryId = $webinars[$i]->parent_category;
                       $subcategoryId = $webinars[$i]->sub_category;
                       $categoryName = NewsCategory::where('id', $categoryId)->first();
@@ -113,7 +114,7 @@ use App\Models\NewsCategory;
                       echo $categoryName->sub_category .'/'. $subcategoryName->sub_category;
                       if($webinars[$i]->projects_name != ''){                        
                       ?><hr class="my-3">
-                      <?= $webinars[$i]->projects_name; } ?>
+                      <?= $webinars[$i]->projects_name; } }?>
                   </td>
                   <td><?= isset($video_content[$i]) ? wordwrap($video_content[$i]->new_title, 10, "<br>") : '-' ?><hr class="my-3">
                     <?php
