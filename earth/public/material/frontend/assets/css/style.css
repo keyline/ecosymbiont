@@ -7270,6 +7270,9 @@ div.block-content {
 .single-post-box ol li{
 margin-bottom: 9px;
 }
+.section div.dt-container {
+  overflow: scroll;
+}
 
 @media(max-width: 400px){
   .seach_holder {
