@@ -1404,6 +1404,7 @@ function numberToOrdinal($number) {
             { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] },
             { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar', 'Iframe'] },
             { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+            { name: 'colors', items: ['TextColor', 'BGColor'] }, 
             { name: 'links', items: ['Link', 'Unlink'] },
             { name: 'justify', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
             { name: 'tools', items: ['CreateDiv'] }
