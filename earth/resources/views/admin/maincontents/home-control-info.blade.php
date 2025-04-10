@@ -77,8 +77,9 @@ use App\Models\NewsContent;
                       $categoryName = NewsCategory::where('id', $categoryId)->first();
                       $subcategoryName = NewsCategory::where('id', $subcategoryId)->first();
                       echo $categoryName->sub_category .'/'. $subcategoryName->sub_category;
+                      if($row->projects_name != ''){                        
                       ?><hr>
-                      <?= $row->projects_name; ?>
+                      <?= $row->projects_name; } ?>
                     </td>
                     <td><?=$row->author_name?></td>                  
                     <td><?=date_format(date_create($row->created_at), "M d, Y h:i A")?></td>                  
