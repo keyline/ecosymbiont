@@ -67,7 +67,7 @@ use App\Models\NewsCategory;
                     $subcategoryId = $gallery[$i]->sub_category;
                     $categoryName = NewsCategory::where('id', $categoryId)->first();
                     $subcategoryName = NewsCategory::where('id', $subcategoryId)->first();
-                    echo $categoryName->sub_category .'/'. $subcategoryName->sub_category;
+                    echo $categoryName->sub_category .'/<br>'. $subcategoryName->sub_category;
                     if($gallery[$i]->projects_name != ''){                        
                     ?><hr class="my-3">
                     <?= $gallery[$i]->projects_name; } }?>

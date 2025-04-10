@@ -69,18 +69,14 @@ use App\Models\NewsContent;
                       >
                     </td>
                     <th scope="row"><?=$sl++?></th>
-                    <td>
-                      <?=$row->new_title?><hr class="my-3">
-                      <?php 
+                    <td><?=$row->new_title?></td>
+                    <td><?php 
                       $categoryId = $row->parent_category;
                       $subcategoryId = $row->sub_category;
                       $categoryName = NewsCategory::where('id', $categoryId)->first();
                       $subcategoryName = NewsCategory::where('id', $subcategoryId)->first();
-                      echo $categoryName->sub_category .'/'. $subcategoryName->sub_category;
-                      if($row->projects_name != ''){                        
-                      ?><hr class="my-3">
-                      <?= $row->projects_name; } ?>
-                    </td>
+                      echo $categoryName->sub_category .'/'. $subcategoryName->sub_category;?></td>
+                    <td><?php if($row->projects_name != ''){ echo $row->projects_name; } else{ echo '-';} ?></td>
                     <td><?=$row->author_name?></td>                  
                     <td><?=date_format(date_create($row->created_at), "M d, Y h:i A")?></td>                  
                   </tr>
