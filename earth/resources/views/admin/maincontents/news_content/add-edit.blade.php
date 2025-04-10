@@ -1397,7 +1397,7 @@ function numberToOrdinal($number) {
     // Initialize the first citation field
     CKEDITOR.replace('citation_1', ckConfig);
     // Loop through and initialize existing citation fields
-    for (let i = 0; i < {{ $citationCount }}; i++) {
+    for (let i = 0; i <= {{ $citationCount }}; i++) {
         const newId = 'citation_' + (i + 1);
         CKEDITOR.replace(newId, ckConfig);
     }
