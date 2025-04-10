@@ -711,57 +711,7 @@ class UserController extends Controller
         $page_name                      = 'home-control-info';
         echo $this->admin_after_login_layout($title,$page_name,$data);
     }
-    // public function homeControlSaveDetails(Request $request, $slug){
-    //     $slug = $slug;
-    //     $postData   = $request->all();
-    //     $selected_ids         = $postData['draw'];
-    //     // $selected_ids = $this->input->post('draw');
-    //     if ($selected_ids) {
-    //         // Save these IDs to another table, or process them as needed
-    //         foreach ($selected_ids as $id) {
-    //             // Helper::pr($id);
-    //             $fields = [];
-    //             // Save or update logic here
-    //             if($slug == 'Gallery'){
-    //                 $fields = [
-    //                     'is_gallery'            => 1
-    //                 ];
-    //             } elseif($slug == 'Featured'){
-    //                 $fields = [
-    //                     'is_feature'            => 1
-    //                 ];
-    //             } elseif($slug == 'Projects'){
-    //                 $fields = [
-    //                     'is_home'              => 1
-    //                 ];
-    //             } elseif($slug == 'Interviews'){
-    //                 $fields = [
-    //                     'is_home'         => 1
-    //                 ];
-    //             } elseif($slug == 'Webinars'){
-    //                 $fields = [
-    //                     'is_home'         => 1
-    //                 ];
-    //             } elseif($slug == 'Video Content'){
-    //                 $fields = [
-    //                     'is_home'                 => 1
-    //                 ];
-    //             } elseif($slug == 'Explore Projects'){
-    //                 $fields = [
-    //                     'is_explore_projects'   => 1
-    //                 ];
-    //             }
-    //             // Update the database with the selected IDs            
-    //             NewsContent::where('id', '=', $id)->update($fields);  
-    //         }
-    //         // Helper::pr($fields);                      
     
-    //         // Redirect or return response
-    //         return redirect()->back()->with('success_message', 'Updated successfully'); 
-    //     } else {
-    //         return redirect()->back()->with('error_message', 'update failed'); 
-    //     }        
-    // }
     public function homeControlSaveDetails(Request $request, $slug)
     {
         $postData     = $request->all();

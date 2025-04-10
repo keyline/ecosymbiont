@@ -1,5 +1,8 @@
 <?php
 use App\Helpers\Helper;
+use App\Models\NewsCategory;
+use App\Models\NewsContent;
+
 ?>
 <div class="pagetitle">
   <h1><?=$page_header?></h1>
@@ -66,7 +69,16 @@ use App\Helpers\Helper;
                       >
                     </td>
                     <th scope="row"><?=$sl++?></th>
-                    <td><?=$row->new_title?></td>
+                    <td>
+                      <?=$row->new_title?><hr>
+                      <?php 
+                      $categoryId = $row->parent_category;
+                      $subcategoryId = $row->sub_category;
+                      $categoryName = NewsCategory::where('id', $categoryId)->first();
+                      $subcategoryName = NewsCategory::where('id', $subcategoryId)->first();
+                      echo $categoryName->sub_category .'/'. $subcategoryName->sub_category;
+                      ?>
+                    </td>
                     <td><?=$row->author_name?></td>                  
                     <td><?=date_format(date_create($row->created_at), "M d, Y h:i A")?></td>                  
                   </tr>
