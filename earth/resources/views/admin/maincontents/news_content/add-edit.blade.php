@@ -1394,6 +1394,10 @@ function numberToOrdinal($number) {
     CKEDITOR.replace('long_desc', ckConfig);
     CKEDITOR.replace('subtitle', ckConfig);
     CKEDITOR.replace('editors_comments', ckConfig);
+    @foreach($citation_value as $key => $value)
+        CKEDITOR.replace('#citation_' + (key + 1), ckConfig);
+    @endforeach
+    // Initialize the first citation field
     CKEDITOR.replace('#citation_1', ckConfig);
 
     $('#add-citation').click(function () {
