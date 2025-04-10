@@ -640,7 +640,7 @@ function numberToOrdinal($number) {
                                                 <div class="col-md-8">
                                                     <!-- <input type="text" name="citation[{{$i+1}}][value]" class="form-control" placeholder="Citation" value="?= $citation_value[$i] ?? '' ?>"> -->
                                                     <textarea name="citation[{{$i+1}}][value]" class="form-control ckeditor" id="citation_{{$i+1}}" placeholder="Citation" rows="3"><?= $citation_value[$i] ?? '' ?></textarea>                                                     
-                                                    <input type="hidden" name="citation[{{$i+1}}][id]" value="<?= $citation_id[$i] ?? '#citation_' . ($i+1) ?>">
+                                                    <input type="hidden" name="citation[{{$i+1}}][id]" value="<?= $citation_id[$i] ?? 'citation_' . ($i+1) ?>">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <button class="btn btn-outline-secondary copy-btn" type="button" data-id="#citation_{{$i+1}}">Copy ID</button>
@@ -1320,7 +1320,7 @@ function numberToOrdinal($number) {
     }
 
     $('#add-citation').click(function () {
-        const newId = '#citation_' + fieldIndex;
+        const newId = 'citation_' + fieldIndex;
 
         $('#field-repeater').append(`
             <div class="input-group d-block col-md-12 col-lg-12" data-index="${fieldIndex}">
@@ -1360,7 +1360,7 @@ function numberToOrdinal($number) {
 
     $(document).on('click', '.copy-btn', function () {
         const id = $(this).data('id');
-        navigator.clipboard.writeText(id).then(() => {
+        navigator.clipboard.writeText('#' + id).then(() => {
             // alert('Copied ID: ' + id);
             // Show success message
             const message = document.getElementById('copyMessage' + id);
