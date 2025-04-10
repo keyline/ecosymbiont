@@ -941,7 +941,7 @@ function numberToOrdinal($number) {
     ],
     toolbar: [
             { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'] },
-            { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] },
+            { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote', 'Div', 'Container'] },
             { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar', 'Iframe'] },
             { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
             { name: 'links', items: ['Link', 'Unlink'] },
