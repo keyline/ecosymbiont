@@ -749,7 +749,7 @@ function numberToOrdinal($number) {
                             </div>
                         </div> -->
                         <div class="row mb-3">
-                            <label for="creative_Work" class="col-md-2 col-lg-4 col-form-label blue-text">28) Is your Creative-Work fiction?
+                            <label for="creative_Work" class="col-md-2 col-lg-4 col-form-label blue-text">25) Is your Creative-Work fiction?
                             </label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="radio" id="fiction_yes" name="creative_Work_fiction" value="Yes" required @checked(old('creative_Work_fiction', $creative_Work_fiction) == 'Yes')>
@@ -759,7 +759,7 @@ function numberToOrdinal($number) {
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="additional_information" class="col-md-2 col-lg-4 col-form-label">29) (Optional: max. 100 words) Comments for the Editor(s) (any additional information you wish to share)
+                            <label for="additional_information" class="col-md-2 col-lg-4 col-form-label">26) (Optional: max. 100 words) Comments for the Editor(s) (any additional information you wish to share)
                             </label>
                             <div class="col-md-10 col-lg-8">
                                 <textarea class="form-control" id="additional_information" name="additional_information" rows="4" cols="50">{{ old('additional_information', $additional_information) }}</textarea>
@@ -767,7 +767,7 @@ function numberToOrdinal($number) {
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="nelp_pdf" class="col-md-2 col-lg-4 col-form-label">30) Upload NELP</label>
+                            <label for="nelp_pdf" class="col-md-2 col-lg-4 col-form-label">27) Upload NELP</label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="file" name="nelp_pdf" class="form-control" id="nelp_pdf" accept="application/pdf">                                                                
                                 <?php if($nelp_pdf != ''){?>
@@ -779,7 +779,7 @@ function numberToOrdinal($number) {
                             </div>
                         </div>                        
                         <div class="row mb-3">
-                            <label for="community" class="col-md-2 col-lg-4 col-form-label">31) Are you a member of an EaRTh Community?
+                            <label for="community" class="col-md-2 col-lg-4 col-form-label">28) Are you a member of an EaRTh Community?
                             </label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="radio" class="readonly-input" id="community_yes" name="community" value="Yes" required @checked(old('community', $community) == 'Yes')>
@@ -791,7 +791,7 @@ function numberToOrdinal($number) {
                         <!-- ?php echo $community_name; die;?> -->
                         <div id="communityDetails" style="display: none;">
                             <div class="row mb-3">
-                                <label for="community_info" class="col-md-2 col-lg-4 col-form-label">31A) Select Community</label>
+                                <label for="community_info" class="col-md-2 col-lg-4 col-form-label">28A) Select Community</label>
                                 <div class="col-md-10 col-lg-8">                                    
                                     <select name="community_name" class="form-control" id="community_name">
                                         <option value="">Select</option>
@@ -804,7 +804,7 @@ function numberToOrdinal($number) {
                             </div> 
                         </div>                        
                         <div class="row mb-3">
-                            <label for="projects" class="col-md-2 col-lg-4 col-form-label">32) Is this a special EaRTh Project?
+                            <label for="projects" class="col-md-2 col-lg-4 col-form-label">29) Is this a special EaRTh Project?
                             </label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="radio" class="readonly-input" id="projects_yes" name="projects" value="Yes" required @checked(old('projects', $projects) == 'Yes')>
@@ -816,7 +816,7 @@ function numberToOrdinal($number) {
                         <!-- ?php echo $projects_name; die;?> -->
                         <div id="projectsDetails" style="display: none;">
                             <div class="row mb-3">
-                                <label for="projects_info" class="col-md-2 col-lg-4 col-form-label">32A) Select projects</label>
+                                <label for="projects_info" class="col-md-2 col-lg-4 col-form-label">29A) Select projects</label>
                                 <div class="col-md-10 col-lg-8">                                    
                                     <select name="projects_name" class="form-control" id="projects_name">
                                         <option value="">Select</option>
@@ -829,7 +829,7 @@ function numberToOrdinal($number) {
                             </div> 
                         </div>
                         <div class="row mb-3">
-                            <label for="is_series" class="col-md-2 col-lg-4 col-form-label">32) Is this part of a series?
+                            <label for="is_series" class="col-md-2 col-lg-4 col-form-label">30) Is this part of a series?
                             </label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="radio" id="series_yes" name="is_series" value="Yes" <?=(($is_series == 'Yes')?'checked':'')?> required>
@@ -839,14 +839,14 @@ function numberToOrdinal($number) {
                             </div>
                         </div>
                         <div class="row series_yes mb-3">
-                            <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label">32A) How many total creative-works in this series?
+                            <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label">30A) How many total creative-works in this series?
                             </label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="number" name="series_article_no" class="form-control" id="series_article_no" value="<?=$series_article_no?>">
                             </div>
                         </div>
                         <div class="row series_yes mb-3">
-                            <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label">32B) What number in the series is this creative-work?
+                            <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label">30B) What number in the series is this creative-work?
                             </label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="text" name="current_article_no" class="form-control" id="current_article_no" value="<?=$current_article_no?>">
@@ -854,7 +854,7 @@ function numberToOrdinal($number) {
                         </div>
 
                         <div class="row series_yes mb-3">
-                            <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label">32C) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).
+                            <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label">30C) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).
                             </label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="text" class="form-control" id="input-tags">
