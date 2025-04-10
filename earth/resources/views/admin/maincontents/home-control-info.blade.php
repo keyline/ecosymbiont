@@ -78,7 +78,7 @@ use App\Models\NewsContent;
                       $subcategoryName = NewsCategory::where('id', $subcategoryId)->first();
                       echo $categoryName->sub_category .'/'. $subcategoryName->sub_category;
                       if($row->projects_name != ''){                        
-                      ?><hr>
+                      ?><hr class="my-3">
                       <?= $row->projects_name; } ?>
                     </td>
                     <td><?=$row->author_name?></td>                  
