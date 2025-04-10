@@ -42,6 +42,8 @@ use App\Models\NewsContent;
                   <th scope="col">#</th>                  
                   <th scope="col">Title</th>
                   <th scope="col">Author</th>
+                  <th scope="col">Category/Subcategory</th>
+                  <th scope="col">Projects</th>
                   <th scope="col">Date of publication</th>                
                 </tr>
               </thead>
