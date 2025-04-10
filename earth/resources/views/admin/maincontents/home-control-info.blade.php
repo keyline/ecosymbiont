@@ -40,9 +40,7 @@ use App\Models\NewsContent;
                 <tr>
                   <th scope="col">Select</th>
                   <th scope="col">#</th>                  
-                  <th scope="col">Title</th>
-                  <th scope="col">Category/Subcategory</th>
-                  <th scope="col">Projects</th>
+                  <th scope="col">Title</th>                  
                   <th scope="col">Author</th>                  
                   <th scope="col">Date of publication</th>                
                 </tr>
@@ -71,9 +69,7 @@ use App\Models\NewsContent;
                       >
                     </td>
                     <th scope="row"><?=$sl++?></th>
-                    <td><?=$row->new_title?></td>
-                    <td></td>
-                    <td></td>
+                    <td><?=$row->new_title?></td>                    
                     <td><?=$row->author_name?></td>                  
                     <td><?=date_format(date_create($row->created_at), "M d, Y h:i A")?></td>                  
                   </tr>
