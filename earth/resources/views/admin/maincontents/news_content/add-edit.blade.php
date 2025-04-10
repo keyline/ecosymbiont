@@ -630,7 +630,8 @@ function numberToOrdinal($number) {
                             <div class="row mb-3">
                                 <label for="ckeditor1" class="col-md-2 col-lg-4 col-form-label">23) Description</label>
                                 <div class="col-md-10 col-lg-8">
-                                    <textarea name="long_desc" class="form-control ckeditor" id="long_desc" rows="5"><?= $long_desc ?></textarea>                                    
+                                    <textarea name="long_desc" class="form-control ckeditor" id="long_desc" rows="5"><?= $long_desc ?></textarea> 
+                                    <label for="citation" class="col-form-label">Citation</label>                                   
                                     @if (!empty($citation_value))
                                     <div id="field-repeater">
                                         @for ($i = 0; $i <= count($citation_value); $i++)
@@ -638,7 +639,7 @@ function numberToOrdinal($number) {
                                             <div class="row mt-3">
                                                 <div class="col-md-8">
                                                     <!-- <input type="text" name="citation[{{$i+1}}][value]" class="form-control" placeholder="Citation" value="?= $citation_value[$i] ?? '' ?>"> -->
-                                                    <textarea name="citation[{{$i+1}}][value]" class="form-control ckeditor" id="citation_{{$i+1}}" placeholder="Citation" rows="3"><?= $citation_value[$i] ?? '' ?></textarea> 
+                                                    <textarea name="citation[{{$i+1}}][value]" class="form-control ckeditor" id="citation_{{$i+1}}" placeholder="Citation" rows="3"><?= $citation_value[$i] ?? '' ?></textarea>                                                     
                                                     <input type="hidden" name="citation[{{$i+1}}][id]" value="<?= $citation_id[$i] ?? '#citation_' . ($i+1) ?>">
                                                 </div>
                                                 <div class="col-md-4">
