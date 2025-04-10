@@ -7271,9 +7271,9 @@ div.block-content {
 margin-bottom: 9px;
 }
 div.dt-container div.dt-layout-row.dt-layout-table div.dt-layout-cell {
-  overflow: scroll;
+  display: block !important;
+  overflow: auto !important;
 }
-
 @media(max-width: 400px){
   .seach_holder {
     width: 100%;
