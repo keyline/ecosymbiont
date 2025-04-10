@@ -938,7 +938,15 @@ function numberToOrdinal($number) {
                 'style': 'border: 4px solid #366236; padding: 15px; background-color:rgb(252, 252, 252); margin: 10px 0; border-radius: 8px;'
             }
         }       
-    ]
+    ],
+    toolbar: [
+            { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'] },
+            { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] },
+            { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar', 'Iframe'] },
+            { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+            { name: 'links', items: ['Link', 'Unlink'] },
+            { name: 'justify', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] }            
+        ]
 });
 </script>
 <script>
