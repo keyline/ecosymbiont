@@ -67,9 +67,9 @@ use App\Models\NewsCategory;
                     $categoryName = NewsCategory::where('id', $categoryId)->first();
                     $subcategoryName = NewsCategory::where('id', $subcategoryId)->first();
                     echo $categoryName->sub_category .'/'. $subcategoryName->sub_category;
-                    if($row->projects_name != ''){                        
+                    if($gallery[$i]->projects_name != ''){                        
                     ?><hr>
-                    <?= $row->projects_name; } ?>
+                    <?= $gallery[$i]->projects_name; } ?>
                   </td>
                   <td><?= isset($featured[$i]) ? wordwrap($featured[$i]->new_title, 10, "<br>") : '-' ?></td>
                   <td><?= isset($projects[$i]) ? wordwrap($projects[$i]->new_title, 10, "<br>") : '-' ?></td>
