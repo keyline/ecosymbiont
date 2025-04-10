@@ -62,6 +62,7 @@ use App\Models\NewsCategory;
                   <th scope="row"><?= $i + 1 ?></th>
                   <td><?= isset($gallery[$i]) ? wordwrap($gallery[$i]->new_title, 10, "<br>") : '-' ?><hr class="my-3">
                   <?php
+                  if(isset($gallery[$i])){
                     $categoryId = $gallery[$i]->parent_category;
                     $subcategoryId = $gallery[$i]->sub_category;
                     $categoryName = NewsCategory::where('id', $categoryId)->first();
@@ -69,10 +70,11 @@ use App\Models\NewsCategory;
                     echo $categoryName->sub_category .'/'. $subcategoryName->sub_category;
                     if($gallery[$i]->projects_name != ''){                        
                     ?><hr class="my-3">
-                    <?= $gallery[$i]->projects_name; } ?>
+                    <?= $gallery[$i]->projects_name; } }?>
                   </td>
                   <td><?= isset($featured[$i]) ? wordwrap($featured[$i]->new_title, 10, "<br>") : '-' ?><hr class="my-3">
                     <?php
+                    if(isset($featured[$i])){
                       $categoryId = $featured[$i]->parent_category;
                       $subcategoryId = $featured[$i]->sub_category;
                       $categoryName = NewsCategory::where('id', $categoryId)->first();
@@ -80,10 +82,11 @@ use App\Models\NewsCategory;
                       echo $categoryName->sub_category .'/'. $subcategoryName->sub_category;
                       if($featured[$i]->projects_name != ''){                        
                       ?><hr class="my-3">
-                      <?= $featured[$i]->projects_name; } ?>
+                      <?= $featured[$i]->projects_name; } }?>
                   </td>
                   <td><?= isset($projects[$i]) ? wordwrap($projects[$i]->new_title, 10, "<br>") : '-' ?><hr class="my-3">
                     <?php
+                    if(isset($projects[$i])){
                       $categoryId = $projects[$i]->parent_category;
                       $subcategoryId = $projects[$i]->sub_category;
                       $categoryName = NewsCategory::where('id', $categoryId)->first();
@@ -91,10 +94,11 @@ use App\Models\NewsCategory;
                       echo $categoryName->sub_category .'/'. $subcategoryName->sub_category;
                       if($projects[$i]->projects_name != ''){                        
                       ?><hr class="my-3">
-                      <?= $projects[$i]->projects_name; } ?>
+                      <?= $projects[$i]->projects_name; } } ?>
                   </td>
                   <td><?= isset($interviews[$i]) ? wordwrap($interviews[$i]->new_title, 10, "<br>") : '-' ?><hr class="my-3">
                     <?php
+                    if(isset($interviews[$i])){
                       $categoryId = $interviews[$i]->parent_category;
                       $subcategoryId = $interviews[$i]->sub_category;
                       $categoryName = NewsCategory::where('id', $categoryId)->first();
@@ -102,7 +106,7 @@ use App\Models\NewsCategory;
                       echo $categoryName->sub_category .'/'. $subcategoryName->sub_category;
                       if($interviews[$i]->projects_name != ''){                        
                       ?><hr class="my-3">
-                      <?= $interviews[$i]->projects_name; } ?>
+                      <?= $interviews[$i]->projects_name; }} ?>
                   </td>
                   <td><?= isset($webinars[$i]) ? wordwrap($webinars[$i]->new_title, 10, "<br>") : '-' ?><hr class="my-3">
                     <?php
@@ -130,6 +134,7 @@ use App\Models\NewsCategory;
                   </td>
                   <td><?= isset($explore_projects[$i]) ? wordwrap($explore_projects[$i]->new_title, 10, "<br>") : '-' ?><hr class="my-3">
                     <?php
+                    if(isset($explore_projects[$i])){
                       $categoryId = $explore_projects[$i]->parent_category;
                       $subcategoryId = $explore_projects[$i]->sub_category;
                       $categoryName = NewsCategory::where('id', $categoryId)->first();
@@ -137,7 +142,7 @@ use App\Models\NewsCategory;
                       echo $categoryName->sub_category .'/'. $subcategoryName->sub_category;
                       if($explore_projects[$i]->projects_name != ''){                        
                       ?><hr class="my-3">
-                      <?= $explore_projects[$i]->projects_name; } ?>
+                      <?= $explore_projects[$i]->projects_name; }} ?>
                   </td>
                 </tr>
               <?php } ?>
