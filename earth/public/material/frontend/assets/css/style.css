@@ -7266,6 +7266,9 @@ div.block-content {
   color: #ffffff;
   font-size: 30px;
 }
+.single-post-box ul li{
+  margin-bottom: 9px;
+  }
 @media(max-width: 400px){
   .seach_holder {
     width: 100%;
