@@ -8,7 +8,7 @@ use App\Helpers\Helper;
                     <div class="sidebar large-sidebar theiaStickySidebar">
                         <div class="widget features-slide-widget">
                             <div class="title-section">
-                                <h1><span>Highlighted</span></h1>
+                                <h1><span>Projects</span></h1>
                             </div>
                             
                             <ul class="list-posts">
@@ -34,10 +34,10 @@ use App\Helpers\Helper;
                                                                     'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
                                                                 )
                                                                 ->where('news_contents.status', 1)  // Fetch only active content
-                                                                ->where('news_contents.is_hot', 1)  // Fetch only featured content
+                                                                ->where('news_contents.is_home_projects', 1)  // Fetch only featured content
                                                                 ->orderBy('news_contents.created_at', 'DESC') // Latest videos first
-                                                                ->inRandomOrder()  // Randomize the result order
-                                                                ->limit(3)  // Limit to 3 records
+                                                                // ->inRandomOrder()  // Randomize the result order
+                                                                // ->limit(3)  // Limit to 3 records
                                                                 ->get();
                                 if($featuredContents){ foreach($featuredContents as $featuredContent){
                                 ?>
@@ -88,10 +88,10 @@ use App\Helpers\Helper;
                         <div class="widget tab-posts-widget">
                             <ul class="nav nav-tabs" id="myTab">
                                 <li class="active">
-                                    <a href="#option1" data-toggle="tab">Popular</a>
+                                    <a href="#option1" data-toggle="tab">Interviews</a>
                                 </li>
                                 <li>
-                                    <a href="#option2" data-toggle="tab">Recent</a>
+                                    <a href="#option2" data-toggle="tab">Webinars</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
@@ -119,10 +119,10 @@ use App\Helpers\Helper;
                                                                 'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
                                                             )
                                                             ->where('news_contents.status', 1)  // Fetch only active content
-                                                            ->where('news_contents.is_popular', 1)  // Fetch only featured content
+                                                            ->where('news_contents.is_home_interviews', 1)  // Fetch only featured content
                                                             ->orderBy('news_contents.created_at', 'DESC') // Latest videos first
-                                                            ->inRandomOrder()  // Randomize the result order
-                                                            ->limit(3)  // Limit to 3 records
+                                                            // ->inRandomOrder()  // Randomize the result order
+                                                            // ->limit(3)  // Limit to 3 records
                                                             ->get();
                                         if($popularContents){ foreach($popularContents as $popularContent){
                                         ?>
@@ -194,9 +194,10 @@ use App\Helpers\Helper;
                                                                             'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
                                                                         )
                                                                         ->where('news_contents.status', 1)  // Fetch only active content                                                                        
-                                                                        ->inRandomOrder()  // Randomize the result order
+                                                                        ->where('news_contents.is_home_webinars', 1)  // Fetch only featured content
+                                                                        // ->inRandomOrder()  // Randomize the result order
                                                                         ->orderBy('news_contents.created_at', 'DESC') // Latest videos first
-                                                                        ->limit(3)  // Limit to 3 records
+                                                                        // ->limit(3)  // Limit to 3 records
                                                                         ->get();
                                         if($recentContents){ foreach($recentContents as $recentContent){
                                         ?>

@@ -676,6 +676,91 @@ class UserController extends Controller
             echo $this->admin_after_login_layout($title,$page_name,$data);
         }
     /* email logs */
+    /* home control */
+    public function homeControl(){
+        $data['gallery']                = NewsContent::where('status', '=', 1)->where('is_gallery', '=', 1)->orderBy('id', 'DESC')->get();
+        $data['featured']               = NewsContent::where('status', '=', 1)->where('is_feature', '=', 1)->orderBy('id', 'DESC')->get();
+        $data['projects']               = NewsContent::where('status', '=', 1)->where('projects', '=', 'yes')->where('is_home_projects', '=', 1)->orderBy('id', 'DESC')->get();
+        $data['interviews']              = NewsContent::where('status', '=', 1)->where('projects_name', '=', 'Interviews')->where('is_home_interviews', '=', 1)->orderBy('id', 'DESC')->get();
+        $data['webinars']                = NewsContent::where('status', '=', 1)->where('projects_name', '=', 'Webinars')->where('is_home_webinars', '=', 1)->orderBy('id', 'DESC')->get();
+        $data['video_content']            = NewsContent::where('status', '=', 1)->where('media', '=', 'video')->where('is_home_video', '=', 1)->orderBy('id', 'DESC')->get();
+        $data['explore_projects']                = NewsContent::where('status', '=', 1)->where('projects', '=', 'yes')->where('is_explore_projects', '=', 1)->orderBy('id', 'DESC')->get();
+        $title                          = 'Home Control';
+        $page_name                      = 'home-control';
+        echo $this->admin_after_login_layout($title,$page_name,$data);
+    }
+    public function homeControlDetails(Request $request,$slug ){
+        $slug = $slug;
+        if($slug == 'Gallery'){
+            $data['rows']                   = NewsContent::where('status', '=', 1)->orderBy('is_gallery', 'DESC')->get();
+        } elseif($slug == 'Featured'){
+            $data['rows']                   = NewsContent::where('status', '=', 1)->orderBy('is_feature', 'DESC')->get();
+        } elseif($slug == 'Projects'){
+            $data['rows']                   = NewsContent::where('status', '=', 1)->where('projects', '=', 'yes')->orderBy('is_home_projects', 'DESC')->get();
+        } elseif($slug == 'Interviews'){
+            $data['rows']                   = NewsContent::where('status', '=', 1)->where('projects_name', '=', 'Interviews')->orderBy('is_home_interviews', 'DESC')->get();
+        } elseif($slug == 'Webinars'){
+            $data['rows']                   = NewsContent::where('status', '=', 1)->where('projects_name', '=', 'Webinars')->orderBy('is_home_webinars', 'DESC')->get();
+        } elseif($slug == 'Video Content'){
+            $data['rows']                   = NewsContent::where('status', '=', 1)->where('media', '=', 'video')->orderBy('is_home_video', 'DESC')->get();
+        } elseif($slug == 'Explore Projects'){
+            $data['rows']                   = NewsContent::where('status', '=', 1)->where('projects', '=', 'yes')->orderBy('is_explore_projects', 'DESC')->get();
+        }   
+        $data['slug']                   = $slug;        
+        $title                          = 'Home Control Details';
+        $page_name                      = 'home-control-info';
+        echo $this->admin_after_login_layout($title,$page_name,$data);
+    }
+    
+    public function homeControlSaveDetails(Request $request, $slug)
+    {
+        $postData     = $request->all();
+        $selected_ids = $postData['draw'] ?? [];
+
+        if (!empty($selected_ids)) {
+            $fieldName = '';
+
+            // Map slug to the correct column
+            switch ($slug) {
+                case 'Gallery':
+                    $fieldName = 'is_gallery';
+                    break;
+                case 'Featured':
+                    $fieldName = 'is_feature';
+                    break;
+                case 'Projects':
+                    $fieldName = 'is_home_projects';
+                    break;
+                case 'Interviews':
+                    $fieldName = 'is_home_interviews';
+                    break;
+                case 'Webinars':
+                    $fieldName = 'is_home_webinars';
+                    break;
+                case 'Video Content':
+                    $fieldName = 'is_home_video';
+                    break;
+                case 'Explore Projects':
+                    $fieldName = 'is_explore_projects';
+                    break;
+                default:
+                    return redirect()->back()->with('error_message', 'Invalid slug');
+            }
+
+            // Step 1: Set field to 1 for selected IDs
+            NewsContent::whereIn('id', $selected_ids)->update([$fieldName => 1]);
+
+            // Step 2: Set field to 0 for non-selected IDs (if you want to reset the others)
+            NewsContent::whereNotIn('id', $selected_ids)->update([$fieldName => 0]);
+
+            return redirect()->back()->with('success_message', 'Updated successfully');
+        }
+
+        return redirect()->back()->with('error_message', 'Update failed');
+    }
+
+    /* home control */
+
     /* login logs */
         public function loginLogs(){
             $data['rows1']                   = UserActivity::where('activity_type', '=', 0)->orderBy('activity_id', 'DESC')->get();

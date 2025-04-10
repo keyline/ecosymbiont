@@ -197,6 +197,21 @@ $current_url = $protocol . $host . $uri;
                                     <?php //} else {?>
                                         <!-- <p>?=substr($rowContent->long_desc,0,100)?> ...</p> -->
                                         <div><?=$rowContent->long_desc?></div>
+                                        <?php 
+                                            $citation_value = json_decode($rowContent->citation_value);
+                                            $citation_id = json_decode($rowContent->citation_id);
+                                            // Helper::pr($citation_value);
+                                            // Helper::pr($citation_id);
+                                            if (!empty($citation_value))
+                                            { ?>
+                                            <hr>
+                                            <div>
+                                            <?php for ($i = 0; $i < count($citation_value); $i++)
+                                            { ?>                                                                                                    
+                                                <p id="<?= $citation_id[$i] ?>"><?= $citation_value[$i] ?></p>                                                
+                                           <?php } ?>
+                                           </div>
+                                        <?php } ?>                                                                                
                                         <div>
                                             <?php // Split the long description into an array of words
                                             // $words = explode(' ', $rowContent->long_desc);

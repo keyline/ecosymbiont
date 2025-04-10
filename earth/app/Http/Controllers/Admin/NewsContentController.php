@@ -255,6 +255,7 @@ class NewsContentController extends Controller
 
             if ($request->isMethod('post')) {
                 $postData                   = $request->all();
+                // Helper::pr($postData);
                 $is_series                  = $postData['is_series'];
                 if($is_series == 'Yes'){
                     $series_article_no          = $postData['series_article_no'];
@@ -306,7 +307,20 @@ class NewsContentController extends Controller
                                 $coauthorClassification[]       = $request->input("co_author_classification_{$i}");
                                 $coauthorPronoun[]              = $request->input("co_author_pronoun{$i}");
                             }
-                        }                             
+                        }
+                        
+                        /* citation details */  
+                        $citation_value = [];
+                        $citation_id = [];                        
+                        if (!empty($postData['citation']) && is_array($postData['citation'])) {
+                            foreach ($postData['citation'] as $citation) {
+                                if (!empty($citation['value'])) {
+                                    $citation_value[] = $citation['value'];
+                                    $citation_id[] = $citation['id'];
+                                }
+                            }
+                        }
+
                         if ($postData['media'] == 'image') {   
                             /* banner image */
                             $imageFile      = $request->file('cover_image');
@@ -368,11 +382,13 @@ class NewsContentController extends Controller
                         'cover_image_caption'       => $postData['cover_image_caption'] ?? '',
                         'video_url'                 => $postData['video_url'],
                         'videoId'                   => $videoId ?? '',
-                        'long_desc'                 => $postData['long_desc'] ?? '',     
+                        'long_desc'                 => $postData['long_desc'] ?? '',   
+                        'citation_value'            => json_encode($citation_value),
+                        'citation_id'               => json_encode($citation_id),  
                         'keywords'                  => $postData['keywords'] ?? '',     
                         'is_feature'                => $postData['is_feature'],  
                         'is_popular'                => $postData['is_popular'], 
-                        'is_hot'                    => $postData['is_hot'],                      
+                        // 'is_hot'                    => $postData['is_hot'],                      
                         'short_desc'                => $postData['short_desc'] ?? '',
                         'editors_comments'          => $postData['editors_comments'] ?? '',
                         'creative_Work_fiction'     => $postData['creative_Work_fiction'],
@@ -400,8 +416,7 @@ class NewsContentController extends Controller
     /* edit */
 
     /* import */
-        public 
-        function import(Request $request, $id)
+        public function import(Request $request, $id)
         {
             $data['module']                 = $this->data;
             $id                             = Helper::decoded($id);        
@@ -429,7 +444,7 @@ class NewsContentController extends Controller
             // Helper::pr($data['projects']);
 
             if ($request->isMethod('post')) {
-                $postData = $request->all();
+                $postData = $request->all();                
 
                 $is_series                  = $postData['is_series'];
                 if($is_series == 'Yes'){
@@ -476,6 +491,18 @@ class NewsContentController extends Controller
                             $coauthorPronoun[] = $request->input("co_author_pronoun{$i}");
                         }
                     }          
+
+                    /* citation details */  
+                    $citation_value = [];
+                    $citation_id = [];                        
+                    if (!empty($postData['citation']) && is_array($postData['citation'])) {
+                        foreach ($postData['citation'] as $citation) {
+                            if (!empty($citation['value'])) {
+                                $citation_value[] = $citation['value'];
+                                $citation_id[] = $citation['id'];
+                            }
+                        }
+                    }
                     
                     if (!isset($postData['media']) || empty($postData['media'])) {
                         // Media type is not selected; skip this method and save the form
@@ -568,6 +595,8 @@ class NewsContentController extends Controller
                     'video_url'                 => $url ?? '',
                     'videoId'                   => $videoId ?? '',
                     'long_desc'                 => $postData['long_desc'] ?? '',
+                    'citation_value'            => json_encode($citation_value),
+                    'citation_id'               => json_encode($citation_id),  
                     'editors_comments'          => $postData['editors_comments'] ?? '',
                     'keywords'                  => $postData['keywords'] ?? '',     
                     'is_feature'                => $postData['is_feature'],  
@@ -637,7 +666,18 @@ class NewsContentController extends Controller
                             $coauthorClassification[] = $request->input("co_author_classification_{$i}");
                             $coauthorPronoun[] = $request->input("co_author_pronoun{$i}");
                         }
-                    }                                   
+                    }           
+                    /* citation details */  
+                    $citation_value = [];
+                    $citation_id = [];                        
+                    if (!empty($postData['citation']) && is_array($postData['citation'])) {
+                        foreach ($postData['citation'] as $citation) {
+                            if (!empty($citation['value'])) {
+                                $citation_value[] = $citation['value'];
+                                $citation_id[] = $citation['id'];
+                            }
+                        }
+                    }                        
                     if ($postData['media'] == 'image') {   
                         /* banner image */
                         $imageFile      = $request->file('cover_image');
@@ -719,11 +759,12 @@ class NewsContentController extends Controller
                         'video_url'                 => $postData['video_url'] ?? '',
                         'videoId'                   => $videoId ?? '',
                         'long_desc'                 => $postData['long_desc'] ?? '',
+                        'citation_value'            => json_encode($citation_value),
+                        'citation_id'               => json_encode($citation_id),  
                         'editors_comments'          => $postData['editors_comments'] ?? '',
                         'keywords'                  => $postData['keywords'] ?? '',     
                         'is_feature'                => $postData['is_feature'],  
-                        'is_popular'                => $postData['is_popular'],
-                        'is_hot'                    => $postData['is_hot'],  
+                        'is_popular'                => $postData['is_popular'],                        
                         'author_short_bio'          => $postData['author_short_bio'] ?? '',  
                         'nelp_form_number'          => $nelp_form_number,
                         'nelp_form_file'            => $nelp_pdf,
@@ -778,6 +819,8 @@ class NewsContentController extends Controller
                         'video_url'                 => $url ?? '',
                         'videoId'                   => $videoId ?? '',
                         'long_desc'                 => $postData['long_desc'] ?? '',
+                        'citation_value'            => json_encode($citation_value),
+                        'citation_id'               => json_encode($citation_id),  
                         'editors_comments'          => $postData['editors_comments'] ?? '',
                         'keywords'                  => $postData['keywords'] ?? '',     
                         'is_feature'                => $postData['is_feature'],  

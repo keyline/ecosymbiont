@@ -157,10 +157,10 @@ use App\Helpers\Helper;
                                                             'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
                                                         )
                                                         ->where('news_contents.status', 1)
-                                                        ->where('news_contents.is_hot', 1)
+                                                        ->where('news_contents.is_gallery', 1)
                                                         ->orderBy('news_contents.id', 'DESC')
                                                         ->get();
-                                           // dd(DB::getQueryLog());
+                                        //    dd(DB::getQueryLog());
                         if($hotNewsContents){ foreach($hotNewsContents as $rowContent){ 
                         ?>
                             <?php
