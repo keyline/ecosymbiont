@@ -638,7 +638,7 @@ function numberToOrdinal($number) {
                                             <div class="row mt-3">
                                                 <div class="col-md-8">
                                                     <!-- <input type="text" name="citation[{{$i+1}}][value]" class="form-control" placeholder="Citation" value="?= $citation_value[$i] ?? '' ?>"> -->
-                                                    <textarea name="citation[{{$i+1}}][value]" class="form-control ckeditor" id="citation_{{$i+1}}" placeholder="Citation" rows="3"><?= $citation_value[$i] ?? '' ?></textarea> 
+                                                    <textarea name="citation[{{$i+1}}][value]" class="form-control ckeditor" id="#citation_{{$i+1}}" placeholder="Citation" rows="3"><?= $citation_value[$i] ?? '' ?></textarea> 
                                                     <input type="hidden" name="citation[{{$i+1}}][id]" value="<?= $citation_id[$i] ?? '#citation_' . ($i+1) ?>">
                                                 </div>
                                                 <div class="col-md-4">
@@ -655,7 +655,7 @@ function numberToOrdinal($number) {
                                             <div class="row mt-3">
                                                 <div class="col-md-8">
                                                     <!-- <input type="text" name="citation[1][value]" class="form-control" placeholder="Citation" value=""> -->
-                                                    <textarea name="citation[1][value]" class="form-control ckeditor" id="citation_1" placeholder="Citation" rows="3"></textarea> 
+                                                    <textarea name="citation[1][value]" class="form-control ckeditor" id="#citation_1" placeholder="Citation" rows="3"></textarea> 
                                                     <input type="hidden" name="citation[1][id]" value="#citation_1">
                                                 </div>
                                                 <div class="col-md-4">
@@ -1390,9 +1390,10 @@ function numberToOrdinal($number) {
     CKEDITOR.replace('long_desc', ckConfig);
     CKEDITOR.replace('subtitle', ckConfig);
     CKEDITOR.replace('editors_comments', ckConfig);
+    CKEDITOR.replace('#citation_1', ckConfig);
 
     $('#add-citation').click(function () {
-        const newId = 'citation_' + fieldIndex;
+        const newId = '#citation_' + fieldIndex;
 
         $('#field-repeater').append(`
             <div class="input-group d-block col-md-12 col-lg-12" data-index="${fieldIndex}">
