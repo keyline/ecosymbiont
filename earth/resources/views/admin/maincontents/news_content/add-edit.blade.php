@@ -644,6 +644,8 @@ function numberToOrdinal($number) {
                                                 <div class="col-md-4">
                                                     <button class="btn btn-outline-secondary copy-btn" type="button" data-id="#citation_{{$i+1}}">Copy ID</button>
                                                     <button class="btn btn-outline-danger remove-citation" type="button">-</button>
+                                                    <!-- Message that appears after copying -->
+                                                    <p id="copyMessage#citation_{{$i+1}}" style="color:green; display:none;">ID copied!</p>
                                                 </div>
                                             </div>                                                                                       
                                         </div>
@@ -660,6 +662,8 @@ function numberToOrdinal($number) {
                                                 </div>
                                                 <div class="col-md-4">
                                                     <button class="btn btn-outline-secondary copy-btn" type="button" data-id="#citation_1">Copy ID</button>
+                                                    <!-- Message that appears after copying -->
+                                                    <p id="copyMessage#citation_1" style="color:green; display:none;">ID copied!</p>
                                                     <!-- <button class="btn btn-outline-danger remove-citation" type="button">-</button> -->
                                                 </div>
                                             </div>
@@ -1404,7 +1408,8 @@ function numberToOrdinal($number) {
                     </div>
                     <div class="col-md-4">
                         <button class="btn btn-outline-secondary copy-btn" type="button" data-id="${newId}">Copy ID</button>
-                        <button class="btn btn-outline-danger remove-citation" type="button">-</button>
+                        <button class="btn btn-outline-danger remove-citation" type="button">-</button>                        
+                        <p id="copyMessage${newId}" style="color:green; display:none;">ID copied!</p>
                     </div>
                 </div>
             </div>
@@ -1433,7 +1438,13 @@ function numberToOrdinal($number) {
     $(document).on('click', '.copy-btn', function () {
         const id = $(this).data('id');
         navigator.clipboard.writeText(id).then(() => {
-            alert('Copied ID: ' + id);
+            // alert('Copied ID: ' + id);
+            // Show success message
+            const message = document.getElementById('copyMessage' + id);
+            message.style.display = 'block';
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 2000); // Hide message after 2 seconds
         });
     });
 </script>
