@@ -936,8 +936,10 @@ function numberToOrdinal($number) {
     document.querySelector('#submitFormButton').addEventListener('click', function (e) {
         e.preventDefault(); // Prevent default form submission
         const caption = document.getElementById('cover_image_caption').value.trim();
+        var media = document.querySelector('input[name="media"]:checked');
         var pdfFile = document.getElementById("nelp_pdf").files.length;
         var existingPdf = document.querySelector("input[name='existing_nelp_pdf']");
+
 
         // Validate PDF upload only for final publishing
         if (pdfFile === 0 && !existingPdf) {
@@ -954,6 +956,13 @@ function numberToOrdinal($number) {
             return false; // Prevent form submission
         }
 
+        // Validate media type selection
+        if (!media) {
+            $('#media_image').attr('required', true);
+            $('#media_video').attr('required', true);
+            document.getElementById('media_image').focus();            
+            return false; // Stop further execution
+        }
         // Confirmation popup
         Swal.fire({
             title: 'Are you sure?',
