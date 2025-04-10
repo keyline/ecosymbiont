@@ -1393,12 +1393,13 @@ function numberToOrdinal($number) {
     // Apply CKEditor to multiple fields
     CKEDITOR.replace('long_desc', ckConfig);
     CKEDITOR.replace('subtitle', ckConfig);
-    CKEDITOR.replace('editors_comments', ckConfig);
-    @foreach($citation_value as $key => $value)
-        CKEDITOR.replace('#citation_' + (key + 1), ckConfig);
-    @endforeach
+    CKEDITOR.replace('editors_comments', ckConfig);    
     // Initialize the first citation field
     CKEDITOR.replace('#citation_1', ckConfig);
+    for($i=0;$i<$citationCount;$i++){
+        const newId = '#citation_' + ($i + 1);
+        CKEDITOR.replace(newId, ckConfig);
+    }
 
     $('#add-citation').click(function () {
         const newId = '#citation_' + fieldIndex;
