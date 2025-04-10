@@ -62,7 +62,7 @@ use App\Models\NewsCategory;
                   <th scope="row"><?= $i + 1 ?></th>
                   <td><?= isset($gallery[$i]) ? wordwrap($gallery[$i]->new_title, 10, "<br>") : '-' ?><hr>
                   <?php
-                    $categoryId = $gallery[$i]->parent_category;
+                    echo $categoryId = $gallery[$i]->parent_category; die;
                     $subcategoryId = $gallery[$i]->sub_category;
                     $categoryName = NewsCategory::where('id', $categoryId)->first();
                     $subcategoryName = NewsCategory::where('id', $subcategoryId)->first();
