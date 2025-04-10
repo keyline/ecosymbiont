@@ -1,5 +1,7 @@
 <?php
 use App\Helpers\Helper;
+use App\Models\NewsCategory;
+
 ?>
 <div class="pagetitle">
   <h1><?=$page_header?></h1>
@@ -58,7 +60,17 @@ use App\Helpers\Helper;
               <?php for ($i = 0; $i < $max; $i++) { ?>
                 <tr>
                   <th scope="row"><?= $i + 1 ?></th>
-                  <td><?= isset($gallery[$i]) ? wordwrap($gallery[$i]->new_title, 10, "<br>") : '-' ?></td>
+                  <td><?= isset($gallery[$i]) ? wordwrap($gallery[$i]->new_title, 10, "<br>") : '-' ?><hr>
+                  <?php
+                    $categoryId = $gallery[$i]->parent_category;
+                    $subcategoryId = $gallery[$i]->sub_category;
+                    $categoryName = NewsCategory::where('id', $categoryId)->first();
+                    $subcategoryName = NewsCategory::where('id', $subcategoryId)->first();
+                    echo $categoryName->sub_category .'/'. $subcategoryName->sub_category;
+                    if($row->projects_name != ''){                        
+                    ?><hr>
+                    <?= $row->projects_name; } ?>
+                  </td>
                   <td><?= isset($featured[$i]) ? wordwrap($featured[$i]->new_title, 10, "<br>") : '-' ?></td>
                   <td><?= isset($projects[$i]) ? wordwrap($projects[$i]->new_title, 10, "<br>") : '-' ?></td>
                   <td><?= isset($interviews[$i]) ? wordwrap($interviews[$i]->new_title, 10, "<br>") : '-' ?></td>

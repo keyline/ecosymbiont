@@ -70,7 +70,7 @@ use App\Models\NewsContent;
                     </td>
                     <th scope="row"><?=$sl++?></th>
                     <td>
-                      <?=$row->new_title?><hr class="m-10">
+                      <?=$row->new_title?><hr class="my-3">
                       <?php 
                       $categoryId = $row->parent_category;
                       $subcategoryId = $row->sub_category;
