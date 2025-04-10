@@ -1475,3 +1475,16 @@ function numberToOrdinal($number) {
         });
     });
 </script>
+<script>
+    function setMode(mode) {
+    // If cover image caption is empty, prevent form submission
+    const caption = document.getElementById('cover_image_caption').value.trim();
+    if (caption === '') {
+        $('#cover_image_caption').attr('required', true);
+        // alert('Cover Image Caption is required.');
+        document.getElementById('cover_image_caption').focus();
+        return false; // Prevent form submission
+    }
+}
+
+</script>

@@ -80,10 +80,7 @@ class NewsContentController extends Controller
                     'pronoun'                   => 'required',   
                     'email'                     => 'required',   
                     'country'                   => 'required',   
-                    'media'                     => 'required',     
-                    'is_feature'                => 'required',  
-                    'is_popular'                => 'required',  
-                    'is_hot'                    => 'required',  
+                    'media'                     => 'required',                           
                     'subtitle'                  => 'required', 
                 ];
                 
@@ -275,10 +272,7 @@ class NewsContentController extends Controller
                     'pronoun'                   => 'required',   
                     'email'                     => 'required',   
                     'country'                   => 'required',   
-                    'media'                     => 'required',     
-                    'is_feature'                => 'required',  
-                    'is_popular'                => 'required',  
-                    'is_hot'                    => 'required',  
+                    'media'                     => 'required',                         
                     'subtitle'                  => 'required', 
                 ];     
                 if ($this->validate($request, $rules)) {
@@ -630,10 +624,7 @@ class NewsContentController extends Controller
                     'pronoun'                   => 'required',   
                     'email'                     => 'required',   
                     'country'                   => 'required',   
-                    'media'                     => 'required',     
-                    'is_feature'                => 'required',  
-                    'is_popular'                => 'required', 
-                    'is_hot'                    => 'required', 
+                    'media'                     => 'required',                         
                     'subtitle'                  => 'required', 
                 ];     
                 if ($this->validate($request, $rules)) {
