@@ -643,7 +643,7 @@ function numberToOrdinal($number) {
                                                     <input type="hidden" name="citation[{{$i+1}}][id]" value="<?= $citation_id[$i] ?? 'citation_' . ($i+1) ?>">
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <button class="btn btn-outline-secondary copy-btn" type="button" data-id="#citation_{{$i+1}}">Copy ID</button>
+                                                    <button class="btn btn-outline-secondary copy-btn" type="button" data-id="citation_{{$i+1}}">Copy ID</button>
                                                     <button class="btn btn-outline-danger remove-citation" type="button">-</button>
                                                     <!-- Message that appears after copying -->
                                                     <p id="copyMessage#citation_{{$i+1}}" style="color:green; display:none;">ID copied!</p>
@@ -659,10 +659,10 @@ function numberToOrdinal($number) {
                                                 <div class="col-md-8">
                                                     <!-- <input type="text" name="citation[1][value]" class="form-control" placeholder="Citation" value=""> -->
                                                     <textarea name="citation[1][value]" class="form-control ckeditor" id="citation_1" placeholder="Citation" rows="3"></textarea> 
-                                                    <input type="hidden" name="citation[1][id]" value="#citation_1">
+                                                    <input type="hidden" name="citation[1][id]" value="citation_1">
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <button class="btn btn-outline-secondary copy-btn" type="button" data-id="#citation_1">Copy ID</button>
+                                                    <button class="btn btn-outline-secondary copy-btn" type="button" data-id="citation_1">Copy ID</button>
                                                     <!-- Message that appears after copying -->
                                                     <p id="copyMessage#citation_1" style="color:green; display:none;">ID copied!</p>
                                                     <!-- <button class="btn btn-outline-danger remove-citation" type="button">-</button> -->
