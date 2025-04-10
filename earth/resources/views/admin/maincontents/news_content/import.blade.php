@@ -666,7 +666,7 @@ function numberToOrdinal($number) {
                                                     <button class="btn btn-outline-secondary copy-btn" type="button" data-id="citation_{{$i+1}}">Copy ID</button>
                                                     <button class="btn btn-outline-danger remove-citation" type="button">-</button>
                                                     <!-- Message that appears after copying -->
-                                                    <p id="copyMessage#citation_{{$i+1}}" style="color:green; display:none;">ID copied!</p>
+                                                    <p id="copyMessagecitation_{{$i+1}}" style="color:green; display:none;">ID copied!</p>
                                                 </div>
                                             </div>                                                                                       
                                         </div>
@@ -684,7 +684,7 @@ function numberToOrdinal($number) {
                                                 <div class="col-md-4">
                                                     <button class="btn btn-outline-secondary copy-btn" type="button" data-id="citation_1">Copy ID</button>
                                                     <!-- Message that appears after copying -->
-                                                    <p id="copyMessage#citation_1" style="color:green; display:none;">ID copied!</p>
+                                                    <p id="copyMessagecitation_1" style="color:green; display:none;">ID copied!</p>
                                                     <!-- <button class="btn btn-outline-danger remove-citation" type="button">-</button> -->
                                                 </div>
                                             </div>
