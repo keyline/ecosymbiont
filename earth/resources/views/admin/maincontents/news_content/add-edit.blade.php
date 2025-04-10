@@ -638,7 +638,7 @@ function numberToOrdinal($number) {
                                             <div class="row mt-3">
                                                 <div class="col-md-8">
                                                     <!-- <input type="text" name="citation[{{$i+1}}][value]" class="form-control" placeholder="Citation" value="?= $citation_value[$i] ?? '' ?>"> -->
-                                                    <textarea name="citation[{{$i+1}}][value]" class="form-control ckeditor" placeholder="Citation" rows="3"><?= $citation_value[$i] ?? '' ?></textarea> 
+                                                    <textarea name="citation[{{$i+1}}][value]" class="form-control ckeditor" id="citation_{{$i+1}}" placeholder="Citation" rows="3"><?= $citation_value[$i] ?? '' ?></textarea> 
                                                     <input type="hidden" name="citation[{{$i+1}}][id]" value="<?= $citation_id[$i] ?? '#citation_' . ($i+1) ?>">
                                                 </div>
                                                 <div class="col-md-4">
@@ -655,7 +655,7 @@ function numberToOrdinal($number) {
                                             <div class="row mt-3">
                                                 <div class="col-md-8">
                                                     <!-- <input type="text" name="citation[1][value]" class="form-control" placeholder="Citation" value=""> -->
-                                                    <textarea name="citation[1][value]" class="form-control ckeditor" placeholder="Citation" rows="3"></textarea> 
+                                                    <textarea name="citation[1][value]" class="form-control ckeditor" id="citation_1" placeholder="Citation" rows="3"></textarea> 
                                                     <input type="hidden" name="citation[1][id]" value="#citation_1">
                                                 </div>
                                                 <div class="col-md-4">
@@ -1367,7 +1367,7 @@ function numberToOrdinal($number) {
                 <div class="row mt-3">
                     <div class="col-md-8">
                         // <input type="text" name="citation[${fieldIndex}][value]" class="form-control" placeholder="Citation">
-                        <textarea name="citation[${fieldIndex}][value]" class="form-control ckeditor" placeholder="Citation" rows="3"></textarea> 
+                        <textarea name="citation[${fieldIndex}][value]" class="form-control ckeditor" id="citation_${fieldIndex}" placeholder="Citation" rows="3"></textarea> 
                         <input type="hidden" name="citation[${fieldIndex}][id]" value="${newId}">
                     </div>
                     <div class="col-md-4">
