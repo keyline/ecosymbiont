@@ -862,25 +862,6 @@ function numberToOrdinal($number) {
 <script src="https://cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.14.5/sweetalert2.min.js" integrity="sha512-JCDnPKShC1tVU4pNu5mhCEt6KWmHf0XPojB0OILRMkr89Eq9BHeBP+54oUlsmj8R5oWqmJstG1QoY6HkkKeUAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- <script>    
-    document.querySelector('#submitFormButton').addEventListener('click', function (e) {
-    e.preventDefault(); // Prevent default form submission
-
-    Swal.fire({
-        title: 'Are you sure?',
-        html: "Once the final submission is made, further edits to this article cannot be made here. However, you can make edits through the 'News Content' module.",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#4CAF50',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, Publish it!'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            document.querySelector('#import_form').submit();
-        }
-    });
-});
-</script> -->
 <script type="text/javascript">
     $(document).ready(function() {
         var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
@@ -891,71 +872,6 @@ function numberToOrdinal($number) {
         });
     });
 </script>
-<!-- <script>
-    CKEDITOR.plugins.add('boxWrapper', {
-        init: function (editor) {
-            editor.addCommand('wrapInBox', {
-                exec: function (editor) {
-                    var selection = editor.getSelection();
-                    var ranges = selection.getRanges();
-
-                    if (ranges.length > 0) {
-                        var wrapper = new CKEDITOR.dom.element('div');
-                        wrapper.setAttribute('class', 'custom-box-style');
-                        wrapper.setAttribute('style', 'border: 4px solid #366236; padding: 15px; background-color:rgb(252, 252, 252); margin: 10px 0; border-radius: 8px;');
-
-                        var fragment = ranges[0].cloneContents();
-                        wrapper.append(fragment);
-
-                        ranges[0].deleteContents();
-                        ranges[0].insertNode(wrapper);
-                    }
-                }
-            });
-
-            editor.ui.addButton('BoxWrapper', {
-                label: 'Wrap in Box Style',
-                command: 'wrapInBox',
-                toolbar: 'styles',
-                icon: 'https://cdn-icons-png.flaticon.com/512/565/565547.png' // You can use any icon here
-            });
-        }
-    });
-</script> -->
-<!-- <script>
-    const ckConfig = {   
-        allowedContent: true,         
-        removeFormatAttributes: '',           
-        stylesSet: [        
-            { 
-                name: 'others_image_colour', 
-                element: 'em', 
-                attributes: { 
-                    'style': 'display: inline-block; color: #87ceeb; font-size: 16px; font-family: \'proximanova_regular\', sans-serif; font-style: italic; margin: 0; text-align: left !important; width: 100%;' 
-                } 
-            }, 
-            {
-                name: 'Box Style',
-                element: 'div',
-                attributes: {
-                    'class': 'custom-box-style',
-                    'style': 'border: 4px solid #366236; padding: 15px; background-color:rgb(252, 252, 252); margin: 10px 0; border-radius: 8px;'
-                }
-            }       
-        ],
-        toolbar: [
-                { name: 'document', items: ['Source'] },
-                { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'] },
-                { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote', 'Div', 'Container'] },
-                { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar', 'Iframe'] },
-                { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
-                { name: 'links', items: ['Link', 'Unlink'] },
-                { name: 'justify', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
-                { name: 'tools', items: ['CreateDiv'] }            
-            ]
-};
- 
-</script> -->
 <script>
     $(document).ready(function() {
         // Function to show/hide the invited and participated fields

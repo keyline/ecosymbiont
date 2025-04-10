@@ -651,18 +651,22 @@ function numberToOrdinal($number) {
                             <label for="ckeditor1" class="col-md-2 col-lg-4 col-form-label">23) Description</label>
                             <div class="col-md-10 col-lg-8">
                                 <textarea name="long_desc" class="form-control ckeditor" rows="5"><?= $long_desc ?></textarea>
-                                @if (!empty($citation_value))
+                                <label for="citation" class="col-form-label">Citation</label>                                   
+                                    @if (!empty($citation_value))
                                     <div id="field-repeater">
                                         @for ($i = 0; $i <= count($citation_value); $i++)
                                         <div class="input-group d-block col-md-12 col-lg-12" data-index="{{$i+1}}">
                                             <div class="row mt-3">
                                                 <div class="col-md-8">
-                                                    <input type="text" name="citation[{{$i+1}}][value]" class="form-control" placeholder="Citation" value="<?= $citation_value[$i] ?? '' ?>">
+                                                    <!-- <input type="text" name="citation[{{$i+1}}][value]" class="form-control" placeholder="Citation" value="?= $citation_value[$i] ?? '' ?>"> -->
+                                                    <textarea name="citation[{{$i+1}}][value]" class="form-control ckeditor" id="citation_{{$i+1}}" placeholder="Citation" rows="3"><?= $citation_value[$i] ?? '' ?></textarea>                                                     
                                                     <input type="hidden" name="citation[{{$i+1}}][id]" value="<?= $citation_id[$i] ?? '#citation_' . ($i+1) ?>">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <button class="btn btn-outline-secondary copy-btn" type="button" data-id="#citation_{{$i+1}}">Copy ID</button>
                                                     <button class="btn btn-outline-danger remove-citation" type="button">-</button>
+                                                    <!-- Message that appears after copying -->
+                                                    <p id="copyMessage#citation_{{$i+1}}" style="color:green; display:none;">ID copied!</p>
                                                 </div>
                                             </div>                                                                                       
                                         </div>
@@ -673,11 +677,14 @@ function numberToOrdinal($number) {
                                         <div class="input-group d-block col-md-12 col-lg-12" data-index="1">
                                             <div class="row mt-3">
                                                 <div class="col-md-8">
-                                                    <input type="text" name="citation[1][value]" class="form-control" placeholder="Citation" value="">
+                                                    <!-- <input type="text" name="citation[1][value]" class="form-control" placeholder="Citation" value=""> -->
+                                                    <textarea name="citation[1][value]" class="form-control ckeditor" id="citation_1" placeholder="Citation" rows="3"></textarea> 
                                                     <input type="hidden" name="citation[1][id]" value="#citation_1">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <button class="btn btn-outline-secondary copy-btn" type="button" data-id="#citation_1">Copy ID</button>
+                                                    <!-- Message that appears after copying -->
+                                                    <p id="copyMessage#citation_1" style="color:green; display:none;">ID copied!</p>
                                                     <!-- <button class="btn btn-outline-danger remove-citation" type="button">-</button> -->
                                                 </div>
                                             </div>
@@ -968,22 +975,6 @@ function numberToOrdinal($number) {
             renderChoiceLimit: 30
         });
     });
-</script>
-<script>
-    CKEDITOR.replace('long_desc', {   
-        allowedContent: true,       
-    stylesSet: [        
-        { name: 'others_image_colour', element: 'em', attributes: { 'style': 'display: inline-block; color: #87ceeb;font-size: 16px;font-family: "proximanova_regular", sans-serif;font-style: italic;margin: 0;text-align: left !important;width: 100%;' } },        
-        {
-            name: 'Box Style',
-            element: 'div',
-            attributes: {
-                'class': 'custom-box-style',
-                'style': 'border: 4px solid #366236; padding: 15px; background-color:rgb(252, 252, 252); margin: 10px 0; border-radius: 8px;'
-            }
-        }
-    ]
-});
 </script>
 <script>
     $(document).ready(function() {
@@ -1387,6 +1378,49 @@ function numberToOrdinal($number) {
     let citationValues = {{ $citationCount }};
     let fieldIndex = citationValues > 0 ? citationValues + 2 : 2;
 
+    const ckConfig = {
+        allowedContent: true,
+        removeFormatAttributes: '',
+        stylesSet: [
+            {
+                name: 'others_image_colour',
+                element: 'em',
+                attributes: {
+                    'style': 'display: inline-block; color: #87ceeb; font-size: 16px; font-family: \'proximanova_regular\', sans-serif; font-style: italic; margin: 0; text-align: left !important; width: 100%;'
+                }
+            },
+            {
+                name: 'Box Style',
+                element: 'div',
+                attributes: {
+                    'class': 'custom-box-style',
+                    'style': 'border: 4px solid #366236; padding: 15px; background-color:rgb(252, 252, 252); margin: 10px 0; border-radius: 8px;'
+                }
+            }
+        ],
+        toolbar: [
+            { name: 'document', items: ['Source'] },
+            { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'] },
+            { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] },
+            { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar', 'Iframe'] },
+            { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+            { name: 'links', items: ['Link', 'Unlink'] },
+            { name: 'justify', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
+            { name: 'tools', items: ['CreateDiv'] }
+        ]
+    };
+
+    // Apply CKEditor to multiple fields
+    CKEDITOR.replace('long_desc', ckConfig);
+    CKEDITOR.replace('subtitle', ckConfig);
+    CKEDITOR.replace('editors_comments', ckConfig);    
+    // Initialize the first citation field
+    CKEDITOR.replace('citation_1', ckConfig);
+    // Loop through and initialize existing citation fields
+    for (let i = 0; i <= {{ $citationCount }}; i++) {
+        const newId = 'citation_' + (i + 1);
+        CKEDITOR.replace(newId, ckConfig);
+    }
 
     $('#add-citation').click(function () {
         const newId = '#citation_' + fieldIndex;
@@ -1394,29 +1428,49 @@ function numberToOrdinal($number) {
         $('#field-repeater').append(`
             <div class="input-group d-block col-md-12 col-lg-12" data-index="${fieldIndex}">
                 <div class="row mt-3">
-                    <div class="col-md-8">
-                        <input type="text" name="citation[${fieldIndex}][value]" class="form-control" placeholder="Citation">
+                    <div class="col-md-8">                       
+                        <textarea name="citation[${fieldIndex}][value]" class="form-control ckeditor" id="citation_${fieldIndex}" placeholder="Citation" rows="3"></textarea> 
                         <input type="hidden" name="citation[${fieldIndex}][id]" value="${newId}">
                     </div>
                     <div class="col-md-4">
                         <button class="btn btn-outline-secondary copy-btn" type="button" data-id="${newId}">Copy ID</button>
-                        <button class="btn btn-outline-danger remove-citation" type="button">-</button>
+                        <button class="btn btn-outline-danger remove-citation" type="button">-</button>                        
+                        <p id="copyMessage${newId}" style="color:green; display:none;">ID copied!</p>
                     </div>
                 </div>
             </div>
         `);
 
+        // ✅ Initialize CKEditor on the newly added textarea
+        setTimeout(() => {
+            CKEDITOR.replace(newId, ckConfig);
+        }, 100);
+
         fieldIndex++;
     });
 
     $(document).on('click', '.remove-citation', function () {
+        const textarea = $(this).closest('.input-group').find('textarea');
+        const id = textarea.attr('id');
+
+        // ✅ Destroy CKEditor instance before removing the field
+        if (CKEDITOR.instances[id]) {
+            CKEDITOR.instances[id].destroy(true);
+        }
+
         $(this).closest('.input-group').remove();
     });
 
     $(document).on('click', '.copy-btn', function () {
         const id = $(this).data('id');
         navigator.clipboard.writeText(id).then(() => {
-            alert('Copied ID: ' + id);
+            // alert('Copied ID: ' + id);
+            // Show success message
+            const message = document.getElementById('copyMessage' + id);
+            message.style.display = 'block';
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 2000); // Hide message after 2 seconds
         });
     });
 </script>
