@@ -1365,8 +1365,7 @@ function numberToOrdinal($number) {
         $('#field-repeater').append(`
             <div class="input-group d-block col-md-12 col-lg-12" data-index="${fieldIndex}">
                 <div class="row mt-3">
-                    <div class="col-md-8">
-                        // <input type="text" name="citation[${fieldIndex}][value]" class="form-control" placeholder="Citation">
+                    <div class="col-md-8">                       
                         <textarea name="citation[${fieldIndex}][value]" class="form-control ckeditor" id="citation_${fieldIndex}" placeholder="Citation" rows="3"></textarea> 
                         <input type="hidden" name="citation[${fieldIndex}][id]" value="${newId}">
                     </div>
