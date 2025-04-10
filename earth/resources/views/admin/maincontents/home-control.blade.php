@@ -45,13 +45,13 @@ use App\Helpers\Helper;
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Gallery <a href="<?=url('admin/home-control/details/Gallery')?>"><i class="fa fa-eye"></i></a></th>
-                  <th scope="col">Featured <a href="<?=url('admin/home-control/details/Featured')?>"><i class="fa fa-eye"></i></a></th>
-                  <th scope="col">Projects <a href="<?=url('admin/home-control/details/Projects')?>"><i class="fa fa-eye"></i></a></th>
-                  <th scope="col">Interviews <a href="<?=url('admin/home-control/details/Interviews')?>"><i class="fa fa-eye"></i></a></th>
-                  <th scope="col">Webinars <a href="<?=url('admin/home-control/details/Webinars')?>"><i class="fa fa-eye"></i></a></th>
-                  <th scope="col">Video Content <a href="<?=url('admin/home-control/details/Video Content')?>"><i class="fa fa-eye"></i></a></th>
-                  <th scope="col">Explore Projects <a href="<?=url('admin/home-control/details/Explore Projects')?>"><i class="fa fa-eye"></i></a></th>
+                  <th scope="col">Gallery <a href="<?=url('admin/home-control/details/Gallery')?>" target="_blank"><i class="fa fa-eye"></i></a></th>
+                  <th scope="col">Featured <a href="<?=url('admin/home-control/details/Featured')?>" target="_blank"><i class="fa fa-eye"></i></a></th>
+                  <th scope="col">Projects <a href="<?=url('admin/home-control/details/Projects')?>" target="_blank"><i class="fa fa-eye"></i></a></th>
+                  <th scope="col">Interviews <a href="<?=url('admin/home-control/details/Interviews')?>" target="_blank"><i class="fa fa-eye"></i></a></th>
+                  <th scope="col">Webinars <a href="<?=url('admin/home-control/details/Webinars')?>" target="_blank"><i class="fa fa-eye"></i></a></th>
+                  <th scope="col">Video Content <a href="<?=url('admin/home-control/details/Video Content')?>" target="_blank"><i class="fa fa-eye"></i></a></th>
+                  <th scope="col">Explore Projects <a href="<?=url('admin/home-control/details/Explore Projects')?>" target="_blank"><i class="fa fa-eye"></i></a></th>
                 </tr>
               </thead>            
               <tbody>

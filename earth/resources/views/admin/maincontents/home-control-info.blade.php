@@ -7,7 +7,7 @@ use App\Helpers\Helper;
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="<?=url('admin/dashboard')?>">Home</a></li>
       <li class="breadcrumb-item"><a href="<?=url('admin/home-control')?>">Home Control Panel</a></li>
-      <li class="breadcrumb-item active"><?=$page_header?></li>
+      <li class="breadcrumb-item active"><?=$slug?></li>
     </ol>
   </nav>
 </div><!-- End Page Title -->
