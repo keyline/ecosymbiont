@@ -701,7 +701,7 @@ function numberToOrdinal($number) {
                                     </div>
                                 </div>
                             </div>                        
-                            <div class="row mb-3">
+                            <!-- <div class="row mb-3">
                                 <label for="is_feature" class="col-md-2 col-lg-4 col-form-label">25) Is Features</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="radio" id="is_feature_yes" name="is_feature" value="1" @checked(old('is_feature', $is_feature) == 1)>
@@ -727,7 +727,7 @@ function numberToOrdinal($number) {
                                     <input type="radio" id="is_hot_no" name="is_hot" value="0" @checked(old('is_hot', $is_hot) == 0)>
                                     <label for="is_hot_no">No</label>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row mb-3">
                                 <label for="nelp_pdf" class="col-md-2 col-lg-4 col-form-label">28) Upload NELP</label>
                                 <div class="col-md-10 col-lg-8">
