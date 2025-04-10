@@ -673,7 +673,7 @@ function numberToOrdinal($number) {
                             <div class="row mb-3">
                                 <label for="ckeditor1" class="col-md-2 col-lg-4 col-form-label">23a) Editor’s comments</label>
                                 <div class="col-md-10 col-lg-8">
-                                    <textarea name="editors_comments" class="form-control ckeditor" rows="5"><?= $editors_comments ?></textarea>
+                                    <textarea name="editors_comments" class="form-control ckeditor" id="editors_comments" rows="5"><?= $editors_comments ?></textarea>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -917,7 +917,7 @@ function numberToOrdinal($number) {
         }
     });
 </script> -->
-<script>
+<!-- <script>
     const ckConfig = {   
         allowedContent: true,         
         removeFormatAttributes: '',           
@@ -949,11 +949,8 @@ function numberToOrdinal($number) {
                 { name: 'tools', items: ['CreateDiv'] }            
             ]
 };
- // Apply CKEditor to multiple fields
- CKEDITOR.replace('long_desc', ckConfig);
-    CKEDITOR.replace('short_desc', ckConfig);
-    CKEDITOR.replace('extra_notes', ckConfig);
-</script>
+ 
+</script> -->
 <script>
     $(document).ready(function() {
         // Function to show/hide the invited and participated fields
@@ -1349,7 +1346,6 @@ function numberToOrdinal($number) {
         });
     });
 </script>
-
 <script>
     @php
         $citationCount = !empty($citation_value) ? count($citation_value) : 0;
@@ -1358,15 +1354,51 @@ function numberToOrdinal($number) {
     let citationValues = {{ $citationCount }};
     let fieldIndex = citationValues > 0 ? citationValues + 2 : 2;
 
+    const ckConfig = {
+        allowedContent: true,
+        removeFormatAttributes: '',
+        stylesSet: [
+            {
+                name: 'others_image_colour',
+                element: 'em',
+                attributes: {
+                    'style': 'display: inline-block; color: #87ceeb; font-size: 16px; font-family: \'proximanova_regular\', sans-serif; font-style: italic; margin: 0; text-align: left !important; width: 100%;'
+                }
+            },
+            {
+                name: 'Box Style',
+                element: 'div',
+                attributes: {
+                    'class': 'custom-box-style',
+                    'style': 'border: 4px solid #366236; padding: 15px; background-color:rgb(252, 252, 252); margin: 10px 0; border-radius: 8px;'
+                }
+            }
+        ],
+        toolbar: [
+            { name: 'document', items: ['Source'] },
+            { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'] },
+            { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] },
+            { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar', 'Iframe'] },
+            { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+            { name: 'links', items: ['Link', 'Unlink'] },
+            { name: 'justify', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
+            { name: 'tools', items: ['CreateDiv'] }
+        ]
+    };
+
+    // Apply CKEditor to multiple fields
+    CKEDITOR.replace('long_desc', ckConfig);
+    CKEDITOR.replace('subtitle', ckConfig);
+    CKEDITOR.replace('editors_comments', ckConfig);
 
     $('#add-citation').click(function () {
-        const newId = '#citation_' + fieldIndex;
+        const newId = 'citation_' + fieldIndex;
 
         $('#field-repeater').append(`
             <div class="input-group d-block col-md-12 col-lg-12" data-index="${fieldIndex}">
                 <div class="row mt-3">
                     <div class="col-md-8">                       
-                        <textarea name="citation[${fieldIndex}][value]" class="form-control ckeditor" id="citation_${fieldIndex}" placeholder="Citation" rows="3"></textarea> 
+                        <textarea name="citation[${fieldIndex}][value]" class="form-control ckeditor" id="${newId}" placeholder="Citation" rows="3"></textarea> 
                         <input type="hidden" name="citation[${fieldIndex}][id]" value="${newId}">
                     </div>
                     <div class="col-md-4">
@@ -1377,10 +1409,23 @@ function numberToOrdinal($number) {
             </div>
         `);
 
+        // ✅ Initialize CKEditor on the newly added textarea
+        setTimeout(() => {
+            CKEDITOR.replace(newId, ckConfig);
+        }, 100);
+
         fieldIndex++;
     });
 
     $(document).on('click', '.remove-citation', function () {
+        const textarea = $(this).closest('.input-group').find('textarea');
+        const id = textarea.attr('id');
+
+        // ✅ Destroy CKEditor instance before removing the field
+        if (CKEDITOR.instances[id]) {
+            CKEDITOR.instances[id].destroy(true);
+        }
+
         $(this).closest('.input-group').remove();
     });
 
