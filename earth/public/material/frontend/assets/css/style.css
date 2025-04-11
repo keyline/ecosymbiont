@@ -814,8 +814,11 @@ header .list-line-posts div.list-post {
   -moz-box-shadow: 0 0 10px #dedede;
   -o-box-shadow: 0 0 10px #dedede;
   display: flex;
-  align-items: stretch;
+  align-items: center;
   height: 124px;
+}
+header .list-line-posts div.list-post .video-post{
+  margin-bottom: 0;
 }
 header .list-line-posts div.list-post img {
   width: 109px;
