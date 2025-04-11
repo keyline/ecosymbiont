@@ -816,6 +816,7 @@ header .list-line-posts div.list-post {
   display: flex;
   align-items: center;
   height: 124px;
+  padding: 0 5px;
 }
 header .list-line-posts div.list-post .video-post{
   margin-bottom: 0;
