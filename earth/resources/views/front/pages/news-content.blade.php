@@ -630,7 +630,7 @@ $current_url = $protocol . $host . $uri;
             <button class="btn btn-primary" onclick="copyText2()"><i class="fa fa-copy"></i> Copy</button>                                  
             <button id="closepermalink">Close</button>
         </div>                                   
-        <h3 id="copyMessage2">Copied successfully!</h3>
+        <h3 id="copyMessage2" class="text-success">Copied successfully!</h3>
     </div>  
 <!-- End block-wrapper-section -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
