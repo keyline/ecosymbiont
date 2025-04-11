@@ -815,6 +815,7 @@ header .list-line-posts div.list-post {
   -o-box-shadow: 0 0 10px #dedede;
   display: flex;
   align-items: stretch;
+  height: 124px;
 }
 header .list-line-posts div.list-post img {
   width: 109px;
@@ -3650,8 +3651,11 @@ div.list-post {
 }
 div.list-post img {
   width: 100px;
-  margin-right: 20px;
+  /* margin-right: 20px; */
   float: left;
+}
+div.list-post .video-post {
+  margin-right: 20px;
 }
 div.list-post .post-content > a {
   display: inline-block;
@@ -6332,7 +6336,8 @@ div#popup h3 {
   margin-top: 0;
   color: #902321;
 }
-div#popup h3.text-success{
+div#popup h3.text-success,
+div#permalink h3.text-success {
   color: #28a745 !important;
 }
 div#popup p {
