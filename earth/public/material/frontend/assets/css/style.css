@@ -6332,7 +6332,7 @@ div#popup h3 {
   margin-top: 0;
   color: #902321;
 }
-div#popup .text-success{
+div#popup h3.text-success{
   color: #28a745;
 }
 div#popup p {
