@@ -701,7 +701,7 @@ function numberToOrdinal($number) {
                                     </div>
                                 </div>
                             </div>                        
-                            <div class="row mb-3">
+                            <!-- <div class="row mb-3">
                                 <label for="is_feature" class="col-md-2 col-lg-4 col-form-label">25) Is Features</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="radio" id="is_feature_yes" name="is_feature" value="1" @checked(old('is_feature', $is_feature) == 1)>
@@ -727,9 +727,9 @@ function numberToOrdinal($number) {
                                     <input type="radio" id="is_hot_no" name="is_hot" value="0" @checked(old('is_hot', $is_hot) == 0)>
                                     <label for="is_hot_no">No</label>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row mb-3">
-                                <label for="nelp_pdf" class="col-md-2 col-lg-4 col-form-label">28) Upload NELP</label>
+                                <label for="nelp_pdf" class="col-md-2 col-lg-4 col-form-label">25) Upload NELP</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="file" name="nelp_pdf" class="form-control" id="nelp_pdf" accept="application/pdf">                                                                
                                     <?php if($nelp_pdf != ''){?>
@@ -739,7 +739,7 @@ function numberToOrdinal($number) {
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="additional_information" class="col-md-2 col-lg-4 col-form-label">29) (Optional: max. 100 words) Comments for the Editor(s) (any additional information you wish to share)
+                                <label for="additional_information" class="col-md-2 col-lg-4 col-form-label">26) (Optional: max. 100 words) Comments for the Editor(s) (any additional information you wish to share)
                                 </label>
                                 <div class="col-md-10 col-lg-8">
                                     <textarea class="form-control" id="additional_information" name="additional_information" rows="4" cols="50">{{ old('additional_information', $additional_information) }}</textarea>
@@ -747,7 +747,7 @@ function numberToOrdinal($number) {
                                 </div>
                             </div>                            
                             <div class="row mb-3">
-                                <label for="creative_Work" class="col-md-2 col-lg-4 col-form-label blue-text">30) Is your Creative-Work fiction?
+                                <label for="creative_Work" class="col-md-2 col-lg-4 col-form-label blue-text">27) Is your Creative-Work fiction?
                                 </label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="radio" id="fiction_yes" name="creative_Work_fiction" value="Yes" required <?=(($creative_Work_fiction == 'Yes')?'checked':'')?>>
@@ -757,7 +757,7 @@ function numberToOrdinal($number) {
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="community" class="col-md-2 col-lg-4 col-form-label">31) Are you a member of an EaRTh Community?</label>
+                                <label for="community" class="col-md-2 col-lg-4 col-form-label">28) Are you a member of an EaRTh Community?</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="radio" class="readonly-input" id="community_yes" name="community" value="Yes" required <?=(($community == 'Yes')?'checked':'')?>>
                                     <label for="yes">Yes</label>
@@ -767,7 +767,7 @@ function numberToOrdinal($number) {
                             </div>
                             <div id="communityDetails" style="display: none;">
                                 <div class="row mb-3">
-                                    <label for="community_info" class="col-md-2 col-lg-4 col-form-label">31A) Select Community</label>
+                                    <label for="community_info" class="col-md-2 col-lg-4 col-form-label">28A) Select Community</label>
                                     <div class="col-md-10 col-lg-8">
                                         <select name="community_name" class="form-control" id="community_name">
                                             <option value="" selected>Select</option>
@@ -780,7 +780,7 @@ function numberToOrdinal($number) {
                                 </div> 
                             </div>
                             <div class="row mb-3">
-                            <label for="projects" class="col-md-2 col-lg-4 col-form-label">32) Is this a special EaRTh Project?
+                            <label for="projects" class="col-md-2 col-lg-4 col-form-label">29) Is this a special EaRTh Project?
                             </label>
                             <div class="col-md-10 col-lg-8">
                                 <input type="radio" class="readonly-input" id="projects_yes" name="projects" value="Yes" required @checked(old('projects', $projects) == 'Yes')>
@@ -792,7 +792,7 @@ function numberToOrdinal($number) {
                         <!-- ?php echo $projects_name; die;?> -->
                         <div id="projectsDetails" style="display: none;">
                             <div class="row mb-3">
-                                <label for="projects_info" class="col-md-2 col-lg-4 col-form-label">32A) Select projects</label>
+                                <label for="projects_info" class="col-md-2 col-lg-4 col-form-label">29A) Select projects</label>
                                 <div class="col-md-10 col-lg-8">                                    
                                     <select name="projects_name" class="form-control" id="projects_name">
                                         <option value="">Select</option>
@@ -805,7 +805,7 @@ function numberToOrdinal($number) {
                             </div> 
                         </div>
                             <div class="row mb-3">
-                                <label for="is_series" class="col-md-2 col-lg-4 col-form-label">32) Is this part of a series?
+                                <label for="is_series" class="col-md-2 col-lg-4 col-form-label">30) Is this part of a series?
                                 </label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="radio" id="series_yes" name="is_series" value="Yes" <?=(($is_series == 'Yes')?'checked':'')?> required>
@@ -815,21 +815,21 @@ function numberToOrdinal($number) {
                                 </div>
                             </div>
                             <div class="row series_yes mb-3">
-                                <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label">32A) How many total creative-works in this series?
+                                <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label">30A) How many total creative-works in this series?
                                 </label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" name="series_article_no" class="form-control" id="series_article_no" min="1" value="<?=$series_article_no?>">
                                 </div>
                             </div>
                             <div class="row series_yes mb-3">
-                                <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label">32B) What number in the series is this creative-work?
+                                <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label">30B) What number in the series is this creative-work?
                                 </label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" name="current_article_no" class="form-control" id="current_article_no" value="<?=$current_article_no?>">
                                 </div>
                             </div>
                             <div class="row series_yes mb-3">
-                                <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label">32C) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).
+                                <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label">30C) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).
                                 </label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" class="form-control" id="input-tags">
@@ -1291,16 +1291,17 @@ function numberToOrdinal($number) {
                 element: 'div',
                 attributes: {
                     'class': 'custom-box-style',
-                    'style': 'border: 4px solid #366236; padding: 15px; background-color:rgb(252, 252, 252); margin: 10px 0; border-radius: 8px;'
+                    'style': 'border: 4px solid #366236; padding: 15px; background-color: #e7ece7; margin: 10px 0; border-radius: 8px;'
                 }
             }
         ],
         toolbar: [
-            { name: 'document', items: ['Source'] },
+            { name: 'document', items: ['Source'] },            
             { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'] },
             { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] },
             { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar', 'Iframe'] },
             { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+            { name: 'colors', items: ['TextColor', 'BGColor'] },
             { name: 'links', items: ['Link', 'Unlink'] },
             { name: 'justify', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
             { name: 'tools', items: ['CreateDiv'] }
