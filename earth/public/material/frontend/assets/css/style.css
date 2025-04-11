@@ -6620,7 +6620,7 @@ div#permalink p {
     padding-left: 10px;
     padding-right: 10px;
   }
-  .sidebar .tab-posts-widget .tab-pane ul.list-posts > li img {
+  .sidebar .tab-posts-widget .tab-pane ul.list-posts > li .video-post {
     margin-right: 10px;
   }
   footer .footer-last-line nav.footer-nav {
