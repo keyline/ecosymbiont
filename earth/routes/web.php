@@ -74,6 +74,9 @@ use Illuminate\Support\Facades\Route;
         Route::group(['middleware' => ['admin']], function () {
             Route::get('dashboard', 'UserController@dashboard');
             Route::get('logout', 'UserController@logout');
+            Route::get('home-control', 'UserController@homeControl');
+            Route::match(['get', 'post'], '/home-control/details/{slug}', 'UserController@homeControlDetails');
+            Route::match(['get', 'post'], '/home-control/{slug}/save', 'UserController@homeControlSaveDetails');
             Route::get('email-logs', 'UserController@emailLogs');
             Route::match(['get', 'post'], '/email-logs/details/{email}', 'UserController@emailLogsDetails');
             Route::get('login-logs', 'UserController@loginLogs');

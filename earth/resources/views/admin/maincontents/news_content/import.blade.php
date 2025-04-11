@@ -92,6 +92,8 @@ function numberToOrdinal($number) {
             $co_indigenous_affiliations = json_decode($row->co_indigenous_affiliations);
             $co_author_classification = json_decode($row->co_author_classification);
             $co_author_pronoun = json_decode($row->co_author_pronoun);
+            $citation_value = json_decode($row->citation_value);            
+            $citation_id = json_decode($row->citation_id);
             // dd($co_author_pronoun);
             $first_name = $row->first_name;                               
             $email = $row->email;          
@@ -649,6 +651,48 @@ function numberToOrdinal($number) {
                             <label for="ckeditor1" class="col-md-12 col-lg-4 col-form-label">23) Description</label>
                             <div class="col-md-12 col-lg-8">
                                 <textarea name="long_desc" class="form-control ckeditor" rows="5"><?= $long_desc ?></textarea>
+                                <label for="citation" class="col-form-label">Citation</label>                                   
+                                    @if (!empty($citation_value))
+                                    <div id="field-repeater">
+                                        @for ($i = 0; $i <= count($citation_value); $i++)
+                                        <div class="input-group d-block col-md-12 col-lg-12" data-index="{{$i+1}}">
+                                            <div class="row mt-3">
+                                                <div class="col-md-8">
+                                                    <!-- <input type="text" name="citation[{{$i+1}}][value]" class="form-control" placeholder="Citation" value="?= $citation_value[$i] ?? '' ?>"> -->
+                                                    <textarea name="citation[{{$i+1}}][value]" class="form-control ckeditor" id="citation_{{$i+1}}" placeholder="Citation" rows="3"><?= $citation_value[$i] ?? '' ?></textarea>                                                     
+                                                    <input type="hidden" name="citation[{{$i+1}}][id]" value="<?= $citation_id[$i] ?? 'citation_' . ($i+1) ?>">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button class="btn btn-outline-secondary copy-btn" type="button" data-id="citation_{{$i+1}}">Copy ID</button>
+                                                    <button class="btn btn-outline-danger remove-citation" type="button">-</button>
+                                                    <!-- Message that appears after copying -->
+                                                    <p id="copyMessagecitation_{{$i+1}}" style="color:green; display:none;">ID copied!</p>
+                                                </div>
+                                            </div>                                                                                       
+                                        </div>
+                                        @endfor
+                                    </div>
+                                    @else
+                                    <div id="field-repeater">
+                                        <div class="input-group d-block col-md-12 col-lg-12" data-index="1">
+                                            <div class="row mt-3">
+                                                <div class="col-md-8">
+                                                    <!-- <input type="text" name="citation[1][value]" class="form-control" placeholder="Citation" value=""> -->
+                                                    <textarea name="citation[1][value]" class="form-control ckeditor" id="citation_1" placeholder="Citation" rows="3"></textarea> 
+                                                    <input type="hidden" name="citation[1][id]" value="citation_1">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button class="btn btn-outline-secondary copy-btn" type="button" data-id="citation_1">Copy ID</button>
+                                                    <!-- Message that appears after copying -->
+                                                    <p id="copyMessagecitation_1" style="color:green; display:none;">ID copied!</p>
+                                                    <!-- <button class="btn btn-outline-danger remove-citation" type="button">-</button> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endif
+                                <button class="btn btn-success mt-2" type="button" id="add-citation">+</button>
+                                <br><br>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -677,9 +721,9 @@ function numberToOrdinal($number) {
                                 </div>
                             </div>
                         </div>                        
-                        <div class="row mb-3">
-                            <label for="is_feature" class="col-md-12 col-lg-4 col-form-label">25) Is Features</label>
-                            <div class="col-md-12 col-lg-8">
+                        <!-- <div class="row mb-3">
+                            <label for="is_feature" class="col-md-2 col-lg-4 col-form-label">25) Is Features</label>
+                            <div class="col-md-10 col-lg-8">
                                 <input type="radio" id="is_feature_yes" name="is_feature" value="1" @checked(old('is_feature', $is_feature) == 1)>
                                 <label for="is_feature_yes">Yes</label>
                                 <input type="radio" id="is_feature_no" name="is_feature" value="0" @checked(old('is_feature', $is_feature) == 0)>
@@ -703,9 +747,9 @@ function numberToOrdinal($number) {
                                 <input type="radio" id="is_hot_no" name="is_hot" value="0" @checked(old('is_hot', $is_hot) == 0)>
                                 <label for="is_hot_no">No</label>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row mb-3">
-                            <label for="creative_Work" class="col-md-12 col-lg-4 col-form-label blue-text">28) Is your Creative-Work fiction?
+                            <label for="creative_Work" class="col-md-2 col-lg-4 col-form-label blue-text">25) Is your Creative-Work fiction?
                             </label>
                             <div class="col-md-12 col-lg-8">
                                 <input type="radio" id="fiction_yes" name="creative_Work_fiction" value="Yes" required @checked(old('creative_Work_fiction', $creative_Work_fiction) == 'Yes')>
@@ -715,7 +759,7 @@ function numberToOrdinal($number) {
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="additional_information" class="col-md-12 col-lg-4 col-form-label">29) (Optional: max. 100 words) Comments for the Editor(s) (any additional information you wish to share)
+                            <label for="additional_information" class="col-md-2 col-lg-4 col-form-label">26) (Optional: max. 100 words) Comments for the Editor(s) (any additional information you wish to share)
                             </label>
                             <div class="col-md-12 col-lg-8">
                                 <textarea class="form-control" id="additional_information" name="additional_information" rows="4" cols="50">{{ old('additional_information', $additional_information) }}</textarea>
@@ -723,8 +767,8 @@ function numberToOrdinal($number) {
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="nelp_pdf" class="col-md-12 col-lg-4 col-form-label">30) Upload NELP</label>
-                            <div class="col-md-12 col-lg-8">
+                            <label for="nelp_pdf" class="col-md-2 col-lg-4 col-form-label">27) Upload NELP</label>
+                            <div class="col-md-10 col-lg-8">
                                 <input type="file" name="nelp_pdf" class="form-control" id="nelp_pdf" accept="application/pdf">                                                                
                                 <?php if($nelp_pdf != ''){?>
                                 <a href="<?= env('UPLOADS_URL') . 'newcontent/' . $nelp_pdf ?>" target="_blank"
@@ -735,7 +779,7 @@ function numberToOrdinal($number) {
                             </div>
                         </div>                        
                         <div class="row mb-3">
-                            <label for="community" class="col-md-12 col-lg-4 col-form-label">31) Are you a member of an EaRTh Community?
+                            <label for="community" class="col-md-2 col-lg-4 col-form-label">28) Are you a member of an EaRTh Community?
                             </label>
                             <div class="col-md-12 col-lg-8">
                                 <input type="radio" class="readonly-input" id="community_yes" name="community" value="Yes" required @checked(old('community', $community) == 'Yes')>
@@ -747,8 +791,8 @@ function numberToOrdinal($number) {
                         <!-- ?php echo $community_name; die;?> -->
                         <div id="communityDetails" style="display: none;">
                             <div class="row mb-3">
-                                <label for="community_info" class="col-md-12 col-lg-4 col-form-label">31A) Select Community</label>
-                                <div class="col-md-12 col-lg-8">                                    
+                                <label for="community_info" class="col-md-2 col-lg-4 col-form-label">28A) Select Community</label>
+                                <div class="col-md-10 col-lg-8">                                    
                                     <select name="community_name" class="form-control" id="community_name">
                                         <option value="">Select</option>
                                         <?php if($communities){ foreach($communities as $cmn){?>
@@ -760,7 +804,7 @@ function numberToOrdinal($number) {
                             </div> 
                         </div>                        
                         <div class="row mb-3">
-                            <label for="projects" class="col-md-12 col-lg-4 col-form-label">32) Is this a special EaRTh Project?
+                            <label for="projects" class="col-md-2 col-lg-4 col-form-label">29) Is this a special EaRTh Project?
                             </label>
                             <div class="col-md-12 col-lg-8">
                                 <input type="radio" class="readonly-input" id="projects_yes" name="projects" value="Yes" required @checked(old('projects', $projects) == 'Yes')>
@@ -772,8 +816,8 @@ function numberToOrdinal($number) {
                         <!-- ?php echo $projects_name; die;?> -->
                         <div id="projectsDetails" style="display: none;">
                             <div class="row mb-3">
-                                <label for="projects_info" class="col-md-12 col-lg-4 col-form-label">32A) Select projects</label>
-                                <div class="col-md-12 col-lg-8">                                    
+                                <label for="projects_info" class="col-md-2 col-lg-4 col-form-label">29A) Select projects</label>
+                                <div class="col-md-10 col-lg-8">                                    
                                     <select name="projects_name" class="form-control" id="projects_name">
                                         <option value="">Select</option>
                                         <?php  if($project){ foreach($project as $proj){?>
@@ -785,7 +829,7 @@ function numberToOrdinal($number) {
                             </div> 
                         </div>
                         <div class="row mb-3">
-                            <label for="is_series" class="col-md-12 col-lg-4 col-form-label">32) Is this part of a series?
+                            <label for="is_series" class="col-md-2 col-lg-4 col-form-label">30) Is this part of a series?
                             </label>
                             <div class="col-md-12 col-lg-8">
                                 <input type="radio" id="series_yes" name="is_series" value="Yes" <?=(($is_series == 'Yes')?'checked':'')?> required>
@@ -795,14 +839,14 @@ function numberToOrdinal($number) {
                             </div>
                         </div>
                         <div class="row series_yes mb-3">
-                            <label for="series_article_no" class="col-md-12 col-lg-4 col-form-label">32A) How many total creative-works in this series?
+                            <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label">30A) How many total creative-works in this series?
                             </label>
                             <div class="col-md-12 col-lg-8">
                                 <input type="number" name="series_article_no" class="form-control" id="series_article_no" value="<?=$series_article_no?>">
                             </div>
                         </div>
                         <div class="row series_yes mb-3">
-                            <label for="current_article_no" class="col-md-12 col-lg-4 col-form-label">32B) What number in the series is this creative-work?
+                            <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label">30B) What number in the series is this creative-work?
                             </label>
                             <div class="col-md-12 col-lg-8">
                                 <input type="text" name="current_article_no" class="form-control" id="current_article_no" value="<?=$current_article_no?>">
@@ -810,7 +854,7 @@ function numberToOrdinal($number) {
                         </div>
 
                         <div class="row series_yes mb-3">
-                            <label for="other_article_part_doi_no" class="col-md-12 col-lg-4 col-form-label">32C) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).
+                            <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label">30C) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).
                             </label>
                             <div class="col-md-12 col-lg-8">
                                 <input type="text" class="form-control" id="input-tags">
@@ -891,9 +935,11 @@ function numberToOrdinal($number) {
 <script>
     document.querySelector('#submitFormButton').addEventListener('click', function (e) {
         e.preventDefault(); // Prevent default form submission
-
+        const caption = document.getElementById('cover_image_caption').value.trim();
+        var media = document.querySelector('input[name="media"]:checked');
         var pdfFile = document.getElementById("nelp_pdf").files.length;
         var existingPdf = document.querySelector("input[name='existing_nelp_pdf']");
+
 
         // Validate PDF upload only for final publishing
         if (pdfFile === 0 && !existingPdf) {
@@ -904,7 +950,19 @@ function numberToOrdinal($number) {
             });
             return; // Stop further execution
         }
+        if (caption === '') {
+            $('#cover_image_caption').attr('required', true);
+            document.getElementById('cover_image_caption').focus();
+            return false; // Prevent form submission
+        }
 
+        // Validate media type selection
+        if (!media) {
+            $('#media_image').attr('required', true);
+            $('#media_video').attr('required', true);
+            document.getElementById('media_image').focus();            
+            return false; // Stop further execution
+        }
         // Confirmation popup
         Swal.fire({
             title: 'Are you sure?',
@@ -931,14 +989,6 @@ function numberToOrdinal($number) {
             renderChoiceLimit: 30
         });
     });
-</script>
-<script>
-    CKEDITOR.replace('long_desc', {   
-        allowedContent: true,       
-    stylesSet: [        
-        { name: 'others_image_colour', element: 'em', attributes: { 'style': 'display: inline-block; color: #87ceeb;font-size: 16px;font-family: "proximanova_regular", sans-serif;font-style: italic;margin: 0;text-align: left !important;width: 100%;' } },        
-    ]
-});
 </script>
 <script>
     $(document).ready(function() {
@@ -1331,6 +1381,111 @@ function numberToOrdinal($number) {
             });
             $(this).parent().remove();
             $('#other_article_part_doi_no').val(tagsArray);
+        });
+    });
+</script>
+<script>
+    @php
+        $citationCount = !empty($citation_value) ? count($citation_value) : 0;
+    @endphp
+
+    let citationValues = {{ $citationCount }};
+    let fieldIndex = citationValues > 0 ? citationValues + 2 : 2;
+
+    const ckConfig = {
+        allowedContent: true,
+        removeFormatAttributes: '',
+        stylesSet: [
+            {
+                name: 'others_image_colour',
+                element: 'em',
+                attributes: {
+                    'style': 'display: inline-block; color: #87ceeb; font-size: 16px; font-family: \'proximanova_regular\', sans-serif; font-style: italic; margin: 0; text-align: left !important; width: 100%;'
+                }
+            },
+            {
+                name: 'Box Style',
+                element: 'div',
+                attributes: {
+                    'class': 'custom-box-style',
+                    'style': 'border: 4px solid #366236; padding: 15px; background-color: #e7ece7; margin: 10px 0; border-radius: 8px;'
+                }
+            }
+        ],
+        toolbar: [
+            { name: 'document', items: ['Source'] },
+            { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'] },
+            { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] },
+            { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar', 'Iframe'] },
+            { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+            { name: 'colors', items: ['TextColor', 'BGColor'] }, 
+            { name: 'links', items: ['Link', 'Unlink'] },
+            { name: 'justify', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
+            { name: 'tools', items: ['CreateDiv'] }
+        ]
+    };
+
+    // Apply CKEditor to multiple fields
+    CKEDITOR.replace('long_desc', ckConfig);
+    CKEDITOR.replace('subtitle', ckConfig);
+    CKEDITOR.replace('editors_comments', ckConfig);    
+    // Initialize the first citation field
+    CKEDITOR.replace('citation_1', ckConfig);
+    // Loop through and initialize existing citation fields
+    for (let i = 0; i <= {{ $citationCount }}; i++) {
+        const extId = 'citation_' + (i + 1);
+        CKEDITOR.replace(extId, ckConfig);
+    }
+
+    $('#add-citation').click(function () {
+        const newId = 'citation_' + fieldIndex;
+
+        $('#field-repeater').append(`
+            <div class="input-group d-block col-md-12 col-lg-12" data-index="${fieldIndex}">
+                <div class="row mt-3">
+                    <div class="col-md-8">                       
+                        <textarea name="citation[${fieldIndex}][value]" class="form-control ckeditor" id="citation_${fieldIndex}" placeholder="Citation" rows="3"></textarea> 
+                        <input type="hidden" name="citation[${fieldIndex}][id]" value="${newId}">
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-outline-secondary copy-btn" type="button" data-id="${newId}">Copy ID</button>
+                        <button class="btn btn-outline-danger remove-citation" type="button">-</button>                        
+                        <p id="copyMessage${newId}" style="color:green; display:none;">ID copied!</p>
+                    </div>
+                </div>
+            </div>
+        `);
+
+        // ✅ Initialize CKEditor on the newly added textarea
+        setTimeout(() => {
+            CKEDITOR.replace(newId, ckConfig);
+        }, 100);
+
+        fieldIndex++;
+    });
+
+    $(document).on('click', '.remove-citation', function () {
+        const textarea = $(this).closest('.input-group').find('textarea');
+        const id = textarea.attr('id');
+
+        // ✅ Destroy CKEditor instance before removing the field
+        if (CKEDITOR.instances[id]) {
+            CKEDITOR.instances[id].destroy(true);
+        }
+
+        $(this).closest('.input-group').remove();
+    });
+
+    $(document).on('click', '.copy-btn', function () {
+        const id = $(this).data('id');
+        navigator.clipboard.writeText('#' + id).then(() => {
+            // alert('Copied ID: ' + id);
+            // Show success message
+            const message = document.getElementById('copyMessage' + id);
+            message.style.display = 'block';
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 2000); // Hide message after 2 seconds
         });
     });
 </script>

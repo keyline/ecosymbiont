@@ -239,6 +239,12 @@ $current_url = $protocol . $host . $uri;
                             <span class="top-stories">TOP STORIES</span>
                             <ul class="bxslider">
                                 <?php
+                                // DB::enableQueryLog(); // Enable query log
+                                // $latestArticleIds = NewsContent::selectRaw('MAX(id) as id')
+                                // ->where('status', 1)
+                                // ->where('parent_category', 3)
+                                // ->groupBy('sub_category')
+                                // ->pluck('id');
                                 $parentCategoryContents3 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
                                                                         ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
                                                                         ->select('news_contents.id', 
@@ -258,12 +264,17 @@ $current_url = $protocol . $host . $uri;
                                                                                 'parent_category.sub_category as parent_category_name', 
                                                                                 'parent_category.slug as parent_category_slug', 
                                                                                 'sub_category.sub_category as sub_category_name', 
-                                                                                'sub_category.slug as sub_category_slug')
+                                                                                'sub_category.slug as sub_category_slug') 
+                                                                        //         ->where('news_contents.status', '=', 1)                                                                       
+                                                                        // ->whereIn('news_contents.id', $latestArticleIds)                                                                                                                                                                                                                        
+                                                                        // ->orderBy('news_contents.id', 'DESC')
+                                                                        // ->get();
                                                                         ->where('news_contents.status', '=', 1)
                                                                         // ->where('news_contents.is_popular', '=', 1) // Uncomment if needed
                                                                         ->where('news_contents.parent_category', '=', 3)
-                                                                        ->inRandomOrder()
-                                                                        ->get();       
+                                                                        // ->inRandomOrder()
+                                                                        ->orderBy('news_contents.id', 'DESC')
+                                                                        ->get();        
                                                                         // dd(DB::getQueryLog());                                                        
                                 if($parentCategoryContents3){ foreach($parentCategoryContents3 as $parentCategoryContent3){
                                 ?>
@@ -585,9 +596,7 @@ $current_url = $protocol . $host . $uri;
                                                                         )
                                                                         ->where('news_contents.status', 1)  // Fetch only active content
                                                                         ->where('news_contents.is_feature', 1)  // Fetch only featured content
-                                                                        ->orderBy('news_contents.created_at', 'DESC') // Latest videos first
-                                                                        ->inRandomOrder()  // Randomize the result order
-                                                                        ->limit(3)  // Limit to 3 records
+                                                                        ->orderBy('news_contents.created_at', 'DESC') // Latest videos first                                                                                                                                                
                                                                         ->get();
                                         if($featuredContents){ foreach($featuredContents as $featuredContent){
                                         ?>
@@ -685,12 +694,12 @@ $current_url = $protocol . $host . $uri;
                             'parent_category.slug as parent_category_slug'
                         )
                         ->where('news_contents.status', 1)
-                        ->where('news_contents.media', 'video')
+                        ->where('news_contents.is_home_video', 1)
                         ->where(function($query) {
                             $query->where('news_contents.current_article_no', 1) // Include first video of each series
                                 ->orWhere('news_contents.is_series', 'No');    // Include standalone videos
                         })
-                        ->inRandomOrder()
+                        // ->inRandomOrder()
                         ->orderBy('news_contents.created_at', 'DESC') // Latest videos first
                         ->limit(8)
                         ->get();
@@ -740,7 +749,7 @@ $current_url = $protocol . $host . $uri;
                         <!-- article box -->
                         <div class="article-box">
                             <div class="title-section">
-                                <h1><span>Latest Creative Works</span></h1>
+                                <h1><span>Explore EaRTh Projects</span></h1>
                             </div>
                             <?php
                             // DB::enableQueryLog(); // Enable query log
@@ -749,6 +758,7 @@ $current_url = $protocol . $host . $uri;
                                             ->select(
                                                 'news_contents.id', 
                                                 'news_contents.new_title', 
+                                                'news_contents.projects_name', 
                                                 'news_contents.sub_title', 
                                                 'news_contents.slug', 
                                                 'news_contents.author_name',
@@ -767,8 +777,8 @@ $current_url = $protocol . $host . $uri;
                                                 'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
                                             )
                                             ->where('news_contents.status', 1)  // Fetch only active content
-                                            // ->where('news_contents.is_feature', 1)  // Fetch only featured content
-                                            ->inRandomOrder()  // Randomize the result order
+                                            ->where('news_contents.is_explore_projects', 1)  // Fetch only featured content
+                                            // ->inRandomOrder()  // Randomize the result order
                                             ->orderBy('news_contents.created_at', 'DESC') // Latest videos first
                                             ->limit(6)  // Limit to 3 records
                                             ->get();
@@ -817,7 +827,7 @@ $current_url = $protocol . $host . $uri;
                                             </div>
                                             <div class="col-sm-7">
                                                 <div class="post-content">
-                                                    <a href="<?=url('category/' . $latestarticle->parent_category_slug)?>"><?=$latestarticle->parent_category_name?></a>
+                                                    <?=strtoupper($latestarticle->projects_name)?>
                                                     <h2><a href="<?=url('content/' . $latestarticle->parent_category_slug. '/' . $latestarticle->category_slug . '/' . $latestarticle->slug)?>"><?=$latestarticle->new_title?></a></h2>
                                                     <ul class="post-tags">
                                                         <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$latestarticle->for_publication_name ?? $latestarticle->author_name?></a></li>
