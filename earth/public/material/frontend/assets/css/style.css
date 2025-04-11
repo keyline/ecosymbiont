@@ -819,6 +819,7 @@ header .list-line-posts div.list-post {
   padding: 5px;
 }
 header .list-line-posts div.list-post .video-post{
+  margin-right: 0;
   margin-bottom: 0;
 }
 header .list-line-posts div.list-post img {
