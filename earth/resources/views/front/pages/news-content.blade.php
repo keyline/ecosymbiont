@@ -619,7 +619,7 @@ $current_url = $protocol . $host . $uri;
             <button class="btn btn-primary" onclick="copyText()"><i class="fa fa-copy"></i> Copy</button>                                  
             <button id="closePopup">Close</button>
         </div>                                    
-        <h3 id="copyMessage">Copied successfully!</h3>
+        <h3 id="copyMessage" class="text-success">Copied successfully!</h3>
     </div>
     <div id="permalink">
         <h3>PERMALINK</h3>  

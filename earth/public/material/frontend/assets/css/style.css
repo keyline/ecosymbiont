@@ -6333,7 +6333,7 @@ div#popup h3 {
   color: #902321;
 }
 div#popup h3.text-success{
-  color: #28a745;
+  color: #28a745 !important;
 }
 div#popup p {
   line-height: 30px;
