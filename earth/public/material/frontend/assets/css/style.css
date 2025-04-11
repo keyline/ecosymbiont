@@ -1275,6 +1275,7 @@ div.block-content:after {
 .carousel-box {
   margin-bottom: 25px;
 }
+
 .carousel-box .news-post,
 .carousel-box ul.list-posts {
   margin-bottom: 30px;
@@ -7243,6 +7244,7 @@ div.block-content {
 }
 .video_post_text .hover-box ul.post-tags li, .video_post_text .hover-box ul.post-tags li {
   color: #fff;
+  margin-bottom: 0;
 }
 .item.news-post.video-post.video_post_text {
   height: 200px;
