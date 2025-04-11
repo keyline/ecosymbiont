@@ -827,6 +827,12 @@ header .list-line-posts div.list-post .post-content {
 }
 header .list-line-posts div.list-post .post-content > a {
   color: #206081;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+          line-clamp: 2; 
+  -webkit-box-orient: vertical;
 }
 header .list-line-posts div.list-post .post-content h2 {
   line-height: 20px;
