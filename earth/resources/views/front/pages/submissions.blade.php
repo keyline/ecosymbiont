@@ -44,7 +44,7 @@ $current_url = $protocol . $host . $uri;
                                                 <h2>SUBMISSION GUIDELINES</h2>
                                                 <p class="black">Before making a submission of your Creative-Work to our professionally edited online knowledge-sharing and community-building platform, please read these submission guidelines in their entirety.</p>
                                                 <h2>ELIGIBILITY CRITERIA</h2>
-                                                <ul>
+                                                <ul class="black">
                                                     <li>You ("Author") must be a grassroots changemaker, innovator, and/or knowledge-holder.</li>
                                                     <li>All components of your word narrative, art image, and/or landscape video, including accompanying images and/or photographs (“Creative-Work”) must be your own original work.</li>
                                                     <li>You must not have used Artificial Intelligence (AI) to generate any component of your Creative-Work.</li>
@@ -54,15 +54,15 @@ $current_url = $protocol . $host . $uri;
                                                 </ul>
                                                 <h2>AUTHORSHIP</h2>
                                                 <p class="black">EaRTh encourages human individuals, as well as ecoweb-rooted communities (see below for definition) or movements to be authors of Creative-Works submitted to EaRTh. Given the current legal framework associated with copyright and licensing, at least one human individual must be a co-author (and the first author) if an ecoweb-rooted community or movement is an author. Please also see the instructions below:</p>
-                                                <ul>
+                                                <ul class="black">
                                                     <li>A Creative-Work may have up to three co-authors, wherein the first author listed must be a human individual ("Lead Author").</li>
                                                     <li>EaRTh encourages an ecoweb-rooted community or movement to be a co-author of a Creative-Work, but only if a human individual is also a co-author (first author).</li>
                                                     <li>For the purposes of submissions of Creative-Work to EaRTh, an ecoweb-rooted community is defined as a self-associating group of human individuals that trace their origins to a particular ecoweb. Examples of ecoweb-rooted communities are: the Idu Mishmi of Arunachal Pradesh (India) and the Lisjan Ohlone of California (United States).</li>
                                                 </ul>
                                                 <h2>GUIDELINES</h2>
-                                                <ol>
+                                                <ol class="black">
                                                     <li>Your Creative-Work can be non-fiction or fiction and must be one of 3 types:</li>
-                                                    <ul>
+                                                    <ul class="black">
                                                         <li><strong>Type A</strong>: word narrative (500-1000 words for prose, 100-250 words for poetry);</li>
                                                         <li><strong>Type B</strong>: art image(s) + descriptive narrative (100-250 words); or</li>
                                                         <li><strong>Type C</strong>: video (5-10 minutes) + descriptive narrative (100-250 words).</li>
@@ -86,37 +86,37 @@ $current_url = $protocol . $host . $uri;
                                                 </ol>
                                                 <h2>EXPLANATION OF CATEGORIES AND SUB-CATEGORIES OF EaRTh</h2>
                                                 <p>EaRTh has five main categories that are further divided into sub-categories. To help you understand what type of content is appropriate for each category/sub-category, please see below.</p>
-                                                <ul>
+                                                <ul class="black">
                                                     <li><strong>ACTION</strong>
-                                                        <ul>
+                                                        <ul class="black">
                                                             <li><strong><i>Activism</i></strong><br>Substantive Creative-Work about specific upcoming or past activism, not a mere announcement.</li>
                                                             <li><strong><i>Events</i></strong><br>Substantive Creative-Work about specific upcoming or past events, not a mere announcement.</li>
                                                             <li><strong><i>Women & Marginalized</i></strong><br>About issues that concern women and members of marginalized communities.</li>
                                                         </ul>
                                                     </li>
                                                     <li><strong>INDIGENOUS</strong>
-                                                        <ul>
+                                                        <ul class="black">
                                                             <li><strong><i>Indigenous Knowledge-Technologies-Practices</i></strong><br>You must either be an Indigenous person narrating your own community's Knowledge-Technologies-Practices (KTP), or if you are a person narrating on behalf of an Indigenous individual and/or community, the latter must be a co-author of your Creative-Work (narrate in a manner that does not reveal details of KTP so that misappropriation by others is prevented).</li>
                                                             <li><strong><i>Indigenous Retelling & Telling</i></strong><br>A retelling or telling of past and/or current events from the perspective of an Indigenous individual and/or community.</li>
                                                             <li><strong><i>Indigenous Survivance</i></strong><br>A sharing of Indigenous individuals, especially women, being vanished by various actors and/or of the persevering and resilience of Indigenous communities.</li>
                                                         </ul>
                                                     </li>
                                                     <li><strong>REGENERATIVE</strong>
-                                                        <ul>
+                                                        <ul class="black">
                                                             <li><strong><i>Ecoweb Regeneration</i></strong><br>About restoring, revitalizing, generating, and/or nurturing one or more ecowebs in a way that optimizes ecosymbiotic health and wellbeing.</li>
                                                             <li><strong><i>Human-Ecoweb Integration</i></strong><br>About integrating one or more human communities into one or more natural or regenerated ecowebs.</li>
                                                             <li><strong><i>Regenerative Technologies</i></strong><br>About technologies that use materials and processes that are not extractive but instead preserve and/or regenerate ecowebs and human communities in ways that optimize ecosymbiotic health and wellbeing.</li>
                                                         </ul>
                                                     </li>
                                                     <li><strong>SYSTEMS</strong>
-                                                        <ul>
+                                                        <ul class="black">
                                                             <li><strong><i>Ecoweb-Rooted Framing</i></strong><br>Creative-Work that conceptualizes economics, law, governance, and education (ELGE) systems in a manner that reframes them to optimize ecoweb-rooted symbiotic wellbeing, <i>i.e.,</i> of human communities and one or more ecowebs we rely on.</li>
                                                             <li><strong><i>Extractivism Alternatives</i></strong><br>Creative-Work that describes Knowledge-Technologies-Practices (KTP) and/or systems that present an alternative to extractivist KTP and systems (<i>e.g.,</i> the cycle of sustainable generation, repeated use, and biodegradable disposal of objects, as opposed to the cycle of resource extraction, disposable commodity production, disposable use, and landfill waste generation).</li>
                                                             <li><strong><i>Systems Reform</i></strong><br>Creative-Work that critically analyzes extractivist economics, law, governance, and education (ELGE) systems or describes concrete ideas on how to reshape ELGE systems in a manner that minimizes or eliminates extractivism.</li>
                                                         </ul>
                                                     </li>
                                                     <li><strong>WELLBEING</strong>
-                                                        <ul>
+                                                        <ul class="black">
                                                             <li><strong><i>Art-Music-Performance</i></strong><br>Visual art, literary art, and/or audiovisual media of music and/or performance, including storytelling.</li>
                                                             <li><strong><i>Food Sovereignty</i></strong><br>About systems that generate food in a manner that optimizes the wellbeing of human communities and the ecowebs we rely on.</li>
                                                             <li><strong><i>Sustainable Health</i></strong><br>About systems that optimize the mental and physical wellbeing of humans, especially those that incorporate connections to and sustainable utilization of biodiverse ecowebs and ecoweb resources.</li>
@@ -125,11 +125,11 @@ $current_url = $protocol . $host . $uri;
                                                 </ul>
 
                                                 <h2>INSTRUCTIONS FOR SUBMISSION</h2>
-                                                <p>Upon submitting a completed form to EaRTh, if you meet the eligibility criteria, you will receive an e-mail from ecosymbiont with a Submission Reference Number ("SRN"). However, upon completing your Creative-Work submission form, you will not be able to click on the "Submit" button unless you check the box just below the scrollable text for the Non-Exclusive License to Publish ("NELP"). Once the editor(s) receive(s) your submission, we will begin substantively reviewing your Creative-Work.</p>
+                                                <p class="black">Upon submitting a completed form to EaRTh, if you meet the eligibility criteria, you will receive an e-mail from ecosymbiont with a Submission Reference Number ("SRN"). However, upon completing your Creative-Work submission form, you will not be able to click on the "Submit" button unless you check the box just below the scrollable text for the Non-Exclusive License to Publish ("NELP"). Once the editor(s) receive(s) your submission, we will begin substantively reviewing your Creative-Work.</p>
                                                 <h2>REVIEW PROCESS</h2>
-                                                <p>Your Creative-Work will be reviewed based on several criteria, including clarity, veracity, and relevance to human-ecological connection. If your Creative-Work is accepted for publication as Content on EaRTh, a few rounds of editor-guided revision may be required before publication.</p>
+                                                <p class="black">Your Creative-Work will be reviewed based on several criteria, including clarity, veracity, and relevance to human-ecological connection. If your Creative-Work is accepted for publication as Content on EaRTh, a few rounds of editor-guided revision may be required before publication.</p>
                                                 <h2>COPYRIGHT & LICENSE</h2>
-                                                <p>As per the terms detailed in the NELP, you grant EaRTh, Ecosymbionts Regenerate (ER), and the Śramani Institute (the nonprofit host organization of ER and EaRTh) a non-exclusive license to publish and use your Content. You will retain the copyright to your work and the right to also publish elsewhere.</p>
+                                                <p class="black">As per the terms detailed in the NELP, you grant EaRTh, Ecosymbionts Regenerate (ER), and the Śramani Institute (the nonprofit host organization of ER and EaRTh) a non-exclusive license to publish and use your Content. You will retain the copyright to your work and the right to also publish elsewhere.</p>
                                                 <?php if($button_show){?>
                                                     <?php if(session('is_user_login')){?>
                                                         <p class="text-center"><a href="<?=url('user/submit-new-article')?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Submit New Creative-Work</a></p>
