@@ -340,7 +340,7 @@ class FrontController extends Controller
         $data['authorPostCount']    = NewsContent::where('news_contents.status', '=', 1)
                                            ->where('news_contents.author_name', 'LIKE', '%'.$author_name.'%')
                                            ->count();
-        // DB::enableQueryLog();
+        DB::enableQueryLog();
         $data['alsoLikeContents'] = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
                                            ->select(
@@ -361,7 +361,7 @@ class FrontController extends Controller
                                                     ->orWhere('news_contents.current_article_no', 1); // First part of series
                                         })
                                            ->get();
-        // dd(DB::getQueryLog());
+        dd(DB::getQueryLog());
         $data['search_keyword']         = '';
 
         $title                      = (($data['rowContent'])?$data['rowContent']->new_title:'');
