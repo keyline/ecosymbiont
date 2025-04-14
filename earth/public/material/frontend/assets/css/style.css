@@ -883,10 +883,12 @@ header .list-line-posts div.list-post .post-content h2 a:hover {
 body.boxed {
   background: url('../images/pattern.png');
 }
+html{
+  scroll-behavior: smooth;
+}
 body{
   font-family: 'proximanova_regular', sans-serif;
   overflow-x: hidden;
-  scroll-behavior: smooth;
 }
 body.boxed #container {
   max-width: 1260px;
