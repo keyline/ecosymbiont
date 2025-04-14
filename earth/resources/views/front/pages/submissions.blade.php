@@ -52,15 +52,60 @@ $current_url = $protocol . $host . $uri;
                                                     <li>Your Creative-Work must not have been published in any other medium that has the exclusive right to publish your work.</li>
                                                     <li>Your Creative-Work must relate to the connection between humans and ecologies <i>(hint: food security/ sovereignty, housing challenges, forced displacement from lands, all of these have a human-ecological connection).</i></li>
                                                 </ul>
+                                                <h2>AUTHORSHIP</h2>
+                                                <p class="black">EaRTh encourages human individuals, as well as ecoweb-rooted communities (see below for definition) or movements to be authors of Creative-Works submitted to EaRTh. Given the current legal framework associated with copyright and licensing, at least one human individual must be a co-author (and the first author) if an ecoweb-rooted community or movement is an author. Please also see the instructions below:</p>
+                                                <ul>
+                                                    <li>A Creative-Work may have up to three co-authors, wherein the first author listed must be a human individual ("Lead Author").</li>
+                                                    <li>EaRTh encourages an ecoweb-rooted community or movement to be a co-author of a Creative-Work, but only if a human individual is also a co-author (first author).</li>
+                                                    <li>For the purposes of submissions of Creative-Work to EaRTh, an ecoweb-rooted community is defined as a self-associating group of human individuals that trace their origins to a particular ecoweb. Examples of ecoweb-rooted communities are: the Idu Mishmi of Arunachal Pradesh (India) and the Lisjan Ohlone of California (United States).</li>
+                                                </ul>
+                                                <h2>GUIDELINES</h2>
+                                                <ol>
+                                                    <li>Your Creative-Work can be non-fiction or fiction and must be one of 3 types:</li>
+                                                    <ul>
+                                                        <li><strong>Type A</strong>: word narrative (500-1000 words for prose, 100-250 words for poetry);</li>
+                                                        <li><strong>Type B</strong>: art image(s) + descriptive narrative (100-250 words); or</li>
+                                                        <li><strong>Type C</strong>: video (5-10 minutes) + descriptive narrative (100-250 words).</li>
+                                                    </ul>
+                                                    <li>For Creative-Work <strong>Type A</strong>, your word narrative submission <u>must be accompanied</u> by at least one (1) image or photograph and may be accompanied by up to five (5) images or photographs.</li>
+                                                    <li>For Creative-Work <strong>Type B</strong>, you may submit up to five (5) art images of the same or related piece(s) of art. You <u>must provide the following details</u> about your piece(s) of art: (a) title, (b) medium (<i>e.g.,</i> oil on canvas), (c) dimensions, and (d) year created.</li>
+                                                    <li>For Creative-Work <strong>Type C</strong>, your video <u>must be</u> (a) a landscape video, (b) be 5-10 minutes long, and (c) have a file size of 1 GB or less.</li>
+                                                    <li>For all Creative-Work types, each image or photograph submitted <u>must be accompanied</u> by a brief figure caption (up to 50 words).</li>
+                                                    <li>If your Creative-Work is longer (or has more images) than the guidelines in points 1-5, then <u>consider submitting a series</u>. EaRTh can publish up to a 6-part series, wherein each segment of the series must conform to the guidelines in points 1-5, including requirements for length and number of accompanying images.</li>
+                                                    <li>To be categorized as non-fiction any knowledge or ideas contained in your Creative-Work must be your own and may include your first-person account of narration by a knowledge-holder and/or ancestor who is explicitly named and credited.</li>
+                                                    <li>A non-fiction Creative-Work that contains descriptions of knowledge and/or activities — especially harmful activities — by legal entities (<i>e.g.,</i> corporations) and/or human persons other than yourself must be substantiated by external sources (<i>e.g.,</i> citations) and/or be witnessed first-hand by you.</li>
+                                                    <li>As you generate your Creative-Work, please keep in mind that readers and grassroots individuals and collectives from across the world will be viewing your Creative-Work if it is published by EaRTh as content. Thus, please write and present in a manner that explains terms and concepts specific to your region or culture, such that a person completely unfamiliar with the topic and regional/cultural context of your Creative-Work can understand.</li>
+                                                    <li>Please <u>write in a simple and clear manner that is not academic</u>, keeping in mind that readers and grassroots individuals and collectives viewing your Creative-Work are from a variety of occupational and cultural backgrounds and may not be native English speakers. When citing another’s publication, please simply state the finding and use footnotes to provide information about the full citation.
+                                                    <p>For example, do <strong>not</strong> write: “Garcia and Hussain (2018) describe various detrimental neurological effects of environmental pollution in frontline communities.”</p>
+                                                    <p>Instead, write: “Environmental pollution has been reported to have various detrimental neurological effects in frontline communities.<sup>[1]</sup>" Then in your footnote for [1] provide the entire citation of Garcia and Hussain (2018).</p>
+                                                    </li>
+                                                    <li>If you are including citations in your Creative-Work, please format them as follows:
+                                                    <p>M. Garcia, L. Hussain, <i>Environmental Pollution Causes Neurological Effects in Impacted Communities,</i> <strong>Journal of Impacts:</strong> Vol. 5 (Issue 12), pp. 46-48 (2018).</p>
+                                                    </li>
+                                                    <li>EaRTh encourages the submission of Creative-Works in vernacular languages. For narratives — both word narratives and descriptive narratives — please ensure that if the language is not English, you also submit an accurate English translation of the entire narrative. For video in which the languages spoken are not English, please ensure that there are accurate English subtitles within the submitted video.</li>
+                                                </ol>
+                                                <h2>EXPLANATION OF CATEGORIES AND SUB-CATEGORIES OF EaRTh</h2>
+                                                <p>EaRTh has five main categories that are further divided into sub-categories. To help you understand what type of content is appropriate for each category/sub-category, please see below.</p>
+                                                <ul>
+                                                    <li><strong>ACTION</strong>
+                                                        <ul>
+                                                            <li><strong><i>Activism</i></strong>Substantive Creative-Work about specific upcoming or past activism, not a mere announcement.</li>
+                                                            <li><strong><i>Events</i></strong>Substantive Creative-Work about specific upcoming or past events, not a mere announcement.</li>
+                                                            <li><strong><i>Women & Marginalized</i></strong>About issues that concern women and members of marginalized communities.</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><strong>INDIGENOUS</strong>
+                                                        <ul>
+                                                            <li><strong><i>Indigenous Knowledge-Technologies-Practices</i></strong>You must either be an Indigenous person narrating your own community's Knowledge-Technologies-Practices (KTP), or if you are a person narrating on behalf of an Indigenous individual and/or community, the latter must be a co-author of your Creative-Work (narrate in a manner that does not reveal details of KTP so that misappropriation by others is prevented).</li>
+                                                            <li><strong><i>Indigenous Retelling & Telling</i></strong>A retelling or telling of past and/or current events from the perspective of an Indigenous individual and/or community.</li>
+                                                            <li><strong><i>Indigenous Survivance</i></strong>A sharing of Indigenous individuals, especially women, being vanished by various actors and/or of the persevering and resilience of Indigenous communities.</li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
 
 
-                                                <p class="black"><i>For example: </i></p>
-                                                <p class="black">F. Jahan, <i>From Bhopal to the Bay: Fighting Corporations Creating Industrial Wastelands</i>, <strong>Ecosymbionts all Regenerate Together (EaRTh):</strong> DOI-EaRTh092024-004 (25 September, 2024).</p>
-                                            </div>
-                                            <div class="titleto-inner">
-                                                <h2>TYPES OF CREATIVE-WORKS</h2>
-                                                <p class="black">Both fiction and non-fiction Creative-Works are published as content on EaRTh, in the form of (a) word narratives, (b) visual art, and (c) videos. EaRTh encourages content in vernacular languages, with English translations provided, and where applicable, English subtitles.</p>
-                                            </div>                                            
+
+                                            
                                         </div>
                                     </div>
                                 </div>
