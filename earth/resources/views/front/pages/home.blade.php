@@ -239,43 +239,46 @@ $current_url = $protocol . $host . $uri;
                             <span class="top-stories">TOP STORIES</span>
                             <ul class="bxslider">
                                 <?php
-                                // DB::enableQueryLog(); // Enable query log
+                                DB::enableQueryLog(); // Enable query log
                                 // $latestArticleIds = NewsContent::selectRaw('MAX(id) as id')
                                 // ->where('status', 1)
                                 // ->where('parent_category', 3)
                                 // ->groupBy('sub_category')
                                 // ->pluck('id');
-                                $parentCategoryContents3 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
-                                                                        ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
-                                                                        ->select('news_contents.id', 
-                                                                                'news_contents.new_title', 
-                                                                                'news_contents.sub_title', 
-                                                                                'news_contents.slug', 
-                                                                                'news_contents.author_name', 
-                                                                                'news_contents.for_publication_name', 
-                                                                                'news_contents.cover_image', 
-                                                                                'news_contents.created_at',
-                                                                                'news_contents.media',
-                                                                                'news_contents.videoId',
-                                                                                'news_contents.is_series',
-                                                                                'news_contents.series_article_no',
-                                                                                'news_contents.current_article_no',
-                                                                                'news_contents.other_article_part_doi_no',
-                                                                                'parent_category.sub_category as parent_category_name', 
-                                                                                'parent_category.slug as parent_category_slug', 
-                                                                                'sub_category.sub_category as sub_category_name', 
-                                                                                'sub_category.slug as sub_category_slug') 
-                                                                        //         ->where('news_contents.status', '=', 1)                                                                       
-                                                                        // ->whereIn('news_contents.id', $latestArticleIds)                                                                                                                                                                                                                        
-                                                                        // ->orderBy('news_contents.id', 'DESC')
-                                                                        // ->get();
-                                                                        ->where('news_contents.status', '=', 1)
-                                                                        // ->where('news_contents.is_popular', '=', 1) // Uncomment if needed
-                                                                        ->where('news_contents.parent_category', '=', 3)
-                                                                        // ->inRandomOrder()
-                                                                        ->orderBy('news_contents.id', 'DESC')
-                                                                        ->get();        
-                                                                        // dd(DB::getQueryLog());                                                        
+                                $parentCategoryContents3 = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
+                                ->select(
+                                    'news_contents.id',
+                                    'news_contents.new_title',
+                                    'news_contents.sub_title',
+                                    'news_contents.slug',
+                                    'news_contents.author_name',
+                                    'news_contents.for_publication_name',
+                                    'news_contents.cover_image',
+                                    'news_contents.created_at',
+                                    'news_contents.media',
+                                    'news_contents.videoId',
+                                    'news_contents.is_series',
+                                    'news_contents.series_article_no',
+                                    'news_contents.current_article_no',
+                                    'news_contents.other_article_part_doi_no',
+                                    'parent_category.sub_category as parent_category_name',
+                                    'parent_category.slug as parent_category_slug',
+                                    'sub_category.sub_category as sub_category_name',
+                                    'sub_category.slug as sub_category_slug'
+                                )
+                                ->where('news_contents.status', 1)
+                                ->where('news_contents.parent_category', 3)
+                                ->whereIn('news_contents.id', function ($query) {
+                                    $query->select(DB::raw('MAX(id)'))
+                                        ->from('news_contents')
+                                        ->where('status', 1)
+                                        ->where('parent_category', 3)
+                                        ->groupBy('sub_category');
+                                })
+                                ->orderBy('news_contents.id', 'DESC')
+                                ->get();      
+                                                                        dd(DB::getQueryLog());                                                        
                                 if($parentCategoryContents3){ foreach($parentCategoryContents3 as $parentCategoryContent3){
                                 ?>
                                     <?php
