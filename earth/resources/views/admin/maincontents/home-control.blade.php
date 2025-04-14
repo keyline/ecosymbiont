@@ -67,7 +67,7 @@ use App\Models\NewsCategory;
                     $subcategoryId = $gallery[$i]->sub_category;
                     $categoryName = NewsCategory::where('id', $categoryId)->first();
                     $subcategoryName = NewsCategory::where('id', $subcategoryId)->first();
-                    echo $categoryName->sub_category .'/'. $subcategoryName->sub_category;
+                    echo $categoryName->sub_category .'/<br>'. $subcategoryName->sub_category;
                     if($gallery[$i]->projects_name != ''){                        
                     ?><hr class="my-3">
                     <?= $gallery[$i]->projects_name; } }?>
@@ -79,7 +79,7 @@ use App\Models\NewsCategory;
                       $subcategoryId = $featured[$i]->sub_category;
                       $categoryName = NewsCategory::where('id', $categoryId)->first();
                       $subcategoryName = NewsCategory::where('id', $subcategoryId)->first();
-                      echo $categoryName->sub_category .'/'. $subcategoryName->sub_category;
+                      echo $categoryName->sub_category .'/<br>'. $subcategoryName->sub_category;
                       if($featured[$i]->projects_name != ''){                        
                       ?><hr class="my-3">
                       <?= $featured[$i]->projects_name; } }?>
@@ -91,7 +91,7 @@ use App\Models\NewsCategory;
                       $subcategoryId = $projects[$i]->sub_category;
                       $categoryName = NewsCategory::where('id', $categoryId)->first();
                       $subcategoryName = NewsCategory::where('id', $subcategoryId)->first();
-                      echo $categoryName->sub_category .'/'. $subcategoryName->sub_category;
+                      echo $categoryName->sub_category .'/<br>'. $subcategoryName->sub_category;
                       if($projects[$i]->projects_name != ''){                        
                       ?><hr class="my-3">
                       <?= $projects[$i]->projects_name; } } ?>
@@ -103,7 +103,7 @@ use App\Models\NewsCategory;
                       $subcategoryId = $interviews[$i]->sub_category;
                       $categoryName = NewsCategory::where('id', $categoryId)->first();
                       $subcategoryName = NewsCategory::where('id', $subcategoryId)->first();
-                      echo $categoryName->sub_category .'/'. $subcategoryName->sub_category;
+                      echo $categoryName->sub_category .'/<br>'. $subcategoryName->sub_category;
                       if($interviews[$i]->projects_name != ''){                        
                       ?><hr class="my-3">
                       <?= $interviews[$i]->projects_name; }} ?>
@@ -115,7 +115,7 @@ use App\Models\NewsCategory;
                       $subcategoryId = $webinars[$i]->sub_category;
                       $categoryName = NewsCategory::where('id', $categoryId)->first();
                       $subcategoryName = NewsCategory::where('id', $subcategoryId)->first();
-                      echo $categoryName->sub_category .'/'. $subcategoryName->sub_category;
+                      echo $categoryName->sub_category .'/<br>'. $subcategoryName->sub_category;
                       if($webinars[$i]->projects_name != ''){                        
                       ?><hr class="my-3">
                       <?= $webinars[$i]->projects_name; } }?>
@@ -127,7 +127,7 @@ use App\Models\NewsCategory;
                       $subcategoryId = $video_content[$i]->sub_category;
                       $categoryName = NewsCategory::where('id', $categoryId)->first();
                       $subcategoryName = NewsCategory::where('id', $subcategoryId)->first();
-                      echo $categoryName->sub_category .'/'. $subcategoryName->sub_category;
+                      echo $categoryName->sub_category .'/<br>'. $subcategoryName->sub_category;
                       if($video_content[$i]->projects_name != ''){                        
                       ?><hr class="my-3">
                       <?= $video_content[$i]->projects_name; } }?>
@@ -139,7 +139,7 @@ use App\Models\NewsCategory;
                       $subcategoryId = $explore_projects[$i]->sub_category;
                       $categoryName = NewsCategory::where('id', $categoryId)->first();
                       $subcategoryName = NewsCategory::where('id', $subcategoryId)->first();
-                      echo $categoryName->sub_category .'/'. $subcategoryName->sub_category;
+                      echo $categoryName->sub_category .'/<br>'. $subcategoryName->sub_category;
                       if($explore_projects[$i]->projects_name != ''){                        
                       ?><hr class="my-3">
                       <?= $explore_projects[$i]->projects_name; }} ?>
