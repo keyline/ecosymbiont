@@ -355,6 +355,11 @@ class FrontController extends Controller
                                            ->where('news_contents.current_article_no', 1)  // Fetch only first series part
                                            ->where('news_contents.parent_category', $parent_category_id)  // Filter by parent category
                                            ->where('news_contents.id', '!=', ($data['rowContent']) ? $data['rowContent']->news_id : null)  // Exclude the current content by its ID
+                                           ->where(function($query) {
+                                            $query->where('news_contents.current_article_no', 1)
+                                                  ->orWhereNull('news_contents.current_article_no')
+                                                  ->orWhere('news_contents.current_article_no', 0);
+                                        })
                                            ->get();
         dd(DB::getQueryLog());
         $data['search_keyword']         = '';
