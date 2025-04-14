@@ -345,11 +345,13 @@ class FrontController extends Controller
                                            ->select(
                                                'news_contents.id as news_id',  // Alias the news ID
                                                'news_contents.*',  // Select all fields from news_contents
+                                               'news_contents.current_article_no',
                                                'sub_category.sub_category as sub_category_name',  // Select subcategory name with alias
                                                'sub_category.slug as sub_category_slug',  // Select subcategory slug with alias
                                                'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
                                            )
                                            ->where('news_contents.status', 1)  // Fetch only active content
+                                           ->where('news_contents.current_article_no', 1)  // Fetch only first series part
                                            ->where('news_contents.parent_category', $parent_category_id)  // Filter by parent category
                                            ->where('news_contents.id', '!=', ($data['rowContent']) ? $data['rowContent']->news_id : null)  // Exclude the current content by its ID
                                            ->get();
