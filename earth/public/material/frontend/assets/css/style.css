@@ -886,6 +886,7 @@ body.boxed {
 body{
   font-family: 'proximanova_regular', sans-serif;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 body.boxed #container {
   max-width: 1260px;
