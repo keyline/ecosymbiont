@@ -41,7 +41,9 @@ $current_url = $protocol . $host . $uri;
                                                     Read this submissions page and watch the video tutorial to get started with making <u>your own password-protected account</u> for streamlined submission of your creative-works, allowing EaRTh editors to review and revise efficiently before publication.
                                                 </p>
                                                 <p class="black"><strong>Welcome to EaRTh!</strong></p>
-                                                <h2>SUBMISSION GUIDELINES</h2>
+                                                <div class="titleto-box">
+                                                    <h1>SUBMISSION GUIDELINES</h1>
+                                                </div>
                                                 <p class="black">Before making a submission of your Creative-Work to our professionally edited online knowledge-sharing and community-building platform, please read these submission guidelines in their entirety.</p>
                                                 <h2>ELIGIBILITY CRITERIA</h2>
                                                 <ul class="black">
