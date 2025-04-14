@@ -356,9 +356,9 @@ class FrontController extends Controller
                                            ->where('news_contents.parent_category', $parent_category_id)  // Filter by parent category
                                            ->where('news_contents.id', '!=', ($data['rowContent']) ? $data['rowContent']->news_id : null)  // Exclude the current content by its ID
                                            ->where(function($query) {
-                                            $query->where('news_contents.current_article_no', 1)
-                                                  ->orWhereNull('news_contents.current_article_no')
-                                                  ->orWhere('news_contents.current_article_no', 0);
+                                            $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                    ->orWhere('news_contents.current_article_no', 0) // First part of series
+                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
                                         })
                                            ->get();
         // dd(DB::getQueryLog());
