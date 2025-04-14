@@ -7298,7 +7298,7 @@ div.dt-container div.dt-layout-row.dt-layout-table div.dt-layout-cell {
   display: block !important;
   overflow: auto !important;
 }
-.custom-box-style p{
+.single-post-box > .post-content .custom-box-style p{
   padding: 0;
 }
 @media(max-width: 400px){
