@@ -16,44 +16,34 @@ $current_url = $protocol . $host . $uri;
                 <!-- block content -->
                 <div class="block-content">
                     <div class="article-box">
+                        <div class="col-md-12">
+                            <div class="welcome_mucis_section">
+                                <audio preload="auto" controls>
+                                    <source src="<?=env('FRONT_ASSETS_URL')?>Ecosymbionts-audio-28Oct2024.mp3">
+                                </audio>
+                            </div>
+                        </div>
                         <div class="titleto-box">
                             <h1>ABOUT</h1>  
                         </div>
+
                             <div class="news-post article-post">
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="post-content">
                                             <div class="titleto-inner">                                                
-                                                <p style="color:#000;">Welcome to <strong>EaRTh</strong>, a custom-built professionally edited knowledge-sharing and community-building platform for grassroots changemakers, innovators, and knowledge-holders across the world. <strong>EaRTh</strong> stands for Ecosymbionts all Regenerate Together and is a project of the Ecosymbionts Regenerate initiative of the <i>Śramani Institute</i>.</p>
+                                                <p style="color:#000;">Ecosymbionts all Regenerate Together (EaRTh) is an online knowledge-sharing and community-building platform for <a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">grassroots</a>  changemakers, innovators, and knowledge-holders from across the world.</p>
+                                                <p class="black">The purpose of EaRTh is two-fold:</p>
+                                                <ul>
+                                                    <li><strong><i>Facilitate synergies:</i></strong> Bring together and facilitate <a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">synergies</a> between grassroots changemakers, innovators, and knowledge-holders from across the world working to <a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">regenerate</a> systems that restore, preserve, and foster human-<a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">ecoweb</a> <a href="<?=env('REGENERATE_URL')?>#definitions" style="color: #d09c1c;" target="_blank">symbiosis</a>.
+                                                    </li>
+                                                    <li><strong><i>Regenerate systems: </i></strong> Collaboratively conceptualize and promote alternative systems that optimize ecoweb wellbeing (instead of exploiting, diminishing, and destroying ecowebs) by synthesizing the knowledge, ideas, and wisdom of grassroots changemakers, innovators, and knowledge-holders from across the world. 
+                                                    </li>     
+                                                </ul>
                                             </div>
                                             <div class="titleto-inner">
-                                                <h2>EaRTh IS FOR YOU IF…</h2>
-                                                <p class="black">Do you care about transforming man-made <strong>extractivist</strong> systems (those that exploit human and ecological resources without replenishing them)? Are you working to counter the <strong>inequity</strong> and <strong>ecocide</strong> caused by extractivist economics, law, governance, and education (ELGE) systems? Do you think about these extractivist systems and work on how to <strong>transform or replace</strong> them with <strong>regenerative</strong> systems (those that restore, revitalize, generate, and/or nurture in a way that leads to ecosymbiotic health and wellbeing)?</p>
-                                                <p class="black">Then EaRTh is for you.</p>
-                                                <p class="black">Do you want to <strong>share</strong> your ideas, art, music, stories, experiences, performances, knowledge, and work <strong>with the world</strong> in a <strong>trusted space,</strong> so that we can learn from and work with each other to <u>reestablish human-ecological connection</u> and <u>ecosymbiosis?</u></p>
-                                                <p class="black">Then EaRTh is for you.</p>
-                                                <p class="black">Do you wish you could <strong>connect</strong> with <u>grassroots humans, communities, and movements</u> all across the world, so we can <strong>support</strong> each other as we implement solutions that ensure <u>human-ecological wellbeing</u>? Together?</p>
-                                                <p class="black">Then EaRTh is for you.</p>
-                                                <p class="black">EaRTh welcomes creative-works submitted in the form of written narratives, art images, and landscape videos. The ways in which you can share your ideas and work are as unlimited as your creativity. Digitized, of course!</p>
-                                                <p class="black"><u>Creative-works in vernacular languages are welcome</u>, as long as you provide a full English translation (and English subtitles for videos) Share your fiction or non-fiction, poetry or prose, projects that worked and ones that didn’t. Share personal stories or cultural stories, interviews with Elders or with youth. As long as what you share is <strong>related to the connection between humans and ecologies</strong>, we want to know!</p>
-
-                                                <p class="black">
-                                                    Read this submissions page and watch the video tutorial to get started with making <u>your own password-protected account</u> for streamlined submission of your creative-works, allowing EaRTh editors to review and revise efficiently before publication.
-                                                </p>
-                                                <p class="black"><strong>Welcome to EaRTh!</strong></p>
-                                                <h2>SUBMISSION GUIDELINES</h2>
-                                                <p class="black">Before making a submission of your Creative-Work to our professionally edited online knowledge-sharing and community-building platform, please read these submission guidelines in their entirety.</p>
-                                                <h2>ELIGIBILITY CRITERIA</h2>
-                                                <ul>
-                                                    <li>You ("Author") must be a grassroots changemaker, innovator, and/or knowledge-holder.</li>
-                                                    <li>All components of your word narrative, art image, and/or landscape video, including accompanying images and/or photographs (“Creative-Work”) must be your own original work.</li>
-                                                    <li>You must not have used Artificial Intelligence (AI) to generate any component of your Creative-Work.</li>
-                                                    <li>You must own the copyright and licensing rights to all components of your Creative-Work.</li>
-                                                    <li>Your Creative-Work must not have been published in any other medium that has the exclusive right to publish your work.</li>
-                                                    <li>Your Creative-Work must relate to the connection between humans and ecologies <i>(hint: food security/ sovereignty, housing challenges, forced displacement from lands, all of these have a human-ecological connection).</i></li>
-                                                </ul>
-
-
+                                                <h2>HOW TO CITE EaRTh CONTENT</h2>
+                                                <p class="black">If you are citing EaRTh content, please use the following format: Author name(s), <i>Title</i>, <strong>Ecosymbionts all Regenerate Together (EaRTh):</strong> DOI (publication date).</p>
                                                 <p class="black"><i>For example: </i></p>
                                                 <p class="black">F. Jahan, <i>From Bhopal to the Bay: Fighting Corporations Creating Industrial Wastelands</i>, <strong>Ecosymbionts all Regenerate Together (EaRTh):</strong> DOI-EaRTh092024-004 (25 September, 2024).</p>
                                             </div>
