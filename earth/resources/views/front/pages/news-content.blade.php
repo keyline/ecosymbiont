@@ -560,7 +560,18 @@ $current_url = $protocol . $host . $uri;
             $new_title = $rowContent->new_title;
             $doi = $rowContent->creative_work_DOI;
             $co_authors = $rowContent->co_authors;
-            $publish_date = date_format(date_create($rowContent->created_at), "d M, Y");
+            $publish_date = date_create($rowContent->created_at);
+
+            $day = (int) $publish_date->format('j'); // Removes leading zero
+            $abrmonth = $publish_date->format('M');     // Abbreviated month
+            $fullMonth = $publish_date->format('F'); // Full month
+            $year = $publish_date->format('Y');
+            $length = strlen($fullMonth);
+            if($length <= 4 ){
+                $month = $fullMonth;
+            }else{
+                $month = $abrmonth.'.';
+            }
             $url = $current_url;
             
             function getInitials($author_name) {
@@ -593,24 +604,24 @@ $current_url = $protocol . $host . $uri;
                     if($co_authorclassification == 'Movement'){                        
                         // echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
                         // $url";
-                        echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date)";
+                        echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ({$day} {$month}, {$year}.)";
                     } elseif($co_authorclassification == 'Ecoweb-rooted community'){                        
-                        // echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
+                        // echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ({$day} {$month}, {$year}.). 
                         // $url";
-                        echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date)";
+                        echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ({$day} {$month}, {$year}.)";
                     } else{
-                        // echo "$initials $last_name & $co_author_initials $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
+                        // echo "$initials $last_name & $co_author_initials $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ({$day} {$month}, {$year}.). 
                         // $url";
-                        echo "$initials $last_name & $co_author_initials $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date)";
+                        echo "$initials $last_name & $co_author_initials $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ({$day} {$month}, {$year}.)";
                     }
                 } elseif($rowContent->co_authors > 1){ 
-                    // echo "$initials $last_name, <em>et al.</em>, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
+                    // echo "$initials $last_name, <em>et al.</em>, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ({$day} {$month}, {$year}.). 
                     // $url";
-                    echo "$initials $last_name, <em>et al.</em>, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date)";
+                    echo "$initials $last_name, <em>et al.</em>, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ({$day} {$month}, {$year}.)";
                 } else {
-                    // echo "$initials $last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
+                    // echo "$initials $last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ({$day} {$month}, {$year}.). 
                     // $url";
-                    echo "$initials $last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date)";
+                    echo "$initials $last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ({$day} {$month}, {$year}.)";
                     // echo "$initials. $words[1], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. <a href="$rowContent->parent_category_name/$rowContent->sub_category_slug/$rowContent->slug">$new_title</a>";
                 }
                 ?></p>  
