@@ -400,6 +400,7 @@ class FrontController extends Controller
                                                     ->orWhere('news_contents.long_desc', 'LIKE', '%' . $search_keyword . '%')
                                                     ->orWhere('news_contents.author_name', 'LIKE', '%' . $search_keyword . '%')
                                                     ->orWhere('news_contents.organization_name', 'LIKE', '%' . $search_keyword . '%')
+                                                    ->orWhere('news_contents.projects_name', 'LIKE', '%' . $search_keyword . '%')
                                                     ->orWhere('news_contents.keywords', 'LIKE', '%' . $search_keyword . '%')
                                                     // ->orWhereRaw("JSON_CONTAINS(news_contents.co_author_names, ?)", [json_encode($search_keyword)]);
                                                     ->orWhereRaw("JSON_UNQUOTE(JSON_EXTRACT(COALESCE(news_contents.co_author_names, '[]'), '$[*]')) LIKE ?", ['%' . $search_keyword . '%']);
@@ -441,6 +442,10 @@ class FrontController extends Controller
             } elseif($search_type == 'Community'){
                 $search_keyword     = $postData['search_keyword3'];
                 // $getCommunity       = Community::select('name')->where('id', '=', $search_keyword)->first();
+                $title              = 'Search result for: "' . ($search_keyword) . '" ('.$search_type.')';
+                $data['keyword']    = $search_keyword;
+            }elseif($search_type == 'Projects'){
+                $search_keyword     = $postData['search_keyword4'];               
                 $title              = 'Search result for: "' . ($search_keyword) . '" ('.$search_type.')';
                 $data['keyword']    = $search_keyword;
             }else {
@@ -696,6 +701,42 @@ class FrontController extends Controller
                                              ->limit(4)
                                              ->get();
                                             //  dd(DB::getQueryLog());
+            } elseif($search_type == 'Projects'){
+                // DB::enableQueryLog();
+                $data['contents']   = NewsContent::select(
+                                                        'news_contents.id', 
+                                                        'news_contents.new_title', 
+                                                        'news_contents.sub_title', 
+                                                        'news_contents.slug', 
+                                                        'news_contents.author_name', 
+                                                        'news_contents.for_publication_name', 
+                                                        'news_contents.cover_image',
+                                                        'news_contents.cover_image_caption',
+                                                        'news_contents.created_at',
+                                                        'news_contents.media',
+                                                        'news_contents.videoId',
+                                                        'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
+                                                        'parent_category.sub_category as parent_category_name', // From parent_category name
+                                                        'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
+                                                        'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                                    )
+                                            ->join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
+                                            ->where(function($query) {
+                                                $query->where('news_contents.status', 1);
+                                             })
+                                             ->where(function($query) use ($search_keyword) {
+                                                $query->where('news_contents.projects_name', 'LIKE', '%'.$search_keyword.'%');
+                                             })
+                                             ->where(function ($query) {
+                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                ->orWhere('news_contents.current_article_no', 0) 
+                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
+                                            })
+                                             ->orderBy('news_contents.created_at', 'DESC')
+                                             ->limit(4)
+                                             ->get();
+                                            //  dd(DB::getQueryLog());
             } elseif($search_type == 'Tag'){
                 $data['contents']   = NewsContent::select(
                                                         'news_contents.id', 
@@ -808,6 +849,7 @@ class FrontController extends Controller
                                                       ->orWhere('news_contents.long_desc', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('news_contents.author_name', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('news_contents.organization_name', 'LIKE', '%'.$search_keyword.'%')
+                                                      ->orWhere('news_contents.projects_name', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('news_contents.keywords', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhereRaw("JSON_UNQUOTE(JSON_EXTRACT(COALESCE(news_contents.co_author_names, '[]'), '$[*]')) LIKE ?", ['%' . $search_keyword . '%']);
                                              })
@@ -1089,6 +1131,42 @@ class FrontController extends Controller
                                             ->offset($offset)
                                             ->limit($limit)
                                             ->get();
+            } elseif($search_type == 'Projects'){
+                // DB::enableQueryLog();
+                $data['contents']   = NewsContent::select(
+                                                        'news_contents.id', 
+                                                        'news_contents.new_title', 
+                                                        'news_contents.sub_title', 
+                                                        'news_contents.slug', 
+                                                        'news_contents.author_name', 
+                                                        'news_contents.for_publication_name', 
+                                                        'news_contents.cover_image',
+                                                        'news_contents.cover_image_caption',
+                                                        'news_contents.created_at',
+                                                        'news_contents.media',
+                                                        'news_contents.videoId',
+                                                        'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
+                                                        'parent_category.sub_category as parent_category_name', // From parent_category name
+                                                        'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
+                                                        'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                                    )
+                                            ->join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id')
+                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id')
+                                            ->where(function($query) {
+                                                $query->where('news_contents.status', 1);
+                                             })
+                                             ->where(function($query) use ($search_keyword) {
+                                                $query->where('news_contents.projects_name', 'LIKE', '%'.$search_keyword.'%');
+                                             })
+                                             ->where(function ($query) {
+                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                                ->orWhere('news_contents.current_article_no', 0) 
+                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
+                                            })
+                                             ->orderBy('news_contents.created_at', 'DESC')
+                                             ->limit(4)
+                                             ->get();
+                                            //  dd(DB::getQueryLog());
             } elseif($search_type == 'Tag'){
                 $contents   = NewsContent::select(
                                                         'news_contents.id', 
@@ -1186,6 +1264,7 @@ class FrontController extends Controller
                                                       ->orWhere('long_desc', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('author_name', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('organization_name', 'LIKE', '%'.$search_keyword.'%')
+                                                      ->orWhere('projects_name', 'LIKE', '%'.$search_keyword.'%')
                                                       ->orWhere('keywords', 'LIKE', '%'.$search_keyword.'%')
                                                     //   ->orWhereRaw("JSON_CONTAINS(co_author_names, ?)", [json_encode($search_keyword)]);
                                                     ->orWhereRaw("JSON_UNQUOTE(JSON_EXTRACT(COALESCE(news_contents.co_author_names, '[]'), '$[*]')) LIKE ?", ['%' . $search_keyword . '%']);
