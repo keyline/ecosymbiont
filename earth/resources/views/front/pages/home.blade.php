@@ -274,9 +274,11 @@ $current_url = $protocol . $host . $uri;
                                                                                 ->from('news_contents')
                                                                                 ->where('status', 1)
                                                                                 ->where('parent_category', 3)
-                                                                                ->where('current_article_no', 1)
-                                                                                ->orWhereNull('current_article_no')
-                                                                                ->orWhere('current_article_no', 0)
+                                                                                ->where(function($q) {
+                                                                                    $q->where('current_article_no', 1)
+                                                                                      ->orWhereNull('current_article_no')
+                                                                                      ->orWhere('current_article_no', 0);
+                                                                                })                                                                                
                                                                                 ->groupBy('sub_category');
                                                                         })
                                                                         ->orderBy('news_contents.id', 'DESC')
