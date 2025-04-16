@@ -663,15 +663,17 @@ $current_url = $protocol . $host . $uri;
 </script> -->
 <script>
     function copyText() {
-        // Get text inside the popup
-        let textToCopy = $('#popup p').map(function() {
-            return $(this).text().trim();
-        }).get().join("\n"); // Join text with new lines
+        // Get text inside the popup        
+
+        let htmlToCopy = $('#popup p').html(); // Preserves <b>, <i>, <a>, etc.
 
         // Create a temporary textarea to copy text
-        let tempTextArea = $('<textarea>');
+        let tempTextArea = $('<textarea>').html(htmlToCopy).css({
+        position: 'absolute',
+        left: '-9999px'
+    });
         $('body').append(tempTextArea);
-        tempTextArea.val(textToCopy).select();
+        tempTextArea.val(htmlToCopy).select();
         document.execCommand('copy');
         tempTextArea.remove();
 
