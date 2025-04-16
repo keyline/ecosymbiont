@@ -201,6 +201,8 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
                 $('select[name="search_keyword2"]').attr('required', false);
                 $('select[name="search_keyword3"]').hide();
                 $('select[name="search_keyword3"]').attr('required', false);
+                $('select[name="search_keyword4"]').hide();
+                $('select[name="search_keyword4"]').attr('required', false);
 
                 $('select[name="search_keyword1"]').show();
                 $('select[name="search_keyword1"]').attr('required', true);
@@ -211,6 +213,8 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
                 $('select[name="search_keyword1"]').attr('required', false);
                 $('select[name="search_keyword3"]').hide();
                 $('select[name="search_keyword3"]').attr('required', false);
+                $('select[name="search_keyword4"]').hide();
+                $('select[name="search_keyword4"]').attr('required', false);
 
                 $('select[name="search_keyword2"]').show();
                 $('select[name="search_keyword2"]').attr('required', true);
@@ -221,6 +225,8 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
                 $('select[name="search_keyword1"]').attr('required', false);
                 $('select[name="search_keyword2"]').hide();
                 $('select[name="search_keyword2"]').attr('required', false);
+                $('select[name="search_keyword4"]').hide();
+                $('select[name="search_keyword4"]').attr('required', false);
 
                 $('select[name="search_keyword3"]').show();
                 $('select[name="search_keyword3"]').attr('required', true);
@@ -241,6 +247,10 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
                 $('select[name="search_keyword1"]').attr('required', false);
                 $('select[name="search_keyword2"]').hide();
                 $('select[name="search_keyword2"]').attr('required', false);
+                $('select[name="search_keyword3"]').hide();
+                $('select[name="search_keyword3"]').attr('required', false);
+                $('select[name="search_keyword4"]').hide();
+                $('select[name="search_keyword4"]').attr('required', false);
 
                 $('input[name="search_keyword0"]').show();
                 $('input[name="search_keyword0"]').attr('required', true);
