@@ -98,7 +98,7 @@
                             </div>
                     
                             <div class="mt-4">
-                                <button class="btn btn-success w-100 py-2 mt-4">Complete Donation</button>
+                                <button class="btn mt-4 donation_btn">Complete Donation</button>
                             </div>
                             </div>
                         </div>                                         

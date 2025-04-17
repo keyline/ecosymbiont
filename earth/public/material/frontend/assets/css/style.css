@@ -6478,6 +6478,13 @@ div#permalink p {
   animation: fadeIn 0.6s ease-in-out;
 }
 
+.donation_btn{
+  padding: 10px 25px;
+  font-size: 18px;
+  color: #fff;
+  background: #d09c1c;
+}
+
 @keyframes fadeIn {
   from {
       opacity: 0;
