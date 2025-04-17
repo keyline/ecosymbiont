@@ -6600,6 +6600,9 @@ div#permalink p {
 .search_suggestion{
   width: 100%;
 } 
+.donation-box .d-flex{
+  justify-content: start;
+}
 }
 @media (max-width: 991px) {
   /* .navbar-nav > li.drop-arrow > a {
@@ -7117,8 +7120,9 @@ div#permalink p {
 .donation-box h3{
   margin-top: 10;
 }
-.donation-box .d-flex{
-  justify-content: start;
+
+.donation-amounts button{
+  margin-top: 0;
 }
 }
 @media (max-width: 650px) {
