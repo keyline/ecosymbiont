@@ -7126,6 +7126,9 @@ div#permalink p {
 .donation-amounts button{
   margin-top: 0;
 }
+.donation-amounts button {
+  margin-bottom: 5px;
+}
 }
 @media (max-width: 650px) {
   ul.autor-list > li .autor-last-line a.autor-site {
