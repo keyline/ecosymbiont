@@ -684,10 +684,10 @@ function numberToOrdinal($number) {
                             <div class="row mb-3">
                                 <label for="keywords" class="col-md-12 col-lg-4 col-form-label">24) Keywords</label>
                                 <div class="col-md-12 col-lg-8">
-                                    <input type="text" id="input-tags" class="form-control" placeholder="Enter Keywords">
+                                    <input type="text" id="input-tags-keywords" class="form-control" placeholder="Enter Keywords">
                                     <textarea class="form-control" name="keywords" id="keywords" style="display:none;"><?=$keywords?></textarea>
                                     <small class="text-primary">Enter keywords with comma separated</small>
-                                    <div id="badge-container">
+                                    <div id="badge-container-keywords">
                                         <?php
                                         if($keywords != ''){
                                             $deal_keywords = explode(",", $keywords);
@@ -832,10 +832,10 @@ function numberToOrdinal($number) {
                                 <label for="other_article_part_doi_no" class="col-md-12 col-lg-4 col-form-label">30C) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).
                                 </label>
                                 <div class="col-md-12 col-lg-8">
-                                    <input type="text" class="form-control" id="input-tags">
+                                    <input type="text" class="form-control" id="input-tags-doi">
                                     <textarea class="form-control" name="other_article_part_doi_no" id="other_article_part_doi_no" style="display:none;"><?=$other_article_part_doi_no?></textarea>
                                     <small class="text-primary">Separate each DOI with a comma</small>
-                                    <div id="badge-container">
+                                    <div id="badge-container-doi">
                                         <?php
                                         if($other_article_part_doi_no != ''){
                                             $deal_keywords = explode(",", $other_article_part_doi_no);
@@ -977,7 +977,7 @@ function numberToOrdinal($number) {
     if(beforeData.length > 0){
       tagsArray = beforeData.split(',');
     }
-    $('#input-tags').on('input', function() {
+    $('#input-tags-keywords').on('input', function() {
         var input = $(this).val();
         if (input.includes(',')) {
             var tags = input.split(',');
@@ -985,7 +985,7 @@ function numberToOrdinal($number) {
                 tag = tag.trim();
                 if (tag.length > 0 && !tagsArray.includes(tag)) {
                     tagsArray.push(tag);
-                    $('#badge-container').append(
+                    $('#badge-container-keywords').append(
                         '<span class="badge">' + tag + ' <span class="remove" data-tag="' + tag + '">&times;</span></span>'
                     );
                 }
@@ -1240,7 +1240,7 @@ function numberToOrdinal($number) {
         if(beforeData.length > 0){
           tagsArray = beforeData.split(',');
         }
-        $('#input-tags').on('input', function() {
+        $('#input-tags-doi').on('input', function() {
             var input = $(this).val();
             if (input.includes(',')) {
                 var tags = input.split(',');
@@ -1248,7 +1248,7 @@ function numberToOrdinal($number) {
                     tag = tag.trim();
                     if (tag.length > 0 && !tagsArray.includes(tag)) {
                         tagsArray.push(tag);
-                        $('#badge-container').append(
+                        $('#badge-container-doi').append(
                             '<span class="badge">' + tag + ' <span class="remove" data-tag="' + tag + '">&times;</span></span>'
                         );
                     }
