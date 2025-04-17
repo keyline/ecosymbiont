@@ -139,7 +139,7 @@
                     
                             <!-- 3. Payment Method -->
                             <div class="section-header mb-3">3. Select Payment Method</div>
-                            <div class="payment-method d-flex flex-wrap">
+                            <div class="payment-method d-flex flex-wrap justify-content-start">
                                 <button class="btn btn-outline-info"><img src="<?=env('UPLOADS_URL').'paypal.png'?>" alt="" class="img-fluid"></button>
                             </div>
                     
