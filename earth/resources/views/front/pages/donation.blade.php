@@ -52,8 +52,8 @@
                        <!-- Left Info -->
                         <div class="col-lg-5 fade-in">
                             <div class="donation-box">
-                            <h3>Give Today — Because the Earth Needs a Good Lawyer</h3>
-                            <p>Śramani Institute is committed to ecological and human wellbeing. Your support helps us:</p>
+                            <h3>Support us to make better World</h3>
+                            <p>Your contribution empowers ecological justice, human rights, and sustainable futures. Your support helps us:</p>
                             <ul>
                                 <li>Advance environmental initiatives</li>
                                 <li>Support ecological justice</li>
@@ -69,15 +69,9 @@
                     
                             <!-- 1. Donation Amount -->
                             <div class="section-header">1. Donation Amount</div>
-                            <div class="mb-3">
-                                <div class="btn-group mb-3" role="group">
-                                <input type="radio" class="btn-check" name="donateType" id="oneTime" checked>
-                                <label class="btn btn-outline-primary" for="oneTime">One-Time</label>
-                                </div>
-                            </div>
                     
                             <div class="donation-amounts d-flex flex-wrap mb-3">
-                                <ul>
+                                <ul class="d-flex flex-wrap list-unstyled">
                                     <li>
                                         <button class="btn btn-outline-secondary">$50</button>
                                     </li>
@@ -114,8 +108,7 @@
                                 </div>
                                 <input type="email" class="form-control mb-3" placeholder="Email Address">
                                 <input type="text" class="form-control mb-3" placeholder="Residential  Address">
-                                <input type="text" class="form-control mb-3" placeholder="Country of Residence">
-                                <select name="country" id="">
+                                <select name="country" id="" class="form-control mb-3">
                                     <option value="India">India</option>
                                     <option value="India">India2</option>
                                     <option value="India">India3</option>
@@ -133,7 +126,7 @@
                             </div>
                     
                             <div class="mt-4">
-                                <button class="btn btn-success w-100 py-2">Complete Donation</button>
+                                <button class="btn btn-success w-100 py-2 mt-3">Complete Donation</button>
                             </div>
                             </div>
                         </div>                                         
