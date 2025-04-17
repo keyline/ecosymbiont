@@ -43,6 +43,7 @@ use App\Models\NewsContent;
                     <th scope="col">#</th>                  
                     <th scope="col">Title</th> 
                     <th scope="col">Category/Subcategory</th>                                   
+                    <th scope="col">Projects</th>                                   
                     <th scope="col">Author</th>                  
                     <th scope="col">Date of publication</th>                
                   </tr>
@@ -79,6 +80,7 @@ use App\Models\NewsContent;
                         $subcategoryName = NewsCategory::where('id', $subcategoryId)->first();
                         echo $categoryName->sub_category .'/'. $subcategoryName->sub_category;?>
                       </td>                  
+                      <td><?=$row->projects_name?></td>                  
                       <td><?=$row->author_name?></td>                  
                       <td><?=date_format(date_create($row->created_at), "M d, Y h:i A")?></td>                  
                     </tr>

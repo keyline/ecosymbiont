@@ -560,7 +560,18 @@ $current_url = $protocol . $host . $uri;
             $new_title = $rowContent->new_title;
             $doi = $rowContent->creative_work_DOI;
             $co_authors = $rowContent->co_authors;
-            $publish_date = date_format(date_create($rowContent->created_at), "d M, Y");
+            $publish_date = date_create($rowContent->created_at);
+
+            $day = (int) $publish_date->format('j'); // Removes leading zero
+            $abrmonth = $publish_date->format('M');     // Abbreviated month
+            $fullMonth = $publish_date->format('F'); // Full month
+            $year = $publish_date->format('Y');
+            $length = strlen($fullMonth);
+            if($length <= 4 ){
+                $month = $fullMonth;
+            }else{
+                $month = $abrmonth.'.';
+            }
             $url = $current_url;
             
             function getInitials($author_name) {
@@ -593,24 +604,24 @@ $current_url = $protocol . $host . $uri;
                     if($co_authorclassification == 'Movement'){                        
                         // echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
                         // $url";
-                        echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date)";
+                        echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ({$day} {$month}, {$year}).";
                     } elseif($co_authorclassification == 'Ecoweb-rooted community'){                        
-                        // echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
+                        // echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ({$day} {$month}, {$year}).. 
                         // $url";
-                        echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date)";
+                        echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ({$day} {$month}, {$year}).";
                     } else{
-                        // echo "$initials $last_name & $co_author_initials $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
+                        // echo "$initials $last_name & $co_author_initials $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ({$day} {$month}, {$year}).. 
                         // $url";
-                        echo "$initials $last_name & $co_author_initials $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date)";
+                        echo "$initials $last_name & $co_author_initials $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ({$day} {$month}, {$year}).";
                     }
                 } elseif($rowContent->co_authors > 1){ 
-                    // echo "$initials $last_name, <em>et al.</em>, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
+                    // echo "$initials $last_name, <em>et al.</em>, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ({$day} {$month}, {$year}).. 
                     // $url";
-                    echo "$initials $last_name, <em>et al.</em>, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date)";
+                    echo "$initials $last_name, <em>et al.</em>, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ({$day} {$month}, {$year}).";
                 } else {
-                    // echo "$initials $last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
+                    // echo "$initials $last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ({$day} {$month}, {$year}).. 
                     // $url";
-                    echo "$initials $last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date)";
+                    echo "$initials $last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ({$day} {$month}, {$year}).";
                     // echo "$initials. $words[1], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. <a href="$rowContent->parent_category_name/$rowContent->sub_category_slug/$rowContent->slug">$new_title</a>";
                 }
                 ?></p>  
@@ -619,7 +630,7 @@ $current_url = $protocol . $host . $uri;
             <button class="btn btn-primary" onclick="copyText()"><i class="fa fa-copy"></i> Copy</button>                                  
             <button id="closePopup">Close</button>
         </div>                                    
-        <h3 id="copyMessage">Copied successfully!</h3>
+        <h3 id="copyMessage" class="text-success">Copied successfully!</h3>
     </div>
     <div id="permalink">
         <h3>PERMALINK</h3>  
@@ -630,7 +641,7 @@ $current_url = $protocol . $host . $uri;
             <button class="btn btn-primary" onclick="copyText2()"><i class="fa fa-copy"></i> Copy</button>                                  
             <button id="closepermalink">Close</button>
         </div>                                   
-        <h3 id="copyMessage2">Copied successfully!</h3>
+        <h3 id="copyMessage2" class="text-success">Copied successfully!</h3>
     </div>  
 <!-- End block-wrapper-section -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
@@ -652,12 +663,18 @@ $current_url = $protocol . $host . $uri;
 </script> -->
 <script>
     function copyText() {
-        // Get text inside the popup
+        // Get text inside the popup  
         let textToCopy = $('#popup p').map(function() {
             return $(this).text().trim();
-        }).get().join("\n"); // Join text with new lines
+        }).get().join("\n"); // Join text with new lines      
+
+        // let htmlToCopy = $('#popup p').html(); // Preserves <b>, <i>, <a>, etc.
 
         // Create a temporary textarea to copy text
+    //     let tempTextArea = $('<textarea>').html(htmlToCopy).css({
+    //     position: 'absolute',
+    //     left: '-9999px'
+    // });
         let tempTextArea = $('<textarea>');
         $('body').append(tempTextArea);
         tempTextArea.val(textToCopy).select();

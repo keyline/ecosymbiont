@@ -210,15 +210,15 @@ function numberToOrdinal($number) {
                     <form method="POST" id="import_form" action="" enctype="multipart/form-data" oninput="validateForm()">
                         @csrf
                         <div class="row mb-3">
-                            <label for="email" class="col-md-2 col-lg-4 col-form-label">1) Email address</label>
-                            <div class="col-md-10 col-lg-8">
+                            <label for="email" class="col-md-4 col-lg-4 col-form-label">1) Email address</label>
+                            <div class="col-md-8 col-lg-8">
                                 <input type="email" name="email" class="form-control" id="email" value="<?= $email ?>">
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="author_classification" class="col-md-2 col-lg-4 col-form-label">2) Author Classification
+                            <label for="author_classification" class="col-md-4 col-lg-4 col-form-label">2) Author Classification
                             </label>           
-                            <div class="col-md-10 col-lg-8">                 
+                            <div class="col-md-8 col-lg-8">                 
                                 <?php if($page_header == "News Content Add" || $page_header == "News Content Update") {?>                                    
                                 <input type="radio" id="Human individual" name="author_classification" value="Human individual" required @checked(old('author_classification', $author_classification) == 'Human individual')>
                                 <label for="Human individual">Human individual</label>
@@ -232,9 +232,9 @@ function numberToOrdinal($number) {
                             </div>
                         </div> 
                         <div class="row mb-3">
-                            <label for="co_authors" class="col-md-2 col-lg-4 col-form-label">3) How many co-authors do you have?
+                            <label for="co_authors" class="col-md-4 col-lg-4 col-form-label">3) How many co-authors do you have?
                             </label>
-                            <div class="col-md-10 col-lg-8">
+                            <div class="col-md-8 col-lg-8">
                                 <input type="radio" id="co_authors_0" name="co_authors" value="0" required @checked(old('co_authors', $co_authors) == '0')>
                                 <label for="0">0</label>
                                 <input type="radio" id="co_authors_1" name="co_authors" value="1" required @checked(old('co_authors', $co_authors) == '1')>
@@ -245,9 +245,9 @@ function numberToOrdinal($number) {
                         </div>
                         <div id="co_authors_position" style="display: none;border: 1px solid #000; padding: 10px; border-radius: 7px;">
                             <div class="row mb-3">
-                                <label for="co_authors_position" class="col-md-2 col-lg-4 col-form-label">3A) If you have co-author(s), indicate in which position your name should appear in the list of authors (the Lead Author, i.e., the first author listed, must be a human individual)
+                                <label for="co_authors_position" class="col-md-6 col-lg-4 col-form-label">3A) If you have co-author(s), indicate in which position your name should appear in the list of authors (the Lead Author, i.e., the first author listed, must be a human individual)
                                 </label>
-                                <div class="col-md-10 col-lg-8">
+                                <div class="col-md-6 col-lg-8">
                                     <input type="radio" id="" name="co_authors_position" value="First position" @checked(old('co_authors_position', $co_authors_position) == 'First position')>
                                     <label for="First position">First position</label>
                                     <input type="radio" id="" name="co_authors_position" value="Second position" @checked(old('co_authors_position', $co_authors_position) == 'Second position')>
@@ -262,8 +262,8 @@ function numberToOrdinal($number) {
                                     <div class="row mb-3">
                                         <div class="col-md-6">
                                             <div class="row">
-                                                <label for="co_author_name_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3B{{$i}}) <?=numberToOrdinal($i)?> co-author’s name</label>
-                                                <div class="col-md-10 col-lg-8">
+                                                <label for="co_author_name_{{$i}}" class="col-md-12 col-lg-4 col-form-label">3B{{$i}}) <?=numberToOrdinal($i)?> co-author’s name</label>
+                                                <div class="col-md-12 col-lg-8">
                                                     <input type="text" name="co_author_name_{{$i}}" class="form-control" id="co_author_name_{{$i}}"
                                                         value="<?php if(isset($co_author_name[$i-1]) && $co_author_name[$i-1] != ''){ echo $co_author_name[$i-1]; }  ?>">
                                                 </div>
@@ -271,8 +271,8 @@ function numberToOrdinal($number) {
                                         </div>
                                         <div class="col-md-6">
                                             <div class="row">
-                                                <label for="co_author_short_bio_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3C{{$i}}) <?=numberToOrdinal($i)?> co-author’s short bio (30-40 words)</label>
-                                                <div class="col-md-10 col-lg-8">
+                                                <label for="co_author_short_bio_{{$i}}" class="col-md-12 col-lg-4 col-form-label">3C{{$i}}) <?=numberToOrdinal($i)?> co-author’s short bio (30-40 words)</label>
+                                                <div class="col-md-12 col-lg-8">
                                                     <input type="text" name="co_author_short_bio_{{$i}}" class="form-control" id="co_author_short_bio_{{$i}}"
                                                         value="<?php if(isset($co_author_short_bio[$i-1]) && $co_author_short_bio[$i-1] != '') { echo $co_author_short_bio[$i-1]; } ?>">
                                                 </div>
@@ -280,8 +280,8 @@ function numberToOrdinal($number) {
                                         </div>
                                         <div class="col-md-6">
                                             <div class="row">
-                                                <label for="co_author_country_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3D{{$i}}) <?=numberToOrdinal($i)?> co-author’s country of residence</label>
-                                                <div class="col-md-10 col-lg-8">
+                                                <label for="co_author_country_{{$i}}" class="col-md-12 col-lg-4 col-form-label">3D{{$i}}) <?=numberToOrdinal($i)?> co-author’s country of residence</label>
+                                                <div class="col-md-12 col-lg-8">
                                                     <select name="co_author_country_{{$i}}" class="form-control" id="co_author_country_{{$i}}" >
                                                         <option value="" selected disabled>Select</option>
                                                         @if ($country)
@@ -297,9 +297,9 @@ function numberToOrdinal($number) {
                                         </div>
                                         <div class="col-md-6">
                                             <div class="row">
-                                                <label for="co_authororganization_name_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3E{{$i}}) <?=numberToOrdinal($i)?> co-author’s grassroots organization/ ecoweb-rooted community/ movement
+                                                <label for="co_authororganization_name_{{$i}}" class="col-md-12 col-lg-4 col-form-label">3E{{$i}}) <?=numberToOrdinal($i)?> co-author’s grassroots organization/ ecoweb-rooted community/ movement
                                                 </label>
-                                                <div class="col-md-10 col-lg-8">
+                                                <div class="col-md-12 col-lg-8">
                                                     <input type="text" name="co_authororganization_name_{{$i}}" class="form-control" id="co_authororganization_name_{{$i}}"
                                                         value="<?php if(isset($co_author_organizations[$i-1]) && $co_author_organizations[$i-1] != '') { echo $co_author_organizations[$i-1]; } ?>">
                                                 </div>
@@ -307,9 +307,9 @@ function numberToOrdinal($number) {
                                         </div>
                                         <div class="col-md-6">
                                             <div class="row">
-                                                <label for="co_ecosystem_affiliation_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3F{{$i}}) What continent are <?=numberToOrdinal($i)?> co-author’s ancestors originally from? (select all that apply)
+                                                <label for="co_ecosystem_affiliation_{{$i}}" class="col-md-12 col-lg-4 col-form-label">3F{{$i}}) What continent are <?=numberToOrdinal($i)?> co-author’s ancestors originally from? (select all that apply)
                                                 </label>
-                                                <div class="col-md-10 col-lg-8">
+                                                <div class="col-md-12 col-lg-8">
                                                     @if ($ecosystem_affiliation)
                                                         @foreach ($ecosystem_affiliation as $data)
                                                             <input type="checkbox" 
@@ -324,9 +324,9 @@ function numberToOrdinal($number) {
                                         </div>
                                         <div class="col-md-6">
                                             <div class="row">
-                                                <label for="co_Indigenous_affiliation_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3G{{$i}}) What specific region are <?=numberToOrdinal($i)?> co-author’s ancestors originally from OR what is the name of first co-author’s Indigenous community? (example of specific region = Bengal; example of Indigenous community name = Lisjan Ohlone)
+                                                <label for="co_Indigenous_affiliation_{{$i}}" class="col-md-12 col-lg-4 col-form-label">3G{{$i}}) What specific region are <?=numberToOrdinal($i)?> co-author’s ancestors originally from OR what is the name of first co-author’s Indigenous community? (example of specific region = Bengal; example of Indigenous community name = Lisjan Ohlone)
                                                 </label>
-                                                <div class="col-md-10 col-lg-8">
+                                                <div class="col-md-12 col-lg-8">
                                                     <input type="text" name="co_indigenous_affiliation_{{$i}}" class="form-control" id="indigenous_affiliation_{{$i}}"
                                                     value="<?php if(isset($co_indigenous_affiliations[$i-1]) && $co_indigenous_affiliations[$i-1] != '') { echo $co_indigenous_affiliations[$i-1]; } ?>" >
                                                 </div>
@@ -334,8 +334,8 @@ function numberToOrdinal($number) {
                                         </div> 
                                         <div class="col-md-6">
                                             <div class="row">
-                                                <label for="co_author_classification_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3H{{$i}}) <?=numberToOrdinal($i)?> co-author’s classification</label>
-                                                <div class="col-md-10 col-lg-8">
+                                                <label for="co_author_classification_{{$i}}" class="col-md-12 col-lg-4 col-form-label">3H{{$i}}) <?=numberToOrdinal($i)?> co-author’s classification</label>
+                                                <div class="col-md-12 col-lg-8">
                                                     <input type="radio" id="Human individual" name="co_author_classification_{{$i}}" value="Human individual" 
                                                         @checked((old('co_author_classification') == 'Human individual') || 
                                                         (isset($co_author_classification[$i-1]) && $co_author_classification[$i-1] == 'Human individual'))>
@@ -355,8 +355,8 @@ function numberToOrdinal($number) {
                                         </div>
                                         <div class="col-md-6">
                                             <div class="row">
-                                                <label for="pronoun" class="col-md-2 col-lg-4 col-form-label">3I{{$i}}) <?=numberToOrdinal($i)?> co-author’s pronoun</label>
-                                                <div class="col-md-10 col-lg-8">
+                                                <label for="pronoun" class="col-md-12 col-lg-4 col-form-label">3I{{$i}}) <?=numberToOrdinal($i)?> co-author’s pronoun</label>
+                                                <div class="col-md-12 col-lg-8">
                                                     @if ($pronoun)
                                                         @foreach ($pronoun as $data)
                                                             <?php
@@ -383,23 +383,23 @@ function numberToOrdinal($number) {
                                 @endfor
                             </div>                                                                           
                         </div> 
-                        <div class="row mb-3">
-                            <label for="first_name" class="col-md-2 col-lg-4 col-form-label">4) Full Legal Name (exactly as it appears on your government-issued identification documents, e.g., passport and/or driver's license)</label>
-                            <div class="col-md-10 col-lg-8">
+                        <div class="row mb-3 mt-3">
+                            <label for="first_name" class="col-md-12 col-lg-4 col-form-label">4) Full Legal Name (exactly as it appears on your government-issued identification documents, e.g., passport and/or driver's license)</label>
+                            <div class="col-md-12 col-lg-8">
                                 <input type="text" name="first_name" class="form-control" id="first_name"
                                     value="<?= $first_name ?>">
                             </div>
                         </div>                                                 
                         <div class="row mb-3">
-                            <label for="for_publication_name" class="col-md-2 col-lg-4 col-form-label">5) Preferred name for publication (if different from full legal name)</label>
-                            <div class="col-md-10 col-lg-8">
+                            <label for="for_publication_name" class="col-md-12 col-lg-4 col-form-label">5) Preferred name for publication (if different from full legal name)</label>
+                            <div class="col-md-12 col-lg-8">
                                 <input type="text" name="for_publication_name" class="form-control" id="for_publication_name"
                                     value="<?= $for_publication_name ?>">
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="title" class="col-md-2 col-lg-4 col-form-label">6) Title</label>
-                            <div class="col-md-10 col-lg-8">                                
+                            <label for="title" class="col-md-12 col-lg-4 col-form-label">6) Title</label>
+                            <div class="col-md-12 col-lg-8">                                
                                 @if ($user_title)
                                     @foreach ($user_title as $data)
                                         <!-- <option value="{{ $data->id }}" @selected($data->id == $titleId)> -->
@@ -411,8 +411,8 @@ function numberToOrdinal($number) {
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="pronoun" class="col-md-2 col-lg-4 col-form-label">7) Pronoun(s) (select all that apply)</label>
-                            <div class="col-md-10 col-lg-8">                                                                
+                            <label for="pronoun" class="col-md-12 col-lg-4 col-form-label">7) Pronoun(s) (select all that apply)</label>
+                            <div class="col-md-12 col-lg-8">                                                                
                                 @if ($pronoun)
                                     @foreach ($pronoun as $data)
                                         <!-- <option value="{{ $data->id }}" @selected($data->id == $pronounId)> -->
@@ -424,9 +424,9 @@ function numberToOrdinal($number) {
                             </div>
                         </div> 
                         <div class="row mb-3">
-                                <label for="section_ert" class="col-md-2 col-lg-4 col-form-label">8) For which CATEGORY and sub-category of ERT would you like your Creative-Work to be considered?
+                                <label for="section_ert" class="col-md-12 col-lg-4 col-form-label">8) For which CATEGORY and sub-category of ERT would you like your Creative-Work to be considered?
                                 </label>
-                                <div class="col-md-10 col-lg-8">
+                                <div class="col-md-12 col-lg-8">
                                 @if ($news_category)
                                     @foreach ($news_category as $parent)
                                     <?php $parent_id = $parent->id; 
@@ -445,37 +445,37 @@ function numberToOrdinal($number) {
                                 </div>
                             </div> 
                             <div class="row mb-3">
-                                <label for="creative_Work" class="col-md-2 col-lg-4 col-form-label">9) Title of your Creative-Work (max. 10 words)
+                                <label for="creative_Work" class="col-md-12 col-lg-4 col-form-label">9) Title of your Creative-Work (max. 10 words)
                                 </label>
-                                <div class="col-md-10 col-lg-8">
+                                <div class="col-md-12 col-lg-8">
                                     <textarea class="form-control" id="creative_Work" name="creative_Work" rows="4" cols="50" placeholder="Your creative_Work here..."><?= $creative_Work ?></textarea>
                                     <div id="creative_WorkError" class="error"></div>
                                 </div>
                             </div>  
                             <div class="row mb-3">
-                            <label for="creative_work_SRN" class="col-md-2 col-lg-4 col-form-label">10) Creative-Work SRN</label>
-                            <div class="col-md-10 col-lg-8">
+                            <label for="creative_work_SRN" class="col-md-12 col-lg-4 col-form-label">10) Creative-Work SRN</label>
+                            <div class="col-md-12 col-lg-8">
                                 <input type="text" name="creative_work_SRN" class="form-control" id="creative_work_SRN" value="<?= $creative_work_SRN ?>">
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="creative_work_DOI" class="col-md-2 col-lg-4 col-form-label">11) Creative-Work DOI</label>
-                            <div class="col-md-10 col-lg-8">
+                            <label for="creative_work_DOI" class="col-md-12 col-lg-4 col-form-label">11) Creative-Work DOI</label>
+                            <div class="col-md-12 col-lg-8">
                                 <input type="text" name="creative_work_DOI" class="form-control" id="creative_work_DOI" value="<?= $creative_work_DOI ?>">
                             </div>
                         </div>
                                           
                             <div class="row mb-3">
-                                <label for="subtitle" class="col-md-2 col-lg-4 col-form-label">12) Subtitle - brief engaging summary of your Creative-Work (max. 40 words)
+                                <label for="subtitle" class="col-md-12 col-lg-4 col-form-label">12) Subtitle - brief engaging summary of your Creative-Work (max. 40 words)
                                 </label>
-                                <div class="col-md-10 col-lg-8">
+                                <div class="col-md-12 col-lg-8">
                                     <textarea name="subtitle" class="form-control ckeditor" id="subtitle" rows="3"><?= $subtitle ?></textarea>
                                     <div id="subtitleError" class="error"></div>
                                 </div>
                             </div>                            
                             <div class="row mb-3">
-                                <label for="country" class="col-md-2 col-lg-4 col-form-label">13) What country/nation do you live in? (Country of Residence)                                </label>
-                                <div class="col-md-10 col-lg-8">
+                                <label for="country" class="col-md-12 col-lg-4 col-form-label">13) What country/nation do you live in? (Country of Residence)                                </label>
+                                <div class="col-md-12 col-lg-8">
                                     <select name="country" class="form-control" id="country" >
                                         <option value="" selected >Select</option>
                                         @if ($country)
@@ -490,39 +490,39 @@ function numberToOrdinal($number) {
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="state" class="col-md-2 col-lg-4 col-form-label">14) State/province of residence</label>
-                                <div class="col-md-10 col-lg-8">
+                                <label for="state" class="col-md-12 col-lg-4 col-form-label">14) State/province of residence</label>
+                                <div class="col-md-12 col-lg-8">
                                     <input type="text" name="state" class="form-control" id="state"
                                         value="<?= $state ?>">
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="city" class="col-md-2 col-lg-4 col-form-label">15) Village/town/city of residence</label>
-                                <div class="col-md-10 col-lg-8">
+                                <label for="city" class="col-md-12 col-lg-4 col-form-label">15) Village/town/city of residence</label>
+                                <div class="col-md-12 col-lg-8">
                                     <input type="text" name="city" class="form-control" id="city"
                                         value="<?= $city ?>">
                                 </div>
                             </div> 
                             <div class="row mb-3">
-                                <label for="organization_name" class="col-md-2 col-lg-4 col-form-label">16) Name of your grassroots organization/ ecoweb-rooted community/ movement (if no grassroots affiliation, type N/A)
+                                <label for="organization_name" class="col-md-12 col-lg-4 col-form-label">16) Name of your grassroots organization/ ecoweb-rooted community/ movement (if no grassroots affiliation, type N/A)
                                 </label>
-                                <div class="col-md-10 col-lg-8">
+                                <div class="col-md-12 col-lg-8">
                                     <input type="text" name="organization_name" class="form-control" id="organization_name"
                                         value="<?= $organization_name ?>">
                                 </div>
                             </div> 
                             <div class="row mb-3">
-                                <label for="organization_website" class="col-md-2 col-lg-4 col-form-label">17) Website of grassroots organization/ ecoweb-rooted community/ movement (if no website, type N/A)
+                                <label for="organization_website" class="col-md-12 col-lg-4 col-form-label">17) Website of grassroots organization/ ecoweb-rooted community/ movement (if no website, type N/A)
                                 </label>
-                                <div class="col-md-10 col-lg-8">
+                                <div class="col-md-12 col-lg-8">
                                     <input type="text" name="organization_website" class="form-control" id="organization_website"
                                         value="<?= $organization_website ?>">
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="ecosystem_affiliation" class="col-md-2 col-lg-4 col-form-label">18) What continent are your ancestors originally from? (select all that apply)
+                                <label for="ecosystem_affiliation" class="col-md-12 col-lg-4 col-form-label">18) What continent are your ancestors originally from? (select all that apply)
                                 </label>
-                                <div class="col-md-10 col-lg-8">                                                               
+                                <div class="col-md-12 col-lg-8">                                                               
                                     @if ($ecosystem_affiliation)
                                         @foreach ($ecosystem_affiliation as $data)
                                         <input type="checkbox" name="ecosystem_affiliation[]" value="{{ $data->id }}" @if(in_array($data->id, old('ecosystem_affiliation', $ecosystem_affiliationId))) checked @endif>  {{ $data->name }}<br>
@@ -531,17 +531,17 @@ function numberToOrdinal($number) {
                                 </div>
                             </div>   
                             <div class="row mb-3">
-                                <label for="Indigenous_affiliation" class="col-md-2 col-lg-4 col-form-label">19) What specific region are your ancestors originally from OR what is the name of your Indigenous community? (example of specific region = Bengal; example of Indigenous community name = Lisjan Ohlone)
+                                <label for="Indigenous_affiliation" class="col-md-12 col-lg-4 col-form-label">19) What specific region are your ancestors originally from OR what is the name of your Indigenous community? (example of specific region = Bengal; example of Indigenous community name = Lisjan Ohlone)
                                 </label>
-                                <div class="col-md-10 col-lg-8">
+                                <div class="col-md-12 col-lg-8">
                                     <input type="text" name="indigenous_affiliation" class="form-control" id="indigenous_affiliation"
                                     value="<?= $indigenous_affiliation ?>">
                                 </div>
                             </div> 
                             <div class="row mb-3">
-                                <label for="expertise_area" class="col-md-2 col-lg-4 col-form-label">20) Your expertise area (select all that apply)
+                                <label for="expertise_area" class="col-md-12 col-lg-4 col-form-label">20) Your expertise area (select all that apply)
                                 </label>
-                                <div class="col-md-10 col-lg-8">
+                                <div class="col-md-12 col-lg-8">
                                     @if ($expertise_area)
                                         @foreach ($expertise_area as $data)
                                         <input type="checkbox" name="expertise_area[]" value="{{ $data->id }}" @if(in_array($data->id, old('expertise_area', $expertise_areaId))) checked @endif>  {{ $data->name }}<br>
@@ -550,17 +550,17 @@ function numberToOrdinal($number) {
                                 </div>
                             </div>                             
                             <div class="row mb-3">
-                                <label for="author_short_bio" class="col-md-2 col-lg-4 col-form-label">21) 1-sentence biography (max. 40 words)
+                                <label for="author_short_bio" class="col-md-12 col-lg-4 col-form-label">21) 1-sentence biography (max. 40 words)
                                 </label>
-                                <div class="col-md-10 col-lg-8">
+                                <div class="col-md-12 col-lg-8">
                                     <textarea class="form-control" id="author_short_bio" name="author_short_bio" rows="4" cols="50" placeholder="Your explanation here..."><?= $author_short_bio ?></textarea>
                                     <div id="bio_shortError" class="error"></div>
                                 </div>
                             </div>
                          
                             <div class="row mb-3">
-                                <label for="media" class="col-md-2 col-lg-4 col-form-label">22) Media Type</label>
-                                <div class="col-md-10 col-lg-8">
+                                <label for="media" class="col-md-12 col-lg-4 col-form-label">22) Media Type</label>
+                                <div class="col-md-12 col-lg-8">
                                     <input type="radio" id="media_image" name="media" value="image" @checked(old('media', $media) == 'image')>
                                     <label for="media_image">Image</label>
                                     <input type="radio" id="media_video" name="media" value="video" @checked(old('media', $media) == 'video')>
@@ -569,8 +569,8 @@ function numberToOrdinal($number) {
                             </div>
                             <div id="imageDetails" style="display: none;">  
                                 <div class="row mb-3">
-                                    <label for="cover_image" class="col-md-2 col-lg-4 col-form-label">22A1) Cover Image</label>
-                                    <div class="col-md-10 col-lg-8">
+                                    <label for="cover_image" class="col-md-12 col-lg-4 col-form-label">22A1) Cover Image</label>
+                                    <div class="col-md-12 col-lg-8">
                                         <input type="file" name="cover_image" class="form-control" id="cover_image">
                                         <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed</small><br>
                                         <span id="cover_image_error" class="text-danger"></span>  
@@ -580,8 +580,8 @@ function numberToOrdinal($number) {
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="cover_image_caption" class="col-md-2 col-lg-4 col-form-label">22A2) Cover Image Caption</label>
-                                    <div class="col-md-10 col-lg-8">
+                                    <label for="cover_image_caption" class="col-md-12 col-lg-4 col-form-label">22A2) Cover Image Caption</label>
+                                    <div class="col-md-12 col-lg-8">
                                         <input type="text" name="cover_image_caption" class="form-control" id="cover_image_caption" value="<?= $cover_image_caption ?>">
                                     </div>
                                 </div>
@@ -612,9 +612,9 @@ function numberToOrdinal($number) {
                             </div>
                             <div id="videoDetails" style="display: none;">
                                 <div class="row mb-3">
-                                    <label for="video_url" class="col-md-2 col-lg-4 col-form-label">22B) Video Url
+                                    <label for="video_url" class="col-md-12 col-lg-4 col-form-label">22B) Video Url
                                     </label>
-                                    <div class="col-md-10 col-lg-8">
+                                    <div class="col-md-12 col-lg-8">
                                         <input type="text" name="video_url" class="form-control" id="video_url"
                                             value="<?= $video_url ?>">
                                         <?php if($video_url != ''){?>
@@ -628,8 +628,8 @@ function numberToOrdinal($number) {
                                 </div> 
                             </div>
                             <div class="row mb-3">
-                                <label for="ckeditor1" class="col-md-2 col-lg-4 col-form-label">23) Description</label>
-                                <div class="col-md-10 col-lg-8">
+                                <label for="ckeditor1" class="col-md-12 col-lg-4 col-form-label">23) Description</label>
+                                <div class="col-md-12 col-lg-8">
                                     <textarea name="long_desc" class="form-control ckeditor" id="long_desc" rows="5"><?= $long_desc ?></textarea> 
                                     <label for="citation" class="col-form-label">Citation</label>                                   
                                     @if (!empty($citation_value))
@@ -676,14 +676,14 @@ function numberToOrdinal($number) {
                                 </div>                                                                
                             </div>
                             <div class="row mb-3">
-                                <label for="ckeditor1" class="col-md-2 col-lg-4 col-form-label">23a) Editor’s comments</label>
-                                <div class="col-md-10 col-lg-8">
+                                <label for="ckeditor1" class="col-md-12 col-lg-4 col-form-label">23a) Editor’s comments</label>
+                                <div class="col-md-12 col-lg-8">
                                     <textarea name="editors_comments" class="form-control ckeditor" id="editors_comments" rows="5"><?= $editors_comments ?></textarea>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="keywords" class="col-md-2 col-lg-4 col-form-label">24) Keywords</label>
-                                <div class="col-md-10 col-lg-8">
+                                <label for="keywords" class="col-md-12 col-lg-4 col-form-label">24) Keywords</label>
+                                <div class="col-md-12 col-lg-8">
                                     <input type="text" id="input-tags" class="form-control" placeholder="Enter Keywords">
                                     <textarea class="form-control" name="keywords" id="keywords" style="display:none;"><?=$keywords?></textarea>
                                     <small class="text-primary">Enter keywords with comma separated</small>
@@ -729,8 +729,8 @@ function numberToOrdinal($number) {
                                 </div>
                             </div> -->
                             <div class="row mb-3">
-                                <label for="nelp_pdf" class="col-md-2 col-lg-4 col-form-label">25) Upload NELP</label>
-                                <div class="col-md-10 col-lg-8">
+                                <label for="nelp_pdf" class="col-md-12 col-lg-4 col-form-label">25) Upload NELP</label>
+                                <div class="col-md-12 col-lg-8">
                                     <input type="file" name="nelp_pdf" class="form-control" id="nelp_pdf" accept="application/pdf">                                                                
                                     <?php if($nelp_pdf != ''){?>
                                     <a href="<?= env('UPLOADS_URL') . 'newcontent/' . $nelp_pdf ?>" target="_blank"
@@ -739,17 +739,17 @@ function numberToOrdinal($number) {
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="additional_information" class="col-md-2 col-lg-4 col-form-label">26) (Optional: max. 100 words) Comments for the Editor(s) (any additional information you wish to share)
+                                <label for="additional_information" class="col-md-12 col-lg-4 col-form-label">26) (Optional: max. 100 words) Comments for the Editor(s) (any additional information you wish to share)
                                 </label>
-                                <div class="col-md-10 col-lg-8">
+                                <div class="col-md-12 col-lg-8">
                                     <textarea class="form-control" id="additional_information" name="additional_information" rows="4" cols="50">{{ old('additional_information', $additional_information) }}</textarea>
                                     <div id="bio_shortError" class="error"></div>
                                 </div>
                             </div>                            
                             <div class="row mb-3">
-                                <label for="creative_Work" class="col-md-2 col-lg-4 col-form-label blue-text">27) Is your Creative-Work fiction?
+                                <label for="creative_Work" class="col-md-12 col-lg-4 col-form-label blue-text">27) Is your Creative-Work fiction?
                                 </label>
-                                <div class="col-md-10 col-lg-8">
+                                <div class="col-md-12 col-lg-8">
                                     <input type="radio" id="fiction_yes" name="creative_Work_fiction" value="Yes" required <?=(($creative_Work_fiction == 'Yes')?'checked':'')?>>
                                     <label for="fiction_yes">Yes</label>
                                     <input type="radio" id="fiction_no" name="creative_Work_fiction" value="No" required <?=(($creative_Work_fiction != 'Yes')?'checked':'')?>>
@@ -757,8 +757,8 @@ function numberToOrdinal($number) {
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="community" class="col-md-2 col-lg-4 col-form-label">28) Are you a member of an EaRTh Community?</label>
-                                <div class="col-md-10 col-lg-8">
+                                <label for="community" class="col-md-12 col-lg-4 col-form-label">28) Are you a member of an EaRTh Community?</label>
+                                <div class="col-md-12 col-lg-8">
                                     <input type="radio" class="readonly-input" id="community_yes" name="community" value="Yes" required <?=(($community == 'Yes')?'checked':'')?>>
                                     <label for="yes">Yes</label>
                                     <input type="radio" class="readonly-input" id="community_no" name="community" value="No" required <?=(($community != 'Yes')?'checked':'')?>>
@@ -767,8 +767,8 @@ function numberToOrdinal($number) {
                             </div>
                             <div id="communityDetails" style="display: none;">
                                 <div class="row mb-3">
-                                    <label for="community_info" class="col-md-2 col-lg-4 col-form-label">28A) Select Community</label>
-                                    <div class="col-md-10 col-lg-8">
+                                    <label for="community_info" class="col-md-12 col-lg-4 col-form-label">28A) Select Community</label>
+                                    <div class="col-md-12 col-lg-8">
                                         <select name="community_name" class="form-control" id="community_name">
                                             <option value="" selected>Select</option>
                                             <?php if($communities){ foreach($communities as $cmn){?>
@@ -780,9 +780,9 @@ function numberToOrdinal($number) {
                                 </div> 
                             </div>
                             <div class="row mb-3">
-                            <label for="projects" class="col-md-2 col-lg-4 col-form-label">29) Is this a special EaRTh Project?
+                            <label for="projects" class="col-md-12 col-lg-4 col-form-label">29) Is this a special EaRTh Project?
                             </label>
-                            <div class="col-md-10 col-lg-8">
+                            <div class="col-md-12 col-lg-8">
                                 <input type="radio" class="readonly-input" id="projects_yes" name="projects" value="Yes" required @checked(old('projects', $projects) == 'Yes')>
                                 <label for="yes">Yes</label>
                                 <input type="radio" class="readonly-input" id="projects_no" name="projects" value="No" required @checked(old('projects', $projects) == 'No')>
@@ -792,8 +792,8 @@ function numberToOrdinal($number) {
                         <!-- ?php echo $projects_name; die;?> -->
                         <div id="projectsDetails" style="display: none;">
                             <div class="row mb-3">
-                                <label for="projects_info" class="col-md-2 col-lg-4 col-form-label">29A) Select projects</label>
-                                <div class="col-md-10 col-lg-8">                                    
+                                <label for="projects_info" class="col-md-12 col-lg-4 col-form-label">29A) Select projects</label>
+                                <div class="col-md-12 col-lg-8">                                    
                                     <select name="projects_name" class="form-control" id="projects_name">
                                         <option value="">Select</option>
                                         <?php  if($project){ foreach($project as $proj){?>
@@ -805,9 +805,9 @@ function numberToOrdinal($number) {
                             </div> 
                         </div>
                             <div class="row mb-3">
-                                <label for="is_series" class="col-md-2 col-lg-4 col-form-label">30) Is this part of a series?
+                                <label for="is_series" class="col-md-12 col-lg-4 col-form-label">30) Is this part of a series?
                                 </label>
-                                <div class="col-md-10 col-lg-8">
+                                <div class="col-md-12 col-lg-8">
                                     <input type="radio" id="series_yes" name="is_series" value="Yes" <?=(($is_series == 'Yes')?'checked':'')?> required>
                                     <label for="series_yes">Yes</label>
                                     <input type="radio" id="series_no" name="is_series" value="No" <?=(($is_series == 'No')?'checked':'')?> required>
@@ -815,23 +815,23 @@ function numberToOrdinal($number) {
                                 </div>
                             </div>
                             <div class="row series_yes mb-3">
-                                <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label">30A) How many total creative-works in this series?
+                                <label for="series_article_no" class="col-md-12 col-lg-4 col-form-label">30A) How many total creative-works in this series?
                                 </label>
-                                <div class="col-md-10 col-lg-8">
+                                <div class="col-md-12 col-lg-8">
                                     <input type="text" name="series_article_no" class="form-control" id="series_article_no" min="1" value="<?=$series_article_no?>">
                                 </div>
                             </div>
                             <div class="row series_yes mb-3">
-                                <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label">30B) What number in the series is this creative-work?
+                                <label for="current_article_no" class="col-md-12 col-lg-4 col-form-label">30B) What number in the series is this creative-work?
                                 </label>
-                                <div class="col-md-10 col-lg-8">
+                                <div class="col-md-12 col-lg-8">
                                     <input type="text" name="current_article_no" class="form-control" id="current_article_no" value="<?=$current_article_no?>">
                                 </div>
                             </div>
                             <div class="row series_yes mb-3">
-                                <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label">30C) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).
+                                <label for="other_article_part_doi_no" class="col-md-12 col-lg-4 col-form-label">30C) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).
                                 </label>
-                                <div class="col-md-10 col-lg-8">
+                                <div class="col-md-12 col-lg-8">
                                     <input type="text" class="form-control" id="input-tags">
                                     <textarea class="form-control" name="other_article_part_doi_no" id="other_article_part_doi_no" style="display:none;"><?=$other_article_part_doi_no?></textarea>
                                     <small class="text-primary">Separate each DOI with a comma</small>
