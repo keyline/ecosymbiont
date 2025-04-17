@@ -5,94 +5,127 @@
 //  $pageSegment = $pageName[1];
 ?>
 <style>
-    .donation-container {
-      max-width: 800px;
-      margin: 60px auto;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      overflow: hidden;
-      animation: fadeInUp 1s ease-in-out;
+    body {
+      background-color: #f8f9fa;
     }
-    .donation-header {
-      background: #4a7c59;
-      color: white;
-      padding: 30px;
-      text-align: center;
-    }
-    .donation-header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 36px;
-      margin-bottom: 10px;
-    }
-    .donation-content {
+
+    .donation-box {
+      background-color: #fff;
+      border-radius: 10px;
       padding: 40px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.05);
     }
-    .donation-content p, .donation-content li {
-      font-size: 16px;
-      line-height: 1.8;
-      color: #333;
+
+    .donation-amounts button {
+      width: 100px;
+      margin: 6px;
     }
-    .donation-footer {
-      background: #f5f5f5;
-      padding: 25px 40px;
+
+    .payment-method button {
+      margin: 5px;
+      width: 160px;
     }
-    .donation-footer p {
-      margin: 0;
-      font-size: 15px;
-      color: #666;
+
+    .section-header {
+      font-weight: 600;
+      font-size: 20px;
+      margin-top: 30px;
     }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
+
+    .fade-in {
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .highlight {
-      font-weight: bold;
-      color: #4a7c59;
-    }
-</style>
+  </style>
 <!-- block-wrapper-section ================================================== -->
 <section class="block-wrapper">
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12 content-blocker">
                 <!-- block content -->
-                <div class="donation-container">
-                    <div class="donation-header">
-                      <h1>Donation Receipt</h1>
-                      <p>Thank you for supporting Śramani Institute</p>
+                <div class="block-content">
+                    <div class="article-box">  
+                       <!-- Left Info -->
+                        <div class="col-lg-5 fade-in">
+                            <div class="donation-box">
+                            <h3>Give Today — Because the Earth Needs a Good Lawyer</h3>
+                            <p>Śramani Institute is committed to ecological and human wellbeing. Your support helps us:</p>
+                            <ul>
+                                <li>Advance environmental initiatives</li>
+                                <li>Support ecological justice</li>
+                                <li>Provide free resources and programs</li>
+                            </ul>
+                            <p class="text-danger fw-semibold">Give today and your gift will be matched <strong>2:1</strong> or <strong>3:1</strong> monthly!</p>
+                            </div>
+                        </div>
+                    
+                        <!-- Right Form -->
+                        <div class="col-lg-7 fade-in">
+                            <div class="donation-box">
+                    
+                            <!-- 1. Donation Amount -->
+                            <div class="section-header">1. Donation Amount</div>
+                            <div class="mb-3">
+                                <div class="btn-group mb-3" role="group">
+                                <input type="radio" class="btn-check" name="donateType" id="oneTime" checked>
+                                <label class="btn btn-outline-primary" for="oneTime">One-Time</label>
+                    
+                                <input type="radio" class="btn-check" name="donateType" id="monthly">
+                                <label class="btn btn-outline-primary" for="monthly">Monthly</label>
+                                </div>
+                            </div>
+                    
+                            <div class="donation-amounts d-flex flex-wrap mb-3">
+                                <button class="btn btn-outline-secondary">$50</button>
+                                <button class="btn btn-outline-secondary">$100</button>
+                                <button class="btn btn-outline-secondary">$250</button>
+                                <button class="btn btn-outline-secondary">$1000</button>
+                                <button class="btn btn-outline-secondary">$2000</button>
+                                <input type="text" class="form-control mt-2 w-50" placeholder="Custom amount">
+                            </div>
+                    
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" id="coverFee">
+                                <label class="form-check-label" for="coverFee">
+                                I'd like to help cover the transaction fees.
+                                </label>
+                            </div>
+                    
+                            <!-- 2. Donor Info -->
+                            <div class="section-header">2. Donor Information</div>
+                            <form class="mb-4">
+                                <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" class="form-control" placeholder="First Name">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" class="form-control" placeholder="Last Name">
+                                </div>
+                                </div>
+                                <input type="email" class="form-control mb-3" placeholder="Email Address">
+                                <input type="text" class="form-control mb-3" placeholder="Country of Residence">
+                            </form>
+                    
+                            <!-- 3. Payment Method -->
+                            <div class="section-header">3. Select Payment Method</div>
+                            <div class="payment-method d-flex flex-wrap">
+                                <button class="btn btn-outline-dark"><i class="fa fa-university me-2"></i>Bank</button>
+                                <button class="btn btn-outline-dark"><i class="fa fa-credit-card me-2"></i>Credit Card</button>
+                                <button class="btn btn-outline-primary"><i class="fab fa-paypal me-2"></i>PayPal</button>
+                                <button class="btn btn-outline-info">DAF Pay</button>
+                            </div>
+                    
+                            <div class="mt-4">
+                                <button class="btn btn-success w-100 py-2">Complete Donation</button>
+                            </div>
+                            </div>
+                        </div>                                         
                     </div>
-                    <div class="donation-content">
-                      <ul class="list-unstyled mb-4">
-                        <li><span class="highlight">Donation Receipt Number:</span> SRM-US-webYYYY-xxxxx</li>
-                        <li><span class="highlight">Donee Name:</span> Śramani Institute, Inc.</li>
-                        <li><span class="highlight">Donation Amount:</span> USD x,xxx.xx (in words)</li>
-                        <li><span class="highlight">Donation Receipt Date:</span> DD/MM/YYYY</li>
-                        <li><span class="highlight">Donor Name:</span> First name Last name</li>
-                        <li><span class="highlight">Donor Country of Residence:</span> Country</li>
-                      </ul>
-                  
-                      <p>Dear <strong>First name Last name</strong>,</p>
-                  
-                      <p>Thank you so much for your donation to the <strong>Śramani Institute, Inc.</strong>!</p>
-                  
-                      <p>We greatly appreciate your gift. It will help to support our initiatives and projects that realize the interconnected wellbeing of humans and ecologies.</p>
-                  
-                      <p>Your donation of <strong>USD x,xxx.xx (in words)</strong> is tax-exempt in the United States of America (USA), as the Śramani Institute, Inc. is a 501(c)(3) tax-exempt nonprofit organization registered in the USA.</p>
-                  
-                      <p>Thank you again for your generosity.</p>
-                  
-                      <p>Best wishes,</p>
-                  
-                      <p><strong>Dr. Kakoli Mitra, Esq.<br>
-                      Founder and Executive Director<br>
-                      Śramani Institute</strong></p>
-                      <p>Email: <a href="mailto:support@sramani.org">support@sramani.org</a></p>
-                    </div>
-                    <div class="donation-footer text-end">
-                      <p>&copy; 2025 Śramani Institute, Inc. | All rights reserved</p>
-                    </div>
-                  </div>
+                </div>
                 <!-- End block content -->
             </div>
         </div>
