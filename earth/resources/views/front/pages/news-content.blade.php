@@ -451,8 +451,8 @@ $current_url = $protocol . $host . $uri;
                                 <!-- carousel box -->
                                 <div class="carousel-box owl-wrapper">
                                     <div class="title-section">
-                                        <?php if($is_series == 'Yes'){ echo "series";?>
-                                            <?php if(count($other_articles_in_this_series) > 1){?>
+                                        <?php if($is_series == 'Yes'){?>
+                                            <?php echo count($other_articles_in_this_series);  if(count($other_articles_in_this_series) > 1){?>
                                                 <h1><span>Other parts of this series</span></h1>
                                             <?php }?>
                                         <?php } else {?>
