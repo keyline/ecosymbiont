@@ -139,12 +139,12 @@
                     
                             <!-- 3. Payment Method -->
                             <div class="section-header mb-3">3. Select Payment Method</div>
-                            <div class="payment-method d-flex flex-wrap justify-content-start">
+                            <div class="payment-method">
                                 <button class="btn btn-outline-info"><img src="<?=env('UPLOADS_URL').'paypal.png'?>" alt="" class="img-fluid"></button>
                             </div>
                     
                             <div class="mt-4">
-                                <button class="btn btn-success w-100 py-2 mt-3">Complete Donation</button>
+                                <button class="btn btn-success w-100 py-2 mt-4">Complete Donation</button>
                             </div>
                             </div>
                         </div>                                         
