@@ -14,7 +14,7 @@
                     <div class="article-box">  
                        <!-- Left Info -->
                         <div class="col-lg-5 fade-in">
-                            <div class="donation-box">
+                            <div class="donation-box donation-left">
                                 <div class="titleto-inner mb-3">
                                     <h2>Support us to make better World</h2>
                                 </div>
