@@ -949,12 +949,7 @@ function numberToOrdinal($number) {
                 text: 'Please upload an NELP before submitting.',
             });
             return; // Stop further execution
-        }
-        if (caption === '') {
-            $('#cover_image_caption').attr('required', true);
-            document.getElementById('cover_image_caption').focus();
-            return false; // Prevent form submission
-        }
+        }        
 
         // Validate media type selection
         if (!media) {
