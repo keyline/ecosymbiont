@@ -18,7 +18,7 @@
 
     .donation-amounts button {
       width: 100px;
-      margin: 6px;
+      margin-right: 6px;
     }
 
     .payment-method button {
@@ -71,7 +71,7 @@
                             <div class="section-header">1. Donation Amount</div>
                     
                             <div class="donation-amounts d-flex flex-wrap mb-3">
-                                <ul class="d-flex flex-wrap list-unstyled">
+                                <ul class="d-flex flex-wrap list-unstyled mt-2">
                                     <li>
                                         <button class="btn btn-outline-secondary">$50</button>
                                     </li>
@@ -119,10 +119,7 @@
                             <!-- 3. Payment Method -->
                             <div class="section-header mb-3">3. Select Payment Method</div>
                             <div class="payment-method d-flex flex-wrap">
-                                <button class="btn btn-outline-dark"><i class="fa fa-university me-2"></i>Bank</button>
-                                <button class="btn btn-outline-dark"><i class="fa fa-credit-card me-2"></i>Credit Card</button>
-                                <button class="btn btn-outline-primary"><i class="fab fa-paypal me-2"></i>PayPal</button>
-                                <button class="btn btn-outline-info">DAF Pay</button>
+                                <button class="btn btn-outline-info"><i class="fa-solid fa-paypal me-2"></i>PayPal</button>
                             </div>
                     
                             <div class="mt-4">
