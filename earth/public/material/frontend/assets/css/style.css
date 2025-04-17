@@ -6435,7 +6435,9 @@ div#permalink p {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
   margin-bottom: 30px;
 }
-
+.donation-box .titleto-inner{
+  margin-bottom: 15px;
+}
 .donation-box p {
   font-size: 15px;
   line-height: 1.5;
@@ -6449,7 +6451,7 @@ div#permalink p {
 .donation-amounts button {
   width: 100px;
   margin-right: 6px;
-  margin-top: 10px;
+  margin-top: 0px;
 }
 
 .payment-method button {
