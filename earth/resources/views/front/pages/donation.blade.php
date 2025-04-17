@@ -14,11 +14,13 @@
       border-radius: 10px;
       padding: 40px;
       box-shadow: 0 0 15px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
     }
 
     .donation-amounts button {
       width: 100px;
       margin-right: 6px;
+      margin-top: 10px;
     }
 
     .payment-method button {
@@ -119,7 +121,7 @@
                             <!-- 3. Payment Method -->
                             <div class="section-header mb-3">3. Select Payment Method</div>
                             <div class="payment-method d-flex flex-wrap">
-                                <button class="btn btn-outline-info"><i class="fa-solid fa-paypal me-2"></i>PayPal</button>
+                                <button class="btn btn-outline-info"><img src="<?=env('UPLOADS_URL').'paypal.png'?>" alt=""></button>
                             </div>
                     
                             <div class="mt-4">
