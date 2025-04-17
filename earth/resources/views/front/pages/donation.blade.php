@@ -24,7 +24,7 @@
     }
 
     .payment-method button {
-      margin: 5px;
+      margin-bottom: 10px;
       width: 160px;
     }
 
@@ -121,7 +121,7 @@
                             <!-- 3. Payment Method -->
                             <div class="section-header mb-3">3. Select Payment Method</div>
                             <div class="payment-method d-flex flex-wrap">
-                                <button class="btn btn-outline-info"><img src="<?=env('UPLOADS_URL').'paypal.png'?>" alt=""></button>
+                                <button class="btn btn-outline-info"><img src="<?=env('UPLOADS_URL').'paypal.png'?>" alt="" class="img-fluid"></button>
                             </div>
                     
                             <div class="mt-4">
