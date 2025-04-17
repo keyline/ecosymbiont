@@ -936,6 +936,7 @@ function numberToOrdinal($number) {
     document.querySelector('#submitFormButton').addEventListener('click', function (e) {
         e.preventDefault(); // Prevent default form submission
         const caption = document.getElementById('cover_image_caption').value.trim();
+        const videoUrl = document.getElementById('video_url') ? document.getElementById('video_url').value.trim() : '';
         var media = document.querySelector('input[name="media"]:checked');
         var pdfFile = document.getElementById("nelp_pdf").files.length;
         var existingPdf = document.querySelector("input[name='existing_nelp_pdf']");
