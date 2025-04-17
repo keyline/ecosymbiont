@@ -73,18 +73,24 @@
                                 <div class="btn-group mb-3" role="group">
                                 <input type="radio" class="btn-check" name="donateType" id="oneTime" checked>
                                 <label class="btn btn-outline-primary" for="oneTime">One-Time</label>
-                    
-                                <input type="radio" class="btn-check" name="donateType" id="monthly">
-                                <label class="btn btn-outline-primary" for="monthly">Monthly</label>
                                 </div>
                             </div>
                     
                             <div class="donation-amounts d-flex flex-wrap mb-3">
-                                <button class="btn btn-outline-secondary">$50</button>
-                                <button class="btn btn-outline-secondary">$100</button>
-                                <button class="btn btn-outline-secondary">$250</button>
-                                <button class="btn btn-outline-secondary">$1000</button>
-                                <button class="btn btn-outline-secondary">$2000</button>
+                                <ul>
+                                    <li>
+                                        <button class="btn btn-outline-secondary">$50</button>
+                                    </li>
+                                    <li>
+                                        <button class="btn btn-outline-secondary">$100</button>
+                                    </li>
+                                    <li>
+                                        <button class="btn btn-outline-secondary">$250</button>
+                                    </li>
+                                    <li>
+                                        <button class="btn btn-outline-secondary">$1000</button>
+                                    </li>
+                                </ul>
                                 <input type="text" class="form-control mt-2 w-50" placeholder="Custom amount">
                             </div>
                     
@@ -96,7 +102,7 @@
                             </div>
                     
                             <!-- 2. Donor Info -->
-                            <div class="section-header">2. Donor Information</div>
+                            <div class="section-header mb-3">2. Donor Information</div>
                             <form class="mb-4">
                                 <div class="row">
                                 <div class="col-md-6 mb-3">
@@ -107,11 +113,18 @@
                                 </div>
                                 </div>
                                 <input type="email" class="form-control mb-3" placeholder="Email Address">
+                                <input type="text" class="form-control mb-3" placeholder="Residential  Address">
                                 <input type="text" class="form-control mb-3" placeholder="Country of Residence">
+                                <select name="country" id="">
+                                    <option value="India">India</option>
+                                    <option value="India">India2</option>
+                                    <option value="India">India3</option>
+                                    <option value="India">India4</option>
+                                </select>
                             </form>
                     
                             <!-- 3. Payment Method -->
-                            <div class="section-header">3. Select Payment Method</div>
+                            <div class="section-header mb-3">3. Select Payment Method</div>
                             <div class="payment-method d-flex flex-wrap">
                                 <button class="btn btn-outline-dark"><i class="fa fa-university me-2"></i>Bank</button>
                                 <button class="btn btn-outline-dark"><i class="fa fa-credit-card me-2"></i>Credit Card</button>
