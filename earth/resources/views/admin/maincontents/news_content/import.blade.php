@@ -963,6 +963,22 @@ function numberToOrdinal($number) {
             document.getElementById('media_image').focus();            
             return false; // Stop further execution
         }
+
+        // Media-specific validations
+        if (media.value === 'image') {
+            if (caption === '') {
+                $('#cover_image_caption').attr('required', true);
+                document.getElementById('cover_image_caption').focus();
+                return false;
+            }
+        } else if (media.value === 'video') {
+            if (videoUrl === '') {                
+                $('#video_url').attr('required', true);
+                document.getElementById('video_url').focus();
+                return false;
+            }
+        }
+
         // Confirmation popup
         Swal.fire({
             title: 'Are you sure?',
