@@ -5,10 +5,12 @@ use App\Models\Country;
 use App\Models\EcosystemAffiliation;
 use App\Helpers\Helper;
 use App\Models\Community;
+use App\Models\Project;
 
 $country                = Country::select('id', 'name')->where('status', '=', 1)->orderBy('name', 'ASC')->get();
 $ecosystem_affiliation  = EcosystemAffiliation::select('id', 'name')->where('status', '=', 1)->orderBy('name', 'ASC')->get();
 $community  = Community::select('id', 'name')->where('status', '=', 1)->orderBy('name', 'ASC')->get();
+$projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('name', 'ASC')->get();
 ?>
 <div class="footer_top_menu">
     <div class="container">
@@ -149,6 +151,7 @@ $community  = Community::select('id', 'name')->where('status', '=', 1)->orderBy(
                             <option value="Country of residence">Country of residence</option>
                             <option value="Organization">Organization</option>
                             <option value="Community">Community</option>
+                            <option value="Projects">Projects</option>
                             <option value="Tag">Tag</option>
                             <option value="Text">Text</option>
                         </select>
@@ -169,6 +172,12 @@ $community  = Community::select('id', 'name')->where('status', '=', 1)->orderBy(
                             <option value="" selected="selected">Select Community</option>
                             <?php if($community){ foreach($community as $community_one){?>
                                 <option value="<?=$community_one->name?>"><?=$community_one->name?></option>
+                            <?php } }?>
+                        </select>
+                        <select id="search_type_projects" class="adv-search-field field-selector" name="search_keyword4" style="display: none;">
+                            <option value="" selected="selected">Select Projects</option>
+                            <?php if($projects){ foreach($projects as $projects_one){?>
+                                <option value="<?=$projects_one->name?>"><?=$projects_one->name?></option>
                             <?php } }?>
                         </select>
                         <input type="text" id="search_keyword" name="search_keyword0" placeholder="Enter a search term" required>
@@ -192,6 +201,8 @@ $community  = Community::select('id', 'name')->where('status', '=', 1)->orderBy(
                 $('select[name="search_keyword2"]').attr('required', false);
                 $('select[name="search_keyword3"]').hide();
                 $('select[name="search_keyword3"]').attr('required', false);
+                $('select[name="search_keyword4"]').hide();
+                $('select[name="search_keyword4"]').attr('required', false);
 
                 $('select[name="search_keyword1"]').show();
                 $('select[name="search_keyword1"]').attr('required', true);
@@ -202,6 +213,8 @@ $community  = Community::select('id', 'name')->where('status', '=', 1)->orderBy(
                 $('select[name="search_keyword1"]').attr('required', false);
                 $('select[name="search_keyword3"]').hide();
                 $('select[name="search_keyword3"]').attr('required', false);
+                $('select[name="search_keyword4"]').hide();
+                $('select[name="search_keyword4"]').attr('required', false);
 
                 $('select[name="search_keyword2"]').show();
                 $('select[name="search_keyword2"]').attr('required', true);
@@ -212,14 +225,32 @@ $community  = Community::select('id', 'name')->where('status', '=', 1)->orderBy(
                 $('select[name="search_keyword1"]').attr('required', false);
                 $('select[name="search_keyword2"]').hide();
                 $('select[name="search_keyword2"]').attr('required', false);
+                $('select[name="search_keyword4"]').hide();
+                $('select[name="search_keyword4"]').attr('required', false);
 
                 $('select[name="search_keyword3"]').show();
                 $('select[name="search_keyword3"]').attr('required', true);
-            } else {
+            } else if(search_type == 'Projects'){
+                $('input[name="search_keyword0"]').hide();
+                $('input[name="search_keyword0"]').attr('required', false);
                 $('select[name="search_keyword1"]').hide();
                 $('select[name="search_keyword1"]').attr('required', false);
                 $('select[name="search_keyword2"]').hide();
                 $('select[name="search_keyword2"]').attr('required', false);
+                $('select[name="search_keyword3"]').hide();
+                $('select[name="search_keyword3"]').attr('required', false);
+
+                $('select[name="search_keyword4"]').show();
+                $('select[name="search_keyword4"]').attr('required', true);
+            }else {
+                $('select[name="search_keyword1"]').hide();
+                $('select[name="search_keyword1"]').attr('required', false);
+                $('select[name="search_keyword2"]').hide();
+                $('select[name="search_keyword2"]').attr('required', false);
+                $('select[name="search_keyword3"]').hide();
+                $('select[name="search_keyword3"]').attr('required', false);
+                $('select[name="search_keyword4"]').hide();
+                $('select[name="search_keyword4"]').attr('required', false);
 
                 $('input[name="search_keyword0"]').show();
                 $('input[name="search_keyword0"]').attr('required', true);

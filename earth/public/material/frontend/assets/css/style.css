@@ -814,11 +814,17 @@ header .list-line-posts div.list-post {
   -moz-box-shadow: 0 0 10px #dedede;
   -o-box-shadow: 0 0 10px #dedede;
   display: flex;
-  align-items: stretch;
+  align-items: center;
+  height: 124px;
+  padding: 5px;
+}
+header .list-line-posts div.list-post .video-post{
+  margin-right: 0;
+  margin-bottom: 0;
 }
 header .list-line-posts div.list-post img {
   width: 109px;
-  height: 109px;
+  height: 100%;
   object-fit: cover;
 }
 header .list-line-posts div.list-post .post-content {
@@ -826,6 +832,12 @@ header .list-line-posts div.list-post .post-content {
 }
 header .list-line-posts div.list-post .post-content > a {
   color: #206081;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+          line-clamp: 2; 
+  -webkit-box-orient: vertical;
 }
 header .list-line-posts div.list-post .post-content h2 {
   line-height: 20px;
@@ -870,6 +882,9 @@ header .list-line-posts div.list-post .post-content h2 a:hover {
 /*-------------------------------------------------*/
 body.boxed {
   background: url('../images/pattern.png');
+}
+html{
+  scroll-behavior: smooth;
 }
 body{
   font-family: 'proximanova_regular', sans-serif;
@@ -1263,6 +1278,7 @@ div.block-content:after {
 .carousel-box {
   margin-bottom: 25px;
 }
+
 .carousel-box .news-post,
 .carousel-box ul.list-posts {
   margin-bottom: 30px;
@@ -3411,7 +3427,7 @@ ul.list-posts > li .post-content h2 a:hover {
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 7px 20px;
+  padding: 7px 10px;
   background: rgba(17, 17, 17, 0.5);
   transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
@@ -3425,7 +3441,7 @@ ul.list-posts > li .post-content h2 a:hover {
   font-weight: 700;
   line-height: 20px;
   margin: 0 0 10px;
-  font-size: 13px;
+  font-size: 13px !important;
   max-height: 40px;
   overflow: hidden;
   margin-bottom: 0;
@@ -3650,8 +3666,11 @@ div.list-post {
 }
 div.list-post img {
   width: 100px;
-  margin-right: 20px;
+  /* margin-right: 20px; */
   float: left;
+}
+div.list-post .video-post {
+  margin-right: 20px;
 }
 div.list-post .post-content > a {
   display: inline-block;
@@ -6332,6 +6351,10 @@ div#popup h3 {
   margin-top: 0;
   color: #902321;
 }
+div#popup h3.text-success,
+div#permalink h3.text-success {
+  color: #28a745 !important;
+}
 div#popup p {
   line-height: 30px;
   word-wrap: break-word;
@@ -6612,7 +6635,7 @@ div#permalink p {
     padding-left: 10px;
     padding-right: 10px;
   }
-  .sidebar .tab-posts-widget .tab-pane ul.list-posts > li img {
+  .sidebar .tab-posts-widget .tab-pane ul.list-posts > li .video-post {
     margin-right: 10px;
   }
   footer .footer-last-line nav.footer-nav {
@@ -7224,6 +7247,7 @@ div.block-content {
 }
 .video_post_text .hover-box ul.post-tags li, .video_post_text .hover-box ul.post-tags li {
   color: #fff;
+  margin-bottom: 0;
 }
 .item.news-post.video-post.video_post_text {
   height: 200px;
@@ -7273,6 +7297,9 @@ margin-bottom: 9px;
 div.dt-container div.dt-layout-row.dt-layout-table div.dt-layout-cell {
   display: block !important;
   overflow: auto !important;
+}
+.single-post-box > .post-content .custom-box-style p{
+  padding: 0;
 }
 @media(max-width: 400px){
   .seach_holder {
