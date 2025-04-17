@@ -7106,6 +7106,20 @@ div#permalink p {
   margin-top: 5px;
   width: 80%;
 }
+.donation-box{
+  padding: 20px;
+}
+.section-header{
+  margin-top: 10;
+  font-size: 18px;
+}
+
+.donation-box h3{
+  margin-top: 10;
+}
+.donation-box .d-flex{
+  justify-content: start;
+}
 }
 @media (max-width: 650px) {
   ul.autor-list > li .autor-last-line a.autor-site {
