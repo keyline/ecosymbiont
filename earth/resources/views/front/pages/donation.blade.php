@@ -20,6 +20,10 @@
         font-size: 15px;
         line-height: 1.5;
     }
+    .donation-box li{
+        margin: 8px 0;
+        font-size: 15px;
+    }
     .donation-amounts button {
       width: 100px;
       margin-right: 6px;
@@ -37,13 +41,12 @@
       margin-top: 30px;
     }
     .custom-alert {
-        background-color: #d1fae5; /* Tailwind-style green-100 */
-        border-left: 5px solid #10b981; /* Tailwind-style green-500 */
+        background-color: #d1fae5;
+        border-left: 5px solid #10b981; 
         border-radius: 6px;
         padding: 1rem 1.5rem;
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
         margin-bottom: 1rem;
-        color: #065f46; /* Tailwind-style green-900 */
     }
 
     .fade-in {
@@ -75,7 +78,7 @@
                             </ul>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci et quo quas consectetur. Maiores voluptatum laborum quam, quis ut ab aut ad harum perspiciatis voluptatibus eos illum voluptas cupiditate, laudantium optio voluptate repellat dignissimos hic! Corporis ipsa fuga iusto, dicta eum minus error, facere rerum cumque hic cupiditate, asperiores ut.</p>
                             <div class="custom-alert d-flex align-items-start">
-                                <p class="text-danger fw-semibold">Give today and your gift will be matched $2:$1 by the Earthjustice Board of Trustees. Or start a monthly gift today and your donation will be matched $3:$1 for the next 12 months!</p>
+                                <p>Give today and your gift will be matched $2:$1 by the Earthjustice Board of Trustees. Or start a monthly gift today and your donation will be matched $3:$1 for the next 12 months!</p>
                             </div>
                             </div>
                         </div>
