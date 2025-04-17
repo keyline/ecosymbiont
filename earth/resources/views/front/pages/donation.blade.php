@@ -61,6 +61,7 @@
                                 <li>Support ecological justice</li>
                                 <li>Provide free resources and programs</li>
                             </ul>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci et quo quas consectetur. Maiores voluptatum laborum quam, quis ut ab aut ad harum perspiciatis voluptatibus eos illum voluptas cupiditate, laudantium optio voluptate repellat dignissimos hic! Corporis ipsa fuga iusto, dicta eum minus error, facere rerum cumque hic cupiditate, asperiores ut.</p>
                             <p class="text-danger fw-semibold">Give today and your gift will be matched <strong>2:1</strong> or <strong>3:1</strong> monthly!</p>
                             </div>
                         </div>
