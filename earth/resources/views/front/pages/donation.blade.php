@@ -56,7 +56,7 @@
                                         <button class="btn btn-outline-secondary">$1000</button>
                                     </li>
                                 </ul>
-                                <input type="text" class="form-control mt-2 w-50" placeholder="Custom amount">
+                                <input type="text" class="form-control mt-2 w-50" placeholder="Other">
                             </div>
                     
                             <div class="form-check mb-4">
