@@ -1529,11 +1529,26 @@ use Illuminate\Support\Facades\DB;
     $(document).ready(function() {
         $(".series_yes").hide();
         var is_series= '<?=$is_series?>';
+        // ✅ Validation handler function
+        function bindDOIValidation() {
+            $('#other_article_part_doi_no').off('input').on('input', function () {
+                var value = $(this).val().trim();
+                var pattern = /^SRN-EaRTh\d{6}-\d+$/;
+                if (!pattern.test(value)) {
+                    this.setCustomValidity("Format must be: SRN-EaRTh042025-052");
+                } else {
+                    this.setCustomValidity("");
+                }
+            });
+        }
         if (is_series === "Yes") {
             $(".series_yes").show();
             $('#series_article_no').attr('required', true);
             $('#current_article_no').attr('required', true);
             $('#other_article_part_doi_no').attr('required', true);
+            
+            // ✅ Bind validation on page load
+            bindDOIValidation();
         } else {
             $(".series_yes").hide();
             $('#series_article_no').attr('required', false);
@@ -1547,16 +1562,9 @@ use Illuminate\Support\Facades\DB;
                 $('#series_article_no').attr('required', true);
                 $('#current_article_no').attr('required', true);
                 $('#other_article_part_doi_no').attr('required', true);
-                // ✅ Bind input event after it's visible
-                $('#other_article_part_doi_no').off('input').on('input', function () {
-                    var value = $(this).val().trim();
-                    var pattern = /^SRN-EaRTh\d{6}-\d+$/;
-                    if (!pattern.test(value)) {
-                        this.setCustomValidity("Format must be: SRN-EaRTh042025-052");
-                    } else {
-                        this.setCustomValidity("");
-                    }
-                });
+                
+            // ✅ Bind validation on page load
+            bindDOIValidation();
             } else {
                 $(".series_yes").hide();
                 $('#series_article_no').attr('required', false);
