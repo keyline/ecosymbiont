@@ -991,7 +991,7 @@ use Illuminate\Support\Facades\DB;
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" class="form-control" id="input-tags">
-                                        <textarea class="form-control" name="other_article_part_doi_no" id="other_article_part_doi_no" style="display:none;" oninput="validateSRN(this)"><?=$other_article_part_doi_no?></textarea>
+                                        <textarea class="form-control" name="other_article_part_doi_no" id="other_article_part_doi_no" style="display:none;" ><?=$other_article_part_doi_no?></textarea>
                                         <small class="text-primary">Type a comma after each SRN</small>
                                         <div id="badge-container">
                                             <?php
@@ -1562,6 +1562,16 @@ use Illuminate\Support\Facades\DB;
             } else {
                 $('#current_article_no').attr('required', true);
                 $('#other_article_part_doi_no').attr('required', true);
+            }
+        });
+         // ✅ Add DOI Format Validation Here
+         $('#other_article_part_doi_no').on('input', function () {
+            var value = $(this).val().trim();
+            var pattern = /^SRN-EaRTh\d{6}-\d+$/;
+            if (!pattern.test(value)) {
+                this.setCustomValidity("Format must be: SRN-EaRTh042025-052");
+            } else {
+                this.setCustomValidity("");
             }
         });
     });
