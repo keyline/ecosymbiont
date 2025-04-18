@@ -702,12 +702,12 @@ function numberToOrdinal($number) {
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="keywords" class="col-md-12 col-lg-4 col-form-label">24) Keywords</label>
-                            <div class="col-md-12 col-lg-8">
-                                <input type="text" id="input-tags" class="form-control" placeholder="Enter Keywords">
+                            <label for="keywords" class="col-md-2 col-lg-4 col-form-label">24) Keywords</label>
+                            <div class="col-md-10 col-lg-8">
+                                <input type="text" id="input-tags-keywords" class="form-control" placeholder="Enter Keywords">
                                 <textarea class="form-control" name="keywords" id="keywords" style="display:none;"><?=$keywords?></textarea>
                                 <small class="text-primary">Enter keywords with comma separated</small>
-                                <div id="badge-container">
+                                <div id="badge-container-keywords">
                                     <?php
                                     if($keywords != ''){
                                         $deal_keywords = explode(",", $keywords);
@@ -856,11 +856,11 @@ function numberToOrdinal($number) {
                         <div class="row series_yes mb-3">
                             <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label">30C) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).
                             </label>
-                            <div class="col-md-12 col-lg-8">
-                                <input type="text" class="form-control" id="input-tags">
+                            <div class="col-md-10 col-lg-8">
+                                <input type="text" class="form-control" id="input-tags-doi">
                                 <textarea class="form-control" name="other_article_part_doi_no" id="other_article_part_doi_no" style="display:none;"><?=$other_article_part_doi_no?></textarea>
                                 <small class="text-primary">Separate each DOI with a comma</small>
-                                <div id="badge-container">
+                                <div id="badge-container-doi">
                                     <?php
                                     if($other_article_part_doi_no != ''){
                                         $deal_keywords = explode(",", $other_article_part_doi_no);
@@ -936,6 +936,7 @@ function numberToOrdinal($number) {
     document.querySelector('#submitFormButton').addEventListener('click', function (e) {
         e.preventDefault(); // Prevent default form submission
         const caption = document.getElementById('cover_image_caption').value.trim();
+        const videoUrl = document.getElementById('video_url') ? document.getElementById('video_url').value.trim() : '';
         var media = document.querySelector('input[name="media"]:checked');
         var pdfFile = document.getElementById("nelp_pdf").files.length;
         var existingPdf = document.querySelector("input[name='existing_nelp_pdf']");
@@ -949,12 +950,7 @@ function numberToOrdinal($number) {
                 text: 'Please upload an NELP before submitting.',
             });
             return; // Stop further execution
-        }
-        if (caption === '') {
-            $('#cover_image_caption').attr('required', true);
-            document.getElementById('cover_image_caption').focus();
-            return false; // Prevent form submission
-        }
+        }        
 
         // Validate media type selection
         if (!media) {
@@ -963,6 +959,22 @@ function numberToOrdinal($number) {
             document.getElementById('media_image').focus();            
             return false; // Stop further execution
         }
+
+        // Media-specific validations
+        if (media.value === 'image') {
+            if (caption === '') {
+                $('#cover_image_caption').attr('required', true);
+                document.getElementById('cover_image_caption').focus();
+                return false;
+            }
+        } else if (media.value === 'video') {
+            if (videoUrl === '') {                
+                $('#video_url').attr('required', true);
+                document.getElementById('video_url').focus();
+                return false;
+            }
+        }
+
         // Confirmation popup
         Swal.fire({
             title: 'Are you sure?',
@@ -1094,7 +1106,7 @@ function numberToOrdinal($number) {
     if(beforeData.length > 0){
       tagsArray = beforeData.split(',');
     }
-    $('#input-tags').on('input', function() {
+    $('#input-tags-keywords').on('input', function() {
         var input = $(this).val();
         if (input.includes(',')) {
             var tags = input.split(',');
@@ -1102,7 +1114,7 @@ function numberToOrdinal($number) {
                 tag = tag.trim();
                 if (tag.length > 0 && !tagsArray.includes(tag)) {
                     tagsArray.push(tag);
-                    $('#badge-container').append(
+                    $('#badge-container-keywords').append(
                         '<span class="badge">' + tag + ' <span class="remove" data-tag="' + tag + '">&times;</span></span>'
                     );
                 }
@@ -1357,7 +1369,7 @@ function numberToOrdinal($number) {
         if(beforeData.length > 0){
           tagsArray = beforeData.split(',');
         }
-        $('#input-tags').on('input', function() {
+        $('#input-tags-doi').on('input', function() {
             var input = $(this).val();
             if (input.includes(',')) {
                 var tags = input.split(',');
@@ -1365,7 +1377,7 @@ function numberToOrdinal($number) {
                     tag = tag.trim();
                     if (tag.length > 0 && !tagsArray.includes(tag)) {
                         tagsArray.push(tag);
-                        $('#badge-container').append(
+                        $('#badge-container-doi').append(
                             '<span class="badge">' + tag + ' <span class="remove" data-tag="' + tag + '">&times;</span></span>'
                         );
                     }

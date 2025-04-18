@@ -270,6 +270,8 @@ class FrontController extends Controller
     }
     public function subcategory($categoryname, $slug)
     {
+        // echo $categoryname;
+        // echo $slug; die;
         $data['row']                    = NewsCategory::select('id', 'sub_category', 'short_description')->where('status', '=', 1)->where('slug', '=', $slug)->first();
         //  dd($data['row']);
         $sub_category_id                = (($data['row'])?$data['row']->id:'');
@@ -306,7 +308,8 @@ class FrontController extends Controller
 
         // $title                          = ($categoryname .'|'. ($data['row'])?$data['row']->sub_category:'');
         $data['search_keyword']         = '';
-        $title                          = ucwords($categoryname) .' | '. $data['row']->sub_category;
+        $title                          = strtoupper($categoryname) .' | '. $data['row']->sub_category;
+        // $title                          = ucwords($categoryname) .' | '. $data['row']->sub_category;
         $page_name                      = 'subcategory';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
