@@ -6306,6 +6306,9 @@ ul.list-posts.home_feature_section li img {
   height: auto;
   object-fit: cover;
 }
+.list-posts.home_feature_section .video-post .video-holder{
+  margin-right: 0;
+}
 header nav.navbar.navbar-default {
   margin-bottom: 0 !important;
 }
