@@ -53,15 +53,14 @@
       font-size: 15px;
     }
 
-    .bold {
-      font-weight: 500;
-      color: #222;
-    }
-
     .greeting {
       margin-top: 30px;
       font-size: 15px;
       line-height: 1.6;
+    }
+    .greeting p{
+        margin-bottom: 15px;
+        color: #000
     }
 
     .signature {
@@ -74,8 +73,8 @@
     }
 
     .footer {
-      font-size: 12px;
-      color: #777;
+      font-size: 15px;
+      color: #000;
       margin-top: 30px;
       border-top: 1px solid #eee;
       padding-top: 10px;
@@ -97,28 +96,30 @@
             </div>
 
             <div class="receipt-details">
-            <p><span class="bold">Donation Receipt Number:</span> SRM-US-web2025-00123</p>
-            <p><span class="bold">Donation Receipt Date:</span> 18/04/2025</p>
-            <p><span class="bold">Donee Name:</span> Śramani Institute, Inc.</p>
-            <p><span class="bold">Donation Amount:</span> USD 1,000.00 (One thousand dollars only)</p>
-            <p><span class="bold">Donor Name:</span> John Doe</p>
-            <p><span class="bold">Donor Country of Residence:</span> United States</p>
+            <p><strong><i>Donation Receipt Number:</i></strong> SRM-US-web2025-00123</p>
+            <p><strong><i>Donation Receipt Date:</i></strong> 18/04/2025</p>
+            <p><strong><i>Donee Name:</i></strong> Śramani Institute, Inc.</p>
+            <p><strong><i>Donation Amount:</i></strong> USD 1,000.00 (One thousand dollars only)</p>
+            <p><strong><i>Donor Name:</i></strong> John Doe</p>
+            <p><strong><i>Donor Country of Residence:</i></strong> United States</p>
             </div>
 
             <div class="greeting">
             <p>Dear John Doe,</p>
             <p>Thank you so much for your donation to the Śramani Institute, Inc.!</p>
+
             <p>We greatly appreciate your gift. It will help to support our initiatives and projects that realize the interconnected wellbeing of humans and ecologies.</p>
-            <p>Your donation of USD 1,000.00 (One thousand dollars only) is tax-exempt in the United States of America (USA), as the Śramani Institute, Inc. is a 501(c)(3) tax-exempt nonprofit organization registered in the USA.</p>
+
+            <p>Your donation of <strong>USD</strong> 1,000.00 (One thousand dollars only) is tax-exempt in the United States of America (USA), as the Śramani Institute, Inc. is a 501(c)(3) tax-exempt nonprofit organization registered in the USA.</p>
             <p>Thank you again for your generosity.</p>
             </div>
 
             <div class="signature">
             <p>Best wishes,</p>
-            <p><strong>Dr. Kakoli Mitra, Esq.</strong></p>
+            <p><strong>Dr. Kakoli Mitra, <i>Esq.</i></strong></p>
             <p>Founder and Executive Director</p>
-            <p>Śramani Institute</p>
-            <p>Email: <a href="mailto:support@sramani.org">support@sramani.org</a></p>
+            <p><i>Śramani Institute</i></p>
+            <p><strong><i>Email:</i></strong> <a href="mailto:support@sramani.org">support@sramani.org</a></p>
             </div>
 
             <div class="footer">
