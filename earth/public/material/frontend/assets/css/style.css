@@ -6497,6 +6497,66 @@ div#permalink p {
   }
 }
 
+/* popup css */
+.custom-modal .modal-content {
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  border-radius: 0;
+  border: none;
+  padding: 40px 20px;
+}
+
+.custom-modal .modal-header {
+  border: none;
+  justify-content: end;
+}
+
+.custom-modal .btn-close {
+  background: none;
+  opacity: 1;
+  filter: invert(1);
+}
+
+.custom-modal .modal-title {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.custom-modal p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.custom-modal .highlight {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.custom-modal .btn-yellow {
+  background-color: #e1de63;
+  color: #000;
+  border: none;
+  padding: 12px 30px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 20px;
+}
+
+.continue-link {
+  color: #ccc;
+  font-size: 0.875rem;
+  margin-top: 30px;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.continue-link:hover {
+  color: #fff;
+}
+
 /*-------------------------------------------------*/
 /* =  Responsive Part
 /*-------------------------------------------------*/

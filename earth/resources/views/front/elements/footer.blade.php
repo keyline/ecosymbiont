@@ -129,6 +129,30 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
     </div>
 </div> -->
 
+<!-- home popup -->
+<div class="modal fade custom-modal" id="popupModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      
+      <div class="modal-body">
+        <h2 class="modal-title">We’re suing.</h2>
+        <p>We’re in court fighting the Trump administration’s relentless attacks on our environment, and we’re not slowing down. As long as they keep attacking our planet and our rights, we’ll keep filing lawsuits.</p>
+        
+        <p>Join the fight today,<br><span class="highlight">your gift will be matched $2:$1!</span></p>
+        
+        <button class="btn btn-yellow">Match My Gift</button>
+        
+        <a href="#" class="continue-link">Continue to website →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <!-- The modal -->
 <div class="modal fade" id="flipFlop" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-center" role="document">
@@ -189,6 +213,12 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+  window.addEventListener('load', () => {
+    const popup = new bootstrap.Modal(document.getElementById('popupModal'));
+    popup.show();
+  });
+</script>
 <script type="text/javascript">
     $(function(){
         $('#search_type').on('change', function(){
