@@ -1608,6 +1608,7 @@ use Illuminate\Support\Facades\DB;
 <script>
 function validateSRN(element) {
     const value = element.value.trim();
+    console.log(value);
     const pattern = /^SRN-EaRTh\d{6}-\d+$/; // Starts with SRN- followed by alphanumerics
     if (!pattern.test(value)) {
         element.setCustomValidity("Must start with 'SRN-EaRTh' followed by numbers only.");
