@@ -1531,7 +1531,7 @@ use Illuminate\Support\Facades\DB;
         var is_series= '<?=$is_series?>';
         // ✅ Validation handler function
         function bindDOIValidation() {
-            const field = $('#other_article_part_doi_no');
+            const field = $('#other_article_part_doi_no').val();
             const length = field.length;
             console.log("Field length:", length); // Test if this prints
             console.log("Binding to:", field.length ? "FOUND" : "NOT FOUND");
