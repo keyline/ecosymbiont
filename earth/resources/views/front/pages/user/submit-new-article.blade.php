@@ -1531,8 +1531,12 @@ use Illuminate\Support\Facades\DB;
         var is_series= '<?=$is_series?>';
         // ✅ Validation handler function
         function bindDOIValidation() {
-            $('#other_article_part_doi_no').off('input').on('input', function () {
+            const field = $('#other_article_part_doi_no');
+            console.log("Binding to:", field.length ? "FOUND" : "NOT FOUND");
+
+            field.off('input').on('input', function () {
                 var value = $(this).val().trim();
+                console.log("User input:", value); // Test if this prints
                 var pattern = /^SRN-EaRTh\d{6}-\d+$/;
                 if (!pattern.test(value)) {
                     this.setCustomValidity("Format must be: SRN-EaRTh042025-052");
