@@ -122,14 +122,17 @@
 .text-right .highlight-line {
     border: none;
     border-top: 1px solid #f4c542;
-    width: 50%;
-    margin: 4px 0 4px auto;
+    width: 100%;
+    margin: 2px 0 0px auto;
 }
 
 .text-right a {
     color: #f4a20e;
     font-weight: bold;
     text-decoration: none;
+}
+.my-3{
+    margin: 5px 0;
 }
 </style>
 <!-- block-wrapper-section ================================================== -->
@@ -144,9 +147,11 @@
                     <strong>Śramani Institute Inc.</strong><br>
                     EIN: 45-2512093<br>
                     <span>Tax Status: 501(c)(3) exempt (USA)</span>
-                    <hr class="highlight-line">
-                    <hr class="highlight-line">
-                    <hr class="highlight-line">
+                    <div class="my-3">
+                        <hr class="highlight-line">
+                        <hr class="highlight-line">
+                        <hr class="highlight-line">
+                    </div>
                     <a href="https://www.sramani.org" target="_blank">www.sramani.org</a><br>
                     <small><i>Realizing the interconnected wellbeing<br>of humans and ecologies</i></small>
                 </div>
