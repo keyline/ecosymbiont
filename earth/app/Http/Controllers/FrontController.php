@@ -198,6 +198,14 @@ class FrontController extends Controller
         $data['search_keyword']         = '';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
+    public function donation_receipt()
+    {
+        $data = [];
+        $title                          = 'Donation-receipt';
+        $page_name                      = 'donation-receipt';
+        $data['search_keyword']         = '';
+        echo $this->front_before_login_layout($title, $page_name, $data);
+    }
     public function projects()
     {
         $data = [];
