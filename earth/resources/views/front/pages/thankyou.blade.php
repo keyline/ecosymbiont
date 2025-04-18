@@ -4,7 +4,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      padding: 100px 0;
     }
     .thank-you-box {
       background: #ffffff;
@@ -20,7 +20,6 @@
       width: 60px;
       height: 60px;
       color: #10b981;
-      margin-bottom: 20px;
     }
 
     @keyframes fadeInUp {
@@ -41,6 +40,6 @@
         </svg>
         <h2 class="fw-bold text-success">Thank You!</h2>
         <p class="mt-3 mb-4 text-muted">Your donation has been successfully received. We truly appreciate your generous support to our cause.</p>
-        <a href="/" class="btn btn-success px-4">Go Back to Home</a>
+        <a href="#" class="btn donation_btn">Download Receipt</a>
     </div>
 </div>
