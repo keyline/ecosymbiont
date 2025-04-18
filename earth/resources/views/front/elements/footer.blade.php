@@ -128,30 +128,24 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
         </div>
     </div>
 </div> -->
+<!-- Modal -->
+<!-- Modal -->
 <div class="modal fade" id="popupModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-sm" style="margin-top: 100px;">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
-
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-
       <div class="modal-body">
         <h4 class="modal-title">We’re suing.</h4>
         <p>We’re in court fighting the Trump administration’s relentless attacks on our environment, and we’re not slowing down. As long as they keep attacking our planet and our rights, we’ll keep filing lawsuits.</p>
-
         <p>Join the fight today,<br><span class="highlight">your gift will be matched $2:$1!</span></p>
-
-        <button class="btn btn-yellow">Match My Gift</button>
-
-        <br>
+        <button class="btn btn-yellow">Match My Gift</button><br>
         <a href="#" class="continue-link">Continue to website →</a>
       </div>
-
     </div>
   </div>
 </div>
-
 
 <!-- The modal -->
 <div class="modal fade" id="flipFlop" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">

@@ -6499,12 +6499,17 @@ div#permalink p {
 
 /* popup css */
 /* Custom Modal Styling */
+.modal-dialog {
+  margin-top: 100px;
+}
+
 .modal-content {
   background-color: #000;
   color: #fff;
+  border: none;
   border-radius: 0;
-  padding: 30px;
   text-align: center;
+  padding: 40px 30px;
 }
 
 .modal-header {
@@ -6515,48 +6520,72 @@ div#permalink p {
 
 .modal-header .close {
   color: #fff;
+  font-size: 28px;
   opacity: 1;
-  font-size: 30px;
 }
 
 .modal-title {
-  font-size: 26px;
-  font-weight: bold;
-  margin-top: 10px;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 15px;
 }
 
 .modal-body p {
-  font-size: 14px;
-  margin: 15px 0;
+  font-size: 15px;
+  line-height: 1.8;
+  margin: 10px 0;
 }
 
 .highlight {
+  display: block;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 17px;
+  margin-top: 10px;
 }
 
 .btn-yellow {
   background-color: #e1de63;
   color: #000;
   border: none;
-  padding: 10px 25px;
+  padding: 12px 30px;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-top: 20px;
+  transition: all 0.3s ease;
+}
+
+.btn-yellow:hover {
+  background-color: #d1cd4a;
 }
 
 .continue-link {
   display: inline-block;
   color: #ccc;
-  margin-top: 25px;
   font-size: 13px;
+  margin-top: 25px;
   text-decoration: none;
 }
 
 .continue-link:hover {
   color: #fff;
   text-decoration: underline;
+}
+
+/* Optional Fade-In Animation */
+.modal.fade .modal-dialog {
+  -webkit-transform: translate(0, -25%);
+  -ms-transform: translate(0, -25%);
+  transform: translate(0, -25%);
+  -webkit-transition: transform 0.3s ease-out;
+  -moz-transition: transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+}
+
+.modal.in .modal-dialog {
+  -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  transform: translate(0, 0);
 }
 /*-------------------------------------------------*/
 /* =  Responsive Part
