@@ -6499,15 +6499,15 @@ div#permalink p {
 
 /* popup css */
 /* Custom Modal Styling */
-.modal-dialog {
+#popupModal .modal-dialog {
   margin-top: 100px;
   width: 100%;
-  max-width: 700px;
+  max-width: 700px !important;
   margin-left: 15px;
   margin-right: 15px;
 }
 
-.modal-content {
+#popupModal .modal-content {
   background-color: #000 !important;
   color: #fff;
   border: none !important;
@@ -6516,29 +6516,31 @@ div#permalink p {
   padding: 20px 20px;
 }
 
-.modal-header {
+#popupModal .modal-header {
   border: none !important;
   padding: 0 !important;
   text-align: right;
 }
 
-.modal-header .close {
+#popupModal .modal-header .close {
   color: #fff;
   font-size: 40px;
   opacity: 1;
 }
 
-.modal-title {
+#popupModal .modal-title {
   font-size: 18px;
   line-height: 1.5;
   margin: 10px 0;
   color: #fff;
 }
 
-.modal-body p {
-  font-size: 15px;
-  line-height: 1.8;
+#popupModal .modal-body p {
+  font-size: 18px;
+  line-height: 1.5;
   margin: 35px 0;
+  color: #fff;
+
 }
 
 .highlight {
@@ -6577,7 +6579,7 @@ div#permalink p {
 }
 
 /* Optional Fade-In Animation */
-.modal.fade .modal-dialog {
+#popupModal.modal.fade .modal-dialog {
   -webkit-transform: translate(0, -25%);
   -ms-transform: translate(0, -25%);
   transform: translate(0, -25%);
@@ -6586,7 +6588,7 @@ div#permalink p {
   transition: transform 0.3s ease-out;
 }
 
-.modal.in .modal-dialog {
+#popupModal.modal.in .modal-dialog {
   -webkit-transform: translate(0, 0);
   -ms-transform: translate(0, 0);
   transform: translate(0, 0);
