@@ -4,7 +4,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 100px 0;
+      padding: 80px 0;
     }
     .thank-you-box {
       background: #ffffff;
@@ -15,7 +15,9 @@
       animation: fadeInUp 0.6s ease-out;
       max-width: 500px;
     }
-
+    .thank-you-box p{
+      margin: 20px 0;
+    }
     .thank-you-box svg {
       width: 60px;
       height: 60px;
