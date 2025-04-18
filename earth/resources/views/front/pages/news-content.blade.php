@@ -452,7 +452,7 @@ $current_url = $protocol . $host . $uri;
                                 <div class="carousel-box owl-wrapper">
                                     <div class="title-section">
                                         <?php if($is_series == 'Yes'){?>
-                                            <?php if(count($other_articles_in_this_series) > 1){?>
+                                            <?php  if(count($other_articles_in_this_series) > 1){?>
                                                 <h1><span>Other parts of this series</span></h1>
                                             <?php }?>
                                         <?php } else {?>
@@ -627,7 +627,7 @@ $current_url = $protocol . $host . $uri;
                 ?></p>  
         </div>
         <div class="cite_button">
-            <button class="btn btn-primary" onclick="copyText()"><i class="fa fa-copy"></i> Copy</button>                                  
+            <!-- <button class="btn btn-primary" onclick="copyText()"><i class="fa fa-copy"></i> Copy</button>                                   -->
             <button id="closePopup">Close</button>
         </div>                                    
         <h3 id="copyMessage" class="text-success">Copied successfully!</h3>
