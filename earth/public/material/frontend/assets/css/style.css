@@ -7239,6 +7239,15 @@ div#permalink p {
   width: 100%;
   max-width: 450px !important;
 }
+#popupModal .modal-title {
+  font-size: 25px;
+}
+#popupModal .modal-body p {
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 25px 0;
+  color: #fff;
+}
 }
 @media (max-width: 650px) {
   ul.autor-list > li .autor-last-line a.autor-site {
