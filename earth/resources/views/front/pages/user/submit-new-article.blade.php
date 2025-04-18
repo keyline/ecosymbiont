@@ -1547,6 +1547,16 @@ use Illuminate\Support\Facades\DB;
                 $('#series_article_no').attr('required', true);
                 $('#current_article_no').attr('required', true);
                 $('#other_article_part_doi_no').attr('required', true);
+                // ✅ Bind input event after it's visible
+                $('#other_article_part_doi_no').off('input').on('input', function () {
+                    var value = $(this).val().trim();
+                    var pattern = /^SRN-EaRTh\d{6}-\d+$/;
+                    if (!pattern.test(value)) {
+                        this.setCustomValidity("Format must be: SRN-EaRTh042025-052");
+                    } else {
+                        this.setCustomValidity("");
+                    }
+                });
             } else {
                 $(".series_yes").hide();
                 $('#series_article_no').attr('required', false);
@@ -1563,18 +1573,7 @@ use Illuminate\Support\Facades\DB;
                 $('#current_article_no').attr('required', true);
                 $('#other_article_part_doi_no').attr('required', true);
             }
-        });
-         // ✅ Add DOI Format Validation Here
-         // ✅ Bind input event after it's visible
-    $('#other_article_part_doi_no').off('input').on('input', function () {
-        var value = $(this).val().trim();
-        var pattern = /^SRN-EaRTh\d{6}-\d+$/;
-        if (!pattern.test(value)) {
-            this.setCustomValidity("Format must be: SRN-EaRTh042025-052");
-        } else {
-            this.setCustomValidity("");
-        }
-    });
+        });        
     });
 </script>
 
