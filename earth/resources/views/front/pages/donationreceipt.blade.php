@@ -54,7 +54,9 @@
         font-size: 16px;
         color: #444;
     }
-
+    .receipt-details strong{
+        width: 230px;
+    }
     .receipt-details p {
         margin: 8px 0;
         font-size: 16px;
