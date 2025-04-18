@@ -270,6 +270,7 @@ class FrontController extends Controller
     }
     public function subcategory($categoryname, $slug)
     {
+        echo $categoryname; die;
         $data['row']                    = NewsCategory::select('id', 'sub_category', 'short_description')->where('status', '=', 1)->where('slug', '=', $slug)->first();
         //  dd($data['row']);
         $sub_category_id                = (($data['row'])?$data['row']->id:'');
