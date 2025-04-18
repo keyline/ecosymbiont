@@ -1567,6 +1567,7 @@ use Illuminate\Support\Facades\DB;
          // ✅ Add DOI Format Validation Here
          $('#other_article_part_doi_no').on('input', function () {
             var value = $(this).val().trim();
+            alert(value);
             var pattern = /^SRN-EaRTh\d{6}-\d+$/;
             if (!pattern.test(value)) {
                 this.setCustomValidity("Format must be: SRN-EaRTh042025-052");
