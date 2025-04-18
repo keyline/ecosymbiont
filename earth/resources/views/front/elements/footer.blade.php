@@ -128,7 +128,10 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
         </div>
     </div>
 </div> -->
-
+<!-- Trigger Button -->
+<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#popupModal">
+  Launch Popup
+</button>
 <!-- home popup -->
 <div class="modal fade custom-modal" id="popupModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
