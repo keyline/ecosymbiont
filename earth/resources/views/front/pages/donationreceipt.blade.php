@@ -141,7 +141,7 @@
         <div class="receipt-card">
             <div class="receipt-header-top">
                 <div class="logo-left">
-                    <img src="<?=env('UPLOADS_URL').'pdf-logo.jpg'?>" alt="" class="img-fluid">
+                    <img src="<?=env('UPLOADS_URL').'pdf-logo.jpg'?>" alt="pdf-logo" class="img-fluid">
                 </div>
                 <div class="text-right">
                     <strong>Śramani Institute Inc.</strong><br>
