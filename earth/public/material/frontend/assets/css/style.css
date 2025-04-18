@@ -7066,6 +7066,9 @@ div#permalink p {
 div.block-content {
   padding: 30px 0 0px;
 }
+.list-posts.home_feature_section .post-content{
+  margin-left: 0;
+}
 }
 @media (max-width: 500px) {
   .image-slider .image-post .hover-box .inner-hover h2 {
