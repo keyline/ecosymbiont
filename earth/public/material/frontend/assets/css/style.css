@@ -7234,6 +7234,11 @@ div#permalink p {
 .donation-amounts button {
   margin-bottom: 5px;
 }
+#popupModal .modal-dialog {
+  margin-top: 50px;
+  width: 100%;
+  max-width: 450px !important;
+}
 }
 @media (max-width: 650px) {
   ul.autor-list > li .autor-last-line a.autor-site {
@@ -7365,6 +7370,11 @@ div.block-content {
   }
   #popup, #permalink {
     max-width: 320px;
+  }
+  #popupModal .modal-dialog {
+    margin-top: 50px;
+    width: 100%;
+    max-width: 320px !important;
   }
 }
 .content-blocker,
