@@ -6526,6 +6526,8 @@ div#permalink p {
   color: #fff;
   font-size: 40px;
   opacity: 1;
+  position: relative;
+  z-index: 5;
 }
 
 #popupModal .modal-title {

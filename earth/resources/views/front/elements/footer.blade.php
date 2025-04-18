@@ -141,7 +141,7 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
         <p>We’re in court fighting the Trump administration’s relentless attacks on our environment, and we’re not slowing down. As long as they keep attacking our planet and our rights, we’ll keep filing lawsuits.</p>
         <p>Join the fight today,<br><span class="highlight">your gift will be matched $2:$1!</span></p>
         <button class="btn btn-yellow">Donate to EaRTh</button><br>
-        <a href="#" class="continue-link">Continue to website →</a>
+        <a href="#" class="continue-link" data-dismiss="modal">Continue to website →</a>
       </div>
     </div>
   </div>
