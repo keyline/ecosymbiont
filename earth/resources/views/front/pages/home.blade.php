@@ -651,7 +651,7 @@ $current_url = $protocol . $host . $uri;
                                                             <li><i class="fa fa-clock-o"></i><?=date_format(date_create($featuredContent->created_at), "d M Y")?></li>
                                                             <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$featuredContent->for_publication_name ?? $featuredContent->author_name?></a></li>
                                                         </ul>
-                                                        <p><?=$featuredContent->sub_title?></p>
+                                                        <p class="dec"><?=$featuredContent->sub_title?></p>
                                                     </div>
                                                 </li>
                                             <?php }?>
