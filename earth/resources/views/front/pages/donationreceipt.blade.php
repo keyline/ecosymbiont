@@ -56,6 +56,7 @@
     }
     .receipt-details strong{
         width: 230px;
+        display: inline-block;
     }
     .receipt-details p {
         margin: 8px 0;
