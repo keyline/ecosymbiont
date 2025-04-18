@@ -1525,13 +1525,13 @@ use Illuminate\Support\Facades\DB;
     });
 </script>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $(document).ready(function() {
         $(".series_yes").hide();
         var is_series= '<?=$is_series?>';
         // ✅ Validation handler function
         function bindDOIValidation() {
-            const field = $('#other_article_part_doi_no').val();
+            const field = $('#other_article_part_doi_no');
             const length = field.length;
             console.log("Field length:", length); // Test if this prints
             console.log("Binding to:", field.length ? "FOUND" : "NOT FOUND");
@@ -1589,7 +1589,73 @@ use Illuminate\Support\Facades\DB;
             }
         });        
     });
+</script> -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".series_yes").hide();
+        var is_series = '<?=$is_series?>';
+
+        // ✅ Function to bind DOI validation
+        function bindDOIValidation() {
+            const field = $('#other_article_part_doi_no');
+            console.log("Binding to:", field.length ? "FOUND" : "NOT FOUND");
+
+            field.off('input').on('input', function () {
+                var value = $(this).val().trim();
+                var pattern = /^SRN-EaRTh\d{6}-\d+$/;
+                if (!pattern.test(value)) {
+                    this.setCustomValidity("Invalid format. Example: SRN-EaRTh042025-052");
+                } else {
+                    this.setCustomValidity("");
+                }
+            });
+        }
+
+        // ✅ Initial page load
+        if (is_series === "Yes") {
+            $(".series_yes").show();
+            $('#series_article_no').attr('required', true);
+            $('#current_article_no').attr('required', true);
+            $('#other_article_part_doi_no').attr('required', true).show();
+            bindDOIValidation();
+        } else {
+            $(".series_yes").hide();
+            $('#series_article_no').attr('required', false);
+            $('#current_article_no').attr('required', false);
+            $('#other_article_part_doi_no').attr('required', false).hide();
+        }
+
+        // ✅ When user changes "is_series"
+        $('input[name="is_series"]').change(function () {
+            if ($(this).val() === "Yes") {
+                $(".series_yes").show();
+                $('#series_article_no').attr('required', true);
+                $('#current_article_no').attr('required', true);
+                $('#other_article_part_doi_no').attr('required', true).show();
+                bindDOIValidation();
+            } else {
+                $(".series_yes").hide();
+                $('#series_article_no').attr('required', false);
+                $('#current_article_no').attr('required', false);
+                $('#other_article_part_doi_no').attr('required', false).hide();
+            }
+        });
+
+        // ✅ Optional logic based on current_article_no value
+        $('#current_article_no').on('input', function () {
+            var val = parseInt($(this).val());
+            if (val <= 1) {
+                $('#current_article_no').attr('required', false);
+                $('#other_article_part_doi_no').attr('required', false);
+            } else {
+                $('#current_article_no').attr('required', true);
+                $('#other_article_part_doi_no').attr('required', true);
+            }
+        });
+    });
 </script>
+
 
 <script type="text/javascript">
     $(document).ready(function() {
