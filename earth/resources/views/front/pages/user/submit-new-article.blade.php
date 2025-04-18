@@ -1565,16 +1565,16 @@ use Illuminate\Support\Facades\DB;
             }
         });
          // ✅ Add DOI Format Validation Here
-         $('#other_article_part_doi_no').on('input', function () {
-            var value = $(this).val().trim();
-            alert(value);
-            var pattern = /^SRN-EaRTh\d{6}-\d+$/;
-            if (!pattern.test(value)) {
-                this.setCustomValidity("Format must be: SRN-EaRTh042025-052");
-            } else {
-                this.setCustomValidity("");
-            }
-        });
+         // ✅ Bind input event after it's visible
+    $('#other_article_part_doi_no').off('input').on('input', function () {
+        var value = $(this).val().trim();
+        var pattern = /^SRN-EaRTh\d{6}-\d+$/;
+        if (!pattern.test(value)) {
+            this.setCustomValidity("Format must be: SRN-EaRTh042025-052");
+        } else {
+            this.setCustomValidity("");
+        }
+    });
     });
 </script>
 
