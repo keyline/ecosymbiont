@@ -99,10 +99,55 @@
         color: #007BFF;
         text-decoration: none;
     }
+    .receipt-header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+.logo-left img {
+    max-height: 80px;
+}
+
+.text-right {
+    text-align: right;
+    font-size: 14px;
+    color: #000;
+    line-height: 1.5;
+}
+
+.text-right .highlight-line {
+    border: none;
+    border-top: 2px solid #f4c542;
+    width: 50%;
+    margin: 4px 0 4px auto;
+}
+
+.text-right a {
+    color: #f4a20e;
+    font-weight: bold;
+    text-decoration: none;
+}
 </style>
 <!-- block-wrapper-section ================================================== -->
 <section class="block-wrapper">
     <div class="pdf-body">
+        <div class="receipt-header-top">
+            <div class="logo-left">
+                <img src="your-image-path/5d319ccb-63f2-4c44-8138-c5bbb5f5538b.png" alt="Śramani Logo">
+            </div>
+            <div class="text-right">
+                <strong>Śramani Institute Inc.</strong><br>
+                EIN: 45-2512093<br>
+                <span>Tax Status: 501(c)(3) exempt (USA)</span>
+                <hr class="highlight-line">
+                <a href="https://www.sramani.org" target="_blank">www.sramani.org</a><br>
+                <small><i>Realizing the interconnected wellbeing<br>of humans and ecologies</i></small>
+            </div>
+        </div>
         <div class="receipt-card">
             <div class="header">
                 <h2>Donation Receipt</h2>
