@@ -987,11 +987,11 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
-                                    <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label blue-text">32c) List (in order is submission) the SRNs of each previously submitted creative-work in series (enter a comma after each SRN)
+                                    <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label blue-text">31c) List (in order is submission) the SRNs of each previously submitted creative-work in series (enter a comma after each SRN)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" class="form-control" id="input-tags">
-                                        <textarea class="form-control" name="other_article_part_doi_no" id="other_article_part_doi_no" style="display:none;" ><?=$other_article_part_doi_no?></textarea>
+                                        <textarea class="form-control" name="other_article_part_doi_no" id="other_article_part_doi_no" style="display:none;"><?=$other_article_part_doi_no?></textarea>
                                         <small class="text-primary">Type a comma after each SRN</small>
                                         <div id="badge-container">
                                             <?php
@@ -1101,7 +1101,13 @@ use Illuminate\Support\Facades\DB;
       <h3><i class="bi bi-exclamation-triangle-fill"></i> Warning</h3>
       <p>You must submit an original Creative-Work and you must own the copyright and licensing rights to your original Creative-Work.</p>
       <button id="closePopup">Close</button>
-    </div>      
+    </div>  
+    <!-- <div id="save">
+      <h3><i class="bi bi-exclamation-triangle-fill"></i> Warning</h3>
+      <p>1. To finalize and submit your article, click "Submit". Please note that after submission, you will no longer be able to edit the data.  
+      2. To save your article temporarily for further edits before submission, click "Save Now".</p>
+      <button id="savenowclose">Close</button>      
+    </div>     -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -1125,6 +1131,45 @@ use Illuminate\Support\Facades\DB;
             $('#submitButton').prop('disabled', false); // Re-enable submit button
             });
         });
+
+//         $(document).ready(function () {
+//             // Initially hide the popup
+//             $('#save').hide();
+//     // Handle submit button click
+//     $('#saveButton').click(function () {
+//         $('#save').show; // Show the modal
+//     });
+
+//     // Close popup and re-enable submit button
+//     $('#savenowclose').click(function () {
+//             $('#save').fadeOut();
+
+//             $('#saveForm')
+//             .find(':input[required]')
+//             .each(function () {
+//                 $(this).data('required', true); // Save original required state
+//                 $(this).removeAttr('required'); // Remove required temporarily
+//             });
+
+//         // Set action to draft
+//         $('#formAction').val('draft');
+
+//         // Submit the form
+//         $('#saveForm').submit();
+//             // $('#submitButton').prop('disabled', false); // Re-enable submit button
+//             });
+//             //  Restore required attributes
+//         $('#saveForm')
+//             .find(':input')
+//             .each(function () {
+//                 if ($(this).data('required')) {
+//                     $(this).attr('required', true); // Restore original required state
+//                 }
+//             });
+
+    
+// });
+        
     </script>
 <!-- Popup end (Initially hidden) -->
 <!-- Function to show/hide the invited and participated fields -->
@@ -1525,36 +1570,15 @@ use Illuminate\Support\Facades\DB;
     });
 </script>
 
-<!-- <script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function() {
         $(".series_yes").hide();
         var is_series= '<?=$is_series?>';
-        // ✅ Validation handler function
-        function bindDOIValidation() {
-            const field = $('#other_article_part_doi_no');
-            const length = field.length;
-            console.log("Field length:", length); // Test if this prints
-            console.log("Binding to:", field.length ? "FOUND" : "NOT FOUND");
-
-            field.off('input').on('input', function () {
-                var value = $(this).val().trim();
-                console.log("User input:", value); // Test if this prints
-                var pattern = /^SRN-EaRTh\d{6}-\d+$/;
-                if (!pattern.test(value)) {
-                    this.setCustomValidity("Format must be: SRN-EaRTh042025-052");
-                } else {
-                    this.setCustomValidity("");
-                }
-            });
-        }
         if (is_series === "Yes") {
             $(".series_yes").show();
             $('#series_article_no').attr('required', true);
             $('#current_article_no').attr('required', true);
             $('#other_article_part_doi_no').attr('required', true);
-            
-            // ✅ Bind validation on page load
-            bindDOIValidation();
         } else {
             $(".series_yes").hide();
             $('#series_article_no').attr('required', false);
@@ -1568,9 +1592,6 @@ use Illuminate\Support\Facades\DB;
                 $('#series_article_no').attr('required', true);
                 $('#current_article_no').attr('required', true);
                 $('#other_article_part_doi_no').attr('required', true);
-                
-            // ✅ Bind validation on page load
-            bindDOIValidation();
             } else {
                 $(".series_yes").hide();
                 $('#series_article_no').attr('required', false);
@@ -1587,75 +1608,9 @@ use Illuminate\Support\Facades\DB;
                 $('#current_article_no').attr('required', true);
                 $('#other_article_part_doi_no').attr('required', true);
             }
-        });        
-    });
-</script> -->
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(".series_yes").hide();
-        var is_series = '<?=$is_series?>';
-
-        // ✅ Function to bind DOI validation
-        function bindDOIValidation() {
-            const field = $('#other_article_part_doi_no');
-            console.log("Binding to:", field.length ? "FOUND" : "NOT FOUND");
-
-            field.off('input').on('input', function () {
-                var value = $(this).val().trim();
-                var pattern = /^SRN-EaRTh\d{6}-\d+$/;
-                if (!pattern.test(value)) {
-                    this.setCustomValidity("Invalid format. Example: SRN-EaRTh042025-052");
-                } else {
-                    this.setCustomValidity("");
-                }
-            });
-        }
-
-        // ✅ Initial page load
-        if (is_series === "Yes") {
-            $(".series_yes").show();
-            $('#series_article_no').attr('required', true);
-            $('#current_article_no').attr('required', true);
-            $('#other_article_part_doi_no').attr('required', true).show();
-            bindDOIValidation();
-        } else {
-            $(".series_yes").hide();
-            $('#series_article_no').attr('required', false);
-            $('#current_article_no').attr('required', false);
-            $('#other_article_part_doi_no').attr('required', false).hide();
-        }
-
-        // ✅ When user changes "is_series"
-        $('input[name="is_series"]').change(function () {
-            if ($(this).val() === "Yes") {
-                $(".series_yes").show();
-                $('#series_article_no').attr('required', true);
-                $('#current_article_no').attr('required', true);
-                $('#other_article_part_doi_no').attr('required', true).show();
-                bindDOIValidation();
-            } else {
-                $(".series_yes").hide();
-                $('#series_article_no').attr('required', false);
-                $('#current_article_no').attr('required', false);
-                $('#other_article_part_doi_no').attr('required', false).hide();
-            }
-        });
-
-        // ✅ Optional logic based on current_article_no value
-        $('#current_article_no').on('input', function () {
-            var val = parseInt($(this).val());
-            if (val <= 1) {
-                $('#current_article_no').attr('required', false);
-                $('#other_article_part_doi_no').attr('required', false);
-            } else {
-                $('#current_article_no').attr('required', true);
-                $('#other_article_part_doi_no').attr('required', true);
-            }
         });
     });
 </script>
-
 
 <script type="text/javascript">
     $(document).ready(function() {
