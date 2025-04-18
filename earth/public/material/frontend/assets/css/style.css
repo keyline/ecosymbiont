@@ -6498,47 +6498,48 @@ div#permalink p {
 }
 
 /* popup css */
-.custom-modal .modal-content {
+/* Custom Modal Styling */
+.modal-content {
   background-color: #000;
   color: #fff;
-  text-align: center;
   border-radius: 0;
-  border: none;
-  padding: 40px 20px;
+  padding: 30px;
+  text-align: center;
 }
 
-.custom-modal .modal-header {
+.modal-header {
   border: none;
-  justify-content: end;
+  padding: 0;
+  text-align: right;
 }
 
-.custom-modal .btn-close {
-  background: none;
+.modal-header .close {
+  color: #fff;
   opacity: 1;
-  filter: invert(1);
+  font-size: 30px;
 }
 
-.custom-modal .modal-title {
-  font-size: 2.2rem;
+.modal-title {
+  font-size: 26px;
   font-weight: bold;
-  margin-bottom: 15px;
+  margin-top: 10px;
 }
 
-.custom-modal p {
-  font-size: 1rem;
-  margin-bottom: 20px;
+.modal-body p {
+  font-size: 14px;
+  margin: 15px 0;
 }
 
-.custom-modal .highlight {
+.highlight {
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 16px;
 }
 
-.custom-modal .btn-yellow {
+.btn-yellow {
   background-color: #e1de63;
   color: #000;
   border: none;
-  padding: 12px 30px;
+  padding: 10px 25px;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -6546,17 +6547,17 @@ div#permalink p {
 }
 
 .continue-link {
-  color: #ccc;
-  font-size: 0.875rem;
-  margin-top: 30px;
   display: inline-block;
+  color: #ccc;
+  margin-top: 25px;
+  font-size: 13px;
   text-decoration: none;
 }
 
 .continue-link:hover {
   color: #fff;
+  text-decoration: underline;
 }
-
 /*-------------------------------------------------*/
 /* =  Responsive Part
 /*-------------------------------------------------*/
