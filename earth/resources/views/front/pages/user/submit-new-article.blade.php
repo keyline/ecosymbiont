@@ -1532,6 +1532,8 @@ use Illuminate\Support\Facades\DB;
         // ✅ Validation handler function
         function bindDOIValidation() {
             const field = $('#other_article_part_doi_no');
+            const length = field.length;
+            console.log("Field length:", length); // Test if this prints
             console.log("Binding to:", field.length ? "FOUND" : "NOT FOUND");
 
             field.off('input').on('input', function () {
