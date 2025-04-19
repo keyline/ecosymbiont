@@ -1691,7 +1691,7 @@ use Illuminate\Support\Facades\DB;
                     tag = tag.trim();
                     if (tag.length > 0) {
                         if (!pattern.test(tag)) {
-                            $('#validation-msg').text("❌ Tag '" + tag + "' is invalid format. Skipped.").css('color', 'red');
+                            $('#validation-msg').text("❌ Tag '" + tag + "' is invalid format.").css('color', 'red');
                             return;
                         }
                         if (!tagsArray.includes(tag)) {
