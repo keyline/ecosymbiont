@@ -71,9 +71,9 @@ $controllerRoute = $module['controller_route'];
                             <a href="<?=url('admin/news_content/import/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit/Import <?=$module['title']?>"><i class="fa fa-edit"></i>/<i class="fa fa-file-import"></i></a><br>
                           <?php } ?>                          
                         </td>
-                        <td><?=$row->article_no?></td>
-                        <td><?=$row->article_no?></td>
-                        <td><?=$row->article_no?></td>
+                        <td><?=$row->current_article_no?>/<?=$row->	series_article_no?></td>
+                        <td><?=$row->projects_name?></td>
+                        <td><?=$row->community_name?></td>
                         <td><?=$row->article_no?></td>
                         <td>
                           <?=$row->first_name?> <?=$row->last_name?><br> <?=$row->email?></td>
