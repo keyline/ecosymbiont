@@ -7052,6 +7052,9 @@ div#permalink p {
   width: 80%;
 }
 ul.list-posts > li .post-content h2{
+  font-size: 16px !important;
+}
+ul.list-posts > li .post-content p{
   font-size: 15px !important;
 }
 }
