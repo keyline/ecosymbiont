@@ -1621,7 +1621,7 @@ use Illuminate\Support\Facades\DB;
         }
         $('#input-tags').on('input', function() {
             var input = $(this).val();
-            alert(input);
+            // alert(input);
             var pattern = /^SRN-EaRTh\d{6}-\d+$/;
                 if (!pattern.test(value)) {
                     this.setCustomValidity("Invalid format. Example: SRN-EaRTh042025-052");
