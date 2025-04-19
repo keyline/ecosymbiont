@@ -34,7 +34,7 @@ $controllerRoute = $module['controller_route'];
             <a href="<?=url('admin/' . $controllerRoute . '/add/')?>" class="btn btn-outline-success btn-sm">Add <?=$module['title']?></a>
           </h5>
           <div class="dt-responsive table-responsive">
-            <table <?php if(count($rows)>0){ ?>id="simpletable" <?php } ?> class="table table-striped table-bordered nowrap">
+            <table <?php Helper::pr($rows); if(count($rows)>0){ ?>id="simpletable" <?php } ?> class="table table-striped table-bordered nowrap">
               <thead>
                 <tr>
                   <!-- <th class="admin-select-none"><a href="javascript:selectToggle(selete);" id="show"
@@ -43,12 +43,15 @@ $controllerRoute = $module['controller_route'];
                       onclick="unCheckALL();">Deselect</a>
                   </th> -->
                   <th scope="col">#</th>
-                  <th scope="col">Action</th>
+                  <th scope="col">Action</th>                  
+                  <th scope="col">Series</th>                  
+                  <th scope="col">Project</th>                  
+                  <th scope="col">Community</th>                  
                   <th scope="col">SRN</th>
-                  <th scope="col">Author Info</th>                  
-                  <th scope="col">Creative-Work Info</th>                  
-                  <th scope="col">Submitted At</th>                  
-                  <th scope="col">Published Status</th>                  
+                  <th scope="col">Author(s)</th>                  
+                  <th scope="col">Title</th>                  
+                  <th scope="col">Submitted</th>                  
+                  <th scope="col">Status</th>                  
                   <!-- <th scope="col">Published Action</th> -->                  
                 </tr>
               </thead>
@@ -68,6 +71,9 @@ $controllerRoute = $module['controller_route'];
                             <a href="<?=url('admin/news_content/import/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit/Import <?=$module['title']?>"><i class="fa fa-edit"></i>/<i class="fa fa-file-import"></i></a><br>
                           <?php } ?>                          
                         </td>
+                        <td><?=$row->article_no?></td>
+                        <td><?=$row->article_no?></td>
+                        <td><?=$row->article_no?></td>
                         <td><?=$row->article_no?></td>
                         <td>
                           <?=$row->first_name?> <?=$row->last_name?><br> <?=$row->email?></td>
