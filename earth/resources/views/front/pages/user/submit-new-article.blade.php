@@ -1621,6 +1621,14 @@ use Illuminate\Support\Facades\DB;
         }
         $('#input-tags').on('input', function() {
             var input = $(this).val();
+            alert(input);
+            var pattern = /^SRN-EaRTh\d{6}-\d+$/;
+                if (!pattern.test(value)) {
+                    this.setCustomValidity("Invalid format. Example: SRN-EaRTh042025-052");
+                } else {
+                    this.setCustomValidity("");
+                }
+
             if (input.includes(',')) {
                 var tags = input.split(',');
                 tags.forEach(function(tag) {
