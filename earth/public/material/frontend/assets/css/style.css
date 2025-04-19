@@ -7059,6 +7059,7 @@ ul.list-posts > li .post-content p,
 .article-post .post-content p{
   font-size: 15px !important;
 }
+}
 
 @media (max-width: 650px) {
   ul.autor-list > li .autor-last-line a.autor-site {
@@ -7079,6 +7080,12 @@ div.block-content {
 }
 .list-posts.home_feature_section .post-content{
   margin-left: 0;
+}
+ul.list-posts > li .video-post{
+  margin-bottom: 0;
+}
+ul.list-posts > li .video-post img{
+  margin-bottom: 10px;
 }
 }
 @media (max-width: 500px) {
