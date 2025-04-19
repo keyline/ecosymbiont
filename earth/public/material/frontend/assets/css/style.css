@@ -3580,7 +3580,7 @@ ul.list-posts > li .video-holder > img{
   font-weight: 700;
   line-height: 20px;
   margin: 0 0 10px;
-  font-size: 18px;
+  font-size: 15px;
   line-height: 24px;
   margin-bottom: 7px;
 }
@@ -3608,6 +3608,7 @@ ul.list-posts > li .video-holder > img{
   margin-bottom: 13px;
   margin-top: 15px;
   color: #000;
+  font-size: 14px;
 }
 /* large post style */
 .large-post {
