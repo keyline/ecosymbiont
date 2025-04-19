@@ -65,8 +65,7 @@ $controllerRoute = $module['controller_route'];
                   <th scope="col">Title</th>
                   <th scope="col">Published Date</th>                  
                   
-                  <!-- <th scope="col">Keywords</th> -->
-                  <th scope="col">Is Feature<br>Is Popular<br>Is Fiction<br>Is Series</th>                  
+                  <!-- <th scope="col">Keywords</th> -->                                   
                 </tr>
               </thead>
               <tbody>
