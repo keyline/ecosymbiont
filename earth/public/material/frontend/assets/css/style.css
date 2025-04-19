@@ -3398,7 +3398,7 @@ ul.list-posts > li .post-content h2 {
   font-weight: 700;
   line-height: 20px;
   margin: 0 0 10px;
-  font-size: 18px;
+  font-size: 15px;
   max-height: 40px;
   overflow: hidden;
   margin-bottom: 7px;
@@ -7054,7 +7054,6 @@ div#permalink p {
   margin-top: 5px;
   width: 80%;
 }
-ul.list-posts > li .post-content h2,
 .article-post .post-content h2{
   font-size: 16px !important;
 }
