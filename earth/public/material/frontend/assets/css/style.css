@@ -6306,6 +6306,9 @@ ul.list-posts.home_feature_section li img {
   height: auto;
   object-fit: cover;
 }
+ul.list-posts.home_feature_section .post-content h2{
+  font-size: 18px;
+}
 .list-posts.home_feature_section .video-post .video-holder{
   margin-right: 0;
 }
