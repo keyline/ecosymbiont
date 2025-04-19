@@ -1623,11 +1623,12 @@ use Illuminate\Support\Facades\DB;
             var input = $(this).val();
             // alert(input);
             var pattern = /^SRN-EaRTh\d{6}-\d+$/;
-                if (!pattern.test(value)) {
-                    this.setCustomValidity("Invalid format. Example: SRN-EaRTh042025-052");
-                } else {
-                    this.setCustomValidity("");
-                }
+            if (pattern.test(input)) {
+                console.log("✅ Valid format");
+            } else {
+                console.log("❌ Invalid format");
+            }
+                
 
             if (input.includes(',')) {
                 var tags = input.split(',');
