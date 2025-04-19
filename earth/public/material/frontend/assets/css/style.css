@@ -3366,7 +3366,7 @@ ul.list-posts > li {
   overflow: hidden;
 }
 ul.list-posts > li img {
-  width: 100px;
+  width: 150px;
   /* margin-right: 20px; */
   float: left;
 }
@@ -3398,7 +3398,7 @@ ul.list-posts > li .post-content h2 {
   font-weight: 700;
   line-height: 20px;
   margin: 0 0 10px;
-  font-size: 13px;
+  font-size: 18px;
   max-height: 40px;
   overflow: hidden;
   margin-bottom: 7px;
@@ -7050,6 +7050,9 @@ div#permalink p {
   margin-bottom: 6px;
   margin-top: 5px;
   width: 80%;
+}
+ul.list-posts > li .post-content h2{
+  font-size: 15px !important;
 }
 }
 @media (max-width: 650px) {
