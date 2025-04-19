@@ -7090,7 +7090,7 @@ ul.list-posts > li .video-post{
 ul.list-posts > li img{
   margin-bottom: 10px;
 }
-.news-postarticle-post .post-gallery img{
+.news-post.article-post .post-gallery img{
   width: 100%;
   max-width: 150px !important;
 }
