@@ -34,7 +34,7 @@ $controllerRoute = $module['controller_route'];
             <a href="<?=url('admin/' . $controllerRoute . '/add/')?>" class="btn btn-outline-success btn-sm">Add <?=$module['title']?></a>
           </h5>
           <div class="dt-responsive table-responsive">
-            <table <?php Helper::pr($rows); if(count($rows)>0){ ?>id="simpletable" <?php } ?> class="table table-striped table-bordered nowrap">
+            <table <?php if(count($rows)>0){ ?>id="simpletable" <?php } ?> class="table table-striped table-bordered nowrap">
               <thead>
                 <tr>
                   <!-- <th class="admin-select-none"><a href="javascript:selectToggle(selete);" id="show"
