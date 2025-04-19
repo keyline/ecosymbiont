@@ -7051,13 +7051,15 @@ div#permalink p {
   margin-top: 5px;
   width: 80%;
 }
-ul.list-posts > li .post-content h2{
+ul.list-posts > li .post-content h2,
+.article-post .post-content h2{
   font-size: 16px !important;
 }
-ul.list-posts > li .post-content p{
+ul.list-posts > li .post-content p,
+.article-post .post-content p{
   font-size: 15px !important;
 }
-}
+
 @media (max-width: 650px) {
   ul.autor-list > li .autor-last-line a.autor-site {
     float: none;
