@@ -991,6 +991,7 @@ use Illuminate\Support\Facades\DB;
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" class="form-control" id="input-tags">
+                                        <div id="validation-msg" style="color:red; font-size: 0.9em;"></div>
                                         <textarea class="form-control" name="other_article_part_doi_no" id="other_article_part_doi_no" style="display:none;"><?=$other_article_part_doi_no?></textarea>
                                         <small class="text-primary">Type a comma after each SRN</small>
                                         <div id="badge-container">
@@ -1624,10 +1625,10 @@ use Illuminate\Support\Facades\DB;
             // alert(input);
             var pattern = /^SRN-EaRTh\d{6}-\d+$/;
             if (pattern.test(input)) {
-                console.log("✅ Valid format");
-            } else {
-                console.log("❌ Invalid format");
-            }
+            $('#validation-msg').text("✅ Valid format").css('color', 'green');
+        } else {
+            $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRTh042025-052").css('color', 'red');
+        }
                 
 
             if (input.includes(',')) {
