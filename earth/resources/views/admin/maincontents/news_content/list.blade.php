@@ -57,10 +57,14 @@ $controllerRoute = $module['controller_route'];
                   </th> -->
                   <th scope="col">#</th>
                   <th scope="col">Action</th>
-                  <th scope="col">SRN<br>DOI<br>Parent Category<br>Sub Category</th>
+                  <th scope="col">Series</th>                  
+                  <th scope="col">Project</th>                  
+                  <th scope="col">Community</th>    
+                  <th scope="col">DOI<br>Parent Category<br>Sub Category</th>
+                  <th scope="col">Author Name<br>Email</th>
                   <th scope="col">Title</th>
-                  <th scope="col">Sub Title</th>
-                  <th scope="col">Author Name<br>Pronoun<br>Affiliation<br>Email<br>Country<br>Organization</th>
+                  <th scope="col">Published Date</th>                  
+                  
                   <!-- <th scope="col">Keywords</th> -->
                   <th scope="col">Is Feature<br>Is Popular<br>Is Fiction<br>Is Series</th>                  
                 </tr>
@@ -81,8 +85,10 @@ $controllerRoute = $module['controller_route'];
                         <a href="<?=url('admin/' . $controllerRoute . '/change-status/'.Helper::encoded($row->id))?>" class="btn btn-outline-warning btn-sm" title="Deactivate <?=$module['title']?>"><i class="fa fa-times"></i></a>
                       <?php }?>
                     </td>
-                    <td>
-                      <?=$row->creative_work_SRN?><br>
+                    <td><?=$row->current_article_no?>/<?=$row->	series_article_no?></td>
+                    <td><?=$row->projects_name?></td>
+                    <td><?=$row->community_name?></td>
+                    <td>                      
                       <?=$row->creative_work_DOI?><br>
                       <?php
                         $parent_id = $row->parent_category;
@@ -98,58 +104,14 @@ $controllerRoute = $module['controller_route'];
                       ?>
                       <?=$subcategory->sub_category?>
                       <?php } ?>
-                    </td>
-                    <td style="text-align: justify;"><?=wordwrap($row->new_title, 20, "<br>\n");?></td>
-                    <td style="text-align: justify;"><?=wordwrap($row->sub_title, 20, "<br>\n");?></td>
-                    <td>
-                      <?=$row->author_name?><br>
-                      <?php
-                        $pronoun_id = $row->author_pronoun;
-                        $pronoun = DB::table('pronouns')->where('id', '=', $pronoun_id)->get();
-                        foreach($pronoun as $pronouns){
-                      ?>
-                        <?=$pronouns->name?>
-                      <?php } ?><br>
-                      <?php
-                      $author_affiliation = json_decode($row->author_affiliation);
-                      $affiliations = [];
-                      if(!empty($author_affiliation)){
-                        for($k=0;$k<count($author_affiliation);$k++){
-                          $getAffiliation = EcosystemAffiliation::select('name')->where('id', '=', $author_affiliation[$k])->first();
-                          $affiliations[] = (($getAffiliation)?$getAffiliation->name:'');
-                        }
-                      }
-                      echo implode(', ', $affiliations);
-                      ?>
-                      <br>
-                      <?=$row->author_email?><br>
-                      <?php
-                        $country_id = $row->country;
-                        $country = DB::table('countries')->where('id', '=', $country_id)->get();
-                        foreach($country as $countries){
-                      ?>
-                        <?=$countries->name?>
-                      <?php } ?><br>
-                      <?=wordwrap($row->organization_name, 20, "<br>\n");?>
-                    </td>
-                    <!-- <td>
-                      <?php
-                      if($row->keywords != ''){
-                          $deal_keywords = explode(",", $row->keywords);
-                          if(!empty($deal_keywords)){
-                          for($k=0;$k<count($deal_keywords);$k++){
-                      ?>
-                          <span class="badge"><?=$deal_keywords[$k]?> <span class="remove" data-tag="<?=$deal_keywords[$k]?>">&times;</span></span>
-                      <?php } }
-                      }
-                      ?>
-                    </td> -->
-                    <td>
-                      <b>Is Feature :</b> <span class="<?=(($row->is_feature)?'badge bg-success':'badge bg-danger')?>"><?=(($row->is_feature)?'<i class="fa fa-check"></i> YES':'<i class="fa fa-times"></i> NO')?></span><br><br>
-                      <b>Is Popular :</b> <span class="<?=(($row->is_popular)?'badge bg-success':'badge bg-danger')?>"><?=(($row->is_popular)?'<i class="fa fa-check"></i> YES':'<i class="fa fa-times"></i> NO')?></span><br><br>
-                      <b>Is Fiction :</b> <span class="<?=(($row->creative_Work_fiction == 'Yes')?'badge bg-success':'badge bg-danger')?>"><?=(($row->creative_Work_fiction == 'Yes')?'<i class="fa fa-check"></i> YES':'<i class="fa fa-times"></i> NO')?></span><br><br>
-                      <b>Is Series :</b> <span class="<?=(($row->is_series)?'badge bg-success':'badge bg-danger')?>"><?=(($row->is_series)?'<i class="fa fa-check"></i> YES':'<i class="fa fa-times"></i> NO')?></span>
                     </td>                    
+                    <td>
+                      <?=$row->author_name?><br>                      
+                      <br>
+                      <?=$row->author_email?><br>                      
+                    </td>  
+                    <td><?=wordwrap($row->creative_Work,30,"<br>\n")?></td>                        
+                    <td><?=date_format(date_create($row->created_at), "M d, Y")?></td>                                                      
                   </tr>
                 <?php } } else {?>
                   <tr>
