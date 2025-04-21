@@ -6659,6 +6659,9 @@ div#permalink p {
   .sidebar .tab-posts-widget .tab-pane ul.list-posts > li .video-post {
     margin-right: 10px;
   }
+  .feature_holder .sidebar .tab-posts-widget .tab-pane ul.list-posts > li .video-post{
+    margin-right: 0;
+  }
   footer .footer-last-line nav.footer-nav {
     display: none;
   }
@@ -7129,6 +7132,9 @@ ul.list-posts > li img{
 .news-post.article-post .post-gallery{
   width: 100%;
   max-width: 150px !important;
+}
+.feature-video .hover-box a{
+  font-size: 12px;
 }
 
 }
