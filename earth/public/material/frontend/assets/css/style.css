@@ -7075,7 +7075,7 @@ ul.list-posts > li .post-content p,
   object-fit: cover;
 }
 .home_banner_box .news-post .hover-box{
-  bottom: 0;
+  bottom: 0 !important;
 }
 
 }
