@@ -25,6 +25,7 @@ use App\Models\ExpertiseArea;
 use App\Models\UserClassification;
 use App\Models\UserProfile;
 use App\Models\Community;
+use App\Models\Project;
 use Auth;
 use Session;
 use Helper;
@@ -79,10 +80,7 @@ class NewsContentController extends Controller
                     'pronoun'                   => 'required',   
                     'email'                     => 'required',   
                     'country'                   => 'required',   
-                    'media'                     => 'required',     
-                    'is_feature'                => 'required',  
-                    'is_popular'                => 'required',  
-                    'is_hot'                    => 'required',  
+                    'media'                     => 'required',                           
                     'subtitle'                  => 'required', 
                 ];
                 
@@ -184,9 +182,9 @@ class NewsContentController extends Controller
                         'videoId'                   => $videoId ?? '',
                         'long_desc'                 => $postData['long_desc'] ?? '',     
                         'keywords'                  => $postData['keywords'] ?? '',     
-                        'is_feature'                => $postData['is_feature'],  
-                        'is_popular'                => $postData['is_popular'],  
-                        'is_hot'                    => $postData['is_hot'],  
+                        // 'is_feature'                => $postData['is_feature'],  
+                        // 'is_popular'                => $postData['is_popular'],  
+                        // 'is_hot'                    => $postData['is_hot'],  
                         'short_desc'                => $postData['short_desc'] ?? '',
                         'editors_comments'          => $postData['editors_comments'] ?? '',
                         'creative_Work_fiction'     => $postData['creative_Work_fiction'],
@@ -250,9 +248,11 @@ class NewsContentController extends Controller
             $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['communities']            = Community::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['project']            = Project::where('status', '=', 1)->orderBy('name', 'ASC')->get();
 
             if ($request->isMethod('post')) {
                 $postData                   = $request->all();
+                // Helper::pr($postData);
                 $is_series                  = $postData['is_series'];
                 if($is_series == 'Yes'){
                     $series_article_no          = $postData['series_article_no'];
@@ -272,10 +272,7 @@ class NewsContentController extends Controller
                     'pronoun'                   => 'required',   
                     'email'                     => 'required',   
                     'country'                   => 'required',   
-                    'media'                     => 'required',     
-                    'is_feature'                => 'required',  
-                    'is_popular'                => 'required',  
-                    'is_hot'                    => 'required',  
+                    'media'                     => 'required',                         
                     'subtitle'                  => 'required', 
                 ];     
                 if ($this->validate($request, $rules)) {
@@ -304,7 +301,20 @@ class NewsContentController extends Controller
                                 $coauthorClassification[]       = $request->input("co_author_classification_{$i}");
                                 $coauthorPronoun[]              = $request->input("co_author_pronoun{$i}");
                             }
-                        }                             
+                        }
+                        
+                        /* citation details */  
+                        $citation_value = [];
+                        $citation_id = [];                        
+                        if (!empty($postData['citation']) && is_array($postData['citation'])) {
+                            foreach ($postData['citation'] as $citation) {
+                                if (!empty($citation['value'])) {
+                                    $citation_value[] = $citation['value'];
+                                    $citation_id[] = $citation['id'];
+                                }
+                            }
+                        }
+
                         if ($postData['media'] == 'image') {   
                             /* banner image */
                             $imageFile      = $request->file('cover_image');
@@ -366,16 +376,20 @@ class NewsContentController extends Controller
                         'cover_image_caption'       => $postData['cover_image_caption'] ?? '',
                         'video_url'                 => $postData['video_url'],
                         'videoId'                   => $videoId ?? '',
-                        'long_desc'                 => $postData['long_desc'] ?? '',     
+                        'long_desc'                 => $postData['long_desc'] ?? '',   
+                        'citation_value'            => json_encode($citation_value),
+                        'citation_id'               => json_encode($citation_id),  
                         'keywords'                  => $postData['keywords'] ?? '',     
-                        'is_feature'                => $postData['is_feature'],  
-                        'is_popular'                => $postData['is_popular'], 
-                        'is_hot'                    => $postData['is_hot'],                      
+                        // 'is_feature'                => $postData['is_feature'],  
+                        // 'is_popular'                => $postData['is_popular'], 
+                        // 'is_hot'                    => $postData['is_hot'],                      
                         'short_desc'                => $postData['short_desc'] ?? '',
                         'editors_comments'          => $postData['editors_comments'] ?? '',
                         'creative_Work_fiction'     => $postData['creative_Work_fiction'],
                         'community'                 => $postData['community'],
                         'community_name'            => $postData['community_name'],
+                        'projects'                 => $postData['projects'],
+                        'projects_name'            => $postData['projects_name'],
                         'additional_information'    => $postData['additional_information'],
                         'is_series'                 => $is_series,
                         'series_article_no'         => $series_article_no,
@@ -403,6 +417,7 @@ class NewsContentController extends Controller
             $title                          = $this->data['title'] . ' import';
             $page_name                      = 'news_content.import';
             $data['row']                    = Article::where($this->data['primary_key'], '=', $id)->first();  
+            // Helper::pr($data['row']);
             
             $user_id                        = $data['row']->user_id;   
             $data['user_title']             = Title::where('status', '=', 1)->orderBy('name', 'ASC')->get();  
@@ -412,15 +427,18 @@ class NewsContentController extends Controller
             $data['parent_category']        = NewsCategory::where('status', '!=', 3)->where('parent_category', '=', 0)->orderBy('id', 'DESC')->get();
             $data['sub_category']           = NewsCategory::where('status', '!=', 3)->where('parent_category', '!=', 0)->orderBy('id', 'DESC')->get();
             $data['pronoun']                = Pronoun::where('status', '!=', 3)->orderBy('id', 'ASC')->get();
+            // Helper::pr($data['pronoun']);
             $data['author_affiliation']     = EcosystemAffiliation::where('status', '!=', 3)->orderBy('name', 'ASC')->get();
             $data['country']                = Country::where('status', '!=', 3)->orderBy('name', 'ASC')->get();
             $data['ecosystem_affiliation']  = EcosystemAffiliation::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['expertise_area']         = ExpertiseArea::where('status', '=', 1)->orderBy('name', 'ASC')->get();
             $data['classification']         = UserClassification::where('user_id', '=', $user_id)->first();
             $data['communities']            = Community::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            $data['project']            = Project::where('status', '=', 1)->orderBy('name', 'ASC')->get();
+            // Helper::pr($data['projects']);
 
             if ($request->isMethod('post')) {
-                $postData = $request->all();
+                $postData = $request->all();                
 
                 $is_series                  = $postData['is_series'];
                 if($is_series == 'Yes'){
@@ -435,6 +453,7 @@ class NewsContentController extends Controller
 
                 $parent_category                = NewsCategory::where('id', '=', $postData['section_ert'])->first();
                 $actionMode                     = $postData['action_mode']; // Get action mode from the form
+                //  echo $actionMode; die;
                 if ($actionMode === 'save') {
                     // Generate a unique slug
                     $slug = Str::slug($postData['creative_Work']);  
@@ -466,6 +485,18 @@ class NewsContentController extends Controller
                             $coauthorPronoun[] = $request->input("co_author_pronoun{$i}");
                         }
                     }          
+
+                    /* citation details */  
+                    $citation_value = [];
+                    $citation_id = [];                        
+                    if (!empty($postData['citation']) && is_array($postData['citation'])) {
+                        foreach ($postData['citation'] as $citation) {
+                            if (!empty($citation['value'])) {
+                                $citation_value[] = $citation['value'];
+                                $citation_id[] = $citation['id'];
+                            }
+                        }
+                    }
                     
                     if (!isset($postData['media']) || empty($postData['media'])) {
                         // Media type is not selected; skip this method and save the form
@@ -512,6 +543,11 @@ class NewsContentController extends Controller
                             return redirect()->back()->with(['error_message' => $uploadedFile['message']]);
                         }
                     } 
+                    else {
+                        $nelp_pdf = $data['row']->nelp_form_pdf;
+                        $nelp_form_number = $data['row']->nelp_form_number;
+                        // $cover_image_caption = '';
+                    }
                     // else {
                     //     return redirect()->back()->with(['error_message' => 'Please Upload Scan Copy Of NELP Form']);
                     // }       
@@ -553,17 +589,21 @@ class NewsContentController extends Controller
                     'video_url'                 => $url ?? '',
                     'videoId'                   => $videoId ?? '',
                     'long_desc'                 => $postData['long_desc'] ?? '',
+                    'citation_value'            => json_encode($citation_value),
+                    'citation_id'               => json_encode($citation_id),  
                     'editors_comments'          => $postData['editors_comments'] ?? '',
                     'keywords'                  => $postData['keywords'] ?? '',     
-                    'is_feature'                => $postData['is_feature'],  
-                    'is_popular'                => $postData['is_popular'],
-                    'is_hot'                    => $postData['is_hot'],   
+                    // 'is_feature'                => $postData['is_feature'],  
+                    // 'is_popular'                => $postData['is_popular'],
+                    // 'is_hot'                    => $postData['is_hot'],   
                     'bio_short'                 => $postData['author_short_bio'] ?? '',  
                     'nelp_form_number'          => $nelp_form_number ?? '',
                     'nelp_form_pdf'             => $nelp_pdf ?? '',
                     'creative_Work_fiction'     => $postData['creative_Work_fiction'],
                     'community'                 => $postData['community'],
                     'community_name'            => $postData['community_name'],
+                    'projects'                 => $postData['projects'],
+                    'projects_name'            => $postData['projects_name'],
                     'additional_information'    => $postData['additional_information'],
                     'is_series'                 => $is_series,
                     'series_article_no'         => $series_article_no,
@@ -571,9 +611,10 @@ class NewsContentController extends Controller
                     'other_article_part_doi_no' => $other_article_part_doi_no,
                     'is_published'              => 1,                                                         
                     ];
-                    // Helper::pr($fields);
+                    //  Helper::pr($fields);
                     Article::where('id', '=', $id)->update($fields);
-                    return redirect("admin/article/list")->with('success_message', 'Article saved successfully');                
+                    // return redirect("admin/article/list")->with('success_message', 'Article saved successfully');                
+                    return redirect("admin/article/editing-checking")->with('success_message', 'Article saved successfully');                
                 }
                 $rules = [                                            
                     'section_ert'               => 'required',   
@@ -583,10 +624,7 @@ class NewsContentController extends Controller
                     'pronoun'                   => 'required',   
                     'email'                     => 'required',   
                     'country'                   => 'required',   
-                    'media'                     => 'required',     
-                    'is_feature'                => 'required',  
-                    'is_popular'                => 'required', 
-                    'is_hot'                    => 'required', 
+                    'media'                     => 'required',                         
                     'subtitle'                  => 'required', 
                 ];     
                 if ($this->validate($request, $rules)) {
@@ -619,7 +657,18 @@ class NewsContentController extends Controller
                             $coauthorClassification[] = $request->input("co_author_classification_{$i}");
                             $coauthorPronoun[] = $request->input("co_author_pronoun{$i}");
                         }
-                    }                                   
+                    }           
+                    /* citation details */  
+                    $citation_value = [];
+                    $citation_id = [];                        
+                    if (!empty($postData['citation']) && is_array($postData['citation'])) {
+                        foreach ($postData['citation'] as $citation) {
+                            if (!empty($citation['value'])) {
+                                $citation_value[] = $citation['value'];
+                                $citation_id[] = $citation['id'];
+                            }
+                        }
+                    }                        
                     if ($postData['media'] == 'image') {   
                         /* banner image */
                         $imageFile      = $request->file('cover_image');
@@ -701,17 +750,20 @@ class NewsContentController extends Controller
                         'video_url'                 => $postData['video_url'] ?? '',
                         'videoId'                   => $videoId ?? '',
                         'long_desc'                 => $postData['long_desc'] ?? '',
+                        'citation_value'            => json_encode($citation_value),
+                        'citation_id'               => json_encode($citation_id),  
                         'editors_comments'          => $postData['editors_comments'] ?? '',
                         'keywords'                  => $postData['keywords'] ?? '',     
-                        'is_feature'                => $postData['is_feature'],  
-                        'is_popular'                => $postData['is_popular'],
-                        'is_hot'                    => $postData['is_hot'],  
+                        // 'is_feature'                => $postData['is_feature'],  
+                        // 'is_popular'                => $postData['is_popular'],                        
                         'author_short_bio'          => $postData['author_short_bio'] ?? '',  
                         'nelp_form_number'          => $nelp_form_number,
                         'nelp_form_file'            => $nelp_pdf,
                         'creative_Work_fiction'     => $postData['creative_Work_fiction'],
                         'community'                 => $postData['community'],
                         'community_name'            => $postData['community_name'],
+                        'projects'                 => $postData['projects'],
+                        'projects_name'            => $postData['projects_name'],
                         'additional_information'    => $postData['additional_information'],
                         'is_series'                 => $is_series,
                         'series_article_no'         => $series_article_no,
@@ -758,11 +810,13 @@ class NewsContentController extends Controller
                         'video_url'                 => $url ?? '',
                         'videoId'                   => $videoId ?? '',
                         'long_desc'                 => $postData['long_desc'] ?? '',
+                        'citation_value'            => json_encode($citation_value),
+                        'citation_id'               => json_encode($citation_id),  
                         'editors_comments'          => $postData['editors_comments'] ?? '',
                         'keywords'                  => $postData['keywords'] ?? '',     
-                        'is_feature'                => $postData['is_feature'],  
-                        'is_popular'                => $postData['is_popular'],  
-                        'is_hot'                    => $postData['is_hot'],
+                        // 'is_feature'                => $postData['is_feature'],  
+                        // 'is_popular'                => $postData['is_popular'],  
+                        // 'is_hot'                    => $postData['is_hot'],
                         'bio_short'                 => $postData['author_short_bio'] ?? '',  
                         'nelp_form_number'          => $nelp_form_number ?? '',
                         'nelp_form_pdf'             => $nelp_pdf ?? '',
@@ -972,4 +1026,13 @@ class NewsContentController extends Controller
             return redirect("admin/news_content_image/list")->with('success_message', 'Image ' . $msg . ' successfully');
         }
     /* change image status */
+    public function multiple_delete(Request $request)
+    {
+        if ($request->has('ids')) {           
+            NewsContent::whereIn('id', $request->ids)->update(['status' => 3]);
+            return response()->json(['message' => 'Selected records deleted successfully.']);
+        } else {
+            return response()->json(['message' => 'No records selected.'], 400);
+        }
+    }
 }

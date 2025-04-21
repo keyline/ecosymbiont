@@ -361,27 +361,6 @@
     </div>
 <!-- End block content -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Function to show/hide the community fields -->
-<script>
-    $(document).ready(function() {
-        
-        function toggleFields() {            
-            const communityYes = $('#community_yes').is(':checked');            
-            
-            // Toggle individual sections            
-            $('#communityDetails').toggle(communityYes);
-        }
-
-        // Trigger on change
-        $('input[name="invited"], input[name="community"]').on('change', function() {
-            toggleFields();
-        });
-
-        // Check initial state on page load
-        toggleFields();
-    });
-</script>
-<!-- End Function to show/hide the community fields -->
 
  <!-- all word count validation -->
 <script>
@@ -420,12 +399,33 @@
         
         function toggleFields() {
             const invitedYes = $('#invited_yes').is(':checked');
-            const participatedYes = $('#participated_yes').is(':checked');            
+            const participatedYes = $('#participated_yes').is(':checked');  
+            const communityYes = $('#community_yes').is(':checked');          
             
             // Toggle individual sections
             $('#invitedDetails').toggle(invitedYes);
             $('#participatedDetails').toggle(participatedYes);
+            $('#communityDetails').toggle(communityYes);
 
+            // Handle required for community_name
+            if (communityYes) {
+                $('#community_name').attr('required', true);
+            } else {
+                $('#community_name').removeAttr('required');
+            }
+            
+            // Handle required for invited_by and invited_by_email
+            if (invitedYes) {
+                $('#invited_by, #invited_by_email').attr('required', true);
+            } else {
+                $('#invited_by, #invited_by_email').removeAttr('required');
+            }
+            // Handle required for participated_info
+            if (participatedYes) {
+                $('#participated_info').attr('required', true);
+            } else {
+                $('#participated_info').removeAttr('required');
+            }           
             // Check if both are "No" and hide the rest of the form
             const invitedNo = $('#invited_no').is(':checked');
             const participatedNo = $('#participated_no').is(':checked');
@@ -442,7 +442,7 @@
         }
 
         // Trigger on change
-        $('input[name="invited"], input[name="participated"]').on('change', function() {
+        $('input[name="invited"], input[name="participated"], input[name="community"]').on('change', function() {
             toggleFields();
         });
 

@@ -49,7 +49,7 @@ use App\Helpers\Helper;
                                 <span class="cel-temperature">+7</span>
                             </li> -->
                             <!-- <li><span class="time-now"><//?=date('l d F Y')?> / <//?=date('H:i')?></span></li> -->
-                            <li><span class="time-now"><?= date('l d F Y') ?> / <?= date('H:i T') ?></span></li>
+                            <li><span class="time-now"><?= date('d F Y') ?> / <?= date('H:i T') ?></span></li>
                             <!-- <li><a href="#">Log In</a></li> -->
                             <!-- <li><a href="<?=url('contact-us')?>">Contact</a></li> -->
                             <?php if(session('is_user_login')){?>
@@ -157,10 +157,10 @@ use App\Helpers\Helper;
                                                             'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
                                                         )
                                                         ->where('news_contents.status', 1)
-                                                        ->where('news_contents.is_hot', 1)
+                                                        ->where('news_contents.is_gallery', 1)
                                                         ->orderBy('news_contents.id', 'DESC')
                                                         ->get();
-                                           // dd(DB::getQueryLog());
+                                        //    dd(DB::getQueryLog());
                         if($hotNewsContents){ foreach($hotNewsContents as $rowContent){ 
                         ?>
                             <?php
@@ -188,7 +188,8 @@ use App\Helpers\Helper;
                                     <?php } else {?>
                                         <div class="video-post">
                                             <img alt="" src="https://img.youtube.com/vi/<?=$rowContent->videoId?>/hqdefault.jpg">
-                                            <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                            <!-- <a href="https://www.youtube.com/watch?v=?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a> -->
+                                            <a href="<?=url('content/' . $rowContent->parent_category_slug. '/' . $rowContent->sub_category_slug . '/' . $rowContent->slug)?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                         </div>
                                     <?php } ?>
 
@@ -228,7 +229,7 @@ use App\Helpers\Helper;
         <div class="nav-list-container">
             <div class="container">
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="d-flex">
+                <div class="d-flex align-items-center">
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <!-- desktop -->
                         <ul class="nav navbar-nav navbar-left">
@@ -256,20 +257,21 @@ use App\Helpers\Helper;
                                 </li>
                             <?php } }?>
                             <li><a href="<?=url('submissions')?>" style="color: black !important;">SUBMISSIONS</a></li>
-                            <li><a href="<?=env('REGENERATE_URL')?>contact.php" style="color: black !important;">CONTACT</a></li>
+                            {{-- <li><a href="?=env('REGENERATE_URL')?>contact.php" style="color: black !important;">CONTACT</a></li> --}}
+                            <li><a href="<?=url('projects')?>" style="color: black !important;">PROJECTS</a></li>
                         </ul>
                         <!-- desktop -->
                     </div>
                     <div class="seach_holder">
                         <form class="navbar-form" method="GET" action="<?=url('search-result')?>" role="search">
                             <!-- @csrf -->
-                            <input type="text" name="article_search" id="article-search" placeholder="Search here" value="<?=$search_keyword?>" onkeyup="getSuggestions(this.value);" style="text-transform: lowercase;" required>
+                            <input type="text" name="article_search" id="article-search" placeholder="search by title, author name, or content" value="<?=$search_keyword?>" onkeyup="getSuggestions(this.value);" style="text-transform: lowercase;" required>
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
                         <div class="search_suggestion">
                             <ul id="suggestions"></ul>
                         </div>
-                        <a href="#flipFlop" data-toggle="modal" data-target="#flipFlop" class="advserach_btn">Advanced</a>
+                        <a href="#flipFlop" data-toggle="modal" data-target="#flipFlop" class="advserach_btn">Advanced Search</a>
                     </div>
                 </div>
                 

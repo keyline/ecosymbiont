@@ -140,11 +140,11 @@ $(document).ready(function($) {
 							dataNum3 = 1;
 						} else if ( dataNum == 2 ) {
 							dataNum2 = 2;
-							dataNum3 = dataNum - 1;
+							dataNum3 = dataNum - 0;
 						}
 						 else {
-							dataNum2 = dataNum - 1;
-							dataNum3 = dataNum - 2;
+							dataNum2 = dataNum - 0;
+							dataNum3 = dataNum - 0;
 						}
 	
 
@@ -208,9 +208,17 @@ $(document).ready(function($) {
 
 	}
 
+	// try {
+	// 	// Example with multiple objects
+	// 	$('.video-link').magnificPopup({
+	// 		type: 'iframe'
+	// 	});
+	// } catch(err) {
+
+	// }
 	try {
 		// Example with multiple objects
-		$('.video-link').magnificPopup({
+		$('.video-link-popup').magnificPopup({
 			type: 'iframe'
 		});
 	} catch(err) {

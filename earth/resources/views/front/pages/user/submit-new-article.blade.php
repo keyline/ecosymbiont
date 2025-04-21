@@ -129,6 +129,8 @@ use Illuminate\Support\Facades\DB;
                 $participated_info = $row->participated_info;
                 $community = $row->community;
                 $community_name = $row->community_name;
+                $projects = $row->projects;
+                $projects_name = $row->projects_name;
                 $organization_name = $row->organization_name;
                 $organization_website = $row->organization_website;
                 $ecosystem_affiliationId = (($row->ecosystem_affiliationId != '')?json_decode($row->ecosystem_affiliationId):[]);
@@ -191,7 +193,8 @@ use Illuminate\Support\Facades\DB;
                 $participated = $profile->participated;
                 $participated_info = $profile->participated_info;
                 $community = $profile->community;
-                $community_name = $profile->community_name;
+                $community_name = $profile->community_name;  
+                $projects_name = '';                              
                 $organization_name = $profile->organization_name;
                 $organization_website = $profile->organization_website;
                 $ecosystem_affiliationId = json_decode($profile->ecosystem_affiliationId);
@@ -292,6 +295,7 @@ use Illuminate\Support\Facades\DB;
                                                     <div class="col-md-10 col-lg-8">
                                                         <input type="text" name="co_author_short_bio_{{$i}}" class="form-control" id="co_author_short_bio_{{$i}}"
                                                         value="{{ old("co_author_short_bio_$i", $co_author_short_bio[$i - 1] ?? '') }}">
+                                                        <div id="co_author_short_bio_{{$i}}Error" class="error"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -577,7 +581,7 @@ use Illuminate\Support\Facades\DB;
                                     <label for="subtitle" class="col-md-2 col-lg-4 col-form-label blue-text">16) Subtitle — brief engaging summary of your Creative-Work (30-40 words)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <textarea name="subtitle" class="form-control" id="subtitle" rows="3">{{ old('subtitle', $subtitle ?? '') }}</textarea>
+                                        <textarea name="subtitle" class="form-control" id="subtitle" rows="3" required>{{ old('subtitle', $subtitle ?? '') }}</textarea>
                                         <div id="subtitleError" class="error"></div>
                                     </div>
                                 </div>
@@ -766,7 +770,7 @@ use Illuminate\Support\Facades\DB;
                                 </div>
                                 <div id="submission_types_c" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px; margin-bottom: 20px">
                                     <div class="row mb-3">
-                                        <label for="art_video_file" class="col-md-2 col-lg-4 col-form-label">17C1) TYPE C: Video (3-10 minutes, Max 1GB)</label>
+                                        <label for="art_video_file" class="col-md-2 col-lg-4 col-form-label">17C1) TYPE C: Video (5-10 minutes, Max 1 GB)</label>
                                         <div class="col-md-10 col-lg-8">
                                             <input type="file" name="art_video_file" class="form-control" id="art_video_file">
                                             <small class="text-info">* Only MP4, AVI, MOV, MKV, WEBM files are allowed (max. 1GB)</small><br>  
@@ -789,7 +793,7 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="additional_information" class="col-md-2 col-lg-4 col-form-label" style="color: grey;">17a) (Optional: max. 100 words) Comments for the Editor(s) (any additional information you wish to share)
+                                    <label for="additional_information" class="col-md-2 col-lg-4 col-form-label" style="color: grey;">17a) (Optional: max. 100 words) Please share your instagram, facebook, and twitter (x) handles and any comments for the Editor(s).
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="additional_information" name="additional_information" rows="4" cols="50">{{ old('additional_information', $additional_information) }}</textarea>
@@ -899,18 +903,46 @@ use Illuminate\Support\Facades\DB;
                                     <div class="row mb-3">
                                         <label for="community_info" class="col-md-2 col-lg-4 col-form-label">28A) Select Community</label>
                                         <div class="col-md-10 col-lg-8">
-                                            <select name="community_name" class="form-control" id="community_name">
-                                                <option value="" selected disabled>Select</option>
-                                                <?php if($communities){ foreach($communities as $cmn){?>
-                                                    <option value="<?=$cmn->name?>" <?=(($community_name == $cmn->name)?'selected':'')?>><?=$cmn->name?></option>
-                                                <?php } }?>
+                                            <select name="community_name" class="form-control" id="community_name">                                              
+
+                                                @if ($communities)
+                                                @foreach ($communities as $data)
+                                                    <option value="{{ $data->name }}" disabled @selected($data->name == $community_name)>
+                                                        {{ $data->name }}</option>
+                                                @endforeach
+                                            @endif
                                             </select>
                                             <input type="hidden" name="community_name" value="{{ $community_name }}">
                                         </div>
                                     </div> 
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">29) Instructions for initial submission of Creative-Work for eligibility screening
+                                    <label for="projects" class="col-md-2 col-lg-4 col-form-label blue-text">29) Is this a special EaRTh Project?
+                                    </label>
+                                    <div class="col-md-10 col-lg-8">
+                                        <input type="radio" id="projects_yes" name="projects" value="Yes" required @checked(old('projects', $projects) == 'Yes')>
+                                        <label for="yes">Yes</label>
+                                        <input type="radio" id="projects_no" name="projects" value="No" required @checked(old('projects', $projects) == 'No')>
+                                        <label for="no">No</label>
+                                    </div>
+                                </div>
+                                <!-- ?php dd($projects); ?> -->
+                                <div id="projectsDetails" style="display: none;">
+                                    <div class="row mb-3">
+                                        <label for="projects_info" class="col-md-2 col-lg-4 col-form-label blue-text">29A) Select Projects</label>
+                                        <div class="col-md-10 col-lg-8">
+                                            <select name="projects_name" class="form-control" id="projects_name">
+                                                <option value="" selected>Select</option>
+                                                <?php if($projects){ foreach($projects as $proj){?>
+                                                    <option value="<?=$proj->name?>" <?=(($projects_name == $proj->name)?'selected':'')?>><?=$proj->name?></option>
+                                                <?php } }?>
+                                            </select>
+                                            <!-- <input type="hidden" name="projects_name" value="{{ $projects_name }}"> -->
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">30) Instructions for initial submission of Creative-Work for eligibility screening
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <p>Once you have completed this form and uploaded all required files, click on the "Submit" button below. If you meet the eligibility criteria <span style="color: red !important">(determined in part by your response to question 12); also, you
@@ -923,7 +955,7 @@ use Illuminate\Support\Facades\DB;
                                     </div> -->
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">30) If you are submitting a video
+                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">31) If you are submitting a video
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <p>Please note that it may take several minutes for your video to upload. Please do not click on the “Submit” button more than once and do not navigate away from this page, until you are re-directed to a page that tells you: “Creative-Work submitted successfully!”</p>                                        
@@ -931,7 +963,7 @@ use Illuminate\Support\Facades\DB;
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="is_series" class="col-md-2 col-lg-4 col-form-label blue-text">31) Is this part of a series?
+                                    <label for="is_series" class="col-md-2 col-lg-4 col-form-label blue-text">32) Is this part of a series?
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="radio" id="series_yes" name="is_series" value="Yes" <?=(($is_series == 'Yes')?'checked':'')?> required>
@@ -941,26 +973,26 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
-                                    <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label blue-text">31a) How many total creative-works in this series?
+                                    <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label blue-text">32a) How many total creative-works in this series?
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="number" name="series_article_no" class="form-control" id="series_article_no" min="1" value="<?=$series_article_no?>">
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
-                                    <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label blue-text">31b) What number in the series is this creative-work?
+                                    <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label blue-text">32b) What number in the series is this creative-work?
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="current_article_no" class="form-control" id="current_article_no" value="<?=$current_article_no?>">
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
-                                    <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label blue-text">31c) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).
+                                    <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label blue-text">31c) List (in order is submission) the SRNs of each previously submitted creative-work in series (enter a comma after each SRN)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" class="form-control" id="input-tags">
                                         <textarea class="form-control" name="other_article_part_doi_no" id="other_article_part_doi_no" style="display:none;"><?=$other_article_part_doi_no?></textarea>
-                                        <small class="text-primary">Separate each DOI with a comma</small>
+                                        <small class="text-primary">Type a comma after each SRN</small>
                                         <div id="badge-container">
                                             <?php
                                             if($other_article_part_doi_no != ''){
@@ -977,7 +1009,7 @@ use Illuminate\Support\Facades\DB;
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">32) Non-Exclusive License to Publish (NELP)
+                                    <label for="bio_long" class="col-md-2 col-lg-4 col-form-label blue-text">33) Non-Exclusive License to Publish (NELP)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <p>In the scrollable window below is the text of the Non-Exclusive License to Publish (NELP). Please note that for your Creative-Work to be published on EaRTh, you must sign this NELP (which you do by clicking the small box below the scrollable window). In essence, by signing the NELP, you declare among other things that: (a) all components of this Creative-Work are your (and, if applicable, your co-authors’) own original creation and not anyone else’s; (b) you (and, if applicable, your co-authors) have not used Artificial Intelligence (AI) to generate any of the components of this Creative-Work; and (c) you (and, if applicable, your co-authors) own the copyright to this Creative-Work and have the authority to grant the NELP. Please note that upon signing this NELP, you retain the copyright to your Creative-Work and the right to publish this Creative-Work on other platforms/in other publications, as long as such platforms/publications do not require an exclusive right to publish.</p>                                        
@@ -1140,38 +1172,48 @@ use Illuminate\Support\Facades\DB;
         
     </script>
 <!-- Popup end (Initially hidden) -->
- <!-- Function to show/hide the community fields -->
-<script>
-    $(document).ready(function() {
-        
-        function toggleFields() {            
-            const communityYes = $('#community_yes').is(':checked');            
-            
-            // Toggle individual sections            
-            $('#communityDetails').toggle(communityYes);
-        }
-
-        // Trigger on change
-        $('input[name="invited"], input[name="community"]').on('change', function() {
-            toggleFields();
-        });
-
-        // Check initial state on page load
-        toggleFields();
-    });
-</script>
-<!-- End Function to show/hide the community fields -->
 <!-- Function to show/hide the invited and participated fields -->
 <script>
     $(document).ready(function() {
         
         function toggleFields() {
             const invitedYes = $('#invited_yes').is(':checked');
-            const participatedYes = $('#participated_yes').is(':checked');            
+            const participatedYes = $('#participated_yes').is(':checked');  
+            const projectsYes = $('#projects_yes').is(':checked');   
+            const communityYes = $('#community_yes').is(':checked'); 
+            
+            // Handle required for community_name
+            if (communityYes) {
+                $('#community_name').attr('required', true);
+            } else {
+                $('#community_name').removeAttr('required');
+            }
+            
+            // Handle required for invited_by and invited_by_email
+            if (invitedYes) {
+                $('#invited_by, #invited_by_email').attr('required', true);
+            } else {
+                $('#invited_by, #invited_by_email').removeAttr('required');
+            }
+            // Handle required for participated_info
+            if (participatedYes) {
+                $('#participated_info').attr('required', true);
+            } else {
+                $('#participated_info').removeAttr('required');
+            }           
+
+            // Handle required for projects_name
+            if (projectsYes) {
+                $('#projects_name').attr('required', true);
+            } else {
+                $('#projects_name').removeAttr('required');
+            }
             
             // Toggle individual sections
             $('#invitedDetails').toggle(invitedYes);
             $('#participatedDetails').toggle(participatedYes);
+            $('#communityDetails').toggle(communityYes);
+            $('#projectsDetails').toggle(projectsYes);
 
             // Check if both are "No" and hide the rest of the form
             const invitedNo = $('#invited_no').is(':checked');
@@ -1189,7 +1231,7 @@ use Illuminate\Support\Facades\DB;
         }
 
         // Trigger on change
-        $('input[name="invited"], input[name="participated"]').on('change', function() {
+        $('input[name="invited"], input[name="participated"], input[name="community"], input[name="projects"]').on('change', function() {
             toggleFields();
         });
 
@@ -1267,6 +1309,8 @@ use Illuminate\Support\Facades\DB;
 
         if (submissionTypes == '1') {
             submissionTypesADiv.style.display = 'block';
+            $('#narrative_file').attr('required', true);
+            $('#narrative_images_1').attr('required', true);            
         } else {
             submissionTypesADiv.style.display = 'none';
         }
@@ -1314,6 +1358,8 @@ use Illuminate\Support\Facades\DB;
             // Show only the number of fields selected
             for (let i = 1; i <= count; i++) {            
                 document.getElementById('card_' + i).style.display = 'block';
+                $('#image_file_1').attr('required', true);
+                $('#narrative_image_desc_1').attr('required', true);
             }
         }
 
@@ -1475,6 +1521,16 @@ use Illuminate\Support\Facades\DB;
         allValid &= checkWordLimit(document.getElementById('subtitle'), 40, 'subtitleError');
         allValid &= checkWordLimit(document.getElementById('additional_information'), 100, 'additional_informationError');
         allValid &= checkWordLimit(document.getElementById('narrative_image_desc_1'), 50, 'narrative_image_desc_1Error');
+        // Loop through the dynamically generated textareas
+        for (let i = 1; i <= 3; i++) {
+            const textarea = document.getElementById(`co_author_short_bio_${i}`);
+            const errorDiv = document.getElementById(`co_author_short_bio_${i}Error`);
+
+            if (textarea) {
+                // Perform word limit validation for each textarea
+                allValid &= checkWordLimit(textarea, 40, `co_author_short_bio_${i}Error`);
+            }
+        } 
         // Loop through the dynamically generated textareas
         for (let i = 2; i <= 5; i++) {
             const textarea = document.getElementById(`narrative_image_desc_${i}`);

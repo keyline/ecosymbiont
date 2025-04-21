@@ -5,10 +5,12 @@ use App\Models\Country;
 use App\Models\EcosystemAffiliation;
 use App\Helpers\Helper;
 use App\Models\Community;
+use App\Models\Project;
 
 $country                = Country::select('id', 'name')->where('status', '=', 1)->orderBy('name', 'ASC')->get();
 $ecosystem_affiliation  = EcosystemAffiliation::select('id', 'name')->where('status', '=', 1)->orderBy('name', 'ASC')->get();
 $community  = Community::select('id', 'name')->where('status', '=', 1)->orderBy('name', 'ASC')->get();
+$projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('name', 'ASC')->get();
 ?>
 <div class="footer_top_menu">
     <div class="container">
@@ -19,6 +21,7 @@ $community  = Community::select('id', 'name')->where('status', '=', 1)->orderBy(
                         <li><a href="<?=url('/') ?>" target="_blank">Home</a></li>
                         <!-- <li><a href="<?=url('about-us')?>" target="_blank">About</a></li> -->
                         <li><a href="<?=url('communities')?>" target="_blank">Communities</a></li>
+                        <li><a href="<?=url('projects')?>" target="_blank">Projects</a></li>
                         <li><a href="<?=env('REGENERATE_URL')?>contact.php" target="_blank">Contact</a></li>
                         <li class="foot-social-icons"><a class="twitter" href="<?=$generalSetting->twitter_profile?>" target="_blank"><i class="fa fa-twitter"></i></a></li>
                         <li class="foot-social-icons"><a class="pinterest" href="<?=$generalSetting->instagram_profile?>" target="_blank"><i class="fa fa-instagram"></i></a></li>
@@ -125,6 +128,24 @@ $community  = Community::select('id', 'name')->where('status', '=', 1)->orderBy(
         </div>
     </div>
 </div> -->
+<!-- Modal -->
+<!-- Modal -->
+<div class="modal fade" id="popupModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h4 class="modal-title">We’re suing.</h4>
+        <p>We’re in court fighting the Trump administration’s relentless attacks on our environment, and we’re not slowing down. As long as they keep attacking our planet and our rights, we’ll keep filing lawsuits.</p>
+        <p>Join the fight today,<br><span class="highlight">your gift will be matched $2:$1!</span></p>
+        <button class="btn btn-yellow">Donate to EaRTh</button><br>
+        <a href="#" class="continue-link" data-dismiss="modal">Continue to website →</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- The modal -->
 <div class="modal fade" id="flipFlop" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -148,6 +169,7 @@ $community  = Community::select('id', 'name')->where('status', '=', 1)->orderBy(
                             <option value="Country of residence">Country of residence</option>
                             <option value="Organization">Organization</option>
                             <option value="Community">Community</option>
+                            <option value="Projects">Projects</option>
                             <option value="Tag">Tag</option>
                             <option value="Text">Text</option>
                         </select>
@@ -170,6 +192,12 @@ $community  = Community::select('id', 'name')->where('status', '=', 1)->orderBy(
                                 <option value="<?=$community_one->name?>"><?=$community_one->name?></option>
                             <?php } }?>
                         </select>
+                        <select id="search_type_projects" class="adv-search-field field-selector" name="search_keyword4" style="display: none;">
+                            <option value="" selected="selected">Select Projects</option>
+                            <?php if($projects){ foreach($projects as $projects_one){?>
+                                <option value="<?=$projects_one->name?>"><?=$projects_one->name?></option>
+                            <?php } }?>
+                        </select>
                         <input type="text" id="search_keyword" name="search_keyword0" placeholder="Enter a search term" required>
                         <button type="submit" class="btn btn-default"><i class="fa fa-search"></i> Search</button>
                     </div>
@@ -179,6 +207,11 @@ $community  = Community::select('id', 'name')->where('status', '=', 1)->orderBy(
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(window).on('load', function () {
+    $('#popupModal').modal('show');
+  });
+</script>
 <script type="text/javascript">
     $(function(){
         $('#search_type').on('change', function(){
@@ -191,6 +224,8 @@ $community  = Community::select('id', 'name')->where('status', '=', 1)->orderBy(
                 $('select[name="search_keyword2"]').attr('required', false);
                 $('select[name="search_keyword3"]').hide();
                 $('select[name="search_keyword3"]').attr('required', false);
+                $('select[name="search_keyword4"]').hide();
+                $('select[name="search_keyword4"]').attr('required', false);
 
                 $('select[name="search_keyword1"]').show();
                 $('select[name="search_keyword1"]').attr('required', true);
@@ -201,6 +236,8 @@ $community  = Community::select('id', 'name')->where('status', '=', 1)->orderBy(
                 $('select[name="search_keyword1"]').attr('required', false);
                 $('select[name="search_keyword3"]').hide();
                 $('select[name="search_keyword3"]').attr('required', false);
+                $('select[name="search_keyword4"]').hide();
+                $('select[name="search_keyword4"]').attr('required', false);
 
                 $('select[name="search_keyword2"]').show();
                 $('select[name="search_keyword2"]').attr('required', true);
@@ -211,14 +248,32 @@ $community  = Community::select('id', 'name')->where('status', '=', 1)->orderBy(
                 $('select[name="search_keyword1"]').attr('required', false);
                 $('select[name="search_keyword2"]').hide();
                 $('select[name="search_keyword2"]').attr('required', false);
+                $('select[name="search_keyword4"]').hide();
+                $('select[name="search_keyword4"]').attr('required', false);
 
                 $('select[name="search_keyword3"]').show();
                 $('select[name="search_keyword3"]').attr('required', true);
-            } else {
+            } else if(search_type == 'Projects'){
+                $('input[name="search_keyword0"]').hide();
+                $('input[name="search_keyword0"]').attr('required', false);
                 $('select[name="search_keyword1"]').hide();
                 $('select[name="search_keyword1"]').attr('required', false);
                 $('select[name="search_keyword2"]').hide();
                 $('select[name="search_keyword2"]').attr('required', false);
+                $('select[name="search_keyword3"]').hide();
+                $('select[name="search_keyword3"]').attr('required', false);
+
+                $('select[name="search_keyword4"]').show();
+                $('select[name="search_keyword4"]').attr('required', true);
+            }else {
+                $('select[name="search_keyword1"]').hide();
+                $('select[name="search_keyword1"]').attr('required', false);
+                $('select[name="search_keyword2"]').hide();
+                $('select[name="search_keyword2"]').attr('required', false);
+                $('select[name="search_keyword3"]').hide();
+                $('select[name="search_keyword3"]').attr('required', false);
+                $('select[name="search_keyword4"]').hide();
+                $('select[name="search_keyword4"]').attr('required', false);
 
                 $('input[name="search_keyword0"]').show();
                 $('input[name="search_keyword0"]').attr('required', true);

@@ -72,6 +72,8 @@ use App\Models\ExpertiseArea;
       $participated_info = $row->participated_info;
       $community = $row->community;
       $community_name = $row->community_name;
+      $projects = $row->projects;
+      $projects_name = $row->projects_name;
       $organization_name = $row->organization_name;
       $organization_website = $row->organization_website;
       $ecosystem_affiliationId = $selected_ecosystem_affiliation;
@@ -433,6 +435,14 @@ use App\Models\ExpertiseArea;
                   <td><?= $community_name ?></td>
                 </tr>
                 <tr>
+                  <td>29) Is this a special EaRTh Project?</td>
+                  <td><?= $projects ?></td>
+                </tr>
+                <tr>
+                  <td>29A) Select Project</td>
+                  <td><?= $projects_name ?></td>
+                </tr>
+                <tr>
                   <td>31) Is this part of a series?</td>
                   <td><?=$is_series?></td>
                 </tr>
@@ -446,8 +456,8 @@ use App\Models\ExpertiseArea;
                     <td><?=$current_article_no?></td>
                   </tr>
                   <tr>
-                    <td>34) List (in order of publication) the DOIs of each of previously published creative-work in this series (separate with commas).</td>
-                    <td><?=$other_article_part_doi_no?></td>
+                    <td>34) List (in order is submission) the SRNs of each previously submitted creative-work in series (enter a comma after each SRN)</td>
+                    <td><?=str_replace('DOI', 'SRN', $other_article_part_doi_no)?></td>
                   </tr>
                 <?php }?>
             </tbody>

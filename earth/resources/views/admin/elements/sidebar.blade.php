@@ -118,11 +118,11 @@ if($pageSegment == 'article'){
                     <!-- End Newsletter -->
                  <!-- masters -->
                  <div class="nav-item">
-                        <a class="nav-link dropdown-toggle active <?=(($pageSegment == 'expertise_area' || $pageSegment == 'ecosystem_affiliation' || $pageSegment == 'pronoun' || $pageSegment == 'title' || $pageSegment == 'role' || $pageSegment == 'section_ert' || $pageSegment == 'submission_type' || $pageSegment == 'country' || $pageSegment == 'communities')?'':'collapsed')?>" href="#navbarVerticalMenuMasters2" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuMasters2" aria-expanded="<?=(($pageSegment == 'expertise_area' || $pageSegment == 'ecosystem_affiliation' || $pageSegment == 'pronoun' || $pageSegment == 'title' || $pageSegment == 'role' || $pageSegment == 'section_ert' || $pageSegment == 'submission_type' || $pageSegment == 'country' || $pageSegment == 'communities')?'true':'false')?>" aria-controls="navbarVerticalMenuMasters2">
+                        <a class="nav-link dropdown-toggle active <?=(($pageSegment == 'expertise_area' || $pageSegment == 'ecosystem_affiliation' || $pageSegment == 'pronoun' || $pageSegment == 'title' || $pageSegment == 'role' || $pageSegment == 'section_ert' || $pageSegment == 'submission_type' || $pageSegment == 'country' || $pageSegment == 'communities' || $pageSegment == 'projects')?'':'collapsed')?>" href="#navbarVerticalMenuMasters2" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuMasters2" aria-expanded="<?=(($pageSegment == 'expertise_area' || $pageSegment == 'ecosystem_affiliation' || $pageSegment == 'pronoun' || $pageSegment == 'title' || $pageSegment == 'role' || $pageSegment == 'section_ert' || $pageSegment == 'submission_type' || $pageSegment == 'country' || $pageSegment == 'communities' || $pageSegment == 'projects')?'true':'false')?>" aria-controls="navbarVerticalMenuMasters2">
                           <i class="fa fa-database nav-icon"></i>
                           <span class="nav-link-title">Masters</span>
                         </a>
-                        <div id="navbarVerticalMenuMasters2" class="nav-collapse collapse <?=(($pageSegment == 'expertise_area' || $pageSegment == 'ecosystem_affiliation' || $pageSegment == 'pronoun' || $pageSegment == 'title' || $pageSegment == 'role' || $pageSegment == 'section_ert' || $pageSegment == 'submission_type' || $pageSegment == 'country' || $pageSegment == 'communities')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">
+                        <div id="navbarVerticalMenuMasters2" class="nav-collapse collapse <?=(($pageSegment == 'expertise_area' || $pageSegment == 'ecosystem_affiliation' || $pageSegment == 'pronoun' || $pageSegment == 'title' || $pageSegment == 'role' || $pageSegment == 'section_ert' || $pageSegment == 'submission_type' || $pageSegment == 'country' || $pageSegment == 'communities' || $pageSegment == 'projects')?'show':'')?>" data-bs-parent="#navbarVerticalMenu">
                           <a class="nav-link <?=(($pageSegment == 'expertise_area')?'active':'')?>" href="<?=url('admin/expertise_area/list')?>">Expertise Area</a>
                           <a class="nav-link <?=(($pageSegment == 'ecosystem_affiliation')?'active':'')?>" href="<?=url('admin/ecosystem_affiliation/list')?>">Ecosystem Affiliation</a>
                           <a class="nav-link <?=(($pageSegment == 'pronoun')?'active':'')?>" href="<?=url('admin/pronoun/list')?>">Pronoun</a>
@@ -131,10 +131,20 @@ if($pageSegment == 'article'){
                           <a class="nav-link <?=(($pageSegment == 'section_ert')?'active':'')?>" href="<?=url('admin/section_ert/list')?>">Section EaRTh</a>
                           <a class="nav-link <?=(($pageSegment == 'submission_type')?'active':'')?>" href="<?=url('admin/submission_type/list')?>">Submission Type</a>
                           <a class="nav-link <?=(($pageSegment == 'communities')?'active':'')?>" href="<?=url('admin/communities/list')?>">Communities</a>
+                          <a class="nav-link <?=(($pageSegment == 'projects')?'active':'')?>" href="<?=url('admin/projects/list')?>">Projects</a>
                           <a class="nav-link <?=(($pageSegment == 'country')?'active':'')?>" href="<?=url('admin/country/list')?>">Country</a>
                         </div>
                     </div>
                 <!-- End masters -->
+                 <!-- Home control -->
+                 <div class="nav-item">
+                        <a class="nav-link <?= $pageSegment == 'home-control' ? 'active' : '' ?>"
+                            href="<?= url('admin/home-control') ?>" data-placement="left">
+                            <i class="fa fa-home nav-icon"></i>
+                            <span class="nav-link-title">Home control</span>
+                        </a>
+                    </div>
+                <!-- End Home control -->
                 <!-- email logs -->
                     <div class="nav-item">
                         <a class="nav-link <?= $pageSegment == 'email-logs' ? 'active' : '' ?>"

@@ -35,7 +35,17 @@ $current_url = $protocol . $host . $uri;
                                     <h1><?=$rowContent->new_title?></h1>
                                     <ul class="post-tags">
                                         <li><i class="fa fa-clock-o"></i><?=date_format(date_create($rowContent->created_at), "d M Y")?></li>
-                                        <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?= $rowContent->for_publication_name ?? $rowContent->author_name ?> | <?=$rowContent->creative_work_DOI?></a></li>
+                                        <?php         
+                                        $co_authors = $rowContent->co_authors;
+                                        $co_author_name = json_decode($rowContent->co_author_names);                                         
+                                            if ($co_authors == 0) { ?>
+                                                <li><i class="fa fa-user"></i>by <?= $rowContent->for_publication_name ?? $rowContent->author_name ?> | <?=$rowContent->creative_work_DOI?></li>
+                                            <?php } elseif ($co_authors == 1) { ?>
+                                            <li><i class="fa fa-user"></i>by <?= $rowContent->for_publication_name ?? $rowContent->author_name ?> & <?= $co_author_name[$co_authors-1] ?> | <?=$rowContent->creative_work_DOI?></li>
+                                            <?php } else { ?>
+                                                <li><i class="fa fa-user"></i>by <?= $rowContent->for_publication_name ?? $rowContent->author_name ?>, <?= $co_author_name[$co_authors-2] ?> & <?= $co_author_name[$co_authors-1] ?> | <?=$rowContent->creative_work_DOI?></li>
+                                            <?php }
+                                        ?>                                                                        
                                         <!-- <li><a href="#"><i class="fa fa-comments-o"></i><span>0</span></a></li>
                                         <li><i class="fa fa-eye"></i>872</li> -->
                                     </ul>
@@ -155,7 +165,7 @@ $current_url = $protocol . $host . $uri;
                                         ?php } else {?>
                                             <a href="?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
                                         ?php }?> -->
-                                        <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                        <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link-popup"><i class="fa fa-play-circle-o"></i></a>
                                     </div>
                                 <?php } ?>
                                 <div class="post-content">
@@ -187,6 +197,21 @@ $current_url = $protocol . $host . $uri;
                                     <?php //} else {?>
                                         <!-- <p>?=substr($rowContent->long_desc,0,100)?> ...</p> -->
                                         <div><?=$rowContent->long_desc?></div>
+                                        <?php 
+                                            $citation_value = json_decode($rowContent->citation_value);
+                                            $citation_id = json_decode($rowContent->citation_id);
+                                            // Helper::pr($citation_value);
+                                            // Helper::pr($citation_id);
+                                            if (!empty($citation_value))
+                                            { ?>
+                                            <hr>
+                                            <div>
+                                            <?php for ($i = 0; $i < count($citation_value); $i++)
+                                            { ?>                                                                                                    
+                                                <p id="<?= $citation_id[$i] ?>"><?= $citation_value[$i] ?></p>                                                
+                                           <?php } ?>
+                                           </div>
+                                        <?php } ?>                                                                                
                                         <div>
                                             <?php // Split the long description into an array of words
                                             // $words = explode(' ', $rowContent->long_desc);
@@ -427,7 +452,7 @@ $current_url = $protocol . $host . $uri;
                                 <div class="carousel-box owl-wrapper">
                                     <div class="title-section">
                                         <?php if($is_series == 'Yes'){?>
-                                            <?php if(count($other_articles_in_this_series) > 1){?>
+                                            <?php  if(count($other_articles_in_this_series) > 1){?>
                                                 <h1><span>Other parts of this series</span></h1>
                                             <?php }?>
                                         <?php } else {?>
@@ -456,7 +481,8 @@ $current_url = $protocol . $host . $uri;
                                                             ?php } else {?>
                                                                 <a href="?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
                                                             ?php }?> -->
-                                                            <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                            <!-- <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a> -->
+                                                            <a href="<?=url('content/' . $alsoLikeContent->parent_category_slug. '/' . $alsoLikeContent->sub_category_slug . '/' . $alsoLikeContent->slug)?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                                         </div>
                                                     <?php } ?>
                                                     <div class="hover-box">
@@ -470,9 +496,6 @@ $current_url = $protocol . $host . $uri;
                                                 </div>
                                             <?php } }?>
                                         <?php } else {?>
-                                            <?php
-                                            // Helper::pr($other_articles_in_this_series);
-                                            ?>
                                             <?php if($other_articles_in_this_series){ foreach($other_articles_in_this_series as $other_articles_in_this_series_row){?>
                                                 <?php if($current_article_no != $other_articles_in_this_series_row->current_article_no){?>
                                                     <div class="item news-post video-post video_post_text">
@@ -494,7 +517,8 @@ $current_url = $protocol . $host . $uri;
                                                                 ?php } else {?>
                                                                     <a href="?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
                                                                 ?php }?> -->
-                                                                <a href="https://www.youtube.com/watch?v=<?=$other_articles_in_this_series_row->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                                <!-- <a href="https://www.youtube.com/watch?v=<?=$other_articles_in_this_series_row->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a> -->
+                                                                <a href="<?=url('content/' . $other_articles_in_this_series_row->parent_category_slug. '/' . $other_articles_in_this_series_row->category_slug . '/' . $other_articles_in_this_series_row->slug)?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
                                                             </div>
                                                         <?php } ?>
                                                         <div class="hover-box">
@@ -518,246 +542,7 @@ $current_url = $protocol . $host . $uri;
                         <!-- End block content -->
                     <?php }?>
                 </div>
-                <div class="col-md-3 col-sm-4 sidebar-sticky">
-                    <!-- sidebar -->
-                    <div class="sidebar large-sidebar theiaStickySidebar">
-                        <div class="widget features-slide-widget">
-                            <div class="title-section">
-                                <h1><span>Highlighted</span></h1>
-                            </div>
-                            
-                            <ul class="list-posts">
-                                <?php
-                                $featuredContents = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
-                                                                ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
-                                                                ->select(
-                                                                    'news_contents.id', 
-                                                                    'news_contents.new_title', 
-                                                                    'news_contents.sub_title', 
-                                                                    'news_contents.slug', 
-                                                                    'news_contents.author_name', 
-                                                                    'news_contents.cover_image', 
-                                                                    'news_contents.created_at',
-                                                                    'news_contents.media',
-                                                                    'news_contents.videoId',
-                                                                    'news_contents.is_series',
-                                                                    'news_contents.series_article_no',
-                                                                    'news_contents.current_article_no',
-                                                                    'news_contents.other_article_part_doi_no',
-                                                                    'sub_category.sub_category as category_name',  // Correct alias for subcategory name
-                                                                    'sub_category.slug as category_slug',  // Correct alias for subcategory slug                                                                            
-                                                                    'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
-                                                                )
-                                                                ->where('news_contents.status', 1)  // Fetch only active content
-                                                                ->where('news_contents.is_hot', 1)  // Fetch only featured content
-                                                                ->inRandomOrder()  // Randomize the result order
-                                                                ->limit(3)  // Limit to 3 records
-                                                                ->get();
-                                if($featuredContents){ foreach($featuredContents as $featuredContent){
-                                ?>
-                                    <?php
-                                    $is_series                  = $featuredContent->is_series;
-                                    $series_article_no          = $featuredContent->series_article_no;
-                                    $current_article_no         = $featuredContent->current_article_no;
-                                    $other_article_part_doi_no  = explode(",", $featuredContent->other_article_part_doi_no);
-                                    if($is_series == 'Yes'){
-                                        if($current_article_no == 1){
-                                            $isShow = true;
-                                        } else {
-                                            $isShow = false;
-                                        }
-                                    } else {
-                                        $isShow = true;
-                                    }
-                                    if($isShow){
-                                    ?>
-                                        <li>
-                                            <?php if($featuredContent->media == 'image'){?>
-                                                <!-- <div class="post-gallery"> -->
-                                                    <img src="<?=env('UPLOADS_URL').'newcontent/'.$featuredContent->cover_image?>" alt="<?=$featuredContent->new_title?>">
-                                                <!-- </div> -->
-                                            <?php } else {?>
-                                                <div class="video-post">
-                                                    <img alt="" src="https://img.youtube.com/vi/<?=$featuredContent->videoId?>/hqdefault.jpg">
-                                                    <!-- <?php if(session('is_user_login')){?>
-                                                        <a href="https://www.youtube.com/watch?v=<?=$featuredContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                                    <?php } else {?>
-                                                        <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
-                                                    <?php }?> -->
-                                                    <a href="https://www.youtube.com/watch?v=<?=$featuredContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                                </div>
-                                            <?php } ?>
-                                            <div class="post-content">
-                                                <h2><a href="<?=url('content/' . $featuredContent->parent_category_slug. '/' . $featuredContent->category_slug . '/' . $featuredContent->slug)?>"><?=$featuredContent->new_title?></a></h2>
-                                                <ul class="post-tags">
-                                                    <li><i class="fa fa-clock-o"></i><?=date_format(date_create($featuredContent->created_at), "d M Y")?></li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    <?php }?>
-                                <?php } }?>
-                            </ul>
-                        </div>
-                        <div class="widget tab-posts-widget">
-                            <ul class="nav nav-tabs" id="myTab">
-                                <li class="active">
-                                    <a href="#option1" data-toggle="tab">Popular</a>
-                                </li>
-                                <li>
-                                    <a href="#option2" data-toggle="tab">Recent</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="option1">
-                                    <ul class="list-posts">
-                                        <?php
-                                        $popularContents = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
-                                                            ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
-                                                            ->select(
-                                                                'news_contents.id', 
-                                                                'news_contents.new_title', 
-                                                                'news_contents.sub_title', 
-                                                                'news_contents.slug', 
-                                                                'news_contents.author_name', 
-                                                                'news_contents.cover_image', 
-                                                                'news_contents.created_at',
-                                                                'news_contents.media',
-                                                                'news_contents.videoId',
-                                                                'news_contents.is_series',
-                                                                'news_contents.series_article_no',
-                                                                'news_contents.current_article_no',
-                                                                'news_contents.other_article_part_doi_no',
-                                                                'sub_category.sub_category as category_name',  // Correct alias for subcategory name
-                                                                'sub_category.slug as category_slug',  // Correct alias for subcategory slug
-                                                                'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
-                                                            )
-                                                            ->where('news_contents.status', 1)  // Fetch only active content
-                                                            ->where('news_contents.is_popular', 1)  // Fetch only featured content
-                                                            ->inRandomOrder()  // Randomize the result order
-                                                            ->limit(3)  // Limit to 3 records
-                                                            ->get();
-                                        if($popularContents){ foreach($popularContents as $popularContent){
-                                        ?>
-                                            <?php
-                                            $is_series                  = $popularContent->is_series;
-                                            $series_article_no          = $popularContent->series_article_no;
-                                            $current_article_no         = $popularContent->current_article_no;
-                                            $other_article_part_doi_no  = explode(",", $popularContent->other_article_part_doi_no);
-                                            if($is_series == 'Yes'){
-                                                if($current_article_no == 1){
-                                                    $isShow = true;
-                                                } else {
-                                                    $isShow = false;
-                                                }
-                                            } else {
-                                                $isShow = true;
-                                            }
-                                            if($isShow){
-                                            ?>
-                                                <li>
-                                                    <?php if($popularContent->media == 'image'){?>
-                                                        <!-- <div class="post-gallery"> -->
-                                                            <img src="<?=env('UPLOADS_URL').'newcontent/'.$popularContent->cover_image?>" alt="<?=$popularContent->new_title?>">
-                                                        <!-- </div> -->
-                                                    <?php } else {?>
-                                                        <div class="video-post">
-                                                            <img alt="" src="https://img.youtube.com/vi/<?=$popularContent->videoId?>/hqdefault.jpg">
-                                                            <!-- <?php if(session('is_user_login')){?>
-                                                                <a href="https://www.youtube.com/watch?v=<?=$popularContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                                            <?php } else {?>
-                                                                <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
-                                                            <?php }?> -->
-                                                            <a href="https://www.youtube.com/watch?v=<?=$popularContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                                        </div>
-                                                    <?php } ?>
-                                                    <div class="post-content">
-                                                        <h2><a href="<?=url('content/'. $popularContent->parent_category_slug. '/' . $popularContent->category_slug . '/' .  $popularContent->slug)?>"><?=$popularContent->new_title?></a></h2>
-                                                        <ul class="post-tags">
-                                                            <li><i class="fa fa-clock-o"></i><?=date_format(date_create($popularContent->created_at), "d M Y")?></li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                            <?php }?>
-                                        <?php } }?>
-                                    </ul>
-                                </div>
-                                <div class="tab-pane" id="option2">
-                                    <ul class="list-posts">
-                                        <?php
-                                        $recentContents = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
-                                                                        ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
-                                                                        ->select(
-                                                                            'news_contents.id', 
-                                                                            'news_contents.new_title', 
-                                                                            'news_contents.sub_title', 
-                                                                            'news_contents.slug', 
-                                                                            'news_contents.author_name', 
-                                                                            'news_contents.cover_image', 
-                                                                            'news_contents.created_at',
-                                                                            'news_contents.media',
-                                                                            'news_contents.videoId',
-                                                                            'news_contents.is_series',
-                                                                            'news_contents.series_article_no',
-                                                                            'news_contents.current_article_no',
-                                                                            'news_contents.other_article_part_doi_no',
-                                                                            'sub_category.sub_category as category_name',  // Correct alias for subcategory name
-                                                                            'sub_category.slug as category_slug',  // Correct alias for subcategory slug
-                                                                            'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
-                                                                        )
-                                                                        ->where('news_contents.status', 1)  // Fetch only active content                                                                        
-                                                                        ->inRandomOrder()  // Randomize the result order
-                                                                        ->limit(3)  // Limit to 3 records
-                                                                        ->get();
-                                        if($recentContents){ foreach($recentContents as $recentContent){
-                                        ?>
-                                            <?php
-                                            $is_series                  = $recentContent->is_series;
-                                            $series_article_no          = $recentContent->series_article_no;
-                                            $current_article_no         = $recentContent->current_article_no;
-                                            $other_article_part_doi_no      = explode(",", $recentContent->other_article_part_doi_no);
-                                            if($is_series == 'Yes'){
-                                                if($current_article_no == 1){
-                                                    $isShow = true;
-                                                } else {
-                                                    $isShow = false;
-                                                }
-                                            } else {
-                                                $isShow = true;
-                                            }
-                                            if($isShow){
-                                            ?>
-                                                <li>
-                                                    <?php if($recentContent->media == 'image'){?>
-                                                        <!-- <div class="post-gallery"> -->
-                                                            <img src="<?=env('UPLOADS_URL').'newcontent/'.$recentContent->cover_image?>" alt="<?=$recentContent->new_title?>">
-                                                        <!-- </div> -->
-                                                    <?php } else {?>
-                                                        <div class="video-post">
-                                                            <img alt="" src="https://img.youtube.com/vi/<?=$recentContent->videoId?>/hqdefault.jpg">
-                                                            <!-- <?php if(session('is_user_login')){?>
-                                                                <a href="https://www.youtube.com/watch?v=<?=$recentContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                                            <?php } else {?>
-                                                                <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
-                                                            <?php }?> -->
-                                                            <a href="https://www.youtube.com/watch?v=<?=$recentContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                                        </div>
-                                                    <?php } ?>
-                                                    <div class="post-content">
-                                                        <h2><a href="<?=url('content/' . $recentContent->parent_category_slug. '/' . $recentContent->category_slug . '/' .  $recentContent->slug)?>"><?=$recentContent->new_title?></a></h2>
-                                                        <ul class="post-tags">
-                                                            <li><i class="fa fa-clock-o"></i><?=date_format(date_create($recentContent->created_at), "d M Y")?></li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                            <?php }?>
-                                        <?php } }?>
-                                    </ul>                                       
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End sidebar -->
-                </div>
+                @include('front.pages.rightsidebar')
             </div>
         </div>
     </section>
@@ -770,11 +555,23 @@ $current_url = $protocol . $host . $uri;
             
              
             //  Helper::pr($co_author_class); 
-            $author_name = $rowContent->author_name;
+            // $author_name = $rowContent->author_name;
+            $author_name = $rowContent->for_publication_name ?? $rowContent->author_name;            
             $new_title = $rowContent->new_title;
             $doi = $rowContent->creative_work_DOI;
             $co_authors = $rowContent->co_authors;
-            $publish_date = date_format(date_create($rowContent->created_at), "d M, Y");
+            $publish_date = date_create($rowContent->created_at);
+
+            $day = (int) $publish_date->format('j'); // Removes leading zero
+            $abrmonth = $publish_date->format('M');     // Abbreviated month
+            $fullMonth = $publish_date->format('F'); // Full month
+            $year = $publish_date->format('Y');
+            $length = strlen($fullMonth);
+            if($length <= 4 ){
+                $month = $fullMonth;
+            }else{
+                $month = $abrmonth.'.';
+            }
             $url = $current_url;
             
             function getInitials($author_name) {
@@ -805,30 +602,35 @@ $current_url = $protocol . $host . $uri;
                 if($rowContent->co_authors == 1){
                     // $co_author_class = json_decode($rowContent->co_author_classification) ;
                     if($co_authorclassification == 'Movement'){                        
-                        echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
-                        $url";
+                        // echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
+                        // $url";
+                        echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ({$day} {$month}, {$year}).";
                     } elseif($co_authorclassification == 'Ecoweb-rooted community'){                        
-                        echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
-                        $url";
+                        // echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ({$day} {$month}, {$year}).. 
+                        // $url";
+                        echo "$initials $last_name & $co_author_name[0], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ({$day} {$month}, {$year}).";
                     } else{
-                        echo "$initials $last_name & $co_author_initials $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
-                        $url";
+                        // echo "$initials $last_name & $co_author_initials $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ({$day} {$month}, {$year}).. 
+                        // $url";
+                        echo "$initials $last_name & $co_author_initials $co_author_last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ({$day} {$month}, {$year}).";
                     }
                 } elseif($rowContent->co_authors > 1){ 
-                    echo "$initials $last_name, <em>et al.</em>, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
-                    $url";
+                    // echo "$initials $last_name, <em>et al.</em>, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ({$day} {$month}, {$year}).. 
+                    // $url";
+                    echo "$initials $last_name, <em>et al.</em>, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ({$day} {$month}, {$year}).";
                 } else {
-                    echo "$initials $last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ($publish_date). 
-                    $url";
+                    // echo "$initials $last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ({$day} {$month}, {$year}).. 
+                    // $url";
+                    echo "$initials $last_name, <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> $doi ({$day} {$month}, {$year}).";
                     // echo "$initials. $words[1], <em>$new_title</em>, <b>Ecosymbionts all Regenerate Together (EaRTh):</b> DOI:$doi. <a href="$rowContent->parent_category_name/$rowContent->sub_category_slug/$rowContent->slug">$new_title</a>";
                 }
                 ?></p>  
         </div>
         <div class="cite_button">
-            <button class="btn btn-primary" onclick="copyText()"><i class="fa fa-copy"></i> Copy</button>                                  
+            <!-- <button class="btn btn-primary" onclick="copyText()"><i class="fa fa-copy"></i> Copy</button>                                   -->
             <button id="closePopup">Close</button>
         </div>                                    
-        <h3 id="copyMessage">Copied successfully!</h3>
+        <h3 id="copyMessage" class="text-success">Copied successfully!</h3>
     </div>
     <div id="permalink">
         <h3>PERMALINK</h3>  
@@ -839,7 +641,7 @@ $current_url = $protocol . $host . $uri;
             <button class="btn btn-primary" onclick="copyText2()"><i class="fa fa-copy"></i> Copy</button>                                  
             <button id="closepermalink">Close</button>
         </div>                                   
-        <h3 id="copyMessage2">Copied successfully!</h3>
+        <h3 id="copyMessage2" class="text-success">Copied successfully!</h3>
     </div>  
 <!-- End block-wrapper-section -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
@@ -861,12 +663,18 @@ $current_url = $protocol . $host . $uri;
 </script> -->
 <script>
     function copyText() {
-        // Get text inside the popup
+        // Get text inside the popup  
         let textToCopy = $('#popup p').map(function() {
             return $(this).text().trim();
-        }).get().join("\n"); // Join text with new lines
+        }).get().join("\n"); // Join text with new lines      
+
+        // let htmlToCopy = $('#popup p').html(); // Preserves <b>, <i>, <a>, etc.
 
         // Create a temporary textarea to copy text
+    //     let tempTextArea = $('<textarea>').html(htmlToCopy).css({
+    //     position: 'absolute',
+    //     left: '-9999px'
+    // });
         let tempTextArea = $('<textarea>');
         $('body').append(tempTextArea);
         tempTextArea.val(textToCopy).select();
