@@ -7094,7 +7094,8 @@ ul.list-posts > li .post-content p,
   bottom: 0 !important;
 }
 .news-post.article-post .post-gallery img,
-.news-post.article-post .post-gallery{
+.news-post.article-post .post-gallery,
+.news-post.article-post .video-post{
   width: 100%;
   max-width: 150px !important;
 }
