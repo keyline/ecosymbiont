@@ -7098,6 +7098,12 @@ ul.list-posts > li .post-content p,
   width: 100%;
   max-width: 150px !important;
 }
+.feature-video .hover-box h2{
+  max-height: 22px;
+}
+.feature-video .hover-box a{
+  font-size: 12px;
+}
 }
 
 @media (max-width: 650px) {
@@ -7131,10 +7137,6 @@ ul.list-posts > li img{
 }
 .feature_holder ul.list-posts > li .video-post{
   margin-bottom: 10px;
-}
-
-.feature-video .hover-box a{
-  font-size: 12px;
 }
 .home_feature_section li img{
   margin-bottom: 10px !important;
