@@ -66,7 +66,7 @@ use App\Helpers\Helper;
                         <td><?=$row->user_email?></td>
                         <td><?=$row->ip_address?></td>
                         <td><?=$row->activity_details?></td>
-                        <td><?=date_format(date_create($row->created_at), "M d, Y h:i A")?></td>
+                        <td data-order="<?=date('Y-m-d H:i:s', strtotime($row->created_at))?>"><?=date_format(date_create($row->created_at), "M d, Y h:i A")?></td>
                         <td>
                           <?php if($row->activity_type == 0) {?>
                             <span class="badge bg-danger">FAILED</span>

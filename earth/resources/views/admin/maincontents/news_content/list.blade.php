@@ -110,7 +110,7 @@ $controllerRoute = $module['controller_route'];
                       <?=$row->author_email?><br>                      
                     </td>  
                     <td><?=wordwrap($row->new_title,30,"<br>\n")?></td>                        
-                    <td><?=date_format(date_create($row->created_at), "M d, Y")?></td>                                                      
+                    <td data-order="<?=date('Y-m-d H:i:s', strtotime($row->created_at))?>"><?=date_format(date_create($row->created_at), "M d, Y")?></td>                                                      
                   </tr>
                 <?php } } else {?>
                   <tr>

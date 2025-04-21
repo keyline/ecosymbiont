@@ -79,7 +79,7 @@ $controllerRoute = $module['controller_route'];
                           <?=$row->first_name?> <?=$row->last_name?><br> <?=$row->email?></td>
                         <td>
                           <?=wordwrap($row->creative_Work,30,"<br>\n")?></td>                    
-                        <td><?=date_format(date_create($row->created_at), "M d, Y")?></td>                                       
+                        <td data-order="<?=date('Y-m-d H:i:s', strtotime($row->created_at))?>"><?=date_format(date_create($row->created_at), "M d, Y")?></td>                                       
                         <td>
                         <?php
                           if($row->is_published == 0){
