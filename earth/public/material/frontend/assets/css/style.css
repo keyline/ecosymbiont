@@ -7069,7 +7069,8 @@ ul.list-posts > li .post-content p,
   height: 350px;
   object-fit: cover;
 }
-.home_banner_box .video-post img{
+.home_banner_box .video-post img,
+.home_banner_box .news-post img{
   height: 350px;
   object-fit: cover;
 }
