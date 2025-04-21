@@ -7137,7 +7137,10 @@ ul.list-posts > li img{
   font-size: 12px;
 }
 .home_feature_section li img{
-  margin-bottom: 10px;
+  margin-bottom: 10px !important;
+}
+.home_feature_section li .video-post .video-holder img{
+  margin-bottom: 0px !important;
 }
 }
 @media (max-width: 500px) {
