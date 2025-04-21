@@ -7279,7 +7279,7 @@ ul.list-posts > li img{
   color: white;
 }
 .project-btn i{    
-  color: white;
+  color: white !important; 
 }
 .navbar-nav > li.drop-arrow:hover .megadropdown{
   display: block ;
