@@ -20,7 +20,7 @@ $current_url = $protocol . $host . $uri;
         <div class="container">
             <div class="row">
                 <div class="col-md-9 col-sm-8 content-blocker">
-                    <?php if($rowContent){?>
+                    <?php Helper::pr($rowContent); if($rowContent){?>
                         <!-- block content -->
                         <div class="block-content">
                             <!-- article box -->
