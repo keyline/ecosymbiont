@@ -7110,7 +7110,7 @@ ul.list-posts > li img{
   width: 100%;
   max-width: 150px !important;
 }
-ul.list-posts.home_feature_section .post-content h2,
+.home_feature_section .post-content h2,
 ul.list-posts > li .post-content p, .article-post .post-content p,
 ul.list-posts > li .post-content h2,
 .article-post .post-content h2{
