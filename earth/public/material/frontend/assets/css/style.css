@@ -6313,6 +6313,9 @@ ul.list-posts.home_feature_section .post-content h2{
 ul.list-posts.home_feature_section .post-content p{
   font-size: 14px;
 }
+.news-post.article-post .post-content p{
+  font-size: 18px;
+}
 .list-posts.home_feature_section .video-post .video-holder{
   margin-right: 0;
 }
