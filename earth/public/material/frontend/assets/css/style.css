@@ -7066,12 +7066,12 @@ ul.list-posts > li .post-content p,
   font-size: 15px !important;
 }
 .home_banner_box .video-post{
-  height: 350px !important;
+  height: 300px !important;
   object-fit: cover;
 }
 .home_banner_box .video-post img,
 .home_banner_box .news-post img{
-  height: 350px !important;
+  height: 300px !important;
   object-fit: cover;
 }
 
