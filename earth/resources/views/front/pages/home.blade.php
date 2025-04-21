@@ -748,7 +748,7 @@ $current_url = $protocol . $host . $uri;
     </section>
 <!-- End feature-video-section -->
 <!-- block-wrapper-section ================================================== -->
-    <section class="block-wrapper">
+    <section class="block-wrapper earth-project">
         <div class="container">
             <div class="row">
                 <div class="col-md-9 col-sm-8 content-blocker">

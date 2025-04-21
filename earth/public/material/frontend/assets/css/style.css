@@ -6439,6 +6439,10 @@ div#permalink p {
   margin: 25px 0 20px;
   font-size: 20px;
 }
+.earth-project .post-content h2,
+.earth-project .post-content p{
+  font-size: 15px;
+}
 
 /*-------------------------------------------------*/
 /* =  Responsive Part
