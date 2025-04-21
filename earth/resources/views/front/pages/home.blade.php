@@ -11,7 +11,7 @@ $current_url = $protocol . $host . $uri;
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- heading-news-section2 ================================================== -->
     <section class="heading-news2">
-        <div class="heading-news-box">
+        <div class="heading-news-box home_banner_box">
             <div class="container">
                 <div class="row">
                     <div class="col-md-3 pl-1 pr-1">
@@ -566,7 +566,7 @@ $current_url = $protocol . $host . $uri;
     </section>
 <!-- End heading-news-section -->
 <!-- block-wrapper-section ================================================== -->
-    <section class="block-wrapper">
+    <section class="block-wrapper feature_holder">
         <div class="container">
             <div class="row">
                 <div class="col-md-9 col-sm-8 content-blocker">
@@ -651,7 +651,7 @@ $current_url = $protocol . $host . $uri;
                                                             <li><i class="fa fa-clock-o"></i><?=date_format(date_create($featuredContent->created_at), "d M Y")?></li>
                                                             <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$featuredContent->for_publication_name ?? $featuredContent->author_name?></a></li>
                                                         </ul>
-                                                        <p><?=$featuredContent->sub_title?></p>
+                                                        <p class="dec"><?=$featuredContent->sub_title?></p>
                                                     </div>
                                                 </li>
                                             <?php }?>
@@ -748,7 +748,7 @@ $current_url = $protocol . $host . $uri;
     </section>
 <!-- End feature-video-section -->
 <!-- block-wrapper-section ================================================== -->
-    <section class="block-wrapper">
+    <section class="block-wrapper earth-project">
         <div class="container">
             <div class="row">
                 <div class="col-md-9 col-sm-8 content-blocker">

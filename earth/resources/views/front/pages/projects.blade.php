@@ -5,7 +5,7 @@
 //  $pageSegment = $pageName[1];
 ?>
 <!-- block-wrapper-section ================================================== -->
-<section class="block-wrapper">
+<section class="block-wrapper project_section">
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12 content-blocker">
