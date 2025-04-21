@@ -7071,7 +7071,7 @@ ul.list-posts > li .post-content p,
 .article-post .post-content p{
   font-size: 15px !important;
 }
-.communities_section p{
+.communities_section .article-post .post-content p{
   font-size: 18px !important;
 }
 .home_banner_box .video-post{
