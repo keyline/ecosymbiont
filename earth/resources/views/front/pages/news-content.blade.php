@@ -49,7 +49,7 @@ $current_url = $protocol . $host . $uri;
                                         <!-- <li><a href="#"><i class="fa fa-comments-o"></i><span>0</span></a></li>
                                         <li><i class="fa fa-eye"></i>872</li> -->
                                         <?php if($rowContent->projects_name != ''){ ?>
-                                        <li><button class="btn btn-primary" id="project">
+                                        <li><button class="btn project-btn" id="project">
                                         <i class="fa fa-users"></i> <?=$rowContent->projects_name?></button></li>
                                         <?php } ?>
                                     </ul>
