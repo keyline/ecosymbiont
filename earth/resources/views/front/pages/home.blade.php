@@ -10,7 +10,7 @@ $current_url = $protocol . $host . $uri;
 ?>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- heading-news-section2 ================================================== -->
-    <section class="heading-news2">
+    <section class="heading-news2 home_section">
         <div class="heading-news-box home_banner_box">
             <div class="container">
                 <div class="row">
