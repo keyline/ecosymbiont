@@ -69,7 +69,7 @@ $controllerRoute = $module['controller_route'];
                 </tr>
               </thead>
               <tbody>
-                <?php Helper::pr($rows); if(count($rows)>0){ $sl=1; foreach($rows as $row){?>
+                <?php if(count($rows)>0){ $sl=1; foreach($rows as $row){?>
                   <tr>
                     <!-- <td>
                       <input type='checkbox' name='draw[]' value="?php echo $row->id ?>" id="required-checkbox1" onClick="CheckIfChecked()">
