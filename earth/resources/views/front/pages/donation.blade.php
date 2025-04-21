@@ -35,71 +35,71 @@
                         <!-- Right Form -->
                         <div class="col-lg-7 fade-in">
                             <div class="donation-box">
-                    
-                            <!-- 1. Donation Amount -->
-                            <div class="titleto-inner mb-3">
-                                <h2>1. Donation Amount</h2>
-                            </div>
-                    
-                            <div class="donation-amounts d-flex flex-wrap mb-3">
-                                <ul class="d-flex flex-wrap list-unstyled mt-2">
-                                    <li>
-                                        <button class="btn btn-outline-secondary">$50</button>
-                                    </li>
-                                    <li>
-                                        <button class="btn btn-outline-secondary">$100</button>
-                                    </li>
-                                    <li>
-                                        <button class="btn btn-outline-secondary">$250</button>
-                                    </li>
-                                    <li>
-                                        <button class="btn btn-outline-secondary">$1000</button>
-                                    </li>
-                                </ul>
-                                <input type="text" class="form-control mt-2 w-50" placeholder="Other">
-                            </div>
-                    
-                            <div class="form-check mb-4">
-                                <input class="form-check-input" type="checkbox" id="coverFee">
-                                <label class="form-check-label" for="coverFee">
-                                I'd like to help cover the transaction fees.
-                                </label>
-                            </div>
-                    
-                            <!-- 2. Donor Info -->
-                            <div class="titleto-inner mb-3">
-                                <h2>2. Donor Information</h2>
-                            </div>
-                            <form class="mb-4">
-                                <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <input type="text" class="form-control" placeholder="First Name">
+                                <!-- 2. Donor Info -->
+                                <div class="titleto-inner mb-3">
+                                    <h2>1. Donor Information</h2>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <input type="text" class="form-control" placeholder="Last Name">
-                                </div>
-                                </div>
-                                <input type="email" class="form-control mb-3" placeholder="Email Address">
-                                <input type="text" class="form-control mb-3" placeholder="Residential  Address">
-                                <select name="country" id="" class="form-control mb-3">
-                                    <option value="India">India</option>
-                                    <option value="India">India2</option>
-                                    <option value="India">India3</option>
-                                    <option value="India">India4</option>
-                                </select>
-                            </form>
+                                <form class="mb-4">
+                                    <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <input type="text" class="form-control" placeholder="First Name">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <input type="text" class="form-control" placeholder="Last Name">
+                                    </div>
+                                    </div>
+                                    <input type="email" class="form-control mb-3" placeholder="Email Address">
+                                    <input type="text" class="form-control mb-3" placeholder="Residential  Address">
+                                    <select name="country" id="" class="form-control mb-3">
+                                        <option value="India">India</option>
+                                        <option value="India">India2</option>
+                                        <option value="India">India3</option>
+                                        <option value="India">India4</option>
+                                    </select>
+                                    <small class="text-danger">*You will be able to download the donation receipt for tax exemption in the United State; therefore, please provide accurate residential address.</small>
+                                </form>
                     
-                            <!-- 3. Payment Method -->
-                            <div class="titleto-inner mb-3">
-                                <h2>3. Select Payment Method</h2>
-                            </div>
-                            <div class="payment-method">
-                                <button class="btn btn-outline-info"><img src="<?=env('UPLOADS_URL').'paypal.png'?>" alt="" class="img-fluid"></button>
-                            </div>
+                                <!-- 1. Donation Amount -->
+                                <div class="titleto-inner mb-3">
+                                    <h2>2. Donation Amount</h2>
+                                </div>
                     
-                            <div class="mt-4">
-                                <button class="btn mt-4 donation_btn">Complete Donation</button>
-                            </div>
+                                <div class="donation-amounts d-flex flex-wrap mb-3">
+                                    <ul class="d-flex flex-wrap list-unstyled mt-2">
+                                        <li>
+                                            <button class="btn btn-outline-secondary">$50</button>
+                                        </li>
+                                        <li>
+                                            <button class="btn btn-outline-secondary">$100</button>
+                                        </li>
+                                        <li>
+                                            <button class="btn btn-outline-secondary">$250</button>
+                                        </li>
+                                        <li>
+                                            <button class="btn btn-outline-secondary">$1000</button>
+                                        </li>
+                                    </ul>
+                                    <input type="text" class="form-control mt-2 w-50" placeholder="Other">
+                                </div>
+                        
+                                <div class="form-check mb-4">
+                                    <input class="form-check-input" type="checkbox" id="coverFee">
+                                    <label class="form-check-label" for="coverFee">
+                                    I'd like to help cover the transaction fees.
+                                    </label>
+                                </div>
+                    
+                                <!-- 3. Payment Method -->
+                                <div class="titleto-inner mb-3">
+                                    <h2>3. Select Payment Method</h2>
+                                </div>
+                                <div class="payment-method">
+                                    <button class="btn btn-outline-info"><img src="<?=env('UPLOADS_URL').'paypal.png'?>" alt="" class="img-fluid"></button>
+                                </div>
+                        
+                                <div class="mt-4">
+                                    <button class="btn mt-4 donation_btn">Complete Donation</button>
+                                </div>
                             </div>
                         </div>                                         
                     </div>
