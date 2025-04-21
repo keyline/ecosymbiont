@@ -7136,7 +7136,9 @@ ul.list-posts > li img{
 .feature-video .hover-box a{
   font-size: 12px;
 }
-
+.home_feature_section li img{
+  margin-bottom: 10px;
+}
 }
 @media (max-width: 500px) {
   .image-slider .image-post .hover-box .inner-hover h2 {
