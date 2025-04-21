@@ -1673,16 +1673,16 @@ use Illuminate\Support\Facades\DB;
         $('#input-tags').on('input', function () {
             var input = $(this).val().trim();
 
-            // Live pattern feedback while typing
-            if (input.length > 0 && !input.includes(',')) {
-                if (pattern.test(input)) {
-                    $('#validation-msg').text("✅ Valid format").css('color', 'green');
-                } else {
-                    $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRTh042025-052").css('color', 'red');
-                }
-            } else {
-                $('#validation-msg').text('');
-            }
+            // // Live pattern feedback while typing
+            // if (input.length > 0 && !input.includes(',')) {
+            //     if (pattern.test(input)) {
+            //         $('#validation-msg').text("✅ Valid format").css('color', 'green');
+            //     } else {
+            //         $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx").css('color', 'red');
+            //     }
+            // } else {
+            //     $('#validation-msg').text('');
+            // }
 
             // When comma is typed
             if (input.includes(',')) {
@@ -1691,7 +1691,7 @@ use Illuminate\Support\Facades\DB;
                     tag = tag.trim();
                     if (tag.length > 0) {
                         if (!pattern.test(tag)) {
-                            $('#validation-msg').text("❌ Tag '" + tag + "' is invalid format.").css('color', 'red');
+                            $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx").css('color', 'red');
                             return;
                         }
                         if (!tagsArray.includes(tag)) {
