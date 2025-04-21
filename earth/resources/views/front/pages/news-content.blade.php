@@ -48,6 +48,8 @@ $current_url = $protocol . $host . $uri;
                                         ?>                                                                        
                                         <!-- <li><a href="#"><i class="fa fa-comments-o"></i><span>0</span></a></li>
                                         <li><i class="fa fa-eye"></i>872</li> -->
+                                        <li><button class="btn btn-primary" id="project">
+                                        <i class="fa fa-users"></i> Project</button></li>
                                     </ul>
                                     <h5><?=$rowContent->sub_title?></h5>
                                     <?php
