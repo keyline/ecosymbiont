@@ -7110,6 +7110,12 @@ ul.list-posts > li .video-post{
 ul.list-posts > li img{
   margin-bottom: 10px;
 }
+.feature_holder ul.list-posts > li img{
+  margin-bottom: 0;
+}
+.feature_holder ul.list-posts > li .video-post{
+  margin-bottom: 10px;
+}
 .news-post.article-post .post-gallery img{
   width: 100%;
   max-width: 150px !important;
