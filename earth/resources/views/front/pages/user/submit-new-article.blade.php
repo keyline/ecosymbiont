@@ -1673,16 +1673,14 @@ use Illuminate\Support\Facades\DB;
         $('#input-tags').on('input', function () {
             var input = $(this).val().trim();
 
-            // // Live pattern feedback while typing
-            // if (input.length > 0 && !input.includes(',')) {
-            //     if (pattern.test(input)) {
-            //         $('#validation-msg').text("✅ Valid format").css('color', 'green');
-            //     } else {
-            //         $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx").css('color', 'red');
-            //     }
-            // } else {
-            //     $('#validation-msg').text('');
-            // }
+            // Live pattern feedback while typing
+            if (input.length > 0 && !input.includes(',')) {
+                if (pattern.test(input)) {
+                    $('#validation-msg').text("✅ Valid format").css('color', 'green');
+                }
+            } else {
+                $('#validation-msg').text('');
+            }
 
             // When comma is typed
             if (input.includes(',')) {
@@ -1694,9 +1692,7 @@ use Illuminate\Support\Facades\DB;
                             $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx").css('color', 'red');
                             return;
                         }
-                        else{
-                            $('#validation-msg').text("✅ Valid format").css('color', 'green');
-                        }
+                        
                         if (!tagsArray.includes(tag)) {
                             tagsArray.push(tag);
                             $('#badge-container').append(
