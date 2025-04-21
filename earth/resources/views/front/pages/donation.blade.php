@@ -90,15 +90,15 @@
                                 </div>
                     
                                 <!-- 3. Payment Method -->
-                                <div class="titleto-inner mb-3">
+                                <!-- <div class="titleto-inner mb-3">
                                     <h2>3. Select Payment Method</h2>
                                 </div>
                                 <div class="payment-method">
                                     <button class="btn btn-outline-info"><img src="<?=env('UPLOADS_URL').'paypal.png'?>" alt="" class="img-fluid"></button>
-                                </div>
+                                </div> -->
                         
                                 <div class="mt-4">
-                                    <button class="btn mt-4 donation_btn">Complete Donation</button>
+                                    <button class="btn mt-4 donation_btn">Preview For Donation</button>
                                 </div>
                             </div>
                         </div>                                         
