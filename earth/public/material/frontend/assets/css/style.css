@@ -2849,8 +2849,8 @@ section.big-slider .big-bxslider li .image-post2 .hover-box .inner-hover h2 {
   background: #fafafa;
 }
 .sidebar.large-sidebar .tab-posts-widget .tab-pane ul.list-posts li {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 0;
+  padding-right: 0;
 }
 .sidebar.small-sidebar {
   position: relative;
@@ -6268,7 +6268,7 @@ a.blue_btn {
 }
 .sidebar.large-sidebar .tab-posts-widget .tab-pane ul.list-posts li {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 .navbar-nav .megadropdown .inner-megadropdown .filter-block ul li a {
   text-transform: capitalize !important;
@@ -6657,7 +6657,7 @@ div#permalink p {
     padding-right: 10px;
   }
   .sidebar .tab-posts-widget .tab-pane ul.list-posts > li .video-post {
-    margin-right: 10px;
+    margin-right: 0;
   }
   .feature_holder .sidebar .tab-posts-widget .tab-pane ul.list-posts > li .video-post{
     margin-right: 0;
