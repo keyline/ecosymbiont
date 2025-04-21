@@ -7065,6 +7065,15 @@ ul.list-posts > li .post-content p,
 .article-post .post-content p{
   font-size: 15px !important;
 }
+.home_banner_box .video-post{
+  height: 350px;
+  object-fit: cover;
+}
+.home_banner_box .video-post img{
+  height: 350px;
+  object-fit: cover;
+}
+
 }
 
 @media (max-width: 650px) {
