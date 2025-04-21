@@ -3365,6 +3365,9 @@ ul.list-posts > li {
   border-bottom: 1px solid #f0f0f0;
   overflow: hidden;
 }
+ul.list-posts > li:last-child {
+  margin-bottom: 5px;
+}
 ul.list-posts > li img {
   width: 150px;
   /* margin-right: 20px; */
