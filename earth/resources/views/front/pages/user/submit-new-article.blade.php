@@ -1694,6 +1694,9 @@ use Illuminate\Support\Facades\DB;
                             $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx").css('color', 'red');
                             return;
                         }
+                        else{
+                            $('#validation-msg').text("✅ Valid format").css('color', 'green');
+                        }
                         if (!tagsArray.includes(tag)) {
                             tagsArray.push(tag);
                             $('#badge-container').append(
