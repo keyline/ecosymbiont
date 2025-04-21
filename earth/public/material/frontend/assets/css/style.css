@@ -6443,7 +6443,9 @@ div#permalink p {
 .earth-project .post-content p{
   font-size: 15px !important;
 }
-
+.communities_section p{
+  font-size: 18px !important;
+}
 /*-------------------------------------------------*/
 /* =  Responsive Part
 /*-------------------------------------------------*/
@@ -7081,7 +7083,9 @@ ul.list-posts > li .post-content p,
 .home_banner_box .news-post .hover-box{
   bottom: 0 !important;
 }
-
+.communities_section p{
+  font-size: 18px !important;
+}
 }
 
 @media (max-width: 650px) {
