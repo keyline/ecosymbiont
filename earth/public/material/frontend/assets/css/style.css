@@ -2848,9 +2848,9 @@ section.big-slider .big-bxslider li .image-post2 .hover-box .inner-hover h2 {
   padding: 10px 0 0;
   background: #fafafa;
 }
-.sidebar.large-sidebar .tab-posts-widget .tab-pane ul.list-posts li {
-  padding-left: 0;
-  padding-right: 0;
+.sidebar.large-sidebar .tab-posts-widget .tab-pane ul.list-posts > li {
+  padding-left: 15px;
+  padding-right: 15px;
 }
 .sidebar.small-sidebar {
   position: relative;
