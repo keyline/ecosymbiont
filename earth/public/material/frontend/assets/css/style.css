@@ -7093,7 +7093,11 @@ ul.list-posts > li .post-content p,
 .home_banner_box .news-post .hover-box{
   bottom: 0 !important;
 }
-
+.news-post.article-post .post-gallery img,
+.news-post.article-post .post-gallery{
+  width: 100%;
+  max-width: 150px !important;
+}
 }
 
 @media (max-width: 650px) {
@@ -7128,11 +7132,7 @@ ul.list-posts > li img{
 .feature_holder ul.list-posts > li .video-post{
   margin-bottom: 10px;
 }
-.news-post.article-post .post-gallery img,
-.news-post.article-post .post-gallery{
-  width: 100%;
-  max-width: 150px !important;
-}
+
 .feature-video .hover-box a{
   font-size: 12px;
 }
