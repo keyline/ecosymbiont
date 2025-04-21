@@ -300,12 +300,14 @@ $current_url = $protocol . $host . $uri;
                                                             <span><?=(($getCountry)?$getCountry->name:'')?></span>
                                                         </span>
                                                     </div>
+                                                    <?php if($rowContent->community_name != ''){?>
                                                     <div class="autor-title">
                                                         <span>
                                                             <img src="<?=env('UPLOADS_URL').'icon/organizational.png'?>" alt="organizational" title="Organizational Affiliation" data-toogle="tooltip">                                                                    
                                                             <span><?= $organization_name = (isset($rowContent->organization_name) > 0) ? trim($rowContent->organization_name) : ''; ?></span>
                                                         </span>
                                                     </div>
+                                                    <?php }?>
                                                     <?php if($rowContent->community_name != ''){?>
                                                     <div class="autor-title">
                                                         <span>
