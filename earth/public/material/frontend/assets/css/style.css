@@ -7278,6 +7278,10 @@ ul.list-posts > li img{
   background-color: #386136;
   color: white;
 }
+.project-btn:hover{
+  background-color: #d09c1e;
+  color: white;
+}
 .project-btn i{    
   color: white !important; 
 }
