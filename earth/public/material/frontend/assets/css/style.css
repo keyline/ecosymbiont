@@ -7071,6 +7071,9 @@ ul.list-posts > li .post-content p,
 .article-post .post-content p{
   font-size: 15px !important;
 }
+.communities_section p{
+  font-size: 18px !important;
+}
 .home_banner_box .video-post{
   height: 300px !important;
   object-fit: cover;
@@ -7083,9 +7086,7 @@ ul.list-posts > li .post-content p,
 .home_banner_box .news-post .hover-box{
   bottom: 0 !important;
 }
-.communities_section p{
-  font-size: 18px !important;
-}
+
 }
 
 @media (max-width: 650px) {
