@@ -313,6 +313,43 @@ class FrontController extends Controller
         $page_name                      = 'subcategory';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
+    public function project($slug)
+    {
+        // $data['row']                    = NewsCategory::select('id', 'sub_category')->where('status', '=', 1)->where('slug', '=', $slug)->first();
+        // $parent_category_id                = (($data['row'])?$data['row']->id:'');
+        $data['contents']               = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
+                                                    ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
+                                                    ->select(
+                                                        'news_contents.id', 
+                                                        'news_contents.new_title', 
+                                                        'news_contents.sub_title', 
+                                                        'news_contents.slug', 
+                                                        'news_contents.author_name', 
+                                                        'news_contents.for_publication_name', 
+                                                        'news_contents.cover_image', 
+                                                        'news_contents.created_at',
+                                                        'news_contents.media',
+                                                        'news_contents.videoId',
+                                                        'news_contents.is_series',
+                                                        'news_contents.series_article_no',
+                                                        'news_contents.current_article_no',
+                                                        'news_contents.other_article_part_doi_no',
+                                                        'news_contents.projects_name',
+                                                        'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
+                                                        'parent_category.sub_category as parent_category_name', // From parent_category name
+                                                        'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
+                                                        'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                                    )
+                                                    ->where('news_contents.status', 1)
+                                                    ->where('news_contents.projects_name', $slug) // Ensure $parent_category_id is defined
+                                                    ->orderBy('news_contents.id', 'DESC')
+                                                    ->get();
+        $data['search_keyword']         = '';
+
+        $title                          = (($data['row'])?$data['row']->sub_category:'');
+        $page_name                      = 'project-list';
+        echo $this->front_before_login_layout($title, $page_name, $data);
+    }
     public function newsContent($categoryname, $subcategoryname, $slug)
     {
         $data['rowContent'] = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
