@@ -81,8 +81,8 @@ class DonationController extends Controller
                     $donation_number    = 'SRM-'.(($getCountry)?$getCountry->ISO:'').'-web'.date('Y').'-'.$next_sl_no_string;
                 }
                 $fields = [
-                    'sl_no'                                 => $postData['name'],
-                    'donation_number'                       => $postData['name'],
+                    'sl_no'                                 => $next_sl_no,
+                    'donation_number'                       => $donation_number,
                     'first_name'                            => $postData['first_name'],
                     'last_name'                             => $postData['last_name'],
                     'email'                                 => $postData['email'],
