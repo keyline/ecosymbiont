@@ -80,7 +80,7 @@
                                         <input type="text" class="form-control mt-2 w-50" placeholder="Other" id="custom_amount" oninput="calculatePayableAmount(this.value);">
                                     </div>
                                     <div class="form-check mb-4">
-                                        <input class="form-check-input" type="checkbox" id="coverFee" onclick="toggleDiv()">
+                                        <input class="form-check-input" type="checkbox" id="coverFee">
                                         <label class="form-check-label" for="coverFee">I'd like to help cover the transaction fees.</label>
                                     </div>
                                     <!-- 3. Payment Method -->
@@ -111,13 +111,22 @@
     function calculatePayableAmount(valam){
         var payable_amount = valam;
         $('#payable_amount').val(payable_amount);
-        $('#payable_amount_text').text(payable_amount);
+        $('#payable_amount_text').text(payable_amount.tofixed(2));
     }
     $('#coverFee').on('change', function () {
+        var country         = $('#country').val();
+        var payable_amount  = $('#payable_amount').val();
         if(this.checked){
-            console.log('yes');
+            if(country == 'United States'){
+                payable_amount = payable_amount + ((payable_amount * 1.99) / 100) + 0.49;
+            } else {
+                payable_amount = payable_amount + ((payable_amount * 3.49) / 100) + 0.49;
+            }
+            $('#payable_amount').val(payable_amount);
+            $('#payable_amount_text').text(payable_amount.tofixed(2));
         } else {
-            console.log('no');
+            $('#payable_amount').val(payable_amount);
+            $('#payable_amount_text').text(payable_amount.tofixed(2));
         }
     });
 </script>
