@@ -315,6 +315,7 @@ class FrontController extends Controller
     }
     public function project($slug)
     {
+        echo $slug; die;
         // $data['row']                    = NewsCategory::select('id', 'sub_category')->where('status', '=', 1)->where('slug', '=', $slug)->first();
         // $parent_category_id                = (($data['row'])?$data['row']->id:'');
         $data['contents']               = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
