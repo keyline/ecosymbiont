@@ -35,7 +35,7 @@
                         <div class="col-lg-7 fade-in">
                             <form class="mb-4">
                                 @csrf
-                                <input type="text" name="payment_mode" id="payment_mode" value="PAYPAL">
+                                <input type="hidden" name="payment_mode" id="payment_mode" value="PAYPAL">
                                 <div class="donation-box">
                                     <!-- 2. Donor Info -->
                                     <div class="titleto-inner mb-3">
@@ -65,16 +65,16 @@
                                     <div class="donation-amounts d-flex flex-wrap mb-3">
                                         <ul class="d-flex flex-wrap list-unstyled mt-2">
                                             <li>
-                                                <button class="btn btn-outline-secondary" onclick="calculatePayableAmount(50);">$50</button>
+                                                <button type="button" class="btn btn-outline-secondary" onclick="calculatePayableAmount(50);">$50</button>
                                             </li>
                                             <li>
-                                                <button class="btn btn-outline-secondary" onclick="calculatePayableAmount(100);">$100</button>
+                                                <button type="button" class="btn btn-outline-secondary" onclick="calculatePayableAmount(100);">$100</button>
                                             </li>
                                             <li>
-                                                <button class="btn btn-outline-secondary" onclick="calculatePayableAmount(250);">$250</button>
+                                                <button type="button" class="btn btn-outline-secondary" onclick="calculatePayableAmount(250);">$250</button>
                                             </li>
                                             <li>
-                                                <button class="btn btn-outline-secondary" onclick="calculatePayableAmount(1000);">$1000</button>
+                                                <button type="button" class="btn btn-outline-secondary" onclick="calculatePayableAmount(1000);">$1000</button>
                                             </li>
                                         </ul>
                                         <input type="text" class="form-control mt-2 w-50" placeholder="Other" id="custom_amount" oninput="calculatePayableAmount(this.value);">
@@ -95,7 +95,7 @@
                                     <input type="text" name="payable_amount" id="payable_amount">
                                     <h2>Payable Amount : <span id="payable_amount_text">0</span></h2>
                                     <div class="mt-4">
-                                        <button class="btn mt-4 donation_btn">Preview For Donation</button>
+                                        <button type="submit" class="btn mt-4 donation_btn">Preview For Donation</button>
                                     </div>
                                 </div>
                             </form>
