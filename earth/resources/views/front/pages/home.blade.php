@@ -852,6 +852,9 @@ $current_url = $protocol . $host . $uri;
                                                          ?>
                                                             <li><i class="fa fa-map-marker"></i><a href="javascript:void(0);"><?=$latestarticle->indigenous_affiliation?></a></li>
                                                         <?php } ?>
+                                                        <?php if($featuredContent->projects_name != ''){ ?>
+                                                            <li><i class="fa fa-users"></i> <?=$featuredContent->projects_name?></li>
+                                                            <?php } ?>
                                                         <!-- <li><i class="fa fa-clock-o"></i><?=date_format(date_create($latestarticle->created_at), "d M Y")?></li> -->
                                                         
                                                         <!-- <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
