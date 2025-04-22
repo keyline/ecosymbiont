@@ -1,8 +1,6 @@
 <?php
-
 use App\Http\Controllers\Admin\ScrollNoticeController;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,9 +18,6 @@ use Illuminate\Support\Facades\Route;
     // before login
         Route::match(['get', 'post'], '/', 'App\Http\Controllers\FrontController@home');
         Route::match(['get', 'post'], '/contact-us', 'App\Http\Controllers\FrontController@contactUs');
-        Route::match(['get', 'post'], '/donation', 'App\Http\Controllers\FrontController@donation');
-        Route::match(['get', 'post'], '/thankyou', 'App\Http\Controllers\FrontController@thankyou');
-        Route::match(['get', 'post'], '/donationreceipt', 'App\Http\Controllers\FrontController@donationreceipt');
         Route::match(['get', 'post'], '/communities', 'App\Http\Controllers\FrontController@aboutUs');
         Route::match(['get', 'post'], '/projects', 'App\Http\Controllers\FrontController@projects');
         Route::match(['get', 'post'], '/communities/SchumacherWild', 'App\Http\Controllers\FrontController@schumacherWild');
@@ -46,6 +41,9 @@ use Illuminate\Support\Facades\Route;
         Route::match(['get', 'post'], '/search_result_load', 'App\Http\Controllers\FrontController@search_result_load');
         Route::match(['get', 'post'], '/advance-search-result', 'App\Http\Controllers\FrontController@advance_search_result');
         Route::match(['get', 'post'], '/advance_search_result_load', 'App\Http\Controllers\FrontController@advance_search_result_load');
+        Route::match(['get', 'post'], '/donation', 'App\Http\Controllers\DonationController@donation');
+        Route::match(['get', 'post'], '/thankyou', 'App\Http\Controllers\DonationController@thankyou');
+        Route::match(['get', 'post'], '/donationreceipt', 'App\Http\Controllers\DonationController@donationreceipt');
     // before login
     // after login
         Route::group(['prefix' => 'user', 'middleware' => ['user']], function () {
