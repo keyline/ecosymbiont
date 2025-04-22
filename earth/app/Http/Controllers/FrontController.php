@@ -345,7 +345,7 @@ class FrontController extends Controller
                                                     ->where('news_contents.projects_name', $slug) // Ensure $parent_category_id is defined
                                                     ->orderBy('news_contents.id', 'DESC')
                                                     ->get();
-                                                    Helper::pr($data['contents']);
+                                                    // Helper::pr($data['contents']);
         $data['search_keyword']         = '';
 
         $title                          = $slug;
