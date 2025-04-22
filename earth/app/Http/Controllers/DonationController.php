@@ -91,7 +91,7 @@ class DonationController extends Controller
                     'payment_mode'                          => $postData['payment_mode'],
                     'payable_amount'                        => $postData['payable_amount'],
                 ];
-                Helper::pr($fields);
+                // Helper::pr($fields);
                 $donation_id = Donation::insertGetId($fields);
                 return redirect(url('donation-preview/' . Helper::encoded($donation_id)))->with('success_message', 'Basic info inserted for donation');
             } else {
