@@ -599,6 +599,7 @@ $current_url = $protocol . $host . $uri;
                                                                             'news_contents.current_article_no',
                                                                             'news_contents.other_article_part_doi_no',
                                                                             'sub_category.sub_category as category_name',  // Correct alias for subcategory name
+                                                                            'parent_category.sub_category as parent_category_name',  // Correct alias for subcategory name
                                                                             'sub_category.slug as category_slug',  // Correct alias for subcategory slug                                                                            
                                                                             'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
                                                                         )
@@ -646,6 +647,8 @@ $current_url = $protocol . $host . $uri;
                                                         </div>
                                                     <?php } ?>
                                                     <div class="post-content">
+                                                        <?=strtoupper($featuredContent->parent_category_name).'|'.strtoupper($featuredContent->category_name)?>
+                                                        <a href="<?=url('category/' . $videoContent->parent_category_slug)?>"><?=$videoContent->parent_category_name?></a>
                                                         <h2><a href="<?=url('content/' . $featuredContent->parent_category_slug. '/' . $featuredContent->category_slug . '/' . $featuredContent->slug)?>"><?=$featuredContent->new_title?></a></h2>
                                                         <ul class="post-tags">
                                                             <li><i class="fa fa-clock-o"></i><?=date_format(date_create($featuredContent->created_at), "d M Y")?></li>
