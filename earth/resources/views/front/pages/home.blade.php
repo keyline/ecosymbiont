@@ -842,6 +842,7 @@ $current_url = $protocol . $host . $uri;
                                             </div>
                                             <div class="col-sm-7">
                                                 <div class="post-content">
+                                                <?=strtoupper($featuredContent->parent_category_name).' | '.$featuredContent->category_name?>
                                                     <?=strtoupper($latestarticle->projects_name)?>
                                                     <h2><a href="<?=url('content/' . $latestarticle->parent_category_slug. '/' . $latestarticle->category_slug . '/' . $latestarticle->slug)?>"><?=$latestarticle->new_title?></a></h2>
                                                     <ul class="post-tags">
