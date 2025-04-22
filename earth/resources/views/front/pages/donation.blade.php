@@ -104,9 +104,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
     function calculatePayableAmount(valam){
-        var base_amount = parseFloat(valam);
+        var base_amount     = parseFloat(valam);
         var country         = $('#country').val();
-        var base_amount     = parseFloat($('#base_amount').val());
+        $('#base_amount').val(convertNumber(base_amount));
         if(this.checked){
             if(country == 220){
                 payable_amount = base_amount + ((base_amount * 1.99) / 100) + 0.49;
