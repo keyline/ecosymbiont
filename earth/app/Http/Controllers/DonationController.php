@@ -50,6 +50,7 @@ class DonationController extends Controller
 {
     public function donation(Request $request)
     {
+        $data['search_keyword']         = '';
         $data['countries']              = Country::select('id', 'name')->where('status', 1)->orderBy('name', 'ASC')->get();
         $title                          = 'Donation';
         $page_name                      = 'donation';
@@ -101,6 +102,7 @@ class DonationController extends Controller
     }
     public function donationPreview($donation_id)
     {
+        $data['search_keyword']         = '';
         $donation_id                    = Helper::decoded($donation_id);
         $data['donation']               = Donation::where('id', $donation_id)->first();
         $title                          = 'Donation Preview';

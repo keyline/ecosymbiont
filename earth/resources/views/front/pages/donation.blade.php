@@ -1,9 +1,3 @@
-<?php
-    //  use Illuminate\Support\Facades\Route;
-    //  $routeName = Route::current();
-    //  $pageName = explode('/', $routeName->uri());
-    //  $pageSegment = $pageName[1];
-    ?>
 <!-- block-wrapper-section ================================================== -->
 <section class="block-wrapper">
     <div class="container">
