@@ -111,7 +111,7 @@
     function calculatePayableAmount(valam){
         var payable_amount = valam;
         $('#payable_amount').val(payable_amount);
-        $('#payable_amount_text').text(payable_amount.tofixed(2));
+        $('#payable_amount_text').text(payable_amount);
     }
     $('#coverFee').on('change', function () {
         var country         = $('#country').val();
@@ -123,10 +123,10 @@
                 payable_amount = payable_amount + ((payable_amount * 3.49) / 100) + 0.49;
             }
             $('#payable_amount').val(payable_amount);
-            $('#payable_amount_text').text(payable_amount.tofixed(2));
+            $('#payable_amount_text').text(payable_amount);
         } else {
             $('#payable_amount').val(payable_amount);
-            $('#payable_amount_text').text(payable_amount.tofixed(2));
+            $('#payable_amount_text').text(payable_amount);
         }
     });
 </script>
