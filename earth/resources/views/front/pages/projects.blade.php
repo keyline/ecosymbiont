@@ -27,22 +27,17 @@ use App\Models\Project;
                                         <h3 class="box_heading">We have a number of special Projects within EaRTh; anyone is welcome to contribute.</h3>
                                         <p>We appreciate your patience as we work on providing more details about each of our special <strong class="black"><i>EaRTh Projects.</i></strong></p>
                                         <div class="titleto-inner">
-                                            <ul>
-                                                <li>Ecoself</li>
+                                            <ul>                                                
                                                 <?php 
                                                 $project = Project::where('status', 1)->get();
                                                 if($project->count() > 0){
                                                     foreach($project as $rowProject){
                                                         ?>
-                                                        <li><a href="<?=url('project/' . $rowProject->name)?>"><?=$rowProject->name?></a></li>
+                                                        <li><a href="<?=url('project/' . $rowProject->name)?>" target="_blank"><?=$rowProject->name?></a></li>
                                                         <?php
                                                     }
                                                 }
-                                                ?>
-                                                <li>Elders</li>
-                                                <li>FiveBecomings (Pañchabhūmi)</li>
-                                                <li>Interviews</li>
-                                                <li>Webinars</li>
+                                                ?>                                                
                                             </ul>
                                         </div>
                                         <div class="thrive_communities">
