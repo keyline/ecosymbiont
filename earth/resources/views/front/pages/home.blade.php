@@ -853,7 +853,7 @@ $current_url = $protocol . $host . $uri;
                                                             <li><i class="fa fa-map-marker"></i><a href="javascript:void(0);"><?=$latestarticle->indigenous_affiliation?></a></li>
                                                         <?php } ?>
                                                         <?php if($latestarticle->projects_name != ''){ ?>
-                                                            <li><i class="fa fa-users"></i> <?=$latestarticle->projects_name?></li>
+                                                            <li><a href="<?= url('project/' .$rowContent->projects_name)?>"><i class="fa fa-users"></i> <?=$latestarticle->projects_name?></a></li>
                                                             <?php } ?>
                                                         <!-- <li><i class="fa fa-clock-o"></i><?=date_format(date_create($latestarticle->created_at), "d M Y")?></li> -->
                                                         
