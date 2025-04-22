@@ -118,12 +118,13 @@
         var payable_amount  = parseFloat($('#payable_amount').val());
         if(this.checked){
             if(country == 'United States'){
-                payable_amount = payable_amount + ((payable_amount * 1.99) / 100) + 0.49;
+                payable_amount2 = payable_amount + ((payable_amount * 1.99) / 100) + 0.49;
             } else {
-                payable_amount = payable_amount + ((payable_amount * 3.49) / 100) + 0.49;
+                payable_amount2 = payable_amount + ((payable_amount * 3.49) / 100) + 0.49;
             }
-            $('#payable_amount').val(convertNumber(payable_amount));
-            $('#payable_amount_text').text(convertNumber(payable_amount));
+            console.log(payable_amount2);
+            $('#payable_amount').val(convertNumber(payable_amount2));
+            $('#payable_amount_text').text(convertNumber(payable_amount2));
         } else {
             $('#payable_amount').val(payable_amount);
             $('#payable_amount_text').text(convertNumber(payable_amount));
