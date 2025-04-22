@@ -80,10 +80,8 @@
                                         <input type="text" class="form-control mt-2 w-50" placeholder="Other" id="custom_amount" oninput="calculatePayableAmount(this.value);">
                                     </div>
                                     <div class="form-check mb-4">
-                                        <input class="form-check-input" type="checkbox" id="coverFee">
-                                        <label class="form-check-label" for="coverFee">
-                                        I'd like to help cover the transaction fees.
-                                        </label>
+                                        <input class="form-check-input" type="checkbox" id="coverFee" onclick="toggleDiv()">
+                                        <label class="form-check-label" for="coverFee">I'd like to help cover the transaction fees.</label>
                                     </div>
                                     <!-- 3. Payment Method -->
                                     <!-- <div class="titleto-inner mb-3">
@@ -108,9 +106,18 @@
     </div>
 </section>
 <!-- End block-wrapper-section -->
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
     function calculatePayableAmount(valam){
-        console.log(valam);
+        var payable_amount = valam;
+        $('#payable_amount').val(payable_amount);
+        $('#payable_amount_text').text(payable_amount);
     }
+    $('#coverFee').on('change', function () {
+        if(this.checked){
+            console.log('yes');
+        } else {
+            console.log('no');
+        }
+    });
 </script>
