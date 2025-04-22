@@ -648,7 +648,7 @@ $current_url = $protocol . $host . $uri;
                                                     <?php } ?>
                                                     <div class="post-content">
                                                         <?=strtoupper($featuredContent->parent_category_name).'|'.strtoupper($featuredContent->category_name)?>
-                                                        <a href="<?=url('category/' . $videoContent->parent_category_slug)?>"><?=$videoContent->parent_category_name?></a>
+                                                        <!-- <a href="?=url('category/' . $videoContent->parent_category_slug)?>">?=$videoContent->parent_category_name?></a> -->
                                                         <h2><a href="<?=url('content/' . $featuredContent->parent_category_slug. '/' . $featuredContent->category_slug . '/' . $featuredContent->slug)?>"><?=$featuredContent->new_title?></a></h2>
                                                         <ul class="post-tags">
                                                             <li><i class="fa fa-clock-o"></i><?=date_format(date_create($featuredContent->created_at), "d M Y")?></li>
