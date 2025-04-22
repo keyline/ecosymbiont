@@ -598,6 +598,7 @@ $current_url = $protocol . $host . $uri;
                                                                             'news_contents.series_article_no',
                                                                             'news_contents.current_article_no',
                                                                             'news_contents.other_article_part_doi_no',
+                                                                            'news_contents.projects_name',
                                                                             'sub_category.sub_category as category_name',  // Correct alias for subcategory name
                                                                             'parent_category.sub_category as parent_category_name',  // Correct alias for subcategory name
                                                                             'sub_category.slug as category_slug',  // Correct alias for subcategory slug                                                                            
@@ -653,6 +654,10 @@ $current_url = $protocol . $host . $uri;
                                                         <ul class="post-tags">
                                                             <li><i class="fa fa-clock-o"></i><?=date_format(date_create($featuredContent->created_at), "d M Y")?></li>
                                                             <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$featuredContent->for_publication_name ?? $featuredContent->author_name?></a></li>
+                                                            <?php if($featuredContent->projects_name != ''){ ?>
+                                                            <li><button class="btn project-btn" id="project">
+                                                            <i class="fa fa-users"></i> <?=$featuredContent->projects_name?></button></li>
+                                                            <?php } ?>
                                                         </ul>
                                                         <p class="dec"><?=$featuredContent->sub_title?></p>
                                                     </div>
