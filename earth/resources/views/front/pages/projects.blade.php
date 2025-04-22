@@ -3,6 +3,9 @@
 //  $routeName = Route::current();
 //  $pageName = explode('/', $routeName->uri());
 //  $pageSegment = $pageName[1];
+
+use App\Models\Project;
+
 ?>
 <!-- block-wrapper-section ================================================== -->
 <section class="block-wrapper project_section">
@@ -26,6 +29,16 @@
                                         <div class="titleto-inner">
                                             <ul>
                                                 <li>Ecoself</li>
+                                                <?php 
+                                                $project = Project::where('status', 1)->get();
+                                                if($project->count() > 0){
+                                                    foreach($project as $rowProject){
+                                                        ?>
+                                                        <li><a href="<?=url('project/' . $rowProject->name)?>"><?=$rowProject->name?></a></li>
+                                                        <?php
+                                                    }
+                                                }
+                                                ?>
                                                 <li>Elders</li>
                                                 <li>FiveBecomings (Pañchabhūmi)</li>
                                                 <li>Interviews</li>
