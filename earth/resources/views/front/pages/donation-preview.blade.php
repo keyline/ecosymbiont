@@ -1,9 +1,6 @@
 <?php
-    //  use Illuminate\Support\Facades\Route;
-    //  $routeName = Route::current();
-    //  $pageName = explode('/', $routeName->uri());
-    //  $pageSegment = $pageName[1];
-    ?>
+use App\Models\Country;
+?>
 <!-- block-wrapper-section ================================================== -->
 <section class="block-wrapper">
     <div class="container">
@@ -33,71 +30,50 @@
                         </div>
                         <!-- Right Form -->
                         <div class="col-lg-7 fade-in">
-                            <form class="mb-4">
-                                @csrf
-                                <input type="hidden" name="payment_mode" id="payment_mode" value="PAYPAL">
-                                <div class="donation-box">
-                                    <!-- 2. Donor Info -->
-                                    <div class="titleto-inner mb-3">
-                                        <h2>1. Donor Information</h2>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <input type="text" class="form-control" placeholder="First Name" name="first_name" required>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <input type="text" class="form-control" placeholder="Last Name" name="last_name" required>
-                                        </div>
-                                    </div>
-                                    <input type="email" class="form-control mb-3" placeholder="Email Address" name="email" required>
-                                    <input type="text" class="form-control mb-3" placeholder="Residential  Address" name="address" required>
-                                    <select name="country" id="country" class="form-control mb-3">
-                                        <option value="" selected>Select Country</option>
-                                        <?php if($countries){ foreach($countries as $country){?>
-                                            <option value="<?=$country->id?>"><?=$country->name?></option>
-                                        <?php } }?>
-                                    </select>
-                                    <small class="text-danger">*You will be able to download the donation receipt for tax exemption in the United State; therefore, please provide accurate residential address.</small>
-                                    <!-- 1. Donation Amount -->
-                                    <div class="titleto-inner mb-3">
-                                        <h2>2. Donation Amount</h2>
-                                    </div>
-                                    <div class="donation-amounts d-flex flex-wrap mb-3">
-                                        <ul class="d-flex flex-wrap list-unstyled mt-2">
-                                            <li>
-                                                <button type="button" class="btn btn-outline-secondary" onclick="calculatePayableAmount(50);">$50</button>
-                                            </li>
-                                            <li>
-                                                <button type="button" class="btn btn-outline-secondary" onclick="calculatePayableAmount(100);">$100</button>
-                                            </li>
-                                            <li>
-                                                <button type="button" class="btn btn-outline-secondary" onclick="calculatePayableAmount(250);">$250</button>
-                                            </li>
-                                            <li>
-                                                <button type="button" class="btn btn-outline-secondary" onclick="calculatePayableAmount(1000);">$1000</button>
-                                            </li>
-                                        </ul>
-                                        <input type="text" class="form-control mt-2 w-50" placeholder="Other" id="custom_amount" oninput="calculatePayableAmount(this.value);">
-                                    </div>
-                                    <div class="form-check mb-4">
-                                        <input class="form-check-input" type="checkbox" id="coverFee">
-                                        <label class="form-check-label" for="coverFee">I'd like to help cover the transaction fees.</label>
-                                    </div>
-                                    <!-- 3. Payment Method -->
-                                    <!-- <div class="titleto-inner mb-3">
-                                        <h2>3. Select Payment Method</h2>
-                                        </div>
-                                        <div class="payment-method">
-                                        <button class="btn btn-outline-info"><img src="<?=env('UPLOADS_URL').'paypal.png'?>" alt="" class="img-fluid"></button>
-                                        </div> -->
-                                    <input type="text" name="base_amount" id="base_amount" value="0" required>
-                                    <input type="text" name="payable_amount" id="payable_amount" value="0" required>
-                                    <h2>Payable Amount : <span id="payable_amount_text">0</span></h2>
+                            <div class="donation-box">
+                                <?php if($donation){?>
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <td>Name</td>
+                                            <td>:</td>
+                                            <td><?=$donation->first_name . ' ' . $donation->last_name?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email</td>
+                                            <td>:</td>
+                                            <td><?=$donation->email?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Address</td>
+                                            <td>:</td>
+                                            <td><?=$donation->address?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Country</td>
+                                            <td>:</td>
+                                            <td>
+                                                <?php
+                                                $getCountry         = Country::select('name', 'ISO')->where('id', $donation->country)->first();
+                                                echo (($getCountry)?$getCountry->name . ' (' . $getCountry->ISO . ')':'');
+                                                ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Payment Method</td>
+                                            <td>:</td>
+                                            <td><?=$donation->payment_mode?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Payable Amount</td>
+                                            <td>:</td>
+                                            <td><?=number_format($donation->payable_amount,2)?></td>
+                                        </tr>
+                                    </table>
                                     <div class="mt-4">
-                                        <button type="submit" class="btn mt-4 donation_btn">Preview For Donation</button>
+                                        <button type="submit" class="btn mt-4 donation_btn">Pay Now <?=number_format($donation->payable_amount,2)?></button>
                                     </div>
-                                </div>
-                            </form>
+                                <?php }?>
+                            </div>
                         </div>
                     </div>
                 </div>
