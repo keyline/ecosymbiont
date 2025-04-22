@@ -346,7 +346,7 @@ class FrontController extends Controller
                                                     ->get();
         $data['search_keyword']         = '';
 
-        $title                          = (($data['row'])?$data['row']->sub_category:'');
+        $title                          = (($data['contents'])?$data['contents']->projects_name:'');
         $page_name                      = 'project-list';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
