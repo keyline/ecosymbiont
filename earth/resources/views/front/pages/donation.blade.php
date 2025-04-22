@@ -110,8 +110,8 @@
 <script type="text/javascript">
     function calculatePayableAmount(valam){
         var payable_amount = parseFloat(valam);
-        $('#payable_amount').val(payable_amount);
-        $('#payable_amount_text').text(payable_amount.tofixed(2));
+        $('#payable_amount').val(convertNumber(payable_amount));
+        $('#payable_amount_text').text(convertNumber(payable_amount));
     }
     $('#coverFee').on('change', function () {
         var country         = $('#country').val();
@@ -122,11 +122,19 @@
             } else {
                 payable_amount = payable_amount + ((payable_amount * 3.49) / 100) + 0.49;
             }
-            $('#payable_amount').val(payable_amount);
-            $('#payable_amount_text').text(payable_amount.tofixed(2));
+            $('#payable_amount').val(convertNumber(payable_amount));
+            $('#payable_amount_text').text(convertNumber(payable_amount));
         } else {
             $('#payable_amount').val(payable_amount);
-            $('#payable_amount_text').text(payable_amount.tofixed(2));
+            $('#payable_amount_text').text(convertNumber(payable_amount));
         }
     });
+    function convertNumber(){
+        let number = 100;
+        let formatted = new Intl.NumberFormat('en-US', { 
+            minimumFractionDigits: 2, 
+            maximumFractionDigits: 2 
+        }).format(number);
+        return formatted;
+    }
 </script>
