@@ -90,6 +90,7 @@
                                         <div class="payment-method">
                                         <button class="btn btn-outline-info"><img src="<?=env('UPLOADS_URL').'paypal.png'?>" alt="" class="img-fluid"></button>
                                         </div> -->
+                                    <input type="text" name="base_amount" id="base_amount">
                                     <input type="text" name="payable_amount" id="payable_amount">
                                     <h2>Payable Amount : <span id="payable_amount_text">0</span></h2>
                                     <div class="mt-4">
@@ -109,29 +110,30 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
     function calculatePayableAmount(valam){
-        var payable_amount = parseFloat(valam);
-        $('#payable_amount').val(convertNumber(payable_amount));
-        $('#payable_amount_text').text(convertNumber(payable_amount));
+        var base_amount = parseFloat(valam);
+        $('#base_amount').val(convertNumber(base_amount));
+        $('#payable_amount').val(convertNumber(base_amount));
+        $('#payable_amount_text').text(convertNumber(base_amount));
     }
-    $('#coverFee').on('change', function () {
+    $('#coverFee, #country').on('change', function () {
         var country         = $('#country').val();
-        var payable_amount  = parseFloat($('#payable_amount').val());
+        var base_amount     = parseFloat($('#base_amount').val());
         if(this.checked){
             if(country == 'United States'){
-                payable_amount2 = payable_amount + ((payable_amount * 1.99) / 100) + 0.49;
+                payable_amount = base_amount + ((base_amount * 1.99) / 100) + 0.49;
             } else {
-                payable_amount2 = payable_amount + ((payable_amount * 3.49) / 100) + 0.49;
+                payable_amount = base_amount + ((base_amount * 3.49) / 100) + 0.49;
             }
-            console.log(payable_amount2);
-            $('#payable_amount').val(convertNumber(payable_amount2));
-            $('#payable_amount_text').text(convertNumber(payable_amount2));
-        } else {
-            $('#payable_amount').val(payable_amount);
+            $('#base_amount').val(convertNumber(base_amount));
+            $('#payable_amount').val(convertNumber(payable_amount));
             $('#payable_amount_text').text(convertNumber(payable_amount));
+        } else {
+            $('#base_amount').val(convertNumber(base_amount));
+            $('#payable_amount').val(convertNumber(base_amount));
+            $('#payable_amount_text').text(convertNumber(base_amount));
         }
     });
     function convertNumber(number){
-        // let number = 100;
         let formatted = new Intl.NumberFormat('en-US', { 
             minimumFractionDigits: 2, 
             maximumFractionDigits: 2 
