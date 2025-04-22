@@ -109,13 +109,13 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
     function calculatePayableAmount(valam){
-        var payable_amount = valam;
+        var payable_amount = parseFloat(valam);
         $('#payable_amount').val(payable_amount);
-        $('#payable_amount_text').text(payable_amount);
+        $('#payable_amount_text').text(payable_amount.tofixed(2));
     }
     $('#coverFee').on('change', function () {
         var country         = $('#country').val();
-        var payable_amount  = $('#payable_amount').val();
+        var payable_amount  = parseFloat($('#payable_amount').val());
         if(this.checked){
             if(country == 'United States'){
                 payable_amount = payable_amount + ((payable_amount * 1.99) / 100) + 0.49;
@@ -123,10 +123,10 @@
                 payable_amount = payable_amount + ((payable_amount * 3.49) / 100) + 0.49;
             }
             $('#payable_amount').val(payable_amount);
-            $('#payable_amount_text').text(payable_amount);
+            $('#payable_amount_text').text(payable_amount.tofixed(2));
         } else {
             $('#payable_amount').val(payable_amount);
-            $('#payable_amount_text').text(payable_amount);
+            $('#payable_amount_text').text(payable_amount.tofixed(2));
         }
     });
 </script>
