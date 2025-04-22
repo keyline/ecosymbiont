@@ -130,8 +130,8 @@
             $('#payable_amount_text').text(convertNumber(payable_amount));
         }
     });
-    function convertNumber(){
-        let number = 100;
+    function convertNumber(number){
+        // let number = 100;
         let formatted = new Intl.NumberFormat('en-US', { 
             minimumFractionDigits: 2, 
             maximumFractionDigits: 2 
