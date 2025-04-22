@@ -70,7 +70,7 @@ use App\Models\Country;
                                         </tr>
                                     </table>
                                     <div class="mt-4">
-                                        <button type="submit" class="btn mt-4 donation_btn">Pay Now <?=number_format($donation->payable_amount,2)?></button>
+                                        <button type="submit" class="btn mt-4 donation_btn" style="display: flex;margin: 0 auto;">Pay Now $<?=number_format($donation->payable_amount,2)?></button>
                                     </div>
                                 <?php }?>
                             </div>
