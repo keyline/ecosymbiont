@@ -74,10 +74,10 @@ $getcountry                 = Country::find($donation->country);
         }
         .receipt-details table{
             border-collapse: collapse;
-            vertical-align: top;
         }
-        .receipt-details table tr{
-            margin: 5px 0;
+        .receipt-details table tr td{
+            vertical-align: top;
+            padding-bottom: 5px;
         }
         .greeting {
             margin-top: 30px;
