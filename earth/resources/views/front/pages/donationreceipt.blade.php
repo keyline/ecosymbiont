@@ -1,8 +1,5 @@
 <?php
-//  use Illuminate\Support\Facades\Route;
-//  $routeName = Route::current();
-//  $pageName = explode('/', $routeName->uri());
-//  $pageSegment = $pageName[1];
+use App\Helpers\Helper;
 ?>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
@@ -100,40 +97,40 @@
         text-decoration: none;
     }
     .receipt-header-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 30px;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 10px;
-}
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+    }
 
-.logo-left img {
-    max-height: 80px;
-}
+    .logo-left img {
+        max-height: 80px;
+    }
 
-.text-right {
-    text-align: right;
-    font-size: 14px;
-    color: #000;
-    line-height: 1.5;
-}
+    .text-right {
+        text-align: right;
+        font-size: 14px;
+        color: #000;
+        line-height: 1.5;
+    }
 
-.text-right .highlight-line {
-    border: none;
-    border-top: 1px solid #f4c542;
-    width: 100%;
-    margin: 2px 0 0px auto;
-}
+    .text-right .highlight-line {
+        border: none;
+        border-top: 1px solid #f4c542;
+        width: 100%;
+        margin: 2px 0 0px auto;
+    }
 
-.text-right a {
-    color: #f4a20e;
-    font-weight: bold;
-    text-decoration: none;
-}
-.my-3{
-    margin: 5px 0;
-}
+    .text-right a {
+        color: #f4a20e;
+        font-weight: bold;
+        text-decoration: none;
+    }
+    .my-3{
+        margin: 5px 0;
+    }
 </style>
 <!-- block-wrapper-section ================================================== -->
 <section class="block-wrapper">
