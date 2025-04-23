@@ -72,7 +72,7 @@ use App\Helpers\Helper;
                                     </table>
                                     <div class="mt-4">
                                         <!-- <button type="submit" class="btn mt-4 donation_btn" style="display: flex;margin: 0 auto;">Pay Now $<?=number_format($donation->payable_amount,2)?></button> -->
-                                        <a href="<?=url('paypal/payment/'.Helper::encoded($donation->id))?>" class="btn mt-4 donation_btn" style="display: flex;margin: 0 auto;">Pay Now $<?=number_format($donation->payable_amount,2)?></a>
+                                        <a href="<?=url('paypal/payment/'.Helper::encoded($donation->id))?>" class="btn mt-4 donation_btn" style="display: flex;margin: 0 auto;justify-content: center;">Pay Now $<?=number_format($donation->payable_amount,2)?></a>
                                     </div>
                                 <?php }?>
                             </div>
