@@ -20,6 +20,10 @@ use Helper;
 use Hash;
 use stripe;
 use DB;
+use PDF;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use DateTime;
 
 class PayPalController extends Controller
 {
@@ -42,7 +46,6 @@ class PayPalController extends Controller
     {
         $id             = Helper::decoded($order_id);
         $getOrder       = Donation::where('id', '=', $id)->first();
-        // Helper::pr($getOrder,0);die;
         $provider       = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));
         $paypalToken    = $provider->getAccessToken();
@@ -64,16 +67,13 @@ class PayPalController extends Controller
         ]);
         
         if (isset($response['id']) && $response['id'] != null) {
-  
             foreach ($response['links'] as $links) {
                 if ($links['rel'] == 'approve') {
                     return redirect()->away($links['href']);
                 }
             }
-  
             return redirect(url('paypal/payment/success/'.Helper::encoded($id)))
                 ->with('error', 'Something went wrong.');
-  
         } else {
             return redirect(url('paypal/payment/success/'.Helper::encoded($id)))
                 ->with('error', $response['message'] ?? 'Something went wrong.');
@@ -89,9 +89,6 @@ class PayPalController extends Controller
     {
         $id             = Helper::decoded($order_id);
         $getOrder       = Donation::where('id', '=', $id)->first();
-        // return redirect()
-        //       ->route('paypal')
-        //       ->with('error', $response['message'] ?? 'You have canceled the transaction.');
         return redirect(url('order-failure/'.Helper::encoded($id)))->with('error_message', 'Payment Failed !!!');
     }
   
@@ -110,7 +107,6 @@ class PayPalController extends Controller
         $provider->getAccessToken();
         $response       = $provider->capturePaymentOrder($request['token']);
         
-        // Helper::pr($response,0);die;
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
 
             $userSubscriptionData = [
@@ -124,8 +120,28 @@ class PayPalController extends Controller
                 'currency'                      => $response['purchase_units'][0]['payments']['captures'][0]['amount']['currency_code'],
                 'particulars'                   => 'Payment '.$getOrder->payable_amount.' for donation on '.date('Y-m-d H:i:s').' by paypal'
             ];
-            // Helper::pr($userSubscriptionData);
             Donation::where('id', '=', $id)->update($userSubscriptionData);
+            /* generate inspection pdf & save it to directory */
+                $donation                       = $getOrder;
+                $donation_number                = (($donation)?$donation->donation_number:'');
+                $generalSetting                 = GeneralSetting::find('1');
+                $subject                        = $generalSetting->site_name . ' Donation Receipt' . $donation_number;
+                $message                        = view('front.pages.donationreceipt',$data);
+                $options                        = new Options();
+                $options->set('defaultFont', 'Courier');
+                $dompdf                         = new Dompdf($options);
+                $html                           = $message;
+                $dompdf->loadHtml($html);
+                $dompdf->setPaper('A4', 'portrait');
+                $dompdf->render();
+                $output                         = $dompdf->output();
+                // $dompdf->stream("document.pdf", array("Attachment" => false));die;
+                $filename                       = $donation_number.'-'.time().'.pdf';
+                $pdfFilePath                    = 'public/uploads/donation/' . $filename;
+                file_put_contents($pdfFilePath, $output);
+                Donation::where('id', '=', $order_id)->update(['payment_receipt' => $filename]);
+            /* generate inspection pdf & save it to directory */
+            
             /* email functionality */
                 // $mailData['getOrder']       = Donation::where('id', '=', $id)->first();
                 // $message                    = view('email-templates.order-place', $mailData);                    

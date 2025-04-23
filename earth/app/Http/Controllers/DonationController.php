@@ -25,7 +25,6 @@ use PDF;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use DateTime;
-date_default_timezone_set("Asia/Calcutta");
 
 class DonationController extends Controller
 {
