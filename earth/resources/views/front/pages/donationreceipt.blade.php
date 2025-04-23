@@ -31,10 +31,8 @@ $getcountry                 = Country::find($donation->country);
     <link rel="stylesheet" type="text/css" href="<?=env('FRONT_ASSETS_URL')?>css/style.css" media="screen">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-
         .pdf-body {
-            font-family: 'Roboto', sans-serif;
+            font-family: sans-serif;
             background: #f5f7fa;
             padding: 40px;
             color: #333;
@@ -133,7 +131,9 @@ $getcountry                 = Country::find($donation->country);
             border-bottom: 2px solid #eee;
             padding-bottom: 10px;
         }
-
+        .logo-left{
+            width: ;
+        }
         .logo-left img {
             max-height: 80px;
         }
