@@ -20,7 +20,7 @@ $current_url = $protocol . $host . $uri;
         <div class="container">
             <div class="row">
                 <div class="col-md-9 col-sm-8 content-blocker">
-                    <?php if($rowContent){?>
+                    <?php  if($rowContent){?>
                         <!-- block content -->
                         <div class="block-content">
                             <!-- article box -->
@@ -48,6 +48,10 @@ $current_url = $protocol . $host . $uri;
                                         ?>                                                                        
                                         <!-- <li><a href="#"><i class="fa fa-comments-o"></i><span>0</span></a></li>
                                         <li><i class="fa fa-eye"></i>872</li> -->
+                                        <?php if($rowContent->projects_name != ''){ ?>
+                                        <li><a class="btn project-btn" href="<?= url('project/' .$rowContent->projects_name)?>" id="project">
+                                        <i class="fa fa-users"></i> <?=$rowContent->projects_name?></a></li>
+                                        <?php } ?>
                                     </ul>
                                     <h5><?=$rowContent->sub_title?></h5>
                                     <?php
@@ -300,12 +304,14 @@ $current_url = $protocol . $host . $uri;
                                                             <span><?=(($getCountry)?$getCountry->name:'')?></span>
                                                         </span>
                                                     </div>
+                                                    <?php if($rowContent->community_name != ''){?>
                                                     <div class="autor-title">
                                                         <span>
                                                             <img src="<?=env('UPLOADS_URL').'icon/organizational.png'?>" alt="organizational" title="Organizational Affiliation" data-toogle="tooltip">                                                                    
                                                             <span><?= $organization_name = (isset($rowContent->organization_name) > 0) ? trim($rowContent->organization_name) : ''; ?></span>
                                                         </span>
                                                     </div>
+                                                    <?php }?>
                                                     <?php if($rowContent->community_name != ''){?>
                                                     <div class="autor-title">
                                                         <span>

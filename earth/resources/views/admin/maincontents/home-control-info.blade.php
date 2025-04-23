@@ -82,7 +82,7 @@ use App\Models\NewsContent;
                       </td>                  
                       <td><?=$row->projects_name?></td>                  
                       <td><?=$row->author_name?></td>                  
-                      <td><?=date_format(date_create($row->created_at), "M d, Y h:i A")?></td>                  
+                      <td data-order="<?=date('Y-m-d H:i:s', strtotime($row->created_at))?>"><?=date_format(date_create($row->created_at), "M d, Y h:i A")?></td>                  
                     </tr>
                   <?php } }?>
                 </tbody>

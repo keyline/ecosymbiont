@@ -3,6 +3,9 @@
 //  $routeName = Route::current();
 //  $pageName = explode('/', $routeName->uri());
 //  $pageSegment = $pageName[1];
+
+use App\Models\Project;
+
 ?>
 <!-- block-wrapper-section ================================================== -->
 <section class="block-wrapper project_section">
@@ -24,12 +27,17 @@
                                         <h3 class="box_heading">We have a number of special Projects within EaRTh; anyone is welcome to contribute.</h3>
                                         <p>We appreciate your patience as we work on providing more details about each of our special <strong class="black"><i>EaRTh Projects.</i></strong></p>
                                         <div class="titleto-inner">
-                                            <ul>
-                                                <li>Ecoself</li>
-                                                <li>Elders</li>
-                                                <li>FiveBecomings (Pañchabhūmi)</li>
-                                                <li>Interviews</li>
-                                                <li>Webinars</li>
+                                            <ul>                                                
+                                                <?php 
+                                                $project = Project::where('status', 1)->get();
+                                                if($project->count() > 0){
+                                                    foreach($project as $rowProject){
+                                                        ?>
+                                                        <li><a class="btn project-btn" href="<?=url('project/' . $rowProject->name)?>" target="_blank"><i class="fa fa-users"></i> <?=$rowProject->name?></a></li>
+                                                        <?php
+                                                    }
+                                                }
+                                                ?>                                                
                                             </ul>
                                         </div>
                                         <div class="thrive_communities">

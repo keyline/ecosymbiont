@@ -7274,7 +7274,19 @@ ul.list-posts > li img{
 .sidebar {
   padding-top: 30px!important;
 }
-
+.project-btn{
+  background-color: #386136;
+  color: white !important;
+  padding-top: 3px !important;
+  padding-bottom: 3px !important;
+}
+.project-btn:hover{
+  background-color: #d09c1e;
+  color: white !important;
+}
+.project-btn i{    
+  color: white !important; 
+}
 .navbar-nav > li.drop-arrow:hover .megadropdown{
   display: block ;
   visibility: visible ;

@@ -43,12 +43,15 @@ $controllerRoute = $module['controller_route'];
                       onclick="unCheckALL();">Deselect</a>
                   </th> -->
                   <th scope="col">#</th>
-                  <th scope="col">Action</th>
+                  <th scope="col">Action</th>                  
+                  <th scope="col">Series</th>                  
+                  <th scope="col">Project</th>                  
+                  <th scope="col">Community</th>                  
                   <th scope="col">SRN</th>
-                  <th scope="col">Author Info</th>                  
-                  <th scope="col">Creative-Work Info</th>                  
-                  <th scope="col">Submitted At</th>                  
-                  <th scope="col">Published Status</th>                  
+                  <th scope="col">Author(s)</th>                  
+                  <th scope="col">Title</th>                  
+                  <th scope="col">Submitted</th>                  
+                  <th scope="col">Status</th>                  
                   <!-- <th scope="col">Published Action</th> -->                  
                 </tr>
               </thead>
@@ -68,12 +71,15 @@ $controllerRoute = $module['controller_route'];
                             <a href="<?=url('admin/news_content/import/'.Helper::encoded($row->id))?>" class="btn btn-outline-primary btn-sm" title="Edit/Import <?=$module['title']?>"><i class="fa fa-edit"></i>/<i class="fa fa-file-import"></i></a><br>
                           <?php } ?>                          
                         </td>
+                        <td><?=$row->current_article_no?>/<?=$row->	series_article_no?></td>
+                        <td><?=$row->projects_name?></td>
+                        <td><?=$row->community_name?></td>
                         <td><?=$row->article_no?></td>
                         <td>
                           <?=$row->first_name?> <?=$row->last_name?><br> <?=$row->email?></td>
                         <td>
                           <?=wordwrap($row->creative_Work,30,"<br>\n")?></td>                    
-                        <td><?=date_format(date_create($row->created_at), "M d, Y")?></td>                                       
+                        <td data-order="<?=date('Y-m-d H:i:s', strtotime($row->created_at))?>"><?=date_format(date_create($row->created_at), "M d, Y")?></td>                                       
                         <td>
                         <?php
                           if($row->is_published == 0){

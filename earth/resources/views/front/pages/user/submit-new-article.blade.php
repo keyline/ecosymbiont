@@ -991,6 +991,7 @@ use Illuminate\Support\Facades\DB;
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" class="form-control" id="input-tags">
+                                        <div id="validation-msg" style="color:red; font-size: 0.9em;"></div>
                                         <textarea class="form-control" name="other_article_part_doi_no" id="other_article_part_doi_no" style="display:none;"><?=$other_article_part_doi_no?></textarea>
                                         <small class="text-primary">Type a comma after each SRN</small>
                                         <div id="badge-container">
@@ -1613,39 +1614,75 @@ use Illuminate\Support\Facades\DB;
 </script>
 
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         var tagsArray = [];
         var beforeData = $('#other_article_part_doi_no').val();
-        if(beforeData.length > 0){
-          tagsArray = beforeData.split(',');
+        if (beforeData.length > 0) {
+            tagsArray = beforeData.split(',');
         }
-        $('#input-tags').on('input', function() {
-            var input = $(this).val();
+
+        function getValidationMessage(input) {
+            if (/^SRN$/.test(input)) {
+                return { valid: true, message: "✅ Valid: SRN" };
+            } else if (/^SRN-$/.test(input)) {
+                return { valid: true, message: "✅ Valid: SRN-" };
+            }else if (/^SRN-EaRTh$/.test(input)) {
+                return { valid: true, message: "✅ Valid: SRN-EaRTh" };
+            } else if (/^SRN-EaRTh(0[1-9]|1[0-2])\d{4}$/.test(input)) {
+                return { valid: true, message: "✅ Valid: SRN-EaRThMMYYYY" };
+            } else if (/^SRN-EaRTh(0[1-9]|1[0-2])\d{4}-$/.test(input)) {
+                return { valid: true, message: "✅ Valid: SRN-EaRThMMYYYY-" };
+            } else if (/^SRN-EaRTh(0[1-9]|1[0-2])\d{4}-\d+$/.test(input)) {
+                return { valid: true, message: "✅ Valid: Full format" };
+            } else {
+                return { valid: false, message: "❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx" };
+            }
+        }
+
+        $('#input-tags').on('input', function () {
+            var input = $(this).val().trim();
+
+            if (input.length > 0 && !input.includes(',')) {
+                var result = getValidationMessage(input);
+                $('#validation-msg').text(result.message).css('color', result.valid ? 'green' : 'red');
+            } else {
+                $('#validation-msg').text('');
+            }
+
+            // When comma is typed
             if (input.includes(',')) {
                 var tags = input.split(',');
-                tags.forEach(function(tag) {
+                tags.forEach(function (tag) {
                     tag = tag.trim();
-                    if (tag.length > 0 && !tagsArray.includes(tag)) {
-                        tagsArray.push(tag);
-                        $('#badge-container').append(
-                            '<span class="badge">' + tag + ' <span class="remove" data-tag="' + tag + '">&times;</span></span>'
-                        );
+                    if (tag.length > 0) {
+                        const result = getValidationMessage(tag);
+                        const pattern = /^SRN-EaRTh\d{6}-\d+$/;
+                        if (!pattern.test(tag)) {
+                            $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx").css('color', 'red');
+                            return;
+                        }                        
+                        if (!tagsArray.includes(tag)) {
+                            tagsArray.push(tag);
+                            $('#badge-container').append(
+                                '<span class="badge">' + tag + ' <span class="remove" data-tag="' + tag + '">&times;</span></span>'
+                            );
+                        }
                     }
                 });
-                $('#other_article_part_doi_no').val(tagsArray);
-                // console.log(tagsArray);
+                $('#other_article_part_doi_no').val(tagsArray.join(','));
                 $(this).val('');
             }
         });
-        // console.log(tagsArray);
-        $(document).on('click', '.remove', function() {
+
+        // Remove tag handler
+        $(document).on('click', '.remove', function () {
             var tag = $(this).data('tag');
-            tagsArray = tagsArray.filter(function(item) {
+            tagsArray = tagsArray.filter(function (item) {
                 return item !== tag;
             });
             $(this).parent().remove();
-            $('#other_article_part_doi_no').val(tagsArray);
-            // console.log(tagsArray);
+            $('#other_article_part_doi_no').val(tagsArray.join(','));
         });
     });
 </script>
+

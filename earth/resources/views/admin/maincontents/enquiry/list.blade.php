@@ -54,7 +54,7 @@ $controllerRoute = $module['controller_route'];
                     <td><?=$row->phone?></td>
                     <td><?=$row->question_for?></td>
                     <td><?=$row->subject?></td>
-                    <td><?=date_format(date_create($row->created_at), "M d, Y h:i A")?></td>
+                    <td data-order="<?=date('Y-m-d H:i:s', strtotime($row->created_at))?>"><?=date_format(date_create($row->created_at), "M d, Y h:i A")?></td>
                     <td>
                       <a href="<?=url('admin/' . $controllerRoute . '/view-details/'.Helper::encoded($row->id))?>" class="btn btn-outline-info btn-sm" title="Edit <?=$module['title']?>"><i class="fa fa-eye"></i></a>
                       <a href="<?=url('admin/' . $controllerRoute . '/delete/'.Helper::encoded($row->id))?>" class="btn btn-outline-danger btn-sm" title="Delete <?=$module['title']?>" onclick="return confirm('Do You Want To Delete This <?=$module['title']?>');"><i class="fa fa-trash"></i></a>
