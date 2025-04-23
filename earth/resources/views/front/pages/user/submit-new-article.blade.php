@@ -1762,7 +1762,8 @@ use Illuminate\Support\Facades\DB;
                     if (tag.length > 0) {
                         const result = getValidationMessage(tag);
                         if (!result.valid) {
-                            $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx").css('color', 'red');
+                            $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx").css('color', 'red').delay(3000)
+                            .fadeOut();
                             return;
                         }
 
