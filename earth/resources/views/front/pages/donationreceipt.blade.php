@@ -112,6 +112,7 @@ $getcountry                 = Country::find($donation->country);
             margin-bottom: 30px;
             border-bottom: 2px solid #eee;
             padding-bottom: 10px;
+            height: 120px;
             clear: both;
         }
         .logo-left{
@@ -153,7 +154,7 @@ $getcountry                 = Country::find($donation->country);
     <div id="container">
         <?php if($donation){?>
             <!-- block-wrapper-section ================================================== -->
-            <section class="block-wrapper">
+            <section class="block-wrappers">
                 <div class="pdf-body">
                     <div class="receipt-card">
                         <div class="receipt-header-top">
