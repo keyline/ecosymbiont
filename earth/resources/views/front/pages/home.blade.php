@@ -846,6 +846,7 @@ $current_url = $protocol . $host . $uri;
                                                     <!-- ?=strtoupper($latestarticle->projects_name)?> -->
                                                     <h2><a href="<?=url('content/' . $latestarticle->parent_category_slug. '/' . $latestarticle->category_slug . '/' . $latestarticle->slug)?>"><?=$latestarticle->new_title?></a></h2>
                                                     <ul class="post-tags">
+                                                        <li><i class="fa fa-clock-o"></i><?=date_format(date_create($latestarticle->created_at), "d M Y")?></li>
                                                         <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$latestarticle->for_publication_name ?? $latestarticle->author_name?></a></li>
                                                         <?php
                                                         if($latestarticle->indigenous_affiliation != ''){                                                    
