@@ -24,6 +24,7 @@ use stripe;
 use PDF;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use DateTime;
 date_default_timezone_set("Asia/Calcutta");
 
 class DonationController extends Controller
@@ -104,8 +105,28 @@ class DonationController extends Controller
         $data['search_keyword']         = '';
         $donation_id                    = Helper::decoded($donation_id);
         $data['donation']               = Donation::where('id', $donation_id)->first();
-        $title                          = 'Donationreceipt';
-        $page_name                      = 'donationreceipt';
-        return view('front.pages.'.$page_name, $data);
+        // $title                          = 'Donationreceipt';
+        // $page_name                      = 'donationreceipt';
+        // return view('front.pages.'.$page_name, $data);
+        /* generate inspection pdf & save it to directory */
+            $donation                       = $data['donation'];
+            $donation_number                = (($donation)?$donation->donation_number:'');
+            $generalSetting                 = GeneralSetting::find('1');
+            $subject                        = $generalSetting->site_name . ' Donation Receipt' . $donation_number;
+            $message                        = view('front.pages.donationreceipt',$donation);
+            $options                        = new Options();
+            $options->set('defaultFont', 'Courier');
+            $dompdf                         = new Dompdf($options);
+            $html                           = $message;
+            $dompdf->loadHtml($html);
+            $dompdf->setPaper('A4', 'portrait');
+            $dompdf->render();
+            $output                         = $dompdf->output();
+            $dompdf->stream("document.pdf", array("Attachment" => false));die;
+            // $filename                       = $donation_number.'-'.time().'.pdf';
+            // $pdfFilePath                    = 'public/uploads/donation/' . $filename;
+            // file_put_contents($pdfFilePath, $output);
+            // Donation::where('id', '=', $donation_id)->update(['payment_receipt' => $filename]);
+        /* generate inspection pdf & save it to directory */
     }
 }
