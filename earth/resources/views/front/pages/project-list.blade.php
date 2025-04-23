@@ -19,7 +19,8 @@ $current_url = $protocol . $host . $uri;
                         <!-- article box -->
                         <div class="article-box">
                             <div class="title-section">
-                                <h1><span><?=$page_header?></span></h1>
+                                <!-- <h1><span><?=$page_header?></span></h1> -->
+                                <h1><span class="btn project-btn"><i class="fa fa-users"></i> Projects</span> <?=$slug?></h1>
                             </div>
                         </div>
                         <!-- End article box -->
