@@ -659,7 +659,7 @@ $current_url = $protocol . $host . $uri;
                                                             <?php } ?>
                                                         </ul>
                                                         <!-- <p class="dec"><?=$featuredContent->sub_title?></p> -->
-                                                        <?=$featuredContent->sub_title?>
+                                                        <P><?=$featuredContent->sub_title?></P>
                                                     </div>
                                                 </li>
                                             <?php }?>
