@@ -180,12 +180,39 @@ $getcountry                 = Country::find($donation->country);
                         </div>
 
                         <div class="receipt-details">
-                            <p><strong><i>Donation Receipt Number:</i></strong> <?=$donation->donation_number?></p>
+                            <table>
+                                <tr>
+                                    <td><strong><i>Donation Receipt Number:</i></strong></td>
+                                    <td><?=$donation->donation_number?></td>
+                                </tr>
+                                <tr>
+                                    <td><strong><i>Donation Receipt Date:</i></strong></td>
+                                    <td><?=date_format(date_create($donation->payment_timestamp), "d/m/Y")?></td>
+                                </tr>
+                                <tr>
+                                    <td><strong><i>Donee Name:</i></strong></td>
+                                    <td><?=$donation->first_name?> <?=$donation->last_name?></td>
+                                </tr>
+                                <tr>
+                                    <td><strong><i>Donation Amount:</i></strong></td>
+                                    <td>USD <?=number_format($donation->payment_amount,2)?> (<?=Helper::getIndianCurrency($donation->payment_amount)?> only)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong><i>Donor Name:</i></strong></td>
+                                    <td><?=$donation->first_name?> <?=$donation->last_name?></td>
+                                </tr>
+                                <tr>
+                                    <td><strong><i>Donor Country of Residence:</i></strong></td>
+                                    <td><?=(($getcountry)?$getcountry->name:'')?></td>
+                                </tr>
+                            </table>
+
+                            <!-- <p><strong><i>Donation Receipt Number:</i></strong> <?=$donation->donation_number?></p>
                             <p><strong><i>Donation Receipt Date:</i></strong> <?=date_format(date_create($donation->payment_timestamp), "d/m/Y")?></p>
                             <p><strong><i>Donee Name:</i></strong> Śramani Institute, Inc.</p>
                             <p style="height: auto;"><strong><i>Donation Amount:</i></strong> USD <?=number_format($donation->payment_amount,2)?> (<?=Helper::getIndianCurrency($donation->payment_amount)?> only)</p>
                             <p><strong><i>Donor Name:</i></strong> <?=$donation->first_name?> <?=$donation->last_name?></p>
-                            <p><strong><i>Donor Country of Residence:</i></strong> <?=(($getcountry)?$getcountry->name:'')?></p>
+                            <p><strong><i>Donor Country of Residence:</i></strong> <?=(($getcountry)?$getcountry->name:'')?></p> -->
                         </div>
 
                         <div class="greeting">
