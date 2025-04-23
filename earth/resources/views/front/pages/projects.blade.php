@@ -33,7 +33,7 @@ use App\Models\Project;
                                                 if($project->count() > 0){
                                                     foreach($project as $rowProject){
                                                         ?>
-                                                        <li><a class="btn project-btn" href="<?=url('project/' . $rowProject->name)?>" target="_blank"><i class="fa fa-users"></i><?=$rowProject->name?></a></li>
+                                                        <li><a class="btn project-btn" href="<?=url('project/' . $rowProject->name)?>" target="_blank"><i class="fa fa-users"></i> <?=$rowProject->name?></a></li>
                                                         <?php
                                                     }
                                                 }
