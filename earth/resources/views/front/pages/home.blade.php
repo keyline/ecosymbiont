@@ -655,7 +655,7 @@ $current_url = $protocol . $host . $uri;
                                                             <li><i class="fa fa-clock-o"></i><?=date_format(date_create($featuredContent->created_at), "d M Y")?></li>
                                                             <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$featuredContent->for_publication_name ?? $featuredContent->author_name?></a></li>
                                                             <?php if($featuredContent->projects_name != ''){ ?>
-                                                            <li><a href="<?= url('project/' .$featuredContent->projects_name)?>"><i class="fa fa-users"></i> <?=$featuredContent->projects_name?></a></li>
+                                                            <li><a class="btn project-btn" href="<?= url('project/' .$featuredContent->projects_name)?>"><i class="fa fa-users"></i> <?=$featuredContent->projects_name?></a>\\</li>
                                                             <?php } ?>
                                                         </ul>
                                                         <p class="dec"><?=$featuredContent->sub_title?></p>
@@ -853,7 +853,7 @@ $current_url = $protocol . $host . $uri;
                                                             <li><i class="fa fa-map-marker"></i><a href="javascript:void(0);"><?=$latestarticle->indigenous_affiliation?></a></li>
                                                         <?php } ?>
                                                         <?php if($latestarticle->projects_name != ''){ ?>
-                                                            <li><a href="<?= url('project/' .$latestarticle->projects_name)?>"><i class="fa fa-users"></i> <?=$latestarticle->projects_name?></a></li>
+                                                            <li><a class="btn project-btn" href="<?= url('project/' .$latestarticle->projects_name)?>"><i class="fa fa-users"></i> <?=$latestarticle->projects_name?></a></li>
                                                             <?php } ?>
                                                         <!-- <li><i class="fa fa-clock-o"></i><?=date_format(date_create($latestarticle->created_at), "d M Y")?></li> -->
                                                         
