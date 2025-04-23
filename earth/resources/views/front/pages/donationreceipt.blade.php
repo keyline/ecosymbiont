@@ -112,15 +112,14 @@ $getcountry                 = Country::find($donation->country);
             margin-bottom: 30px;
             border-bottom: 2px solid #eee;
             padding-bottom: 10px;
-            height: 120px;
-            clear: both;
+            height: 135px;
         }
         .logo-left{
-            width: 30%;
+            width: 40%;
             float: left;
         }
         .logo-left img {
-            max-height: 80px;
+            max-height: 120px;
         }
 
         .text-right {
@@ -128,7 +127,7 @@ $getcountry                 = Country::find($donation->country);
             font-size: 14px;
             color: #000;
             line-height: 1.5;
-            width: 70%;
+            width: 60%;
             float: left;
         }
 
