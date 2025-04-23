@@ -1,5 +1,10 @@
 <?php
+use App\Models\Country;
+use App\Models\GeneralSetting;
+use App\Models\EmailLog;
+use App\Models\Donation;
 use App\Helpers\Helper;
+$generalSetting             = GeneralSetting::find('1');
 ?>
 <!doctype html>
 <html lang="en" class="no-js">
