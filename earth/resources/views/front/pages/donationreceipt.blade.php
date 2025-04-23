@@ -33,22 +33,7 @@ $getcountry                 = Country::find($donation->country);
     <style>
         .pdf-body {
             font-family: sans-serif;
-            background: #f5f7fa;
-            padding: 40px;
             color: #333;
-            animation: fadeIn 1s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .receipt-card {
@@ -124,15 +109,14 @@ $getcountry                 = Country::find($donation->country);
             text-decoration: none;
         }
         .receipt-header-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
             margin-bottom: 30px;
             border-bottom: 2px solid #eee;
             padding-bottom: 10px;
+            clear: both;
         }
         .logo-left{
-            width: ;
+            width: 30%;
+            float: left;
         }
         .logo-left img {
             max-height: 80px;
@@ -143,6 +127,8 @@ $getcountry                 = Country::find($donation->country);
             font-size: 14px;
             color: #000;
             line-height: 1.5;
+            width: 70%;
+            float: left;
         }
 
         .text-right .highlight-line {
