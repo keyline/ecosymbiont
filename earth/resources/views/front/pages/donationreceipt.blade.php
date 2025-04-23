@@ -133,18 +133,21 @@ $getcountry                 = Country::find($donation->country);
 
         .text-right .highlight-line {
             border: none;
-            border-top: 1px solid #f4c542;
+            border-top: 1px solid #DAA600;
             width: 100%;
             margin: 2px 0 0px auto;
         }
 
         .text-right a {
-            color: #f4a20e;
+            color: #DAA600;
             font-weight: bold;
             text-decoration: none;
         }
+        .text-right small{
+            color: #538135;
+        }
         .my-3{
-            margin: 5px 0;
+            margin: 5px 0 2px;
         }
     </style>
 </head>
@@ -159,12 +162,12 @@ $getcountry                 = Country::find($donation->country);
                         <div class="receipt-header-top">
                             <div class="logo-left">
                                 <!-- <img src="<?=env('UPLOADS_URL').'pdf-logo.jpg'?>" alt="pdf-logo" class="img-fluid"> -->
-                                <img src="data:image/svg+xml;base64,<?php echo base64_encode(file_get_contents(base_path('public/uploads/pdf-logo.jpg'))); ?>">
+                                <img style="max-height: 180px;" src="data:image/svg+xml;base64,<?php echo base64_encode(file_get_contents(base_path('public/uploads/pdf-logo.jpg'))); ?>">
                             </div>
                             <div class="text-right">
                                 <strong>Śramani Institute Inc.</strong><br>
-                                EIN: 45-2512093<br>
-                                <span>Tax Status: 501(c)(3) exempt (USA)</span>
+                                <strong>EIN: 45-2512093</strong><br>
+                                <span><strong>Tax Status:</strong> 501(c)(3) exempt (USA)</span>
                                 <div class="my-3">
                                     <hr class="highlight-line">
                                     <hr class="highlight-line">
