@@ -72,7 +72,13 @@ $getcountry                 = Country::find($donation->country);
             font-size: 16px;
             color: #000
         }
-
+        .receipt-details table{
+            border-collapse: collapse;
+            vertical-align: top;
+        }
+        .receipt-details table tr{
+            margin: 5px 0;
+        }
         .greeting {
             margin-top: 30px;
             font-size: 15px;
@@ -167,7 +173,7 @@ $getcountry                 = Country::find($donation->country);
                             </div>
                             <div class="text-right">
                                 <strong>Śramani Institute Inc.</strong><br>
-                                <strong>EIN: 45-2512093</strong><br>
+                                <strong>EIN:</strong> 45-2512093<br>
                                 <span><strong>Tax Status:</strong> 501(c)(3) exempt (USA)</span>
                                 <div class="my-3">
                                     <hr class="highlight-line">
