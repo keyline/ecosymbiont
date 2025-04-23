@@ -136,29 +136,30 @@ class PayPalController extends Controller
                 $dompdf->render();
                 $output                         = $dompdf->output();
                 // $dompdf->stream("document.pdf", array("Attachment" => false));die;
-                $filename                       = $donation_number.'-'.time().'.pdf';
+                $filename                       = $donation_number.'.pdf';
                 $pdfFilePath                    = 'public/uploads/donation/' . $filename;
                 file_put_contents($pdfFilePath, $output);
-                $payment_receipt = env('UPLOADS_URL').'/donation/' . $filename;
+                $payment_receipt = env('UPLOADS_URL').'donation/' . $filename;
                 Donation::where('id', '=', $id)->update(['payment_receipt' => $payment_receipt]);
             /* generate inspection pdf & save it to directory */
 
             /* email functionality */
-                // $mailData['getOrder']       = Donation::where('id', '=', $id)->first();
-                // $message                    = view('email-templates.order-place', $mailData);                    
-                // $generalSetting             = GeneralSetting::find('1');
-                // $subject                    = 'Order Confirmation - Your Order with '.$generalSetting->site_name.' ['.$mailData['getOrder']->order_no.'] has been successfully placed!';
-                // $this->sendMail($generalSetting->system_email, $subject, $message);
-                // $this->sendMail($mailData['getOrder']->b_email, $subject, $message);
+                $mailData['getOrder']       = Donation::where('id', '=', $id)->first();                   
+                $generalSetting             = GeneralSetting::find('1');
+                $subject                    = 'Donation Confirmation - Your Donation with '.$generalSetting->site_name.' ['.$donation_number.'] has been successfully placed!';
+                $message                    = $subject;
+                $attchment                  = 'public/uploads/donation/' . $filename;
+                $this->sendMail($generalSetting->system_email, $subject, $message, $attchment);
+                $this->sendMail((($data['donation'])?$data['donation']->email:''), $subject, $message, $attchment);
             /* email functionality */
             /* email log save */
-                // $postData2 = [
-                //     'name'                  => $mailData['getOrder']->b_fname.' '.$mailData['getOrder']->b_lname,
-                //     'email'                 => $mailData['getOrder']->b_email,
-                //     'subject'               => $subject,
-                //     'message'               => $message
-                // ];
-                // EmailLog::insertGetId($postData2);
+                $postData2 = [
+                    'name'                  => (($data['donation'])?$data['donation']->first_name.' '.$data['donation']->last_name:''),
+                    'email'                 => (($data['donation'])?$data['donation']->email:''),
+                    'subject'               => $subject,
+                    'message'               => $message
+                ];
+                EmailLog::insertGetId($postData2);
             /* email log save */
             return redirect(url('thankyou/'.Helper::encoded($id)))->with('success_message', 'Donation Payment Completed Successfully !!!');
         } else {
