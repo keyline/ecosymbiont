@@ -106,6 +106,6 @@ class DonationController extends Controller
         $data['donation']               = Donation::where('id', $donation_id)->first();
         $title                          = 'Donationreceipt';
         $page_name                      = 'donationreceipt';
-        echo view('front.pages.'.$page_name, $data);
+        return view('front.pages.'.$page_name, $data);
     }
 }

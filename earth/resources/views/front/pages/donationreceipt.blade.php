@@ -11,7 +11,7 @@ $generalSetting             = GeneralSetting::find('1');
 <head>
     <title>Donation-Receipt</title>
     <!-- Favicons -->
-    <link href="<?=env('UPLOADS_URL').$generalSetting->site_favicon?>" rel="icon">
+    <!-- <link href="<?=env('UPLOADS_URL').$generalSetting->site_favicon?>" rel="icon">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -28,7 +28,7 @@ $generalSetting             = GeneralSetting::find('1');
     <link rel="stylesheet" type="text/css" href="<?=env('FRONT_ASSETS_URL')?>css/menumaker.css"/>
     <link rel="stylesheet" type="text/css" href="<?=env('FRONT_ASSETS_URL')?>css/audioplayer.css">
     <link rel="stylesheet" type="text/css" href="<?=env('FRONT_ASSETS_URL')?>css/style.css" media="screen">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
