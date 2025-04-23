@@ -105,6 +105,7 @@ class DonationController extends Controller
         $data['search_keyword']         = '';
         $donation_id                    = Helper::decoded($donation_id);
         $data['donation']               = Donation::where('id', $donation_id)->first();
+        $data['country_id']             = (($data['donation'])?$data['donation']->country:0);
         // $title                          = 'Donationreceipt';
         // $page_name                      = 'donationreceipt';
         // return view('front.pages.'.$page_name, $data);
@@ -113,7 +114,7 @@ class DonationController extends Controller
             $donation_number                = (($donation)?$donation->donation_number:'');
             $generalSetting                 = GeneralSetting::find('1');
             $subject                        = $generalSetting->site_name . ' Donation Receipt' . $donation_number;
-            $message                        = view('front.pages.donationreceipt',$donation);
+            $message                        = view('front.pages.donationreceipt',$data);
             $options                        = new Options();
             $options->set('defaultFont', 'Courier');
             $dompdf                         = new Dompdf($options);
