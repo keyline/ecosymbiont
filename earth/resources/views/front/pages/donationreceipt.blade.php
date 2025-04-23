@@ -5,6 +5,7 @@ use App\Models\EmailLog;
 use App\Models\Donation;
 use App\Helpers\Helper;
 $generalSetting             = GeneralSetting::find('1');
+$country                    = GeneralSetting::find($donation->country);
 ?>
 <!doctype html>
 <html lang="en" class="no-js">
@@ -164,65 +165,68 @@ $generalSetting             = GeneralSetting::find('1');
 <body>
     <!-- Container -->
     <div id="container">
-        <!-- block-wrapper-section ================================================== -->
-        <section class="block-wrapper">
-            <div class="pdf-body">
-                <div class="receipt-card">
-                    <div class="receipt-header-top">
-                        <div class="logo-left">
-                            <img src="<?=env('UPLOADS_URL').'pdf-logo.jpg'?>" alt="pdf-logo" class="img-fluid">
-                        </div>
-                        <div class="text-right">
-                            <strong>Śramani Institute Inc.</strong><br>
-                            EIN: 45-2512093<br>
-                            <span>Tax Status: 501(c)(3) exempt (USA)</span>
-                            <div class="my-3">
-                                <hr class="highlight-line">
-                                <hr class="highlight-line">
-                                <hr class="highlight-line">
+        <?php if($donation){?>
+            <!-- block-wrapper-section ================================================== -->
+            <section class="block-wrapper">
+                <div class="pdf-body">
+                    <div class="receipt-card">
+                        <div class="receipt-header-top">
+                            <div class="logo-left">
+                                <img src="<?=env('UPLOADS_URL').'pdf-logo.jpg'?>" alt="pdf-logo" class="img-fluid">
+                                <img src="data:image/svg+xml;base64,<?php echo base64_encode(file_get_contents(base_path('public/uploads/pdf-logo.jpg'))); ?>">
                             </div>
-                            <a href="https://www.sramani.org" target="_blank">www.sramani.org</a><br>
-                            <small><i>Realizing the interconnected wellbeing<br>of humans and ecologies</i></small>
+                            <div class="text-right">
+                                <strong>Śramani Institute Inc.</strong><br>
+                                EIN: 45-2512093<br>
+                                <span>Tax Status: 501(c)(3) exempt (USA)</span>
+                                <div class="my-3">
+                                    <hr class="highlight-line">
+                                    <hr class="highlight-line">
+                                    <hr class="highlight-line">
+                                </div>
+                                <a href="https://www.sramani.org" target="_blank">www.sramani.org</a><br>
+                                <small><i>Realizing the interconnected wellbeing<br>of humans and ecologies</i></small>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="receipt-details">
-                        <p><strong><i>Donation Receipt Number:</i></strong> SRM-US-web2025-00123</p>
-                        <p><strong><i>Donation Receipt Date:</i></strong> 18/04/2025</p>
-                        <p><strong><i>Donee Name:</i></strong> Śramani Institute, Inc.</p>
-                        <p><strong><i>Donation Amount:</i></strong> USD 1,000.00 (One thousand dollars only)</p>
-                        <p><strong><i>Donor Name:</i></strong> John Doe</p>
-                        <p><strong><i>Donor Country of Residence:</i></strong> United States</p>
-                    </div>
+                        <div class="receipt-details">
+                            <p><strong><i>Donation Receipt Number:</i></strong> <?=$donation->donation_number?></p>
+                            <p><strong><i>Donation Receipt Date:</i></strong> <?=date_format(date_create($donation->payment_timestamp), "d/m/Y")?></p>
+                            <p><strong><i>Donee Name:</i></strong> Śramani Institute, Inc.</p>
+                            <p><strong><i>Donation Amount:</i></strong> USD <?=number_format($donation->payment_amount,2)?> (<?=Helper::getIndianCurrency($donation->payment_amount)?> only)</p>
+                            <p><strong><i>Donor Name:</i></strong> <?=$donation->first_name?> <?=$donation->last_name?></p>
+                            <p><strong><i>Donor Country of Residence:</i></strong> <?=(($country)?$country->name:'')?></p>
+                        </div>
 
-                    <div class="greeting">
-                        <p>Dear John Doe,</p>
-                        <p>Thank you so much for your donation to the Śramani Institute, Inc.!</p>
+                        <div class="greeting">
+                            <p>Dear <?=$donation->first_name?> <?=$donation->last_name?>,</p>
+                            <p>Thank you so much for your donation to the Śramani Institute, Inc.!</p>
 
-                        <p>We greatly appreciate your gift. It will help to support our initiatives and projects that realize
-                            the interconnected wellbeing of humans and ecologies.</p>
+                            <p>We greatly appreciate your gift. It will help to support our initiatives and projects that realize
+                                the interconnected wellbeing of humans and ecologies.</p>
 
-                        <p>Your donation of <strong>USD</strong> 1,000.00 (One thousand dollars only) is tax-exempt in the
-                            United States of America (USA), as the Śramani Institute, Inc. is a 501(c)(3) tax-exempt nonprofit
-                            organization registered in the USA.</p>
-                        <p>Thank you again for your generosity.</p>
-                    </div>
+                            <p>Your donation of <strong>USD</strong> <?=number_format($donation->payment_amount,2)?> (One thousand dollars only) is tax-exempt in the
+                                United States of America (USA), as the Śramani Institute, Inc. is a 501(c)(3) tax-exempt nonprofit
+                                organization registered in the USA.</p>
+                            <p>Thank you again for your generosity.</p>
+                        </div>
 
-                    <div class="signature">
-                        <p>Best wishes,</p>
-                        <p><strong>Dr. Kakoli Mitra, <i>Esq.</i></strong></p>
-                        <p>Founder and Executive Director</p>
-                        <p><i>Śramani Institute</i></p>
-                        <p><strong><i>Email:</i></strong> <a href="mailto:support@sramani.org">support@sramani.org</a></p>
-                    </div>
+                        <div class="signature">
+                            <p>Best wishes,</p>
+                            <p><strong>Dr. Kakoli Mitra, <i>Esq.</i></strong></p>
+                            <p>Founder and Executive Director</p>
+                            <p><i>Śramani Institute</i></p>
+                            <p><strong><i>Email:</i></strong> <a href="mailto:support@sramani.org">support@sramani.org</a></p>
+                        </div>
 
-                    <div class="footer">
-                        Śramani Institute, Inc. | 501(c)(3) Nonprofit | Tax ID: [Insert EIN]
+                        <div class="footer">
+                            Śramani Institute, Inc. | 501(c)(3) Nonprofit | Tax ID: [45-2512093]
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <!-- End block-wrapper-section -->
+            </section>
+            <!-- End block-wrapper-section -->
+        <?php }?>
     </div>
     <!-- End Container -->
 </body>
