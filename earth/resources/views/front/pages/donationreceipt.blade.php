@@ -96,7 +96,7 @@ $getcountry                 = Country::find($donation->country);
         }
 
         .signature p {
-            margin: 4px 0;
+            margin: 8px 0;
             font-size: 15px;
             color: #000;
         }
@@ -172,7 +172,7 @@ $getcountry                 = Country::find($donation->country);
                                 <img style="max-height: 300px;" src="data:image/svg+xml;base64,<?php echo base64_encode(file_get_contents(base_path('public/uploads/pdf-logo.jpg'))); ?>">
                             </div>
                             <div class="text-right">
-                                <strong>Śramani Institute Inc.</strong><br>
+                                <strong>Sramani Institute Inc.</strong><br>
                                 <strong>EIN:</strong> 45-2512093<br>
                                 <span><strong>Tax Status:</strong> 501(c)(3) exempt (USA)</span>
                                 <div class="my-3">
@@ -215,7 +215,7 @@ $getcountry                 = Country::find($donation->country);
 
                             <!-- <p><strong><i>Donation Receipt Number:</i></strong> <?=$donation->donation_number?></p>
                             <p><strong><i>Donation Receipt Date:</i></strong> <?=date_format(date_create($donation->payment_timestamp), "d/m/Y")?></p>
-                            <p><strong><i>Donee Name:</i></strong> Śramani Institute, Inc.</p>
+                            <p><strong><i>Donee Name:</i></strong> Sramani Institute, Inc.</p>
                             <p style="height: auto;"><strong><i>Donation Amount:</i></strong> USD <?=number_format($donation->payment_amount,2)?> (<?=Helper::getIndianCurrency($donation->payment_amount)?> only)</p>
                             <p><strong><i>Donor Name:</i></strong> <?=$donation->first_name?> <?=$donation->last_name?></p>
                             <p><strong><i>Donor Country of Residence:</i></strong> <?=(($getcountry)?$getcountry->name:'')?></p> -->
@@ -223,13 +223,13 @@ $getcountry                 = Country::find($donation->country);
 
                         <div class="greeting">
                             <p>Dear <?=$donation->first_name?> <?=$donation->last_name?>,</p>
-                            <p>Thank you so much for your donation to the Śramani Institute, Inc.!</p>
+                            <p>Thank you so much for your donation to the Sramani Institute, Inc.!</p>
 
                             <p>We greatly appreciate your gift. It will help to support our initiatives and projects that realize
                                 the interconnected wellbeing of humans and ecologies.</p>
 
                             <p>Your donation of <strong>USD</strong> <?=number_format($donation->payment_amount,2)?> (One thousand dollars only) is tax-exempt in the
-                                United States of America (USA), as the Śramani Institute, Inc. is a 501(c)(3) tax-exempt nonprofit
+                                United States of America (USA), as the Sramani Institute, Inc. is a 501(c)(3) tax-exempt nonprofit
                                 organization registered in the USA.</p>
                             <p>Thank you again for your generosity.</p>
                         </div>
@@ -238,12 +238,12 @@ $getcountry                 = Country::find($donation->country);
                             <p>Best wishes,</p>
                             <p><strong>Dr. Kakoli Mitra, <i>Esq.</i></strong></p>
                             <p>Founder and Executive Director</p>
-                            <p><i>Śramani Institute</i></p>
+                            <p><i>Sramani Institute</i></p>
                             <p><strong><i>Email:</i></strong> <a href="mailto:support@sramani.org">support@sramani.org</a></p>
                         </div>
 
                         <div class="footer">
-                            Śramani Institute, Inc. | 501(c)(3) Nonprofit | Tax ID: [45-2512093]
+                            Sramani Institute, Inc. | 501(c)(3) Nonprofit | Tax ID: [45-2512093]
                         </div>
                     </div>
                 </div>
