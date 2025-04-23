@@ -7276,11 +7276,11 @@ ul.list-posts > li img{
 }
 .project-btn{
   background-color: #386136;
-  color: white;
+  color: white !important;
 }
 .project-btn:hover{
   background-color: #d09c1e;
-  color: white;
+  color: white !important;
 }
 .project-btn i{    
   color: white !important; 
