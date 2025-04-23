@@ -90,9 +90,11 @@ class DonationController extends Controller
         $page_name                      = 'donation-preview';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
-    public function thankyou()
+    public function thankyou($donation_id)
     {
-        $data = [];
+        $data['search_keyword']         = '';
+        $donation_id                    = Helper::decoded($donation_id);
+        $data['donation']               = Donation::where('id', $donation_id)->first();
         $title                          = 'Thankyou';
         $page_name                      = 'thankyou';
         echo $this->front_before_login_layout($title, $page_name, $data);

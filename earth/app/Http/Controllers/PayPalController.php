@@ -115,49 +115,38 @@ class PayPalController extends Controller
 
             $userSubscriptionData = [
                 'payment_status'                => 1,
-                'payment_txn_no'                => $response['purchase_units'][0]['payments']['captures'][0]['id'],
-                'payment_date_time'             => date('Y-m-d H:i:s'),
+                'payment_amount'                => $getOrder->payable_amount,
+                'payment_timestamp'             => date('Y-m-d H:i:s'),
+                'txn_id'                        => $response['purchase_units'][0]['payments']['captures'][0]['id'],
                 'payment_gateway_id'            => $response['id'],
                 'customer_id'                   => $response['payment_source']['paypal']['account_id'],
                 'customer_card_id'              => '',
                 'currency'                      => $response['purchase_units'][0]['payments']['captures'][0]['amount']['currency_code'],
-                'particulars'                   => 'Payment '.$getOrder->payable_amount.' for donation on '.date('Y-m-d H:i:s').' by paypal',
-                'card_last_4_digits'            => '',
-                'expiry_month'                  => '',
-                'expiry_year'                   => '',
+                'particulars'                   => 'Payment '.$getOrder->payable_amount.' for donation on '.date('Y-m-d H:i:s').' by paypal'
             ];
             Helper::pr($userSubscriptionData);
             Donation::where('id', '=', $id)->update($userSubscriptionData);
-            OrderDetail::where('order_id', '=', $id)->update(['is_cart' => 0]);
 
             /* email functionality */
-                $mailData['getOrder']       = Donation::where('id', '=', $id)->first();
-                $message                    = view('email-templates.order-place', $mailData);                    
-                $generalSetting             = GeneralSetting::find('1');
-                $subject                    = 'Order Confirmation - Your Order with '.$generalSetting->site_name.' ['.$mailData['getOrder']->order_no.'] has been successfully placed!';
-                $this->sendMail($generalSetting->system_email, $subject, $message);
-                $this->sendMail($mailData['getOrder']->b_email, $subject, $message);
+                // $mailData['getOrder']       = Donation::where('id', '=', $id)->first();
+                // $message                    = view('email-templates.order-place', $mailData);                    
+                // $generalSetting             = GeneralSetting::find('1');
+                // $subject                    = 'Order Confirmation - Your Order with '.$generalSetting->site_name.' ['.$mailData['getOrder']->order_no.'] has been successfully placed!';
+                // $this->sendMail($generalSetting->system_email, $subject, $message);
+                // $this->sendMail($mailData['getOrder']->b_email, $subject, $message);
             /* email functionality */
             /* email log save */
-                $postData2 = [
-                    'name'                  => $mailData['getOrder']->b_fname.' '.$mailData['getOrder']->b_lname,
-                    'email'                 => $mailData['getOrder']->b_email,
-                    'subject'               => $subject,
-                    'message'               => $message
-                ];
-                EmailLog::insertGetId($postData2);
+                // $postData2 = [
+                //     'name'                  => $mailData['getOrder']->b_fname.' '.$mailData['getOrder']->b_lname,
+                //     'email'                 => $mailData['getOrder']->b_email,
+                //     'subject'               => $subject,
+                //     'message'               => $message
+                // ];
+                // EmailLog::insertGetId($postData2);
             /* email log save */
-
-            return redirect(url('order-success/'.Helper::encoded($id)))->with('success_message', 'Order Placed & Payment Completed Successfully !!!');
-
-            // return redirect()
-            //     ->route('paypal')
-            //     ->with('success', 'Transaction complete.');
+            return redirect(url('thankyou/'.Helper::encoded($id)))->with('success_message', 'Donation Payment Completed Successfully !!!');
         } else {
-            return redirect(url('order-failure/'.Helper::encoded($id)))->with('error_message', 'Payment Failed !!!');
-            // return redirect()
-            //     ->route('paypal')
-            //     ->with('error', $response['message'] ?? 'Something went wrong.');
+            return redirect(url('thankyou/'.Helper::encoded($id)))->with('error_message', 'Payment Failed !!!');
         }
     }
 }

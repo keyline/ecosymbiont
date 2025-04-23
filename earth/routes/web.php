@@ -45,7 +45,7 @@ use App\Http\Controllers\PayPalController;
 
         Route::match(['get', 'post'], '/donation', 'App\Http\Controllers\DonationController@donation');
         Route::match(['get', 'post'], '/donation-preview/{id}', 'App\Http\Controllers\DonationController@donationPreview');
-        Route::match(['get', 'post'], '/thankyou', 'App\Http\Controllers\DonationController@thankyou');
+        Route::match(['get', 'post'], '/thankyou/{id}', 'App\Http\Controllers\DonationController@thankyou');
         Route::match(['get', 'post'], '/donationreceipt', 'App\Http\Controllers\DonationController@donationreceipt');
         Route::get('paypal', [PayPalController::class, 'index'])->name('paypal');
         Route::get('paypal/payment/{id1}', [PayPalController::class, 'payment'])->name('paypal.payment');

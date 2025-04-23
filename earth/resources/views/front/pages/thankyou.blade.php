@@ -43,6 +43,6 @@
         </svg>
         <h2 class="fw-bold text-success">Thank You!</h2>
         <p class="mt-3 mb-4 text-muted">Your donation has been successfully received. We truly appreciate your generous support to our cause.</p>
-        <a href="#" class="btn donation_btn">Download receipt</a>
+        <a href="#" class="btn donation_btn" target="_blank">Download receipt</a>
     </div>
 </div>
