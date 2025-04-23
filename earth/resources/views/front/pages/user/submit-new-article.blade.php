@@ -1729,7 +1729,9 @@ use Illuminate\Support\Facades\DB;
         function getValidationMessage(input) {
             if (/^SRN$/.test(input)) {
                 return { valid: true, message: "✅ Valid: SRN" };
-            } else if (/^SRN-EaRTh$/.test(input)) {
+            } else if (/^SRN-$/.test(input)) {
+                return { valid: true, message: "✅ Valid: SRN-" };
+            }else if (/^SRN-EaRTh$/.test(input)) {
                 return { valid: true, message: "✅ Valid: SRN-EaRTh" };
             } else if (/^SRN-EaRTh(0[1-9]|1[0-2])\d{4}$/.test(input)) {
                 return { valid: true, message: "✅ Valid: SRN-EaRThMMYYYY" };
@@ -1738,7 +1740,7 @@ use Illuminate\Support\Facades\DB;
             } else if (/^SRN-EaRTh(0[1-9]|1[0-2])\d{4}-\d+$/.test(input)) {
                 return { valid: true, message: "✅ Valid: Full format" };
             } else {
-                return { valid: false, message: "❌ Invalid format" };
+                return { valid: false, message: "❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx" };
             }
         }
 
