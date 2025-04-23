@@ -172,7 +172,7 @@ return [
         //App\Providers\SiteConfigurationServiceProvider::class,
         App\Providers\ConfigurationServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-        Srmklive\PayPal\Providers\PayPalServiceProvider::class,
+        // Srmklive\PayPal\Providers\PayPalServiceProvider::class,
     ])->toArray(),
 
     /*
