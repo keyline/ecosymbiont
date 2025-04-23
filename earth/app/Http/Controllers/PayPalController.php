@@ -42,7 +42,7 @@ class PayPalController extends Controller
     {
         $id             = Helper::decoded($order_id);
         $getOrder       = Donation::where('id', '=', $id)->first();
-        Helper::pr($getOrder,0);die;
+        // Helper::pr($getOrder,0);die;
         $provider       = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));
         $paypalToken    = $provider->getAccessToken();
