@@ -348,7 +348,7 @@ class FrontController extends Controller
                                                     // Helper::pr($data['contents']);
         $data['search_keyword']         = '';
 
-        $title                          = $slug;
+        $title                          = '<p class="btn project-btn"><i class="fa fa-users"></i>Projects</p>'. $slug;
         $page_name                      = 'project-list';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
