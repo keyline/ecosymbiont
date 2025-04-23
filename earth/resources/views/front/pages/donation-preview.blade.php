@@ -34,22 +34,22 @@ use App\Models\Country;
                                 <?php if($donation){?>
                                     <table class="table table-striped">
                                         <tr>
-                                            <td class="font-weight-bold">Name</td>
+                                            <td style="font-weight: bold;">Name</td>
                                             <td>:</td>
                                             <td><?=$donation->first_name . ' ' . $donation->last_name?></td>
                                         </tr>
                                         <tr>
-                                            <td class="font-weight-bold">Email</td>
+                                            <td style="font-weight: bold;">Email</td>
                                             <td>:</td>
                                             <td><?=$donation->email?></td>
                                         </tr>
                                         <tr>
-                                            <td class="font-weight-bold">Address</td>
+                                            <td style="font-weight: bold;">Address</td>
                                             <td>:</td>
                                             <td><?=$donation->address?></td>
                                         </tr>
                                         <tr>
-                                            <td class="font-weight-bold">Country</td>
+                                            <td style="font-weight: bold;">Country</td>
                                             <td>:</td>
                                             <td>
                                                 <?php
@@ -59,12 +59,12 @@ use App\Models\Country;
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="font-weight-bold">Payment Method</td>
+                                            <td style="font-weight: bold;">Payment Method</td>
                                             <td>:</td>
                                             <td><?=$donation->payment_mode?></td>
                                         </tr>
                                         <tr>
-                                            <td class="font-weight-bold">Payable Amount</td>
+                                            <td style="font-weight: bold;">Payable Amount</td>
                                             <td>:</td>
                                             <td><?=number_format($donation->payable_amount,2)?></td>
                                         </tr>
