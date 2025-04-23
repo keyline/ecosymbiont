@@ -4,7 +4,7 @@ use App\Helpers\Helper;
 <!doctype html>
 <html lang="en" class="no-js">
 <head>
-    <title><?=$title?></title>
+    <title>Donation-Receipt</title>
     <!-- Favicons -->
     <link href="<?=env('UPLOADS_URL').$generalSetting->site_favicon?>" rel="icon">
     <meta charset="utf-8">
