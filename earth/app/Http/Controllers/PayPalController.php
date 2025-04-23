@@ -139,9 +139,10 @@ class PayPalController extends Controller
                 $filename                       = $donation_number.'-'.time().'.pdf';
                 $pdfFilePath                    = 'public/uploads/donation/' . $filename;
                 file_put_contents($pdfFilePath, $output);
-                Donation::where('id', '=', $order_id)->update(['payment_receipt' => $filename]);
+                $payment_receipt = env('UPLOADS_URL').'/donation/' . $filename;
+                Donation::where('id', '=', $order_id)->update(['payment_receipt' => $payment_receipt]);
             /* generate inspection pdf & save it to directory */
-            
+
             /* email functionality */
                 // $mailData['getOrder']       = Donation::where('id', '=', $id)->first();
                 // $message                    = view('email-templates.order-place', $mailData);                    
