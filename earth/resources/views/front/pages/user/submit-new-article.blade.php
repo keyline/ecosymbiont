@@ -1761,11 +1761,16 @@ use Illuminate\Support\Facades\DB;
                     tag = tag.trim();
                     if (tag.length > 0) {
                         const result = getValidationMessage(tag);
-                        if (!result.valid) {
-                            $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx").css('color', 'red').delay(3000)
-                            .fadeOut();
+                        const pattern = /^SRN-EaRTh\d{6}-\d+$/;
+                        if (!pattern.test(tag)) {
+                            $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx").css('color', 'red');
                             return;
                         }
+                        // if (!result.valid) {
+                        //     $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx").css('color', 'red').delay(3000)
+                        //     .fadeOut();
+                        //     return;
+                        // }
 
                         if (!tagsArray.includes(tag)) {
                             tagsArray.push(tag);
