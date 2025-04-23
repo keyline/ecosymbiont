@@ -124,9 +124,8 @@ class PayPalController extends Controller
                 'currency'                      => $response['purchase_units'][0]['payments']['captures'][0]['amount']['currency_code'],
                 'particulars'                   => 'Payment '.$getOrder->payable_amount.' for donation on '.date('Y-m-d H:i:s').' by paypal'
             ];
-            Helper::pr($userSubscriptionData);
+            // Helper::pr($userSubscriptionData);
             Donation::where('id', '=', $id)->update($userSubscriptionData);
-
             /* email functionality */
                 // $mailData['getOrder']       = Donation::where('id', '=', $id)->first();
                 // $message                    = view('email-templates.order-place', $mailData);                    
