@@ -191,7 +191,7 @@ $getcountry                 = Country::find($donation->country);
                                 <p><strong><i>Donation Receipt Number:</i></strong></p>
                                 <p><strong><i>Donation Receipt Date:</i></strong></p>
                                 <p><strong><i>Donee Name:</i></strong></p>
-                                <p><strong><i>Donation Amount:</i></strong></p>
+                                <p style="height: 32px;"><strong><i>Donation Amount:</i></strong></p>
                                 <p><strong><i>Donor Name:</i></strong></p>
                                 <p><strong><i>Donor Country of Residence:</i></strong></p>
                             </div>
