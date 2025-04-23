@@ -110,7 +110,7 @@ class PayPalController extends Controller
         $provider->getAccessToken();
         $response       = $provider->capturePaymentOrder($request['token']);
         
-        Helper::pr($response,0);die;
+        // Helper::pr($response,0);die;
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
 
             $userSubscriptionData = [
@@ -121,7 +121,7 @@ class PayPalController extends Controller
                 'customer_id'                   => $response['payment_source']['paypal']['account_id'],
                 'customer_card_id'              => '',
                 'currency'                      => $response['purchase_units'][0]['payments']['captures'][0]['amount']['currency_code'],
-                'particulars'                   => 'Payment '.$getOrder->payable_amount.' for order place on '.date('Y-m-d H:i:s').' by paypal',
+                'particulars'                   => 'Payment '.$getOrder->payable_amount.' for donation on '.date('Y-m-d H:i:s').' by paypal',
                 'card_last_4_digits'            => '',
                 'expiry_month'                  => '',
                 'expiry_year'                   => '',
