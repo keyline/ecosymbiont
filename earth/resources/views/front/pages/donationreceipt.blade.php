@@ -63,9 +63,15 @@ $getcountry                 = Country::find($donation->country);
             font-size: 16px;
             color: #444;
         }
-        .receipt-details strong{
+        .receipt-details{
+            height: 160px;
+        }
+        .receipt-details-left{
             width: 230px;
-            display: inline-block;
+            float: left;
+        }
+        .receipt-details-right{
+            float: left;
         }
         .receipt-details p {
             margin: 8px 0;
@@ -145,9 +151,10 @@ $getcountry                 = Country::find($donation->country);
         }
         .text-right small{
             color: #538135;
+            line-height: 1;
         }
         .my-3{
-            margin: 5px 0 2px;
+            margin: 8px 0 2px;
         }
     </style>
 </head>
@@ -162,7 +169,7 @@ $getcountry                 = Country::find($donation->country);
                         <div class="receipt-header-top">
                             <div class="logo-left">
                                 <!-- <img src="<?=env('UPLOADS_URL').'pdf-logo.jpg'?>" alt="pdf-logo" class="img-fluid"> -->
-                                <img style="max-height: 180px;" src="data:image/svg+xml;base64,<?php echo base64_encode(file_get_contents(base_path('public/uploads/pdf-logo.jpg'))); ?>">
+                                <img style="max-height: 300px;" src="data:image/svg+xml;base64,<?php echo base64_encode(file_get_contents(base_path('public/uploads/pdf-logo.jpg'))); ?>">
                             </div>
                             <div class="text-right">
                                 <strong>Śramani Institute Inc.</strong><br>
@@ -179,12 +186,22 @@ $getcountry                 = Country::find($donation->country);
                         </div>
 
                         <div class="receipt-details">
-                            <p><strong><i>Donation Receipt Number:</i></strong> <?=$donation->donation_number?></p>
-                            <p><strong><i>Donation Receipt Date:</i></strong> <?=date_format(date_create($donation->payment_timestamp), "d/m/Y")?></p>
-                            <p><strong><i>Donee Name:</i></strong> Śramani Institute, Inc.</p>
-                            <p><strong><i>Donation Amount:</i></strong> USD <?=number_format($donation->payment_amount,2)?> (<?=Helper::getIndianCurrency($donation->payment_amount)?> only)</p>
-                            <p><strong><i>Donor Name:</i></strong> <?=$donation->first_name?> <?=$donation->last_name?></p>
-                            <p><strong><i>Donor Country of Residence:</i></strong> <?=(($getcountry)?$getcountry->name:'')?></p>
+                            <div class="receipt-details-left">
+                                <p><strong><i>Donation Receipt Number:</i></strong> <?=$donation->donation_number?></p>
+                                <p><strong><i>Donation Receipt Date:</i></strong> <?=date_format(date_create($donation->payment_timestamp), "d/m/Y")?></p>
+                                <p><strong><i>Donee Name:</i></strong> Śramani Institute, Inc.</p>
+                                <p><strong><i>Donation Amount:</i></strong> USD <?=number_format($donation->payment_amount,2)?> (<?=Helper::getIndianCurrency($donation->payment_amount)?> only)</p>
+                                <p><strong><i>Donor Name:</i></strong> <?=$donation->first_name?> <?=$donation->last_name?></p>
+                                <p><strong><i>Donor Country of Residence:</i></strong> <?=(($getcountry)?$getcountry->name:'')?></p>
+                            </div>
+                            <div class="receipt-details-right">
+                                <p><?=$donation->donation_number?></p>
+                                <p><?=date_format(date_create($donation->payment_timestamp), "d/m/Y")?></p>
+                                <p>Śramani Institute, Inc.</p>
+                                <p>USD <?=number_format($donation->payment_amount,2)?> (<?=Helper::getIndianCurrency($donation->payment_amount)?> only)</p>
+                                <p><?=$donation->first_name?> <?=$donation->last_name?></p>
+                                <p><?=(($getcountry)?$getcountry->name:'')?></p>
+                            </div>
                         </div>
 
                         <div class="greeting">
