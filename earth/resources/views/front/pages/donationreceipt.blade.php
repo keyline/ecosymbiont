@@ -111,15 +111,15 @@ $getcountry                 = Country::find($donation->country);
         .receipt-header-top {
             margin-bottom: 30px;
             border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-            height: 135px;
+            padding-bottom: 20px;
+            height: 130px;
         }
         .logo-left{
-            width: 40%;
+            width: 50%;
             float: left;
         }
         .logo-left img {
-            max-height: 120px;
+            max-height: 180px;
         }
 
         .text-right {
@@ -127,8 +127,8 @@ $getcountry                 = Country::find($donation->country);
             font-size: 14px;
             color: #000;
             line-height: 1.5;
-            width: 60%;
-            float: left;
+            width: 50%;
+            float: right;
         }
 
         .text-right .highlight-line {
