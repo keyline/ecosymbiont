@@ -172,6 +172,7 @@ return [
         //App\Providers\SiteConfigurationServiceProvider::class,
         App\Providers\ConfigurationServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Srmklive\PayPal\Providers\PayPalServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -229,6 +230,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Helper' => App\Helpers\Helper::class,
         'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
+        'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
     ])->toArray(),
 
 ];
