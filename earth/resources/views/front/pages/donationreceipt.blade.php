@@ -5,7 +5,7 @@ use App\Models\EmailLog;
 use App\Models\Donation;
 use App\Helpers\Helper;
 $generalSetting             = GeneralSetting::find('1');
-$country                    = GeneralSetting::find($donation->country);
+$getcountry                 = Country::find($donation->country);
 ?>
 <!doctype html>
 <html lang="en" class="no-js">
@@ -195,7 +195,7 @@ $country                    = GeneralSetting::find($donation->country);
                             <p><strong><i>Donee Name:</i></strong> Śramani Institute, Inc.</p>
                             <p><strong><i>Donation Amount:</i></strong> USD <?=number_format($donation->payment_amount,2)?> (<?=Helper::getIndianCurrency($donation->payment_amount)?> only)</p>
                             <p><strong><i>Donor Name:</i></strong> <?=$donation->first_name?> <?=$donation->last_name?></p>
-                            <p><strong><i>Donor Country of Residence:</i></strong> <?=(($country)?$country->name:'')?></p>
+                            <p><strong><i>Donor Country of Residence:</i></strong> <?=(($getcountry)?$getcountry->name:'')?></p>
                         </div>
 
                         <div class="greeting">
