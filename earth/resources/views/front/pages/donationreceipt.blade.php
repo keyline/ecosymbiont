@@ -67,10 +67,11 @@ $getcountry                 = Country::find($donation->country);
             height: 160px;
         }
         .receipt-details-left{
-            width: 230px;
+            width: 50%;
             float: left;
         }
         .receipt-details-right{
+            width: 50%;
             float: left;
         }
         .receipt-details p {
@@ -187,12 +188,12 @@ $getcountry                 = Country::find($donation->country);
 
                         <div class="receipt-details">
                             <div class="receipt-details-left">
-                                <p><strong><i>Donation Receipt Number:</i></strong> <?=$donation->donation_number?></p>
-                                <p><strong><i>Donation Receipt Date:</i></strong> <?=date_format(date_create($donation->payment_timestamp), "d/m/Y")?></p>
-                                <p><strong><i>Donee Name:</i></strong> Śramani Institute, Inc.</p>
-                                <p><strong><i>Donation Amount:</i></strong> USD <?=number_format($donation->payment_amount,2)?> (<?=Helper::getIndianCurrency($donation->payment_amount)?> only)</p>
-                                <p><strong><i>Donor Name:</i></strong> <?=$donation->first_name?> <?=$donation->last_name?></p>
-                                <p><strong><i>Donor Country of Residence:</i></strong> <?=(($getcountry)?$getcountry->name:'')?></p>
+                                <p><strong><i>Donation Receipt Number:</i></strong></p>
+                                <p><strong><i>Donation Receipt Date:</i></strong></p>
+                                <p><strong><i>Donee Name:</i></strong></p>
+                                <p><strong><i>Donation Amount:</i></strong></p>
+                                <p><strong><i>Donor Name:</i></strong></p>
+                                <p><strong><i>Donor Country of Residence:</i></strong></p>
                             </div>
                             <div class="receipt-details-right">
                                 <p><?=$donation->donation_number?></p>
