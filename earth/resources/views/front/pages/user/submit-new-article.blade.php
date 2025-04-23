@@ -1660,7 +1660,7 @@ use Illuminate\Support\Facades\DB;
     });
 </script> -->
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $(document).ready(function () {
         var tagsArray = [];
         var beforeData = $('#other_article_part_doi_no').val();
@@ -1716,4 +1716,76 @@ use Illuminate\Support\Facades\DB;
             $('#other_article_part_doi_no').val(tagsArray.join(','));
         });
     });
+</script> -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var tagsArray = [];
+        var beforeData = $('#other_article_part_doi_no').val();
+        if (beforeData.length > 0) {
+            tagsArray = beforeData.split(',');
+        }
+
+        function getValidationMessage(input) {
+            if (/^SRN$/.test(input)) {
+                return { valid: true, message: "✅ Valid: SRN" };
+            } else if (/^SRN-EaRTh$/.test(input)) {
+                return { valid: true, message: "✅ Valid: SRN-EaRTh" };
+            } else if (/^SRN-EaRTh(0[1-9]|1[0-2])\d{4}$/.test(input)) {
+                return { valid: true, message: "✅ Valid: SRN-EaRThMMYYYY" };
+            } else if (/^SRN-EaRTh(0[1-9]|1[0-2])\d{4}-$/.test(input)) {
+                return { valid: true, message: "✅ Valid: SRN-EaRThMMYYYY-" };
+            } else if (/^SRN-EaRTh(0[1-9]|1[0-2])\d{4}-\d+$/.test(input)) {
+                return { valid: true, message: "✅ Valid: Full format" };
+            } else {
+                return { valid: false, message: "❌ Invalid format" };
+            }
+        }
+
+        $('#input-tags').on('input', function () {
+            var input = $(this).val().trim();
+
+            if (input.length > 0 && !input.includes(',')) {
+                var result = getValidationMessage(input);
+                $('#validation-msg').text(result.message).css('color', result.valid ? 'green' : 'red');
+            } else {
+                $('#validation-msg').text('');
+            }
+
+            // When comma is typed
+            if (input.includes(',')) {
+                var tags = input.split(',');
+                tags.forEach(function (tag) {
+                    tag = tag.trim();
+                    if (tag.length > 0) {
+                        const result = getValidationMessage(tag);
+                        if (!result.valid) {
+                            $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx").css('color', 'red');
+                            return;
+                        }
+
+                        if (!tagsArray.includes(tag)) {
+                            tagsArray.push(tag);
+                            $('#badge-container').append(
+                                '<span class="badge">' + tag + ' <span class="remove" data-tag="' + tag + '">&times;</span></span>'
+                            );
+                        }
+                    }
+                });
+                $('#other_article_part_doi_no').val(tagsArray.join(','));
+                $(this).val('');
+            }
+        });
+
+        // Remove tag handler
+        $(document).on('click', '.remove', function () {
+            var tag = $(this).data('tag');
+            tagsArray = tagsArray.filter(function (item) {
+                return item !== tag;
+            });
+            $(this).parent().remove();
+            $('#other_article_part_doi_no').val(tagsArray.join(','));
+        });
+    });
 </script>
+
