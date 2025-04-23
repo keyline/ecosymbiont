@@ -7277,6 +7277,8 @@ ul.list-posts > li img{
 .project-btn{
   background-color: #386136;
   color: white !important;
+  padding-top: 3px !important;
+  padding-bottom: 3px !important;
 }
 .project-btn:hover{
   background-color: #d09c1e;
