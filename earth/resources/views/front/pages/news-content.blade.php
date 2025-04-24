@@ -321,7 +321,7 @@ $current_url = $protocol . $host . $uri;
                                         <?php }  ?>
                                     </div>
                                     <div class="owl-carousel" data-num="3">
-                                        <?php if($is_series = 'Yes') {?>
+                                        <?php if($is_series == 'Yes') {?>
                                             <?php if($other_articles_in_this_series){ foreach($other_articles_in_this_series as $other_articles_in_this_series_row){?>
                                                 <?php if($current_article_no != $other_articles_in_this_series_row->current_article_no){?>
                                                     <div class="item news-post video-post video_post_text">
