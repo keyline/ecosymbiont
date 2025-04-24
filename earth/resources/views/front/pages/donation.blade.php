@@ -84,8 +84,8 @@
                                         <div class="payment-method">
                                         <button class="btn btn-outline-info"><img src="<?=env('UPLOADS_URL').'paypal.png'?>" alt="" class="img-fluid"></button>
                                         </div> -->
-                                    <input type="text" name="base_amount" id="base_amount" value="0" required>
-                                    <input type="text" name="payable_amount" id="payable_amount" value="0" required>
+                                    <input type="hidden" name="base_amount" id="base_amount" value="0" required>
+                                    <input type="hidden" name="payable_amount" id="payable_amount" value="0" required>
                                     <h2>Payable Amount : <span id="payable_amount_text">0</span></h2>
                                     <div class="mt-4">
                                         <button type="submit" class="btn mt-4 donation_btn">Preview For Donation</button>
