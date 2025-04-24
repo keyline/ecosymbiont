@@ -122,7 +122,7 @@ class PayPalController extends Controller
             ];
             Donation::where('id', '=', $id)->update($userSubscriptionData);
             /* generate inspection pdf & save it to directory */
-                $data['donation']               = $getOrder;
+                $data['donation']               = Donation::where('id', '=', $id)->first();
                 $donation_number                = (($data['donation'])?$data['donation']->donation_number:'');
                 $generalSetting                 = GeneralSetting::find('1');
                 $subject                        = $generalSetting->site_name . ' Donation Receipt' . $donation_number;
