@@ -658,7 +658,8 @@ $current_url = $protocol . $host . $uri;
                                                             <li><a class="btn project-btn" href="<?= url('project/' .$featuredContent->projects_name)?>"><i class="fa fa-users"></i> <?=$featuredContent->projects_name?></a></li>
                                                             <?php } ?>
                                                         </ul>
-                                                        <p class="dec"><?=$featuredContent->sub_title?></p>
+                                                        <!-- <p class="dec"><?=$featuredContent->sub_title?></p> -->
+                                                        <p><?=$featuredContent->sub_title?></p>
                                                     </div>
                                                 </li>
                                             <?php }?>

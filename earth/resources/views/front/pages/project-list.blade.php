@@ -20,7 +20,7 @@ $current_url = $protocol . $host . $uri;
                         <div class="article-box">
                             <div class="title-section">
                                 <!-- <h1><span><?=$page_header?></span></h1> -->
-                                <h1><span class="btn project-btn"><i class="fa fa-users"></i> Projects</span> <?=$slug?></h1>
+                                <h1><a href="<?=url('projects')?>" class="btn project-btn"><i class="fa fa-users"></i> PROJECTS</a> <?=$slug?></h1>
                             </div>
                         </div>
                         <!-- End article box -->
@@ -74,6 +74,9 @@ $current_url = $protocol . $host . $uri;
                                                     <ul class="post-tags">
                                                         <li><i class="fa fa-clock-o"></i><?=date_format(date_create($rowContent->created_at), "d M Y")?></li>
                                                         <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?= $rowContent->for_publication_name ?? $rowContent->author_name?></a></li>
+                                                        <?php if($rowContent->projects_name != ''){ ?>
+                                                        <li>PROJECTS: <a class="btn project-btn" href="<?= url('project/' .$rowContent->projects_name)?>"><i class="fa fa-users"></i> <?=$rowContent->projects_name?></a></li>
+                                                        <?php } ?>
                                                         <!-- <li><a href="#"><i class="fa fa-comments-o"></i><span>23</span></a></li>
                                                         <li><i class="fa fa-eye"></i>872</li> -->
                                                     </ul>

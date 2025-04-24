@@ -7279,6 +7279,7 @@ ul.list-posts > li img{
   color: white !important;
   padding-top: 3px !important;
   padding-bottom: 3px !important;
+  font-size: 12px !important;
 }
 .project-btn:hover{
   background-color: #d09c1e;
