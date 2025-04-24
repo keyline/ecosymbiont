@@ -107,7 +107,7 @@
         var base_amount     = parseFloat(valam);
         var country         = $('#country').val();
         $('#base_amount').val(convertNumber(base_amount));
-        if(this.checked){
+        if($('#coverFee').is(':checked')){
             if(country == 220){
                 payable_amount = base_amount + ((base_amount * 1.99) / 100) + 0.49;
             } else {
@@ -126,7 +126,7 @@
         $('#coverFee, #country').on('change', function () {
             var country         = $('#country').val();
             var base_amount     = parseFloat($('#base_amount').val());
-            if(this.checked){
+            if($('#coverFee').is(':checked')){
                 if(country == 220){
                     var payable_amount = base_amount + ((base_amount * 1.99) / 100) + 0.49;
                 } else {
