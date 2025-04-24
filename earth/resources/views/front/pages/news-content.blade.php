@@ -150,7 +150,8 @@ $current_url = $protocol . $host . $uri;
                                         </li>
                                         
                                     </ul>
-                                </div>   
+                                </div> 
+                                <?php if($rowContent->media == 'video'){?>  
                                 <div class="post-content">
                                     <?php //if(session('is_user_login')){?>
                                         <!-- <div><?=$rowContent->long_desc?></div> -->
@@ -202,7 +203,8 @@ $current_url = $protocol . $host . $uri;
                                         <!-- <p class="text-center"><a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="text-primary">Read More</a></p> -->
                                     <?php //}?>
                                     
-                                </div>                                                           
+                                </div>                                    
+                                <?php } ?>                       
                                 <?php if($rowContent->media == 'image'){?>
                                     <div class="post-gallery">
                                         <img src="<?=env('UPLOADS_URL').'newcontent/'.$rowContent->cover_image?>" alt="<?=$rowContent->new_title?>">
@@ -247,7 +249,60 @@ $current_url = $protocol . $host . $uri;
                                         <?php } }?>
                                     </div>
                                 </div> -->
-                                
+                                <?php if($rowContent->media == 'image'){?>
+                                    <div class="post-content">
+                                        <?php //if(session('is_user_login')){?>
+                                            <!-- <div><?=$rowContent->long_desc?></div> -->
+                                        <?php //} else {?>
+                                            <!-- <p>?=substr($rowContent->long_desc,0,100)?> ...</p> -->
+                                            <div><?=$rowContent->long_desc?></div>
+                                            <?php 
+                                                $citation_value = json_decode($rowContent->citation_value);
+                                                $citation_id = json_decode($rowContent->citation_id);
+                                                // Helper::pr($citation_value);
+                                                // Helper::pr($citation_id);
+                                                if (!empty($citation_value))
+                                                { ?>
+                                                <hr>
+                                                <div>
+                                                <?php for ($i = 0; $i < count($citation_value); $i++)
+                                                { ?>                                                                                                    
+                                                    <p id="<?= $citation_id[$i] ?>"><?= $citation_value[$i] ?></p>                                                
+                                            <?php } ?>
+                                            </div>
+                                            <?php } ?>                                                                                
+                                            <div>
+                                                <?php // Split the long description into an array of words
+                                                // $words = explode(' ', $rowContent->long_desc);
+                                            
+                                                // // Get the first 40 words
+                                                // $short_desc = implode(' ', array_slice($words, 0, 50));
+                                            
+                                                // // Display the shortened description
+                                                // echo $short_desc;
+                                                ?>
+                                            </div>
+                                            <?php
+                                            // Check if HTTPS is enabled
+                                            $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+
+                                            // Get the host name
+                                            $host = $_SERVER['HTTP_HOST'];
+
+                                            // Get the URI (Uniform Resource Identifier)
+                                            $uri = $_SERVER['REQUEST_URI'];
+
+                                            // Combine to get the full URL
+                                            $current_url = $protocol . $host . $uri;
+
+                                            // Output the current URL
+                                            // echo $current_url;
+                                            ?>
+                                            <!-- <p class="text-center"><a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="text-primary">Read More</a></p> -->
+                                        <?php //}?>
+                                        
+                                    </div> 
+                                <?php } ?>
                                 <div class="post-tags-box">
                                     <ul class="tags-box">
                                         <li><i class="fa fa-tags"></i><span>Tags:</span></li>
