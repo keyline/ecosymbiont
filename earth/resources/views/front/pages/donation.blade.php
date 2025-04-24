@@ -122,23 +122,25 @@
             $('#payable_amount_text').text(convertNumber(base_amount));
         }
     }
-    $('#coverFee, #country').on('change', function () {
-        var country         = $('#country').val();
-        var base_amount     = parseFloat($('#base_amount').val());
-        if(this.checked){
-            if(country == 220){
-                payable_amount = base_amount + ((base_amount * 1.99) / 100) + 0.49;
+    $(function(){
+        $('#coverFee, #country').on('change', function () {
+            var country         = $('#country').val();
+            var base_amount     = parseFloat($('#base_amount').val());
+            if(this.checked){
+                if(country == 220){
+                    var payable_amount = base_amount + ((base_amount * 1.99) / 100) + 0.49;
+                } else {
+                    var payable_amount = base_amount + ((base_amount * 3.49) / 100) + 0.49;
+                }
+                $('#base_amount').val(convertNumber(base_amount));
+                $('#payable_amount').val(convertNumber(payable_amount));
+                $('#payable_amount_text').text(convertNumber(payable_amount));
             } else {
-                payable_amount = base_amount + ((base_amount * 3.49) / 100) + 0.49;
+                $('#base_amount').val(convertNumber(base_amount));
+                $('#payable_amount').val(convertNumber(base_amount));
+                $('#payable_amount_text').text(convertNumber(base_amount));
             }
-            $('#base_amount').val(convertNumber(base_amount));
-            $('#payable_amount').val(convertNumber(payable_amount));
-            $('#payable_amount_text').text(convertNumber(payable_amount));
-        } else {
-            $('#base_amount').val(convertNumber(base_amount));
-            $('#payable_amount').val(convertNumber(base_amount));
-            $('#payable_amount_text').text(convertNumber(base_amount));
-        }
+        });
     });
     function convertNumber(number){
         let formatted = new Intl.NumberFormat('en-US', { 
