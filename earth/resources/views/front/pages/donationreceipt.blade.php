@@ -228,7 +228,7 @@ $getcountry                 = Country::find($donation->country);
                             <p>We greatly appreciate your gift. It will help to support our initiatives and projects that realize
                                 the interconnected wellbeing of humans and ecologies.</p>
 
-                            <p>Your donation of <strong>USD</strong> <?=number_format($donation->payment_amount,2)?> (One thousand dollars only) is tax-exempt in the
+                            <p>Your donation of <strong>USD</strong> <?=number_format($donation->payment_amount,2)?> (<?=Helper::getIndianCurrency($donation->payment_amount)?> only) is tax-exempt in the
                                 United States of America (USA), as the Sramani Institute, Inc. is a 501(c)(3) tax-exempt nonprofit
                                 organization registered in the USA.</p>
                             <p>Thank you again for your generosity.</p>

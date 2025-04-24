@@ -201,7 +201,7 @@ class Helper{
             } else $str[] = null;
         }
         $Rupees = implode('', array_reverse($str));
-        $paise = ($decimal) ? "and " . ($words[$decimal - ($decimal % 10)] . " " . $words[$decimal % 10]) . ' cents' : '';
+        $paise = ($decimal) ? " and " . ($words[$decimal - ($decimal % 10)] . " " . $words[$decimal % 10]) . ' cents' : '';
         return ($Rupees ? $Rupees.' dollars' . '' : '') . $paise;
     }
     // specific word search check in a string
