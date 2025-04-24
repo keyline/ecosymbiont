@@ -290,6 +290,9 @@ use App\Http\Controllers\PayPalController;
                 Route::get('enquiry/view-details/{id}', 'EnquiryController@details');
                 Route::get('enquiry/delete/{id}', 'EnquiryController@delete');
                 //enquiry
+                /* donation */
+                 Route::get('donation/list', 'DonationController@list');
+                 /* donation */
         });
     });
 /* Admin Panel */

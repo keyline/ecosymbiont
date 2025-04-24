@@ -27,7 +27,7 @@ class DonationController extends Controller
         $this->data = array(
             'title'             => 'Donation',
             'controller'        => 'DonationController',
-            'controller_route'  => 'pronoun',
+            'controller_route'  => 'donation',
             'primary_key'       => 'id',
         );
     }
