@@ -51,20 +51,20 @@ $controllerRoute = $module['controller_route'];
                     <th scope="row"><?=$sl++?></th>
                     <td><?=$row->donation_number?></td>
                     <td>
-                      <?=$row->first_name. ' '. $row->last_name?><br>
-                      <?=$row->email?><br>
-                      <?=$row->address?><br>
-                      <?=$row->country_name?><br>
+                      <i class="fa fa-user"></i>&nbsp;<?=$row->first_name. ' '. $row->last_name?><br>
+                      <i class="fa fa-envelope"></i>&nbsp;<?=$row->email?><br>
+                      <i class="fa fa-map-marker"></i>&nbsp;<?=$row->address?><br>
+                      <i class="fa fa-flag"></i>&nbsp;<?=$row->country_name?><br>
                     </td>
                     <td>
                       <?=$row->payment_mode?><br>
-                      <?=$row->payment_amount?><br>
+                      $<?=number_format($row->payment_amount,2)?><br>
                       <?=$row->txn_id?><br>
                       <span class="badge <?=(($row->payment_status)?'bg-success':'bg-danger')?>"><?=(($row->payment_status)?'PAID':'UNPAID')?></span>
                       <br>
                     </td>                   
                     <td><?=date_format(date_create($row->payment_timestamp), "d M, Y h:i A")?></td>
-                    <td><a href="<?=$row->payment_receipt?>" target="_blank" class="badge bg-info">View Receipt</td>
+                    <td><a href="<?=$row->payment_receipt?>" target="_blank" class="badge bg-info"><i class="fa fa-eye"></i>&nbsp;View Receipt</td>
                   </tr>
                 <?php } } else {?>
                   <tr>
