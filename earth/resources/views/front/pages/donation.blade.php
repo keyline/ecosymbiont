@@ -113,12 +113,12 @@
             } else {
                 payable_amount = base_amount + ((base_amount * 3.49) / 100) + 0.49;
             }
-            $('#base_amount').val(convertNumber(base_amount));
-            $('#payable_amount').val(convertNumber(payable_amount));
+            $('#base_amount').val(base_amount);
+            $('#payable_amount').val(payable_amount);
             $('#payable_amount_text').text(convertNumber(payable_amount));
         } else {
-            $('#base_amount').val(convertNumber(base_amount));
-            $('#payable_amount').val(convertNumber(base_amount));
+            $('#base_amount').val(base_amount);
+            $('#payable_amount').val(base_amount);
             $('#payable_amount_text').text(convertNumber(base_amount));
         }
     }
@@ -132,12 +132,12 @@
                 } else {
                     var payable_amount = base_amount + ((base_amount * 3.49) / 100) + 0.49;
                 }
-                $('#base_amount').val(convertNumber(base_amount));
-                $('#payable_amount').val(convertNumber(payable_amount));
+                $('#base_amount').val(base_amount);
+                $('#payable_amount').val(payable_amount);
                 $('#payable_amount_text').text(convertNumber(payable_amount));
             } else {
-                $('#base_amount').val(convertNumber(base_amount));
-                $('#payable_amount').val(convertNumber(base_amount));
+                $('#base_amount').val(base_amount);
+                $('#payable_amount').val(base_amount);
                 $('#payable_amount_text').text(convertNumber(base_amount));
             }
         });
