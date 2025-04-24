@@ -150,7 +150,10 @@ $current_url = $protocol . $host . $uri;
                                         </li>
                                         
                                     </ul>
-                                </div>                                                              
+                                </div>  
+                                <div class="post-content">
+                                    <?=$rowContent->short_desc?>
+                                </div>                                                            
                                 <?php if($rowContent->media == 'image'){?>
                                     <div class="post-gallery">
                                         <img src="<?=env('UPLOADS_URL').'newcontent/'.$rowContent->cover_image?>" alt="<?=$rowContent->new_title?>">
@@ -172,9 +175,7 @@ $current_url = $protocol . $host . $uri;
                                         <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link-popup"><i class="fa fa-play-circle-o"></i></a>
                                     </div>
                                 <?php } ?>
-                                <div class="post-content">
-                                    <?=$rowContent->short_desc?>
-                                </div>
+                                
                                 <!-- <div class="article-inpost">
                                     <div class="row">
                                         <?php
