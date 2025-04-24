@@ -572,7 +572,7 @@ $current_url = $protocol . $host . $uri;
                                 <!-- carousel box -->
                                 <div class="carousel-box owl-wrapper">
                                     <div class="title-section">
-                                        <?php if($is_series != 'Yes') {?>
+                                        <?php echo $is_series;  if($is_series != 'Yes') {?>
                                             <h1><span>You may also like</span></h1>
                                         <?php } ?>
                                     </div>
