@@ -146,8 +146,8 @@ class PayPalController extends Controller
             /* email functionality */
                 $mailData['getOrder']       = Donation::where('id', '=', $id)->first();                   
                 $generalSetting             = GeneralSetting::find('1');
-                $subject                    = 'Donation Confirmation - Your Donation with '.$generalSetting->site_name.' ['.$donation_number.'] has been successfully placed!';
-                $message                    = $subject;
+                $subject                    = 'Thank you for your donation to the Śramani Institute ['.$donation_number.']';
+                $message                    = 'Thank you very much for your donation to the Śramani Institute. Please find enclosed your donation receipt.<br>Best wishes,<br>the Śramani Institute';
                 $attchment                  = 'public/uploads/donation/' . $filename;
                 $this->sendMail($generalSetting->system_email, $subject, $message, $attchment);
                 $this->sendMail((($data['donation'])?$data['donation']->email:''), $subject, $message, $attchment);

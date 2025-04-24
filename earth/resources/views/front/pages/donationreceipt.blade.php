@@ -193,7 +193,7 @@ $getcountry                 = Country::find($donation->country);
                                 </tr>
                                 <tr>
                                     <td><strong><i>Donation Receipt Date:</i></strong></td>
-                                    <td><?=date_format(date_create($donation->payment_timestamp), "d/m/Y")?></td>
+                                    <td><?=date_format(date_create($donation->payment_timestamp), "d M, Y")?></td>
                                 </tr>
                                 <tr>
                                     <td><strong><i>Donee Name:</i></strong></td>
