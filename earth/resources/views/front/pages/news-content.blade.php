@@ -150,52 +150,7 @@ $current_url = $protocol . $host . $uri;
                                         </li>
                                         
                                     </ul>
-                                </div>  
-                                <div class="post-content">
-                                    <?=$rowContent->short_desc?>
-                                </div>                                                            
-                                <?php if($rowContent->media == 'image'){?>
-                                    <div class="post-gallery">
-                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$rowContent->cover_image?>" alt="<?=$rowContent->new_title?>">
-                                        <span class="image-caption" style="color:skyblue;"><?=$rowContent->cover_image_caption?></span>
-                                    </div>
-                                <?php } else {?>
-                                    <div class="post-gallery video-post">
-                                        <img alt="" src="https://img.youtube.com/vi/<?=$rowContent->videoId?>/hqdefault.jpg">
-                                        <!-- <?php if(session('is_user_login')){?>
-                                            <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                        <?php } else {?>
-                                            <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
-                                        <?php }?> -->
-                                        <!-- ?php if(session('is_user_login')){?>
-                                            <a href="https://www.youtube.com/watch?v=?=$featuredContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                        ?php } else {?>
-                                            <a href="?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
-                                        ?php }?> -->
-                                        <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link-popup"><i class="fa fa-play-circle-o"></i></a>
-                                    </div>
-                                <?php } ?>
-                                
-                                <!-- <div class="article-inpost">
-                                    <div class="row">
-                                        <?php
-                                        $news_id = $rowContent->news_id;
-                                        $contentOtherImages = NewsContentImage::select('image_file')->where('status', '=', 1)->where('news_id', '=', $news_id)->get();
-                                        if($contentOtherImages){ foreach($contentOtherImages as $contentOtherImage){
-                                        ?>
-                                            <div class="col-md-6">
-                                                <div class="image-content">
-                                                    <div class="image-place">
-                                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$contentOtherImage->image_file?>" alt="<?=$rowContent->new_title?>">
-                                                        <div class="hover-image">
-                                                            <a class="zoom" href="<?=env('UPLOADS_URL').'newcontent/'.$contentOtherImage->image_file?>"><i class="fa fa-arrows-alt"></i></a>
-                                                        </div>
-                                                    </div>                                                   
-                                                </div>
-                                            </div>
-                                        <?php } }?>
-                                    </div>
-                                </div> -->
+                                </div>   
                                 <div class="post-content">
                                     <?php //if(session('is_user_login')){?>
                                         <!-- <div><?=$rowContent->long_desc?></div> -->
@@ -247,7 +202,52 @@ $current_url = $protocol . $host . $uri;
                                         <!-- <p class="text-center"><a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="text-primary">Read More</a></p> -->
                                     <?php //}?>
                                     
+                                </div>                                                           
+                                <?php if($rowContent->media == 'image'){?>
+                                    <div class="post-gallery">
+                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$rowContent->cover_image?>" alt="<?=$rowContent->new_title?>">
+                                        <span class="image-caption" style="color:skyblue;"><?=$rowContent->cover_image_caption?></span>
+                                    </div>
+                                <?php } else {?>
+                                    <div class="post-gallery video-post">
+                                        <img alt="" src="https://img.youtube.com/vi/<?=$rowContent->videoId?>/hqdefault.jpg">
+                                        <!-- <?php if(session('is_user_login')){?>
+                                            <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                        <?php } else {?>
+                                            <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
+                                        <?php }?> -->
+                                        <!-- ?php if(session('is_user_login')){?>
+                                            <a href="https://www.youtube.com/watch?v=?=$featuredContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                        ?php } else {?>
+                                            <a href="?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
+                                        ?php }?> -->
+                                        <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link-popup"><i class="fa fa-play-circle-o"></i></a>
+                                    </div>
+                                <?php } ?>
+                                <div class="post-content">
+                                    <?=$rowContent->short_desc?>
                                 </div>
+                                <!-- <div class="article-inpost">
+                                    <div class="row">
+                                        <?php
+                                        $news_id = $rowContent->news_id;
+                                        $contentOtherImages = NewsContentImage::select('image_file')->where('status', '=', 1)->where('news_id', '=', $news_id)->get();
+                                        if($contentOtherImages){ foreach($contentOtherImages as $contentOtherImage){
+                                        ?>
+                                            <div class="col-md-6">
+                                                <div class="image-content">
+                                                    <div class="image-place">
+                                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$contentOtherImage->image_file?>" alt="<?=$rowContent->new_title?>">
+                                                        <div class="hover-image">
+                                                            <a class="zoom" href="<?=env('UPLOADS_URL').'newcontent/'.$contentOtherImage->image_file?>"><i class="fa fa-arrows-alt"></i></a>
+                                                        </div>
+                                                    </div>                                                   
+                                                </div>
+                                            </div>
+                                        <?php } }?>
+                                    </div>
+                                </div> -->
+                                
                                 <div class="post-tags-box">
                                     <ul class="tags-box">
                                         <li><i class="fa fa-tags"></i><span>Tags:</span></li>
