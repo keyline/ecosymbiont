@@ -71,6 +71,7 @@ class DonationController extends Controller
                     'payment_mode'                          => $postData['payment_mode'],
                     'payable_amount'                        => $postData['payable_amount'],
                     'created_at'                            => date('Y-m-d H:i:s'),
+                    'updated_at'                            => date('Y-m-d H:i:s'),
                 ];
                 // Helper::pr($fields);
                 $donation_id = Donation::insertGetId($fields);
