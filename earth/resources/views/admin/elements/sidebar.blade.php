@@ -145,6 +145,15 @@ if($pageSegment == 'article'){
                         </a>
                     </div>
                 <!-- End Home control -->
+                <!-- Donations -->
+                    <div class="nav-item">
+                        <a class="nav-link <?= $pageSegment == 'donation' ? 'active' : '' ?>"
+                            href="<?= url('admin/donation/list') ?>" data-placement="left">
+                            <i class="fas fa-donate nav-icon"></i>
+                            <span class="nav-link-title">Donations</span>
+                        </a>
+                    </div>
+                <!-- End Donations -->
                 <!-- email logs -->
                     <div class="nav-item">
                         <a class="nav-link <?= $pageSegment == 'email-logs' ? 'active' : '' ?>"
