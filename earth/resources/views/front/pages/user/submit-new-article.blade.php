@@ -2,10 +2,7 @@
     .choices__list--multiple .choices__item {
         background-color: #d81636;
         border: 1px solid #d81636;
-    }
-    .required-error {
-    outline: 2px solid red;
-    }
+    }    
     .error { color: red; }
     .heading{
         margin: 0;
@@ -265,7 +262,7 @@ use Illuminate\Support\Facades\DB;
                                     <input type="radio" id="co_authors_2" name="co_authors" value="2" required @checked(old('co_authors', $co_authors ?? '') == '2')>
                                     <label for="2">2</label>
                                 </div>
-                                <div id="co_authors-error" class="error-msg" style="display: none;"></div>
+                                <div id="co_authors-error" class="error" style="display: none;"></div>
                             </div>
                             <div id="co_authors_position" style="display: none;border: 1px solid #000; padding: 10px; border-radius: 7px; margin-bottom: 20px;">
                                 <div class="row mb-3">
@@ -454,7 +451,7 @@ use Illuminate\Support\Facades\DB;
                                     <input type="radio" id="no" name="orginal_work" value="No" required @checked(old('orginal_work', $orginal_work ?? '') == 'No') onclick="showModal()">
                                     <label for="no">No</label>
                                 </div>
-                                <div id="orginal_work-error" class="error-msg" style="display: none;"></div>
+                                <div id="orginal_work-error" class="error" style="display: none;"></div>
                             </div>
                             <div class="row mb-3">
                                 <label for="copyright" class="col-md-2 col-lg-4 col-form-label blue-text">9) Do you own the copyright and licensing rights to all components of your Creative-Work?
@@ -465,7 +462,7 @@ use Illuminate\Support\Facades\DB;
                                     <input type="radio" id="no" name="copyright" value="No" required @checked(old('copyright', $copyright ?? '') == 'No') onclick="showModal()">
                                     <label for="no">No</label>
                                 </div>
-                                <div id="copyright-error" class="error-msg" style="display: none;"></div>
+                                <div id="copyright-error" class="error" style="display: none;"></div>
                             </div>                              
                             <!-- Modal -->
                             <!-- <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
@@ -732,7 +729,7 @@ use Illuminate\Support\Facades\DB;
                                             <input type="radio" id="art_images_5" name="art_images" value="5" @checked(old('art_images', $art_images) == '5')>
                                             <label for="5">5</label>
                                         </div>
-                                        <div id="image-error-msg" class="error" style="display:none; color:red;"></div>
+                                        <div id="image-error" class="error" style="display:none; color:red;"></div>
                                     </div>
 
                                     <!-- Image upload and description divs (hidden initially) -->
