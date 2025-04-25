@@ -1321,7 +1321,7 @@ use Illuminate\Support\Facades\DB;
             submissionTypesBDiv.style.display = 'block';
             $('#art_images_1').attr('required', true);
             $('#art_desc').attr('required', true);
-            $('#submitButton').on('submit', function (e) {
+            $('#saveForm').on('submit', function (e) {
                 alert('Form submitted');
                 let valid = true;
                 if (!$('#art_images_1').val()) {
