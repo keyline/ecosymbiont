@@ -124,15 +124,11 @@ $getcountry                 = Country::find($donation->country);
             width: 50%;
             float: left;
         }
-        .logo-left img {
-            max-height: 180px;
-        }
-
         .text-right {
             text-align: right;
             font-size: 14px;
             color: #000;
-            line-height: 1.5;
+            line-height: 1;
             width: 50%;
             float: right;
         }
@@ -140,7 +136,7 @@ $getcountry                 = Country::find($donation->country);
         .text-right .highlight-line {
             border: none;
             border-top: 1px solid #DAA600;
-            width: 80%;
+            width: 82%;
             margin: 2px 0 0px auto;
         }
 
@@ -148,6 +144,9 @@ $getcountry                 = Country::find($donation->country);
             color: #DAA600;
             font-weight: bold;
             text-decoration: none;
+        }
+        .yellow{
+            color: #DAA600;
         }
         .text-right .green{
             color: #538135;
@@ -167,7 +166,7 @@ $getcountry                 = Country::find($donation->country);
                     <div class="receipt-card">
                         <div class="receipt-header-top">
                             <div class="logo-left">
-                                <img style="width: 136px; height: 136px;" src="data:image/svg+xml;base64,<?php echo base64_encode(file_get_contents(base_path('public/uploads/pdf-logo.jpg'))); ?>">
+                                <img style="width: 130px; height: 130px;" src="data:image/svg+xml;base64,<?php echo base64_encode(file_get_contents(base_path('public/uploads/pdf-logo.jpg'))); ?>">
                             </div>
                             <div class="text-right">
                                 <strong class="green">Realizing the interconnected wellbeing<br>of humans and ecologies</strong><br>
@@ -177,7 +176,7 @@ $getcountry                 = Country::find($donation->country);
                                     <hr class="highlight-line">
                                     <hr class="highlight-line">
                                 </div>
-                                <strong>Sramani Institute, Inc.</strong><br>
+                                <strong class="yellow">Sramani Institute, Inc.</strong><br>
                                 <strong>EIN:</strong> 45-2512093<br>
                                 <span><strong>Tax Status:</strong> 501(c)(3) exempt (USA)</span>
                                 
