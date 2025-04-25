@@ -1334,42 +1334,19 @@ use Illuminate\Support\Facades\DB;
         }
     }
 
-    // Attach the form submit handler OUTSIDE the toggle function
-    $(document).ready(function () {
-        $('#saveForm').on('submit', function (e) {
-            var submissionType = $('input[name="submission_types"]:checked').val();
-            alert(submissionType);
-            let valid = true;
-
-            if (submissionType == '2') {
-                if (!$('#art_images_1').val()) {
-                    $('#image-error-msg').text("Plz select number of art images upload").show().delay(3000).fadeOut();
-                    valid = false;
-                }
-                if (!$('#art_desc').val()) {
-                    $('#art_descError').text("Description is required.").show().delay(3000).fadeOut();
-                    valid = false;
-                }
-                if (!valid) {
-                    e.preventDefault(); // stop submission
-                }
-            }
+        // Add event listeners to co-author radio buttons    
+        document.querySelectorAll('input[name="submission_types"]').forEach(function(element) {
+            element.addEventListener('change', togglesubmissionTypes);
         });
 
-        // Add event listeners to co-author radio buttons    
-        // document.querySelectorAll('input[name="submission_types"]').forEach(function(element) {
-        //     element.addEventListener('change', togglesubmissionTypes);
-        // });
-
         // Run the function on page load to ensure correct state
-        // document.addEventListener('DOMContentLoaded', togglesubmissionTypes);
+        document.addEventListener('DOMContentLoaded', togglesubmissionTypes);
 
-         // Handle radio change
-         $('input[name="submission_types"]').on('change', togglesubmissionTypes);
+        //  // Handle radio change
+        //  $('input[name="submission_types"]').on('change', togglesubmissionTypes);
 
-        // Run once on load
-        togglesubmissionTypes();
-    });
+        // // Run once on load
+        // togglesubmissionTypes();    
 </script>
 <!--End Function to toggle the submission_types position section -->
 <!-- Show only the number of narrative images selected -->
