@@ -1509,75 +1509,7 @@ use Illuminate\Support\Facades\DB;
     }
 </script>
 <!-- End real-time size validation script -->
-<!-- all word count validation -->
-<script>
-    function checkWordLimit(field, limit, errorField) {
-        //  console.log(field);
-        var words = field.value.trim().split(/\s+/).filter(word => word.length > 0).length;
-        if (words > limit) {
-            document.getElementById(errorField).innerText = "Exceeded word limit of " + limit + " words.";
-            // Truncate the input field's value to the last valid word limit
-            let truncatedValue = field.value.trim().split(/\s+/).slice(0, limit).join(' ');
-            field.value = truncatedValue;
-             // ✅ Fade out after 3 seconds
-            $('#' + errorField).show().delay(3000).fadeOut(1000, function () {
-                $(this).text('').show(); // Reset and keep element visible
-            });
-            event.preventDefault();
-            return false;
-        } else {
-            document.getElementById(errorField).innerText = "";
-            return true;
-        }
-    }
 
-    function validateForm() {
-        let allValid = true;
-        // allValid &= checkWordLimit(document.getElementById('explanation'), 100, 'explanationError');
-        // allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');
-        allValid &= checkWordLimit(document.getElementById('creative_Work'), 10, 'creative_WorkError');
-        allValid &= checkWordLimit(document.getElementById('subtitle'), 40, 'subtitleError');
-        allValid &= checkWordLimit(document.getElementById('additional_information'), 100, 'additional_informationError');
-        allValid &= checkWordLimit(document.getElementById('narrative_image_desc_1'), 50, 'narrative_image_desc_1Error');
-        // Loop through the dynamically generated textareas
-        for (let i = 1; i <= 3; i++) {
-            const textarea = document.getElementById(`co_author_short_bio_${i}`);
-            const errorDiv = document.getElementById(`co_author_short_bio_${i}Error`);
-
-            if (textarea) {
-                // Perform word limit validation for each textarea
-                allValid &= checkWordLimit(textarea, 40, `co_author_short_bio_${i}Error`);
-            }
-        } 
-        // Loop through the dynamically generated textareas
-        for (let i = 2; i <= 5; i++) {
-            const textarea = document.getElementById(`narrative_image_desc_${i}`);
-            const errorDiv = document.getElementById(`narrative_image_desc_${i}Error`);
-
-            if (textarea) {
-                // Perform word limit validation for each textarea
-                allValid &= checkWordLimit(textarea, 50, `narrative_image_desc_${i}Error`);
-            }
-        }  
-        // Loop through the dynamically generated textareas
-        for (let i = 1; i <= 5; i++) {
-            const textarea = document.getElementById(`art_image_desc_${i}`);
-            const errorDiv = document.getElementById(`art_image_desc_${i}Error`);
-
-            if (textarea) {
-                // Perform word limit validation for each textarea
-                allValid &= checkWordLimit(textarea, 50, `art_image_desc_${i}Error`);
-            }
-        }                
-        allValid &= checkWordLimit(document.getElementById('art_desc'), 250, 'art_descError');
-        allValid &= checkWordLimit(document.getElementById('art_video_desc'), 250, 'art_video_descError');
-        allValid &= checkWordLimit(document.getElementById('bio_short'), 40, 'bio_shortError');
-        allValid &= checkWordLimit(document.getElementById('bio_long'), 250, 'bio_longError');        
-
-        // document.getElementById('submitButton').disabled = !allValid;
-    }
-</script>
-<!-- End all word count validation -->
 <!-- prefill radio button value -->
 <script>
     // Prevent changes to the radio buttons
