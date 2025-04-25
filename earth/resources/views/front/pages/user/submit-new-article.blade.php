@@ -1658,7 +1658,9 @@ use Illuminate\Support\Facades\DB;
                         // const result = getValidationMessage(tag);
                         const pattern = /^SRN-EaRTh\d{6}-\d+$/;
                         if (!pattern.test(tag)) {
-                            $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx").css('color', 'red');
+                            $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx").css('color', 'red').fadeIn()
+                    .delay(3000)
+                    .fadeOut();
                             return;
                         }                        
                         if (!tagsArray.includes(tag)) {
