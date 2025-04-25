@@ -134,7 +134,7 @@ $getcountry                 = Country::find($donation->country);
         }
         .text-right strong,
         .text-right span {
-            line-height: 1.2;
+            line-height: 1.5;
         }
         .text-right .highlight-line {
             border: none;
