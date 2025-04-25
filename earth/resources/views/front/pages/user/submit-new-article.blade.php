@@ -1321,7 +1321,7 @@ use Illuminate\Support\Facades\DB;
             submissionTypesBDiv.style.display = 'block';
             $('#art_images_1').attr('required', true);
             $('#art_desc').attr('required', true);
-            $('#your-form-id').on('submit', function (e) {
+            $('#submitButton').on('submit', function (e) {
                 let valid = true;
                 if (!$('#art_images_1').val()) {
                     $('#image-error-msg').text("Plz select number of art images upload").show().delay(3000).fadeOut();
