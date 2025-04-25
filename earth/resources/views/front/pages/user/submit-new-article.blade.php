@@ -1318,12 +1318,16 @@ use Illuminate\Support\Facades\DB;
 
         if (submissionTypes == '2') {
             submissionTypesBDiv.style.display = 'block';
+            $('#art_image_file_1').attr('required', true);
+            $('#art_desc').attr('required', true);
         } else {
             submissionTypesBDiv.style.display = 'none';
         }
 
         if (submissionTypes == '3') {
             submissionTypesCDiv.style.display = 'block';
+            $('#art_video_file').attr('required', true);
+            $('#art_video_desc').attr('required', true);
         } else {
             submissionTypesCDiv.style.display = 'none';
         }
@@ -1394,6 +1398,8 @@ use Illuminate\Support\Facades\DB;
             // Show only the number of fields corresponding to the selected value
             for (let i = 1; i <= count; i++) {            
                 document.getElementById('art_card_' + i).style.display = 'block';
+                $('#art_image_file_1').attr('required', true);
+                $('#art_image_desc_1').attr('required', true);
             }
         }
 
