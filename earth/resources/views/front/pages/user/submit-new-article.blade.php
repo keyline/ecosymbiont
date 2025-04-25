@@ -1357,12 +1357,18 @@ use Illuminate\Support\Facades\DB;
         });
 
         // Add event listeners to co-author radio buttons    
-        document.querySelectorAll('input[name="submission_types"]').forEach(function(element) {
-            element.addEventListener('change', togglesubmissionTypes);
-        });
+        // document.querySelectorAll('input[name="submission_types"]').forEach(function(element) {
+        //     element.addEventListener('change', togglesubmissionTypes);
+        // });
 
         // Run the function on page load to ensure correct state
-        document.addEventListener('DOMContentLoaded', togglesubmissionTypes);
+        // document.addEventListener('DOMContentLoaded', togglesubmissionTypes);
+
+         // Handle radio change
+         $('input[name="submission_types"]').on('change', togglesubmissionTypes);
+
+        // Run once on load
+        togglesubmissionTypes();
     });
 </script>
 <!--End Function to toggle the submission_types position section -->
