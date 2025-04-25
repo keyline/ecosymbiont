@@ -140,6 +140,10 @@ $getcountry                 = Country::find($donation->country);
             margin: 0px 0 0px auto;
         }
 
+        .text-right .highlight-line:nth-child(2) {
+            margin: 1px 0 1px auto;
+        }
+
         .text-right a {
             color: #DAA600;
             font-weight: bold;
