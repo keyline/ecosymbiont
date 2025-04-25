@@ -1318,7 +1318,7 @@ use Illuminate\Support\Facades\DB;
 
         if (submissionTypes == '2') {
             submissionTypesBDiv.style.display = 'block';
-            $('#art_image_file_1').attr('required', true);
+            $('#art_images_1').attr('required', true);
             $('#art_desc').attr('required', true);
         } else {
             submissionTypesBDiv.style.display = 'none';
