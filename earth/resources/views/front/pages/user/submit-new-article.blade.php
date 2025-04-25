@@ -1675,6 +1675,10 @@ use Illuminate\Support\Facades\DB;
                     .delay(3000)
                     .fadeOut();
                             return;
+                        } else{
+                            $('#validation-msg').text("✅ Valid: SRN-EaRThMMYYYY-xxx,").css('color', 'green').fadeIn()
+                    .delay(3000)
+                    .fadeOut();
                         }                        
                         if (!tagsArray.includes(tag)) {
                             tagsArray.push(tag);
