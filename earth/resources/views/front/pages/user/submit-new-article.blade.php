@@ -1338,6 +1338,7 @@ use Illuminate\Support\Facades\DB;
     $(document).ready(function () {
         $('#saveForm').on('submit', function (e) {
             var submissionType = $('input[name="submission_types"]:checked').val();
+            alert(submissionType);
             let valid = true;
 
             if (submissionType == '2') {
