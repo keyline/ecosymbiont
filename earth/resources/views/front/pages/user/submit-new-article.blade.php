@@ -726,6 +726,7 @@ use Illuminate\Support\Facades\DB;
                                             <input type="radio" id="art_images_5" name="art_images" value="5" @checked(old('art_images', $art_images) == '5')>
                                             <label for="5">5</label>
                                         </div>
+                                        <div id="image-error-msg" class="error" style="display:none; color:red;"></div>
                                     </div>
 
                                     <!-- Image upload and description divs (hidden initially) -->
@@ -1320,6 +1321,20 @@ use Illuminate\Support\Facades\DB;
             submissionTypesBDiv.style.display = 'block';
             $('#art_images_1').attr('required', true);
             $('#art_desc').attr('required', true);
+            $('#your-form-id').on('submit', function (e) {
+                let valid = true;
+                if (!$('#art_images_1').val()) {
+                    $('#image-error-msg').text("Plz select number of art images upload").show().delay(3000).fadeOut();
+                    valid = false;
+                }
+                if (!$('#art_desc').val()) {
+                    $('#art_descError').text("Description is required.").show().delay(3000).fadeOut();
+                    valid = false;
+                }
+                if (!valid) {
+                    e.preventDefault(); // prevent submission
+                }
+            });
         } else {
             submissionTypesBDiv.style.display = 'none';
         }
