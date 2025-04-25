@@ -140,7 +140,7 @@ $getcountry                 = Country::find($donation->country);
         .text-right .highlight-line {
             border: none;
             border-top: 1px solid #DAA600;
-            width: 100%;
+            width: 80%;
             margin: 2px 0 0px auto;
         }
 
@@ -169,7 +169,7 @@ $getcountry                 = Country::find($donation->country);
                         <div class="receipt-header-top">
                             <div class="logo-left">
                                 <!-- <img src="<?=env('UPLOADS_URL').'pdf-logo.jpg'?>" alt="pdf-logo" class="img-fluid"> -->
-                                <img style="max-height: 300px;" src="data:image/svg+xml;base64,<?php echo base64_encode(file_get_contents(base_path('public/uploads/pdf-logo.jpg'))); ?>">
+                                <img style="max-width: 400px;" src="data:image/svg+xml;base64,<?php echo base64_encode(file_get_contents(base_path('public/uploads/pdf-logo.jpg'))); ?>">
                             </div>
                             <div class="text-right">
                                 <strong><small><i>Realizing the interconnected wellbeing<br>of humans and ecologies</i></small></strong><br>
