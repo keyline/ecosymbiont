@@ -135,13 +135,14 @@ $getcountry                 = Country::find($donation->country);
 
         .text-right .highlight-line {
             border: none;
-            border-top: 1px solid #DAA600;
+            height: 1px;
+            background: #DAA600;
             width: 82%;
-            margin: 0px 0 0px auto;
+            margin: 0px auto;
         }
 
         .text-right .highlight-line:nth-child(2) {
-            margin: 1px 0 1px auto;
+            margin: 2px auto;
         }
 
         .text-right a {
@@ -175,7 +176,7 @@ $getcountry                 = Country::find($donation->country);
                             <div class="text-right">
                                 <strong class="green">Realizing the interconnected wellbeing<br>of humans and ecologies</strong><br>
                                 <a href="https://www.sramani.org" target="_blank">www.sramani.org</a>
-                                <div class="my-3">
+                                <div>
                                     <hr class="highlight-line">
                                     <hr class="highlight-line">
                                     <hr class="highlight-line">
