@@ -133,7 +133,8 @@ $getcountry                 = Country::find($donation->country);
         .signature p {
             font-size: 16px;
             color: #000;
-            line-height: 1.5
+            line-height: 1.5;
+            margin: 0;
         }
 
         .footer {
