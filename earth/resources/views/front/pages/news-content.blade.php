@@ -55,7 +55,7 @@ $current_url = $protocol . $host . $uri;
                                     </ul>
                                     <h5><?=$rowContent->sub_title?></h5>
                                     <?php
-                                    $is_series                  = $rowContent->is_series;
+                                    echo $is_series                  = $rowContent->is_series;
                                     $series_article_no          = $rowContent->series_article_no;
                                     $current_article_no         = $rowContent->current_article_no;
                                     $other_article_part_doi_no      = explode(",", $rowContent->other_article_part_doi_no);
@@ -150,51 +150,8 @@ $current_url = $protocol . $host . $uri;
                                         </li>
                                         
                                     </ul>
-                                </div>                                                              
-                                <?php if($rowContent->media == 'image'){?>
-                                    <div class="post-gallery">
-                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$rowContent->cover_image?>" alt="<?=$rowContent->new_title?>">
-                                        <span class="image-caption" style="color:skyblue;"><?=$rowContent->cover_image_caption?></span>
-                                    </div>
-                                <?php } else {?>
-                                    <div class="post-gallery video-post">
-                                        <img alt="" src="https://img.youtube.com/vi/<?=$rowContent->videoId?>/hqdefault.jpg">
-                                        <!-- <?php if(session('is_user_login')){?>
-                                            <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                        <?php } else {?>
-                                            <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
-                                        <?php }?> -->
-                                        <!-- ?php if(session('is_user_login')){?>
-                                            <a href="https://www.youtube.com/watch?v=?=$featuredContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                        ?php } else {?>
-                                            <a href="?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
-                                        ?php }?> -->
-                                        <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link-popup"><i class="fa fa-play-circle-o"></i></a>
-                                    </div>
-                                <?php } ?>
-                                <div class="post-content">
-                                    <?=$rowContent->short_desc?>
-                                </div>
-                                <!-- <div class="article-inpost">
-                                    <div class="row">
-                                        <?php
-                                        $news_id = $rowContent->news_id;
-                                        $contentOtherImages = NewsContentImage::select('image_file')->where('status', '=', 1)->where('news_id', '=', $news_id)->get();
-                                        if($contentOtherImages){ foreach($contentOtherImages as $contentOtherImage){
-                                        ?>
-                                            <div class="col-md-6">
-                                                <div class="image-content">
-                                                    <div class="image-place">
-                                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$contentOtherImage->image_file?>" alt="<?=$rowContent->new_title?>">
-                                                        <div class="hover-image">
-                                                            <a class="zoom" href="<?=env('UPLOADS_URL').'newcontent/'.$contentOtherImage->image_file?>"><i class="fa fa-arrows-alt"></i></a>
-                                                        </div>
-                                                    </div>                                                   
-                                                </div>
-                                            </div>
-                                        <?php } }?>
-                                    </div>
-                                </div> -->
+                                </div> 
+                                <?php if($rowContent->media == 'video'){?>  
                                 <div class="post-content">
                                     <?php //if(session('is_user_login')){?>
                                         <!-- <div><?=$rowContent->long_desc?></div> -->
@@ -246,7 +203,165 @@ $current_url = $protocol . $host . $uri;
                                         <!-- <p class="text-center"><a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="text-primary">Read More</a></p> -->
                                     <?php //}?>
                                     
+                                </div>                                    
+                                <?php } ?>                       
+                                <?php if($rowContent->media == 'image'){?>
+                                    <div class="post-gallery">
+                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$rowContent->cover_image?>" alt="<?=$rowContent->new_title?>">
+                                        <span class="image-caption" style="color:skyblue;"><?=$rowContent->cover_image_caption?></span>
+                                    </div>
+                                <?php } else {?>
+                                    <div class="post-gallery video-post">
+                                        <!-- <img alt="" src="https://img.youtube.com/vi/<?=$rowContent->videoId?>/hqdefault.jpg"> -->
+                                        <!-- <?php if(session('is_user_login')){?>
+                                            <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                        <?php } else {?>
+                                            <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
+                                        <?php }?> -->
+                                        <!-- ?php if(session('is_user_login')){?>
+                                            <a href="https://www.youtube.com/watch?v=?=$featuredContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                        ?php } else {?>
+                                            <a href="?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
+                                        ?php }?> -->
+                                        <!-- <a href="https://www.youtube.com/watch?v=<?=$rowContent->videoId?>" class="video-link-popup"><i class="fa fa-play-circle-o"></i></a> -->
+                                        <iframe width="560" height="315" 
+                                        src="https://www.youtube.com/embed/<?=$rowContent->videoId?>" 
+                                        title="YouTube video player" 
+                                        frameborder="0" 
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                        allowfullscreen>
+                                        </iframe>
+
+                                    </div>
+                                <?php } ?>
+                                <div class="post-content">
+                                    <?=$rowContent->short_desc?>
                                 </div>
+                                <!-- <div class="article-inpost">
+                                    <div class="row">
+                                        <?php
+                                        $news_id = $rowContent->news_id;
+                                        $contentOtherImages = NewsContentImage::select('image_file')->where('status', '=', 1)->where('news_id', '=', $news_id)->get();
+                                        if($contentOtherImages){ foreach($contentOtherImages as $contentOtherImage){
+                                        ?>
+                                            <div class="col-md-6">
+                                                <div class="image-content">
+                                                    <div class="image-place">
+                                                        <img src="<?=env('UPLOADS_URL').'newcontent/'.$contentOtherImage->image_file?>" alt="<?=$rowContent->new_title?>">
+                                                        <div class="hover-image">
+                                                            <a class="zoom" href="<?=env('UPLOADS_URL').'newcontent/'.$contentOtherImage->image_file?>"><i class="fa fa-arrows-alt"></i></a>
+                                                        </div>
+                                                    </div>                                                   
+                                                </div>
+                                            </div>
+                                        <?php } }?>
+                                    </div>
+                                </div> -->
+                                <?php if($rowContent->media == 'image'){?>
+                                    <div class="post-content">
+                                        <?php //if(session('is_user_login')){?>
+                                            <!-- <div><?=$rowContent->long_desc?></div> -->
+                                        <?php //} else {?>
+                                            <!-- <p>?=substr($rowContent->long_desc,0,100)?> ...</p> -->
+                                            <div><?=$rowContent->long_desc?></div>
+                                            <?php 
+                                                $citation_value = json_decode($rowContent->citation_value);
+                                                $citation_id = json_decode($rowContent->citation_id);
+                                                // Helper::pr($citation_value);
+                                                // Helper::pr($citation_id);
+                                                if (!empty($citation_value))
+                                                { ?>
+                                                <hr>
+                                                <div>
+                                                <?php for ($i = 0; $i < count($citation_value); $i++)
+                                                { ?>                                                                                                    
+                                                    <p id="<?= $citation_id[$i] ?>"><?= $citation_value[$i] ?></p>                                                
+                                            <?php } ?>
+                                            </div>
+                                            <?php } ?>                                                                                
+                                            <div>
+                                                <?php // Split the long description into an array of words
+                                                // $words = explode(' ', $rowContent->long_desc);
+                                            
+                                                // // Get the first 40 words
+                                                // $short_desc = implode(' ', array_slice($words, 0, 50));
+                                            
+                                                // // Display the shortened description
+                                                // echo $short_desc;
+                                                ?>
+                                            </div>
+                                            <?php
+                                            // Check if HTTPS is enabled
+                                            $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+
+                                            // Get the host name
+                                            $host = $_SERVER['HTTP_HOST'];
+
+                                            // Get the URI (Uniform Resource Identifier)
+                                            $uri = $_SERVER['REQUEST_URI'];
+
+                                            // Combine to get the full URL
+                                            $current_url = $protocol . $host . $uri;
+
+                                            // Output the current URL
+                                            // echo $current_url;
+                                            ?>
+                                            <!-- <p class="text-center"><a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="text-primary">Read More</a></p> -->
+                                        <?php //}?>
+                                        
+                                    </div> 
+                                <?php } ?>
+                                <!-- carousel box -->
+                                <div class="carousel-box owl-wrapper">
+                                    <div class="title-section">
+                                        <?php if($is_series == 'Yes'){?>
+                                            <?php  if(count($other_articles_in_this_series) > 1){?>
+                                                <h1><span>Other parts of this series</span></h1>
+                                            <?php }?>
+                                        <?php }  ?>
+                                    </div>
+                                    <div class="owl-carousel" data-num="3">
+                                        <?php if($is_series == 'Yes') {?>
+                                            <?php if($other_articles_in_this_series){ foreach($other_articles_in_this_series as $other_articles_in_this_series_row){?>
+                                                <?php if($current_article_no != $other_articles_in_this_series_row->current_article_no){?>
+                                                    <div class="item news-post video-post video_post_text">
+                                                        <!-- <img src="<?=env('UPLOADS_URL').'newcontent/'.$other_articles_in_this_series_row->cover_image?>" alt="<?=$other_articles_in_this_series_row->new_title?>"> -->
+                                                        <?php if($other_articles_in_this_series_row->media == 'image'){?>
+                                                            <!-- <div class="post-gallery"> -->
+                                                                <img src="<?=env('UPLOADS_URL').'newcontent/'.$other_articles_in_this_series_row->cover_image?>" alt="<?=$other_articles_in_this_series_row->new_title?>">
+                                                            <!-- </div> -->
+                                                        <?php } else {?>
+                                                            <div class="video-post">
+                                                                <img alt="" src="https://img.youtube.com/vi/<?=$other_articles_in_this_series_row->videoId?>/hqdefault.jpg">
+                                                                <!-- <?php if(session('is_user_login')){?>
+                                                                    <a href="https://www.youtube.com/watch?v=<?=$other_articles_in_this_series_row->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                                <?php } else {?>
+                                                                    <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
+                                                                <?php }?> -->
+                                                                <!-- ?php if(session('is_user_login')){?>
+                                                                    <a href="https://www.youtube.com/watch?v=?=$featuredContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                                ?php } else {?>
+                                                                    <a href="?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
+                                                                ?php }?> -->
+                                                                <!-- <a href="https://www.youtube.com/watch?v=<?=$other_articles_in_this_series_row->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a> -->
+                                                                <a href="<?=url('content/' . $other_articles_in_this_series_row->parent_category_slug. '/' . $other_articles_in_this_series_row->category_slug . '/' . $other_articles_in_this_series_row->slug)?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
+                                                            </div>
+                                                        <?php } ?>
+                                                        <div class="hover-box">
+                                                            <a href="<?=url('category/' . $other_articles_in_this_series_row->parent_category_slug. '/' . $other_articles_in_this_series_row->sub_category_slug)?>"><?=$other_articles_in_this_series_row->sub_category_name?></a>
+                                                            <h2 style="font-size: 10px;"><a href="<?=url('content/' . $other_articles_in_this_series_row->parent_category_slug. '/' . $other_articles_in_this_series_row->category_slug . '/' . $other_articles_in_this_series_row->slug)?>"><?=$other_articles_in_this_series_row->new_title?></a></h2>
+                                                            <ul class="post-tags">
+                                                                <li><i class="fa fa-clock-o"></i><?=date_format(date_create($other_articles_in_this_series_row->created_at), "d M Y")?></li>
+                                                                <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$other_articles_in_this_series_row->author_name?></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                <?php }?>
+                                            <?php } }?>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                                <!-- End carousel box -->
                                 <div class="post-tags-box">
                                     <ul class="tags-box">
                                         <li><i class="fa fa-tags"></i><span>Tags:</span></li>
@@ -457,11 +572,7 @@ $current_url = $protocol . $host . $uri;
                                 <!-- carousel box -->
                                 <div class="carousel-box owl-wrapper">
                                     <div class="title-section">
-                                        <?php if($is_series == 'Yes'){?>
-                                            <?php  if(count($other_articles_in_this_series) > 1){?>
-                                                <h1><span>Other parts of this series</span></h1>
-                                            <?php }?>
-                                        <?php } else {?>
+                                        <?php if($is_series != 'Yes') {?>
                                             <h1><span>You may also like</span></h1>
                                         <?php } ?>
                                     </div>
@@ -500,43 +611,6 @@ $current_url = $protocol . $host . $uri;
                                                         </ul>
                                                     </div>
                                                 </div>
-                                            <?php } }?>
-                                        <?php } else {?>
-                                            <?php if($other_articles_in_this_series){ foreach($other_articles_in_this_series as $other_articles_in_this_series_row){?>
-                                                <?php if($current_article_no != $other_articles_in_this_series_row->current_article_no){?>
-                                                    <div class="item news-post video-post video_post_text">
-                                                        <!-- <img src="<?=env('UPLOADS_URL').'newcontent/'.$other_articles_in_this_series_row->cover_image?>" alt="<?=$other_articles_in_this_series_row->new_title?>"> -->
-                                                        <?php if($other_articles_in_this_series_row->media == 'image'){?>
-                                                            <!-- <div class="post-gallery"> -->
-                                                                <img src="<?=env('UPLOADS_URL').'newcontent/'.$other_articles_in_this_series_row->cover_image?>" alt="<?=$other_articles_in_this_series_row->new_title?>">
-                                                            <!-- </div> -->
-                                                        <?php } else {?>
-                                                            <div class="video-post">
-                                                                <img alt="" src="https://img.youtube.com/vi/<?=$other_articles_in_this_series_row->videoId?>/hqdefault.jpg">
-                                                                <!-- <?php if(session('is_user_login')){?>
-                                                                    <a href="https://www.youtube.com/watch?v=<?=$other_articles_in_this_series_row->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                                                <?php } else {?>
-                                                                    <a href="<?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
-                                                                <?php }?> -->
-                                                                <!-- ?php if(session('is_user_login')){?>
-                                                                    <a href="https://www.youtube.com/watch?v=?=$featuredContent->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                                                ?php } else {?>
-                                                                    <a href="?=url('sign-in/' . Helper::encoded($current_url))?>" class="video-link-without-signin"><i class="fa fa-play-circle-o"></i></a>
-                                                                ?php }?> -->
-                                                                <!-- <a href="https://www.youtube.com/watch?v=<?=$other_articles_in_this_series_row->videoId?>" class="video-link"><i class="fa fa-play-circle-o"></i></a> -->
-                                                                <a href="<?=url('content/' . $other_articles_in_this_series_row->parent_category_slug. '/' . $other_articles_in_this_series_row->category_slug . '/' . $other_articles_in_this_series_row->slug)?>" class="video-link"><i class="fa fa-play-circle-o"></i></a>
-                                                            </div>
-                                                        <?php } ?>
-                                                        <div class="hover-box">
-                                                            <a href="<?=url('category/' . $other_articles_in_this_series_row->parent_category_slug. '/' . $other_articles_in_this_series_row->sub_category_slug)?>"><?=$other_articles_in_this_series_row->sub_category_name?></a>
-                                                            <h2 style="font-size: 10px;"><a href="<?=url('content/' . $other_articles_in_this_series_row->parent_category_slug. '/' . $other_articles_in_this_series_row->category_slug . '/' . $other_articles_in_this_series_row->slug)?>"><?=$other_articles_in_this_series_row->new_title?></a></h2>
-                                                            <ul class="post-tags">
-                                                                <li><i class="fa fa-clock-o"></i><?=date_format(date_create($other_articles_in_this_series_row->created_at), "d M Y")?></li>
-                                                                <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$other_articles_in_this_series_row->author_name?></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                <?php }?>
                                             <?php } }?>
                                         <?php } ?>
                                     </div>

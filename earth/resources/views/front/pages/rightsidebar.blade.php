@@ -21,6 +21,7 @@ use App\Helpers\Helper;
                                                                     'news_contents.sub_title', 
                                                                     'news_contents.slug', 
                                                                     'news_contents.author_name', 
+                                                                    'news_contents.for_publication_name',
                                                                     'news_contents.cover_image', 
                                                                     'news_contents.created_at',
                                                                     'news_contents.media',
@@ -77,7 +78,8 @@ use App\Helpers\Helper;
                                             <div class="post-content">
                                                 <h2><a href="<?=url('content/' . $featuredContent->parent_category_slug. '/' . $featuredContent->category_slug . '/' . $featuredContent->slug)?>"><?=$featuredContent->new_title?></a></h2>
                                                 <ul class="post-tags">
-                                                    <li><i class="fa fa-clock-o"></i><?=date_format(date_create($featuredContent->created_at), "d M Y")?></li>
+                                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?= $featuredContent->for_publication_name ?? $featuredContent->author_name?></a></li>
+                                                    <!-- <li><i class="fa fa-clock-o"></i><?=date_format(date_create($featuredContent->created_at), "d M Y")?></li> -->
                                                 </ul>
                                             </div>
                                         </li>
@@ -105,7 +107,8 @@ use App\Helpers\Helper;
                                                                 'news_contents.new_title', 
                                                                 'news_contents.sub_title', 
                                                                 'news_contents.slug', 
-                                                                'news_contents.author_name', 
+                                                                'news_contents.author_name',
+                                                                'news_contents.for_publication_name', 
                                                                 'news_contents.cover_image', 
                                                                 'news_contents.created_at',
                                                                 'news_contents.media',
@@ -162,7 +165,8 @@ use App\Helpers\Helper;
                                                     <div class="post-content">
                                                         <h2><a href="<?=url('content/'. $popularContent->parent_category_slug. '/' . $popularContent->category_slug . '/' .  $popularContent->slug)?>"><?=$popularContent->new_title?></a></h2>
                                                         <ul class="post-tags">
-                                                            <li><i class="fa fa-clock-o"></i><?=date_format(date_create($popularContent->created_at), "d M Y")?></li>
+                                                            <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?= $popularContent->for_publication_name ?? $popularContent->author_name?></a></li>
+                                                            <!-- <li><i class="fa fa-clock-o"></i><?=date_format(date_create($popularContent->created_at), "d M Y")?></li> -->
                                                         </ul>
                                                     </div>
                                                 </li>
@@ -181,6 +185,7 @@ use App\Helpers\Helper;
                                                                             'news_contents.sub_title', 
                                                                             'news_contents.slug', 
                                                                             'news_contents.author_name', 
+                                                                            'news_contents.for_publication_name', 
                                                                             'news_contents.cover_image', 
                                                                             'news_contents.created_at',
                                                                             'news_contents.media',
@@ -237,7 +242,8 @@ use App\Helpers\Helper;
                                                     <div class="post-content">
                                                         <h2><a href="<?=url('content/' . $recentContent->parent_category_slug. '/' . $recentContent->category_slug . '/' .  $recentContent->slug)?>"><?=$recentContent->new_title?></a></h2>
                                                         <ul class="post-tags">
-                                                            <li><i class="fa fa-clock-o"></i><?=date_format(date_create($recentContent->created_at), "d M Y")?></li>
+                                                            <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?= $recentContent->for_publication_name ?? $recentContent->author_name?></a></li>
+                                                            <!-- <li><i class="fa fa-clock-o"></i><?=date_format(date_create($recentContent->created_at), "d M Y")?></li> -->
                                                         </ul>
                                                     </div>
                                                 </li>
