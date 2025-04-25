@@ -2355,7 +2355,7 @@ class FrontController extends Controller
                                     'current_article_no'        => $current_article_no,
                                     'other_article_part_doi_no' => str_replace('SRN', 'DOI', $other_article_part_doi_no),
                                ];
-                                      Helper::pr($fields);
+                                    //   Helper::pr($fields);
 
                                 /* submission email */
                                 $generalSetting             = GeneralSetting::find('1');                            
@@ -2405,10 +2405,10 @@ class FrontController extends Controller
                                }
                            } 
                            else {
-                               return redirect()->back()->withInput()->with(['error_message' => 'Please upload an art video (Type C)']);
+                               return redirect()->back()->withInput()->with(['error_message' => 'Please upload a landscape video (Type C)']);
                            }
                            if($postData['art_video_desc'] == ''){
-                            return redirect()->back()->withInput()->with(['error_message' => 'If you are submitting an art video (Type C), please ensure that you have also included a descriptive narrative (100-250 words).']);
+                            return redirect()->back()->withInput()->with(['error_message' => 'If you are submitting a art video (Type C), please ensure that you have also included a descriptive narrative (100-250 words).']);
                         }
                            /* art_video file */   
                            if ($this->validate($request, $rules)) {  
