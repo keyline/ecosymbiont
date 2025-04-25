@@ -1371,8 +1371,8 @@ use Illuminate\Support\Facades\DB;
                 // Show only the number of fields corresponding to the selected value
                 for (let i = 1; i <= count; i++) {            
                     document.getElementById('art_card_' + i).style.display = 'block';
-                    $('#art_image_file_1').attr('required', true);
-                    $('#art_image_desc_1').attr('required', true);
+                    $('#art_image_file_' +i).attr('required', true);
+                    $('#art_image_desc_' +i).attr('required', true);
                 }
             }
 
