@@ -1519,6 +1519,10 @@ use Illuminate\Support\Facades\DB;
             // Truncate the input field's value to the last valid word limit
             let truncatedValue = field.value.trim().split(/\s+/).slice(0, limit).join(' ');
             field.value = truncatedValue;
+             // ✅ Fade out after 3 seconds
+            $('#' + errorField).show().delay(3000).fadeOut(1000, function () {
+                $(this).text('').show(); // Reset and keep element visible
+            });
             event.preventDefault();
             return false;
         } else {
