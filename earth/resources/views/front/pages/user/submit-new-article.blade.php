@@ -1549,7 +1549,7 @@ use Illuminate\Support\Facades\DB;
         // Prevent changes to the radio buttons
         document.querySelectorAll('.readonly-input').forEach(input => {
             input.addEventListener('click', function(e) {
-                e.preventDefault(); // Block any change
+                // e.preventDefault(); // Block any change
             });
         });
     </script>
