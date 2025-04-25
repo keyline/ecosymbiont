@@ -1123,7 +1123,7 @@ use Illuminate\Support\Facades\DB;
     });
     </script> -->
     <script>
-       $('#submitBtn').on('click', function (e) {
+       $('#submitButton').on('click', function (e) {
         let isValid = true;
 
         $('input[type="radio"][required]').each(function () {
