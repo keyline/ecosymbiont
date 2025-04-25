@@ -1336,7 +1336,7 @@ use Illuminate\Support\Facades\DB;
 
     // Attach the form submit handler OUTSIDE the toggle function
     $(document).ready(function () {
-        $('#submitButton').on('submit', function (e) {
+        $('#saveForm').on('submit', function (e) {
             var submissionType = $('input[name="submission_types"]:checked').val();
             let valid = true;
 
