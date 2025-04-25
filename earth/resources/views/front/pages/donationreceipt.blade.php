@@ -89,6 +89,7 @@ $getcountry                 = Country::find($donation->country);
             margin-bottom: 15px;
             color: #000;
             font-size: 16px;
+            line-height: 1.5
         }
 
         .signature {
@@ -96,9 +97,10 @@ $getcountry                 = Country::find($donation->country);
         }
 
         .signature p {
-            margin: 8px 0;
-            font-size: 15px;
+            /* margin: 8px 0; */
+            font-size: 16px;
             color: #000;
+            line-height: 1.5
         }
 
         .footer {
@@ -142,7 +144,7 @@ $getcountry                 = Country::find($donation->country);
             height: 1px;
             background: #DAA600;
             width: 100%;
-            max-width: 255px;
+            max-width: 256px;
             margin: 0px 0 0 auto;
         }
         .text-right .highlight-line:nth-child(1) {
