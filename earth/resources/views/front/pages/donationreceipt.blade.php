@@ -160,7 +160,7 @@ $getcountry                 = Country::find($donation->country);
                     <div class="receipt-card">
                         <div class="receipt-header-top">
                             <div class="logo-left">
-                                <img style="width: 133px; height: 135px; margin-top: 5px" src="data:image/svg+xml;base64,<?php echo base64_encode(file_get_contents(base_path('public/uploads/pdf-logo.jpg'))); ?>">
+                                <img style="width: 133px; height: 130px; margin-top: 5px" src="data:image/svg+xml;base64,<?php echo base64_encode(file_get_contents(base_path('public/uploads/pdf-logo.jpg'))); ?>">
                             </div>
                             <div class="text-right">
                                 <strong class="green">Realizing the interconnected wellbeing<br>of humans and ecologies</strong><br>
