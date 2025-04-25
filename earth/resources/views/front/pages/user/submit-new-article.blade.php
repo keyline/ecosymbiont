@@ -1574,7 +1574,7 @@ use Illuminate\Support\Facades\DB;
         allValid &= checkWordLimit(document.getElementById('bio_short'), 40, 'bio_shortError');
         allValid &= checkWordLimit(document.getElementById('bio_long'), 250, 'bio_longError');        
 
-        document.getElementById('submitButton').disabled = !allValid;
+        // document.getElementById('submitButton').disabled = !allValid;
     }
 </script>
 <!-- End all word count validation -->
