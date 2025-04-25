@@ -142,7 +142,7 @@ $getcountry                 = Country::find($donation->country);
             height: 1px;
             background: #DAA600;
             width: 100%;
-            max-width: 250px;
+            max-width: 255px;
             margin: 0px 0 0 auto;
         }
         .text-right .highlight-line:nth-child(1) {
