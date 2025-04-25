@@ -1105,7 +1105,7 @@ use Illuminate\Support\Facades\DB;
       <button id="closePopup">Close</button>
     </div>     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
+    <!-- <script>
     $('#saveForm').on('submit', function (e) {
     // Check built-in HTML5 validity
     if (!this.checkValidity()) {
@@ -1115,7 +1115,7 @@ use Illuminate\Support\Facades\DB;
         return;
     }
     });
-    </script>
+    </script> -->
     <script>
         $(document).ready(function () {
             // Initially hide the popup
@@ -1336,8 +1336,8 @@ use Illuminate\Support\Facades\DB;
                 // Show only the number of fields selected
                 for (let i = 1; i <= count; i++) {            
                     document.getElementById('card_' + i).style.display = 'block';
-                    $('#image_file_1').attr('required', true);
-                    $('#narrative_image_desc_1').attr('required', true);
+                    $('#image_file_' +i).attr('required', true);
+                    $('#narrative_image_desc_' +i).attr('required', true);
                 }
             }
 
@@ -1617,7 +1617,7 @@ use Illuminate\Support\Facades\DB;
                             // const result = getValidationMessage(tag);
                             const pattern = /^SRN-EaRTh\d{6}-\d+$/;
                             if (!pattern.test(tag)) {
-                                $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx").css('color', 'red').fadeIn()
+                                $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx,").css('color', 'red').fadeIn()
                         .delay(3000)
                         .fadeOut();
                                 return;
