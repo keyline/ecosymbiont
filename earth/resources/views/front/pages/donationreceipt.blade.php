@@ -167,10 +167,10 @@ $getcountry                 = Country::find($donation->country);
                     <div class="receipt-card">
                         <div class="receipt-header-top">
                             <div class="logo-left">
-                                <img style="width: 100%; height: 100%;" src="data:image/svg+xml;base64,<?php echo base64_encode(file_get_contents(base_path('public/uploads/pdf-logo.jpg'))); ?>">
+                                <img style="width: 100%; max-width: 400px; height: 100%;" src="data:image/svg+xml;base64,<?php echo base64_encode(file_get_contents(base_path('public/uploads/pdf-logo.jpg'))); ?>">
                             </div>
                             <div class="text-right">
-                                <strong class="green"><i>Realizing the interconnected wellbeing<br>of humans and ecologies</i></strong><br>
+                                <strong class="green">Realizing the interconnected wellbeing<br>of humans and ecologies</strong><br>
                                 <a href="https://www.sramani.org" target="_blank">www.sramani.org</a>
                                 <div class="my-3">
                                     <hr class="highlight-line">
