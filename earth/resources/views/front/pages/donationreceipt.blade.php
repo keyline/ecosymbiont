@@ -133,8 +133,10 @@ $getcountry                 = Country::find($donation->country);
             float: right;
         }
         .text-right strong,
-        .text-right span {
+        .text-right span,
+        .text-right a {
             line-height: 1.5;
+            display: block;
         }
         .text-right .highlight-line {
             border: none;
@@ -144,7 +146,7 @@ $getcountry                 = Country::find($donation->country);
             margin: 0px 0 0 auto;
         }
         .text-right .highlight-line:nth-child(1) {
-            margin-top: 3px;
+            margin-top: 4px;
         }
         .text-right .highlight-line:nth-child(2) {
             margin: 2px 0 2px auto;
@@ -186,7 +188,7 @@ $getcountry                 = Country::find($donation->country);
                                     <hr class="highlight-line">
                                     <hr class="highlight-line">
                                 </div>
-                                <strong class="yellow">Sramani Institute, Inc.</strong><br>
+                                <strong class="yellow"><i>Sramani Institute, Inc.</i></strong><br>
                                 <strong>EIN:</strong> 45-2512093<br>
                                 <span><strong>Tax Status:</strong> 501(c)(3) exempt (USA)</span>
                             </div>
