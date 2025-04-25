@@ -45,24 +45,6 @@ $getcountry                 = Country::find($donation->country);
             padding: 40px 50px;
         }
 
-        .header {
-            text-align: center;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-            margin-bottom: 30px;
-        }
-
-        .header h2 {
-            margin: 0;
-            font-size: 26px;
-            color: #2b2b2b;
-        }
-
-        .header p {
-            font-weight: bold;
-            font-size: 16px;
-            color: #444;
-        }
         .receipt-details strong{
             width: 230px;
             display: inline-block;
@@ -78,43 +60,6 @@ $getcountry                 = Country::find($donation->country);
         .receipt-details table tr td{
             vertical-align: top;
             padding-bottom: 5px;
-        }
-        .greeting {
-            margin-top: 30px;
-            font-size: 15px;
-            line-height: 1.6;
-        }
-
-        .greeting p {
-            margin-bottom: 15px;
-            color: #000;
-            font-size: 16px;
-            line-height: 1.5
-        }
-
-        .signature {
-            margin-top: 40px;
-        }
-
-        .signature p {
-            /* margin: 8px 0; */
-            font-size: 16px;
-            color: #000;
-            line-height: 1.5
-        }
-
-        .footer {
-            font-size: 15px;
-            color: #000;
-            margin-top: 30px;
-            border-top: 1px solid #eee;
-            padding-top: 10px;
-            text-align: center;
-        }
-
-        a {
-            color: #007BFF;
-            text-decoration: none;
         }
         .receipt-header-top {
             margin-bottom: 30px;
@@ -167,6 +112,37 @@ $getcountry                 = Country::find($donation->country);
         }
         .my-3{
             margin: 8px 0 2px;
+        }
+        .greeting {
+            margin-top: 30px;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .greeting p {
+            margin-bottom: 15px;
+            color: #000;
+            font-size: 16px;
+            line-height: 1.5
+        }
+
+        .signature {
+            margin-top: 40px;
+        }
+
+        .signature p {
+            font-size: 16px;
+            color: #000;
+            line-height: 1.5
+        }
+
+        .footer {
+            font-size: 15px;
+            color: #000;
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+            text-align: center;
         }
     </style>
 </head>
