@@ -3,6 +3,9 @@
         background-color: #d81636;
         border: 1px solid #d81636;
     }
+    .required-error {
+    outline: 2px solid red;
+    }
     .error { color: red; }
     .heading{
         margin: 0;
@@ -1116,6 +1119,14 @@ use Illuminate\Support\Facades\DB;
     }
     });
     </script> -->
+    <script>
+        $('input[type="radio"][required]').each(function () {
+    const name = $(this).attr('name');
+    if ($('input[name="' + name + '"]:checked').length === 0) {
+        $('input[name="' + name + '"]').addClass('required-error');
+    }
+});
+    </script>
     <script>
         $(document).ready(function () {
             // Initially hide the popup
