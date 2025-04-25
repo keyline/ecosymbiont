@@ -110,6 +110,9 @@ $getcountry                 = Country::find($donation->country);
         .text-right .green{
             color: #538135;
         }
+        .receipt-details table tr td{
+            font-size: 16px;
+        }
         .my-3{
             margin: 8px 0 2px;
         }
