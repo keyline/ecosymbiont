@@ -132,7 +132,10 @@ $getcountry                 = Country::find($donation->country);
             width: 50%;
             float: right;
         }
-
+        .text-right strong,
+        .text-right span {
+            line-height: 1.2;
+        }
         .text-right .highlight-line {
             border: none;
             height: 1px;
@@ -184,8 +187,6 @@ $getcountry                 = Country::find($donation->country);
                                 <strong class="yellow">Sramani Institute, Inc.</strong><br>
                                 <strong>EIN:</strong> 45-2512093<br>
                                 <span><strong>Tax Status:</strong> 501(c)(3) exempt (USA)</span>
-                                
-                                
                             </div>
                         </div>
 
