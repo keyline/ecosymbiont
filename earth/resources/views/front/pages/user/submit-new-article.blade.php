@@ -987,7 +987,7 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
-                                    <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label blue-text">31c) List (in order is submission) the SRNs of each previously submitted creative-work in series (enter a comma after each SRN)
+                                    <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label blue-text">32c) List (in order is submission) the SRNs of each previously submitted creative-work in series (enter a comma after each SRN)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" class="form-control" id="input-tags">
@@ -1621,33 +1621,33 @@ use Illuminate\Support\Facades\DB;
             tagsArray = beforeData.split(',');
         }
 
-        function getValidationMessage(input) {
-            if (/^SRN$/.test(input)) {
-                return { valid: true, message: "✅ Valid: SRN" };
-            } else if (/^SRN-$/.test(input)) {
-                return { valid: true, message: "✅ Valid: SRN-" };
-            }else if (/^SRN-EaRTh$/.test(input)) {
-                return { valid: true, message: "✅ Valid: SRN-EaRTh" };
-            } else if (/^SRN-EaRTh(0[1-9]|1[0-2])\d{4}$/.test(input)) {
-                return { valid: true, message: "✅ Valid: SRN-EaRThMMYYYY" };
-            } else if (/^SRN-EaRTh(0[1-9]|1[0-2])\d{4}-$/.test(input)) {
-                return { valid: true, message: "✅ Valid: SRN-EaRThMMYYYY-" };
-            } else if (/^SRN-EaRTh(0[1-9]|1[0-2])\d{4}-\d+$/.test(input)) {
-                return { valid: true, message: "✅ Valid: Full format" };
-            } else {
-                return { valid: false, message: "❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx" };
-            }
-        }
+        // function getValidationMessage(input) {
+        //     if (/^SRN$/.test(input)) {
+        //         return { valid: true, message: "✅ Valid: SRN" };
+        //     } else if (/^SRN-$/.test(input)) {
+        //         return { valid: true, message: "✅ Valid: SRN-" };
+        //     }else if (/^SRN-EaRTh$/.test(input)) {
+        //         return { valid: true, message: "✅ Valid: SRN-EaRTh" };
+        //     } else if (/^SRN-EaRTh(0[1-9]|1[0-2])\d{4}$/.test(input)) {
+        //         return { valid: true, message: "✅ Valid: SRN-EaRThMMYYYY" };
+        //     } else if (/^SRN-EaRTh(0[1-9]|1[0-2])\d{4}-$/.test(input)) {
+        //         return { valid: true, message: "✅ Valid: SRN-EaRThMMYYYY-" };
+        //     } else if (/^SRN-EaRTh(0[1-9]|1[0-2])\d{4}-\d+$/.test(input)) {
+        //         return { valid: true, message: "✅ Valid: Full format" };
+        //     } else {
+        //         return { valid: false, message: "❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx" };
+        //     }
+        // }
 
         $('#input-tags').on('input', function () {
             var input = $(this).val().trim();
 
-            if (input.length > 0 && !input.includes(',')) {
-                var result = getValidationMessage(input);
-                $('#validation-msg').text(result.message).css('color', result.valid ? 'green' : 'red');
-            } else {
-                $('#validation-msg').text('');
-            }
+            // if (input.length > 0 && !input.includes(',')) {
+            //     var result = getValidationMessage(input);
+            //     $('#validation-msg').text(result.message).css('color', result.valid ? 'green' : 'red');
+            // } else {
+            //     $('#validation-msg').text('');
+            // }
 
             // When comma is typed
             if (input.includes(',')) {
@@ -1655,7 +1655,7 @@ use Illuminate\Support\Facades\DB;
                 tags.forEach(function (tag) {
                     tag = tag.trim();
                     if (tag.length > 0) {
-                        const result = getValidationMessage(tag);
+                        // const result = getValidationMessage(tag);
                         const pattern = /^SRN-EaRTh\d{6}-\d+$/;
                         if (!pattern.test(tag)) {
                             $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx").css('color', 'red');
