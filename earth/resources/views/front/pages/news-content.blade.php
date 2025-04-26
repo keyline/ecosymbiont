@@ -522,13 +522,13 @@ $current_url = $protocol . $host . $uri;
                                                                     <span><?=$getCoCountry->name?></span>
                                                                 </span>
                                                             </div>
-                                                            <div class="autor-title">
+                                                            <!-- <div class="autor-title">
                                                                 <span>
                                                                     <img src="<?=env('UPLOADS_URL').'icon/organizational.png'?>" alt="organizational" title="Organizational Affiliation" data-toogle="tooltip">                                                                    
-                                                                    <!-- <span><?= $organization_name = (isset($organization[$i]) > 0) ? trim($organization[$i]) : ''; ?></span> -->
+                                                                     <span><?= $organization_name = (isset($organization[$i]) > 0) ? trim($organization[$i]) : ''; ?></span> 
                                                                     <span><?= $co_author_organizations[$i - 1] ?></span>
                                                                 </span>
-                                                            </div>
+                                                            </div> -->
                                                             <?php if($co_author_organizations[$i - 1] != ''){?>
                                                             <div class="autor-title">
                                                                 <span>
