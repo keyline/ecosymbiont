@@ -55,7 +55,7 @@ $current_url = $protocol . $host . $uri;
                                     </ul>
                                     <h5><?=$rowContent->sub_title?></h5>
                                     <?php
-                                    echo $is_series                  = $rowContent->is_series;
+                                    $is_series                  = $rowContent->is_series;
                                     $series_article_no          = $rowContent->series_article_no;
                                     $current_article_no         = $rowContent->current_article_no;
                                     $other_article_part_doi_no      = explode(",", $rowContent->other_article_part_doi_no);
