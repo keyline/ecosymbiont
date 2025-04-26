@@ -419,7 +419,7 @@ $current_url = $protocol . $host . $uri;
                                                             <span><?=(($getCountry)?$getCountry->name:'')?></span>
                                                         </span>
                                                     </div>
-                                                    <?php if($rowContent->community_name != ''){?>
+                                                    <?php if($rowContent->organization_name != ''){?>
                                                     <div class="autor-title">
                                                         <span>
                                                             <img src="<?=env('UPLOADS_URL').'icon/organizational.png'?>" alt="organizational" title="Organizational Affiliation" data-toogle="tooltip">                                                                    
@@ -529,6 +529,14 @@ $current_url = $protocol . $host . $uri;
                                                                     <span><?= $co_author_organizations[$i - 1] ?></span>
                                                                 </span>
                                                             </div>
+                                                            <?php if($co_author_organizations[$i - 1] != ''){?>
+                                                            <div class="autor-title">
+                                                                <span>
+                                                                    <img src="<?=env('UPLOADS_URL').'icon/organizational.png'?>" alt="organizational" title="Organizational Affiliation" data-toogle="tooltip">                                                                    
+                                                                    <span><?= $organization_name = (isset($co_author_organizations[$i - 1]) > 0) ? trim($co_author_organizations[$i - 1]) : ''; ?></span>
+                                                                </span>
+                                                            </div>
+                                                            <?php }?>                                                            
                                                         </div>
                                                     </div>
                                                 </div>
