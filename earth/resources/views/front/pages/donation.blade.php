@@ -59,6 +59,9 @@
                                     <div class="donation-amounts d-flex flex-wrap mb-3">
                                         <ul class="d-flex flex-wrap list-unstyled mt-2">
                                             <li>
+                                                <button type="button" class="btn btn-outline-secondary" onclick="calculatePayableAmount(25);">$25</button>
+                                            </li>
+                                            <li>
                                                 <button type="button" class="btn btn-outline-secondary" onclick="calculatePayableAmount(50);">$50</button>
                                             </li>
                                             <li>
@@ -68,7 +71,7 @@
                                                 <button type="button" class="btn btn-outline-secondary" onclick="calculatePayableAmount(250);">$250</button>
                                             </li>
                                             <li>
-                                                <button type="button" class="btn btn-outline-secondary" onclick="calculatePayableAmount(1000);">$1000</button>
+                                                <button type="button" class="btn btn-outline-secondary" onclick="calculatePayableAmount(500);">$500</button>
                                             </li>
                                         </ul>
                                         <input type="text" class="form-control mt-2 w-50" placeholder="Other amount: minimum donation is the equivalent of USD 10" id="custom_amount" oninput="calculatePayableAmount(this.value);">
