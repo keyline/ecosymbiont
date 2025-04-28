@@ -1639,7 +1639,7 @@ use Illuminate\Support\Facades\DB;
                         tag = tag.trim();
                         if (tag.length > 0) {
                             // const result = getValidationMessage(tag);
-                            const pattern = /^SRN-EaRTh\d{6}-\d+$/;
+                            const pattern = /^SRN-EaRTh\d{6}-\d{3}$/;
                             if (!pattern.test(tag)) {
                                 $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx,").css('color', 'red').fadeIn()
                         .delay(3000)
