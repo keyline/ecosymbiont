@@ -1451,7 +1451,7 @@ use Illuminate\Support\Facades\DB;
     <!-- Add real-time size validation script -->
     <script>
         document.getElementById('narrative_file').addEventListener('change', function() {
-            validateFileSize(this, 'narrative_file_error');
+            // validateFileSize(this, 'narrative_file_error');
             validateFileType(this, 'narrative_file_error');
         });
         
@@ -1554,7 +1554,13 @@ use Illuminate\Support\Facades\DB;
                     input.value = ''; // Clear the input if validation fails
                 } else {
                     document.getElementById(errorElementId).innerText = ""; // Clear error if valid file
-                }               
+                }
+
+                // Validate file size (Max 1 MB)
+                if (file.size > 1 * 1024 * 1024) {
+                    document.getElementById(errorElementId).innerText = "❌ File size exceeds 1 MB.";
+                    input.value = ''; // Clear the input if validation fails
+                }
             } else {
                 document.getElementById(errorElementId).innerText = ""; // Clear error if no file selected
             }
