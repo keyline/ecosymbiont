@@ -89,9 +89,9 @@
                                         </div> -->
                                     <input type="hidden" name="base_amount" id="base_amount" value="0" required>
                                     <input type="hidden" name="payable_amount" id="payable_amount" value="0" required>
-                                    <h2>Payable Amount: USD <span id="payable_amount_text">0</span></h2>
+                                    <h2>Payable amount: USD <span id="payable_amount_text">0</span></h2>
                                     <div class="mt-4">
-                                        <button type="submit" class="btn mt-4 donation_btn">Preview For Donation</button>
+                                        <button type="submit" class="btn mt-4 donation_btn">Preview for donation</button>
                                     </div>
                                 </div>
                             </form>
