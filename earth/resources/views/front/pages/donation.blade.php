@@ -71,7 +71,7 @@
                                                 <button type="button" class="btn btn-outline-secondary" onclick="calculatePayableAmount(1000);">$1000</button>
                                             </li>
                                         </ul>
-                                        <input type="text" class="form-control mt-2 w-50" placeholder="Other" id="custom_amount" oninput="calculatePayableAmount(this.value);">
+                                        <input type="text" class="form-control mt-2 w-50" placeholder="Other amount: minimum donation is the equivalent of USD 10" id="custom_amount" oninput="calculatePayableAmount(this.value);">
                                     </div>
                                     <div class="form-check mb-4">
                                         <input class="form-check-input" type="checkbox" id="coverFee">
@@ -86,7 +86,7 @@
                                         </div> -->
                                     <input type="hidden" name="base_amount" id="base_amount" value="0" required>
                                     <input type="hidden" name="payable_amount" id="payable_amount" value="0" required>
-                                    <h2>Payable Amount : <span id="payable_amount_text">0</span></h2>
+                                    <h2>Payable Amount : USD <span id="payable_amount_text">0</span></h2>
                                     <div class="mt-4">
                                         <button type="submit" class="btn mt-4 donation_btn">Preview For Donation</button>
                                     </div>
