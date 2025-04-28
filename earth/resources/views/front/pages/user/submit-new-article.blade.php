@@ -1185,7 +1185,7 @@ use Illuminate\Support\Facades\DB;
         });
     });
 </script> -->
-<script>
+<!-- <script>
     $(document).ready(function () {
         $('#submitButton').on('click', function (e) {
             let isValid = true;
@@ -1258,6 +1258,68 @@ use Illuminate\Support\Facades\DB;
             const id = $(this).attr('id');
             $('#' + id + '-error').hide();
         });
+    });
+</script> -->
+<script>
+    $(document).ready(function () {
+
+        $('#submitButton').on('click', function (e) {
+            let isValid = true;
+
+            // Loop through all required fields
+            $('[required]').each(function () {
+                const field = $(this);
+                const type = field.attr('type');
+                const tag = field.prop('tagName').toLowerCase();
+                const name = field.attr('name') || field.attr('id');
+
+                let hasError = false;
+
+                // Validation for radio buttons
+                if (type === 'radio') {
+                    if ($('input[name="' + name + '"]:checked').length === 0) {
+                        hasError = true;
+                    }
+                }
+                // Validation for text input or textarea
+                else if (type === 'text' || tag === 'textarea') {
+                    if ($.trim(field.val()) === '') {
+                        hasError = true;
+                    }
+                }
+
+                if (hasError) {
+                    $('#' + name + '-error').text('This field is required.').show();
+                    field.focus();
+                    isValid = false;
+                    return false; // stop looping on first error
+                } else {
+                    $('#' + name + '-error').hide();
+                }
+            });
+
+            if (!isValid) {
+                e.preventDefault();
+            }
+        });
+
+        // Hide error when user interacts
+        $(document).on('change input', '[required]', function () {
+            const field = $(this);
+            const type = field.attr('type');
+            const name = field.attr('name') || field.attr('id');
+
+            if (type === 'radio') {
+                if ($('input[name="' + name + '"]:checked').length > 0) {
+                    $('#' + name + '-error').hide();
+                }
+            } else {
+                if ($.trim(field.val()) !== '') {
+                    $('#' + name + '-error').hide();
+                }
+            }
+        });
+
     });
 </script>
 
