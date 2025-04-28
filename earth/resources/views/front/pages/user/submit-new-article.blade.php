@@ -1116,7 +1116,7 @@ use Illuminate\Support\Facades\DB;
       <button id="closePopup">Close</button>
     </div>     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
+    <!-- <script>
     $(document).ready(function () {
         // When clicking the submit button
         $('#submitButton').on('click', function (e) {
@@ -1184,7 +1184,83 @@ use Illuminate\Support\Facades\DB;
             $('#' + id + '-error').hide();
         });
     });
+</script> -->
+<script>
+    $(document).ready(function () {
+        $('#submitButton').on('click', function (e) {
+            let isValid = true;
+
+            // Validate radio buttons
+            const radios = $('input[type="radio"][required]');
+            for (let i = 0; i < radios.length; i++) {
+                const name = $(radios[i]).attr('name');
+                if ($('input[name="' + name + '"]:checked').length === 0) {
+                    $('#' + name + '-error').text('This field is required.').show();
+                    $('input[name="' + name + '"]').first().focus();
+                    isValid = false;
+                    break; // stop checking further
+                } else {
+                    $('#' + name + '-error').hide();
+                }
+            }
+
+            // Validate text inputs only if radios are valid
+            if (isValid) {
+                const textInputs = $('input[type="text"][required]');
+                for (let i = 0; i < textInputs.length; i++) {
+                    const id = $(textInputs[i]).attr('id');
+                    if ($.trim($(textInputs[i]).val()) === '') {
+                        $('#' + id + '-error').text('This field is required.').show();
+                        $(textInputs[i]).focus();
+                        isValid = false;
+                        break;
+                    } else {
+                        $('#' + id + '-error').hide();
+                    }
+                }
+            }
+
+            // Validate textareas only if previous are valid
+            if (isValid) {
+                const textareas = $('textarea[required]');
+                for (let i = 0; i < textareas.length; i++) {
+                    const id = $(textareas[i]).attr('id');
+                    if ($.trim($(textareas[i]).val()) === '') {
+                        $('#' + id + '-error').text('This field is required.').show();
+                        $(textareas[i]).focus();
+                        isValid = false;
+                        break;
+                    } else {
+                        $('#' + id + '-error').hide();
+                    }
+                }
+            }
+
+            if (!isValid) {
+                e.preventDefault();
+            }
+        });
+
+        // When selecting any radio button, remove the error message
+        $('input[type="radio"][required]').on('change', function () {
+            const name = $(this).attr('name');
+            $('#' + name + '-error').hide();
+        });
+
+        // When typing in text input, remove the error message
+        $('input[type="text"][required]').on('input', function () {
+            const id = $(this).attr('id');
+            $('#' + id + '-error').hide();
+        });
+
+        // When typing in textarea, remove the error message
+        $('textarea[required]').on('input', function () {
+            const id = $(this).attr('id');
+            $('#' + id + '-error').hide();
+        });
+    });
 </script>
+
 
 
     <script>
