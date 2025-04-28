@@ -131,7 +131,7 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
 <!-- Modal -->
 <!-- Modal -->
 <div class="modal fade" id="popupModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
