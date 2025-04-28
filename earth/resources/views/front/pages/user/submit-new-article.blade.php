@@ -262,7 +262,7 @@ use Illuminate\Support\Facades\DB;
                                     <input type="radio" id="co_authors_2" name="co_authors" value="2" required @checked(old('co_authors', $co_authors ?? '') == '2')>
                                     <label for="2">2</label>
                                 </div>
-                                <!-- <div id="co_authors-error" class="error" style="display: none;"></div> -->
+                                <div id="co_authors-error" class="error" style="display: none;"></div>
                             </div>
                             <div id="co_authors_position" style="display: none;border: 1px solid #000; padding: 10px; border-radius: 7px; margin-bottom: 20px;">
                                 <div class="row mb-3">
@@ -451,7 +451,7 @@ use Illuminate\Support\Facades\DB;
                                     <input type="radio" id="no" name="orginal_work" value="No" required @checked(old('orginal_work', $orginal_work ?? '') == 'No') onclick="showModal()">
                                     <label for="no">No</label>
                                 </div>
-                                <!-- <div id="orginal_work-error" class="error" style="display: none;"></div> -->
+                                <div id="orginal_work-error" class="error" style="display: none;"></div>
                             </div>
                             <div class="row mb-3">
                                 <label for="copyright" class="col-md-2 col-lg-4 col-form-label blue-text">9) Do you own the copyright and licensing rights to all components of your Creative-Work?
@@ -462,7 +462,7 @@ use Illuminate\Support\Facades\DB;
                                     <input type="radio" id="no" name="copyright" value="No" required @checked(old('copyright', $copyright ?? '') == 'No') onclick="showModal()">
                                     <label for="no">No</label>
                                 </div>
-                                <!-- <div id="copyright-error" class="error" style="display: none;"></div> -->
+                                <div id="copyright-error" class="error" style="display: none;"></div>
                             </div>                              
                             <!-- Modal -->
                             <!-- <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
@@ -1119,7 +1119,7 @@ use Illuminate\Support\Facades\DB;
     }
     });
     </script> -->
-    <!-- <script>
+    <script>
        $('#submitButton').on('click', function (e) {
         let isValid = true;
 
@@ -1139,7 +1139,7 @@ use Illuminate\Support\Facades\DB;
             e.preventDefault();
         }
     });
-    </script> -->
+    </script>
     <script>
         $(document).ready(function () {
             // Initially hide the popup
