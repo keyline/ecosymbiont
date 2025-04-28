@@ -617,7 +617,7 @@ use Illuminate\Support\Facades\DB;
                                             <input type="file" name="narrative_file" class="form-control" id="narrative_file">
                                             <!-- <span>{{ session('narrative_file') }}</span> -->
                                             <small class="text-info">* Only DOC files are allowed (Max 1 MB)</small><br>
-                                            <span id="narrative_file_error" class="error"></span>
+                                            <span id="narrative_file-error" class="error"></span>
                                             <?php if($narrative_file != ''){?>
                                             <a href="<?= env('UPLOADS_URL') . 'narrative/' . $narrative_file ?>" target="_blank"
                                                 class="badge bg-primary">View PDF</a>
@@ -1597,7 +1597,7 @@ use Illuminate\Support\Facades\DB;
     <!-- Add real-time size validation script -->
     <script>
         document.getElementById('narrative_file').addEventListener('change', function() {
-            validateFileSize(this, 'narrative_file_error');
+            validateFileSize(this, 'narrative_file-error');
         });
         
         document.getElementById('image_file_1').addEventListener('change', function() {
