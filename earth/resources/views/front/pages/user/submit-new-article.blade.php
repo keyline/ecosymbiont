@@ -1452,6 +1452,7 @@ use Illuminate\Support\Facades\DB;
     <script>
         document.getElementById('narrative_file').addEventListener('change', function() {
             validateFileSize(this, 'narrative_file_error');
+            validateFileType(this, 'narrative_file_error');
         });
         
         document.getElementById('image_file_1').addEventListener('change', function() {
@@ -1537,6 +1538,27 @@ use Illuminate\Support\Facades\DB;
                 document.getElementById(errorElementId).innerText = '';
             }
         }
+
+        function validateFileType(input, errorElementId) {
+            var file = input.files[0];
+            var allowedExtensions = ['.doc']; // Allowed extension
+
+            // Check if a file is selected
+            if (file) {
+                var fileName = file.name.toLowerCase();
+                var fileExtension = fileName.slice(fileName.lastIndexOf('.'));
+
+                // Validate file extension
+                if (!allowedExtensions.includes(fileExtension)) {
+                    document.getElementById(errorElementId).innerText = "❌ Only DOC files are allowed (Max 1 MB).";
+                    input.value = ''; // Clear the input if validation fails
+                } else {
+                    document.getElementById(errorElementId).innerText = ""; // Clear error if valid file
+                }               
+            } else {
+                document.getElementById(errorElementId).innerText = ""; // Clear error if no file selected
+            }
+        }                                       
     </script>
     <!-- End real-time size validation script -->
     <!-- all word count validation -->
