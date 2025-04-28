@@ -125,6 +125,15 @@ function isActive($page) {
     <link rel="stylesheet" href="css/audioplayer.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/style_meeting.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZF0FJHP0P2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ZF0FJHP0P2');
+</script>
 </head>
 <body>
 <header>
