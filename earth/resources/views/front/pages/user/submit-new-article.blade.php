@@ -677,6 +677,7 @@ use Illuminate\Support\Facades\DB;
                                                             <?php if(isset($image_files[0]) && $image_files[0] != ''){?>
                                                             <img src="<?=env('UPLOADS_URL').'narrative/'.$image_files[0]?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
                                                             <?php }?>
+                                                            <div id="image_file_1-error" class="error"></div>
                                                         </div>
                                                     </div>                                    
                                                 </div>
@@ -686,6 +687,7 @@ use Illuminate\Support\Facades\DB;
                                                         <div class="col-md-10 col-lg-8">
                                                             <textarea class="form-control" id="narrative_image_desc_1" name="narrative_image_desc_1" rows="4" cols="50"><?php if(isset($narrative_image_desc[0]) && $narrative_image_desc[0] != '') { echo $narrative_image_desc[0]; } ?></textarea>
                                                             <div id="narrative_image_desc_1Error" class="error"></div>
+                                                            <div id="narrative_image_desc_1-error" class="error"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -706,6 +708,7 @@ use Illuminate\Support\Facades\DB;
                                                             <?php if(isset($image_files[$i-1]) && $image_files[$i-1] != ''){?>
                                                             <img src="<?=env('UPLOADS_URL').'narrative/'.$image_files[$i-1]?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
                                                             <?php }?>
+                                                            <div id="image_file_{{ $i }}-error" class="error"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -715,6 +718,7 @@ use Illuminate\Support\Facades\DB;
                                                         <div class="col-md-10 col-lg-8">
                                                             <textarea class="form-control" id="narrative_image_desc_{{ $i }}" name="narrative_image_desc_{{ $i }}" rows="4" cols="50"><?php if(isset($narrative_image_desc[$i-1]) && $narrative_image_desc[$i-1] != '') { echo $narrative_image_desc[$i-1]; }?></textarea>
                                                             <div id="narrative_image_desc_{{ $i }}Error" class="error"></div>
+                                                            <div id="narrative_image_desc_{{ $i }}-error" class="error"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -739,6 +743,7 @@ use Illuminate\Support\Facades\DB;
                                             <label for="5">5</label>
                                         </div>
                                         <div id="image-error-msg" class="error" style="display:none; color:red;"></div>
+                                        <div id="art_images-error" class="error"></div>
                                     </div>
 
                                     <!-- Image upload and description divs (hidden initially) -->
