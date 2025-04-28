@@ -1654,6 +1654,7 @@ use Illuminate\Support\Facades\DB;
             if (file.size > maxSize) {
                 // alert('File size exceeds 1MB. Please upload a smaller file.');
                 document.getElementById(errorElementId).innerText = "File size exceeds 1MB. Please upload a smaller file.";
+                document.getElementById(errorElementId).style.display = 'block';
                 input.value = ''; // Clear the input if validation fails
             } else{
                 document.getElementById(errorElementId).innerText = "";
@@ -1672,6 +1673,7 @@ use Illuminate\Support\Facades\DB;
                 // Validate file type
                 if (!allowedExtensions.includes(fileExtension)) {
                     document.getElementById(errorElementId).innerText = "Invalid file type. Only MP4, AVI, MOV, MKV, WEBM are allowed.";
+                    document.getElementById(errorElementId).style.display = 'block';
                     input.value = ''; // Clear the input
                     return;
                 }
@@ -1679,6 +1681,7 @@ use Illuminate\Support\Facades\DB;
                 // Validate file size
                 if (file.size > fileSizeLimit) {
                     document.getElementById(errorElementId).innerText = "File size exceeds 1 GB. Please upload a smaller file.";
+                    document.getElementById(errorElementId).style.display = 'block';
                     input.value = ''; // Clear the input
                     return;
                 }
