@@ -55,7 +55,7 @@ $current_url = $protocol . $host . $uri;
                                     </ul>
                                     <h5><?=$rowContent->sub_title?></h5>
                                     <?php
-                                    echo $is_series                  = $rowContent->is_series;
+                                    $is_series                  = $rowContent->is_series;
                                     $series_article_no          = $rowContent->series_article_no;
                                     $current_article_no         = $rowContent->current_article_no;
                                     $other_article_part_doi_no      = explode(",", $rowContent->other_article_part_doi_no);
@@ -419,7 +419,7 @@ $current_url = $protocol . $host . $uri;
                                                             <span><?=(($getCountry)?$getCountry->name:'')?></span>
                                                         </span>
                                                     </div>
-                                                    <?php if($rowContent->community_name != ''){?>
+                                                    <?php if($rowContent->organization_name != ''){?>
                                                     <div class="autor-title">
                                                         <span>
                                                             <img src="<?=env('UPLOADS_URL').'icon/organizational.png'?>" alt="organizational" title="Organizational Affiliation" data-toogle="tooltip">                                                                    
@@ -522,13 +522,21 @@ $current_url = $protocol . $host . $uri;
                                                                     <span><?=$getCoCountry->name?></span>
                                                                 </span>
                                                             </div>
+                                                            <!-- <div class="autor-title">
+                                                                <span>
+                                                                    <img src="<?=env('UPLOADS_URL').'icon/organizational.png'?>" alt="organizational" title="Organizational Affiliation" data-toogle="tooltip">                                                                    
+                                                                     <span><?= $organization_name = (isset($organization[$i]) > 0) ? trim($organization[$i]) : ''; ?></span> 
+                                                                    <span><?= $co_author_organizations[$i - 1] ?></span>
+                                                                </span>
+                                                            </div> -->
+                                                            <?php if($co_author_organizations[$i - 1] != ''){?>
                                                             <div class="autor-title">
                                                                 <span>
                                                                     <img src="<?=env('UPLOADS_URL').'icon/organizational.png'?>" alt="organizational" title="Organizational Affiliation" data-toogle="tooltip">                                                                    
-                                                                    <!-- <span><?= $organization_name = (isset($organization[$i]) > 0) ? trim($organization[$i]) : ''; ?></span> -->
-                                                                    <span><?= $co_author_organizations[$i - 1] ?></span>
+                                                                    <span><?= $organization_name = (isset($co_author_organizations[$i - 1]) > 0) ? trim($co_author_organizations[$i - 1]) : ''; ?></span>
                                                                 </span>
                                                             </div>
+                                                            <?php }?>                                                            
                                                         </div>
                                                     </div>
                                                 </div>

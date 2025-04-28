@@ -63,7 +63,7 @@ $current_url = $protocol . $host . $uri;
                                         </div>
                                         <div class="col-sm-7">
                                             <div class="post-content">
-                                                <a href="<?=url('category/' . $rowContent->parent_category_name. '/' . $rowContent->sub_category_slug)?>"><?=$rowContent->sub_category_name?></a>
+                                                <a href="<?=url('category/' . $rowContent->parent_category_name. '/' . $rowContent->sub_category_slug)?>"><?=$rowContent->parent_category_name.' | '.$rowContent->sub_category_name?></a>
                                                 <h2><a href="<?=url('content/' . $rowContent->parent_category_slug. '/' . $rowContent->sub_category_slug . '/' . $rowContent->slug)?>"><?=$rowContent->new_title?></a></h2>
                                                 <ul class="post-tags">
                                                     <li><i class="fa fa-clock-o"></i><?=date_format(date_create($rowContent->created_at), "d M Y")?></li>
@@ -152,7 +152,7 @@ $current_url = $protocol . $host . $uri;
                                     </div>
                                     <div class="col-sm-7">
                                         <div class="post-content">
-                                            <a href="<?=url('category/')?>${content.parent_category_name}/${content.sub_category_slug}">${content.sub_category_name}</a>
+                                            <a href="<?=url('category/')?>${content.parent_category_name}/${content.sub_category_slug}">${content.parent_category_name} | ${content.sub_category_name}</a>
                                             <h2>
                                                 <a href="<?=url('content/')?>/${content.parent_category_slug}/${content.sub_category_slug}/${content.slug}">
                                                     ${content.new_title}
