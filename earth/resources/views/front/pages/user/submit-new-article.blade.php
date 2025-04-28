@@ -562,6 +562,7 @@ use Illuminate\Support\Facades\DB;
                                             @endforeach
                                         @endforeach
                                     @endif 
+                                    <div id="section_ert-error" class="error" style="display: none;"></div>
                                                                         
                                     </div>
                                 </div>     
@@ -570,7 +571,7 @@ use Illuminate\Support\Facades\DB;
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="creative_Work" name="creative_Work" rows="4" cols="50"  required>{{ old('creative_Work', $creative_Work ?? '') }}</textarea>
-                                        <div id="creative_WorkError" class="error"></div>
+                                        <div id="creative_Work-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -581,6 +582,7 @@ use Illuminate\Support\Facades\DB;
                                         <label for="fiction_yes">Yes</label>
                                         <input type="radio" id="fiction_no" name="creative_Work_fiction" value="No" required @checked(old('creative_Work_fiction', $creative_Work_fiction) == 'No')>
                                         <label for="fiction_no">No</label>
+                                        <div id="creative_Work_fiction-error" class="error" style="display: none;"></div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -588,7 +590,7 @@ use Illuminate\Support\Facades\DB;
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <textarea name="subtitle" class="form-control" id="subtitle" rows="3" required>{{ old('subtitle', $subtitle ?? '') }}</textarea>
-                                        <div id="subtitleError" class="error"></div>
+                                        <div id="subtitle-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -604,7 +606,8 @@ use Illuminate\Support\Facades\DB;
                                             <input type="radio" id="submission_types_<?=$data->id?>" name="submission_types" value="<?php echo $data->id ?>" required @checked(old('submission_types') == $data->id)>
                                             <label for="submission_types"><?php echo $data->name?></label><br>
                                         @endfor
-                                    @endif                            
+                                    @endif 
+                                    <div id="submission_types-error" class="error" style="display: none;"></div>                           
                                     </div>
                                 </div>                                
                                 <div id="submission_types_a" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px; margin-bottom: 20px">
@@ -931,6 +934,7 @@ use Illuminate\Support\Facades\DB;
                                         <label for="yes">Yes</label>
                                         <input type="radio" id="projects_no" name="projects" value="No" required @checked(old('projects', $projects) == 'No')>
                                         <label for="no">No</label>
+                                        <div id="projects-error" class="error" style="display: none;"></div>
                                     </div>
                                 </div>
                                 <!-- ?php dd($projects); ?> -->
@@ -977,6 +981,7 @@ use Illuminate\Support\Facades\DB;
                                         <label for="series_yes">Yes</label>
                                         <input type="radio" id="series_no" name="is_series" value="No" <?=(($is_series == 'No')?'checked':'')?> required>
                                         <label for="series_no">No</label>
+                                        <div id="is_series-error" class="error" style="display: none;"></div>
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
@@ -1117,6 +1122,7 @@ use Illuminate\Support\Facades\DB;
         $('#submitButton').on('click', function (e) {
             let isValid = true;
 
+            // Validate radio buttons
             $('input[type="radio"][required]').each(function () {
                 const name = $(this).attr('name');
                 if ($('input[name="' + name + '"]:checked').length === 0) {
@@ -1126,6 +1132,32 @@ use Illuminate\Support\Facades\DB;
                     return false; // break loop on first error
                 } else {
                     $('#' + name + '-error').hide();
+                }
+            });
+
+            // Validate text inputs
+            $('input[type="text"][required]').each(function () {
+                const id = $(this).attr('id');
+                if ($.trim($(this).val()) === '') {
+                    $('#' + id + '-error').text('This field is required.').show();
+                    $(this).focus();
+                    isValid = false;
+                    return false;
+                } else {
+                    $('#' + id + '-error').hide();
+                }
+            });
+
+            // Validate textareas
+            $('textarea[required]').each(function () {
+                const id = $(this).attr('id');
+                if ($.trim($(this).val()) === '') {
+                    $('#' + id + '-error').text('This field is required.').show();
+                    $(this).focus();
+                    isValid = false;
+                    return false;
+                } else {
+                    $('#' + id + '-error').hide();
                 }
             });
 
@@ -1139,8 +1171,21 @@ use Illuminate\Support\Facades\DB;
             const name = $(this).attr('name');
             $('#' + name + '-error').hide();
         });
+
+        // When typing in text input, remove the error message
+        $('input[type="text"][required]').on('input', function () {
+            const id = $(this).attr('id');
+            $('#' + id + '-error').hide();
+        });
+
+        // When typing in textarea, remove the error message
+        $('textarea[required]').on('input', function () {
+            const id = $(this).attr('id');
+            $('#' + id + '-error').hide();
+        });
     });
 </script>
+
 
     <script>
         $(document).ready(function () {
@@ -1527,8 +1572,8 @@ use Illuminate\Support\Facades\DB;
             let allValid = true;
             // allValid &= checkWordLimit(document.getElementById('explanation'), 100, 'explanationError');
             // allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');
-            allValid &= checkWordLimit(document.getElementById('creative_Work'), 10, 'creative_WorkError');
-            allValid &= checkWordLimit(document.getElementById('subtitle'), 40, 'subtitleError');
+            allValid &= checkWordLimit(document.getElementById('creative_Work'), 10, 'creative_Work-error');
+            allValid &= checkWordLimit(document.getElementById('subtitle'), 40, 'subtitle-error');
             allValid &= checkWordLimit(document.getElementById('additional_information'), 100, 'additional_informationError');
             allValid &= checkWordLimit(document.getElementById('narrative_image_desc_1'), 50, 'narrative_image_desc_1Error');
             // Loop through the dynamically generated textareas
