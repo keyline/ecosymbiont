@@ -33,7 +33,7 @@
                                 <div class="donation-box">
                                     <!-- 2. Donor Info -->
                                     <div class="titleto-inner mb-3">
-                                        <h2>1. Donor Information</h2>
+                                        <h2>1. Donor Information *</h2>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
@@ -51,7 +51,7 @@
                                             <option value="<?=$country->id?>"><?=$country->name?></option>
                                         <?php } }?>
                                     </select>
-                                    <small class="text-danger">*You will be able to download the donation receipt for tax exemption in the United State; therefore, please provide accurate residential address.</small>
+                                    <small class="text-danger">*You will be able to download the donation receipt for tax exemption in the United States; therefore, please provide an accurate residential address.</small>
                                     <!-- 1. Donation Amount -->
                                     <div class="titleto-inner mb-3">
                                         <h2>2. Donation Amount</h2>
@@ -89,7 +89,7 @@
                                         </div> -->
                                     <input type="hidden" name="base_amount" id="base_amount" value="0" required>
                                     <input type="hidden" name="payable_amount" id="payable_amount" value="0" required>
-                                    <h2>Payable Amount : USD <span id="payable_amount_text">0</span></h2>
+                                    <h2>Payable Amount: USD <span id="payable_amount_text">0</span></h2>
                                     <div class="mt-4">
                                         <button type="submit" class="btn mt-4 donation_btn">Preview For Donation</button>
                                     </div>
