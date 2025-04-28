@@ -1700,19 +1700,22 @@ use Illuminate\Support\Facades\DB;
         function checkWordLimit(field, limit, errorField) {
             //  console.log(field);
             var words = field.value.trim().split(/\s+/).filter(word => word.length > 0).length;
+            const errorElement = document.getElementById(errorField);
             if (words > limit) {
-                document.getElementById(errorField).innerText = "Exceeded word limit of " + limit + " words.";
+                errorElement.innerText = "Exceeded word limit of " + limit + " words.";
+                errorElement.style.display = 'block'; 
                 // Truncate the input field's value to the last valid word limit
                 let truncatedValue = field.value.trim().split(/\s+/).slice(0, limit).join(' ');
                 field.value = truncatedValue;
                 // ✅ Fade out after 3 seconds
-                $('#' + errorField).show().delay(3000).fadeOut(1000, function () {
-                    $(this).text('').show(); // Reset and keep element visible
+                $('#' + errorField).delay(3000).fadeOut(1000, function () {
+                    $(this).text('').css('display', 'block'); // Reset and keep element visible
                 });
-                event.preventDefault();
+                // event.preventDefault();
                 return false;
             } else {
-                document.getElementById(errorField).innerText = "";
+                errorElement.innerText = "";
+                errorElement.style.display = 'none'; // ✅ Hide the error
                 return true;
             }
         }
