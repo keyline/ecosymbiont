@@ -1274,7 +1274,7 @@ use Illuminate\Support\Facades\DB;
             let isValid = true;
 
             // Only validate fields inside #saveForm
-            $('#saveForm [required]').each(function () {
+            $('#saveForm [required], #saveForm select[required]').each(function () {
                 const field = $(this);
                 const type = field.attr('type');
                 const tag = field.prop('tagName').toLowerCase();
@@ -1311,7 +1311,7 @@ use Illuminate\Support\Facades\DB;
         });
 
         // Hide error inside #saveForm when user interacts
-        $('#saveForm').on('change input', '[required]', function () {
+        $('#saveForm').on('change input', '[required], select[required]', function () {
             const field = $(this);
             const type = field.attr('type');
             const name = field.attr('name') || field.attr('id');
