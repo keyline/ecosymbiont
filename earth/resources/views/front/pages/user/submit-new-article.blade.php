@@ -618,7 +618,7 @@ use Illuminate\Support\Facades\DB;
                                             <!-- <span>{{ session('narrative_file') }}</span> -->
                                             <small class="text-info">* Only DOC files are allowed (Max 1 MB)</small><br>
                                             <span id="narrative_file-error" class="error"></span>                                            
-                                            <div id="narrative_file_error" class="error"></div>
+                                            <!-- <div id="narrative_file_error" class="error"></div> -->
                                             <?php if($narrative_file != ''){?>
                                             <a href="<?= env('UPLOADS_URL') . 'narrative/' . $narrative_file ?>" target="_blank"
                                                 class="badge bg-primary">View PDF</a>
@@ -1283,7 +1283,7 @@ use Illuminate\Support\Facades\DB;
                     }
                 }
                 // Validation for text input or textarea
-                else if (type === 'text' || tag === 'textarea') {
+                else if (type === 'text' || type === 'file' || tag === 'textarea') {
                     if ($.trim(field.val()) === '') {
                         hasError = true;
                     }
