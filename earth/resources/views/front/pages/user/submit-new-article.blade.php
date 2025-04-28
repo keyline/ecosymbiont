@@ -1671,7 +1671,7 @@ use Illuminate\Support\Facades\DB;
 
             $('#input-tags').on('input', function () {
                 var input = $(this).val().trim();
-
+                $('#validation-msg').text('').hide();  // 🛠️ Hide old error immediately
                 // When comma is typed
                 if (input.includes(',')) {
                     var tags = input.split(',');
@@ -1680,7 +1680,7 @@ use Illuminate\Support\Facades\DB;
                         if (tag.length > 0) {
                             // const result = getValidationMessage(tag);
                             const pattern = /^SRN-EaRTh\d{6}-\d{3}$/;
-                            $('#validation-msg').text('').hide();  // 🛠️ Hide old error immediately
+                            
                             if (!pattern.test(tag)) {
                                 $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx,").css('color', 'red').fadeIn()
                         .delay(3000)
