@@ -571,6 +571,7 @@ use Illuminate\Support\Facades\DB;
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="creative_Work" name="creative_Work" rows="4" cols="50"  required>{{ old('creative_Work', $creative_Work ?? '') }}</textarea>
+                                        <div id="creative_WorkError" class="error"></div>
                                         <div id="creative_Work-error" class="error"></div>
                                     </div>
                                 </div>
@@ -590,7 +591,7 @@ use Illuminate\Support\Facades\DB;
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <textarea name="subtitle" class="form-control" id="subtitle" rows="3" required>{{ old('subtitle', $subtitle ?? '') }}</textarea>
-                                        <div id="subtitle-error" class="error"></div>
+                                        <div id="subtitleError" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -606,8 +607,7 @@ use Illuminate\Support\Facades\DB;
                                             <input type="radio" id="submission_types_<?=$data->id?>" name="submission_types" value="<?php echo $data->id ?>" required @checked(old('submission_types') == $data->id)>
                                             <label for="submission_types"><?php echo $data->name?></label><br>
                                         @endfor
-                                    @endif 
-                                    <div id="submission_types-error" class="error" style="display: none;"></div>                           
+                                    @endif                            
                                     </div>
                                 </div>                                
                                 <div id="submission_types_a" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px; margin-bottom: 20px">
@@ -617,8 +617,7 @@ use Illuminate\Support\Facades\DB;
                                             <input type="file" name="narrative_file" class="form-control" id="narrative_file">
                                             <!-- <span>{{ session('narrative_file') }}</span> -->
                                             <small class="text-info">* Only DOC files are allowed (Max 1 MB)</small><br>
-                                            <span id="narrative_file-error" class="error"></span>                                            
-                                            <!-- <div id="narrative_file_error" class="error"></div> -->
+                                            <span id="narrative_file_error" class="text-danger"></span>
                                             <?php if($narrative_file != ''){?>
                                             <a href="<?= env('UPLOADS_URL') . 'narrative/' . $narrative_file ?>" target="_blank"
                                                 class="badge bg-primary">View PDF</a>
@@ -627,7 +626,7 @@ use Illuminate\Support\Facades\DB;
                                             <img src="<?=env('UPLOADS_URL').'narrative/'.$narrative_file?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
                                             <?php } else {?>
                                             <img src="<?=env('NO_IMAGE')?>" alt="narrative_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
-                                            <?php }?> -->                                            
+                                            <?php }?> -->
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -657,8 +656,7 @@ use Illuminate\Support\Facades\DB;
                                             <input type="radio" id="narrative_images_5" name="narrative_images" value="5" 
                                             @checked((old('narrative_images') == '5') || 
                                             (isset($narrative_images) && $narrative_images == '5'))>                                        
-                                            <label for="5">5</label>     
-                                            <div id="narrative_images-error" class="error"></div>                                   
+                                            <label for="5">5</label>                                        
                                         </div>
                                     </div>
                                     <!-- Image upload and description divs (hidden initially) -->
@@ -672,7 +670,7 @@ use Illuminate\Support\Facades\DB;
                                                         <div class="col-md-10 col-lg-8">
                                                             <input type="file" name="image_file_1" class="form-control" id="image_file_1" value="{{ old('image_file_1', $image_file_0 ?? '') }}">
                                                             <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed (max. 1 MB)</small>
-                                                            <span id="image_file_1-error" class="text-danger"></span>                                                        
+                                                            <span id="image_file_1_error" class="text-danger"></span>                                                        
                                                             <?php if(isset($image_files[0]) && $image_files[0] != ''){?>
                                                             <img src="<?=env('UPLOADS_URL').'narrative/'.$image_files[0]?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
                                                             <?php }?>
@@ -684,7 +682,7 @@ use Illuminate\Support\Facades\DB;
                                                         <label for="narrative_image_desc_1" class="col-md-2 col-lg-4 col-form-label">17A3b1) TYPE A: short caption for image 1 (max. 50 words)</label>
                                                         <div class="col-md-10 col-lg-8">
                                                             <textarea class="form-control" id="narrative_image_desc_1" name="narrative_image_desc_1" rows="4" cols="50"><?php if(isset($narrative_image_desc[0]) && $narrative_image_desc[0] != '') { echo $narrative_image_desc[0]; } ?></textarea>
-                                                            <div id="narrative_image_desc_1-error" class="error"></div>
+                                                            <div id="narrative_image_desc_1Error" class="error"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -701,7 +699,7 @@ use Illuminate\Support\Facades\DB;
                                                         <div class="col-md-10 col-lg-8">
                                                             <input type="file" name="image_file_{{ $i }}" class="form-control" id="image_file_{{ $i }}" value="{{ old('image_file_'.$i, $image_files[$i-1] ?? '') }}">
                                                             <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed (max. 1 MB)</small>
-                                                            <span id="image_file_{{ $i }}-error" class="error"></span>                                                        
+                                                            <span id="image_file_{{ $i }}_error" class="text-danger"></span>                                                        
                                                             <?php if(isset($image_files[$i-1]) && $image_files[$i-1] != ''){?>
                                                             <img src="<?=env('UPLOADS_URL').'narrative/'.$image_files[$i-1]?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
                                                             <?php }?>
@@ -713,7 +711,7 @@ use Illuminate\Support\Facades\DB;
                                                         <label for="narrative_image_desc_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17A3b{{$i}}) TYPE A: short caption for image {{ $i }} (max. 50 words)</label>
                                                         <div class="col-md-10 col-lg-8">
                                                             <textarea class="form-control" id="narrative_image_desc_{{ $i }}" name="narrative_image_desc_{{ $i }}" rows="4" cols="50"><?php if(isset($narrative_image_desc[$i-1]) && $narrative_image_desc[$i-1] != '') { echo $narrative_image_desc[$i-1]; }?></textarea>
-                                                            <div id="narrative_image_desc_{{ $i }}-error" class="error"></div>
+                                                            <div id="narrative_image_desc_{{ $i }}Error" class="error"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -736,9 +734,8 @@ use Illuminate\Support\Facades\DB;
                                             <label for="4">4</label>
                                             <input type="radio" id="art_images_5" name="art_images" value="5" @checked(old('art_images', $art_images) == '5')>
                                             <label for="5">5</label>
-                                            <div id="art_images-error" class="error"></div>
                                         </div>
-                                        <!-- <div id="image-error-msg" class="error" style="display:none; color:red;"></div> -->
+                                        <div id="image-error-msg" class="error" style="display:none; color:red;"></div>
                                     </div>
 
                                     <!-- Image upload and description divs (hidden initially) -->
@@ -752,7 +749,7 @@ use Illuminate\Support\Facades\DB;
                                                         <div class="col-md-10 col-lg-8">
                                                             <input type="file" name="art_image_file_{{ $i }}" class="form-control" id="art_image_file_{{ $i }}">
                                                             <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed (max. 1 MB)</small>
-                                                            <span id="art_image_file_{{ $i }}-error" class="error"></span>                                                        
+                                                            <span id="art_image_file_{{ $i }}_error" class="text-danger"></span>                                                        
                                                             <?php if(isset($art_image_file[$i-1]) && $art_image_file[$i-1] != ''){?>
                                                             <img src="<?=env('UPLOADS_URL').'art_image/'.$art_image_file[$i-1]?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
                                                             <?php }?>
@@ -764,7 +761,7 @@ use Illuminate\Support\Facades\DB;
                                                         <label for="art_image_desc_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17B2b{{$i}}) TYPE B: short caption for image {{ $i }} (max. 50 words)</label>
                                                         <div class="col-md-10 col-lg-8">
                                                             <textarea style="resize: none; height: 180px;" class="form-control" id="art_image_desc_{{ $i }}" name="art_image_desc_{{ $i }}" rows="4" cols="50"><?php if(isset($art_image_desc[$i-1]) && $art_image_desc[$i-1] != '') { echo $art_image_desc[$i-1]; }?></textarea>
-                                                            <div id="art_image_desc_{{ $i }}-error" class="error"></div>
+                                                            <div id="art_image_desc_{{ $i }}Error" class="error"></div>
                                                         </div>
                                                     </div>
                                                 </div>                                                                                        
@@ -777,7 +774,7 @@ use Illuminate\Support\Facades\DB;
                                         </label>
                                         <div class="col-md-10 col-lg-8">
                                             <textarea class="form-control" id="art_desc" name="art_desc" rows="4" cols="50">{{ old('art_desc', $art_desc ?? '') }}</textarea>
-                                            <div id="art_desc-error" class="error"></div>
+                                            <div id="art_descError" class="error"></div>
                                         </div>
                                     </div>                           
                                 </div>
@@ -787,7 +784,7 @@ use Illuminate\Support\Facades\DB;
                                         <div class="col-md-10 col-lg-8">
                                             <input type="file" name="art_video_file" class="form-control" id="art_video_file">
                                             <small class="text-info">* Only MP4, AVI, MOV, MKV, WEBM files are allowed (max. 1GB)</small><br>  
-                                            <span id="art_video_file-error" class="error"></span>                                  
+                                            <span id="art_video_file_error" class="text-danger"></span>                                  
                                             <?php if($art_video_file != ''){?>
                                                 <video width="350" height="250" controls>
                                                     <source src="<?=env('UPLOADS_URL').'art_video/'.$art_video_file?>" type="video/mp4">
@@ -801,7 +798,7 @@ use Illuminate\Support\Facades\DB;
                                         </label>
                                         <div class="col-md-10 col-lg-8">
                                             <textarea class="form-control" id="art_video_desc" name="art_video_desc" rows="4" cols="50">{{ old('art_video_desc', $art_video_desc ?? '') }}</textarea>
-                                            <div id="art_video_desc-error" class="error"></div>
+                                            <div id="art_video_descError" class="error"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -937,7 +934,6 @@ use Illuminate\Support\Facades\DB;
                                         <label for="yes">Yes</label>
                                         <input type="radio" id="projects_no" name="projects" value="No" required @checked(old('projects', $projects) == 'No')>
                                         <label for="no">No</label>
-                                        <div id="projects-error" class="error" style="display: none;"></div>
                                     </div>
                                 </div>
                                 <!-- ?php dd($projects); ?> -->
@@ -951,7 +947,6 @@ use Illuminate\Support\Facades\DB;
                                                     <option value="<?=$proj->name?>" <?=(($projects_name == $proj->name)?'selected':'')?>><?=$proj->name?></option>
                                                 <?php } }?>
                                             </select>
-                                            <div id="projects_name-error" class="error" style="display: none;"></div>
                                             <!-- <input type="hidden" name="projects_name" value="{{ $projects_name }}"> -->
                                         </div>
                                     </div> 
@@ -985,7 +980,6 @@ use Illuminate\Support\Facades\DB;
                                         <label for="series_yes">Yes</label>
                                         <input type="radio" id="series_no" name="is_series" value="No" <?=(($is_series == 'No')?'checked':'')?> required>
                                         <label for="series_no">No</label>
-                                        <div id="is_series-error" class="error" style="display: none;"></div>
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
@@ -993,7 +987,6 @@ use Illuminate\Support\Facades\DB;
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="number" name="series_article_no" class="form-control" id="series_article_no" min="1" value="<?=$series_article_no?>">
-                                        <div id="series_article_no-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
@@ -1001,7 +994,6 @@ use Illuminate\Support\Facades\DB;
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="current_article_no" class="form-control" id="current_article_no" value="<?=$current_article_no?>">
-                                        <div id="current_article_no-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
@@ -1024,7 +1016,6 @@ use Illuminate\Support\Facades\DB;
                                             }
                                             ?>
                                         </div>
-                                        <div id="other_article_part_doi_no-error" class="error"></div>
                                     </div>
                                 </div>
 
@@ -1123,151 +1114,7 @@ use Illuminate\Support\Facades\DB;
       <button id="closePopup">Close</button>
     </div>     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- <script>
-    $(document).ready(function () {
-        // When clicking the submit button
-        $('#submitButton').on('click', function (e) {
-            let isValid = true;
-
-            // Validate radio buttons
-            $('input[type="radio"][required]').each(function () {
-                const name = $(this).attr('name');
-                if ($('input[name="' + name + '"]:checked').length === 0) {
-                    $('#' + name + '-error').text('This field is required.').show();
-                    $('input[name="' + name + '"]').first().focus();
-                    isValid = false;
-                    return false; // break loop on first error
-                } else {
-                    $('#' + name + '-error').hide();
-                }
-            });
-
-            // Validate text inputs
-            $('input[type="text"][required]').each(function () {
-                const id = $(this).attr('id');
-                if ($.trim($(this).val()) === '') {
-                    $('#' + id + '-error').text('This field is required.').show();
-                    $(this).focus();
-                    isValid = false;
-                    return false;
-                } else {
-                    $('#' + id + '-error').hide();
-                }
-            });
-
-            // Validate textareas
-            $('textarea[required]').each(function () {
-                const id = $(this).attr('id');
-                if ($.trim($(this).val()) === '') {
-                    $('#' + id + '-error').text('This field is required.').show();
-                    $(this).focus();
-                    isValid = false;
-                    return false;
-                } else {
-                    $('#' + id + '-error').hide();
-                }
-            });
-
-            if (!isValid) {
-                e.preventDefault();
-            }
-        });
-
-        // When selecting any radio button, remove the error message
-        $('input[type="radio"][required]').on('change', function () {
-            const name = $(this).attr('name');
-            $('#' + name + '-error').hide();
-        });
-
-        // When typing in text input, remove the error message
-        $('input[type="text"][required]').on('input', function () {
-            const id = $(this).attr('id');
-            $('#' + id + '-error').hide();
-        });
-
-        // When typing in textarea, remove the error message
-        $('textarea[required]').on('input', function () {
-            const id = $(this).attr('id');
-            $('#' + id + '-error').hide();
-        });
-    });
-</script> -->
-<!-- <script>
-    $(document).ready(function () {
-        $('#submitButton').on('click', function (e) {
-            let isValid = true;
-
-            // Validate radio buttons
-            const radios = $('input[type="radio"][required]');
-            for (let i = 0; i < radios.length; i++) {
-                const name = $(radios[i]).attr('name');
-                if ($('input[name="' + name + '"]:checked').length === 0) {
-                    $('#' + name + '-error').text('This field is required.').show();
-                    $('input[name="' + name + '"]').first().focus();
-                    isValid = false;
-                    break; // stop checking further
-                } else {
-                    $('#' + name + '-error').hide();
-                }
-            }
-
-            // Validate text inputs only if radios are valid
-            if (isValid) {
-                const textInputs = $('input[type="text"][required]');
-                for (let i = 0; i < textInputs.length; i++) {
-                    const id = $(textInputs[i]).attr('id');
-                    if ($.trim($(textInputs[i]).val()) === '') {
-                        $('#' + id + '-error').text('This field is required.').show();
-                        $(textInputs[i]).focus();
-                        isValid = false;
-                        break;
-                    } else {
-                        $('#' + id + '-error').hide();
-                    }
-                }
-            }
-
-            // Validate textareas only if previous are valid
-            if (isValid) {
-                const textareas = $('textarea[required]');
-                for (let i = 0; i < textareas.length; i++) {
-                    const id = $(textareas[i]).attr('id');
-                    if ($.trim($(textareas[i]).val()) === '') {
-                        $('#' + id + '-error').text('This field is required.').show();
-                        $(textareas[i]).focus();
-                        isValid = false;
-                        break;
-                    } else {
-                        $('#' + id + '-error').hide();
-                    }
-                }
-            }
-
-            if (!isValid) {
-                e.preventDefault();
-            }
-        });
-
-        // When selecting any radio button, remove the error message
-        $('input[type="radio"][required]').on('change', function () {
-            const name = $(this).attr('name');
-            $('#' + name + '-error').hide();
-        });
-
-        // When typing in text input, remove the error message
-        $('input[type="text"][required]').on('input', function () {
-            const id = $(this).attr('id');
-            $('#' + id + '-error').hide();
-        });
-
-        // When typing in textarea, remove the error message
-        $('textarea[required]').on('input', function () {
-            const id = $(this).attr('id');
-            $('#' + id + '-error').hide();
-        });
-    });
-</script> -->
-<script>
+    <script>
     $(document).ready(function () {
 
         $('#saveForm #submitButton').on('click', function (e) {
@@ -1329,9 +1176,6 @@ use Illuminate\Support\Facades\DB;
 
     });
 </script>
-
-
-
 
     <script>
         $(document).ready(function () {
@@ -1604,16 +1448,16 @@ use Illuminate\Support\Facades\DB;
     <!-- Add real-time size validation script -->
     <script>
         document.getElementById('narrative_file').addEventListener('change', function() {
-            validateFileSize(this, 'narrative_file-error');
+            validateFileSize(this, 'narrative_file_error');
         });
         
         document.getElementById('image_file_1').addEventListener('change', function() {
-            validateFileSize(this, 'image_file_1-error');
+            validateFileSize(this, 'image_file_1_error');
         });
 
         @for ($i = 2; $i <= 5; $i++)
         document.getElementById('image_file_{{ $i }}').addEventListener('change', function() {
-            validateFileSize(this, 'image_file_{{ $i }}-error');
+            validateFileSize(this, 'image_file_{{ $i }}_error');
         });
         @endfor
 
@@ -1628,7 +1472,7 @@ use Illuminate\Support\Facades\DB;
 
         @for ($i = 2; $i <= 5; $i++)
         document.getElementById('art_image_file_{{ $i }}').addEventListener('change', function() {
-            validateFileSize(this, 'art_image_file_{{ $i }}-error');
+            validateFileSize(this, 'art_image_file_{{ $i }}_error');
         });
         @endfor
 
@@ -1642,7 +1486,7 @@ use Illuminate\Support\Facades\DB;
         });      
         
         document.getElementById('art_video_file').addEventListener('change', function() {
-            validateVideoFile(this, 'art_video_file-error');
+            validateVideoFile(this, 'art_video_file_error');
         });
 
         // Add similar event listeners for other file inputs
@@ -1654,7 +1498,6 @@ use Illuminate\Support\Facades\DB;
             if (file.size > maxSize) {
                 // alert('File size exceeds 1MB. Please upload a smaller file.');
                 document.getElementById(errorElementId).innerText = "File size exceeds 1MB. Please upload a smaller file.";
-                document.getElementById(errorElementId).style.display = 'block';
                 input.value = ''; // Clear the input if validation fails
             } else{
                 document.getElementById(errorElementId).innerText = "";
@@ -1673,7 +1516,6 @@ use Illuminate\Support\Facades\DB;
                 // Validate file type
                 if (!allowedExtensions.includes(fileExtension)) {
                     document.getElementById(errorElementId).innerText = "Invalid file type. Only MP4, AVI, MOV, MKV, WEBM are allowed.";
-                    document.getElementById(errorElementId).style.display = 'block';
                     input.value = ''; // Clear the input
                     return;
                 }
@@ -1681,7 +1523,6 @@ use Illuminate\Support\Facades\DB;
                 // Validate file size
                 if (file.size > fileSizeLimit) {
                     document.getElementById(errorElementId).innerText = "File size exceeds 1 GB. Please upload a smaller file.";
-                    document.getElementById(errorElementId).style.display = 'block';
                     input.value = ''; // Clear the input
                     return;
                 }
@@ -1700,22 +1541,19 @@ use Illuminate\Support\Facades\DB;
         function checkWordLimit(field, limit, errorField) {
             //  console.log(field);
             var words = field.value.trim().split(/\s+/).filter(word => word.length > 0).length;
-            const errorElement = document.getElementById(errorField);
             if (words > limit) {
-                errorElement.innerText = "Exceeded word limit of " + limit + " words.";
-                errorElement.style.display = 'block'; 
+                document.getElementById(errorField).innerText = "Exceeded word limit of " + limit + " words.";
                 // Truncate the input field's value to the last valid word limit
                 let truncatedValue = field.value.trim().split(/\s+/).slice(0, limit).join(' ');
                 field.value = truncatedValue;
                 // ✅ Fade out after 3 seconds
-                $('#' + errorField).delay(3000).fadeOut(1000, function () {
-                    $(this).text('').css('display', 'block'); // Reset and keep element visible
+                $('#' + errorField).show().delay(3000).fadeOut(1000, function () {
+                    $(this).text('').show(); // Reset and keep element visible
                 });
-                // event.preventDefault();
+                event.preventDefault();
                 return false;
             } else {
-                errorElement.innerText = "";
-                errorElement.style.display = 'none'; // ✅ Hide the error
+                document.getElementById(errorField).innerText = "";
                 return true;
             }
         }
@@ -1724,10 +1562,10 @@ use Illuminate\Support\Facades\DB;
             let allValid = true;
             // allValid &= checkWordLimit(document.getElementById('explanation'), 100, 'explanationError');
             // allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');
-            allValid &= checkWordLimit(document.getElementById('creative_Work'), 10, 'creative_Work-error');
-            allValid &= checkWordLimit(document.getElementById('subtitle'), 40, 'subtitle-error');
+            allValid &= checkWordLimit(document.getElementById('creative_Work'), 10, 'creative_WorkError');
+            allValid &= checkWordLimit(document.getElementById('subtitle'), 40, 'subtitleError');
             allValid &= checkWordLimit(document.getElementById('additional_information'), 100, 'additional_informationError');
-            allValid &= checkWordLimit(document.getElementById('narrative_image_desc_1'), 50, 'narrative_image_desc_1-error');
+            allValid &= checkWordLimit(document.getElementById('narrative_image_desc_1'), 50, 'narrative_image_desc_1Error');
             // Loop through the dynamically generated textareas
             for (let i = 1; i <= 3; i++) {
                 const textarea = document.getElementById(`co_author_short_bio_${i}`);
@@ -1741,25 +1579,25 @@ use Illuminate\Support\Facades\DB;
             // Loop through the dynamically generated textareas
             for (let i = 2; i <= 5; i++) {
                 const textarea = document.getElementById(`narrative_image_desc_${i}`);
-                const errorDiv = document.getElementById(`narrative_image_desc_${i}-error`);
+                const errorDiv = document.getElementById(`narrative_image_desc_${i}Error`);
 
                 if (textarea) {
                     // Perform word limit validation for each textarea
-                    allValid &= checkWordLimit(textarea, 50, `narrative_image_desc_${i}-error`);
+                    allValid &= checkWordLimit(textarea, 50, `narrative_image_desc_${i}Error`);
                 }
             }  
             // Loop through the dynamically generated textareas
             for (let i = 1; i <= 5; i++) {
                 const textarea = document.getElementById(`art_image_desc_${i}`);
-                const errorDiv = document.getElementById(`art_image_desc_${i}-error`);
+                const errorDiv = document.getElementById(`art_image_desc_${i}Error`);
 
                 if (textarea) {
                     // Perform word limit validation for each textarea
-                    allValid &= checkWordLimit(textarea, 50, `art_image_desc_${i}-error`);
+                    allValid &= checkWordLimit(textarea, 50, `art_image_desc_${i}Error`);
                 }
             }                
-            allValid &= checkWordLimit(document.getElementById('art_desc'), 250, 'art_desc-error');
-            allValid &= checkWordLimit(document.getElementById('art_video_desc'), 250, 'art_video_desc-error');
+            allValid &= checkWordLimit(document.getElementById('art_desc'), 250, 'art_descError');
+            allValid &= checkWordLimit(document.getElementById('art_video_desc'), 250, 'art_video_descError');
             allValid &= checkWordLimit(document.getElementById('bio_short'), 40, 'bio_shortError');
             allValid &= checkWordLimit(document.getElementById('bio_long'), 250, 'bio_longError');        
 
