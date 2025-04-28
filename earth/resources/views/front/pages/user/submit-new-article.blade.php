@@ -1541,7 +1541,7 @@ use Illuminate\Support\Facades\DB;
 
         function validateFileType(input, errorElementId) {
             var file = input.files[0];
-            var allowedExtensions = ['.doc']; // Allowed extension
+            var allowedExtensions = ['.doc', '.docx']; // Allowed extension
 
             // Check if a file is selected
             if (file) {
