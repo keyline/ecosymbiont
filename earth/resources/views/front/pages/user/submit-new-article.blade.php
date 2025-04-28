@@ -1629,59 +1629,39 @@ use Illuminate\Support\Facades\DB;
                 tagsArray = beforeData.split(',');
             }
 
-            // $('#input-tags').on('input', function () {
-            //     var input = $(this).val().trim();
+            $('#input-tags').on('input', function () {
+                var input = $(this).val().trim();
 
-            //     // When comma is typed
-            //     if (input.includes(',')) {
-            //         var tags = input.split(',');
-            //         tags.forEach(function (tag) {
-            //             tag = tag.trim();
-            //             if (tag.length > 0) {
-            //                 // const result = getValidationMessage(tag);
-            //                 const pattern = /^SRN-EaRTh\d{6}-\d{3}+$/;
-            //                 if (!pattern.test(tag)) {
-            //                     $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx,").css('color', 'red').fadeIn()
-            //             .delay(3000)
-            //             .fadeOut();
-            //                     return;
-            //                 } else{
-            //                     $('#validation-msg').text("✅ Valid: SRN-EaRThMMYYYY-xxx,").css('color', 'green').fadeIn()
-            //             .delay(3000)
-            //             .fadeOut();
-            //                 }                        
-            //                 if (!tagsArray.includes(tag)) {
-            //                     tagsArray.push(tag);
-            //                     $('#badge-container').append(
-            //                         '<span class="badge">' + tag + ' <span class="remove" data-tag="' + tag + '">&times;</span></span>'
-            //                     );
-            //                 }
-            //             }
-            //         });
-            //         $('#other_article_part_doi_no').val(tagsArray.join(','));
-            //         $(this).val('');
-            //     }
-            // });
-
-
-            $('#input-tags-doi').on('keyup', function(e) {
-            if (e.key === ',' || e.keyCode === 188) { // Only when comma is pressed
-                var input = $(this).val();
-                var tags = input.split(',');
-                tags.forEach(function(tag) {
-                    tag = tag.trim();
-                    if (tag.length > 0 && !tagsArray.includes(tag)) {
-                        tagsArray.push(tag);
-                        $('#badge-container-doi').append(
-                            '<span class="badge">' + tag + ' <span class="remove" data-tag="' + tag + '">&times;</span></span>'
-                        );
-                    }
-                });
-                $('#other_article_part_doi_no').val(tagsArray.join(','));
-                $(this).val(''); // clear input
-            }
-        });
-
+                // When comma is typed
+                if (input.includes(',')) {
+                    var tags = input.split(',');
+                    tags.forEach(function (tag) {
+                        tag = tag.trim();
+                        if (tag.length > 0) {
+                            // const result = getValidationMessage(tag);
+                            const pattern = /^SRN-EaRTh\d{6}-\d+$/;
+                            if (!pattern.test(tag)) {
+                                $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx,").css('color', 'red').fadeIn()
+                        .delay(3000)
+                        .fadeOut();
+                                return;
+                            } else{
+                                $('#validation-msg').text("✅ Valid: SRN-EaRThMMYYYY-xxx,").css('color', 'green').fadeIn()
+                        .delay(3000)
+                        .fadeOut();
+                            }                        
+                            if (!tagsArray.includes(tag)) {
+                                tagsArray.push(tag);
+                                $('#badge-container').append(
+                                    '<span class="badge">' + tag + ' <span class="remove" data-tag="' + tag + '">&times;</span></span>'
+                                );
+                            }
+                        }
+                    });
+                    $('#other_article_part_doi_no').val(tagsArray.join(','));
+                    $(this).val('');
+                }
+            });
 
             // Remove tag handler
             $(document).on('click', '.remove', function () {
