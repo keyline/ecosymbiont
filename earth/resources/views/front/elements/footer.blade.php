@@ -130,7 +130,7 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
 </div> -->
 <!-- Modal -->
 <!-- Modal -->
-<!-- <div class="modal fade" id="popupModal" tabindex="-1" role="dialog">
+<div class="modal fade" id="popupModal" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -145,7 +145,7 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
       </div>
     </div>
   </div>
-</div> -->
+</div>
 
 <!-- The modal -->
 <div class="modal fade" id="flipFlop" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
