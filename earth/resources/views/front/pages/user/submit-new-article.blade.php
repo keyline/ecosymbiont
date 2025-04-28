@@ -1263,14 +1263,13 @@ use Illuminate\Support\Facades\DB;
 <script>
     $(document).ready(function () {
 
-        $('#submitButton').on('click', function (e) {
+        $('#saveForm #submitButton').on('click', function (e) {
             let isValid = true;
 
-            // Loop through all required fields
-            $('[required]').each(function () {
+            // Only validate fields inside #saveForm
+            $('#saveForm [required]').each(function () {
                 const field = $(this);
                 const type = field.attr('type');
-                alert(type);
                 const tag = field.prop('tagName').toLowerCase();
                 const name = field.attr('name') || field.attr('id');
 
@@ -1278,7 +1277,7 @@ use Illuminate\Support\Facades\DB;
 
                 // Validation for radio buttons
                 if (type === 'radio') {
-                    if ($('input[name="' + name + '"]:checked').length === 0) {
+                    if ($('#saveForm input[name="' + name + '"]:checked').length === 0) {
                         hasError = true;
                     }
                 }
@@ -1293,7 +1292,7 @@ use Illuminate\Support\Facades\DB;
                     $('#' + name + '-error').text('This field is required.').show();
                     field.focus();
                     isValid = false;
-                    return false; // stop looping on first error
+                    return false; // stop checking further fields
                 } else {
                     $('#' + name + '-error').hide();
                 }
@@ -1304,14 +1303,14 @@ use Illuminate\Support\Facades\DB;
             }
         });
 
-        // Hide error when user interacts
-        $(document).on('change input', '[required]', function () {
+        // Hide error inside #saveForm when user interacts
+        $('#saveForm').on('change input', '[required]', function () {
             const field = $(this);
             const type = field.attr('type');
             const name = field.attr('name') || field.attr('id');
 
             if (type === 'radio') {
-                if ($('input[name="' + name + '"]:checked').length > 0) {
+                if ($('#saveForm input[name="' + name + '"]:checked').length > 0) {
                     $('#' + name + '-error').hide();
                 }
             } else {
@@ -1323,6 +1322,7 @@ use Illuminate\Support\Facades\DB;
 
     });
 </script>
+
 
 
 
