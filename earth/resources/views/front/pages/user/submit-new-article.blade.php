@@ -1111,38 +1111,37 @@ use Illuminate\Support\Facades\DB;
       <button id="closePopup">Close</button>
     </div>     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- <script>
-    $('#saveForm').on('submit', function (e) {
-    // Check built-in HTML5 validity
-    if (!this.checkValidity()) {
-        // Let the browser handle showing messages
-        e.preventDefault();
-        this.reportValidity(); // Optional: shows browser popup
-        return;
-    }
-    });
-    </script> -->
     <script>
-       $('#submitButton').on('click', function (e) {
-        let isValid = true;
+    $(document).ready(function () {
+        // When clicking the submit button
+        $('#submitButton').on('click', function (e) {
+            let isValid = true;
 
-        $('input[type="radio"][required]').each(function () {
-            const name = $(this).attr('name');
-            if ($('input[name="' + name + '"]:checked').length === 0) {
-                $('#'+name+'-error').text('This field is required.').show();
-                $('input[name="' + name + '"]').first().focus();
-                isValid = false;
-                return false; // break loop on first error
-            } else {
-                $('#'+name+'-error').hide();
+            $('input[type="radio"][required]').each(function () {
+                const name = $(this).attr('name');
+                if ($('input[name="' + name + '"]:checked').length === 0) {
+                    $('#' + name + '-error').text('This field is required.').show();
+                    $('input[name="' + name + '"]').first().focus();
+                    isValid = false;
+                    return false; // break loop on first error
+                } else {
+                    $('#' + name + '-error').hide();
+                }
+            });
+
+            if (!isValid) {
+                e.preventDefault();
             }
         });
 
-        if (!isValid) {
-            e.preventDefault();
-        }
+        // When selecting any radio button, remove the error message
+        $('input[type="radio"][required]').on('change', function () {
+            const name = $(this).attr('name');
+            $('#' + name + '-error').hide();
+        });
     });
-    </script>
+</script>
+
     <script>
         $(document).ready(function () {
             // Initially hide the popup
