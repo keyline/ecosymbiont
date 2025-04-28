@@ -617,7 +617,7 @@ use Illuminate\Support\Facades\DB;
                                             <input type="file" name="narrative_file" class="form-control" id="narrative_file">
                                             <!-- <span>{{ session('narrative_file') }}</span> -->
                                             <small class="text-info">* Only DOC files are allowed (Max 1 MB)</small><br>
-                                            <span id="narrative_file_error" class="text-danger"></span>
+                                            <span id="narrative_file_error" class="error"></span>
                                             <?php if($narrative_file != ''){?>
                                             <a href="<?= env('UPLOADS_URL') . 'narrative/' . $narrative_file ?>" target="_blank"
                                                 class="badge bg-primary">View PDF</a>
@@ -626,7 +626,7 @@ use Illuminate\Support\Facades\DB;
                                             <img src="<?=env('UPLOADS_URL').'narrative/'.$narrative_file?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
                                             <?php } else {?>
                                             <img src="<?=env('NO_IMAGE')?>" alt="narrative_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
-                                            <?php }?> -->
+                                            <?php }?> -->                                            
                                         </div>
                                     </div>
                                     <div class="row mb-3">
