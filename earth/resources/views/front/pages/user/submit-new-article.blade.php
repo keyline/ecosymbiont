@@ -657,7 +657,8 @@ use Illuminate\Support\Facades\DB;
                                             <input type="radio" id="narrative_images_5" name="narrative_images" value="5" 
                                             @checked((old('narrative_images') == '5') || 
                                             (isset($narrative_images) && $narrative_images == '5'))>                                        
-                                            <label for="5">5</label>                                        
+                                            <label for="5">5</label>     
+                                            <div id="narrative_images-error" class="error"></div>                                   
                                         </div>
                                     </div>
                                     <!-- Image upload and description divs (hidden initially) -->
@@ -671,7 +672,7 @@ use Illuminate\Support\Facades\DB;
                                                         <div class="col-md-10 col-lg-8">
                                                             <input type="file" name="image_file_1" class="form-control" id="image_file_1" value="{{ old('image_file_1', $image_file_0 ?? '') }}">
                                                             <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed (max. 1 MB)</small>
-                                                            <span id="image_file_1_error" class="text-danger"></span>                                                        
+                                                            <span id="image_file_1-error" class="text-danger"></span>                                                        
                                                             <?php if(isset($image_files[0]) && $image_files[0] != ''){?>
                                                             <img src="<?=env('UPLOADS_URL').'narrative/'.$image_files[0]?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
                                                             <?php }?>
@@ -683,7 +684,7 @@ use Illuminate\Support\Facades\DB;
                                                         <label for="narrative_image_desc_1" class="col-md-2 col-lg-4 col-form-label">17A3b1) TYPE A: short caption for image 1 (max. 50 words)</label>
                                                         <div class="col-md-10 col-lg-8">
                                                             <textarea class="form-control" id="narrative_image_desc_1" name="narrative_image_desc_1" rows="4" cols="50"><?php if(isset($narrative_image_desc[0]) && $narrative_image_desc[0] != '') { echo $narrative_image_desc[0]; } ?></textarea>
-                                                            <div id="narrative_image_desc_1Error" class="error"></div>
+                                                            <div id="narrative_image_desc_1-error" class="error"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -700,7 +701,7 @@ use Illuminate\Support\Facades\DB;
                                                         <div class="col-md-10 col-lg-8">
                                                             <input type="file" name="image_file_{{ $i }}" class="form-control" id="image_file_{{ $i }}" value="{{ old('image_file_'.$i, $image_files[$i-1] ?? '') }}">
                                                             <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed (max. 1 MB)</small>
-                                                            <span id="image_file_{{ $i }}_error" class="text-danger"></span>                                                        
+                                                            <span id="image_file_{{ $i }}-error" class="error"></span>                                                        
                                                             <?php if(isset($image_files[$i-1]) && $image_files[$i-1] != ''){?>
                                                             <img src="<?=env('UPLOADS_URL').'narrative/'.$image_files[$i-1]?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
                                                             <?php }?>
@@ -712,7 +713,7 @@ use Illuminate\Support\Facades\DB;
                                                         <label for="narrative_image_desc_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17A3b{{$i}}) TYPE A: short caption for image {{ $i }} (max. 50 words)</label>
                                                         <div class="col-md-10 col-lg-8">
                                                             <textarea class="form-control" id="narrative_image_desc_{{ $i }}" name="narrative_image_desc_{{ $i }}" rows="4" cols="50"><?php if(isset($narrative_image_desc[$i-1]) && $narrative_image_desc[$i-1] != '') { echo $narrative_image_desc[$i-1]; }?></textarea>
-                                                            <div id="narrative_image_desc_{{ $i }}Error" class="error"></div>
+                                                            <div id="narrative_image_desc_{{ $i }}-error" class="error"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -735,8 +736,9 @@ use Illuminate\Support\Facades\DB;
                                             <label for="4">4</label>
                                             <input type="radio" id="art_images_5" name="art_images" value="5" @checked(old('art_images', $art_images) == '5')>
                                             <label for="5">5</label>
+                                            <div id="art_images-error" class="error"></div>
                                         </div>
-                                        <div id="image-error-msg" class="error" style="display:none; color:red;"></div>
+                                        <!-- <div id="image-error-msg" class="error" style="display:none; color:red;"></div> -->
                                     </div>
 
                                     <!-- Image upload and description divs (hidden initially) -->
@@ -750,7 +752,7 @@ use Illuminate\Support\Facades\DB;
                                                         <div class="col-md-10 col-lg-8">
                                                             <input type="file" name="art_image_file_{{ $i }}" class="form-control" id="art_image_file_{{ $i }}">
                                                             <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed (max. 1 MB)</small>
-                                                            <span id="art_image_file_{{ $i }}_error" class="text-danger"></span>                                                        
+                                                            <span id="art_image_file_{{ $i }}-error" class="error"></span>                                                        
                                                             <?php if(isset($art_image_file[$i-1]) && $art_image_file[$i-1] != ''){?>
                                                             <img src="<?=env('UPLOADS_URL').'art_image/'.$art_image_file[$i-1]?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
                                                             <?php }?>
@@ -762,7 +764,7 @@ use Illuminate\Support\Facades\DB;
                                                         <label for="art_image_desc_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17B2b{{$i}}) TYPE B: short caption for image {{ $i }} (max. 50 words)</label>
                                                         <div class="col-md-10 col-lg-8">
                                                             <textarea style="resize: none; height: 180px;" class="form-control" id="art_image_desc_{{ $i }}" name="art_image_desc_{{ $i }}" rows="4" cols="50"><?php if(isset($art_image_desc[$i-1]) && $art_image_desc[$i-1] != '') { echo $art_image_desc[$i-1]; }?></textarea>
-                                                            <div id="art_image_desc_{{ $i }}Error" class="error"></div>
+                                                            <div id="art_image_desc_{{ $i }}-error" class="error"></div>
                                                         </div>
                                                     </div>
                                                 </div>                                                                                        
@@ -775,7 +777,7 @@ use Illuminate\Support\Facades\DB;
                                         </label>
                                         <div class="col-md-10 col-lg-8">
                                             <textarea class="form-control" id="art_desc" name="art_desc" rows="4" cols="50">{{ old('art_desc', $art_desc ?? '') }}</textarea>
-                                            <div id="art_descError" class="error"></div>
+                                            <div id="art_desc-error" class="error"></div>
                                         </div>
                                     </div>                           
                                 </div>
@@ -785,7 +787,7 @@ use Illuminate\Support\Facades\DB;
                                         <div class="col-md-10 col-lg-8">
                                             <input type="file" name="art_video_file" class="form-control" id="art_video_file">
                                             <small class="text-info">* Only MP4, AVI, MOV, MKV, WEBM files are allowed (max. 1GB)</small><br>  
-                                            <span id="art_video_file_error" class="text-danger"></span>                                  
+                                            <span id="art_video_file-error" class="error"></span>                                  
                                             <?php if($art_video_file != ''){?>
                                                 <video width="350" height="250" controls>
                                                     <source src="<?=env('UPLOADS_URL').'art_video/'.$art_video_file?>" type="video/mp4">
@@ -799,7 +801,7 @@ use Illuminate\Support\Facades\DB;
                                         </label>
                                         <div class="col-md-10 col-lg-8">
                                             <textarea class="form-control" id="art_video_desc" name="art_video_desc" rows="4" cols="50">{{ old('art_video_desc', $art_video_desc ?? '') }}</textarea>
-                                            <div id="art_video_descError" class="error"></div>
+                                            <div id="art_video_desc-error" class="error"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -949,6 +951,7 @@ use Illuminate\Support\Facades\DB;
                                                     <option value="<?=$proj->name?>" <?=(($projects_name == $proj->name)?'selected':'')?>><?=$proj->name?></option>
                                                 <?php } }?>
                                             </select>
+                                            <div id="projects_name-error" class="error" style="display: none;"></div>
                                             <!-- <input type="hidden" name="projects_name" value="{{ $projects_name }}"> -->
                                         </div>
                                     </div> 
@@ -990,6 +993,7 @@ use Illuminate\Support\Facades\DB;
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="number" name="series_article_no" class="form-control" id="series_article_no" min="1" value="<?=$series_article_no?>">
+                                        <div id="series_article_no-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
@@ -997,6 +1001,7 @@ use Illuminate\Support\Facades\DB;
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="current_article_no" class="form-control" id="current_article_no" value="<?=$current_article_no?>">
+                                        <div id="current_article_no-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
@@ -1019,6 +1024,7 @@ use Illuminate\Support\Facades\DB;
                                             }
                                             ?>
                                         </div>
+                                        <div id="other_article_part_doi_no-error" class="error"></div>
                                     </div>
                                 </div>
 
@@ -1283,7 +1289,7 @@ use Illuminate\Support\Facades\DB;
                     }
                 }
                 // Validation for text input or textarea
-                else if (type === 'text' || type === 'file' || tag === 'textarea') {
+                else if (type === 'text' || type === 'number' || type === 'file' || tag === 'textarea' || tag === 'select') {
                     if ($.trim(field.val()) === '') {
                         hasError = true;
                     }
@@ -1602,12 +1608,12 @@ use Illuminate\Support\Facades\DB;
         });
         
         document.getElementById('image_file_1').addEventListener('change', function() {
-            validateFileSize(this, 'image_file_1_error');
+            validateFileSize(this, 'image_file_1-error');
         });
 
         @for ($i = 2; $i <= 5; $i++)
         document.getElementById('image_file_{{ $i }}').addEventListener('change', function() {
-            validateFileSize(this, 'image_file_{{ $i }}_error');
+            validateFileSize(this, 'image_file_{{ $i }}-error');
         });
         @endfor
 
@@ -1622,7 +1628,7 @@ use Illuminate\Support\Facades\DB;
 
         @for ($i = 2; $i <= 5; $i++)
         document.getElementById('art_image_file_{{ $i }}').addEventListener('change', function() {
-            validateFileSize(this, 'art_image_file_{{ $i }}_error');
+            validateFileSize(this, 'art_image_file_{{ $i }}-error');
         });
         @endfor
 
@@ -1636,7 +1642,7 @@ use Illuminate\Support\Facades\DB;
         });      
         
         document.getElementById('art_video_file').addEventListener('change', function() {
-            validateVideoFile(this, 'art_video_file_error');
+            validateVideoFile(this, 'art_video_file-error');
         });
 
         // Add similar event listeners for other file inputs
@@ -1715,7 +1721,7 @@ use Illuminate\Support\Facades\DB;
             allValid &= checkWordLimit(document.getElementById('creative_Work'), 10, 'creative_Work-error');
             allValid &= checkWordLimit(document.getElementById('subtitle'), 40, 'subtitle-error');
             allValid &= checkWordLimit(document.getElementById('additional_information'), 100, 'additional_informationError');
-            allValid &= checkWordLimit(document.getElementById('narrative_image_desc_1'), 50, 'narrative_image_desc_1Error');
+            allValid &= checkWordLimit(document.getElementById('narrative_image_desc_1'), 50, 'narrative_image_desc_1-error');
             // Loop through the dynamically generated textareas
             for (let i = 1; i <= 3; i++) {
                 const textarea = document.getElementById(`co_author_short_bio_${i}`);
@@ -1729,25 +1735,25 @@ use Illuminate\Support\Facades\DB;
             // Loop through the dynamically generated textareas
             for (let i = 2; i <= 5; i++) {
                 const textarea = document.getElementById(`narrative_image_desc_${i}`);
-                const errorDiv = document.getElementById(`narrative_image_desc_${i}Error`);
+                const errorDiv = document.getElementById(`narrative_image_desc_${i}-error`);
 
                 if (textarea) {
                     // Perform word limit validation for each textarea
-                    allValid &= checkWordLimit(textarea, 50, `narrative_image_desc_${i}Error`);
+                    allValid &= checkWordLimit(textarea, 50, `narrative_image_desc_${i}-error`);
                 }
             }  
             // Loop through the dynamically generated textareas
             for (let i = 1; i <= 5; i++) {
                 const textarea = document.getElementById(`art_image_desc_${i}`);
-                const errorDiv = document.getElementById(`art_image_desc_${i}Error`);
+                const errorDiv = document.getElementById(`art_image_desc_${i}-error`);
 
                 if (textarea) {
                     // Perform word limit validation for each textarea
-                    allValid &= checkWordLimit(textarea, 50, `art_image_desc_${i}Error`);
+                    allValid &= checkWordLimit(textarea, 50, `art_image_desc_${i}-error`);
                 }
             }                
-            allValid &= checkWordLimit(document.getElementById('art_desc'), 250, 'art_descError');
-            allValid &= checkWordLimit(document.getElementById('art_video_desc'), 250, 'art_video_descError');
+            allValid &= checkWordLimit(document.getElementById('art_desc'), 250, 'art_desc-error');
+            allValid &= checkWordLimit(document.getElementById('art_video_desc'), 250, 'art_video_desc-error');
             allValid &= checkWordLimit(document.getElementById('bio_short'), 40, 'bio_shortError');
             allValid &= checkWordLimit(document.getElementById('bio_long'), 250, 'bio_longError');        
 
