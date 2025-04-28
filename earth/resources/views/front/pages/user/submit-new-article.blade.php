@@ -1290,7 +1290,7 @@ use Illuminate\Support\Facades\DB;
                 }
                 // Validation for text input or textarea
                 else if (type === 'text' || type === 'number' || type === 'file' || tag === 'textarea' || tag === 'select') {
-                    if ($.trim(field.val()) === '') {
+                    if ($.trim(field.val()) === '' || field.val() === null) {
                         hasError = true;
                     }
                 }
