@@ -583,7 +583,7 @@ use Illuminate\Support\Facades\DB;
                                         <label for="fiction_yes">Yes</label>
                                         <input type="radio" id="fiction_no" name="creative_Work_fiction" value="No" required @checked(old('creative_Work_fiction', $creative_Work_fiction) == 'No')>
                                         <label for="fiction_no">No</label>
-                                        <div id="creative_Work_fiction-error" class="error" style="display: none;"></div>
+                                        <div id="creative_Work_fiction-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -592,6 +592,7 @@ use Illuminate\Support\Facades\DB;
                                     <div class="col-md-10 col-lg-8">
                                         <textarea name="subtitle" class="form-control" id="subtitle" rows="3" required>{{ old('subtitle', $subtitle ?? '') }}</textarea>
                                         <div id="subtitleError" class="error"></div>
+                                        <div id="subtitle-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -607,7 +608,8 @@ use Illuminate\Support\Facades\DB;
                                             <input type="radio" id="submission_types_<?=$data->id?>" name="submission_types" value="<?php echo $data->id ?>" required @checked(old('submission_types') == $data->id)>
                                             <label for="submission_types"><?php echo $data->name?></label><br>
                                         @endfor
-                                    @endif                            
+                                    @endif       
+                                    <div id="submission_types-error" class="error"></div>                     
                                     </div>
                                 </div>                                
                                 <div id="submission_types_a" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px; margin-bottom: 20px">
@@ -627,6 +629,7 @@ use Illuminate\Support\Facades\DB;
                                             <?php } else {?>
                                             <img src="<?=env('NO_IMAGE')?>" alt="narrative_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
                                             <?php }?> -->
+                                            <span id="narrative_file-error" class="error"></span>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -656,7 +659,8 @@ use Illuminate\Support\Facades\DB;
                                             <input type="radio" id="narrative_images_5" name="narrative_images" value="5" 
                                             @checked((old('narrative_images') == '5') || 
                                             (isset($narrative_images) && $narrative_images == '5'))>                                        
-                                            <label for="5">5</label>                                        
+                                            <label for="5">5</label>  
+                                            <div id="narrative_images-error" class="error"></div>                                      
                                         </div>
                                     </div>
                                     <!-- Image upload and description divs (hidden initially) -->
