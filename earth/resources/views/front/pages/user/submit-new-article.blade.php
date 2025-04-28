@@ -1631,7 +1631,7 @@ use Illuminate\Support\Facades\DB;
 
             $('#input-tags').on('input', function () {
                 var input = $(this).val().trim();
-
+                $('#validation-msg').text('').hide();  // 🛠️ Hide old error immediately
                 // When comma is typed
                 if (input.includes(',')) {
                     var tags = input.split(',');
