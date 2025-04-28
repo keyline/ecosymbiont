@@ -1270,6 +1270,7 @@ use Illuminate\Support\Facades\DB;
             $('[required]').each(function () {
                 const field = $(this);
                 const type = field.attr('type');
+                alert(type);
                 const tag = field.prop('tagName').toLowerCase();
                 const name = field.attr('name') || field.attr('id');
 
