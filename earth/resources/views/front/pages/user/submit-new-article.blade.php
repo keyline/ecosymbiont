@@ -1136,90 +1136,14 @@ use Illuminate\Support\Facades\DB;
 <!-- End block content -->
 <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <!-- Popup Div (Initially hidden) -->
     <div id="popup">
       <h3><i class="bi bi-exclamation-triangle-fill"></i> Warning</h3>
       <p>You must submit an original Creative-Work and you must own the copyright and licensing rights to your original Creative-Work.</p>
       <button id="closePopup">Close</button>
     </div>     
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
-<script>
-$(document).ready(function () {
-    $('#saveForm #submitButton').on('click', function (e) {
-        let isValid = true;
-
-        $('#saveForm [required]:not(:disabled):not([type="hidden"])').each(function () {
-            const field = $(this);
-            const type = field.attr('type');
-            const tag = field.prop('tagName').toLowerCase();
-            let name = field.attr('name') || field.attr('id');
-            let hasError = false;
-
-            // Normalize name for [] fields (like checkbox groups)
-            if (name && name.endsWith('[]')) {
-                name = name.slice(0, -2);
-            }
-
-             // ❗ Skip specific field
-            if (name === 'community_name') {
-                return true; // skip this field
-            }
-
-            // Validation for checkbox and radio groups
-            if (type === 'checkbox' || type === 'radio') {
-                if ($('input[name="' + name + '[]"]:checked').length === 0 &&
-                    $('input[name="' + name + '"]:checked').length === 0) {
-                    hasError = true;
-                }
-            }
-            // Validation for other inputs
-            else if (type === 'text' || type === 'number' || type === 'file' || tag === 'textarea' || tag === 'select') {
-                if ($.trim(field.val()) === '' || field.val() === null) {
-                    hasError = true;
-                }
-            }
-
-            if (hasError) {
-                $('#' + name + '-error').text('This field is required.').show();
-                field.focus();
-                isValid = false;
-                return false; // stop loop
-            } else {
-                $('#' + name + '-error').hide();
-            }
-        });
-
-        if (!isValid) {
-            e.preventDefault(); // stop form submission
-        }
-    });
-
-    // Hide error on interaction
-    $('#saveForm').on('change input', 'input, select, textarea', function () {
-        const field = $(this);
-        const type = field.attr('type');
-        let name = field.attr('name') || field.attr('id');
-
-        // Normalize name
-        if (name && name.endsWith('[]')) {
-            name = name.slice(0, -2);
-        }
-
-        if (type === 'radio' || type === 'checkbox') {
-            if ($('input[name="' + name + '[]"]:checked').length > 0 ||
-                $('input[name="' + name + '"]:checked').length > 0) {
-                $('#' + name + '-error').hide();
-            }
-        } else {
-            if ($.trim(field.val()) !== '') {
-                $('#' + name + '-error').hide();
-            }
-        }
-    });
-});
-</script>
-
-
+     
     <script>
         $(document).ready(function () {
             // Initially hide the popup
@@ -1243,7 +1167,86 @@ $(document).ready(function () {
             });
         });
     </script>
-    <!-- Popup end (Initially hidden) -->
+    <!-- Popup end (Initially hidden) --> 
+
+    <!-- all field that is required show error message  -->
+    <script>
+        $(document).ready(function () {
+            $('#saveForm #submitButton').on('click', function (e) {
+                let isValid = true;
+
+                $('#saveForm [required]:not(:disabled):not([type="hidden"])').each(function () {
+                    const field = $(this);
+                    const type = field.attr('type');
+                    const tag = field.prop('tagName').toLowerCase();
+                    let name = field.attr('name') || field.attr('id');
+                    let hasError = false;
+
+                    // Normalize name for [] fields (like checkbox groups)
+                    if (name && name.endsWith('[]')) {
+                        name = name.slice(0, -2);
+                    }
+
+                    // ❗ Skip specific field
+                    if (name === 'community_name') {
+                        return true; // skip this field
+                    }
+
+                    // Validation for checkbox and radio groups
+                    if (type === 'checkbox' || type === 'radio') {
+                        if ($('input[name="' + name + '[]"]:checked').length === 0 &&
+                            $('input[name="' + name + '"]:checked').length === 0) {
+                            hasError = true;
+                        }
+                    }
+                    // Validation for other inputs
+                    else if (type === 'text' || type === 'number' || type === 'file' || tag === 'textarea' || tag === 'select') {
+                        if ($.trim(field.val()) === '' || field.val() === null) {
+                            hasError = true;
+                        }
+                    }
+
+                    if (hasError) {
+                        $('#' + name + '-error').text('This field is required.').show();
+                        field.focus();
+                        isValid = false;
+                        return false; // stop loop
+                    } else {
+                        $('#' + name + '-error').hide();
+                    }
+                });
+
+                if (!isValid) {
+                    e.preventDefault(); // stop form submission
+                }
+            });
+
+            // Hide error on interaction
+            $('#saveForm').on('change input', 'input, select, textarea', function () {
+                const field = $(this);
+                const type = field.attr('type');
+                let name = field.attr('name') || field.attr('id');
+
+                // Normalize name
+                if (name && name.endsWith('[]')) {
+                    name = name.slice(0, -2);
+                }
+
+                if (type === 'radio' || type === 'checkbox') {
+                    if ($('input[name="' + name + '[]"]:checked').length > 0 ||
+                        $('input[name="' + name + '"]:checked').length > 0) {
+                        $('#' + name + '-error').hide();
+                    }
+                } else {
+                    if ($.trim(field.val()) !== '') {
+                        $('#' + name + '-error').hide();
+                    }
+                }
+            });
+        });
+    </script>
+    <!--end all field that is required show error message  -->
+    
     <!-- Function to show/hide the invited and participated fields -->
     <script>
         $(document).ready(function() {
@@ -1312,150 +1315,55 @@ $(document).ready(function () {
         });
     </script>
     <!-- End Function to show/hide the invited and participated fields -->
-    <!-- Function to toggle the co-authors position section -->
-    <!-- <script>
-        // Function to toggle the co-authors position section
-        function toggleCoAuthorsPosition() {
-            var coAuthors = document.querySelector('input[name="co_authors"]:checked').value;
-            var positionDiv = document.getElementById('co_authors_position');   
-            const positionInputs = document.querySelectorAll('input[name="co_authors_position"]'); 
-            
-            if (coAuthors == '1' || coAuthors == '2') {
-                positionDiv.style.display = 'block';
-                positionInputs.forEach(input => input.setAttribute('required', 'required'));
-            } else {
-                positionDiv.style.display = 'none';
-                positionInputs.forEach(input => input.removeAttribute('required'));
-            }        
-        }
 
-        // Add event listeners to co-author radio buttons
-        document.querySelectorAll('input[name="co_authors"]').forEach(function(element) {
-            element.addEventListener('change', toggleCoAuthorsPosition);
-        });    
-
-        // Run the function on page load to ensure correct state
-        document.addEventListener('DOMContentLoaded', toggleCoAuthorsPosition);
-    </script> -->
-    <!-- <script>
-        function toggleCoAuthorsPosition() {
-        var coAuthors = document.querySelector('input[name="co_authors"]:checked').value;
-        var positionDiv = document.getElementById('co_authors_position');   
-        const positionInputs = document.querySelectorAll('input[name="co_authors_position"]');
-
-        if (coAuthors == '1' || coAuthors == '2') {
-            positionDiv.style.display = 'block';
-            positionInputs.forEach(input => input.setAttribute('required', 'required'));
-
-            // Show and set required fields for co-authors
-            for (let i = 1; i <= coAuthors; i++) {
-                document.getElementById('author_card_' + i).style.display = 'block';
-                // Set required attribute for each input in the card
-                document.querySelectorAll('#author_card_' + i + ' input, #author_card_' + i + ' select').forEach(function(field) {
-                    field.setAttribute('required', 'required');
-                });
-            }
-            // Hide and remove required from unused cards
-            for (let i = parseInt(coAuthors) + 1; i <= 2; i++) {
-                document.getElementById('author_card_' + i).style.display = 'none';
-                document.querySelectorAll('#author_card_' + i + ' input, #author_card_' + i + ' select').forEach(function(field) {
-                    field.removeAttribute('required');
-                });
-            }
-        } else {
-            positionDiv.style.display = 'none';
-            positionInputs.forEach(input => input.removeAttribute('required'));
-
-            // Hide all co-author cards and remove required
-            for (let i = 1; i <= 2; i++) {
-                document.getElementById('author_card_' + i).style.display = 'none';
-                document.querySelectorAll('#author_card_' + i + ' input, #author_card_' + i + ' select').forEach(function(field) {
-                    field.removeAttribute('required');
-                });
-            }
-        }        
-    }
-    </script> -->
-    <!--End Function to toggle the co-authors position section -->
-    <!-- Show only the number of co_authors selected -->
-    <!-- <script>
+    <!--Function to toggle co-authors position details section -->
+    <script>
         document.addEventListener('DOMContentLoaded', function () {
             const coAuthorsRadios = document.querySelectorAll('input[name="co_authors"]');
+            const positionDiv = document.getElementById('co_authors_position');   
+            const positionInputs = document.querySelectorAll('input[name="co_authors_position"]');
 
-            // Listen for changes to the co_authors radio buttons
+            function toggleCoAuthorsFields(count) {
+                // Show/hide and set/remove required on author cards
+                for (let i = 1; i <= 2; i++) {
+                    const card = document.getElementById('author_card_' + i);
+                    const inputs = card.querySelectorAll('input, select');
+
+                    if (i <= count) {
+                        card.style.display = 'block';
+                        inputs.forEach(input => input.setAttribute('required', 'required'));
+                    } else {
+                        card.style.display = 'none';
+                        inputs.forEach(input => input.removeAttribute('required'));
+                    }
+                }
+
+                // Show/hide and manage required for co-author positions
+                if (count === 1 || count === 2) {
+                    positionDiv.style.display = 'block';
+                    positionInputs.forEach(input => input.setAttribute('required', 'required'));
+                } else {
+                    positionDiv.style.display = 'none';
+                    positionInputs.forEach(input => input.removeAttribute('required'));
+                }
+            }
+
+            // Attach listener to co-author radio buttons
             coAuthorsRadios.forEach(radio => {
                 radio.addEventListener('change', function () {
-                    const selectedValue = this.value;
-                    toggleCoAuthorsFields(selectedValue);
+                    toggleCoAuthorsFields(parseInt(this.value));
                 });
             });
 
-            function toggleCoAuthorsFields(count) {
-                // Hide all co-author fields initially
-                for (let i = 1; i <= 2; i++) {
-                    document.getElementById('author_card_' + i).style.display = 'none';
-                }
-
-                // Show only the necessary fields based on the selected number of co-authors
-                for (let i = 1; i <= count; i++) {
-                    document.getElementById('author_card_' + i).style.display = 'block';
-                }        
-            }
-
-            // Initialize the form with the correct fields displayed if a value is already selected
+            // Initialize on page load
             const initialSelectedValue = document.querySelector('input[name="co_authors"]:checked');
             if (initialSelectedValue) {
-                toggleCoAuthorsFields(initialSelectedValue.value);
+                toggleCoAuthorsFields(parseInt(initialSelectedValue.value));
             }
         });
-    </script> -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const coAuthorsRadios = document.querySelectorAll('input[name="co_authors"]');
-        const positionDiv = document.getElementById('co_authors_position');   
-        const positionInputs = document.querySelectorAll('input[name="co_authors_position"]');
-
-        function toggleCoAuthorsFields(count) {
-            // Show/hide and set/remove required on author cards
-            for (let i = 1; i <= 2; i++) {
-                const card = document.getElementById('author_card_' + i);
-                const inputs = card.querySelectorAll('input, select');
-
-                if (i <= count) {
-                    card.style.display = 'block';
-                    inputs.forEach(input => input.setAttribute('required', 'required'));
-                } else {
-                    card.style.display = 'none';
-                    inputs.forEach(input => input.removeAttribute('required'));
-                }
-            }
-
-            // Show/hide and manage required for co-author positions
-            if (count === 1 || count === 2) {
-                positionDiv.style.display = 'block';
-                positionInputs.forEach(input => input.setAttribute('required', 'required'));
-            } else {
-                positionDiv.style.display = 'none';
-                positionInputs.forEach(input => input.removeAttribute('required'));
-            }
-        }
-
-        // Attach listener to co-author radio buttons
-        coAuthorsRadios.forEach(radio => {
-            radio.addEventListener('change', function () {
-                toggleCoAuthorsFields(parseInt(this.value));
-            });
-        });
-
-        // Initialize on page load
-        const initialSelectedValue = document.querySelector('input[name="co_authors"]:checked');
-        if (initialSelectedValue) {
-            toggleCoAuthorsFields(parseInt(initialSelectedValue.value));
-        }
-    });
-</script>
-
-    <!--End Show only the number of co_authors selected -->
+    </script>
+    <!--End Function to toggle co-authors details section -->
+   
     <!-- Function to toggle the submission_types position section -->
     <script>    
         function togglesubmissionTypes() {        
@@ -1504,6 +1412,7 @@ $(document).ready(function () {
             // togglesubmissionTypes();    
     </script>
     <!--End Function to toggle the submission_types position section -->
+
     <!-- Show only the number of narrative images selected -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -1538,6 +1447,7 @@ $(document).ready(function () {
         });
     </script>
     <!--End Show only the number of narrative images selected -->
+
     <!-- Show only the number of art images selected -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -1573,7 +1483,8 @@ $(document).ready(function () {
         });
     </script>
     <!-- End Show only the number of art images selected -->
-    <!-- Add real-time size validation script -->
+
+    <!-- Add real-time size and file type validation script -->
     <script>
         document.getElementById('narrative_file').addEventListener('change', function() {
             // validateFileSize(this, 'narrative_file_error');
@@ -1588,50 +1499,17 @@ $(document).ready(function () {
         document.getElementById('image_file_{{ $i }}').addEventListener('change', function() {
             validateFileType(this, 'image_file_{{ $i }}_error');
         });
-        @endfor
-
-        // document.addEventListener('change', function (event) {
-        //     // Check if the event target is an input file with the required ID format
-        //     if (event.target && event.target.id.startsWith('image_file_')) {
-        //         const inputId = event.target.id;
-        //         const errorId = inputId + '_error'; // Construct the error span ID dynamically
-        //         validateFileSize(event.target, errorId);
-        //     }
-        // });
+        @endfor        
 
         @for ($i = 1; $i <= 5; $i++)
         document.getElementById('art_image_file_{{ $i }}').addEventListener('change', function() {
             validateFileType(this, 'art_image_file_{{ $i }}_error');
         });
         @endfor
-
-        // document.addEventListener('change', function (event) {
-        //     // Check if the event target is an input file with the required ID format
-        //     if (event.target && event.target.id.startsWith('art_image_file_')) {
-        //         const inputId = event.target.id;
-        //         const errorId = inputId + '_error'; // Construct the error span ID dynamically
-        //         validateFileSize(event.target, errorId);
-        //     }
-        // });      
-        
+    
         document.getElementById('art_video_file').addEventListener('change', function() {
             validateVideoFile(this, 'art_video_file_error');
-        });
-
-        // Add similar event listeners for other file inputs
-
-        // function validateFileSize(input, errorElementId) {
-        //     var file = input.files[0];
-        //     var maxSize = 1 * 1024 * 1024; // 1MB in bytes
-
-        //     if (file.size > maxSize) {
-        //         // alert('File size exceeds 1MB. Please upload a smaller file.');
-        //         document.getElementById(errorElementId).innerText = "File size exceeds 1MB. Please upload a smaller file.";
-        //         input.value = ''; // Clear the input if validation fails
-        //     } else{
-        //         document.getElementById(errorElementId).innerText = "";
-        // }
-        // }
+        });        
 
         function validateVideoFile(input, errorElementId) {
             var file = input.files[0];
@@ -1664,32 +1542,6 @@ $(document).ready(function () {
             }
         }
 
-        // function validateFileType(input, errorElementId) {
-        //     var file = input.files[0];
-        //     var allowedExtensions = ['.doc', '.docx']; // Allowed extension
-
-        //     // Check if a file is selected
-        //     if (file) {
-        //         var fileName = file.name.toLowerCase();
-        //         var fileExtension = fileName.slice(fileName.lastIndexOf('.'));
-
-        //         // Validate file extension
-        //         if (!allowedExtensions.includes(fileExtension)) {
-        //             document.getElementById(errorElementId).innerText = "❌ Only DOC files are allowed (Max 1 MB).";
-        //             input.value = ''; // Clear the input if validation fails
-        //         } else {
-        //             document.getElementById(errorElementId).innerText = ""; // Clear error if valid file
-        //         }
-
-        //         // Validate file size (Max 1 MB)
-        //         if (file.size > 1 * 1024 * 1024) {
-        //             document.getElementById(errorElementId).innerText = "❌ File size exceeds 1 MB.";
-        //             input.value = ''; // Clear the input if validation fails
-        //         }
-        //     } else {
-        //         document.getElementById(errorElementId).innerText = ""; // Clear error if no file selected
-        //     }
-        // }       
         
         function validateFileType(input, errorElementId) {
             const file = input.files[0];
@@ -1745,7 +1597,8 @@ $(document).ready(function () {
             errorElement.innerText = '';
         }                                
     </script>
-    <!-- End real-time size validation script -->
+    <!-- End real-time size and file type validation script -->
+
     <!-- all word count validation -->
     <script>
         function checkWordLimit(field, limit, errorField) {
@@ -1769,9 +1622,7 @@ $(document).ready(function () {
         }
 
         function validateForm() {
-            let allValid = true;
-            // allValid &= checkWordLimit(document.getElementById('explanation'), 100, 'explanationError');
-            // allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');
+            let allValid = true;            
             allValid &= checkWordLimit(document.getElementById('creative_Work'), 10, 'creative_WorkError');
             allValid &= checkWordLimit(document.getElementById('subtitle'), 40, 'subtitleError');
             allValid &= checkWordLimit(document.getElementById('additional_information'), 100, 'additional_informationError');
@@ -1815,6 +1666,7 @@ $(document).ready(function () {
         }
     </script>
     <!-- End all word count validation -->
+
     <!-- prefill radio button value -->
     <script>
         // Prevent changes to the radio buttons
