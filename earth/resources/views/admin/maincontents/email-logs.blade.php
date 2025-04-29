@@ -48,7 +48,7 @@ use App\Helpers\Helper;
                     <td><?=$row->name?></td>
                     <td><?=$row->email?></td>
                     <td><?=$row->subject?></td>
-                    <td><?=date_format(date_create($row->created_at), "M d, Y h:i A")?></td>
+                    <td data-order="<?=date('Y-m-d H:i:s', strtotime($row->created_at))?>"><?=date_format(date_create($row->created_at), "M d, Y h:i A")?></td>
                     <td>
                       <a class="btn btn-info btn-sm" href="<?=url('admin/email-logs/details/'.Helper::encoded($row->id))?>"><i class="fa fa-eye"></i> Details</a>
                     </td>

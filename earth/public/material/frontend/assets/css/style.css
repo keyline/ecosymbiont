@@ -631,6 +631,7 @@ header {
   margin-bottom: 18px;
   margin-top: 5px;
 }
+
 .seach_holder a.advserach_btn {
   color: #000;
   font-size: 12px;
@@ -2845,12 +2846,12 @@ section.big-slider .big-bxslider li .image-post2 .hover-box .inner-hover h2 {
   width: 50%;
 }
 .sidebar.large-sidebar .tab-posts-widget .tab-pane {
-  padding: 10px 0 0;
+  padding: 15px 0 0;
   background: #fafafa;
 }
-.sidebar.large-sidebar .tab-posts-widget .tab-pane ul.list-posts li {
-  padding-left: 0;
-  padding-right: 0;
+.sidebar.large-sidebar .tab-posts-widget .tab-pane ul.list-posts > li {
+  padding-left: 15px;
+  padding-right: 15px;
 }
 .sidebar.small-sidebar {
   position: relative;
@@ -3365,6 +3366,9 @@ ul.list-posts > li {
   border-bottom: 1px solid #f0f0f0;
   overflow: hidden;
 }
+ul.list-posts > li:last-child {
+  margin-bottom: 5px;
+}
 ul.list-posts > li img {
   width: 150px;
   /* margin-right: 20px; */
@@ -3398,7 +3402,7 @@ ul.list-posts > li .post-content h2 {
   font-weight: 700;
   line-height: 20px;
   margin: 0 0 10px;
-  font-size: 15px;
+  font-size: 13px;
   max-height: 40px;
   overflow: hidden;
   margin-bottom: 7px;
@@ -6439,8 +6443,7 @@ div#permalink p {
   margin: 25px 0 20px;
   font-size: 20px;
 }
-
-/* donation page css */
+/* donation box css */
 .donation-box {
   background-color: #fff;
   border-radius: 10px;
@@ -6608,6 +6611,8 @@ div#permalink p {
   -webkit-transform: translate(0, 0);
   -ms-transform: translate(0, 0);
   transform: translate(0, 0);
+}
+/*-------------------------------------------------*/
 .earth-project .post-content h2,
 .earth-project .post-content p{
   font-size: 15px !important;
@@ -6729,9 +6734,6 @@ div#permalink p {
 .search_suggestion{
   width: 100%;
 } 
-.donation-box .d-flex{
-  justify-content: start;
-}
 }
 @media (max-width: 991px) {
   /* .navbar-nav > li.drop-arrow > a {
@@ -7241,7 +7243,8 @@ div#permalink p {
   margin-top: 5px;
   width: 80%;
 }
-<<<<<<< HEAD
+
+/* donation css  */
 .donation-box{
   padding: 20px;
 }
@@ -7274,10 +7277,9 @@ div#permalink p {
   margin: 25px 0;
   color: #fff;
 }
-=======
+
 .article-post .post-content h2{
   font-size: 15px !important;
->>>>>>> main
 }
 ul.list-posts > li .post-content p,
 .article-post .post-content p{
@@ -7287,6 +7289,10 @@ ul.list-posts > li .post-content p,
 .submittion_section .article-post .post-content p,
 .project_section .article-post .post-content p{
   font-size: 18px !important;
+}
+.communities_section .article-post .post-content h2,
+.submittion_section .article-post .post-content h2{
+  font-size: 20px !important;
 }
 .home_banner_box .video-post{
   height: 300px !important;
@@ -7301,7 +7307,8 @@ ul.list-posts > li .post-content p,
   bottom: 0 !important;
 }
 .news-post.article-post .post-gallery img,
-.news-post.article-post .post-gallery{
+.news-post.article-post .post-gallery,
+.news-post.article-post .video-post{
   width: 100%;
   max-width: 150px !important;
 }
@@ -7465,11 +7472,6 @@ ul.list-posts > li img{
   #popup, #permalink {
     max-width: 320px;
   }
-  #popupModal .modal-dialog {
-    margin-top: 50px;
-    width: 100%;
-    max-width: 320px !important;
-  }
 }
 .content-blocker,
 .sidebar-sticky {
@@ -7478,7 +7480,20 @@ ul.list-posts > li img{
 .sidebar {
   padding-top: 30px!important;
 }
-
+.project-btn{
+  background-color: #386136;
+  color: white !important;
+  padding-top: 3px !important;
+  padding-bottom: 3px !important;
+  font-size: 12px !important;
+}
+.project-btn:hover{
+  background-color: #d09c1e;
+  color: white !important;
+}
+.project-btn i{    
+  color: white !important; 
+}
 .navbar-nav > li.drop-arrow:hover .megadropdown{
   display: block ;
   visibility: visible ;
