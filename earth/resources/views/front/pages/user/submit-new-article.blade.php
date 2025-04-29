@@ -1189,7 +1189,10 @@ use Illuminate\Support\Facades\DB;
         $('#saveForm').on('change input', '[required], select[required]', function () {
             const field = $(this);
             const type = field.attr('type');
-            const name = field.attr('name') || field.attr('id');
+            let name = field.attr('name') || field.attr('id');
+            if (name && name.endsWith('[]')) {
+                    name = name.slice(0, -2); // normalize checkbox group name
+                }
 
             if (type === 'radio' || type === 'checkbox') {
                 if ($('#saveForm input[name="' + name + '"]:checked').length > 0) {
