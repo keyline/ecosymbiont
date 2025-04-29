@@ -780,6 +780,7 @@ use Illuminate\Support\Facades\DB;
                                                         <div class="col-md-10 col-lg-8">
                                                             <textarea style="resize: none; height: 180px;" class="form-control" id="art_image_desc_{{ $i }}" name="art_image_desc_{{ $i }}" rows="4" cols="50"><?php if(isset($art_image_desc[$i-1]) && $art_image_desc[$i-1] != '') { echo $art_image_desc[$i-1]; }?></textarea>
                                                             <div id="art_image_desc_{{ $i }}Error" class="error"></div>
+                                                            <div id="art_image_desc_{{ $i }}-error" class="error"></div>
                                                         </div>
                                                     </div>
                                                 </div>                                                                                        
