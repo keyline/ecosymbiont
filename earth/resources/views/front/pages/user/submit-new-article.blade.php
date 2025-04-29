@@ -1131,7 +1131,7 @@ use Illuminate\Support\Facades\DB;
       <button id="closePopup">Close</button>
     </div>     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
+    <!-- <script>
     $(document).ready(function () {
 
         $('#saveForm #submitButton').on('click', function (e) {
@@ -1207,7 +1207,79 @@ use Illuminate\Support\Facades\DB;
         });
 
     });
+</script> -->
+
+<script>
+$(document).ready(function () {
+    $('#saveForm #submitButton').on('click', function (e) {
+        let isValid = true;
+
+        $('#saveForm [required]').each(function () {
+            const field = $(this);
+            const type = field.attr('type');
+            const tag = field.prop('tagName').toLowerCase();
+            let name = field.attr('name') || field.attr('id');
+            let hasError = false;
+
+            // Normalize name for [] fields (like checkbox groups)
+            if (name && name.endsWith('[]')) {
+                name = name.slice(0, -2);
+            }
+
+            // Validation for checkbox and radio groups
+            if (type === 'checkbox' || type === 'radio') {
+                if ($('input[name="' + name + '[]"]:checked').length === 0 &&
+                    $('input[name="' + name + '"]:checked').length === 0) {
+                    hasError = true;
+                }
+            }
+            // Validation for other inputs
+            else if (type === 'text' || type === 'number' || type === 'file' || tag === 'textarea' || tag === 'select') {
+                if ($.trim(field.val()) === '' || field.val() === null) {
+                    hasError = true;
+                }
+            }
+
+            if (hasError) {
+                $('#' + name + '-error').text('This field is required.').show();
+                field.focus();
+                isValid = false;
+                return false; // stop loop
+            } else {
+                $('#' + name + '-error').hide();
+            }
+        });
+
+        if (!isValid) {
+            e.preventDefault(); // stop form submission
+        }
+    });
+
+    // Hide error on interaction
+    $('#saveForm').on('change input', 'input, select, textarea', function () {
+        const field = $(this);
+        const type = field.attr('type');
+        let name = field.attr('name') || field.attr('id');
+
+        // Normalize name
+        if (name && name.endsWith('[]')) {
+            name = name.slice(0, -2);
+        }
+
+        if (type === 'radio' || type === 'checkbox') {
+            if ($('input[name="' + name + '[]"]:checked').length > 0 ||
+                $('input[name="' + name + '"]:checked').length > 0) {
+                $('#' + name + '-error').hide();
+            }
+        } else {
+            if ($.trim(field.val()) !== '') {
+                $('#' + name + '-error').hide();
+            }
+        }
+    });
+});
 </script>
+
 
     <script>
         $(document).ready(function () {
