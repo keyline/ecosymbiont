@@ -58,7 +58,7 @@
                                         <h2>2. Donation Amount</h2>
                                     </div>
                                     <div class="donation-amounts d-flex flex-wrap mb-3 justify-content-start">
-                                        <ul class="d-flex flex-wrap list-unstyled mt-2">
+                                        <ul class="d-flex flex-wrap list-unstyled mt-2 justify-content-start">
                                             <li>
                                                 <button type="button" class="btn btn-outline-secondary" onclick="calculatePayableAmount(25);">$25</button>
                                             </li>
