@@ -1159,6 +1159,11 @@ $(document).ready(function () {
                 name = name.slice(0, -2);
             }
 
+             // ❗ Skip specific field
+            if (name === 'community_name') {
+                return true; // skip this field
+            }
+
             // Validation for checkbox and radio groups
             if (type === 'checkbox' || type === 'radio') {
                 if ($('input[name="' + name + '[]"]:checked').length === 0 &&
