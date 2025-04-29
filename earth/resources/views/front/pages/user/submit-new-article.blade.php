@@ -1113,10 +1113,10 @@ use Illuminate\Support\Facades\DB;
                                         <p>iv. <span style="width:5.24pt; text-indent:0pt; display:inline-block;">&nbsp;</span>AND, no other person nor entity has any copyright interest in the Contribution.</p>                                        
                                         </div>
                                         <!-- NELP form content -->
-                                        <input type="checkbox" id="acknowledge" name="acknowledge" value="1" required>
-                                        <div id="acknowledge-error" class="error"></div>
+                                        <input type="checkbox" id="acknowledge" name="acknowledge" value="1" required>                                        
                                         <!-- <label for="acknowledge">I understand</label> -->                                         
                                         <label for="acknowledge">By clicking this box I sign the NELP provided directly above.</label>
+                                        <div id="acknowledge-error" class="error"></div>
                                     </div>
                                 </div>                              
                             </div>                  
