@@ -16,6 +16,13 @@ $current_url = $protocol . $host . $uri;
                 <!-- block content -->
                 <div class="block-content">
                     <div class="article-box">
+                        <div class="col-md-12">
+                            <div class="welcome_mucis_section">
+                                <audio preload="auto" controls>
+                                    <source src="<?=env('FRONT_ASSETS_URL')?>Audio-Submissions-28Apr2025.mp3">
+                                </audio>
+                            </div>
+                        </div>
                         <div class="titleto-box">
                             <h1>ABOUT</h1>  
                         </div>
@@ -131,6 +138,24 @@ $current_url = $protocol . $host . $uri;
                                                 <p class="black">Your Creative-Work will be reviewed based on several criteria, including clarity, veracity, and relevance to human-ecological connection. If your Creative-Work is accepted for publication as Content on EaRTh, a few rounds of editor-guided revision may be required before publication.</p>
                                                 <h2>COPYRIGHT & LICENSE</h2>
                                                 <p class="black">As per the terms detailed in the NELP, you grant EaRTh, Ecosymbionts Regenerate (ER), and the Śramani Institute (the nonprofit host organization of ER and EaRTh) a non-exclusive license to publish and use your Content. You will retain the copyright to your work and the right to also publish elsewhere.</p>
+                                                <h3 class="box_heading">Please watch the tutorial videos below before signing up for your password-protected EaRTh Creator account.</h3>
+                                                <div class="video_box">
+                                                    <h4 class="text-center">EaRTh Creator Tutorial 1: Navigating EaRTh</h4>
+                                                    <iframe src="https://youtu.be/epfiF1mJJIQ" frameborder="0"></iframe>
+                                                </div>   
+                                                <div class="video_box">
+                                                    <h4 class="text-center">EaRTh Creator Tutorial 2: Sign-Up and Profile Creation</h4>
+                                                    <iframe src="https://youtu.be/7WP08ULd5p8" frameborder="0"></iframe>
+                                                </div>  
+                                                <div class="video_box">
+                                                    <h4 class="text-center">EaRTh Creator Tutorial 3: Submitting a Creative-Work (Part 1)</h4>
+                                                    <iframe src="https://youtu.be/HVzN3cPgRrY" frameborder="0"></iframe>
+                                                </div>   
+                                                <div class="video_box">
+                                                    <h4 class="text-center">EaRTh Creator Tutorial 4: Submitting a Creative-Work (Part 2)</h4>
+                                                    <iframe src="https://youtu.be/MrkH7BYnstc" frameborder="0"></iframe>
+                                                </div> 
+                                                
                                                 <?php if($button_show){?>
                                                     <?php if(session('is_user_login')){?>
                                                         <p class="text-center"><a href="<?=url('user/submit-new-article')?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Submit New Creative-Work</a></p>
