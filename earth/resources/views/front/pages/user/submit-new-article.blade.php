@@ -1878,7 +1878,7 @@ $(document).ready(function () {
 
             $('#input-tags').on('input', function () {
                 var input = $(this).val().trim();
-                if (value.length > 0) {
+                if (input.length > 0) {
                     $(this).removeAttr('required'); // remove required
                     // $('#input-tags-error').hide();  // hide any previous error
                 }
