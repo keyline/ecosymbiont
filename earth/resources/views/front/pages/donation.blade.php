@@ -57,7 +57,7 @@
                                     <div class="titleto-inner mb-3">
                                         <h2>2. Donation Amount</h2>
                                     </div>
-                                    <div class="donation-amounts d-flex flex-wrap mb-3">
+                                    <div class="donation-amounts d-flex flex-wrap mb-3 justify-content-start">
                                         <ul class="d-flex flex-wrap list-unstyled mt-2 justify-content-between">
                                             <li>
                                                 <button type="button" class="btn btn-outline-secondary" onclick="calculatePayableAmount(25);">$25</button>
