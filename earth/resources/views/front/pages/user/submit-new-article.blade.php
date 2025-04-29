@@ -1191,7 +1191,7 @@ use Illuminate\Support\Facades\DB;
             const type = field.attr('type');
             const name = field.attr('name') || field.attr('id');
 
-            if (type === 'radio') {
+            if (type === 'radio' || type === 'checkbox') {
                 if ($('#saveForm input[name="' + name + '"]:checked').length > 0) {
                     $('#' + name + '-error').hide();
                 }
