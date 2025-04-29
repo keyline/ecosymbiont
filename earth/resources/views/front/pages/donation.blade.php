@@ -58,7 +58,7 @@
                                         <h2>2. Donation Amount</h2>
                                     </div>
                                     <div class="donation-amounts d-flex flex-wrap mb-3 justify-content-start">
-                                        <ul class="d-flex flex-wrap list-unstyled mt-2 justify-content-between">
+                                        <ul class="d-flex flex-wrap list-unstyled mt-2">
                                             <li>
                                                 <button type="button" class="btn btn-outline-secondary" onclick="calculatePayableAmount(25);">$25</button>
                                             </li>
@@ -90,7 +90,7 @@
                                         </div> -->
                                     <input type="hidden" name="base_amount" id="base_amount" value="0" required>
                                     <input type="hidden" name="payable_amount" id="payable_amount" value="0" required>
-                                    <h3>Amount Payable: USD <span id="payable_amount_text">0</span></h3>
+                                    <h3 class="payable_amount">Amount Payable: USD <span id="payable_amount_text">0</span></h3>
                                     <div class="mt-4">
                                         <button type="submit" class="btn mt-4 donation_btn">Next</button>
                                     </div>

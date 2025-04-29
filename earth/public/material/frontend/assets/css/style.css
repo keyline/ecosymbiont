@@ -6499,6 +6499,10 @@ div#permalink p {
   font-size: 18px !important;
   color: #fff !important;
   background: #d09c1c;
+  margin-top: 10px;
+}
+.payable_amount{
+  margin: 10px 0;
 }
 
 @keyframes fadeIn {
