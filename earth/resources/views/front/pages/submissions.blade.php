@@ -141,19 +141,19 @@ $current_url = $protocol . $host . $uri;
                                                 <h3 class="box_heading">Please watch the tutorial videos below before signing up for your password-protected EaRTh Creator account.</h3>
                                                 <div class="video_box text-center">
                                                     <h4 class="text-center">EaRTh Creator Tutorial 1: Navigating EaRTh</h4>
-                                                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/epfiF1mJJIQ?si=dUJBP8Y6IVpZHUbT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                                    <iframe width="600px" height="315" src="https://www.youtube.com/embed/epfiF1mJJIQ?si=dUJBP8Y6IVpZHUbT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                                                 </div>   
                                                 <div class="video_box text-center">
                                                     <h4 class="text-center">EaRTh Creator Tutorial 2: Sign-Up and Profile Creation</h4>
-                                                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/7WP08ULd5p8?si=IK_ZKZOGxQSrjbQ6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                                    <iframe width="600px" height="315" src="https://www.youtube.com/embed/7WP08ULd5p8?si=IK_ZKZOGxQSrjbQ6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                                                 </div>  
                                                 <div class="video_box text-center">
                                                     <h4 class="text-center">EaRTh Creator Tutorial 3: Submitting a Creative-Work (Part 1)</h4>
-                                                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/HVzN3cPgRrY?si=sKsk-Bc3bAJltBDR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                                    <iframe width="600px" height="315" src="https://www.youtube.com/embed/HVzN3cPgRrY?si=sKsk-Bc3bAJltBDR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                                                 </div>   
                                                 <div class="video_box text-center">
                                                     <h4 class="text-center">EaRTh Creator Tutorial 4: Submitting a Creative-Work (Part 2)</h4>
-                                                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/MrkH7BYnstc?si=WmdbuqQLAHJcH0XS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                                    <iframe width="600px" height="315" src="https://www.youtube.com/embed/MrkH7BYnstc?si=WmdbuqQLAHJcH0XS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                                                 </div> 
                                                 
                                                 <?php if($button_show){?>
