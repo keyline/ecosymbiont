@@ -1152,6 +1152,14 @@ use Illuminate\Support\Facades\DB;
                         hasError = true;
                     }
                 }
+
+                // Validation for checkboxes
+                else if (type === 'checkbox') {
+                    if ($('#saveForm input[name="' + name + '"]:checked').length === 0) {
+                        hasError = true;
+                    }
+                }
+                
                 // Validation for text input or textarea
                 else if (type === 'text' || type === 'number' || type === 'file' || tag === 'textarea' || tag === 'select') {
                     if ($.trim(field.val()) === '' || field.val() === null) {
