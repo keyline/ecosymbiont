@@ -6637,22 +6637,22 @@ div#permalink p {
   position: fixed;
   top: 50%;
   right: -62px;
-  background-color: #28a745;
+  background-color: #d09c1c;
   color: white;
   padding: 12px 20px;
   font-size: 16px;
   font-weight: bold;
-  border-radius: 30px;
+  border-radius: 5px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   text-decoration: none;
-  z-index: 9;
+  z-index: 99;
   transition: all 0.3s ease-in-out;
   transform: translateY(-50%);
   transform: rotate(-90deg);
 }
 
 .donate-button:hover {
-  background-color: #218838;
+  background-color: #d09c1c;
   color: #fff
 }
 /*-------------------------------------------------*/
