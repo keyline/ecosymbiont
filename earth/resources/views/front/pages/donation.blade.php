@@ -22,7 +22,7 @@
                                 </ul>
                                 
                                 <div class="custom-alert d-flex align-items-start">
-                                    <p><strong>Give today, so we can amplify the voices of more grassroots changemakers through EaRTh!</strong></p>
+                                    <strong>Give today, so we can amplify the voices of more grassroots changemakers through EaRTh!</strong>
                                 </div>
                             </div>
                         </div>
@@ -90,7 +90,7 @@
                                         </div> -->
                                     <input type="hidden" name="base_amount" id="base_amount" value="0" required>
                                     <input type="hidden" name="payable_amount" id="payable_amount" value="0" required>
-                                    <h2>Amount Payable: USD <span id="payable_amount_text">0</span></h2>
+                                    <h3>Amount Payable: USD <span id="payable_amount_text">0</span></h3>
                                     <div class="mt-4">
                                         <button type="submit" class="btn mt-4 donation_btn">Next</button>
                                     </div>
