@@ -6447,7 +6447,7 @@ div#permalink p {
 .donation-box {
   background-color: #fff;
   border-radius: 10px;
-  padding: 40px;
+  padding: 30px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
   margin-bottom: 30px;
 }
@@ -6457,6 +6457,7 @@ div#permalink p {
 .donation-box p {
   font-size: 15px;
   line-height: 1.5;
+  color: #000;
 }
 
 .donation-left li {

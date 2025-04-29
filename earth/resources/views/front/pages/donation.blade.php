@@ -10,7 +10,7 @@
                         <div class="col-lg-5 fade-in">
                             <div class="donation-box donation-left">
                                 <div class="titleto-inner mb-3">
-                                    <h2>Give Today — Because We Need Real Solutions for People and Planet Now</h2>
+                                    <h2 class="mt-0">Give Today — Because We Need Real Solutions for People and Planet Now</h2>
                                 </div>
                                 <p>EaRTh is the only professionally edited (ad-free) global platform for grassroots changemakers (humans, communities, movements) everywhere in the world to share knowledge and build community, without censorship or gatekeeping (financially or content-wise).</p>
                                 <p>EaRTh Creators (authors) include Elders, ecologists, activists, Indigenous peoples, frontline communities, artists, conservationists, reformers, thinkers, musicians, healers, and storytellers, who are <strong>innovating and implementing sustainable solutions for our planet, which includes us humans.</strong></p>
@@ -34,7 +34,7 @@
                                 <div class="donation-box">
                                     <!-- 2. Donor Info -->
                                     <div class="titleto-inner mb-3">
-                                        <h2>1. Donor Information*</h2>
+                                        <h2 class="mt-0">1. Donor Information*</h2>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
