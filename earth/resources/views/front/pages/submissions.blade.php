@@ -139,21 +139,21 @@ $current_url = $protocol . $host . $uri;
                                                 <h2>COPYRIGHT & LICENSE</h2>
                                                 <p class="black">As per the terms detailed in the NELP, you grant EaRTh, Ecosymbionts Regenerate (ER), and the Śramani Institute (the nonprofit host organization of ER and EaRTh) a non-exclusive license to publish and use your Content. You will retain the copyright to your work and the right to also publish elsewhere.</p>
                                                 <h3 class="box_heading">Please watch the tutorial videos below before signing up for your password-protected EaRTh Creator account.</h3>
-                                                <div class="video_box">
+                                                <div class="video_box text-center">
                                                     <h4 class="text-center">EaRTh Creator Tutorial 1: Navigating EaRTh</h4>
-                                                    <iframe src="https://youtu.be/epfiF1mJJIQ" frameborder="0"></iframe>
+                                                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/epfiF1mJJIQ?si=dUJBP8Y6IVpZHUbT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                                                 </div>   
-                                                <div class="video_box">
+                                                <div class="video_box text-center">
                                                     <h4 class="text-center">EaRTh Creator Tutorial 2: Sign-Up and Profile Creation</h4>
-                                                    <iframe src="https://youtu.be/7WP08ULd5p8" frameborder="0"></iframe>
+                                                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/7WP08ULd5p8?si=IK_ZKZOGxQSrjbQ6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                                                 </div>  
-                                                <div class="video_box">
+                                                <div class="video_box text-center">
                                                     <h4 class="text-center">EaRTh Creator Tutorial 3: Submitting a Creative-Work (Part 1)</h4>
-                                                    <iframe src="https://youtu.be/HVzN3cPgRrY" frameborder="0"></iframe>
+                                                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/HVzN3cPgRrY?si=sKsk-Bc3bAJltBDR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                                                 </div>   
-                                                <div class="video_box">
+                                                <div class="video_box text-center">
                                                     <h4 class="text-center">EaRTh Creator Tutorial 4: Submitting a Creative-Work (Part 2)</h4>
-                                                    <iframe src="https://youtu.be/MrkH7BYnstc" frameborder="0"></iframe>
+                                                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/MrkH7BYnstc?si=WmdbuqQLAHJcH0XS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                                                 </div> 
                                                 
                                                 <?php if($button_show){?>
