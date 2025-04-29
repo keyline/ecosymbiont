@@ -1142,7 +1142,7 @@ use Illuminate\Support\Facades\DB;
                 const field = $(this);
                 const type = field.attr('type');
                 const tag = field.prop('tagName').toLowerCase();
-                const name = field.attr('name') || field.attr('id');
+                let name = field.attr('name') || field.attr('id');
                 if (name && name.endsWith('[]')) {
                     name = name.slice(0, -2); // normalize checkbox group name
                 }
