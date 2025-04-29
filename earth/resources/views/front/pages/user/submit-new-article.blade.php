@@ -794,7 +794,7 @@ use Illuminate\Support\Facades\DB;
                                         <div class="col-md-10 col-lg-8">
                                             <textarea class="form-control" id="art_desc" name="art_desc" rows="4" cols="50">{{ old('art_desc', $art_desc ?? '') }}</textarea>
                                             <div id="art_descError" class="error"></div>
-                                            <div id="art_desc_error" class="error"></div>
+                                            <div id="art_desc-error" class="error"></div>
                                         </div>
                                     </div>                           
                                 </div>
@@ -820,7 +820,7 @@ use Illuminate\Support\Facades\DB;
                                         <div class="col-md-10 col-lg-8">
                                             <textarea class="form-control" id="art_video_desc" name="art_video_desc" rows="4" cols="50">{{ old('art_video_desc', $art_video_desc ?? '') }}</textarea>
                                             <div id="art_video_descError" class="error"></div>
-                                            <div id="art_video_desc_error" class="error"></div>
+                                            <div id="art_video_desc-error" class="error"></div>
                                         </div>
                                     </div>
                                 </div>
