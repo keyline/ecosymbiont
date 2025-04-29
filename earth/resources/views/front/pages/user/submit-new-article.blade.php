@@ -347,7 +347,7 @@ use Illuminate\Support\Facades\DB;
                                                                 {{ $data->name }}<br>
                                                             @endforeach
                                                         @endif
-                                                        <div id="co_ecosystem_affiliation_{{$i}}-error" class="error"></div>
+                                                        <div id="co_ecosystem_affiliation_{{$i}}[]-error" class="error"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1159,7 +1159,7 @@ use Illuminate\Support\Facades\DB;
                         hasError = true;
                     }
                 }
-                
+
                 // Validation for text input or textarea
                 else if (type === 'text' || type === 'number' || type === 'file' || tag === 'textarea' || tag === 'select') {
                     if ($.trim(field.val()) === '' || field.val() === null) {
