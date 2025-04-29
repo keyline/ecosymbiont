@@ -226,7 +226,7 @@ $getcountry                 = Country::find($donation->country);
                         </div>
 
                         <div class="signature">
-                            <p>Best wishes,</p>
+                            <p style="margin-bottom: 10px;">Best wishes,</p>
                             <p><strong>Dr. Kakoli Mitra, <i>Esq.</i></strong></p>
                             <p>Founder and Executive Director</p>
                             <p><i>Sramani Institute, Inc.</i></p>
