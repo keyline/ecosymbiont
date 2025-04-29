@@ -276,6 +276,7 @@ use Illuminate\Support\Facades\DB;
                                         <label for="Second position">Second position</label>
                                         <input type="radio" id="" name="co_authors_position" value="Third position" @checked(old('co_authors_position', $co_authors_position ?? '') == 'Third position')>
                                         <label for="Third position">Third position</label>
+                                        <div id="co_authors_position-error" class="error"></div>
                                     </div>
                                 </div>                                
                                 <div id="artimageFieldsContainer">
@@ -288,6 +289,7 @@ use Illuminate\Support\Facades\DB;
                                                     <div class="col-md-10 col-lg-8">
                                                         <input type="text" name="co_author_name_{{$i}}" class="form-control" id="co_author_name_{{$i}}"
                                                         value="{{ old("co_author_name_$i", $co_author_name[$i - 1] ?? '') }}">
+                                                        <div id="co_author_name_{{$i}}-error" class="error"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -298,6 +300,7 @@ use Illuminate\Support\Facades\DB;
                                                         <input type="text" name="co_author_short_bio_{{$i}}" class="form-control" id="co_author_short_bio_{{$i}}"
                                                         value="{{ old("co_author_short_bio_$i", $co_author_short_bio[$i - 1] ?? '') }}">
                                                         <div id="co_author_short_bio_{{$i}}Error" class="error"></div>
+                                                        <div id="co_author_short_bio_{{$i}}-error" class="error"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -315,6 +318,7 @@ use Illuminate\Support\Facades\DB;
                                                                 @endforeach
                                                             @endif
                                                         </select>
+                                                        <div id="co_author_country_{{$i}}-error" class="error"></div>
                                                     </div>
                                                 </div>                                        
                                             </div>
@@ -325,6 +329,7 @@ use Illuminate\Support\Facades\DB;
                                                     <div class="col-md-10 col-lg-8">
                                                         <input type="text" name="co_authororganization_name_{{$i}}" class="form-control" id="co_authororganization_name_{{$i}}"
                                                         value="{{ old("co_authororganization_name_$i", $co_authororganization_name[$i - 1] ?? '') }}">
+                                                        <div id="co_authororganization_name_{{$i}}-error" class="error"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -342,6 +347,7 @@ use Illuminate\Support\Facades\DB;
                                                                 {{ $data->name }}<br>
                                                             @endforeach
                                                         @endif
+                                                        <div id="co_ecosystem_affiliation_{{$i}}-error" class="error"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -352,6 +358,7 @@ use Illuminate\Support\Facades\DB;
                                                     <div class="col-md-10 col-lg-8">
                                                         <input type="text" name="co_indigenous_affiliation_{{$i}}" class="form-control" id="indigenous_affiliation_{{$i}}"
                                                         value="{{ old("co_indigenous_affiliation_$i", $co_indigenous_affiliation[$i - 1] ?? '') }}" >
+                                                        <div id="co_indigenous_affiliation_{{$i}}-error" class="error"></div>
                                                     </div>
                                                 </div>
                                             </div> 
@@ -370,6 +377,7 @@ use Illuminate\Support\Facades\DB;
                                                         <input type="radio" id="Movement" name="co_author_classification_{{$i}}" value="Movement" 
                                                             @checked(old("co_author_classification_{$i}", $co_author_classification[$i - 1] ?? '') == 'Movement')>
                                                         <label for="Movement">Movement</label>
+                                                        <div id="co_author_classification_{{$i}}-error" class="error"></div>
                                                     </div>
                                                 </div> 
                                             </div>
@@ -393,7 +401,8 @@ use Illuminate\Support\Facades\DB;
                                                                 <input type="radio" name="co_author_pronoun_{{$i}}" value="{{ $data->id }}" <?=$pronoun_checked?>>
                                                                 <label>{{ $data->name }}</label>
                                                             @endforeach
-                                                        @endif                                
+                                                        @endif  
+                                                        <div id="co_author_pronoun_{{$i}}-error" class="error"></div>                              
                                                     </div>
                                                 </div>
                                             </div>
