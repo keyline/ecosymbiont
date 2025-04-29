@@ -6516,7 +6516,7 @@ div#permalink p {
 /* popup css */
 /* Custom Modal Styling */
 #popupModal .modal-dialog {
-  margin-top: 100px;
+  margin-top: 50px;
   width: 100%;
   max-width: 700px !important;
   margin-left: auto;
@@ -7264,7 +7264,7 @@ div#permalink p {
   margin-bottom: 5px;
 }
 #popupModal .modal-dialog {
-  margin-top: 50px;
+  margin-top: 25px;
   width: 100%;
   max-width: 450px !important;
 }
@@ -7631,5 +7631,8 @@ div.dt-container div.dt-layout-row.dt-layout-table div.dt-layout-cell {
   }
   .advarnseach_section .modal-body .advance_inner_search select{
     width: 46%;
+  }
+  #popupModal .modal-dialog {
+    max-width: 320px !important;
   }
 }
