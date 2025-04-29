@@ -766,7 +766,8 @@ use Illuminate\Support\Facades\DB;
                                                         <div class="col-md-10 col-lg-8">
                                                             <input type="file" name="art_image_file_{{ $i }}" class="form-control" id="art_image_file_{{ $i }}">
                                                             <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed (max. 1 MB)</small>
-                                                            <span id="art_image_file_{{ $i }}_error" class="text-danger"></span>                                                        
+                                                            <span id="art_image_file_{{ $i }}_error" class="text-danger"></span>     
+                                                            <div id="art_image_file_{{ $i }}-error" class="error"></div>                                                   
                                                             <?php if(isset($art_image_file[$i-1]) && $art_image_file[$i-1] != ''){?>
                                                             <img src="<?=env('UPLOADS_URL').'art_image/'.$art_image_file[$i-1]?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
                                                             <?php }?>
