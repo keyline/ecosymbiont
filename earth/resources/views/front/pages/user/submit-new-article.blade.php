@@ -1147,7 +1147,7 @@ $(document).ready(function () {
     $('#saveForm #submitButton').on('click', function (e) {
         let isValid = true;
 
-        $('#saveForm [required]').each(function () {
+        $('#saveForm [required]:not(:disabled):not([type="hidden"])').each(function () {
             const field = $(this);
             const type = field.attr('type');
             const tag = field.prop('tagName').toLowerCase();
