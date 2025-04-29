@@ -162,7 +162,7 @@ $current_url = $protocol . $host . $uri;
                                                         <p style="color: red; text-align: center;">In case of technical difficulties, please <a href="<?=env('REGENERATE_URL')?>contact.php">contact us.</a></p>
                                                     <?php } else {?>
                                                         <p class="text-center"><a href="<?=url('sign-in/' . Helper::encoded('https://ecosymbiont.org/earth/user/submit-new-article'))?>" class="btn btn-primary">Submit New Creative-Work</a></p>
-                                                        <p style="color: red; text-align: center;">In case of technical difficulties please <a href="<?=env('REGENERATE_URL')?>contact.php" target="_blank">contact us.</a></p>
+                                                        <p style="color: red; text-align: center;">In case of technical difficulties, please <a href="<?=env('REGENERATE_URL')?>contact.php" target="_blank">contact us.</a></p>
                                                     <?php }?>
                                                 <?php }?>   
                                         </div>
