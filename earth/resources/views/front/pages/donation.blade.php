@@ -10,19 +10,20 @@
                         <div class="col-lg-5 fade-in">
                             <div class="donation-box donation-left">
                                 <div class="titleto-inner mb-3">
-                                    <h2>Support us to make better World</h2>
+                                    <h2>Give Today — Because We Need Real Solutions for People and Planet Now</h2>
                                 </div>
-                                <p>Your contribution empowers ecological justice, human rights, and sustainable futures. Your support helps us:</p>
+                                <p>EaRTh is the only professionally edited (ad-free) global platform for grassroots changemakers (humans, communities, movements) everywhere in the world to share knowledge and build community, without censorship or gatekeeping (financially or content-wise).</p>
+                                <p>EaRTh Creators (authors) include Elders, ecologists, activists, Indigenous peoples, frontline communities, artists, conservationists, reformers, thinkers, musicians, healers, and storytellers, who are <strong>innovating and implementing sustainable solutions for our planet, which includes us humans.</strong></p>
+                                <p>Your support helps us:</p>
                                 <ul>
-                                    <li>Advance environmental initiatives</li>
-                                    <li>Support ecological justice</li>
-                                    <li>Provide free resources and programs</li>
+                                    <li>Ensure anyone who cares about people and planet can be heard without paying</li>
+                                    <li>Continue improving EaRTh for authors and readers/viewers</li>
+                                    <li>Maintain the high quality of the Creative-Works published on EaRTh</li>
                                 </ul>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci et quo quas consectetur. Maiores voluptatum laborum quam, quis ut ab aut ad harum perspiciatis voluptatibus eos illum voluptas cupiditate, laudantium optio voluptate repellat dignissimos hic! Corporis ipsa fuga iusto, dicta eum minus error, facere rerum cumque hic cupiditate, asperiores ut.</p>
+                                
                                 <div class="custom-alert d-flex align-items-start">
-                                    <p>Give today and your gift will be matched $2:$1 by the Earthjustice Board of Trustees. Or start a monthly gift today and your donation will be matched $3:$1 for the next 12 months!</p>
+                                    <p><strong>Give today, so we can amplify the voices of more grassroots changemakers through EaRTh!</strong></p>
                                 </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci et quo quas consectetur. Maiores voluptatum laborum quam, quis ut ab aut ad harum perspiciatis voluptatibus eos illum voluptas cupiditate, laudantium optio voluptate repellat dignissimos hic! Corporis ipsa fuga iusto, dicta eum minus error, facere rerum cumque hic cupiditate, asperiores ut.</p>
                             </div>
                         </div>
                         <!-- Right Form -->
@@ -33,7 +34,7 @@
                                 <div class="donation-box">
                                     <!-- 2. Donor Info -->
                                     <div class="titleto-inner mb-3">
-                                        <h2>1. Donor Information *</h2>
+                                        <h2>1. Donor Information*</h2>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
@@ -57,7 +58,7 @@
                                         <h2>2. Donation Amount</h2>
                                     </div>
                                     <div class="donation-amounts d-flex flex-wrap mb-3">
-                                        <ul class="d-flex flex-wrap list-unstyled mt-2">
+                                        <ul class="d-flex flex-wrap list-unstyled mt-2 justify-content-between">
                                             <li>
                                                 <button type="button" class="btn btn-outline-secondary" onclick="calculatePayableAmount(25);">$25</button>
                                             </li>
@@ -89,9 +90,9 @@
                                         </div> -->
                                     <input type="hidden" name="base_amount" id="base_amount" value="0" required>
                                     <input type="hidden" name="payable_amount" id="payable_amount" value="0" required>
-                                    <h2>Payable amount: USD <span id="payable_amount_text">0</span></h2>
+                                    <h2>Amount Payable: USD <span id="payable_amount_text">0</span></h2>
                                     <div class="mt-4">
-                                        <button type="submit" class="btn mt-4 donation_btn">Preview for donation</button>
+                                        <button type="submit" class="btn mt-4 donation_btn">Next</button>
                                     </div>
                                 </div>
                             </form>
