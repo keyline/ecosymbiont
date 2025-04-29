@@ -1584,18 +1584,18 @@ $(document).ready(function () {
 
         @for ($i = 2; $i <= 5; $i++)
         document.getElementById('art_image_file_{{ $i }}').addEventListener('change', function() {
-            validateFileSize(this, 'art_image_file_{{ $i }}_error');
+            validateFileType(this, 'art_image_file_{{ $i }}_error');
         });
         @endfor
 
-        document.addEventListener('change', function (event) {
-            // Check if the event target is an input file with the required ID format
-            if (event.target && event.target.id.startsWith('art_image_file_')) {
-                const inputId = event.target.id;
-                const errorId = inputId + '_error'; // Construct the error span ID dynamically
-                validateFileSize(event.target, errorId);
-            }
-        });      
+        // document.addEventListener('change', function (event) {
+        //     // Check if the event target is an input file with the required ID format
+        //     if (event.target && event.target.id.startsWith('art_image_file_')) {
+        //         const inputId = event.target.id;
+        //         const errorId = inputId + '_error'; // Construct the error span ID dynamically
+        //         validateFileSize(event.target, errorId);
+        //     }
+        // });      
         
         document.getElementById('art_video_file').addEventListener('change', function() {
             validateVideoFile(this, 'art_video_file_error');
@@ -1674,58 +1674,59 @@ $(document).ready(function () {
         //     }
         // }       
         
-function validateFileType(input, errorElementId) {
-    const file = input.files[0];
-    const inputName = input.getAttribute('name');
-    const errorElement = document.getElementById(errorElementId);
-    
-    // Define allowed types
-    const docExtensions = ['.doc', '.docx'];
-    const imageExtensions = ['.jpg', '.jpeg', '.png', '.svg', '.ico'];
+        function validateFileType(input, errorElementId) {
+            const file = input.files[0];
+            const inputName = input.getAttribute('name');
+            const errorElement = document.getElementById(errorElementId);
+            
+            // Define allowed types
+            const docExtensions = ['.doc', '.docx'];
+            const imageExtensions = ['.jpg', '.jpeg', '.png', '.svg', '.ico'];
 
-    if (!file) {
-        errorElement.innerText = '';
-        return;
-    }
+            if (!file) {
+                errorElement.innerText = '';
+                return;
+            }
 
-    const fileName = file.name.toLowerCase();
-    const fileExtension = fileName.substring(fileName.lastIndexOf('.'));
-    const fileSize = file.size;
-    let allowedExtensions = [];
-    let errorMsg = '';
+            const fileName = file.name.toLowerCase();
+            const fileExtension = fileName.substring(fileName.lastIndexOf('.'));
+            const fileSize = file.size;
+            let allowedExtensions = [];
+            let errorMsg = '';
 
-    // Determine type of file field
-    if (inputName === 'narrative_file') {
-        allowedExtensions = docExtensions;
-        errorMsg = "❌ Only DOC or DOCX files are allowed (Max 1 MB).";
-    } else if (/^image_file_[1-5]$/.test(inputName)) {
-        allowedExtensions = imageExtensions;
-        errorMsg = "❌ Only image files (JPG, PNG, etc.) are allowed (Max 1 MB).";
-    } else {
-        errorElement.innerText = "❌ Invalid input field.";
-        input.value = '';
-        return;
-    }
+            // Determine type of file field
+            if (inputName === 'narrative_file') {
+                allowedExtensions = docExtensions;
+                errorMsg = "❌ Only DOC or DOCX files are allowed (Max 1 MB).";
+            } else if (/^image_file_[1-5]$/.test(inputName)) {
+                allowedExtensions = imageExtensions;
+                errorMsg = "❌ Only image files (JPG, PNG, etc.) are allowed (Max 1 MB).";
+            } else if (/^art_image_file_[1-5]$/.test(inputName)) {
+                allowedExtensions = imageExtensions;
+                errorMsg = "❌ Only image files (JPG, PNG, etc.) are allowed (Max 1 MB).";
+            } else {
+                errorElement.innerText = "❌ Invalid input field.";
+                input.value = '';
+                return;
+            }
 
-    // Check extension
-    if (!allowedExtensions.includes(fileExtension)) {
-        errorElement.innerText = errorMsg;
-        input.value = '';
-        return;
-    }
+            // Check extension
+            if (!allowedExtensions.includes(fileExtension)) {
+                errorElement.innerText = errorMsg;
+                input.value = '';
+                return;
+            }
 
-    // Check size
-    if (fileSize > 1 * 1024 * 1024) {
-        errorElement.innerText = "❌ File size exceeds 1 MB.";
-        input.value = '';
-        return;
-    }
+            // Check size
+            if (fileSize > 1 * 1024 * 1024) {
+                errorElement.innerText = "❌ File size exceeds 1 MB.";
+                input.value = '';
+                return;
+            }
 
-    // All good
-    errorElement.innerText = '';
-}
-
-                                
+            // All good
+            errorElement.innerText = '';
+        }                                
     </script>
     <!-- End real-time size validation script -->
     <!-- all word count validation -->
