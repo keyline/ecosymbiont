@@ -1287,7 +1287,7 @@ use Illuminate\Support\Facades\DB;
     </script>
     <!-- End Function to show/hide the invited and participated fields -->
     <!-- Function to toggle the co-authors position section -->
-    <script>
+    <!-- <script>
         // Function to toggle the co-authors position section
         function toggleCoAuthorsPosition() {
             var coAuthors = document.querySelector('input[name="co_authors"]:checked').value;
@@ -1310,10 +1310,49 @@ use Illuminate\Support\Facades\DB;
 
         // Run the function on page load to ensure correct state
         document.addEventListener('DOMContentLoaded', toggleCoAuthorsPosition);
-    </script>
+    </script> -->
+    <!-- <script>
+        function toggleCoAuthorsPosition() {
+        var coAuthors = document.querySelector('input[name="co_authors"]:checked').value;
+        var positionDiv = document.getElementById('co_authors_position');   
+        const positionInputs = document.querySelectorAll('input[name="co_authors_position"]');
+
+        if (coAuthors == '1' || coAuthors == '2') {
+            positionDiv.style.display = 'block';
+            positionInputs.forEach(input => input.setAttribute('required', 'required'));
+
+            // Show and set required fields for co-authors
+            for (let i = 1; i <= coAuthors; i++) {
+                document.getElementById('author_card_' + i).style.display = 'block';
+                // Set required attribute for each input in the card
+                document.querySelectorAll('#author_card_' + i + ' input, #author_card_' + i + ' select').forEach(function(field) {
+                    field.setAttribute('required', 'required');
+                });
+            }
+            // Hide and remove required from unused cards
+            for (let i = parseInt(coAuthors) + 1; i <= 2; i++) {
+                document.getElementById('author_card_' + i).style.display = 'none';
+                document.querySelectorAll('#author_card_' + i + ' input, #author_card_' + i + ' select').forEach(function(field) {
+                    field.removeAttribute('required');
+                });
+            }
+        } else {
+            positionDiv.style.display = 'none';
+            positionInputs.forEach(input => input.removeAttribute('required'));
+
+            // Hide all co-author cards and remove required
+            for (let i = 1; i <= 2; i++) {
+                document.getElementById('author_card_' + i).style.display = 'none';
+                document.querySelectorAll('#author_card_' + i + ' input, #author_card_' + i + ' select').forEach(function(field) {
+                    field.removeAttribute('required');
+                });
+            }
+        }        
+    }
+    </script> -->
     <!--End Function to toggle the co-authors position section -->
     <!-- Show only the number of co_authors selected -->
-    <script>
+    <!-- <script>
         document.addEventListener('DOMContentLoaded', function () {
             const coAuthorsRadios = document.querySelectorAll('input[name="co_authors"]');
 
@@ -1343,7 +1382,53 @@ use Illuminate\Support\Facades\DB;
                 toggleCoAuthorsFields(initialSelectedValue.value);
             }
         });
-    </script>
+    </script> -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const coAuthorsRadios = document.querySelectorAll('input[name="co_authors"]');
+        const positionDiv = document.getElementById('co_authors_position');   
+        const positionInputs = document.querySelectorAll('input[name="co_authors_position"]');
+
+        function toggleCoAuthorsFields(count) {
+            // Show/hide and set/remove required on author cards
+            for (let i = 1; i <= 2; i++) {
+                const card = document.getElementById('author_card_' + i);
+                const inputs = card.querySelectorAll('input, select');
+
+                if (i <= count) {
+                    card.style.display = 'block';
+                    inputs.forEach(input => input.setAttribute('required', 'required'));
+                } else {
+                    card.style.display = 'none';
+                    inputs.forEach(input => input.removeAttribute('required'));
+                }
+            }
+
+            // Show/hide and manage required for co-author positions
+            if (count === 1 || count === 2) {
+                positionDiv.style.display = 'block';
+                positionInputs.forEach(input => input.setAttribute('required', 'required'));
+            } else {
+                positionDiv.style.display = 'none';
+                positionInputs.forEach(input => input.removeAttribute('required'));
+            }
+        }
+
+        // Attach listener to co-author radio buttons
+        coAuthorsRadios.forEach(radio => {
+            radio.addEventListener('change', function () {
+                toggleCoAuthorsFields(parseInt(this.value));
+            });
+        });
+
+        // Initialize on page load
+        const initialSelectedValue = document.querySelector('input[name="co_authors"]:checked');
+        if (initialSelectedValue) {
+            toggleCoAuthorsFields(parseInt(initialSelectedValue.value));
+        }
+    });
+</script>
+
     <!--End Show only the number of co_authors selected -->
     <!-- Function to toggle the submission_types position section -->
     <script>    
