@@ -347,7 +347,7 @@ use Illuminate\Support\Facades\DB;
                                                                 {{ $data->name }}<br>
                                                             @endforeach
                                                         @endif
-                                                        <div id="co_ecosystem_affiliation_{{$i}}[]-error" class="error"></div>
+                                                        <div id="co_ecosystem_affiliation_{{$i}}-error" class="error"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1143,6 +1143,9 @@ use Illuminate\Support\Facades\DB;
                 const type = field.attr('type');
                 const tag = field.prop('tagName').toLowerCase();
                 const name = field.attr('name') || field.attr('id');
+                if (name && name.endsWith('[]')) {
+                    name = name.slice(0, -2); // normalize checkbox group name
+                }
 
                 let hasError = false;
 
