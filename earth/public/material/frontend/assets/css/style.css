@@ -6635,22 +6635,25 @@ div#permalink p {
 }
 .donate-button {
   position: fixed;
-  top: 20px;
-  right: 20px;
+  top: 50%;
+  right: -62px;
   background-color: #28a745;
   color: white;
   padding: 12px 20px;
   font-size: 16px;
   font-weight: bold;
   border-radius: 30px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   text-decoration: none;
-  z-index: 9999;
-  transition: background-color 0.3s ease;
+  z-index: 9;
+  transition: all 0.3s ease-in-out;
+  transform: translateY(-50%);
+  transform: rotate(-90deg);
 }
 
 .donate-button:hover {
   background-color: #218838;
+  color: #fff
 }
 /*-------------------------------------------------*/
 /* =  Responsive Part
