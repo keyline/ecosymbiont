@@ -1588,14 +1588,14 @@ $(document).ready(function () {
         });
         @endfor
 
-        // document.addEventListener('change', function (event) {
-        //     // Check if the event target is an input file with the required ID format
-        //     if (event.target && event.target.id.startsWith('art_image_file_')) {
-        //         const inputId = event.target.id;
-        //         const errorId = inputId + '_error'; // Construct the error span ID dynamically
-        //         validateFileSize(event.target, errorId);
-        //     }
-        // });      
+        document.addEventListener('change', function (event) {
+            // Check if the event target is an input file with the required ID format
+            if (event.target && event.target.id.startsWith('art_image_file_')) {
+                const inputId = event.target.id;
+                const errorId = inputId + '_error'; // Construct the error span ID dynamically
+                validateFileSize(event.target, errorId);
+            }
+        });      
         
         document.getElementById('art_video_file').addEventListener('change', function() {
             validateVideoFile(this, 'art_video_file_error');
