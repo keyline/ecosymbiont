@@ -1646,7 +1646,7 @@ use Illuminate\Support\Facades\DB;
         // Prevent changes to the radio buttons
         document.querySelectorAll('.readonly-input').forEach(input => {
             input.addEventListener('click', function(e) {
-                // e.preventDefault(); // Block any change
+                e.preventDefault(); // Block any change
             });
         });
     </script>
@@ -1713,7 +1713,6 @@ use Illuminate\Support\Facades\DB;
                         if (tag.length > 0) {
                             // const result = getValidationMessage(tag);
                             const pattern = /^SRN-EaRTh\d{6}-\d{3}$/;
-                            
                             if (!pattern.test(tag)) {
                                 $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx,").css('color', 'red').fadeIn()
                         .delay(3000)
