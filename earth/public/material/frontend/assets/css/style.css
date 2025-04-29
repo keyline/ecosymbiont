@@ -6547,16 +6547,16 @@ div#permalink p {
 }
 
 #popupModal .modal-title {
-  font-size: 42px;
-  line-height: 1.5;
-  margin: 10px 0;
+  font-size: 30px;
+  line-height: 1.2;
+  margin: 0px 0;
   color: #fff;
 }
 
 #popupModal .modal-body p {
-  font-size: 20px;
-  line-height: 1.5;
-  margin: 35px 0;
+  font-size: 15px;
+  line-height: 1.4;
+  margin: 15px 0;
   color: #fff;
 
 }
@@ -6572,12 +6572,12 @@ div#permalink p {
   background-color: #d09c1c;
   color: #000;
   border: none !important;
-  padding: 12px 30px !important;
+  padding: 10px 25px !important;
   font-weight: bold !important;
   letter-spacing: 1px;
   margin-top: 20px;
   transition: all 0.3s ease;
-  font-size: 24px !important;
+  font-size: 18px !important;
 }
 
 .btn-yellow:hover {
@@ -6588,7 +6588,7 @@ div#permalink p {
   display: flex  ;
   color: #ccc;
   font-size: 13px;
-  margin-top: 45px;
+  margin-top: 25px;
   justify-content: flex-end;
 }
 
