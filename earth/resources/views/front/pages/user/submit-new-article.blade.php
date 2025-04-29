@@ -792,6 +792,7 @@ use Illuminate\Support\Facades\DB;
                                         <div class="col-md-10 col-lg-8">
                                             <textarea class="form-control" id="art_desc" name="art_desc" rows="4" cols="50">{{ old('art_desc', $art_desc ?? '') }}</textarea>
                                             <div id="art_descError" class="error"></div>
+                                            <div id="art_desc_error" class="error"></div>
                                         </div>
                                     </div>                           
                                 </div>
@@ -807,7 +808,8 @@ use Illuminate\Support\Facades\DB;
                                                     <source src="<?=env('UPLOADS_URL').'art_video/'.$art_video_file?>" type="video/mp4">
                                                     Your browser does not support the video tag.
                                                 </video>                                        
-                                            <?php } ?>                                                                                
+                                            <?php } ?> 
+                                            <div id="art_video_file-error" class="error"></div>                                                                               
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -816,6 +818,7 @@ use Illuminate\Support\Facades\DB;
                                         <div class="col-md-10 col-lg-8">
                                             <textarea class="form-control" id="art_video_desc" name="art_video_desc" rows="4" cols="50">{{ old('art_video_desc', $art_video_desc ?? '') }}</textarea>
                                             <div id="art_video_descError" class="error"></div>
+                                            <div id="art_video_desc_error" class="error"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -951,6 +954,7 @@ use Illuminate\Support\Facades\DB;
                                         <label for="yes">Yes</label>
                                         <input type="radio" id="projects_no" name="projects" value="No" required @checked(old('projects', $projects) == 'No')>
                                         <label for="no">No</label>
+                                        <div id="projects-error" class="error"></div>
                                     </div>
                                 </div>
                                 <!-- ?php dd($projects); ?> -->
@@ -964,6 +968,7 @@ use Illuminate\Support\Facades\DB;
                                                     <option value="<?=$proj->name?>" <?=(($projects_name == $proj->name)?'selected':'')?>><?=$proj->name?></option>
                                                 <?php } }?>
                                             </select>
+                                            <div id="projects_name-error" class="error"></div>
                                             <!-- <input type="hidden" name="projects_name" value="{{ $projects_name }}"> -->
                                         </div>
                                     </div> 
@@ -997,6 +1002,7 @@ use Illuminate\Support\Facades\DB;
                                         <label for="series_yes">Yes</label>
                                         <input type="radio" id="series_no" name="is_series" value="No" <?=(($is_series == 'No')?'checked':'')?> required>
                                         <label for="series_no">No</label>
+                                        <div id="is_series-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
@@ -1004,6 +1010,7 @@ use Illuminate\Support\Facades\DB;
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="number" name="series_article_no" class="form-control" id="series_article_no" min="1" value="<?=$series_article_no?>">
+                                        <div id="series_article_no-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
@@ -1011,14 +1018,16 @@ use Illuminate\Support\Facades\DB;
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="current_article_no" class="form-control" id="current_article_no" value="<?=$current_article_no?>">
+                                        <div id="current_article_no-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
                                     <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label blue-text">32c) List (in order is submission) the SRNs of each previously submitted creative-work in series (enter a comma after each SRN)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="text" class="form-control" id="input-tags">
+                                        <input type="text" name="input-tags" class="form-control" id="input-tags">
                                         <div id="validation-msg" style="color:red; font-size: 0.9em;"></div>
+                                        <div id="input-tags-error" class="error"></div>
                                         <textarea class="form-control" name="other_article_part_doi_no" id="other_article_part_doi_no" style="display:none;"><?=$other_article_part_doi_no?></textarea>
                                         <small class="text-primary">Type a comma after each SRN</small>
                                         <div id="badge-container">
@@ -1603,18 +1612,18 @@ $(document).ready(function () {
 
         // Add similar event listeners for other file inputs
 
-        function validateFileSize(input, errorElementId) {
-            var file = input.files[0];
-            var maxSize = 1 * 1024 * 1024; // 1MB in bytes
+        // function validateFileSize(input, errorElementId) {
+        //     var file = input.files[0];
+        //     var maxSize = 1 * 1024 * 1024; // 1MB in bytes
 
-            if (file.size > maxSize) {
-                // alert('File size exceeds 1MB. Please upload a smaller file.');
-                document.getElementById(errorElementId).innerText = "File size exceeds 1MB. Please upload a smaller file.";
-                input.value = ''; // Clear the input if validation fails
-            } else{
-                document.getElementById(errorElementId).innerText = "";
-        }
-        }
+        //     if (file.size > maxSize) {
+        //         // alert('File size exceeds 1MB. Please upload a smaller file.');
+        //         document.getElementById(errorElementId).innerText = "File size exceeds 1MB. Please upload a smaller file.";
+        //         input.value = ''; // Clear the input if validation fails
+        //     } else{
+        //         document.getElementById(errorElementId).innerText = "";
+        // }
+        // }
 
         function validateVideoFile(input, errorElementId) {
             var file = input.files[0];
