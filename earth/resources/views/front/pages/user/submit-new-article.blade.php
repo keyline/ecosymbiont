@@ -1564,12 +1564,12 @@ $(document).ready(function () {
         });
         
         document.getElementById('image_file_1').addEventListener('change', function() {
-            validateFileSize(this, 'image_file_1_error');
+            validateFileType(this, 'image_file_1_error');
         });
 
         @for ($i = 2; $i <= 5; $i++)
         document.getElementById('image_file_{{ $i }}').addEventListener('change', function() {
-            validateFileSize(this, 'image_file_{{ $i }}_error');
+            validateFileType(this, 'image_file_{{ $i }}_error');
         });
         @endfor
 
