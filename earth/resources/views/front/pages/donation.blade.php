@@ -7,7 +7,7 @@
                 <div class="block-content">
                     <div class="article-box">
                         <!-- Left Info -->
-                        <div class="col-lg-6 fade-in">
+                        <div class="col-lg-5 fade-in">
                             <div class="donation-box donation-left">
                                 <div class="titleto-inner mb-3">
                                     <h2 class="mt-0">Give Today — Because We Need Real Solutions for People and Planet Now</h2>
@@ -27,7 +27,7 @@
                             </div>
                         </div>
                         <!-- Right Form -->
-                        <div class="col-lg-6 fade-in">
+                        <div class="col-lg-7 fade-in">
                             <form class="mb-4" action="" method="POST">
                                 @csrf
                                 <input type="hidden" name="payment_mode" id="payment_mode" value="PAYPAL">
