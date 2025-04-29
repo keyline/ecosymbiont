@@ -1130,85 +1130,7 @@ use Illuminate\Support\Facades\DB;
       <p>You must submit an original Creative-Work and you must own the copyright and licensing rights to your original Creative-Work.</p>
       <button id="closePopup">Close</button>
     </div>     
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- <script>
-    $(document).ready(function () {
-
-        $('#saveForm #submitButton').on('click', function (e) {
-            let isValid = true;
-
-            // Only validate fields inside #saveForm
-            $('#saveForm [required], #saveForm select[required]').each(function () {
-                const field = $(this);
-                const type = field.attr('type');
-                const tag = field.prop('tagName').toLowerCase();
-                let name = field.attr('name') || field.attr('id');
-                if (name && name.endsWith('[]')) {
-                    name = name.slice(0, -2); // normalize checkbox group name
-                }
-
-                let hasError = false;
-
-                // Validation for radio buttons
-                if (type === 'radio') {
-                    if ($('#saveForm input[name="' + name + '"]:checked').length === 0) {
-                        hasError = true;
-                    }
-                }
-
-                // Validation for checkboxes
-                else if (type === 'checkbox') {
-                    if ($('#saveForm input[name="' + name + '"]:checked').length === 0) {
-                        hasError = true;
-                    }
-                }
-
-                // Validation for text input or textarea
-                else if (type === 'text' || type === 'number' || type === 'file' || tag === 'textarea' || tag === 'select') {
-                    if ($.trim(field.val()) === '' || field.val() === null) {
-                        hasError = true;
-                    }
-                }
-
-                if (hasError) {
-                    $('#' + name + '-error').text('This field is required.').show();
-                    field.focus();
-                    isValid = false;
-                    return false; // stop checking further fields
-                } else {
-                    $('#' + name + '-error').hide();
-                }
-            });
-
-            if (!isValid) {
-                e.preventDefault();
-            }
-        });
-
-        // Hide error inside #saveForm when user interacts
-        $('#saveForm').on('change input', 'input, select, textarea', function () {
-            const field = $(this);
-            const type = field.attr('type');
-            let name = field.attr('name') || field.attr('id');
-            
-
-            if (type === 'radio' || type === 'checkbox') {
-                if (name && name.endsWith('[]')) {
-                    name = name.slice(0, -2); // normalize checkbox group name
-                }
-                if ($('#saveForm input[name="' + name + '"]:checked').length > 0) {
-                    $('#' + name + '-error').hide();
-                }
-            } else {
-                if ($.trim(field.val()) !== '') {
-                    $('#' + name + '-error').hide();
-                }
-            }
-        });
-
-    });
-</script> -->
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
 <script>
 $(document).ready(function () {
     $('#saveForm #submitButton').on('click', function (e) {
@@ -1725,32 +1647,85 @@ $(document).ready(function () {
             }
         }
 
-        function validateFileType(input, errorElementId) {
-            var file = input.files[0];
-            var allowedExtensions = ['.doc', '.docx']; // Allowed extension
+        // function validateFileType(input, errorElementId) {
+        //     var file = input.files[0];
+        //     var allowedExtensions = ['.doc', '.docx']; // Allowed extension
 
-            // Check if a file is selected
-            if (file) {
-                var fileName = file.name.toLowerCase();
-                var fileExtension = fileName.slice(fileName.lastIndexOf('.'));
+        //     // Check if a file is selected
+        //     if (file) {
+        //         var fileName = file.name.toLowerCase();
+        //         var fileExtension = fileName.slice(fileName.lastIndexOf('.'));
 
-                // Validate file extension
-                if (!allowedExtensions.includes(fileExtension)) {
-                    document.getElementById(errorElementId).innerText = "❌ Only DOC files are allowed (Max 1 MB).";
-                    input.value = ''; // Clear the input if validation fails
-                } else {
-                    document.getElementById(errorElementId).innerText = ""; // Clear error if valid file
-                }
+        //         // Validate file extension
+        //         if (!allowedExtensions.includes(fileExtension)) {
+        //             document.getElementById(errorElementId).innerText = "❌ Only DOC files are allowed (Max 1 MB).";
+        //             input.value = ''; // Clear the input if validation fails
+        //         } else {
+        //             document.getElementById(errorElementId).innerText = ""; // Clear error if valid file
+        //         }
 
-                // Validate file size (Max 1 MB)
-                if (file.size > 1 * 1024 * 1024) {
-                    document.getElementById(errorElementId).innerText = "❌ File size exceeds 1 MB.";
-                    input.value = ''; // Clear the input if validation fails
-                }
-            } else {
-                document.getElementById(errorElementId).innerText = ""; // Clear error if no file selected
-            }
-        }                                       
+        //         // Validate file size (Max 1 MB)
+        //         if (file.size > 1 * 1024 * 1024) {
+        //             document.getElementById(errorElementId).innerText = "❌ File size exceeds 1 MB.";
+        //             input.value = ''; // Clear the input if validation fails
+        //         }
+        //     } else {
+        //         document.getElementById(errorElementId).innerText = ""; // Clear error if no file selected
+        //     }
+        // }       
+        
+function validateFileType(input, errorElementId) {
+    const file = input.files[0];
+    const inputName = input.getAttribute('name');
+    const errorElement = document.getElementById(errorElementId);
+    
+    // Define allowed types
+    const docExtensions = ['.doc', '.docx'];
+    const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
+
+    if (!file) {
+        errorElement.innerText = '';
+        return;
+    }
+
+    const fileName = file.name.toLowerCase();
+    const fileExtension = fileName.substring(fileName.lastIndexOf('.'));
+    const fileSize = file.size;
+    let allowedExtensions = [];
+    let errorMsg = '';
+
+    // Determine type of file field
+    if (inputName === 'narrative_file') {
+        allowedExtensions = docExtensions;
+        errorMsg = "❌ Only DOC or DOCX files are allowed (Max 1 MB).";
+    } else if (/^image_file_[1-5]$/.test(inputName)) {
+        allowedExtensions = imageExtensions;
+        errorMsg = "❌ Only image files (JPG, PNG, etc.) are allowed (Max 1 MB).";
+    } else {
+        errorElement.innerText = "❌ Invalid input field.";
+        input.value = '';
+        return;
+    }
+
+    // Check extension
+    if (!allowedExtensions.includes(fileExtension)) {
+        errorElement.innerText = errorMsg;
+        input.value = '';
+        return;
+    }
+
+    // Check size
+    if (fileSize > 1 * 1024 * 1024) {
+        errorElement.innerText = "❌ File size exceeds 1 MB.";
+        input.value = '';
+        return;
+    }
+
+    // All good
+    errorElement.innerText = '';
+}
+
+                                
     </script>
     <!-- End real-time size validation script -->
     <!-- all word count validation -->
