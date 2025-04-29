@@ -1573,29 +1573,29 @@ $(document).ready(function () {
         });
         @endfor
 
-        document.addEventListener('change', function (event) {
-            // Check if the event target is an input file with the required ID format
-            if (event.target && event.target.id.startsWith('image_file_')) {
-                const inputId = event.target.id;
-                const errorId = inputId + '_error'; // Construct the error span ID dynamically
-                validateFileSize(event.target, errorId);
-            }
-        });
+        // document.addEventListener('change', function (event) {
+        //     // Check if the event target is an input file with the required ID format
+        //     if (event.target && event.target.id.startsWith('image_file_')) {
+        //         const inputId = event.target.id;
+        //         const errorId = inputId + '_error'; // Construct the error span ID dynamically
+        //         validateFileSize(event.target, errorId);
+        //     }
+        // });
 
-        @for ($i = 2; $i <= 5; $i++)
+        @for ($i = 1; $i <= 5; $i++)
         document.getElementById('art_image_file_{{ $i }}').addEventListener('change', function() {
             validateFileType(this, 'art_image_file_{{ $i }}_error');
         });
         @endfor
 
-        document.addEventListener('change', function (event) {
-            // Check if the event target is an input file with the required ID format
-            if (event.target && event.target.id.startsWith('art_image_file_')) {
-                const inputId = event.target.id;
-                const errorId = inputId + '_error'; // Construct the error span ID dynamically
-                validateFileSize(event.target, errorId);
-            }
-        });      
+        // document.addEventListener('change', function (event) {
+        //     // Check if the event target is an input file with the required ID format
+        //     if (event.target && event.target.id.startsWith('art_image_file_')) {
+        //         const inputId = event.target.id;
+        //         const errorId = inputId + '_error'; // Construct the error span ID dynamically
+        //         validateFileSize(event.target, errorId);
+        //     }
+        // });      
         
         document.getElementById('art_video_file').addEventListener('change', function() {
             validateVideoFile(this, 'art_video_file_error');
