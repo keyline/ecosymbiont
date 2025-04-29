@@ -1834,35 +1834,35 @@ $(document).ready(function () {
                 $(".series_yes").show();
                 $('#series_article_no').attr('required', true);
                 $('#current_article_no').attr('required', true);
-                $('#other_article_part_doi_no').attr('required', true);
+                $('#input-tags').attr('required', true);
             } else {
                 $(".series_yes").hide();
                 $('#series_article_no').attr('required', false);
                 $('#current_article_no').attr('required', false);
-                $('#other_article_part_doi_no').attr('required', false);
+                $('#input-tags').attr('required', false);
             }
             
-            $('input[name="is_series"]').change(function() {
-                if ($(this).val() === "Yes") {
-                    $(".series_yes").show();
-                    $('#series_article_no').attr('required', true);
-                    $('#current_article_no').attr('required', true);
-                    $('#other_article_part_doi_no').attr('required', true);
-                } else {
-                    $(".series_yes").hide();
-                    $('#series_article_no').attr('required', false);
-                    $('#current_article_no').attr('required', false);
-                    $('#other_article_part_doi_no').attr('required', false);
-                }
-            });
+            // $('input[name="is_series"]').change(function() {
+            //     if ($(this).val() === "Yes") {
+            //         $(".series_yes").show();
+            //         $('#series_article_no').attr('required', true);
+            //         $('#current_article_no').attr('required', true);
+            //         $('#input-tags').attr('required', true);
+            //     } else {
+            //         $(".series_yes").hide();
+            //         $('#series_article_no').attr('required', false);
+            //         $('#current_article_no').attr('required', false);
+            //         $('#input-tags').attr('required', false);
+            //     }
+            // });
             $('#current_article_no').on('input', function(){
                 var current_article_no = parseInt($('#current_article_no').val());
                 if(current_article_no <= 1){
                     $('#current_article_no').attr('required', false);
-                    $('#other_article_part_doi_no').attr('required', false);
+                    $('#input-tags').attr('required', false);
                 } else {
                     $('#current_article_no').attr('required', true);
-                    $('#other_article_part_doi_no').attr('required', true);
+                    $('#input-tags').attr('required', true);
                 }
             });
         });
