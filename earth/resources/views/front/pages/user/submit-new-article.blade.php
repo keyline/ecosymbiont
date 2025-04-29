@@ -1114,6 +1114,7 @@ use Illuminate\Support\Facades\DB;
                                         </div>
                                         <!-- NELP form content -->
                                         <input type="checkbox" id="acknowledge" name="acknowledge" value="1" required>
+                                        <div id="acknowledge-error" class="error"></div>
                                         <!-- <label for="acknowledge">I understand</label> -->                                         
                                         <label for="acknowledge">By clicking this box I sign the NELP provided directly above.</label>
                                     </div>
@@ -1634,7 +1635,7 @@ $(document).ready(function () {
 
         function validateVideoFile(input, errorElementId) {
             var file = input.files[0];
-            console.log(file);
+            // console.log(file);
             var allowedExtensions = ['mp4', 'avi', 'mov', 'mkv', 'webm'];
             var fileSizeLimit = 1073741824; // 1GB in bytes
 
