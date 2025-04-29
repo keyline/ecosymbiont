@@ -1681,7 +1681,7 @@ function validateFileType(input, errorElementId) {
     
     // Define allowed types
     const docExtensions = ['.doc', '.docx'];
-    const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
+    const imageExtensions = ['.jpg', '.jpeg', '.png', '.svg', '.ico'];
 
     if (!file) {
         errorElement.innerText = '';
