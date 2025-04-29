@@ -7271,10 +7271,13 @@ div#permalink p {
 #popupModal .modal-title {
   font-size: 25px;
 }
+#popupModal .modal-body{
+  padding: 0;
+}
 #popupModal .modal-body p {
   font-size: 15px;
   line-height: 1.5;
-  margin: 25px 0;
+  margin: 10px 0;
   color: #fff;
 }
 
