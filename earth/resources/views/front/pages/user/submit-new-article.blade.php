@@ -1677,6 +1677,7 @@ $(document).ready(function () {
         function validateFileType(input, errorElementId) {
             const file = input.files[0];
             const inputName = input.getAttribute('name');
+            alert(inputName);
             const errorElement = document.getElementById(errorElementId);
             
             // Define allowed types
