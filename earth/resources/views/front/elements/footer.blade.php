@@ -140,13 +140,13 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
         <h4 class="modal-title">Help keep EaRTh free!</h4>
         <p>EaRTh is a vital and unique resource for grassroots changemakers across the world, especially members of frontline communities whose voices are seldom amplified.</p>
         <p>EaRTh provides the marginalized and silenced a global platform to share their challenges, solutions, and knowledge directly with all of us.</p>
-        <h4>How?</h4>
+        <p>How?</p>
         <p>By not censoring or gatekeeping, like so many journals and media do.</p>
         <p>And by keeping EaRTh free for the authors and free for the readers and viewers.</p>
         <p><u>But we can’t do this without your financial help.</u></p>
         <p>While EaRTh is free to use, we (a small nonprofit organization) need to pay the editorial staff, designers, software developers, and others who ensure that EaRTh runs smoothly, so we can serve those who need most to be heard.</p>
         {{-- <p>Join the fight today,<br><span class="highlight">your gift will be matched $2:$1!</span></p> --}}
-        <button class="btn btn-yellow">Donate to EaRTh</button><br>
+        <a href="<?=url('donation')?>" class="btn btn-yellow">Donate to EaRTh</a><br>
         <a href="javascript:void(0);" class="continue-link" data-dismiss="modal">Continue to website →</a>
       </div>
     </div>
