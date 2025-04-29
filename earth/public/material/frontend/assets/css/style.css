@@ -6633,6 +6633,25 @@ div#permalink p {
 .video_box  iframe{
   margin: 10px 0 30px;
 }
+.donate-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #28a745;
+  color: white;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 30px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  text-decoration: none;
+  z-index: 9999;
+  transition: background-color 0.3s ease;
+}
+
+.donate-button:hover {
+  background-color: #218838;
+}
 /*-------------------------------------------------*/
 /* =  Responsive Part
 /*-------------------------------------------------*/

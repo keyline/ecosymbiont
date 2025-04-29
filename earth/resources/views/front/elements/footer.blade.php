@@ -212,6 +212,9 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
         </div>
     </div>
 </div>
+{{-- stickt button --}}
+<a href="#donate" class="donate-button">Donate to EaRTH</a>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
     $(window).on('load', function () {
