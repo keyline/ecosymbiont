@@ -6630,6 +6630,9 @@ div#permalink p {
 .project_section p{
   font-size: 18px !important;
 }
+.video_box  iframe{
+  margin: 10px 0 30px;
+}
 /*-------------------------------------------------*/
 /* =  Responsive Part
 /*-------------------------------------------------*/
@@ -7334,6 +7337,9 @@ ul.list-posts > li .post-content p,
 .feature-video .hover-box a{
   font-size: 12px;
 }
+.video_box  iframe{
+  width: 100%;
+}
 }
 
 @media (max-width: 650px) {
@@ -7487,6 +7493,10 @@ ul.list-posts > li img{
   }
   #popup, #permalink {
     max-width: 320px;
+  }
+  .video_box  iframe{
+    width: 100%;
+    height: 250px;
   }
 }
 .content-blocker,
