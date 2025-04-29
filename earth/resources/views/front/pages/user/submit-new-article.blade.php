@@ -1864,7 +1864,7 @@ $(document).ready(function () {
                     $('#current_article_no').attr('required', true);
                     $('#input-tags').attr('required', true);
                 }
-            });
+            });            
         });
     </script>
 
@@ -1878,6 +1878,10 @@ $(document).ready(function () {
 
             $('#input-tags').on('input', function () {
                 var input = $(this).val().trim();
+                if (value.length > 0) {
+                    $(this).removeAttr('required'); // remove required
+                    // $('#input-tags-error').hide();  // hide any previous error
+                }
                 $('#validation-msg').text('').hide();  // 🛠️ Hide old error immediately
                 // When comma is typed
                 if (input.includes(',')) {
