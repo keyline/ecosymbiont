@@ -1186,15 +1186,16 @@ use Illuminate\Support\Facades\DB;
         });
 
         // Hide error inside #saveForm when user interacts
-        $('#saveForm').on('change input', '[required], select[required]', function () {
+        $('#saveForm').on('change input', 'input, select, textarea', function () {
             const field = $(this);
             const type = field.attr('type');
             let name = field.attr('name') || field.attr('id');
-            if (name && name.endsWith('[]')) {
-                    name = name.slice(0, -2); // normalize checkbox group name
-                }
+            
 
             if (type === 'radio' || type === 'checkbox') {
+                if (name && name.endsWith('[]')) {
+                    name = name.slice(0, -2); // normalize checkbox group name
+                }
                 if ($('#saveForm input[name="' + name + '"]:checked').length > 0) {
                     $('#' + name + '-error').hide();
                 }
