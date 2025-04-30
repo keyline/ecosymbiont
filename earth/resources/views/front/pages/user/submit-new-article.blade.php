@@ -309,7 +309,7 @@ use Illuminate\Support\Facades\DB;
                                                     <label for="co_author_country_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3D{{$i}}) <?=numberToOrdinal($i)?> co-author’s country of residence</label>
                                                     <div class="col-md-10 col-lg-8">
                                                         <select name="co_author_country_{{$i}}" class="form-control" id="co_author_country_{{$i}}" >
-                                                            <option value="" selected disabled>Select</option>
+                                                            <option value="" selected>Select</option>
                                                             @if ($country)
                                                                 @foreach ($country as $data)
                                                                     <option value="{{ $data->id }}" @selected(old("co_author_country_$i", $co_author_countries[$i - 1] ?? '') == $data->id)>
