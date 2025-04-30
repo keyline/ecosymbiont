@@ -1208,6 +1208,7 @@ use Illuminate\Support\Facades\DB;
 
                     if (hasError) {
                         $('#' + name + '-error').text('This field is required.').show();
+                        console.log('Field: ' + name + ' is required.');
                         field.focus();
                         isValid = false;
                         return false; // stop loop
