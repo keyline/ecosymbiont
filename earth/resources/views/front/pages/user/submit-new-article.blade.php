@@ -356,7 +356,7 @@ use Illuminate\Support\Facades\DB;
                                                     <label for="co_Indigenous_affiliation_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3G{{$i}}) What specific region are <?=numberToOrdinal($i)?> co-author’s ancestors originally from OR what is the name of first co-author’s Indigenous community? (example of specific region = Bengal; example of Indigenous community name = Lisjan Ohlone)
                                                     </label>
                                                     <div class="col-md-10 col-lg-8">
-                                                        <input type="text" name="co_indigenous_affiliation_{{$i}}" class="form-control" id="indigenous_affiliation_{{$i}}"
+                                                        <input type="text" name="co_indigenous_affiliation_{{$i}}" class="form-control" id="co_indigenous_affiliation_{{$i}}"
                                                         value="{{ old("co_indigenous_affiliation_$i", $co_indigenous_affiliation[$i - 1] ?? '') }}" >
                                                         <div id="co_indigenous_affiliation_{{$i}}-error" class="error"></div>
                                                     </div>
