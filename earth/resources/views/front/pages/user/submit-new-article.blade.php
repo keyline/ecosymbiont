@@ -1175,11 +1175,12 @@ use Illuminate\Support\Facades\DB;
                     }
 
                     let errorId = name + '-error';
-                    if ($('#' + errorId).length === 0) {
+                    if ($('#' + CSS.escape(errorId)).length === 0) {
                         // try by ID if it's different than name
                         errorId = field.attr('id') + '-error';
+                        console.log('Error ID: ' + errorId);
                     }
-                    $('#' + errorId).text('This field is required.').show();
+                    $('#' + CSS.escape(errorId)).text('This field is required.').show();
 
                     // ❗ Skip specific field
                     if (name === 'community_name') {
