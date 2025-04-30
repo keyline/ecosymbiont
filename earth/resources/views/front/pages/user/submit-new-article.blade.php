@@ -1252,6 +1252,8 @@ use Illuminate\Support\Facades\DB;
     $(document).ready(function () {
         $('#saveForm #submitButton').on('click', function (e) {
             let isValid = true;
+              // Clear previous group validation flags
+                $('input[type="checkbox"]').removeData('validated');
 
             $('#saveForm [required]:not(:disabled):not([type="hidden"])').each(function () {
                 const field = $(this);
@@ -1272,13 +1274,18 @@ use Illuminate\Support\Facades\DB;
 
                 // ✅ Checkbox group validation
                 if (type === 'checkbox' && rawName.endsWith('[]')) {
-                    if ($('input[name="' + rawName + '"]:checked').length === 0) {
-                        alert('Please select at least one checkbox.');
-                        hasError = true;
-                    }else{
-                        alert('validation passed');
-                        hasError = false;
-                        return true; // skip this field
+                    if (field.data('validated')) return true;
+
+                    const group = $('input[name="' + rawName + '"]');
+                    group.data('validated', true);
+
+                    if (group.filter(':checked').length === 0) {
+                        $('#' + errorId).text('Please select at least one option.').show();
+                        isValid = false;
+                        return false;
+                    } else {
+                        $('#' + errorId).hide();
+                        return true;
                     }
                 }
 
