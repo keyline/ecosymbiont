@@ -958,7 +958,7 @@ use Illuminate\Support\Facades\DB;
                                             <select name="projects_name" class="form-control" id="projects_name">
                                                 <option value="" selected>Select</option>
                                                 <?php if($projects){ foreach($projects as $proj){?>
-                                                    <option value="<?=$proj->name?>" <?=(($projects_name == $proj->name)?'selected':'')?>><?=$proj->name?></option>
+                                                    <option value="<?=$proj->name?>" @selected(old("projects_name", $projects_name ?? '') == $proj->name)><?=$proj->name?></option>
                                                 <?php } }?>
                                             </select>
                                             <div id="projects_name-error" class="error"></div>
