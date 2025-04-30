@@ -951,7 +951,7 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>
                                 <!-- ?php dd($projects); ?> -->
-                                <div id="projectsDetails" style="display: none;">
+                                <div id="projectsDetails" style="display: {{ old('projects', $projects ?? '') == 'Yes' ? 'block' : 'none' }};">
                                     <div class="row mb-3">
                                         <label for="projects_info" class="col-md-2 col-lg-4 col-form-label blue-text">29A) Select Projects</label>
                                         <div class="col-md-10 col-lg-8">
