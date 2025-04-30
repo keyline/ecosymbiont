@@ -22,7 +22,7 @@
                                 </ul>
                                 
                                 <div class="custom-alert d-flex align-items-start">
-                                    <strong>Give today, so we can amplify the voices of more grassroots changemakers through EaRTh!</strong>
+                                    <strong class="font15">Give today, so we can amplify the voices of more grassroots changemakers through EaRTh!</strong>
                                 </div>
                             </div>
                         </div>
