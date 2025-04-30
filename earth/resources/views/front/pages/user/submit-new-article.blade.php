@@ -1261,33 +1261,30 @@ use Illuminate\Support\Facades\DB;
                 let name = rawName;
                 let hasError = false;
 
-                // Normalize name for [] fields
+                // Normalize name for checkbox groups (remove [])
                 if (rawName && rawName.endsWith('[]')) {
                     name = rawName.slice(0, -2);
                 }
 
                 const errorId = name + '-error';
 
-                // Skip specific fields if needed
-                if (name === 'community_name') {
-                    return true; // skip this field
+                if (name === 'community_name') return true; // Skip
+
+                // ✅ Checkbox group validation
+                if (type === 'checkbox' && rawName.endsWith('[]')) {
+                    if ($('input[name="' + rawName + '"]:checked').length === 0) {
+                        hasError = true;
+                    }
                 }
 
-                // ✅ Validation for checkbox groups
-                if (type === 'checkbox') {
-                    const group = $('input[name="' + rawName + '"]');
-                    if (group.length && group.filter(':checked').length === 0) {
-                        hasError = true;
-                    }
-                }
-                // ✅ Validation for radio groups
+                // ✅ Radio group validation
                 else if (type === 'radio') {
-                    const group = $('input[name="' + rawName + '"]');
-                    if (group.length && group.filter(':checked').length === 0) {
+                    if ($('input[name="' + rawName + '"]:checked').length === 0) {
                         hasError = true;
                     }
                 }
-                // ✅ Validation for other fields
+
+                // ✅ Other inputs
                 else if (
                     type === 'text' || type === 'number' || type === 'file' ||
                     tag === 'textarea' || tag === 'select'
@@ -1301,18 +1298,16 @@ use Illuminate\Support\Facades\DB;
                     $('#' + errorId).text('This field is required.').show();
                     field.focus();
                     isValid = false;
-                    return false; // break loop
+                    return false; // stop loop
                 } else {
                     $('#' + errorId).hide();
                 }
             });
 
-            if (!isValid) {
-                e.preventDefault(); // stop form submission
-            }
+            if (!isValid) e.preventDefault(); // block submit
         });
 
-        // ✅ Hide error on input or change
+        // ✅ Hide error on change
         $('#saveForm').on('change input', 'input, select, textarea', function () {
             const field = $(this);
             const type = field.attr('type');
@@ -1325,10 +1320,8 @@ use Illuminate\Support\Facades\DB;
 
             const errorId = name + '-error';
 
-            // Hide checkbox/radio group errors
-            if (type === 'radio' || type === 'checkbox') {
-                const group = $('input[name="' + rawName + '"]');
-                if (group.length && group.filter(':checked').length > 0) {
+            if ((type === 'checkbox' || type === 'radio') && rawName) {
+                if ($('input[name="' + rawName + '"]:checked').length > 0) {
                     $('#' + errorId).hide();
                 }
             } else {
@@ -1339,6 +1332,7 @@ use Illuminate\Support\Facades\DB;
         });
     });
 </script>
+
 
     <!--end all field that is required show error message  -->
     <script>
