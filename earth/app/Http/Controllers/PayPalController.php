@@ -87,9 +87,13 @@ class PayPalController extends Controller
      */
     public function paymentCancel($order_id)
     {
-        $id             = Helper::decoded($order_id);
-        $getOrder       = Donation::where('id', '=', $id)->first();
-        return redirect(url('order-failure/'.Helper::encoded($id)))->with('error_message', 'Payment Failed !!!');
+        // return redirect(url('order-failure/'.Helper::encoded($id)))->with('error_message', 'Payment Failed !!!');
+        $data['search_keyword']         = '';
+        $donation_id                    = Helper::decoded($order_id);
+        $data['donation']               = Donation::where('id', $donation_id)->first();
+        $title                          = 'Payment Failed';
+        $page_name                      = 'payment-cancel';
+        echo $this->front_before_login_layout($title, $page_name, $data);
     }
   
     /**
