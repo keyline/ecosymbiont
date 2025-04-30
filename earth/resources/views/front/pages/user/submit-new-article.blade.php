@@ -1159,7 +1159,7 @@ use Illuminate\Support\Facades\DB;
                     const tag = field.prop('tagName').toLowerCase();
                     let rawName = field.attr('name') || field.attr('id');
                     let name = rawName;
-                    alert(rawName);
+                    // alert(rawName);
                     let hasError = false;
                     // let errorId = name + '-error';
                     // if ($('#' + errorId).length === 0) {
