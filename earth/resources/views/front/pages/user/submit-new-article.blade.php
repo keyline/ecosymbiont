@@ -1276,6 +1276,7 @@ use Illuminate\Support\Facades\DB;
                         alert('Please select at least one checkbox.');
                         hasError = true;
                     }else{
+                        alert('validation passed');
                         hasError = false;
                     }
                 }
