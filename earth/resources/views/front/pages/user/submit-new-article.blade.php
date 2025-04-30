@@ -1187,8 +1187,8 @@ use Illuminate\Support\Facades\DB;
                         return true; // skip this field
                     }
 
-                    if (name === 'co_ecosystem_affiliation_{{$i}}[]') {
-                        return true; // skip this field
+                    if (rawName && rawName.startsWith('co_ecosystem_affiliation_') && rawName.endsWith('[]')) {
+                        return true; // skip these checkbox fields
                     }
 
                     // Validation for checkbox and radio groups
