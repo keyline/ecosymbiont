@@ -91,7 +91,7 @@ use Illuminate\Support\Facades\DB;
                 $co_indigenous_affiliations = json_decode($row->co_indigenous_affiliations);
                 $co_author_classification = json_decode($row->co_author_classification);
                 $co_author_pronoun = json_decode($row->co_author_pronoun);
-                dd($co_author_pronoun);
+                // dd($co_author_pronoun);
                 $first_name = $row->first_name;
                 $email = $row->email;
                 $for_publication_name = $row->for_publication_name;
@@ -386,23 +386,7 @@ use Illuminate\Support\Facades\DB;
                                                 <div class="row">
                                                     <label for="pronoun" class="col-md-2 col-lg-4 col-form-label">3I{{$i}}) <?=numberToOrdinal($i)?> co-author’s pronoun</label>
                                                     <div class="col-md-10 col-lg-8">
-                                                        <!-- @if ($pronoun)
-                                                            @foreach ($pronoun as $data)
-                                                                ?php
-                                                                if($co_author_pronoun != ''){
-                                                                    if($data->id == $co_author_pronoun[$i - 1]){
-                                                                        $pronoun_checked = 'checked';
-                                                                    } else {
-                                                                        $pronoun_checked = '';
-                                                                    }
-                                                                } else {
-                                                                    $pronoun_checked = '';
-                                                                }
-                                                                ?>
-                                                                <input type="radio" name="co_author_pronoun_{{$i}}" value="{{ $data->id }}" ?=$pronoun_checked?>>
-                                                                <label>{{ $data->name }}</label>
-                                                            @endforeach
-                                                        @endif   -->
+                                                        
                                                         @if ($pronoun)
                                                             @foreach ($pronoun as $data)
                                                                 <input type="radio" name="co_author_pronoun_{{$i}}" value="{{ $data->id }}" @checked(old("co_author_pronoun_{$i}" == $data->id)>
