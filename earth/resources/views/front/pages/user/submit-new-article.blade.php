@@ -261,8 +261,9 @@ use Illuminate\Support\Facades\DB;
                                     <label for="1">1</label>
                                     <input type="radio" id="co_authors_2" name="co_authors" value="2" required @checked(old('co_authors', $co_authors ?? '') == '2')>
                                     <label for="2">2</label>
+                                    <div id="co_authors-error" class="error" style="display: none;"></div>
                                 </div>
-                                <!-- <div id="co_authors-error" class="error" style="display: none;"></div> -->
+                                
                             </div>
                             <div id="co_authors_position" style="display: none;border: 1px solid #000; padding: 10px; border-radius: 7px; margin-bottom: 20px;">
                                 <div class="row mb-3">
@@ -275,6 +276,7 @@ use Illuminate\Support\Facades\DB;
                                         <label for="Second position">Second position</label>
                                         <input type="radio" id="" name="co_authors_position" value="Third position" @checked(old('co_authors_position', $co_authors_position ?? '') == 'Third position')>
                                         <label for="Third position">Third position</label>
+                                        <div id="co_authors_position-error" class="error"></div>
                                     </div>
                                 </div>                                
                                 <div id="artimageFieldsContainer">
@@ -287,6 +289,7 @@ use Illuminate\Support\Facades\DB;
                                                     <div class="col-md-10 col-lg-8">
                                                         <input type="text" name="co_author_name_{{$i}}" class="form-control" id="co_author_name_{{$i}}"
                                                         value="{{ old("co_author_name_$i", $co_author_name[$i - 1] ?? '') }}">
+                                                        <div id="co_author_name_{{$i}}-error" class="error"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -297,6 +300,7 @@ use Illuminate\Support\Facades\DB;
                                                         <input type="text" name="co_author_short_bio_{{$i}}" class="form-control" id="co_author_short_bio_{{$i}}"
                                                         value="{{ old("co_author_short_bio_$i", $co_author_short_bio[$i - 1] ?? '') }}">
                                                         <div id="co_author_short_bio_{{$i}}Error" class="error"></div>
+                                                        <div id="co_author_short_bio_{{$i}}-error" class="error"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -314,6 +318,7 @@ use Illuminate\Support\Facades\DB;
                                                                 @endforeach
                                                             @endif
                                                         </select>
+                                                        <div id="co_author_country_{{$i}}-error" class="error"></div>
                                                     </div>
                                                 </div>                                        
                                             </div>
@@ -324,6 +329,7 @@ use Illuminate\Support\Facades\DB;
                                                     <div class="col-md-10 col-lg-8">
                                                         <input type="text" name="co_authororganization_name_{{$i}}" class="form-control" id="co_authororganization_name_{{$i}}"
                                                         value="{{ old("co_authororganization_name_$i", $co_authororganization_name[$i - 1] ?? '') }}">
+                                                        <div id="co_authororganization_name_{{$i}}-error" class="error"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -341,6 +347,7 @@ use Illuminate\Support\Facades\DB;
                                                                 {{ $data->name }}<br>
                                                             @endforeach
                                                         @endif
+                                                        <div id="co_ecosystem_affiliation_{{$i}}-error" class="error"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -351,6 +358,7 @@ use Illuminate\Support\Facades\DB;
                                                     <div class="col-md-10 col-lg-8">
                                                         <input type="text" name="co_indigenous_affiliation_{{$i}}" class="form-control" id="indigenous_affiliation_{{$i}}"
                                                         value="{{ old("co_indigenous_affiliation_$i", $co_indigenous_affiliation[$i - 1] ?? '') }}" >
+                                                        <div id="co_indigenous_affiliation_{{$i}}-error" class="error"></div>
                                                     </div>
                                                 </div>
                                             </div> 
@@ -369,6 +377,7 @@ use Illuminate\Support\Facades\DB;
                                                         <input type="radio" id="Movement" name="co_author_classification_{{$i}}" value="Movement" 
                                                             @checked(old("co_author_classification_{$i}", $co_author_classification[$i - 1] ?? '') == 'Movement')>
                                                         <label for="Movement">Movement</label>
+                                                        <div id="co_author_classification_{{$i}}-error" class="error"></div>
                                                     </div>
                                                 </div> 
                                             </div>
@@ -392,7 +401,8 @@ use Illuminate\Support\Facades\DB;
                                                                 <input type="radio" name="co_author_pronoun_{{$i}}" value="{{ $data->id }}" <?=$pronoun_checked?>>
                                                                 <label>{{ $data->name }}</label>
                                                             @endforeach
-                                                        @endif                                
+                                                        @endif  
+                                                        <div id="co_author_pronoun_{{$i}}-error" class="error"></div>                              
                                                     </div>
                                                 </div>
                                             </div>
@@ -450,8 +460,9 @@ use Illuminate\Support\Facades\DB;
                                     <label for="yes">Yes</label>
                                     <input type="radio" id="no" name="orginal_work" value="No" required @checked(old('orginal_work', $orginal_work ?? '') == 'No') onclick="showModal()">
                                     <label for="no">No</label>
+                                    <div id="orginal_work-error" class="error" style="display: none;"></div>
                                 </div>
-                                <!-- <div id="orginal_work-error" class="error" style="display: none;"></div> -->
+                                
                             </div>
                             <div class="row mb-3">
                                 <label for="copyright" class="col-md-2 col-lg-4 col-form-label blue-text">9) Do you own the copyright and licensing rights to all components of your Creative-Work?
@@ -461,8 +472,9 @@ use Illuminate\Support\Facades\DB;
                                     <label for="yes">Yes</label>
                                     <input type="radio" id="no" name="copyright" value="No" required @checked(old('copyright', $copyright ?? '') == 'No') onclick="showModal()">
                                     <label for="no">No</label>
+                                    <div id="copyright-error" class="error" style="display: none;"></div>
                                 </div>
-                                <!-- <div id="copyright-error" class="error" style="display: none;"></div> -->
+                                
                             </div>                              
                             <!-- Modal -->
                             <!-- <div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
@@ -559,6 +571,7 @@ use Illuminate\Support\Facades\DB;
                                             @endforeach
                                         @endforeach
                                     @endif 
+                                    <div id="section_ert-error" class="error" style="display: none;"></div>
                                                                         
                                     </div>
                                 </div>     
@@ -568,6 +581,7 @@ use Illuminate\Support\Facades\DB;
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="creative_Work" name="creative_Work" rows="4" cols="50"  required>{{ old('creative_Work', $creative_Work ?? '') }}</textarea>
                                         <div id="creative_WorkError" class="error"></div>
+                                        <div id="creative_Work-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -578,6 +592,7 @@ use Illuminate\Support\Facades\DB;
                                         <label for="fiction_yes">Yes</label>
                                         <input type="radio" id="fiction_no" name="creative_Work_fiction" value="No" required @checked(old('creative_Work_fiction', $creative_Work_fiction) == 'No')>
                                         <label for="fiction_no">No</label>
+                                        <div id="creative_Work_fiction-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -586,6 +601,7 @@ use Illuminate\Support\Facades\DB;
                                     <div class="col-md-10 col-lg-8">
                                         <textarea name="subtitle" class="form-control" id="subtitle" rows="3" required>{{ old('subtitle', $subtitle ?? '') }}</textarea>
                                         <div id="subtitleError" class="error"></div>
+                                        <div id="subtitle-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -601,15 +617,15 @@ use Illuminate\Support\Facades\DB;
                                             <input type="radio" id="submission_types_<?=$data->id?>" name="submission_types" value="<?php echo $data->id ?>" required @checked(old('submission_types') == $data->id)>
                                             <label for="submission_types"><?php echo $data->name?></label><br>
                                         @endfor
-                                    @endif                            
+                                    @endif       
+                                    <div id="submission_types-error" class="error"></div>                     
                                     </div>
                                 </div>                                
                                 <div id="submission_types_a" style="display: none; border: 1px solid #000; padding: 10px; border-radius: 7px; margin-bottom: 20px">
                                     <div class="row mb-3">
                                         <label for="narrative_file" class="col-md-2 col-lg-4 col-form-label">17A1) TYPE A: word narrative (no embedded images) (500-1000 words for prose, 100-250 words for poetry)</label>
                                         <div class="col-md-10 col-lg-8">
-                                            <input type="file" name="narrative_file" class="form-control" id="narrative_file">
-                                            <!-- <span>{{ session('narrative_file') }}</span> -->
+                                            <input type="file" name="narrative_file" class="form-control" id="narrative_file">                                            
                                             <small class="text-info">* Only DOC files are allowed (Max 1 MB)</small><br>
                                             <span id="narrative_file_error" class="text-danger"></span>
                                             <?php if($narrative_file != ''){?>
@@ -621,6 +637,7 @@ use Illuminate\Support\Facades\DB;
                                             <?php } else {?>
                                             <img src="<?=env('NO_IMAGE')?>" alt="narrative_file" class="img-thumbnail" style="width: 150px; height: 150px; margin-top: 10px;">
                                             <?php }?> -->
+                                            <span id="narrative_file-error" class="error"></span>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -650,7 +667,8 @@ use Illuminate\Support\Facades\DB;
                                             <input type="radio" id="narrative_images_5" name="narrative_images" value="5" 
                                             @checked((old('narrative_images') == '5') || 
                                             (isset($narrative_images) && $narrative_images == '5'))>                                        
-                                            <label for="5">5</label>                                        
+                                            <label for="5">5</label>  
+                                            <div id="narrative_images-error" class="error"></div>                                      
                                         </div>
                                     </div>
                                     <!-- Image upload and description divs (hidden initially) -->
@@ -668,6 +686,7 @@ use Illuminate\Support\Facades\DB;
                                                             <?php if(isset($image_files[0]) && $image_files[0] != ''){?>
                                                             <img src="<?=env('UPLOADS_URL').'narrative/'.$image_files[0]?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
                                                             <?php }?>
+                                                            <div id="image_file_1-error" class="error"></div>
                                                         </div>
                                                     </div>                                    
                                                 </div>
@@ -677,6 +696,7 @@ use Illuminate\Support\Facades\DB;
                                                         <div class="col-md-10 col-lg-8">
                                                             <textarea class="form-control" id="narrative_image_desc_1" name="narrative_image_desc_1" rows="4" cols="50"><?php if(isset($narrative_image_desc[0]) && $narrative_image_desc[0] != '') { echo $narrative_image_desc[0]; } ?></textarea>
                                                             <div id="narrative_image_desc_1Error" class="error"></div>
+                                                            <div id="narrative_image_desc_1-error" class="error"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -697,6 +717,7 @@ use Illuminate\Support\Facades\DB;
                                                             <?php if(isset($image_files[$i-1]) && $image_files[$i-1] != ''){?>
                                                             <img src="<?=env('UPLOADS_URL').'narrative/'.$image_files[$i-1]?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
                                                             <?php }?>
+                                                            <div id="image_file_{{ $i }}-error" class="error"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -706,6 +727,7 @@ use Illuminate\Support\Facades\DB;
                                                         <div class="col-md-10 col-lg-8">
                                                             <textarea class="form-control" id="narrative_image_desc_{{ $i }}" name="narrative_image_desc_{{ $i }}" rows="4" cols="50"><?php if(isset($narrative_image_desc[$i-1]) && $narrative_image_desc[$i-1] != '') { echo $narrative_image_desc[$i-1]; }?></textarea>
                                                             <div id="narrative_image_desc_{{ $i }}Error" class="error"></div>
+                                                            <div id="narrative_image_desc_{{ $i }}-error" class="error"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -730,6 +752,7 @@ use Illuminate\Support\Facades\DB;
                                             <label for="5">5</label>
                                         </div>
                                         <div id="image-error-msg" class="error" style="display:none; color:red;"></div>
+                                        <div id="art_images-error" class="error"></div>
                                     </div>
 
                                     <!-- Image upload and description divs (hidden initially) -->
@@ -743,7 +766,8 @@ use Illuminate\Support\Facades\DB;
                                                         <div class="col-md-10 col-lg-8">
                                                             <input type="file" name="art_image_file_{{ $i }}" class="form-control" id="art_image_file_{{ $i }}">
                                                             <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed (max. 1 MB)</small>
-                                                            <span id="art_image_file_{{ $i }}_error" class="text-danger"></span>                                                        
+                                                            <span id="art_image_file_{{ $i }}_error" class="text-danger"></span>     
+                                                            <div id="art_image_file_{{ $i }}-error" class="error"></div>                                                   
                                                             <?php if(isset($art_image_file[$i-1]) && $art_image_file[$i-1] != ''){?>
                                                             <img src="<?=env('UPLOADS_URL').'art_image/'.$art_image_file[$i-1]?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
                                                             <?php }?>
@@ -756,6 +780,7 @@ use Illuminate\Support\Facades\DB;
                                                         <div class="col-md-10 col-lg-8">
                                                             <textarea style="resize: none; height: 180px;" class="form-control" id="art_image_desc_{{ $i }}" name="art_image_desc_{{ $i }}" rows="4" cols="50"><?php if(isset($art_image_desc[$i-1]) && $art_image_desc[$i-1] != '') { echo $art_image_desc[$i-1]; }?></textarea>
                                                             <div id="art_image_desc_{{ $i }}Error" class="error"></div>
+                                                            <div id="art_image_desc_{{ $i }}-error" class="error"></div>
                                                         </div>
                                                     </div>
                                                 </div>                                                                                        
@@ -769,6 +794,7 @@ use Illuminate\Support\Facades\DB;
                                         <div class="col-md-10 col-lg-8">
                                             <textarea class="form-control" id="art_desc" name="art_desc" rows="4" cols="50">{{ old('art_desc', $art_desc ?? '') }}</textarea>
                                             <div id="art_descError" class="error"></div>
+                                            <div id="art_desc-error" class="error"></div>
                                         </div>
                                     </div>                           
                                 </div>
@@ -784,7 +810,8 @@ use Illuminate\Support\Facades\DB;
                                                     <source src="<?=env('UPLOADS_URL').'art_video/'.$art_video_file?>" type="video/mp4">
                                                     Your browser does not support the video tag.
                                                 </video>                                        
-                                            <?php } ?>                                                                                
+                                            <?php } ?> 
+                                            <div id="art_video_file-error" class="error"></div>                                                                               
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -793,6 +820,7 @@ use Illuminate\Support\Facades\DB;
                                         <div class="col-md-10 col-lg-8">
                                             <textarea class="form-control" id="art_video_desc" name="art_video_desc" rows="4" cols="50">{{ old('art_video_desc', $art_video_desc ?? '') }}</textarea>
                                             <div id="art_video_descError" class="error"></div>
+                                            <div id="art_video_desc-error" class="error"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -928,6 +956,7 @@ use Illuminate\Support\Facades\DB;
                                         <label for="yes">Yes</label>
                                         <input type="radio" id="projects_no" name="projects" value="No" required @checked(old('projects', $projects) == 'No')>
                                         <label for="no">No</label>
+                                        <div id="projects-error" class="error"></div>
                                     </div>
                                 </div>
                                 <!-- ?php dd($projects); ?> -->
@@ -941,6 +970,7 @@ use Illuminate\Support\Facades\DB;
                                                     <option value="<?=$proj->name?>" <?=(($projects_name == $proj->name)?'selected':'')?>><?=$proj->name?></option>
                                                 <?php } }?>
                                             </select>
+                                            <div id="projects_name-error" class="error"></div>
                                             <!-- <input type="hidden" name="projects_name" value="{{ $projects_name }}"> -->
                                         </div>
                                     </div> 
@@ -974,6 +1004,7 @@ use Illuminate\Support\Facades\DB;
                                         <label for="series_yes">Yes</label>
                                         <input type="radio" id="series_no" name="is_series" value="No" <?=(($is_series == 'No')?'checked':'')?> required>
                                         <label for="series_no">No</label>
+                                        <div id="is_series-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
@@ -981,6 +1012,7 @@ use Illuminate\Support\Facades\DB;
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="number" name="series_article_no" class="form-control" id="series_article_no" min="1" value="<?=$series_article_no?>">
+                                        <div id="series_article_no-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
@@ -988,14 +1020,16 @@ use Illuminate\Support\Facades\DB;
                                     </label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="current_article_no" class="form-control" id="current_article_no" value="<?=$current_article_no?>">
+                                        <div id="current_article_no-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
                                     <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label blue-text">32c) List (in order is submission) the SRNs of each previously submitted creative-work in series (enter a comma after each SRN)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="text" class="form-control" id="input-tags">
+                                        <input type="text" name="input-tags" class="form-control" id="input-tags">
                                         <div id="validation-msg" style="color:red; font-size: 0.9em;"></div>
+                                        <div id="input-tags-error" class="error"></div>
                                         <textarea class="form-control" name="other_article_part_doi_no" id="other_article_part_doi_no" style="display:none;"><?=$other_article_part_doi_no?></textarea>
                                         <small class="text-primary">Type a comma after each SRN</small>
                                         <div id="badge-container">
@@ -1079,9 +1113,10 @@ use Illuminate\Support\Facades\DB;
                                         <p>iv. <span style="width:5.24pt; text-indent:0pt; display:inline-block;">&nbsp;</span>AND, no other person nor entity has any copyright interest in the Contribution.</p>                                        
                                         </div>
                                         <!-- NELP form content -->
-                                        <input type="checkbox" id="acknowledge" name="acknowledge" value="1" required>
+                                        <input type="checkbox" id="acknowledge" name="acknowledge" value="1" required>                                        
                                         <!-- <label for="acknowledge">I understand</label> -->                                         
                                         <label for="acknowledge">By clicking this box I sign the NELP provided directly above.</label>
+                                        <div id="acknowledge-error" class="error"></div>
                                     </div>
                                 </div>                              
                             </div>                  
@@ -1101,45 +1136,14 @@ use Illuminate\Support\Facades\DB;
 <!-- End block content -->
 <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <!-- Popup Div (Initially hidden) -->
     <div id="popup">
       <h3><i class="bi bi-exclamation-triangle-fill"></i> Warning</h3>
       <p>You must submit an original Creative-Work and you must own the copyright and licensing rights to your original Creative-Work.</p>
       <button id="closePopup">Close</button>
     </div>     
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- <script>
-    $('#saveForm').on('submit', function (e) {
-    // Check built-in HTML5 validity
-    if (!this.checkValidity()) {
-        // Let the browser handle showing messages
-        e.preventDefault();
-        this.reportValidity(); // Optional: shows browser popup
-        return;
-    }
-    });
-    </script> -->
-    <!-- <script>
-       $('#submitButton').on('click', function (e) {
-        let isValid = true;
-
-        $('input[type="radio"][required]').each(function () {
-            const name = $(this).attr('name');
-            if ($('input[name="' + name + '"]:checked').length === 0) {
-                $('#'+name+'-error').text('This field is required.').show();
-                $('input[name="' + name + '"]').first().focus();
-                isValid = false;
-                return false; // break loop on first error
-            } else {
-                $('#'+name+'-error').hide();
-            }
-        });
-
-        if (!isValid) {
-            e.preventDefault();
-        }
-    });
-    </script> -->
+     
     <script>
         $(document).ready(function () {
             // Initially hide the popup
@@ -1163,7 +1167,86 @@ use Illuminate\Support\Facades\DB;
             });
         });
     </script>
-    <!-- Popup end (Initially hidden) -->
+    <!-- Popup end (Initially hidden) --> 
+
+    <!-- all field that is required show error message  -->
+    <script>
+        $(document).ready(function () {
+            $('#saveForm #submitButton').on('click', function (e) {
+                let isValid = true;
+
+                $('#saveForm [required]:not(:disabled):not([type="hidden"])').each(function () {
+                    const field = $(this);
+                    const type = field.attr('type');
+                    const tag = field.prop('tagName').toLowerCase();
+                    let name = field.attr('name') || field.attr('id');
+                    let hasError = false;
+
+                    // Normalize name for [] fields (like checkbox groups)
+                    if (name && name.endsWith('[]')) {
+                        name = name.slice(0, -2);
+                    }
+
+                    // ❗ Skip specific field
+                    if (name === 'community_name') {
+                        return true; // skip this field
+                    }
+
+                    // Validation for checkbox and radio groups
+                    if (type === 'checkbox' || type === 'radio') {
+                        if ($('input[name="' + name + '[]"]:checked').length === 0 &&
+                            $('input[name="' + name + '"]:checked').length === 0) {
+                            hasError = true;
+                        }
+                    }
+                    // Validation for other inputs
+                    else if (type === 'text' || type === 'number' || type === 'file' || tag === 'textarea' || tag === 'select') {
+                        if ($.trim(field.val()) === '' || field.val() === null) {
+                            hasError = true;
+                        }
+                    }
+
+                    if (hasError) {
+                        $('#' + name + '-error').text('This field is required.').show();
+                        field.focus();
+                        isValid = false;
+                        return false; // stop loop
+                    } else {
+                        $('#' + name + '-error').hide();
+                    }
+                });
+
+                if (!isValid) {
+                    e.preventDefault(); // stop form submission
+                }
+            });
+
+            // Hide error on interaction
+            $('#saveForm').on('change input', 'input, select, textarea', function () {
+                const field = $(this);
+                const type = field.attr('type');
+                let name = field.attr('name') || field.attr('id');
+
+                // Normalize name
+                if (name && name.endsWith('[]')) {
+                    name = name.slice(0, -2);
+                }
+
+                if (type === 'radio' || type === 'checkbox') {
+                    if ($('input[name="' + name + '[]"]:checked').length > 0 ||
+                        $('input[name="' + name + '"]:checked').length > 0) {
+                        $('#' + name + '-error').hide();
+                    }
+                } else {
+                    if ($.trim(field.val()) !== '') {
+                        $('#' + name + '-error').hide();
+                    }
+                }
+            });
+        });
+    </script>
+    <!--end all field that is required show error message  -->
+    
     <!-- Function to show/hide the invited and participated fields -->
     <script>
         $(document).ready(function() {
@@ -1232,65 +1315,55 @@ use Illuminate\Support\Facades\DB;
         });
     </script>
     <!-- End Function to show/hide the invited and participated fields -->
-    <!-- Function to toggle the co-authors position section -->
-    <script>
-        // Function to toggle the co-authors position section
-        function toggleCoAuthorsPosition() {
-            var coAuthors = document.querySelector('input[name="co_authors"]:checked').value;
-            var positionDiv = document.getElementById('co_authors_position');   
-            const positionInputs = document.querySelectorAll('input[name="co_authors_position"]'); 
-            
-            if (coAuthors == '1' || coAuthors == '2') {
-                positionDiv.style.display = 'block';
-                positionInputs.forEach(input => input.setAttribute('required', 'required'));
-            } else {
-                positionDiv.style.display = 'none';
-                positionInputs.forEach(input => input.removeAttribute('required'));
-            }        
-        }
 
-        // Add event listeners to co-author radio buttons
-        document.querySelectorAll('input[name="co_authors"]').forEach(function(element) {
-            element.addEventListener('change', toggleCoAuthorsPosition);
-        });    
-
-        // Run the function on page load to ensure correct state
-        document.addEventListener('DOMContentLoaded', toggleCoAuthorsPosition);
-    </script>
-    <!--End Function to toggle the co-authors position section -->
-    <!-- Show only the number of co_authors selected -->
+    <!--Function to toggle co-authors position details section -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const coAuthorsRadios = document.querySelectorAll('input[name="co_authors"]');
+            const positionDiv = document.getElementById('co_authors_position');   
+            const positionInputs = document.querySelectorAll('input[name="co_authors_position"]');
 
-            // Listen for changes to the co_authors radio buttons
+            function toggleCoAuthorsFields(count) {
+                // Show/hide and set/remove required on author cards
+                for (let i = 1; i <= 2; i++) {
+                    const card = document.getElementById('author_card_' + i);
+                    const inputs = card.querySelectorAll('input, select');
+
+                    if (i <= count) {
+                        card.style.display = 'block';
+                        inputs.forEach(input => input.setAttribute('required', 'required'));
+                    } else {
+                        card.style.display = 'none';
+                        inputs.forEach(input => input.removeAttribute('required'));
+                    }
+                }
+
+                // Show/hide and manage required for co-author positions
+                if (count === 1 || count === 2) {
+                    positionDiv.style.display = 'block';
+                    positionInputs.forEach(input => input.setAttribute('required', 'required'));
+                } else {
+                    positionDiv.style.display = 'none';
+                    positionInputs.forEach(input => input.removeAttribute('required'));
+                }
+            }
+
+            // Attach listener to co-author radio buttons
             coAuthorsRadios.forEach(radio => {
                 radio.addEventListener('change', function () {
-                    const selectedValue = this.value;
-                    toggleCoAuthorsFields(selectedValue);
+                    toggleCoAuthorsFields(parseInt(this.value));
                 });
             });
 
-            function toggleCoAuthorsFields(count) {
-                // Hide all co-author fields initially
-                for (let i = 1; i <= 2; i++) {
-                    document.getElementById('author_card_' + i).style.display = 'none';
-                }
-
-                // Show only the necessary fields based on the selected number of co-authors
-                for (let i = 1; i <= count; i++) {
-                    document.getElementById('author_card_' + i).style.display = 'block';
-                }        
-            }
-
-            // Initialize the form with the correct fields displayed if a value is already selected
+            // Initialize on page load
             const initialSelectedValue = document.querySelector('input[name="co_authors"]:checked');
             if (initialSelectedValue) {
-                toggleCoAuthorsFields(initialSelectedValue.value);
+                toggleCoAuthorsFields(parseInt(initialSelectedValue.value));
             }
         });
     </script>
-    <!--End Show only the number of co_authors selected -->
+    <!--End Function to toggle co-authors details section -->
+   
     <!-- Function to toggle the submission_types position section -->
     <script>    
         function togglesubmissionTypes() {        
@@ -1339,6 +1412,7 @@ use Illuminate\Support\Facades\DB;
             // togglesubmissionTypes();    
     </script>
     <!--End Function to toggle the submission_types position section -->
+
     <!-- Show only the number of narrative images selected -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -1373,6 +1447,7 @@ use Illuminate\Support\Facades\DB;
         });
     </script>
     <!--End Show only the number of narrative images selected -->
+
     <!-- Show only the number of art images selected -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -1408,68 +1483,37 @@ use Illuminate\Support\Facades\DB;
         });
     </script>
     <!-- End Show only the number of art images selected -->
-    <!-- Add real-time size validation script -->
+
+    <!-- Add real-time size and file type validation script -->
     <script>
         document.getElementById('narrative_file').addEventListener('change', function() {
-            validateFileSize(this, 'narrative_file_error');
+            // validateFileSize(this, 'narrative_file_error');
+            validateFileType(this, 'narrative_file_error');
         });
         
         document.getElementById('image_file_1').addEventListener('change', function() {
-            validateFileSize(this, 'image_file_1_error');
+            validateFileType(this, 'image_file_1_error');
         });
 
         @for ($i = 2; $i <= 5; $i++)
         document.getElementById('image_file_{{ $i }}').addEventListener('change', function() {
-            validateFileSize(this, 'image_file_{{ $i }}_error');
+            validateFileType(this, 'image_file_{{ $i }}_error');
         });
-        @endfor
+        @endfor        
 
-        document.addEventListener('change', function (event) {
-            // Check if the event target is an input file with the required ID format
-            if (event.target && event.target.id.startsWith('image_file_')) {
-                const inputId = event.target.id;
-                const errorId = inputId + '_error'; // Construct the error span ID dynamically
-                validateFileSize(event.target, errorId);
-            }
-        });
-
-        @for ($i = 2; $i <= 5; $i++)
+        @for ($i = 1; $i <= 5; $i++)
         document.getElementById('art_image_file_{{ $i }}').addEventListener('change', function() {
-            validateFileSize(this, 'art_image_file_{{ $i }}_error');
+            validateFileType(this, 'art_image_file_{{ $i }}_error');
         });
         @endfor
-
-        document.addEventListener('change', function (event) {
-            // Check if the event target is an input file with the required ID format
-            if (event.target && event.target.id.startsWith('art_image_file_')) {
-                const inputId = event.target.id;
-                const errorId = inputId + '_error'; // Construct the error span ID dynamically
-                validateFileSize(event.target, errorId);
-            }
-        });      
-        
+    
         document.getElementById('art_video_file').addEventListener('change', function() {
             validateVideoFile(this, 'art_video_file_error');
-        });
-
-        // Add similar event listeners for other file inputs
-
-        function validateFileSize(input, errorElementId) {
-            var file = input.files[0];
-            var maxSize = 1 * 1024 * 1024; // 1MB in bytes
-
-            if (file.size > maxSize) {
-                // alert('File size exceeds 1MB. Please upload a smaller file.');
-                document.getElementById(errorElementId).innerText = "File size exceeds 1MB. Please upload a smaller file.";
-                input.value = ''; // Clear the input if validation fails
-            } else{
-                document.getElementById(errorElementId).innerText = "";
-        }
-        }
+        });        
 
         function validateVideoFile(input, errorElementId) {
             var file = input.files[0];
-            console.log(file);
+            // console.log(file);
             var allowedExtensions = ['mp4', 'avi', 'mov', 'mkv', 'webm'];
             var fileSizeLimit = 1073741824; // 1GB in bytes
 
@@ -1497,8 +1541,64 @@ use Illuminate\Support\Facades\DB;
                 document.getElementById(errorElementId).innerText = '';
             }
         }
+
+        
+        function validateFileType(input, errorElementId) {
+            const file = input.files[0];
+            const inputName = input.getAttribute('name');            
+            const errorElement = document.getElementById(errorElementId);
+            
+            // Define allowed types
+            const docExtensions = ['.doc', '.docx'];
+            const imageExtensions = ['.jpg', '.jpeg', '.png', '.svg', '.ico'];
+
+            if (!file) {
+                errorElement.innerText = '';
+                return;
+            }
+
+            const fileName = file.name.toLowerCase();
+            const fileExtension = fileName.substring(fileName.lastIndexOf('.'));
+            const fileSize = file.size;
+            let allowedExtensions = [];
+            let errorMsg = '';
+
+            // Determine type of file field
+            if (inputName === 'narrative_file') {
+                allowedExtensions = docExtensions;
+                errorMsg = "❌ Only DOC or DOCX files are allowed (Max 1 MB).";
+            } else if (/^image_file_[1-5]$/.test(inputName)) {
+                allowedExtensions = imageExtensions;
+                errorMsg = "❌ Only image files (JPG, PNG, etc.) are allowed (Max 1 MB).";
+            } else if (/^art_image_file_[1-5]$/.test(inputName)) {
+                allowedExtensions = imageExtensions;
+                errorMsg = "❌ Only image files (JPG, PNG, etc.) are allowed (Max 1 MB).";
+            } else {
+                errorElement.innerText = "❌ Invalid input field.";
+                input.value = '';
+                return;
+            }
+
+            // Check extension
+            if (!allowedExtensions.includes(fileExtension)) {
+                errorElement.innerText = errorMsg;
+                input.value = '';
+                return;
+            }
+
+            // Check size
+            if (fileSize > 1 * 1024 * 1024) {
+                errorElement.innerText = "❌ File size exceeds 1 MB.";
+                input.value = '';
+                return;
+            }
+
+            // All good
+            errorElement.innerText = '';
+        }                                
     </script>
-    <!-- End real-time size validation script -->
+    <!-- End real-time size and file type validation script -->
+
     <!-- all word count validation -->
     <script>
         function checkWordLimit(field, limit, errorField) {
@@ -1522,9 +1622,7 @@ use Illuminate\Support\Facades\DB;
         }
 
         function validateForm() {
-            let allValid = true;
-            // allValid &= checkWordLimit(document.getElementById('explanation'), 100, 'explanationError');
-            // allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');
+            let allValid = true;            
             allValid &= checkWordLimit(document.getElementById('creative_Work'), 10, 'creative_WorkError');
             allValid &= checkWordLimit(document.getElementById('subtitle'), 40, 'subtitleError');
             allValid &= checkWordLimit(document.getElementById('additional_information'), 100, 'additional_informationError');
@@ -1568,6 +1666,7 @@ use Illuminate\Support\Facades\DB;
         }
     </script>
     <!-- End all word count validation -->
+
     <!-- prefill radio button value -->
     <script>
         // Prevent changes to the radio buttons
@@ -1587,12 +1686,12 @@ use Illuminate\Support\Facades\DB;
                 $(".series_yes").show();
                 $('#series_article_no').attr('required', true);
                 $('#current_article_no').attr('required', true);
-                $('#other_article_part_doi_no').attr('required', true);
+                $('#input-tags').attr('required', true);
             } else {
                 $(".series_yes").hide();
                 $('#series_article_no').attr('required', false);
                 $('#current_article_no').attr('required', false);
-                $('#other_article_part_doi_no').attr('required', false);
+                $('#input-tags').attr('required', false);
             }
             
             $('input[name="is_series"]').change(function() {
@@ -1600,24 +1699,24 @@ use Illuminate\Support\Facades\DB;
                     $(".series_yes").show();
                     $('#series_article_no').attr('required', true);
                     $('#current_article_no').attr('required', true);
-                    $('#other_article_part_doi_no').attr('required', true);
+                    $('#input-tags').attr('required', true);
                 } else {
                     $(".series_yes").hide();
                     $('#series_article_no').attr('required', false);
                     $('#current_article_no').attr('required', false);
-                    $('#other_article_part_doi_no').attr('required', false);
+                    $('#input-tags').attr('required', false);
                 }
             });
             $('#current_article_no').on('input', function(){
                 var current_article_no = parseInt($('#current_article_no').val());
                 if(current_article_no <= 1){
                     $('#current_article_no').attr('required', false);
-                    $('#other_article_part_doi_no').attr('required', false);
+                    $('#input-tags').attr('required', false);
                 } else {
                     $('#current_article_no').attr('required', true);
-                    $('#other_article_part_doi_no').attr('required', true);
+                    $('#input-tags').attr('required', true);
                 }
-            });
+            });            
         });
     </script>
 
@@ -1631,6 +1730,10 @@ use Illuminate\Support\Facades\DB;
 
             $('#input-tags').on('input', function () {
                 var input = $(this).val().trim();
+                if (input.length > 0) {
+                    $(this).removeAttr('required'); // remove required
+                    // $('#input-tags-error').hide();  // hide any previous error
+                }
                 $('#validation-msg').text('').hide();  // 🛠️ Hide old error immediately
                 // When comma is typed
                 if (input.includes(',')) {

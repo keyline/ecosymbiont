@@ -22,9 +22,9 @@
                               @endif
                             </div>
                             <div class="col-md-12">
-                              <p style="color:red; font-style: italic;font-size: 14px;text-align: justify;">
+                              {{-- <p style="color:red; font-style: italic;font-size: 14px;text-align: justify;">
                                 We are experiencing some technical difficulties; if you see an error message after entering your information and clicking the "Submit" button, please refresh your screen and try a second time to enter your information and hit "Submit." We apologize for the inconvenience.
-                              </p>
+                              </p> --}}
                               <div class="card">
                                 <div class="card-body">
                                     <h2 class="text-center"><?=$page_header?></h2>

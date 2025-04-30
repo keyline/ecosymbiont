@@ -1,8 +1,7 @@
 <?php
-
 use App\Http\Controllers\Admin\ScrollNoticeController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PayPalController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,6 +43,15 @@ use Illuminate\Support\Facades\Route;
         Route::match(['get', 'post'], '/search_result_load', 'App\Http\Controllers\FrontController@search_result_load');
         Route::match(['get', 'post'], '/advance-search-result', 'App\Http\Controllers\FrontController@advance_search_result');
         Route::match(['get', 'post'], '/advance_search_result_load', 'App\Http\Controllers\FrontController@advance_search_result_load');
+
+        Route::match(['get', 'post'], '/donation', 'App\Http\Controllers\DonationController@donation');
+        Route::match(['get', 'post'], '/donation-preview/{id}', 'App\Http\Controllers\DonationController@donationPreview');
+        Route::match(['get', 'post'], '/thankyou/{id}', 'App\Http\Controllers\DonationController@thankyou');
+        Route::match(['get', 'post'], '/donationreceipt/{id}', 'App\Http\Controllers\DonationController@donationreceipt');
+        Route::get('paypal', [PayPalController::class, 'index'])->name('paypal');
+        Route::get('paypal/payment/{id1}', [PayPalController::class, 'payment'])->name('paypal.payment');
+        Route::get('paypal/payment/success/{id1}', [PayPalController::class, 'paymentSuccess'])->name('paypal.payment.success');
+        Route::get('paypal/payment/cancel/{id1}', [PayPalController::class, 'paymentCancel'])->name('paypal.payment/cancel');
     // before login
     // after login
         Route::group(['prefix' => 'user', 'middleware' => ['user']], function () {
@@ -283,6 +291,9 @@ use Illuminate\Support\Facades\Route;
                 Route::get('enquiry/view-details/{id}', 'EnquiryController@details');
                 Route::get('enquiry/delete/{id}', 'EnquiryController@delete');
                 //enquiry
+                /* donation */
+                 Route::get('donation/list', 'DonationController@list');
+                 /* donation */
         });
     });
 /* Admin Panel */

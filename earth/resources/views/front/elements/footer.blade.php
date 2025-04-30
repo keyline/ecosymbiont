@@ -128,6 +128,29 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
         </div>
     </div>
 </div> -->
+<!-- Modal -->
+<div class="modal fade" id="popupModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h4 class="modal-title">Help keep EaRTh free!</h4>
+        <p>EaRTh is a vital and unique resource for grassroots changemakers across the world, especially members of frontline communities whose voices are seldom amplified.</p>
+        <p>EaRTh provides the marginalized and silenced a global platform to share their challenges, solutions, and knowledge directly with all of us.</p>
+        <p>How?</p>
+        <p>By not censoring or gatekeeping, like so many journals and media do.</p>
+        <p>And by keeping EaRTh free for the authors and free for the readers and viewers.</p>
+        <p><u>But we can’t do this without your financial help.</u></p>
+        <p>While EaRTh is free to use, we (a small nonprofit organization) need to pay the editorial staff, designers, software developers, and others who ensure that EaRTh runs smoothly, so we can serve those who need most to be heard.</p>
+        {{-- <p>Join the fight today,<br><span class="highlight">your gift will be matched $2:$1!</span></p> --}}
+        <a href="<?=url('donation')?>" target="_blank" class="btn btn-yellow">Donate to EaRTh</a><br>
+        <a href="javascript:void(0);" class="continue-link" data-dismiss="modal">Continue to website →</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- The modal -->
 <div class="modal fade" id="flipFlop" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -188,7 +211,15 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
         </div>
     </div>
 </div>
+{{-- stickt button --}}
+<a href="<?=url('donation')?>" target="_blank" class="donate-button">Donate to EaRTH</a>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(window).on('load', function () {
+    $('#popupModal').modal('show');
+  });
+</script>
 <script type="text/javascript">
     $(function(){
         $('#search_type').on('change', function(){
