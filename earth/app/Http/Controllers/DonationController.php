@@ -54,11 +54,13 @@ class DonationController extends Controller
                     $sl_no              = $getLastDonation->sl_no;
                     $next_sl_no         = $sl_no + 1;
                     $next_sl_no_string  = str_pad($next_sl_no, 5, 0, STR_PAD_LEFT);
-                    $donation_number    = 'SRM-'.(($getCountry)?$getCountry->ISO:'').'-web'.date('Y').'-'.$next_sl_no_string;
+                    // $donation_number    = 'SRM-'.(($getCountry)?$getCountry->ISO:'').'-web'.date('Y').'-'.$next_sl_no_string;
+                    $donation_number    = 'SRM-web'.date('Y').'-'.$next_sl_no_string;
                 } else {
                     $next_sl_no         = 1;
                     $next_sl_no_string  = str_pad($next_sl_no, 5, 0, STR_PAD_LEFT);
-                    $donation_number    = 'SRM-'.(($getCountry)?$getCountry->ISO:'').'-web'.date('Y').'-'.$next_sl_no_string;
+                    // $donation_number    = 'SRM-'.(($getCountry)?$getCountry->ISO:'').'-web'.date('Y').'-'.$next_sl_no_string;
+                    $donation_number    = 'SRM-web'.date('Y').'-'.$next_sl_no_string;
                 }
                 $fields = [
                     'sl_no'                                 => $next_sl_no,
