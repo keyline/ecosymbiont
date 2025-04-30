@@ -499,8 +499,7 @@ use Illuminate\Support\Facades\DB;
                                     <input type="radio" class="readonly-input" id="invited_yes" name="invited" value="Yes"  @checked(old('invited', $invited) == 'Yes')>
                                     <label for="yes">Yes</label>
                                     <input type="radio" class="readonly-input" id="invited_no" name="invited" value="No"  @checked(old('invited', $invited) == 'No')>
-                                    <label for="no">No</label>
-                                    <div id="invited-error" class="error" style="display: none;"></div>
+                                    <label for="no">No</label>                                    
                                 </div>
                             </div>  
                             <div id="invitedDetails" style="display: none;">
@@ -1177,38 +1176,23 @@ use Illuminate\Support\Facades\DB;
                     }
                     $('#' + errorId).text('This field is required.').show();
 
-                     // ❗ Skip specific fields
-                    if (
-                        (rawName && rawName.startsWith('co_ecosystem_affiliation_') && rawName.endsWith('[]')) ||
-                        (name && name.startsWith('co_ecosystem_affiliation_'))
-                    ) {
-                        console.log('Skipping validation for field: ' + rawName);
-                        return true; // skip this checkbox group
-                    }
-
-                    // let errorId = name + '-error';
-                    // if ($('#' + CSS.escape(errorId)).length === 0) {
-                    //     // try by ID if it's different than name
-                    //     errorId = field.attr('id') + '-error';
-                    //     console.log('Error ID: ' + errorId);
-                    // }
-                    // $('#' + CSS.escape(errorId)).text('This field is required.').show();
-
-                   
+                     // ❗ Skip specific fields                                    
                     if (name === 'community_name') {
                         return true; // skip this field
                     }                    
 
-                    // Validation for checkbox and radio groups
-                    if (type === 'checkbox' || type === 'radio') {
-                        const groupSelector = 'input[name="' + rawName + '"]:checked, input[name="' + name + '"]:checked';
-                        if ($(groupSelector).length === 0) {
-                        hasError = true;
-                    }
-                        // if ($('input[name="' + name + '[]"]:checked').length === 0 &&
-                        //     $('input[name="' + name + '"]:checked').length === 0) {
-                        //     hasError = true;
-                        // }
+                    // Validation for checkbox and radio groups                    
+                    if (type === 'checkbox') {
+                        const group = $('input[name="' + rawName + '"]');
+                        if (group.length && group.filter(':checked').length === 0) {
+                            hasError = true;
+                        }
+                    }                    
+                    else if (type === 'radio') {
+                        const group = $('input[name="' + rawName + '"]');
+                        if (group.length && group.filter(':checked').length === 0) {
+                            hasError = true;
+                        }
                     }
                     // Validation for other inputs
                     else if (type === 'text' || type === 'number' || type === 'file' || tag === 'textarea' || tag === 'select') {
