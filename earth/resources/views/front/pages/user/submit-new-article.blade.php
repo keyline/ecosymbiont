@@ -500,6 +500,7 @@ use Illuminate\Support\Facades\DB;
                                     <label for="yes">Yes</label>
                                     <input type="radio" class="readonly-input" id="invited_no" name="invited" value="No"  @checked(old('invited', $invited) == 'No')>
                                     <label for="no">No</label>
+                                    <div id="invited-error" class="error" style="display: none;"></div>
                                 </div>
                             </div>  
                             <div id="invitedDetails" style="display: none;">
