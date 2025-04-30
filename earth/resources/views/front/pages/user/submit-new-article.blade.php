@@ -1144,29 +1144,7 @@ use Illuminate\Support\Facades\DB;
       <button id="closePopup">Close</button>
     </div>     
      
-    <script>
-        $(document).ready(function () {
-            // Initially hide the popup
-            $('#popup').hide();
-
-            // Disable submit button initially
-            $('#submitButton').prop('disabled', false);
-
-            // Show popup and disable submit button when "No" is selected
-            $('input[name="orginal_work"], input[name="copyright"]').change(function () {
-            if ($(this).val() === 'No') {
-                $('#popup').fadeIn();
-                $('#submitButton').prop('disabled', true); // Disable submit button
-            }
-            });
-
-            // Close popup and re-enable submit button
-            $('#closePopup').click(function () {
-            $('#popup').fadeOut();
-            $('#submitButton').prop('disabled', false); // Re-enable submit button
-            });
-        });
-    </script>
+    
     <!-- Popup end (Initially hidden) --> 
 
     <!-- all field that is required show error message  -->
@@ -1247,7 +1225,29 @@ use Illuminate\Support\Facades\DB;
         });
     </script>
     <!--end all field that is required show error message  -->
-    
+    <script>
+        $(document).ready(function () {
+            // Initially hide the popup
+            $('#popup').hide();
+
+            // Disable submit button initially
+            $('#submitButton').prop('disabled', false);
+
+            // Show popup and disable submit button when "No" is selected
+            $('input[name="orginal_work"], input[name="copyright"]').change(function () {
+            if ($(this).val() === 'No') {
+                $('#popup').fadeIn();
+                $('#submitButton').prop('disabled', true); // Disable submit button
+            }
+            });
+
+            // Close popup and re-enable submit button
+            $('#closePopup').click(function () {
+            $('#popup').fadeOut();
+            $('#submitButton').prop('disabled', false); // Re-enable submit button
+            });
+        });
+    </script>
     <!-- Function to show/hide the invited and participated fields -->
     <script>
         $(document).ready(function() {
