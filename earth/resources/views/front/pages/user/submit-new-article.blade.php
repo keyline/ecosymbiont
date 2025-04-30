@@ -1148,7 +1148,7 @@ use Illuminate\Support\Facades\DB;
     <!-- Popup end (Initially hidden) --> 
 
     <!-- all field that is required show error message  -->
-    <script>
+    <!-- <script>
         $(document).ready(function () {
             $('#saveForm #submitButton').on('click', function (e) {
                 let isValid = true;
@@ -1247,7 +1247,99 @@ use Illuminate\Support\Facades\DB;
                 }
             });
         });
-    </script>
+    </script> -->
+    <script>
+    $(document).ready(function () {
+        $('#saveForm #submitButton').on('click', function (e) {
+            let isValid = true;
+
+            $('#saveForm [required]:not(:disabled):not([type="hidden"])').each(function () {
+                const field = $(this);
+                const type = field.attr('type');
+                const tag = field.prop('tagName').toLowerCase();
+                let rawName = field.attr('name') || field.attr('id');
+                let name = rawName;
+                let hasError = false;
+
+                // Normalize name for [] fields
+                if (rawName && rawName.endsWith('[]')) {
+                    name = rawName.slice(0, -2);
+                }
+
+                const errorId = name + '-error';
+
+                // Skip specific fields if needed
+                if (name === 'community_name') {
+                    return true; // skip this field
+                }
+
+                // ✅ Validation for checkbox groups
+                if (type === 'checkbox') {
+                    const group = $('input[name="' + rawName + '"]');
+                    if (group.length && group.filter(':checked').length === 0) {
+                        hasError = true;
+                    }
+                }
+                // ✅ Validation for radio groups
+                else if (type === 'radio') {
+                    const group = $('input[name="' + rawName + '"]');
+                    if (group.length && group.filter(':checked').length === 0) {
+                        hasError = true;
+                    }
+                }
+                // ✅ Validation for other fields
+                else if (
+                    type === 'text' || type === 'number' || type === 'file' ||
+                    tag === 'textarea' || tag === 'select'
+                ) {
+                    if ($.trim(field.val()) === '' || field.val() === null) {
+                        hasError = true;
+                    }
+                }
+
+                if (hasError) {
+                    $('#' + errorId).text('This field is required.').show();
+                    field.focus();
+                    isValid = false;
+                    return false; // break loop
+                } else {
+                    $('#' + errorId).hide();
+                }
+            });
+
+            if (!isValid) {
+                e.preventDefault(); // stop form submission
+            }
+        });
+
+        // ✅ Hide error on input or change
+        $('#saveForm').on('change input', 'input, select, textarea', function () {
+            const field = $(this);
+            const type = field.attr('type');
+            let rawName = field.attr('name') || field.attr('id');
+            let name = rawName;
+
+            if (rawName && rawName.endsWith('[]')) {
+                name = rawName.slice(0, -2);
+            }
+
+            const errorId = name + '-error';
+
+            // Hide checkbox/radio group errors
+            if (type === 'radio' || type === 'checkbox') {
+                const group = $('input[name="' + rawName + '"]');
+                if (group.length && group.filter(':checked').length > 0) {
+                    $('#' + errorId).hide();
+                }
+            } else {
+                if ($.trim(field.val()) !== '') {
+                    $('#' + errorId).hide();
+                }
+            }
+        });
+    });
+</script>
+
     <!--end all field that is required show error message  -->
     <script>
         $(document).ready(function () {
