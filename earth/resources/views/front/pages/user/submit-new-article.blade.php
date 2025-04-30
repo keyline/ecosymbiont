@@ -1273,7 +1273,10 @@ use Illuminate\Support\Facades\DB;
                 // ✅ Checkbox group validation
                 if (type === 'checkbox' && rawName.endsWith('[]')) {
                     if ($('input[name="' + rawName + '"]:checked').length === 0) {
+                        alert('Please select at least one checkbox.');
                         hasError = true;
+                    }else{
+                        hasError = false;
                     }
                 }
 
