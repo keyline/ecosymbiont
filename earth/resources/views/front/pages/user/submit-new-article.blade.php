@@ -1278,6 +1278,7 @@ use Illuminate\Support\Facades\DB;
                     }else{
                         alert('validation passed');
                         hasError = false;
+                        return true; // skip this field
                     }
                 }
 
