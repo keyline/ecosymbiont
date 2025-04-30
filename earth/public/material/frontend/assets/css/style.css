@@ -6660,6 +6660,10 @@ div#permalink p {
   background-color: #d09c1c;
   color: #fff
 }
+.label_checkbox label{
+  position: relative;
+  top: -1.5px;
+}
 /*-------------------------------------------------*/
 /* =  Responsive Part
 /*-------------------------------------------------*/
@@ -7375,7 +7379,7 @@ ul.list-posts > li .post-content p,
   font-size: 18px;
 }
 .label_checkbox label{
-  font-size: 15px;
+  font-size: 14px;
 }
 }
 
@@ -7704,6 +7708,8 @@ div.dt-container div.dt-layout-row.dt-layout-table div.dt-layout-cell {
   }
   .label_checkbox label{
     font-size: 10px;
+    position: relative;
+    top: -3px;
   }
   .payable_amount {
     font-size: 15px;
