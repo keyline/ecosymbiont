@@ -1159,6 +1159,12 @@ use Illuminate\Support\Facades\DB;
                     const tag = field.prop('tagName').toLowerCase();
                     let name = field.attr('name') || field.attr('id');
                     let hasError = false;
+                    let errorId = name + '-error';
+                    if ($('#' + errorId).length === 0) {
+                        // try by ID if it's different than name
+                        errorId = field.attr('id') + '-error';
+                    }
+                    $('#' + errorId).text('This field is required.').show();
 
                     // Normalize name for [] fields (like checkbox groups)
                     if (name && name.endsWith('[]')) {
@@ -1186,7 +1192,8 @@ use Illuminate\Support\Facades\DB;
 
                     if (hasError) {
                         $('#' + name + '-error').text('This field is required.').show();
-                        console.log('Field: ' + name + ' is required.');
+                        // console.log('Field: ' + name + ' is required.');
+                        console.log(`Validating field: ${name}, type: ${type}, tag: ${tag}, value: '${field.val()}'`);
                         field.focus();
                         isValid = false;
                         return false; // stop loop
@@ -1333,9 +1340,11 @@ use Illuminate\Support\Facades\DB;
                     if (i <= count) {
                         card.style.display = 'block';
                         inputs.forEach(input => input.setAttribute('required', 'required'));
+                        input.removeAttribute('disabled'); // Ensure not disabled
                     } else {
                         card.style.display = 'none';
                         inputs.forEach(input => input.removeAttribute('required'));
+                        input.setAttribute('disabled', 'disabled'); // Avoid validation
                     }
                 }
 
