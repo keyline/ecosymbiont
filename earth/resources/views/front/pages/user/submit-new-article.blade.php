@@ -341,7 +341,7 @@ use Illuminate\Support\Facades\DB;
                                                         @if ($ecosystem_affiliation)
                                                             @foreach ($ecosystem_affiliation as $data)
                                                                 <input type="checkbox" 
-                                                                    name="co_ecosystem_affiliation_{{$i}}[]" id="co_ecosystem_affiliation_{{$i}}"
+                                                                    name="co_ecosystem_affiliation_{{$i}}[]"
                                                                     value="{{ $data->id }}" 
                                                                     @if (in_array($data->id, old("co_ecosystem_affiliation_{$i}", $co_ecosystem_affiliations[$i - 1] ?? []))) checked @endif>
                                                                 {{ $data->name }}<br>
@@ -1174,16 +1174,20 @@ use Illuminate\Support\Facades\DB;
                         console.log('Normalized name: ' + name);
                     }
 
-                    let errorId = name + '-error';
-                    if ($('#' + CSS.escape(errorId)).length === 0) {
-                        // try by ID if it's different than name
-                        errorId = field.attr('id') + '-error';
-                        console.log('Error ID: ' + errorId);
-                    }
-                    $('#' + CSS.escape(errorId)).text('This field is required.').show();
+                    // let errorId = name + '-error';
+                    // if ($('#' + CSS.escape(errorId)).length === 0) {
+                    //     // try by ID if it's different than name
+                    //     errorId = field.attr('id') + '-error';
+                    //     console.log('Error ID: ' + errorId);
+                    // }
+                    // $('#' + CSS.escape(errorId)).text('This field is required.').show();
 
                     // ❗ Skip specific field
                     if (name === 'community_name') {
+                        return true; // skip this field
+                    }
+
+                    if (name === 'co_ecosystem_affiliation_{{$i}}[]') {
                         return true; // skip this field
                     }
 
