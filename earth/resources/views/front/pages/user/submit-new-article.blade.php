@@ -341,7 +341,7 @@ use Illuminate\Support\Facades\DB;
                                                         @if ($ecosystem_affiliation)
                                                             @foreach ($ecosystem_affiliation as $data)
                                                                 <input type="checkbox" 
-                                                                    name="co_ecosystem_affiliation_{{$i}}[]" 
+                                                                    name="co_ecosystem_affiliation_{{$i}}[]" id="co_ecosystem_affiliation_{{$i}}"
                                                                     value="{{ $data->id }}" 
                                                                     @if (in_array($data->id, old("co_ecosystem_affiliation_{$i}", $co_ecosystem_affiliations[$i - 1] ?? []))) checked @endif>
                                                                 {{ $data->name }}<br>
@@ -1173,6 +1173,13 @@ use Illuminate\Support\Facades\DB;
                         name = rawName.slice(0, -2);
                         console.log('Normalized name: ' + name);
                     }
+
+                    let errorId = name + '-error';
+                    if ($('#' + errorId).length === 0) {
+                        // try by ID if it's different than name
+                        errorId = field.attr('id') + '-error';
+                    }
+                    $('#' + errorId).text('This field is required.').show();
 
                     // ❗ Skip specific field
                     if (name === 'community_name') {
