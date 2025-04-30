@@ -1157,7 +1157,8 @@ use Illuminate\Support\Facades\DB;
                     const field = $(this);
                     const type = field.attr('type');
                     const tag = field.prop('tagName').toLowerCase();
-                    let name = field.attr('name') || field.attr('id');
+                    let rawName = field.attr('name') || field.attr('id');
+                    let name = rawName;
                     let hasError = false;
                     let errorId = name + '-error';
                     if ($('#' + errorId).length === 0) {
@@ -1167,8 +1168,8 @@ use Illuminate\Support\Facades\DB;
                     $('#' + errorId).text('This field is required.').show();
 
                     // Normalize name for [] fields (like checkbox groups)
-                    if (name && name.endsWith('[]')) {
-                        name = name.slice(0, -2);
+                    if (rawName && rawName.endsWith('[]')) {
+                        name = rawName.slice(0, -2);
                     }
 
                     // ❗ Skip specific field
@@ -1178,10 +1179,14 @@ use Illuminate\Support\Facades\DB;
 
                     // Validation for checkbox and radio groups
                     if (type === 'checkbox' || type === 'radio') {
-                        if ($('input[name="' + name + '[]"]:checked').length === 0 &&
-                            $('input[name="' + name + '"]:checked').length === 0) {
-                            hasError = true;
-                        }
+                        const groupSelector = 'input[name="' + rawName + '"]:checked, input[name="' + name + '"]:checked';
+                        if ($(groupSelector).length === 0) {
+                        hasError = true;
+                    }
+                        // if ($('input[name="' + name + '[]"]:checked').length === 0 &&
+                        //     $('input[name="' + name + '"]:checked').length === 0) {
+                        //     hasError = true;
+                        // }
                     }
                     // Validation for other inputs
                     else if (type === 'text' || type === 'number' || type === 'file' || tag === 'textarea' || tag === 'select') {
@@ -1211,18 +1216,24 @@ use Illuminate\Support\Facades\DB;
             $('#saveForm').on('change input', 'input, select, textarea', function () {
                 const field = $(this);
                 const type = field.attr('type');
-                let name = field.attr('name') || field.attr('id');
+                let rawName = field.attr('name') || field.attr('id');
+                let name = rawName;
+                // let name = field.attr('name') || field.attr('id');
 
                 // Normalize name
-                if (name && name.endsWith('[]')) {
-                    name = name.slice(0, -2);
+                if (rawName && rawName.endsWith('[]')) {
+                    name = rawName.slice(0, -2);
                 }
 
                 if (type === 'radio' || type === 'checkbox') {
-                    if ($('input[name="' + name + '[]"]:checked').length > 0 ||
-                        $('input[name="' + name + '"]:checked').length > 0) {
-                        $('#' + name + '-error').hide();
-                    }
+                    const groupSelector = 'input[name="' + rawName + '"]:checked, input[name="' + name + '"]:checked';
+                    if ($(groupSelector).length > 0) {
+                    $('#' + name + '-error').hide();
+                }
+                    // if ($('input[name="' + name + '[]"]:checked').length > 0 ||
+                    //     $('input[name="' + name + '"]:checked').length > 0) {
+                    //     $('#' + name + '-error').hide();
+                    // }
                 } else {
                     if ($.trim(field.val()) !== '') {
                         $('#' + name + '-error').hide();
