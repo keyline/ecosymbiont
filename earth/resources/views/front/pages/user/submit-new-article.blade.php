@@ -385,9 +385,9 @@ use Illuminate\Support\Facades\DB;
                                                 <div class="row">
                                                     <label for="pronoun" class="col-md-2 col-lg-4 col-form-label">3I{{$i}}) <?=numberToOrdinal($i)?> co-author’s pronoun</label>
                                                     <div class="col-md-10 col-lg-8">
-                                                        @if ($pronoun)
+                                                        <!-- @if ($pronoun)
                                                             @foreach ($pronoun as $data)
-                                                                <?php
+                                                                ?php
                                                                 if($co_author_pronoun != ''){
                                                                     if($data->id == $co_author_pronoun[$i - 1]){
                                                                         $pronoun_checked = 'checked';
@@ -398,10 +398,19 @@ use Illuminate\Support\Facades\DB;
                                                                     $pronoun_checked = '';
                                                                 }
                                                                 ?>
-                                                                <input type="radio" name="co_author_pronoun_{{$i}}" value="{{ $data->id }}" <?=$pronoun_checked?>>
+                                                                <input type="radio" name="co_author_pronoun_{{$i}}" value="{{ $data->id }}" ?=$pronoun_checked?>>
                                                                 <label>{{ $data->name }}</label>
                                                             @endforeach
-                                                        @endif  
+                                                        @endif   -->
+                                                        @if ($pronoun)
+                                                            @foreach ($pronoun as $data)
+                                                                <input type="radio"
+                                                                    name="co_author_pronoun_{{$i}}"
+                                                                    value="{{ $data->id }}"
+                                                                    {{ old("co_author_pronoun_{$i}", $co_author_pronoun[$i - 1] ?? '') == $data->id ? 'checked' : '' }}>
+                                                                <label>{{ $data->name }}</label>
+                                                            @endforeach
+                                                        @endif 
                                                         <div id="co_author_pronoun_{{$i}}-error" class="error"></div>                              
                                                     </div>
                                                 </div>
