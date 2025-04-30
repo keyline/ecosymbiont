@@ -404,10 +404,7 @@ use Illuminate\Support\Facades\DB;
                                                         @endif   -->
                                                         @if ($pronoun)
                                                             @foreach ($pronoun as $data)
-                                                                <input type="radio"
-                                                                    name="co_author_pronoun_{{$i}}"
-                                                                    value="{{ $data->id }}"
-                                                                    {{ old("co_author_pronoun_{$i}", $co_author_pronoun[$i - 1] ?? '') == $data->id ? 'checked' : '' }}>
+                                                                <input type="radio" name="co_author_pronoun_{{$i}}" value="{{ $data->id }}" @checked(old("co_author_pronoun_{$i}" == $data->id)>
                                                                 <label>{{ $data->name }}</label>
                                                             @endforeach
                                                         @endif 
