@@ -1899,7 +1899,7 @@ use Illuminate\Support\Facades\DB;
         });
     </script> -->
 
-<!-- <script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function () {
         var tagsArray = [];
 
@@ -1945,18 +1945,39 @@ use Illuminate\Support\Facades\DB;
         });
 
         // Tag management logic
+        // var beforeData = $('#other_article_part_doi_no').val();
+        // if (beforeData.length > 0) {
+        //     tagsArray = beforeData.split(',');
+        //     tagsArray.forEach(function (tag) {
+        //         tag = tag.trim();
+        //         if (tag.length > 0) {
+        //             $('#badge-container').append(
+        //                 '<span class="badge">' + tag + ' <span class="remove" data-tag="' + tag + '">&times;</span></span>'
+        //             );
+        //         }
+        //     });
+        // }
+
         var beforeData = $('#other_article_part_doi_no').val();
-        if (beforeData.length > 0) {
-            tagsArray = beforeData.split(',');
-            tagsArray.forEach(function (tag) {
-                tag = tag.trim();
-                if (tag.length > 0) {
-                    $('#badge-container').append(
-                        '<span class="badge">' + tag + ' <span class="remove" data-tag="' + tag + '">&times;</span></span>'
-                    );
-                }
-            });
-        }
+            if (beforeData.length > 0) {
+                tagsArray = beforeData.split(',');
+                tagsArray.forEach(function (tag) {
+                    tag = tag.trim();
+                    if (tag.length > 0) {
+                        $('#badge-container').append(
+                            '<span class="badge">' + tag + ' <span class="remove" data-tag="' + tag + '">&times;</span></span>'
+                        );
+                    }
+                });
+            }
+
+            // ✅ Check if tags are missing and conditionally set required
+            var currentVal = parseInt($('#current_article_no').val());
+            if (is_series === "Yes" && (isNaN(currentVal) || currentVal > 1) && tagsArray.length === 0) {
+                $('#input-tags').attr('required', true);
+            } else {
+                $('#input-tags').attr('required', false);
+            }
 
         $('#input-tags').on('input', function () {
             var input = $(this).val().trim();
@@ -1995,122 +2016,9 @@ use Illuminate\Support\Facades\DB;
             $('#other_article_part_doi_no').val(tagsArray.join(','));
         });
     });
-</script> -->
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        var is_series = '<?= $is_series ?>';
-        var currentArticleNo = parseInt($('#current_article_no').val()) || 0;
-        var tagsArray = [];
-
-        // --- Show/hide logic for series section ---
-        if (is_series === "Yes") {
-            $(".series_yes").show();
-            $('#series_article_no').attr('required', true);
-            $('#current_article_no').attr('required', true);
-        } else {
-            $(".series_yes").hide();
-            $('#series_article_no').attr('required', false);
-            $('#current_article_no').attr('required', false);
-        }
-
-        $('input[name="is_series"]').change(function () {
-            if ($(this).val() === "Yes") {
-                $(".series_yes").show();
-                $('#series_article_no').attr('required', true);
-                $('#current_article_no').attr('required', true);
-                $('#input-tags').attr('required', true);
-            } else {
-                $(".series_yes").hide();
-                $('#series_article_no').attr('required', false);
-                $('#current_article_no').attr('required', false);
-                $('#input-tags').attr('required', false);
-            }
-        });
-
-        $('#current_article_no').on('input', function () {
-            var current_article_no = parseInt($(this).val());
-            if (current_article_no <= 1 || isNaN(current_article_no)) {
-                $('#current_article_no').attr('required', false);
-                $('#input-tags').attr('required', false);
-            } else {
-                $('#current_article_no').attr('required', true);
-                $('#input-tags').attr('required', true);
-            }
-        });
-
-        // --- Handle restoring tags and checking if input-tags should be required ---
-        var beforeData = $('#other_article_part_doi_no').val();
-        if (beforeData.length > 0) {
-            tagsArray = beforeData.split(',');
-            tagsArray.forEach(function (tag) {
-                tag = tag.trim();
-                if (tag.length > 0) {
-                    $('#badge-container').append(
-                        '<span class="badge">' + tag + ' <span class="remove" data-tag="' + tag + '">&times;</span></span>'
-                    );
-                }
-            });
-            $('#input-tags').attr('required', false); // ✅ Not required if tags exist
-        } else {
-            if (is_series === "Yes" && currentArticleNo > 1) {
-                $('#input-tags').attr('required', true); // ✅ Required if no tags and needed
-            } else {
-                $('#input-tags').attr('required', false);
-            }
-        }
-
-        // --- Handle new tag input ---
-        $('#input-tags').on('input', function () {
-            var input = $(this).val().trim();
-            $('#validation-msg').text('').hide();
-
-            if (input.includes(',')) {
-                var tags = input.split(',');
-                tags.forEach(function (tag) {
-                    tag = tag.trim();
-                    if (tag.length > 0) {
-                        const pattern = /^SRN-EaRTh\d{6}-\d{3}$/;
-                        if (!pattern.test(tag)) {
-                            $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx,")
-                                .css('color', 'red').fadeIn().delay(3000).fadeOut();
-                            return;
-                        } else {
-                            $('#validation-msg').text("✅ Valid: SRN-EaRThMMYYYY-xxx,")
-                                .css('color', 'green').fadeIn().delay(3000).fadeOut();
-                        }
-
-                        if (!tagsArray.includes(tag)) {
-                            tagsArray.push(tag);
-                            $('#badge-container').append(
-                                '<span class="badge">' + tag + ' <span class="remove" data-tag="' + tag + '">&times;</span></span>'
-                            );
-                        }
-                    }
-                });
-
-                $('#other_article_part_doi_no').val(tagsArray.join(','));
-                $(this).val('');
-                $(this).removeAttr('required'); // No longer required after adding valid tags
-            }
-        });
-
-        // --- Remove tag on click ---
-        $(document).on('click', '.remove', function () {
-            var tag = $(this).data('tag');
-            tagsArray = tagsArray.filter(function (item) {
-                return item !== tag;
-            });
-            $(this).parent().remove();
-            $('#other_article_part_doi_no').val(tagsArray.join(','));
-
-            // Re-check if input-tags should now be required
-            if (is_series === "Yes" && parseInt($('#current_article_no').val()) > 1 && tagsArray.length === 0) {
-                $('#input-tags').attr('required', true);
-            }
-        });
-    });
 </script>
+
+
 
 
     <!-- series toggle value show and hide end -->
