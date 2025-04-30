@@ -42,12 +42,13 @@ use App\Helpers\Helper;
 <?php if($donation){?>
   <div class="thankyou-holder">
       <div class="thank-you-box">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
-            <path d="M16 8a8 8 0 11-16 0 8 8 0 0116 0zM6.93 10.588l5.482-5.482-.708-.708L6.93 9.172 4.796 7.04l-.708.707L6.93 10.588z"/>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="red" class="bi bi-x-circle-fill">
+            <circle cx="8" cy="8" r="8" fill="red"/>
+            <path fill="white" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 1 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
           </svg>
-          <h2 class="fw-bold text-success">Oops! Something Went Wrong.</h2>
-          <p class="mt-3 mb-4 text-muted">Unfortunately, your donation could not be processed. Please try again or contact us if the issue persists.</p>
-          <a href="<?=url('donation-preview/' . Helper::encoded($donation->id))?>" class="btn donation_btn" target="_blank">Retry Payment</a>
+          <h2 class="fw-bold text-danger">Oops! Something Went Wrong.</h2>
+          <p class="mt-3 mb-4 text-muted">Unfortunately, your donation could not be processed. Please try again or <a href="https://ecosymbiont.org/contact.php" target="_blank">contact</a> us if the issue persists.</p>
+          <a href="<?=url('donation-preview/' . Helper::encoded($donation->id))?>" class="btn donation_btn">Retry Payment</a>
       </div>
   </div>
 <?php }?>
