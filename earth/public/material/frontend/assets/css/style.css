@@ -6527,11 +6527,13 @@ div#permalink p {
   padding-right: 0 !important;
 }
 #popupModal .modal-dialog {
-  margin-top: 50px;
+  margin: 0 auto;
   width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   max-width: 700px !important;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 #popupModal .modal-content {
