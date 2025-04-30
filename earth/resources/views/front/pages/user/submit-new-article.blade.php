@@ -1159,13 +1159,14 @@ use Illuminate\Support\Facades\DB;
                     const tag = field.prop('tagName').toLowerCase();
                     let rawName = field.attr('name') || field.attr('id');
                     let name = rawName;
+                    alert(rawName);
                     let hasError = false;
-                    let errorId = name + '-error';
-                    if ($('#' + errorId).length === 0) {
-                        // try by ID if it's different than name
-                        errorId = field.attr('id') + '-error';
-                    }
-                    $('#' + errorId).text('This field is required.').show();
+                    // let errorId = name + '-error';
+                    // if ($('#' + errorId).length === 0) {
+                    //     // try by ID if it's different than name
+                    //     errorId = field.attr('id') + '-error';
+                    // }
+                    // $('#' + errorId).text('This field is required.').show();
 
                     // Normalize name for [] fields (like checkbox groups)
                     if (rawName && rawName.endsWith('[]')) {
