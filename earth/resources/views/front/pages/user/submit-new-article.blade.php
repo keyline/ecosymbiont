@@ -991,9 +991,9 @@ use Illuminate\Support\Facades\DB;
                                     <label for="is_series" class="col-md-2 col-lg-4 col-form-label blue-text">32) Is this part of a series?
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="radio" id="series_yes" name="is_series" value="Yes" <?=(($is_series == 'Yes')?'checked':'')?> required>
+                                        <input type="radio" id="series_yes" name="is_series" value="Yes" @checked(old('is_series', $is_series) == 'Yes') required>
                                         <label for="series_yes">Yes</label>
-                                        <input type="radio" id="series_no" name="is_series" value="No" <?=(($is_series == 'No')?'checked':'')?> required>
+                                        <input type="radio" id="series_no" name="is_series" value="No" @checked(old('is_series', $is_series) == 'No') required>
                                         <label for="series_no">No</label>
                                         <div id="is_series-error" class="error"></div>
                                     </div>
