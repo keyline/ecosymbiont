@@ -7371,6 +7371,12 @@ ul.list-posts > li .post-content p,
 #popupModal .modal-header .close{
   font-size: 20px;
 }
+.payable_amount {
+  font-size: 18px;
+}
+.label_checkbox label{
+  font-size: 15px;
+}
 }
 
 @media (max-width: 650px) {
@@ -7692,6 +7698,9 @@ div.dt-container div.dt-layout-row.dt-layout-table div.dt-layout-cell {
   }
   .advarnseach_section .modal-body .advance_inner_search select{
     width: 46%;
+  }
+  .continue-link {
+    margin-top: 15px;
   }
   
 }
