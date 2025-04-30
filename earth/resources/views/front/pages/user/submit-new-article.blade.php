@@ -1454,7 +1454,12 @@ use Illuminate\Support\Facades\DB;
 
                     if (i <= count) {
                         card.style.display = 'block';
-                        inputs.forEach(input => input.setAttribute('required', 'required'));
+                        // inputs.forEach(input => input.setAttribute('required', 'required'));
+                        inputs.forEach(input => {
+                            if (input.name !== 'co_ecosystem_affiliation_' + i + '[]') {
+                                input.setAttribute('required', 'required');
+                            }
+                        });
                         // input.removeAttribute('disabled'); // Ensure not disabled
                     } else {
                         card.style.display = 'none';
