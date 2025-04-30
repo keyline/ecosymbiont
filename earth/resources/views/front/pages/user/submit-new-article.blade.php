@@ -1163,17 +1163,18 @@ use Illuminate\Support\Facades\DB;
                     // alert(rawName);
                     let hasError = false;
                     let errorId = name + '-error';
-                    if ($('#' + errorId).length === 0) {
-                        // try by ID if it's different than name
-                        errorId = field.attr('id') + '-error';
-                    }
-                    $('#' + errorId).text('This field is required.').show();
+                    
 
                     // Normalize name for [] fields (like checkbox groups)
                     if (rawName && rawName.endsWith('[]')) {
                         name = rawName.slice(0, -2);
                         console.log('Normalized name: ' + name);
                     }
+                    if ($('#' + errorId).length === 0) {
+                        // try by ID if it's different than name
+                        errorId = field.attr('id') + '-error';
+                    }
+                    $('#' + errorId).text('This field is required.').show();
 
                      // ❗ Skip specific fields
                     if (
