@@ -1340,11 +1340,11 @@ use Illuminate\Support\Facades\DB;
                     if (i <= count) {
                         card.style.display = 'block';
                         inputs.forEach(input => input.setAttribute('required', 'required'));
-                        input.removeAttribute('disabled'); // Ensure not disabled
+                        // input.removeAttribute('disabled'); // Ensure not disabled
                     } else {
                         card.style.display = 'none';
                         inputs.forEach(input => input.removeAttribute('required'));
-                        input.setAttribute('disabled', 'disabled'); // Avoid validation
+                        // input.setAttribute('disabled', 'disabled'); // Avoid validation
                     }
                 }
 
