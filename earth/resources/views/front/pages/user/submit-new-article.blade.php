@@ -309,7 +309,7 @@ use Illuminate\Support\Facades\DB;
                                                     <label for="co_author_country_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3D{{$i}}) <?=numberToOrdinal($i)?> co-author’s country of residence</label>
                                                     <div class="col-md-10 col-lg-8">
                                                         <select name="co_author_country_{{$i}}" class="form-control" id="co_author_country_{{$i}}" >
-                                                            <option value="" selected disabled>Select</option>
+                                                            <option value="" selected>Select</option>
                                                             @if ($country)
                                                                 @foreach ($country as $data)
                                                                     <option value="{{ $data->id }}" @selected(old("co_author_country_$i", $co_author_countries[$i - 1] ?? '') == $data->id)>
@@ -341,7 +341,7 @@ use Illuminate\Support\Facades\DB;
                                                         @if ($ecosystem_affiliation)
                                                             @foreach ($ecosystem_affiliation as $data)
                                                                 <input type="checkbox" 
-                                                                    name="co_ecosystem_affiliation_{{$i}}[]" 
+                                                                    name="co_ecosystem_affiliation_{{$i}}[]"
                                                                     value="{{ $data->id }}" 
                                                                     @if (in_array($data->id, old("co_ecosystem_affiliation_{$i}", $co_ecosystem_affiliations[$i - 1] ?? []))) checked @endif>
                                                                 {{ $data->name }}<br>
@@ -356,7 +356,7 @@ use Illuminate\Support\Facades\DB;
                                                     <label for="co_Indigenous_affiliation_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3G{{$i}}) What specific region are <?=numberToOrdinal($i)?> co-author’s ancestors originally from OR what is the name of first co-author’s Indigenous community? (example of specific region = Bengal; example of Indigenous community name = Lisjan Ohlone)
                                                     </label>
                                                     <div class="col-md-10 col-lg-8">
-                                                        <input type="text" name="co_indigenous_affiliation_{{$i}}" class="form-control" id="indigenous_affiliation_{{$i}}"
+                                                        <input type="text" name="co_indigenous_affiliation_{{$i}}" class="form-control" id="co_indigenous_affiliation_{{$i}}"
                                                         value="{{ old("co_indigenous_affiliation_$i", $co_indigenous_affiliation[$i - 1] ?? '') }}" >
                                                         <div id="co_indigenous_affiliation_{{$i}}-error" class="error"></div>
                                                     </div>
@@ -499,7 +499,7 @@ use Illuminate\Support\Facades\DB;
                                     <input type="radio" class="readonly-input" id="invited_yes" name="invited" value="Yes"  @checked(old('invited', $invited) == 'Yes')>
                                     <label for="yes">Yes</label>
                                     <input type="radio" class="readonly-input" id="invited_no" name="invited" value="No"  @checked(old('invited', $invited) == 'No')>
-                                    <label for="no">No</label>
+                                    <label for="no">No</label>                                    
                                 </div>
                             </div>  
                             <div id="invitedDetails" style="display: none;">
@@ -1144,6 +1144,209 @@ use Illuminate\Support\Facades\DB;
       <button id="closePopup">Close</button>
     </div>     
      
+    
+    <!-- Popup end (Initially hidden) --> 
+
+    <!-- all field that is required show error message  -->
+    <!-- <script>
+        $(document).ready(function () {
+            $('#saveForm #submitButton').on('click', function (e) {
+                let isValid = true;
+
+                $('#saveForm [required]:not(:disabled):not([type="hidden"])').each(function () {
+                    const field = $(this);
+                    const type = field.attr('type');
+                    const tag = field.prop('tagName').toLowerCase();
+                    let rawName = field.attr('name') || field.attr('id');
+                    let name = rawName;
+                    // alert(rawName);
+                    let hasError = false;
+                    
+                    
+
+                    // Normalize name for [] fields (like checkbox groups)
+                    if (rawName && rawName.endsWith('[]')) {
+                        name = rawName.slice(0, -2);
+                        console.log('Normalized name: ' + name);
+                    }
+                    let errorId = name + '-error';
+                    if ($('#' + errorId).length === 0) {
+                        // try by ID if it's different than name
+                        errorId = field.attr('id') + '-error';
+                    }
+                    $('#' + errorId).text('This field is required.').show();
+
+                     // ❗ Skip specific fields                                    
+                    if (name === 'community_name') {
+                        return true; // skip this field
+                    }                    
+
+                    // Validation for checkbox and radio groups                    
+                    if (type === 'checkbox') {
+                        const group = $('input[name="' + rawName + '"]');
+                        if (group.length && group.filter(':checked').length === 0) {
+                            hasError = true;
+                        }
+                    }                    
+                    else if (type === 'radio') {
+                        const group = $('input[name="' + rawName + '"]');
+                        if (group.length && group.filter(':checked').length === 0) {
+                            hasError = true;
+                        }
+                    }
+                    // Validation for other inputs
+                    else if (type === 'text' || type === 'number' || type === 'file' || tag === 'textarea' || tag === 'select') {
+                        if ($.trim(field.val()) === '' || field.val() === null) {
+                            hasError = true;
+                        }
+                    }
+
+                    if (hasError) {
+                        $('#' + name + '-error').text('This field is required.').show();
+                        // console.log('Field: ' + name + ' is required.');
+                        console.log(`Validating field: ${name}, type: ${type}, tag: ${tag}, value: '${field.val()}'`);
+                        field.focus();
+                        isValid = false;
+                        return false; // stop loop
+                    } else {
+                        $('#' + name + '-error').hide();
+                    }
+                });
+
+                if (!isValid) {
+                    e.preventDefault(); // stop form submission
+                }
+            });
+
+            // Hide error on interaction
+            $('#saveForm').on('change input', 'input, select, textarea', function () {
+                const field = $(this);
+                const type = field.attr('type');
+                let rawName = field.attr('name') || field.attr('id');
+                let name = rawName;
+                // let name = field.attr('name') || field.attr('id');
+
+                // Normalize name
+                if (rawName && rawName.endsWith('[]')) {
+                    name = rawName.slice(0, -2);
+                }
+
+                if (type === 'radio' || type === 'checkbox') {
+                    const groupSelector = 'input[name="' + rawName + '"]:checked, input[name="' + name + '"]:checked';
+                    if ($(groupSelector).length > 0) {
+                    $('#' + name + '-error').hide();
+                }
+                    // if ($('input[name="' + name + '[]"]:checked').length > 0 ||
+                    //     $('input[name="' + name + '"]:checked').length > 0) {
+                    //     $('#' + name + '-error').hide();
+                    // }
+                } else {
+                    if ($.trim(field.val()) !== '') {
+                        $('#' + name + '-error').hide();
+                    }
+                }
+            });
+        });
+    </script> -->
+    <script>
+    $(document).ready(function () {
+        $('#saveForm #submitButton').on('click', function (e) {
+            let isValid = true;
+              // Clear previous group validation flags
+                $('input[type="checkbox"]').removeData('validated');
+
+            $('#saveForm [required]:not(:disabled):not([type="hidden"])').each(function () {
+                const field = $(this);
+                const type = field.attr('type');
+                const tag = field.prop('tagName').toLowerCase();
+                let rawName = field.attr('name') || field.attr('id');
+                let name = rawName;
+                let hasError = false;
+
+                // Normalize name for checkbox groups (remove [])
+                if (rawName && rawName.endsWith('[]')) {
+                    name = rawName.slice(0, -2);
+                }
+
+                const errorId = name + '-error';
+
+                if (name === 'community_name') return true; // Skip
+
+                // ✅ Checkbox group validation
+                if (type === 'checkbox' && rawName.endsWith('[]')) {
+                    if (field.data('validated')) return true;
+
+                    const group = $('input[name="' + rawName + '"]');
+                    group.data('validated', true);
+
+                    if (group.filter(':checked').length === 0) {
+                        $('#' + errorId).text('Please select at least one option.').show();
+                        isValid = false;
+                        return false;
+                    } else {
+                        $('#' + errorId).hide();
+                        return true;
+                    }
+                }
+
+                // ✅ Radio group validation
+                else if (type === 'radio') {
+                    if ($('input[name="' + rawName + '"]:checked').length === 0) {
+                        hasError = true;
+                    }
+                }
+
+                // ✅ Other inputs
+                else if (
+                    type === 'text' || type === 'number' || type === 'file' ||
+                    tag === 'textarea' || tag === 'select'
+                ) {
+                    if ($.trim(field.val()) === '' || field.val() === null) {
+                        hasError = true;
+                    }
+                }
+
+                if (hasError) {
+                    $('#' + errorId).text('This field is required.').show();
+                    field.focus();
+                    isValid = false;
+                    return false; // stop loop
+                } else {
+                    $('#' + errorId).hide();
+                }
+            });
+
+            if (!isValid) e.preventDefault(); // block submit
+        });
+
+        // ✅ Hide error on change
+        $('#saveForm').on('change input', 'input, select, textarea', function () {
+            const field = $(this);
+            const type = field.attr('type');
+            let rawName = field.attr('name') || field.attr('id');
+            let name = rawName;
+
+            if (rawName && rawName.endsWith('[]')) {
+                name = rawName.slice(0, -2);
+            }
+
+            const errorId = name + '-error';
+
+            if ((type === 'checkbox' || type === 'radio') && rawName) {
+                if ($('input[name="' + rawName + '"]:checked').length > 0) {
+                    $('#' + errorId).hide();
+                }
+            } else {
+                if ($.trim(field.val()) !== '') {
+                    $('#' + errorId).hide();
+                }
+            }
+        });
+    });
+</script>
+
+
+    <!--end all field that is required show error message  -->
     <script>
         $(document).ready(function () {
             // Initially hide the popup
@@ -1167,86 +1370,6 @@ use Illuminate\Support\Facades\DB;
             });
         });
     </script>
-    <!-- Popup end (Initially hidden) --> 
-
-    <!-- all field that is required show error message  -->
-    <script>
-        $(document).ready(function () {
-            $('#saveForm #submitButton').on('click', function (e) {
-                let isValid = true;
-
-                $('#saveForm [required]:not(:disabled):not([type="hidden"])').each(function () {
-                    const field = $(this);
-                    const type = field.attr('type');
-                    const tag = field.prop('tagName').toLowerCase();
-                    let name = field.attr('name') || field.attr('id');
-                    let hasError = false;
-
-                    // Normalize name for [] fields (like checkbox groups)
-                    if (name && name.endsWith('[]')) {
-                        name = name.slice(0, -2);
-                    }
-
-                    // ❗ Skip specific field
-                    if (name === 'community_name') {
-                        return true; // skip this field
-                    }
-
-                    // Validation for checkbox and radio groups
-                    if (type === 'checkbox' || type === 'radio') {
-                        if ($('input[name="' + name + '[]"]:checked').length === 0 &&
-                            $('input[name="' + name + '"]:checked').length === 0) {
-                            hasError = true;
-                        }
-                    }
-                    // Validation for other inputs
-                    else if (type === 'text' || type === 'number' || type === 'file' || tag === 'textarea' || tag === 'select') {
-                        if ($.trim(field.val()) === '' || field.val() === null) {
-                            hasError = true;
-                        }
-                    }
-
-                    if (hasError) {
-                        $('#' + name + '-error').text('This field is required.').show();
-                        field.focus();
-                        isValid = false;
-                        return false; // stop loop
-                    } else {
-                        $('#' + name + '-error').hide();
-                    }
-                });
-
-                if (!isValid) {
-                    e.preventDefault(); // stop form submission
-                }
-            });
-
-            // Hide error on interaction
-            $('#saveForm').on('change input', 'input, select, textarea', function () {
-                const field = $(this);
-                const type = field.attr('type');
-                let name = field.attr('name') || field.attr('id');
-
-                // Normalize name
-                if (name && name.endsWith('[]')) {
-                    name = name.slice(0, -2);
-                }
-
-                if (type === 'radio' || type === 'checkbox') {
-                    if ($('input[name="' + name + '[]"]:checked').length > 0 ||
-                        $('input[name="' + name + '"]:checked').length > 0) {
-                        $('#' + name + '-error').hide();
-                    }
-                } else {
-                    if ($.trim(field.val()) !== '') {
-                        $('#' + name + '-error').hide();
-                    }
-                }
-            });
-        });
-    </script>
-    <!--end all field that is required show error message  -->
-    
     <!-- Function to show/hide the invited and participated fields -->
     <script>
         $(document).ready(function() {
@@ -1331,10 +1454,17 @@ use Illuminate\Support\Facades\DB;
 
                     if (i <= count) {
                         card.style.display = 'block';
-                        inputs.forEach(input => input.setAttribute('required', 'required'));
+                        // inputs.forEach(input => input.setAttribute('required', 'required'));
+                        inputs.forEach(input => {
+                            if (input.name !== 'co_ecosystem_affiliation_' + i + '[]') {
+                                input.setAttribute('required', 'required');
+                            }
+                        });
+                        // input.removeAttribute('disabled'); // Ensure not disabled
                     } else {
                         card.style.display = 'none';
                         inputs.forEach(input => input.removeAttribute('required'));
+                        // input.setAttribute('disabled', 'disabled'); // Avoid validation
                     }
                 }
 

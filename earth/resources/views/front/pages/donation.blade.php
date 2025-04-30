@@ -22,7 +22,7 @@
                                 </ul>
                                 
                                 <div class="custom-alert d-flex align-items-start">
-                                    <strong>Give today, so we can amplify the voices of more grassroots changemakers through EaRTh!</strong>
+                                    <strong class="font15">Give today, so we can amplify the voices of more grassroots changemakers through EaRTh!</strong>
                                 </div>
                             </div>
                         </div>
@@ -75,9 +75,9 @@
                                                 <button type="button" class="btn btn-outline-secondary" onclick="calculatePayableAmount(500);">$500</button>
                                             </li>
                                         </ul>
-                                        <input type="text" class="form-control mt-2 w-50" placeholder="Other amount: minimum donation is the equivalent of USD 10" id="custom_amount" oninput="calculatePayableAmount(this.value);">
+                                        <input type="text" class="form-control mt-2 w-50" placeholder="Minimum donation USD 10" id="custom_amount" oninput="calculatePayableAmount(this.value);">
                                     </div>
-                                    <div class="form-check mb-4">
+                                    <div class="form-check mb-4 label_checkbox">
                                         <input class="form-check-input" type="checkbox" id="coverFee">
                                         <label class="form-check-label" for="coverFee">I'd like to help cover the transaction fees.</label>
                                     </div>
