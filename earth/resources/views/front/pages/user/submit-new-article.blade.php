@@ -1162,7 +1162,7 @@ use Illuminate\Support\Facades\DB;
                     let name = rawName;
                     // alert(rawName);
                     let hasError = false;
-                    let errorId = name + '-error';
+                    
                     
 
                     // Normalize name for [] fields (like checkbox groups)
@@ -1170,6 +1170,7 @@ use Illuminate\Support\Facades\DB;
                         name = rawName.slice(0, -2);
                         console.log('Normalized name: ' + name);
                     }
+                    let errorId = name + '-error';
                     if ($('#' + errorId).length === 0) {
                         // try by ID if it's different than name
                         errorId = field.attr('id') + '-error';
