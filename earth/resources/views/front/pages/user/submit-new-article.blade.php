@@ -91,6 +91,7 @@ use Illuminate\Support\Facades\DB;
                 $co_indigenous_affiliations = json_decode($row->co_indigenous_affiliations);
                 $co_author_classification = json_decode($row->co_author_classification);
                 $co_author_pronoun = json_decode($row->co_author_pronoun);
+                dd($co_author_pronoun);
                 $first_name = $row->first_name;
                 $email = $row->email;
                 $for_publication_name = $row->for_publication_name;
