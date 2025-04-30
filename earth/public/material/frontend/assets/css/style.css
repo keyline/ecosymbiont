@@ -7530,6 +7530,9 @@ ul.list-posts > li img{
     width: 100%;
     height: 250px;
   }
+  #popupModal .modal-dialog {
+    max-width: 320px !important;
+  }
 }
 .content-blocker,
 .sidebar-sticky {
@@ -7690,7 +7693,5 @@ div.dt-container div.dt-layout-row.dt-layout-table div.dt-layout-cell {
   .advarnseach_section .modal-body .advance_inner_search select{
     width: 46%;
   }
-  #popupModal .modal-dialog {
-    max-width: 320px !important;
-  }
+  
 }
