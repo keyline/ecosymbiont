@@ -6523,6 +6523,9 @@ div#permalink p {
 
 /* popup css */
 /* Custom Modal Styling */
+#popupModal.modal{
+  padding-right: 0 !important;
+}
 #popupModal .modal-dialog {
   margin-top: 50px;
   width: 100%;
@@ -7305,19 +7308,20 @@ div#permalink p {
   max-width: 450px !important;
 }
 #popupModal .modal-title {
-  font-size: 25px;
+  font-size: 20px;
 }
 #popupModal .modal-body{
   padding: 0;
 }
 #popupModal .modal-body p {
-  font-size: 15px;
-  line-height: 1.5;
-  margin: 10px 0;
+  font-size: 13px;
+  line-height: 1.4;
+  margin: 5px 0;
   color: #fff;
 }
 .btn-yellow{
-  font-size: 15px !important;
+  font-size: 13px !important;
+  padding: 6px 15px !important;
 }
 .article-post .post-content h2{
   font-size: 15px !important;
@@ -7363,7 +7367,7 @@ ul.list-posts > li .post-content p,
   width: 100%;
 }
 #popupModal .modal-header .close{
-  font-size: 25px;
+  font-size: 20px;
 }
 }
 
