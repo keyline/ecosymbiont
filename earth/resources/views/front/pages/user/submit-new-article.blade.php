@@ -1002,7 +1002,7 @@ use Illuminate\Support\Facades\DB;
                                     <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label blue-text">32a) How many total creative-works in this series?
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="number" name="series_article_no" class="form-control" id="series_article_no" min="1" value="<?=$series_article_no?>">
+                                        <input type="number" name="series_article_no" class="form-control" id="series_article_no" min="1" value="{{ old("series_article_no", $series_article_no ?? '') }}">
                                         <div id="series_article_no-error" class="error"></div>
                                     </div>
                                 </div>
@@ -1010,7 +1010,7 @@ use Illuminate\Support\Facades\DB;
                                     <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label blue-text">32b) What number in the series is this creative-work?
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="text" name="current_article_no" class="form-control" id="current_article_no" value="<?=$current_article_no?>">
+                                        <input type="text" name="current_article_no" class="form-control" id="current_article_no" value="{{ old("current_article_no", $current_article_no ?? '') }}">
                                         <div id="current_article_no-error" class="error"></div>
                                     </div>
                                 </div>
@@ -1021,7 +1021,7 @@ use Illuminate\Support\Facades\DB;
                                         <input type="text" name="input-tags" class="form-control" id="input-tags">
                                         <div id="validation-msg" style="color:red; font-size: 0.9em;"></div>
                                         <div id="input-tags-error" class="error"></div>
-                                        <textarea class="form-control" name="other_article_part_doi_no" id="other_article_part_doi_no" style="display:none;"><?=$other_article_part_doi_no?></textarea>
+                                        <textarea class="form-control" name="other_article_part_doi_no" id="other_article_part_doi_no" style="display:none;">{{ old("other_article_part_doi_no", $other_article_part_doi_no ?? '') }}</textarea>
                                         <small class="text-primary">Type a comma after each SRN</small>
                                         <div id="badge-container">
                                             <?php
