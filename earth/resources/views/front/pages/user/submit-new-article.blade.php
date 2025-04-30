@@ -1170,6 +1170,7 @@ use Illuminate\Support\Facades\DB;
                     // Normalize name for [] fields (like checkbox groups)
                     if (rawName && rawName.endsWith('[]')) {
                         name = rawName.slice(0, -2);
+                        console.log('Normalized name: ' + name);
                     }
 
                     // ❗ Skip specific field
