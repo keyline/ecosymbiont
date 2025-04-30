@@ -1162,17 +1162,26 @@ use Illuminate\Support\Facades\DB;
                     let name = rawName;
                     // alert(rawName);
                     let hasError = false;
-                    // let errorId = name + '-error';
-                    // if ($('#' + errorId).length === 0) {
-                    //     // try by ID if it's different than name
-                    //     errorId = field.attr('id') + '-error';
-                    // }
-                    // $('#' + errorId).text('This field is required.').show();
+                    let errorId = name + '-error';
+                    if ($('#' + errorId).length === 0) {
+                        // try by ID if it's different than name
+                        errorId = field.attr('id') + '-error';
+                    }
+                    $('#' + errorId).text('This field is required.').show();
 
                     // Normalize name for [] fields (like checkbox groups)
                     if (rawName && rawName.endsWith('[]')) {
                         name = rawName.slice(0, -2);
                         console.log('Normalized name: ' + name);
+                    }
+
+                     // ❗ Skip specific fields
+                    if (
+                        (rawName && rawName.startsWith('co_ecosystem_affiliation_') && rawName.endsWith('[]')) ||
+                        (name && name.startsWith('co_ecosystem_affiliation_'))
+                    ) {
+                        console.log('Skipping validation for field: ' + rawName);
+                        return true; // skip this checkbox group
                     }
 
                     // let errorId = name + '-error';
@@ -1183,14 +1192,10 @@ use Illuminate\Support\Facades\DB;
                     // }
                     // $('#' + CSS.escape(errorId)).text('This field is required.').show();
 
-                    // ❗ Skip specific field
+                   
                     if (name === 'community_name') {
                         return true; // skip this field
-                    }
-
-                    if (rawName && rawName.startsWith('co_ecosystem_affiliation_') && rawName.endsWith('[]')) {
-                        return true; // skip these checkbox fields
-                    }
+                    }                    
 
                     // Validation for checkbox and radio groups
                     if (type === 'checkbox' || type === 'radio') {
