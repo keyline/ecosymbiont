@@ -1264,21 +1264,21 @@ use Illuminate\Support\Facades\DB;
                 if (name === 'community_name') return true; // Skip
 
                 // ✅ Checkbox group validation
-                if (type === 'checkbox' && rawName.endsWith('[]')) {
-                    if (field.data('validated')) return true;
+                // if (type === 'checkbox' && rawName.endsWith('[]')) {
+                //     if (field.data('validated')) return true;
 
-                    const group = $('input[name="' + rawName + '"]');
-                    group.data('validated', true);
+                //     const group = $('input[name="' + rawName + '"]');
+                //     group.data('validated', true);
 
-                    if (group.filter(':checked').length === 0) {
-                        $('#' + errorId).text('Please select at least one option.').show();
-                        isValid = false;
-                        return false;
-                    } else {
-                        $('#' + errorId).hide();
-                        return true;
-                    }
-                }
+                //     if (group.filter(':checked').length === 0) {
+                //         $('#' + errorId).text('Please select at least one option.').show();
+                //         isValid = false;
+                //         return false;
+                //     } else {
+                //         $('#' + errorId).hide();
+                //         return true;
+                //     }
+                // }
 
                 // ✅ Radio group validation
                 else if (type === 'radio') {
