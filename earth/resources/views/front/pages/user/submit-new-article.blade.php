@@ -1252,7 +1252,6 @@ use Illuminate\Support\Facades\DB;
     $(document).ready(function () {
         $('#saveForm #submitButton').on('click', function (e) {
             let isValid = true;
-            const validatedCheckboxGroups = new Set();
 
             $('#saveForm [required]:not(:disabled):not([type="hidden"])').each(function () {
                 const field = $(this);
@@ -1262,33 +1261,33 @@ use Illuminate\Support\Facades\DB;
                 let name = rawName;
                 let hasError = false;
 
-                // Normalize name for array inputs
+                // Normalize name for checkbox groups (remove [])
                 if (rawName && rawName.endsWith('[]')) {
                     name = rawName.slice(0, -2);
                 }
 
                 const errorId = name + '-error';
 
-                // ✅ Only validate a checkbox group once
+                if (name === 'community_name') return true; // Skip
+
+                // ✅ Checkbox group validation
                 if (type === 'checkbox' && rawName.endsWith('[]')) {
-                    if (validatedCheckboxGroups.has(rawName)) return true;
-                    validatedCheckboxGroups.add(rawName);
-
-                    const group = $('input[name="' + rawName + '"]');
-                    if (group.filter(':checked').length === 0) {
+                    if ($('input[name="' + rawName + '"]:checked').length === 0) {
+                        alert('Please select at least one checkbox.');
                         hasError = true;
+                    }else{
+                        hasError = false;
                     }
                 }
 
-                // ✅ Radio button validation
+                // ✅ Radio group validation
                 else if (type === 'radio') {
-                    const group = $('input[name="' + rawName + '"]');
-                    if (group.filter(':checked').length === 0) {
+                    if ($('input[name="' + rawName + '"]:checked').length === 0) {
                         hasError = true;
                     }
                 }
 
-                // ✅ Text/select/textarea validation
+                // ✅ Other inputs
                 else if (
                     type === 'text' || type === 'number' || type === 'file' ||
                     tag === 'textarea' || tag === 'select'
@@ -1298,18 +1297,17 @@ use Illuminate\Support\Facades\DB;
                     }
                 }
 
-                // ✅ Show/hide error
                 if (hasError) {
                     $('#' + errorId).text('This field is required.').show();
+                    field.focus();
                     isValid = false;
+                    return false; // stop loop
                 } else {
                     $('#' + errorId).hide();
                 }
             });
 
-            if (!isValid) {
-                e.preventDefault(); // stop form submission
-            }
+            if (!isValid) e.preventDefault(); // block submit
         });
 
         // ✅ Hide error on change
@@ -1325,7 +1323,7 @@ use Illuminate\Support\Facades\DB;
 
             const errorId = name + '-error';
 
-            if (type === 'checkbox' || type === 'radio') {
+            if ((type === 'checkbox' || type === 'radio') && rawName) {
                 if ($('input[name="' + rawName + '"]:checked').length > 0) {
                     $('#' + errorId).hide();
                 }
@@ -1337,7 +1335,6 @@ use Illuminate\Support\Facades\DB;
         });
     });
 </script>
-
 
 
     <!--end all field that is required show error message  -->
