@@ -1799,7 +1799,7 @@ use Illuminate\Support\Facades\DB;
     </script>
 
     <!-- series toggle vlaue show and hide  -->
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         $(document).ready(function() {
             $(".series_yes").hide();
             var is_series= '<?=$is_series?>';
@@ -1897,6 +1897,105 @@ use Illuminate\Support\Facades\DB;
                 $('#other_article_part_doi_no').val(tagsArray.join(','));
             });
         });
-    </script>
+    </script> -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var tagsArray = [];
+
+        // Handle initial display of series fields
+        var is_series = '<?= old('is_series', $is_series ?? '') ?>';
+        if (is_series === "Yes") {
+            $(".series_yes").show();
+            $('#series_article_no').attr('required', true);
+            $('#current_article_no').attr('required', true);
+
+            var currentVal = parseInt($('#current_article_no').val());
+            if (currentVal > 1 || isNaN(currentVal)) {
+                $('#input-tags').attr('required', true);
+            } else {
+                $('#input-tags').attr('required', false);
+            }
+        } else {
+            $(".series_yes").hide();
+            $('#series_article_no, #current_article_no, #input-tags').attr('required', false);
+        }
+
+        // Show/hide based on is_series radio buttons
+        $('input[name="is_series"]').change(function () {
+            if ($(this).val() === "Yes") {
+                $(".series_yes").show();
+                $('#series_article_no').attr('required', true);
+                $('#current_article_no').attr('required', true);
+                $('#input-tags').attr('required', true);
+            } else {
+                $(".series_yes").hide();
+                $('#series_article_no, #current_article_no, #input-tags').attr('required', false);
+            }
+        });
+
+        // Adjust required based on current article number
+        $('#current_article_no').on('input', function () {
+            var val = parseInt($(this).val());
+            if (val <= 1 || isNaN(val)) {
+                $('#input-tags').attr('required', false);
+            } else {
+                $('#input-tags').attr('required', true);
+            }
+        });
+
+        // Tag management logic
+        var beforeData = $('#other_article_part_doi_no').val();
+        if (beforeData.length > 0) {
+            tagsArray = beforeData.split(',');
+            tagsArray.forEach(function (tag) {
+                tag = tag.trim();
+                if (tag.length > 0) {
+                    $('#badge-container').append(
+                        '<span class="badge">' + tag + ' <span class="remove" data-tag="' + tag + '">&times;</span></span>'
+                    );
+                }
+            });
+        }
+
+        $('#input-tags').on('input', function () {
+            var input = $(this).val().trim();
+            if (input.includes(',')) {
+                var tags = input.split(',');
+                tags.forEach(function (tag) {
+                    tag = tag.trim();
+                    if (tag.length > 0) {
+                        const pattern = /^SRN-EaRTh\d{6}-\d{3}$/;
+                        if (!pattern.test(tag)) {
+                            $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx,").css('color', 'red').fadeIn().delay(3000).fadeOut();
+                            return;
+                        } else {
+                            $('#validation-msg').text("✅ Valid: SRN-EaRThMMYYYY-xxx,").css('color', 'green').fadeIn().delay(3000).fadeOut();
+                        }
+
+                        if (!tagsArray.includes(tag)) {
+                            tagsArray.push(tag);
+                            $('#badge-container').append(
+                                '<span class="badge">' + tag + ' <span class="remove" data-tag="' + tag + '">&times;</span></span>'
+                            );
+                        }
+                    }
+                });
+                $('#other_article_part_doi_no').val(tagsArray.join(','));
+                $(this).val('');
+            }
+        });
+
+        $(document).on('click', '.remove', function () {
+            var tag = $(this).data('tag');
+            tagsArray = tagsArray.filter(function (item) {
+                return item !== tag;
+            });
+            $(this).parent().remove();
+            $('#other_article_part_doi_no').val(tagsArray.join(','));
+        });
+    });
+</script>
+
     <!-- series toggle value show and hide end -->
 
