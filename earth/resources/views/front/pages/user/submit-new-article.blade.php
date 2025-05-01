@@ -91,6 +91,7 @@ use Illuminate\Support\Facades\DB;
                 $co_indigenous_affiliations = json_decode($row->co_indigenous_affiliations);
                 $co_author_classification = json_decode($row->co_author_classification);
                 $co_author_pronoun = json_decode($row->co_author_pronoun);
+                // dd($co_author_pronoun);
                 $first_name = $row->first_name;
                 $email = $row->email;
                 $for_publication_name = $row->for_publication_name;
@@ -385,23 +386,13 @@ use Illuminate\Support\Facades\DB;
                                                 <div class="row">
                                                     <label for="pronoun" class="col-md-2 col-lg-4 col-form-label">3I{{$i}}) <?=numberToOrdinal($i)?> co-author’s pronoun</label>
                                                     <div class="col-md-10 col-lg-8">
+                                                        
                                                         @if ($pronoun)
                                                             @foreach ($pronoun as $data)
-                                                                <?php
-                                                                if($co_author_pronoun != ''){
-                                                                    if($data->id == $co_author_pronoun[$i - 1]){
-                                                                        $pronoun_checked = 'checked';
-                                                                    } else {
-                                                                        $pronoun_checked = '';
-                                                                    }
-                                                                } else {
-                                                                    $pronoun_checked = '';
-                                                                }
-                                                                ?>
-                                                                <input type="radio" name="co_author_pronoun_{{$i}}" value="{{ $data->id }}" <?=$pronoun_checked?>>
+                                                                <input type="radio" name="co_author_pronoun_{{$i}}" value="{{ $data->id }}" @checked(old("co_author_pronoun_{$i}") == $data->id)>
                                                                 <label>{{ $data->name }}</label>
                                                             @endforeach
-                                                        @endif  
+                                                        @endif 
                                                         <div id="co_author_pronoun_{{$i}}-error" class="error"></div>                              
                                                     </div>
                                                 </div>
@@ -960,14 +951,14 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>
                                 <!-- ?php dd($projects); ?> -->
-                                <div id="projectsDetails" style="display: none;">
+                                <div id="projectsDetails" style="display: {{ old('projects', $projects ?? '') == 'Yes' ? 'block' : 'none' }};">
                                     <div class="row mb-3">
                                         <label for="projects_info" class="col-md-2 col-lg-4 col-form-label blue-text">29A) Select Projects</label>
                                         <div class="col-md-10 col-lg-8">
                                             <select name="projects_name" class="form-control" id="projects_name">
                                                 <option value="" selected>Select</option>
                                                 <?php if($projects){ foreach($projects as $proj){?>
-                                                    <option value="<?=$proj->name?>" <?=(($projects_name == $proj->name)?'selected':'')?>><?=$proj->name?></option>
+                                                    <option value="<?=$proj->name?>" @selected(old("projects_name", $projects_name ?? '') == $proj->name)><?=$proj->name?></option>
                                                 <?php } }?>
                                             </select>
                                             <div id="projects_name-error" class="error"></div>
@@ -1000,9 +991,9 @@ use Illuminate\Support\Facades\DB;
                                     <label for="is_series" class="col-md-2 col-lg-4 col-form-label blue-text">32) Is this part of a series?
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="radio" id="series_yes" name="is_series" value="Yes" <?=(($is_series == 'Yes')?'checked':'')?> required>
+                                        <input type="radio" id="series_yes" name="is_series" value="Yes" @checked(old('is_series', $is_series) == 'Yes') required>
                                         <label for="series_yes">Yes</label>
-                                        <input type="radio" id="series_no" name="is_series" value="No" <?=(($is_series == 'No')?'checked':'')?> required>
+                                        <input type="radio" id="series_no" name="is_series" value="No" @checked(old('is_series', $is_series) == 'No') required>
                                         <label for="series_no">No</label>
                                         <div id="is_series-error" class="error"></div>
                                     </div>
@@ -1011,7 +1002,7 @@ use Illuminate\Support\Facades\DB;
                                     <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label blue-text">32a) How many total creative-works in this series?
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="number" name="series_article_no" class="form-control" id="series_article_no" min="1" value="<?=$series_article_no?>">
+                                        <input type="number" name="series_article_no" class="form-control" id="series_article_no" min="1" value="{{ old("series_article_no", $series_article_no ?? '') }}">
                                         <div id="series_article_no-error" class="error"></div>
                                     </div>
                                 </div>
@@ -1019,7 +1010,7 @@ use Illuminate\Support\Facades\DB;
                                     <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label blue-text">32b) What number in the series is this creative-work?
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="text" name="current_article_no" class="form-control" id="current_article_no" value="<?=$current_article_no?>">
+                                        <input type="text" name="current_article_no" class="form-control" id="current_article_no" value="{{ old("current_article_no", $current_article_no ?? '') }}">
                                         <div id="current_article_no-error" class="error"></div>
                                     </div>
                                 </div>
@@ -1030,7 +1021,7 @@ use Illuminate\Support\Facades\DB;
                                         <input type="text" name="input-tags" class="form-control" id="input-tags">
                                         <div id="validation-msg" style="color:red; font-size: 0.9em;"></div>
                                         <div id="input-tags-error" class="error"></div>
-                                        <textarea class="form-control" name="other_article_part_doi_no" id="other_article_part_doi_no" style="display:none;"><?=$other_article_part_doi_no?></textarea>
+                                        <textarea class="form-control" name="other_article_part_doi_no" id="other_article_part_doi_no" style="display:none;">{{ old("other_article_part_doi_no", $other_article_part_doi_no ?? '') }}</textarea>
                                         <small class="text-primary">Type a comma after each SRN</small>
                                         <div id="badge-container">
                                             <?php
@@ -1273,21 +1264,21 @@ use Illuminate\Support\Facades\DB;
                 if (name === 'community_name') return true; // Skip
 
                 // ✅ Checkbox group validation
-                if (type === 'checkbox' && rawName.endsWith('[]')) {
-                    if (field.data('validated')) return true;
+                // if (type === 'checkbox' && rawName.endsWith('[]')) {
+                //     if (field.data('validated')) return true;
 
-                    const group = $('input[name="' + rawName + '"]');
-                    group.data('validated', true);
+                //     const group = $('input[name="' + rawName + '"]');
+                //     group.data('validated', true);
 
-                    if (group.filter(':checked').length === 0) {
-                        $('#' + errorId).text('Please select at least one option.').show();
-                        isValid = false;
-                        return false;
-                    } else {
-                        $('#' + errorId).hide();
-                        return true;
-                    }
-                }
+                //     if (group.filter(':checked').length === 0) {
+                //         $('#' + errorId).text('Please select at least one option.').show();
+                //         isValid = false;
+                //         return false;
+                //     } else {
+                //         $('#' + errorId).hide();
+                //         return true;
+                //     }
+                // }
 
                 // ✅ Radio group validation
                 else if (type === 'radio') {
@@ -1808,7 +1799,7 @@ use Illuminate\Support\Facades\DB;
     </script>
 
     <!-- series toggle vlaue show and hide  -->
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         $(document).ready(function() {
             $(".series_yes").hide();
             var is_series= '<?=$is_series?>';
@@ -1906,6 +1897,129 @@ use Illuminate\Support\Facades\DB;
                 $('#other_article_part_doi_no').val(tagsArray.join(','));
             });
         });
-    </script>
+    </script> -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var tagsArray = [];
+
+        // Handle initial display of series fields
+        var is_series = '<?= old('is_series', $is_series ?? '') ?>';
+        if (is_series === "Yes") {
+            $(".series_yes").show();
+            $('#series_article_no').attr('required', true);
+            $('#current_article_no').attr('required', true);
+
+            var currentVal = parseInt($('#current_article_no').val());
+            if (currentVal > 1 || isNaN(currentVal)) {
+                $('#input-tags').attr('required', true);
+            } else {
+                $('#input-tags').attr('required', false);
+            }
+        } else {
+            $(".series_yes").hide();
+            $('#series_article_no, #current_article_no, #input-tags').attr('required', false);
+        }
+
+        // Show/hide based on is_series radio buttons
+        $('input[name="is_series"]').change(function () {
+            if ($(this).val() === "Yes") {
+                $(".series_yes").show();
+                $('#series_article_no').attr('required', true);
+                $('#current_article_no').attr('required', true);
+                $('#input-tags').attr('required', true);
+            } else {
+                $(".series_yes").hide();
+                $('#series_article_no, #current_article_no, #input-tags').attr('required', false);
+            }
+        });
+
+        // Adjust required based on current article number
+        $('#current_article_no').on('input', function () {
+            var val = parseInt($(this).val());
+            if (val <= 1 || isNaN(val)) {
+                $('#input-tags').attr('required', false);
+            } else {
+                $('#input-tags').attr('required', true);
+            }
+        });
+
+        // Tag management logic
+        // var beforeData = $('#other_article_part_doi_no').val();
+        // if (beforeData.length > 0) {
+        //     tagsArray = beforeData.split(',');
+        //     tagsArray.forEach(function (tag) {
+        //         tag = tag.trim();
+        //         if (tag.length > 0) {
+        //             $('#badge-container').append(
+        //                 '<span class="badge">' + tag + ' <span class="remove" data-tag="' + tag + '">&times;</span></span>'
+        //             );
+        //         }
+        //     });
+        // }
+
+        var beforeData = $('#other_article_part_doi_no').val();
+            if (beforeData.length > 0) {
+                tagsArray = beforeData.split(',');
+                tagsArray.forEach(function (tag) {
+                    tag = tag.trim();
+                    if (tag.length > 0) {
+                        $('#badge-container').append(
+                            '<span class="badge">' + tag + ' <span class="remove" data-tag="' + tag + '">&times;</span></span>'
+                        );
+                    }
+                });
+            }
+
+            // ✅ Check if tags are missing and conditionally set required
+            var currentVal = parseInt($('#current_article_no').val());
+            if (is_series === "Yes" && (isNaN(currentVal) || currentVal > 1) && tagsArray.length === 0) {
+                $('#input-tags').attr('required', true);
+            } else {
+                $('#input-tags').attr('required', false);
+            }
+
+        $('#input-tags').on('input', function () {
+            var input = $(this).val().trim();
+            if (input.includes(',')) {
+                var tags = input.split(',');
+                tags.forEach(function (tag) {
+                    tag = tag.trim();
+                    if (tag.length > 0) {
+                        const pattern = /^SRN-EaRTh\d{6}-\d{3}$/;
+                        if (!pattern.test(tag)) {
+                            $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx,").css('color', 'red').fadeIn().delay(3000).fadeOut();
+                            return;
+                        } else {
+                            $('#validation-msg').text("✅ Valid: SRN-EaRThMMYYYY-xxx,").css('color', 'green').fadeIn().delay(3000).fadeOut();
+                        }
+
+                        if (!tagsArray.includes(tag)) {
+                            tagsArray.push(tag);
+                            $('#badge-container').append(
+                                '<span class="badge">' + tag + ' <span class="remove" data-tag="' + tag + '">&times;</span></span>'
+                            );
+                        }
+                    }
+                });
+                $('#other_article_part_doi_no').val(tagsArray.join(','));
+                $(this).val('');
+            }
+        });
+
+        $(document).on('click', '.remove', function () {
+            var tag = $(this).data('tag');
+            tagsArray = tagsArray.filter(function (item) {
+                return item !== tag;
+            });
+            $(this).parent().remove();
+            $('#other_article_part_doi_no').val(tagsArray.join(','));
+        });
+    });
+</script>
+
+
+
+
     <!-- series toggle value show and hide end -->
 
