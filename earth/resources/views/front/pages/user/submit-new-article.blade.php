@@ -685,7 +685,7 @@ use Illuminate\Support\Facades\DB;
                                                     <div class="row description-div" id="description_1" >
                                                         <label for="narrative_image_desc_1" class="col-md-2 col-lg-4 col-form-label">17A3b1) TYPE A: short caption for image 1 (max. 50 words)</label>
                                                         <div class="col-md-10 col-lg-8">
-                                                            <textarea class="form-control" id="narrative_image_desc_1" name="narrative_image_desc_1" rows="4" cols="50"><?php if(isset($narrative_image_desc[0]) && $narrative_image_desc[0] != '') { echo $narrative_image_desc[0]; } ?></textarea>
+                                                            <textarea class="form-control" id="narrative_image_desc_1" name="narrative_image_desc_1" rows="4" cols="50">{{ old('narrative_image_desc_'.$i, $narrative_image_desc[$i-1] ?? '') }}</textarea>
                                                             <div id="narrative_image_desc_1Error" class="error"></div>
                                                             <div id="narrative_image_desc_1-error" class="error"></div>
                                                         </div>
