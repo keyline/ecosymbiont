@@ -314,7 +314,11 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
         const pageName = segments.pop() || segments.pop(); // handles trailing slash
         // Check if the cookie is already set
         if (pageName.toLowerCase() !== "donation" && !getCookie("popupShown")) {
-            $('#popupModal').modal('show'); // Bootstrap modal show
+            DelayNodelay = 2000; // Delay in milliseconds
+            setTimeout(function () {
+                $('#popupModal').modal('show'); // Bootstrap modal show
+            }, DelayNodelay);            
+            // $('#popupModal').modal('show'); // Bootstrap modal show
             setCookie("popupShown", "true", 30); // Set cookie for 30 days
         }
     });
