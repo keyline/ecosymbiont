@@ -419,10 +419,8 @@
 
                     if (group.filter(':checked').length === 0) {
                         $('#' + errorId).text('Please select at least one option.').show();
-                        if (isValid) {
-                        field.first().focus(); // Focus on first checkbox in group
-                    }
-                    isValid = false;
+                        field.focus();
+                        isValid = false;
                         return false;
                     } else {
                         $('#' + errorId).hide();
@@ -461,7 +459,7 @@
         });
 
         // ✅ Hide error on change
-        $('#saveForm').on('change input', 'input[type="checkbox"][name$="[]"]', 'input, select, textarea', function () {
+        $('#saveForm').on('change input', 'input, select, textarea', function () {
             const field = $(this);
             const type = field.attr('type');
             let rawName = field.attr('name') || field.attr('id');
