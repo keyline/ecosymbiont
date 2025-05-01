@@ -25,7 +25,7 @@
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 
 // Get the host (domain name)
-$host = $_SERVER['HTTP_HOST']; // e.g., localhost or example.com
+echo $host = $_SERVER['HTTP_HOST']; // e.g., localhost or example.com
 
 // Get the request URI (path after the domain)
 $requestUri = $_SERVER['REQUEST_URI']; // e.g., /ecosymbiontgit/together/category/action
