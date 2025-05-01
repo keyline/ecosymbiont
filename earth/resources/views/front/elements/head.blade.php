@@ -28,7 +28,7 @@ $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVE
 $host = $_SERVER['HTTP_HOST']; // e.g., localhost or example.com
 
 // Get the request URI (path after the domain)
-echo $requestUri = $_SERVER['REQUEST_URI']; // e.g., /ecosymbiontgit/together/category/action
+$requestUri = $_SERVER['REQUEST_URI']; // e.g., /ecosymbiontgit/together/category/action
 
 // Combine all parts to get the full URL
 $fullUrl = $protocol . $host . $requestUri;
