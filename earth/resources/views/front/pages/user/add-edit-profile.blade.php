@@ -139,6 +139,7 @@
                                     <input type="text" name="for_publication_name" class="form-control" id="for_publication_name"
                                         value="{{ old('for_publication_name', $for_publication_name) }}">
                                 </div>
+                                <div id="for_publication_name-error" class="error"></div>
                             </div>
                             <div class="row mb-3">
                                 <label for="title" class="col-md-2 col-lg-4 col-form-label">6) Title
@@ -361,6 +362,102 @@
     </div>
 <!-- End block content -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- all field that is required show error message  --> 
+<script>
+    $(document).ready(function () {
+        $('#saveForm #submitButton').on('click', function (e) {
+            let isValid = true;            
+
+            $('#saveForm [required]:not(:disabled):not([type="hidden"])').each(function () {
+                const field = $(this);
+                const type = field.attr('type');
+                const tag = field.prop('tagName').toLowerCase();
+                let rawName = field.attr('name') || field.attr('id');
+                let name = rawName;
+                let hasError = false;
+
+                // Normalize name for checkbox groups (remove [])
+                if (rawName && rawName.endsWith('[]')) {
+                    name = rawName.slice(0, -2);
+                }
+
+                const errorId = name + '-error';
+
+                if (name === 'community_name') return true; // Skip
+
+                // ✅ Checkbox group validation
+                // if (type === 'checkbox' && rawName.endsWith('[]')) {
+                //     if (field.data('validated')) return true;
+
+                //     const group = $('input[name="' + rawName + '"]');
+                //     group.data('validated', true);
+
+                //     if (group.filter(':checked').length === 0) {
+                //         $('#' + errorId).text('Please select at least one option.').show();
+                //         isValid = false;
+                //         return false;
+                //     } else {
+                //         $('#' + errorId).hide();
+                //         return true;
+                //     }
+                // }
+
+                // ✅ Radio group validation
+                else if (type === 'radio') {
+                    if ($('input[name="' + rawName + '"]:checked').length === 0) {
+                        hasError = true;
+                    }
+                }
+
+                // ✅ Other inputs
+                else if (
+                    type === 'text' || type === 'number' || type === 'file' ||
+                    tag === 'textarea' || tag === 'select'
+                ) {
+                    if ($.trim(field.val()) === '' || field.val() === null) {
+                        hasError = true;
+                    }
+                }
+
+                if (hasError) {
+                    $('#' + errorId).text('This field is required.').show();
+                    field.focus();
+                    isValid = false;
+                    return false; // stop loop
+                } else {
+                    $('#' + errorId).hide();
+                }
+            });
+
+            if (!isValid) e.preventDefault(); // block submit
+        });
+
+        // ✅ Hide error on change
+        $('#saveForm').on('change input', 'input, select, textarea', function () {
+            const field = $(this);
+            const type = field.attr('type');
+            let rawName = field.attr('name') || field.attr('id');
+            let name = rawName;
+
+            if (rawName && rawName.endsWith('[]')) {
+                name = rawName.slice(0, -2);
+            }
+
+            const errorId = name + '-error';
+
+            if ((type === 'checkbox' || type === 'radio') && rawName) {
+                if ($('input[name="' + rawName + '"]:checked').length > 0) {
+                    $('#' + errorId).hide();
+                }
+            } else {
+                if ($.trim(field.val()) !== '') {
+                    $('#' + errorId).hide();
+                }
+            }
+        });
+    });
+</script>
+<!-- end all field that is required show error message  --> 
 
  <!-- all word count validation -->
 <script>
