@@ -461,7 +461,7 @@
         });
 
         // ✅ Hide error on change
-        $('#saveForm').on('change', 'input[type="checkbox"][name$="[]"]', 'input, select, textarea', function () {
+        $('#saveForm').on('change input', 'input[type="checkbox"][name$="[]"]', 'input, select, textarea', function () {
             const field = $(this);
             const type = field.attr('type');
             let rawName = field.attr('name') || field.attr('id');
