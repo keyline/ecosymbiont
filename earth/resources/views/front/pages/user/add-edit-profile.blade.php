@@ -152,7 +152,8 @@
                                             <label for="yes">{{ $data->name }}</label>
                                                 <!-- {{ $data->name }}</option> -->
                                         @endforeach
-                                    @endif                                
+                                    @endif
+                                    <div id="title-error" class="error"></div>                                
                                 </div>
                             </div>   
                             <div class="row mb-3">
@@ -166,7 +167,8 @@
                                             <label for="yes">{{ $data->name }}</label>
                                                 <!-- {{ $data->name }}</option> -->
                                         @endforeach
-                                    @endif                                
+                                    @endif 
+                                    <div id="pronoun-error" class="error"></div>                               
                                 </div>
                             </div>                                                                                       
                             <div class="row mb-3">
@@ -177,6 +179,7 @@
                                     <label for="yes">Yes</label>
                                     <input type="radio" id="invited_no" name="invited" value="No" required @checked(old('invited', $invited) == 'No')>
                                     <label for="no">No</label>
+                                    <div id="invited-error" class="error"></div>
                                 </div>
                             </div>  
                             <div id="invitedDetails" style="display: none;">
@@ -186,6 +189,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="invited_by" class="form-control" id="invited_by"
                                             value="{{ old('invited_by', $invited_by) }}">
+                                        <div id="invited_by-error" class="error"></div>
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
@@ -194,6 +198,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="invited_by_email" class="form-control" id="invited_by_email"
                                             value="{{ old('invited_by_email', $invited_by_email) }}">
+                                        <div id="invited_by_email-error" class="error"></div>
                                     </div>
                                 </div>
                             </div>
@@ -205,6 +210,7 @@
                                     <label for="yes">Yes</label>
                                     <input type="radio" id="participated_no" name="participated" value="No" required @checked(old('participated', $participated) == 'No')>
                                     <label for="no">No</label>
+                                    <div id="participated-error" class="error"></div>
                                 </div>
                             </div> 
                             <div id="participatedDetails" style="display: none;">
@@ -212,7 +218,8 @@
                                     <label for="participated_info" class="col-md-2 col-lg-4 col-form-label">11A) Provide date and location of most recent in-person ER Synergy Meeting in which you participated</label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="participated_info" class="form-control" id="participated_info"
-                                        value="{{ old('participated_info', $participated_info) }}">                                    
+                                        value="{{ old('participated_info', $participated_info) }}">
+                                        <div id="participated_info-error" class="error"></div>                                    
                                     </div>
                                 </div> 
                             </div>
@@ -221,7 +228,8 @@
                                     <label for="explanation" class="col-md-2 col-lg-4 col-form-label">12) Explain why you are a grassroots changemaker, innovator, and/or knowledge-holder (max. 100 words)</label>
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="explanation" name="explanation" rows="4" cols="50" required>{{ old('explanation', $explanation) }}</textarea>
-                                        <div id="explanationError" class="error"></div>                                    
+                                        <div id="explanationError" class="error"></div>    
+                                        <div id="explanation-error" class="error"></div>                               
                                     </div>
                                 </div>  
                                 <div class="row mb-3">
@@ -229,6 +237,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="explanation_submission" name="explanation_submission" rows="4" cols="50" required>{{ old('explanation_submission', $explanation_submission) }}</textarea>
                                         <div id="explanation_submissionError" class="error"></div>                                        
+                                        <div id="explanation_submission-error" class="error"></div>                                        
                                     </div>
                                 </div>                                
                                 <div class="row mb-3">
@@ -243,6 +252,7 @@
                                                 @endforeach
                                             @endif
                                         </select>
+                                        <div id="country-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -250,6 +260,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="state" class="form-control" id="state"
                                             value="{{ old('state', $state) }}" required>
+                                        <div id="state-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -257,6 +268,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="city" class="form-control" id="city"
                                             value="{{ old('city', $city ) }}" required>
+                                        <div id="city-error" class="error"></div>
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
@@ -265,6 +277,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="organization_name" class="form-control" id="organization_name"
                                             value="{{ old('organization_name', $organization_name) }}" required>
+                                        <div id="organization_name-error" class="error"></div>
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
@@ -273,6 +286,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="organization_website" class="form-control" id="organization_website"
                                             value="{{ old('organization_website', $organization_website) }}" required>
+                                        <div id="organization_website-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -284,6 +298,7 @@
                                             <input type="checkbox" name="ecosystem_affiliation[]" value="{{ $data->id }}" @if(in_array($data->id, old('ecosystem_affiliation', $ecosystem_affiliationId))) checked @endif>  {{ $data->name }}<br>
                                             @endforeach
                                         @endif                                
+                                        <div id="ecosystem_affiliation-error" class="error"></div>
                                     </div>
                                 </div>   
                                 <div class="row mb-3">
@@ -292,6 +307,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="indigenous_affiliation" class="form-control" id="indigenous_affiliation"
                                         value="{{ old('indigenous_affiliation', $indigenous_affiliation) }}" required>
+                                        <div id="indigenous_affiliation-error" class="error"></div>
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
@@ -303,6 +319,7 @@
                                             <input type="checkbox" name="expertise_area[]" value="{{ $data->id }}" @if(in_array($data->id, old('expertise_area', $expertise_areaId))) checked @endif>  {{ $data->name }}<br>
                                             @endforeach
                                         @endif
+                                        <div id="expertise_area-error" class="error"></div>
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
@@ -311,6 +328,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="bio_short" name="bio_short" rows="4" cols="50" required>{{ old('bio_short', $bio_short) }}</textarea>
                                         <div id="bio_shortError" class="error"></div>
+                                        <div id="bio_short-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -319,6 +337,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="bio_long" name="bio_long" rows="4" cols="50" required>{{ old('bio_long', $bio_long) }}</textarea>
                                         <div id="bio_longError" class="error"></div>
+                                        <div id="bio_long-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -329,6 +348,7 @@
                                         <label for="yes">Yes</label>
                                         <input type="radio" id="community_no" name="community" value="No" required @checked(old('community', $community) == 'No')>
                                         <label for="no">No</label>
+                                        <div id="community-error" class="error"></div>
                                     </div>
                                 </div> 
                                 <div id="communityDetails" style="display: none;">
@@ -343,6 +363,7 @@
                                                     <option value="<?=$cmn->name?>" <?=(($community_name == $cmn->name)?'selected':'')?>><?=$cmn->name?></option>
                                                 <?php } }?>
                                             </select>
+                                            <div id="community_name-error" class="error"></div>
                                         </div>
                                     </div> 
                                 </div>                                                                
