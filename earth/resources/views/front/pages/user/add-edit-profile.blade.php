@@ -386,7 +386,7 @@
 <!-- End block content -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- all field that is required show error message  --> 
-<!-- <script>
+<script>
     $(document).ready(function () {
         $('#saveForm #submitButton').on('click', function (e) {
             let isValid = true;         
@@ -484,122 +484,6 @@
             }
         });
     });
-</script> -->
-
-<script>
-$(document).ready(function () {
-    let formSubmitted = false;
-
-    // Main validation function
-    function validateForm() {
-        let isValid = true;
-        $('input[type="checkbox"][name$="[]"]').removeData('validated');
-        $('.error').hide();
-
-        $('#saveForm [required]:not(:disabled):not([type="hidden"])').each(function () {
-            if (!isValid) return;
-
-            const field = $(this);
-            const type = field.attr('type');
-            const tag = field.prop('tagName').toLowerCase();
-            let rawName = field.attr('name') || field.attr('id');
-            let name = rawName.replace('[]', '');
-            const errorId = `${name}-error`;
-
-            if (name === 'community_name') return true;
-
-            // Checkbox group validation
-            if (type === 'checkbox' && rawName.endsWith('[]')) {
-                if (field.data('validated')) return;
-                const group = $(`input[name="${rawName}"]`);
-                group.data('validated', true);
-                if (group.filter(':checked').length === 0) {
-                    $(`#${errorId}`).text('Please select at least one option.').show();
-                    if (isValid) group.first().focus();
-                    isValid = false;
-                }
-            }
-            // Radio button validation
-            else if (type === 'radio') {
-                if ($(`input[name="${rawName}"]:checked`).length === 0) {
-                    $(`#${errorId}`).text('Please select an option.').show();
-                    if (isValid) $(`input[name="${rawName}"]`).first().focus();
-                    isValid = false;
-                }
-            }
-            // Select dropdown validation
-            else if (tag === 'select') {
-                if (!field.val()) {
-                    $(`#${errorId}`).text('Please select an option.').show();
-                    if (isValid) field.focus();
-                    isValid = false;
-                }
-            }
-            // Other input types
-            else if (['text', 'number', 'file', 'email', 'password'].includes(type) || 
-                     tag === 'textarea') {
-                if (!field.val().trim()) {
-                    $(`#${errorId}`).text('This field is required.').show();
-                    if (isValid) field.focus();
-                    isValid = false;
-                }
-            }
-        });
-
-        return isValid;
-    }
-
-    // Submit button handler
-    $('#saveForm #submitButton').on('click', function (e) {
-        formSubmitted = true;
-        if (!validateForm()) {
-            e.preventDefault();
-            formSubmitted = false;
-        }
-    });
-
-    // Form submission handler
-    $('#saveForm').on('submit', function(e) {
-        if (!formSubmitted) {
-            e.preventDefault();
-            $('#saveForm #submitButton').click();
-        }
-    });
-
-    // Real-time validation handlers
-    $('#saveForm').on({
-        // For text inputs, textareas, etc.
-        'input change': 'input[type="text"], input[type="number"], input[type="email"], input[type="password"], textarea',
-        // For file inputs
-        'change': 'input[type="file"]',
-        // For checkboxes and radio buttons
-        'change': 'input[type="checkbox"], input[type="radio"]',
-        // For select dropdowns
-        'change': 'select'
-    }, function() {
-        const field = $(this);
-        const rawName = field.attr('name') || field.attr('id');
-        const name = rawName.replace('[]', '');
-        const errorId = `${name}-error`;
-        
-        // Special handling for checkbox groups
-        if (field.attr('type') === 'checkbox' && rawName.endsWith('[]')) {
-            if ($(`input[name="${rawName}"]:checked`).length > 0) {
-                $(`#${errorId}`).hide();
-            }
-        } 
-        // For all other fields
-        else if (field.attr('type') === 'radio' || field.prop('tagName').toLowerCase() === 'select') {
-            if (field.attr('type') === 'radio' ? $(`input[name="${rawName}"]:checked`).length > 0 : field.val()) {
-                $(`#${errorId}`).hide();
-            }
-        }
-        // For regular inputs
-        else if (field.val().trim()) {
-            $(`#${errorId}`).hide();
-        }
-    });
-});
 </script>
 <!-- end all field that is required show error message  --> 
 
