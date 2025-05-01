@@ -138,8 +138,8 @@
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" name="for_publication_name" class="form-control" id="for_publication_name"
                                         value="{{ old('for_publication_name', $for_publication_name) }}" required>
-                                </div>
-                                <div id="for_publication_name-error" class="error"></div>
+                                    <div id="for_publication_name-error" class="error"></div>
+                                </div>                                
                             </div>
                             <div class="row mb-3">
                                 <label for="title" class="col-md-2 col-lg-4 col-form-label">6) Title
