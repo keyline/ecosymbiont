@@ -137,7 +137,7 @@
                                 <label for="for_publication_name" class="col-md-2 col-lg-4 col-form-label">5) Preferred name for publication (if different from full legal name)</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" name="for_publication_name" class="form-control" id="for_publication_name"
-                                        value="{{ old('for_publication_name', $for_publication_name) }}">
+                                        value="{{ old('for_publication_name', $for_publication_name) }}" required>
                                 </div>
                                 <div id="for_publication_name-error" class="error"></div>
                             </div>
