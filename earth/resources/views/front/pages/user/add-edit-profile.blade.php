@@ -148,8 +148,8 @@
                                     @if ($user_title)
                                         @foreach ($user_title as $data)
                                             <!-- <option value="{{ $data->id }}" @selected($data->id == $titleId)> -->
-                                            <input type="radio" id="yes" name="title" value="{{ $data->id }}" required @checked($data->id == $titleId) >
-                                            <label for="yes">{{ $data->name }}</label>
+                                            <input type="radio" id="title" name="title" value="{{ $data->id }}" required  @checked(old("title") == $data->id)  >
+                                            <label for="title">{{ $data->name }}</label>
                                                 <!-- {{ $data->name }}</option> -->
                                         @endforeach
                                     @endif
