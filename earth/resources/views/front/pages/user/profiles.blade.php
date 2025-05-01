@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\DB;
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <?php if(count($profiles) <= 0){?>
+                        <?php if(count($profiles) >= 0){?>
                             <a href="<?=url('user/add-profile')?>" class="btn btn-success btn-sm"><i class="fa fa-plus-circle"></i> Add New Profile</a>
                         <?php }?>
                         <div class="table-responsive">                        
