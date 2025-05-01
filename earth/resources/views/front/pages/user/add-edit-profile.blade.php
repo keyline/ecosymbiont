@@ -295,7 +295,7 @@
                                     <div class="col-md-10 col-lg-8">                                                                                                
                                         @if ($ecosystem_affiliation)
                                             @foreach ($ecosystem_affiliation as $data)
-                                            <input type="checkbox" name="ecosystem_affiliation[]" value="{{ $data->id }}" required @if(in_array($data->id, old('ecosystem_affiliation', $ecosystem_affiliationId))) checked @endif>  {{ $data->name }}<br>
+                                            <input type="checkbox" name="ecosystem_affiliation[]" value="{{ $data->id }}" @if(in_array($data->id, old('ecosystem_affiliation', $ecosystem_affiliationId))) checked @endif>  {{ $data->name }}<br>
                                             <div id="ecosystem_affiliation-error" class="error"></div>
                                             @endforeach
                                         @endif                                
@@ -317,7 +317,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         @if ($expertise_area)
                                             @foreach ($expertise_area as $data)
-                                            <input type="checkbox" name="expertise_area[]" value="{{ $data->id }}" required @if(in_array($data->id, old('expertise_area', $expertise_areaId))) checked @endif>  {{ $data->name }}<br>
+                                            <input type="checkbox" name="expertise_area[]" value="{{ $data->id }}" @if(in_array($data->id, old('expertise_area', $expertise_areaId))) checked @endif>  {{ $data->name }}<br>
                                             <div id="expertise_area-error" class="error"></div>
                                             @endforeach
                                         @endif
