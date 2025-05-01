@@ -2545,7 +2545,7 @@ class FrontController extends Controller
 
                                     if($request->input("co_ecosystem_affiliation_{$i}") !== null){
                                         $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
-                                    } else{
+                                    } else{                                        
                                         return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ecosystem affiliation']);
                                     }
                                     // $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
