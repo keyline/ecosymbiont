@@ -289,3 +289,28 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
         });
     })
 </script>
+<!-- cookie set -->
+<script>
+    function getCookie(name) {
+        let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+        return match ? match[2] : null;
+    }
+
+    function setCookie(name, value, days) {
+        let expires = "";
+        if (days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Check if the cookie is already set
+        if (!getCookie("popupShown")) {
+            $('#popupModal').modal('show'); // Bootstrap modal show
+            setCookie("popupShown", "true", 30); // Set cookie for 30 days
+        }
+    });
+</script>
