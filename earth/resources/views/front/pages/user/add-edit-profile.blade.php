@@ -386,10 +386,12 @@
 <!-- End block content -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- all field that is required show error message  --> 
-<script>
+<!-- <script>
     $(document).ready(function () {
         $('#saveForm #submitButton').on('click', function (e) {
-            let isValid = true;            
+            let isValid = true;         
+            // Reset all validated flags for checkbox groups
+            $('input[type="checkbox"][name$="[]"]').removeData('validated');   
 
             $('#saveForm [required]:not(:disabled):not([type="hidden"])').each(function () {
                 const field = $(this);
@@ -417,8 +419,10 @@
 
                     if (group.filter(':checked').length === 0) {
                         $('#' + errorId).text('Please select at least one option.').show();
-                        field.focus();
-                        isValid = false;
+                        if (isValid) {
+                        field.first().focus(); // Focus on first checkbox in group
+                    }
+                    isValid = false;
                         return false;
                     } else {
                         $('#' + errorId).hide();
@@ -457,7 +461,7 @@
         });
 
         // ✅ Hide error on change
-        $('#saveForm').on('change input', 'input, select, textarea', function () {
+        $('#saveForm').on('change', 'input[type="checkbox"][name$="[]"]', 'input, select, textarea', function () {
             const field = $(this);
             const type = field.attr('type');
             let rawName = field.attr('name') || field.attr('id');
@@ -480,6 +484,106 @@
             }
         });
     });
+</script> -->
+
+<script>
+$(document).ready(function () {
+    let formSubmitted = false;
+
+    // Submit button click handler
+    $('#saveForm #submitButton').on('click', function (e) {
+        formSubmitted = true;
+        let isValid = true;
+
+        // Clear previous validation states
+        $('input[type="checkbox"][name$="[]"]').removeData('validated');
+        $('.error').hide();
+
+        // Validate all required fields
+        $('#saveForm [required]:not(:disabled):not([type="hidden"])').each(function () {
+            if (!isValid) return; // Skip if already invalid
+
+            const field = $(this);
+            const type = field.attr('type');
+            const tag = field.prop('tagName').toLowerCase();
+            let rawName = field.attr('name') || field.attr('id');
+            let name = rawName.replace('[]', ''); // Normalize name
+            const errorId = `${name}-error`;
+
+            // Skip community_name if needed
+            if (name === 'community_name') return true;
+
+            // Checkbox group validation
+            if (type === 'checkbox' && rawName.endsWith('[]')) {
+                if (field.data('validated')) return true; // Skip if already validated
+
+                const group = $(`input[name="${rawName}"]`);
+                group.data('validated', true); // Mark group as validated
+
+                if (group.filter(':checked').length === 0) {
+                    $(`#${errorId}`).text('Please select at least one option.').show();
+                    if (isValid) group.first().focus();
+                    isValid = false;
+                }
+            } 
+            // Radio group validation
+            else if (type === 'radio') {
+                if ($(`input[name="${rawName}"]:checked`).length === 0) {
+                    $(`#${errorId}`).text('Please select an option.').show();
+                    if (isValid) $(`input[name="${rawName}"]`).first().focus();
+                    isValid = false;
+                }
+            }
+            // Other input types validation
+            else if (['text', 'number', 'file', 'email', 'password'].includes(type) || 
+                     ['textarea', 'select'].includes(tag)) {
+                if (!field.val().trim()) {
+                    $(`#${errorId}`).text('This field is required.').show();
+                    if (isValid) field.focus();
+                    isValid = false;
+                }
+            }
+        });
+
+        if (!isValid) {
+            e.preventDefault();
+            formSubmitted = false;
+        }
+    });
+
+    // Real-time validation for checkbox groups
+    $('#saveForm').on('change', 'input[type="checkbox"][name$="[]"]', function() {
+        const rawName = $(this).attr('name');
+        const name = rawName.replace('[]', '');
+        const errorId = `${name}-error`;
+        
+        if ($(`input[name="${rawName}"]:checked`).length > 0) {
+            $(`#${errorId}`).hide();
+        }
+    });
+
+    // Real-time validation for other fields
+    $('#saveForm').on('input change', 
+        'input[type="text"], input[type="number"], input[type="file"], textarea, select', 
+        function() {
+            const field = $(this);
+            const name = (field.attr('name') || field.attr('id')).replace('[]', '');
+            const errorId = `${name}-error`;
+            
+            if (field.val().trim()) {
+                $(`#${errorId}`).hide();
+            }
+        }
+    );
+
+    // Form submit handler to prevent double validation
+    $('#saveForm').on('submit', function(e) {
+        if (!formSubmitted) {
+            e.preventDefault();
+            $('#saveForm #submitButton').click();
+        }
+    });
+});
 </script>
 <!-- end all field that is required show error message  --> 
 
