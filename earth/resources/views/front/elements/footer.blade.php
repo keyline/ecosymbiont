@@ -213,13 +213,6 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
 </div>
 {{-- stickt button --}}
 <a href="<?=url('donation')?>" target="_blank" class="donate-button">Donate to EaRTH</a>
-<?php
-
-$url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-$segments = explode("/", rtrim($url, "/"));
-$pageName = end($segments);
-echo $pageName; // Output: "donation"
-?>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
@@ -316,8 +309,11 @@ echo $pageName; // Output: "donation"
     }
 
     document.addEventListener("DOMContentLoaded", function () {
+        const url = window.location.href;
+        const segments = url.split("/");
+        const pageName = segments.pop() || segments.pop(); // handles trailing slash
         // Check if the cookie is already set
-        if (!getCookie("popupShown")) {
+        if (pageName.toLowerCase() !== "donation" && !getCookie("popupShown")) {
             $('#popupModal').modal('show'); // Bootstrap modal show
             setCookie("popupShown", "true", 30); // Set cookie for 30 days
         }
