@@ -391,7 +391,7 @@
         $('#saveForm #submitButton').on('click', function (e) {
             let isValid = true;         
             // Reset all validated flags for checkbox groups
-            $('input[type="checkbox"][name$="[]"]').removeData('validated');   
+            // $('input[type="checkbox"][name$="[]"]').removeData('validated');   
 
             $('#saveForm [required]:not(:disabled):not([type="hidden"])').each(function () {
                 const field = $(this);
@@ -411,22 +411,22 @@
                 if (name === 'community_name') return true; // Skip
 
                 // ✅ Checkbox group validation
-                if (type === 'checkbox' && rawName.endsWith('[]')) {
-                    if (field.data('validated')) return true;
+                // if (type === 'checkbox' && rawName.endsWith('[]')) {
+                //     if (field.data('validated')) return true;
 
-                    const group = $('input[name="' + rawName + '"]');
-                    group.data('validated', true);
+                //     const group = $('input[name="' + rawName + '"]');
+                //     group.data('validated', true);
 
-                    if (group.filter(':checked').length === 0) {
-                        $('#' + errorId).text('Please select at least one option.').show();
-                        field.focus();
-                        isValid = false;
-                        return false;
-                    } else {
-                        $('#' + errorId).hide();
-                        return true;
-                    }
-                }
+                //     if (group.filter(':checked').length === 0) {
+                //         $('#' + errorId).text('Please select at least one option.').show();
+                //         field.focus();
+                //         isValid = false;
+                //         return false;
+                //     } else {
+                //         $('#' + errorId).hide();
+                //         return true;
+                //     }
+                // }
 
                 // ✅ Radio group validation
                 else if (type === 'radio') {
