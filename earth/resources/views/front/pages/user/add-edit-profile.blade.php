@@ -360,7 +360,7 @@
                                                 <!-- <option value="Schumacher Wild" @selected(old("community_name", $community_name ?? '') == 'Schumacher Wild') >Schumacher Wild</option>
                                                 <option value="West Oakland Matters" @selected(old("community_name", $community_name ?? '') == 'West Oakland Matters') >West Oakland Matters</option> -->
                                                 <?php if($communities){ foreach($communities as $cmn){?>
-                                                    <option value="<?=$cmn->name?>" <?=(($community_name == $cmn->name)?'selected':'')?>><?=$cmn->name?></option>
+                                                    <option value="<?=$cmn->name?>" @selected(old("community_name", $community_name ?? '') == $cmn->name) ><?=$cmn->name?></option>
                                                 <?php } }?>
                                             </select>
                                             <div id="community_name-error" class="error"></div>
