@@ -293,6 +293,7 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
 <!-- cookie set -->
 <script>
     function getCookie(name) {
+        alert(name);
         let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
         return match ? match[2] : null;
     }
