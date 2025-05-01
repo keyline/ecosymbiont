@@ -151,7 +151,7 @@ class PayPalController extends Controller
                 $mailData['getOrder']       = Donation::where('id', '=', $id)->first();                   
                 $generalSetting             = GeneralSetting::find('1');
                 $subject                    = 'Thank you for your donation to the Śramani Institute ['.$donation_number.']';
-                $message                    = 'Thank you very much for your donation to the Śramani Institute. Please find enclosed your donation receipt.<br><br>Best wishes,<br><br>Śramani Institute, Inc.';
+                $message                    = 'Thank you very much for your donation to the Śramani Institute.<br>Please find enclosed your donation receipt.<br><br>Best wishes,<br><br>Śramani Institute, Inc.';
                 // $message                    = 'Thank you very much for your donation to the Śramani Institute. Please find enclosed your donation receipt.<br>Best wishes,<br>the Śramani Institute';
                 $attchment                  = 'public/uploads/donation/' . $filename;
                 $this->sendMail($generalSetting->system_email, $subject, $message, $attchment);
