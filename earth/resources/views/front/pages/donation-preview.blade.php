@@ -11,7 +11,7 @@ use App\Helpers\Helper;
                 <div class="block-content">
                     <div class="article-box">
                         <!-- Left Info -->
-                        <div class="col-lg-7 fade-in">
+                        <!-- <div class="col-lg-7 fade-in">
                             <div class="donation-box donation-left">
                                 <div class="titleto-inner mb-3">
                                     <h2 class="mt-0">Give Today — Because We Need Real Solutions for People and Planet Now</h2>
@@ -29,9 +29,9 @@ use App\Helpers\Helper;
                                     <strong class="font15">Give today, so we can amplify the voices of more grassroots changemakers through EaRTh!</strong>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- Right Form -->
-                        <div class="col-lg-5 fade-in">
+                        <div class="col-lg-12 fade-in">
                             <div class="donation-box">
                                 <?php if($donation){?>
                                     <table class="table table-striped">
