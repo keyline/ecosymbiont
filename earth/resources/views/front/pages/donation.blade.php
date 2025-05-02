@@ -75,7 +75,7 @@
                                                 <button type="button" class="btn btn-outline-secondary" onclick="calculatePayableAmount(500);">$500</button>
                                             </li>
                                         </ul>
-                                        <input type="text" class="form-control mt-2 w-50" placeholder="Minimum donation USD 10" id="custom_amount" oninput="calculatePayableAmount(this.value);">
+                                        <div style="width: 100%;"><input type="text" class="form-control donation_abovesame mt-2 w-50" placeholder="Minimum donation USD 10" id="custom_amount" oninput="calculatePayableAmount(this.value);"></div>
                                     </div>
                                     <div class="form-check mb-4 label_checkbox">
                                         <input class="form-check-input" type="checkbox" id="coverFee">

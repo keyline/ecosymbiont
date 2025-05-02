@@ -6485,7 +6485,9 @@ div#permalink p {
 .donation-amounts li:last-child button {
   margin-right: 0;
 }
-
+.donation_abovesame {
+  max-width: 385px;
+}
 .payment-method button {
   margin-bottom: 15px;
   width: 160px;
