@@ -9,7 +9,7 @@ use App\Helpers\Helper;
             <div class="col-md-12 col-sm-12 content-blocker">
                 <!-- block content -->
                 <div class="block-content">
-                    <div class="article-box">
+                    <div class="article-box d-flex justify-content-center align-items-center">
                         <!-- Left Info -->
                         <!-- <div class="col-lg-7 fade-in">
                             <div class="donation-box donation-left">
