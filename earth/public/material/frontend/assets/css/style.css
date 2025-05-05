@@ -3482,6 +3482,13 @@ ul.list-posts > li .post-content h2 a:hover {
 .hover-box a{
   color: #fff !important;
 }
+.item.news-post.video-post.video_post_text:hover .hover-box h2 {
+  overflow: visible;
+  max-height: 100px;
+}
+.item.news-post.video-post.video_post_text:hover .hover-box h2 a:hover{
+  opacity: 1;
+}
 .video-post {
   margin-bottom: 10px;
 }
@@ -6466,14 +6473,21 @@ div#permalink p {
 .donation-left li {
   margin: 8px 0;
   font-size: 15px;
+  font-family: 'proximanova_regular', sans-serif;
+  line-height: 1.25;
 }
 
 .donation-amounts button {
-  width: 100px;
+  width: 72px;
   margin-right: 6px;
   margin-top: 0px;
 }
-
+.donation-amounts li:last-child button {
+  margin-right: 0;
+}
+.donation_abovesame {
+  max-width: 385px;
+}
 .payment-method button {
   margin-bottom: 15px;
   width: 160px;
