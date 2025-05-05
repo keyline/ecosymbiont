@@ -105,7 +105,18 @@ include "include/header.php";
             </div>
         </div>
     </section>
-    <script src="https://www.google.com/recaptcha/api.js?render=6LcIw04qAAAAAGBE5JP7v7i3gYEa4OPNSWqBlvbH"></script>
+    <?php
+    //  Get the host (domain name)
+    $host = $_SERVER['HTTP_HOST']; // e.g., localhost or example.com
+    if($host == 'ecosymbiont.keylines.in'){
+        $site_key = '6Ldum88qAAAAAGgaGIGZqvD0cZP_KzBWgN9CRUYO';
+    } elseif($host == 'ecosymbiont-uat.keylines.in'){
+        $site_key = '6Lco6wQrAAAAAA6CUefDtu4VFOND-y_vJvvsGJTj';
+    } else{ 
+        $site_key = '6LcIw04qAAAAAGBE5JP7v7i3gYEa4OPNSWqBlvbH';
+    }
+    ?>
+    <script src="https://www.google.com/recaptcha/api.js?render=<?=$site_key?>"></script>
     <script>
         // Validate the form before submission
         function validateForm() {
@@ -122,7 +133,7 @@ include "include/header.php";
 
             // Trigger reCAPTCHA validation
             grecaptcha.ready(function () {
-                grecaptcha.execute('6LcIw04qAAAAAGBE5JP7v7i3gYEa4OPNSWqBlvbH', { action: 'submit' }).then(function (token) {
+                grecaptcha.execute('<?=$site_key?>', { action: 'submit' }).then(function (token) {
                     // Set the token into the hidden input field
                     document.getElementById('recaptchaResponse').value = token;
                     document.getElementById('myForm').submit();
