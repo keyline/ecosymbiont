@@ -23,7 +23,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    //   print_r($_POST); die;
+      print_r($_POST); die;
     $full_name = $_POST['full_name'] ;
     $email = $_POST['email'];
     $country = $_POST['country'];
