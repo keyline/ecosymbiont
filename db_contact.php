@@ -1,6 +1,7 @@
 <?php
-// error_reporting(E_ALL);
-// include "include/header.php";
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 session_start();
 // Database connection parameters
 $servername = "localhost"; // Your database server
@@ -28,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $country = $_POST['country'];
     $subject = $_POST['subject'];
-    $message = $_POST['message'];
+    $comment = $_POST['message'];
     $subject_string = implode(", ", $subject);; // Or use json_encode($subject)
 
     // Verify the reCAPTCHA response
@@ -51,7 +52,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'secret' => $secretKey,
         'response' => $recaptchaResponse
     );
-
     $options = array(
         'http' => array(
             'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
@@ -59,7 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'content' => http_build_query($data)
         )
     );
-
     $context  = stream_context_create($options);
     $response = file_get_contents($url, false, $context);
     $result = json_decode($response);
@@ -69,13 +68,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // echo "verified"; die;
         // Handle the form submission (e.g., save to database, send email, etc.)
         // Prepare the SQL query
-        $sql = "INSERT INTO enquiries (name, email, country, subject, message) VALUES ('$full_name', '$email', '$country', '$subject_string', '$message')";
+        $sql = "INSERT INTO enquiries (name, email, country, subject, message) VALUES ('$full_name', '$email', '$country', '$subject_string', '$comment')";
 
         // Execute the query
         if (mysqli_query($conn, $sql)) {        
-            // Initialize PHPMailer for admin notification
-            // $adminMail = new PHPMailer(true);
-
+            // Initialize PHPMailer for admin notification           
             // $to = "Ecosymbionts.regenerate@gmail.com";
             $to = "deblinasonaidas1997@gmail.com";
             $subject = 'New Lead From Ecosymbiont Website - ' . htmlspecialchars($full_name);
@@ -86,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <tr><td style='padding: 8px 15px'><strong>Name: </strong>" . htmlspecialchars($full_name) . "</td></tr>
                     <tr><td style='padding: 8px 15px'><strong>Email: </strong>" . htmlspecialchars($email) . "</td></tr>    
                     <tr><td style='padding: 8px 15px'><strong>Country: </strong>" . htmlspecialchars($country) . "</td></tr>                                         
-                    <tr><td style='padding: 8px 15px'><strong>Message: </strong>" . htmlspecialchars($message) . "</td></tr>
+                    <tr><td style='padding: 8px 15px'><strong>Message: </strong>" . htmlspecialchars($comment) . "</td></tr>
                     <tr><td style='padding: 8px 15px'><strong>Subject: </strong>" . htmlspecialchars($subject_string) . "</td></tr>
                     <tr><td style='padding: 8px 15px'>Thank You,</td></tr>
                     <tr><td style='padding: 8px 15px'>Auto-generated from the Ecosymbiont Website.</td></tr>
@@ -96,69 +93,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Always set content-type when sending HTML email
             $headers = "MIME-Version: 1.0" . "\r\n";
             $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-
             $headers .= "From: no-reply@ecosymbiont.org" . "\r\n" .
             "BCC: deblina@keylines.net";
 
             mail($to,$subject,$txt,$headers);
-            $adminSent = true;
-            // try {
-            //     // Server settings
-            //     // $adminMail->SMTPDebug = 3;
-            //     // $adminMail->isSMTP();
-            //     $adminMail->Host = 'mail.ecosymbiont.org';
-            //     $adminMail->SMTPAuth = true;
-            //     $adminMail->Username = 'no-reply@ecosymbiont.org';
-            //     $adminMail->Password = 'NXVfrKH_rSML';
-            //     $adminMail->SMTPSecure = PHPMailer::ENCRYPTION_TLS;
-            //     // $adminMail->SMTPSecure = 'tls';
-            //     $adminMail->Port = 587;
-                
-                
-            //     // Recipients
-            //     $adminMail->setFrom('no-reply@ecosymbiont.org', 'Ecosymbiont');                
-            //     $adminMail->addAddress('deblina@keylines.net', 'Ecosymbiont');
-            //     $adminMail->addReplyTo('no-reply@ecosymbiont.org', 'Ecosymbiont');
-        
-            //     // Content
-            //     $adminMail->isHTML(true);
-            //     $adminMail->Subject = 'New Lead From Ecosymbiont Website - ' . htmlspecialchars($full_name);
-        
-            //     $adminMail->Body = "
-            //     <table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
-            //         <tr><td style='padding: 8px 15px'>Dear Administrator,</td></tr>
-            //         <tr><td style='padding: 8px 15px'>A new enquiry is submitted through the Ecosymbiont Website. Please take a look at the details below.</td></tr>
-            //         <tr><td style='padding: 8px 15px'><strong>Name: </strong>" . htmlspecialchars($full_name) . "</td></tr>
-            //         <tr><td style='padding: 8px 15px'><strong>Email: </strong>" . htmlspecialchars($email) . "</td></tr>    
-            //         <tr><td style='padding: 8px 15px'><strong>Country: </strong>" . htmlspecialchars($country) . "</td></tr>                                         
-            //         <tr><td style='padding: 8px 15px'><strong>Message: </strong>" . htmlspecialchars($message) . "</td></tr>
-            //         <tr><td style='padding: 8px 15px'><strong>Subject: </strong>" . htmlspecialchars($subject_string) . "</td></tr>
-            //         <tr><td style='padding: 8px 15px'>Thank You,</td></tr>
-            //         <tr><td style='padding: 8px 15px'>Auto-generated from the Ecosymbiont Website.</td></tr>
-            //     </table>";
-        
-            //     $adminMail->send();
-            //     $adminSent = true;
-            //     // echo "page 4";die;
-            // } catch (Exception $e) {
-            //     $adminSent = false;
-            // }
-
+            $adminSent = true;            
             // Send the email 
 
             if ($adminSent) {                    
                 $_SESSION['mail_succ'] = 'Your enquiry has been sent successfully.';
                 header("Location: contact.php");
                 exit();
-                // $_SESSION['download_flag'] = "true";
-                                    
-                
+                // $_SESSION['download_flag'] = "true";                                                    
             } else {
                 $_SESSION['mail_fail'] = 'admin mail sent failed';
                 header("Location: contact.php");
                 exit();
-            }
-        
+            }        
         } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }            
