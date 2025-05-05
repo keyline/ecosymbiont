@@ -23,7 +23,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      print_r($_POST); die;
+    //   print_r($_POST); die;
     $full_name = $_POST['full_name'] ;
     $email = $_POST['email'];
     $country = $_POST['country'];
@@ -33,7 +33,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Verify the reCAPTCHA response
     $recaptchaResponse = $_POST['recaptcha_response'];
-    $secretKey = '6LcIw04qAAAAAJCWh02op84FgNvxexQsh9LLCuqW'; // Your secret key
+    // Get the host (domain name)
+    $host = $_SERVER['HTTP_HOST']; // e.g., localhost or example.com
+    if($host == 'ecosymbiont.keylines.in'){
+         // Your Google reCAPTCHA secret key [dev]
+    $secretKey = '6Ldum88qAAAAANVww5Xe6aHFL-g_UHLsHl7HGKs5';
+    } elseif($host == 'ecosymbiont-uat.keylines.in'){ 
+        // Your Google reCAPTCHA secret key [uat]
+    $secretKey = '6Lco6wQrAAAAAJksrZFpNTfW07l2QLUKMsQ6bREb';
+    } else{
+        // Your Google reCAPTCHA secret key [live]
+    $secretKey = '6LcIw04qAAAAAJCWh02op84FgNvxexQsh9LLCuqW';
+    }    
 
     $url = 'https://www.google.com/recaptcha/api/siteverify';
     $data = array(
@@ -65,8 +76,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Initialize PHPMailer for admin notification
             // $adminMail = new PHPMailer(true);
 
-            $to = "Ecosymbionts.regenerate@gmail.com";
-            // $to = "deblinasonaidas1997@gmail.com";
+            // $to = "Ecosymbionts.regenerate@gmail.com";
+            $to = "deblinasonaidas1997@gmail.com";
             $subject = 'New Lead From Ecosymbiont Website - ' . htmlspecialchars($full_name);
             $message = "
                 <table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
