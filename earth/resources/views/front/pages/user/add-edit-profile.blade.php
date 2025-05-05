@@ -137,8 +137,9 @@
                                 <label for="for_publication_name" class="col-md-2 col-lg-4 col-form-label">5) Preferred name for publication (if different from full legal name)</label>
                                 <div class="col-md-10 col-lg-8">
                                     <input type="text" name="for_publication_name" class="form-control" id="for_publication_name"
-                                        value="{{ old('for_publication_name', $for_publication_name) }}">
-                                </div>
+                                        value="{{ old('for_publication_name', $for_publication_name) }}" required>
+                                    <div id="for_publication_name-error" class="error"></div>
+                                </div>                                
                             </div>
                             <div class="row mb-3">
                                 <label for="title" class="col-md-2 col-lg-4 col-form-label">6) Title
@@ -147,11 +148,12 @@
                                     @if ($user_title)
                                         @foreach ($user_title as $data)
                                             <!-- <option value="{{ $data->id }}" @selected($data->id == $titleId)> -->
-                                            <input type="radio" id="yes" name="title" value="{{ $data->id }}" required @checked($data->id == $titleId) >
-                                            <label for="yes">{{ $data->name }}</label>
+                                            <input type="radio" id="title" name="title" value="{{ $data->id }}" required  @checked(old("title") == $data->id)  >
+                                            <label for="title">{{ $data->name }}</label>
                                                 <!-- {{ $data->name }}</option> -->
                                         @endforeach
-                                    @endif                                
+                                    @endif
+                                    <div id="title-error" class="error"></div>                                
                                 </div>
                             </div>   
                             <div class="row mb-3">
@@ -161,11 +163,12 @@
                                     @if ($pronoun)
                                         @foreach ($pronoun as $data)
                                             <!-- <option value="{{ $data->id }}" @selected($data->id == $pronounId)> -->
-                                            <input type="radio" id="yes" name="pronoun" value="{{ $data->id }}" required @checked($data->id == $pronounId) >
-                                            <label for="yes">{{ $data->name }}</label>
+                                            <input type="radio" id="pronoun" name="pronoun" value="{{ $data->id }}" required  @checked(old("pronoun") == $data->id)  >
+                                            <label for="pronoun">{{ $data->name }}</label>
                                                 <!-- {{ $data->name }}</option> -->
                                         @endforeach
-                                    @endif                                
+                                    @endif 
+                                    <div id="pronoun-error" class="error"></div>                               
                                 </div>
                             </div>                                                                                       
                             <div class="row mb-3">
@@ -176,6 +179,7 @@
                                     <label for="yes">Yes</label>
                                     <input type="radio" id="invited_no" name="invited" value="No" required @checked(old('invited', $invited) == 'No')>
                                     <label for="no">No</label>
+                                    <div id="invited-error" class="error"></div>
                                 </div>
                             </div>  
                             <div id="invitedDetails" style="display: none;">
@@ -185,6 +189,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="invited_by" class="form-control" id="invited_by"
                                             value="{{ old('invited_by', $invited_by) }}">
+                                        <div id="invited_by-error" class="error"></div>
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
@@ -193,6 +198,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="invited_by_email" class="form-control" id="invited_by_email"
                                             value="{{ old('invited_by_email', $invited_by_email) }}">
+                                        <div id="invited_by_email-error" class="error"></div>
                                     </div>
                                 </div>
                             </div>
@@ -204,6 +210,7 @@
                                     <label for="yes">Yes</label>
                                     <input type="radio" id="participated_no" name="participated" value="No" required @checked(old('participated', $participated) == 'No')>
                                     <label for="no">No</label>
+                                    <div id="participated-error" class="error"></div>
                                 </div>
                             </div> 
                             <div id="participatedDetails" style="display: none;">
@@ -211,7 +218,8 @@
                                     <label for="participated_info" class="col-md-2 col-lg-4 col-form-label">11A) Provide date and location of most recent in-person ER Synergy Meeting in which you participated</label>
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="participated_info" class="form-control" id="participated_info"
-                                        value="{{ old('participated_info', $participated_info) }}">                                    
+                                        value="{{ old('participated_info', $participated_info) }}">
+                                        <div id="participated_info-error" class="error"></div>                                    
                                     </div>
                                 </div> 
                             </div>
@@ -220,7 +228,8 @@
                                     <label for="explanation" class="col-md-2 col-lg-4 col-form-label">12) Explain why you are a grassroots changemaker, innovator, and/or knowledge-holder (max. 100 words)</label>
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="explanation" name="explanation" rows="4" cols="50" required>{{ old('explanation', $explanation) }}</textarea>
-                                        <div id="explanationError" class="error"></div>                                    
+                                        <div id="explanationError" class="error"></div>    
+                                        <div id="explanation-error" class="error"></div>                               
                                     </div>
                                 </div>  
                                 <div class="row mb-3">
@@ -228,6 +237,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="explanation_submission" name="explanation_submission" rows="4" cols="50" required>{{ old('explanation_submission', $explanation_submission) }}</textarea>
                                         <div id="explanation_submissionError" class="error"></div>                                        
+                                        <div id="explanation_submission-error" class="error"></div>                                        
                                     </div>
                                 </div>                                
                                 <div class="row mb-3">
@@ -242,6 +252,7 @@
                                                 @endforeach
                                             @endif
                                         </select>
+                                        <div id="country-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -249,6 +260,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="state" class="form-control" id="state"
                                             value="{{ old('state', $state) }}" required>
+                                        <div id="state-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -256,6 +268,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="city" class="form-control" id="city"
                                             value="{{ old('city', $city ) }}" required>
+                                        <div id="city-error" class="error"></div>
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
@@ -264,6 +277,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="organization_name" class="form-control" id="organization_name"
                                             value="{{ old('organization_name', $organization_name) }}" required>
+                                        <div id="organization_name-error" class="error"></div>
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
@@ -272,6 +286,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="organization_website" class="form-control" id="organization_website"
                                             value="{{ old('organization_website', $organization_website) }}" required>
+                                        <div id="organization_website-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -281,8 +296,10 @@
                                         @if ($ecosystem_affiliation)
                                             @foreach ($ecosystem_affiliation as $data)
                                             <input type="checkbox" name="ecosystem_affiliation[]" value="{{ $data->id }}" @if(in_array($data->id, old('ecosystem_affiliation', $ecosystem_affiliationId))) checked @endif>  {{ $data->name }}<br>
+                                            <div id="ecosystem_affiliation-error" class="error"></div>
                                             @endforeach
                                         @endif                                
+                                        
                                     </div>
                                 </div>   
                                 <div class="row mb-3">
@@ -291,6 +308,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         <input type="text" name="indigenous_affiliation" class="form-control" id="indigenous_affiliation"
                                         value="{{ old('indigenous_affiliation', $indigenous_affiliation) }}" required>
+                                        <div id="indigenous_affiliation-error" class="error"></div>
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
@@ -300,8 +318,10 @@
                                         @if ($expertise_area)
                                             @foreach ($expertise_area as $data)
                                             <input type="checkbox" name="expertise_area[]" value="{{ $data->id }}" @if(in_array($data->id, old('expertise_area', $expertise_areaId))) checked @endif>  {{ $data->name }}<br>
+                                            <div id="expertise_area-error" class="error"></div>
                                             @endforeach
                                         @endif
+                                        
                                     </div>
                                 </div> 
                                 <div class="row mb-3">
@@ -310,6 +330,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="bio_short" name="bio_short" rows="4" cols="50" required>{{ old('bio_short', $bio_short) }}</textarea>
                                         <div id="bio_shortError" class="error"></div>
+                                        <div id="bio_short-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -318,6 +339,7 @@
                                     <div class="col-md-10 col-lg-8">
                                         <textarea class="form-control" id="bio_long" name="bio_long" rows="4" cols="50" required>{{ old('bio_long', $bio_long) }}</textarea>
                                         <div id="bio_longError" class="error"></div>
+                                        <div id="bio_long-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -328,6 +350,7 @@
                                         <label for="yes">Yes</label>
                                         <input type="radio" id="community_no" name="community" value="No" required @checked(old('community', $community) == 'No')>
                                         <label for="no">No</label>
+                                        <div id="community-error" class="error"></div>
                                     </div>
                                 </div> 
                                 <div id="communityDetails" style="display: none;">
@@ -339,9 +362,10 @@
                                                 <!-- <option value="Schumacher Wild" @selected(old("community_name", $community_name ?? '') == 'Schumacher Wild') >Schumacher Wild</option>
                                                 <option value="West Oakland Matters" @selected(old("community_name", $community_name ?? '') == 'West Oakland Matters') >West Oakland Matters</option> -->
                                                 <?php if($communities){ foreach($communities as $cmn){?>
-                                                    <option value="<?=$cmn->name?>" <?=(($community_name == $cmn->name)?'selected':'')?>><?=$cmn->name?></option>
+                                                    <option value="<?=$cmn->name?>" @selected(old("community_name", $community_name ?? '') == $cmn->name) ><?=$cmn->name?></option>
                                                 <?php } }?>
                                             </select>
+                                            <div id="community_name-error" class="error"></div>
                                         </div>
                                     </div> 
                                 </div>                                                                
@@ -361,6 +385,105 @@
     </div>
 <!-- End block content -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- all field that is required show error message  --> 
+<script>
+    $(document).ready(function () {
+        $('#saveForm #submitButton').on('click', function (e) {
+            let isValid = true;         
+            // Reset all validated flags for checkbox groups
+            // $('input[type="checkbox"][name$="[]"]').removeData('validated');   
+
+            $('#saveForm [required]:not(:disabled):not([type="hidden"])').each(function () {
+                const field = $(this);
+                const type = field.attr('type');
+                const tag = field.prop('tagName').toLowerCase();
+                let rawName = field.attr('name') || field.attr('id');
+                let name = rawName;
+                let hasError = false;
+
+                // Normalize name for checkbox groups (remove [])
+                if (rawName && rawName.endsWith('[]')) {
+                    name = rawName.slice(0, -2);
+                }
+
+                const errorId = name + '-error';
+
+                if (name === 'community_name') return true; // Skip
+
+                // ✅ Checkbox group validation
+                // if (type === 'checkbox' && rawName.endsWith('[]')) {
+                //     if (field.data('validated')) return true;
+
+                //     const group = $('input[name="' + rawName + '"]');
+                //     group.data('validated', true);
+
+                //     if (group.filter(':checked').length === 0) {
+                //         $('#' + errorId).text('Please select at least one option.').show();
+                //         field.focus();
+                //         isValid = false;
+                //         return false;
+                //     } else {
+                //         $('#' + errorId).hide();
+                //         return true;
+                //     }
+                // }
+
+                // ✅ Radio group validation
+                else if (type === 'radio') {
+                    if ($('input[name="' + rawName + '"]:checked').length === 0) {
+                        hasError = true;
+                    }
+                }
+
+                // ✅ Other inputs
+                else if (
+                    type === 'text' || type === 'number' || type === 'file' ||
+                    tag === 'textarea' || tag === 'select'
+                ) {
+                    if ($.trim(field.val()) === '' || field.val() === null) {
+                        hasError = true;
+                    }
+                }
+
+                if (hasError) {
+                    $('#' + errorId).text('This field is required.').show();
+                    field.focus();
+                    isValid = false;
+                    return false; // stop loop
+                } else {
+                    $('#' + errorId).hide();
+                }
+            });
+
+            if (!isValid) e.preventDefault(); // block submit
+        });
+
+        // ✅ Hide error on change
+        $('#saveForm').on('change input', 'input, select, textarea', function () {
+            const field = $(this);
+            const type = field.attr('type');
+            let rawName = field.attr('name') || field.attr('id');
+            let name = rawName;
+
+            if (rawName && rawName.endsWith('[]')) {
+                name = rawName.slice(0, -2);
+            }
+
+            const errorId = name + '-error';
+
+            if ((type === 'checkbox' || type === 'radio') && rawName) {
+                if ($('input[name="' + rawName + '"]:checked').length > 0) {
+                    $('#' + errorId).hide();
+                }
+            } else {
+                if ($.trim(field.val()) !== '') {
+                    $('#' + errorId).hide();
+                }
+            }
+        });
+    });
+</script>
+<!-- end all field that is required show error message  --> 
 
  <!-- all word count validation -->
 <script>
@@ -372,6 +495,10 @@
             // Truncate the input field's value to the last valid word limit
             let truncatedValue = field.value.trim().split(/\s+/).slice(0, limit).join(' ');
             field.value = truncatedValue;
+            // ✅ Fade out after 3 seconds
+            $('#' + errorField).show().delay(3000).fadeOut(1000, function () {
+                    $(this).text('').show(); // Reset and keep element visible
+                });
             event.preventDefault();
             return false;
         } else {
@@ -389,7 +516,7 @@
         allValid &= checkWordLimit(document.getElementById('bio_short'), 40, 'bio_shortError');
         allValid &= checkWordLimit(document.getElementById('bio_long'), 250, 'bio_longError');        
 
-        document.getElementById('submitButton').disabled = !allValid;
+        // document.getElementById('submitButton').disabled = !allValid;
     }
 </script>
 <!-- End all word count validation -->

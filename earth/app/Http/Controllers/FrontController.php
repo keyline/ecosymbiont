@@ -1466,16 +1466,20 @@ class FrontController extends Controller
                     $recaptchaResponse = $postData['g-recaptcha-response'];                   
 
                     // Google reCAPTCHA verification URL
-                    $verifyURL = 'https://www.google.com/recaptcha/api/siteverify';                    
+                    $verifyURL = 'https://www.google.com/recaptcha/api/siteverify';   
 
-                    // Your Google reCAPTCHA secret key [live]
+                        // Get the host (domain name)
+                    $host = $_SERVER['HTTP_HOST']; // e.g., localhost or example.com
+                    if($host == 'ecosymbiont.keylines.in'){
+                         // Your Google reCAPTCHA secret key [dev]
+                    $secretKey = '6Ldum88qAAAAANVww5Xe6aHFL-g_UHLsHl7HGKs5';
+                    } elseif($host == 'ecosymbiont-uat.keylines.in'){ 
+                        // Your Google reCAPTCHA secret key [uat]
+                    $secretKey = '6Lco6wQrAAAAAJksrZFpNTfW07l2QLUKMsQ6bREb';
+                    } else{
+                        // Your Google reCAPTCHA secret key [live]
                     $secretKey = '6LcIw04qAAAAAJCWh02op84FgNvxexQsh9LLCuqW';
-                
-                    // Your Google reCAPTCHA secret key [dev]
-                    // $secretKey = '6Ldum88qAAAAANVww5Xe6aHFL-g_UHLsHl7HGKs5';
-
-                    // Your Google reCAPTCHA secret key [uat]
-                    // $secretKey = '6Lco6wQrAAAAAJksrZFpNTfW07l2QLUKMsQ6bREb';
+                    }   
 
                     // Prepare the POST request
                     $data = array(
@@ -1563,15 +1567,18 @@ class FrontController extends Controller
                     // Google reCAPTCHA verification URL
                     $verifyURL = 'https://www.google.com/recaptcha/api/siteverify';
 
-                    // Your Google reCAPTCHA secret key [live]
+                    // Get the host (domain name)
+                    $host = $_SERVER['HTTP_HOST']; // e.g., localhost or example.com
+                    if($host == 'ecosymbiont.keylines.in'){
+                         // Your Google reCAPTCHA secret key [dev]
+                    $secretKey = '6Ldum88qAAAAANVww5Xe6aHFL-g_UHLsHl7HGKs5';
+                    } elseif($host == 'ecosymbiont-uat.keylines.in'){ 
+                        // Your Google reCAPTCHA secret key [uat]
+                    $secretKey = '6Lco6wQrAAAAAJksrZFpNTfW07l2QLUKMsQ6bREb';
+                    } else{
+                        // Your Google reCAPTCHA secret key [live]
                     $secretKey = '6LcIw04qAAAAAJCWh02op84FgNvxexQsh9LLCuqW';
-                
-                    // Your Google reCAPTCHA secret key [dev]
-                    // $secretKey = '6Ldum88qAAAAANVww5Xe6aHFL-g_UHLsHl7HGKs5';
-
-                    // Your Google reCAPTCHA secret key [uat]
-                    // $secretKey = '6Lco6wQrAAAAAJksrZFpNTfW07l2QLUKMsQ6bREb';
-                    
+                    }                                          
 
                     // Prepare the POST request
                     $data = array(
@@ -2538,7 +2545,7 @@ class FrontController extends Controller
 
                                     if($request->input("co_ecosystem_affiliation_{$i}") !== null){
                                         $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);
-                                    } else{
+                                    } else{                                        
                                         return redirect()->back()->withInput()->with(['error_message' => 'Please select Co-Author ecosystem affiliation']);
                                     }
                                     // $coecosystemAffiliations[] = $request->input("co_ecosystem_affiliation_{$i}", []);

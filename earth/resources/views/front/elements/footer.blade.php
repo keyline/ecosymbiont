@@ -144,7 +144,7 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
         <p>And by keeping EaRTh free for the authors and free for the readers and viewers.</p>
         <p><u>But we can’t do this without your financial help.</u></p>
         <p>While EaRTh is free to use, we (a small nonprofit organization) need to pay the editorial staff, designers, software developers, and others who ensure that EaRTh runs smoothly, so we can serve those who need most to be heard.</p>
-        <!-- {{-- <p>Join the fight today,<br><span class="highlight">your gift will be matched $2:$1!</span></p> --}} -->
+         <!-- <p>Join the fight today,<br><span class="highlight">your gift will be matched $2:$1!</span></p>  -->
         <a href="<?=url('donation')?>" target="_blank" class="btn btn-yellow">Donate to EaRTh</a><br>
         <a href="javascript:void(0);" class="continue-link" data-dismiss="modal">Continue to website →</a>
       </div>
@@ -215,7 +215,6 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
 <a href="<?=url('donation')?>" target="_blank" class="donate-button">Donate to EaRTH</a>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
 <!-- <script>
     $(window).on('load', function () {
     $('#popupModal').modal('show');

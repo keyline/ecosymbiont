@@ -685,7 +685,7 @@ use Illuminate\Support\Facades\DB;
                                                     <div class="row description-div" id="description_1" >
                                                         <label for="narrative_image_desc_1" class="col-md-2 col-lg-4 col-form-label">17A3b1) TYPE A: short caption for image 1 (max. 50 words)</label>
                                                         <div class="col-md-10 col-lg-8">
-                                                            <textarea class="form-control" id="narrative_image_desc_1" name="narrative_image_desc_1" rows="4" cols="50"><?php if(isset($narrative_image_desc[0]) && $narrative_image_desc[0] != '') { echo $narrative_image_desc[0]; } ?></textarea>
+                                                            <textarea class="form-control" id="narrative_image_desc_1" name="narrative_image_desc_1" rows="4" cols="50">{{ old('narrative_image_desc_'.$i, $narrative_image_desc[$i-1] ?? '') }}</textarea>
                                                             <div id="narrative_image_desc_1Error" class="error"></div>
                                                             <div id="narrative_image_desc_1-error" class="error"></div>
                                                         </div>
@@ -769,7 +769,7 @@ use Illuminate\Support\Facades\DB;
                                                     <div class="row description-div" id="art_description_{{ $i }}" >
                                                         <label for="art_image_desc_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17B2b{{$i}}) TYPE B: short caption for image {{ $i }} (max. 50 words)</label>
                                                         <div class="col-md-10 col-lg-8">
-                                                            <textarea style="resize: none; height: 180px;" class="form-control" id="art_image_desc_{{ $i }}" name="art_image_desc_{{ $i }}" rows="4" cols="50"><?php if(isset($art_image_desc[$i-1]) && $art_image_desc[$i-1] != '') { echo $art_image_desc[$i-1]; }?></textarea>
+                                                            <textarea style="resize: none; height: 180px;" class="form-control" id="art_image_desc_{{ $i }}" name="art_image_desc_{{ $i }}" rows="4" cols="50">{{ old('art_image_desc_'.$i, $art_image_desc[$i-1] ?? '') }}</textarea>
                                                             <div id="art_image_desc_{{ $i }}Error" class="error"></div>
                                                             <div id="art_image_desc_{{ $i }}-error" class="error"></div>
                                                         </div>
@@ -1138,107 +1138,7 @@ use Illuminate\Support\Facades\DB;
     
     <!-- Popup end (Initially hidden) --> 
 
-    <!-- all field that is required show error message  -->
-    <!-- <script>
-        $(document).ready(function () {
-            $('#saveForm #submitButton').on('click', function (e) {
-                let isValid = true;
-
-                $('#saveForm [required]:not(:disabled):not([type="hidden"])').each(function () {
-                    const field = $(this);
-                    const type = field.attr('type');
-                    const tag = field.prop('tagName').toLowerCase();
-                    let rawName = field.attr('name') || field.attr('id');
-                    let name = rawName;
-                    // alert(rawName);
-                    let hasError = false;
-                    
-                    
-
-                    // Normalize name for [] fields (like checkbox groups)
-                    if (rawName && rawName.endsWith('[]')) {
-                        name = rawName.slice(0, -2);
-                        console.log('Normalized name: ' + name);
-                    }
-                    let errorId = name + '-error';
-                    if ($('#' + errorId).length === 0) {
-                        // try by ID if it's different than name
-                        errorId = field.attr('id') + '-error';
-                    }
-                    $('#' + errorId).text('This field is required.').show();
-
-                     // ❗ Skip specific fields                                    
-                    if (name === 'community_name') {
-                        return true; // skip this field
-                    }                    
-
-                    // Validation for checkbox and radio groups                    
-                    if (type === 'checkbox') {
-                        const group = $('input[name="' + rawName + '"]');
-                        if (group.length && group.filter(':checked').length === 0) {
-                            hasError = true;
-                        }
-                    }                    
-                    else if (type === 'radio') {
-                        const group = $('input[name="' + rawName + '"]');
-                        if (group.length && group.filter(':checked').length === 0) {
-                            hasError = true;
-                        }
-                    }
-                    // Validation for other inputs
-                    else if (type === 'text' || type === 'number' || type === 'file' || tag === 'textarea' || tag === 'select') {
-                        if ($.trim(field.val()) === '' || field.val() === null) {
-                            hasError = true;
-                        }
-                    }
-
-                    if (hasError) {
-                        $('#' + name + '-error').text('This field is required.').show();
-                        // console.log('Field: ' + name + ' is required.');
-                        console.log(`Validating field: ${name}, type: ${type}, tag: ${tag}, value: '${field.val()}'`);
-                        field.focus();
-                        isValid = false;
-                        return false; // stop loop
-                    } else {
-                        $('#' + name + '-error').hide();
-                    }
-                });
-
-                if (!isValid) {
-                    e.preventDefault(); // stop form submission
-                }
-            });
-
-            // Hide error on interaction
-            $('#saveForm').on('change input', 'input, select, textarea', function () {
-                const field = $(this);
-                const type = field.attr('type');
-                let rawName = field.attr('name') || field.attr('id');
-                let name = rawName;
-                // let name = field.attr('name') || field.attr('id');
-
-                // Normalize name
-                if (rawName && rawName.endsWith('[]')) {
-                    name = rawName.slice(0, -2);
-                }
-
-                if (type === 'radio' || type === 'checkbox') {
-                    const groupSelector = 'input[name="' + rawName + '"]:checked, input[name="' + name + '"]:checked';
-                    if ($(groupSelector).length > 0) {
-                    $('#' + name + '-error').hide();
-                }
-                    // if ($('input[name="' + name + '[]"]:checked').length > 0 ||
-                    //     $('input[name="' + name + '"]:checked').length > 0) {
-                    //     $('#' + name + '-error').hide();
-                    // }
-                } else {
-                    if ($.trim(field.val()) !== '') {
-                        $('#' + name + '-error').hide();
-                    }
-                }
-            });
-        });
-    </script> -->
+    <!-- all field that is required show error message  -->    
     <script>
     $(document).ready(function () {
         $('#saveForm #submitButton').on('click', function (e) {
