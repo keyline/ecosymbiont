@@ -46,7 +46,7 @@ use App\Helpers\Helper;
             <circle cx="8" cy="8" r="8" fill="red"/>
             <path fill="white" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 1 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
           </svg>
-          <h2 class="fw-bold text-danger">Oops! Something Went Wrong.</h2>
+          <h2 class="fw-bold text-danger">Something Went Wrong.</h2>
           <p class="mt-3 mb-4 text-muted">Unfortunately, your donation could not be processed. Please try again or <a href="https://ecosymbiont.org/contact.php" target="_blank">contact</a> us if the issue persists.</p>
           <a href="<?=url('donation-preview/' . Helper::encoded($donation->id))?>" class="btn donation_btn">Retry Payment</a>
       </div>

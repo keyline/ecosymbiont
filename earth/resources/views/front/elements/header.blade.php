@@ -59,7 +59,7 @@ use App\Helpers\Helper;
                                 <li><a href="<?=url('user/signout')?>">Sign Out</a></li>
                             <?php } else {?>
                                 <li><a href="<?=url('signin')?>">Sign In</a></li> 
-                                <li><a href="<?=url('signup')?>">Sign Up</a></li>
+                                <li><a href="<?=url('submissions')?>">Sign Up</a></li>
                             <?php }?>
                         </ul>
                     </div>  
@@ -103,7 +103,8 @@ use App\Helpers\Helper;
                                 </li>
                             <?php } }?>
                             <li><a href="<?=url('submissions')?>"  style="color: black !important;">SUBMISSIONS</a></li>
-                            <li><a href="<?=env('REGENERATE_URL')?>contact.php"  style="color: black !important;">CONTACT</a></li>
+                            <!-- <li><a href="<?=env('REGENERATE_URL')?>contact.php"  style="color: black !important;">CONTACT</a></li> -->
+                            <li><a href="<?=url('projects')?>" style="color: black !important;">PROJECTS</a></li>
                         </ul>
                         <!-- mobile -->
                     </div>
