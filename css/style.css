@@ -379,7 +379,7 @@ textarea.form-control {
     color: #fff;
 }
 #popupModal .modal-body p {
-    font-size: 15px;
+    font-size: 15px !important;
     line-height: 1.4;
     margin: 15px 0;
     color: #fff;
