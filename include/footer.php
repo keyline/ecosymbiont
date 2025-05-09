@@ -44,5 +44,60 @@
     }
 });
 </script>
+<!-- Modal -->
+<div class="modal fade" id="popupModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h4 class="modal-title">Help keep EaRTh free!</h4>
+        <p>EaRTh is a vital and unique resource for grassroots changemakers across the world, especially members of frontline communities whose voices are seldom amplified.</p>
+        <p>EaRTh provides the marginalized and silenced a global platform to share their challenges, solutions, and knowledge directly with all of us.</p>
+        <p>How?</p>
+        <p>By not censoring or gatekeeping, like so many journals and media do.</p>
+        <p>And by keeping EaRTh free for the authors and free for the readers and viewers.</p>
+        <p><u>But we can’t do this without your financial help.</u></p>
+        <p>While EaRTh is free to use, we (a small nonprofit organization) need to pay the editorial staff, designers, software developers, and others who ensure that EaRTh runs smoothly, so we can serve those who need most to be heard.</p>
+         <!-- <p>Join the fight today,<br><span class="highlight">your gift will be matched $2:$1!</span></p>  -->
+        <a href="<?= BASE_URL; ?>earth/donation" target="_blank" class="btn btn-yellow">Donate to EaRTh</a><br>
+        <a href="javascript:void(0);" class="continue-link" data-dismiss="modal">Continue to website →</a>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    function getCookie(name) {
+        // alert(name);
+        let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+        return match ? match[2] : null;
+    }
+
+    function setCookie(name, value, days) {
+        let expires = "";
+        if (days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const url = window.location.href;
+        const segments = url.split("/");
+        const pageName = segments.pop() || segments.pop(); // handles trailing slash
+        // Check if the cookie is already set
+        if (pageName.toLowerCase() !== "donation" && !getCookie("popupShown")) {
+            DelayNodelay = 5000; // Delay in milliseconds
+            setTimeout(function () {
+                $('#popupModal').modal('show'); // Bootstrap modal show
+            }, DelayNodelay);            
+            // $('#popupModal').modal('show'); // Bootstrap modal show
+            setCookie("popupShown", "true", 30); // Set cookie for 30 days
+        }
+    });
+</script>
 </body>
 </html>
