@@ -37,7 +37,7 @@ $controllerRoute = $module['controller_route'];
             <table <?php if(count($rows)>0){ ?>id="simpletable" <?php } ?> class="table table-striped table-bordered nowrap">
               <thead>
                 <tr>
-                  <th class="admin-select-none"><a href="javascript:selectToggle(selete);" id="show"
+                  <th class="admin-select-none no-sort"><a href="javascript:selectToggle(selete);" id="show"
                       onclick="checkALL();">Select</a> | <br> <a
                       href="javascript:selectToggle(unselect);" id="hide"
                       onclick="unCheckALL();">Deselect</a>
