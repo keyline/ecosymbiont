@@ -61,7 +61,7 @@ $controllerRoute = $module['controller_route'];
                   { ?>
                       <tr>
                         <td>
-                            <input type='checkbox' name='draw[]' value="?php echo $row->id ?>" id="required-checkbox1" onClick="CheckIfChecked()">
+                            <input type='checkbox' name='draw[]' value="<?php echo $row->id ?>" id="required-checkbox1" onClick="CheckIfChecked()">
                         </td>
                         <th scope="row"><?=$sl++?></th>
                         <td>                      
