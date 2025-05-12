@@ -14,7 +14,7 @@ $(document).ready(function() {
             columnDefs: [
         {
             orderable: false,
-            targets: 0  // First column (checkboxes)
+            targets: no-sort // First column (checkboxes)
         }
     ]
         });
