@@ -502,6 +502,7 @@ class FrontController extends Controller
             $data['contents']   = [];
 
             if($search_type == 'Title'){
+                DB::enableQueryLog();
                 $data['contents']   = NewsContent::select(
                                                         'news_contents.id', 
                                                         'news_contents.new_title', 
@@ -536,6 +537,7 @@ class FrontController extends Controller
                                              ->orderBy('news_contents.created_at', 'DESC')
                                              ->limit(4)
                                              ->get();
+                                              dd(DB::getQueryLog());
             } elseif($search_type == 'Author name'){
                 // DB::enableQueryLog();
                 $data['contents'] = NewsContent::select(
