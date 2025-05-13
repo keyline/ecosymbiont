@@ -502,6 +502,7 @@ class FrontController extends Controller
             $data['contents']   = [];
 
             if($search_type == 'Title'){
+                // DB::enableQueryLog();
                 $data['contents']   = NewsContent::select(
                                                         'news_contents.id', 
                                                         'news_contents.new_title', 
@@ -528,14 +529,15 @@ class FrontController extends Controller
                                              ->where(function($query) use ($search_keyword) {
                                                 $query->where('news_contents.new_title', 'LIKE', '%'.$search_keyword.'%');
                                              })
-                                             ->where(function ($query) {
-                                                $query->whereNull('news_contents.current_article_no') 
-                                                        ->orWhere('news_contents.current_article_no', 0) // Standalone articles
-                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
-                                            })
+                                            //  ->where(function ($query) {
+                                            //     $query->whereNull('news_contents.current_article_no') 
+                                            //             ->orWhere('news_contents.current_article_no', 0) // Standalone articles
+                                            //         ->orWhere('news_contents.current_article_no', 1); // First part of series
+                                            // })
                                              ->orderBy('news_contents.created_at', 'DESC')
                                              ->limit(4)
                                              ->get();
+                                            //   dd(DB::getQueryLog());
             } elseif($search_type == 'Author name'){
                 // DB::enableQueryLog();
                 $data['contents'] = NewsContent::select(
@@ -963,11 +965,11 @@ class FrontController extends Controller
                                              ->where(function($query) use ($search_keyword) {
                                                 $query->where('news_contents.new_title', 'LIKE', '%'.$search_keyword.'%');                                                
                                              })
-                                             ->where(function ($query) {
-                                                $query->whereNull('news_contents.current_article_no') // Standalone articles
-                                                ->orWhere('news_contents.current_article_no', 0) 
-                                                    ->orWhere('news_contents.current_article_no', 1); // First part of series
-                                            })
+                                            //  ->where(function ($query) {
+                                            //     $query->whereNull('news_contents.current_article_no') // Standalone articles
+                                            //     ->orWhere('news_contents.current_article_no', 0) 
+                                            //         ->orWhere('news_contents.current_article_no', 1); // First part of series
+                                            // })
                                              ->orderBy('news_contents.created_at', 'DESC')
                                             ->offset($offset)
                                             ->limit($limit)
