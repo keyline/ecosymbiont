@@ -45,8 +45,9 @@ $current_url = $protocol . $host . $uri;
                                                 <p class="black"><u>Creative-works in vernacular languages are welcome</u>, as long as you provide a full English translation (and English subtitles for videos) Share your fiction or non-fiction, poetry or prose, projects that worked and ones that didn’t. Share personal stories or cultural stories, interviews with Elders or with youth. As long as what you share is <strong>related to the connection between humans and ecologies</strong>, we want to know!</p>
 
                                                 <p class="black">
-                                                    Read this submissions page and watch the video tutorial to get started with making <u>your own password-protected account</u> for streamlined submission of your creative-works, allowing EaRTh editors to review and revise efficiently before publication.<br><strong>Welcome to EaRTh!</strong>
+                                                    Read this submissions page and watch the video tutorial to get started with making <u>your own password-protected account</u> for streamlined submission of your creative-works, allowing EaRTh editors to review and revise efficiently before publication.
                                                 </p>
+                                                <p><strong>Welcome to EaRTh!</strong></p>
                                                 <div class="titleto-box">
                                                     <h1>SUBMISSION GUIDELINES</h1>
                                                 </div>
