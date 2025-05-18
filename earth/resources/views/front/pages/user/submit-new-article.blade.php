@@ -91,6 +91,7 @@ use Illuminate\Support\Facades\DB;
                 $co_indigenous_affiliations = json_decode($row->co_indigenous_affiliations);
                 $co_author_classification = json_decode($row->co_author_classification);
                 $co_author_pronoun = json_decode($row->co_author_pronoun);
+                // dd($co_author_pronoun);
                 $first_name = $row->first_name;
                 $email = $row->email;
                 $for_publication_name = $row->for_publication_name;
@@ -309,7 +310,7 @@ use Illuminate\Support\Facades\DB;
                                                     <label for="co_author_country_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3D{{$i}}) <?=numberToOrdinal($i)?> co-author’s country of residence</label>
                                                     <div class="col-md-10 col-lg-8">
                                                         <select name="co_author_country_{{$i}}" class="form-control" id="co_author_country_{{$i}}" >
-                                                            <option value="" selected disabled>Select</option>
+                                                            <option value="" selected>Select</option>
                                                             @if ($country)
                                                                 @foreach ($country as $data)
                                                                     <option value="{{ $data->id }}" @selected(old("co_author_country_$i", $co_author_countries[$i - 1] ?? '') == $data->id)>
@@ -341,13 +342,13 @@ use Illuminate\Support\Facades\DB;
                                                         @if ($ecosystem_affiliation)
                                                             @foreach ($ecosystem_affiliation as $data)
                                                                 <input type="checkbox" 
-                                                                    name="co_ecosystem_affiliation_{{$i}}[]" 
+                                                                    name="co_ecosystem_affiliation_{{$i}}[]"
                                                                     value="{{ $data->id }}" 
                                                                     @if (in_array($data->id, old("co_ecosystem_affiliation_{$i}", $co_ecosystem_affiliations[$i - 1] ?? []))) checked @endif>
                                                                 {{ $data->name }}<br>
                                                             @endforeach
                                                         @endif
-                                                        <div id="co_ecosystem_affiliation_{{$i}}[]-error" class="error"></div>
+                                                        <div id="co_ecosystem_affiliation_{{$i}}-error" class="error"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -356,7 +357,7 @@ use Illuminate\Support\Facades\DB;
                                                     <label for="co_Indigenous_affiliation_{{$i}}" class="col-md-2 col-lg-4 col-form-label">3G{{$i}}) What specific region are <?=numberToOrdinal($i)?> co-author’s ancestors originally from OR what is the name of first co-author’s Indigenous community? (example of specific region = Bengal; example of Indigenous community name = Lisjan Ohlone)
                                                     </label>
                                                     <div class="col-md-10 col-lg-8">
-                                                        <input type="text" name="co_indigenous_affiliation_{{$i}}" class="form-control" id="indigenous_affiliation_{{$i}}"
+                                                        <input type="text" name="co_indigenous_affiliation_{{$i}}" class="form-control" id="co_indigenous_affiliation_{{$i}}"
                                                         value="{{ old("co_indigenous_affiliation_$i", $co_indigenous_affiliation[$i - 1] ?? '') }}" >
                                                         <div id="co_indigenous_affiliation_{{$i}}-error" class="error"></div>
                                                     </div>
@@ -385,23 +386,13 @@ use Illuminate\Support\Facades\DB;
                                                 <div class="row">
                                                     <label for="pronoun" class="col-md-2 col-lg-4 col-form-label">3I{{$i}}) <?=numberToOrdinal($i)?> co-author’s pronoun</label>
                                                     <div class="col-md-10 col-lg-8">
+                                                        
                                                         @if ($pronoun)
                                                             @foreach ($pronoun as $data)
-                                                                <?php
-                                                                if($co_author_pronoun != ''){
-                                                                    if($data->id == $co_author_pronoun[$i - 1]){
-                                                                        $pronoun_checked = 'checked';
-                                                                    } else {
-                                                                        $pronoun_checked = '';
-                                                                    }
-                                                                } else {
-                                                                    $pronoun_checked = '';
-                                                                }
-                                                                ?>
-                                                                <input type="radio" name="co_author_pronoun_{{$i}}" value="{{ $data->id }}" <?=$pronoun_checked?>>
+                                                                <input type="radio" name="co_author_pronoun_{{$i}}" value="{{ $data->id }}" @checked(old("co_author_pronoun_{$i}") == $data->id)>
                                                                 <label>{{ $data->name }}</label>
                                                             @endforeach
-                                                        @endif  
+                                                        @endif 
                                                         <div id="co_author_pronoun_{{$i}}-error" class="error"></div>                              
                                                     </div>
                                                 </div>
@@ -499,7 +490,7 @@ use Illuminate\Support\Facades\DB;
                                     <input type="radio" class="readonly-input" id="invited_yes" name="invited" value="Yes"  @checked(old('invited', $invited) == 'Yes')>
                                     <label for="yes">Yes</label>
                                     <input type="radio" class="readonly-input" id="invited_no" name="invited" value="No"  @checked(old('invited', $invited) == 'No')>
-                                    <label for="no">No</label>
+                                    <label for="no">No</label>                                    
                                 </div>
                             </div>  
                             <div id="invitedDetails" style="display: none;">
@@ -694,7 +685,7 @@ use Illuminate\Support\Facades\DB;
                                                     <div class="row description-div" id="description_1" >
                                                         <label for="narrative_image_desc_1" class="col-md-2 col-lg-4 col-form-label">17A3b1) TYPE A: short caption for image 1 (max. 50 words)</label>
                                                         <div class="col-md-10 col-lg-8">
-                                                            <textarea class="form-control" id="narrative_image_desc_1" name="narrative_image_desc_1" rows="4" cols="50"><?php if(isset($narrative_image_desc[0]) && $narrative_image_desc[0] != '') { echo $narrative_image_desc[0]; } ?></textarea>
+                                                            <textarea class="form-control" id="narrative_image_desc_1" name="narrative_image_desc_1" rows="4" cols="50">{{ old('narrative_image_desc_'.$i, $narrative_image_desc[$i-1] ?? '') }}</textarea>
                                                             <div id="narrative_image_desc_1Error" class="error"></div>
                                                             <div id="narrative_image_desc_1-error" class="error"></div>
                                                         </div>
@@ -766,7 +757,8 @@ use Illuminate\Support\Facades\DB;
                                                         <div class="col-md-10 col-lg-8">
                                                             <input type="file" name="art_image_file_{{ $i }}" class="form-control" id="art_image_file_{{ $i }}">
                                                             <small class="text-info">* Only JPG, JPEG, ICO, SVG, PNG files are allowed (max. 1 MB)</small>
-                                                            <span id="art_image_file_{{ $i }}_error" class="text-danger"></span>                                                        
+                                                            <span id="art_image_file_{{ $i }}_error" class="text-danger"></span>     
+                                                            <div id="art_image_file_{{ $i }}-error" class="error"></div>                                                   
                                                             <?php if(isset($art_image_file[$i-1]) && $art_image_file[$i-1] != ''){?>
                                                             <img src="<?=env('UPLOADS_URL').'art_image/'.$art_image_file[$i-1]?>" alt="narrative_file" style="width: 150px; height: 150px; margin-top: 10px;">
                                                             <?php }?>
@@ -777,8 +769,9 @@ use Illuminate\Support\Facades\DB;
                                                     <div class="row description-div" id="art_description_{{ $i }}" >
                                                         <label for="art_image_desc_{{ $i }}" class="col-md-2 col-lg-4 col-form-label">17B2b{{$i}}) TYPE B: short caption for image {{ $i }} (max. 50 words)</label>
                                                         <div class="col-md-10 col-lg-8">
-                                                            <textarea style="resize: none; height: 180px;" class="form-control" id="art_image_desc_{{ $i }}" name="art_image_desc_{{ $i }}" rows="4" cols="50"><?php if(isset($art_image_desc[$i-1]) && $art_image_desc[$i-1] != '') { echo $art_image_desc[$i-1]; }?></textarea>
+                                                            <textarea style="resize: none; height: 180px;" class="form-control" id="art_image_desc_{{ $i }}" name="art_image_desc_{{ $i }}" rows="4" cols="50">{{ old('art_image_desc_'.$i, $art_image_desc[$i-1] ?? '') }}</textarea>
                                                             <div id="art_image_desc_{{ $i }}Error" class="error"></div>
+                                                            <div id="art_image_desc_{{ $i }}-error" class="error"></div>
                                                         </div>
                                                     </div>
                                                 </div>                                                                                        
@@ -792,6 +785,7 @@ use Illuminate\Support\Facades\DB;
                                         <div class="col-md-10 col-lg-8">
                                             <textarea class="form-control" id="art_desc" name="art_desc" rows="4" cols="50">{{ old('art_desc', $art_desc ?? '') }}</textarea>
                                             <div id="art_descError" class="error"></div>
+                                            <div id="art_desc-error" class="error"></div>
                                         </div>
                                     </div>                           
                                 </div>
@@ -807,7 +801,8 @@ use Illuminate\Support\Facades\DB;
                                                     <source src="<?=env('UPLOADS_URL').'art_video/'.$art_video_file?>" type="video/mp4">
                                                     Your browser does not support the video tag.
                                                 </video>                                        
-                                            <?php } ?>                                                                                
+                                            <?php } ?> 
+                                            <div id="art_video_file-error" class="error"></div>                                                                               
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -816,6 +811,7 @@ use Illuminate\Support\Facades\DB;
                                         <div class="col-md-10 col-lg-8">
                                             <textarea class="form-control" id="art_video_desc" name="art_video_desc" rows="4" cols="50">{{ old('art_video_desc', $art_video_desc ?? '') }}</textarea>
                                             <div id="art_video_descError" class="error"></div>
+                                            <div id="art_video_desc-error" class="error"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -951,19 +947,21 @@ use Illuminate\Support\Facades\DB;
                                         <label for="yes">Yes</label>
                                         <input type="radio" id="projects_no" name="projects" value="No" required @checked(old('projects', $projects) == 'No')>
                                         <label for="no">No</label>
+                                        <div id="projects-error" class="error"></div>
                                     </div>
                                 </div>
                                 <!-- ?php dd($projects); ?> -->
-                                <div id="projectsDetails" style="display: none;">
+                                <div id="projectsDetails" style="display: {{ old('projects', $projects ?? '') == 'Yes' ? 'block' : 'none' }};">
                                     <div class="row mb-3">
                                         <label for="projects_info" class="col-md-2 col-lg-4 col-form-label blue-text">29A) Select Projects</label>
                                         <div class="col-md-10 col-lg-8">
                                             <select name="projects_name" class="form-control" id="projects_name">
                                                 <option value="" selected>Select</option>
                                                 <?php if($projects){ foreach($projects as $proj){?>
-                                                    <option value="<?=$proj->name?>" <?=(($projects_name == $proj->name)?'selected':'')?>><?=$proj->name?></option>
+                                                    <option value="<?=$proj->name?>" @selected(old("projects_name", $projects_name ?? '') == $proj->name)><?=$proj->name?></option>
                                                 <?php } }?>
                                             </select>
+                                            <div id="projects_name-error" class="error"></div>
                                             <!-- <input type="hidden" name="projects_name" value="{{ $projects_name }}"> -->
                                         </div>
                                     </div> 
@@ -993,33 +991,37 @@ use Illuminate\Support\Facades\DB;
                                     <label for="is_series" class="col-md-2 col-lg-4 col-form-label blue-text">32) Is this part of a series?
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="radio" id="series_yes" name="is_series" value="Yes" <?=(($is_series == 'Yes')?'checked':'')?> required>
+                                        <input type="radio" id="series_yes" name="is_series" value="Yes" @checked(old('is_series', $is_series) == 'Yes') required>
                                         <label for="series_yes">Yes</label>
-                                        <input type="radio" id="series_no" name="is_series" value="No" <?=(($is_series == 'No')?'checked':'')?> required>
+                                        <input type="radio" id="series_no" name="is_series" value="No" @checked(old('is_series', $is_series) == 'No') required>
                                         <label for="series_no">No</label>
+                                        <div id="is_series-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
                                     <label for="series_article_no" class="col-md-2 col-lg-4 col-form-label blue-text">32a) How many total creative-works in this series?
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="number" name="series_article_no" class="form-control" id="series_article_no" min="1" value="<?=$series_article_no?>">
+                                        <input type="number" name="series_article_no" class="form-control" id="series_article_no" min="1" value="{{ old("series_article_no", $series_article_no ?? '') }}">
+                                        <div id="series_article_no-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
                                     <label for="current_article_no" class="col-md-2 col-lg-4 col-form-label blue-text">32b) What number in the series is this creative-work?
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="text" name="current_article_no" class="form-control" id="current_article_no" value="<?=$current_article_no?>">
+                                        <input type="text" name="current_article_no" class="form-control" id="current_article_no" value="{{ old("current_article_no", $current_article_no ?? '') }}">
+                                        <div id="current_article_no-error" class="error"></div>
                                     </div>
                                 </div>
                                 <div class="row series_yes mb-3">
                                     <label for="other_article_part_doi_no" class="col-md-2 col-lg-4 col-form-label blue-text">32c) List (in order is submission) the SRNs of each previously submitted creative-work in series (enter a comma after each SRN)
                                     </label>
                                     <div class="col-md-10 col-lg-8">
-                                        <input type="text" class="form-control" id="input-tags">
+                                        <input type="text" name="input-tags" class="form-control" id="input-tags">
                                         <div id="validation-msg" style="color:red; font-size: 0.9em;"></div>
-                                        <textarea class="form-control" name="other_article_part_doi_no" id="other_article_part_doi_no" style="display:none;"><?=$other_article_part_doi_no?></textarea>
+                                        <div id="input-tags-error" class="error"></div>
+                                        <textarea class="form-control" name="other_article_part_doi_no" id="other_article_part_doi_no" style="display:none;">{{ old("other_article_part_doi_no", $other_article_part_doi_no ?? '') }}</textarea>
                                         <small class="text-primary">Type a comma after each SRN</small>
                                         <div id="badge-container">
                                             <?php
@@ -1102,9 +1104,10 @@ use Illuminate\Support\Facades\DB;
                                         <p>iv. <span style="width:5.24pt; text-indent:0pt; display:inline-block;">&nbsp;</span>AND, no other person nor entity has any copyright interest in the Contribution.</p>                                        
                                         </div>
                                         <!-- NELP form content -->
-                                        <input type="checkbox" id="acknowledge" name="acknowledge" value="1" required>
+                                        <input type="checkbox" id="acknowledge" name="acknowledge" value="1" required>                                        
                                         <!-- <label for="acknowledge">I understand</label> -->                                         
                                         <label for="acknowledge">By clicking this box I sign the NELP provided directly above.</label>
+                                        <div id="acknowledge-error" class="error"></div>
                                     </div>
                                 </div>                              
                             </div>                  
@@ -1124,84 +1127,117 @@ use Illuminate\Support\Facades\DB;
 <!-- End block content -->
 <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <!-- Popup Div (Initially hidden) -->
     <div id="popup">
       <h3><i class="bi bi-exclamation-triangle-fill"></i> Warning</h3>
       <p>You must submit an original Creative-Work and you must own the copyright and licensing rights to your original Creative-Work.</p>
       <button id="closePopup">Close</button>
     </div>     
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     
+    
+    <!-- Popup end (Initially hidden) --> 
+
+    <!-- all field that is required show error message  -->    
     <script>
     $(document).ready(function () {
-
         $('#saveForm #submitButton').on('click', function (e) {
             let isValid = true;
+              // Clear previous group validation flags
+                $('input[type="checkbox"]').removeData('validated');
 
-            // Only validate fields inside #saveForm
-            $('#saveForm [required], #saveForm select[required]').each(function () {
+            $('#saveForm [required]:not(:disabled):not([type="hidden"])').each(function () {
                 const field = $(this);
                 const type = field.attr('type');
                 const tag = field.prop('tagName').toLowerCase();
-                const name = field.attr('name') || field.attr('id');
-
+                let rawName = field.attr('name') || field.attr('id');
+                let name = rawName;
                 let hasError = false;
 
-                // Validation for radio buttons
-                if (type === 'radio') {
-                    if ($('#saveForm input[name="' + name + '"]:checked').length === 0) {
+                // Normalize name for checkbox groups (remove [])
+                if (rawName && rawName.endsWith('[]')) {
+                    name = rawName.slice(0, -2);
+                }
+
+                const errorId = name + '-error';
+
+                if (name === 'community_name') return true; // Skip
+
+                // ✅ Checkbox group validation
+                // if (type === 'checkbox' && rawName.endsWith('[]')) {
+                //     if (field.data('validated')) return true;
+
+                //     const group = $('input[name="' + rawName + '"]');
+                //     group.data('validated', true);
+
+                //     if (group.filter(':checked').length === 0) {
+                //         $('#' + errorId).text('Please select at least one option.').show();
+                //         isValid = false;
+                //         return false;
+                //     } else {
+                //         $('#' + errorId).hide();
+                //         return true;
+                //     }
+                // }
+
+                // ✅ Radio group validation
+                else if (type === 'radio') {
+                    if ($('input[name="' + rawName + '"]:checked').length === 0) {
                         hasError = true;
                     }
                 }
 
-                // Validation for checkboxes
-                else if (type === 'checkbox') {
-                    if ($('#saveForm input[name="' + name + '"]:checked').length === 0) {
-                        hasError = true;
-                    }
-                }
-
-                // Validation for text input or textarea
-                else if (type === 'text' || type === 'number' || type === 'file' || tag === 'textarea' || tag === 'select') {
+                // ✅ Other inputs
+                else if (
+                    type === 'text' || type === 'number' || type === 'file' ||
+                    tag === 'textarea' || tag === 'select'
+                ) {
                     if ($.trim(field.val()) === '' || field.val() === null) {
                         hasError = true;
                     }
                 }
 
                 if (hasError) {
-                    $('#' + name + '-error').text('This field is required.').show();
+                    $('#' + errorId).text('This field is required.').show();
                     field.focus();
                     isValid = false;
-                    return false; // stop checking further fields
+                    return false; // stop loop
                 } else {
-                    $('#' + name + '-error').hide();
+                    $('#' + errorId).hide();
                 }
             });
 
-            if (!isValid) {
-                e.preventDefault();
-            }
+            if (!isValid) e.preventDefault(); // block submit
         });
 
-        // Hide error inside #saveForm when user interacts
-        $('#saveForm').on('change input', '[required], select[required]', function () {
+        // ✅ Hide error on change
+        $('#saveForm').on('change input', 'input, select, textarea', function () {
             const field = $(this);
             const type = field.attr('type');
-            const name = field.attr('name') || field.attr('id');
+            let rawName = field.attr('name') || field.attr('id');
+            let name = rawName;
 
-            if (type === 'radio') {
-                if ($('#saveForm input[name="' + name + '"]:checked').length > 0) {
-                    $('#' + name + '-error').hide();
+            if (rawName && rawName.endsWith('[]')) {
+                name = rawName.slice(0, -2);
+            }
+
+            const errorId = name + '-error';
+
+            if ((type === 'checkbox' || type === 'radio') && rawName) {
+                if ($('input[name="' + rawName + '"]:checked').length > 0) {
+                    $('#' + errorId).hide();
                 }
             } else {
                 if ($.trim(field.val()) !== '') {
-                    $('#' + name + '-error').hide();
+                    $('#' + errorId).hide();
                 }
             }
         });
-
     });
 </script>
 
+
+    <!--end all field that is required show error message  -->
     <script>
         $(document).ready(function () {
             // Initially hide the popup
@@ -1225,7 +1261,6 @@ use Illuminate\Support\Facades\DB;
             });
         });
     </script>
-    <!-- Popup end (Initially hidden) -->
     <!-- Function to show/hide the invited and participated fields -->
     <script>
         $(document).ready(function() {
@@ -1294,150 +1329,62 @@ use Illuminate\Support\Facades\DB;
         });
     </script>
     <!-- End Function to show/hide the invited and participated fields -->
-    <!-- Function to toggle the co-authors position section -->
-    <!-- <script>
-        // Function to toggle the co-authors position section
-        function toggleCoAuthorsPosition() {
-            var coAuthors = document.querySelector('input[name="co_authors"]:checked').value;
-            var positionDiv = document.getElementById('co_authors_position');   
-            const positionInputs = document.querySelectorAll('input[name="co_authors_position"]'); 
-            
-            if (coAuthors == '1' || coAuthors == '2') {
-                positionDiv.style.display = 'block';
-                positionInputs.forEach(input => input.setAttribute('required', 'required'));
-            } else {
-                positionDiv.style.display = 'none';
-                positionInputs.forEach(input => input.removeAttribute('required'));
-            }        
-        }
 
-        // Add event listeners to co-author radio buttons
-        document.querySelectorAll('input[name="co_authors"]').forEach(function(element) {
-            element.addEventListener('change', toggleCoAuthorsPosition);
-        });    
-
-        // Run the function on page load to ensure correct state
-        document.addEventListener('DOMContentLoaded', toggleCoAuthorsPosition);
-    </script> -->
-    <!-- <script>
-        function toggleCoAuthorsPosition() {
-        var coAuthors = document.querySelector('input[name="co_authors"]:checked').value;
-        var positionDiv = document.getElementById('co_authors_position');   
-        const positionInputs = document.querySelectorAll('input[name="co_authors_position"]');
-
-        if (coAuthors == '1' || coAuthors == '2') {
-            positionDiv.style.display = 'block';
-            positionInputs.forEach(input => input.setAttribute('required', 'required'));
-
-            // Show and set required fields for co-authors
-            for (let i = 1; i <= coAuthors; i++) {
-                document.getElementById('author_card_' + i).style.display = 'block';
-                // Set required attribute for each input in the card
-                document.querySelectorAll('#author_card_' + i + ' input, #author_card_' + i + ' select').forEach(function(field) {
-                    field.setAttribute('required', 'required');
-                });
-            }
-            // Hide and remove required from unused cards
-            for (let i = parseInt(coAuthors) + 1; i <= 2; i++) {
-                document.getElementById('author_card_' + i).style.display = 'none';
-                document.querySelectorAll('#author_card_' + i + ' input, #author_card_' + i + ' select').forEach(function(field) {
-                    field.removeAttribute('required');
-                });
-            }
-        } else {
-            positionDiv.style.display = 'none';
-            positionInputs.forEach(input => input.removeAttribute('required'));
-
-            // Hide all co-author cards and remove required
-            for (let i = 1; i <= 2; i++) {
-                document.getElementById('author_card_' + i).style.display = 'none';
-                document.querySelectorAll('#author_card_' + i + ' input, #author_card_' + i + ' select').forEach(function(field) {
-                    field.removeAttribute('required');
-                });
-            }
-        }        
-    }
-    </script> -->
-    <!--End Function to toggle the co-authors position section -->
-    <!-- Show only the number of co_authors selected -->
-    <!-- <script>
+    <!--Function to toggle co-authors position details section -->
+    <script>
         document.addEventListener('DOMContentLoaded', function () {
             const coAuthorsRadios = document.querySelectorAll('input[name="co_authors"]');
+            const positionDiv = document.getElementById('co_authors_position');   
+            const positionInputs = document.querySelectorAll('input[name="co_authors_position"]');
 
-            // Listen for changes to the co_authors radio buttons
+            function toggleCoAuthorsFields(count) {
+                // Show/hide and set/remove required on author cards
+                for (let i = 1; i <= 2; i++) {
+                    const card = document.getElementById('author_card_' + i);
+                    const inputs = card.querySelectorAll('input, select');
+
+                    if (i <= count) {
+                        card.style.display = 'block';
+                        // inputs.forEach(input => input.setAttribute('required', 'required'));
+                        inputs.forEach(input => {
+                            if (input.name !== 'co_ecosystem_affiliation_' + i + '[]') {
+                                input.setAttribute('required', 'required');
+                            }
+                        });
+                        // input.removeAttribute('disabled'); // Ensure not disabled
+                    } else {
+                        card.style.display = 'none';
+                        inputs.forEach(input => input.removeAttribute('required'));
+                        // input.setAttribute('disabled', 'disabled'); // Avoid validation
+                    }
+                }
+
+                // Show/hide and manage required for co-author positions
+                if (count === 1 || count === 2) {
+                    positionDiv.style.display = 'block';
+                    positionInputs.forEach(input => input.setAttribute('required', 'required'));
+                } else {
+                    positionDiv.style.display = 'none';
+                    positionInputs.forEach(input => input.removeAttribute('required'));
+                }
+            }
+
+            // Attach listener to co-author radio buttons
             coAuthorsRadios.forEach(radio => {
                 radio.addEventListener('change', function () {
-                    const selectedValue = this.value;
-                    toggleCoAuthorsFields(selectedValue);
+                    toggleCoAuthorsFields(parseInt(this.value));
                 });
             });
 
-            function toggleCoAuthorsFields(count) {
-                // Hide all co-author fields initially
-                for (let i = 1; i <= 2; i++) {
-                    document.getElementById('author_card_' + i).style.display = 'none';
-                }
-
-                // Show only the necessary fields based on the selected number of co-authors
-                for (let i = 1; i <= count; i++) {
-                    document.getElementById('author_card_' + i).style.display = 'block';
-                }        
-            }
-
-            // Initialize the form with the correct fields displayed if a value is already selected
+            // Initialize on page load
             const initialSelectedValue = document.querySelector('input[name="co_authors"]:checked');
             if (initialSelectedValue) {
-                toggleCoAuthorsFields(initialSelectedValue.value);
+                toggleCoAuthorsFields(parseInt(initialSelectedValue.value));
             }
         });
-    </script> -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const coAuthorsRadios = document.querySelectorAll('input[name="co_authors"]');
-        const positionDiv = document.getElementById('co_authors_position');   
-        const positionInputs = document.querySelectorAll('input[name="co_authors_position"]');
-
-        function toggleCoAuthorsFields(count) {
-            // Show/hide and set/remove required on author cards
-            for (let i = 1; i <= 2; i++) {
-                const card = document.getElementById('author_card_' + i);
-                const inputs = card.querySelectorAll('input, select');
-
-                if (i <= count) {
-                    card.style.display = 'block';
-                    inputs.forEach(input => input.setAttribute('required', 'required'));
-                } else {
-                    card.style.display = 'none';
-                    inputs.forEach(input => input.removeAttribute('required'));
-                }
-            }
-
-            // Show/hide and manage required for co-author positions
-            if (count === 1 || count === 2) {
-                positionDiv.style.display = 'block';
-                positionInputs.forEach(input => input.setAttribute('required', 'required'));
-            } else {
-                positionDiv.style.display = 'none';
-                positionInputs.forEach(input => input.removeAttribute('required'));
-            }
-        }
-
-        // Attach listener to co-author radio buttons
-        coAuthorsRadios.forEach(radio => {
-            radio.addEventListener('change', function () {
-                toggleCoAuthorsFields(parseInt(this.value));
-            });
-        });
-
-        // Initialize on page load
-        const initialSelectedValue = document.querySelector('input[name="co_authors"]:checked');
-        if (initialSelectedValue) {
-            toggleCoAuthorsFields(parseInt(initialSelectedValue.value));
-        }
-    });
-</script>
-
-    <!--End Show only the number of co_authors selected -->
+    </script>
+    <!--End Function to toggle co-authors details section -->
+   
     <!-- Function to toggle the submission_types position section -->
     <script>    
         function togglesubmissionTypes() {        
@@ -1486,6 +1433,7 @@ use Illuminate\Support\Facades\DB;
             // togglesubmissionTypes();    
     </script>
     <!--End Function to toggle the submission_types position section -->
+
     <!-- Show only the number of narrative images selected -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -1520,6 +1468,7 @@ use Illuminate\Support\Facades\DB;
         });
     </script>
     <!--End Show only the number of narrative images selected -->
+
     <!-- Show only the number of art images selected -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -1555,7 +1504,8 @@ use Illuminate\Support\Facades\DB;
         });
     </script>
     <!-- End Show only the number of art images selected -->
-    <!-- Add real-time size validation script -->
+
+    <!-- Add real-time size and file type validation script -->
     <script>
         document.getElementById('narrative_file').addEventListener('change', function() {
             // validateFileSize(this, 'narrative_file_error');
@@ -1563,61 +1513,28 @@ use Illuminate\Support\Facades\DB;
         });
         
         document.getElementById('image_file_1').addEventListener('change', function() {
-            validateFileSize(this, 'image_file_1_error');
+            validateFileType(this, 'image_file_1_error');
         });
 
         @for ($i = 2; $i <= 5; $i++)
         document.getElementById('image_file_{{ $i }}').addEventListener('change', function() {
-            validateFileSize(this, 'image_file_{{ $i }}_error');
+            validateFileType(this, 'image_file_{{ $i }}_error');
         });
-        @endfor
+        @endfor        
 
-        document.addEventListener('change', function (event) {
-            // Check if the event target is an input file with the required ID format
-            if (event.target && event.target.id.startsWith('image_file_')) {
-                const inputId = event.target.id;
-                const errorId = inputId + '_error'; // Construct the error span ID dynamically
-                validateFileSize(event.target, errorId);
-            }
-        });
-
-        @for ($i = 2; $i <= 5; $i++)
+        @for ($i = 1; $i <= 5; $i++)
         document.getElementById('art_image_file_{{ $i }}').addEventListener('change', function() {
-            validateFileSize(this, 'art_image_file_{{ $i }}_error');
+            validateFileType(this, 'art_image_file_{{ $i }}_error');
         });
         @endfor
-
-        document.addEventListener('change', function (event) {
-            // Check if the event target is an input file with the required ID format
-            if (event.target && event.target.id.startsWith('art_image_file_')) {
-                const inputId = event.target.id;
-                const errorId = inputId + '_error'; // Construct the error span ID dynamically
-                validateFileSize(event.target, errorId);
-            }
-        });      
-        
+    
         document.getElementById('art_video_file').addEventListener('change', function() {
             validateVideoFile(this, 'art_video_file_error');
-        });
-
-        // Add similar event listeners for other file inputs
-
-        function validateFileSize(input, errorElementId) {
-            var file = input.files[0];
-            var maxSize = 1 * 1024 * 1024; // 1MB in bytes
-
-            if (file.size > maxSize) {
-                // alert('File size exceeds 1MB. Please upload a smaller file.');
-                document.getElementById(errorElementId).innerText = "File size exceeds 1MB. Please upload a smaller file.";
-                input.value = ''; // Clear the input if validation fails
-            } else{
-                document.getElementById(errorElementId).innerText = "";
-        }
-        }
+        });        
 
         function validateVideoFile(input, errorElementId) {
             var file = input.files[0];
-            console.log(file);
+            // console.log(file);
             var allowedExtensions = ['mp4', 'avi', 'mov', 'mkv', 'webm'];
             var fileSizeLimit = 1073741824; // 1GB in bytes
 
@@ -1646,34 +1563,63 @@ use Illuminate\Support\Facades\DB;
             }
         }
 
+        
         function validateFileType(input, errorElementId) {
-            var file = input.files[0];
-            var allowedExtensions = ['.doc', '.docx']; // Allowed extension
+            const file = input.files[0];
+            const inputName = input.getAttribute('name');            
+            const errorElement = document.getElementById(errorElementId);
+            
+            // Define allowed types
+            const docExtensions = ['.doc', '.docx'];
+            const imageExtensions = ['.jpg', '.jpeg', '.png', '.svg', '.ico'];
 
-            // Check if a file is selected
-            if (file) {
-                var fileName = file.name.toLowerCase();
-                var fileExtension = fileName.slice(fileName.lastIndexOf('.'));
-
-                // Validate file extension
-                if (!allowedExtensions.includes(fileExtension)) {
-                    document.getElementById(errorElementId).innerText = "❌ Only DOC files are allowed (Max 1 MB).";
-                    input.value = ''; // Clear the input if validation fails
-                } else {
-                    document.getElementById(errorElementId).innerText = ""; // Clear error if valid file
-                }
-
-                // Validate file size (Max 1 MB)
-                if (file.size > 1 * 1024 * 1024) {
-                    document.getElementById(errorElementId).innerText = "❌ File size exceeds 1 MB.";
-                    input.value = ''; // Clear the input if validation fails
-                }
-            } else {
-                document.getElementById(errorElementId).innerText = ""; // Clear error if no file selected
+            if (!file) {
+                errorElement.innerText = '';
+                return;
             }
-        }                                       
+
+            const fileName = file.name.toLowerCase();
+            const fileExtension = fileName.substring(fileName.lastIndexOf('.'));
+            const fileSize = file.size;
+            let allowedExtensions = [];
+            let errorMsg = '';
+
+            // Determine type of file field
+            if (inputName === 'narrative_file') {
+                allowedExtensions = docExtensions;
+                errorMsg = "❌ Only DOC or DOCX files are allowed (Max 1 MB).";
+            } else if (/^image_file_[1-5]$/.test(inputName)) {
+                allowedExtensions = imageExtensions;
+                errorMsg = "❌ Only image files (JPG, PNG, etc.) are allowed (Max 1 MB).";
+            } else if (/^art_image_file_[1-5]$/.test(inputName)) {
+                allowedExtensions = imageExtensions;
+                errorMsg = "❌ Only image files (JPG, PNG, etc.) are allowed (Max 1 MB).";
+            } else {
+                errorElement.innerText = "❌ Invalid input field.";
+                input.value = '';
+                return;
+            }
+
+            // Check extension
+            if (!allowedExtensions.includes(fileExtension)) {
+                errorElement.innerText = errorMsg;
+                input.value = '';
+                return;
+            }
+
+            // Check size
+            if (fileSize > 1 * 1024 * 1024) {
+                errorElement.innerText = "❌ File size exceeds 1 MB.";
+                input.value = '';
+                return;
+            }
+
+            // All good
+            errorElement.innerText = '';
+        }                                
     </script>
-    <!-- End real-time size validation script -->
+    <!-- End real-time size and file type validation script -->
+
     <!-- all word count validation -->
     <script>
         function checkWordLimit(field, limit, errorField) {
@@ -1697,9 +1643,7 @@ use Illuminate\Support\Facades\DB;
         }
 
         function validateForm() {
-            let allValid = true;
-            // allValid &= checkWordLimit(document.getElementById('explanation'), 100, 'explanationError');
-            // allValid &= checkWordLimit(document.getElementById('explanation_submission'), 150, 'explanation_submissionError');
+            let allValid = true;            
             allValid &= checkWordLimit(document.getElementById('creative_Work'), 10, 'creative_WorkError');
             allValid &= checkWordLimit(document.getElementById('subtitle'), 40, 'subtitleError');
             allValid &= checkWordLimit(document.getElementById('additional_information'), 100, 'additional_informationError');
@@ -1743,6 +1687,7 @@ use Illuminate\Support\Facades\DB;
         }
     </script>
     <!-- End all word count validation -->
+
     <!-- prefill radio button value -->
     <script>
         // Prevent changes to the radio buttons
@@ -1754,7 +1699,7 @@ use Illuminate\Support\Facades\DB;
     </script>
 
     <!-- series toggle vlaue show and hide  -->
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         $(document).ready(function() {
             $(".series_yes").hide();
             var is_series= '<?=$is_series?>';
@@ -1762,12 +1707,12 @@ use Illuminate\Support\Facades\DB;
                 $(".series_yes").show();
                 $('#series_article_no').attr('required', true);
                 $('#current_article_no').attr('required', true);
-                $('#other_article_part_doi_no').attr('required', true);
+                $('#input-tags').attr('required', true);
             } else {
                 $(".series_yes").hide();
                 $('#series_article_no').attr('required', false);
                 $('#current_article_no').attr('required', false);
-                $('#other_article_part_doi_no').attr('required', false);
+                $('#input-tags').attr('required', false);
             }
             
             $('input[name="is_series"]').change(function() {
@@ -1775,24 +1720,24 @@ use Illuminate\Support\Facades\DB;
                     $(".series_yes").show();
                     $('#series_article_no').attr('required', true);
                     $('#current_article_no').attr('required', true);
-                    $('#other_article_part_doi_no').attr('required', true);
+                    $('#input-tags').attr('required', true);
                 } else {
                     $(".series_yes").hide();
                     $('#series_article_no').attr('required', false);
                     $('#current_article_no').attr('required', false);
-                    $('#other_article_part_doi_no').attr('required', false);
+                    $('#input-tags').attr('required', false);
                 }
             });
             $('#current_article_no').on('input', function(){
                 var current_article_no = parseInt($('#current_article_no').val());
                 if(current_article_no <= 1){
                     $('#current_article_no').attr('required', false);
-                    $('#other_article_part_doi_no').attr('required', false);
+                    $('#input-tags').attr('required', false);
                 } else {
                     $('#current_article_no').attr('required', true);
-                    $('#other_article_part_doi_no').attr('required', true);
+                    $('#input-tags').attr('required', true);
                 }
-            });
+            });            
         });
     </script>
 
@@ -1806,6 +1751,10 @@ use Illuminate\Support\Facades\DB;
 
             $('#input-tags').on('input', function () {
                 var input = $(this).val().trim();
+                if (input.length > 0) {
+                    $(this).removeAttr('required'); // remove required
+                    // $('#input-tags-error').hide();  // hide any previous error
+                }
                 $('#validation-msg').text('').hide();  // 🛠️ Hide old error immediately
                 // When comma is typed
                 if (input.includes(',')) {
@@ -1848,6 +1797,130 @@ use Illuminate\Support\Facades\DB;
                 $('#other_article_part_doi_no').val(tagsArray.join(','));
             });
         });
-    </script>
+    </script> -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var tagsArray = [];
+
+        // Handle initial display of series fields
+        var is_series = '<?= old('is_series', $is_series ?? '') ?>';
+        if (is_series === "Yes") {
+            $(".series_yes").show();
+            $('#series_article_no').attr('required', true);
+            $('#current_article_no').attr('required', true);
+
+            var currentVal = parseInt($('#current_article_no').val());
+            if (currentVal > 1 || isNaN(currentVal)) {
+                $('#input-tags').attr('required', true);
+            } else {
+                $('#input-tags').attr('required', false);
+            }
+        } else {
+            $(".series_yes").hide();
+            $('#series_article_no, #current_article_no, #input-tags').attr('required', false);
+        }
+
+        // Show/hide based on is_series radio buttons
+        $('input[name="is_series"]').change(function () {
+            if ($(this).val() === "Yes") {
+                $(".series_yes").show();
+                $('#series_article_no').attr('required', true);
+                $('#current_article_no').attr('required', true);
+                $('#input-tags').attr('required', true);
+            } else {
+                $(".series_yes").hide();
+                $('#series_article_no, #current_article_no, #input-tags').attr('required', false);
+            }
+        });
+
+        // Adjust required based on current article number
+        $('#current_article_no').on('input', function () {
+            var val = parseInt($(this).val());
+            if (val <= 1 || isNaN(val)) {
+                $('#input-tags').attr('required', false);
+            } else {
+                $('#input-tags').attr('required', true);
+            }
+        });
+
+        // Tag management logic
+        // var beforeData = $('#other_article_part_doi_no').val();
+        // if (beforeData.length > 0) {
+        //     tagsArray = beforeData.split(',');
+        //     tagsArray.forEach(function (tag) {
+        //         tag = tag.trim();
+        //         if (tag.length > 0) {
+        //             $('#badge-container').append(
+        //                 '<span class="badge">' + tag + ' <span class="remove" data-tag="' + tag + '">&times;</span></span>'
+        //             );
+        //         }
+        //     });
+        // }
+
+        var beforeData = $('#other_article_part_doi_no').val();
+            if (beforeData.length > 0) {
+                tagsArray = beforeData.split(',');
+                tagsArray.forEach(function (tag) {
+                    tag = tag.trim();
+                    if (tag.length > 0) {
+                        $('#badge-container').append(
+                            '<span class="badge">' + tag + ' <span class="remove" data-tag="' + tag + '">&times;</span></span>'
+                        );
+                    }
+                });
+            }
+
+            // ✅ Check if tags are missing and conditionally set required
+            var currentVal = parseInt($('#current_article_no').val());
+            if (is_series === "Yes" && (isNaN(currentVal) || currentVal > 1) && tagsArray.length === 0) {
+                $('#input-tags').attr('required', true);
+            } else {
+                $('#input-tags').attr('required', false);
+            }
+
+        $('#input-tags').on('input', function () {
+            var input = $(this).val().trim();
+            if (input.includes(',')) {
+                var tags = input.split(',');
+                tags.forEach(function (tag) {
+                    tag = tag.trim();
+                    if (tag.length > 0) {
+                        const pattern = /^SRN-EaRTh\d{6}-\d{3}$/;
+                        if (!pattern.test(tag)) {
+                            $('#validation-msg').text("❌ Invalid format: Must match SRN-EaRThMMYYYY-xxx,").css('color', 'red').fadeIn().delay(3000).fadeOut();
+                            return;
+                        } else {
+                            $('#validation-msg').text("✅ Valid: SRN-EaRThMMYYYY-xxx,").css('color', 'green').fadeIn().delay(3000).fadeOut();
+                            $('#input-tags').attr('required', false);
+                        }
+
+                        if (!tagsArray.includes(tag)) {
+                            tagsArray.push(tag);
+                            $('#badge-container').append(
+                                '<span class="badge">' + tag + ' <span class="remove" data-tag="' + tag + '">&times;</span></span>'
+                            );
+                        }
+                    }
+                });
+                $('#other_article_part_doi_no').val(tagsArray.join(','));
+                $(this).val('');
+            }
+        });
+
+        $(document).on('click', '.remove', function () {
+            var tag = $(this).data('tag');
+            tagsArray = tagsArray.filter(function (item) {
+                return item !== tag;
+            });
+            $(this).parent().remove();
+            $('#other_article_part_doi_no').val(tagsArray.join(','));
+        });
+    });
+</script>
+
+
+
+
     <!-- series toggle value show and hide end -->
 

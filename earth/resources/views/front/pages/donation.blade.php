@@ -7,7 +7,7 @@
                 <div class="block-content">
                     <div class="article-box">
                         <!-- Left Info -->
-                        <div class="col-lg-5 fade-in">
+                        <div class="col-lg-7 fade-in">
                             <div class="donation-box donation-left">
                                 <div class="titleto-inner mb-3">
                                     <h2 class="mt-0">Give Today — Because We Need Real Solutions for People and Planet Now</h2>
@@ -22,12 +22,12 @@
                                 </ul>
                                 
                                 <div class="custom-alert d-flex align-items-start">
-                                    <strong>Give today, so we can amplify the voices of more grassroots changemakers through EaRTh!</strong>
+                                    <strong class="font15" style="font-family: 'proximanova_regular', sans-serif;">Give today, so we can amplify the voices of more grassroots changemakers through EaRTh!</strong>
                                 </div>
                             </div>
                         </div>
                         <!-- Right Form -->
-                        <div class="col-lg-7 fade-in">
+                        <div class="col-lg-5 fade-in">
                             <form class="mb-4" action="" method="POST">
                                 @csrf
                                 <input type="hidden" name="payment_mode" id="payment_mode" value="PAYPAL">
@@ -75,9 +75,9 @@
                                                 <button type="button" class="btn btn-outline-secondary" onclick="calculatePayableAmount(500);">$500</button>
                                             </li>
                                         </ul>
-                                        <input type="text" class="form-control mt-2 w-50" placeholder="Other amount: minimum donation is the equivalent of USD 10" id="custom_amount" oninput="calculatePayableAmount(this.value);">
+                                        <div style="width: 100%;"><input type="text" class="form-control donation_abovesame mt-2 w-50" placeholder="Minimum donation USD 10" id="custom_amount" oninput="calculatePayableAmount(this.value);"></div>
                                     </div>
-                                    <div class="form-check mb-4">
+                                    <div class="form-check mb-4 label_checkbox">
                                         <input class="form-check-input" type="checkbox" id="coverFee">
                                         <label class="form-check-label" for="coverFee">I'd like to help cover the transaction fees.</label>
                                     </div>

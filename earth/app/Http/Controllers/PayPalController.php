@@ -87,9 +87,13 @@ class PayPalController extends Controller
      */
     public function paymentCancel($order_id)
     {
-        $id             = Helper::decoded($order_id);
-        $getOrder       = Donation::where('id', '=', $id)->first();
-        return redirect(url('order-failure/'.Helper::encoded($id)))->with('error_message', 'Payment Failed !!!');
+        // return redirect(url('order-failure/'.Helper::encoded($id)))->with('error_message', 'Payment Failed !!!');
+        $data['search_keyword']         = '';
+        $donation_id                    = Helper::decoded($order_id);
+        $data['donation']               = Donation::where('id', $donation_id)->first();
+        $title                          = 'Payment Failed';
+        $page_name                      = 'payment-cancel';
+        echo $this->front_before_login_layout($title, $page_name, $data);
     }
   
     /**
@@ -147,7 +151,7 @@ class PayPalController extends Controller
                 $mailData['getOrder']       = Donation::where('id', '=', $id)->first();                   
                 $generalSetting             = GeneralSetting::find('1');
                 $subject                    = 'Thank you for your donation to the Śramani Institute ['.$donation_number.']';
-                $message                    = 'Thank you very much for your donation to the Śramani Institute. Please find enclosed your donation receipt.<br><br>Best wishes,<br><br>Śramani Institute, Inc.';
+                $message                    = 'Thank you very much for your donation to the Śramani Institute.<br>Please find enclosed your donation receipt.<br><br>Best wishes,<br><br>Śramani Institute, Inc.';
                 // $message                    = 'Thank you very much for your donation to the Śramani Institute. Please find enclosed your donation receipt.<br>Best wishes,<br>the Śramani Institute';
                 $attchment                  = 'public/uploads/donation/' . $filename;
                 $this->sendMail($generalSetting->system_email, $subject, $message, $attchment);

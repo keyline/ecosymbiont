@@ -10,7 +10,13 @@ $(document).ready(function() {
                 topStart: {
                     buttons: ['excel', 'pdf', 'print']
                 }
-            }
+            },
+            columnDefs: [
+        {
+            orderable: false,
+            targets: 'no-sort' // First column (checkboxes)
+        }
+    ]
         });
         $('#simpletable2').DataTable({
             layout: {

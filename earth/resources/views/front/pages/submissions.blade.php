@@ -45,8 +45,9 @@ $current_url = $protocol . $host . $uri;
                                                 <p class="black"><u>Creative-works in vernacular languages are welcome</u>, as long as you provide a full English translation (and English subtitles for videos) Share your fiction or non-fiction, poetry or prose, projects that worked and ones that didn’t. Share personal stories or cultural stories, interviews with Elders or with youth. As long as what you share is <strong>related to the connection between humans and ecologies</strong>, we want to know!</p>
 
                                                 <p class="black">
-                                                    Read this submissions page and watch the video tutorial to get started with making <u>your own password-protected account</u> for streamlined submission of your creative-works, allowing EaRTh editors to review and revise efficiently before publication.<br><strong>Welcome to EaRTh!</strong>
+                                                    Read this submissions page and watch the video tutorial to get started with making <u>your own password-protected account</u> for streamlined submission of your creative-works, allowing EaRTh editors to review and revise efficiently before publication.
                                                 </p>
+                                                <p><strong>Welcome to EaRTh!</strong></p>
                                                 <div class="titleto-box">
                                                     <h1>SUBMISSION GUIDELINES</h1>
                                                 </div>
@@ -104,7 +105,7 @@ $current_url = $protocol . $host . $uri;
                                                     </li>
                                                     <li><strong>INDIGENOUS</strong>
                                                         <ul class="black" style="margin-top: 10px">
-                                                            <li><strong><i>Indigenous Knowledge-Technologies-Practices</i></strong><br>You must either be an Indigenous person narrating your own community's Knowledge-Technologies-Practices (KTP), or if you are a person narrating on behalf of an Indigenous individual and/or community, the latter must be a co-author of your Creative-Work (narrate in a manner that does not reveal details of KTP so that misappropriation by others is prevented).</li>
+                                                            <li><strong><i>Indigenous Knowledge-Technologies-Practices</i></strong><br>You must either be an Indigenous person narrating your own community's Knowledge-Technologies-Practices (Knowtep), or if you are a person narrating on behalf of an Indigenous individual and/or community, the latter must be a co-author of your Creative-Work (narrate in a manner that does not reveal details of Knowtep so that misappropriation by others is prevented).</li>
                                                             <li><strong><i>Indigenous Retelling & Telling</i></strong><br>A retelling or telling of past and/or current events from the perspective of an Indigenous individual and/or community.</li>
                                                             <li><strong><i>Indigenous Survivance</i></strong><br>A sharing of Indigenous individuals, especially women, being vanished by various actors and/or of the persevering and resilience of Indigenous communities.</li>
                                                         </ul>
@@ -119,7 +120,7 @@ $current_url = $protocol . $host . $uri;
                                                     <li><strong>SYSTEMS</strong>
                                                         <ul class="black" style="margin-top: 10px">
                                                             <li><strong><i>Ecoweb-Rooted Framing</i></strong><br>Creative-Work that conceptualizes economics, law, governance, and education (ELGE) systems in a manner that reframes them to optimize ecoweb-rooted symbiotic wellbeing, <i>i.e.,</i> of human communities and one or more ecowebs we rely on.</li>
-                                                            <li><strong><i>Extractivism Alternatives</i></strong><br>Creative-Work that describes Knowledge-Technologies-Practices (KTP) and/or systems that present an alternative to extractivist KTP and systems (<i>e.g.,</i> the cycle of sustainable generation, repeated use, and biodegradable disposal of objects, as opposed to the cycle of resource extraction, disposable commodity production, disposable use, and landfill waste generation).</li>
+                                                            <li><strong><i>Extractivism Alternatives</i></strong><br>Creative-Work that describes Knowledge-Technologies-Practices (Knowtep) and/or systems that present an alternative to extractivist Knowtep and systems (<i>e.g.,</i> the cycle of sustainable generation, repeated use, and biodegradable disposal of objects, as opposed to the cycle of resource extraction, disposable commodity production, disposable use, and landfill waste generation).</li>
                                                             <li><strong><i>Systems Reform</i></strong><br>Creative-Work that critically analyzes extractivist economics, law, governance, and education (ELGE) systems or describes concrete ideas on how to reshape ELGE systems in a manner that minimizes or eliminates extractivism.</li>
                                                         </ul>
                                                     </li>
@@ -158,10 +159,10 @@ $current_url = $protocol . $host . $uri;
                                                 
                                                 <?php if($button_show){?>
                                                     <?php if(session('is_user_login')){?>
-                                                        <p class="text-center"><a href="<?=url('user/submit-new-article')?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Submit New Creative-Work</a></p>
+                                                        <p class="text-center"><a href="<?=url('user/submit-new-article')?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Sign Up & Submit Creative-Work</a></p>
                                                         <p style="color: red; text-align: center;">In case of technical difficulties, please <a href="<?=env('REGENERATE_URL')?>contact.php">contact us.</a></p>
                                                     <?php } else {?>
-                                                        <p class="text-center"><a href="<?=url('sign-in/' . Helper::encoded('https://ecosymbiont.org/earth/user/submit-new-article'))?>" class="btn btn-primary">Submit New Creative-Work</a></p>
+                                                        <p class="text-center"><a href="<?=url('sign-in/' . Helper::encoded('https://ecosymbiont.org/earth/user/submit-new-article'))?>" class="btn btn-primary">Sign Up & Submit Creative-Work</a></p>
                                                         <p style="color: red; text-align: center;">In case of technical difficulties, please <a href="<?=env('REGENERATE_URL')?>contact.php" target="_blank">contact us.</a></p>
                                                     <?php }?>
                                                 <?php }?>   

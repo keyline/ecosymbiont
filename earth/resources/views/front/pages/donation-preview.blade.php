@@ -11,7 +11,7 @@ use App\Helpers\Helper;
                 <div class="block-content">
                     <div class="article-box">
                         <!-- Left Info -->
-                        <div class="col-lg-5 fade-in">
+                        <!-- <div class="col-lg-7 fade-in">
                             <div class="donation-box donation-left">
                                 <div class="titleto-inner mb-3">
                                     <h2 class="mt-0">Give Today — Because We Need Real Solutions for People and Planet Now</h2>
@@ -26,12 +26,12 @@ use App\Helpers\Helper;
                                 </ul>
                                 
                                 <div class="custom-alert d-flex align-items-start">
-                                    <strong>Give today, so we can amplify the voices of more grassroots changemakers through EaRTh!</strong>
+                                    <strong class="font15">Give today, so we can amplify the voices of more grassroots changemakers through EaRTh!</strong>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- Right Form -->
-                        <div class="col-lg-7 fade-in">
+                        <div class="col-lg-12 fade-in">
                             <div class="donation-box">
                                 <?php if($donation){?>
                                     <table class="table table-striped">
@@ -73,7 +73,7 @@ use App\Helpers\Helper;
                                     </table>
                                     <div class="mt-4">
                                         <!-- <button type="submit" class="btn mt-4 donation_btn" style="display: flex;margin: 0 auto;">Pay Now $<?=number_format($donation->payable_amount,2)?></button> -->
-                                        <a href="<?=url('paypal/payment/'.Helper::encoded($donation->id))?>" class="btn mt-4 donation_btn" style="display: flex;margin: 0 auto;justify-content: center;">Pay Now $<?=number_format($donation->payable_amount,2)?></a>
+                                        <a href="<?=url('paypal/payment/'.Helper::encoded($donation->id))?>" class="btn mt-4 donation_btn" style="display: flex;margin: 0 auto;justify-content: center;">Pay now: USD <?=number_format($donation->payable_amount,2)?></a>
                                     </div>
                                 <?php }?>
                             </div>
