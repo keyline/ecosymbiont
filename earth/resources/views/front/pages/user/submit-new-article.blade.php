@@ -1892,6 +1892,7 @@ use Illuminate\Support\Facades\DB;
                             return;
                         } else {
                             $('#validation-msg').text("✅ Valid: SRN-EaRThMMYYYY-xxx,").css('color', 'green').fadeIn().delay(3000).fadeOut();
+                            $('#input-tags').attr('required', false);
                         }
 
                         if (!tagsArray.includes(tag)) {
