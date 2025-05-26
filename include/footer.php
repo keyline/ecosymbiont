@@ -109,7 +109,7 @@
         alert(pageName);
 
         // If it's the home page (typically empty or index), show popup
-        if (pageName === "" || pageName.toLowerCase() === "index" || pageName.toLowerCase() === "home") {
+        if (pageName === "ecosymbiont.org") {
             const DelayNodelay = 5000; // Delay in milliseconds
             setTimeout(function () {
                 $('#popupModal').modal('show'); // Bootstrap modal show
