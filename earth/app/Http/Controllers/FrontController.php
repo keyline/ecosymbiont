@@ -1231,7 +1231,8 @@ class FrontController extends Controller
                                                     ->orWhere('news_contents.current_article_no', 1); // First part of series
                                             })
                                              ->orderBy('news_contents.created_at', 'DESC')
-                                             ->limit(4)
+                                             ->offset($offset)
+                                            ->limit($limit)
                                              ->get();
                                              dd(DB::getQueryLog());
             } elseif($search_type == 'Tag'){
