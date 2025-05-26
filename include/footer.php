@@ -102,7 +102,7 @@
 
     document.addEventListener("DOMContentLoaded", function () {
         const url = window.location.href;
-        // alert(url);
+        alert(url);
         const segments = url.split("/");
         const pageName = segments.pop() || segments.pop(); // handles trailing slash        
 
