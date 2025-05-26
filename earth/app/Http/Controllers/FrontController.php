@@ -1199,7 +1199,7 @@ class FrontController extends Controller
                                             ->get();
             } elseif($search_type == 'Projects'){
                 // DB::enableQueryLog();
-                $data['contents']   = NewsContent::select(
+                $contents   = NewsContent::select(
                                                         'news_contents.id', 
                                                         'news_contents.new_title', 
                                                         'news_contents.sub_title', 
