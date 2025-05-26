@@ -89,13 +89,21 @@
         const segments = url.split("/");
         const pageName = segments.pop() || segments.pop(); // handles trailing slash
         // Check if the cookie is already set
-        if (pageName.toLowerCase() !== "donation" && !getCookie("popupShown")) {
-            DelayNodelay = 5000; // Delay in milliseconds
+        // if (pageName.toLowerCase() !== "donation" && !getCookie("popupShown")) {
+        //     DelayNodelay = 5000; // Delay in milliseconds
+        //     setTimeout(function () {
+        //         $('#popupModal').modal('show'); // Bootstrap modal show
+        //     }, DelayNodelay);            
+        //     // $('#popupModal').modal('show'); // Bootstrap modal show
+        //     setCookie("popupShown", "true", 30); // Set cookie for 30 days
+        // }
+
+        // If it's the home page (typically empty or index), show popup
+        if (pageName === "" || pageName.toLowerCase() === "index" || pageName.toLowerCase() === "home") {
+            const DelayNodelay = 5000; // Delay in milliseconds
             setTimeout(function () {
                 $('#popupModal').modal('show'); // Bootstrap modal show
-            }, DelayNodelay);            
-            // $('#popupModal').modal('show'); // Bootstrap modal show
-            setCookie("popupShown", "true", 30); // Set cookie for 30 days
+            }, DelayNodelay);
         }
     });
 </script>
