@@ -309,9 +309,11 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
 
     document.addEventListener("DOMContentLoaded", function () {
         const url = window.location.href;
-        alert(url);
+        // alert(url);
         const segments = url.split("/");
+        alert(segments);
         const pageName = segments.pop() || segments.pop(); // handles trailing slash
+        alert(pageName);
         // If it's the home page (typically empty or index), show popup
         if (pageName === "" || pageName.toLowerCase() === "index" || pageName.toLowerCase() === "home") {
             const DelayNodelay = 5000; // Delay in milliseconds
