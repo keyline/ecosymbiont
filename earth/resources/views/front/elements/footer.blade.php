@@ -308,12 +308,9 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
     // }
 
     document.addEventListener("DOMContentLoaded", function () {
-        const url = window.location.href;
-        // alert(url);
-        const segments = url.split("/");
-        alert(segments);
-        const pageName = segments.pop() || segments.pop(); // handles trailing slash
-        alert(pageName);
+        const url = window.location.href;        
+        const segments = url.split("/");        
+        const pageName = segments.pop() || segments.pop(); // handles trailing slash        
         // If it's the home page (typically empty or index), show popup
         if (pageName === "earth") {
             const DelayNodelay = 5000; // Delay in milliseconds
