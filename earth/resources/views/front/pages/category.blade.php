@@ -8,6 +8,14 @@ $host = $_SERVER['HTTP_HOST'];
 $uri = $_SERVER['REQUEST_URI'];
 $current_url = $protocol . $host . $uri;
 ?>
+<style>
+    svg {
+        width: 70px;
+        height: 70px;
+        margin: 20px;
+        display: inline-block;
+    }
+</style>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- block-wrapper-section ================================================== -->
     <section class="block-wrapper">
