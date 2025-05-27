@@ -376,6 +376,8 @@ class FrontController extends Controller
 
         // $title                          = ($categoryname .'|'. ($data['row'])?$data['row']->sub_category:'');
         $data['search_keyword']         = '';
+        $data['slug']                    = $slug;
+        $data['categoryname']           = $categoryname;
         $title                          = strtoupper($categoryname) .' | '. $data['row']->sub_category;
         // $title                          = ucwords($categoryname) .' | '. $data['row']->sub_category;
         $page_name                      = 'subcategory';
