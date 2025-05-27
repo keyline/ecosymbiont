@@ -262,6 +262,7 @@ class FrontController extends Controller
                                                     ->where('news_contents.status', 1)
                                                     ->where('news_contents.parent_category', $parent_category_id) // Ensure $parent_category_id is defined
                                                     ->orderBy('news_contents.id', 'DESC')
+                                                     ->limit(4)
                                                     ->get();
         $data['search_keyword']         = '';
 
