@@ -271,6 +271,7 @@ class FrontController extends Controller
                                                     ->get();
         // Helper::pr($data['contents']);
         // dd(DB::getQueryLog());
+        $data['slug']                    = $slug;
         $data['search_keyword']         = '';
 
         $title                          = (($data['row'])?$data['row']->sub_category:'');

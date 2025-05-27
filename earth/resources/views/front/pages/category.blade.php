@@ -128,7 +128,7 @@ $current_url = $protocol . $host . $uri;
     $('#load_more_btn').on('click', function () {
         $('#loading').show();
         $.ajax({
-            url: '<?= url('category_load') ?>',
+            url: '<?= url('category_load'+$slug) ?>',
             type: 'POST',
             data: {
                 offset: offset,
