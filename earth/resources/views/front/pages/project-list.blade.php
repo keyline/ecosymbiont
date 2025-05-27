@@ -163,8 +163,7 @@ $current_url = $protocol . $host . $uri;
                                     </div>
                                     <div class="col-sm-7">
                                         <div class="post-content">
-                                            ${strtoupper(rowContent.parent_category_name)}.' | '.${rowContent.sub_category_name}
-                                            <a href="<?=url('category/')?>${content.parent_category_slug}/${content.sub_category_slug}">${content.sub_category_name}</a>
+                                            ${content.parent_category_name.toUpperCase()} | ${content.sub_category_name}                                          
                                             <h2>
                                                 <a href="<?=url('content/')?>/${content.parent_category_slug}/${content.sub_category_slug}/${content.slug}">
                                                     ${content.new_title}
