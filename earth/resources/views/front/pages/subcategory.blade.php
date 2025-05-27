@@ -31,7 +31,8 @@ $current_url = $protocol . $host . $uri;
                             </div>
                         </div>
                         <!-- End article box -->
-                        <!-- article box -->                        
+                        <!-- article box -->    
+                        <div class="article-box" id="content-list">                    
                             <?php if ($contents->isEmpty()) { ?>
                                 <div class="news-post article-post">
                                     <div class="row">
@@ -103,22 +104,23 @@ $current_url = $protocol . $host . $uri;
                                 <?php }  
                             } ?>    
                             <?php if(count($contents) >= 4) { ?>
-                        <button id="load_more_btn" style="background-color: #d09c1c;border: #d09c1c;display: flex;margin: 0 auto;" class="btn btn-primary">Load More</button>
-                        <?php }?>
-                        <div id="loading" style="display: none;text-align: center;">
-                            <svg version="1.1" id="L5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                            viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
-                                <circle fill="#ed1c24" stroke="none" cx="6" cy="50" r="6">
-                                    <animateTransform attributeName="transform" dur="1s" type="translate" values="0 15 ; 0 -15; 0 15" repeatCount="indefinite" begin="0.1" />
-                                </circle>
-                                <circle fill="#ed1c24" stroke="none" cx="30" cy="50" r="6">
-                                    <animateTransform attributeName="transform" dur="1s" type="translate" values="0 10 ; 0 -10; 0 10" repeatCount="indefinite" begin="0.2" />
-                                </circle>
-                                <circle fill="#ed1c24" stroke="none" cx="54" cy="50" r="6">
-                                    <animateTransform attributeName="transform" dur="1s" type="translate" values="0 5 ; 0 -5; 0 5" repeatCount="indefinite" begin="0.3" />
-                                </circle>
-                            </svg>
-                        </div>                   
+                            <button id="load_more_btn" style="background-color: #d09c1c;border: #d09c1c;display: flex;margin: 0 auto;" class="btn btn-primary">Load More</button>
+                            <?php }?>
+                            <div id="loading" style="display: none;text-align: center;">
+                                <svg version="1.1" id="L5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+                                    <circle fill="#ed1c24" stroke="none" cx="6" cy="50" r="6">
+                                        <animateTransform attributeName="transform" dur="1s" type="translate" values="0 15 ; 0 -15; 0 15" repeatCount="indefinite" begin="0.1" />
+                                    </circle>
+                                    <circle fill="#ed1c24" stroke="none" cx="30" cy="50" r="6">
+                                        <animateTransform attributeName="transform" dur="1s" type="translate" values="0 10 ; 0 -10; 0 10" repeatCount="indefinite" begin="0.2" />
+                                    </circle>
+                                    <circle fill="#ed1c24" stroke="none" cx="54" cy="50" r="6">
+                                        <animateTransform attributeName="transform" dur="1s" type="translate" values="0 5 ; 0 -5; 0 5" repeatCount="indefinite" begin="0.3" />
+                                    </circle>
+                                </svg>
+                            </div>   
+                        </div>                
                         <!-- End article box -->
                     </div>
                     <!-- End block content -->
