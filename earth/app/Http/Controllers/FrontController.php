@@ -278,7 +278,7 @@ class FrontController extends Controller
         $page_name                      = 'category';
         echo $this->front_before_login_layout($title, $page_name, $data);
     }
-    public function cateory_load($slug, Request $request)
+    public function category_load($slug, Request $request)
     {
         if($request->isMethod('post')){
             $postData           = $request->all();
