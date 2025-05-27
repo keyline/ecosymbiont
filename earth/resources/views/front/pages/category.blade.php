@@ -24,7 +24,7 @@ $current_url = $protocol . $host . $uri;
                         </div>
                         <!-- End article box -->
                         <!-- article box -->
-                        <div class="article-box">
+                        <div class="article-box" id="content-list">
                             <?php if($contents){ foreach($contents as $rowContent){?>
                                 <?php
                                 $is_series                  = $rowContent->is_series;
@@ -86,6 +86,23 @@ $current_url = $protocol . $host . $uri;
                                 <?php }?>
                             <?php } }?>
                         </div>
+                        <?php if(count($contents) >= 4) { ?>
+                        <button id="load_more_btn" style="background-color: #d09c1c;border: #d09c1c;display: flex;margin: 0 auto;" class="btn btn-primary">Load More</button>
+                        <?php }?>
+                        <div id="loading" style="display: none;text-align: center;">
+                            <svg version="1.1" id="L5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                            viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+                                <circle fill="#ed1c24" stroke="none" cx="6" cy="50" r="6">
+                                    <animateTransform attributeName="transform" dur="1s" type="translate" values="0 15 ; 0 -15; 0 15" repeatCount="indefinite" begin="0.1" />
+                                </circle>
+                                <circle fill="#ed1c24" stroke="none" cx="30" cy="50" r="6">
+                                    <animateTransform attributeName="transform" dur="1s" type="translate" values="0 10 ; 0 -10; 0 10" repeatCount="indefinite" begin="0.2" />
+                                </circle>
+                                <circle fill="#ed1c24" stroke="none" cx="54" cy="50" r="6">
+                                    <animateTransform attributeName="transform" dur="1s" type="translate" values="0 5 ; 0 -5; 0 5" repeatCount="indefinite" begin="0.3" />
+                                </circle>
+                            </svg>
+                        </div>
                         <!-- End article box -->
                     </div>
                     <!-- End block content -->
@@ -95,3 +112,92 @@ $current_url = $protocol . $host . $uri;
         </div>
     </section>
 <!-- End block-wrapper-section -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>    
+    let offset = 4;
+    const limit = 4;
+    
+    $('#load_more_btn').on('click', function () {
+        $('#loading').show();
+        $.ajax({
+            url: '<?= url('advance_search_result_load') ?>',
+            type: 'POST',
+            data: {
+                offset: offset,
+                limit: limit,
+                _token: '<?= csrf_token() ?>'
+            },
+            success: function (response) {
+                $('#loading').hide();
+                contents = response.data;
+                if (contents.length > 0) {
+                    let contentHtml = '';
+                    contents.forEach(content => {
+                        contentHtml += `
+                            <div class="news-post article-post">
+                                <div class="row">
+                                    <div class="col-sm-5">                                        
+                                        ${content.media === 'image' ? `
+                                            <div class="post-gallery">
+                                                <img src="<?=env('UPLOADS_URL').'newcontent/'?>${content.cover_image}" alt="${content.new_title}">
+                                                <span class="image-caption" style="color:skyblue;">${content.cover_image_caption}</span>
+                                            </div>
+                                        ` : `
+                                            <div class="video-post">
+                                                <img alt="" src="https://img.youtube.com/vi/${content.videoId}/hqdefault.jpg">                                                                                                   
+                                                <a href="<?=url('content/')?>/${content.parent_category_slug}/${content.sub_category_slug}/${content.slug}" class="video-link">
+                                                    <i class="fa fa-play-circle-o"></i>
+                                                </a>            
+                                            </div>
+                                        `}
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <div class="post-content">
+                                            <a href="<?=url('category/')?>${content.parent_category_slug}/${content.sub_category_slug}">${content.sub_category_name}</a>
+                                            <h2>
+                                                <a href="<?=url('content/')?>/${content.parent_category_slug}/${content.sub_category_slug}/${content.slug}">
+                                                    ${content.new_title}
+                                                </a>
+                                            </h2>
+                                            <ul class="post-tags">
+                                                <li>
+                                                    <i class="fa fa-clock-o"></i> 
+                                                    ${new Date(content.created_at).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}
+                                                </li>
+                                                <li>
+                                                    <i class="fa fa-user"></i> by 
+                                                    <a href="javascript:void(0);">${content.for_publication_name ?? content.author_name}</a>
+                                                </li>   
+                                                ${content.projects_name ? `
+                                                    <li>
+                                                        <a class="btn project-btn" href="<?= url('project/') ?>${content.projects_name}">
+                                                            <i class="fa fa-users"></i> ${content.projects_name}
+                                                        </a>
+                                                    </li>` : ''}                                             
+                                            </ul>
+                                            <p>${content.sub_title}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+                    });
+                    $('#content-list').append(contentHtml);
+                    offset += contents.length;
+                    if (contents.length < limit) {
+                        $('#load_more_btn').hide();
+                    }
+                } else {
+                    $('#load_more_btn').hide();
+                    if ($('#no_more_contents').length === 0) {
+                        $('#content-list').after('<p id="no_more_contents" class="text-center">End of search results</p>');
+                    }
+                }              
+            },
+            error: function () {
+                alert('End of search results');
+                $('#loading').hide();
+            }
+        });
+    });
+</script>
+

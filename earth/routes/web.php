@@ -27,6 +27,7 @@ use App\Http\Controllers\PayPalController;
         Route::match(['get', 'post'], '/communities/EthosFellows', 'App\Http\Controllers\FrontController@ethosfellows');
         Route::match(['get', 'post'], '/page/{id}', 'App\Http\Controllers\FrontController@pageContent');
         Route::match(['get', 'post'], '/category/{id}', 'App\Http\Controllers\FrontController@category');
+        Route::match(['get', 'post'], '/category_load/{id}', 'App\Http\Controllers\FrontController@category_load');
         Route::match(['get', 'post'], '/category/{categoryname}/{id}', 'App\Http\Controllers\FrontController@subcategory');
         Route::match(['get', 'post'], '/project/{id}', 'App\Http\Controllers\FrontController@project');
         Route::match(['get', 'post'], '/content/{categoryname}/{subcategoryname}/{id}', 'App\Http\Controllers\FrontController@newsContent');
