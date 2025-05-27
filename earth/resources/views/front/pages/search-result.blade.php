@@ -192,7 +192,13 @@ $current_url = $protocol . $host . $uri;
                                                 <li>
                                                     <i class="fa fa-user"></i> by 
                                                     <a href="javascript:void(0);">${content.for_publication_name ?? content.author_name}</a>
-                                                </li>                                                
+                                                </li> 
+                                                ${content.projects_name ? `
+                                                    <li>
+                                                        <a class="btn project-btn" href="<?= url('project/') ?>${content.projects_name}">
+                                                            <i class="fa fa-users"></i> ${content.projects_name}
+                                                        </a>
+                                                    </li>` : ''}                                               
                                             </ul>
                                             <p>${content.sub_title}</p>
                                         </div>
