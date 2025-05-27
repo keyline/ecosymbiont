@@ -1408,6 +1408,7 @@ class FrontController extends Controller
                                              ->offset($offset)
                                             ->limit($limit)
                                              ->get();
+                                             Helper::pr($contents);
                                             //  dd(DB::getQueryLog());
             } elseif($search_type == 'Tag'){
                 $contents   = NewsContent::select(
