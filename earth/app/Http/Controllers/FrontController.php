@@ -235,7 +235,7 @@ class FrontController extends Controller
     {
         $data['row']                    = NewsCategory::select('id', 'sub_category')->where('status', '=', 1)->where('slug', '=', $slug)->first();
         $parent_category_id                = (($data['row'])?$data['row']->id:'');
-
+        DB::enableQueryLog();
         $data['contents']               = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
                                                     ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
                                                     ->select(
@@ -264,6 +264,7 @@ class FrontController extends Controller
                                                     ->orderBy('news_contents.id', 'DESC')
                                                      ->limit(4)
                                                     ->get();
+        dd(DB::getQueryLog());
         $data['search_keyword']         = '';
 
         $title                          = (($data['row'])?$data['row']->sub_category:'');
