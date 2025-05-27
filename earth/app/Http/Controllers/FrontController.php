@@ -314,6 +314,11 @@ class FrontController extends Controller
                                                     )
                                                     ->where('news_contents.status', 1)
                                                     ->where('news_contents.parent_category', $parent_category_id) // Ensure $parent_category_id is defined
+                                                    ->where(function ($query) {
+                                                            $query->whereNull('news_contents.current_article_no')
+                                                                ->orWhere('news_contents.current_article_no', 0)
+                                                                ->orWhere('news_contents.current_article_no', 1);
+                                                        })
                                                     ->orderBy('news_contents.id', 'DESC')
                                                     ->offset($offset)
                                                     ->limit($limit)
