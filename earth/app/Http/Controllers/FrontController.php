@@ -264,7 +264,7 @@ class FrontController extends Controller
                                                     ->orderBy('news_contents.id', 'DESC')
                                                      ->limit(4)
                                                     ->get();
-        Helper::pr($data['contents']);
+        // Helper::pr($data['contents']);
         // dd(DB::getQueryLog());
         $data['search_keyword']         = '';
 
