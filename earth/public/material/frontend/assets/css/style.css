@@ -6539,6 +6539,7 @@ div#permalink p {
 /* Custom Modal Styling */
 #popupModal.modal{
   padding-right: 0 !important;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 #popupModal .modal-dialog {
   margin: 0 auto;
@@ -6571,6 +6572,7 @@ div#permalink p {
   opacity: 1;
   position: relative;
   z-index: 5;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 #popupModal .modal-title {
@@ -6578,6 +6580,7 @@ div#permalink p {
   line-height: 1.2;
   margin: 0px 0;
   color: #fff;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 #popupModal .modal-body p {
