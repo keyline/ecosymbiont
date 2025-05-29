@@ -212,7 +212,7 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
     </div>
 </div>
 {{-- stickt button --}}
-<a href="<?=url('donation')?>" target="_blank" class="donate-button">Donate to EaRTH</a>
+<a href="<?=url('donation')?>" target="_blank" class="donate-button">Donate to EaRTh</a>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <!-- <script>
@@ -291,34 +291,32 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
 </script>
 <!-- cookie set -->
 <script>
-    function getCookie(name) {
-        // alert(name);
-        let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-        return match ? match[2] : null;
-    }
+    // function getCookie(name) {
+    //     // alert(name);
+    //     let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    //     return match ? match[2] : null;
+    // }
 
-    function setCookie(name, value, days) {
-        let expires = "";
-        if (days) {
-            const date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            expires = "; expires=" + date.toUTCString();
-        }
-        document.cookie = name + "=" + value + expires + "; path=/";
-    }
+    // function setCookie(name, value, days) {
+    //     let expires = "";
+    //     if (days) {
+    //         const date = new Date();
+    //         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    //         expires = "; expires=" + date.toUTCString();
+    //     }
+    //     document.cookie = name + "=" + value + expires + "; path=/";
+    // }
 
     document.addEventListener("DOMContentLoaded", function () {
-        const url = window.location.href;
-        const segments = url.split("/");
-        const pageName = segments.pop() || segments.pop(); // handles trailing slash
-        // Check if the cookie is already set
-        if (pageName.toLowerCase() !== "donation" && !getCookie("popupShown")) {
-            DelayNodelay = 5000; // Delay in milliseconds
+        const url = window.location.href;        
+        const segments = url.split("/");        
+        const pageName = segments.pop() || segments.pop(); // handles trailing slash        
+        // If it's the home page (typically empty or index), show popup
+        if (pageName === "earth") {
+            const DelayNodelay = 5000; // Delay in milliseconds
             setTimeout(function () {
                 $('#popupModal').modal('show'); // Bootstrap modal show
-            }, DelayNodelay);            
-            // $('#popupModal').modal('show'); // Bootstrap modal show
-            setCookie("popupShown", "true", 30); // Set cookie for 30 days
+            }, DelayNodelay);
         }
     });
 </script>
