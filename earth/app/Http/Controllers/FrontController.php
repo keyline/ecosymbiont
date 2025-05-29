@@ -235,7 +235,7 @@ class FrontController extends Controller
     {
         $data['row']                    = NewsCategory::select('id', 'sub_category')->where('status', '=', 1)->where('slug', '=', $slug)->first();
         $parent_category_id                = (($data['row'])?$data['row']->id:'');
-
+        // DB::enableQueryLog();
         $data['contents']               = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
                                                     ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
                                                     ->select(
@@ -245,7 +245,8 @@ class FrontController extends Controller
                                                         'news_contents.slug', 
                                                         'news_contents.author_name', 
                                                         'news_contents.for_publication_name', 
-                                                        'news_contents.cover_image', 
+                                                        'news_contents.cover_image',
+                                                        'news_contents.cover_image_caption', 
                                                         'news_contents.created_at',
                                                         'news_contents.media',
                                                         'news_contents.videoId',
@@ -261,13 +262,74 @@ class FrontController extends Controller
                                                     )
                                                     ->where('news_contents.status', 1)
                                                     ->where('news_contents.parent_category', $parent_category_id) // Ensure $parent_category_id is defined
+                                                    ->where(function ($query) {
+                                                            $query->whereNull('news_contents.current_article_no')
+                                                                ->orWhere('news_contents.current_article_no', 0)
+                                                                ->orWhere('news_contents.current_article_no', 1);
+                                                        })
                                                     ->orderBy('news_contents.id', 'DESC')
+                                                     ->limit(4)
                                                     ->get();
+        // Helper::pr($data['contents']);
+        // dd(DB::getQueryLog());
+        $data['slug']                    = $slug;
         $data['search_keyword']         = '';
 
         $title                          = (($data['row'])?$data['row']->sub_category:'');
         $page_name                      = 'category';
         echo $this->front_before_login_layout($title, $page_name, $data);
+    }
+    public function category_load($slug, Request $request)
+    {
+        if($request->isMethod('post')){
+            $postData           = $request->all();
+            $offset             = $postData['offset'];
+            $limit              = $postData['limit'];                   
+            $contents           = [];            
+
+            $data['row']                    = NewsCategory::select('id', 'sub_category')->where('status', '=', 1)->where('slug', '=', $slug)->first();
+            $parent_category_id                = (($data['row'])?$data['row']->id:'');
+            // DB::enableQueryLog();
+            $data['contents']               = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
+                                                    ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
+                                                    ->select(
+                                                        'news_contents.id', 
+                                                        'news_contents.new_title', 
+                                                        'news_contents.sub_title', 
+                                                        'news_contents.slug', 
+                                                        'news_contents.author_name', 
+                                                        'news_contents.for_publication_name', 
+                                                        'news_contents.cover_image', 
+                                                        'news_contents.cover_image_caption',
+                                                        'news_contents.created_at',
+                                                        'news_contents.media',
+                                                        'news_contents.videoId',
+                                                        'news_contents.is_series',
+                                                        'news_contents.series_article_no',
+                                                        'news_contents.current_article_no',
+                                                        'news_contents.other_article_part_doi_no',
+                                                        'news_contents.projects_name',
+                                                        'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
+                                                        'parent_category.sub_category as parent_category_name', // From parent_category name
+                                                        'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
+                                                        'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                                    )
+                                                    ->where('news_contents.status', 1)
+                                                    ->where('news_contents.parent_category', $parent_category_id) // Ensure $parent_category_id is defined
+                                                    ->where(function ($query) {
+                                                            $query->whereNull('news_contents.current_article_no')
+                                                                ->orWhere('news_contents.current_article_no', 0)
+                                                                ->orWhere('news_contents.current_article_no', 1);
+                                                        })
+                                                    ->orderBy('news_contents.id', 'DESC')
+                                                    ->offset($offset)
+                                                    ->limit($limit)
+                                                    ->get();
+                                                    //    dd(DB::getQueryLog());
+        $contents = $data['contents'];
+        $data['search_keyword']         = '';            
+            return response()->json(['success' => true, 'data' => $contents]);
+        }
     }
     public function subcategory($categoryname, $slug)
     {
@@ -288,6 +350,7 @@ class FrontController extends Controller
                                                     'news_contents.author_name', 
                                                     'news_contents.for_publication_name', 
                                                     'news_contents.cover_image', 
+                                                    'news_contents.cover_image_caption',
                                                     'news_contents.created_at',
                                                     'news_contents.media',
                                                     'news_contents.videoId',
@@ -303,6 +366,12 @@ class FrontController extends Controller
                                                 )
                                                 ->where('news_contents.status', 1)
                                                 ->where('news_contents.sub_category', $sub_category_id) // Ensure $parent_category_id is defined
+                                                ->where(function ($query) {
+                                                        $query->whereNull('news_contents.current_article_no')
+                                                            ->orWhere('news_contents.current_article_no', 0)
+                                                            ->orWhere('news_contents.current_article_no', 1);
+                                                    })
+                                                ->limit(4)
                                                 ->orderBy('news_contents.id', 'DESC')
                                                 ->get();
                                         //    dd($data['contents']);
@@ -310,10 +379,64 @@ class FrontController extends Controller
 
         // $title                          = ($categoryname .'|'. ($data['row'])?$data['row']->sub_category:'');
         $data['search_keyword']         = '';
+        $data['slug']                    = $slug;
+        $data['categoryname']           = $categoryname;
         $title                          = strtoupper($categoryname) .' | '. $data['row']->sub_category;
         // $title                          = ucwords($categoryname) .' | '. $data['row']->sub_category;
         $page_name                      = 'subcategory';
         echo $this->front_before_login_layout($title, $page_name, $data);
+    }
+    public function subcategory_load($categoryname, $slug, Request $request)
+    {
+        if($request->isMethod('post')){
+            $postData           = $request->all();
+            $offset             = $postData['offset'];
+            $limit              = $postData['limit'];                   
+            $contents           = [];            
+
+            $data['row']                    = NewsCategory::select('id', 'sub_category', 'short_description')->where('status', '=', 1)->where('slug', '=', $slug)->first();
+            $sub_category_id                = (($data['row'])?$data['row']->id:'');
+            // DB::enableQueryLog();
+            $data['contents']               = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
+                                                ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
+                                                ->select(
+                                                    'news_contents.id', 
+                                                    'news_contents.new_title', 
+                                                    'news_contents.sub_title', 
+                                                    'news_contents.slug', 
+                                                    'news_contents.author_name', 
+                                                    'news_contents.for_publication_name', 
+                                                    'news_contents.cover_image', 
+                                                    'news_contents.cover_image_caption',
+                                                    'news_contents.created_at',
+                                                    'news_contents.media',
+                                                    'news_contents.videoId',
+                                                    'news_contents.is_series',
+                                                    'news_contents.series_article_no',
+                                                    'news_contents.current_article_no',
+                                                    'news_contents.other_article_part_doi_no',
+                                                    'news_contents.projects_name',
+                                                    'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
+                                                    'parent_category.sub_category as parent_category_name', // From parent_category name
+                                                    'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
+                                                    'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                                )
+                                                ->where('news_contents.status', 1)
+                                                ->where('news_contents.sub_category', $sub_category_id) // Ensure $parent_category_id is defined
+                                                ->where(function ($query) {
+                                                        $query->whereNull('news_contents.current_article_no')
+                                                            ->orWhere('news_contents.current_article_no', 0)
+                                                            ->orWhere('news_contents.current_article_no', 1);
+                                                    })
+                                                ->orderBy('news_contents.id', 'DESC')
+                                                ->offset($offset)
+                                                ->limit($limit)                                                
+                                                ->get();                                                                                                                                                            
+                                                    //    dd(DB::getQueryLog());
+        $contents = $data['contents'];
+        $data['search_keyword']         = '';            
+            return response()->json(['success' => true, 'data' => $contents]);
+        }
     }
     public function project($slug)
     {
@@ -330,6 +453,7 @@ class FrontController extends Controller
                                                         'news_contents.author_name', 
                                                         'news_contents.for_publication_name', 
                                                         'news_contents.cover_image', 
+                                                        'news_contents.cover_image_caption', 
                                                         'news_contents.created_at',
                                                         'news_contents.media',
                                                         'news_contents.videoId',
@@ -345,7 +469,13 @@ class FrontController extends Controller
                                                     )
                                                     ->where('news_contents.status', 1)
                                                     ->where('news_contents.projects_name', $slug) // Ensure $parent_category_id is defined
+                                                    ->where(function ($query) {
+                                                            $query->whereNull('news_contents.current_article_no')
+                                                                ->orWhere('news_contents.current_article_no', 0)
+                                                                ->orWhere('news_contents.current_article_no', 1);
+                                                        }) 
                                                     ->orderBy('news_contents.id', 'DESC')
+                                                    ->limit(4)
                                                     ->get();
                                                     // Helper::pr($data['contents']);
         $data['search_keyword']         = '';
@@ -354,6 +484,56 @@ class FrontController extends Controller
         $title                          = $slug;
         $page_name                      = 'project-list';
         echo $this->front_before_login_layout($title, $page_name, $data);
+    }
+    public function project_load($slug, Request $request)
+    {
+        if($request->isMethod('post')){
+            $postData           = $request->all();
+            $offset             = $postData['offset'];
+            $limit              = $postData['limit'];                   
+            $contents           = [];                        
+            // DB::enableQueryLog();
+            $data['contents']               = NewsContent::join('news_category as parent_category', 'news_contents.parent_category', '=', 'parent_category.id') // Join for parent category
+                                                    ->join('news_category as sub_category', 'news_contents.sub_category', '=', 'sub_category.id') // Join for subcategory
+                                                    ->select(
+                                                        'news_contents.id', 
+                                                        'news_contents.new_title', 
+                                                        'news_contents.sub_title', 
+                                                        'news_contents.slug', 
+                                                        'news_contents.author_name', 
+                                                        'news_contents.for_publication_name', 
+                                                        'news_contents.cover_image', 
+                                                        'news_contents.cover_image_caption',
+                                                        'news_contents.created_at',
+                                                        'news_contents.media',
+                                                        'news_contents.videoId',
+                                                        'news_contents.is_series',
+                                                        'news_contents.series_article_no',
+                                                        'news_contents.current_article_no',
+                                                        'news_contents.other_article_part_doi_no',
+                                                        'news_contents.projects_name',
+                                                        'sub_category.sub_category as sub_category_name', // Corrected name to sub_category
+                                                        'parent_category.sub_category as parent_category_name', // From parent_category name
+                                                        'sub_category.slug as sub_category_slug', // Corrected alias to sub_category
+                                                        'parent_category.slug as parent_category_slug' // Corrected alias to sub_category
+                                                    )
+                                                    ->where('news_contents.status', 1)
+                                                    ->where('news_contents.projects_name', $slug) // Ensure $parent_category_id is defined
+                                                    ->where(function ($query) {
+                                                            $query->whereNull('news_contents.current_article_no')
+                                                                ->orWhere('news_contents.current_article_no', 0)
+                                                                ->orWhere('news_contents.current_article_no', 1);
+                                                        }) 
+                                                    ->orderBy('news_contents.id', 'DESC')                                                                                                       
+                                                    ->offset($offset)
+                                                    ->limit($limit)                                                
+                                                    ->get();                                                                                                                                                            
+                                                    //    dd(DB::getQueryLog());
+        $contents = $data['contents'];
+        $data['slug']                    = $slug;
+        $data['search_keyword']         = '';            
+            return response()->json(['success' => true, 'data' => $contents]);
+        }
     }
     public function newsContent($categoryname, $subcategoryname, $slug)
     {
@@ -1199,7 +1379,7 @@ class FrontController extends Controller
                                             ->get();
             } elseif($search_type == 'Projects'){
                 // DB::enableQueryLog();
-                $data['contents']   = NewsContent::select(
+                $contents   = NewsContent::select(
                                                         'news_contents.id', 
                                                         'news_contents.new_title', 
                                                         'news_contents.sub_title', 
@@ -1231,8 +1411,10 @@ class FrontController extends Controller
                                                     ->orWhere('news_contents.current_article_no', 1); // First part of series
                                             })
                                              ->orderBy('news_contents.created_at', 'DESC')
-                                             ->limit(4)
+                                             ->offset($offset)
+                                            ->limit($limit)
                                              ->get();
+                                            //  Helper::pr($contents);
                                             //  dd(DB::getQueryLog());
             } elseif($search_type == 'Tag'){
                 $contents   = NewsContent::select(
