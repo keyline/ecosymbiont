@@ -329,6 +329,7 @@ textarea.form-control {
 }
 #popupModal.modal {
     padding-right: 0 !important;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 #popupModal.modal.fade .modal-dialog {
     -webkit-transform: translate(0, -25%);
@@ -377,6 +378,7 @@ textarea.form-control {
     line-height: 1.2;
     margin: 0px 0;
     color: #fff;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 #popupModal .modal-body p {
     font-size: 15px !important;
