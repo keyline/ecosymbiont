@@ -385,6 +385,7 @@ textarea.form-control {
     line-height: 1.4;
     margin: 15px 0;
     color: #fff;
+    font-family: 'proximanova_regular', sans-serif;
 }
 .btn-yellow {
     background-color: #d09c1c;
