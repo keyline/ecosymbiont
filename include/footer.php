@@ -116,5 +116,7 @@
         }
     });
 </script>
+<!-- stickt button  -->
+<a href="<?=url('donation')?>" target="_blank" class="donate-button">Donate to EaRTh</a>
 </body>
 </html>
