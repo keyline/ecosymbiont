@@ -445,6 +445,30 @@ textarea.form-control {
     }
 }
 @media(max-width: 767px){
+    #popupModal .modal-dialog {
+        margin-top: 25px;
+        width: 100%;
+        max-width: 450px !important;
+    }
+    #popupModal .modal-body {
+        padding: 0;
+    }
+    #popupModal .modal-title {
+        font-size: 20px;
+    }
+    #popupModal .modal-body p {
+        font-size: 13px;
+        line-height: 1.4;
+        margin: 5px 0;
+        color: #fff;
+    }
+    .btn-yellow {
+        font-size: 13px !important;
+        padding: 6px 15px !important;
+    }
+    #popupModal .modal-header .close {
+        font-size: 20px;
+    }
     .navbar-header{
         width: 100%;
     }
@@ -526,8 +550,12 @@ textarea.form-control {
         justify-content: space-between;
         flex-wrap: wrap;
     }
-    #popupModal .modal-dialog {
-        margin: 15px auto;
+        #popupModal .modal-dialog {
         max-width: 320px !important;
-    }  
+    }
+}
+@media (max-width: 400px) {
+    .continue-link {
+        margin-top: 15px;
+    }
 }
