@@ -23,7 +23,7 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
                         <li><a href="<?=url('communities')?>" target="_blank">Communities</a></li>
                         <li><a href="<?=url('projects')?>" target="_blank">Projects</a></li>
                         <li><a href="<?=env('REGENERATE_URL')?>contact.php" target="_blank">Contact</a></li>
-                        <li><a href="<?=$base_url?>earth/donation" target="_blank">Donate</a></li>
+                        <li><a href="<?=env('REGENERATE_URL')?>earth/donation" target="_blank">Donate</a></li>
                         <li class="foot-social-icons"><a class="twitter" href="<?=$generalSetting->twitter_profile?>" target="_blank"><i class="fa fa-twitter"></i></a></li>
                         <li class="foot-social-icons"><a class="pinterest" href="<?=$generalSetting->instagram_profile?>" target="_blank"><i class="fa fa-instagram"></i></a></li>
                         <li class="foot-social-icons"><a target="_blank" class="facebook" href="<?=$generalSetting->facebook_profile?>"><i class="fa fa-facebook"></i></a></li>
