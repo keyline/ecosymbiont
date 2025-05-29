@@ -422,6 +422,10 @@ textarea.form-control {
     transform: translateY(-50%);
     transform: rotate(-90deg);
 }
+.donate-button:hover {
+    background-color: #d09c1c;
+    color: #fff;
+}
 
 
   
