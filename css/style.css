@@ -526,4 +526,8 @@ textarea.form-control {
         justify-content: space-between;
         flex-wrap: wrap;
     }
+    #popupModal .modal-dialog {
+        margin: 15px auto;
+        max-width: 320px !important;
+    }  
 }
