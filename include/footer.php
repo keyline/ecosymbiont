@@ -18,7 +18,7 @@
         </div>
     </div>
     <!-- stickt button  -->
-    <a href="<?=$base_url?>earth/donation" target="_blank" class="donate-button">Donate to Sramani</a>
+    <a href="<?=$base_url?>earth/donation" target="_blank" class="donate-button">Donate to Śramani</a>
 </footer>
 
 
