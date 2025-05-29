@@ -17,8 +17,9 @@
         </div>
     </div>
 </footer>
-{{-- stickt button --}}
+<!-- stickt button  -->
 <a href="<?=url('donation')?>" target="_blank" class="donate-button">Donate to EaRTh</a>
+
 <!-- js link -->
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
