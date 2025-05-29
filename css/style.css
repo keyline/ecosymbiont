@@ -405,7 +405,23 @@ textarea.form-control {
     margin-top: 25px;
     justify-content: flex-end;
 }
-
+.donate-button {
+    position: fixed;
+    top: 50%;
+    right: -58px;
+    background-color: #d09c1c;
+    color: white;
+    padding: 8px 15px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    z-index: 99;
+    transition: all 0.3s ease-in-out;
+    transform: translateY(-50%);
+    transform: rotate(-90deg);
+}
 
 
   
@@ -457,7 +473,7 @@ textarea.form-control {
         font-size: 20px;
     }
     #popupModal .modal-body p {
-        font-size: 13px;
+        font-size: 13px !important;
         line-height: 1.4;
         margin: 5px 0;
         color: #fff;
