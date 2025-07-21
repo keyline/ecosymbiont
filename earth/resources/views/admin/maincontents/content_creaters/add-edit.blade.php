@@ -172,7 +172,7 @@ $controllerRoute = $module['controller_route'];
                             <label for="author_classification" class="col-md-2 col-lg-4 col-form-label">2) Author Classification
                             </label>
                             <div class="col-md-10 col-lg-8">                                                                      
-                                <input type="text" class="form-control" id="Ecoweb-rooted community" name="author_classification" value="{{ old('author_classification', $author_classification->name) }}" readonly>
+                                <input type="text" class="form-control" id="Ecoweb-rooted community" name="author_classification" value="{{ old('author_classification', $author_classification) }}" readonly>
                             </div>
                         </div>                                                          
                         <div class="row mb-3">
