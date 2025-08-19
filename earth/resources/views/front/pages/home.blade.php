@@ -27,6 +27,7 @@ $current_url = $protocol . $host . $uri;
                                                         'news_contents.slug', 
                                                         'news_contents.author_name', 
                                                         'news_contents.co_authors', 
+                                                        'news_contents.co_author_names',
                                                         'news_contents.for_publication_name', 
                                                         'news_contents.cover_image', 
                                                         'news_contents.created_at',
@@ -65,6 +66,7 @@ $current_url = $protocol . $host . $uri;
                                                             'news_contents.slug', 
                                                             'news_contents.author_name', 
                                                             'news_contents.co_authors',
+                                                            'news_contents.co_author_names',
                                                             'news_contents.for_publication_name', 
                                                             'news_contents.cover_image', 
                                                             'news_contents.created_at',
@@ -122,7 +124,7 @@ $current_url = $protocol . $host . $uri;
                                                     </li>
                                                     <?php 
                                                     $co_authors = $parentCategoryContent1->co_authors;
-                                                    dd($co_authors);
+                                                    $co_author_name = json_decode($parentCategoryContent1->co_author_names);                                                      
                                                     if ($co_authors == 0) { ?>
                                                     <li><i class="fa fa-user"></i>by <?= $parentCategoryContent1->for_publication_name ?? $parentCategoryContent1->author_name ?></li>
                                                     <?php } elseif ($co_authors == 1) { ?>
