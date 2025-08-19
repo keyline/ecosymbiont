@@ -119,9 +119,9 @@ $current_url = $protocol . $host . $uri;
                                                 <h2><a href="<?=url('content/' . $parentCategoryContent1->parent_category_slug. '/' . $parentCategoryContent1->category_slug . '/' . $parentCategoryContent1->slug)?>"><?=$parentCategoryContent1->new_title?></a></h2>
                                                 <ul class="post-tags">
                                                     <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent1->created_at), "d M Y")?></span></li> -->
-                                                    <li><i class="fa fa-user"></i>by 
+                                                    <!-- <li><i class="fa fa-user"></i>by 
                                                         <a href="javascript:void(0);"><?=$parentCategoryContent1->for_publication_name ?? $parentCategoryContent1->author_name?></a>
-                                                    </li>
+                                                    </li> -->
                                                     <?php 
                                                     $co_authors = $parentCategoryContent1->co_authors;
                                                     $co_author_name = json_decode($parentCategoryContent1->co_author_names);                                                      
@@ -150,6 +150,8 @@ $current_url = $protocol . $host . $uri;
                                                         'news_contents.sub_title', 
                                                         'news_contents.slug', 
                                                         'news_contents.author_name', 
+                                                        'news_contents.co_authors', 
+                                                        'news_contents.co_author_names',
                                                         'news_contents.for_publication_name', 
                                                         'news_contents.cover_image', 
                                                         'news_contents.created_at',
@@ -186,7 +188,9 @@ $current_url = $protocol . $host . $uri;
                                                             'news_contents.new_title', 
                                                             'news_contents.sub_title', 
                                                             'news_contents.slug', 
-                                                            'news_contents.author_name', 
+                                                            'news_contents.author_name',
+                                                            'news_contents.co_authors',
+                                                            'news_contents.co_author_names', 
                                                             'news_contents.for_publication_name', 
                                                             'news_contents.cover_image', 
                                                             'news_contents.created_at',
@@ -239,7 +243,17 @@ $current_url = $protocol . $host . $uri;
                                                 <h2><a href="<?=url('content/' . $parentCategoryContent8->parent_category_slug. '/' . $parentCategoryContent8->category_slug . '/' . $parentCategoryContent8->slug)?>"><?=$parentCategoryContent8->new_title?></a></h2>
                                                 <ul class="post-tags">
                                                     <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent8->created_at), "d M Y")?></span></li> -->
-                                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent8->for_publication_name ?? $parentCategoryContent8->author_name?></a></li>
+                                                    <!-- <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent8->for_publication_name ?? $parentCategoryContent8->author_name?></a></li> -->
+                                                    <?php 
+                                                    $co_authors = $parentCategoryContent8->co_authors;
+                                                    $co_author_name = json_decode($parentCategoryContent8->co_author_names);                                                      
+                                                    if ($co_authors == 0) { ?>
+                                                    <li><i class="fa fa-user"></i>by <?= $parentCategoryContent8->for_publication_name ?? $parentCategoryContent8->author_name ?></li>
+                                                    <?php } elseif ($co_authors == 1) { ?>
+                                                    <li><i class="fa fa-user"></i>by <?= $parentCategoryContent8->for_publication_name ?? $parentCategoryContent8->author_name ?> & <?= $co_author_name[$co_authors-1] ?></li>
+                                                    <?php } else { ?>
+                                                        <li><i class="fa fa-user"></i>by <?= $parentCategoryContent8->for_publication_name ?? $parentCategoryContent8->author_name ?>, <?= $co_author_name[$co_authors-2] ?> & <?= $co_author_name[$co_authors-1] ?></li>
+                                                    <?php } ?>
                                                 </ul>
                                                 <p><?=$parentCategoryContent8->sub_title?></p>
                                             </div>
@@ -269,6 +283,8 @@ $current_url = $protocol . $host . $uri;
                                                                             'news_contents.sub_title',
                                                                             'news_contents.slug',
                                                                             'news_contents.author_name',
+                                                                            'news_contents.co_authors',
+                                                                            'news_contents.co_author_names',
                                                                             'news_contents.for_publication_name',
                                                                             'news_contents.cover_image',
                                                                             'news_contents.created_at',
@@ -344,7 +360,17 @@ $current_url = $protocol . $host . $uri;
                                                         <h2><a href="<?=url('content/' . $parentCategoryContent3->parent_category_slug. '/' . $parentCategoryContent3->sub_category_slug. '/' . $parentCategoryContent3->slug)?>"><?=$parentCategoryContent3->new_title?></a></h2>
                                                         <ul class="post-tags">
                                                             <li><i class="fa fa-clock-o"></i><?=date_format(date_create($parentCategoryContent3->created_at), "d M Y")?></li>
-                                                            <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent3->for_publication_name ?? $parentCategoryContent3->author_name?></a></li>                                                
+                                                            <!-- <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent3->for_publication_name ?? $parentCategoryContent3->author_name?></a></li>-->
+                                                             <?php 
+                                                            $co_authors = $parentCategoryContents3->co_authors;
+                                                            $co_author_name = json_decode($parentCategoryContents3->co_author_names);                                                      
+                                                            if ($co_authors == 0) { ?>
+                                                            <li><i class="fa fa-user"></i>by <?= $parentCategoryContents3->for_publication_name ?? $parentCategoryContents3->author_name ?></li>
+                                                            <?php } elseif ($co_authors == 1) { ?>
+                                                            <li><i class="fa fa-user"></i>by <?= $parentCategoryContents3->for_publication_name ?? $parentCategoryContents3->author_name ?> & <?= $co_author_name[$co_authors-1] ?></li>
+                                                            <?php } else { ?>
+                                                            <li><i class="fa fa-user"></i>by <?= $parentCategoryContents3->for_publication_name ?? $parentCategoryContents3->author_name ?>, <?= $co_author_name[$co_authors-2] ?> & <?= $co_author_name[$co_authors-1] ?></li>
+                                                            <?php } ?>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -366,6 +392,8 @@ $current_url = $protocol . $host . $uri;
                                                         'news_contents.sub_title', 
                                                         'news_contents.slug', 
                                                         'news_contents.author_name', 
+                                                        'news_contents.co_authors',
+                                                        'news_contents.co_author_names',
                                                         'news_contents.for_publication_name', 
                                                         'news_contents.cover_image', 
                                                         'news_contents.created_at',
@@ -403,7 +431,9 @@ $current_url = $protocol . $host . $uri;
                                                             'news_contents.new_title', 
                                                             'news_contents.sub_title', 
                                                             'news_contents.slug', 
-                                                            'news_contents.author_name', 
+                                                            'news_contents.author_name',
+                                                            'news_contents.co_authors',
+                                                            'news_contents.co_author_names', 
                                                             'news_contents.for_publication_name', 
                                                             'news_contents.cover_image', 
                                                             'news_contents.created_at',
@@ -456,7 +486,17 @@ $current_url = $protocol . $host . $uri;
                                             <h2><a href="<?=url('content/'. $parentCategoryContent2->parent_category_slug. '/' . $parentCategoryContent2->category_slug . '/' . $parentCategoryContent2->slug)?>"><?=$parentCategoryContent2->new_title?></a></h2>
                                             <ul class="post-tags">
                                                 <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent2->created_at), "d M Y")?></span></li> -->
-                                                <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent2->for_publication_name ?? $parentCategoryContent2->author_name?></a></li>
+                                                <!-- <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent2->for_publication_name ?? $parentCategoryContent2->author_name?></a></li> -->
+                                                <?php 
+                                                $co_authors = $parentCategoryContent2->co_authors;
+                                                $co_author_name = json_decode($parentCategoryContent2->co_author_names);                                                      
+                                                if ($co_authors == 0) { ?>
+                                                <li><i class="fa fa-user"></i>by <?= $parentCategoryContent2->for_publication_name ?? $parentCategoryContent2->author_name ?></li>
+                                                <?php } elseif ($co_authors == 1) { ?>
+                                                <li><i class="fa fa-user"></i>by <?= $parentCategoryContent2->for_publication_name ?? $parentCategoryContent2->author_name ?> & <?= $co_author_name[$co_authors-1] ?></li>
+                                                <?php } else { ?>
+                                                    <li><i class="fa fa-user"></i>by <?= $parentCategoryContent2->for_publication_name ?? $parentCategoryContent2->author_name ?>, <?= $co_author_name[$co_authors-2] ?> & <?= $co_author_name[$co_authors-1] ?></li>
+                                                <?php } ?>
                                             </ul>
                                             <p><?=$parentCategoryContent2->sub_title?></p>
                                         </div>
@@ -474,7 +514,8 @@ $current_url = $protocol . $host . $uri;
                                                     'news_contents.new_title', 
                                                     'news_contents.sub_title', 
                                                     'news_contents.slug', 
-                                                    'news_contents.author_name', 
+                                                    'news_contents.author_name',                                                                             'news_contents.co_authors',
+                                                    'news_contents.co_author_names',
                                                     'news_contents.for_publication_name', 
                                                     'news_contents.cover_image', 
                                                     'news_contents.created_at',
@@ -511,7 +552,8 @@ $current_url = $protocol . $host . $uri;
                                             'news_contents.new_title', 
                                             'news_contents.sub_title', 
                                             'news_contents.slug', 
-                                            'news_contents.author_name', 
+                                            'news_contents.author_name',                                                                             'news_contents.co_authors',
+                                            'news_contents.co_author_names',
                                             'news_contents.for_publication_name', 
                                             'news_contents.cover_image', 
                                             'news_contents.created_at',
@@ -564,7 +606,17 @@ $current_url = $protocol . $host . $uri;
                                             <h2><a href="<?=url('content/' . $parentCategoryContent9->parent_category_slug. '/' . $parentCategoryContent9->category_slug . '/' . $parentCategoryContent9->slug)?>"><?=$parentCategoryContent9->new_title?></a></h2>
                                             <ul class="post-tags">
                                                 <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent9->created_at), "d M Y")?></span></li> -->
-                                                <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent9->for_publication_name ?? $parentCategoryContent9->author_name?></a></li>
+                                                <!-- <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent9->for_publication_name ?? $parentCategoryContent9->author_name?></a></li> -->
+                                                 <?php 
+                                                $co_authors = $parentCategoryContent9->co_authors;
+                                                $co_author_name = json_decode($parentCategoryContent9->co_author_names);                                                      
+                                                if ($co_authors == 0) { ?>
+                                                <li><i class="fa fa-user"></i>by <?= $parentCategoryContent9->for_publication_name ?? $parentCategoryContent9->author_name ?></li>
+                                                <?php } elseif ($co_authors == 1) { ?>
+                                                <li><i class="fa fa-user"></i>by <?= $parentCategoryContent9->for_publication_name ?? $parentCategoryContent9->author_name ?> & <?= $co_author_name[$co_authors-1] ?></li>
+                                                <?php } else { ?>
+                                                    <li><i class="fa fa-user"></i>by <?= $parentCategoryContent9->for_publication_name ?? $parentCategoryContent9->author_name ?>, <?= $co_author_name[$co_authors-2] ?> & <?= $co_author_name[$co_authors-1] ?></li>
+                                                <?php } ?>
                                             </ul>
                                             <p><?=$parentCategoryContent9->sub_title?></p>
                                         </div>
@@ -605,6 +657,8 @@ $current_url = $protocol . $host . $uri;
                                                                             'news_contents.sub_title', 
                                                                             'news_contents.slug', 
                                                                             'news_contents.author_name',
+                                                                            'news_contents.co_authors',
+                                                                            'news_contents.co_author_names',
                                                                             'news_contents.for_publication_name', 
                                                                             'news_contents.cover_image', 
                                                                             'news_contents.created_at',
@@ -669,7 +723,17 @@ $current_url = $protocol . $host . $uri;
                                                         <h2><a href="<?=url('content/' . $featuredContent->parent_category_slug. '/' . $featuredContent->category_slug . '/' . $featuredContent->slug)?>"><?=$featuredContent->new_title?></a></h2>
                                                         <ul class="post-tags">
                                                             <li><i class="fa fa-clock-o"></i><?=date_format(date_create($featuredContent->created_at), "d M Y")?></li>
-                                                            <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$featuredContent->for_publication_name ?? $featuredContent->author_name?></a></li>
+                                                            <!-- <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$featuredContent->for_publication_name ?? $featuredContent->author_name?></a></li> -->
+                                                             <?php 
+                                                            $co_authors = $featuredContent->co_authors;
+                                                            $co_author_name = json_decode($featuredContent->co_author_names);                                                      
+                                                            if ($co_authors == 0) { ?>
+                                                            <li><i class="fa fa-user"></i>by <?= $featuredContent->for_publication_name ?? $featuredContent->author_name ?></li>
+                                                            <?php } elseif ($co_authors == 1) { ?>
+                                                            <li><i class="fa fa-user"></i>by <?= $featuredContent->for_publication_name ?? $featuredContent->author_name ?> & <?= $co_author_name[$co_authors-1] ?></li>
+                                                            <?php } else { ?>
+                                                                <li><i class="fa fa-user"></i>by <?= $featuredContent->for_publication_name ?? $featuredContent->author_name ?>, <?= $co_author_name[$co_authors-2] ?> & <?= $co_author_name[$co_authors-1] ?></li>
+                                                            <?php } ?>
                                                             <?php if($featuredContent->projects_name != ''){ ?>
                                                             <li><a class="btn project-btn" href="<?= url('project/' .$featuredContent->projects_name)?>"><i class="fa fa-users"></i> <?=$featuredContent->projects_name?></a></li>
                                                             <?php } ?>
@@ -711,7 +775,9 @@ $current_url = $protocol . $host . $uri;
                             'news_contents.new_title', 
                             'news_contents.sub_title', 
                             'news_contents.slug', 
-                            'news_contents.author_name',
+                            'news_contents.author_name',   
+                            'news_contents.co_authors',
+                            'news_contents.co_author_names',
                             'news_contents.for_publication_name', 
                             'news_contents.cover_image', 
                             'news_contents.created_at',
@@ -755,9 +821,19 @@ $current_url = $protocol . $host . $uri;
                                         </a>
                                     </h2>
                                     <ul class="post-tags">
-                                        <li><i class="fa fa-user"></i>by <a href="javascript:void(0);">
+                                        <!-- <li><i class="fa fa-user"></i>by <a href="javascript:void(0);">
                                             <?=$videoContent->for_publication_name ?? $videoContent->author_name?>
-                                        </a></li>
+                                        </a></li> -->
+                                        <?php 
+                                        $co_authors = $videoContent->co_authors;
+                                        $co_author_name = json_decode($videoContent->co_author_names);                                                      
+                                        if ($co_authors == 0) { ?>
+                                        <li><i class="fa fa-user"></i>by <?= $videoContent->for_publication_name ?? $videoContent->author_name ?></li>
+                                        <?php } elseif ($co_authors == 1) { ?>
+                                        <li><i class="fa fa-user"></i>by <?= $videoContent->for_publication_name ?? $videoContent->author_name ?> & <?= $co_author_name[$co_authors-1] ?></li>
+                                        <?php } else { ?>
+                                            <li><i class="fa fa-user"></i>by <?= $videoContent->for_publication_name ?? $videoContent->author_name ?>, <?= $co_author_name[$co_authors-2] ?> & <?= $co_author_name[$co_authors-1] ?></li>
+                                        <?php } ?>
                                         <?php if($videoContent->indigenous_affiliation != ''){ ?>
                                             <li><i class="fa fa-map-marker"></i><a href="javascript:void(0);"><?=$videoContent->indigenous_affiliation?></a></li>
                                         <?php } ?>
@@ -794,6 +870,8 @@ $current_url = $protocol . $host . $uri;
                                                 'news_contents.sub_title', 
                                                 'news_contents.slug', 
                                                 'news_contents.author_name',
+                                                'news_contents.co_authors',
+                                                'news_contents.co_author_names',
                                                 'news_contents.for_publication_name', 
                                                 'news_contents.cover_image', 
                                                 'news_contents.created_at',
@@ -864,7 +942,17 @@ $current_url = $protocol . $host . $uri;
                                                     <h2><a href="<?=url('content/' . $latestarticle->parent_category_slug. '/' . $latestarticle->category_slug . '/' . $latestarticle->slug)?>"><?=$latestarticle->new_title?></a></h2>
                                                     <ul class="post-tags">
                                                         <li><i class="fa fa-clock-o"></i><?=date_format(date_create($latestarticle->created_at), "d M Y")?></li>
-                                                        <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$latestarticle->for_publication_name ?? $latestarticle->author_name?></a></li>
+                                                        <!-- <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$latestarticle->for_publication_name ?? $latestarticle->author_name?></a></li> -->
+                                                         <?php 
+                                                    $co_authors = $latestarticle->co_authors;
+                                                    $co_author_name = json_decode($latestarticle->co_author_names);                                                      
+                                                    if ($co_authors == 0) { ?>
+                                                    <li><i class="fa fa-user"></i>by <?= $latestarticle->for_publication_name ?? $latestarticle->author_name ?></li>
+                                                    <?php } elseif ($co_authors == 1) { ?>
+                                                    <li><i class="fa fa-user"></i>by <?= $latestarticle->for_publication_name ?? $latestarticle->author_name ?> & <?= $co_author_name[$co_authors-1] ?></li>
+                                                    <?php } else { ?>
+                                                        <li><i class="fa fa-user"></i>by <?= $latestarticle->for_publication_name ?? $latestarticle->author_name ?>, <?= $co_author_name[$co_authors-2] ?> & <?= $co_author_name[$co_authors-1] ?></li>
+                                                    <?php } ?>
                                                         <?php
                                                         if($latestarticle->indigenous_affiliation != ''){                                                    
                                                          ?>
