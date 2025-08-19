@@ -26,6 +26,7 @@ $current_url = $protocol . $host . $uri;
                                                         'news_contents.sub_title', 
                                                         'news_contents.slug', 
                                                         'news_contents.author_name', 
+                                                        'news_contents.co_authors', 
                                                         'news_contents.for_publication_name', 
                                                         'news_contents.cover_image', 
                                                         'news_contents.created_at',
@@ -63,6 +64,7 @@ $current_url = $protocol . $host . $uri;
                                                             'news_contents.sub_title', 
                                                             'news_contents.slug', 
                                                             'news_contents.author_name', 
+                                                            'news_contents.co_authors',
                                                             'news_contents.for_publication_name', 
                                                             'news_contents.cover_image', 
                                                             'news_contents.created_at',
@@ -115,7 +117,19 @@ $current_url = $protocol . $host . $uri;
                                                 <h2><a href="<?=url('content/' . $parentCategoryContent1->parent_category_slug. '/' . $parentCategoryContent1->category_slug . '/' . $parentCategoryContent1->slug)?>"><?=$parentCategoryContent1->new_title?></a></h2>
                                                 <ul class="post-tags">
                                                     <!-- <li><i class="fa fa-clock-o"></i><span><?=date_format(date_create($parentCategoryContent1->created_at), "d M Y")?></span></li> -->
-                                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent1->for_publication_name ?? $parentCategoryContent1->author_name?></a></li>
+                                                    <li><i class="fa fa-user"></i>by 
+                                                        <a href="javascript:void(0);"><?=$parentCategoryContent1->for_publication_name ?? $parentCategoryContent1->author_name?></a>
+                                                    </li>
+                                                    <?php 
+                                                    $co_authors = $parentCategoryContent1->co_authors;
+                                                    Helper::pr($co_authors);
+                                                    if ($co_authors == 0) { ?>
+                                                    <li><i class="fa fa-user"></i>by <?= $parentCategoryContent1->for_publication_name ?? $parentCategoryContent1->author_name ?></li>
+                                                    <?php } elseif ($co_authors == 1) { ?>
+                                                    <li><i class="fa fa-user"></i>by <?= $parentCategoryContent1->for_publication_name ?? $parentCategoryContent1->author_name ?> & <?= $co_author_name[$co_authors-1] ?></li>
+                                                    <?php } else { ?>
+                                                        <li><i class="fa fa-user"></i>by <?= $parentCategoryContent1->for_publication_name ?? $parentCategoryContent1->author_name ?>, <?= $co_author_name[$co_authors-2] ?> & <?= $co_author_name[$co_authors-1] ?></li>
+                                                    <?php } ?>
                                                 </ul>
                                                 <p><?=$parentCategoryContent1->sub_title?></p>
                                             </div>
