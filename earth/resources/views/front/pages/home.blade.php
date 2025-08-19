@@ -362,14 +362,14 @@ $current_url = $protocol . $host . $uri;
                                                             <li><i class="fa fa-clock-o"></i><?=date_format(date_create($parentCategoryContent3->created_at), "d M Y")?></li>
                                                             <!-- <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$parentCategoryContent3->for_publication_name ?? $parentCategoryContent3->author_name?></a></li>-->
                                                              <?php 
-                                                            $co_authors = $parentCategoryContents3->co_authors;
-                                                            $co_author_name = json_decode($parentCategoryContents3->co_author_names);                                                      
+                                                            $co_authors = $parentCategoryContent3->co_authors;
+                                                            $co_author_name = json_decode($parentCategoryContent3->co_author_names);                                                      
                                                             if ($co_authors == 0) { ?>
-                                                            <li><i class="fa fa-user"></i>by <?= $parentCategoryContents3->for_publication_name ?? $parentCategoryContents3->author_name ?></li>
+                                                            <li><i class="fa fa-user"></i>by <?= $parentCategoryContent3->for_publication_name ?? $parentCategoryContent3->author_name ?></li>
                                                             <?php } elseif ($co_authors == 1) { ?>
-                                                            <li><i class="fa fa-user"></i>by <?= $parentCategoryContents3->for_publication_name ?? $parentCategoryContents3->author_name ?> & <?= $co_author_name[$co_authors-1] ?></li>
+                                                            <li><i class="fa fa-user"></i>by <?= $parentCategoryContent3->for_publication_name ?? $parentCategoryContent3->author_name ?> & <?= $co_author_name[$co_authors-1] ?></li>
                                                             <?php } else { ?>
-                                                            <li><i class="fa fa-user"></i>by <?= $parentCategoryContents3->for_publication_name ?? $parentCategoryContents3->author_name ?>, <?= $co_author_name[$co_authors-2] ?> & <?= $co_author_name[$co_authors-1] ?></li>
+                                                            <li><i class="fa fa-user"></i>by <?= $parentCategoryContent3->for_publication_name ?? $parentCategoryContent3->author_name ?>, <?= $co_author_name[$co_authors-2] ?> & <?= $co_author_name[$co_authors-1] ?></li>
                                                             <?php } ?>
                                                         </ul>
                                                     </div>
