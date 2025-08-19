@@ -165,7 +165,7 @@ use App\Helpers\Helper;
                                                     <div class="post-content">
                                                         <h2><a href="<?=url('content/'. $popularContent->parent_category_slug. '/' . $popularContent->category_slug . '/' .  $popularContent->slug)?>"><?=$popularContent->new_title?></a></h2>
                                                         <ul class="post-tags">
-                                                            <li><i class="fa fa-user"></i>by &nbsp;<a href="javascript:void(0);"><?= $popularContent->for_publication_name ?? $popularContent->author_name?></a></li>
+                                                            <li><i class="fa fa-user"></i>by&nbsp;<a href="javascript:void(0);"><?= $popularContent->for_publication_name ?? $popularContent->author_name?></a></li>
                                                             <!-- <li><i class="fa fa-clock-o"></i><?=date_format(date_create($popularContent->created_at), "d M Y")?></li> -->
                                                         </ul>
                                                     </div>
