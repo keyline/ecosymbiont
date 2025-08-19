@@ -122,7 +122,7 @@ $current_url = $protocol . $host . $uri;
                                                     </li>
                                                     <?php 
                                                     $co_authors = $parentCategoryContent1->co_authors;
-                                                    Helper::pr($co_authors);
+                                                    dd($co_authors);
                                                     if ($co_authors == 0) { ?>
                                                     <li><i class="fa fa-user"></i>by <?= $parentCategoryContent1->for_publication_name ?? $parentCategoryContent1->author_name ?></li>
                                                     <?php } elseif ($co_authors == 1) { ?>
