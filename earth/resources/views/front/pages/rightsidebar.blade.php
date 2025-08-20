@@ -80,7 +80,17 @@ use App\Helpers\Helper;
                                             <div class="post-content">
                                                 <h2><a href="<?=url('content/' . $featuredContent->parent_category_slug. '/' . $featuredContent->category_slug . '/' . $featuredContent->slug)?>"><?=$featuredContent->new_title?></a></h2>
                                                 <ul class="post-tags">
-                                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?= $featuredContent->for_publication_name ?? $featuredContent->author_name?></a></li>
+                                                    <!-- <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?= $featuredContent->for_publication_name ?? $featuredContent->author_name?></a></li> -->
+                                                     <?php 
+                                                    $co_authors = $featuredContent->co_authors;
+                                                    $co_author_name = json_decode($featuredContent->co_author_names);                                                      
+                                                    if ($co_authors == 0) { ?>
+                                                    <li><i class="fa fa-user"></i>by <?= $featuredContent->for_publication_name ?? $featuredContent->author_name ?></li>
+                                                    <?php } elseif ($co_authors == 1) { ?>
+                                                    <li><i class="fa fa-user"></i>by <?= $featuredContent->for_publication_name ?? $featuredContent->author_name ?> & <?= $co_author_name[$co_authors-1] ?></li>
+                                                    <?php } else { ?>
+                                                        <li><i class="fa fa-user"></i>by <?= $featuredContent->for_publication_name ?? $featuredContent->author_name ?>, <?= $co_author_name[$co_authors-2] ?> & <?= $co_author_name[$co_authors-1] ?></li>
+                                                    <?php } ?>
                                                     <!-- <li><i class="fa fa-clock-o"></i><?=date_format(date_create($featuredContent->created_at), "d M Y")?></li> -->
                                                 </ul>
                                             </div>
