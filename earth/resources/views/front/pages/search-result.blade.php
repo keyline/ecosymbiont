@@ -65,7 +65,17 @@ $current_url = $protocol . $host . $uri;
                                                 <h2><a href="<?=url('content/' . $rowContent->parent_category_slug. '/' . $rowContent->sub_category_slug . '/' . $rowContent->slug)?>"><?=$rowContent->new_title?></a></h2>
                                                 <ul class="post-tags">
                                                     <li><i class="fa fa-clock-o"></i><?=date_format(date_create($rowContent->created_at), "d M Y")?></li>
-                                                    <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$rowContent->for_publication_name ?? $rowContent->author_name?></a></li>
+                                                    <!-- <li><i class="fa fa-user"></i>by <a href="javascript:void(0);"><?=$rowContent->for_publication_name ?? $rowContent->author_name?></a></li> -->
+                                                     <?php 
+                                                        $co_authors = $rowContent->co_authors;
+                                                        $co_author_name = json_decode($rowContent->co_author_names);                                                      
+                                                        if ($co_authors == 0) { ?>
+                                                        <li><i class="fa fa-user"></i>by <?= $rowContent->for_publication_name ?? $rowContent->author_name ?></li>
+                                                        <?php } elseif ($co_authors == 1) { ?>
+                                                        <li><i class="fa fa-user"></i>by <?= $rowContent->for_publication_name ?? $rowContent->author_name ?> & <?= $co_author_name[$co_authors-1] ?></li>
+                                                        <?php } else { ?>
+                                                        <li><i class="fa fa-user"></i>by <?= $rowContent->for_publication_name ?? $rowContent->author_name ?>, <?= $co_author_name[$co_authors-2] ?> & <?= $co_author_name[$co_authors-1] ?></li>
+                                                    <?php } ?>
                                                     <?php if($rowContent->projects_name != ''){ ?>
                                                         <li><a class="btn project-btn" href="<?= url('project/' .$rowContent->projects_name)?>"><i class="fa fa-users"></i> <?=$rowContent->projects_name?></a></li>
                                                         <?php } ?>
@@ -158,6 +168,16 @@ $current_url = $protocol . $host . $uri;
                     //     type: 'iframe'
                     // });
                     contents.forEach(content => {
+                        let coAuthorNames = JSON.parse(content.co_author_names || "[]");
+                        let authorPart = "";
+
+                        if (content.co_authors == 0) {
+                            authorPart = `by ${content.for_publication_name ?? content.author_name}`;
+                        } else if (content.co_authors == 1) {
+                            authorPart = `by ${content.for_publication_name ?? content.author_name} & ${coAuthorNames[content.co_authors - 1]}`;
+                        } else {
+                            authorPart = `by ${content.for_publication_name ?? content.author_name}, ${coAuthorNames[content.co_authors - 2]} & ${coAuthorNames[content.co_authors - 1]}`;
+                        }
                         contentHtml += `
                             <div class="news-post article-post">
                                 <div class="row">
@@ -188,11 +208,8 @@ $current_url = $protocol . $host . $uri;
                                                 <li>
                                                     <i class="fa fa-clock-o"></i> 
                                                     ${new Date(content.created_at).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}
-                                                </li>
-                                                <li>
-                                                    <i class="fa fa-user"></i> by 
-                                                    <a href="javascript:void(0);">${content.for_publication_name ?? content.author_name}</a>
-                                                </li> 
+                                                </li>                                                    
+                                                <li><i class="fa fa-user"></i> ${authorPart}</li>                                        
                                                 ${content.projects_name ? `
                                                     <li>
                                                         <a class="btn project-btn" href="<?= url('project/') ?>${content.projects_name}">
