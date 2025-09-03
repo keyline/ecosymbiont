@@ -6578,6 +6578,7 @@ div#permalink p {
   line-height: 1.2;
   margin: 0px 0;
   color: #fff;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 #popupModal .modal-body p {
@@ -7697,6 +7698,7 @@ div.dt-container div.dt-layout-row.dt-layout-table div.dt-layout-cell {
 .single-post-box > .post-content .custom-box-style p{
   padding: 0;
 }
+
 @media(max-width: 400px){
   .seach_holder {
     width: 100%;

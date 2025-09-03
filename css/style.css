@@ -329,6 +329,7 @@ textarea.form-control {
 }
 #popupModal.modal {
     padding-right: 0 !important;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 #popupModal.modal.fade .modal-dialog {
     -webkit-transform: translate(0, -25%);
@@ -377,12 +378,14 @@ textarea.form-control {
     line-height: 1.2;
     margin: 0px 0;
     color: #fff;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 #popupModal .modal-body p {
     font-size: 15px !important;
     line-height: 1.4;
     margin: 15px 0;
     color: #fff;
+    font-family: 'proximanova_regular', sans-serif;
 }
 .btn-yellow {
     background-color: #d09c1c;
@@ -402,7 +405,28 @@ textarea.form-control {
     margin-top: 25px;
     justify-content: flex-end;
 }
-
+.donate-button {
+    position: fixed;
+    top: 50%;
+    right: -64px;
+    background-color: #d09c1c;
+    color: white;
+    padding: 8px 15px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 5px;
+    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); */
+    text-decoration: none;
+    z-index: 99;
+    transition: all 0.3s ease-in-out;
+    transform: translateY(-50%);
+    transform: rotate(-90deg);
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.donate-button:hover {
+    background-color: #d09c1c;
+    color: #fff;
+}
 
 
   
@@ -442,6 +466,30 @@ textarea.form-control {
     }
 }
 @media(max-width: 767px){
+    #popupModal .modal-dialog {
+        margin-top: 25px;
+        width: 100%;
+        max-width: 450px !important;
+    }
+    #popupModal .modal-body {
+        padding: 0;
+    }
+    #popupModal .modal-title {
+        font-size: 20px;
+    }
+    #popupModal .modal-body p {
+        font-size: 13px !important;
+        line-height: 1.4;
+        margin: 5px 0;
+        color: #fff;
+    }
+    .btn-yellow {
+        font-size: 13px !important;
+        padding: 6px 15px !important;
+    }
+    #popupModal .modal-header .close {
+        font-size: 20px;
+    }
     .navbar-header{
         width: 100%;
     }
@@ -522,5 +570,13 @@ textarea.form-control {
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
+    }
+        #popupModal .modal-dialog {
+        max-width: 320px !important;
+    }
+}
+@media (max-width: 400px) {
+    .continue-link {
+        margin-top: 15px;
     }
 }
