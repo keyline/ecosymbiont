@@ -28,20 +28,18 @@ class Controller extends BaseController
     protected function sendMail($email, $subject, $message, $file = '')
     {
         $generalSetting             = GeneralSetting::find('1');
-        Helper::pr($generalSetting); die;
+        // Helper::pr($generalSetting); die;
         $mailLibrary                = new PHPMailer(true);
         $mailLibrary->CharSet       = 'UTF-8';
-        $mailLibrary->SMTPDebug     = config('app.debug') ? 2 : 0;
-        $mailLibrary->Debugoutput   = function($str, $level) {
-            \Log::info("PHPMailer [$level]: " . trim($str));
-        };
+        $mailLibrary->SMTPDebug     = 2;
+        $mailLibrary->Debugoutput   = 'html';
         $mailLibrary->isSMTP();
         $mailLibrary->Host          = $generalSetting->smtp_host;
         $mailLibrary->SMTPAuth      = true;
         $mailLibrary->Port          = $generalSetting->smtp_port;
         $mailLibrary->Username      = $generalSetting->smtp_username;
         $mailLibrary->Password      = $generalSetting->smtp_password;
-        $mailLibrary->SMTPSecure    = 'ssl';
+        $mailLibrary->SMTPSecure    = 'tls';
         $mailLibrary->From          = $generalSetting->from_email;
         $mailLibrary->FromName      = $generalSetting->from_name;
         $mailLibrary->AddReplyTo($generalSetting->from_email, $generalSetting->from_name);
