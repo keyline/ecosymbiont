@@ -28,6 +28,7 @@ class Controller extends BaseController
     protected function sendMail($email, $subject, $message, $file = '')
     {
         $generalSetting             = GeneralSetting::find('1');
+        Helper::pr($generalSetting); die;
         $mailLibrary                = new PHPMailer(true);
         $mailLibrary->CharSet       = 'UTF-8';
         $mailLibrary->SMTPDebug     = config('app.debug') ? 2 : 0;
