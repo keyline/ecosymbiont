@@ -30,8 +30,11 @@ class Controller extends BaseController
         $generalSetting             = GeneralSetting::find('1');
         $mailLibrary                = new PHPMailer(true);
         $mailLibrary->CharSet       = 'UTF-8';
-        $mailLibrary->SMTPDebug     = 0;
-        //$mailLibrary->IsSMTP();
+        $mailLibrary->SMTPDebug     = config('app.debug') ? 2 : 0;
+        $mailLibrary->Debugoutput   = function($str, $level) {
+            \Log::info("PHPMailer [$level]: " . trim($str));
+        };
+        $mailLibrary->isSMTP();
         $mailLibrary->Host          = $generalSetting->smtp_host;
         $mailLibrary->SMTPAuth      = true;
         $mailLibrary->Port          = $generalSetting->smtp_port;
@@ -58,7 +61,13 @@ class Controller extends BaseController
         if (!empty($file)):
             $mailLibrary->AddAttachment($file);
         endif;
-        return (!$mailLibrary->send()) ? false : true;
+        try {
+            $mailLibrary->send();
+            return true;
+        } catch (\Exception $e) {
+            \Log::error("PHPMailer Error: {$mailLibrary->ErrorInfo}");
+            return $mailLibrary->ErrorInfo;
+        }
     }
     // single file upload
     public function upload_single_file($fieldName, $fileName, $uploadedpath, $uploadType, $tempFile = '')
