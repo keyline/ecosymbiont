@@ -31,7 +31,7 @@ class Controller extends BaseController
         // Helper::pr($generalSetting); die;
         $mailLibrary                = new PHPMailer(true);
         $mailLibrary->CharSet       = 'UTF-8';
-        $mailLibrary->SMTPDebug     = 2;
+        $mailLibrary->SMTPDebug     = 0;
         $mailLibrary->Debugoutput   = 'html';
         $mailLibrary->isSMTP();
         $mailLibrary->Host          = $generalSetting->smtp_host;

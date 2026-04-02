@@ -1757,7 +1757,7 @@ class FrontController extends Controller
                                     'password'                  => Hash::make($randomPassword),                         
                                 ];
                                 //  Helper::pr($fields);
-                                // User::insert($fields);
+                                User::insert($fields);
                                 $generalSetting             = GeneralSetting::where('id', '=', 1)->first();
                                 $subject                    = 'Subject: Your Login Credentials for Portal Access';
                                 $message                    = "<table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
