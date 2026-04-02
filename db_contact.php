@@ -97,11 +97,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $headers .= "From: no-reply@ecosymbiont.org" . "\r\n" .
             "BCC: deblina@keylines.net";
 
-            mail($to,$subject,$txt,$headers);
-            $adminSent = true;            
+             $mailSent = mail($to, $subject, $message, $headers);
             // Send the email 
 
-            if ($adminSent) {                    
+            if ($mailSent) {                    
                 $_SESSION['mail_succ'] = 'Your enquiry has been sent successfully.';
                 header("Location: contact.php");
                 exit();
