@@ -22,6 +22,7 @@ require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use PhpParser\Node\Expr\Print_;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //   print_r($_POST); die;
@@ -69,6 +70,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Handle the form submission (e.g., save to database, send email, etc.)
         // Prepare the SQL query
         $sql = "INSERT INTO enquiries (name, email, country, subject, message) VALUES ('$full_name', '$email', '$country', '$subject_string', '$comment')";
+        $generalSetting = "SELECT * FROM general_settings WHERE id = 1";
+        $generalSettingResult = mysqli_query($conn, $generalSetting);
+        Print_r($generalSettingResult); die;
+        // $generalSettingRow = mysqli_fetch_assoc($generalSettingResult);
+        
 
         // Execute the query
         if (mysqli_query($conn, $sql)) {        
