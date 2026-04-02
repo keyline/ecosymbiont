@@ -73,9 +73,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Execute the query
         if (mysqli_query($conn, $sql)) {        
             // Initialize PHPMailer for admin notification           
-            $to = "Ecosymbionts.regenerate@gmail.com";
+            // $to = "Ecosymbionts.regenerate@gmail.com";
+             $to = "Greetings@sramani.org";
             // $to = "deblinasonaidas1997@gmail.com";
-            $subject = 'New Lead From Ecosymbiont Website - ' . htmlspecialchars($full_name);
+            $subject = 'New Enquiry From Ecosymbiont Website - ' . htmlspecialchars($full_name);
             $message = "
                 <table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
                     <tr><td style='padding: 8px 15px'>Dear Administrator,</td></tr>
