@@ -123,45 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['mail_fail'] = 'Mailer Error: ' . $mail->ErrorInfo;
                 header("Location: contact.php");
                 exit();
-            }
-            // // Initialize PHPMailer for admin notification           
-            // // $to = "Ecosymbionts.regenerate@gmail.com";
-            //  $to = "Greetings@sramani.org";
-            // // $to = "deblinasonaidas1997@gmail.com";
-            // $subject = 'New Enquiry From Ecosymbiont Website - ' . htmlspecialchars($full_name);
-            // $message = "
-            //     <table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
-            //         <tr><td style='padding: 8px 15px'>Dear Administrator,</td></tr>
-            //         <tr><td style='padding: 8px 15px'>A new enquiry is submitted through the Ecosymbiont Website. Please take a look at the details below.</td></tr>
-            //         <tr><td style='padding: 8px 15px'><strong>Name: </strong>" . htmlspecialchars($full_name) . "</td></tr>
-            //         <tr><td style='padding: 8px 15px'><strong>Email: </strong>" . htmlspecialchars($email) . "</td></tr>    
-            //         <tr><td style='padding: 8px 15px'><strong>Country: </strong>" . htmlspecialchars($country) . "</td></tr>                                         
-            //         <tr><td style='padding: 8px 15px'><strong>Message: </strong>" . htmlspecialchars($comment) . "</td></tr>
-            //         <tr><td style='padding: 8px 15px'><strong>Subject: </strong>" . htmlspecialchars($subject_string) . "</td></tr>
-            //         <tr><td style='padding: 8px 15px'>Thank You,</td></tr>
-            //         <tr><td style='padding: 8px 15px'>Auto-generated from the Ecosymbiont Website.</td></tr>
-            //     </table>";
-            // $txt = $message;
-
-            // // Always set content-type when sending HTML email
-            // $headers = "MIME-Version: 1.0" . "\r\n";
-            // $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-            // $headers .= "From: no-reply@ecosymbiont.org" . "\r\n" .
-            // "BCC: deblina@keylines.net";
-
-            //  $mailSent = mail($to, $subject, $message, $headers);
-            // // Send the email 
-
-            // if ($mailSent) {                    
-            //     $_SESSION['mail_succ'] = 'Your enquiry has been sent successfully.';
-            //     header("Location: contact.php");
-            //     exit();
-            //     // $_SESSION['download_flag'] = "true";                                                    
-            // } else {
-            //     $_SESSION['mail_fail'] = 'admin mail sent failed';
-            //     header("Location: contact.php");
-            //     exit();
-            // }        
+            }            
         } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }            
