@@ -72,8 +72,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sql = "INSERT INTO enquiries (name, email, country, subject, message) VALUES ('$full_name', '$email', '$country', '$subject_string', '$comment')";
         $generalSetting = "SELECT * FROM general_settings WHERE id = 1";
         $generalSettingResult = mysqli_query($conn, $generalSetting);
-        Print_r($generalSettingResult); die;
-        // $generalSettingRow = mysqli_fetch_assoc($generalSettingResult);
+        
+        $generalSettingRow = mysqli_fetch_assoc($generalSettingResult);
+        Print_r($generalSettingRow); die;
         
 
         // Execute the query
