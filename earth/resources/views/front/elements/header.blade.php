@@ -236,7 +236,7 @@ use App\Helpers\Helper;
                         <ul class="nav navbar-nav navbar-left">
                             <!-- <li><a class="active" href="<?=url('/')?>">Home</a></li> -->
                             <li><a href="<?=url('communities')?>" style="color: black !important;">COMMUNITIES</a></li>
-                            <?php  if($parentCats){ foreach($parentCats as $parentCat){?>
+                            <?php if($parentCats){ foreach($parentCats as $parentCat){?>
                                 <li class="drop-arrow"><a href="<?=url('category/' . $parentCat->slug)?>"><?=$parentCat->sub_category?></a>
                                     <div class="megadropdown">
                                         <div>
@@ -246,7 +246,7 @@ use App\Helpers\Helper;
                                                         <?php
                                                         
                                                         $childCats = NewsCategory::select('id', 'sub_category', 'slug')->where('status', '=', 1)->where('parent_category', '=', $parentCat->id)->orderBy('sub_category', 'asc')->get();                                                                                                        
-                                                    Helper::pr($childCats); if($childCats){ $sl=1; foreach($childCats as $childCat){
+                                                        if($childCats){ $sl=1; foreach($childCats as $childCat){
                                                         ?>
                                                             <li><a <?=(($sl == 1)?'class="active"':'')?> href="<?=url('category/' . $parentCat->slug .'/'. $childCat->slug)?>"><?=$childCat->sub_category?></a></li>
                                                         <?php $sl++; } }?>
