@@ -22,6 +22,7 @@ require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use PhpParser\Node\Expr\Print_;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //   print_r($_POST); die;
@@ -69,47 +70,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Handle the form submission (e.g., save to database, send email, etc.)
         // Prepare the SQL query
         $sql = "INSERT INTO enquiries (name, email, country, subject, message) VALUES ('$full_name', '$email', '$country', '$subject_string', '$comment')";
+        $generalSetting = "SELECT * FROM general_settings WHERE id = 1";
+        $generalSettingResult = mysqli_query($conn, $generalSetting);
+        
+        $generalSettingRow = mysqli_fetch_assoc($generalSettingResult);
+        // Print_r($generalSettingRow); die;
+        
 
         // Execute the query
         if (mysqli_query($conn, $sql)) {        
-            // Initialize PHPMailer for admin notification           
-            $to = "Ecosymbionts.regenerate@gmail.com";
-            // $to = "deblinasonaidas1997@gmail.com";
-            $subject = 'New Lead From Ecosymbiont Website - ' . htmlspecialchars($full_name);
-            $message = "
-                <table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding: 10px; background: #fff; width: 500px;'>
-                    <tr><td style='padding: 8px 15px'>Dear Administrator,</td></tr>
-                    <tr><td style='padding: 8px 15px'>A new enquiry is submitted through the Ecosymbiont Website. Please take a look at the details below.</td></tr>
-                    <tr><td style='padding: 8px 15px'><strong>Name: </strong>" . htmlspecialchars($full_name) . "</td></tr>
-                    <tr><td style='padding: 8px 15px'><strong>Email: </strong>" . htmlspecialchars($email) . "</td></tr>    
-                    <tr><td style='padding: 8px 15px'><strong>Country: </strong>" . htmlspecialchars($country) . "</td></tr>                                         
-                    <tr><td style='padding: 8px 15px'><strong>Message: </strong>" . htmlspecialchars($comment) . "</td></tr>
-                    <tr><td style='padding: 8px 15px'><strong>Subject: </strong>" . htmlspecialchars($subject_string) . "</td></tr>
-                    <tr><td style='padding: 8px 15px'>Thank You,</td></tr>
-                    <tr><td style='padding: 8px 15px'>Auto-generated from the Ecosymbiont Website.</td></tr>
+
+            $mail = new PHPMailer(true);
+             try {
+                // 🔹 SMTP CONFIG
+                $mail->isSMTP();
+                $mail->Host       = $generalSettingRow['smtp_host'];
+                $mail->Port       = $generalSettingRow['smtp_port']; // change if needed
+                $mail->SMTPAuth   = true;
+                $mail->Username   = $generalSettingRow['smtp_username']; // your email
+                $mail->Password   = $generalSettingRow['smtp_password']; // Gmail App Password
+                $mail->SMTPSecure = 'tls';
+                $mail->Port       = 587;
+
+                // 🔹 EMAIL SETTINGS
+                $mail->setFrom('no-reply@ecosymbiont.org', 'Ecosymbiont Website');
+                $mail->addAddress('Greetings@sramani.org');
+                $mail->addBCC('deblina@keylines.net');
+
+                // 🔹 CONTENT
+                $mail->isHTML(true);
+                $mail->Subject = 'New Enquiry From Ecosymbiont Website - ' . htmlspecialchars($full_name);
+
+                $mail->Body = "
+                <table width='500' style='background:#fff;padding:10px'>
+                    <tr><td>Dear Administrator,</td></tr>
+                    <tr><td>A new enquiry has been submitted.</td></tr>
+                    <tr><td><strong>Name:</strong> " . htmlspecialchars($full_name) . "</td></tr>
+                    <tr><td><strong>Email:</strong> " . htmlspecialchars($email) . "</td></tr>
+                    <tr><td><strong>Country:</strong> " . htmlspecialchars($country) . "</td></tr>
+                    <tr><td><strong>Subject:</strong> " . htmlspecialchars($subject_string) . "</td></tr>
+                    <tr><td><strong>Message:</strong> " . htmlspecialchars($comment) . "</td></tr>
                 </table>";
-            $txt = $message;
 
-            // Always set content-type when sending HTML email
-            $headers = "MIME-Version: 1.0" . "\r\n";
-            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-            $headers .= "From: no-reply@ecosymbiont.org" . "\r\n" .
-            "BCC: deblina@keylines.net";
+                // 🔹 SEND
+                $mail->send();
 
-            mail($to,$subject,$txt,$headers);
-            $adminSent = true;            
-            // Send the email 
-
-            if ($adminSent) {                    
                 $_SESSION['mail_succ'] = 'Your enquiry has been sent successfully.';
                 header("Location: contact.php");
                 exit();
-                // $_SESSION['download_flag'] = "true";                                                    
-            } else {
-                $_SESSION['mail_fail'] = 'admin mail sent failed';
+
+            } catch (Exception $e) {
+                $_SESSION['mail_fail'] = 'Mailer Error: ' . $mail->ErrorInfo;
                 header("Location: contact.php");
                 exit();
-            }        
+            }            
         } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }            

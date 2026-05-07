@@ -776,8 +776,11 @@ class UserController extends Controller
             $generalSetting             = GeneralSetting::where('id', '=', 1)->first();
             $subject                    = 'Test email subject on '.date('Y-m-d H:i:s');
             $message                    = 'Test email message body on '.date('Y-m-d H:i:s');
-            $this->sendMail($generalSetting->site_mail, $subject, $message);
-            return redirect()->back()->with('success_message', 'Test email sent successfully');            
+            $result = $this->sendMail($generalSetting->site_mail, $subject, $message);
+            if ($result === true) {
+                return redirect()->back()->with('success_message', 'Test email sent successfully');
+            }
+            return redirect()->back()->with('error_message', 'Test email failed: ' . $result);            
             
         }
 /* test email */
