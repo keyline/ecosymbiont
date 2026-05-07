@@ -6,7 +6,7 @@ $host = $_SERVER['HTTP_HOST'];
 // Set base URL according to the environment
 if ($host == 'localhost') {
     // Local environment
-    define('BASE_URL', 'http://localhost/ecosymbiont/');
+    define('BASE_URL', 'http://localhost/ecosymbiontgit/');
 } elseif ($host == 'ecosymbiont.org') {
     // Live environment
     define('BASE_URL', 'https://ecosymbiont.org/');

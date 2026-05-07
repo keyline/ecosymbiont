@@ -18,7 +18,8 @@ include "include/header.php";
                     
 
                     <div class="info-box"> 
-                        <p>If you are interested in funding or learning more about the work of Ecosymbionts Regenerate (ER) and/or Ecosymbionts all Regenerate Together (EaRTh) or if you would like to submit Creative-Work, please contact us.</p>
+                        <!-- <p>If you are interested in funding or learning more about the work of Ecosymbionts Regenerate (ER) and/or Ecosymbionts all Regenerate Together (EaRTh) or if you would like to submit Creative-Work, please contact us.</p> -->
+                         <p>If you are interested in supporting our work or learning more about our initiatives, please use the form below.</p>
                     </div>
 
                     <div class="info-contact_form">
@@ -35,38 +36,7 @@ include "include/header.php";
                             <?php
                             unset($_SESSION['mail_succ']);
                         }
-                        ?>
-                        <!-- <form>
-                            <div class="form-row">
-                                <div class="form-group col-6">
-                                    <label for="exampleInputEmail1">Full name*</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1">
-                                </div>
-                                <div class="form-group col-6">
-                                    <label for="exampleInputPassword1">Email address*</label>
-                                    <input type="test" class="form-control" id="">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-6">
-                                    <label class="form-check-label" for="exampleCheck1">Country of residence*</label>
-                                    <input type="test" class="form-control" id=""> 
-                                </div>
-                                <div class="form-group col-6">
-                                    <label class="form-check-label" for="exampleCheck1">Subject*</label>
-                                    <select class="form-control" name="field1" id="field1" multiple onchange="console.log(Array.from(this.selectedOptions).map(x=>x.value??x.text))" multiselect-hide-x="true">
-                                        <option value="1">I am interested in fuding the work of ER and/or EaRTh</option>
-                                        <option value="2">I am interested in learning more about the work of ER and/or EaRTh</option>
-                                        <option value="3">I am interested in submitting Creative-Work to EaRTh</option>
-                                    </select> 
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <label for="exampleCheck1">Message (up to 250 words)*</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>                               
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form> -->
+                        ?>                        
                         <form id="myForm" action="db_contact.php" method="POST" onsubmit="return validateForm();">
                             <div class="form-row">
                                 <div class="form-group col-6">
@@ -78,21 +48,22 @@ include "include/header.php";
                                     <input type="email" class="form-control" id="email" name="email" required>
                                 </div>
                             </div>
-                                <div class="form-group ">
-                                    <label class="form-check-label" for="country">Country of residence*</label>
-                                    <input type="text" class="form-control" id="country" name="country" required>
-                                </div>
-                                
-
                             <div class="form-group ">
-                                    <label for="subject">Subject*</label>
-                                    <select class="form-control" name="subject[]" id="subject" multiple onchange="console.log(Array.from(this.selectedOptions).map(x=>x.value??x.text))" multiselect-hide-x="true" required>
-                                        <option value="I am interested in funding the work of ER and/or EaRTh">I am interested in funding the work of ER and/or EaRTh</option>
-                                        <option value="I am interested in learning more about the work of ER and/or EaRTh">I am interested in learning more about the work of ER and/or EaRTh</option>
-                                        <option value="I am interested in submitting Creative-Work to EaRTh">I am interested in submitting Creative-Work to EaRTh</option>
-                                        <option value="I am having technical problems with EaRTh">I'm having technical problems with EaRTh</option>
-                                    </select>
-                                </div>
+                                <label class="form-check-label" for="country">Country of residence*</label>
+                                <input type="text" class="form-control" id="country" name="country" required>
+                            </div>                                
+                            <div class="form-group ">
+                                <label for="subject">Subject*</label>
+                                <select class="form-control" name="subject[]" id="subject" multiple onchange="console.log(Array.from(this.selectedOptions).map(x=>x.value??x.text))" multiselect-hide-x="true" required>
+                                    <option value="I am interested in funding the work of the Śramani Institute">I am interested in funding the work of the Śramani Institute</option>
+                                    <option value="I am interested in learning about FiveBecomings (Pañchabhūmi)">I am interested in learning about FiveBecomings (Pañchabhūmi)</option>
+                                    <option value="I am interested in learning about EcoResilience Workshops">I am interested in learning about EcoResilience Workshops</option>
+                                    <option value="I am interested in learning about the Śramani Institute’s consulting/certification services">I am interested in learning about the Śramani Institute’s consulting/certification services</option>
+                                    <option value="I am interested in collaborating/partnering with the Śramani Institute">I am interested in collaborating/partnering with the Śramani Institute</option>
+                                    <option value="I am interested in contributing a Creative-Work to EaRTh">I am interested in contributing a Creative-Work to EaRTh</option>
+                                    <option value="I would like to interview a Śramani Institute staff member and/or invite her/him as a speaker/author">I would like to interview a Śramani Institute staff member and/or invite her/him as a speaker/author</option>
+                                </select>
+                            </div>
                             <div class="form-group">
                                 <label for="message">Message (up to 250 words)*</label>
                                 <textarea class="form-control" id="message" name="message" rows="3" maxlength="250" required></textarea>
