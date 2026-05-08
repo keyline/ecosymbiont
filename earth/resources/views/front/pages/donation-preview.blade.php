@@ -55,8 +55,12 @@ use App\Helpers\Helper;
                                             <td>:</td>
                                             <td>
                                                 <?php
-                                                $getCountry         = Country::select('name', 'ISO')->where('id', $donation->country)->first();
-                                                echo (($getCountry)?$getCountry->name . ' (' . $getCountry->ISO . ')':'');
+                                                if ($donation->payment_mode === 'INR') {
+                                                    echo 'India';
+                                                } else {
+                                                    $getCountry = Country::select('name', 'ISO')->where('id', $donation->country)->first();
+                                                    echo (($getCountry) ? $getCountry->name . ' (' . $getCountry->ISO . ')' : '');
+                                                }
                                                 ?>
                                             </td>
                                         </tr>
@@ -68,12 +72,23 @@ use App\Helpers\Helper;
                                         <tr>
                                             <td style="font-weight: bold;">Payable Amount</td>
                                             <td>:</td>
-                                            <td>$<?=number_format($donation->payable_amount,2)?></td>
+                                            <td>
+                                                <?php
+                                                if ($donation->payment_mode === 'INR') {
+                                                    echo '₹' . number_format($donation->payable_amount, 2);
+                                                } else {
+                                                    echo '$' . number_format($donation->payable_amount, 2);
+                                                }
+                                                ?>
+                                            </td>
                                         </tr>
                                     </table>
                                     <div class="mt-4">
-                                        <!-- <button type="submit" class="btn mt-4 donation_btn" style="display: flex;margin: 0 auto;">Pay Now $<?=number_format($donation->payable_amount,2)?></button> -->
-                                        <a href="<?=url('paypal/payment/'.Helper::encoded($donation->id))?>" class="btn mt-4 donation_btn" style="display: flex;margin: 0 auto;justify-content: center;">Pay now: USD <?=number_format($donation->payable_amount,2)?></a>
+                                        <?php if ($donation->payment_mode === 'INR') { ?>
+                                            <a href="<?=url('thankyou/'.Helper::encoded($donation->id))?>" class="btn mt-4 donation_btn" style="display:flex;margin:0 auto;justify-content:center;">Pay now: INR ₹<?=number_format($donation->payable_amount,2)?></a>
+                                        <?php } else { ?>
+                                            <a href="<?=url('paypal/payment/'.Helper::encoded($donation->id))?>" class="btn mt-4 donation_btn" style="display:flex;margin:0 auto;justify-content:center;">Pay now: USD $<?=number_format($donation->payable_amount,2)?></a>
+                                        <?php } ?>
                                     </div>
                                 <?php }?>
                             </div>

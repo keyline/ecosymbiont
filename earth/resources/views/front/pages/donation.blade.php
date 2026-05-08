@@ -3,6 +3,18 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12 content-blocker">
+                @if(session('success_message'))
+                    <div class="alert alert-success bg-success text-dark border-0 alert-dismissible show mt-3" role="alert">
+                        {{ session('success_message') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                @endif
+                @if(session('error_message'))
+                    <div class="alert alert-danger bg-danger text-dark border-0 alert-dismissible show mt-3" role="alert">
+                        {{ session('error_message') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                @endif
                 <!-- block content -->
                 <div class="block-content">
                     <div class="article-box">
@@ -85,6 +97,7 @@
                                             </div>
                                         </div>
 
+                                        <div id="inr_fields_wrapper">
                                         <input type="text" class="form-control mb-3" placeholder="Full legal name" name="full_legal_name" required>
                                         <div class="mb-3">
                                             <input type="text" class="form-control" placeholder="PAN Number" name="pan_number" id="pan_number" oninput="validatePAN(this)" required>
@@ -140,6 +153,7 @@
                                         <div class="mt-4">
                                             <button type="submit" class="btn mt-4 donation_btn">Next</button>
                                         </div>
+                                        </div>{{-- end #inr_fields_wrapper --}}
                                     </div>
                                 </form>
                             </div>
@@ -217,6 +231,44 @@
     </div>
 </section>
 <!-- End block-wrapper-section -->
+{{-- INR Eligibility Warning Modal --}}
+<div class="modal fade" id="inrEligibilityModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background:#8b1a1a;">
+                <h5 class="modal-title" style="color:#fff;">Please Choose Donation Type Properly</h5>
+            </div>
+            <div class="modal-body text-center py-4">
+                <div style="font-size:40px; color:#8b1a1a; margin-bottom:12px;">&#9888;</div>
+                <p style="font-size:15px; margin-bottom:8px;">The <strong>INR donation form</strong> is only for <strong>Indian citizens donating in Indian Rupees</strong>.</p>
+                <p style="font-size:14px; color:#555;">If you are not an Indian citizen or wish to donate in a currency other than INR, please go back and select the other donation type.</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="inr_eligibility_back_btn">Go Back & Choose Again</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- Data Preview Modal --}}
+{{-- <div class="modal fade" id="donationPreviewModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Review Your Donation Details</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <pre id="donation_preview_data" style="background:#f8f9fa;padding:15px;border-radius:4px;font-size:13px;"></pre>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Edit</button>
+                <button type="button" class="btn donation_btn" id="confirm_submit_btn">Confirm & Submit</button>
+            </div>
+        </div>
+    </div>
+</div> --}}
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 
@@ -391,6 +443,72 @@
             maximumFractionDigits: 2
         }).format(number);
     }
+
+    // INR eligibility check — hide fields and show popup if either answer is "No"
+    function checkINReligibility() {
+        var citizen = $('input[name="is_indian_citizen"]:checked').val();
+        var inr     = $('input[name="is_donating_inr"]:checked').val();
+
+        // Only trigger if at least one has been answered
+        if (!citizen && !inr) return;
+
+        if (citizen === 'no' || inr === 'no') {
+            $('#inr_fields_wrapper').hide();
+            $('#inr_fields_wrapper').find('input, select, textarea').prop('required', false);
+            $('#inrEligibilityModal').modal('show');
+        } else if (citizen === 'yes' && inr === 'yes') {
+            $('#inr_fields_wrapper').show();
+            $('#inr_fields_wrapper').find('input[type="text"], input[type="email"]').prop('required', true);
+        }
+    }
+
+    $('input[name="is_indian_citizen"], input[name="is_donating_inr"]').on('change', checkINReligibility);
+
+    $('#inr_eligibility_back_btn').on('click', function () {
+        $('input[name="is_indian_citizen"]').prop('checked', false);
+        $('input[name="is_donating_inr"]').prop('checked', false);
+        $('input[name="donation_type"]').prop('checked', false);
+        $('#inr_form_wrapper').hide();
+        $('#usd_form_wrapper').hide();
+    });
+
+    // var $activeForm = null;
+
+    // function collectFormData($form) {
+    //     var data = {};
+    //     $form.find('[name]').each(function () {
+    //         var name = $(this).attr('name');
+    //         if (name === '_token') return;
+    //         var type = $(this).attr('type');
+    //         if ((type === 'radio' || type === 'checkbox') && !$(this).is(':checked')) return;
+    //         data[name] = $(this).val();
+    //     });
+    //     return data;
+    // }
+
+    // function formatDataAsArray(data) {
+    //     var lines = ['Array('];
+    //     $.each(data, function (key, value) {
+    //         lines.push('    [' + key + '] => ' + (value === '' ? '(empty)' : value));
+    //     });
+    //     lines.push(')');
+    //     return lines.join('\n');
+    // }
+
+    // $('#inr_donation_form, #usd_donation_form').on('submit', function (e) {
+    //     e.preventDefault();
+    //     $activeForm = $(this);
+    //     var data = collectFormData($activeForm);
+    //     $('#donation_preview_data').text(formatDataAsArray(data));
+    //     $('#donationPreviewModal').modal('show');
+    // });
+
+    // $('#confirm_submit_btn').on('click', function () {
+    //     $('#donationPreviewModal').modal('hide');
+    //     if ($activeForm) {
+    //         $activeForm.off('submit').submit();
+    //     }
+    // });
 </script>
 
 <style>
