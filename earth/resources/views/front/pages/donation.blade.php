@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12 content-blocker">
-                @if(session('success_message'))
+                {{-- @if(session('success_message'))
                     <div class="alert alert-success bg-success text-dark border-0 alert-dismissible show mt-3" role="alert">
                         {{ session('success_message') }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -14,7 +14,7 @@
                         {{ session('error_message') }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
-                @endif
+                @endif --}}
                 <!-- block content -->
                 <div class="block-content">
                     <div class="article-box">
