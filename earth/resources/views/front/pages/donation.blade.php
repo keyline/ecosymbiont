@@ -161,7 +161,7 @@
 
                             {{-- USD / Non-INR Donation Form --}}
                             <div id="usd_form_wrapper" style="display:none;">
-                                <p class="mb-3" style="font-family:'proximanova_regular',sans-serif;font-size:15px;color:#7a5c00;line-height:1.5;background-color:#fff8e1;border-left:4px solid #f0a500;padding:12px 15px;border-radius:4px;">This form [KM10.1] is for donations that are NOT in Indian Rupees (INR). Your donation is tax-exempt in the United States of America (501(c)(3) tax-exempt).</p>
+                                <p class="mb-3" style="font-family:'proximanova_regular',sans-serif;font-size:15px;color:#7a5c00;line-height:1.5;background-color:#fff8e1;border-left:4px solid #f0a500;padding:12px 15px;border-radius:4px;">This form is for donations that are NOT in Indian Rupees (INR). Your donation is tax-exempt in the United States of America (501(c)(3) tax-exempt).</p>
                                 <form class="mb-4" id="usd_donation_form" action="" method="POST">
                                     @csrf
                                     <input type="hidden" name="payment_mode" id="payment_mode" value="PAYPAL">
