@@ -59,6 +59,7 @@
 
                             {{-- INR Donation Form --}}
                             <div id="inr_form_wrapper" style="display:none;">
+                                <p class="mb-3" style="font-family:'proximanova_regular',sans-serif;font-size:14px;color:#333;">To donate using this form you MUST be an Indian citizen and donate in INR via NEFT transfer. Your donation is tax-exempt in India (80G/12A: AARCS9840EF20251/EE20251).</p>
                                 <form class="mb-4" id="inr_donation_form" action="" method="POST">
                                     @csrf
                                     <input type="hidden" name="payment_mode" value="INR">
