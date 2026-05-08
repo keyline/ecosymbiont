@@ -25,11 +25,11 @@
                                     <h2 class="mt-0">Give Today — Because We Need Real Solutions for People and Planet Now</h2>
                                 </div>
                                 <p>The Śramani Institute works with impoverished, marginalized communities in degraded ecologies around the world to help them become EcoResilient, ensuring both human and ecological health and wellbeing. Your donation (tax-exempt in the USA and in India) helps us ensure a sustainable future for people and planet.</p>
-                                <p>If you are interested in making a large donation, please contact us, so that we can minimize transaction fees.</p>
+                                <p>If you are interested in making a large donation, please <a href="<?=env('REGENERATE_URL')?>contact.php">contact us</a>, so that we can minimize transaction fees.</p>
                                 <p>Give today!</p>
-                                <div class="custom-alert d-flex align-items-start">
+                                {{-- <div class="custom-alert d-flex align-items-start">
                                     <strong class="font15" style="font-family: 'proximanova_regular', sans-serif;">Give today, so we can amplify the voices of more grassroots changemakers through EaRTh!</strong>
-                                </div>
+                                </div> --}}
 
                                 {{-- Donation type selector --}}
                                 <div class="donation-type-selector mt-4">
@@ -59,7 +59,7 @@
 
                             {{-- INR Donation Form --}}
                             <div id="inr_form_wrapper" style="display:none;">
-                                <p class="mb-3" style="font-family:'proximanova_regular',sans-serif;font-size:14px;color:#333;">To donate using this form you MUST be an Indian citizen and donate in INR via NEFT transfer. Your donation is tax-exempt in India (80G/12A: AARCS9840EF20251/EE20251).</p>
+                                <p class="mb-3" style="font-family:'proximanova_regular',sans-serif;font-size:15px;color:#7a5c00;line-height:1.5;background-color:#fff8e1;border-left:4px solid #f0a500;padding:12px 15px;border-radius:4px;">To donate using this form you MUST be an Indian citizen and donate in INR via NEFT transfer. Your donation is tax-exempt in India (80G/12A: AARCS9840EF20251/EE20251).</p>
                                 <form class="mb-4" id="inr_donation_form" action="" method="POST">
                                     @csrf
                                     <input type="hidden" name="payment_mode" value="INR">
