@@ -87,9 +87,11 @@ class DonationController extends Controller
                         'last_name'            => '',
                         'email'                => $postData['email'],
                         'address'              => $postData['address'],
-                        'country'              => 30, // India
+                        'country'              => 97, // India
                         'payment_mode'         => 'INR',
-                        'payable_amount'       => $postData['payable_amount'],
+                        // 'payable_amount'       => $postData['payable_amount'],
+                        'payment_status'       => 1,
+                        'payment_amount'        => $postData['payable_amount'],
                         'pan_number'           => $postData['pan_number'] ?? null,
                         'mobile_number'        => $postData['mobile_number'] ?? null,
                         'bank_name'            => $postData['bank_name'] ?? null,

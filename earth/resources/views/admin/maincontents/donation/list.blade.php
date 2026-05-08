@@ -58,13 +58,21 @@ $controllerRoute = $module['controller_route'];
                     </td>
                     <td>
                       <?=$row->payment_mode?><br>
-                      $<?=number_format($row->payment_amount,2)?><br>
+                      <?=($row->payment_mode === 'INR') ? '₹' : '$'?><?=number_format($row->payment_amount,2)?><br>
                       <?=$row->txn_id?><br>
                       <span class="badge <?=(($row->payment_status)?'bg-success':'bg-danger')?>"><?=(($row->payment_status)?'PAID':'UNPAID')?></span>
                       <br>
-                    </td>                   
+                    </td>
                     <td><?=date_format(date_create($row->payment_timestamp), "d M, Y h:i A")?></td>
-                    <td><a href="<?=$row->payment_receipt?>" target="_blank" class="badge bg-info"><i class="fa fa-eye"></i>&nbsp;View Receipt</td>
+                    <td>
+                      <?php if($row->payment_mode === 'INR'){ ?>
+                        <span class="badge bg-secondary" style="cursor:not-allowed;opacity:0.6;"><i class="fa fa-eye"></i>&nbsp;View Receipt</span>
+                      <?php } elseif(!empty($row->payment_receipt)){ ?>
+                        <a href="<?=$row->payment_receipt?>" target="_blank" class="badge bg-info"><i class="fa fa-eye"></i>&nbsp;View Receipt</a>
+                      <?php } else { ?>
+                        <span class="badge bg-secondary" style="cursor:not-allowed;opacity:0.6;"><i class="fa fa-eye"></i>&nbsp;View Receipt</span>
+                      <?php } ?>
+                    </td>
                   </tr>
                 <?php } } else {?>
                   <tr>
