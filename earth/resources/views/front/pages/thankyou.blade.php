@@ -42,11 +42,14 @@
           <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
             <path d="M16 8a8 8 0 11-16 0 8 8 0 0116 0zM6.93 10.588l5.482-5.482-.708-.708L6.93 9.172 4.796 7.04l-.708.707L6.93 10.588z"/>
           </svg>
+           <?php if($donation->payment_mode !== 'INR' && !empty($donation->payment_receipt)){ ?>
           <h2 class="fw-bold text-success">Thank You!</h2>
           <p class="mt-3 mb-4 text-muted">Your donation has been successfully received. We truly appreciate your generous support to our cause.</p>
-          <?php if($donation->payment_mode !== 'INR' && !empty($donation->payment_receipt)){ ?>
+         
             <a href="<?=$donation->payment_receipt?>" class="btn donation_btn" target="_blank">Download receipt</a>
-          <?php } ?>
+          <?php } else{ ?>
+            <p>Thank you for your interest in donating. The NEFT/account details have been shared to your submitted email address (<?=$donation->email?>)</p>
+          <?php }?>
       </div>
   </div>
 <?php }?>
