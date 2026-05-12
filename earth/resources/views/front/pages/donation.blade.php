@@ -71,30 +71,30 @@
                                         {{-- Are you an Indian Citizen? --}}
                                         <div class="form-group mb-3">
                                             <label class="donor-label">Are you an Indian Citizen?</label>
-                                            <div class="d-flex mt-1">
-                                                <div class="form-check mr-4">
-                                                    <input class="form-check-input" type="radio" name="is_indian_citizen" id="citizen_yes" value="yes" required>
-                                                    <label class="form-check-label" for="citizen_yes">Yes</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="is_indian_citizen" id="citizen_no" value="no">
-                                                    <label class="form-check-label" for="citizen_no">No</label>
-                                                </div>
+                                            <div class="donor-radio-group mt-1">
+                                                <label class="donor-radio-label">
+                                                    <input type="radio" name="is_indian_citizen" id="citizen_yes" value="yes" required>
+                                                    <span>Yes</span>
+                                                </label>
+                                                <label class="donor-radio-label">
+                                                    <input type="radio" name="is_indian_citizen" id="citizen_no" value="no">
+                                                    <span>No</span>
+                                                </label>
                                             </div>
                                         </div>
 
                                         {{-- Are you donating in INR? --}}
                                         <div class="form-group mb-3">
                                             <label class="donor-label">Are you donating in Indian Rupees (INR)?</label>
-                                            <div class="d-flex mt-1">
-                                                <div class="form-check mr-4">
-                                                    <input class="form-check-input" type="radio" name="is_donating_inr" id="inr_yes" value="yes" required>
-                                                    <label class="form-check-label" for="inr_yes">Yes</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="is_donating_inr" id="inr_no" value="no">
-                                                    <label class="form-check-label" for="inr_no">No</label>
-                                                </div>
+                                            <div class="donor-radio-group mt-1">
+                                                <label class="donor-radio-label">
+                                                    <input type="radio" name="is_donating_inr" id="inr_yes" value="yes" required>
+                                                    <span>Yes</span>
+                                                </label>
+                                                <label class="donor-radio-label">
+                                                    <input type="radio" name="is_donating_inr" id="inr_no" value="no">
+                                                    <span>No</span>
+                                                </label>
                                             </div>
                                         </div>
 
@@ -142,8 +142,8 @@
                                                 </li>
                                             </ul>
                                             <div style="width:100%;">
-                                                <input type="text" class="form-control donation_abovesame mt-2 w-50" placeholder="Minimum donation INR 500" id="inr_custom_amount" oninput="calculateINRPayableAmount(this.value);" onblur="validateINRMinimum(this);">
-                                                <small id="inr_amount_error" class="text-danger mt-1" style="display:none;">Minimum donation amount is ₹500. Please enter a valid amount.</small>
+                                                <input type="text" class="form-control donation_abovesame mt-2 w-50" placeholder="Minimum donation INR 1000" id="inr_custom_amount" oninput="calculateINRPayableAmount(this.value);" onblur="validateINRMinimum(this);">
+                                                <small id="inr_amount_error" class="text-danger mt-1" style="display:none;">Minimum donation amount is ₹1,000. Please enter a valid amount.</small>
                                             </div>
                                         </div>
 
@@ -350,10 +350,10 @@
         }
     });
 
-    // INR minimum validation on blur — resets field if below 500
+    // INR minimum validation on blur — resets field if below 1000
     function validateINRMinimum(input) {
         var amount = parseFloat(input.value);
-        if (!isNaN(amount) && amount > 0 && amount < 500) {
+        if (!isNaN(amount) && amount > 0 && amount < 1000) {
             $('#inr_amount_error').show();
             $(input).val('');
             $('#inr_payable_amount_text').text('0');
@@ -372,7 +372,7 @@
             $('#inr_payable_amount').val(0);
             return;
         }
-        if (amount < 500) {
+        if (amount < 1000) {
             $('#inr_amount_error').show();
             $('#inr_payable_amount_text').text('0');
             $('#inr_base_amount').val(0);
@@ -383,6 +383,9 @@
         $('#inr_base_amount').val(amount);
         $('#inr_payable_amount').val(amount);
         $('#inr_payable_amount_text').text(convertINRNumber(amount));
+
+        // Populate the custom amount input with the selected value
+        $('#inr_custom_amount').val(amount);
 
         // Highlight active button
         $('.inr-amount-btn').removeClass('active');
@@ -537,4 +540,22 @@
         border-color: #8b1a1a;
     }
     .mr-4 { margin-right: 1.5rem; }
+    .donor-radio-group {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
+    .donor-radio-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 14px;
+        font-family: 'proximanova_regular', sans-serif;
+        cursor: pointer;
+        margin: 0;
+    }
+    .donor-radio-label input[type="radio"] {
+        margin: 0;
+        cursor: pointer;
+    }
 </style>

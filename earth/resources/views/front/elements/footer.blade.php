@@ -23,7 +23,7 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
                         <li><a href="<?=url('communities')?>" target="_blank">Communities</a></li>
                         <li><a href="<?=url('projects')?>" target="_blank">Projects</a></li>
                         <li><a href="<?=env('REGENERATE_URL')?>contact.php" target="_blank">Contact</a></li>
-                        <li><a href="<?=env('REGENERATE_URL')?>earth/donation" target="_blank">Donate</a></li>
+                        <li><a href="<?=env('REGENERATE_URL')?>earth/donate" target="_blank">Donate</a></li>
                         <li class="foot-social-icons"><a class="twitter" href="<?=$generalSetting->twitter_profile?>" target="_blank"><i class="fa fa-twitter"></i></a></li>
                         <li class="foot-social-icons"><a class="pinterest" href="<?=$generalSetting->instagram_profile?>" target="_blank"><i class="fa fa-instagram"></i></a></li>
                         <li class="foot-social-icons"><a target="_blank" class="facebook" href="<?=$generalSetting->facebook_profile?>"><i class="fa fa-facebook"></i></a></li>
@@ -146,7 +146,7 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
         <p><u>But we can’t do this without your financial help.</u></p>
         <p>While EaRTh is free to use, we (a small nonprofit organization) need to pay the editorial staff, designers, software developers, and others who ensure that EaRTh runs smoothly, so we can serve those who need most to be heard.</p>
          <!-- <p>Join the fight today,<br><span class="highlight">your gift will be matched $2:$1!</span></p>  -->
-        <a href="<?=url('donation')?>" target="_blank" class="btn btn-yellow">Donate to EaRTh</a><br>
+        <a href="<?=url('donate')?>" target="_blank" class="btn btn-yellow">Donate to EaRTh</a><br>
         <a href="javascript:void(0);" class="continue-link" data-dismiss="modal">Continue to website →</a>
       </div>
     </div>
@@ -213,7 +213,7 @@ $projects  = Project::select('id', 'name')->where('status', '=', 1)->orderBy('na
     </div>
 </div>
 {{-- stickt button --}}
-<a href="<?=url('donation')?>" target="_blank" class="donate-button">Donate to EaRTh</a>
+<a href="<?=url('donate')?>" target="_blank" class="donate-button">Donate to EaRTh</a>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <!-- <script>

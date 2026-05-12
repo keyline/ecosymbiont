@@ -48,7 +48,7 @@
          
             <a href="<?=$donation->payment_receipt?>" class="btn donation_btn" target="_blank">Download receipt</a>
           <?php } else{ ?>
-            <p>Thank you for your interest in donating. The NEFT/account details have been shared to your submitted email address (<?=$donation->email?>)</p>
+            <p>Thank you for your interest in making a tax-exempt donation to the Śramani Institute. Our account details for NEFT transfer have been shared to your e-mail address (<?=$donation->email?>)</p>
           <?php }?>
       </div>
   </div>

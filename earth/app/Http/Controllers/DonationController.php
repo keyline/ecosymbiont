@@ -130,46 +130,93 @@ class DonationController extends Controller
                 $currency       = ($payment_mode === 'INR') ? 'INR' : 'USD';
                 $admin_email    = ($generalSetting->site_mail ?: ($generalSetting->system_email ?: null));
 
-                // Mail to donor
-                $user_subject = 'Thank You for Your Donation to the Śramani Institute';
-                $user_message = "
-                    <table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding:10px;background:#fff;max-width:600px;font-family:Arial,sans-serif;font-size:14px;color:#333;'>
-                        <tr><td style='padding:8px 15px'>Dear " . htmlspecialchars($donor_name) . ",</td></tr>
-                        <tr><td style='padding:8px 15px'>Thank you for your tax-exempt donation to the Śramani Institute (80G/12A tax-exempt). Please find below the details for NEFT transfer of your donation.</td></tr>
-                        <tr><td style='padding:8px 15px'>&nbsp;</td></tr>
-                        <tr><td style='padding:8px 15px'><strong>Beneficiary Name:</strong> Sramani Institute</td></tr>
-                        <tr><td style='padding:8px 15px'><strong>Checking Account number:</strong> 00087620000109</td></tr>
-                        <tr><td style='padding:8px 15px'><strong>IFSC Code:</strong> HDFC0000008</td></tr>
-                        <tr><td style='padding:8px 15px'><strong>Bank Name:</strong> HDFC Bank</td></tr>
-                        <tr><td style='padding:8px 15px'><strong>Bank address:</strong> Stephen House, 4BBD Bag East Kolkata 700001</td></tr>
-                        <tr><td style='padding:8px 15px'>&nbsp;</td></tr>
-                        <tr><td style='padding:8px 15px'>Once you have donated, please e-mail us (<a href='mailto:Support@sramani.org'>Support@sramani.org</a>) with the date, time, and amount of your NEFT transfer and we will e-mail you a donation receipt.</td></tr>
-                        <tr><td style='padding:8px 15px'>&nbsp;</td></tr>
-                        <tr><td style='padding:8px 15px'>Thank you and best wishes,</td></tr>
-                        <tr><td style='padding:8px 15px'><strong>Śramani Institute</strong></td></tr>
-                    </table>";
-                if (!empty($donor_email)) {
-                    $this->sendMail($donor_email, $user_subject, $user_message);
-                }
+                if($payment_mode === 'INR')
+                    {
+                        // Mail to donor
+                        $user_subject = 'Thank You for Your Donation to the Śramani Institute';
+                        $user_message = "
+                            <table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding:10px;background:#fff;max-width:600px;font-family:Arial,sans-serif;font-size:14px;color:#333;'>
+                                <tr><td style='padding:8px 15px'>Dear " . htmlspecialchars($donor_name) . ",</td></tr>
+                                <tr><td style='padding:8px 15px'>Thank you for your tax-exempt donation to the Śramani Institute (80G/12A tax-exempt). Please find below the details for NEFT transfer of your donation.</td></tr>
+                                <tr><td style='padding:8px 15px'>&nbsp;</td></tr>
+                                <tr><td style='padding:8px 15px'><strong>Beneficiary Name:</strong> Sramani Institute</td></tr>
+                                <tr><td style='padding:8px 15px'><strong>Checking Account number:</strong> 00087620000109</td></tr>
+                                <tr><td style='padding:8px 15px'><strong>IFSC Code:</strong> HDFC0000008</td></tr>
+                                <tr><td style='padding:8px 15px'><strong>Bank Name:</strong> HDFC Bank</td></tr>
+                                <tr><td style='padding:8px 15px'><strong>Bank address:</strong> Stephen House, 4BBD Bag East Kolkata 700001</td></tr>
+                                <tr><td style='padding:8px 15px'>&nbsp;</td></tr>
+                                <tr><td style='padding:8px 15px'>Once you have donated, please e-mail us (<a href='mailto:Support@sramani.org'>Support@sramani.org</a>) with the date, time, and amount of your NEFT transfer and we will e-mail you a donation receipt.</td></tr>
+                                <tr><td style='padding:8px 15px'>&nbsp;</td></tr>
+                                <tr><td style='padding:8px 15px'>Thank you and best wishes,</td></tr>
+                                <tr><td style='padding:8px 15px'><strong>Śramani Institute</strong></td></tr>
+                            </table>";
+                        if (!empty($donor_email)) {
+                            $this->sendMail($donor_email, $user_subject, $user_message);
+                        }
 
-                // Mail to admin
-                $admin_subject = 'New Donation Received — ' . $donation_number;
-                $admin_message = "
-                    <table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding:10px;background:#fff;max-width:600px;font-family:Arial,sans-serif;font-size:14px;color:#333;'>
-                        <tr><td style='padding:8px 15px'>Dear Administrator,</td></tr>
-                        <tr><td style='padding:8px 15px'>A new donation has been submitted. Please find the details below.</td></tr>
-                        <tr><td style='padding:8px 15px'>&nbsp;</td></tr>
-                        <tr><td style='padding:8px 15px'><strong>Donation Number:</strong> " . htmlspecialchars($donation_number) . "</td></tr>
-                        <tr><td style='padding:8px 15px'><strong>Donor Name:</strong> " . htmlspecialchars($donor_name) . "</td></tr>
-                        <tr><td style='padding:8px 15px'><strong>Email:</strong> " . htmlspecialchars($donor_email) . "</td></tr>
-                        <tr><td style='padding:8px 15px'><strong>Payment Mode:</strong> " . htmlspecialchars($payment_mode) . "</td></tr>
-                        <tr><td style='padding:8px 15px'><strong>Amount:</strong> " . htmlspecialchars($currency) . " " . htmlspecialchars($amount) . "</td></tr>
-                        <tr><td style='padding:8px 15px'>&nbsp;</td></tr>
-                        <tr><td style='padding:8px 15px'>Auto-generated from the Ecosymbiont Website.</td></tr>
-                    </table>";
-                if (!empty($admin_email)) {
-                    $this->sendMail($admin_email, $admin_subject, $admin_message);
-                }
+                        // Mail to admin
+                        $admin_subject = 'New Donation Initiated — ' . $donation_number;
+                        $admin_message = "
+                            <table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding:10px;background:#fff;max-width:600px;font-family:Arial,sans-serif;font-size:14px;color:#333;'>
+                                <tr><td style='padding:8px 15px'>Dear Administrator,</td></tr>
+                                <tr><td style='padding:8px 15px'>A new donation has been initiated by an Indian citizen wishing to donate in INR. Please find the details below.</td></tr>
+                                <tr><td style='padding:8px 15px'>&nbsp;</td></tr>
+                                <tr><td style='padding:8px 15px'><strong>Donation Number:</strong> " . htmlspecialchars($donation_number) . "</td></tr>
+                                <tr><td style='padding:8px 15px'><strong>Donor Name:</strong> " . htmlspecialchars($donor_name) . "</td></tr>
+                                <tr><td style='padding:8px 15px'><strong>Email:</strong> " . htmlspecialchars($donor_email) . "</td></tr>
+                                <tr><td style='padding:8px 15px'><strong>Payment Mode:</strong> " . htmlspecialchars($payment_mode) . "</td></tr>
+                                <tr><td style='padding:8px 15px'><strong>Amount:</strong> " . htmlspecialchars($currency) . " " . htmlspecialchars($amount) . "</td></tr>
+                                <tr><td style='padding:8px 15px'>&nbsp;</td></tr>
+                                <tr><td style='padding:8px 15px'>Auto-generated from the Ecosymbiont Website.</td></tr>
+                            </table>";
+                        if (!empty($admin_email)) {
+                            $this->sendMail($admin_email, $admin_subject, $admin_message);
+                        }
+
+                    }
+                    else{
+                        // Mail to donor
+                        $user_subject = 'Thank You for Your Donation to the Śramani Institute';
+                        $user_message = "
+                            <table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding:10px;background:#fff;max-width:600px;font-family:Arial,sans-serif;font-size:14px;color:#333;'>
+                                <tr><td style='padding:8px 15px'>Dear " . htmlspecialchars($donor_name) . ",</td></tr>
+                                <tr><td style='padding:8px 15px'>Thank you for your tax-exempt donation to the Śramani Institute (80G/12A tax-exempt). Please find below the details for NEFT transfer of your donation.</td></tr>
+                                <tr><td style='padding:8px 15px'>&nbsp;</td></tr>
+                                <tr><td style='padding:8px 15px'><strong>Beneficiary Name:</strong> Sramani Institute</td></tr>
+                                <tr><td style='padding:8px 15px'><strong>Checking Account number:</strong> 00087620000109</td></tr>
+                                <tr><td style='padding:8px 15px'><strong>IFSC Code:</strong> HDFC0000008</td></tr>
+                                <tr><td style='padding:8px 15px'><strong>Bank Name:</strong> HDFC Bank</td></tr>
+                                <tr><td style='padding:8px 15px'><strong>Bank address:</strong> Stephen House, 4BBD Bag East Kolkata 700001</td></tr>
+                                <tr><td style='padding:8px 15px'>&nbsp;</td></tr>
+                                <tr><td style='padding:8px 15px'>Once you have donated, please e-mail us (<a href='mailto:Support@sramani.org'>Support@sramani.org</a>) with the date, time, and amount of your NEFT transfer and we will e-mail you a donation receipt.</td></tr>
+                                <tr><td style='padding:8px 15px'>&nbsp;</td></tr>
+                                <tr><td style='padding:8px 15px'>Thank you and best wishes,</td></tr>
+                                <tr><td style='padding:8px 15px'><strong>Śramani Institute</strong></td></tr>
+                            </table>";
+                        if (!empty($donor_email)) {
+                            $this->sendMail($donor_email, $user_subject, $user_message);
+                        }
+
+                        // Mail to admin
+                        $admin_subject = 'New Donation Initiated — ' . $donation_number;
+                        $admin_message = "
+                            <table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding:10px;background:#fff;max-width:600px;font-family:Arial,sans-serif;font-size:14px;color:#333;'>
+                                <tr><td style='padding:8px 15px'>Dear Administrator,</td></tr>
+                                <tr><td style='padding:8px 15px'>A new donation has been initiated by a non-Indian citizen wishing to donate in a currency other than INR. Please find the details below.</td></tr>
+                                <tr><td style='padding:8px 15px'>&nbsp;</td></tr>
+                                <tr><td style='padding:8px 15px'><strong>Donation Number:</strong> " . htmlspecialchars($donation_number) . "</td></tr>
+                                <tr><td style='padding:8px 15px'><strong>Donor Name:</strong> " . htmlspecialchars($donor_name) . "</td></tr>
+                                <tr><td style='padding:8px 15px'><strong>Email:</strong> " . htmlspecialchars($donor_email) . "</td></tr>
+                                <tr><td style='padding:8px 15px'><strong>Payment Mode:</strong> " . htmlspecialchars($payment_mode) . "</td></tr>
+                                <tr><td style='padding:8px 15px'><strong>Amount:</strong> " . htmlspecialchars($currency) . " " . htmlspecialchars($amount) . "</td></tr>
+                                <tr><td style='padding:8px 15px'>&nbsp;</td></tr>
+                                <tr><td style='padding:8px 15px'>Auto-generated from the Ecosymbiont Website.</td></tr>
+                            </table>";
+                        if (!empty($admin_email)) {
+                            $this->sendMail($admin_email, $admin_subject, $admin_message);
+                        }
+                    }
+                
 
                 return redirect(url('donation-preview/' . Helper::encoded($donation_id)))->with('success_message', 'Thank you! Your donation details have been submitted successfully.');
             } else {
