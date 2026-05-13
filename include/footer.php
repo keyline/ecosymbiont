@@ -60,7 +60,7 @@
         <h4 class="modal-title">Support the Śramani Institute!</h4>
         <p>The Śramani Institute works with impoverished, marginalized communities in degraded ecologies around the world to help them become <b><i>EcoResilient</i></b>, ensuring both human and ecological health and wellbeing.</p>
         <p>Your donation (tax-exempt in the USA and in India) helps us ensure a sustainable future for people and planet.</p>        
-        <a href="<?= BASE_URL; ?>earth/donation" target="_blank" class="btn btn-yellow">Donate to Śramani</a><br>
+        <a href="<?= BASE_URL; ?>earth/donate" target="_blank" class="btn btn-yellow">Donate to Śramani</a><br>
         <a href="javascript:void(0);" class="continue-link" data-dismiss="modal">Continue to website →</a>
       </div>
     </div>
