@@ -47,7 +47,7 @@ use App\Http\Controllers\PayPalController;
         Route::match(['get', 'post'], '/advance-search-result', 'App\Http\Controllers\FrontController@advance_search_result');
         Route::match(['get', 'post'], '/advance_search_result_load', 'App\Http\Controllers\FrontController@advance_search_result_load');
 
-        Route::match(['get', 'post'], '/donation', 'App\Http\Controllers\DonationController@donation');
+        Route::match(['get', 'post'], '/donate', 'App\Http\Controllers\DonationController@donation');
         Route::match(['get', 'post'], '/donation-preview/{id}', 'App\Http\Controllers\DonationController@donationPreview');
         Route::match(['get', 'post'], '/thankyou/{id}', 'App\Http\Controllers\DonationController@thankyou');
         Route::match(['get', 'post'], '/donationreceipt/{id}', 'App\Http\Controllers\DonationController@donationreceipt');
