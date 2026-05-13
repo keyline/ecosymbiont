@@ -145,7 +145,7 @@ class DonationController extends Controller
                                 <tr><td style='padding:8px 15px'><strong>Bank Name:</strong> HDFC Bank</td></tr>
                                 <tr><td style='padding:8px 15px'><strong>Bank address:</strong> Stephen House, 4BBD Bag East Kolkata 700001</td></tr>
                                 <tr><td style='padding:8px 15px'>&nbsp;</td></tr>
-                                <tr><td style='padding:8px 15px'>Once you have donated, please e-mail us (<a href='mailto:Support@sramani.org'>Support@sramani.org</a>) with the date, time, and amount of your NEFT transfer and we will e-mail you a donation receipt.</td></tr>
+                                <tr><td style='padding:8px 15px'>Once you have donated, please e-mail us (<a href='mailto:support@sramani.org'>support@sramani.org</a>) with the date, time, and amount of your NEFT transfer and we will e-mail you a donation receipt.</td></tr>
                                 <tr><td style='padding:8px 15px'>&nbsp;</td></tr>
                                 <tr><td style='padding:8px 15px'>Thank you and best wishes,</td></tr>
                                 <tr><td style='padding:8px 15px'><strong>Śramani Institute</strong></td></tr>
@@ -175,26 +175,37 @@ class DonationController extends Controller
 
                     }
                     else{
-                        // Mail to donor
-                        $user_subject = 'Thank You for Your Donation to the Śramani Institute';
+                        // Generate PDF receipt for non-INR donor
+                        $receipt_donation   = Donation::where('id', $donation_id)->first();
+                        $receipt_country_id = $receipt_donation ? $receipt_donation->country : 0;
+                        $receipt_html       = view('front.pages.donationreceipt', [
+                            'donation'   => $receipt_donation,
+                            'country_id' => $receipt_country_id,
+                        ])->render();
+                        $receipt_options    = new Options();
+                        $receipt_options->set('defaultFont', 'Courier');
+                        $receipt_dompdf     = new Dompdf($receipt_options);
+                        $receipt_dompdf->loadHtml($receipt_html);
+                        $receipt_dompdf->setPaper('A4', 'portrait');
+                        $receipt_dompdf->render();
+                        $receipt_pdf_path   = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $donation_number . '-receipt.pdf';
+                        file_put_contents($receipt_pdf_path, $receipt_dompdf->output());
+
+                        // Mail to donor with receipt attached
+                        $user_subject = 'Thank You for Your Donation to the Śramani Institute [' .$donation_number . ']';
                         $user_message = "
                             <table width='100%' border='0' cellspacing='0' cellpadding='0' style='padding:10px;background:#fff;max-width:600px;font-family:Arial,sans-serif;font-size:14px;color:#333;'>
                                 <tr><td style='padding:8px 15px'>Dear " . htmlspecialchars($donor_name) . ",</td></tr>
-                                <tr><td style='padding:8px 15px'>Thank you for your tax-exempt donation to the Śramani Institute (80G/12A tax-exempt). Please find below the details for NEFT transfer of your donation.</td></tr>
-                                <tr><td style='padding:8px 15px'>&nbsp;</td></tr>
-                                <tr><td style='padding:8px 15px'><strong>Beneficiary Name:</strong> Sramani Institute</td></tr>
-                                <tr><td style='padding:8px 15px'><strong>Checking Account number:</strong> 00087620000109</td></tr>
-                                <tr><td style='padding:8px 15px'><strong>IFSC Code:</strong> HDFC0000008</td></tr>
-                                <tr><td style='padding:8px 15px'><strong>Bank Name:</strong> HDFC Bank</td></tr>
-                                <tr><td style='padding:8px 15px'><strong>Bank address:</strong> Stephen House, 4BBD Bag East Kolkata 700001</td></tr>
-                                <tr><td style='padding:8px 15px'>&nbsp;</td></tr>
-                                <tr><td style='padding:8px 15px'>Once you have donated, please e-mail us (<a href='mailto:Support@sramani.org'>Support@sramani.org</a>) with the date, time, and amount of your NEFT transfer and we will e-mail you a donation receipt.</td></tr>
+                                <tr><td style='padding:8px 15px'>Thank you very much for your donation to the Śramani Institute. Please find your donation receipt attached to this email.</td></tr>
                                 <tr><td style='padding:8px 15px'>&nbsp;</td></tr>
                                 <tr><td style='padding:8px 15px'>Thank you and best wishes,</td></tr>
                                 <tr><td style='padding:8px 15px'><strong>Śramani Institute</strong></td></tr>
                             </table>";
                         if (!empty($donor_email)) {
-                            $this->sendMail($donor_email, $user_subject, $user_message);
+                            $this->sendMail($donor_email, $user_subject, $user_message, $receipt_pdf_path);
+                        }
+                        if (file_exists($receipt_pdf_path)) {
+                            @unlink($receipt_pdf_path);
                         }
 
                         // Mail to admin

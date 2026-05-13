@@ -400,7 +400,12 @@
     function calculatePayableAmount(valam){
         var base_amount = parseFloat(valam);
         var country     = $('#country').val();
-        if (isNaN(base_amount)) return;
+        if (isNaN(base_amount) || valam === '') {
+            $('#base_amount').val(0);
+            $('#payable_amount').val(0);
+            $('#payable_amount_text').text('0');
+            return;
+        }
         if($('#coverFee').is(':checked')){
             if(country == 220){
                 var payable_amount = base_amount + ((base_amount * 1.99) / 100) + 0.49;
@@ -413,6 +418,17 @@
         $('#base_amount').val(base_amount);
         $('#payable_amount').val(payable_amount);
         $('#payable_amount_text').text(convertNumber(payable_amount));
+
+        // Show selected amount in the custom input field
+        $('#custom_amount').val(base_amount);
+
+        // Highlight active preset button
+        $('#usd_form_wrapper .btn-outline-secondary').removeClass('active');
+        $('#usd_form_wrapper .btn-outline-secondary').each(function () {
+            if (parseFloat($(this).text().replace(/[$,]/g, '')) === base_amount) {
+                $(this).addClass('active');
+            }
+        });
     }
 
     $(function(){
@@ -534,7 +550,8 @@
         margin-bottom: 4px;
         display: block;
     }
-    .inr-amount-btn.active {
+    .inr-amount-btn.active,
+    #usd_form_wrapper .btn-outline-secondary.active {
         background-color: #8b1a1a;
         color: #fff;
         border-color: #8b1a1a;
