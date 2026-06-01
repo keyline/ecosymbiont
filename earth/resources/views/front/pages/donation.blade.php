@@ -63,6 +63,7 @@
                                 <form class="mb-4" id="inr_donation_form" action="" method="POST">
                                     @csrf
                                     <input type="hidden" name="payment_mode" value="INR">
+                                    <input type="hidden" name="g-recaptcha-response" id="inr_g_recaptcha_response">
                                     <div class="donation-box">
                                         <div class="titleto-inner mb-3">
                                             <h2 class="mt-0">1. Donor Information</h2>
@@ -165,6 +166,7 @@
                                 <form class="mb-4" id="usd_donation_form" action="" method="POST">
                                     @csrf
                                     <input type="hidden" name="payment_mode" id="payment_mode" value="PAYPAL">
+                                    <input type="hidden" name="g-recaptcha-response" id="non_inr_g_recaptcha_response">
                                     <div class="donation-box">
                                         <div class="titleto-inner mb-3">
                                             <h2 class="mt-0">1. Donor Information*</h2>
@@ -272,7 +274,61 @@
 </div> --}}
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<?php
+$host = $_SERVER['HTTP_HOST'];
+if ($host == 'ecosymbiont.keylines.in') {
+    $site_key = '6Ldum88qAAAAAGgaGIGZqvD0cZP_KzBWgN9CRUYO';
+} elseif ($host == 'ecosymbiont-uat.keylines.in') {
+    $site_key = '6Lco6wQrAAAAAA6CUefDtu4VFOND-y_vJvvsGJTj';
+} else {
+    $site_key = '6LcIw04qAAAAAGBE5JP7v7i3gYEa4OPNSWqBlvbH';
+}
+?>
+<script src="https://www.google.com/recaptcha/api.js?render=<?=$site_key?>"></script>
 <script type="text/javascript">
+
+    function submitDonationWithRecaptcha(form, action) {
+        var $form = $(form);
+        var $submitButton = $form.find('button[type="submit"]');
+
+        if ($form.data('recaptcha-pending')) {
+            return;
+        }
+
+        $form.data('recaptcha-pending', true);
+        $submitButton.prop('disabled', true);
+        $form.find('input[name="g-recaptcha-response"]').val('');
+
+        if (typeof grecaptcha === 'undefined') {
+            resetDonationCaptchaSubmit($form);
+            return;
+        }
+
+        grecaptcha.ready(function () {
+            grecaptcha.execute('<?=$site_key?>', {action: action}).then(function (token) {
+                $form.find('input[name="g-recaptcha-response"]').val(token);
+                HTMLFormElement.prototype.submit.call(form);
+            }).catch(function () {
+                resetDonationCaptchaSubmit($form);
+            });
+        });
+    }
+
+    function resetDonationCaptchaSubmit($form) {
+        $form.data('recaptcha-pending', false);
+        $form.find('button[type="submit"]').prop('disabled', false);
+        alert('Unable to validate reCAPTCHA. Please try again.');
+    }
+
+    $('#inr_donation_form').on('submit', function (event) {
+        event.preventDefault();
+        submitDonationWithRecaptcha(this, 'donation_inr');
+    });
+
+    $('#usd_donation_form').on('submit', function (event) {
+        event.preventDefault();
+        submitDonationWithRecaptcha(this, 'donation_non_inr');
+    });
 
     // PAN: format AAAAA9999A
     function validatePAN(input) {

@@ -37,6 +37,11 @@ class DonationController extends Controller
         if ($request->isMethod('post')) {
             $postData     = $request->all();
             $payment_mode = $postData['payment_mode'] ?? '';
+            $recaptchaAction = ($payment_mode === 'INR') ? 'donation_inr' : 'donation_non_inr';
+
+            if (!$this->verifyDonationRecaptcha($request, $recaptchaAction)) {
+                return redirect()->back()->with('error_message', 'reCAPTCHA v3 validation failed. Please try again.');
+            }
 
             if ($payment_mode === 'INR') {
                 $rules = [
@@ -235,6 +240,57 @@ class DonationController extends Controller
             }
         }
         echo $this->front_before_login_layout($title, $page_name, $data);
+    }
+    private function verifyDonationRecaptcha(Request $request, string $expectedAction): bool
+    {
+        $recaptchaResponse = $request->input('g-recaptcha-response');
+        if (!is_string($recaptchaResponse) || trim($recaptchaResponse) === '') {
+            return false;
+        }
+
+        $verifyURL = 'https://www.google.com/recaptcha/api/siteverify';
+        $secretKey = $this->getRecaptchaSecretKey($request);
+        $ch = curl_init();
+        if ($ch === false) {
+            return false;
+        }
+
+        curl_setopt($ch, CURLOPT_URL, $verifyURL);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
+            'secret'   => $secretKey,
+            'response' => $recaptchaResponse,
+            'remoteip' => $request->ip(),
+        ]));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+        if (!is_string($response)) {
+            return false;
+        }
+
+        $responseData = json_decode($response, true);
+
+        return is_array($responseData)
+            && ($responseData['success'] ?? false) === true
+            && isset($responseData['score'])
+            && (float) $responseData['score'] >= 0.5
+            && ($responseData['action'] ?? '') === $expectedAction;
+    }
+    private function getRecaptchaSecretKey(Request $request): string
+    {
+        if ($request->getHost() === 'ecosymbiont.keylines.in') {
+            return '6Ldum88qAAAAANVww5Xe6aHFL-g_UHLsHl7HGKs5';
+        }
+
+        if ($request->getHost() === 'ecosymbiont-uat.keylines.in') {
+            return '6Lco6wQrAAAAAJksrZFpNTfW07l2QLUKMsQ6bREb';
+        }
+
+        return '6LcIw04qAAAAAJCWh02op84FgNvxexQsh9LLCuqW';
     }
     public function donationPreview($donation_id)
     {
