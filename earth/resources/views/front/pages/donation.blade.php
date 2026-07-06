@@ -101,10 +101,6 @@
 
                                         <div id="inr_fields_wrapper">
                                         <input type="text" class="form-control mb-3" placeholder="Full legal name" name="full_legal_name" required>
-                                        <div class="mb-3">
-                                            <input type="text" class="form-control" placeholder="PAN Number" name="pan_number" id="pan_number" oninput="validatePAN(this)" required>
-                                            <small id="pan_error" class="text-danger mt-1" style="display:none;">Invalid PAN. Format: AAAAA9999A (5 letters, 4 digits, 1 letter).</small>
-                                        </div>
                                         <input type="text" class="form-control mb-3" placeholder="Residential address" name="address" required>
                                         <div class="mb-3">
                                             <input type="email" class="form-control" placeholder="E-mail address" name="email" id="inr_email" oninput="validateEmail(this)" required>
@@ -115,10 +111,6 @@
                                             <small id="mobile_error" class="text-danger mt-1" style="display:none;">Enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9.</small>
                                         </div>
                                         <input type="text" class="form-control mb-3" placeholder="Donor bank name" name="bank_name" required>
-                                        <div class="mb-3">
-                                            <input type="text" class="form-control" placeholder="Donor bank account number" name="bank_account_number" id="bank_account_number" oninput="validateBankAccount(this)" required>
-                                            <small id="bank_error" class="text-danger mt-1" style="display:none;">Bank account number must contain only digits.</small>
-                                        </div>
 
                                         {{-- Donation Amount --}}
                                         <div class="titleto-inner mb-3">
@@ -330,23 +322,6 @@ if ($host == 'ecosymbiont.keylines.in') {
         submitDonationWithRecaptcha(this, 'donation_non_inr');
     });
 
-    // PAN: format AAAAA9999A
-    function validatePAN(input) {
-        var val = input.value.toUpperCase();
-        input.value = val;
-        var pan_regex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
-        if (val.length === 0) {
-            $('#pan_error').hide();
-            $(input).removeClass('is-invalid is-valid');
-        } else if (pan_regex.test(val)) {
-            $('#pan_error').hide();
-            $(input).removeClass('is-invalid').addClass('is-valid');
-        } else {
-            $('#pan_error').show();
-            $(input).removeClass('is-valid').addClass('is-invalid');
-        }
-    }
-
     // Email validation
     function validateEmail(input) {
         var val = input.value.trim();
@@ -375,22 +350,6 @@ if ($host == 'ecosymbiont.keylines.in') {
             $(input).removeClass('is-invalid').addClass('is-valid');
         } else {
             $('#mobile_error').show();
-            $(input).removeClass('is-valid').addClass('is-invalid');
-        }
-    }
-
-    // Bank account: digits only
-    function validateBankAccount(input) {
-        input.value = input.value.replace(/[^0-9]/g, '');
-        var val = input.value;
-        if (val.length === 0) {
-            $('#bank_error').hide();
-            $(input).removeClass('is-invalid is-valid');
-        } else if (/^[0-9]+$/.test(val)) {
-            $('#bank_error').hide();
-            $(input).removeClass('is-invalid').addClass('is-valid');
-        } else {
-            $('#bank_error').show();
             $(input).removeClass('is-valid').addClass('is-invalid');
         }
     }

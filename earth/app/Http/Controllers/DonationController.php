@@ -48,12 +48,10 @@ class DonationController extends Controller
                     'is_indian_citizen'   => 'required',
                     'is_donating_inr'     => 'required',
                     'full_legal_name'     => 'required',
-                    'pan_number'          => 'required',
                     'address'             => 'required',
                     'email'               => 'required|email',
                     'mobile_number'       => 'required',
                     'bank_name'           => 'required',
-                    'bank_account_number' => 'required',
                     'payment_mode'        => 'required',
                     'payable_amount'      => 'required',
                 ];
@@ -97,10 +95,8 @@ class DonationController extends Controller
                         'payable_amount'       => $postData['payable_amount'],
                         'payment_status'       => 1,
                         'payment_amount'        => $postData['payable_amount'],
-                        'pan_number'           => $postData['pan_number'] ?? null,
                         'mobile_number'        => $postData['mobile_number'] ?? null,
                         'bank_name'            => $postData['bank_name'] ?? null,
-                        'bank_account_number'  => $postData['bank_account_number'] ?? null,
                         'is_indian_citizen'    => $postData['is_indian_citizen'] ?? null,
                         'is_donating_inr'      => $postData['is_donating_inr'] ?? null,
                         'created_at'           => date('Y-m-d H:i:s'),
@@ -137,6 +133,9 @@ class DonationController extends Controller
 
                 if($payment_mode === 'INR')
                     {
+                        $qr_attachment_path = public_path('uploads/sramani-qr.jpg');
+                        $qr_attachment_path = file_exists($qr_attachment_path) ? $qr_attachment_path : '';
+
                         // Mail to donor
                         $user_subject = 'Thank You for Your Donation to the Śramani Institute';
                         $user_message = "
@@ -144,6 +143,7 @@ class DonationController extends Controller
                                 <tr><td style='padding:8px 15px'>Dear " . htmlspecialchars($donor_name) . ",</td></tr>
                                 <tr><td style='padding:8px 15px'>Thank you for your tax-exempt donation to the Śramani Institute (80G/12A tax-exempt). Please find below the details for NEFT transfer of your donation.</td></tr>
                                 <tr><td style='padding:8px 15px'>&nbsp;</td></tr>
+                                <tr><td style='padding:8px 15px'>The payment QR code is attached to this email.</td></tr>
                                 <tr><td style='padding:8px 15px'><strong>Beneficiary Name:</strong> Sramani Institute</td></tr>
                                 <tr><td style='padding:8px 15px'><strong>Checking Account number:</strong> 00087620000109</td></tr>
                                 <tr><td style='padding:8px 15px'><strong>IFSC Code:</strong> HDFC0000008</td></tr>
@@ -156,7 +156,7 @@ class DonationController extends Controller
                                 <tr><td style='padding:8px 15px'><strong>Śramani Institute</strong></td></tr>
                             </table>";
                         if (!empty($donor_email)) {
-                            $this->sendMail($donor_email, $user_subject, $user_message);
+                            $this->sendMail($donor_email, $user_subject, $user_message, $qr_attachment_path);
                         }
 
                         // Mail to admin

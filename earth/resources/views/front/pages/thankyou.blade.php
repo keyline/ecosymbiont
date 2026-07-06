@@ -24,6 +24,20 @@
       height: 60px;
       color: #10b981;
     }
+    .thank-you-qr {
+      margin: 20px auto 0;
+      max-width: 260px;
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      background: #fff;
+    }
+    .thank-you-qr img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
 
     @keyframes fadeInUp {
       from {
@@ -47,6 +61,11 @@
           <p class="mt-3 mb-4 text-muted">Your donation has been successfully received. We truly appreciate your generous support to our cause.</p>
          
             <a href="<?=$donation->payment_receipt?>" class="btn donation_btn" target="_blank">Download receipt</a>
+          <?php } elseif($donation->payment_mode === 'INR'){ ?>
+            <p>Thank you for your interest in making a tax-exempt donation to the &#346;ramani Institute. Our account details for NEFT transfer have been shared to your e-mail address (<?=$donation->email?>). You may also use the QR code below for payment.</p>
+            <div class="thank-you-qr">
+              <img src="<?=env('UPLOADS_URL').'sramani-qr.jpg'?>" alt="Sramani payment QR code">
+            </div>
           <?php } else{ ?>
             <p>Thank you for your interest in making a tax-exempt donation to the Śramani Institute. Our account details for NEFT transfer have been shared to your e-mail address (<?=$donation->email?>)</p>
           <?php }?>
