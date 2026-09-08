@@ -28,7 +28,7 @@
                               <div class="card">
                                 <div class="card-body">
                                     <h2 class="text-center"><?=$page_header?></h2>
-                                    <form method="POST" action="">
+                                    <form method="POST" action="" id="signup-form">
                                         @csrf
                                         <div class="row" style="margin-bottom: 15px;">
                                           <label for="first_name" class="col-md-4 col-lg-3 col-form-label">User Type</label>
@@ -85,7 +85,8 @@
                                           </div>
                                         </div> 
                                         <!-- Add hidden input for reCAPTCHA token -->
-                                        <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">                                           
+                                        <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
+                                        <p id="signup-captcha-error" class="text-danger" role="alert" hidden></p>
                                         <div class="text-center" style="margin-bottom: 15px;">
                                           <button type="submit" class="btn btn-primary">Submit</button>
                                         </div>
@@ -155,12 +156,55 @@ if($host == 'ecosymbiont.keylines.in'){
 
 <script src="https://www.google.com/recaptcha/api.js?render=<?=$site_key?>"></script>
  <script>
-grecaptcha.ready(function() {
-    grecaptcha.execute('<?=$site_key?>', {action: 'submit'}).then(function(token) {
-        // Add the token to your form submission
-        document.getElementById('g-recaptcha-response').value = token;
+(function() {
+    var form = document.getElementById('signup-form');
+    var button = form.querySelector('button[type="submit"]');
+    var tokenInput = document.getElementById('g-recaptcha-response');
+    var error = document.getElementById('signup-captcha-error');
+    var pending = false;
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        if (pending || !form.reportValidity()) return;
+
+        pending = true;
+        button.disabled = true;
+        error.hidden = true;
+        tokenInput.value = '';
+
+        var timeout;
+        new Promise(function(resolve, reject) {
+            timeout = setTimeout(function() {
+                reject(new Error('CAPTCHA timed out'));
+            }, 15000);
+
+            if (typeof grecaptcha === 'undefined') {
+                reject(new Error('CAPTCHA unavailable'));
+                return;
+            }
+
+            grecaptcha.ready(function() {
+                try {
+                    grecaptcha.execute('<?=$site_key?>', {action: 'submit'}).then(resolve, reject);
+                } catch (failure) {
+                    reject(failure);
+                }
+            });
+        }).then(function(token) {
+            clearTimeout(timeout);
+            if (!token) throw new Error('CAPTCHA token missing');
+            tokenInput.value = token;
+            HTMLFormElement.prototype.submit.call(form);
+        }).catch(function() {
+            clearTimeout(timeout);
+            tokenInput.value = '';
+            pending = false;
+            button.disabled = false;
+            error.textContent = 'CAPTCHA verification could not complete. Please check your connection and click Submit to try again.';
+            error.hidden = false;
+        });
     });
-});
+})();
 </script>
 <!-- site key [dev] -->
 <!--<script src="https://www.google.com/recaptcha/api.js?render=6Ldum88qAAAAAGgaGIGZqvD0cZP_KzBWgN9CRUYO"></script>
