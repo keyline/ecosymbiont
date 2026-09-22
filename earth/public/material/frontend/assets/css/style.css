@@ -4155,6 +4155,9 @@ div.list-post .post-content h2 a:hover {
     font-weight: 400;
     line-height: 1.25;
 }
+.single-post-box > .post-content li ul{
+  margin-top: 9px;
+}
 .single-post-box h5 {
   font-size: 18px;
   font-family: 'proximanova_regular';
