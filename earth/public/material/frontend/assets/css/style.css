@@ -374,7 +374,7 @@ header {
   z-index: 2;
 }
 .nav>li>a{
-padding: 10px 17px !important ;
+padding: 10px 15px 10px 15px !important;
 }
 .navbar-nav > li > a:before {
   position: absolute;
@@ -394,18 +394,18 @@ padding: 10px 17px !important ;
   padding-right: 30px;
 }
 .navbar-nav > li.drop-arrow > a:after {
-  content: '\f107';
-  position: absolute;
-  font-family: 'FontAwesome';
-  font-size: 13px;
-  color: #fff;
-  top: 9px;
-  right: 0px;
-  /* right: 13px; */
-  transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -webkit-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
+   content: '\f107';
+    position: absolute;
+    font-family: 'FontAwesome';
+    font-size: 13px;
+    color: #fff;
+    top: 9px;
+    right: 2px;
+    /* right: 13px; */
+    transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
 }
 .navbar-nav > li:hover > a,
 .navbar-nav > li > a.active {
