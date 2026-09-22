@@ -374,7 +374,7 @@ header {
   z-index: 2;
 }
 .nav>li>a{
-padding: 10px !important ;
+padding: 10px 17px !important ;
 }
 .navbar-nav > li > a:before {
   position: absolute;
@@ -400,7 +400,8 @@ padding: 10px !important ;
   font-size: 13px;
   color: #fff;
   top: 16px;
-  right: 13px;
+  right: 0px;
+  /* right: 13px; */
   transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
