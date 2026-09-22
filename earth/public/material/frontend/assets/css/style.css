@@ -72,7 +72,7 @@
   src:url('font/proximanova_black.ttf');
 }
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6{
-  font-family: 'proximanova_regular';
+  font-family: 'proximanova_regular', sans-serif;
 }
 a:focus, a:hover{
   text-decoration: none;
@@ -372,6 +372,9 @@ header {
   padding: 16px 20px;
   position: relative;
   z-index: 2;
+}
+.nav>li>a{
+padding: 10px !important ;
 }
 .navbar-nav > li > a:before {
   position: absolute;
@@ -4160,7 +4163,7 @@ div.list-post .post-content h2 a:hover {
 }
 .single-post-box h5 {
   font-size: 18px;
-  font-family: 'proximanova_regular';
+  font-family: 'proximanova_regular', sans-serif;
   line-height: 1.25;
 }
 .single-post-box > .post-content p a {
@@ -4579,7 +4582,7 @@ div.list-post .post-content h2 a:hover {
 .single-post-box .about-more-autor .autor-box .autor-content .autor-title {
   overflow: hidden;
   margin-bottom: 10px;
-  font-family: 'proximanova_regular';
+  font-family: 'proximanova_regular', sans-serif;
   width: 100%;
   font-size: 18px;
 }
@@ -6277,7 +6280,7 @@ a.blue_btn {
 .titleto-inner h4 {
   color: #90201f !important;
   font-weight: 600;
-  font-family: 'proximanova_regular';
+  font-family: 'proximanova_regular', sans-serif;
 }
 .features-slide-widget li {
   display: flex;
