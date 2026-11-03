@@ -306,8 +306,8 @@ header {
   color: #d09c1c !important;
 }
 .navbar-brand img {
-  max-width: 100%;
-  width: 300px;
+    max-width: 300px;
+    width: 100%;
 }
 .logo-advertisement {
   background: #fafafa;
