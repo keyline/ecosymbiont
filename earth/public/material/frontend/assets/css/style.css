@@ -7037,6 +7037,9 @@ div#permalink p {
     /* display: none; */
     text-align: center;
   }
+  .navbar-brand img {
+    max-width: 100px;
+}
   .top-line ul.top-line-list {
     display: flex;
     flex-wrap: wrap;
