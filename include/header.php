@@ -6,7 +6,7 @@ $host = $_SERVER['HTTP_HOST'];
 // Set base URL according to the environment
 if ($host == 'localhost') {
     // Local environment
-    define('BASE_URL', 'http://localhost/ecosymbiontgit/');
+    define('BASE_URL', 'http://localhost/ecosymbiont/');
 } elseif ($host == 'ecosymbiont.org') {
     // Live environment
     define('BASE_URL', 'https://ecosymbiont.org/');
@@ -30,7 +30,7 @@ if($urlParts[2] == 'index.php'|| $urlParts[2] == ''){
     $metadescription = 'home description';
     $metakeyword = 'home keyword';
     $ogdescription = $metadescription;
-    $ogimage = BASE_URL."images/logo.webp";
+    $ogimage = BASE_URL."images/EcoResilience-logo-nowords.png";
 ?>
     <title><?= $title ?></title>
     <meta name="title" content="<?=$title?>">
@@ -51,7 +51,7 @@ if($urlParts[2] == 'index.php'|| $urlParts[2] == ''){
     $metadescription = 'synergy-meetings description';
     $metakeyword = '';
     $ogdescription = $metadescription;
-    $ogimage = BASE_URL."images/logo.webp";
+    $ogimage = BASE_URL."images/EcoResilience-logo-nowords.png";
 ?>
     <title><?= $title ?></title>
     <meta name="title" content="<?=$title?>">
@@ -72,7 +72,7 @@ if($urlParts[2] == 'index.php'|| $urlParts[2] == ''){
     $metadescription = 'in-the-media description';
     $metakeyword = '';
     $ogdescription = $metadescription;
-    $ogimage = BASE_URL."images/logo.webp";
+    $ogimage = BASE_URL."images/EcoResilience-logo-nowords.png";
 ?>
     <title><?= $title ?></title>
     <meta name="title" content="<?=$title?>">
@@ -149,7 +149,7 @@ function isActive($page) {
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="<?= BASE_URL; ?>">
-                        <img src="images/logo.webp" alt="" class="img-responsive">
+                        <img src="images/EcoResilience-logo-nowords.png" alt="" class="img-responsive">
                     </a>
                 </div>
 

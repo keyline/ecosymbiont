@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-12">
                 <ul>
-                    <li class="foot_logo"><a href="index.php"><img src="images/logo.webp" alt="" class="img-responsive"></a></li>
+                    <li class="foot_logo"><a href="index.php"><img src="images/EcoResilience-logo-nowords.png" alt="" class="img-responsive"></a></li>
                     <li><a target="_blank" href="<?= BASE_URL ?>earth/communities" class="footer_btn">Communities</a></li>
                     <li><a target="_blank" href="<?= BASE_URL ?>earth/projects" class="footer_btn">Projects</a></li>
                     <li><a target="_blank" href="contact.php" class="footer_btn">Contact</a></li>
